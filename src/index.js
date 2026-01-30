@@ -134,6 +134,19 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ success: true });
 });
 
+// Organization Branding (public — no auth needed for login screen)
+app.get('/api/organization/branding', (req, res) => {
+  res.json({
+    branding: {
+      brandName: 'Uplift',
+      primaryColor: '#FF6B35',
+      secondaryColor: '#E55A2B',
+      logoUrl: null,
+      logoDarkUrl: null,
+    },
+  });
+});
+
 // Organization
 app.get('/api/organization', authMiddleware, async (req, res) => {
   try {
