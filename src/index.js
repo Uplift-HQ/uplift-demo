@@ -71,15 +71,23 @@ app.get('/api/health', (req, res) => {
 });
 
 // Auth
+// Map demo email aliases — website shows @uplifthq.co.uk but DB has @uplift.hr
+const DEMO_EMAIL_ALIASES = {
+  'demo-admin@uplifthq.co.uk': 'demo-admin@uplift.hr',
+  'demo-manager@uplifthq.co.uk': 'demo-manager@uplift.hr',
+  'demo-worker@uplifthq.co.uk': 'demo-worker@uplift.hr',
+};
+
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: 'Email and password required' });
     }
+    const normalizedEmail = DEMO_EMAIL_ALIASES[email.toLowerCase()] || email.toLowerCase();
     const result = await db.query(
       `SELECT u.*, o.name as organization_name FROM users u JOIN organizations o ON o.id = u.organization_id WHERE u.email = $1`,
-      [email.toLowerCase()]
+      [normalizedEmail]
     );
     const user = result.rows[0];
     if (!user) {
