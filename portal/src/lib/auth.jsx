@@ -1,13 +1,16 @@
 // ============================================================
 // AUTH CONTEXT & HOOKS
-// Authentication state management (Bearer token based)
+// Authentication state management with Bearer tokens
 // ============================================================
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { api, authApi } from './api';
 
 const AuthContext = createContext(null);
+
+// Public paths that don't require authentication
+const PUBLIC_PATHS = ['/login', '/terms', '/privacy', '/register', '/forgot-password', '/reset-password'];
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -15,74 +18,91 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check if user is logged in on mount (token-based)
+  // Check if current path is public
+  const isPublicPath = PUBLIC_PATHS.some(path => location.pathname.startsWith(path));
+
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem('uplift_token');
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
-      api.setToken(token);
-
-      try {
-        const { user } = await authApi.me();
-        setUser(user);
-      } catch (error) {
-        // Token invalid or expired
-        setUser(null);
-        api.setToken(null);
-      }
-      setLoading(false);
-    };
-    
     checkAuth();
   }, []);
 
-  const login = useCallback(async (email, password) => {
-    const result = await authApi.login(email, password);
-    
-    if (result.requiresMfa) {
-      return { requiresMfa: true, mfaToken: result.mfaToken };
+  const checkAuth = async () => {
+    // Always allow public paths
+    if (isPublicPath) {
+      setLoading(false);
+      return;
     }
-    
-    // Store the Bearer token
-    api.setToken(result.token);
-    setUser(result.user);
-    
-    // Redirect to intended page or dashboard
-    const from = location.state?.from?.pathname || '/';
-    navigate(from, { replace: true });
-    
-    return { success: true };
-  }, [navigate, location]);
 
-  const logout = useCallback(async () => {
+    const token = localStorage.getItem('uplift_token');
+
+    // No token stored - user needs to log in
+    if (!token) {
+      localStorage.removeItem('uplift_user');
+      localStorage.removeItem('uplift_token');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Verify token with backend
+      api.setToken(token);
+      const result = await authApi.me();
+      const userData = result.user || result;
+      setUser(userData);
+      localStorage.setItem('uplift_user', JSON.stringify(userData));
+    } catch {
+      // Backend verification failed - clear credentials
+      localStorage.removeItem('uplift_user');
+      localStorage.removeItem('uplift_token');
+      api.setToken(null);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const login = async (email, password) => {
+    try {
+      const result = await authApi.login(email, password);
+
+      if (result.token) {
+        api.setToken(result.token);
+      }
+
+      const userData = result.user || result;
+      setUser(userData);
+      localStorage.setItem('uplift_user', JSON.stringify(userData));
+
+      const from = location.state?.from?.pathname || '/';
+      navigate(from, { replace: true });
+
+      return result;
+    } catch (error) {
+      throw new Error(error.message || 'Invalid email or password');
+    }
+  };
+
+  const logout = async () => {
     try {
       await authApi.logout();
-    } catch (error) {
-      // Ignore errors on logout
+    } catch {
+      // Ignore logout errors
+    } finally {
+      api.setToken(null);
+      localStorage.removeItem('uplift_token');
+      localStorage.removeItem('uplift_user');
+      setUser(null);
+      navigate('/login');
     }
-    setUser(null);
-    api.setToken(null);
-    navigate('/login');
-  }, [navigate]);
-
-  const register = useCallback(async (data) => {
-    const result = await authApi.register(data);
-    return result;
-  }, []);
+  };
 
   const value = {
     user,
     loading,
     login,
     logout,
-    register,
     isAuthenticated: !!user,
     isAdmin: user?.role === 'admin' || user?.role === 'superadmin',
-    isManager: ['admin', 'manager', 'superadmin'].includes(user?.role),
+    isManager: user?.role === 'manager' || user?.role === 'admin' || user?.role === 'superadmin',
   };
 
   return (
@@ -95,46 +115,60 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 }
 
-// Protected route wrapper
-export function RequireAuth({ children, roles = [] }) {
-  const { user, loading, isAuthenticated } = useAuth();
+export function RequireAuth({ children }) {
+  const { user, loading } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      navigate('/login', { state: { from: location }, replace: true });
-    }
-    
-    if (!loading && isAuthenticated && roles.length > 0) {
-      if (!roles.includes(user?.role)) {
-        navigate('/', { replace: true });
-      }
-    }
-  }, [loading, isAuthenticated, user, roles, navigate, location]);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-momentum-500" />
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-center">
+          <div className="w-12 h-12 bg-momentum-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span className="text-white font-bold text-2xl">U</span>
+          </div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-momentum-500 mx-auto" />
+        </div>
       </div>
     );
   }
 
-  if (!isAuthenticated) {
-    return null;
-  }
-
-  if (roles.length > 0 && !roles.includes(user?.role)) {
-    return null;
+  if (!user) {
+    // Redirect to login, saving the attempted location
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   return children;
 }
 
-export default AuthContext;
+export function RequireAdmin({ children }) {
+  const { user, isAdmin, loading } = useAuth();
+
+  if (loading) {
+    return null;
+  }
+
+  if (!user || !isAdmin) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
+
+export function RequireManager({ children }) {
+  const { user, isManager, loading } = useAuth();
+
+  if (loading) {
+    return null;
+  }
+
+  if (!user || !isManager) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}

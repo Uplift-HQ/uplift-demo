@@ -6,6 +6,9 @@
 import { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
+import { useBranding } from '../lib/branding';
+import { useTranslation } from 'react-i18next';
+import { SUPPORTED_LANGUAGES, changeLanguage, getCurrentLanguage } from '../i18n';
 import {
   LayoutDashboard,
   Users,
@@ -24,71 +27,53 @@ import {
   Briefcase,
   TrendingUp,
   Copy,
+  UserPlus,
   Upload,
+  ClipboardCheck,
+  Plug,
+  Globe,
 } from 'lucide-react';
-import { UpliftLogo } from './UpliftLogo';
 
 // Navigation items with role-based visibility
-const getNavigation = (role) => {
+const getNavigation = (role, t) => {
   const isAdmin = role === 'admin';
   const isManager = role === 'manager' || isAdmin;
-  
-  return [
-    { name: 'Dashboard', href: '/', icon: LayoutDashboard, show: true },
-    { name: 'Employees', href: '/employees', icon: Users, show: isManager },
-    { name: 'Schedule', href: '/schedule', icon: Calendar, show: true },
-    { name: 'Templates', href: '/shift-templates', icon: Copy, show: isManager },
-    { name: 'Time Tracking', href: '/time-tracking', icon: Clock, show: true },
-    { name: 'Time Off', href: '/time-off', icon: Umbrella, show: true },
-    { name: 'Locations', href: '/locations', icon: MapPin, show: isManager },
-    // Differentiators
-    { name: 'Skills', href: '/skills', icon: Award, show: isManager, highlight: true },
-    { name: 'Opportunities', href: '/jobs', icon: Briefcase, show: true, highlight: true },
-    { name: 'My Career', href: '/career', icon: TrendingUp, show: !isManager, highlight: true },
-    // Admin
-    { name: 'Bulk Import', href: '/bulk-import', icon: Upload, show: isManager },
-    { name: 'Reports', href: '/reports', icon: BarChart3, show: isManager },
-    { name: 'Settings', href: '/settings', icon: Settings, show: true },
-  ].filter(item => item.show);
-};
 
-// Check if we're in demo mode (can be set via env var or org settings)
-const isDemoMode = () => {
-  // Check environment variable
-  if (import.meta.env.VITE_DEMO_MODE === 'true') return true;
-  // Check if URL contains 'demo'
-  if (window.location.hostname.includes('demo')) return true;
-  return false;
+  return [
+    { name: t('nav.dashboard', 'Dashboard'), href: '/', icon: LayoutDashboard, show: true },
+    { name: t('nav.employees', 'Employees'), href: '/employees', icon: Users, show: isManager },
+    { name: t('nav.onboarding', 'Onboarding'), href: '/onboarding', icon: UserPlus, show: isManager },
+    { name: t('nav.schedule', 'Schedule'), href: '/schedule', icon: Calendar, show: true },
+    { name: t('nav.templates', 'Templates'), href: '/shift-templates', icon: Copy, show: isManager },
+    { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock, show: true },
+    { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella, show: true },
+    { name: t('nav.locations', 'Locations'), href: '/locations', icon: MapPin, show: isManager },
+    // Differentiators
+    { name: t('nav.skills', 'Skills'), href: '/skills', icon: Award, show: isManager, highlight: true },
+    { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase, show: true, highlight: true },
+    { name: t('nav.myCareer', 'My Career'), href: '/career', icon: TrendingUp, show: !isManager, highlight: true },
+    // Admin
+    { name: t('nav.bulkImport', 'Bulk Import'), href: '/bulk-import', icon: Upload, show: isManager },
+    { name: t('nav.activity', 'Activity'), href: '/activity', icon: ClipboardCheck, show: isManager, highlight: true },
+    { name: t('nav.reports', 'Reports'), href: '/reports', icon: BarChart3, show: isManager },
+    { name: t('nav.integrations', 'Integrations'), href: '/integrations', icon: Plug, show: isManager },
+    { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings, show: true },
+  ].filter(item => item.show);
 };
 
 export default function Layout() {
   const { user, logout } = useAuth();
+  const { branding } = useBranding();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [demoBannerVisible, setDemoBannerVisible] = useState(isDemoMode());
-  
-  const navigation = getNavigation(user?.role);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
+  const navigation = getNavigation(user?.role, t);
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Demo Mode Banner */}
-      {demoBannerVisible && (
-        <div className="bg-gradient-to-r from-momentum-500 to-momentum-600 text-white px-4 py-2 text-center text-sm relative">
-          <span className="font-medium">Demo Environment</span>
-          <span className="mx-2">|</span>
-          <span>The Grand Metropolitan Hotel Group - 150 employees across 5 locations</span>
-          <span className="mx-2">|</span>
-          <span className="opacity-90">All data is fictional</span>
-          <button 
-            onClick={() => setDemoBannerVisible(false)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 hover:bg-white/20 rounded p-1"
-            aria-label="Dismiss banner"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      )}
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -104,7 +89,14 @@ export default function Layout() {
       `}>
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
-          <UpliftLogo size={32} showWordmark={true} variant="dark" />
+          <div className="flex items-center gap-2">
+            {branding.logo_url ? (
+              <img src={branding.logo_url} alt={branding.brand_name || 'Logo'} className="h-8 w-auto max-w-[140px] object-contain" />
+            ) : (
+              <img src="/logo.svg" alt="Uplift" className="w-8 h-8" />
+            )}
+            <span className="text-white font-semibold text-lg">{branding.brand_name || 'Uplift'}</span>
+          </div>
           <button 
             onClick={() => setSidebarOpen(false)}
             className="lg:hidden text-slate-400 hover:text-white"
@@ -165,8 +157,52 @@ export default function Layout() {
 
           <div className="flex-1" />
 
+          {/* Language Selector */}
+          <div className="relative">
+            <button
+              onClick={() => setLangMenuOpen(!langMenuOpen)}
+              className="flex items-center gap-1 p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"
+            >
+              <Globe className="w-5 h-5" />
+              <span className="hidden sm:block text-xs font-medium">{currentLang.flag || '🌐'}</span>
+            </button>
+
+            {langMenuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setLangMenuOpen(false)}
+                />
+                <div className="absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20 max-h-80 overflow-y-auto">
+                  <div className="px-3 py-2 border-b border-slate-100">
+                    <p className="text-xs font-semibold text-slate-500 uppercase">Language</p>
+                  </div>
+                  {SUPPORTED_LANGUAGES.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        changeLanguage(lang.code);
+                        setCurrentLang(getCurrentLanguage());
+                        setLangMenuOpen(false);
+                      }}
+                      className={`w-full px-3 py-2 text-left text-sm flex items-center gap-2 hover:bg-slate-50 ${
+                        currentLang.code === lang.code ? 'bg-momentum-50 text-momentum-600' : 'text-slate-700'
+                      }`}
+                    >
+                      <span className="text-lg">{lang.flag}</span>
+                      <span className="flex-1">{lang.nativeName}</span>
+                      {currentLang.code === lang.code && (
+                        <span className="text-momentum-500">✓</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
           {/* Notifications */}
-          <button 
+          <button
             className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"
             onClick={() => navigate('/settings/notifications')}
           >

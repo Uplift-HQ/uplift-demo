@@ -1,0 +1,31 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Uplift Mark Only - Orange on transparent -->
+  <!-- For use in navigation, headers, etc. -->
+  
+  <!-- Rising U mark -->
+  <path d="
+    M24 24
+    L24 136
+    Q24 168 56 168
+    L144 168
+    Q176 168 176 136
+    L176 80
+    L144 40
+    L144 136
+    Q144 148 132 148
+    L68 148
+    Q56 148 56 136
+    L56 24
+    Z
+  " fill="#FF6B35"/>
+  
+  <!-- Rising arrow -->
+  <path d="
+    M144 40
+    L176 80
+    L208 40
+    L176 0
+    Z
+  " fill="#FF6B35"/>
+  
+</svg>

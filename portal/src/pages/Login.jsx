@@ -1,15 +1,17 @@
 // ============================================================
-// LOGIN PAGE
+// LOGIN PAGE - TRANSLATED
 // ============================================================
 
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
 import { api } from '../lib/api';
 import { Eye, EyeOff, Loader2, ArrowLeft, Shield } from 'lucide-react';
 import { UpliftLogo } from '../components/UpliftLogo';
 
 export default function Login() {
+  const { t } = useTranslation();
   const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +48,7 @@ export default function Login() {
         setLoading(false);
       }
     } catch (err) {
-      setError(err.message || 'Login failed');
+      setError(err.message || t('auth.loginFailed', 'Login failed'));
       setLoading(false);
     }
   };
@@ -64,7 +66,7 @@ export default function Login() {
       // Refresh page to load authenticated state
       window.location.href = '/';
     } catch (err) {
-      setError(err.message || 'Invalid code');
+      setError(err.message || t('auth.invalidCode', 'Invalid code'));
       setLoading(false);
     }
   };
@@ -95,8 +97,8 @@ export default function Login() {
               <div className="w-16 h-16 bg-momentum-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield className="w-8 h-8 text-momentum-600" />
               </div>
-              <h1 className="text-2xl font-bold text-slate-900">Two-Factor Authentication</h1>
-              <p className="text-slate-600 mt-2">Enter the code from your authenticator app</p>
+              <h1 className="text-2xl font-bold text-slate-900">{t('auth.twoFactorAuth', 'Two-Factor Authentication')}</h1>
+              <p className="text-slate-600 mt-2">{t('auth.enterMfaCode', 'Enter the code from your authenticator app')}</p>
             </div>
 
             {error && (
@@ -107,7 +109,7 @@ export default function Login() {
 
             <form onSubmit={handleMfaSubmit} className="space-y-4">
               <div>
-                <label className="label">Verification Code</label>
+                <label className="label">{t('auth.verificationCode', 'Verification Code')}</label>
                 <input
                   type="text"
                   value={mfaCode}
@@ -125,7 +127,7 @@ export default function Login() {
                 disabled={loading || mfaCode.length !== 6}
                 className="btn btn-primary w-full justify-center py-2.5"
               >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify'}
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : t('auth.verify', 'Verify')}
               </button>
 
               <button
@@ -133,7 +135,7 @@ export default function Login() {
                 onClick={() => { setShowMfa(false); setMfaCode(''); }}
                 className="w-full text-center text-sm text-slate-500 hover:text-slate-700"
               >
-                Back to login
+                {t('auth.backToLogin', 'Back to login')}
               </button>
             </form>
           </div>
@@ -153,7 +155,7 @@ export default function Login() {
               className="flex items-center gap-1 text-slate-500 hover:text-slate-700 mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to login
+              {t('auth.backToLogin', 'Back to login')}
             </button>
 
             {forgotSent ? (
@@ -163,21 +165,21 @@ export default function Login() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h2 className="text-xl font-bold text-slate-900 mb-2">Check your email</h2>
+                <h2 className="text-xl font-bold text-slate-900 mb-2">{t('auth.checkYourEmail', 'Check your email')}</h2>
                 <p className="text-slate-600">
-                  If an account exists for {forgotEmail}, you'll receive a password reset link.
+                  {t('auth.resetLinkSent', `If an account exists for ${forgotEmail}, you'll receive a password reset link.`, { email: forgotEmail })}
                 </p>
               </div>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-slate-900 mb-2">Reset password</h1>
+                <h1 className="text-2xl font-bold text-slate-900 mb-2">{t('auth.resetPassword', 'Reset password')}</h1>
                 <p className="text-slate-600 mb-6">
-                  Enter your email address and we'll send you a link to reset your password.
+                  {t('auth.resetPasswordDesc', "Enter your email address and we'll send you a link to reset your password.")}
                 </p>
 
                 <form onSubmit={handleForgotPassword} className="space-y-4">
                   <div>
-                    <label className="label">Email</label>
+                    <label className="label">{t('auth.email', 'Email')}</label>
                     <input
                       type="email"
                       value={forgotEmail}
@@ -194,7 +196,7 @@ export default function Login() {
                     disabled={loading}
                     className="btn btn-primary w-full justify-center py-2.5"
                   >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Send reset link'}
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : t('auth.sendResetLink', 'Send reset link')}
                   </button>
                 </form>
               </>
@@ -214,12 +216,12 @@ export default function Login() {
           <div className="inline-flex flex-col items-center gap-3 mb-4">
             <UpliftLogo size={48} showWordmark={true} variant="white" />
           </div>
-          <p className="text-slate-400">Admin Portal</p>
+          <p className="text-slate-400">{t('auth.adminPortal', 'Admin Portal')}</p>
         </div>
 
         {/* Login form */}
         <div className="bg-white rounded-2xl shadow-xl p-8">
-          <h1 className="text-2xl font-bold text-slate-900 mb-6">Sign in</h1>
+          <h1 className="text-2xl font-bold text-slate-900 mb-6">{t('auth.signIn', 'Sign in')}</h1>
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
@@ -229,7 +231,7 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="label">Email</label>
+              <label className="label">{t('auth.email', 'Email')}</label>
               <input
                 type="email"
                 value={email}
@@ -242,7 +244,7 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="label">Password</label>
+              <label className="label">{t('auth.password', 'Password')}</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -265,14 +267,14 @@ export default function Login() {
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="rounded border-slate-300" />
-                <span className="text-slate-600">Remember me</span>
+                <span className="text-slate-600">{t('auth.rememberMe', 'Remember me')}</span>
               </label>
-              <button 
+              <button
                 type="button"
                 onClick={() => { setShowForgot(true); setForgotEmail(email); }}
                 className="text-momentum-500 hover:text-momentum-600 font-medium"
               >
-                Forgot password?
+                {t('auth.forgotPassword', 'Forgot password?')}
               </button>
             </div>
 
@@ -284,19 +286,19 @@ export default function Login() {
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
-                'Sign in'
+                t('auth.signIn', 'Sign in')
               )}
             </button>
           </form>
         </div>
 
         <p className="text-center text-slate-500 text-sm mt-6">
-          © {new Date().getFullYear()} Uplift. All rights reserved.
+          © {new Date().getFullYear()} Uplift. {t('auth.allRightsReserved', 'All rights reserved.')}
         </p>
         <p className="text-center text-slate-400 text-xs mt-2">
-          <a href="/terms" className="hover:text-slate-300">Terms of Service</a>
+          <a href="/terms" className="hover:text-slate-300">{t('auth.termsOfService', 'Terms of Service')}</a>
           {' · '}
-          <a href="/privacy" className="hover:text-slate-300">Privacy Policy</a>
+          <a href="/privacy" className="hover:text-slate-300">{t('auth.privacyPolicy', 'Privacy Policy')}</a>
         </p>
       </div>
     </div>

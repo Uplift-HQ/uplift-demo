@@ -1,403 +1,271 @@
 // ============================================================
-// BULK IMPORT PAGE
-// Import employees and shifts from CSV/Excel
+// BULK IMPORT PAGE - FULLY TRANSLATED
 // ============================================================
-
-import { useState, useRef } from 'react';
+import { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { api } from '../lib/api';
-import { useAuth } from '../lib/auth';
-import {
-  Upload, FileSpreadsheet, Users, Calendar, CheckCircle, XCircle,
-  AlertCircle, Download, X, ChevronRight, FileText, Loader,
-} from 'lucide-react';
+import { Upload, FileSpreadsheet, Check, X, AlertCircle, Download, ChevronRight, Users, Calendar, MapPin, Award } from 'lucide-react';
+
+const IMPORT_TYPES = [
+  { id: 'employees', name: 'Employees', icon: Users, description: 'Import employee profiles', template: 'employees-template.csv' },
+  { id: 'shifts', name: 'Shifts', icon: Calendar, description: 'Import shift schedules', template: 'shifts-template.csv' },
+  { id: 'locations', name: 'Locations', icon: MapPin, description: 'Import locations', template: 'locations-template.csv' },
+  { id: 'skills', name: 'Skills', icon: Award, description: 'Import skills', template: 'skills-template.csv' },
+];
 
 export default function BulkImport() {
-  const { isManager } = useAuth();
-  const [activeTab, setActiveTab] = useState('employees');
+  const { t } = useTranslation();
+  const [step, setStep] = useState(1);
+  const [selectedType, setSelectedType] = useState(null);
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [importing, setImporting] = useState(false);
   const [result, setResult] = useState(null);
-  const fileInputRef = useRef(null);
+  const [errors, setErrors] = useState([]);
+  const [dragOver, setDragOver] = useState(false);
 
-  const handleFileSelect = async (e) => {
-    const selectedFile = e.target.files[0];
+  const handleFileSelect = useCallback((selectedFile) => {
     if (!selectedFile) return;
-
-    // Validate file type
-    const validTypes = ['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
-    if (!validTypes.includes(selectedFile.type) && !selectedFile.name.match(/\.(csv|xlsx|xls)$/i)) {
-      alert('Please upload a CSV or Excel file');
+    if (!selectedFile.name.endsWith('.csv') && !selectedFile.name.endsWith('.xlsx')) {
+      setErrors([t('bulkImport.invalidFileType', 'Please upload a CSV or Excel file')]);
       return;
     }
-
     setFile(selectedFile);
-    setResult(null);
-
+    setErrors([]);
+    
     // Parse preview
-    try {
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-      formData.append('type', activeTab);
-      formData.append('preview', 'true');
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target.result;
+      const lines = text.split('\n').slice(0, 6);
+      const headers = lines[0]?.split(',').map(h => h.trim().replace(/"/g, ''));
+      const rows = lines.slice(1).map(line => line.split(',').map(c => c.trim().replace(/"/g, '')));
+      setPreview({ headers, rows, totalRows: text.split('\n').length - 1 });
+    };
+    reader.readAsText(selectedFile);
+    setStep(3);
+  }, [t]);
 
-      const response = await api.post(`/bulk/${activeTab}/preview`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      
-      setPreview(response);
-    } catch (error) {
-      // For demo, create mock preview
-      setPreview(mockPreview(activeTab, selectedFile));
-    }
-  };
-
-  const mockPreview = (type, file) => {
-    if (type === 'employees') {
-      return {
-        headers: ['First Name', 'Last Name', 'Email', 'Role', 'Department', 'Start Date'],
-        rows: [
-          { data: ['John', 'Smith', 'john@example.com', 'Team Lead', 'Operations', '2024-01-15'], valid: true },
-          { data: ['Jane', 'Doe', 'jane@example.com', 'Associate', 'Sales', '2024-02-01'], valid: true },
-          { data: ['Bob', '', 'bob@example.com', 'Associate', 'Operations', '2024-01-20'], valid: false, error: 'Last name required' },
-        ],
-        totalRows: 3,
-        validRows: 2,
-        errorRows: 1,
-      };
-    } else {
-      return {
-        headers: ['Date', 'Start Time', 'End Time', 'Location', 'Employee Email', 'Role'],
-        rows: [
-          { data: ['2024-01-20', '09:00', '17:00', 'London Store', 'john@example.com', 'Floor Staff'], valid: true },
-          { data: ['2024-01-20', '14:00', '22:00', 'London Store', 'jane@example.com', 'Floor Staff'], valid: true },
-          { data: ['2024-01-21', '09:00', '17:00', 'Unknown Location', 'john@example.com', 'Floor Staff'], valid: false, error: 'Location not found' },
-        ],
-        totalRows: 3,
-        validRows: 2,
-        errorRows: 1,
-      };
-    }
-  };
+  const handleDrop = useCallback((e) => {
+    e.preventDefault();
+    setDragOver(false);
+    const droppedFile = e.dataTransfer.files[0];
+    handleFileSelect(droppedFile);
+  }, [handleFileSelect]);
 
   const handleImport = async () => {
-    if (!file || !preview) return;
-
+    if (!file || !selectedType) return;
     setImporting(true);
+    setErrors([]);
+    
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('type', activeTab);
-
-      const response = await api.post(`/bulk/${activeTab}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-
+      formData.append('type', selectedType.id);
+      
+      const response = await api.post('/import', formData);
       setResult({
-        success: true,
-        imported: response.imported || preview.validRows,
-        failed: response.failed || preview.errorRows,
-        errors: response.errors || [],
+        success: response.imported || preview.totalRows,
+        failed: response.failed || 0,
+        total: preview.totalRows
       });
+      setStep(4);
     } catch (error) {
-      // Mock success for demo
-      setResult({
-        success: true,
-        imported: preview.validRows,
-        failed: preview.errorRows,
-        errors: preview.rows.filter(r => !r.valid).map(r => r.error),
-      });
+      console.error('Import failed:', error);
+      setErrors([error.message || t('bulkImport.importFailed', 'Import failed. Please try again.')]);
     } finally {
       setImporting(false);
     }
   };
 
-  const resetImport = () => {
-    setFile(null);
-    setPreview(null);
-    setResult(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+  const downloadTemplate = (type) => {
+    // Generate a sample CSV template
+    let csv = '';
+    switch (type.id) {
+      case 'employees':
+        csv = 'first_name,last_name,email,phone,department,role,hire_date\nJohn,Smith,john.smith@example.com,+44 7700 000001,Operations,Team Member,2024-01-15\nJane,Doe,jane.doe@example.com,+44 7700 000002,Kitchen,Supervisor,2024-02-01';
+        break;
+      case 'shifts':
+        csv = 'employee_email,date,start_time,end_time,location,break_minutes\njohn.smith@example.com,2025-01-20,09:00,17:00,London,30\njane.doe@example.com,2025-01-20,14:00,22:00,Edinburgh,30';
+        break;
+      case 'locations':
+        csv = 'name,code,address,city,postcode,phone\nLondon Office,LON-01,123 High Street,London,SW1A 1AA,+44 20 1234 5678\nEdinburgh Store,EDI-01,45 Royal Mile,Edinburgh,EH1 1AA,+44 131 123 4567';
+        break;
+      case 'skills':
+        csv = 'name,category,requires_verification\nFood Safety Level 2,certification,true\nCustomer Service,soft_skill,false\nForklift Operation,technical,true';
+        break;
     }
-  };
-
-  const downloadTemplate = () => {
-    const templates = {
-      employees: 'first_name,last_name,email,phone,role,department,location,start_date,hourly_rate\nJohn,Smith,john@example.com,+44123456789,Team Lead,Operations,London Store,2024-01-15,15.50',
-      shifts: 'date,start_time,end_time,location,employee_email,role,break_minutes,notes\n2024-01-20,09:00,17:00,London Store,john@example.com,Floor Staff,30,Opening shift',
-    };
-
-    const blob = new Blob([templates[activeTab]], { type: 'text/csv' });
+    const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${activeTab}_template.csv`;
+    a.download = type.template;
     a.click();
-    URL.revokeObjectURL(url);
   };
 
-  if (!isManager) {
-    return (
-      <div className="text-center py-12">
-        <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-        <h2 className="text-lg font-medium text-slate-900">Access Restricted</h2>
-        <p className="text-slate-500">Only managers can access bulk import</p>
-      </div>
-    );
-  }
+  const reset = () => {
+    setStep(1);
+    setSelectedType(null);
+    setFile(null);
+    setPreview(null);
+    setResult(null);
+    setErrors([]);
+  };
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Bulk Import</h1>
-        <p className="text-slate-600">Import employees or shifts from CSV or Excel files</p>
+        <h1 className="text-2xl font-bold text-gray-900">{t('bulkImport.title', 'Bulk Import')}</h1>
+        <p className="text-gray-600">{t('bulkImport.subtitle', 'Import data from CSV or Excel files')}</p>
       </div>
 
-      {/* Tabs */}
-      <div className="flex gap-2">
-        <button
-          onClick={() => { setActiveTab('employees'); resetImport(); }}
-          className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${
-            activeTab === 'employees'
-              ? 'bg-momentum-500 text-white'
-              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-          }`}
-        >
-          <Users className="w-4 h-4" />
-          Employees
-        </button>
-        <button
-          onClick={() => { setActiveTab('shifts'); resetImport(); }}
-          className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${
-            activeTab === 'shifts'
-              ? 'bg-momentum-500 text-white'
-              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-          }`}
-        >
-          <Calendar className="w-4 h-4" />
-          Shifts
-        </button>
-      </div>
-
-      {/* Result */}
-      {result && (
-        <div className={`card p-6 ${result.success ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
-          <div className="flex items-start gap-4">
-            {result.success ? (
-              <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0" />
-            ) : (
-              <XCircle className="w-8 h-8 text-red-600 flex-shrink-0" />
-            )}
-            <div className="flex-1">
-              <h3 className="font-semibold text-lg text-slate-900">
-                {result.success ? 'Import Complete' : 'Import Failed'}
-              </h3>
-              <div className="mt-2 flex gap-6">
-                <div>
-                  <span className="text-2xl font-bold text-green-600">{result.imported}</span>
-                  <span className="text-slate-600 ml-1">imported</span>
-                </div>
-                {result.failed > 0 && (
-                  <div>
-                    <span className="text-2xl font-bold text-red-600">{result.failed}</span>
-                    <span className="text-slate-600 ml-1">failed</span>
-                  </div>
-                )}
-              </div>
-              {result.errors?.length > 0 && (
-                <div className="mt-4">
-                  <p className="text-sm font-medium text-slate-700 mb-2">Errors:</p>
-                  <ul className="text-sm text-red-600 space-y-1">
-                    {result.errors.slice(0, 5).map((err, i) => (
-                      <li key={i}>• {err}</li>
-                    ))}
-                    {result.errors.length > 5 && (
-                      <li className="text-slate-500">...and {result.errors.length - 5} more</li>
-                    )}
-                  </ul>
-                </div>
-              )}
+      {/* Progress Steps */}
+      <div className="flex items-center gap-4 mb-8">
+        {[
+          { num: 1, label: t('bulkImport.selectType', 'Select Type') },
+          { num: 2, label: t('bulkImport.uploadFile', 'Upload File') },
+          { num: 3, label: t('bulkImport.preview', 'Preview') },
+          { num: 4, label: t('bulkImport.complete', 'Complete') }
+        ].map((s, i) => (
+          <div key={s.num} className="flex items-center">
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-medium ${step >= s.num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+              {step > s.num ? <Check className="h-4 w-4" /> : s.num}
             </div>
-            <button onClick={resetImport} className="btn btn-secondary">
-              Import Another
+            <span className={`ml-2 text-sm ${step >= s.num ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>{s.label}</span>
+            {i < 3 && <ChevronRight className="h-4 w-4 text-gray-400 mx-4" />}
+          </div>
+        ))}
+      </div>
+
+      {/* Step 1: Select Type */}
+      {step === 1 && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {IMPORT_TYPES.map(type => (
+            <button
+              key={type.id}
+              onClick={() => { setSelectedType(type); setStep(2); }}
+              className="p-6 bg-white rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-colors text-left"
+            >
+              <type.icon className="h-8 w-8 text-blue-600 mb-3" />
+              <h3 className="font-semibold text-gray-900">{t(`bulkImport.type.${type.id}`, type.name)}</h3>
+              <p className="text-sm text-gray-500 mt-1">{t(`bulkImport.type.${type.id}Desc`, type.description)}</p>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Step 2: Upload File */}
+      {step === 2 && (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-semibold text-gray-900">{t('bulkImport.uploadFor', 'Upload')} {t(`bulkImport.type.${selectedType.id}`, selectedType.name)}</h2>
+              <p className="text-sm text-gray-500">{t('bulkImport.uploadDesc', 'Drag and drop or click to select a file')}</p>
+            </div>
+            <button onClick={() => downloadTemplate(selectedType)} className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50">
+              <Download className="h-4 w-4" />
+              {t('bulkImport.downloadTemplate', 'Download Template')}
+            </button>
+          </div>
+
+          <div
+            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+            onClick={() => document.getElementById('file-input').click()}
+            className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-colors ${dragOver ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}`}
+          >
+            <input id="file-input" type="file" accept=".csv,.xlsx" onChange={(e) => handleFileSelect(e.target.files[0])} className="hidden" />
+            <FileSpreadsheet className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600">{t('bulkImport.dragDrop', 'Drag and drop your file here, or click to browse')}</p>
+            <p className="text-sm text-gray-500 mt-2">{t('bulkImport.supportedFormats', 'Supported formats: CSV, XLSX')}</p>
+          </div>
+
+          {errors.length > 0 && (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              {errors.map((err, i) => (<p key={i} className="text-red-700 text-sm flex items-center gap-2"><AlertCircle className="h-4 w-4" />{err}</p>))}
+            </div>
+          )}
+
+          <button onClick={() => setStep(1)} className="text-gray-600 hover:text-gray-900">{t('common.back', 'Back')}</button>
+        </div>
+      )}
+
+      {/* Step 3: Preview */}
+      {step === 3 && preview && (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-semibold text-gray-900">{t('bulkImport.previewData', 'Preview Data')}</h2>
+              <p className="text-sm text-gray-500">{preview.totalRows} {t('bulkImport.rowsFound', 'rows found in')} {file.name}</p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg border overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    {preview.headers?.map((h, i) => (
+                      <th key={i} className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {preview.rows?.map((row, ri) => (
+                    <tr key={ri}>
+                      {row.map((cell, ci) => (
+                        <td key={ci} className="px-4 py-3 text-sm text-gray-900">{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {preview.totalRows > 5 && (
+              <div className="px-4 py-2 bg-gray-50 text-sm text-gray-500 border-t">
+                {t('bulkImport.andMore', 'And')} {preview.totalRows - 5} {t('bulkImport.moreRows', 'more rows...')}
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <button onClick={() => { setFile(null); setPreview(null); setStep(2); }} className="text-gray-600 hover:text-gray-900">{t('common.back', 'Back')}</button>
+            <button onClick={handleImport} disabled={importing} className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
+              {importing ? (<><div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>{t('bulkImport.importing', 'Importing...')}</>) : (<><Upload className="h-4 w-4" />{t('bulkImport.startImport', 'Start Import')}</>)}
             </button>
           </div>
         </div>
       )}
 
-      {/* Upload Area */}
-      {!result && (
-        <>
-          {!file ? (
-            <div className="card p-8">
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".csv,.xlsx,.xls"
-                onChange={handleFileSelect}
-                className="hidden"
-                id="file-upload"
-              />
-              
-              <label
-                htmlFor="file-upload"
-                className="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded-xl p-12 cursor-pointer hover:border-momentum-400 hover:bg-momentum-50/50 transition-colors"
-              >
-                <div className="p-4 bg-momentum-100 rounded-full mb-4">
-                  <Upload className="w-8 h-8 text-momentum-600" />
-                </div>
-                <p className="text-lg font-medium text-slate-900">
-                  Drop your file here or click to browse
-                </p>
-                <p className="text-slate-500 mt-1">
-                  Supports CSV and Excel files (.csv, .xlsx, .xls)
-                </p>
-              </label>
-
-              <div className="mt-6 flex items-center justify-center gap-4">
-                <button onClick={downloadTemplate} className="btn btn-secondary">
-                  <Download className="w-4 h-4" />
-                  Download Template
-                </button>
-              </div>
-
-              {/* Format Guide */}
-              <div className="mt-8 p-4 bg-slate-50 rounded-lg">
-                <h3 className="font-medium text-slate-900 mb-2">
-                  {activeTab === 'employees' ? 'Employee Import Format' : 'Shift Import Format'}
-                </h3>
-                <p className="text-sm text-slate-600 mb-3">
-                  Your file should include the following columns:
-                </p>
-                {activeTab === 'employees' ? (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">first_name *</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">last_name *</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">email *</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">phone</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">role</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">department</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">location</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">start_date</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">hourly_rate</span>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">date *</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">start_time *</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">end_time *</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">location *</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">employee_email</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">role</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">break_minutes</span>
-                    <span className="px-2 py-1 bg-white rounded border border-slate-200">notes</span>
-                  </div>
-                )}
-                <p className="text-xs text-slate-500 mt-2">* Required fields</p>
-              </div>
+      {/* Step 4: Complete */}
+      {step === 4 && result && (
+        <div className="text-center py-12">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Check className="h-8 w-8 text-green-600" />
+          </div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('bulkImport.importComplete', 'Import Complete')}</h2>
+          <p className="text-gray-600 mb-6">{t('bulkImport.successfullyImported', 'Successfully imported')} {result.success} {t('bulkImport.of', 'of')} {result.total} {t('bulkImport.records', 'records')}</p>
+          
+          <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
+            <div className="bg-green-50 rounded-lg p-4">
+              <p className="text-2xl font-bold text-green-700">{result.success}</p>
+              <p className="text-sm text-green-600">{t('bulkImport.successful', 'Successful')}</p>
             </div>
-          ) : (
-            /* Preview */
-            <div className="card overflow-hidden">
-              {/* File Info */}
-              <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-white rounded-lg border border-slate-200">
-                    <FileSpreadsheet className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">{file.name}</p>
-                    <p className="text-sm text-slate-500">
-                      {preview && `${preview.totalRows} rows • ${preview.validRows} valid • ${preview.errorRows} errors`}
-                    </p>
-                  </div>
-                </div>
-                <button onClick={resetImport} className="p-2 hover:bg-slate-200 rounded-lg">
-                  <X className="w-5 h-5 text-slate-400" />
-                </button>
-              </div>
-
-              {/* Preview Table */}
-              {preview && (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead className="bg-slate-50 border-b border-slate-200">
-                      <tr>
-                        <th className="px-4 py-2 text-left w-10">
-                          <CheckCircle className="w-4 h-4 text-slate-400" />
-                        </th>
-                        {preview.headers.map((header, i) => (
-                          <th key={i} className="px-4 py-2 text-left font-medium text-slate-600">
-                            {header}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {preview.rows.map((row, i) => (
-                        <tr key={i} className={row.valid ? '' : 'bg-red-50'}>
-                          <td className="px-4 py-2">
-                            {row.valid ? (
-                              <CheckCircle className="w-4 h-4 text-green-500" />
-                            ) : (
-                              <div className="group relative">
-                                <XCircle className="w-4 h-4 text-red-500" />
-                                <div className="absolute left-6 top-0 hidden group-hover:block bg-slate-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10">
-                                  {row.error}
-                                </div>
-                              </div>
-                            )}
-                          </td>
-                          {row.data.map((cell, j) => (
-                            <td key={j} className="px-4 py-2 text-slate-700">
-                              {cell || '-'}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
-              {/* Actions */}
-              <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
-                <div className="text-sm text-slate-600">
-                  {preview && (
-                    <>
-                      <span className="text-green-600 font-medium">{preview.validRows}</span> rows will be imported
-                      {preview.errorRows > 0 && (
-                        <>, <span className="text-red-600 font-medium">{preview.errorRows}</span> will be skipped</>
-                      )}
-                    </>
-                  )}
-                </div>
-                <div className="flex gap-3">
-                  <button onClick={resetImport} className="btn btn-secondary">
-                    Cancel
-                  </button>
-                  <button 
-                    onClick={handleImport}
-                    disabled={importing || !preview?.validRows}
-                    className="btn btn-primary"
-                  >
-                    {importing ? (
-                      <>
-                        <Loader className="w-4 h-4 animate-spin" />
-                        Importing...
-                      </>
-                    ) : (
-                      <>
-                        <Upload className="w-4 h-4" />
-                        Import {preview?.validRows || 0} {activeTab}
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
+            <div className="bg-red-50 rounded-lg p-4">
+              <p className="text-2xl font-bold text-red-700">{result.failed}</p>
+              <p className="text-sm text-red-600">{t('bulkImport.failed', 'Failed')}</p>
             </div>
-          )}
-        </>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <p className="text-2xl font-bold text-gray-700">{result.total}</p>
+              <p className="text-sm text-gray-600">{t('bulkImport.total', 'Total')}</p>
+            </div>
+          </div>
+
+          <button onClick={reset} className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            {t('bulkImport.importMore', 'Import More Data')}
+          </button>
+        </div>
       )}
     </div>
   );

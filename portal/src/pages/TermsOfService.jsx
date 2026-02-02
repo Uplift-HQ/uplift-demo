@@ -2,10 +2,12 @@
 // TERMS OF SERVICE PAGE
 // ============================================================
 
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
 export default function TermsOfService() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
@@ -13,7 +15,7 @@ export default function TermsOfService() {
         <div className="max-w-4xl mx-auto px-4 py-6">
           <Link to="/login" className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 mb-4">
             <ArrowLeft className="w-4 h-4" />
-            Back to login
+            {t('auth.backToLogin', 'Back to login')}
           </Link>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-momentum-500 rounded-xl flex items-center justify-center">
@@ -26,8 +28,8 @@ export default function TermsOfService() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Terms of Service</h1>
-        <p className="text-slate-600 mb-8">Last updated: January 2026</p>
+        <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('settings.termsOfService', 'Terms of Service')}</h1>
+        <p className="text-slate-600 mb-8">{t('legal.lastUpdated', 'Last updated')}: January 2026</p>
 
         <div className="prose prose-slate max-w-none">
           <h2>1. Acceptance of Terms</h2>
@@ -102,7 +104,7 @@ export default function TermsOfService() {
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-6">
         <div className="max-w-4xl mx-auto px-4 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} Uplift. All rights reserved.
+          © {new Date().getFullYear()} Uplift. {t('auth.allRightsReserved', 'All rights reserved')}.
         </div>
       </footer>
     </div>

@@ -24,8 +24,11 @@ import Jobs from './pages/Jobs';
 import Career from './pages/Career';
 import BulkImport from './pages/BulkImport';
 import Reports from './pages/Reports';
+import Integrations from './pages/Integrations';
 import Settings from './pages/Settings';
 import NotificationSettings from './pages/NotificationSettings';
+import Activity from './pages/Activity';
+import Onboarding from './pages/Onboarding';
 
 // Legal pages
 import TermsOfService from './pages/TermsOfService';
@@ -66,6 +69,7 @@ export default function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/employees/:id" element={<EmployeeDetail />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/shift-templates" element={<ShiftTemplates />} />
         <Route path="/time-tracking" element={<TimeTracking />} />
@@ -76,6 +80,8 @@ export default function App() {
         <Route path="/career" element={<Career />} />
         <Route path="/bulk-import" element={<BulkImport />} />
         <Route path="/reports" element={<Reports />} />
+        <Route path="/integrations" element={<Integrations />} />
+        <Route path="/activity" element={<Activity />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/settings/notifications" element={<NotificationSettings />} />
       </Route>
