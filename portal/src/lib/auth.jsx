@@ -1,6 +1,6 @@
 // ============================================================
 // AUTH CONTEXT & HOOKS
-// Authentication state management (httpOnly cookie based)
+// Authentication state management (Bearer token based)
 // ============================================================
 
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
@@ -15,17 +15,24 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check if user is logged in on mount (cookie-based)
+  // Check if user is logged in on mount (token-based)
   useEffect(() => {
     const checkAuth = async () => {
+      const token = localStorage.getItem('uplift_token');
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
+      api.setToken(token);
+
       try {
         const { user } = await authApi.me();
         setUser(user);
-        api.setAuthenticated(true);
       } catch (error) {
-        // Not logged in or token expired
+        // Token invalid or expired
         setUser(null);
-        api.setAuthenticated(false);
+        api.setToken(null);
       }
       setLoading(false);
     };
@@ -40,9 +47,9 @@ export function AuthProvider({ children }) {
       return { requiresMfa: true, mfaToken: result.mfaToken };
     }
     
-    // Token is now in httpOnly cookie, just set user
+    // Store the Bearer token
+    api.setToken(result.token);
     setUser(result.user);
-    api.setAuthenticated(true);
     
     // Redirect to intended page or dashboard
     const from = location.state?.from?.pathname || '/';
@@ -58,7 +65,7 @@ export function AuthProvider({ children }) {
       // Ignore errors on logout
     }
     setUser(null);
-    api.setAuthenticated(false);
+    api.setToken(null);
     navigate('/login');
   }, [navigate]);
 

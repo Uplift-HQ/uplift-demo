@@ -1,25 +1,27 @@
 // ============================================================
 // API CLIENT
-// Centralized HTTP client with httpOnly cookie auth + CSRF protection
+// Centralized HTTP client with Bearer token auth
 // ============================================================
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
-
-// Helper to get cookie value
-const getCookie = (name) => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-};
+const TOKEN_KEY = 'uplift_token';
 
 class ApiClient {
   constructor() {
-    this.isAuthenticated = false;
+    this.token = localStorage.getItem(TOKEN_KEY) || null;
   }
 
-  setAuthenticated(value) {
-    this.isAuthenticated = value;
+  setToken(token) {
+    this.token = token;
+    if (token) {
+      localStorage.setItem(TOKEN_KEY, token);
+    } else {
+      localStorage.removeItem(TOKEN_KEY);
+    }
+  }
+
+  getToken() {
+    return this.token;
   }
 
   async request(method, path, data, options = {}) {
@@ -30,18 +32,13 @@ class ApiClient {
       ...options.headers,
     };
 
-    // Add CSRF token for non-GET requests
-    if (method !== 'GET') {
-      const csrfToken = getCookie('csrfToken');
-      if (csrfToken) {
-        headers['X-CSRF-Token'] = csrfToken;
-      }
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
     }
 
     const config = {
       method,
       headers,
-      credentials: 'include', // Always include cookies
     };
 
     if (data && method !== 'GET') {
@@ -51,34 +48,10 @@ class ApiClient {
     try {
       const response = await fetch(url, config);
       
-      // Handle token expiry - refresh automatically
       if (response.status === 401) {
-        const result = await response.json();
-        if (result.code === 'TOKEN_EXPIRED') {
-          // Try to refresh (cookie-based)
-          const refreshed = await this.refreshToken();
-          if (refreshed) {
-            // Retry original request
-            const retryResponse = await fetch(url, config);
-            return this.handleResponse(retryResponse);
-          }
-        }
-        // Clear auth state and redirect
-        this.setAuthenticated(false);
+        this.setToken(null);
         window.location.href = '/login';
         throw new Error('Session expired');
-      }
-
-      // Handle CSRF error - fetch new token and retry
-      if (response.status === 403) {
-        const result = await response.json();
-        if (result.code === 'CSRF_ERROR') {
-          await this.fetchCsrfToken();
-          // Retry with new token
-          headers['X-CSRF-Token'] = getCookie('csrfToken');
-          const retryResponse = await fetch(url, { ...config, headers });
-          return this.handleResponse(retryResponse);
-        }
       }
 
       return this.handleResponse(response);
@@ -99,35 +72,6 @@ class ApiClient {
     }
     
     return data;
-  }
-
-  async refreshToken() {
-    try {
-      const response = await fetch(`${API_URL}/auth/refresh`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'X-CSRF-Token': getCookie('csrfToken'),
-        },
-      });
-      
-      if (response.ok) {
-        return true;
-      }
-      return false;
-    } catch {
-      return false;
-    }
-  }
-
-  async fetchCsrfToken() {
-    try {
-      await fetch(`${API_URL}/csrf-token`, {
-        credentials: 'include',
-      });
-    } catch {
-      // Ignore errors
-    }
   }
 
   // Convenience methods
