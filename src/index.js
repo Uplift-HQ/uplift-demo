@@ -685,6 +685,9 @@ app.get('/api/shift-templates', authMiddleware, (req, res) => {
 app.get('/api/shift-swaps', authMiddleware, (req, res) => {
   res.json({ swaps: [] });
 });
+app.get('/api/shifts/swaps', authMiddleware, (req, res) => {
+  res.json({ swaps: [] });
+});
 
 app.post('/api/shift-swaps', authMiddleware, (req, res) => {
   res.status(201).json({ swap: { id: 'demo', status: 'pending' } });
