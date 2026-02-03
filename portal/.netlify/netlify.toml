@@ -26,18 +26,6 @@ command = "npm run build"
 [build.services]
 
 [[redirects]]
-from = "/api/*"
-to = "https://uplift-demo-production.up.railway.app/api/:splat"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200.0

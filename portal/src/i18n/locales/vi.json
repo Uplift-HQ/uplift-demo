@@ -54,7 +54,6 @@
     "viewMyCareer": "Xem sự nghiệp của tôi",
     "timeOffBalance": "Số ngày nghỉ phép còn lại"
   },
-
   "nav": {
     "dashboard": "Bảng điều khiển",
     "employees": "Nhân viên",
@@ -150,9 +149,21 @@
     "active": "Đang hoạt động",
     "inactive": "Không hoạt động",
     "enabled": "Đã bật",
-    "disabled": "Đã tắt"
+    "disabled": "Đã tắt",
+    "approveSelected": "Duyệt mục đã chọn",
+    "rejectSelected": "Từ chối mục đã chọn",
+    "clearSelection": "Xóa",
+    "showing": "Hiển thị",
+    "of": "trên",
+    "page": "Trang",
+    "previous": "Trước",
+    "terminated": "Đã nghỉ việc",
+    "sunday": "CN",
+    "monday": "T2",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Để có quyền truy cập Uplift, vui lòng liên hệ quản lý hoặc phòng nhân sự. Họ sẽ gửi cho bạn liên kết mời.",
     "enterEmailPassword": "Vui lòng nhập email và mật khẩu",
     "loginFailed": "Đăng nhập thất bại",
-    "demoAccounts": "Tài khoản demo:",
-    "demoWorker": "Nhân viên: worker@uplift.work / Demo123!",
-    "demoManager": "Quản lý: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Xác thực hai yếu tố",
     "enterMfaCode": "Nhập mã từ ứng dụng xác thực của bạn",
     "verificationCode": "Mã xác minh",
@@ -194,9 +202,16 @@
     "invalidCode": "Mã không hợp lệ",
     "allRightsReserved": "Đã đăng ký bản quyền",
     "termsOfService": "Điều khoản dịch vụ",
-    "privacyPolicy": "Chính sách bảo mật"
+    "privacyPolicy": "Chính sách bảo mật",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Trang chủ",
     "schedule": "Lịch làm việc",
@@ -214,7 +229,6 @@
     "leaderboard": "Bảng xếp hạng",
     "badges": "Huy hiệu"
   },
-
   "home": {
     "welcome": "Chào mừng trở lại, {{name}}!",
     "welcomeBack": "Chào mừng trở lại,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Cơ hội mở",
     "noOpportunities": "Hiện không có cơ hội phù hợp với kỹ năng của bạn"
   },
-
   "schedule": {
     "title": "Lịch làm việc của tôi",
     "weekView": "Tuần",
@@ -293,9 +306,22 @@
     "yourShift": "Ca của bạn",
     "theirShift": "Ca của họ",
     "sendRequest": "Gửi yêu cầu",
-    "cancelSwap": "Hủy đổi ca"
+    "cancelSwap": "Hủy đổi ca",
+    "allLocations": "Tất cả địa điểm",
+    "tuesday": "T3",
+    "wednesday": "T4",
+    "thursday": "T5",
+    "friday": "T6",
+    "saturday": "T7",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Chấm công",
     "clockedIn": "Đã chấm công vào",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Nhấn để chấm công vào",
     "onBreakSince": "Đang nghỉ từ {{time}}",
     "workingSince": "Đang làm việc từ {{time}}",
-    "shiftEnded": "Ca làm đã kết thúc"
+    "shiftEnded": "Ca làm đã kết thúc",
+    "entriesApproved": "Đã duyệt {{count}} bản ghi",
+    "approveError": "Không thể duyệt bản ghi. Vui lòng thử lại.",
+    "entriesRejected": "Đã từ chối {{count}} bản ghi",
+    "rejectError": "Không thể từ chối bản ghi. Vui lòng thử lại.",
+    "clockInError": "Không thể chấm công vào. Vui lòng thử lại.",
+    "clockOutError": "Không thể chấm công ra. Vui lòng thử lại.",
+    "breakError": "Không thể cập nhật trạng thái nghỉ. Vui lòng thử lại.",
+    "noPending": "Không có bản ghi chờ xem xét",
+    "noEntries": "Không tìm thấy bản ghi thời gian",
+    "history": "Lịch sử",
+    "managerSubtitle": "Xem xét và duyệt bảng chấm công",
+    "employeeSubtitle": "Theo dõi giờ làm việc của bạn",
+    "clockIn": "Chấm công vào",
+    "clockOut": "Chấm công ra",
+    "startBreak": "Bắt đầu nghỉ",
+    "endBreak": "Kết thúc nghỉ",
+    "totalHours": "Tổng số giờ"
   },
-
   "timeOff": {
     "title": "Nghỉ phép",
     "request": "Yêu cầu nghỉ phép",
@@ -359,9 +401,16 @@
     "selectDates": "Chọn ngày",
     "selectType": "Chọn loại",
     "addNotes": "Thêm ghi chú (Tùy chọn)",
-    "reviewRequest": "Xem lại yêu cầu"
+    "reviewRequest": "Xem lại yêu cầu",
+    "oneDay": "1 ngày",
+    "days": "ngày",
+    "dates": "Ngày",
+    "duration": "Thời lượng",
+    "noRequests": "Không tìm thấy yêu cầu",
+    "requestDetails": "Chi tiết yêu cầu nghỉ phép",
+    "noReason": "Không có lý do",
+    "submitted": "Đã gửi"
   },
-
   "feed": {
     "title": "Bảng tin",
     "newPost": "Bài viết mới",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}} giờ trước",
     "daysAgo": "{{count}} ngày trước"
   },
-
   "messages": {
     "title": "Tin nhắn",
     "newMessage": "Tin nhắn mới",
@@ -419,7 +467,6 @@
     "translateMessage": "Dịch",
     "showOriginal": "Hiển thị bản gốc"
   },
-
   "profile": {
     "title": "Hồ sơ",
     "editProfile": "Chỉnh sửa hồ sơ",
@@ -447,7 +494,6 @@
     "viewProfile": "Xem hồ sơ",
     "memberSince": "Thành viên từ {{date}}"
   },
-
   "skills": {
     "title": "Kỹ năng",
     "mySkills": "Kỹ năng của tôi",
@@ -474,7 +520,6 @@
     "skillAdded": "Đã thêm kỹ năng thành công",
     "verificationRequested": "Đã yêu cầu xác minh"
   },
-
   "career": {
     "title": "Sự nghiệp",
     "careerPath": "Lộ trình sự nghiệp",
@@ -549,7 +594,6 @@
     "expired": "Đã hết hạn",
     "expires": "Hết hạn {{date}}"
   },
-
   "gamification": {
     "level": "Cấp {{level}}",
     "levelShort": "C.{{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Đạt được vào {{date}}",
     "progressToEarn": "{{percent}}% tiến độ để đạt được"
   },
-
   "notifications": {
     "title": "Thông báo",
     "markAllRead": "Đánh dấu tất cả đã đọc",
@@ -605,7 +648,6 @@
     "allCaught": "Bạn đã xem hết!",
     "checkBackLater": "Hãy quay lại sau để xem thông báo mới"
   },
-
   "settings": {
     "title": "Cài đặt",
     "subtitle": "Quản lý tổ chức và tài khoản của bạn",
@@ -740,9 +782,23 @@
     "featureAccess": "Quyền truy cập tính năng",
     "enableAll": "Bật tất cả",
     "disableAll": "Tắt tất cả",
-    "aboutEmployeeVisibility": "Các cài đặt này kiểm soát tính năng nào hiển thị cho mỗi nhân viên."
+    "aboutEmployeeVisibility": "Các cài đặt này kiểm soát tính năng nào hiển thị cho mỗi nhân viên.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Nhiệm vụ",
     "myTasks": "Nhiệm vụ của tôi",
@@ -781,7 +837,6 @@
     "takePhoto": "Chụp ảnh",
     "chooseFromLibrary": "Chọn từ thư viện"
   },
-
   "expenses": {
     "title": "Chi phí",
     "myExpenses": "Chi phí của tôi",
@@ -808,7 +863,6 @@
     "totalApproved": "Tổng đã duyệt",
     "totalReimbursed": "Tổng đã hoàn tiền"
   },
-
   "rewards": {
     "title": "Phần thưởng",
     "myRewards": "Phần thưởng của tôi",
@@ -828,7 +882,6 @@
     "validUntil": "Có hiệu lực đến {{date}}",
     "termsConditions": "Điều khoản & Điều kiện"
   },
-
   "manager": {
     "dashboard": "Bảng điều khiển quản lý",
     "teamOverview": "Tổng quan đội",
@@ -859,7 +912,6 @@
     "attendance": "Điểm danh",
     "performance": "Hiệu suất"
   },
-
   "onboarding": {
     "welcome": "Chào mừng đến với Uplift!",
     "getStarted": "Hãy bắt đầu cài đặt",
@@ -877,7 +929,6 @@
     "allSet": "Bạn đã sẵn sàng!",
     "startExploring": "Bắt đầu khám phá ca làm và cơ hội"
   },
-
   "errors": {
     "networkError": "Lỗi mạng. Vui lòng kiểm tra kết nối.",
     "serverError": "Lỗi máy chủ. Vui lòng thử lại sau.",
@@ -898,7 +949,6 @@
     "tryAgain": "Vui lòng thử lại",
     "somethingWentWrong": "Đã xảy ra lỗi"
   },
-
   "activity": {
     "title": "Xem xét hoạt động",
     "subtitle": "Xem xét hoàn thành nhiệm vụ, tải lên bằng chứng và gửi biểu mẫu",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Nhập lý do từ chối...",
     "confirmRejection": "Xác nhận từ chối",
     "approve": "Phê duyệt",
-    "reject": "Từ chối"
+    "reject": "Từ chối",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Tùy chọn thông báo",
     "subtitle": "Chọn cách thức và thời điểm nhận thông báo",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Bạn có chắc muốn tắt tất cả thông báo? Bạn có thể bật lại bất cứ lúc nào.",
     "disableSuccess": "Tất cả thông báo đã được tắt."
   },
-
   "employeeDetail": {
     "notFound": "Không tìm thấy nhân viên",
     "backToEmployees": "Quay lại danh sách nhân viên",
@@ -989,7 +1040,6 @@
     "basic": "Cơ bản",
     "adding": "Đang thêm..."
   },
-
   "reports": {
     "title": "Báo cáo",
     "subtitle": "Phân tích, thông tin chi tiết và báo cáo tùy chỉnh",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Tháng này",
     "lastMonth": "Tháng trước",
     "last7Days": "7 ngày qua",
-    "last30Days": "30 ngày qua"
+    "last30Days": "30 ngày qua",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Menu",
     "closeMenu": "Đóng menu",
@@ -1041,7 +1104,6 @@
     "required": "Bắt buộc",
     "optional": "Tùy chọn"
   },
-
   "shiftTemplates": {
     "title": "Mẫu ca làm",
     "subtitle": "Tạo mẫu ca làm có thể tái sử dụng",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "ca",
     "generating": "Đang tạo..."
   },
-
   "legal": {
-    "lastUpdated": "Cập nhật lần cuối"
+    "lastUpdated": "Cập nhật lần cuối",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "SA",
     "pm": "CH",
@@ -1120,5 +1289,564 @@
     "october": "Tháng Mười",
     "november": "Tháng Mười Một",
     "december": "Tháng Mười Hai"
+  },
+  "bulkImport": {
+    "title": "Nhập hàng loạt",
+    "subtitle": "Nhập dữ liệu từ tệp CSV hoặc Excel",
+    "selectType": "Chọn loại",
+    "uploadFile": "Tải lên tệp",
+    "preview": "Xem trước",
+    "complete": "Hoàn thành",
+    "invalidFileType": "Vui lòng tải lên tệp CSV hoặc Excel",
+    "importFailed": "Nhập thất bại. Vui lòng thử lại.",
+    "uploadFor": "Tải lên",
+    "uploadDesc": "Kéo thả hoặc nhấp để chọn tệp",
+    "downloadTemplate": "Tải xuống mẫu",
+    "dragDrop": "Kéo thả tệp vào đây hoặc nhấp để duyệt",
+    "supportedFormats": "Định dạng hỗ trợ: CSV, XLSX",
+    "previewData": "Xem trước dữ liệu",
+    "rowsFound": "dòng tìm thấy trong",
+    "andMore": "Và",
+    "moreRows": "dòng nữa...",
+    "importing": "Đang nhập...",
+    "startImport": "Bắt đầu nhập",
+    "importComplete": "Nhập hoàn tất",
+    "successfullyImported": "Đã nhập thành công",
+    "of": "trên",
+    "records": "bản ghi",
+    "successful": "Thành công",
+    "failed": "Thất bại",
+    "total": "Tổng",
+    "importMore": "Nhập thêm dữ liệu",
+    "type": {
+      "employees": "Nhân viên",
+      "employeesDesc": "Nhập hồ sơ nhân viên",
+      "shifts": "Ca làm việc",
+      "shiftsDesc": "Nhập lịch ca",
+      "locations": "Địa điểm",
+      "locationsDesc": "Nhập địa điểm",
+      "skills": "Kỹ năng",
+      "skillsDesc": "Nhập kỹ năng"
+    }
+  },
+  "jobs": {
+    "open": "Đang mở",
+    "closed": "Đã đóng",
+    "applicants": "Ứng viên",
+    "created": "Đã tạo tin tuyển dụng thành công",
+    "createError": "Không thể tạo tin tuyển dụng. Vui lòng thử lại.",
+    "updated": "Đã cập nhật tin tuyển dụng thành công",
+    "updateError": "Không thể cập nhật tin tuyển dụng. Vui lòng thử lại.",
+    "fullTime": "Toàn thời gian",
+    "partTime": "Bán thời gian",
+    "contract": "Hợp đồng",
+    "temporary": "Tạm thời",
+    "subtitle": "Quản lý cơ hội nghề nghiệp nội bộ",
+    "openPositions": "Vị trí đang tuyển",
+    "closedPositions": "Đã đóng",
+    "totalApplicants": "Tổng ứng viên",
+    "noJobs": "Không tìm thấy tin tuyển dụng",
+    "viewApplicants": "Xem ứng viên",
+    "editPosting": "Chỉnh sửa tin tuyển dụng",
+    "jobTitle": "Chức danh",
+    "enterTitle": "Nhập chức danh",
+    "selectDepartment": "Chọn phòng ban",
+    "selectLocation": "Chọn địa điểm",
+    "salary": "Mức lương",
+    "enterDescription": "Nhập mô tả công việc",
+    "postJob": "Đăng việc làm",
+    "skillMatch": "kỹ năng phù hợp",
+    "noApplicants": "Chưa có ứng viên"
+  },
+  "employees": {
+    "searchPlaceholder": "Tìm theo tên hoặc email...",
+    "employees": "nhân viên",
+    "noResults": "Không tìm thấy nhân viên phù hợp với tiêu chí",
+    "details": "Chi tiết nhân viên",
+    "hireDate": "Ngày tuyển dụng",
+    "assigned": "đã phân công",
+    "leaveDetails": "Chi tiết nghỉ phép",
+    "until": "Đến",
+    "terminationDetails": "Chi tiết chấm dứt hợp đồng",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Trung tâm tích hợp",
+    "subtitle": "Kết nối Uplift với các công cụ hiện tại của bạn",
+    "apiFactory": "API Factory",
+    "addIntegration": "Thêm tích hợp",
+    "configure": "Cấu hình",
+    "connect": "Kết nối",
+    "cancel": "Hủy",
+    "back": "Quay lại",
+    "saveChanges": "Lưu thay đổi",
+    "syncNow": "Đồng bộ ngay",
+    "disconnect": "Ngắt kết nối {{name}}",
+    "disconnectConfirm": "Ngắt kết nối {{name}}? Tất cả đồng bộ sẽ dừng lại.",
+    "settingsSaved": "Đã lưu cài đặt",
+    "browseMarketplace": "Duyệt Marketplace",
+    "loadingIntegrations": "Đang tải tích hợp...",
+    "noIntegrations": "Chưa có tích hợp nào được kết nối",
+    "noIntegrationsDesc": "Kết nối tích hợp đầu tiên để bắt đầu đồng bộ dữ liệu",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Đang đồng bộ..."
+    },
+    "stats": {
+      "connected": "Đã kết nối",
+      "available": "Có sẵn",
+      "syncsToday": "Đồng bộ hôm nay",
+      "errors": "Lỗi",
+      "totalSyncs": "Tổng đồng bộ",
+      "lastSync": "Đồng bộ gần nhất",
+      "records": "bản ghi"
+    },
+    "tabs": {
+      "connected": "Đã kết nối",
+      "marketplace": "Marketplace",
+      "restApi": "REST API",
+      "apiFactory": "API Factory",
+      "activityLog": "Nhật ký hoạt động",
+      "settings": "Cài đặt",
+      "fieldMapping": "Ánh xạ trường",
+      "syncHistory": "Lịch sử đồng bộ",
+      "webhooks": "Webhook"
+    },
+    "connection": {
+      "lastSync": "Đồng bộ gần nhất",
+      "frequency": "Tần suất",
+      "status": "Trạng thái",
+      "healthy": "Bình thường",
+      "errors": "lỗi"
+    },
+    "connectModal": {
+      "title": "Kết nối {{name}}",
+      "whatItDoes": "Tích hợp này làm gì:",
+      "redirectNotice": "Bạn sẽ được chuyển hướng đến {{name}}",
+      "authorizeMessage": "Đăng nhập và cho phép Uplift truy cập dữ liệu của bạn. Chúng tôi chỉ yêu cầu các quyền cần thiết.",
+      "connectWith": "Kết nối với {{name}}",
+      "connecting": "Đang kết nối với {{name}}...",
+      "completeAuth": "Vui lòng hoàn tất xác thực trong cửa sổ bật lên",
+      "successConnected": "Kết nối thành công!",
+      "configureSyncSettings": "Cấu hình cài đặt đồng bộ bên dưới.",
+      "completeSetup": "Hoàn tất cài đặt",
+      "connected": "{{name}} đã kết nối!",
+      "firstSyncSoon": "Lần đồng bộ đầu tiên sẽ bắt đầu sớm",
+      "hris": {
+        "syncEmployees": "Tự động đồng bộ hồ sơ nhân viên",
+        "importDepts": "Nhập phòng ban và địa điểm",
+        "syncTimeOff": "Đồng bộ số ngày nghỉ phép"
+      },
+      "payroll": {
+        "exportTimesheets": "Xuất bảng chấm công đã duyệt",
+        "syncPayRates": "Đồng bộ mức lương và tăng ca",
+        "autoReconciliation": "Đối chiếu lương tự động"
+      },
+      "comms": {
+        "shiftReminders": "Gửi nhắc nhở ca làm",
+        "postRecognition": "Đăng khen thưởng lên kênh",
+        "swapNotifications": "Thông báo yêu cầu đổi ca"
+      },
+      "identity": {
+        "sso": "Đăng nhập một lần (SSO)",
+        "autoProvisioning": "Cung cấp người dùng tự động",
+        "directorySync": "Đồng bộ thư mục"
+      },
+      "other": {
+        "bidirectional": "Đồng bộ dữ liệu hai chiều",
+        "realtimeWebhooks": "Cập nhật thời gian thực qua webhook",
+        "auditTrail": "Nhật ký kiểm toán đầy đủ"
+      }
+    },
+    "configureModal": {
+      "title": "Cài đặt {{name}}",
+      "connectedSince": "Đã kết nối {{date}}"
+    },
+    "settings": {
+      "autoSync": "Tự động đồng bộ",
+      "autoSyncDesc": "Tự động đồng bộ dữ liệu theo lịch",
+      "autoSyncScheduleDesc": "Đồng bộ tự động theo lịch",
+      "syncFrequency": "Tần suất đồng bộ",
+      "nextScheduledSync": "Lần đồng bộ tiếp theo",
+      "dataToSync": "Dữ liệu để đồng bộ",
+      "frequency": {
+        "realtime": "Thời gian thực",
+        "hourly": "Mỗi giờ",
+        "daily": "Hàng ngày",
+        "weekly": "Hàng tuần"
+      },
+      "data": {
+        "employees": "Nhân viên",
+        "timeEntries": "Bản ghi thời gian",
+        "departments": "Phòng ban",
+        "locations": "Địa điểm"
+      }
+    },
+    "mapping": {
+      "description": "Ánh xạ trường kiểm soát cách dữ liệu từ {{name}} ánh xạ sang các trường Uplift. Thay đổi có hiệu lực trong lần đồng bộ tiếp theo.",
+      "sourceField": "Trường {{name}}",
+      "upliftField": "Trường Uplift",
+      "status": "Trạng thái",
+      "selectField": "Chọn trường...",
+      "mapped": "Đã ánh xạ",
+      "unmapped": "Chưa ánh xạ"
+    },
+    "history": {
+      "noHistory": "Chưa có lịch sử đồng bộ",
+      "sync": "Đồng bộ",
+      "duration": "Thời lượng",
+      "records": "Bản ghi",
+      "created": "Đã tạo",
+      "updated": "Đã cập nhật"
+    },
+    "webhooks": {
+      "description": "Webhook thông báo cho {{name}} khi có sự kiện xảy ra trong Uplift",
+      "addWebhook": "Thêm Webhook",
+      "noWebhooks": "Chưa cấu hình webhook nào",
+      "createFirst": "Tạo webhook đầu tiên",
+      "active": "Hoạt động",
+      "paused": "Đã tạm dừng",
+      "sendTestPayload": "Gửi payload thử nghiệm",
+      "pauseWebhook": "Tạm dừng webhook",
+      "enableWebhook": "Kích hoạt webhook",
+      "deleteWebhook": "Xóa webhook",
+      "lastTriggered": "Kích hoạt gần nhất",
+      "never": "Chưa bao giờ",
+      "successRate": "Tỷ lệ thành công",
+      "sendEventsTo": "Gửi sự kiện đến {{name}}",
+      "endpointUrl": "URL điểm cuối",
+      "eventsToSend": "Sự kiện cần gửi",
+      "hmacInfo": "Chúng tôi sẽ ký tất cả payload webhook bằng HMAC-SHA256. Bạn sẽ nhận chữ ký trong",
+      "header": "header.",
+      "createWebhook": "Tạo Webhook",
+      "validationError": "Vui lòng nhập URL và chọn ít nhất một sự kiện",
+      "createdSuccess": "Tạo webhook thành công!",
+      "testSent": "Đã gửi payload thử nghiệm đến",
+      "testStatus": "Trạng thái",
+      "deleteConfirm": "Xóa webhook này?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Tìm tích hợp...",
+      "allCategories": "Tất cả danh mục",
+      "infoBannerTitle": "Uplift hoạt động với các công cụ hiện tại của bạn",
+      "infoBannerDesc": "Kết nối hệ thống HRIS, lương và liên lạc. Chúng tôi đồng bộ dữ liệu, không thay thế hệ thống của bạn.",
+      "noResults": "Không có tích hợp nào phù hợp với tìm kiếm",
+      "dontSeeSystem": "Không thấy hệ thống của bạn?",
+      "alwaysAdding": "Chúng tôi luôn bổ sung tích hợp mới. Hãy cho chúng tôi biết bạn cần gì.",
+      "requestIntegration": "Yêu cầu tích hợp"
+    },
+    "activity": {
+      "recentActivity": "Hoạt động tích hợp gần đây",
+      "exportLog": "Xuất nhật ký"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API Factory",
+    "subtitle": "Xây dựng tích hợp REST API tùy chỉnh mà không cần viết code",
+    "newIntegration": "Tích hợp mới",
+    "searchPlaceholder": "Tìm tích hợp...",
+    "loadingIntegrations": "Đang tải tích hợp...",
+    "noIntegrationsFound": "Không tìm thấy tích hợp",
+    "noIntegrationsYet": "Chưa có tích hợp tùy chỉnh",
+    "tryDifferentSearch": "Thử từ khóa khác",
+    "createFirstDesc": "Tạo tích hợp API tùy chỉnh đầu tiên để kết nối bất kỳ REST API nào",
+    "createIntegration": "Tạo tích hợp",
+    "deleteConfirm": "Bạn có chắc muốn xóa tích hợp này?",
+    "list": {
+      "eventsCount": "{{count}} sự kiện",
+      "scheduled": "Theo lịch",
+      "incomingWebhook": "Webhook đến",
+      "manual": "Thủ công",
+      "runsCount": "{{count}} lần chạy",
+      "errorsCount": "{{count}} lỗi",
+      "disabled": "Đã tắt",
+      "edit": "Sửa",
+      "test": "Thử",
+      "viewLogs": "Xem nhật ký",
+      "delete": "Xóa",
+      "lastRun": "Lần chạy cuối"
+    },
+    "stats": {
+      "totalIntegrations": "Tổng tích hợp",
+      "active": "Đang hoạt động",
+      "runsToday": "Lần chạy hôm nay",
+      "totalErrors": "Tổng lỗi"
+    },
+    "editor": {
+      "editTitle": "Sửa tích hợp API",
+      "createTitle": "Tạo tích hợp API",
+      "subtitle": "Cấu hình kết nối REST API tùy chỉnh",
+      "integrationName": "Tên tích hợp",
+      "integrationNamePlaceholder": "VD: Đồng bộ với hệ thống lương",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Tích hợp này làm gì?",
+      "method": "Phương thức",
+      "url": "URL",
+      "headers": "Header",
+      "addHeader": "Thêm Header",
+      "headerName": "Tên header",
+      "headerValue": "Giá trị",
+      "requestBodyJson": "Nội dung yêu cầu (JSON)",
+      "useVariables": "Sử dụng {{field}} cho biến",
+      "availableVariables": "Các biến có sẵn",
+      "authenticationType": "Loại xác thực",
+      "apiKeyLocation": "Vị trí API Key",
+      "header": "Header",
+      "queryParameter": "Tham số truy vấn",
+      "keyName": "Tên khóa",
+      "keyNamePlaceholder": "VD: X-API-Key",
+      "apiKey": "API Key",
+      "enterApiKey": "Nhập API key của bạn",
+      "bearerToken": "Bearer Token",
+      "enterToken": "Nhập token của bạn",
+      "username": "Tên đăng nhập",
+      "password": "Mật khẩu",
+      "tokenUrl": "URL Token",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scopes": "Phạm vi (phân cách bằng dấu phẩy)",
+      "whenShouldRun": "Tích hợp này nên chạy khi nào?",
+      "selectEvents": "Chọn sự kiện",
+      "schedule": "Lịch",
+      "cronExpression": "Biểu thức CRON",
+      "scheduleUtcNote": "Lịch sử dụng múi giờ UTC. CRON hiện tại",
+      "yourWebhookUrl": "URL Webhook của bạn",
+      "webhookPostNote": "Gửi yêu cầu POST đến URL này. Chúng tôi sẽ xử lý dữ liệu đến và ánh xạ sang Uplift.",
+      "fieldMappings": "Ánh xạ trường",
+      "fieldMappingsDesc": "Ánh xạ trường Uplift sang trường API bên ngoài",
+      "addMapping": "Thêm ánh xạ",
+      "noFieldMappings": "Chưa có ánh xạ trường",
+      "addMappingsDesc": "Thêm ánh xạ để chuyển đổi dữ liệu giữa các hệ thống",
+      "addFirstMapping": "Thêm ánh xạ đầu tiên",
+      "selectUpliftField": "Chọn trường Uplift...",
+      "externalFieldName": "Tên trường bên ngoài",
+      "noTransform": "Không chuyển đổi",
+      "dateIso": "Ngày → ISO",
+      "dateUk": "Ngày → Định dạng UK",
+      "boolYn": "Bool → Y/N",
+      "fieldMappingTip": "Ánh xạ trường được sử dụng để tự động xây dựng nội dung yêu cầu. Bạn cũng có thể sử dụng cú pháp {{field}} trong tab Yêu cầu cho cấu trúc JSON tùy chỉnh.",
+      "testConfiguration": "Kiểm tra cấu hình",
+      "testDescription": "Gửi yêu cầu thử nghiệm để xác minh cấu hình. Chúng tôi sẽ sử dụng dữ liệu mẫu.",
+      "testing": "Đang kiểm tra...",
+      "sendTestRequest": "Gửi yêu cầu thử",
+      "success": "Thành công",
+      "failed": "Thất bại",
+      "status": "Trạng thái",
+      "time": "Thời gian",
+      "response": "Phản hồi",
+      "enableIntegration": "Kích hoạt tích hợp",
+      "cancel": "Hủy",
+      "saveChanges": "Lưu thay đổi",
+      "createIntegration": "Tạo tích hợp",
+      "tabs": {
+        "request": "Yêu cầu",
+        "authentication": "Xác thực",
+        "trigger": "Kích hoạt",
+        "fieldMapping": "Ánh xạ trường",
+        "test": "Kiểm tra"
+      }
+    },
+    "logs": {
+      "executionLogs": "Nhật ký thực thi",
+      "export": "Xuất",
+      "noData": "Chưa có dữ liệu. Nhật ký thực thi sẽ xuất hiện ở đây khi tích hợp chạy.",
+      "unknown": "Không rõ",
+      "error": "Lỗi"
+    },
+    "helpBanner": {
+      "title": "Cần trợ giúp xây dựng tích hợp?",
+      "description": "Xem tài liệu API để tham khảo ví dụ, hoặc liên hệ hỗ trợ cho các trường hợp phức tạp."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "Khóa REST API",
+    "subtitle": "Tạo khóa API để truy cập dữ liệu Uplift từ ứng dụng của bạn",
+    "apiDocs": "Tài liệu API",
+    "createKey": "Tạo khóa",
+    "createApiKey": "Tạo khóa API",
+    "loadingKeys": "Đang tải khóa API...",
+    "loadError": "Không thể tải khóa API.",
+    "noKeysYet": "Chưa có khóa API",
+    "createFirstDesc": "Tạo khóa API đầu tiên để bắt đầu tích hợp với Uplift",
+    "retry": "Thử lại",
+    "revokeConfirm": "Thu hồi khóa API \"{{name}}\"? Hành động này không thể hoàn tác.",
+    "regenerateConfirm": "Tạo lại bí mật cho \"{{name}}\"? Bí mật cũ sẽ ngừng hoạt động ngay lập tức.",
+    "regenerateSuccess": "Khóa bí mật mới: {{secret}}\n\nLưu ngay bây giờ - bạn sẽ không thể xem lại!",
+    "regenerateError": "Không thể tạo lại bí mật: {{message}}",
+    "usageStats": "Thống kê sử dụng cho {{name}}:\n\nTổng yêu cầu: {{requests}}\nSử dụng gần nhất: {{lastUsed}}",
+    "card": {
+      "noDescription": "Không có mô tả",
+      "expired": "Đã hết hạn",
+      "active": "Đang hoạt động",
+      "inactive": "Không hoạt động",
+      "keyId": "ID khóa",
+      "requests": "Yêu cầu",
+      "lastUsed": "Sử dụng gần nhất",
+      "never": "Chưa bao giờ",
+      "rateLimit": "Giới hạn tốc độ",
+      "standard": "Tiêu chuẩn",
+      "hideDetails": "Ẩn chi tiết",
+      "showDetails": "Hiển thị chi tiết",
+      "scopes": "PHẠM VI",
+      "created": "Đã tạo",
+      "expires": "Hết hạn",
+      "usage": "Sử dụng",
+      "regenerate": "Tạo lại",
+      "revoke": "Thu hồi"
+    },
+    "create": {
+      "keyCreatedTitle": "Đã tạo khóa API",
+      "createTitle": "Tạo khóa API",
+      "keyCreatedSuccess": "Tạo khóa API thành công",
+      "copySecretWarning": "Sao chép khóa bí mật ngay bây giờ. Bạn sẽ không thể xem lại!",
+      "keyIdLabel": "ID khóa",
+      "secretKeyLabel": "Khóa bí mật",
+      "fullApiKeyLabel": "Khóa API đầy đủ (cho header Authorization)",
+      "fullKeyLabel": "Khóa đầy đủ",
+      "authHeaderNote": "Sử dụng trong header Authorization của bạn",
+      "done": "Xong",
+      "keyName": "Tên khóa",
+      "keyNamePlaceholder": "VD: Khóa API Production",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Khóa này sẽ được dùng để làm gì?",
+      "permissions": "Quyền",
+      "rateLimit": "Giới hạn tốc độ",
+      "expiration": "Hết hạn",
+      "neverExpires": "Không bao giờ hết hạn",
+      "thirtyDays": "30 ngày",
+      "ninetyDays": "90 ngày",
+      "oneYear": "1 năm",
+      "createError": "Không thể tạo khóa API. Vui lòng thử lại.",
+      "cancel": "Hủy",
+      "createKey": "Tạo khóa"
+    },
+    "docs": {
+      "quickStart": "Bắt đầu nhanh",
+      "authentication": "Xác thực",
+      "exampleResponse": "Phản hồi mẫu",
+      "viewFullDocs": "Xem tài liệu đầy đủ",
+      "downloadSpec": "Tải xuống OpenAPI Spec"
+    },
+    "securityBanner": {
+      "title": "Bảo mật khóa API",
+      "description": "Giữ an toàn cho khóa API. Không bao giờ để lộ trong code phía client hoặc kho mã nguồn công khai. Nếu khóa bị lộ, hãy thu hồi ngay và tạo khóa mới."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Thiết lập tổ chức",
+    "subtitle": "Hãy cấu hình tổ chức của bạn",
+    "steps": {
+      "orgDetails": "Chi tiết tổ chức",
+      "locations": "Địa điểm",
+      "departments": "Phòng ban",
+      "roles": "Vai trò & Quyền",
+      "review": "Xem xét & Khởi chạy"
+    },
+    "orgDetails": {
+      "companyName": "Tên công ty",
+      "companyNamePlaceholder": "VD: Công ty ABC",
+      "tradingName": "Tên thương mại (tùy chọn)",
+      "tradingNamePlaceholder": "Tên công khai",
+      "industry": "Ngành",
+      "selectIndustry": "Chọn ngành",
+      "companySize": "Quy mô công ty",
+      "selectSize": "Chọn quy mô",
+      "timezone": "Múi giờ mặc định",
+      "currency": "Tiền tệ mặc định",
+      "weekStart": "Tuần bắt đầu vào",
+      "logo": "Logo công ty",
+      "uploadLogo": "Tải lên logo",
+      "uploadLogoDesc": "PNG hoặc SVG, khuyến nghị 200×200px"
+    },
+    "locations": {
+      "title": "Địa điểm",
+      "subtitle": "Thêm văn phòng, chi nhánh của bạn",
+      "addLocation": "Thêm địa điểm",
+      "name": "Tên địa điểm",
+      "namePlaceholder": "VD: Trụ sở chính",
+      "address": "Địa chỉ",
+      "addressPlaceholder": "Địa chỉ đầy đủ",
+      "timezone": "Múi giờ",
+      "noLocations": "Chưa thêm địa điểm nào",
+      "addFirst": "Thêm địa điểm đầu tiên để bắt đầu"
+    },
+    "departments": {
+      "title": "Phòng ban",
+      "subtitle": "Thiết lập cấu trúc phòng ban",
+      "addDepartment": "Thêm phòng ban",
+      "name": "Tên phòng ban",
+      "namePlaceholder": "VD: Kỹ thuật",
+      "parentDepartment": "Phòng ban cha (tùy chọn)",
+      "none": "Không (cấp cao nhất)",
+      "manager": "Quản lý phòng ban",
+      "selectManager": "Chọn quản lý",
+      "noDepartments": "Chưa thêm phòng ban nào",
+      "addFirst": "Thêm phòng ban đầu tiên"
+    },
+    "roles": {
+      "title": "Vai trò & Quyền",
+      "subtitle": "Cấu hình mức truy cập cho nhóm của bạn",
+      "addRole": "Thêm vai trò tùy chỉnh",
+      "builtIn": "Tích hợp sẵn",
+      "custom": "Tùy chỉnh",
+      "name": "Tên vai trò",
+      "namePlaceholder": "VD: Giám sát ca",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Vai trò này có thể làm gì?",
+      "permissions": "Quyền",
+      "permissionGroups": {
+        "scheduling": "Lập lịch",
+        "timeTracking": "Chấm công",
+        "employees": "Nhân viên",
+        "reports": "Báo cáo",
+        "settings": "Cài đặt"
+      }
+    },
+    "review": {
+      "title": "Xem xét & Khởi chạy",
+      "subtitle": "Kiểm tra mọi thứ trước khi bắt đầu",
+      "orgInfo": "Thông tin tổ chức",
+      "locationsCount": "Đã cấu hình {{count}} địa điểm",
+      "departmentsCount": "Đã cấu hình {{count}} phòng ban",
+      "rolesCount": "Đã cấu hình {{count}} vai trò",
+      "allLooksGood": "Mọi thứ đều ổn!",
+      "launch": "Khởi chạy tổ chức",
+      "launchDesc": "Thao tác này sẽ kích hoạt tổ chức và gửi lời mời đến các thành viên đã thêm."
+    },
+    "navigation": {
+      "back": "Quay lại",
+      "next": "Tiếp theo",
+      "skip": "Bỏ qua",
+      "finish": "Hoàn tất cài đặt"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

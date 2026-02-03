@@ -54,7 +54,6 @@
     "viewMyCareer": "मेरा करियर देखें",
     "timeOffBalance": "छुट्टी शेष"
   },
-
   "nav": {
     "dashboard": "डैशबोर्ड",
     "employees": "कर्मचारी",
@@ -150,9 +149,21 @@
     "active": "सक्रिय",
     "inactive": "निष्क्रिय",
     "enabled": "सक्षम",
-    "disabled": "अक्षम"
+    "disabled": "अक्षम",
+    "approveSelected": "चयनित स्वीकृत करें",
+    "rejectSelected": "चयनित अस्वीकार करें",
+    "clearSelection": "साफ़ करें",
+    "showing": "दिखा रहा है",
+    "of": "में से",
+    "page": "पृष्ठ",
+    "previous": "पिछला",
+    "terminated": "सेवामुक्त",
+    "sunday": "रवि",
+    "monday": "सोम",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "लॉग इन",
     "logout": "लॉग आउट",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Uplift तक पहुंच प्राप्त करने के लिए, कृपया अपने मैनेजर या HR विभाग से संपर्क करें। वे आपको एक आमंत्रण लिंक भेजेंगे।",
     "enterEmailPassword": "कृपया ईमेल और पासवर्ड दर्ज करें",
     "loginFailed": "लॉगिन विफल",
-    "demoAccounts": "डेमो खाते:",
-    "demoWorker": "कर्मचारी: worker@uplift.work / Demo123!",
-    "demoManager": "मैनेजर: manager@uplift.work / Demo123!",
     "twoFactorAuth": "दो-कारक प्रमाणीकरण",
     "enterMfaCode": "अपने प्रमाणक ऐप से कोड दर्ज करें",
     "verificationCode": "सत्यापन कोड",
@@ -194,9 +202,16 @@
     "invalidCode": "अमान्य कोड",
     "allRightsReserved": "सर्वाधिकार सुरक्षित",
     "termsOfService": "सेवा की शर्तें",
-    "privacyPolicy": "गोपनीयता नीति"
+    "privacyPolicy": "गोपनीयता नीति",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "होम",
     "schedule": "शेड्यूल",
@@ -214,7 +229,6 @@
     "leaderboard": "लीडरबोर्ड",
     "badges": "बैज"
   },
-
   "home": {
     "welcome": "स्वागत है, {{name}}!",
     "welcomeBack": "वापसी पर स्वागत है,",
@@ -239,7 +253,6 @@
     "openOpportunities": "खुले अवसर",
     "noOpportunities": "अभी आपके कौशल से मेल खाने वाले कोई अवसर नहीं हैं"
   },
-
   "schedule": {
     "title": "मेरा शेड्यूल",
     "weekView": "सप्ताह",
@@ -293,9 +306,22 @@
     "yourShift": "आपकी शिफ्ट",
     "theirShift": "उनकी शिफ्ट",
     "sendRequest": "अनुरोध भेजें",
-    "cancelSwap": "बदलाव रद्द करें"
+    "cancelSwap": "बदलाव रद्द करें",
+    "allLocations": "सभी स्थान",
+    "tuesday": "मंगल",
+    "wednesday": "बुध",
+    "thursday": "गुरु",
+    "friday": "शुक्र",
+    "saturday": "शनि",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "समय ट्रैकिंग",
     "clockedIn": "क्लॉक इन हुआ",
@@ -326,9 +352,25 @@
     "tapToClockIn": "क्लॉक इन के लिए टैप करें",
     "onBreakSince": "{{time}} से ब्रेक पर",
     "workingSince": "{{time}} से काम कर रहे हैं",
-    "shiftEnded": "शिफ्ट समाप्त हुई"
+    "shiftEnded": "शिफ्ट समाप्त हुई",
+    "entriesApproved": "{{count}} प्रविष्टियाँ स्वीकृत",
+    "approveError": "प्रविष्टियाँ स्वीकृत करने में विफल। कृपया पुनः प्रयास करें।",
+    "entriesRejected": "{{count}} प्रविष्टियाँ अस्वीकृत",
+    "rejectError": "प्रविष्टियाँ अस्वीकार करने में विफल। कृपया पुनः प्रयास करें।",
+    "clockInError": "क्लॉक इन विफल। कृपया पुनः प्रयास करें।",
+    "clockOutError": "क्लॉक आउट विफल। कृपया पुनः प्रयास करें।",
+    "breakError": "ब्रेक स्थिति अपडेट विफल। कृपया पुनः प्रयास करें।",
+    "noPending": "समीक्षा के लिए कोई लंबित प्रविष्टि नहीं",
+    "noEntries": "कोई समय प्रविष्टि नहीं मिली",
+    "history": "इतिहास",
+    "managerSubtitle": "टाइमशीट की समीक्षा और स्वीकृति",
+    "employeeSubtitle": "अपने कार्य घंटों को ट्रैक करें",
+    "clockIn": "क्लॉक इन",
+    "clockOut": "क्लॉक आउट",
+    "startBreak": "ब्रेक शुरू",
+    "endBreak": "ब्रेक समाप्त",
+    "totalHours": "कुल घंटे"
   },
-
   "timeOff": {
     "title": "छुट्टी",
     "request": "छुट्टी का अनुरोध करें",
@@ -359,9 +401,16 @@
     "selectDates": "तारीखें चुनें",
     "selectType": "प्रकार चुनें",
     "addNotes": "नोट्स जोड़ें (वैकल्पिक)",
-    "reviewRequest": "अनुरोध की समीक्षा करें"
+    "reviewRequest": "अनुरोध की समीक्षा करें",
+    "oneDay": "1 दिन",
+    "days": "दिन",
+    "dates": "तिथियाँ",
+    "duration": "अवधि",
+    "noRequests": "कोई अनुरोध नहीं मिला",
+    "requestDetails": "छुट्टी अनुरोध विवरण",
+    "noReason": "कोई कारण नहीं दिया गया",
+    "submitted": "प्रस्तुत"
   },
-
   "feed": {
     "title": "फ़ीड",
     "newPost": "नई पोस्ट",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}} घंटे पहले",
     "daysAgo": "{{count}} दिन पहले"
   },
-
   "messages": {
     "title": "संदेश",
     "newMessage": "नया संदेश",
@@ -419,7 +467,6 @@
     "translateMessage": "अनुवाद करें",
     "showOriginal": "मूल दिखाएं"
   },
-
   "profile": {
     "title": "प्रोफ़ाइल",
     "editProfile": "प्रोफ़ाइल संपादित करें",
@@ -447,7 +494,6 @@
     "viewProfile": "प्रोफ़ाइल देखें",
     "memberSince": "{{date}} से सदस्य"
   },
-
   "skills": {
     "title": "कौशल",
     "mySkills": "मेरे कौशल",
@@ -474,7 +520,6 @@
     "skillAdded": "कौशल सफलतापूर्वक जोड़ा गया",
     "verificationRequested": "सत्यापन का अनुरोध किया गया"
   },
-
   "career": {
     "title": "करियर",
     "careerPath": "करियर पथ",
@@ -549,7 +594,6 @@
     "expired": "समाप्त",
     "expires": "{{date}} को समाप्त होता है"
   },
-
   "gamification": {
     "level": "स्तर {{level}}",
     "levelShort": "स्तर {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "{{date}} को अर्जित",
     "progressToEarn": "अर्जित करने के लिए {{percent}}% प्रगति"
   },
-
   "notifications": {
     "title": "सूचनाएं",
     "markAllRead": "सभी पढ़ा हुआ चिह्नित करें",
@@ -605,7 +648,6 @@
     "allCaught": "आप अपडेट हैं!",
     "checkBackLater": "नई सूचनाओं के लिए बाद में देखें"
   },
-
   "settings": {
     "title": "सेटिंग्स",
     "subtitle": "अपने संगठन और खाते को प्रबंधित करें",
@@ -740,9 +782,23 @@
     "featureAccess": "सुविधा पहुंच",
     "enableAll": "सभी सक्षम करें",
     "disableAll": "सभी अक्षम करें",
-    "aboutEmployeeVisibility": "ये सेटिंग्स नियंत्रित करती हैं कि प्रत्येक कर्मचारी को कौन सी सुविधाएं दिखाई देती हैं।"
+    "aboutEmployeeVisibility": "ये सेटिंग्स नियंत्रित करती हैं कि प्रत्येक कर्मचारी को कौन सी सुविधाएं दिखाई देती हैं।",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "कार्य",
     "myTasks": "मेरे कार्य",
@@ -781,7 +837,6 @@
     "takePhoto": "फोटो लें",
     "chooseFromLibrary": "लाइब्रेरी से चुनें"
   },
-
   "expenses": {
     "title": "खर्चे",
     "myExpenses": "मेरे खर्चे",
@@ -808,7 +863,6 @@
     "totalApproved": "कुल स्वीकृत",
     "totalReimbursed": "कुल प्रतिपूर्ति"
   },
-
   "rewards": {
     "title": "पुरस्कार",
     "myRewards": "मेरे पुरस्कार",
@@ -828,7 +882,6 @@
     "validUntil": "{{date}} तक वैध",
     "termsConditions": "नियम और शर्तें"
   },
-
   "manager": {
     "dashboard": "मैनेजर डैशबोर्ड",
     "teamOverview": "टीम अवलोकन",
@@ -859,7 +912,6 @@
     "attendance": "उपस्थिति",
     "performance": "प्रदर्शन"
   },
-
   "onboarding": {
     "welcome": "Uplift में आपका स्वागत है!",
     "getStarted": "आइए आपको सेट अप करें",
@@ -877,7 +929,6 @@
     "allSet": "सब तैयार है!",
     "startExploring": "शिफ्ट और अवसर खोजना शुरू करें"
   },
-
   "errors": {
     "networkError": "नेटवर्क त्रुटि। अपना कनेक्शन जांचें।",
     "serverError": "सर्वर त्रुटि। कृपया बाद में पुनः प्रयास करें।",
@@ -898,7 +949,6 @@
     "tryAgain": "पुनः प्रयास करें",
     "somethingWentWrong": "कुछ गलत हो गया"
   },
-
   "activity": {
     "title": "गतिविधि समीक्षा",
     "subtitle": "कार्य पूर्णता, प्रमाण अपलोड और फॉर्म सबमिशन की समीक्षा करें",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "अस्वीकृति का कारण दर्ज करें...",
     "confirmRejection": "अस्वीकृति की पुष्टि करें",
     "approve": "स्वीकृत करें",
-    "reject": "अस्वीकृत करें"
+    "reject": "अस्वीकृत करें",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "सूचना प्राथमिकताएं",
     "subtitle": "चुनें कि आप कैसे और कब सूचनाएं प्राप्त करते हैं",
@@ -973,7 +1025,6 @@
     "disableConfirm": "क्या आप सुनिश्चित हैं कि आप सभी सूचनाएं अक्षम करना चाहते हैं? आप उन्हें कभी भी पुनः सक्षम कर सकते हैं।",
     "disableSuccess": "सभी सूचनाएं अक्षम कर दी गई हैं।"
   },
-
   "employeeDetail": {
     "notFound": "कर्मचारी नहीं मिला",
     "backToEmployees": "कर्मचारियों पर वापस जाएं",
@@ -989,7 +1040,6 @@
     "basic": "बुनियादी",
     "adding": "जोड़ रहे हैं..."
   },
-
   "reports": {
     "title": "रिपोर्ट",
     "subtitle": "विश्लेषण, अंतर्दृष्टि और कस्टम रिपोर्ट",
@@ -1025,9 +1075,22 @@
     "thisMonth": "इस महीने",
     "lastMonth": "पिछले महीने",
     "last7Days": "पिछले 7 दिन",
-    "last30Days": "पिछले 30 दिन"
+    "last30Days": "पिछले 30 दिन",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "मेनू",
     "closeMenu": "मेनू बंद करें",
@@ -1041,7 +1104,6 @@
     "required": "आवश्यक",
     "optional": "वैकल्पिक"
   },
-
   "shiftTemplates": {
     "title": "शिफ्ट टेम्पलेट",
     "subtitle": "पुनः प्रयोज्य शिफ्ट पैटर्न बनाएं",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "शिफ्ट",
     "generating": "जेनरेट हो रहा है..."
   },
-
   "legal": {
-    "lastUpdated": "अंतिम अपडेट"
+    "lastUpdated": "अंतिम अपडेट",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "सुबह",
     "pm": "शाम",
@@ -1120,5 +1289,564 @@
     "october": "अक्टूबर",
     "november": "नवंबर",
     "december": "दिसंबर"
+  },
+  "bulkImport": {
+    "title": "बल्क आयात",
+    "subtitle": "CSV या Excel फ़ाइलों से डेटा आयात करें",
+    "selectType": "प्रकार चुनें",
+    "uploadFile": "फ़ाइल अपलोड करें",
+    "preview": "पूर्वावलोकन",
+    "complete": "पूर्ण",
+    "invalidFileType": "कृपया CSV या Excel फ़ाइल अपलोड करें",
+    "importFailed": "आयात विफल। कृपया पुनः प्रयास करें।",
+    "uploadFor": "अपलोड",
+    "uploadDesc": "खींचें और छोड़ें या फ़ाइल चुनने के लिए क्लिक करें",
+    "downloadTemplate": "टेम्पलेट डाउनलोड करें",
+    "dragDrop": "अपनी फ़ाइल यहाँ खींचें और छोड़ें, या ब्राउज़ करने के लिए क्लिक करें",
+    "supportedFormats": "समर्थित प्रारूप: CSV, XLSX",
+    "previewData": "डेटा पूर्वावलोकन",
+    "rowsFound": "पंक्तियाँ मिलीं",
+    "andMore": "और",
+    "moreRows": "अधिक पंक्तियाँ...",
+    "importing": "आयात हो रहा है...",
+    "startImport": "आयात शुरू करें",
+    "importComplete": "आयात पूर्ण",
+    "successfullyImported": "सफलतापूर्वक आयातित",
+    "of": "में से",
+    "records": "रिकॉर्ड",
+    "successful": "सफल",
+    "failed": "विफल",
+    "total": "कुल",
+    "importMore": "और डेटा आयात करें",
+    "type": {
+      "employees": "कर्मचारी",
+      "employeesDesc": "कर्मचारी प्रोफ़ाइल आयात करें",
+      "shifts": "शिफ्ट",
+      "shiftsDesc": "शिफ्ट शेड्यूल आयात करें",
+      "locations": "स्थान",
+      "locationsDesc": "स्थान आयात करें",
+      "skills": "कौशल",
+      "skillsDesc": "कौशल आयात करें"
+    }
+  },
+  "jobs": {
+    "open": "खुला",
+    "closed": "बंद",
+    "applicants": "आवेदक",
+    "created": "नौकरी पोस्ट सफलतापूर्वक बनाई गई",
+    "createError": "नौकरी पोस्ट बनाने में विफल। कृपया पुनः प्रयास करें।",
+    "updated": "नौकरी पोस्ट सफलतापूर्वक अपडेट की गई",
+    "updateError": "नौकरी पोस्ट अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
+    "fullTime": "पूर्णकालिक",
+    "partTime": "अंशकालिक",
+    "contract": "अनुबंध",
+    "temporary": "अस्थायी",
+    "subtitle": "आंतरिक करियर अवसर प्रबंधित करें",
+    "openPositions": "खुली पदों",
+    "closedPositions": "बंद",
+    "totalApplicants": "कुल आवेदक",
+    "noJobs": "कोई नौकरी पोस्ट नहीं मिली",
+    "viewApplicants": "आवेदक देखें",
+    "editPosting": "नौकरी पोस्ट संपादित करें",
+    "jobTitle": "पद का शीर्षक",
+    "enterTitle": "पद का शीर्षक दर्ज करें",
+    "selectDepartment": "विभाग चुनें",
+    "selectLocation": "स्थान चुनें",
+    "salary": "वेतन सीमा",
+    "enterDescription": "पद विवरण दर्ज करें",
+    "postJob": "नौकरी पोस्ट करें",
+    "skillMatch": "कौशल मिलान",
+    "noApplicants": "अभी तक कोई आवेदक नहीं"
+  },
+  "employees": {
+    "searchPlaceholder": "नाम या ईमेल से खोजें...",
+    "employees": "कर्मचारी",
+    "noResults": "आपके मानदंडों से मेल खाते कोई कर्मचारी नहीं",
+    "details": "कर्मचारी विवरण",
+    "hireDate": "नियुक्ति तिथि",
+    "assigned": "सौंपा गया",
+    "leaveDetails": "छुट्टी विवरण",
+    "until": "तक",
+    "terminationDetails": "सेवामुक्ति विवरण",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "एकीकरण केंद्र",
+    "subtitle": "Uplift को अपने मौजूदा टूल्स से जोड़ें",
+    "apiFactory": "API फैक्ट्री",
+    "addIntegration": "एकीकरण जोड़ें",
+    "configure": "कॉन्फ़िगर करें",
+    "connect": "कनेक्ट करें",
+    "cancel": "रद्द करें",
+    "back": "वापस",
+    "saveChanges": "परिवर्तन सहेजें",
+    "syncNow": "अभी सिंक करें",
+    "disconnect": "{{name}} डिस्कनेक्ट करें",
+    "disconnectConfirm": "{{name}} डिस्कनेक्ट करें? सभी सिंक रुक जाएंगे।",
+    "settingsSaved": "सेटिंग्स सहेजी गईं",
+    "browseMarketplace": "मार्केटप्लेस ब्राउज़ करें",
+    "loadingIntegrations": "एकीकरण लोड हो रहे हैं...",
+    "noIntegrations": "कोई एकीकरण कनेक्ट नहीं",
+    "noIntegrationsDesc": "डेटा सिंक शुरू करने के लिए अपना पहला एकीकरण कनेक्ट करें",
+    "status": {
+      "beta": "बीटा",
+      "syncing": "सिंक हो रहा है..."
+    },
+    "stats": {
+      "connected": "कनेक्टेड",
+      "available": "उपलब्ध",
+      "syncsToday": "आज के सिंक",
+      "errors": "त्रुटियाँ",
+      "totalSyncs": "कुल सिंक",
+      "lastSync": "अंतिम सिंक",
+      "records": "रिकॉर्ड"
+    },
+    "tabs": {
+      "connected": "कनेक्टेड",
+      "marketplace": "मार्केटप्लेस",
+      "restApi": "REST API",
+      "apiFactory": "API फैक्ट्री",
+      "activityLog": "गतिविधि लॉग",
+      "settings": "सेटिंग्स",
+      "fieldMapping": "फ़ील्ड मैपिंग",
+      "syncHistory": "सिंक इतिहास",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "अंतिम सिंक",
+      "frequency": "आवृत्ति",
+      "status": "स्थिति",
+      "healthy": "स्वस्थ",
+      "errors": "त्रुटियाँ"
+    },
+    "connectModal": {
+      "title": "{{name}} कनेक्ट करें",
+      "whatItDoes": "यह एकीकरण क्या करता है:",
+      "redirectNotice": "आपको {{name}} पर रीडायरेक्ट किया जाएगा",
+      "authorizeMessage": "लॉग इन करें और Uplift को अपने डेटा तक पहुँच की अनुमति दें। हम केवल आवश्यक अनुमतियाँ माँगते हैं।",
+      "connectWith": "{{name}} से कनेक्ट करें",
+      "connecting": "{{name}} से कनेक्ट हो रहा है...",
+      "completeAuth": "कृपया पॉपअप विंडो में प्राधिकरण पूर्ण करें",
+      "successConnected": "सफलतापूर्वक कनेक्ट हुआ!",
+      "configureSyncSettings": "नीचे अपनी सिंक सेटिंग्स कॉन्फ़िगर करें।",
+      "completeSetup": "सेटअप पूर्ण करें",
+      "connected": "{{name}} कनेक्ट हुआ!",
+      "firstSyncSoon": "आपका पहला सिंक जल्द शुरू होगा",
+      "hris": {
+        "syncEmployees": "कर्मचारी रिकॉर्ड स्वचालित रूप से सिंक करें",
+        "importDepts": "विभाग और स्थान आयात करें",
+        "syncTimeOff": "छुट्टी शेष सिंक में रखें"
+      },
+      "payroll": {
+        "exportTimesheets": "स्वीकृत टाइमशीट निर्यात करें",
+        "syncPayRates": "वेतन दरें और ओवरटाइम सिंक करें",
+        "autoReconciliation": "स्वचालित पेरोल समाधान"
+      },
+      "comms": {
+        "shiftReminders": "शिफ्ट रिमाइंडर भेजें",
+        "postRecognition": "चैनलों में सम्मान पोस्ट करें",
+        "swapNotifications": "स्वैप अनुरोध सूचनाएँ"
+      },
+      "identity": {
+        "sso": "सिंगल साइन-ऑन (SSO)",
+        "autoProvisioning": "स्वचालित उपयोगकर्ता प्रावधान",
+        "directorySync": "डायरेक्टरी सिंक"
+      },
+      "other": {
+        "bidirectional": "द्विदिशात्मक डेटा सिंक",
+        "realtimeWebhooks": "Webhooks के माध्यम से रीयल-टाइम अपडेट",
+        "auditTrail": "पूर्ण ऑडिट ट्रेल"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} सेटिंग्स",
+      "connectedSince": "{{date}} से कनेक्टेड"
+    },
+    "settings": {
+      "autoSync": "ऑटो सिंक",
+      "autoSyncDesc": "शेड्यूल पर स्वचालित रूप से डेटा सिंक करें",
+      "autoSyncScheduleDesc": "शेड्यूल पर स्वचालित सिंक",
+      "syncFrequency": "सिंक आवृत्ति",
+      "nextScheduledSync": "अगला शेड्यूल्ड सिंक",
+      "dataToSync": "सिंक करने के लिए डेटा",
+      "frequency": {
+        "realtime": "रीयल-टाइम",
+        "hourly": "प्रति घंटा",
+        "daily": "दैनिक",
+        "weekly": "साप्ताहिक"
+      },
+      "data": {
+        "employees": "कर्मचारी",
+        "timeEntries": "समय प्रविष्टियाँ",
+        "departments": "विभाग",
+        "locations": "स्थान"
+      }
+    },
+    "mapping": {
+      "description": "फ़ील्ड मैपिंग नियंत्रित करती है कि {{name}} से डेटा कैसे Uplift फ़ील्ड में मैप होता है। परिवर्तन अगले सिंक पर लागू होंगे।",
+      "sourceField": "{{name}} फ़ील्ड",
+      "upliftField": "Uplift फ़ील्ड",
+      "status": "स्थिति",
+      "selectField": "फ़ील्ड चुनें...",
+      "mapped": "मैप किया गया",
+      "unmapped": "मैप नहीं किया गया"
+    },
+    "history": {
+      "noHistory": "कोई सिंक इतिहास नहीं",
+      "sync": "सिंक",
+      "duration": "अवधि",
+      "records": "रिकॉर्ड",
+      "created": "बनाए गए",
+      "updated": "अपडेट किए गए"
+    },
+    "webhooks": {
+      "description": "Webhooks Uplift में घटनाओं के बारे में {{name}} को सूचित करते हैं",
+      "addWebhook": "Webhook जोड़ें",
+      "noWebhooks": "कोई webhook कॉन्फ़िगर नहीं",
+      "createFirst": "अपना पहला webhook बनाएं",
+      "active": "सक्रिय",
+      "paused": "रुका हुआ",
+      "sendTestPayload": "टेस्ट डेटा भेजें",
+      "pauseWebhook": "Webhook रोकें",
+      "enableWebhook": "Webhook सक्रिय करें",
+      "deleteWebhook": "Webhook हटाएं",
+      "lastTriggered": "अंतिम ट्रिगर",
+      "never": "कभी नहीं",
+      "successRate": "सफलता दर",
+      "sendEventsTo": "{{name}} को इवेंट भेजें",
+      "endpointUrl": "एंडपॉइंट URL",
+      "eventsToSend": "भेजने के लिए इवेंट",
+      "hmacInfo": "हम सभी webhook संदेशों को HMAC-SHA256 से साइन करेंगे। हस्ताक्षर",
+      "header": "हेडर में प्राप्त होगा।",
+      "createWebhook": "Webhook बनाएं",
+      "validationError": "कृपया URL दर्ज करें और कम से कम एक इवेंट चुनें",
+      "createdSuccess": "Webhook सफलतापूर्वक बनाया गया!",
+      "testSent": "टेस्ट डेटा भेजा गया",
+      "testStatus": "स्थिति",
+      "deleteConfirm": "इस webhook को हटाएं?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "एकीकरण खोजें...",
+      "allCategories": "सभी श्रेणियाँ",
+      "infoBannerTitle": "Uplift आपके मौजूदा टूल्स के साथ काम करता है",
+      "infoBannerDesc": "अपने HRIS, पेरोल और संचार सिस्टम कनेक्ट करें। हम डेटा सिंक करते हैं — आपके स्टैक को नहीं बदलते।",
+      "noResults": "कोई एकीकरण नहीं मिला",
+      "dontSeeSystem": "अपना सिस्टम नहीं दिख रहा?",
+      "alwaysAdding": "हम लगातार नए एकीकरण जोड़ रहे हैं। हमें बताएं आपको क्या चाहिए।",
+      "requestIntegration": "एकीकरण का अनुरोध करें"
+    },
+    "activity": {
+      "recentActivity": "हालिया एकीकरण गतिविधि",
+      "exportLog": "लॉग निर्यात करें"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API फैक्ट्री",
+    "subtitle": "बिना कोड लिखे कस्टम REST API एकीकरण बनाएं",
+    "newIntegration": "नया एकीकरण",
+    "searchPlaceholder": "एकीकरण खोजें...",
+    "loadingIntegrations": "एकीकरण लोड हो रहे हैं...",
+    "noIntegrationsFound": "कोई एकीकरण नहीं मिला",
+    "noIntegrationsYet": "अभी तक कोई कस्टम एकीकरण नहीं",
+    "tryDifferentSearch": "कोई अन्य खोज शब्द आज़माएं",
+    "createFirstDesc": "अपना पहला कस्टम API एकीकरण बनाएं",
+    "createIntegration": "एकीकरण बनाएं",
+    "deleteConfirm": "क्या आप वाकई इस एकीकरण को हटाना चाहते हैं?",
+    "list": {
+      "eventsCount": "{{count}} इवेंट",
+      "scheduled": "शेड्यूल्ड",
+      "incomingWebhook": "इनकमिंग webhook",
+      "manual": "मैनुअल",
+      "runsCount": "{{count}} रन",
+      "errorsCount": "{{count}} त्रुटियाँ",
+      "disabled": "अक्षम",
+      "edit": "संपादित करें",
+      "test": "परीक्षण",
+      "viewLogs": "लॉग देखें",
+      "delete": "हटाएं",
+      "lastRun": "अंतिम रन"
+    },
+    "stats": {
+      "totalIntegrations": "कुल एकीकरण",
+      "active": "सक्रिय",
+      "runsToday": "आज के रन",
+      "totalErrors": "कुल त्रुटियाँ"
+    },
+    "editor": {
+      "editTitle": "API एकीकरण संपादित करें",
+      "createTitle": "API एकीकरण बनाएं",
+      "subtitle": "अपना कस्टम REST API कनेक्शन कॉन्फ़िगर करें",
+      "integrationName": "एकीकरण नाम",
+      "integrationNamePlaceholder": "उदा., पेरोल सिस्टम में सिंक",
+      "description": "विवरण",
+      "descriptionPlaceholder": "यह एकीकरण क्या करता है?",
+      "method": "विधि",
+      "url": "URL",
+      "headers": "हेडर",
+      "addHeader": "हेडर जोड़ें",
+      "headerName": "हेडर नाम",
+      "headerValue": "मान",
+      "requestBodyJson": "अनुरोध बॉडी (JSON)",
+      "useVariables": "वेरिएबल के लिए {{field}} का उपयोग करें",
+      "availableVariables": "उपलब्ध वेरिएबल",
+      "authenticationType": "प्रमाणीकरण प्रकार",
+      "apiKeyLocation": "API कुंजी स्थान",
+      "header": "हेडर",
+      "queryParameter": "क्वेरी पैरामीटर",
+      "keyName": "कुंजी नाम",
+      "keyNamePlaceholder": "उदा., X-API-Key",
+      "apiKey": "API कुंजी",
+      "enterApiKey": "अपनी API कुंजी दर्ज करें",
+      "bearerToken": "Bearer Token",
+      "enterToken": "अपना token दर्ज करें",
+      "username": "उपयोगकर्ता नाम",
+      "password": "पासवर्ड",
+      "tokenUrl": "Token URL",
+      "clientId": "क्लाइंट ID",
+      "clientSecret": "क्लाइंट सीक्रेट",
+      "scopes": "स्कोप (अल्पविराम से अलग)",
+      "whenShouldRun": "यह एकीकरण कब चलना चाहिए?",
+      "selectEvents": "इवेंट चुनें",
+      "schedule": "शेड्यूल",
+      "cronExpression": "CRON एक्सप्रेशन",
+      "scheduleUtcNote": "शेड्यूल UTC टाइमज़ोन का उपयोग करता है। वर्तमान CRON",
+      "yourWebhookUrl": "आपका Webhook URL",
+      "webhookPostNote": "इस URL पर POST अनुरोध भेजें। हम आने वाले डेटा को प्रोसेस करके Uplift में मैप करेंगे।",
+      "fieldMappings": "फ़ील्ड मैपिंग",
+      "fieldMappingsDesc": "Uplift फ़ील्ड को अपने बाहरी API फ़ील्ड में मैप करें",
+      "addMapping": "मैपिंग जोड़ें",
+      "noFieldMappings": "अभी तक कोई फ़ील्ड मैपिंग नहीं",
+      "addMappingsDesc": "सिस्टम के बीच डेटा ट्रांसफ़ॉर्म करने के लिए मैपिंग जोड़ें",
+      "addFirstMapping": "पहली मैपिंग जोड़ें",
+      "selectUpliftField": "Uplift फ़ील्ड चुनें...",
+      "externalFieldName": "बाहरी फ़ील्ड नाम",
+      "noTransform": "कोई ट्रांसफ़ॉर्म नहीं",
+      "dateIso": "तिथि → ISO",
+      "dateUk": "तिथि → UK प्रारूप",
+      "boolYn": "Bool → हाँ/नहीं",
+      "fieldMappingTip": "फ़ील्ड मैपिंग स्वचालित रूप से अनुरोध बॉडी बनाने के लिए उपयोग होती है। आप अनुरोध टैब में {{field}} सिंटैक्स भी उपयोग कर सकते हैं।",
+      "testConfiguration": "कॉन्फ़िगरेशन परीक्षण",
+      "testDescription": "कॉन्फ़िगरेशन सत्यापित करने के लिए टेस्ट अनुरोध भेजें।",
+      "testing": "परीक्षण हो रहा है...",
+      "sendTestRequest": "टेस्ट अनुरोध भेजें",
+      "success": "सफल",
+      "failed": "विफल",
+      "status": "स्थिति",
+      "time": "समय",
+      "response": "प्रतिक्रिया",
+      "enableIntegration": "एकीकरण सक्रिय करें",
+      "cancel": "रद्द करें",
+      "saveChanges": "परिवर्तन सहेजें",
+      "createIntegration": "एकीकरण बनाएं",
+      "tabs": {
+        "request": "अनुरोध",
+        "authentication": "प्रमाणीकरण",
+        "trigger": "ट्रिगर",
+        "fieldMapping": "फ़ील्ड मैपिंग",
+        "test": "परीक्षण"
+      }
+    },
+    "logs": {
+      "executionLogs": "निष्पादन लॉग",
+      "export": "निर्यात",
+      "noData": "अभी तक कोई डेटा नहीं। एकीकरण चलने पर लॉग यहाँ दिखाई देंगे।",
+      "unknown": "अज्ञात",
+      "error": "त्रुटि"
+    },
+    "helpBanner": {
+      "title": "एकीकरण बनाने में मदद चाहिए?",
+      "description": "उदाहरणों के लिए हमारा API दस्तावेज़ देखें, या जटिल मामलों के लिए सहायता से संपर्क करें।"
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API कुंजियाँ",
+    "subtitle": "अपने एप्लिकेशन से Uplift डेटा एक्सेस करने के लिए API कुंजियाँ बनाएं",
+    "apiDocs": "API दस्तावेज़",
+    "createKey": "कुंजी बनाएं",
+    "createApiKey": "API कुंजी बनाएं",
+    "loadingKeys": "API कुंजियाँ लोड हो रही हैं...",
+    "loadError": "API कुंजियाँ लोड करने में विफल।",
+    "noKeysYet": "अभी तक कोई API कुंजी नहीं",
+    "createFirstDesc": "Uplift के साथ एकीकरण शुरू करने के लिए अपनी पहली API कुंजी बनाएं",
+    "retry": "पुनः प्रयास",
+    "revokeConfirm": "API कुंजी \"{{name}}\" निरस्त करें? यह क्रिया अपरिवर्तनीय है।",
+    "regenerateConfirm": "\"{{name}}\" के लिए नया सीक्रेट बनाएं? पुराना सीक्रेट तुरंत काम करना बंद कर देगा।",
+    "regenerateSuccess": "नई गुप्त कुंजी: {{secret}}\n\nइसे अभी सहेजें — आप इसे दोबारा नहीं देखेंगे!",
+    "regenerateError": "सीक्रेट पुनः बनाने में विफल: {{message}}",
+    "usageStats": "{{name}} के लिए उपयोग आँकड़े:\n\nकुल अनुरोध: {{requests}}\nअंतिम उपयोग: {{lastUsed}}",
+    "card": {
+      "noDescription": "कोई विवरण नहीं",
+      "expired": "समाप्त",
+      "active": "सक्रिय",
+      "inactive": "निष्क्रिय",
+      "keyId": "कुंजी ID",
+      "requests": "अनुरोध",
+      "lastUsed": "अंतिम उपयोग",
+      "never": "कभी नहीं",
+      "rateLimit": "दर सीमा",
+      "standard": "मानक",
+      "hideDetails": "विवरण छुपाएं",
+      "showDetails": "विवरण दिखाएं",
+      "scopes": "स्कोप",
+      "created": "बनाया गया",
+      "expires": "समाप्ति",
+      "usage": "उपयोग",
+      "regenerate": "पुनः बनाएं",
+      "revoke": "निरस्त करें"
+    },
+    "create": {
+      "keyCreatedTitle": "API कुंजी बनाई गई",
+      "createTitle": "API कुंजी बनाएं",
+      "keyCreatedSuccess": "API कुंजी सफलतापूर्वक बनाई गई",
+      "copySecretWarning": "अपनी गुप्त कुंजी अभी कॉपी करें। आप इसे दोबारा नहीं देख पाएंगे!",
+      "keyIdLabel": "कुंजी ID",
+      "secretKeyLabel": "गुप्त कुंजी",
+      "fullApiKeyLabel": "पूर्ण API कुंजी (Authorization हेडर के लिए)",
+      "fullKeyLabel": "पूर्ण कुंजी",
+      "authHeaderNote": "इसे अपने Authorization हेडर में उपयोग करें",
+      "done": "हो गया",
+      "keyName": "कुंजी नाम",
+      "keyNamePlaceholder": "उदा., प्रोडक्शन API कुंजी",
+      "description": "विवरण",
+      "descriptionPlaceholder": "इस कुंजी का उपयोग किसलिए होगा?",
+      "permissions": "अनुमतियाँ",
+      "rateLimit": "दर सीमा",
+      "expiration": "समाप्ति",
+      "neverExpires": "कभी समाप्त नहीं होती",
+      "thirtyDays": "30 दिन",
+      "ninetyDays": "90 दिन",
+      "oneYear": "1 वर्ष",
+      "createError": "API कुंजी बनाने में विफल। कृपया पुनः प्रयास करें।",
+      "cancel": "रद्द करें",
+      "createKey": "कुंजी बनाएं"
+    },
+    "docs": {
+      "quickStart": "त्वरित शुरुआत",
+      "authentication": "प्रमाणीकरण",
+      "exampleResponse": "उदाहरण प्रतिक्रिया",
+      "viewFullDocs": "पूर्ण दस्तावेज़ देखें",
+      "downloadSpec": "OpenAPI Spec डाउनलोड करें"
+    },
+    "securityBanner": {
+      "title": "API कुंजी सुरक्षा",
+      "description": "अपनी API कुंजियाँ सुरक्षित रखें। उन्हें क्लाइंट-साइड कोड या सार्वजनिक रिपॉजिटरी में कभी न रखें। यदि कुंजी से समझौता हो जाए, तो उसे तुरंत निरस्त करें और नई बनाएं।"
+    }
+  },
+  "orgOnboarding": {
+    "title": "संगठन सेटअप",
+    "subtitle": "आइए आपके संगठन को कॉन्फ़िगर करें",
+    "steps": {
+      "orgDetails": "संगठन विवरण",
+      "locations": "स्थान",
+      "departments": "विभाग",
+      "roles": "भूमिकाएँ और अनुमतियाँ",
+      "review": "समीक्षा और लॉन्च"
+    },
+    "orgDetails": {
+      "companyName": "कंपनी का नाम",
+      "companyNamePlaceholder": "उदा., एक्मे प्रा. लि.",
+      "tradingName": "व्यापारिक नाम (वैकल्पिक)",
+      "tradingNamePlaceholder": "सार्वजनिक नाम",
+      "industry": "उद्योग",
+      "selectIndustry": "उद्योग चुनें",
+      "companySize": "कंपनी का आकार",
+      "selectSize": "आकार चुनें",
+      "timezone": "डिफ़ॉल्ट टाइमज़ोन",
+      "currency": "डिफ़ॉल्ट मुद्रा",
+      "weekStart": "सप्ताह शुरू होता है",
+      "logo": "कंपनी लोगो",
+      "uploadLogo": "लोगो अपलोड करें",
+      "uploadLogoDesc": "PNG या SVG, अनुशंसित 200×200px"
+    },
+    "locations": {
+      "title": "स्थान",
+      "subtitle": "अपने कार्यालय, साइट या शाखाएँ जोड़ें",
+      "addLocation": "स्थान जोड़ें",
+      "name": "स्थान का नाम",
+      "namePlaceholder": "उदा., मुख्य कार्यालय",
+      "address": "पता",
+      "addressPlaceholder": "पूरा पता",
+      "timezone": "टाइमज़ोन",
+      "noLocations": "अभी तक कोई स्थान नहीं जोड़ा गया",
+      "addFirst": "शुरू करने के लिए अपना पहला स्थान जोड़ें"
+    },
+    "departments": {
+      "title": "विभाग",
+      "subtitle": "अपनी विभाग संरचना सेट करें",
+      "addDepartment": "विभाग जोड़ें",
+      "name": "विभाग का नाम",
+      "namePlaceholder": "उदा., इंजीनियरिंग",
+      "parentDepartment": "मूल विभाग (वैकल्पिक)",
+      "none": "कोई नहीं (शीर्ष-स्तर)",
+      "manager": "विभाग प्रबंधक",
+      "selectManager": "प्रबंधक चुनें",
+      "noDepartments": "अभी तक कोई विभाग नहीं जोड़ा गया",
+      "addFirst": "अपना पहला विभाग जोड़ें"
+    },
+    "roles": {
+      "title": "भूमिकाएँ और अनुमतियाँ",
+      "subtitle": "अपनी टीम के लिए एक्सेस स्तर कॉन्फ़िगर करें",
+      "addRole": "कस्टम भूमिका जोड़ें",
+      "builtIn": "अंतर्निहित",
+      "custom": "कस्टम",
+      "name": "भूमिका का नाम",
+      "namePlaceholder": "उदा., शिफ्ट सुपरवाइज़र",
+      "description": "विवरण",
+      "descriptionPlaceholder": "यह भूमिका क्या कर सकती है?",
+      "permissions": "अनुमतियाँ",
+      "permissionGroups": {
+        "scheduling": "शेड्यूलिंग",
+        "timeTracking": "समय ट्रैकिंग",
+        "employees": "कर्मचारी",
+        "reports": "रिपोर्ट",
+        "settings": "सेटिंग्स"
+      }
+    },
+    "review": {
+      "title": "समीक्षा और लॉन्च",
+      "subtitle": "लाइव होने से पहले सब कुछ जाँचें",
+      "orgInfo": "संगठन जानकारी",
+      "locationsCount": "{{count}} स्थान कॉन्फ़िगर किए गए",
+      "departmentsCount": "{{count}} विभाग कॉन्फ़िगर किए गए",
+      "rolesCount": "{{count}} भूमिकाएँ कॉन्फ़िगर की गईं",
+      "allLooksGood": "सब कुछ अच्छा लग रहा है!",
+      "launch": "संगठन लॉन्च करें",
+      "launchDesc": "यह आपके संगठन को सक्रिय करेगा और टीम सदस्यों को आमंत्रण भेजेगा।"
+    },
+    "navigation": {
+      "back": "वापस",
+      "next": "अगला",
+      "skip": "छोड़ें",
+      "finish": "सेटअप पूर्ण करें"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

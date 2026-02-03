@@ -37,6 +37,21 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // NC-1: Client-side validation before API call
+    if (!email.trim()) {
+      setError(t('errors.requiredField', 'Email is required'));
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError(t('errors.invalidEmail', 'Please enter a valid email address'));
+      return;
+    }
+    if (!password) {
+      setError(t('errors.requiredField', 'Password is required'));
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -107,6 +122,7 @@ export default function Login() {
               </div>
             )}
 
+            {/* NOTE: Consider adding custom validation beyond HTML5 required/type attributes */}
             <form onSubmit={handleMfaSubmit} className="space-y-4">
               <div>
                 <label className="label">{t('auth.verificationCode', 'Verification Code')}</label>

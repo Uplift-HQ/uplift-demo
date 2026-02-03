@@ -1,9 +1,50 @@
 // ============================================================
 // API CLIENT
 // Centralized HTTP client with Bearer token auth
+// Falls back to demo data when API is unavailable
 // ============================================================
 
+import {
+  DEMO_DASHBOARD,
+  DEMO_EMPLOYEES,
+  DEMO_LOCATIONS,
+  DEMO_DEPARTMENTS,
+  DEMO_OPPORTUNITIES,
+  DEMO_TIME_ENTRIES,
+  DEMO_SKILLS,
+  DEMO_INTEGRATIONS,
+  DEMO_USERS,
+  DEMO_SESSIONS,
+  DEMO_WEBHOOKS,
+  DEMO_ORGANIZATION,
+  DEMO_BRANDING,
+  DEMO_NAVIGATION,
+  DEMO_EMPLOYEE_VISIBILITY,
+  DEMO_ACTIVITIES,
+  DEMO_CAREER,
+  DEMO_IMPORT_TEMPLATES,
+  DEMO_HOURS_REPORT,
+  DEMO_ATTENDANCE_REPORT,
+  DEMO_LABOR_COST_REPORT,
+  DEMO_SHIFT_TEMPLATES,
+  DEMO_API_KEYS,
+  DEMO_CUSTOM_INTEGRATIONS,
+  DEMO_NOTIFICATIONS,
+  DEMO_TIME_OFF_POLICIES,
+  DEMO_TIME_OFF_REQUESTS,
+  DEMO_TIME_OFF_BALANCES,
+  DEMO_SHIFT_SWAPS,
+  DEMO_SCHEDULE_PERIODS,
+  DEMO_ROLES,
+  DEMO_USER,
+  generateDemoShifts,
+  getWeekStart,
+} from './demoData';
+
 const API_URL = import.meta.env.VITE_API_URL || '/api';
+
+// Demo mode - always use demo data (no backend)
+export const DEMO_MODE = true;
 
 class ApiClient {
   constructor() {
@@ -24,14 +65,18 @@ class ApiClient {
   }
 
   async request(method, path, data, options = {}) {
+    // DEMO MODE: Intercept all requests and return demo data
+    if (DEMO_MODE) {
+      return this.getDemoData(path, method, data);
+    }
+
     const url = `${API_URL}${path}`;
-    
+
     const headers = {
       'Content-Type': 'application/json',
       ...options.headers,
     };
 
-    // Add Bearer token if available
     const token = this.getToken();
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
@@ -49,7 +94,6 @@ class ApiClient {
     try {
       const response = await fetch(url, config);
 
-      // Handle 401 - clear token (let auth flow handle redirect)
       if (response.status === 401) {
         this.setToken(null);
         localStorage.removeItem('uplift_user');
@@ -60,7 +104,6 @@ class ApiClient {
 
       return this.handleResponse(response);
     } catch (error) {
-      // Don't log network errors for demo mode (no backend)
       if (error.name !== 'TypeError') {
         console.error('API Error:', error);
       }
@@ -68,23 +111,202 @@ class ApiClient {
     }
   }
 
+  // Demo data router - returns appropriate data based on path
+  getDemoData(path, method, data) {
+    // Dashboard
+    if (path.startsWith('/dashboard')) {
+      return DEMO_DASHBOARD;
+    }
+
+    // Employees
+    if (path === '/employees' || path.startsWith('/employees?')) {
+      return { employees: DEMO_EMPLOYEES };
+    }
+    if (path.match(/^\/employees\/[^/]+$/)) {
+      const id = path.split('/')[2];
+      const emp = DEMO_EMPLOYEES.find(e => e.id === id);
+      return emp ? { employee: emp } : { employee: DEMO_EMPLOYEES[0] };
+    }
+
+    // Locations
+    if (path === '/locations' || path.startsWith('/locations?')) {
+      return { locations: DEMO_LOCATIONS };
+    }
+    if (path.match(/^\/locations\/[^/]+$/)) {
+      const id = path.split('/')[2];
+      const loc = DEMO_LOCATIONS.find(l => l.id === id);
+      return loc ? { location: loc } : { location: DEMO_LOCATIONS[0] };
+    }
+
+    // Departments
+    if (path === '/departments') {
+      return { departments: DEMO_DEPARTMENTS };
+    }
+
+    // Roles
+    if (path === '/roles') {
+      return { roles: DEMO_ROLES };
+    }
+
+    // Skills
+    if (path === '/skills') {
+      return { skills: DEMO_SKILLS };
+    }
+
+    // Shifts
+    if (path === '/shifts' || path.startsWith('/shifts?')) {
+      const shifts = generateDemoShifts(getWeekStart());
+      return { shifts };
+    }
+    if (path.startsWith('/shifts/swaps')) {
+      return { swaps: DEMO_SHIFT_SWAPS };
+    }
+
+    // Shift Templates
+    if (path === '/shift-templates' || path.startsWith('/shift-templates?')) {
+      return { templates: DEMO_SHIFT_TEMPLATES };
+    }
+
+    // Schedule Periods
+    if (path.startsWith('/schedule/periods')) {
+      return { periods: DEMO_SCHEDULE_PERIODS };
+    }
+
+    // Time Entries
+    if (path.startsWith('/time/entries') || path.startsWith('/time/pending')) {
+      if (path.includes('pending')) {
+        const pending = DEMO_TIME_ENTRIES.filter(e => !e.approved).slice(0, 8);
+        return { entries: pending };
+      }
+      return { entries: DEMO_TIME_ENTRIES };
+    }
+
+    // Time Off
+    if (path === '/time-off/policies') {
+      return { policies: DEMO_TIME_OFF_POLICIES };
+    }
+    if (path.startsWith('/time-off/requests')) {
+      return { requests: DEMO_TIME_OFF_REQUESTS };
+    }
+    if (path.startsWith('/time-off/balances')) {
+      return { balances: DEMO_TIME_OFF_BALANCES };
+    }
+
+    // Jobs/Opportunities
+    if (path === '/jobs' || path.startsWith('/jobs?')) {
+      return { jobs: DEMO_OPPORTUNITIES };
+    }
+    if (path.match(/^\/jobs\/[^/]+$/)) {
+      const id = path.split('/')[2];
+      const job = DEMO_OPPORTUNITIES.find(j => j.id === id);
+      return job ? { job } : { job: DEMO_OPPORTUNITIES[0] };
+    }
+
+    // Integrations
+    if (path === '/integrations') {
+      return { integrations: DEMO_INTEGRATIONS };
+    }
+    if (path === '/integrations/api-keys') {
+      return { apiKeys: DEMO_API_KEYS };
+    }
+    if (path === '/integrations/custom') {
+      return { customIntegrations: DEMO_CUSTOM_INTEGRATIONS };
+    }
+
+    // Organization
+    if (path === '/organization') {
+      return { organization: DEMO_ORGANIZATION };
+    }
+    if (path === '/organization/branding') {
+      return { branding: DEMO_BRANDING };
+    }
+
+    // Settings
+    if (path === '/settings/navigation') {
+      return { navigation: DEMO_NAVIGATION };
+    }
+    if (path === '/settings/employee-visibility') {
+      return { visibility: DEMO_EMPLOYEE_VISIBILITY };
+    }
+
+    // Users
+    if (path === '/users' || path.startsWith('/users?') || path === '/auth/users') {
+      return { users: DEMO_USERS };
+    }
+    if (path.match(/\/users\/.*\/sessions/)) {
+      return { sessions: DEMO_SESSIONS };
+    }
+
+    // Webhooks
+    if (path === '/webhooks') {
+      return { webhooks: DEMO_WEBHOOKS };
+    }
+
+    // Activity
+    if (path.startsWith('/activity')) {
+      return { activities: DEMO_ACTIVITIES };
+    }
+
+    // Career
+    if (path.startsWith('/career')) {
+      return DEMO_CAREER;
+    }
+
+    // Bulk Import
+    if (path.startsWith('/import')) {
+      return { templates: DEMO_IMPORT_TEMPLATES };
+    }
+
+    // Reports
+    if (path.startsWith('/reports/hours')) {
+      return DEMO_HOURS_REPORT;
+    }
+    if (path.startsWith('/reports/attendance')) {
+      return DEMO_ATTENDANCE_REPORT;
+    }
+    if (path.startsWith('/reports/labor-cost')) {
+      return DEMO_LABOR_COST_REPORT;
+    }
+    if (path.startsWith('/reports/coverage')) {
+      return {
+        summary: { coverageRate: 94, understaffedShifts: 4, overstaffedShifts: 2 },
+        byLocation: DEMO_LOCATIONS.map(l => ({
+          id: l.id, name: l.name, coverage: Math.round(Math.random() * 10 + 90),
+        })),
+      };
+    }
+
+    // Notifications
+    if (path.startsWith('/notifications')) {
+      return { notifications: DEMO_NOTIFICATIONS };
+    }
+
+    // Auth
+    if (path === '/auth/me') {
+      return { user: DEMO_USER };
+    }
+
+    // Default empty response
+    return {};
+  }
+
   async handleResponse(response) {
     const text = await response.text();
     let data;
-    
+
     try {
       data = text ? JSON.parse(text) : {};
     } catch {
       data = { message: text };
     }
-    
+
     if (!response.ok) {
       const error = new Error(data.error || data.message || 'Request failed');
       error.status = response.status;
       error.data = data;
       throw error;
     }
-    
+
     return data;
   }
 
@@ -110,6 +332,9 @@ class ApiClient {
   }
 
   async upload(path, formData) {
+    if (DEMO_MODE) {
+      return { success: true, message: 'Demo mode - upload simulated' };
+    }
     const url = `${API_URL}${path}`;
     const headers = {};
     const token = this.getToken();
@@ -147,6 +372,12 @@ export const api = new ApiClient();
 
 export const authApi = {
   login: async (email, password) => {
+    if (DEMO_MODE) {
+      const token = 'demo_token_' + Date.now();
+      api.setToken(token);
+      localStorage.setItem('uplift_user', JSON.stringify(DEMO_USER));
+      return { token, user: DEMO_USER };
+    }
     const result = await api.post('/auth/login', { email, password });
     if (result.token) {
       api.setToken(result.token);
@@ -158,23 +389,42 @@ export const authApi = {
     localStorage.removeItem('uplift_user');
     return Promise.resolve({ success: true });
   },
-  me: () => api.get('/auth/me'),
+  me: async () => {
+    if (DEMO_MODE) {
+      return { user: DEMO_USER };
+    }
+    return api.get('/auth/me');
+  },
   register: (data) => api.post('/auth/register', data),
   requestPasswordReset: (email) => api.post('/auth/password/reset-request', { email }),
   resetPassword: (token, password) => api.post('/auth/password/reset', { token, password }),
-  changePassword: (currentPassword, newPassword) => 
+  changePassword: (currentPassword, newPassword) =>
     api.post('/auth/password/change', { currentPassword, newPassword }),
   inviteUser: (data) => api.post('/auth/users/invite', data),
-  getUsers: () => api.get('/auth/users'),
+  getUsers: async () => {
+    if (DEMO_MODE) {
+      return { users: DEMO_USERS };
+    }
+    return api.get('/auth/users');
+  },
   updateProfile: (data) => api.patch('/users/me', data),
 };
 
 export const employeesApi = {
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { employees: DEMO_EMPLOYEES };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/employees${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/employees/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const emp = DEMO_EMPLOYEES.find(e => e.id === id);
+      return emp ? { employee: emp } : { employee: DEMO_EMPLOYEES[0] };
+    }
+    return api.get(`/employees/${id}`);
+  },
   create: (data) => api.post('/employees', data),
   update: (id, data) => api.patch(`/employees/${id}`, data),
   delete: (id) => api.delete(`/employees/${id}`),
@@ -183,56 +433,102 @@ export const employeesApi = {
 };
 
 export const locationsApi = {
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { locations: DEMO_LOCATIONS };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/locations${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/locations/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const loc = DEMO_LOCATIONS.find(l => l.id === id);
+      return loc ? { location: loc } : { location: DEMO_LOCATIONS[0] };
+    }
+    return api.get(`/locations/${id}`);
+  },
   create: (data) => api.post('/locations', data),
   update: (id, data) => api.patch(`/locations/${id}`, data),
 };
 
 export const departmentsApi = {
-  list: () => api.get('/departments'),
+  list: async () => {
+    if (DEMO_MODE) {
+      return { departments: DEMO_DEPARTMENTS };
+    }
+    return api.get('/departments');
+  },
   create: (data) => api.post('/departments', data),
   update: (id, data) => api.patch(`/departments/${id}`, data),
 };
 
 export const rolesApi = {
-  list: () => api.get('/roles'),
+  list: async () => {
+    if (DEMO_MODE) {
+      return { roles: DEMO_ROLES };
+    }
+    return api.get('/roles');
+  },
   create: (data) => api.post('/roles', data),
 };
 
 export const skillsApi = {
-  list: () => api.get('/skills'),
+  list: async () => {
+    if (DEMO_MODE) {
+      return { skills: DEMO_SKILLS };
+    }
+    return api.get('/skills');
+  },
   create: (data) => api.post('/skills', data),
 };
 
 export const shiftsApi = {
-  list: (params) => {
+  list: async (params) => {
+    if (DEMO_MODE) {
+      const shifts = generateDemoShifts(getWeekStart());
+      return { shifts };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/shifts${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/shifts/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const shifts = generateDemoShifts(getWeekStart());
+      const shift = shifts.find(s => s.id === id);
+      return shift ? { shift } : { shift: shifts[0] };
+    }
+    return api.get(`/shifts/${id}`);
+  },
   create: (data) => api.post('/shifts', data),
   createBulk: (shifts) => api.post('/shifts/bulk', { shifts }),
   update: (id, data) => api.patch(`/shifts/${id}`, data),
   delete: (id) => api.delete(`/shifts/${id}`),
   assignOpen: (id, employeeId) => api.post(`/shifts/${id}/assign`, { employeeId }),
-  getSwaps: (params = {}) => {
+  getSwaps: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { swaps: DEMO_SHIFT_SWAPS };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/shifts/swaps${query ? `?${query}` : ''}`);
   },
   approveSwap: (id, notes) => api.post(`/shifts/swaps/${id}/approve`, { notes }),
   rejectSwap: (id, notes) => api.post(`/shifts/swaps/${id}/reject`, { notes }),
-  getTemplates: (params = {}) => {
+  getTemplates: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { templates: DEMO_SHIFT_TEMPLATES };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/shift-templates${query ? `?${query}` : ''}`);
   },
   createTemplate: (data) => api.post('/shift-templates', data),
-  generateFromTemplate: (templateId, data) => 
+  updateTemplate: (id, data) => api.put(`/shift-templates/${id}`, data),
+  deleteTemplate: (id) => api.delete(`/shift-templates/${id}`),
+  generateFromTemplate: (templateId, data) =>
     api.post(`/shift-templates/${templateId}/generate`, data),
-  getPeriods: (params = {}) => {
+  getPeriods: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { periods: DEMO_SCHEDULE_PERIODS };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/schedule/periods${query ? `?${query}` : ''}`);
   },
@@ -241,11 +537,18 @@ export const shiftsApi = {
 };
 
 export const timeApi = {
-  getEntries: (params = {}) => {
+  getEntries: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { entries: DEMO_TIME_ENTRIES };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/time/entries${query ? `?${query}` : ''}`);
   },
-  getPending: (params = {}) => {
+  getPending: async (params = {}) => {
+    if (DEMO_MODE) {
+      const pending = DEMO_TIME_ENTRIES.filter(e => !e.approved).slice(0, 8);
+      return { entries: pending };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/time/pending${query ? `?${query}` : ''}`);
   },
@@ -253,41 +556,78 @@ export const timeApi = {
   reject: (id, reason) => api.post(`/time/entries/${id}/reject`, { reason }),
   bulkApprove: (entryIds) => api.post('/time/entries/bulk-approve', { entryIds }),
   adjust: (id, data) => api.patch(`/time/entries/${id}`, data),
+  clockIn: (data) => api.post('/time/clock-in', data),
+  clockOut: (entryId) => api.post(`/time/entries/${entryId}/clock-out`),
+  startBreak: (entryId) => api.post(`/time/entries/${entryId}/break/start`),
+  endBreak: (entryId) => api.post(`/time/entries/${entryId}/break/end`),
 };
 
 export const timeOffApi = {
-  getPolicies: () => api.get('/time-off/policies'),
+  getPolicies: async () => {
+    if (DEMO_MODE) {
+      return { policies: DEMO_TIME_OFF_POLICIES };
+    }
+    return api.get('/time-off/policies');
+  },
   createPolicy: (data) => api.post('/time-off/policies', data),
-  getRequests: (params = {}) => {
+  getRequests: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { requests: DEMO_TIME_OFF_REQUESTS };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/time-off/requests${query ? `?${query}` : ''}`);
   },
   approve: (id, notes) => api.post(`/time-off/requests/${id}/approve`, { notes }),
   reject: (id, notes) => api.post(`/time-off/requests/${id}/reject`, { notes }),
-  getBalances: (employeeId) => api.get(`/time-off/balances?employeeId=${employeeId}`),
+  getBalances: async (employeeId) => {
+    if (DEMO_MODE) {
+      return { balances: DEMO_TIME_OFF_BALANCES };
+    }
+    return api.get(`/time-off/balances?employeeId=${employeeId}`);
+  },
 };
 
 export const dashboardApi = {
-  get: (params = {}) => {
+  get: async (params = {}) => {
+    if (DEMO_MODE) {
+      return DEMO_DASHBOARD;
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/dashboard${query ? `?${query}` : ''}`);
   },
 };
 
 export const reportsApi = {
-  hours: (params) => {
+  hours: async (params) => {
+    if (DEMO_MODE) {
+      return DEMO_HOURS_REPORT;
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/hours?${query}`);
   },
-  attendance: (params) => {
+  attendance: async (params) => {
+    if (DEMO_MODE) {
+      return DEMO_ATTENDANCE_REPORT;
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/attendance?${query}`);
   },
-  laborCost: (params) => {
+  laborCost: async (params) => {
+    if (DEMO_MODE) {
+      return DEMO_LABOR_COST_REPORT;
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/labor-cost?${query}`);
   },
-  coverage: (params) => {
+  coverage: async (params) => {
+    if (DEMO_MODE) {
+      return {
+        summary: { coverageRate: 94, understaffedShifts: 4, overstaffedShifts: 2 },
+        byLocation: DEMO_LOCATIONS.map(l => ({
+          id: l.id, name: l.name, coverage: Math.round(Math.random() * 10 + 90),
+        })),
+      };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/coverage?${query}`);
   },
@@ -302,12 +642,22 @@ export const reportsApi = {
 };
 
 export const organizationApi = {
-  get: () => api.get('/organization'),
+  get: async () => {
+    if (DEMO_MODE) {
+      return { organization: DEMO_ORGANIZATION };
+    }
+    return api.get('/organization');
+  },
   update: (data) => api.patch('/organization', data),
 };
 
 export const brandingApi = {
-  get: () => api.get('/organization/branding'),
+  get: async () => {
+    if (DEMO_MODE) {
+      return { branding: DEMO_BRANDING };
+    }
+    return api.get('/organization/branding');
+  },
   update: (data) => api.put('/organization/branding', data),
   uploadLogo: (file, type) => {
     const formData = new FormData();
@@ -319,33 +669,145 @@ export const brandingApi = {
 };
 
 export const notificationsApi = {
-  list: (unreadOnly = false) => api.get(`/notifications?unreadOnly=${unreadOnly}`),
+  list: async (unreadOnly = false) => {
+    if (DEMO_MODE) {
+      return { notifications: DEMO_NOTIFICATIONS };
+    }
+    return api.get(`/notifications?unreadOnly=${unreadOnly}`);
+  },
   markRead: (id) => api.post(`/notifications/${id}/read`),
   markAllRead: () => api.post('/notifications/read-all'),
 };
 
 export const jobsApi = {
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { jobs: DEMO_OPPORTUNITIES };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/jobs${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/jobs/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const job = DEMO_OPPORTUNITIES.find(j => j.id === id);
+      return job ? { job } : { job: DEMO_OPPORTUNITIES[0] };
+    }
+    return api.get(`/jobs/${id}`);
+  },
   create: (data) => api.post('/jobs', data),
   update: (id, data) => api.patch(`/jobs/${id}`, data),
   apply: (id, data) => api.post(`/jobs/${id}/apply`, data),
 };
 
 export const integrationsApi = {
-  list: () => api.get('/integrations'),
-  get: (id) => api.get(`/integrations/${id}`),
+  list: async () => {
+    if (DEMO_MODE) {
+      return { integrations: DEMO_INTEGRATIONS };
+    }
+    return api.get('/integrations');
+  },
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const integration = DEMO_INTEGRATIONS.find(i => i.id === id);
+      return integration ? { integration } : { integration: DEMO_INTEGRATIONS[0] };
+    }
+    return api.get(`/integrations/${id}`);
+  },
   create: (data) => api.post('/integrations', data),
   update: (id, data) => api.patch(`/integrations/${id}`, data),
   delete: (id) => api.delete(`/integrations/${id}`),
   test: (id) => api.post(`/integrations/${id}/test`),
   sync: (id) => api.post(`/integrations/${id}/sync`),
-  getApiKeys: () => api.get('/integrations/api-keys'),
+  getApiKeys: async () => {
+    if (DEMO_MODE) {
+      return { apiKeys: DEMO_API_KEYS };
+    }
+    return api.get('/integrations/api-keys');
+  },
+  getCustomIntegrations: async () => {
+    if (DEMO_MODE) {
+      return { customIntegrations: DEMO_CUSTOM_INTEGRATIONS };
+    }
+    return api.get('/integrations/custom');
+  },
   createApiKey: (data) => api.post('/integrations/api-keys', data),
   revokeApiKey: (id) => api.delete(`/integrations/api-keys/${id}`),
+};
+
+// Settings API (for Settings page)
+export const settingsApi = {
+  getNavigation: async () => {
+    if (DEMO_MODE) {
+      return { navigation: DEMO_NAVIGATION };
+    }
+    return api.get('/settings/navigation');
+  },
+  updateNavigation: (data) => api.put('/settings/navigation', data),
+  getEmployeeVisibility: async () => {
+    if (DEMO_MODE) {
+      return { visibility: DEMO_EMPLOYEE_VISIBILITY };
+    }
+    return api.get('/settings/employee-visibility');
+  },
+  updateEmployeeVisibility: (data) => api.put('/settings/employee-visibility', data),
+  getUsers: async () => {
+    if (DEMO_MODE) {
+      return { users: DEMO_USERS };
+    }
+    return api.get('/users');
+  },
+  getSessions: async () => {
+    if (DEMO_MODE) {
+      return { sessions: DEMO_SESSIONS };
+    }
+    return api.get('/users/me/sessions');
+  },
+  getWebhooks: async () => {
+    if (DEMO_MODE) {
+      return { webhooks: DEMO_WEBHOOKS };
+    }
+    return api.get('/webhooks');
+  },
+  createWebhook: (data) => api.post('/webhooks', data),
+  deleteWebhook: (id) => api.delete(`/webhooks/${id}`),
+};
+
+// Activity API
+export const activityApi = {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { activities: DEMO_ACTIVITIES };
+    }
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/activity${query ? `?${query}` : ''}`);
+  },
+};
+
+// Career API
+export const careerApi = {
+  getPaths: async () => {
+    if (DEMO_MODE) {
+      return DEMO_CAREER;
+    }
+    return api.get('/career/paths');
+  },
+  getInsights: async () => {
+    if (DEMO_MODE) {
+      return { insights: DEMO_CAREER.insights };
+    }
+    return api.get('/career/insights');
+  },
+};
+
+// Bulk Import API
+export const bulkImportApi = {
+  getTemplates: async () => {
+    if (DEMO_MODE) {
+      return { templates: DEMO_IMPORT_TEMPLATES };
+    }
+    return api.get('/import/templates');
+  },
+  upload: (formData) => api.upload('/import/upload', formData),
 };
 
 export default api;

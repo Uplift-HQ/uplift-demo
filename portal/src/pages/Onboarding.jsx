@@ -5,7 +5,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useToast } from '../components/ToastProvider';
 import {
   employeesApi,
   departmentsApi,
@@ -34,15 +35,15 @@ import {
 } from 'lucide-react';
 
 const STEPS = [
-  { id: 1, label: 'Employee Details', icon: User },
-  { id: 2, label: 'Role & Department', icon: Briefcase },
-  { id: 3, label: 'Skills & Certs', icon: Award },
-  { id: 4, label: 'Availability', icon: CalendarClock },
-  { id: 5, label: 'Invitation', icon: Send },
+  { id: 1, labelKey: 'onboarding.steps.employeeDetails', icon: User },
+  { id: 2, labelKey: 'onboarding.steps.roleDepartment', icon: Briefcase },
+  { id: 3, labelKey: 'onboarding.steps.skillsCerts', icon: Award },
+  { id: 4, labelKey: 'onboarding.steps.availability', icon: CalendarClock },
+  { id: 5, labelKey: 'onboarding.steps.invitation', icon: Send },
 ];
 
-const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const SHIFT_TIMES = ['Morning', 'Afternoon', 'Evening', 'Night'];
+const DAYS_KEYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+const SHIFT_TIMES_KEYS = ['morning', 'afternoon', 'evening', 'night'];
 const PROFICIENCY_LEVELS = ['beginner', 'intermediate', 'advanced'];
 const EMPLOYMENT_TYPES = ['full-time', 'part-time', 'casual', 'contractor'];
 
@@ -53,8 +54,25 @@ function generateEmployeeId() {
 // ============================================================
 // STEP 1: Employee Details
 // ============================================================
-function StepEmployeeDetails({ data, onChange, errors }) {
+function StepEmployeeDetails({ data, onChange, errors, employees }) {
   const update = (field, value) => onChange({ ...data, [field]: value });
+  const [emailWarning, setEmailWarning] = useState('');
+
+  const handleEmailBlur = () => {
+    const email = (data.email || '').trim().toLowerCase();
+    if (email && employees && employees.length > 0) {
+      const match = employees.find(
+        (emp) => (emp.email || '').toLowerCase() === email
+      );
+      if (match) {
+        setEmailWarning(`An employee with this email already exists (${match.first_name} ${match.last_name}).`);
+      } else {
+        setEmailWarning('');
+      }
+    } else {
+      setEmailWarning('');
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -97,13 +115,20 @@ function StepEmployeeDetails({ data, onChange, errors }) {
           <input
             type="email"
             value={data.email || ''}
-            onChange={(e) => update('email', e.target.value)}
+            onChange={(e) => { update('email', e.target.value); setEmailWarning(''); }}
+            onBlur={handleEmailBlur}
             className={`w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 ${
               errors.email ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
             placeholder="e.g. john.smith@company.com"
           />
           {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+          {emailWarning && !errors.email && (
+            <p className="mt-1 text-xs text-amber-600 flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" />
+              {emailWarning}
+            </p>
+          )}
         </div>
 
         <div>
@@ -440,6 +465,7 @@ function StepSkillsCertifications({ data, onChange, availableSkills }) {
 // STEP 4: Availability & Preferences
 // ============================================================
 function StepAvailability({ data, onChange }) {
+  const { t } = useTranslation();
   const update = (field, value) => onChange({ ...data, [field]: value });
   const daysAvailable = data.daysAvailable || [];
   const preferredShifts = data.preferredShifts || [];
@@ -463,52 +489,52 @@ function StepAvailability({ data, onChange }) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-1">Availability & Preferences</h3>
-        <p className="text-sm text-slate-500">Set the employee's availability and scheduling preferences.</p>
+        <h3 className="text-lg font-semibold text-slate-900 mb-1">{t('onboarding.availabilityTitle', 'Availability & Preferences')}</h3>
+        <p className="text-sm text-slate-500">{t('onboarding.availabilityDesc', "Set the employee's availability and scheduling preferences.")}</p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-2">Days Available</label>
+        <label className="block text-sm font-medium text-slate-700 mb-2">{t('onboarding.daysAvailable', 'Days Available')}</label>
         <div className="flex flex-wrap gap-2">
-          {DAYS.map((day) => (
+          {DAYS_KEYS.map((dayKey) => (
             <button
-              key={day}
+              key={dayKey}
               type="button"
-              onClick={() => toggleDay(day)}
+              onClick={() => toggleDay(dayKey)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                daysAvailable.includes(day)
+                daysAvailable.includes(dayKey)
                   ? 'bg-momentum-500 text-white'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
-              {day.slice(0, 3)}
+              {t(`common.days.${dayKey}Short`)}
             </button>
           ))}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-2">Preferred Shift Times</label>
+        <label className="block text-sm font-medium text-slate-700 mb-2">{t('onboarding.preferredShiftTimes', 'Preferred Shift Times')}</label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {SHIFT_TIMES.map((shift) => (
+          {SHIFT_TIMES_KEYS.map((shiftKey) => (
             <button
-              key={shift}
+              key={shiftKey}
               type="button"
-              onClick={() => toggleShift(shift)}
+              onClick={() => toggleShift(shiftKey)}
               className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors border ${
-                preferredShifts.includes(shift)
+                preferredShifts.includes(shiftKey)
                   ? 'bg-momentum-50 border-momentum-500 text-momentum-700'
                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
               }`}
             >
-              {shift}
+              {t(`common.shifts.${shiftKey}`)}
             </button>
           ))}
         </div>
       </div>
 
       <div className="max-w-xs">
-        <label className="block text-sm font-medium text-slate-700 mb-1">Max Hours Per Week</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.maxHoursPerWeek', 'Max Hours Per Week')}</label>
         <input
           type="number"
           min="0"
@@ -698,6 +724,7 @@ function SuccessState({ formData, onViewEmployee, onOnboardAnother }) {
 export default function Onboarding() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const toast = useToast();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
@@ -824,14 +851,18 @@ export default function Onboarding() {
       await employeesApi.create(payload);
       if (inviteSettings.sendEmail) {
         try {
-          await authApi.inviteUser({
+          const invitePayload = {
             email: formData.email,
             firstName: formData.firstName,
             lastName: formData.lastName,
             role: 'worker',
-          });
+          };
+          if (inviteSettings.setPassword && inviteSettings.temporaryPassword) {
+            invitePayload.temporaryPassword = inviteSettings.temporaryPassword;
+          }
+          await authApi.inviteUser(invitePayload);
         } catch {
-          // Invitation failed but employee was created
+          toast.warning('Employee created but invitation email failed to send. You can resend from the Employees page.');
         }
       }
       setFormData({ ...formData, employeeId });
@@ -887,7 +918,10 @@ export default function Onboarding() {
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-slate-900">{t('nav.onboarding', 'Employee Onboarding')}</h1>
-        <p className="text-slate-500 mt-1">Add a new employee and invite them to the Uplift app.</p>
+        <p className="text-slate-500 mt-1">
+          Add a new employee and invite them to the Uplift app.
+          {' '}<Link to="/bulk-import" className="text-momentum-600 hover:text-momentum-700 text-sm font-medium">Need to add many employees? Use Bulk Import</Link>
+        </p>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-slate-200">
@@ -917,7 +951,7 @@ export default function Onboarding() {
                         isActive ? 'text-momentum-600' : isDone ? 'text-green-600' : 'text-slate-400'
                       }`}
                     >
-                      {step.label}
+                      {t(step.labelKey)}
                     </span>
                   </div>
                   {idx < STEPS.length - 1 && (
@@ -948,7 +982,7 @@ export default function Onboarding() {
 
         {/* Step content */}
         <div className="p-6">
-          {currentStep === 1 && <StepEmployeeDetails data={formData} onChange={setFormData} errors={errors} />}
+          {currentStep === 1 && <StepEmployeeDetails data={formData} onChange={setFormData} errors={errors} employees={employees} />}
           {currentStep === 2 && (
             <StepRoleDepartment
               data={formData} onChange={setFormData} errors={errors}

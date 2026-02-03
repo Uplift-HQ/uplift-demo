@@ -4,7 +4,7 @@
 // ============================================================
 
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth, RequireAuth } from './lib/auth';
+import { useAuth, RequireAuth, RequireAdmin } from './lib/auth';
 
 // Layout
 import Layout from './components/Layout';
@@ -29,6 +29,7 @@ import Settings from './pages/Settings';
 import NotificationSettings from './pages/NotificationSettings';
 import Activity from './pages/Activity';
 import Onboarding from './pages/Onboarding';
+import OrgOnboarding from './pages/OrgOnboarding';
 
 // Legal pages
 import TermsOfService from './pages/TermsOfService';
@@ -70,6 +71,7 @@ export default function App() {
         <Route path="/employees" element={<Employees />} />
         <Route path="/employees/:id" element={<EmployeeDetail />} />
         <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/org-onboarding" element={<RequireAdmin><OrgOnboarding /></RequireAdmin>} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/shift-templates" element={<ShiftTemplates />} />
         <Route path="/time-tracking" element={<TimeTracking />} />

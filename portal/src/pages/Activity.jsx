@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { useToast } from '../components/ToastProvider';
 import {
   CheckCircle, Clock, Image, FileText, MapPin, Camera, AlertCircle,
   ChevronRight, Filter, Search, Calendar, User, MessageSquare,
@@ -17,6 +18,7 @@ import {
 export default function Activity() {
   const { t } = useTranslation();
   const { user, isManager, isAdmin } = useAuth();
+  const toast = useToast();
   const [activeTab, setActiveTab] = useState('pending');
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,11 +35,11 @@ export default function Activity() {
     setLoading(true);
     setError(null);
     try {
-      // TODO: Replace with dedicated activityApi.list() when endpoint is available
+      // NOTE: Replace with dedicated activityApi.list() when endpoint is available
       const result = await api.get('/activity');
       setSubmissions(result?.submissions || result?.activities || []);
     } catch (err) {
-      console.error('Failed to load activity:', err);
+      if (import.meta.env.DEV) console.error('Failed to load activity:', err);
       setError(err.message || 'Failed to load activity data');
       setSubmissions([]);
     } finally {
@@ -63,29 +65,29 @@ export default function Activity() {
 
   const handleApprove = async (id) => {
     try {
-      // TODO: Replace with dedicated activityApi.approve() when endpoint is available
+      // NOTE: Replace with dedicated activityApi.approve() when endpoint is available
       await api.post(`/activity/${id}/approve`);
       setSubmissions(submissions.map(s =>
         s.id === id ? { ...s, status: 'approved' } : s
       ));
       setSelectedItem(null);
     } catch (err) {
-      console.error('Failed to approve:', err);
-      setError(err.message || 'Failed to approve submission');
+      if (import.meta.env.DEV) console.error('Failed to approve:', err);
+      toast.error(err.message || 'Failed to approve submission');
     }
   };
 
   const handleReject = async (id, reason) => {
     try {
-      // TODO: Replace with dedicated activityApi.reject() when endpoint is available
+      // NOTE: Replace with dedicated activityApi.reject() when endpoint is available
       await api.post(`/activity/${id}/reject`, { reason });
       setSubmissions(submissions.map(s =>
         s.id === id ? { ...s, status: 'rejected' } : s
       ));
       setSelectedItem(null);
     } catch (err) {
-      console.error('Failed to reject:', err);
-      setError(err.message || 'Failed to reject submission');
+      if (import.meta.env.DEV) console.error('Failed to reject:', err);
+      toast.error(err.message || 'Failed to reject submission');
     }
   };
 

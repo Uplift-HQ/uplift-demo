@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { brandingApi } from '../lib/api';
 import { useBranding } from '../lib/branding';
+import { useToast } from '../components/ToastProvider';
 
 // Tab configuration - names will be translated in the component
 const TABS = [
@@ -35,6 +36,7 @@ const TABS = [
 export default function Settings() {
   const { t } = useTranslation();
   const { user, isAdmin, logout } = useAuth();
+  const toast = useToast();
   const [activeTab, setActiveTab] = useState(isAdmin ? 'organization' : 'account');
   const [organization, setOrganization] = useState(null);
   const [users, setUsers] = useState([]);
@@ -67,7 +69,8 @@ export default function Settings() {
         setSessions(result?.sessions || []);
       }
     } catch (error) {
-      console.error('Failed to load settings:', error);
+      if (import.meta.env.DEV) console.error('Failed to load settings:', error);
+      toast.error('Failed to load settings');
     } finally {
       setLoading(false);
     }
@@ -206,6 +209,7 @@ export default function Settings() {
 
 function OrganizationSettings({ organization, onSave }) {
   const { t } = useTranslation();
+  const toast = useToast();
   const [form, setForm] = useState({
     name: organization?.name || '',
     timezone: organization?.timezone || 'Europe/London',
@@ -222,7 +226,8 @@ function OrganizationSettings({ organization, onSave }) {
       await organizationApi.update(form);
       onSave();
     } catch (error) {
-      console.error('Failed to save:', error);
+      if (import.meta.env.DEV) console.error('Failed to save:', error);
+      toast.error('Failed to save organization settings');
     } finally {
       setSaving(false);
     }
@@ -280,8 +285,8 @@ function OrganizationSettings({ organization, onSave }) {
               onChange={e => setForm({ ...form, weekStartsOn: e.target.value })}
               className="input"
             >
-              <option value="monday">Monday</option>
-              <option value="sunday">Sunday</option>
+              <option value="monday">{t('settings.monday')}</option>
+              <option value="sunday">{t('settings.sunday')}</option>
             </select>
           </div>
         </div>
@@ -456,7 +461,7 @@ function BrandingSettings({ organization, showMsg }) {
               </div>
             ))}
           </div>
-          <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-lg shadow-lg shadow-orange-200 hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all">
+          <button onClick={() => window.open('mailto:sales@uplift.hr')} className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-lg shadow-lg shadow-orange-200 hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all">
             Contact Sales
           </button>
         </div>
@@ -835,6 +840,7 @@ function UsersSettings({ users, onRefresh, showMsg, onInvite, onViewUser }) {
 // ============================================================
 
 function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
+  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [sessions, setSessions] = useState([]);
   const [activity, setActivity] = useState([]);
@@ -853,7 +859,8 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
       setSessions(sessResult.sessions || []);
       setActivity(actResult.activities || []);
     } catch (error) {
-      console.error('Failed to load user data:', error);
+      if (import.meta.env.DEV) console.error('Failed to load user data:', error);
+      toast.error('Failed to load user data');
     }
   };
 
@@ -990,9 +997,9 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
                     className="input mt-1"
                     disabled={loading}
                   >
-                    <option value="worker">Worker</option>
-                    <option value="manager">Manager</option>
-                    <option value="admin">Admin</option>
+                    <option value="worker">{t('settings.worker')}</option>
+                    <option value="manager">{t('settings.manager')}</option>
+                    <option value="admin">{t('settings.admin')}</option>
                   </select>
                 </div>
                 <div>
@@ -1122,9 +1129,9 @@ function InviteUserModal({ onClose, onSuccess }) {
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Role</label>
             <select value={form.role} onChange={e => setForm({...form, role: e.target.value})} className="input">
-              <option value="worker">Worker</option>
-              <option value="manager">Manager</option>
-              <option value="admin">Admin</option>
+              <option value="worker">{t('settings.worker')}</option>
+              <option value="manager">{t('settings.manager')}</option>
+              <option value="admin">{t('settings.admin')}</option>
             </select>
           </div>
           <div className="flex justify-end gap-3 pt-4">
@@ -1489,7 +1496,7 @@ function WebhooksSettings({ showMsg }) {
 
   const loadWebhooks = async () => {
     try {
-      // TODO: Replace with webhooksApi.list() when available
+      // NOTE: Replace with webhooksApi.list() when available
       const result = await api.get('/webhooks');
       setWebhooks(result?.webhooks || []);
     } catch (error) {
@@ -1503,7 +1510,7 @@ function WebhooksSettings({ showMsg }) {
     const webhook = webhooks.find(w => w.id === id);
     if (!webhook) return;
     try {
-      // TODO: Replace with webhooksApi.update() when available
+      // NOTE: Replace with webhooksApi.update() when available
       await api.patch(`/webhooks/${id}`, { active: !webhook.active });
       setWebhooks(webhooks.map(w =>
         w.id === id ? { ...w, active: !w.active } : w
@@ -1515,7 +1522,7 @@ function WebhooksSettings({ showMsg }) {
 
   const deleteWebhook = async (id) => {
     try {
-      // TODO: Replace with webhooksApi.delete() when available
+      // NOTE: Replace with webhooksApi.delete() when available
       await api.delete(`/webhooks/${id}`);
       setWebhooks(webhooks.filter(w => w.id !== id));
     } catch (error) {
@@ -1678,7 +1685,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
     }
     setLoading(true);
     try {
-      // TODO: Replace with webhooksApi.create() when available
+      // NOTE: Replace with webhooksApi.create() when available
       const result = await api.post('/webhooks', form);
       onSuccess(result?.webhook || { ...form, id: Date.now(), active: true });
     } catch (err) {
@@ -1783,6 +1790,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
 }
 
 function WebhookDetailModal({ webhook, onClose }) {
+  const toast = useToast();
   const [copied, setCopied] = useState(false);
   const [deliveryLogs, setDeliveryLogs] = useState([]);
   const [stats, setStats] = useState(null);
@@ -1794,12 +1802,13 @@ function WebhookDetailModal({ webhook, onClose }) {
 
   const loadDeliveryLogs = async () => {
     try {
-      // TODO: Replace with webhooksApi.getDeliveries() when available
+      // NOTE: Replace with webhooksApi.getDeliveries() when available
       const result = await api.get(`/webhooks/${webhook.id}/deliveries`);
       setDeliveryLogs(result?.deliveries || []);
       setStats(result?.stats || null);
     } catch (error) {
-      console.error('Failed to load delivery logs:', error);
+      if (import.meta.env.DEV) console.error('Failed to load delivery logs:', error);
+      toast.error('Failed to load delivery logs');
     } finally {
       setLoadingLogs(false);
     }
@@ -1932,7 +1941,7 @@ function NavigationSettings({ showMsg }) {
 
   const loadNavigationSettings = async () => {
     try {
-      // TODO: Replace with organizationApi.getNavigation() when available
+      // NOTE: Replace with organizationApi.getNavigation() when available
       const result = await api.get('/organization/navigation');
       setPages(result?.pages || []);
       setRoleVisibility(result?.roleVisibility || {});
@@ -1956,7 +1965,7 @@ function NavigationSettings({ showMsg }) {
     const newVisibility = { ...roleVisibility, [role]: newPages };
 
     try {
-      // TODO: Replace with organizationApi.updateNavigation() when available
+      // NOTE: Replace with organizationApi.updateNavigation() when available
       await api.put('/organization/navigation', { roleVisibility: newVisibility });
       setRoleVisibility(newVisibility);
     } catch (error) {
@@ -2065,7 +2074,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
 
   const loadEmployees = async () => {
     try {
-      // TODO: Replace with employeesApi.listWithVisibility() when available
+      // NOTE: Replace with employeesApi.listWithVisibility() when available
       const result = await api.get('/employees?include=visibility');
       setEmployees(result?.employees || []);
     } catch (error) {
@@ -2088,7 +2097,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
     if (!emp) return;
     const newVisibility = { ...emp.visibility, [feature]: !emp.visibility[feature] };
     try {
-      // TODO: Replace with employeesApi.updateVisibility() when available
+      // NOTE: Replace with employeesApi.updateVisibility() when available
       await api.put(`/employees/${empId}/visibility`, newVisibility);
       setEmployees(prev => prev.map(e =>
         e.id === empId ? { ...e, visibility: newVisibility } : e
@@ -2102,7 +2111,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
     const newVisibility = {};
     visibilityFeatures.forEach(f => { newVisibility[f.id] = enabled; });
     try {
-      // TODO: Replace with employeesApi.updateVisibility() when available
+      // NOTE: Replace with employeesApi.updateVisibility() when available
       await api.put(`/employees/${empId}/visibility`, newVisibility);
       setEmployees(prev => prev.map(e =>
         e.id === empId ? { ...e, visibility: newVisibility } : e
@@ -2298,7 +2307,7 @@ function AccentColorPicker({ showMsg }) {
     setSelectedColor(color);
     localStorage.setItem('uplift-accent-color', color);
     try {
-      // TODO: Replace with organizationApi.updateAccentColor() or user preferences API when available
+      // NOTE: Replace with organizationApi.updateAccentColor() or user preferences API when available
       await api.put('/users/me/preferences', { accentColor: color });
     } catch (error) {
       showMsg('Failed to save accent color', 'error');
@@ -2340,10 +2349,8 @@ function PrivacySettings({ user, showMsg, logout }) {
   const exportData = async () => {
     setExporting(true);
     try {
-      const response = await fetch('/api/users/me/data-export', {
-        credentials: 'include',
-      });
-      const blob = await response.blob();
+      const data = await api.get('/users/me/data-export');
+      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;

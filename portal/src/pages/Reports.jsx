@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { reportsApi, locationsApi, api } from '../lib/api';
+import { reportsApi, locationsApi } from '../lib/api';
 import {
   BarChart3,
   Download,
@@ -40,10 +40,10 @@ const REPORTS = [
 ];
 
 const CHART_TYPES = [
-  { id: 'table', name: 'Table', icon: Table },
-  { id: 'bar', name: 'Bar Chart', icon: BarChart3 },
-  { id: 'line', name: 'Line Chart', icon: LineChart },
-  { id: 'pie', name: 'Pie Chart', icon: PieChart },
+  { id: 'table', nameKey: 'reports.chartTypes.table', icon: Table },
+  { id: 'bar', nameKey: 'reports.chartTypes.bar', icon: BarChart3 },
+  { id: 'line', nameKey: 'reports.chartTypes.line', icon: LineChart },
+  { id: 'pie', nameKey: 'reports.chartTypes.pie', icon: PieChart },
 ];
 
 export default function Reports() {
@@ -78,19 +78,14 @@ export default function Reports() {
       const result = await locationsApi.list();
       setLocations(result?.locations || []);
     } catch (err) {
-      console.error('Failed to load locations:', err);
+      if (import.meta.env.DEV) console.error('Failed to load locations:', err);
       setLocations([]);
     }
   };
 
   const loadSavedReports = async () => {
-    try {
-      // TODO: Replace with reportsApi.getSaved() when endpoint is available
-      const result = await api.get('/reports/saved');
-      setSavedReports(result?.reports || []);
-    } catch {
-      setSavedReports([]);
-    }
+    // Saved reports endpoint not yet available
+    setSavedReports([]);
   };
 
   const loadReport = async () => {
@@ -116,7 +111,7 @@ export default function Reports() {
       setData(result?.data || []);
       setTotals(result?.totals || null);
     } catch (err) {
-      console.error('Failed to load report:', err);
+      if (import.meta.env.DEV) console.error('Failed to load report:', err);
       setError(err.message || 'Failed to load report data');
       setData([]);
       setTotals(null);
@@ -136,16 +131,9 @@ export default function Reports() {
   };
 
   const handleSaveReport = async (report) => {
-    try {
-      // TODO: Replace with reportsApi.saveReport() when endpoint is available
-      const result = await api.post('/reports/saved', report);
-      setSavedReports([...savedReports, result.report || { ...report, id: String(Date.now()) }]);
-      setShowReportBuilder(false);
-    } catch (err) {
-      console.error('Failed to save report:', err);
-      // Show error inline in modal - handled by the modal component
-      throw err;
-    }
+    // Saved reports feature not yet available on the backend
+    setSavedReports([...savedReports, { ...report, id: String(Date.now()) }]);
+    setShowReportBuilder(false);
   };
 
   // Quick date range presets
@@ -200,7 +188,7 @@ export default function Reports() {
       )}
 
       {/* Saved Reports */}
-      {savedReports.length > 0 && (
+      {savedReports.length > 0 ? (
         <div className="card p-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-medium text-slate-900">{t('reports.savedReports', 'Saved Reports')}</h3>
@@ -217,8 +205,9 @@ export default function Reports() {
               </button>
             ))}
           </div>
+          <p className="text-xs text-slate-400 mt-2">Saved reports are stored locally. Persistent saved reports coming soon.</p>
         </div>
-      )}
+      ) : null}
 
       {/* Report Type Selector */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -298,7 +287,7 @@ export default function Reports() {
               onChange={(e) => setFilters({ ...filters, locationId: e.target.value })}
               className="input"
             >
-              <option value="">{t('reports.allLocations', 'All Locations')}</option>
+              <option value="">{t('reports.allLocations', t('reports.allLocations'))}</option>
               {(locations || []).map((l) => (
                 <option key={l.id} value={l.id}>{l.name}</option>
               ))}
@@ -330,7 +319,7 @@ export default function Reports() {
                   className={`p-2 rounded-md transition-colors ${
                     chartType === type.id ? 'bg-white shadow-sm' : 'hover:bg-slate-200'
                   }`}
-                  title={type.name}
+                  title={t(type.nameKey)}
                 >
                   <type.icon className={`w-4 h-4 ${chartType === type.id ? 'text-momentum-600' : 'text-slate-500'}`} />
                 </button>
@@ -571,29 +560,29 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
 
   const availableColumns = {
     hours: [
-      { id: 'employee', name: 'Employee Name' },
-      { id: 'total_hours', name: 'Total Hours' },
-      { id: 'regular_hours', name: 'Regular Hours' },
-      { id: 'overtime_hours', name: 'Overtime Hours' },
-      { id: 'labor_cost', name: 'Labor Cost' },
-      { id: 'location', name: 'Location' },
-      { id: 'department', name: 'Department' },
+      { id: 'employee', nameKey: 'reports.columns.employeeName' },
+      { id: 'total_hours', nameKey: 'reports.columns.totalHours' },
+      { id: 'regular_hours', nameKey: 'reports.columns.regularHours' },
+      { id: 'overtime_hours', nameKey: 'reports.columns.overtimeHours' },
+      { id: 'labor_cost', nameKey: 'reports.columns.laborCost' },
+      { id: 'location', nameKey: 'reports.columns.location' },
+      { id: 'department', nameKey: 'reports.columns.department' },
     ],
     attendance: [
-      { id: 'employee', name: 'Employee Name' },
-      { id: 'scheduled_shifts', name: 'Scheduled Shifts' },
-      { id: 'worked_shifts', name: 'Worked Shifts' },
-      { id: 'missed_shifts', name: 'Missed Shifts' },
-      { id: 'late_arrivals', name: 'Late Arrivals' },
-      { id: 'avg_arrival_diff', name: 'Avg Arrival Diff' },
+      { id: 'employee', nameKey: 'reports.columns.employeeName' },
+      { id: 'scheduled_shifts', nameKey: 'reports.columns.scheduledShifts' },
+      { id: 'worked_shifts', nameKey: 'reports.columns.workedShifts' },
+      { id: 'missed_shifts', nameKey: 'reports.columns.missedShifts' },
+      { id: 'late_arrivals', nameKey: 'reports.columns.lateArrivals' },
+      { id: 'avg_arrival_diff', nameKey: 'reports.columns.avgArrivalDiff' },
     ],
     coverage: [
-      { id: 'date', name: 'Date' },
-      { id: 'location', name: 'Location' },
-      { id: 'total_shifts', name: 'Total Shifts' },
-      { id: 'filled_shifts', name: 'Filled Shifts' },
-      { id: 'open_shifts', name: 'Open Shifts' },
-      { id: 'fill_rate', name: 'Fill Rate' },
+      { id: 'date', nameKey: 'reports.columns.date' },
+      { id: 'location', nameKey: 'reports.columns.location' },
+      { id: 'total_shifts', nameKey: 'reports.columns.totalShifts' },
+      { id: 'filled_shifts', nameKey: 'reports.columns.filledShifts' },
+      { id: 'open_shifts', nameKey: 'reports.columns.openShifts' },
+      { id: 'fill_rate', nameKey: 'reports.columns.fillRate' },
     ],
   };
 
@@ -686,7 +675,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
-                      {col.name}
+                      {t(col.nameKey)}
                     </button>
                   ))}
                 </div>
@@ -700,11 +689,11 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                     onChange={(e) => setReport({ ...report, groupBy: e.target.value })}
                     className="input"
                   >
-                    <option value="employee">Employee</option>
-                    <option value="location">Location</option>
-                    <option value="department">Department</option>
-                    <option value="day">Day</option>
-                    <option value="week">Week</option>
+                    <option value="employee">{t('reports.employee')}</option>
+                    <option value="location">{t('reports.location')}</option>
+                    <option value="department">{t('reports.department')}</option>
+                    <option value="day">{t('common.day')}</option>
+                    <option value="week">{t('common.week')}</option>
                   </select>
                 </div>
                 <div>
@@ -729,9 +718,9 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                 <label className="block text-sm font-medium text-slate-700 mb-2">Filters</label>
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm text-slate-600">Location</label>
+                    <label className="text-sm text-slate-600">{t('reports.location')}</label>
                     <select className="input mt-1">
-                      <option value="">All Locations</option>
+                      <option value="">{t('reports.allLocations')}</option>
                       {(locations || []).map((l) => (
                         <option key={l.id} value={l.id}>{l.name}</option>
                       ))}
@@ -803,9 +792,9 @@ function HoursTable({ data, groupBy }) {
       <thead>
         <tr>
           <th>{groupBy === 'employee' ? 'Employee' : groupBy === 'location' ? 'Location' : 'Date'}</th>
-          <th className="text-right">Total Hours</th>
+          <th className="text-right">{t('reports.totalHours')}</th>
           <th className="text-right">Regular</th>
-          <th className="text-right">Overtime</th>
+          <th className="text-right">{t('reports.overtime')}</th>
           {groupBy === 'employee' && <th className="text-right">Labor Cost</th>}
         </tr>
       </thead>
@@ -837,7 +826,7 @@ function AttendanceTable({ data }) {
     <table className="table">
       <thead>
         <tr>
-          <th>Employee</th>
+          <th>{t('reports.employee')}</th>
           <th className="text-right">Scheduled</th>
           <th className="text-right">Worked</th>
           <th className="text-right">Missed</th>
@@ -876,7 +865,7 @@ function LaborCostTable({ data }) {
     <table className="table">
       <thead>
         <tr>
-          <th>Period</th>
+          <th>{t('reports.period')}</th>
           <th className="text-right">Employees</th>
           <th className="text-right">Hours</th>
           <th className="text-right">Regular Cost</th>
@@ -905,8 +894,8 @@ function CoverageTable({ data }) {
     <table className="table">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Location</th>
+          <th>{t('reports.date')}</th>
+          <th>{t('reports.location')}</th>
           <th className="text-right">Total Shifts</th>
           <th className="text-right">Filled</th>
           <th className="text-right">Open</th>

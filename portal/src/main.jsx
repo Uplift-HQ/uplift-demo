@@ -5,6 +5,7 @@ import App from './App';
 import { AuthProvider } from './lib/auth';
 import { BrandingProvider } from './lib/branding';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { ToastProvider } from './components/ToastProvider';
 import './i18n';
 import './styles/index.css';
 
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <AuthProvider>
           <BrandingProvider>
-            <App />
+            <ToastProvider>
+              <App />
+            </ToastProvider>
           </BrandingProvider>
         </AuthProvider>
       </BrowserRouter>

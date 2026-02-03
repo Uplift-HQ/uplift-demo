@@ -54,7 +54,6 @@
     "viewMyCareer": "عرض مساري المهني",
     "timeOffBalance": "رصيد الإجازات"
   },
-
   "nav": {
     "dashboard": "لوحة التحكم",
     "employees": "الموظفون",
@@ -150,7 +149,20 @@
     "active": "نشط",
     "inactive": "غير نشط",
     "enabled": "مفعل",
-    "disabled": "معطل"
+    "disabled": "معطل",
+    "approveSelected": "الموافقة على المحددة",
+    "rejectSelected": "رفض المحددة",
+    "clearSelection": "مسح",
+    "showing": "عرض",
+    "of": "من",
+    "page": "صفحة",
+    "previous": "السابق",
+    "terminated": "منتهي",
+    "sunday": "أحد",
+    "monday": "إثن",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
   "auth": {
     "login": "تسجيل الدخول",
@@ -177,9 +189,6 @@
     "requestAccessMsg": "للحصول على صلاحية الوصول إلى Uplift، يرجى التواصل مع مديرك أو قسم الموارد البشرية. سيرسلون لك رابط دعوة.",
     "enterEmailPassword": "يرجى إدخال البريد الإلكتروني وكلمة المرور",
     "loginFailed": "فشل تسجيل الدخول",
-    "demoAccounts": "حسابات تجريبية:",
-    "demoWorker": "موظف: worker@uplift.work / Demo123!",
-    "demoManager": "مدير: manager@uplift.work / Demo123!",
     "twoFactorAuth": "المصادقة الثنائية",
     "enterMfaCode": "أدخل الرمز من تطبيق المصادقة",
     "verificationCode": "رمز التحقق",
@@ -193,7 +202,15 @@
     "invalidCode": "رمز غير صالح",
     "allRightsReserved": "جميع الحقوق محفوظة",
     "termsOfService": "شروط الخدمة",
-    "privacyPolicy": "سياسة الخصوصية"
+    "privacyPolicy": "سياسة الخصوصية",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
   "navigation": {
     "home": "الرئيسية",
@@ -289,7 +306,21 @@
     "yourShift": "ورديتك",
     "theirShift": "ورديتهم",
     "sendRequest": "إرسال الطلب",
-    "cancelSwap": "إلغاء التبديل"
+    "cancelSwap": "إلغاء التبديل",
+    "allLocations": "جميع المواقع",
+    "tuesday": "ثل",
+    "wednesday": "أر",
+    "thursday": "خم",
+    "friday": "جم",
+    "saturday": "سب",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
   "timeTracking": {
     "title": "تتبع الوقت",
@@ -321,7 +352,24 @@
     "tapToClockIn": "انقر لتسجيل الحضور",
     "onBreakSince": "في استراحة منذ {{time}}",
     "workingSince": "في العمل منذ {{time}}",
-    "shiftEnded": "انتهت الوردية"
+    "shiftEnded": "انتهت الوردية",
+    "entriesApproved": "تمت الموافقة على {{count}} إدخالات",
+    "approveError": "فشلت الموافقة على الإدخالات. يرجى المحاولة مرة أخرى.",
+    "entriesRejected": "تم رفض {{count}} إدخالات",
+    "rejectError": "فشل رفض الإدخالات. يرجى المحاولة مرة أخرى.",
+    "clockInError": "فشل تسجيل الحضور. يرجى المحاولة مرة أخرى.",
+    "clockOutError": "فشل تسجيل الانصراف. يرجى المحاولة مرة أخرى.",
+    "breakError": "فشل تحديث حالة الاستراحة. يرجى المحاولة مرة أخرى.",
+    "noPending": "لا توجد إدخالات معلقة للمراجعة",
+    "noEntries": "لا توجد إدخالات وقت",
+    "history": "السجل",
+    "managerSubtitle": "مراجعة والموافقة على كشوف الحضور",
+    "employeeSubtitle": "تتبع ساعات عملك",
+    "clockIn": "تسجيل الحضور",
+    "clockOut": "تسجيل الانصراف",
+    "startBreak": "بدء الاستراحة",
+    "endBreak": "إنهاء الاستراحة",
+    "totalHours": "إجمالي الساعات"
   },
   "timeOff": {
     "title": "الإجازات",
@@ -353,7 +401,15 @@
     "selectDates": "اختر التواريخ",
     "selectType": "اختر النوع",
     "addNotes": "إضافة ملاحظات (اختياري)",
-    "reviewRequest": "مراجعة الطلب"
+    "reviewRequest": "مراجعة الطلب",
+    "oneDay": "يوم واحد",
+    "days": "أيام",
+    "dates": "التواريخ",
+    "duration": "المدة",
+    "noRequests": "لا توجد طلبات",
+    "requestDetails": "تفاصيل طلب الإجازة",
+    "noReason": "لم يتم تقديم سبب",
+    "submitted": "تم الإرسال"
   },
   "feed": {
     "title": "الأخبار",
@@ -726,7 +782,22 @@
     "featureAccess": "الوصول للميزات",
     "enableAll": "تفعيل الكل",
     "disableAll": "تعطيل الكل",
-    "aboutEmployeeVisibility": "تتحكم هذه الإعدادات في الميزات المرئية لكل موظف."
+    "aboutEmployeeVisibility": "تتحكم هذه الإعدادات في الميزات المرئية لكل موظف.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
   "tasks": {
     "title": "المهام",
@@ -878,7 +949,6 @@
     "tryAgain": "يرجى المحاولة مرة أخرى",
     "somethingWentWrong": "حدث خطأ ما"
   },
-
   "activity": {
     "title": "مراجعة النشاط",
     "subtitle": "مراجعة إكمال المهام وتحميلات الإثبات وإرسال النماذج",
@@ -909,9 +979,11 @@
     "enterRejectionReason": "أدخل سبب الرفض...",
     "confirmRejection": "تأكيد الرفض",
     "approve": "موافقة",
-    "reject": "رفض"
+    "reject": "رفض",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "تفضيلات الإشعارات",
     "subtitle": "اختر كيف ومتى تتلقى الإشعارات",
@@ -953,7 +1025,6 @@
     "disableConfirm": "هل أنت متأكد من تعطيل جميع الإشعارات؟ يمكنك إعادة تفعيلها في أي وقت.",
     "disableSuccess": "تم تعطيل جميع الإشعارات."
   },
-
   "employeeDetail": {
     "notFound": "الموظف غير موجود",
     "backToEmployees": "العودة للموظفين",
@@ -969,7 +1040,6 @@
     "basic": "أساسي",
     "adding": "جارٍ الإضافة..."
   },
-
   "reports": {
     "title": "التقارير",
     "subtitle": "التحليلات والرؤى والتقارير المخصصة",
@@ -1005,9 +1075,35 @@
     "thisMonth": "هذا الشهر",
     "lastMonth": "الشهر الماضي",
     "last7Days": "آخر 7 أيام",
-    "last30Days": "آخر 30 يوماً"
+    "last30Days": "آخر 30 يوماً",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
+  "accessibility": {
+    "menu": "القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "openMenu": "فتح القائمة",
+    "goBack": "العودة",
+    "selected": "محدد",
+    "notSelected": "غير محدد",
+    "loading": "جاري التحميل",
+    "loaded": "تم التحميل",
+    "error": "خطأ",
+    "required": "مطلوب",
+    "optional": "اختياري"
+  },
   "shiftTemplates": {
     "title": "قوالب الورديات",
     "subtitle": "إنشاء أنماط ورديات قابلة لإعادة الاستخدام",
@@ -1039,25 +1135,118 @@
     "shiftsLabel": "ورديات",
     "generating": "جارٍ التوليد..."
   },
-
   "legal": {
-    "lastUpdated": "آخر تحديث"
+    "lastUpdated": "آخر تحديث",
+    "privacy": {
+      "title": "سياسة الخصوصية",
+      "lastUpdated": "آخر تحديث: يناير 2026",
+      "s1Title": "1. المقدمة",
+      "s1Text": "تلتزم Uplift (\"نحن\" أو \"لنا\" أو \"خاصتنا\") بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية جمع واستخدام والإفصاح عن وحماية معلوماتك عند استخدامك لمنصة ذكاء القوى العاملة الخاصة بنا.",
+      "s2Title": "2. المعلومات التي نجمعها",
+      "s2aTitle": "2.1 المعلومات الشخصية",
+      "s2aText": "قد نجمع معلومات شخصية تقدمها مباشرة، بما في ذلك:",
+      "s2aItem1": "الاسم وعنوان البريد الإلكتروني ورقم الهاتف",
+      "s2aItem2": "تفاصيل التوظيف (المسمى الوظيفي، القسم، موقع العمل)",
+      "s2aItem3": "المهارات والشهادات",
+      "s2aItem4": "تفضيلات جدول العمل والتوافر",
+      "s2aItem5": "بيانات الوقت والحضور",
+      "s2bTitle": "2.2 بيانات الاستخدام",
+      "s2bText": "نجمع تلقائياً معلومات معينة عند استخدامك للخدمة:",
+      "s2bItem1": "معلومات الجهاز (نوع المتصفح، نظام التشغيل)",
+      "s2bItem2": "عنوان IP وبيانات الموقع",
+      "s2bItem3": "أنماط الاستخدام والتفاعلات مع الميزات",
+      "s2bItem4": "أوقات تسجيل الدخول ومدة الجلسة",
+      "s3Title": "3. كيف نستخدم معلوماتك",
+      "s3Text": "نستخدم المعلومات التي نجمعها من أجل:",
+      "s3Item1": "تقديم الخدمة وصيانتها",
+      "s3Item2": "معالجة وظائف الجدولة وإدارة القوى العاملة",
+      "s3Item3": "إرسال إشعارات حول المناوبات والإجازات والفرص",
+      "s3Item4": "إنشاء تحليلات ورؤى لمؤسستك",
+      "s3Item5": "تحسين خدمتنا وتطوير ميزات جديدة",
+      "s3Item6": "التواصل معك بشأن التحديثات والدعم",
+      "s3Item7": "الامتثال للالتزامات القانونية",
+      "s4Title": "4. مشاركة البيانات",
+      "s4Text": "قد نشارك معلوماتك مع:",
+      "s4Item1Label": "صاحب العمل:",
+      "s4Item1Text": "نظراً لأن المنصة مقدمة للمؤسسات، يمكن لصاحب عملك الوصول إلى البيانات المتعلقة بالعمل",
+      "s4Item2Label": "مقدمو الخدمات:",
+      "s4Item2Text": "أطراف ثالثة تساعدنا في تشغيل الخدمة (مثل الاستضافة السحابية ومعالجة المدفوعات)",
+      "s4Item3Label": "المتطلبات القانونية:",
+      "s4Item3Text": "عندما يقتضي القانون ذلك أو لحماية حقوقنا",
+      "s4NoSell": "لا نبيع معلوماتك الشخصية لأطراف ثالثة.",
+      "s5Title": "5. أمن البيانات",
+      "s5Text": "ننفذ تدابير تقنية وتنظيمية مناسبة لحماية معلوماتك الشخصية، بما في ذلك:",
+      "s5Item1": "تشفير البيانات أثناء النقل وفي حالة السكون",
+      "s5Item2": "تقييمات أمنية منتظمة واختبارات اختراق",
+      "s5Item3": "ضوابط الوصول وآليات المصادقة",
+      "s5Item4": "تدريب الموظفين على حماية البيانات",
+      "s6Title": "6. الاحتفاظ بالبيانات",
+      "s6Text": "نحتفظ بمعلوماتك الشخصية طالما كان ذلك ضرورياً لتقديم الخدمة وتحقيق الأغراض الموضحة في هذه السياسة، ما لم يتطلب القانون فترة احتفاظ أطول.",
+      "s7Title": "7. حقوقك (اللائحة العامة لحماية البيانات)",
+      "s7Text": "إذا كنت في المنطقة الاقتصادية الأوروبية، لديك الحق في:",
+      "s7Item1Label": "الوصول:",
+      "s7Item1Text": "طلب نسخة من بياناتك الشخصية",
+      "s7Item2Label": "التصحيح:",
+      "s7Item2Text": "طلب تصحيح البيانات غير الدقيقة",
+      "s7Item3Label": "المحو:",
+      "s7Item3Text": "طلب حذف بياناتك (\"الحق في النسيان\")",
+      "s7Item4Label": "قابلية النقل:",
+      "s7Item4Text": "الحصول على بياناتك بتنسيق قابل للقراءة آلياً",
+      "s7Item5Label": "الاعتراض:",
+      "s7Item5Text": "الاعتراض على معالجة معينة لبياناتك",
+      "s7Item6Label": "التقييد:",
+      "s7Item6Text": "طلب تقييد المعالجة",
+      "s7Contact": "لممارسة هذه الحقوق، اتصل بنا على privacy@getuplift.io أو استخدم خيارات الخدمة الذاتية في إعدادات حسابك.",
+      "s8Title": "8. ملفات تعريف الارتباط",
+      "s8Text": "نستخدم ملفات تعريف الارتباط وتقنيات التتبع المماثلة لتتبع النشاط على خدمتنا. تُستخدم هذه للمصادقة والتفضيلات والتحليلات. يمكنك التحكم في إعدادات ملفات تعريف الارتباط من خلال متصفحك.",
+      "s9Title": "9. التحويلات الدولية",
+      "s9Text": "قد يتم نقل معلوماتك ومعالجتها في بلدان غير بلد إقامتك. نضمن وجود ضمانات مناسبة لهذه التحويلات وفقاً لقوانين حماية البيانات المعمول بها.",
+      "s10Title": "10. خصوصية الأطفال",
+      "s10Text": "خدمتنا غير موجهة للأفراد دون سن 16 عاماً. لا نجمع عن قصد معلومات شخصية من الأطفال دون سن 16 عاماً.",
+      "s11Title": "11. التغييرات على هذه السياسة",
+      "s11Text": "قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر السياسة الجديدة على هذه الصفحة وتحديث تاريخ \"آخر تحديث\".",
+      "s12Title": "12. اتصل بنا",
+      "s12Text": "إذا كانت لديك أسئلة حول سياسة الخصوصية هذه أو ترغب في ممارسة حقوقك المتعلقة بالبيانات، يرجى الاتصال بنا:",
+      "dpoLabel": "مسؤول حماية البيانات:",
+      "addressLabel": "العنوان:",
+      "address": "لندن، المملكة المتحدة"
+    },
+    "terms": {
+      "title": "شروط الخدمة",
+      "lastUpdated": "آخر تحديث: يناير 2026",
+      "s1Title": "1. قبول الشروط",
+      "s1Text": "بالوصول إلى أو استخدام منصة ذكاء القوى العاملة من Uplift (\"الخدمة\")، فإنك توافق على الالتزام بشروط الخدمة هذه (\"الشروط\"). إذا كنت لا توافق على أي جزء من هذه الشروط، فلا يجوز لك الوصول إلى الخدمة.",
+      "s2Title": "2. وصف الخدمة",
+      "s2Text": "توفر Uplift منصة SaaS لذكاء القوى العاملة تتضمن الجدولة بالذكاء الاصطناعي وتتبع المهارات ورؤية المسار الوظيفي وميزات التلعيب المصممة لمساعدة المؤسسات على إدارة قواها العاملة بشكل أكثر فعالية.",
+      "s3Title": "3. حسابات المستخدمين",
+      "s3Text1": "عند إنشاء حساب معنا، يجب عليك تقديم معلومات دقيقة وكاملة وحديثة. يشكل عدم القيام بذلك انتهاكاً لهذه الشروط، مما قد يؤدي إلى إنهاء حسابك فوراً.",
+      "s3Text2": "أنت مسؤول عن حماية كلمة المرور الخاصة بك وعن جميع الأنشطة التي تحدث تحت حسابك. توافق على عدم الإفصاح عن كلمة المرور الخاصة بك لأي طرف ثالث.",
+      "s4Title": "4. حماية البيانات",
+      "s4Text": "نأخذ حماية البيانات على محمل الجد. يخضع استخدامك للخدمة أيضاً لسياسة الخصوصية الخاصة بنا، والتي تصف كيفية جمع واستخدام وحماية معلوماتك الشخصية.",
+      "s5Title": "5. الاستخدام المقبول",
+      "s5Text": "توافق على عدم:",
+      "s5Item1": "استخدام الخدمة لأي غرض غير قانوني",
+      "s5Item2": "محاولة الوصول غير المصرح به إلى أي جزء من الخدمة",
+      "s5Item3": "التدخل في أو تعطيل الخدمة أو الخوادم",
+      "s5Item4": "تحميل رمز أو محتوى ضار",
+      "s5Item5": "مشاركة بيانات اعتماد الحساب مع مستخدمين غير مصرح لهم",
+      "s6Title": "6. الملكية الفكرية",
+      "s6Text": "الخدمة ومحتواها الأصلي وميزاتها ووظائفها مملوكة لشركة Uplift ومحمية بموجب قوانين حقوق النشر والعلامات التجارية وقوانين الملكية الفكرية الدولية الأخرى.",
+      "s7Title": "7. الاشتراك والدفع",
+      "s7Text": "تتم فوترة بعض أجزاء الخدمة على أساس الاشتراك. سيتم فوترتك مقدماً على أساس متكرر. يتم تحديد دورات الفوترة على أساس شهري أو سنوي، حسب خطة اشتراكك.",
+      "s8Title": "8. الإنهاء",
+      "s8Text": "يجوز لنا إنهاء أو تعليق حسابك فوراً، دون إشعار مسبق أو مسؤولية، لأي سبب، بما في ذلك انتهاك هذه الشروط. عند الإنهاء، سينتهي حقك في استخدام الخدمة فوراً.",
+      "s9Title": "9. تحديد المسؤولية",
+      "s9Text": "لن تكون Uplift أو مديروها أو موظفوها أو شركاؤها أو مورّدوها بأي حال مسؤولين عن أي أضرار غير مباشرة أو عرضية أو خاصة أو تبعية أو عقابية، بما في ذلك خسارة الأرباح أو البيانات أو السمعة التجارية.",
+      "s10Title": "10. التغييرات في الشروط",
+      "s10Text": "نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سنقدم إشعاراً بأي تغييرات جوهرية عن طريق نشر الشروط الجديدة على هذه الصفحة وتحديث تاريخ \"آخر تحديث\".",
+      "s11Title": "11. اتصل بنا",
+      "s11Text": "إذا كانت لديك أي أسئلة حول هذه الشروط، يرجى الاتصال بنا على:",
+      "emailLabel": "البريد الإلكتروني:",
+      "addressLabel": "العنوان:",
+      "address": "لندن، المملكة المتحدة"
+    }
   },
-
-  "accessibility": {
-    "menu": "القائمة",
-    "closeMenu": "إغلاق القائمة",
-    "openMenu": "فتح القائمة",
-    "goBack": "العودة",
-    "selected": "محدد",
-    "notSelected": "غير محدد",
-    "loading": "جاري التحميل",
-    "loaded": "تم التحميل",
-    "error": "خطأ",
-    "required": "مطلوب",
-    "optional": "اختياري"
-  },
-
   "dateTime": {
     "am": "صباحاً",
     "pm": "مساءً",
@@ -1100,5 +1289,564 @@
     "october": "أكتوبر",
     "november": "نوفمبر",
     "december": "ديسمبر"
+  },
+  "bulkImport": {
+    "title": "استيراد جماعي",
+    "subtitle": "استيراد البيانات من ملفات CSV أو Excel",
+    "selectType": "اختر النوع",
+    "uploadFile": "رفع ملف",
+    "preview": "معاينة",
+    "complete": "اكتمل",
+    "invalidFileType": "يرجى رفع ملف CSV أو Excel",
+    "importFailed": "فشل الاستيراد. يرجى المحاولة مرة أخرى.",
+    "uploadFor": "رفع",
+    "uploadDesc": "اسحب وأفلت أو انقر لاختيار ملف",
+    "downloadTemplate": "تنزيل القالب",
+    "dragDrop": "اسحب وأفلت ملفك هنا، أو انقر للتصفح",
+    "supportedFormats": "الصيغ المدعومة: CSV، XLSX",
+    "previewData": "معاينة البيانات",
+    "rowsFound": "صفوف وجدت في",
+    "andMore": "و",
+    "moreRows": "صفوف أخرى...",
+    "importing": "جارٍ الاستيراد...",
+    "startImport": "بدء الاستيراد",
+    "importComplete": "اكتمل الاستيراد",
+    "successfullyImported": "تم الاستيراد بنجاح",
+    "of": "من",
+    "records": "سجلات",
+    "successful": "ناجح",
+    "failed": "فاشل",
+    "total": "المجموع",
+    "importMore": "استيراد المزيد من البيانات",
+    "type": {
+      "employees": "الموظفون",
+      "employeesDesc": "استيراد ملفات الموظفين",
+      "shifts": "الورديات",
+      "shiftsDesc": "استيراد جداول الورديات",
+      "locations": "المواقع",
+      "locationsDesc": "استيراد المواقع",
+      "skills": "المهارات",
+      "skillsDesc": "استيراد المهارات"
+    }
+  },
+  "jobs": {
+    "open": "مفتوح",
+    "closed": "مغلق",
+    "applicants": "المتقدمون",
+    "created": "تم إنشاء إعلان الوظيفة بنجاح",
+    "createError": "فشل إنشاء إعلان الوظيفة. يرجى المحاولة مرة أخرى.",
+    "updated": "تم تحديث إعلان الوظيفة بنجاح",
+    "updateError": "فشل تحديث إعلان الوظيفة. يرجى المحاولة مرة أخرى.",
+    "fullTime": "دوام كامل",
+    "partTime": "دوام جزئي",
+    "contract": "عقد",
+    "temporary": "مؤقت",
+    "subtitle": "إدارة فرص التوظيف الداخلية",
+    "openPositions": "الوظائف المفتوحة",
+    "closedPositions": "مغلقة",
+    "totalApplicants": "إجمالي المتقدمين",
+    "noJobs": "لا توجد إعلانات وظائف",
+    "viewApplicants": "عرض المتقدمين",
+    "editPosting": "تعديل إعلان الوظيفة",
+    "jobTitle": "المسمى الوظيفي",
+    "enterTitle": "أدخل المسمى الوظيفي",
+    "selectDepartment": "اختر القسم",
+    "selectLocation": "اختر الموقع",
+    "salary": "نطاق الراتب",
+    "enterDescription": "أدخل وصف الوظيفة",
+    "postJob": "نشر الوظيفة",
+    "skillMatch": "تطابق المهارات",
+    "noApplicants": "لا يوجد متقدمون بعد"
+  },
+  "employees": {
+    "searchPlaceholder": "البحث بالاسم أو البريد الإلكتروني...",
+    "employees": "موظفون",
+    "noResults": "لم يتم العثور على موظفين يطابقون معاييرك",
+    "details": "تفاصيل الموظف",
+    "hireDate": "تاريخ التعيين",
+    "assigned": "مُسند",
+    "leaveDetails": "تفاصيل الإجازة",
+    "until": "حتى",
+    "terminationDetails": "تفاصيل إنهاء الخدمة",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "مركز التكاملات",
+    "subtitle": "ربط Uplift بأدواتك الحالية",
+    "apiFactory": "مصنع API",
+    "addIntegration": "إضافة تكامل",
+    "configure": "تكوين",
+    "connect": "ربط",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "saveChanges": "حفظ التغييرات",
+    "syncNow": "مزامنة الآن",
+    "disconnect": "قطع الاتصال بـ {{name}}",
+    "disconnectConfirm": "قطع الاتصال بـ {{name}}؟ سيؤدي هذا إلى إيقاف جميع المزامنات.",
+    "settingsSaved": "تم حفظ الإعدادات",
+    "browseMarketplace": "تصفح السوق",
+    "loadingIntegrations": "جارٍ تحميل التكاملات...",
+    "noIntegrations": "لا توجد تكاملات متصلة",
+    "noIntegrationsDesc": "اربط أول تكامل لبدء مزامنة البيانات",
+    "status": {
+      "beta": "تجريبي",
+      "syncing": "جارٍ المزامنة..."
+    },
+    "stats": {
+      "connected": "متصل",
+      "available": "متاح",
+      "syncsToday": "مزامنات اليوم",
+      "errors": "أخطاء",
+      "totalSyncs": "إجمالي المزامنات",
+      "lastSync": "آخر مزامنة",
+      "records": "سجلات"
+    },
+    "tabs": {
+      "connected": "متصل",
+      "marketplace": "السوق",
+      "restApi": "REST API",
+      "apiFactory": "مصنع API",
+      "activityLog": "سجل النشاط",
+      "settings": "الإعدادات",
+      "fieldMapping": "تعيين الحقول",
+      "syncHistory": "سجل المزامنة",
+      "webhooks": "الويب هوك"
+    },
+    "connection": {
+      "lastSync": "آخر مزامنة",
+      "frequency": "التكرار",
+      "status": "الحالة",
+      "healthy": "سليم",
+      "errors": "أخطاء"
+    },
+    "connectModal": {
+      "title": "ربط {{name}}",
+      "whatItDoes": "ما يفعله هذا التكامل:",
+      "redirectNotice": "سيتم إعادة توجيهك إلى {{name}}",
+      "authorizeMessage": "قم بتسجيل الدخول وتفويض Uplift للوصول إلى بياناتك. نطلب فقط الصلاحيات التي نحتاجها.",
+      "connectWith": "ربط مع {{name}}",
+      "connecting": "جارٍ الربط بـ {{name}}...",
+      "completeAuth": "يرجى إكمال التفويض في النافذة المنبثقة",
+      "successConnected": "تم الربط بنجاح!",
+      "configureSyncSettings": "قم بتكوين إعدادات المزامنة أدناه.",
+      "completeSetup": "إكمال الإعداد",
+      "connected": "تم ربط {{name}}!",
+      "firstSyncSoon": "ستبدأ المزامنة الأولى قريباً",
+      "hris": {
+        "syncEmployees": "مزامنة سجلات الموظفين تلقائياً",
+        "importDepts": "استيراد الأقسام والمواقع",
+        "syncTimeOff": "الحفاظ على مزامنة أرصدة الإجازات"
+      },
+      "payroll": {
+        "exportTimesheets": "تصدير كشوف الحضور المعتمدة",
+        "syncPayRates": "مزامنة معدلات الأجور والعمل الإضافي",
+        "autoReconciliation": "تسوية الرواتب تلقائياً"
+      },
+      "comms": {
+        "shiftReminders": "إرسال تذكيرات الورديات",
+        "postRecognition": "نشر التقدير في القنوات",
+        "swapNotifications": "إشعارات طلبات التبديل"
+      },
+      "identity": {
+        "sso": "تسجيل دخول موحد (SSO)",
+        "autoProvisioning": "إنشاء المستخدمين تلقائياً",
+        "directorySync": "مزامنة الدليل"
+      },
+      "other": {
+        "bidirectional": "مزامنة بيانات ثنائية الاتجاه",
+        "realtimeWebhooks": "تحديثات فورية عبر الويب هوك",
+        "auditTrail": "سجل مراجعة كامل"
+      }
+    },
+    "configureModal": {
+      "title": "إعدادات {{name}}",
+      "connectedSince": "متصل {{date}}"
+    },
+    "settings": {
+      "autoSync": "مزامنة تلقائية",
+      "autoSyncDesc": "مزامنة البيانات تلقائياً حسب الجدول",
+      "autoSyncScheduleDesc": "مزامنة تلقائية حسب الجدول",
+      "syncFrequency": "تكرار المزامنة",
+      "nextScheduledSync": "المزامنة المجدولة التالية",
+      "dataToSync": "البيانات للمزامنة",
+      "frequency": {
+        "realtime": "فوري",
+        "hourly": "كل ساعة",
+        "daily": "يومياً",
+        "weekly": "أسبوعياً"
+      },
+      "data": {
+        "employees": "الموظفون",
+        "timeEntries": "إدخالات الوقت",
+        "departments": "الأقسام",
+        "locations": "المواقع"
+      }
+    },
+    "mapping": {
+      "description": "تعيين الحقول يتحكم في كيفية تعيين البيانات من {{name}} إلى حقول Uplift. تسري التغييرات عند المزامنة التالية.",
+      "sourceField": "حقل {{name}}",
+      "upliftField": "حقل Uplift",
+      "status": "الحالة",
+      "selectField": "اختر حقلاً...",
+      "mapped": "معيّن",
+      "unmapped": "غير معيّن"
+    },
+    "history": {
+      "noHistory": "لا يوجد سجل مزامنة بعد",
+      "sync": "مزامنة",
+      "duration": "المدة",
+      "records": "السجلات",
+      "created": "مُنشأ",
+      "updated": "مُحدث"
+    },
+    "webhooks": {
+      "description": "الويب هوك تُبلغ {{name}} عند حدوث أحداث في Uplift",
+      "addWebhook": "إضافة ويب هوك",
+      "noWebhooks": "لا توجد ويب هوك مُكوّنة",
+      "createFirst": "أنشئ أول ويب هوك",
+      "active": "نشط",
+      "paused": "متوقف مؤقتاً",
+      "sendTestPayload": "إرسال حمولة تجريبية",
+      "pauseWebhook": "إيقاف الويب هوك مؤقتاً",
+      "enableWebhook": "تفعيل الويب هوك",
+      "deleteWebhook": "حذف الويب هوك",
+      "lastTriggered": "آخر تشغيل",
+      "never": "أبداً",
+      "successRate": "معدل النجاح",
+      "sendEventsTo": "إرسال الأحداث إلى {{name}}",
+      "endpointUrl": "عنوان URL للنقطة النهائية",
+      "eventsToSend": "الأحداث للإرسال",
+      "hmacInfo": "سنوقّع جميع حمولات الويب هوك بـ HMAC-SHA256. ستتلقى التوقيع في",
+      "header": "الرأس.",
+      "createWebhook": "إنشاء ويب هوك",
+      "validationError": "يرجى إدخال عنوان URL واختيار حدث واحد على الأقل",
+      "createdSuccess": "تم إنشاء الويب هوك بنجاح!",
+      "testSent": "تم إرسال الحمولة التجريبية إلى",
+      "testStatus": "الحالة",
+      "deleteConfirm": "حذف هذا الويب هوك؟"
+    },
+    "marketplace": {
+      "searchPlaceholder": "البحث عن التكاملات...",
+      "allCategories": "جميع الفئات",
+      "infoBannerTitle": "Uplift يعمل مع أدواتك الحالية",
+      "infoBannerDesc": "اربط أنظمة الموارد البشرية والرواتب والاتصالات. نحن نزامن البيانات - لا نستبدل أدواتك.",
+      "noResults": "لا توجد تكاملات تطابق بحثك",
+      "dontSeeSystem": "لا ترى نظامك؟",
+      "alwaysAdding": "نحن نضيف تكاملات جديدة باستمرار. أخبرنا بما تحتاجه.",
+      "requestIntegration": "طلب تكامل"
+    },
+    "activity": {
+      "recentActivity": "نشاط التكاملات الأخير",
+      "exportLog": "تصدير السجل"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "مصنع API",
+    "subtitle": "إنشاء تكاملات REST API مخصصة بدون كتابة كود",
+    "newIntegration": "تكامل جديد",
+    "searchPlaceholder": "البحث عن التكاملات...",
+    "loadingIntegrations": "جارٍ تحميل التكاملات...",
+    "noIntegrationsFound": "لم يتم العثور على تكاملات",
+    "noIntegrationsYet": "لا توجد تكاملات مخصصة بعد",
+    "tryDifferentSearch": "جرب مصطلح بحث مختلف",
+    "createFirstDesc": "أنشئ أول تكامل API مخصص لربط أي REST API",
+    "createIntegration": "إنشاء تكامل",
+    "deleteConfirm": "هل أنت متأكد من حذف هذا التكامل؟",
+    "list": {
+      "eventsCount": "{{count}} أحداث",
+      "scheduled": "مجدول",
+      "incomingWebhook": "ويب هوك وارد",
+      "manual": "يدوي",
+      "runsCount": "{{count}} تشغيل",
+      "errorsCount": "{{count}} أخطاء",
+      "disabled": "معطل",
+      "edit": "تعديل",
+      "test": "اختبار",
+      "viewLogs": "عرض السجلات",
+      "delete": "حذف",
+      "lastRun": "آخر تشغيل"
+    },
+    "stats": {
+      "totalIntegrations": "إجمالي التكاملات",
+      "active": "نشط",
+      "runsToday": "تشغيلات اليوم",
+      "totalErrors": "إجمالي الأخطاء"
+    },
+    "editor": {
+      "editTitle": "تعديل تكامل API",
+      "createTitle": "إنشاء تكامل API",
+      "subtitle": "تكوين اتصال REST API المخصص",
+      "integrationName": "اسم التكامل",
+      "integrationNamePlaceholder": "مثال: مزامنة مع نظام الرواتب",
+      "description": "الوصف",
+      "descriptionPlaceholder": "ماذا يفعل هذا التكامل؟",
+      "method": "الطريقة",
+      "url": "عنوان URL",
+      "headers": "الرؤوس",
+      "addHeader": "إضافة رأس",
+      "headerName": "اسم الرأس",
+      "headerValue": "القيمة",
+      "requestBodyJson": "نص الطلب (JSON)",
+      "useVariables": "استخدم {{field}} للمتغيرات",
+      "availableVariables": "المتغيرات المتاحة",
+      "authenticationType": "نوع المصادقة",
+      "apiKeyLocation": "موقع مفتاح API",
+      "header": "رأس",
+      "queryParameter": "معامل استعلام",
+      "keyName": "اسم المفتاح",
+      "keyNamePlaceholder": "مثال: X-API-Key",
+      "apiKey": "مفتاح API",
+      "enterApiKey": "أدخل مفتاح API الخاص بك",
+      "bearerToken": "رمز Bearer",
+      "enterToken": "أدخل الرمز الخاص بك",
+      "username": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "tokenUrl": "عنوان URL للرمز",
+      "clientId": "معرف العميل",
+      "clientSecret": "سر العميل",
+      "scopes": "النطاقات (مفصولة بفواصل)",
+      "whenShouldRun": "متى يجب أن يعمل هذا التكامل؟",
+      "selectEvents": "اختر الأحداث",
+      "schedule": "الجدول",
+      "cronExpression": "تعبير CRON",
+      "scheduleUtcNote": "يستخدم الجدول المنطقة الزمنية UTC. CRON الحالي",
+      "yourWebhookUrl": "عنوان URL الخاص بك للويب هوك",
+      "webhookPostNote": "أرسل طلبات POST إلى هذا العنوان. سنعالج البيانات الواردة ونعيّنها إلى Uplift.",
+      "fieldMappings": "تعيينات الحقول",
+      "fieldMappingsDesc": "تعيين حقول Uplift إلى حقول API الخارجية",
+      "addMapping": "إضافة تعيين",
+      "noFieldMappings": "لا توجد تعيينات حقول بعد",
+      "addMappingsDesc": "أضف تعيينات لتحويل البيانات بين الأنظمة",
+      "addFirstMapping": "إضافة أول تعيين",
+      "selectUpliftField": "اختر حقل Uplift...",
+      "externalFieldName": "اسم الحقل الخارجي",
+      "noTransform": "بدون تحويل",
+      "dateIso": "تاريخ ← ISO",
+      "dateUk": "تاريخ ← صيغة بريطانية",
+      "boolYn": "منطقي ← نعم/لا",
+      "fieldMappingTip": "تُستخدم تعيينات الحقول لبناء نص الطلب تلقائياً. يمكنك أيضاً استخدام صيغة {{field}} في تبويب الطلب لهياكل JSON مخصصة.",
+      "testConfiguration": "اختبار التكوين",
+      "testDescription": "أرسل طلب اختبار للتحقق من تكوينك. سنستخدم بيانات نموذجية.",
+      "testing": "جارٍ الاختبار...",
+      "sendTestRequest": "إرسال طلب اختبار",
+      "success": "نجاح",
+      "failed": "فشل",
+      "status": "الحالة",
+      "time": "الوقت",
+      "response": "الاستجابة",
+      "enableIntegration": "تفعيل التكامل",
+      "cancel": "إلغاء",
+      "saveChanges": "حفظ التغييرات",
+      "createIntegration": "إنشاء تكامل",
+      "tabs": {
+        "request": "الطلب",
+        "authentication": "المصادقة",
+        "trigger": "المشغّل",
+        "fieldMapping": "تعيين الحقول",
+        "test": "اختبار"
+      }
+    },
+    "logs": {
+      "executionLogs": "سجلات التشغيل",
+      "export": "تصدير",
+      "noData": "لا توجد بيانات بعد. ستظهر سجلات التشغيل هنا بمجرد تشغيل التكاملات.",
+      "unknown": "غير معروف",
+      "error": "خطأ"
+    },
+    "helpBanner": {
+      "title": "هل تحتاج مساعدة في بناء تكامل؟",
+      "description": "تحقق من وثائق API للأمثلة، أو اتصل بالدعم لحالات الاستخدام المعقدة."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "مفاتيح REST API",
+    "subtitle": "إنشاء مفاتيح API للوصول إلى بيانات Uplift من تطبيقاتك",
+    "apiDocs": "وثائق API",
+    "createKey": "إنشاء مفتاح",
+    "createApiKey": "إنشاء مفتاح API",
+    "loadingKeys": "جارٍ تحميل مفاتيح API...",
+    "loadError": "فشل تحميل مفاتيح API.",
+    "noKeysYet": "لا توجد مفاتيح API بعد",
+    "createFirstDesc": "أنشئ أول مفتاح API لبدء التكامل مع Uplift",
+    "retry": "إعادة المحاولة",
+    "revokeConfirm": "إلغاء مفتاح API \"{{name}}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "regenerateConfirm": "إعادة توليد السر لـ \"{{name}}\"؟ سيتوقف السر القديم عن العمل فوراً.",
+    "regenerateSuccess": "مفتاح السر الجديد: {{secret}}\n\nاحفظه الآن - لن تراه مرة أخرى!",
+    "regenerateError": "فشل إعادة توليد السر: {{message}}",
+    "usageStats": "إحصائيات الاستخدام لـ {{name}}:\n\nإجمالي الطلبات: {{requests}}\nآخر استخدام: {{lastUsed}}",
+    "card": {
+      "noDescription": "بدون وصف",
+      "expired": "منتهي الصلاحية",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "keyId": "معرف المفتاح",
+      "requests": "الطلبات",
+      "lastUsed": "آخر استخدام",
+      "never": "أبداً",
+      "rateLimit": "حد المعدل",
+      "standard": "قياسي",
+      "hideDetails": "إخفاء التفاصيل",
+      "showDetails": "عرض التفاصيل",
+      "scopes": "النطاقات",
+      "created": "تم الإنشاء",
+      "expires": "ينتهي",
+      "usage": "الاستخدام",
+      "regenerate": "إعادة التوليد",
+      "revoke": "إلغاء"
+    },
+    "create": {
+      "keyCreatedTitle": "تم إنشاء مفتاح API",
+      "createTitle": "إنشاء مفتاح API",
+      "keyCreatedSuccess": "تم إنشاء مفتاح API بنجاح",
+      "copySecretWarning": "انسخ مفتاح السر الآن. لن تتمكن من رؤيته مرة أخرى!",
+      "keyIdLabel": "معرف المفتاح",
+      "secretKeyLabel": "مفتاح السر",
+      "fullApiKeyLabel": "مفتاح API الكامل (لرأس التفويض)",
+      "fullKeyLabel": "المفتاح الكامل",
+      "authHeaderNote": "استخدم هذا في رأس التفويض الخاص بك",
+      "done": "تم",
+      "keyName": "اسم المفتاح",
+      "keyNamePlaceholder": "مثال: مفتاح API للإنتاج",
+      "description": "الوصف",
+      "descriptionPlaceholder": "ما الغرض من هذا المفتاح؟",
+      "permissions": "الصلاحيات",
+      "rateLimit": "حد المعدل",
+      "expiration": "انتهاء الصلاحية",
+      "neverExpires": "لا ينتهي أبداً",
+      "thirtyDays": "30 يوماً",
+      "ninetyDays": "90 يوماً",
+      "oneYear": "سنة واحدة",
+      "createError": "فشل إنشاء مفتاح API. يرجى المحاولة مرة أخرى.",
+      "cancel": "إلغاء",
+      "createKey": "إنشاء مفتاح"
+    },
+    "docs": {
+      "quickStart": "بداية سريعة",
+      "authentication": "المصادقة",
+      "exampleResponse": "استجابة نموذجية",
+      "viewFullDocs": "عرض الوثائق الكاملة",
+      "downloadSpec": "تنزيل مواصفات OpenAPI"
+    },
+    "securityBanner": {
+      "title": "أمان مفاتيح API",
+      "description": "حافظ على أمان مفاتيح API الخاصة بك. لا تكشفها أبداً في الكود العميل أو المستودعات العامة. إذا تم اختراق مفتاح، قم بإلغائه فوراً وأنشئ مفتاحاً جديداً."
+    }
+  },
+  "orgOnboarding": {
+    "title": "إعداد المؤسسة",
+    "subtitle": "لنقم بتكوين مؤسستك",
+    "steps": {
+      "orgDetails": "تفاصيل المؤسسة",
+      "locations": "المواقع",
+      "departments": "الأقسام",
+      "roles": "الأدوار والصلاحيات",
+      "review": "المراجعة والإطلاق"
+    },
+    "orgDetails": {
+      "companyName": "اسم الشركة",
+      "companyNamePlaceholder": "مثال: شركة أكمي",
+      "tradingName": "الاسم التجاري (اختياري)",
+      "tradingNamePlaceholder": "الاسم العام",
+      "industry": "الصناعة",
+      "selectIndustry": "اختر الصناعة",
+      "companySize": "حجم الشركة",
+      "selectSize": "اختر الحجم",
+      "timezone": "المنطقة الزمنية الافتراضية",
+      "currency": "العملة الافتراضية",
+      "weekStart": "يبدأ الأسبوع في",
+      "logo": "شعار الشركة",
+      "uploadLogo": "رفع الشعار",
+      "uploadLogoDesc": "PNG أو SVG، يُوصى بـ 200×200 بكسل"
+    },
+    "locations": {
+      "title": "المواقع",
+      "subtitle": "أضف مكاتبك أو مواقعك أو فروعك",
+      "addLocation": "إضافة موقع",
+      "name": "اسم الموقع",
+      "namePlaceholder": "مثال: المكتب الرئيسي",
+      "address": "العنوان",
+      "addressPlaceholder": "العنوان الكامل",
+      "timezone": "المنطقة الزمنية",
+      "noLocations": "لم تتم إضافة مواقع بعد",
+      "addFirst": "أضف أول موقع للبدء"
+    },
+    "departments": {
+      "title": "الأقسام",
+      "subtitle": "إعداد هيكل الأقسام",
+      "addDepartment": "إضافة قسم",
+      "name": "اسم القسم",
+      "namePlaceholder": "مثال: الهندسة",
+      "parentDepartment": "القسم الأم (اختياري)",
+      "none": "بدون (مستوى أعلى)",
+      "manager": "مدير القسم",
+      "selectManager": "اختر المدير",
+      "noDepartments": "لم تتم إضافة أقسام بعد",
+      "addFirst": "أضف أول قسم"
+    },
+    "roles": {
+      "title": "الأدوار والصلاحيات",
+      "subtitle": "تكوين مستويات الوصول لفريقك",
+      "addRole": "إضافة دور مخصص",
+      "builtIn": "مدمج",
+      "custom": "مخصص",
+      "name": "اسم الدور",
+      "namePlaceholder": "مثال: مشرف الورديات",
+      "description": "الوصف",
+      "descriptionPlaceholder": "ما الذي يمكن لهذا الدور فعله؟",
+      "permissions": "الصلاحيات",
+      "permissionGroups": {
+        "scheduling": "الجدولة",
+        "timeTracking": "تتبع الوقت",
+        "employees": "الموظفون",
+        "reports": "التقارير",
+        "settings": "الإعدادات"
+      }
+    },
+    "review": {
+      "title": "المراجعة والإطلاق",
+      "subtitle": "تحقق من أن كل شيء يبدو صحيحاً قبل البدء",
+      "orgInfo": "معلومات المؤسسة",
+      "locationsCount": "{{count}} مواقع مُكوّنة",
+      "departmentsCount": "{{count}} أقسام مُكوّنة",
+      "rolesCount": "{{count}} أدوار مُكوّنة",
+      "allLooksGood": "كل شيء يبدو جيداً!",
+      "launch": "إطلاق المؤسسة",
+      "launchDesc": "سيؤدي هذا إلى تنشيط مؤسستك وإرسال دعوات لأي أعضاء فريق تمت إضافتهم."
+    },
+    "navigation": {
+      "back": "رجوع",
+      "next": "التالي",
+      "skip": "تخطي الآن",
+      "finish": "إنهاء الإعداد"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

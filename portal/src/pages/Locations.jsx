@@ -36,7 +36,7 @@ export default function Locations() {
       const result = await locationsApi.list({ status: 'all' });
       setLocations(result?.locations || []);
     } catch (err) {
-      console.error('Failed to load locations:', err);
+      if (import.meta.env.DEV) console.error('Failed to load locations:', err);
       setError('Failed to load locations. Please try again.');
     } finally {
       setLoading(false);
@@ -54,7 +54,7 @@ export default function Locations() {
       setShowModal(false);
       setEditingLocation(null);
     } catch (err) {
-      console.error('Failed to save location:', err);
+      if (import.meta.env.DEV) console.error('Failed to save location:', err);
     }
   };
 

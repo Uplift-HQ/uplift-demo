@@ -54,7 +54,6 @@
     "viewMyCareer": "Zobraziť moju kariéru",
     "timeOffBalance": "Zostatok dovolenky"
   },
-
   "nav": {
     "dashboard": "Prehľad",
     "employees": "Zamestnanci",
@@ -150,9 +149,21 @@
     "active": "Aktívne",
     "inactive": "Neaktívne",
     "enabled": "Povolené",
-    "disabled": "Zakázané"
+    "disabled": "Zakázané",
+    "approveSelected": "Schváliť vybrané",
+    "rejectSelected": "Zamietnuť vybrané",
+    "clearSelection": "Vymazať",
+    "showing": "Zobrazuje sa",
+    "of": "z",
+    "page": "Strana",
+    "previous": "Predchádzajúce",
+    "terminated": "Ukončené",
+    "sunday": "Ne",
+    "monday": "Po",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Prihlásiť sa",
     "logout": "Odhlásiť sa",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Pre získanie prístupu do Uplift kontaktujte svojho manažéra alebo HR oddelenie. Pošlú vám pozvánku.",
     "enterEmailPassword": "Prosím, zadajte e-mail a heslo",
     "loginFailed": "Prihlásenie zlyhalo",
-    "demoAccounts": "Demo účty:",
-    "demoWorker": "Pracovník: worker@uplift.work / Demo123!",
-    "demoManager": "Manažér: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Dvojfaktorové overenie",
     "enterMfaCode": "Zadajte kód z autentifikačnej aplikácie",
     "verificationCode": "Overovací kód",
@@ -194,9 +202,16 @@
     "invalidCode": "Neplatný kód",
     "allRightsReserved": "Všetky práva vyhradené",
     "termsOfService": "Podmienky služby",
-    "privacyPolicy": "Zásady ochrany osobných údajov"
+    "privacyPolicy": "Zásady ochrany osobných údajov",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Domov",
     "schedule": "Rozvrh",
@@ -214,7 +229,6 @@
     "leaderboard": "Rebríček",
     "badges": "Odznaky"
   },
-
   "home": {
     "welcome": "Vitajte späť, {{name}}!",
     "welcomeBack": "Vitajte späť,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Voľné príležitosti",
     "noOpportunities": "Momentálne žiadne príležitosti zodpovedajúce vašim zručnostiam"
   },
-
   "schedule": {
     "title": "Môj rozvrh",
     "weekView": "Týždeň",
@@ -293,9 +306,22 @@
     "yourShift": "Vaša smena",
     "theirShift": "Ich smena",
     "sendRequest": "Odoslať žiadosť",
-    "cancelSwap": "Zrušiť výmenu"
+    "cancelSwap": "Zrušiť výmenu",
+    "allLocations": "Všetky lokality",
+    "tuesday": "Ut",
+    "wednesday": "St",
+    "thursday": "Št",
+    "friday": "Pi",
+    "saturday": "So",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Sledovanie času",
     "clockedIn": "Prihlásený",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Klepnite pre prihlásenie",
     "onBreakSince": "Na prestávke od {{time}}",
     "workingSince": "Pracuje od {{time}}",
-    "shiftEnded": "Smena skončila"
+    "shiftEnded": "Smena skončila",
+    "entriesApproved": "{{count}} záznamov schválených",
+    "approveError": "Nepodarilo sa schváliť záznamy. Skúste to znova.",
+    "entriesRejected": "{{count}} záznamov zamietnutých",
+    "rejectError": "Nepodarilo sa zamietnuť záznamy. Skúste to znova.",
+    "clockInError": "Nepodarilo sa prihlásiť. Skúste to znova.",
+    "clockOutError": "Nepodarilo sa odhlásiť. Skúste to znova.",
+    "breakError": "Nepodarilo sa aktualizovať stav prestávky. Skúste to znova.",
+    "noPending": "Žiadne čakajúce záznamy na kontrolu",
+    "noEntries": "Nenašli sa žiadne časové záznamy",
+    "history": "História",
+    "managerSubtitle": "Skontrolujte a schváľte výkazy práce",
+    "employeeSubtitle": "Sledujte svoje pracovné hodiny",
+    "clockIn": "Príchod",
+    "clockOut": "Odchod",
+    "startBreak": "Začať prestávku",
+    "endBreak": "Ukončiť prestávku",
+    "totalHours": "Celkové hodiny"
   },
-
   "timeOff": {
     "title": "Voľno",
     "request": "Požiadať o voľno",
@@ -359,9 +401,16 @@
     "selectDates": "Vybrať dátumy",
     "selectType": "Vybrať typ",
     "addNotes": "Pridať poznámky (voliteľné)",
-    "reviewRequest": "Skontrolovať žiadosť"
+    "reviewRequest": "Skontrolovať žiadosť",
+    "oneDay": "1 deň",
+    "days": "dní",
+    "dates": "Dátumy",
+    "duration": "Trvanie",
+    "noRequests": "Nenašli sa žiadne žiadosti",
+    "requestDetails": "Podrobnosti žiadosti o voľno",
+    "noReason": "Dôvod nebol uvedený",
+    "submitted": "Odoslané"
   },
-
   "feed": {
     "title": "Príspevky",
     "newPost": "Nový príspevok",
@@ -401,7 +450,6 @@
     "hoursAgo": "pred {{count}}h",
     "daysAgo": "pred {{count}}d"
   },
-
   "messages": {
     "title": "Správy",
     "newMessage": "Nová správa",
@@ -419,7 +467,6 @@
     "translateMessage": "Preložiť",
     "showOriginal": "Zobraziť originál"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Upraviť profil",
@@ -447,7 +494,6 @@
     "viewProfile": "Zobraziť profil",
     "memberSince": "Členom od {{date}}"
   },
-
   "skills": {
     "title": "Zručnosti",
     "mySkills": "Moje zručnosti",
@@ -474,7 +520,6 @@
     "skillAdded": "Zručnosť úspešne pridaná",
     "verificationRequested": "Žiadosť o overenie odoslaná"
   },
-
   "career": {
     "title": "Kariéra",
     "careerPath": "Kariérna cesta",
@@ -549,7 +594,6 @@
     "expired": "Vypršané",
     "expires": "Vyprší {{date}}"
   },
-
   "gamification": {
     "level": "Úroveň {{level}}",
     "levelShort": "Úr. {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Získané {{date}}",
     "progressToEarn": "{{percent}}% pokrok k získaniu"
   },
-
   "notifications": {
     "title": "Notifikácie",
     "markAllRead": "Označiť všetko ako prečítané",
@@ -605,7 +648,6 @@
     "allCaught": "Ste v obraze!",
     "checkBackLater": "Skontrolujte neskôr pre nové notifikácie"
   },
-
   "settings": {
     "title": "Nastavenia",
     "subtitle": "Spravujte svoju organizáciu a účet",
@@ -740,9 +782,23 @@
     "featureAccess": "Prístup k funkciám",
     "enableAll": "Povoliť všetko",
     "disableAll": "Zakázať všetko",
-    "aboutEmployeeVisibility": "Tieto nastavenia riadia, ktoré funkcie sú viditeľné pre každého zamestnanca."
+    "aboutEmployeeVisibility": "Tieto nastavenia riadia, ktoré funkcie sú viditeľné pre každého zamestnanca.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Úlohy",
     "myTasks": "Moje úlohy",
@@ -781,7 +837,6 @@
     "takePhoto": "Odfotiť",
     "chooseFromLibrary": "Vybrať z galérie"
   },
-
   "expenses": {
     "title": "Výdavky",
     "myExpenses": "Moje výdavky",
@@ -808,7 +863,6 @@
     "totalApproved": "Celkom schválené",
     "totalReimbursed": "Celkom preplatené"
   },
-
   "rewards": {
     "title": "Odmeny",
     "myRewards": "Moje odmeny",
@@ -828,7 +882,6 @@
     "validUntil": "Platné do {{date}}",
     "termsConditions": "Podmienky"
   },
-
   "manager": {
     "dashboard": "Manažérsky prehľad",
     "teamOverview": "Prehľad tímu",
@@ -859,7 +912,6 @@
     "attendance": "Dochádzka",
     "performance": "Výkon"
   },
-
   "onboarding": {
     "welcome": "Vitajte v Uplift!",
     "getStarted": "Poďme vás nastaviť",
@@ -877,7 +929,6 @@
     "allSet": "Všetko je pripravené!",
     "startExploring": "Začnite objavovať smeny a príležitosti"
   },
-
   "errors": {
     "networkError": "Chyba siete. Skontrolujte svoje pripojenie.",
     "serverError": "Chyba servera. Skúste to neskôr.",
@@ -898,7 +949,6 @@
     "tryAgain": "Skúste to znova",
     "somethingWentWrong": "Niečo sa pokazilo"
   },
-
   "activity": {
     "title": "Kontrola aktivít",
     "subtitle": "Kontrola dokončených úloh, nahraných dôkazov a odoslaných formulárov",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Zadajte dôvod zamietnutia...",
     "confirmRejection": "Potvrdiť zamietnutie",
     "approve": "Schváliť",
-    "reject": "Zamietnuť"
+    "reject": "Zamietnuť",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Preferencie notifikácií",
     "subtitle": "Vyberte, ako a kedy dostávate notifikácie",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Naozaj chcete zakázať všetky notifikácie? Môžete ich kedykoľvek znova povoliť.",
     "disableSuccess": "Všetky notifikácie boli zakázané."
   },
-
   "employeeDetail": {
     "notFound": "Zamestnanec nenájdený",
     "backToEmployees": "Späť na zamestnancov",
@@ -989,7 +1040,6 @@
     "basic": "Základná",
     "adding": "Pridávam..."
   },
-
   "reports": {
     "title": "Reporty",
     "subtitle": "Analytika, prehľady a vlastné reporty",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Tento mesiac",
     "lastMonth": "Minulý mesiac",
     "last7Days": "Posledných 7 dní",
-    "last30Days": "Posledných 30 dní"
+    "last30Days": "Posledných 30 dní",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Menu",
     "closeMenu": "Zavrieť menu",
@@ -1041,7 +1104,6 @@
     "required": "Povinné",
     "optional": "Voliteľné"
   },
-
   "shiftTemplates": {
     "title": "Šablóny smien",
     "subtitle": "Vytvorte opakovateľné vzory smien",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "smien",
     "generating": "Generujem..."
   },
-
   "legal": {
-    "lastUpdated": "Naposledy aktualizované"
+    "lastUpdated": "Naposledy aktualizované",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1289,564 @@
     "october": "Október",
     "november": "November",
     "december": "December"
+  },
+  "bulkImport": {
+    "title": "Hromadný import",
+    "subtitle": "Import údajov z CSV alebo Excel súborov",
+    "selectType": "Vybrať typ",
+    "uploadFile": "Nahrať súbor",
+    "preview": "Náhľad",
+    "complete": "Dokončiť",
+    "invalidFileType": "Nahrajte CSV alebo Excel súbor",
+    "importFailed": "Import zlyhal. Skúste to znova.",
+    "uploadFor": "Nahrať",
+    "uploadDesc": "Pretiahnite alebo kliknite pre výber súboru",
+    "downloadTemplate": "Stiahnuť šablónu",
+    "dragDrop": "Pretiahnite súbor sem alebo kliknite pre výber",
+    "supportedFormats": "Podporované formáty: CSV, XLSX",
+    "previewData": "Náhľad údajov",
+    "rowsFound": "riadkov nájdených v",
+    "andMore": "A",
+    "moreRows": "ďalších riadkov...",
+    "importing": "Importujem...",
+    "startImport": "Spustiť import",
+    "importComplete": "Import dokončený",
+    "successfullyImported": "Úspešne importované",
+    "of": "z",
+    "records": "záznamov",
+    "successful": "Úspešné",
+    "failed": "Zlyhané",
+    "total": "Celkom",
+    "importMore": "Importovať ďalšie údaje",
+    "type": {
+      "employees": "Zamestnanci",
+      "employeesDesc": "Import profilov zamestnancov",
+      "shifts": "Smeny",
+      "shiftsDesc": "Import rozvrhov smien",
+      "locations": "Lokality",
+      "locationsDesc": "Import lokalít",
+      "skills": "Zručnosti",
+      "skillsDesc": "Import zručností"
+    }
+  },
+  "jobs": {
+    "open": "Otvorené",
+    "closed": "Uzavreté",
+    "applicants": "Uchádzači",
+    "created": "Pracovná ponuka úspešne vytvorená",
+    "createError": "Nepodarilo sa vytvoriť pracovnú ponuku. Skúste to znova.",
+    "updated": "Pracovná ponuka úspešne aktualizovaná",
+    "updateError": "Nepodarilo sa aktualizovať pracovnú ponuku. Skúste to znova.",
+    "fullTime": "Plný úväzok",
+    "partTime": "Čiastočný úväzok",
+    "contract": "Zmluva",
+    "temporary": "Dočasné",
+    "subtitle": "Spravovať interné kariérne príležitosti",
+    "openPositions": "Otvorené pozície",
+    "closedPositions": "Uzavreté",
+    "totalApplicants": "Celkom uchádzačov",
+    "noJobs": "Nenašli sa žiadne pracovné ponuky",
+    "viewApplicants": "Zobraziť uchádzačov",
+    "editPosting": "Upraviť pracovnú ponuku",
+    "jobTitle": "Názov pozície",
+    "enterTitle": "Zadajte názov pozície",
+    "selectDepartment": "Vybrať oddelenie",
+    "selectLocation": "Vybrať lokalitu",
+    "salary": "Platový rozsah",
+    "enterDescription": "Zadajte popis pozície",
+    "postJob": "Zverejniť pozíciu",
+    "skillMatch": "zhoda zručností",
+    "noApplicants": "Zatiaľ žiadni uchádzači"
+  },
+  "employees": {
+    "searchPlaceholder": "Hľadať podľa mena alebo e-mailu...",
+    "employees": "zamestnanci",
+    "noResults": "Nenašli sa žiadni zamestnanci zodpovedajúci vašim kritériám",
+    "details": "Podrobnosti zamestnanca",
+    "hireDate": "Dátum nástupu",
+    "assigned": "priradené",
+    "leaveDetails": "Podrobnosti voľna",
+    "until": "Do",
+    "terminationDetails": "Podrobnosti ukončenia",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Centrum integrácií",
+    "subtitle": "Prepojte Uplift s vašimi existujúcimi nástrojmi",
+    "apiFactory": "API továreň",
+    "addIntegration": "Pridať integráciu",
+    "configure": "Konfigurovať",
+    "connect": "Pripojiť",
+    "cancel": "Zrušiť",
+    "back": "Späť",
+    "saveChanges": "Uložiť zmeny",
+    "syncNow": "Synchronizovať teraz",
+    "disconnect": "Odpojiť {{name}}",
+    "disconnectConfirm": "Odpojiť {{name}}? Toto zastaví všetky synchronizácie.",
+    "settingsSaved": "Nastavenia uložené",
+    "browseMarketplace": "Prehľadávať trh",
+    "loadingIntegrations": "Načítavam integrácie...",
+    "noIntegrations": "Žiadne pripojené integrácie",
+    "noIntegrationsDesc": "Pripojte svoju prvú integráciu a začnite synchronizovať údaje",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Synchronizujem..."
+    },
+    "stats": {
+      "connected": "Pripojené",
+      "available": "Dostupné",
+      "syncsToday": "Synchronizácie dnes",
+      "errors": "Chyby",
+      "totalSyncs": "Celkové synchronizácie",
+      "lastSync": "Posledná synchronizácia",
+      "records": "záznamov"
+    },
+    "tabs": {
+      "connected": "Pripojené",
+      "marketplace": "Trh",
+      "restApi": "REST API",
+      "apiFactory": "API továreň",
+      "activityLog": "Záznam aktivít",
+      "settings": "Nastavenia",
+      "fieldMapping": "Mapovanie polí",
+      "syncHistory": "História synchronizácie",
+      "webhooks": "Webhooky"
+    },
+    "connection": {
+      "lastSync": "Posledná synchronizácia",
+      "frequency": "Frekvencia",
+      "status": "Stav",
+      "healthy": "V poriadku",
+      "errors": "chýb"
+    },
+    "connectModal": {
+      "title": "Pripojiť {{name}}",
+      "whatItDoes": "Čo táto integrácia robí:",
+      "redirectNotice": "Budete presmerovaný na {{name}}",
+      "authorizeMessage": "Prihláste sa a autorizujte Uplift pre prístup k vašim údajom. Žiadame len potrebné oprávnenia.",
+      "connectWith": "Pripojiť cez {{name}}",
+      "connecting": "Pripájam sa k {{name}}...",
+      "completeAuth": "Dokončite autorizáciu vo vyskakovacom okne",
+      "successConnected": "Úspešne pripojené!",
+      "configureSyncSettings": "Nakonfigurujte nastavenia synchronizácie nižšie.",
+      "completeSetup": "Dokončiť nastavenie",
+      "connected": "{{name}} pripojené!",
+      "firstSyncSoon": "Vaša prvá synchronizácia začne čoskoro",
+      "hris": {
+        "syncEmployees": "Automatická synchronizácia záznamov zamestnancov",
+        "importDepts": "Import oddelení a lokalít",
+        "syncTimeOff": "Synchronizácia zostatkov voľna"
+      },
+      "payroll": {
+        "exportTimesheets": "Export schválených výkazov práce",
+        "syncPayRates": "Synchronizácia sadzieb a nadčasov",
+        "autoReconciliation": "Automatické odsúhlasenie miezd"
+      },
+      "comms": {
+        "shiftReminders": "Odosielanie pripomienok smien",
+        "postRecognition": "Zverejnenie uznania v kanáloch",
+        "swapNotifications": "Notifikácie o žiadostiach o výmenu"
+      },
+      "identity": {
+        "sso": "Jednotné prihlásenie (SSO)",
+        "autoProvisioning": "Automatické vytváranie používateľov",
+        "directorySync": "Synchronizácia adresára"
+      },
+      "other": {
+        "bidirectional": "Obojsmerná synchronizácia údajov",
+        "realtimeWebhooks": "Aktualizácie v reálnom čase cez webhooky",
+        "auditTrail": "Kompletný audit trail"
+      }
+    },
+    "configureModal": {
+      "title": "Nastavenia {{name}}",
+      "connectedSince": "Pripojené {{date}}"
+    },
+    "settings": {
+      "autoSync": "Automatická synchronizácia",
+      "autoSyncDesc": "Automaticky synchronizovať údaje podľa plánu",
+      "autoSyncScheduleDesc": "Synchronizovať automaticky podľa plánu",
+      "syncFrequency": "Frekvencia synchronizácie",
+      "nextScheduledSync": "Ďalšia plánovaná synchronizácia",
+      "dataToSync": "Údaje na synchronizáciu",
+      "frequency": {
+        "realtime": "V reálnom čase",
+        "hourly": "Každú hodinu",
+        "daily": "Denne",
+        "weekly": "Týždenne"
+      },
+      "data": {
+        "employees": "Zamestnanci",
+        "timeEntries": "Časové záznamy",
+        "departments": "Oddelenia",
+        "locations": "Lokality"
+      }
+    },
+    "mapping": {
+      "description": "Mapovanie polí riadi, ako sa údaje z {{name}} mapujú na polia Uplift. Zmeny sa prejavia pri ďalšej synchronizácii.",
+      "sourceField": "Pole {{name}}",
+      "upliftField": "Pole Uplift",
+      "status": "Stav",
+      "selectField": "Vybrať pole...",
+      "mapped": "Namapované",
+      "unmapped": "Nenamapované"
+    },
+    "history": {
+      "noHistory": "Zatiaľ žiadna história synchronizácie",
+      "sync": "Synchronizácia",
+      "duration": "Trvanie",
+      "records": "Záznamy",
+      "created": "Vytvorené",
+      "updated": "Aktualizované"
+    },
+    "webhooks": {
+      "description": "Webhooky informujú {{name}} o udalostiach v Uplift",
+      "addWebhook": "Pridať webhook",
+      "noWebhooks": "Žiadne nakonfigurované webhooky",
+      "createFirst": "Vytvorte svoj prvý webhook",
+      "active": "Aktívny",
+      "paused": "Pozastavený",
+      "sendTestPayload": "Odoslať testovací payload",
+      "pauseWebhook": "Pozastaviť webhook",
+      "enableWebhook": "Povoliť webhook",
+      "deleteWebhook": "Vymazať webhook",
+      "lastTriggered": "Naposledy spustený",
+      "never": "Nikdy",
+      "successRate": "Úspešnosť",
+      "sendEventsTo": "Odosielať udalosti na {{name}}",
+      "endpointUrl": "URL koncového bodu",
+      "eventsToSend": "Udalosti na odoslanie",
+      "hmacInfo": "Všetky webhook payloady podpíšeme pomocou HMAC-SHA256. Podpis dostanete v",
+      "header": "hlavičke.",
+      "createWebhook": "Vytvoriť webhook",
+      "validationError": "Zadajte URL a vyberte aspoň jednu udalosť",
+      "createdSuccess": "Webhook úspešne vytvorený!",
+      "testSent": "Testovací payload odoslaný na",
+      "testStatus": "Stav",
+      "deleteConfirm": "Vymazať tento webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Hľadať integrácie...",
+      "allCategories": "Všetky kategórie",
+      "infoBannerTitle": "Uplift funguje s vašimi existujúcimi nástrojmi",
+      "infoBannerDesc": "Prepojte svoj HRIS, mzdový a komunikačný systém. Synchronizujeme údaje - nenahradzujeme váš stack.",
+      "noResults": "Žiadne integrácie nezodpovedajú vášmu hľadaniu",
+      "dontSeeSystem": "Nevidíte váš systém?",
+      "alwaysAdding": "Neustále pridávame nové integrácie. Dajte nám vedieť, čo potrebujete.",
+      "requestIntegration": "Požiadať o integráciu"
+    },
+    "activity": {
+      "recentActivity": "Nedávna aktivita integrácií",
+      "exportLog": "Exportovať záznam"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API továreň",
+    "subtitle": "Vytvorte vlastné REST API integrácie bez písania kódu",
+    "newIntegration": "Nová integrácia",
+    "searchPlaceholder": "Hľadať integrácie...",
+    "loadingIntegrations": "Načítavam integrácie...",
+    "noIntegrationsFound": "Nenašli sa žiadne integrácie",
+    "noIntegrationsYet": "Zatiaľ žiadne vlastné integrácie",
+    "tryDifferentSearch": "Skúste iný vyhľadávací výraz",
+    "createFirstDesc": "Vytvorte svoju prvú vlastnú API integráciu pre prepojenie akéhokoľvek REST API",
+    "createIntegration": "Vytvoriť integráciu",
+    "deleteConfirm": "Naozaj chcete vymazať túto integráciu?",
+    "list": {
+      "eventsCount": "{{count}} udalostí",
+      "scheduled": "Naplánované",
+      "incomingWebhook": "Prichádzajúci webhook",
+      "manual": "Manuálne",
+      "runsCount": "{{count}} spustení",
+      "errorsCount": "{{count}} chýb",
+      "disabled": "Zakázané",
+      "edit": "Upraviť",
+      "test": "Testovať",
+      "viewLogs": "Zobraziť záznamy",
+      "delete": "Vymazať",
+      "lastRun": "Posledné spustenie"
+    },
+    "stats": {
+      "totalIntegrations": "Celkom integrácií",
+      "active": "Aktívne",
+      "runsToday": "Spustení dnes",
+      "totalErrors": "Celkom chýb"
+    },
+    "editor": {
+      "editTitle": "Upraviť API integráciu",
+      "createTitle": "Vytvoriť API integráciu",
+      "subtitle": "Nakonfigurujte svoje vlastné REST API pripojenie",
+      "integrationName": "Názov integrácie",
+      "integrationNamePlaceholder": "napr. Synchronizácia s mzdovým systémom",
+      "description": "Popis",
+      "descriptionPlaceholder": "Čo táto integrácia robí?",
+      "method": "Metóda",
+      "url": "URL",
+      "headers": "Hlavičky",
+      "addHeader": "Pridať hlavičku",
+      "headerName": "Názov hlavičky",
+      "headerValue": "Hodnota",
+      "requestBodyJson": "Telo požiadavky (JSON)",
+      "useVariables": "Použite {{field}} pre premenné",
+      "availableVariables": "Dostupné premenné",
+      "authenticationType": "Typ autentifikácie",
+      "apiKeyLocation": "Umiestnenie API kľúča",
+      "header": "Hlavička",
+      "queryParameter": "Parameter dotazu",
+      "keyName": "Názov kľúča",
+      "keyNamePlaceholder": "napr. X-API-Key",
+      "apiKey": "API kľúč",
+      "enterApiKey": "Zadajte váš API kľúč",
+      "bearerToken": "Bearer token",
+      "enterToken": "Zadajte váš token",
+      "username": "Používateľské meno",
+      "password": "Heslo",
+      "tokenUrl": "URL tokenu",
+      "clientId": "ID klienta",
+      "clientSecret": "Tajný kľúč klienta",
+      "scopes": "Rozsahy (oddelené čiarkou)",
+      "whenShouldRun": "Kedy sa má táto integrácia spúšťať?",
+      "selectEvents": "Vybrať udalosti",
+      "schedule": "Plán",
+      "cronExpression": "CRON výraz",
+      "scheduleUtcNote": "Plán používa časovú zónu UTC. Aktuálny CRON",
+      "yourWebhookUrl": "Vaša webhook URL",
+      "webhookPostNote": "Odošlite POST požiadavky na túto URL. Spracujeme prichádzajúce údaje a namapujeme ich na Uplift.",
+      "fieldMappings": "Mapovanie polí",
+      "fieldMappingsDesc": "Namapujte polia Uplift na polia vášho externého API",
+      "addMapping": "Pridať mapovanie",
+      "noFieldMappings": "Zatiaľ žiadne mapovanie polí",
+      "addMappingsDesc": "Pridajte mapovania pre transformáciu údajov medzi systémami",
+      "addFirstMapping": "Pridať prvé mapovanie",
+      "selectUpliftField": "Vybrať pole Uplift...",
+      "externalFieldName": "Názov externého poľa",
+      "noTransform": "Bez transformácie",
+      "dateIso": "Dátum -> ISO",
+      "dateUk": "Dátum -> UK formát",
+      "boolYn": "Bool -> Á/N",
+      "fieldMappingTip": "Mapovanie polí sa používa na automatické zostavenie tela požiadavky. Môžete tiež použiť syntax {{field}} v záložke Požiadavka pre vlastné JSON štruktúry.",
+      "testConfiguration": "Testovať konfiguráciu",
+      "testDescription": "Odošlite testovaciu požiadavku na overenie konfigurácie. Použijeme vzorové údaje.",
+      "testing": "Testujem...",
+      "sendTestRequest": "Odoslať testovaciu požiadavku",
+      "success": "Úspech",
+      "failed": "Zlyhanie",
+      "status": "Stav",
+      "time": "Čas",
+      "response": "Odpoveď",
+      "enableIntegration": "Povoliť integráciu",
+      "cancel": "Zrušiť",
+      "saveChanges": "Uložiť zmeny",
+      "createIntegration": "Vytvoriť integráciu",
+      "tabs": {
+        "request": "Požiadavka",
+        "authentication": "Autentifikácia",
+        "trigger": "Spúšťač",
+        "fieldMapping": "Mapovanie polí",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Záznamy spustení",
+      "export": "Exportovať",
+      "noData": "Zatiaľ žiadne údaje. Záznamy spustení sa zobrazia po spustení integrácií.",
+      "unknown": "Neznáme",
+      "error": "Chyba"
+    },
+    "helpBanner": {
+      "title": "Potrebujete pomoc s integráciou?",
+      "description": "Pozrite si našu API dokumentáciu pre príklady alebo kontaktujte podporu pre zložitejšie prípady."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API kľúče",
+    "subtitle": "Generujte API kľúče pre prístup k údajom Uplift z vašich aplikácií",
+    "apiDocs": "API dokumentácia",
+    "createKey": "Vytvoriť kľúč",
+    "createApiKey": "Vytvoriť API kľúč",
+    "loadingKeys": "Načítavam API kľúče...",
+    "loadError": "Nepodarilo sa načítať API kľúče.",
+    "noKeysYet": "Zatiaľ žiadne API kľúče",
+    "createFirstDesc": "Vytvorte svoj prvý API kľúč a začnite integrovať s Uplift",
+    "retry": "Skúsiť znova",
+    "revokeConfirm": "Zrušiť API kľúč \"{{name}}\"? Túto akciu nie je možné vrátiť.",
+    "regenerateConfirm": "Pregenerovať tajný kľúč pre \"{{name}}\"? Starý tajný kľúč okamžite prestane fungovať.",
+    "regenerateSuccess": "Nový tajný kľúč: {{secret}}\n\nUložte si ho teraz - znova ho neuvidíte!",
+    "regenerateError": "Nepodarilo sa pregenerovať tajný kľúč: {{message}}",
+    "usageStats": "Štatistiky použitia pre {{name}}:\n\nCelkové požiadavky: {{requests}}\nNaposledy použité: {{lastUsed}}",
+    "card": {
+      "noDescription": "Bez popisu",
+      "expired": "Vypršané",
+      "active": "Aktívny",
+      "inactive": "Neaktívny",
+      "keyId": "ID kľúča",
+      "requests": "Požiadavky",
+      "lastUsed": "Naposledy použité",
+      "never": "Nikdy",
+      "rateLimit": "Limit požiadaviek",
+      "standard": "Štandardný",
+      "hideDetails": "Skryť podrobnosti",
+      "showDetails": "Zobraziť podrobnosti",
+      "scopes": "ROZSAHY",
+      "created": "Vytvorené",
+      "expires": "Vyprší",
+      "usage": "Použitie",
+      "regenerate": "Pregenerovať",
+      "revoke": "Zrušiť"
+    },
+    "create": {
+      "keyCreatedTitle": "API kľúč vytvorený",
+      "createTitle": "Vytvoriť API kľúč",
+      "keyCreatedSuccess": "API kľúč úspešne vytvorený",
+      "copySecretWarning": "Skopírujte si tajný kľúč teraz. Znova ho neuvidíte!",
+      "keyIdLabel": "ID kľúča",
+      "secretKeyLabel": "Tajný kľúč",
+      "fullApiKeyLabel": "Kompletný API kľúč (pre Authorization hlavičku)",
+      "fullKeyLabel": "Kompletný kľúč",
+      "authHeaderNote": "Použite toto v hlavičke Authorization",
+      "done": "Hotovo",
+      "keyName": "Názov kľúča",
+      "keyNamePlaceholder": "napr. Produkčný API kľúč",
+      "description": "Popis",
+      "descriptionPlaceholder": "Na čo bude tento kľúč použitý?",
+      "permissions": "Oprávnenia",
+      "rateLimit": "Limit požiadaviek",
+      "expiration": "Platnosť",
+      "neverExpires": "Nikdy nevyprší",
+      "thirtyDays": "30 dní",
+      "ninetyDays": "90 dní",
+      "oneYear": "1 rok",
+      "createError": "Nepodarilo sa vytvoriť API kľúč. Skúste to znova.",
+      "cancel": "Zrušiť",
+      "createKey": "Vytvoriť kľúč"
+    },
+    "docs": {
+      "quickStart": "Rýchly štart",
+      "authentication": "Autentifikácia",
+      "exampleResponse": "Príklad odpovede",
+      "viewFullDocs": "Zobraziť kompletnú dokumentáciu",
+      "downloadSpec": "Stiahnuť OpenAPI špecifikáciu"
+    },
+    "securityBanner": {
+      "title": "Bezpečnosť API kľúčov",
+      "description": "Udržujte svoje API kľúče v bezpečí. Nikdy ich nezverejňujte v klientskom kóde alebo verejných repozitároch. Ak je kľúč kompromitovaný, okamžite ho zrušte a vytvorte nový."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Nastavenie organizácie",
+    "subtitle": "Poďme nakonfigurovať vašu organizáciu",
+    "steps": {
+      "orgDetails": "Podrobnosti organizácie",
+      "locations": "Lokality",
+      "departments": "Oddelenia",
+      "roles": "Role a oprávnenia",
+      "review": "Kontrola a spustenie"
+    },
+    "orgDetails": {
+      "companyName": "Názov spoločnosti",
+      "companyNamePlaceholder": "napr. Acme s.r.o.",
+      "tradingName": "Obchodný názov (voliteľné)",
+      "tradingNamePlaceholder": "Verejný názov",
+      "industry": "Odvetvie",
+      "selectIndustry": "Vybrať odvetvie",
+      "companySize": "Veľkosť spoločnosti",
+      "selectSize": "Vybrať veľkosť",
+      "timezone": "Predvolená časová zóna",
+      "currency": "Predvolená mena",
+      "weekStart": "Týždeň začína",
+      "logo": "Logo spoločnosti",
+      "uploadLogo": "Nahrať logo",
+      "uploadLogoDesc": "PNG alebo SVG, odporúčané 200x200px"
+    },
+    "locations": {
+      "title": "Lokality",
+      "subtitle": "Pridajte svoje kancelárie, prevádzky alebo pobočky",
+      "addLocation": "Pridať lokalitu",
+      "name": "Názov lokality",
+      "namePlaceholder": "napr. Hlavná kancelária",
+      "address": "Adresa",
+      "addressPlaceholder": "Úplná adresa",
+      "timezone": "Časová zóna",
+      "noLocations": "Zatiaľ žiadne pridané lokality",
+      "addFirst": "Pridajte svoju prvú lokalitu pre začatie"
+    },
+    "departments": {
+      "title": "Oddelenia",
+      "subtitle": "Nastavte štruktúru oddelení",
+      "addDepartment": "Pridať oddelenie",
+      "name": "Názov oddelenia",
+      "namePlaceholder": "napr. Inžinierstvo",
+      "parentDepartment": "Nadradené oddelenie (voliteľné)",
+      "none": "Žiadne (najvyššia úroveň)",
+      "manager": "Manažér oddelenia",
+      "selectManager": "Vybrať manažéra",
+      "noDepartments": "Zatiaľ žiadne pridané oddelenia",
+      "addFirst": "Pridajte svoje prvé oddelenie"
+    },
+    "roles": {
+      "title": "Role a oprávnenia",
+      "subtitle": "Nakonfigurujte úrovne prístupu pre váš tím",
+      "addRole": "Pridať vlastnú rolu",
+      "builtIn": "Vstavaná",
+      "custom": "Vlastná",
+      "name": "Názov roly",
+      "namePlaceholder": "napr. Vedúci smeny",
+      "description": "Popis",
+      "descriptionPlaceholder": "Čo táto rola umožňuje?",
+      "permissions": "Oprávnenia",
+      "permissionGroups": {
+        "scheduling": "Plánovanie",
+        "timeTracking": "Sledovanie času",
+        "employees": "Zamestnanci",
+        "reports": "Reporty",
+        "settings": "Nastavenia"
+      }
+    },
+    "review": {
+      "title": "Kontrola a spustenie",
+      "subtitle": "Skontrolujte, či všetko vyzerá správne pred spustením",
+      "orgInfo": "Informácie o organizácii",
+      "locationsCount": "{{count}} nakonfigurovaných lokalít",
+      "departmentsCount": "{{count}} nakonfigurovaných oddelení",
+      "rolesCount": "{{count}} nakonfigurovaných rolí",
+      "allLooksGood": "Všetko vyzerá dobre!",
+      "launch": "Spustiť organizáciu",
+      "launchDesc": "Toto aktivuje vašu organizáciu a odošle pozvánky pridaným členom tímu."
+    },
+    "navigation": {
+      "back": "Späť",
+      "next": "Ďalej",
+      "skip": "Preskočiť",
+      "finish": "Dokončiť nastavenie"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

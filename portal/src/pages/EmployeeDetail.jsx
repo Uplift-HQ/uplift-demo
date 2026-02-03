@@ -8,12 +8,14 @@ import { useTranslation } from 'react-i18next';
 import { useParams, Link } from 'react-router-dom';
 import { employeesApi, skillsApi, api } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { useToast } from '../components/ToastProvider';
 import { ArrowLeft, Mail, Phone, MapPin, Calendar, Clock, Award, Plus, Star, Check, X, Shield, Trash, TrendingUp, Briefcase, GraduationCap, AlertTriangle, AlertCircle } from 'lucide-react';
 
 export default function EmployeeDetail() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { isAdmin, isManager } = useAuth();
+  const toast = useToast();
   const [employee, setEmployee] = useState(null);
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +53,8 @@ export default function EmployeeDetail() {
       loadEmployee();
       setShowAddSkill(false);
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to add skill:', err);
+      toast.error('Failed to add skill');
     }
   };
 
@@ -60,7 +63,8 @@ export default function EmployeeDetail() {
       await api.put(`/employees/${id}/skills/${skillId}`, { verified });
       loadEmployee();
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to verify skill:', err);
+      toast.error('Failed to verify skill');
     }
   };
 
@@ -69,7 +73,8 @@ export default function EmployeeDetail() {
       await api.put(`/employees/${id}/skills/${skillId}`, { level });
       loadEmployee();
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to update skill level:', err);
+      toast.error('Failed to update skill level');
     }
   };
 
@@ -79,7 +84,8 @@ export default function EmployeeDetail() {
       await api.delete(`/employees/${id}/skills/${skillId}`);
       loadEmployee();
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to remove skill:', err);
+      toast.error('Failed to remove skill');
     }
   };
 
@@ -335,6 +341,7 @@ function AddSkillModal({ skills, onClose, onAdd, t }) {
           </button>
         </div>
 
+        {/* NOTE: Consider adding custom validation beyond HTML5 required/type attributes */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">{t('employeeDetail.selectSkill', 'Select Skill')}</label>

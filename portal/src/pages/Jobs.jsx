@@ -27,7 +27,7 @@ export default function Jobs() {
       const data = await jobsApi.list();
       setJobs(data.jobs || []);
     } catch (err) {
-      console.error('Failed to load jobs:', err);
+      if (import.meta.env.DEV) console.error('Failed to load jobs:', err);
       setError('Failed to load job postings. Please try again.');
     } finally {
       setLoading(false);
@@ -186,6 +186,7 @@ export default function Jobs() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
             <div className="flex justify-between items-center mb-4"><h2 className="text-lg font-semibold">{editingJob ? t('jobs.editPosting', 'Edit Job Posting') : t('manager.createPosting', 'Create Job Posting')}</h2><button onClick={() => { setShowModal(false); setEditingJob(null); }} className="p-1 hover:bg-gray-100 rounded"><X className="h-5 w-5 text-gray-500" /></button></div>
+            {/* NOTE: Consider adding custom validation beyond HTML5 required/type attributes */}
             <form onSubmit={editingJob ? handleUpdateJob : handleCreateJob} className="space-y-4">
               <div><label className="block text-sm font-medium text-gray-700 mb-1">{t('jobs.jobTitle', 'Job Title')} *</label><input name="title" type="text" className="w-full px-3 py-2 border rounded-lg" placeholder={t('jobs.enterTitle', 'Enter job title')} defaultValue={editingJob?.title || ''} required /></div>
               <div className="grid grid-cols-2 gap-4">

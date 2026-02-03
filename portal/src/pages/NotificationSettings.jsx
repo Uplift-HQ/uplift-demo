@@ -52,7 +52,7 @@ export default function NotificationSettings() {
         setPreferences(prev => ({ ...prev, ...result.preferences }));
       }
     } catch (error) {
-      console.error('Failed to load preferences:', error);
+      if (import.meta.env.DEV) console.error('Failed to load preferences:', error);
     } finally {
       setLoading(false);
     }
@@ -63,7 +63,7 @@ export default function NotificationSettings() {
     try {
       await api.put('/notifications/preferences', preferences);
     } catch (error) {
-      console.error('Failed to save preferences:', error);
+      if (import.meta.env.DEV) console.error('Failed to save preferences:', error);
     } finally {
       setSaving(false);
     }
@@ -306,7 +306,7 @@ export default function NotificationSettings() {
                 await api.put('/notifications/preferences', disabledPrefs);
                 setPreferences(disabledPrefs);
               } catch (error) {
-                console.error('Failed to disable notifications:', error);
+                if (import.meta.env.DEV) console.error('Failed to disable notifications:', error);
               }
             }
           }}

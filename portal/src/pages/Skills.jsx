@@ -53,26 +53,18 @@ export default function Skills() {
       }));
       setSkills(enriched);
     } catch (err) {
-      console.error('Failed to load skills:', err);
+      if (import.meta.env.DEV) console.error('Failed to load skills:', err);
       setError('Failed to load skills. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
+  // NOTE: Requires backend endpoint GET /skills/:id/employees
   const loadSkillEmployees = async (skill) => {
     setSelectedSkill(skill);
-    setLoadingEmployees(true);
-    try {
-      // TODO: skillsApi does not have a getEmployees method yet
-      const data = await skillsApi.list(); // Placeholder — replace with skillsApi.getEmployees(skill.id) when available
-      setSkillEmployees(data.employees || []);
-    } catch (err) {
-      console.error('Failed to load skill employees:', err);
-      setSkillEmployees([]);
-    } finally {
-      setLoadingEmployees(false);
-    }
+    setLoadingEmployees(false);
+    setSkillEmployees([]);
   };
 
   const handleAddSkill = async (e) => {
@@ -383,7 +375,7 @@ export default function Skills() {
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                 </div>
               ) : skillEmployees.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">{t('skills.noEmployees', 'No employees have this skill yet')}</p>
+                <p className="text-gray-500 text-center py-8">Employee listing for this skill is coming soon.</p>
               ) : (
                 <div className="space-y-3">
                   {skillEmployees.map(emp => (

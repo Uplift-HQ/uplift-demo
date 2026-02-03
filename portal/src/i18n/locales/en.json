@@ -54,7 +54,6 @@
     "viewMyCareer": "View My Career",
     "timeOffBalance": "Time Off Balance"
   },
-
   "nav": {
     "dashboard": "Dashboard",
     "employees": "Employees",
@@ -150,9 +149,45 @@
     "active": "Active",
     "inactive": "Inactive",
     "enabled": "Enabled",
-    "disabled": "Disabled"
+    "disabled": "Disabled",
+    "approveSelected": "Approve Selected",
+    "rejectSelected": "Reject Selected",
+    "clearSelection": "Clear",
+    "showing": "Showing",
+    "of": "of",
+    "page": "Page",
+    "previous": "Previous",
+    "terminated": "Terminated",
+    "sunday": "Sun",
+    "monday": "Mon",
+    "day": "Day",
+    "week": "Week",
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "mondayShort": "Mon",
+      "tuesdayShort": "Tue",
+      "wednesdayShort": "Wed",
+      "thursdayShort": "Thu",
+      "fridayShort": "Fri",
+      "saturdayShort": "Sat",
+      "sundayShort": "Sun"
+    },
+    "shifts": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "night": "Night"
+    },
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-  
   "auth": {
     "login": "Log In",
     "logout": "Log Out",
@@ -178,10 +213,7 @@
     "requestAccessMsg": "To get access to Uplift, please contact your manager or HR department. They will send you an invitation link.",
     "enterEmailPassword": "Please enter email and password",
     "loginFailed": "Login Failed",
-    "demoAccounts": "Demo Accounts:",
-    "demoWorker": "Worker: worker@uplift.work / Demo123!",
-    "demoManager": "Manager: manager@uplift.work / Demo123!",
-    "twoFactorAuth": "Two-Factor Authentication",
+        "twoFactorAuth": "Two-Factor Authentication",
     "enterMfaCode": "Enter the code from your authenticator app",
     "verificationCode": "Verification Code",
     "verify": "Verify",
@@ -194,9 +226,16 @@
     "invalidCode": "Invalid code",
     "allRightsReserved": "All rights reserved",
     "termsOfService": "Terms of Service",
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-  
   "navigation": {
     "home": "Home",
     "schedule": "Schedule",
@@ -214,7 +253,6 @@
     "leaderboard": "Leaderboard",
     "badges": "Badges"
   },
-  
   "home": {
     "welcome": "Welcome back, {{name}}!",
     "welcomeBack": "Welcome back,",
@@ -239,11 +277,30 @@
     "openOpportunities": "Open Opportunities",
     "noOpportunities": "No opportunities matching your skills right now"
   },
-  
   "schedule": {
     "title": "My Schedule",
     "weekView": "Week",
     "monthView": "Month",
+    "viewModes": {
+      "day": "Day",
+      "week": "Week",
+      "twoWeeks": "2 Weeks",
+      "month": "Month"
+    },
+    "ai": {
+      "skillsMatch": "Skills Match",
+      "budgetCompliance": "Budget Compliance",
+      "employeePreferences": "Employee Preferences",
+      "hoursFairness": "Hours Fairness",
+      "careerDevelopment": "Career Development",
+      "respectRestPeriods": "Respect 11-hour rest periods",
+      "avoidOvertime": "Avoid overtime unless necessary",
+      "includeTrainingShifts": "Include training shifts for developing staff",
+      "options": "Options",
+      "analyzing": "Analyzing schedules and availability...",
+      "consideringSkills": "Considering skills, preferences, and your priorities",
+      "noSuggestions": "No suggestions available"
+    },
     "listView": "List",
     "myShifts": "My Shifts",
     "openShifts": "Open Shifts",
@@ -293,9 +350,22 @@
     "yourShift": "Your Shift",
     "theirShift": "Their Shift",
     "sendRequest": "Send Request",
-    "cancelSwap": "Cancel Swap"
+    "cancelSwap": "Cancel Swap",
+    "allLocations": "All Locations",
+    "tuesday": "Tue",
+    "wednesday": "Wed",
+    "thursday": "Thu",
+    "friday": "Fri",
+    "saturday": "Sat",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-  
   "timeTracking": {
     "title": "Time Tracking",
     "clockedIn": "Clocked In",
@@ -326,9 +396,25 @@
     "tapToClockIn": "Tap to clock in",
     "onBreakSince": "On break since {{time}}",
     "workingSince": "Working since {{time}}",
-    "shiftEnded": "Shift ended"
+    "shiftEnded": "Shift ended",
+    "entriesApproved": "{{count}} entries approved",
+    "approveError": "Failed to approve entries. Please try again.",
+    "entriesRejected": "{{count}} entries rejected",
+    "rejectError": "Failed to reject entries. Please try again.",
+    "clockInError": "Failed to clock in. Please try again.",
+    "clockOutError": "Failed to clock out. Please try again.",
+    "breakError": "Failed to update break status. Please try again.",
+    "noPending": "No pending entries to review",
+    "noEntries": "No time entries found",
+    "history": "History",
+    "managerSubtitle": "Review and approve timesheets",
+    "employeeSubtitle": "Track your working hours",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "startBreak": "Start Break",
+    "endBreak": "End Break",
+    "totalHours": "Total Hours"
   },
-  
   "timeOff": {
     "title": "Time Off",
     "request": "Request Time Off",
@@ -359,9 +445,16 @@
     "selectDates": "Select Dates",
     "selectType": "Select Type",
     "addNotes": "Add Notes (Optional)",
-    "reviewRequest": "Review Request"
+    "reviewRequest": "Review Request",
+    "oneDay": "1 day",
+    "days": "days",
+    "dates": "Dates",
+    "duration": "Duration",
+    "noRequests": "No requests found",
+    "requestDetails": "Time Off Request Details",
+    "noReason": "No reason provided",
+    "submitted": "Submitted"
   },
-  
   "feed": {
     "title": "Feed",
     "newPost": "New Post",
@@ -401,7 +494,6 @@
     "hoursAgo": "{{count}}h ago",
     "daysAgo": "{{count}}d ago"
   },
-  
   "messages": {
     "title": "Messages",
     "newMessage": "New Message",
@@ -419,7 +511,6 @@
     "translateMessage": "Translate",
     "showOriginal": "Show Original"
   },
-  
   "profile": {
     "title": "Profile",
     "editProfile": "Edit Profile",
@@ -447,7 +538,6 @@
     "viewProfile": "View Profile",
     "memberSince": "Member since {{date}}"
   },
-  
   "skills": {
     "title": "Skills",
     "mySkills": "My Skills",
@@ -474,7 +564,6 @@
     "skillAdded": "Skill added successfully",
     "verificationRequested": "Verification requested"
   },
-  
   "career": {
     "title": "Career",
     "careerPath": "Career Path",
@@ -549,7 +638,6 @@
     "expired": "Expired",
     "expires": "Expires {{date}}"
   },
-  
   "gamification": {
     "level": "Level {{level}}",
     "levelShort": "Lvl {{level}}",
@@ -583,7 +671,6 @@
     "earnedOn": "Earned on {{date}}",
     "progressToEarn": "{{percent}}% progress to earn"
   },
-  
   "notifications": {
     "title": "Notifications",
     "markAllRead": "Mark All as Read",
@@ -605,7 +692,6 @@
     "allCaught": "You're all caught up!",
     "checkBackLater": "Check back later for new notifications"
   },
-  
   "settings": {
     "title": "Settings",
     "subtitle": "Manage your organization and account",
@@ -740,9 +826,23 @@
     "featureAccess": "Feature Access",
     "enableAll": "Enable All",
     "disableAll": "Disable All",
-    "aboutEmployeeVisibility": "These settings control which features are visible to each employee."
+    "aboutEmployeeVisibility": "These settings control which features are visible to each employee.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-  
   "tasks": {
     "title": "Tasks",
     "myTasks": "My Tasks",
@@ -781,7 +881,6 @@
     "takePhoto": "Take Photo",
     "chooseFromLibrary": "Choose from Library"
   },
-  
   "expenses": {
     "title": "Expenses",
     "myExpenses": "My Expenses",
@@ -808,7 +907,6 @@
     "totalApproved": "Total Approved",
     "totalReimbursed": "Total Reimbursed"
   },
-  
   "rewards": {
     "title": "Rewards",
     "myRewards": "My Rewards",
@@ -828,7 +926,6 @@
     "validUntil": "Valid until {{date}}",
     "termsConditions": "Terms & Conditions"
   },
-  
   "manager": {
     "dashboard": "Manager Dashboard",
     "teamOverview": "Team Overview",
@@ -859,10 +956,20 @@
     "attendance": "Attendance",
     "performance": "Performance"
   },
-  
   "onboarding": {
     "welcome": "Welcome to Uplift!",
     "getStarted": "Let's get you set up",
+    "steps": {
+      "employeeDetails": "Employee Details",
+      "roleDepartment": "Role & Department",
+      "skillsCerts": "Skills & Certs",
+      "availability": "Availability",
+      "invitation": "Invitation"
+    },
+    "daysAvailable": "Days Available",
+    "preferredShiftTimes": "Preferred Shift Times",
+    "availabilityTitle": "Availability & Preferences",
+    "availabilityDesc": "Set the employee's availability and scheduling preferences.",
     "skip": "Skip for now",
     "continue": "Continue",
     "finish": "Finish",
@@ -877,7 +984,6 @@
     "allSet": "You're All Set!",
     "startExploring": "Start exploring shifts and opportunities"
   },
-  
   "errors": {
     "networkError": "Network error. Please check your connection.",
     "serverError": "Server error. Please try again later.",
@@ -898,7 +1004,6 @@
     "tryAgain": "Please try again",
     "somethingWentWrong": "Something went wrong"
   },
-  
   "activity": {
     "title": "Activity Review",
     "subtitle": "Review task completions, proof uploads, and form submissions",
@@ -929,9 +1034,11 @@
     "enterRejectionReason": "Enter reason for rejection...",
     "confirmRejection": "Confirm Rejection",
     "approve": "Approve",
-    "reject": "Reject"
+    "reject": "Reject",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Notification Preferences",
     "subtitle": "Choose how and when you receive notifications",
@@ -973,7 +1080,6 @@
     "disableConfirm": "Are you sure you want to disable all notifications? You can re-enable them anytime.",
     "disableSuccess": "All notifications have been disabled."
   },
-
   "employeeDetail": {
     "notFound": "Employee not found",
     "backToEmployees": "Back to Employees",
@@ -989,15 +1095,39 @@
     "basic": "Basic",
     "adding": "Adding..."
   },
-
   "reports": {
     "title": "Reports",
     "subtitle": "Analytics, insights, and custom reports",
     "buildReport": "Build Report",
+    "chartTypes": {
+      "table": "Table",
+      "bar": "Bar Chart",
+      "line": "Line Chart",
+      "pie": "Pie Chart"
+    },
+    "columns": {
+      "employeeName": "Employee Name",
+      "totalHours": "Total Hours",
+      "regularHours": "Regular Hours",
+      "overtimeHours": "Overtime Hours",
+      "laborCost": "Labor Cost",
+      "location": "Location",
+      "department": "Department",
+      "scheduledShifts": "Scheduled Shifts",
+      "workedShifts": "Worked Shifts",
+      "missedShifts": "Missed Shifts",
+      "lateArrivals": "Late Arrivals",
+      "avgArrivalDiff": "Avg Arrival Diff",
+      "date": "Date",
+      "totalShifts": "Total Shifts",
+      "filledShifts": "Filled Shifts",
+      "openShifts": "Open Shifts",
+      "fillRate": "Fill Rate"
+    },
     "export": "Export",
-    "exportCsv": "Export as CSV",
+    "exportCsv": "Export CSV",
     "exportExcel": "Export as Excel",
-    "exportPdf": "Export as PDF",
+    "exportPdf": "Export PDF",
     "savedReports": "Saved Reports",
     "hoursWorked": "Hours Worked",
     "hoursWorkedDesc": "Employee hours by period",
@@ -1021,13 +1151,26 @@
     "regularHours": "Regular Hours",
     "overtimeHours": "Overtime Hours",
     "employees": "Employees",
-    "noData": "No data for selected period",
+    "noData": "No data available",
     "thisMonth": "This Month",
     "lastMonth": "Last Month",
     "last7Days": "Last 7 Days",
-    "last30Days": "Last 30 Days"
+    "last30Days": "Last 30 Days",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Menu",
     "closeMenu": "Close menu",
@@ -1041,7 +1184,6 @@
     "required": "Required",
     "optional": "Optional"
   },
-  
   "shiftTemplates": {
     "title": "Shift Templates",
     "subtitle": "Create reusable shift patterns",
@@ -1073,11 +1215,118 @@
     "shiftsLabel": "shifts",
     "generating": "Generating..."
   },
-
   "legal": {
-    "lastUpdated": "Last updated"
+    "lastUpdated": "Last updated",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1369,567 @@
     "october": "October",
     "november": "November",
     "december": "December"
+  },
+  "bulkImport": {
+    "title": "Bulk Import",
+    "subtitle": "Import data from CSV or Excel files",
+    "selectType": "Select Type",
+    "uploadFile": "Upload File",
+    "preview": "Preview",
+    "complete": "Complete",
+    "invalidFileType": "Please upload a CSV or Excel file",
+    "importFailed": "Import failed. Please try again.",
+    "uploadFor": "Upload",
+    "uploadDesc": "Drag and drop or click to select a file",
+    "downloadTemplate": "Download Template",
+    "dragDrop": "Drag and drop your file here, or click to browse",
+    "supportedFormats": "Supported formats: CSV, XLSX",
+    "previewData": "Preview Data",
+    "rowsFound": "rows found in",
+    "andMore": "And",
+    "moreRows": "more rows...",
+    "importing": "Importing...",
+    "startImport": "Start Import",
+    "importComplete": "Import Complete",
+    "successfullyImported": "Successfully imported",
+    "of": "of",
+    "records": "records",
+    "successful": "Successful",
+    "failed": "Failed",
+    "total": "Total",
+    "importMore": "Import More Data",
+    "type": {
+      "employees": "Employees",
+      "employeesDesc": "Import employee profiles",
+      "shifts": "Shifts",
+      "shiftsDesc": "Import shift schedules",
+      "locations": "Locations",
+      "locationsDesc": "Import locations",
+      "skills": "Skills",
+      "skillsDesc": "Import skills"
+    }
+  },
+  "jobs": {
+    "open": "Open",
+    "closed": "Closed",
+    "applicants": "Applicants",
+    "created": "Job posting created successfully",
+    "createError": "Failed to create job posting. Please try again.",
+    "updated": "Job posting updated successfully",
+    "updateError": "Failed to update job posting. Please try again.",
+    "fullTime": "Full Time",
+    "partTime": "Part Time",
+    "contract": "Contract",
+    "temporary": "Temporary",
+    "subtitle": "Manage internal career opportunities",
+    "openPositions": "Open Positions",
+    "closedPositions": "Closed",
+    "totalApplicants": "Total Applicants",
+    "noJobs": "No job postings found",
+    "viewApplicants": "View Applicants",
+    "editPosting": "Edit Job Posting",
+    "jobTitle": "Job Title",
+    "enterTitle": "Enter job title",
+    "selectDepartment": "Select department",
+    "selectLocation": "Select location",
+    "salary": "Salary Range",
+    "enterDescription": "Enter job description",
+    "postJob": "Post Job",
+    "skillMatch": "skill match",
+    "noApplicants": "No applicants yet"
+  },
+  "employees": {
+    "searchPlaceholder": "Search by name or email...",
+    "employees": "employees",
+    "noResults": "No employees found matching your criteria",
+    "details": "Employee Details",
+    "hireDate": "Hire Date",
+    "assigned": "assigned",
+    "leaveDetails": "Leave Details",
+    "until": "Until",
+    "terminationDetails": "Termination Details",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Integration Hub",
+    "subtitle": "Connect Uplift to your existing tools",
+    "apiFactory": "API Factory",
+    "addIntegration": "Add Integration",
+    "configure": "Configure",
+    "connect": "Connect",
+    "cancel": "Cancel",
+    "back": "Back",
+    "saveChanges": "Save Changes",
+    "syncNow": "Sync Now",
+    "disconnect": "Disconnect {{name}}",
+    "disconnectConfirm": "Disconnect {{name}}? This will stop all syncs.",
+    "settingsSaved": "Settings saved",
+    "browseMarketplace": "Browse Marketplace",
+    "loadingIntegrations": "Loading integrations...",
+    "noIntegrations": "No integrations connected",
+    "noIntegrationsDesc": "Connect your first integration to start syncing data",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Syncing..."
+    },
+    "stats": {
+      "connected": "Connected",
+      "available": "Available",
+      "syncsToday": "Syncs Today",
+      "errors": "Errors",
+      "totalSyncs": "Total Syncs",
+      "lastSync": "Last Sync",
+      "records": "records"
+    },
+    "tabs": {
+      "connected": "Connected",
+      "marketplace": "Marketplace",
+      "restApi": "REST API",
+      "apiFactory": "API Factory",
+      "activityLog": "Activity Log",
+      "settings": "Settings",
+      "fieldMapping": "Field Mapping",
+      "syncHistory": "Sync History",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Last Sync",
+      "frequency": "Frequency",
+      "status": "Status",
+      "healthy": "Healthy",
+      "errors": "errors"
+    },
+    "connectModal": {
+      "title": "Connect {{name}}",
+      "whatItDoes": "What this integration does:",
+      "redirectNotice": "You'll be redirected to {{name}}",
+      "authorizeMessage": "Sign in and authorize Uplift to access your data. We only request the permissions we need.",
+      "connectWith": "Connect with {{name}}",
+      "connecting": "Connecting to {{name}}...",
+      "completeAuth": "Please complete authorization in the popup window",
+      "successConnected": "Successfully connected!",
+      "configureSyncSettings": "Configure your sync settings below.",
+      "completeSetup": "Complete Setup",
+      "connected": "{{name}} Connected!",
+      "firstSyncSoon": "Your first sync will begin shortly",
+      "hris": {
+        "syncEmployees": "Sync employee records automatically",
+        "importDepts": "Import departments and locations",
+        "syncTimeOff": "Keep time-off balances in sync"
+      },
+      "payroll": {
+        "exportTimesheets": "Export approved timesheets",
+        "syncPayRates": "Sync pay rates and overtime",
+        "autoReconciliation": "Automatic payroll reconciliation"
+      },
+      "comms": {
+        "shiftReminders": "Send shift reminders",
+        "postRecognition": "Post recognition to channels",
+        "swapNotifications": "Swap request notifications"
+      },
+      "identity": {
+        "sso": "Single sign-on (SSO)",
+        "autoProvisioning": "Automatic user provisioning",
+        "directorySync": "Directory sync"
+      },
+      "other": {
+        "bidirectional": "Bidirectional data sync",
+        "realtimeWebhooks": "Real-time updates via webhooks",
+        "auditTrail": "Full audit trail"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} Settings",
+      "connectedSince": "Connected {{date}}"
+    },
+    "settings": {
+      "autoSync": "Auto Sync",
+      "autoSyncDesc": "Automatically sync data on schedule",
+      "autoSyncScheduleDesc": "Sync automatically on schedule",
+      "syncFrequency": "Sync Frequency",
+      "nextScheduledSync": "Next Scheduled Sync",
+      "dataToSync": "Data to Sync",
+      "frequency": {
+        "realtime": "Real-time",
+        "hourly": "Hourly",
+        "daily": "Daily",
+        "weekly": "Weekly"
+      },
+      "data": {
+        "employees": "Employees",
+        "timeEntries": "Time Entries",
+        "departments": "Departments",
+        "locations": "Locations"
+      }
+    },
+    "mapping": {
+      "description": "Field mapping controls how data from {{name}} maps to Uplift fields. Changes take effect on next sync.",
+      "sourceField": "{{name}} Field",
+      "upliftField": "Uplift Field",
+      "status": "Status",
+      "selectField": "Select field...",
+      "mapped": "Mapped",
+      "unmapped": "Unmapped"
+    },
+    "history": {
+      "noHistory": "No sync history yet",
+      "sync": "Sync",
+      "duration": "Duration",
+      "records": "Records",
+      "created": "Created",
+      "updated": "Updated"
+    },
+    "webhooks": {
+      "description": "Webhooks notify {{name}} when events occur in Uplift",
+      "addWebhook": "Add Webhook",
+      "noWebhooks": "No webhooks configured",
+      "createFirst": "Create your first webhook",
+      "active": "Active",
+      "paused": "Paused",
+      "sendTestPayload": "Send test payload",
+      "pauseWebhook": "Pause webhook",
+      "enableWebhook": "Enable webhook",
+      "deleteWebhook": "Delete webhook",
+      "lastTriggered": "Last triggered",
+      "never": "Never",
+      "successRate": "Success rate",
+      "sendEventsTo": "Send events to {{name}}",
+      "endpointUrl": "Endpoint URL",
+      "eventsToSend": "Events to Send",
+      "hmacInfo": "We'll sign all webhook payloads with HMAC-SHA256. You'll receive the signature in the",
+      "header": "header.",
+      "createWebhook": "Create Webhook",
+      "validationError": "Please enter a URL and select at least one event",
+      "createdSuccess": "Webhook created successfully!",
+      "testSent": "Test payload sent to",
+      "testStatus": "Status",
+      "deleteConfirm": "Delete this webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Search integrations...",
+      "allCategories": "All Categories",
+      "infoBannerTitle": "Uplift works with your existing tools",
+      "infoBannerDesc": "Connect your HRIS, payroll, and comms systems. We sync data — we don't replace your stack.",
+      "noResults": "No integrations match your search",
+      "dontSeeSystem": "Don't see your system?",
+      "alwaysAdding": "We're always adding new integrations. Let us know what you need.",
+      "requestIntegration": "Request Integration"
+    },
+    "activity": {
+      "recentActivity": "Recent integration activity",
+      "exportLog": "Export Log"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API Factory",
+    "subtitle": "Build custom REST API integrations without writing code",
+    "newIntegration": "New Integration",
+    "searchPlaceholder": "Search integrations...",
+    "loadingIntegrations": "Loading integrations...",
+    "noIntegrationsFound": "No integrations found",
+    "noIntegrationsYet": "No custom integrations yet",
+    "tryDifferentSearch": "Try a different search term",
+    "createFirstDesc": "Create your first custom API integration to connect any REST API",
+    "createIntegration": "Create Integration",
+    "deleteConfirm": "Are you sure you want to delete this integration?",
+    "list": {
+      "eventsCount": "{{count}} events",
+      "scheduled": "Scheduled",
+      "incomingWebhook": "Incoming webhook",
+      "manual": "Manual",
+      "runsCount": "{{count}} runs",
+      "errorsCount": "{{count}} errors",
+      "disabled": "Disabled",
+      "edit": "Edit",
+      "test": "Test",
+      "viewLogs": "View Logs",
+      "delete": "Delete",
+      "lastRun": "Last run"
+    },
+    "stats": {
+      "totalIntegrations": "Total Integrations",
+      "active": "Active",
+      "runsToday": "Runs Today",
+      "totalErrors": "Total Errors"
+    },
+    "editor": {
+      "editTitle": "Edit API Integration",
+      "createTitle": "Create API Integration",
+      "subtitle": "Configure your custom REST API connection",
+      "integrationName": "Integration Name",
+      "integrationNamePlaceholder": "e.g., Sync to Payroll System",
+      "description": "Description",
+      "descriptionPlaceholder": "What does this integration do?",
+      "method": "Method",
+      "url": "URL",
+      "headers": "Headers",
+      "addHeader": "Add Header",
+      "headerName": "Header name",
+      "headerValue": "Value",
+      "requestBodyJson": "Request Body (JSON)",
+      "useVariables": "Use {{field}} for variables",
+      "availableVariables": "Available variables",
+      "authenticationType": "Authentication Type",
+      "apiKeyLocation": "API Key Location",
+      "header": "Header",
+      "queryParameter": "Query Parameter",
+      "keyName": "Key Name",
+      "keyNamePlaceholder": "e.g., X-API-Key",
+      "apiKey": "API Key",
+      "enterApiKey": "Enter your API key",
+      "bearerToken": "Bearer Token",
+      "enterToken": "Enter your token",
+      "username": "Username",
+      "password": "Password",
+      "tokenUrl": "Token URL",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scopes": "Scopes (comma-separated)",
+      "whenShouldRun": "When should this integration run?",
+      "selectEvents": "Select Events",
+      "schedule": "Schedule",
+      "cronExpression": "CRON Expression",
+      "scheduleUtcNote": "Schedule uses UTC timezone. Current CRON",
+      "yourWebhookUrl": "Your Webhook URL",
+      "webhookPostNote": "Send POST requests to this URL. We'll process incoming data and map it to Uplift.",
+      "fieldMappings": "Field Mappings",
+      "fieldMappingsDesc": "Map Uplift fields to your external API fields",
+      "addMapping": "Add Mapping",
+      "noFieldMappings": "No field mappings yet",
+      "addMappingsDesc": "Add mappings to transform data between systems",
+      "addFirstMapping": "Add First Mapping",
+      "selectUpliftField": "Select Uplift field...",
+      "externalFieldName": "External field name",
+      "noTransform": "No transform",
+      "dateIso": "Date → ISO",
+      "dateUk": "Date → UK format",
+      "boolYn": "Bool → Y/N",
+      "fieldMappingTip": "Field mappings are used to build the request body automatically. You can also use {{field}} syntax in the Request tab for custom JSON structures.",
+      "testConfiguration": "Test Configuration",
+      "testDescription": "Send a test request to verify your configuration. We'll use sample data.",
+      "testing": "Testing...",
+      "sendTestRequest": "Send Test Request",
+      "success": "Success",
+      "failed": "Failed",
+      "status": "Status",
+      "time": "Time",
+      "response": "Response",
+      "enableIntegration": "Enable integration",
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes",
+      "createIntegration": "Create Integration",
+      "tabs": {
+        "request": "Request",
+        "authentication": "Authentication",
+        "trigger": "Trigger",
+        "fieldMapping": "Field Mapping",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Execution Logs",
+      "export": "Export",
+      "noData": "No data yet. Execution logs will appear here once integrations run.",
+      "unknown": "Unknown",
+      "error": "Error"
+    },
+    "helpBanner": {
+      "title": "Need help building an integration?",
+      "description": "Check our API documentation for examples, or contact support for complex use cases."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API Keys",
+    "subtitle": "Generate API keys to access Uplift data from your applications",
+    "apiDocs": "API Docs",
+    "createKey": "Create Key",
+    "createApiKey": "Create API Key",
+    "loadingKeys": "Loading API keys...",
+    "loadError": "Failed to load API keys.",
+    "noKeysYet": "No API keys yet",
+    "createFirstDesc": "Create your first API key to start integrating with Uplift",
+    "retry": "Retry",
+    "revokeConfirm": "Revoke API key \"{{name}}\"? This action cannot be undone.",
+    "regenerateConfirm": "Regenerate secret for \"{{name}}\"? The old secret will stop working immediately.",
+    "regenerateSuccess": "New secret key: {{secret}}\n\nSave this now - you won't see it again!",
+    "regenerateError": "Failed to regenerate secret: {{message}}",
+    "usageStats": "Usage stats for {{name}}:\n\nTotal requests: {{requests}}\nLast used: {{lastUsed}}",
+    "card": {
+      "noDescription": "No description",
+      "expired": "Expired",
+      "active": "Active",
+      "inactive": "Inactive",
+      "keyId": "Key ID",
+      "requests": "Requests",
+      "lastUsed": "Last Used",
+      "never": "Never",
+      "rateLimit": "Rate Limit",
+      "standard": "Standard",
+      "hideDetails": "Hide details",
+      "showDetails": "Show details",
+      "scopes": "SCOPES",
+      "created": "Created",
+      "expires": "Expires",
+      "usage": "Usage",
+      "regenerate": "Regenerate",
+      "revoke": "Revoke"
+    },
+    "create": {
+      "keyCreatedTitle": "API Key Created",
+      "createTitle": "Create API Key",
+      "keyCreatedSuccess": "API key created successfully",
+      "copySecretWarning": "Copy your secret key now. You won't be able to see it again!",
+      "keyIdLabel": "Key ID",
+      "secretKeyLabel": "Secret Key",
+      "fullApiKeyLabel": "Full API Key (for Authorization header)",
+      "fullKeyLabel": "Full Key",
+      "authHeaderNote": "Use this in your Authorization header",
+      "done": "Done",
+      "keyName": "Key Name",
+      "keyNamePlaceholder": "e.g., Production API Key",
+      "description": "Description",
+      "descriptionPlaceholder": "What will this key be used for?",
+      "permissions": "Permissions",
+      "rateLimit": "Rate Limit",
+      "expiration": "Expiration",
+      "neverExpires": "Never expires",
+      "thirtyDays": "30 days",
+      "ninetyDays": "90 days",
+      "oneYear": "1 year",
+      "createError": "Failed to create API key. Please try again.",
+      "cancel": "Cancel",
+      "createKey": "Create Key"
+    },
+    "docs": {
+      "quickStart": "Quick Start",
+      "authentication": "Authentication",
+      "exampleResponse": "Example Response",
+      "viewFullDocs": "View Full Documentation",
+      "downloadSpec": "Download OpenAPI Spec"
+    },
+    "securityBanner": {
+      "title": "API Key Security",
+      "description": "Keep your API keys secure. Never expose them in client-side code or public repositories. If a key is compromised, revoke it immediately and create a new one."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Organisation Setup",
+    "subtitle": "Let's get your organisation configured",
+    "steps": {
+      "orgDetails": "Organisation Details",
+      "locations": "Locations",
+      "departments": "Departments",
+      "roles": "Roles & Permissions",
+      "review": "Review & Launch"
+    },
+    "orgDetails": {
+      "companyName": "Company Name",
+      "companyNamePlaceholder": "e.g., Acme Ltd",
+      "tradingName": "Trading Name (optional)",
+      "tradingNamePlaceholder": "Public-facing name",
+      "industry": "Industry",
+      "selectIndustry": "Select industry",
+      "companySize": "Company Size",
+      "selectSize": "Select size",
+      "timezone": "Default Timezone",
+      "currency": "Default Currency",
+      "weekStart": "Week Starts On",
+      "logo": "Company Logo",
+      "uploadLogo": "Upload Logo",
+      "uploadLogoDesc": "PNG or SVG, recommended 200×200px"
+    },
+    "locations": {
+      "title": "Locations",
+      "subtitle": "Add your offices, sites, or branches",
+      "addLocation": "Add Location",
+      "name": "Location Name",
+      "namePlaceholder": "e.g., Head Office",
+      "address": "Address",
+      "addressPlaceholder": "Full address",
+      "timezone": "Timezone",
+      "noLocations": "No locations added yet",
+      "addFirst": "Add your first location to get started"
+    },
+    "departments": {
+      "title": "Departments",
+      "subtitle": "Set up your department structure",
+      "addDepartment": "Add Department",
+      "name": "Department Name",
+      "namePlaceholder": "e.g., Engineering",
+      "parentDepartment": "Parent Department (optional)",
+      "none": "None (top-level)",
+      "manager": "Department Manager",
+      "selectManager": "Select manager",
+      "noDepartments": "No departments added yet",
+      "addFirst": "Add your first department"
+    },
+    "roles": {
+      "title": "Roles & Permissions",
+      "subtitle": "Configure access levels for your team",
+      "addRole": "Add Custom Role",
+      "builtIn": "Built-in",
+      "custom": "Custom",
+      "name": "Role Name",
+      "namePlaceholder": "e.g., Shift Supervisor",
+      "description": "Description",
+      "descriptionPlaceholder": "What can this role do?",
+      "permissions": "Permissions",
+      "permissionGroups": {
+        "scheduling": "Scheduling",
+        "timeTracking": "Time Tracking",
+        "employees": "Employees",
+        "reports": "Reports",
+        "settings": "Settings"
+      }
+    },
+    "review": {
+      "title": "Review & Launch",
+      "subtitle": "Check everything looks right before going live",
+      "orgInfo": "Organisation Info",
+      "locationsCount": "{{count}} locations configured",
+      "departmentsCount": "{{count}} departments configured",
+      "rolesCount": "{{count}} roles configured",
+      "allLooksGood": "Everything looks good!",
+      "launch": "Launch Organisation",
+      "launchDesc": "This will activate your organisation and send invitations to any added team members."
+    },
+    "navigation": {
+      "back": "Back",
+      "next": "Next",
+      "skip": "Skip for now",
+      "finish": "Finish Setup"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "forecast": {
+    "demoData": "Demo Data"
   }
 }

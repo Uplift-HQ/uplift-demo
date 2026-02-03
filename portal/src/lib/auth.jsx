@@ -5,7 +5,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { api, authApi } from './api';
+import { api, authApi, DEMO_MODE } from './api';
 
 const AuthContext = createContext(null);
 
@@ -33,6 +33,19 @@ export function AuthProvider({ children }) {
     }
 
     const token = localStorage.getItem('uplift_token');
+
+    // DEMO MODE: Auto-login if no token
+    if (!token && DEMO_MODE) {
+      try {
+        const result = await authApi.login('demo@grandhotel.com', 'demo');
+        const userData = result.user || result;
+        setUser(userData);
+        setLoading(false);
+        return;
+      } catch {
+        // Fall through to normal flow
+      }
+    }
 
     // No token stored - user needs to log in
     if (!token) {

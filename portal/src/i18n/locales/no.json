@@ -54,7 +54,6 @@
     "viewMyCareer": "Se min karriere",
     "timeOffBalance": "Fraværssaldo"
   },
-
   "nav": {
     "dashboard": "Oversikt",
     "employees": "Ansatte",
@@ -150,9 +149,21 @@
     "active": "Aktiv",
     "inactive": "Inaktiv",
     "enabled": "Aktivert",
-    "disabled": "Deaktivert"
+    "disabled": "Deaktivert",
+    "approveSelected": "Godkjenn valgte",
+    "rejectSelected": "Avslå valgte",
+    "clearSelection": "Tøm",
+    "showing": "Viser",
+    "of": "av",
+    "page": "Side",
+    "previous": "Forrige",
+    "terminated": "Avsluttet",
+    "sunday": "Søn",
+    "monday": "Man",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Logg inn",
     "logout": "Logg ut",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "For å få tilgang til Uplift, vennligst kontakt lederen din eller HR-avdelingen. De vil sende deg en invitasjonslenke.",
     "enterEmailPassword": "Vennligst oppgi e-post og passord",
     "loginFailed": "Innlogging mislyktes",
-    "demoAccounts": "Demokontoer:",
-    "demoWorker": "Arbeider: worker@uplift.work / Demo123!",
-    "demoManager": "Leder: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Tofaktorautentisering",
     "enterMfaCode": "Skriv inn koden fra autentiseringsappen din",
     "verificationCode": "Verifiseringskode",
@@ -194,9 +202,16 @@
     "invalidCode": "Ugyldig kode",
     "allRightsReserved": "Alle rettigheter reservert",
     "termsOfService": "Vilkår for bruk",
-    "privacyPolicy": "Personvernerklæring"
+    "privacyPolicy": "Personvernerklæring",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Hjem",
     "schedule": "Vaktplan",
@@ -214,7 +229,6 @@
     "leaderboard": "Toppliste",
     "badges": "Merker"
   },
-
   "home": {
     "welcome": "Velkommen tilbake, {{name}}!",
     "welcomeBack": "Velkommen tilbake,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Ledige muligheter",
     "noOpportunities": "Ingen muligheter som matcher kompetansen din akkurat nå"
   },
-
   "schedule": {
     "title": "Min vaktplan",
     "weekView": "Uke",
@@ -293,9 +306,22 @@
     "yourShift": "Din vakt",
     "theirShift": "Deres vakt",
     "sendRequest": "Send forespørsel",
-    "cancelSwap": "Avbryt bytte"
+    "cancelSwap": "Avbryt bytte",
+    "allLocations": "Alle lokasjoner",
+    "tuesday": "Tir",
+    "wednesday": "Ons",
+    "thursday": "Tor",
+    "friday": "Fre",
+    "saturday": "Lør",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Tidregistrering",
     "clockedIn": "Stemplet inn",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Trykk for å stemple inn",
     "onBreakSince": "På pause siden {{time}}",
     "workingSince": "Jobber siden {{time}}",
-    "shiftEnded": "Vakt avsluttet"
+    "shiftEnded": "Vakt avsluttet",
+    "entriesApproved": "{{count}} oppføringer godkjent",
+    "approveError": "Kunne ikke godkjenne oppføringer. Vennligst prøv igjen.",
+    "entriesRejected": "{{count}} oppføringer avslått",
+    "rejectError": "Kunne ikke avslå oppføringer. Vennligst prøv igjen.",
+    "clockInError": "Kunne ikke stemple inn. Vennligst prøv igjen.",
+    "clockOutError": "Kunne ikke stemple ut. Vennligst prøv igjen.",
+    "breakError": "Kunne ikke oppdatere pausestatus. Vennligst prøv igjen.",
+    "noPending": "Ingen ventende oppføringer å gjennomgå",
+    "noEntries": "Ingen tidsoppføringer funnet",
+    "history": "Historikk",
+    "managerSubtitle": "Gjennomgå og godkjenn timelister",
+    "employeeSubtitle": "Følg med på arbeidstiden din",
+    "clockIn": "Stemple inn",
+    "clockOut": "Stemple ut",
+    "startBreak": "Start pause",
+    "endBreak": "Avslutt pause",
+    "totalHours": "Totalt timer"
   },
-
   "timeOff": {
     "title": "Fravær",
     "request": "Be om fravær",
@@ -359,9 +401,16 @@
     "selectDates": "Velg datoer",
     "selectType": "Velg type",
     "addNotes": "Legg til notater (valgfritt)",
-    "reviewRequest": "Gjennomgå forespørsel"
+    "reviewRequest": "Gjennomgå forespørsel",
+    "oneDay": "1 dag",
+    "days": "dager",
+    "dates": "Datoer",
+    "duration": "Varighet",
+    "noRequests": "Ingen forespørsler funnet",
+    "requestDetails": "Fraværsforespørselsdetaljer",
+    "noReason": "Ingen årsak oppgitt",
+    "submitted": "Sendt"
   },
-
   "feed": {
     "title": "Strøm",
     "newPost": "Nytt innlegg",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}}t siden",
     "daysAgo": "{{count}}d siden"
   },
-
   "messages": {
     "title": "Meldinger",
     "newMessage": "Ny melding",
@@ -419,7 +467,6 @@
     "translateMessage": "Oversett",
     "showOriginal": "Vis original"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Rediger profil",
@@ -447,7 +494,6 @@
     "viewProfile": "Se profil",
     "memberSince": "Medlem siden {{date}}"
   },
-
   "skills": {
     "title": "Kompetanse",
     "mySkills": "Min kompetanse",
@@ -474,7 +520,6 @@
     "skillAdded": "Kompetanse lagt til",
     "verificationRequested": "Verifisering forespurt"
   },
-
   "career": {
     "title": "Karriere",
     "careerPath": "Karrierevei",
@@ -549,7 +594,6 @@
     "expired": "Utløpt",
     "expires": "Utløper {{date}}"
   },
-
   "gamification": {
     "level": "Nivå {{level}}",
     "levelShort": "Niv {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Opptjent {{date}}",
     "progressToEarn": "{{percent}}% fremgang for å tjene"
   },
-
   "notifications": {
     "title": "Varsler",
     "markAllRead": "Merk alle som lest",
@@ -605,7 +648,6 @@
     "allCaught": "Du er oppdatert!",
     "checkBackLater": "Kom tilbake senere for nye varsler"
   },
-
   "settings": {
     "title": "Innstillinger",
     "subtitle": "Administrer organisasjonen din og kontoen",
@@ -740,9 +782,23 @@
     "featureAccess": "Funksjonstilgang",
     "enableAll": "Aktiver alle",
     "disableAll": "Deaktiver alle",
-    "aboutEmployeeVisibility": "Disse innstillingene kontrollerer hvilke funksjoner som er synlige for hver ansatt."
+    "aboutEmployeeVisibility": "Disse innstillingene kontrollerer hvilke funksjoner som er synlige for hver ansatt.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Oppgaver",
     "myTasks": "Mine oppgaver",
@@ -781,7 +837,6 @@
     "takePhoto": "Ta bilde",
     "chooseFromLibrary": "Velg fra bibliotek"
   },
-
   "expenses": {
     "title": "Utgifter",
     "myExpenses": "Mine utgifter",
@@ -808,7 +863,6 @@
     "totalApproved": "Totalt godkjent",
     "totalReimbursed": "Totalt refundert"
   },
-
   "rewards": {
     "title": "Belønninger",
     "myRewards": "Mine belønninger",
@@ -828,7 +882,6 @@
     "validUntil": "Gyldig til {{date}}",
     "termsConditions": "Vilkår og betingelser"
   },
-
   "manager": {
     "dashboard": "Lederoversikt",
     "teamOverview": "Teamoversikt",
@@ -859,7 +912,6 @@
     "attendance": "Oppmøte",
     "performance": "Ytelse"
   },
-
   "onboarding": {
     "welcome": "Velkommen til Uplift!",
     "getStarted": "La oss sette deg i gang",
@@ -877,7 +929,6 @@
     "allSet": "Du er klar!",
     "startExploring": "Begynn å utforske vakter og muligheter"
   },
-
   "errors": {
     "networkError": "Nettverksfeil. Vennligst sjekk tilkoblingen din.",
     "serverError": "Serverfeil. Vennligst prøv igjen senere.",
@@ -898,7 +949,6 @@
     "tryAgain": "Vennligst prøv igjen",
     "somethingWentWrong": "Noe gikk galt"
   },
-
   "activity": {
     "title": "Aktivitetsgjennomgang",
     "subtitle": "Gjennomgå oppgavefullføringer, bevisopplastinger og skjemainnleveringer",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Skriv inn årsak til avslag...",
     "confirmRejection": "Bekreft avslag",
     "approve": "Godkjenn",
-    "reject": "Avslå"
+    "reject": "Avslå",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Varslingsinnstillinger",
     "subtitle": "Velg hvordan og når du mottar varsler",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Er du sikker på at du vil deaktivere alle varsler? Du kan aktivere dem igjen når som helst.",
     "disableSuccess": "Alle varsler er deaktivert."
   },
-
   "employeeDetail": {
     "notFound": "Ansatt ikke funnet",
     "backToEmployees": "Tilbake til ansatte",
@@ -989,7 +1040,6 @@
     "basic": "Grunnleggende",
     "adding": "Legger til..."
   },
-
   "reports": {
     "title": "Rapporter",
     "subtitle": "Analyser, innsikt og tilpassede rapporter",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Denne måneden",
     "lastMonth": "Forrige måned",
     "last7Days": "Siste 7 dager",
-    "last30Days": "Siste 30 dager"
+    "last30Days": "Siste 30 dager",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Meny",
     "closeMenu": "Lukk meny",
@@ -1041,7 +1104,6 @@
     "required": "Påkrevd",
     "optional": "Valgfritt"
   },
-
   "shiftTemplates": {
     "title": "Vaktmaler",
     "subtitle": "Opprett gjenbrukbare vaktmønstre",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "vakter",
     "generating": "Genererer..."
   },
-
   "legal": {
-    "lastUpdated": "Sist oppdatert"
+    "lastUpdated": "Sist oppdatert",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1289,564 @@
     "october": "Oktober",
     "november": "November",
     "december": "Desember"
+  },
+  "bulkImport": {
+    "title": "Masseimport",
+    "subtitle": "Importer data fra CSV- eller Excel-filer",
+    "selectType": "Velg type",
+    "uploadFile": "Last opp fil",
+    "preview": "Forhåndsvisning",
+    "complete": "Fullført",
+    "invalidFileType": "Vennligst last opp en CSV- eller Excel-fil",
+    "importFailed": "Import mislyktes. Vennligst prøv igjen.",
+    "uploadFor": "Last opp",
+    "uploadDesc": "Dra og slipp eller klikk for å velge en fil",
+    "downloadTemplate": "Last ned mal",
+    "dragDrop": "Dra og slipp filen din her, eller klikk for å bla",
+    "supportedFormats": "Støttede formater: CSV, XLSX",
+    "previewData": "Forhåndsvis data",
+    "rowsFound": "rader funnet i",
+    "andMore": "Og",
+    "moreRows": "flere rader...",
+    "importing": "Importerer...",
+    "startImport": "Start import",
+    "importComplete": "Import fullført",
+    "successfullyImported": "Importert",
+    "of": "av",
+    "records": "poster",
+    "successful": "Vellykket",
+    "failed": "Mislykket",
+    "total": "Totalt",
+    "importMore": "Importer mer data",
+    "type": {
+      "employees": "Ansatte",
+      "employeesDesc": "Importer ansattprofiler",
+      "shifts": "Vakter",
+      "shiftsDesc": "Importer vaktplaner",
+      "locations": "Lokasjoner",
+      "locationsDesc": "Importer lokasjoner",
+      "skills": "Kompetanse",
+      "skillsDesc": "Importer kompetanse"
+    }
+  },
+  "jobs": {
+    "open": "Åpen",
+    "closed": "Lukket",
+    "applicants": "Søkere",
+    "created": "Stillingsutlysning opprettet",
+    "createError": "Kunne ikke opprette stillingsutlysning. Vennligst prøv igjen.",
+    "updated": "Stillingsutlysning oppdatert",
+    "updateError": "Kunne ikke oppdatere stillingsutlysning. Vennligst prøv igjen.",
+    "fullTime": "Heltid",
+    "partTime": "Deltid",
+    "contract": "Kontrakt",
+    "temporary": "Midlertidig",
+    "subtitle": "Administrer interne karrieremuligheter",
+    "openPositions": "Åpne stillinger",
+    "closedPositions": "Lukkede",
+    "totalApplicants": "Totalt søkere",
+    "noJobs": "Ingen stillingsutlysninger funnet",
+    "viewApplicants": "Se søkere",
+    "editPosting": "Rediger stillingsutlysning",
+    "jobTitle": "Stillingstittel",
+    "enterTitle": "Skriv inn stillingstittel",
+    "selectDepartment": "Velg avdeling",
+    "selectLocation": "Velg lokasjon",
+    "salary": "Lønnsramme",
+    "enterDescription": "Skriv inn stillingsbeskrivelse",
+    "postJob": "Publiser stilling",
+    "skillMatch": "kompetansematch",
+    "noApplicants": "Ingen søkere ennå"
+  },
+  "employees": {
+    "searchPlaceholder": "Søk etter navn eller e-post...",
+    "employees": "ansatte",
+    "noResults": "Ingen ansatte funnet som matcher kriteriene dine",
+    "details": "Ansattdetaljer",
+    "hireDate": "Ansettelsesdato",
+    "assigned": "tildelt",
+    "leaveDetails": "Fraværsdetaljer",
+    "until": "Til",
+    "terminationDetails": "Avslutningsdetaljer",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Integrasjonshub",
+    "subtitle": "Koble Uplift til dine eksisterende verktøy",
+    "apiFactory": "API-fabrikk",
+    "addIntegration": "Legg til integrasjon",
+    "configure": "Konfigurer",
+    "connect": "Koble til",
+    "cancel": "Avbryt",
+    "back": "Tilbake",
+    "saveChanges": "Lagre endringer",
+    "syncNow": "Synkroniser nå",
+    "disconnect": "Koble fra {{name}}",
+    "disconnectConfirm": "Koble fra {{name}}? Dette vil stoppe all synkronisering.",
+    "settingsSaved": "Innstillinger lagret",
+    "browseMarketplace": "Bla i markedsplassen",
+    "loadingIntegrations": "Laster integrasjoner...",
+    "noIntegrations": "Ingen integrasjoner tilkoblet",
+    "noIntegrationsDesc": "Koble til din første integrasjon for å starte synkronisering",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Synkroniserer..."
+    },
+    "stats": {
+      "connected": "Tilkoblet",
+      "available": "Tilgjengelig",
+      "syncsToday": "Synkroniseringer i dag",
+      "errors": "Feil",
+      "totalSyncs": "Totalt synkroniseringer",
+      "lastSync": "Siste synkronisering",
+      "records": "poster"
+    },
+    "tabs": {
+      "connected": "Tilkoblet",
+      "marketplace": "Markedsplass",
+      "restApi": "REST API",
+      "apiFactory": "API-fabrikk",
+      "activityLog": "Aktivitetslogg",
+      "settings": "Innstillinger",
+      "fieldMapping": "Felttilordning",
+      "syncHistory": "Synkroniseringshistorikk",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Siste synkronisering",
+      "frequency": "Frekvens",
+      "status": "Status",
+      "healthy": "Sunn",
+      "errors": "feil"
+    },
+    "connectModal": {
+      "title": "Koble til {{name}}",
+      "whatItDoes": "Hva denne integrasjonen gjør:",
+      "redirectNotice": "Du vil bli videresendt til {{name}}",
+      "authorizeMessage": "Logg inn og autoriser Uplift til å få tilgang til dataene dine. Vi ber bare om tillatelsene vi trenger.",
+      "connectWith": "Koble til med {{name}}",
+      "connecting": "Kobler til {{name}}...",
+      "completeAuth": "Fullfør autorisering i popup-vinduet",
+      "successConnected": "Tilkoblet!",
+      "configureSyncSettings": "Konfigurer synkroniseringsinnstillingene nedenfor.",
+      "completeSetup": "Fullfør oppsett",
+      "connected": "{{name}} tilkoblet!",
+      "firstSyncSoon": "Din første synkronisering starter snart",
+      "hris": {
+        "syncEmployees": "Synkroniser ansattregistre automatisk",
+        "importDepts": "Importer avdelinger og lokasjoner",
+        "syncTimeOff": "Hold fraværssaldoer synkronisert"
+      },
+      "payroll": {
+        "exportTimesheets": "Eksporter godkjente timelister",
+        "syncPayRates": "Synkroniser lønnssatser og overtid",
+        "autoReconciliation": "Automatisk lønnsavstemming"
+      },
+      "comms": {
+        "shiftReminders": "Send vaktpåminnelser",
+        "postRecognition": "Publiser anerkjennelse til kanaler",
+        "swapNotifications": "Bytteforespørselsvarsler"
+      },
+      "identity": {
+        "sso": "Enkel pålogging (SSO)",
+        "autoProvisioning": "Automatisk brukeropprettelse",
+        "directorySync": "Katalogsynkronisering"
+      },
+      "other": {
+        "bidirectional": "Toveis datasynkronisering",
+        "realtimeWebhooks": "Sanntidsoppdateringer via webhooks",
+        "auditTrail": "Fullstendig revisjonslogg"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}}-innstillinger",
+      "connectedSince": "Tilkoblet {{date}}"
+    },
+    "settings": {
+      "autoSync": "Automatisk synkronisering",
+      "autoSyncDesc": "Synkroniser data automatisk etter plan",
+      "autoSyncScheduleDesc": "Synkroniser automatisk etter plan",
+      "syncFrequency": "Synkroniseringsfrekvens",
+      "nextScheduledSync": "Neste planlagte synkronisering",
+      "dataToSync": "Data å synkronisere",
+      "frequency": {
+        "realtime": "Sanntid",
+        "hourly": "Hver time",
+        "daily": "Daglig",
+        "weekly": "Ukentlig"
+      },
+      "data": {
+        "employees": "Ansatte",
+        "timeEntries": "Tidsoppføringer",
+        "departments": "Avdelinger",
+        "locations": "Lokasjoner"
+      }
+    },
+    "mapping": {
+      "description": "Felttilordning styrer hvordan data fra {{name}} kobles til Uplift-felt. Endringer trer i kraft ved neste synkronisering.",
+      "sourceField": "{{name}}-felt",
+      "upliftField": "Uplift-felt",
+      "status": "Status",
+      "selectField": "Velg felt...",
+      "mapped": "Tilordnet",
+      "unmapped": "Ikke tilordnet"
+    },
+    "history": {
+      "noHistory": "Ingen synkroniseringshistorikk ennå",
+      "sync": "Synkronisering",
+      "duration": "Varighet",
+      "records": "Poster",
+      "created": "Opprettet",
+      "updated": "Oppdatert"
+    },
+    "webhooks": {
+      "description": "Webhooks varsler {{name}} når hendelser skjer i Uplift",
+      "addWebhook": "Legg til webhook",
+      "noWebhooks": "Ingen webhooks konfigurert",
+      "createFirst": "Opprett din første webhook",
+      "active": "Aktiv",
+      "paused": "Pauset",
+      "sendTestPayload": "Send testdata",
+      "pauseWebhook": "Pause webhook",
+      "enableWebhook": "Aktiver webhook",
+      "deleteWebhook": "Slett webhook",
+      "lastTriggered": "Sist utløst",
+      "never": "Aldri",
+      "successRate": "Suksessrate",
+      "sendEventsTo": "Send hendelser til {{name}}",
+      "endpointUrl": "Endepunkt-URL",
+      "eventsToSend": "Hendelser å sende",
+      "hmacInfo": "Vi signerer alle webhook-nyttelaster med HMAC-SHA256. Du mottar signaturen i",
+      "header": "headeren.",
+      "createWebhook": "Opprett webhook",
+      "validationError": "Vennligst oppgi en URL og velg minst én hendelse",
+      "createdSuccess": "Webhook opprettet!",
+      "testSent": "Testdata sendt til",
+      "testStatus": "Status",
+      "deleteConfirm": "Slett denne webhooken?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Søk i integrasjoner...",
+      "allCategories": "Alle kategorier",
+      "infoBannerTitle": "Uplift fungerer med dine eksisterende verktøy",
+      "infoBannerDesc": "Koble til dine HR-, lønns- og kommunikasjonssystemer. Vi synkroniserer data - vi erstatter ikke systemene dine.",
+      "noResults": "Ingen integrasjoner matcher søket ditt",
+      "dontSeeSystem": "Ser du ikke systemet ditt?",
+      "alwaysAdding": "Vi legger stadig til nye integrasjoner. Gi oss beskjed om hva du trenger.",
+      "requestIntegration": "Be om integrasjon"
+    },
+    "activity": {
+      "recentActivity": "Nylig integrasjonsaktivitet",
+      "exportLog": "Eksporter logg"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API-fabrikk",
+    "subtitle": "Bygg tilpassede REST API-integrasjoner uten å skrive kode",
+    "newIntegration": "Ny integrasjon",
+    "searchPlaceholder": "Søk i integrasjoner...",
+    "loadingIntegrations": "Laster integrasjoner...",
+    "noIntegrationsFound": "Ingen integrasjoner funnet",
+    "noIntegrationsYet": "Ingen tilpassede integrasjoner ennå",
+    "tryDifferentSearch": "Prøv et annet søkeord",
+    "createFirstDesc": "Opprett din første tilpassede API-integrasjon for å koble til et hvilket som helst REST API",
+    "createIntegration": "Opprett integrasjon",
+    "deleteConfirm": "Er du sikker på at du vil slette denne integrasjonen?",
+    "list": {
+      "eventsCount": "{{count}} hendelser",
+      "scheduled": "Planlagt",
+      "incomingWebhook": "Innkommende webhook",
+      "manual": "Manuell",
+      "runsCount": "{{count}} kjøringer",
+      "errorsCount": "{{count}} feil",
+      "disabled": "Deaktivert",
+      "edit": "Rediger",
+      "test": "Test",
+      "viewLogs": "Se logger",
+      "delete": "Slett",
+      "lastRun": "Siste kjøring"
+    },
+    "stats": {
+      "totalIntegrations": "Totalt integrasjoner",
+      "active": "Aktive",
+      "runsToday": "Kjøringer i dag",
+      "totalErrors": "Totalt feil"
+    },
+    "editor": {
+      "editTitle": "Rediger API-integrasjon",
+      "createTitle": "Opprett API-integrasjon",
+      "subtitle": "Konfigurer din tilpassede REST API-tilkobling",
+      "integrationName": "Integrasjonsnavn",
+      "integrationNamePlaceholder": "f.eks. Synkroniser til lønnssystem",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Hva gjør denne integrasjonen?",
+      "method": "Metode",
+      "url": "URL",
+      "headers": "Headere",
+      "addHeader": "Legg til header",
+      "headerName": "Headernavn",
+      "headerValue": "Verdi",
+      "requestBodyJson": "Forespørselskropp (JSON)",
+      "useVariables": "Bruk {{field}} for variabler",
+      "availableVariables": "Tilgjengelige variabler",
+      "authenticationType": "Autentiseringstype",
+      "apiKeyLocation": "API-nøkkelplassering",
+      "header": "Header",
+      "queryParameter": "Spørringsparameter",
+      "keyName": "Nøkkelnavn",
+      "keyNamePlaceholder": "f.eks. X-API-Key",
+      "apiKey": "API-nøkkel",
+      "enterApiKey": "Skriv inn din API-nøkkel",
+      "bearerToken": "Bearer-token",
+      "enterToken": "Skriv inn ditt token",
+      "username": "Brukernavn",
+      "password": "Passord",
+      "tokenUrl": "Token-URL",
+      "clientId": "Klient-ID",
+      "clientSecret": "Klienthemmelighet",
+      "scopes": "Omfang (kommaseparert)",
+      "whenShouldRun": "Når skal denne integrasjonen kjøre?",
+      "selectEvents": "Velg hendelser",
+      "schedule": "Planlegging",
+      "cronExpression": "CRON-uttrykk",
+      "scheduleUtcNote": "Planen bruker UTC-tidssone. Gjeldende CRON",
+      "yourWebhookUrl": "Din webhook-URL",
+      "webhookPostNote": "Send POST-forespørsler til denne URL-en. Vi behandler innkommende data og tilordner dem til Uplift.",
+      "fieldMappings": "Felttilordninger",
+      "fieldMappingsDesc": "Tilordne Uplift-felt til dine eksterne API-felt",
+      "addMapping": "Legg til tilordning",
+      "noFieldMappings": "Ingen felttilordninger ennå",
+      "addMappingsDesc": "Legg til tilordninger for å transformere data mellom systemer",
+      "addFirstMapping": "Legg til første tilordning",
+      "selectUpliftField": "Velg Uplift-felt...",
+      "externalFieldName": "Eksternt feltnavn",
+      "noTransform": "Ingen transformasjon",
+      "dateIso": "Dato → ISO",
+      "dateUk": "Dato → UK-format",
+      "boolYn": "Bool → J/N",
+      "fieldMappingTip": "Felttilordninger brukes til å bygge forespørselskroppen automatisk. Du kan også bruke {{field}}-syntaks i Forespørsel-fanen for tilpassede JSON-strukturer.",
+      "testConfiguration": "Test konfigurasjon",
+      "testDescription": "Send en testforespørsel for å verifisere konfigurasjonen din. Vi bruker testdata.",
+      "testing": "Tester...",
+      "sendTestRequest": "Send testforespørsel",
+      "success": "Vellykket",
+      "failed": "Mislykket",
+      "status": "Status",
+      "time": "Tid",
+      "response": "Respons",
+      "enableIntegration": "Aktiver integrasjon",
+      "cancel": "Avbryt",
+      "saveChanges": "Lagre endringer",
+      "createIntegration": "Opprett integrasjon",
+      "tabs": {
+        "request": "Forespørsel",
+        "authentication": "Autentisering",
+        "trigger": "Utløser",
+        "fieldMapping": "Felttilordning",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Kjøringslogger",
+      "export": "Eksporter",
+      "noData": "Ingen data ennå. Kjøringslogger vises her når integrasjoner kjøres.",
+      "unknown": "Ukjent",
+      "error": "Feil"
+    },
+    "helpBanner": {
+      "title": "Trenger du hjelp med å bygge en integrasjon?",
+      "description": "Sjekk vår API-dokumentasjon for eksempler, eller kontakt støtte for komplekse brukstilfeller."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API-nøkler",
+    "subtitle": "Generer API-nøkler for å få tilgang til Uplift-data fra applikasjonene dine",
+    "apiDocs": "API-dokumentasjon",
+    "createKey": "Opprett nøkkel",
+    "createApiKey": "Opprett API-nøkkel",
+    "loadingKeys": "Laster API-nøkler...",
+    "loadError": "Kunne ikke laste API-nøkler.",
+    "noKeysYet": "Ingen API-nøkler ennå",
+    "createFirstDesc": "Opprett din første API-nøkkel for å starte integrasjonen med Uplift",
+    "retry": "Prøv igjen",
+    "revokeConfirm": "Tilbakekall API-nøkkel «{{name}}»? Denne handlingen kan ikke angres.",
+    "regenerateConfirm": "Regenerer hemmelighet for «{{name}}»? Den gamle hemmeligheten slutter å fungere umiddelbart.",
+    "regenerateSuccess": "Ny hemmelighetssnøkkel: {{secret}}\n\nLagre denne nå - du ser den ikke igjen!",
+    "regenerateError": "Kunne ikke regenerere hemmelighet: {{message}}",
+    "usageStats": "Bruksstatistikk for {{name}}:\n\nTotalt forespørsler: {{requests}}\nSist brukt: {{lastUsed}}",
+    "card": {
+      "noDescription": "Ingen beskrivelse",
+      "expired": "Utløpt",
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "keyId": "Nøkkel-ID",
+      "requests": "Forespørsler",
+      "lastUsed": "Sist brukt",
+      "never": "Aldri",
+      "rateLimit": "Hastighetsbegrensning",
+      "standard": "Standard",
+      "hideDetails": "Skjul detaljer",
+      "showDetails": "Vis detaljer",
+      "scopes": "OMFANG",
+      "created": "Opprettet",
+      "expires": "Utløper",
+      "usage": "Bruk",
+      "regenerate": "Regenerer",
+      "revoke": "Tilbakekall"
+    },
+    "create": {
+      "keyCreatedTitle": "API-nøkkel opprettet",
+      "createTitle": "Opprett API-nøkkel",
+      "keyCreatedSuccess": "API-nøkkel opprettet",
+      "copySecretWarning": "Kopier hemmelighetssnøkkelen din nå. Du vil ikke kunne se den igjen!",
+      "keyIdLabel": "Nøkkel-ID",
+      "secretKeyLabel": "Hemmelig nøkkel",
+      "fullApiKeyLabel": "Full API-nøkkel (for autorisasjonsheader)",
+      "fullKeyLabel": "Full nøkkel",
+      "authHeaderNote": "Bruk denne i autorisasjonsheaderen din",
+      "done": "Ferdig",
+      "keyName": "Nøkkelnavn",
+      "keyNamePlaceholder": "f.eks. Produksjons-API-nøkkel",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Hva skal denne nøkkelen brukes til?",
+      "permissions": "Tillatelser",
+      "rateLimit": "Hastighetsbegrensning",
+      "expiration": "Utløp",
+      "neverExpires": "Utløper aldri",
+      "thirtyDays": "30 dager",
+      "ninetyDays": "90 dager",
+      "oneYear": "1 år",
+      "createError": "Kunne ikke opprette API-nøkkel. Vennligst prøv igjen.",
+      "cancel": "Avbryt",
+      "createKey": "Opprett nøkkel"
+    },
+    "docs": {
+      "quickStart": "Hurtigstart",
+      "authentication": "Autentisering",
+      "exampleResponse": "Eksempelsvar",
+      "viewFullDocs": "Se fullstendig dokumentasjon",
+      "downloadSpec": "Last ned OpenAPI-spesifikasjon"
+    },
+    "securityBanner": {
+      "title": "API-nøkkelsikkerhet",
+      "description": "Hold API-nøklene dine sikre. Aldri eksponer dem i klientkode eller offentlige repositorier. Hvis en nøkkel er kompromittert, tilbakekall den umiddelbart og opprett en ny."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Organisasjonsoppsett",
+    "subtitle": "La oss konfigurere organisasjonen din",
+    "steps": {
+      "orgDetails": "Organisasjonsdetaljer",
+      "locations": "Lokasjoner",
+      "departments": "Avdelinger",
+      "roles": "Roller og tillatelser",
+      "review": "Gjennomgå og start"
+    },
+    "orgDetails": {
+      "companyName": "Firmanavn",
+      "companyNamePlaceholder": "f.eks. Firma AS",
+      "tradingName": "Handelsnavn (valgfritt)",
+      "tradingNamePlaceholder": "Offentlig navn",
+      "industry": "Bransje",
+      "selectIndustry": "Velg bransje",
+      "companySize": "Firmastørrelse",
+      "selectSize": "Velg størrelse",
+      "timezone": "Standard tidssone",
+      "currency": "Standard valuta",
+      "weekStart": "Uken starter på",
+      "logo": "Firmalogo",
+      "uploadLogo": "Last opp logo",
+      "uploadLogoDesc": "PNG eller SVG, anbefalt 200×200px"
+    },
+    "locations": {
+      "title": "Lokasjoner",
+      "subtitle": "Legg til kontorer, steder eller filialer",
+      "addLocation": "Legg til lokasjon",
+      "name": "Lokasjonsnavn",
+      "namePlaceholder": "f.eks. Hovedkontor",
+      "address": "Adresse",
+      "addressPlaceholder": "Fullstendig adresse",
+      "timezone": "Tidssone",
+      "noLocations": "Ingen lokasjoner lagt til ennå",
+      "addFirst": "Legg til din første lokasjon for å komme i gang"
+    },
+    "departments": {
+      "title": "Avdelinger",
+      "subtitle": "Sett opp avdelingsstrukturen",
+      "addDepartment": "Legg til avdeling",
+      "name": "Avdelingsnavn",
+      "namePlaceholder": "f.eks. Teknisk",
+      "parentDepartment": "Overordnet avdeling (valgfritt)",
+      "none": "Ingen (toppnivå)",
+      "manager": "Avdelingsleder",
+      "selectManager": "Velg leder",
+      "noDepartments": "Ingen avdelinger lagt til ennå",
+      "addFirst": "Legg til din første avdeling"
+    },
+    "roles": {
+      "title": "Roller og tillatelser",
+      "subtitle": "Konfigurer tilgangsnivåer for teamet ditt",
+      "addRole": "Legg til tilpasset rolle",
+      "builtIn": "Innebygd",
+      "custom": "Tilpasset",
+      "name": "Rollenavn",
+      "namePlaceholder": "f.eks. Vaktleder",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Hva kan denne rollen gjøre?",
+      "permissions": "Tillatelser",
+      "permissionGroups": {
+        "scheduling": "Planlegging",
+        "timeTracking": "Tidregistrering",
+        "employees": "Ansatte",
+        "reports": "Rapporter",
+        "settings": "Innstillinger"
+      }
+    },
+    "review": {
+      "title": "Gjennomgå og start",
+      "subtitle": "Sjekk at alt ser riktig ut før du går live",
+      "orgInfo": "Organisasjonsinfo",
+      "locationsCount": "{{count}} lokasjoner konfigurert",
+      "departmentsCount": "{{count}} avdelinger konfigurert",
+      "rolesCount": "{{count}} roller konfigurert",
+      "allLooksGood": "Alt ser bra ut!",
+      "launch": "Start organisasjonen",
+      "launchDesc": "Dette vil aktivere organisasjonen din og sende invitasjoner til teammedlemmer som er lagt til."
+    },
+    "navigation": {
+      "back": "Tilbake",
+      "next": "Neste",
+      "skip": "Hopp over for nå",
+      "finish": "Fullfør oppsett"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

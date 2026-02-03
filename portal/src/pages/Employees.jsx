@@ -16,8 +16,8 @@ export default function Employees() {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('active');
-  const [departmentFilter, setDepartmentFilter] = useState('All Departments');
-  const [locationFilter, setLocationFilter] = useState('All Locations');
+  const [departmentFilter, setDepartmentFilter] = useState(t('employees.allDepartments'));
+  const [locationFilter, setLocationFilter] = useState(t('employees.allLocations'));
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [departments, setDepartments] = useState([]);
@@ -65,8 +65,8 @@ export default function Employees() {
       if (statusFilter === 'on_leave' && emp.status !== 'on_leave') return false;
       if (statusFilter === 'terminated' && emp.status !== 'terminated') return false;
 
-      if (departmentFilter !== 'All Departments' && emp.department !== departmentFilter) return false;
-      if (locationFilter !== 'All Locations' && emp.location !== locationFilter) return false;
+      if (departmentFilter !== t('employees.allDepartments') && emp.department !== departmentFilter) return false;
+      if (locationFilter !== t('employees.allLocations') && emp.location !== locationFilter) return false;
 
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
@@ -205,7 +205,7 @@ export default function Employees() {
           onChange={(e) => setDepartmentFilter(e.target.value)}
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         >
-          <option value="All Departments">All Departments</option>
+          <option value={t('employees.allDepartments')}>{t('employees.allDepartments')}</option>
           {departments.map(dept => (
             <option key={dept} value={dept}>{dept}</option>
           ))}
@@ -215,7 +215,7 @@ export default function Employees() {
           onChange={(e) => setLocationFilter(e.target.value)}
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         >
-          <option value="All Locations">All Locations</option>
+          <option value={t('employees.allLocations')}>{t('employees.allLocations')}</option>
           {locations.map(loc => (
             <option key={loc} value={loc}>{loc}</option>
           ))}

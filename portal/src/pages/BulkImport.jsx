@@ -71,7 +71,7 @@ export default function BulkImport() {
       });
       setStep(4);
     } catch (error) {
-      console.error('Import failed:', error);
+      if (import.meta.env.DEV) console.error('Import failed:', error);
       setErrors([error.message || t('bulkImport.importFailed', 'Import failed. Please try again.')]);
     } finally {
       setImporting(false);

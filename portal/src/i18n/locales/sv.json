@@ -54,7 +54,6 @@
     "viewMyCareer": "Visa min karriär",
     "timeOffBalance": "Ledighetssaldo"
   },
-
   "nav": {
     "dashboard": "Översikt",
     "employees": "Anställda",
@@ -150,9 +149,21 @@
     "active": "Aktiv",
     "inactive": "Inaktiv",
     "enabled": "Aktiverad",
-    "disabled": "Inaktiverad"
+    "disabled": "Inaktiverad",
+    "approveSelected": "Godkänn valda",
+    "rejectSelected": "Avvisa valda",
+    "clearSelection": "Rensa",
+    "showing": "Visar",
+    "of": "av",
+    "page": "Sida",
+    "previous": "Föregående",
+    "terminated": "Avslutad",
+    "sunday": "Sön",
+    "monday": "Mån",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Logga in",
     "logout": "Logga ut",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "För att få tillgång till Uplift, kontakta din chef eller HR-avdelning. De skickar en inbjudningslänk.",
     "enterEmailPassword": "Ange e-post och lösenord",
     "loginFailed": "Inloggning misslyckades",
-    "demoAccounts": "Demokonton:",
-    "demoWorker": "Arbetare: worker@uplift.work / Demo123!",
-    "demoManager": "Chef: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Tvåfaktorsautentisering",
     "enterMfaCode": "Ange koden från din autentiseringsapp",
     "verificationCode": "Verifieringskod",
@@ -194,9 +202,16 @@
     "invalidCode": "Ogiltig kod",
     "allRightsReserved": "Alla rättigheter förbehållna",
     "termsOfService": "Användarvillkor",
-    "privacyPolicy": "Integritetspolicy"
+    "privacyPolicy": "Integritetspolicy",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Hem",
     "schedule": "Schema",
@@ -214,7 +229,6 @@
     "leaderboard": "Topplista",
     "badges": "Märken"
   },
-
   "home": {
     "welcome": "Välkommen tillbaka, {{name}}!",
     "welcomeBack": "Välkommen tillbaka,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Öppna möjligheter",
     "noOpportunities": "Inga möjligheter som matchar dina kompetenser just nu"
   },
-
   "schedule": {
     "title": "Mitt schema",
     "weekView": "Vecka",
@@ -293,9 +306,22 @@
     "yourShift": "Ditt pass",
     "theirShift": "Deras pass",
     "sendRequest": "Skicka förfrågan",
-    "cancelSwap": "Avbryt byte"
+    "cancelSwap": "Avbryt byte",
+    "allLocations": "Alla platser",
+    "tuesday": "Tis",
+    "wednesday": "Ons",
+    "thursday": "Tor",
+    "friday": "Fre",
+    "saturday": "Lör",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Tidrapportering",
     "clockedIn": "Instämplad",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Tryck för att stämpla in",
     "onBreakSince": "På rast sedan {{time}}",
     "workingSince": "Arbetar sedan {{time}}",
-    "shiftEnded": "Pass avslutat"
+    "shiftEnded": "Pass avslutat",
+    "entriesApproved": "{{count}} poster godkända",
+    "approveError": "Kunde inte godkänna poster. Försök igen.",
+    "entriesRejected": "{{count}} poster avvisade",
+    "rejectError": "Kunde inte avvisa poster. Försök igen.",
+    "clockInError": "Kunde inte stämpla in. Försök igen.",
+    "clockOutError": "Kunde inte stämpla ut. Försök igen.",
+    "breakError": "Kunde inte uppdatera raststatus. Försök igen.",
+    "noPending": "Inga väntande poster att granska",
+    "noEntries": "Inga tidposter hittades",
+    "history": "Historik",
+    "managerSubtitle": "Granska och godkänn tidrapporter",
+    "employeeSubtitle": "Följ dina arbetstimmar",
+    "clockIn": "Stämpla in",
+    "clockOut": "Stämpla ut",
+    "startBreak": "Börja rast",
+    "endBreak": "Avsluta rast",
+    "totalHours": "Totala timmar"
   },
-
   "timeOff": {
     "title": "Ledighet",
     "request": "Begär ledighet",
@@ -359,9 +401,16 @@
     "selectDates": "Välj datum",
     "selectType": "Välj typ",
     "addNotes": "Lägg till anteckningar (valfritt)",
-    "reviewRequest": "Granska förfrågan"
+    "reviewRequest": "Granska förfrågan",
+    "oneDay": "1 dag",
+    "days": "dagar",
+    "dates": "Datum",
+    "duration": "Varaktighet",
+    "noRequests": "Inga förfrågningar hittades",
+    "requestDetails": "Detaljer för ledighetsförfrågan",
+    "noReason": "Ingen orsak angiven",
+    "submitted": "Skickad"
   },
-
   "feed": {
     "title": "Flöde",
     "newPost": "Nytt inlägg",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}}t sedan",
     "daysAgo": "{{count}}d sedan"
   },
-
   "messages": {
     "title": "Meddelanden",
     "newMessage": "Nytt meddelande",
@@ -419,7 +467,6 @@
     "translateMessage": "Översätt",
     "showOriginal": "Visa original"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Redigera profil",
@@ -447,7 +494,6 @@
     "viewProfile": "Visa profil",
     "memberSince": "Medlem sedan {{date}}"
   },
-
   "skills": {
     "title": "Kompetenser",
     "mySkills": "Mina kompetenser",
@@ -474,7 +520,6 @@
     "skillAdded": "Kompetens tillagd",
     "verificationRequested": "Verifiering begärd"
   },
-
   "career": {
     "title": "Karriär",
     "careerPath": "Karriärväg",
@@ -549,7 +594,6 @@
     "expired": "Utgången",
     "expires": "Går ut {{date}}"
   },
-
   "gamification": {
     "level": "Nivå {{level}}",
     "levelShort": "Nivå {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Förtjänat {{date}}",
     "progressToEarn": "{{percent}}% framsteg för att förtjäna"
   },
-
   "notifications": {
     "title": "Aviseringar",
     "markAllRead": "Markera alla som lästa",
@@ -605,7 +648,6 @@
     "allCaught": "Du är i fas!",
     "checkBackLater": "Kom tillbaka senare för nya aviseringar"
   },
-
   "settings": {
     "title": "Inställningar",
     "subtitle": "Hantera din organisation och ditt konto",
@@ -740,9 +782,23 @@
     "featureAccess": "Funktionstillgång",
     "enableAll": "Aktivera alla",
     "disableAll": "Inaktivera alla",
-    "aboutEmployeeVisibility": "Dessa inställningar kontrollerar vilka funktioner som är synliga för varje anställd."
+    "aboutEmployeeVisibility": "Dessa inställningar kontrollerar vilka funktioner som är synliga för varje anställd.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Uppgifter",
     "myTasks": "Mina uppgifter",
@@ -781,7 +837,6 @@
     "takePhoto": "Ta foto",
     "chooseFromLibrary": "Välj från bibliotek"
   },
-
   "expenses": {
     "title": "Utlägg",
     "myExpenses": "Mina utlägg",
@@ -808,7 +863,6 @@
     "totalApproved": "Totalt godkänt",
     "totalReimbursed": "Totalt ersatt"
   },
-
   "rewards": {
     "title": "Belöningar",
     "myRewards": "Mina belöningar",
@@ -828,7 +882,6 @@
     "validUntil": "Giltig till {{date}}",
     "termsConditions": "Villkor"
   },
-
   "manager": {
     "dashboard": "Chefsöversikt",
     "teamOverview": "Teamöversikt",
@@ -859,7 +912,6 @@
     "attendance": "Närvaro",
     "performance": "Prestation"
   },
-
   "onboarding": {
     "welcome": "Välkommen till Uplift!",
     "getStarted": "Låt oss komma igång",
@@ -877,7 +929,6 @@
     "allSet": "Du är redo!",
     "startExploring": "Börja utforska pass och möjligheter"
   },
-
   "errors": {
     "networkError": "Nätverksfel. Kontrollera din anslutning.",
     "serverError": "Serverfel. Försök igen senare.",
@@ -898,7 +949,6 @@
     "tryAgain": "Försök igen",
     "somethingWentWrong": "Något gick fel"
   },
-
   "activity": {
     "title": "Aktivitetsgranskning",
     "subtitle": "Granska uppgiftsslutföranden, bevisuppladdningar och formulärinlämningar",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Ange orsak för avvisning...",
     "confirmRejection": "Bekräfta avvisning",
     "approve": "Godkänn",
-    "reject": "Avvisa"
+    "reject": "Avvisa",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Aviseringspreferenser",
     "subtitle": "Välj hur och när du får aviseringar",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Är du säker på att du vill inaktivera alla aviseringar? Du kan aktivera dem igen när som helst.",
     "disableSuccess": "Alla aviseringar har inaktiverats."
   },
-
   "employeeDetail": {
     "notFound": "Anställd hittades inte",
     "backToEmployees": "Tillbaka till anställda",
@@ -989,7 +1040,6 @@
     "basic": "Grundläggande",
     "adding": "Lägger till..."
   },
-
   "reports": {
     "title": "Rapporter",
     "subtitle": "Analyser, insikter och anpassade rapporter",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Denna månad",
     "lastMonth": "Förra månaden",
     "last7Days": "Senaste 7 dagarna",
-    "last30Days": "Senaste 30 dagarna"
+    "last30Days": "Senaste 30 dagarna",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Meny",
     "closeMenu": "Stäng meny",
@@ -1041,7 +1104,6 @@
     "required": "Obligatorisk",
     "optional": "Valfri"
   },
-
   "shiftTemplates": {
     "title": "Passmallar",
     "subtitle": "Skapa återanvändbara passmönster",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "pass",
     "generating": "Genererar..."
   },
-
   "legal": {
-    "lastUpdated": "Senast uppdaterad"
+    "lastUpdated": "Senast uppdaterad",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "FM",
     "pm": "EM",
@@ -1120,5 +1289,564 @@
     "october": "Oktober",
     "november": "November",
     "december": "December"
+  },
+  "bulkImport": {
+    "title": "Massimport",
+    "subtitle": "Importera data från CSV- eller Excel-filer",
+    "selectType": "Välj typ",
+    "uploadFile": "Ladda upp fil",
+    "preview": "Förhandsgranska",
+    "complete": "Slutför",
+    "invalidFileType": "Ladda upp en CSV- eller Excel-fil",
+    "importFailed": "Importen misslyckades. Försök igen.",
+    "uploadFor": "Ladda upp",
+    "uploadDesc": "Dra och släpp eller klicka för att välja en fil",
+    "downloadTemplate": "Ladda ner mall",
+    "dragDrop": "Dra och släpp din fil här, eller klicka för att bläddra",
+    "supportedFormats": "Format som stöds: CSV, XLSX",
+    "previewData": "Förhandsgranska data",
+    "rowsFound": "rader hittades i",
+    "andMore": "Och",
+    "moreRows": "fler rader...",
+    "importing": "Importerar...",
+    "startImport": "Starta import",
+    "importComplete": "Import slutförd",
+    "successfullyImported": "Importerade framgångsrikt",
+    "of": "av",
+    "records": "poster",
+    "successful": "Lyckade",
+    "failed": "Misslyckade",
+    "total": "Totalt",
+    "importMore": "Importera mer data",
+    "type": {
+      "employees": "Anställda",
+      "employeesDesc": "Importera anställdprofiler",
+      "shifts": "Pass",
+      "shiftsDesc": "Importera passscheman",
+      "locations": "Platser",
+      "locationsDesc": "Importera platser",
+      "skills": "Kompetenser",
+      "skillsDesc": "Importera kompetenser"
+    }
+  },
+  "jobs": {
+    "open": "Öppen",
+    "closed": "Stängd",
+    "applicants": "Sökande",
+    "created": "Jobbannons skapad",
+    "createError": "Kunde inte skapa jobbannons. Försök igen.",
+    "updated": "Jobbannons uppdaterad",
+    "updateError": "Kunde inte uppdatera jobbannons. Försök igen.",
+    "fullTime": "Heltid",
+    "partTime": "Deltid",
+    "contract": "Kontrakt",
+    "temporary": "Tillfällig",
+    "subtitle": "Hantera interna karriärmöjligheter",
+    "openPositions": "Öppna positioner",
+    "closedPositions": "Stängda",
+    "totalApplicants": "Totalt sökande",
+    "noJobs": "Inga jobbannonser hittades",
+    "viewApplicants": "Visa sökande",
+    "editPosting": "Redigera jobbannons",
+    "jobTitle": "Jobbtitel",
+    "enterTitle": "Ange jobbtitel",
+    "selectDepartment": "Välj avdelning",
+    "selectLocation": "Välj plats",
+    "salary": "Löneintervall",
+    "enterDescription": "Ange jobbeskrivning",
+    "postJob": "Publicera jobb",
+    "skillMatch": "kompetensmatchning",
+    "noApplicants": "Inga sökande ännu"
+  },
+  "employees": {
+    "searchPlaceholder": "Sök efter namn eller e-post...",
+    "employees": "anställda",
+    "noResults": "Inga anställda matchar dina kriterier",
+    "details": "Anställningsdetaljer",
+    "hireDate": "Anställningsdatum",
+    "assigned": "tilldelad",
+    "leaveDetails": "Ledighetsdetaljer",
+    "until": "Till",
+    "terminationDetails": "Uppsägningsdetaljer",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Integrationshub",
+    "subtitle": "Anslut Uplift till dina befintliga verktyg",
+    "apiFactory": "API Factory",
+    "addIntegration": "Lägg till integration",
+    "configure": "Konfigurera",
+    "connect": "Anslut",
+    "cancel": "Avbryt",
+    "back": "Tillbaka",
+    "saveChanges": "Spara ändringar",
+    "syncNow": "Synkronisera nu",
+    "disconnect": "Koppla från {{name}}",
+    "disconnectConfirm": "Koppla från {{name}}? Detta stoppar alla synkroniseringar.",
+    "settingsSaved": "Inställningar sparade",
+    "browseMarketplace": "Bläddra i marknadsplatsen",
+    "loadingIntegrations": "Laddar integrationer...",
+    "noIntegrations": "Inga integrationer anslutna",
+    "noIntegrationsDesc": "Anslut din första integration för att börja synkronisera data",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Synkroniserar..."
+    },
+    "stats": {
+      "connected": "Anslutna",
+      "available": "Tillgängliga",
+      "syncsToday": "Synk idag",
+      "errors": "Fel",
+      "totalSyncs": "Totala synkroniseringar",
+      "lastSync": "Senaste synk",
+      "records": "poster"
+    },
+    "tabs": {
+      "connected": "Anslutna",
+      "marketplace": "Marknadsplats",
+      "restApi": "REST API",
+      "apiFactory": "API Factory",
+      "activityLog": "Aktivitetslogg",
+      "settings": "Inställningar",
+      "fieldMapping": "Fältmappning",
+      "syncHistory": "Synkhistorik",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Senaste synk",
+      "frequency": "Frekvens",
+      "status": "Status",
+      "healthy": "Frisk",
+      "errors": "fel"
+    },
+    "connectModal": {
+      "title": "Anslut {{name}}",
+      "whatItDoes": "Vad denna integration gör:",
+      "redirectNotice": "Du omdirigeras till {{name}}",
+      "authorizeMessage": "Logga in och auktorisera Uplift att komma åt dina data. Vi begär bara de behörigheter vi behöver.",
+      "connectWith": "Anslut med {{name}}",
+      "connecting": "Ansluter till {{name}}...",
+      "completeAuth": "Slutför auktorisering i popup-fönstret",
+      "successConnected": "Ansluten!",
+      "configureSyncSettings": "Konfigurera dina synkroniseringsinställningar nedan.",
+      "completeSetup": "Slutför konfiguration",
+      "connected": "{{name}} ansluten!",
+      "firstSyncSoon": "Din första synkronisering startar snart",
+      "hris": {
+        "syncEmployees": "Synkronisera anställdposter automatiskt",
+        "importDepts": "Importera avdelningar och platser",
+        "syncTimeOff": "Håll ledighetssaldon synkroniserade"
+      },
+      "payroll": {
+        "exportTimesheets": "Exportera godkända tidrapporter",
+        "syncPayRates": "Synkronisera lönesatser och övertid",
+        "autoReconciliation": "Automatisk lönerekonciliering"
+      },
+      "comms": {
+        "shiftReminders": "Skicka passpåminnelser",
+        "postRecognition": "Publicera erkännande i kanaler",
+        "swapNotifications": "Bytesförfrågan-notifikationer"
+      },
+      "identity": {
+        "sso": "Enkel inloggning (SSO)",
+        "autoProvisioning": "Automatisk användarprovisionering",
+        "directorySync": "Katalogsynkronisering"
+      },
+      "other": {
+        "bidirectional": "Dubbelriktad datasynkronisering",
+        "realtimeWebhooks": "Realtidsuppdateringar via webhooks",
+        "auditTrail": "Fullständigt revisionsregister"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}}-inställningar",
+      "connectedSince": "Ansluten {{date}}"
+    },
+    "settings": {
+      "autoSync": "Automatisk synk",
+      "autoSyncDesc": "Synkronisera data automatiskt enligt schema",
+      "autoSyncScheduleDesc": "Synkronisera automatiskt enligt schema",
+      "syncFrequency": "Synkfrekvens",
+      "nextScheduledSync": "Nästa schemalagda synk",
+      "dataToSync": "Data att synkronisera",
+      "frequency": {
+        "realtime": "Realtid",
+        "hourly": "Varje timme",
+        "daily": "Dagligen",
+        "weekly": "Veckovis"
+      },
+      "data": {
+        "employees": "Anställda",
+        "timeEntries": "Tidposter",
+        "departments": "Avdelningar",
+        "locations": "Platser"
+      }
+    },
+    "mapping": {
+      "description": "Fältmappning styr hur data från {{name}} mappas till Uplift-fält. Ändringar träder i kraft vid nästa synk.",
+      "sourceField": "{{name}}-fält",
+      "upliftField": "Uplift-fält",
+      "status": "Status",
+      "selectField": "Välj fält...",
+      "mapped": "Mappad",
+      "unmapped": "Omappad"
+    },
+    "history": {
+      "noHistory": "Ingen synkhistorik ännu",
+      "sync": "Synk",
+      "duration": "Varaktighet",
+      "records": "Poster",
+      "created": "Skapade",
+      "updated": "Uppdaterade"
+    },
+    "webhooks": {
+      "description": "Webhooks meddelar {{name}} när händelser inträffar i Uplift",
+      "addWebhook": "Lägg till webhook",
+      "noWebhooks": "Inga webhooks konfigurerade",
+      "createFirst": "Skapa din första webhook",
+      "active": "Aktiv",
+      "paused": "Pausad",
+      "sendTestPayload": "Skicka testdata",
+      "pauseWebhook": "Pausa webhook",
+      "enableWebhook": "Aktivera webhook",
+      "deleteWebhook": "Ta bort webhook",
+      "lastTriggered": "Senast utlöst",
+      "never": "Aldrig",
+      "successRate": "Framgångsfrekvens",
+      "sendEventsTo": "Skicka händelser till {{name}}",
+      "endpointUrl": "Slutpunkts-URL",
+      "eventsToSend": "Händelser att skicka",
+      "hmacInfo": "Vi signerar alla webhook-data med HMAC-SHA256. Du får signaturen i",
+      "header": "headern.",
+      "createWebhook": "Skapa webhook",
+      "validationError": "Ange en URL och välj minst en händelse",
+      "createdSuccess": "Webhook skapad!",
+      "testSent": "Testdata skickad till",
+      "testStatus": "Status",
+      "deleteConfirm": "Ta bort denna webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Sök integrationer...",
+      "allCategories": "Alla kategorier",
+      "infoBannerTitle": "Uplift fungerar med dina befintliga verktyg",
+      "infoBannerDesc": "Anslut ditt HR-system, lönesystem och kommunikationsverktyg. Vi synkroniserar data - vi ersätter inte din stack.",
+      "noResults": "Inga integrationer matchar din sökning",
+      "dontSeeSystem": "Ser du inte ditt system?",
+      "alwaysAdding": "Vi lägger ständigt till nya integrationer. Låt oss veta vad du behöver.",
+      "requestIntegration": "Begär integration"
+    },
+    "activity": {
+      "recentActivity": "Senaste integrationsaktivitet",
+      "exportLog": "Exportera logg"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API Factory",
+    "subtitle": "Bygg anpassade REST API-integrationer utan att skriva kod",
+    "newIntegration": "Ny integration",
+    "searchPlaceholder": "Sök integrationer...",
+    "loadingIntegrations": "Laddar integrationer...",
+    "noIntegrationsFound": "Inga integrationer hittades",
+    "noIntegrationsYet": "Inga anpassade integrationer ännu",
+    "tryDifferentSearch": "Prova en annan sökterm",
+    "createFirstDesc": "Skapa din första anpassade API-integration för att ansluta valfritt REST API",
+    "createIntegration": "Skapa integration",
+    "deleteConfirm": "Är du säker på att du vill ta bort denna integration?",
+    "list": {
+      "eventsCount": "{{count}} händelser",
+      "scheduled": "Schemalagd",
+      "incomingWebhook": "Inkommande webhook",
+      "manual": "Manuell",
+      "runsCount": "{{count}} körningar",
+      "errorsCount": "{{count}} fel",
+      "disabled": "Inaktiverad",
+      "edit": "Redigera",
+      "test": "Testa",
+      "viewLogs": "Visa loggar",
+      "delete": "Ta bort",
+      "lastRun": "Senaste körning"
+    },
+    "stats": {
+      "totalIntegrations": "Totala integrationer",
+      "active": "Aktiva",
+      "runsToday": "Körningar idag",
+      "totalErrors": "Totala fel"
+    },
+    "editor": {
+      "editTitle": "Redigera API-integration",
+      "createTitle": "Skapa API-integration",
+      "subtitle": "Konfigurera din anpassade REST API-anslutning",
+      "integrationName": "Integrationsnamn",
+      "integrationNamePlaceholder": "t.ex. Synka till lönesystem",
+      "description": "Beskrivning",
+      "descriptionPlaceholder": "Vad gör denna integration?",
+      "method": "Metod",
+      "url": "URL",
+      "headers": "Rubriker",
+      "addHeader": "Lägg till rubrik",
+      "headerName": "Rubriknamn",
+      "headerValue": "Värde",
+      "requestBodyJson": "Förfrågningskropp (JSON)",
+      "useVariables": "Använd {{field}} för variabler",
+      "availableVariables": "Tillgängliga variabler",
+      "authenticationType": "Autentiseringstyp",
+      "apiKeyLocation": "API-nyckelplats",
+      "header": "Rubrik",
+      "queryParameter": "Frågeparameter",
+      "keyName": "Nyckelnamn",
+      "keyNamePlaceholder": "t.ex. X-API-Key",
+      "apiKey": "API-nyckel",
+      "enterApiKey": "Ange din API-nyckel",
+      "bearerToken": "Bearer-token",
+      "enterToken": "Ange din token",
+      "username": "Användarnamn",
+      "password": "Lösenord",
+      "tokenUrl": "Token-URL",
+      "clientId": "Klient-ID",
+      "clientSecret": "Klienthemlighet",
+      "scopes": "Omfattningar (kommaseparerade)",
+      "whenShouldRun": "När ska denna integration köras?",
+      "selectEvents": "Välj händelser",
+      "schedule": "Schema",
+      "cronExpression": "CRON-uttryck",
+      "scheduleUtcNote": "Schemat använder UTC-tidszon. Aktuellt CRON",
+      "yourWebhookUrl": "Din webhook-URL",
+      "webhookPostNote": "Skicka POST-förfrågningar till denna URL. Vi bearbetar inkommande data och mappar till Uplift.",
+      "fieldMappings": "Fältmappningar",
+      "fieldMappingsDesc": "Mappa Uplift-fält till dina externa API-fält",
+      "addMapping": "Lägg till mappning",
+      "noFieldMappings": "Inga fältmappningar ännu",
+      "addMappingsDesc": "Lägg till mappningar för att transformera data mellan system",
+      "addFirstMapping": "Lägg till första mappningen",
+      "selectUpliftField": "Välj Uplift-fält...",
+      "externalFieldName": "Externt fältnamn",
+      "noTransform": "Ingen transformation",
+      "dateIso": "Datum → ISO",
+      "dateUk": "Datum → UK-format",
+      "boolYn": "Bool → J/N",
+      "fieldMappingTip": "Fältmappningar används för att bygga förfrågningskroppen automatiskt. Du kan också använda {{field}}-syntax i Förfrågan-fliken för anpassade JSON-strukturer.",
+      "testConfiguration": "Testa konfiguration",
+      "testDescription": "Skicka en testförfrågan för att verifiera din konfiguration. Vi använder exempeldata.",
+      "testing": "Testar...",
+      "sendTestRequest": "Skicka testförfrågan",
+      "success": "Lyckades",
+      "failed": "Misslyckades",
+      "status": "Status",
+      "time": "Tid",
+      "response": "Svar",
+      "enableIntegration": "Aktivera integration",
+      "cancel": "Avbryt",
+      "saveChanges": "Spara ändringar",
+      "createIntegration": "Skapa integration",
+      "tabs": {
+        "request": "Förfrågan",
+        "authentication": "Autentisering",
+        "trigger": "Utlösare",
+        "fieldMapping": "Fältmappning",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Körningsloggar",
+      "export": "Exportera",
+      "noData": "Inga data ännu. Körningsloggar visas här när integrationer körs.",
+      "unknown": "Okänd",
+      "error": "Fel"
+    },
+    "helpBanner": {
+      "title": "Behöver du hjälp att bygga en integration?",
+      "description": "Kolla vår API-dokumentation för exempel, eller kontakta support för komplexa användningsfall."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API-nycklar",
+    "subtitle": "Generera API-nycklar för att komma åt Uplift-data från dina applikationer",
+    "apiDocs": "API-dokumentation",
+    "createKey": "Skapa nyckel",
+    "createApiKey": "Skapa API-nyckel",
+    "loadingKeys": "Laddar API-nycklar...",
+    "loadError": "Kunde inte ladda API-nycklar.",
+    "noKeysYet": "Inga API-nycklar ännu",
+    "createFirstDesc": "Skapa din första API-nyckel för att börja integrera med Uplift",
+    "retry": "Försök igen",
+    "revokeConfirm": "Återkalla API-nyckel \"{{name}}\"? Denna åtgärd kan inte ångras.",
+    "regenerateConfirm": "Regenerera hemlighet för \"{{name}}\"? Den gamla hemligheten slutar fungera omedelbart.",
+    "regenerateSuccess": "Ny hemlig nyckel: {{secret}}\n\nSpara detta nu - du ser det inte igen!",
+    "regenerateError": "Kunde inte regenerera hemlighet: {{message}}",
+    "usageStats": "Användningsstatistik för {{name}}:\n\nTotala förfrågningar: {{requests}}\nSenast använd: {{lastUsed}}",
+    "card": {
+      "noDescription": "Ingen beskrivning",
+      "expired": "Utgången",
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "keyId": "Nyckel-ID",
+      "requests": "Förfrågningar",
+      "lastUsed": "Senast använd",
+      "never": "Aldrig",
+      "rateLimit": "Hastighetsbegränsning",
+      "standard": "Standard",
+      "hideDetails": "Dölj detaljer",
+      "showDetails": "Visa detaljer",
+      "scopes": "OMFÅNG",
+      "created": "Skapad",
+      "expires": "Utgår",
+      "usage": "Användning",
+      "regenerate": "Regenerera",
+      "revoke": "Återkalla"
+    },
+    "create": {
+      "keyCreatedTitle": "API-nyckel skapad",
+      "createTitle": "Skapa API-nyckel",
+      "keyCreatedSuccess": "API-nyckel skapad framgångsrikt",
+      "copySecretWarning": "Kopiera din hemliga nyckel nu. Du kan inte se den igen!",
+      "keyIdLabel": "Nyckel-ID",
+      "secretKeyLabel": "Hemlig nyckel",
+      "fullApiKeyLabel": "Fullständig API-nyckel (för Authorization-header)",
+      "fullKeyLabel": "Fullständig nyckel",
+      "authHeaderNote": "Använd detta i din Authorization-header",
+      "done": "Klar",
+      "keyName": "Nyckelnamn",
+      "keyNamePlaceholder": "t.ex. Produktions-API-nyckel",
+      "description": "Beskrivning",
+      "descriptionPlaceholder": "Vad ska denna nyckel användas till?",
+      "permissions": "Behörigheter",
+      "rateLimit": "Hastighetsbegränsning",
+      "expiration": "Utgångstid",
+      "neverExpires": "Går aldrig ut",
+      "thirtyDays": "30 dagar",
+      "ninetyDays": "90 dagar",
+      "oneYear": "1 år",
+      "createError": "Kunde inte skapa API-nyckel. Försök igen.",
+      "cancel": "Avbryt",
+      "createKey": "Skapa nyckel"
+    },
+    "docs": {
+      "quickStart": "Snabbstart",
+      "authentication": "Autentisering",
+      "exampleResponse": "Exempelsvar",
+      "viewFullDocs": "Visa fullständig dokumentation",
+      "downloadSpec": "Ladda ner OpenAPI-specifikation"
+    },
+    "securityBanner": {
+      "title": "API-nyckelsäkerhet",
+      "description": "Håll dina API-nycklar säkra. Exponera dem aldrig i klientkod eller offentliga repositorier. Om en nyckel komprometteras, återkalla den omedelbart och skapa en ny."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Organisationsinstallation",
+    "subtitle": "Låt oss konfigurera din organisation",
+    "steps": {
+      "orgDetails": "Organisationsdetaljer",
+      "locations": "Platser",
+      "departments": "Avdelningar",
+      "roles": "Roller & behörigheter",
+      "review": "Granska & lansera"
+    },
+    "orgDetails": {
+      "companyName": "Företagsnamn",
+      "companyNamePlaceholder": "t.ex. Acme AB",
+      "tradingName": "Handelsnamn (valfritt)",
+      "tradingNamePlaceholder": "Offentligt namn",
+      "industry": "Bransch",
+      "selectIndustry": "Välj bransch",
+      "companySize": "Företagsstorlek",
+      "selectSize": "Välj storlek",
+      "timezone": "Standardtidszon",
+      "currency": "Standardvaluta",
+      "weekStart": "Veckan börjar på",
+      "logo": "Företagslogotyp",
+      "uploadLogo": "Ladda upp logotyp",
+      "uploadLogoDesc": "PNG eller SVG, rekommenderat 200x200px"
+    },
+    "locations": {
+      "title": "Platser",
+      "subtitle": "Lägg till dina kontor, anläggningar eller filialer",
+      "addLocation": "Lägg till plats",
+      "name": "Platsnamn",
+      "namePlaceholder": "t.ex. Huvudkontor",
+      "address": "Adress",
+      "addressPlaceholder": "Fullständig adress",
+      "timezone": "Tidszon",
+      "noLocations": "Inga platser tillagda ännu",
+      "addFirst": "Lägg till din första plats för att komma igång"
+    },
+    "departments": {
+      "title": "Avdelningar",
+      "subtitle": "Konfigurera din avdelningsstruktur",
+      "addDepartment": "Lägg till avdelning",
+      "name": "Avdelningsnamn",
+      "namePlaceholder": "t.ex. Teknik",
+      "parentDepartment": "Överordnad avdelning (valfritt)",
+      "none": "Ingen (toppnivå)",
+      "manager": "Avdelningschef",
+      "selectManager": "Välj chef",
+      "noDepartments": "Inga avdelningar tillagda ännu",
+      "addFirst": "Lägg till din första avdelning"
+    },
+    "roles": {
+      "title": "Roller & behörigheter",
+      "subtitle": "Konfigurera åtkomstnivåer för ditt team",
+      "addRole": "Lägg till anpassad roll",
+      "builtIn": "Inbyggd",
+      "custom": "Anpassad",
+      "name": "Rollnamn",
+      "namePlaceholder": "t.ex. Passansvarig",
+      "description": "Beskrivning",
+      "descriptionPlaceholder": "Vad kan denna roll göra?",
+      "permissions": "Behörigheter",
+      "permissionGroups": {
+        "scheduling": "Schemaläggning",
+        "timeTracking": "Tidrapportering",
+        "employees": "Anställda",
+        "reports": "Rapporter",
+        "settings": "Inställningar"
+      }
+    },
+    "review": {
+      "title": "Granska & lansera",
+      "subtitle": "Kontrollera att allt ser rätt ut innan du startar",
+      "orgInfo": "Organisationsinformation",
+      "locationsCount": "{{count}} platser konfigurerade",
+      "departmentsCount": "{{count}} avdelningar konfigurerade",
+      "rolesCount": "{{count}} roller konfigurerade",
+      "allLooksGood": "Allt ser bra ut!",
+      "launch": "Lansera organisation",
+      "launchDesc": "Detta aktiverar din organisation och skickar inbjudningar till tillagda teammedlemmar."
+    },
+    "navigation": {
+      "back": "Tillbaka",
+      "next": "Nästa",
+      "skip": "Hoppa över för nu",
+      "finish": "Slutför konfiguration"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

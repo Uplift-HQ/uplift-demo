@@ -54,7 +54,6 @@
     "viewMyCareer": "Vezi cariera mea",
     "timeOffBalance": "Sold concediu"
   },
-
   "nav": {
     "dashboard": "Panou de control",
     "employees": "Angajați",
@@ -150,9 +149,21 @@
     "active": "Activ",
     "inactive": "Inactiv",
     "enabled": "Activat",
-    "disabled": "Dezactivat"
+    "disabled": "Dezactivat",
+    "approveSelected": "Aprobă selecția",
+    "rejectSelected": "Respinge selecția",
+    "clearSelection": "Șterge",
+    "showing": "Se afișează",
+    "of": "din",
+    "page": "Pagina",
+    "previous": "Anterior",
+    "terminated": "Reziliat",
+    "sunday": "Dum",
+    "monday": "Lun",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Autentificare",
     "logout": "Deconectare",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Pentru a obține acces la Uplift, te rugăm să contactezi managerul sau departamentul HR. Aceștia îți vor trimite un link de invitație.",
     "enterEmailPassword": "Te rugăm să introduci email-ul și parola",
     "loginFailed": "Autentificare eșuată",
-    "demoAccounts": "Conturi demo:",
-    "demoWorker": "Angajat: worker@uplift.work / Demo123!",
-    "demoManager": "Manager: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Autentificare în doi pași",
     "enterMfaCode": "Introdu codul din aplicația de autentificare",
     "verificationCode": "Cod de verificare",
@@ -194,9 +202,16 @@
     "invalidCode": "Cod invalid",
     "allRightsReserved": "Toate drepturile rezervate",
     "termsOfService": "Termeni și condiții",
-    "privacyPolicy": "Politica de confidențialitate"
+    "privacyPolicy": "Politica de confidențialitate",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Acasă",
     "schedule": "Program",
@@ -214,7 +229,6 @@
     "leaderboard": "Clasament",
     "badges": "Insigne"
   },
-
   "home": {
     "welcome": "Bine ai revenit, {{name}}!",
     "welcomeBack": "Bine ai revenit,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Oportunități disponibile",
     "noOpportunities": "Momentan nu există oportunități care să se potrivească competențelor tale"
   },
-
   "schedule": {
     "title": "Programul meu",
     "weekView": "Săptămână",
@@ -293,9 +306,22 @@
     "yourShift": "Tura ta",
     "theirShift": "Tura lor",
     "sendRequest": "Trimite cererea",
-    "cancelSwap": "Anulează schimbul"
+    "cancelSwap": "Anulează schimbul",
+    "allLocations": "Toate locațiile",
+    "tuesday": "Mar",
+    "wednesday": "Mie",
+    "thursday": "Joi",
+    "friday": "Vin",
+    "saturday": "Sâm",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Pontaj",
     "clockedIn": "Intrare înregistrată",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Apasă pentru a ponta",
     "onBreakSince": "În pauză de la {{time}}",
     "workingSince": "Lucrează de la {{time}}",
-    "shiftEnded": "Tura s-a încheiat"
+    "shiftEnded": "Tura s-a încheiat",
+    "entriesApproved": "{{count}} înregistrări aprobate",
+    "approveError": "Aprobarea înregistrărilor a eșuat. Te rugăm să încerci din nou.",
+    "entriesRejected": "{{count}} înregistrări respinse",
+    "rejectError": "Respingerea înregistrărilor a eșuat. Te rugăm să încerci din nou.",
+    "clockInError": "Pontarea intrării a eșuat. Te rugăm să încerci din nou.",
+    "clockOutError": "Pontarea ieșirii a eșuat. Te rugăm să încerci din nou.",
+    "breakError": "Actualizarea stării pauzei a eșuat. Te rugăm să încerci din nou.",
+    "noPending": "Nicio înregistrare în așteptare de revizuit",
+    "noEntries": "Nicio înregistrare de timp găsită",
+    "history": "Istoric",
+    "managerSubtitle": "Revizuiește și aprobă foile de pontaj",
+    "employeeSubtitle": "Urmărește-ți orele de lucru",
+    "clockIn": "Pontează intrarea",
+    "clockOut": "Pontează ieșirea",
+    "startBreak": "Începe pauza",
+    "endBreak": "Termină pauza",
+    "totalHours": "Total ore"
   },
-
   "timeOff": {
     "title": "Concedii",
     "request": "Solicită concediu",
@@ -359,9 +401,16 @@
     "selectDates": "Selectează datele",
     "selectType": "Selectează tipul",
     "addNotes": "Adaugă note (opțional)",
-    "reviewRequest": "Revizuiește cererea"
+    "reviewRequest": "Revizuiește cererea",
+    "oneDay": "1 zi",
+    "days": "zile",
+    "dates": "Date",
+    "duration": "Durată",
+    "noRequests": "Nicio cerere găsită",
+    "requestDetails": "Detalii cerere de concediu",
+    "noReason": "Niciun motiv furnizat",
+    "submitted": "Trimis"
   },
-
   "feed": {
     "title": "Feed",
     "newPost": "Postare nouă",
@@ -401,7 +450,6 @@
     "hoursAgo": "acum {{count}}h",
     "daysAgo": "acum {{count}}z"
   },
-
   "messages": {
     "title": "Mesaje",
     "newMessage": "Mesaj nou",
@@ -419,7 +467,6 @@
     "translateMessage": "Traduce",
     "showOriginal": "Arată originalul"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Editează profilul",
@@ -447,7 +494,6 @@
     "viewProfile": "Vezi profilul",
     "memberSince": "Membru din {{date}}"
   },
-
   "skills": {
     "title": "Competențe",
     "mySkills": "Competențele mele",
@@ -474,7 +520,6 @@
     "skillAdded": "Competență adăugată cu succes",
     "verificationRequested": "Verificare solicitată"
   },
-
   "career": {
     "title": "Carieră",
     "careerPath": "Traseu profesional",
@@ -549,7 +594,6 @@
     "expired": "Expirat",
     "expires": "Expiră {{date}}"
   },
-
   "gamification": {
     "level": "Nivel {{level}}",
     "levelShort": "Niv {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Obținută pe {{date}}",
     "progressToEarn": "{{percent}}% progres pentru obținere"
   },
-
   "notifications": {
     "title": "Notificări",
     "markAllRead": "Marchează toate ca citite",
@@ -605,7 +648,6 @@
     "allCaught": "Ești la curent cu tot!",
     "checkBackLater": "Revino mai târziu pentru notificări noi"
   },
-
   "settings": {
     "title": "Setări",
     "subtitle": "Administrează organizația și contul tău",
@@ -740,9 +782,23 @@
     "featureAccess": "Acces funcționalități",
     "enableAll": "Activează toate",
     "disableAll": "Dezactivează toate",
-    "aboutEmployeeVisibility": "Aceste setări controlează ce funcționalități sunt vizibile pentru fiecare angajat."
+    "aboutEmployeeVisibility": "Aceste setări controlează ce funcționalități sunt vizibile pentru fiecare angajat.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Sarcini",
     "myTasks": "Sarcinile mele",
@@ -781,7 +837,6 @@
     "takePhoto": "Fă o fotografie",
     "chooseFromLibrary": "Alege din galerie"
   },
-
   "expenses": {
     "title": "Cheltuieli",
     "myExpenses": "Cheltuielile mele",
@@ -808,7 +863,6 @@
     "totalApproved": "Total aprobat",
     "totalReimbursed": "Total rambursat"
   },
-
   "rewards": {
     "title": "Recompense",
     "myRewards": "Recompensele mele",
@@ -828,7 +882,6 @@
     "validUntil": "Valabil până la {{date}}",
     "termsConditions": "Termeni și condiții"
   },
-
   "manager": {
     "dashboard": "Panou manager",
     "teamOverview": "Prezentare echipă",
@@ -859,7 +912,6 @@
     "attendance": "Prezență",
     "performance": "Performanță"
   },
-
   "onboarding": {
     "welcome": "Bine ai venit în Uplift!",
     "getStarted": "Hai să te configurăm",
@@ -877,7 +929,6 @@
     "allSet": "Totul e pregătit!",
     "startExploring": "Începe să explorezi ture și oportunități"
   },
-
   "errors": {
     "networkError": "Eroare de rețea. Verifică-ți conexiunea.",
     "serverError": "Eroare de server. Te rugăm să încerci din nou mai târziu.",
@@ -898,7 +949,6 @@
     "tryAgain": "Te rugăm să încerci din nou",
     "somethingWentWrong": "Ceva nu a funcționat corect"
   },
-
   "activity": {
     "title": "Revizuire activitate",
     "subtitle": "Revizuiește finalizările de sarcini, încărcările de dovezi și trimiterile de formulare",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Introdu motivul respingerii...",
     "confirmRejection": "Confirmă respingerea",
     "approve": "Aprobă",
-    "reject": "Respinge"
+    "reject": "Respinge",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Preferințe notificări",
     "subtitle": "Alege cum și când primești notificări",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Ești sigur că vrei să dezactivezi toate notificările? Le poți reactiva oricând.",
     "disableSuccess": "Toate notificările au fost dezactivate."
   },
-
   "employeeDetail": {
     "notFound": "Angajat negăsit",
     "backToEmployees": "Înapoi la angajați",
@@ -989,7 +1040,6 @@
     "basic": "De bază",
     "adding": "Se adaugă..."
   },
-
   "reports": {
     "title": "Rapoarte",
     "subtitle": "Analize, perspective și rapoarte personalizate",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Luna aceasta",
     "lastMonth": "Luna trecută",
     "last7Days": "Ultimele 7 zile",
-    "last30Days": "Ultimele 30 de zile"
+    "last30Days": "Ultimele 30 de zile",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Meniu",
     "closeMenu": "Închide meniul",
@@ -1041,7 +1104,6 @@
     "required": "Obligatoriu",
     "optional": "Opțional"
   },
-
   "shiftTemplates": {
     "title": "Șabloane de ture",
     "subtitle": "Creează modele de ture reutilizabile",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "ture",
     "generating": "Se generează..."
   },
-
   "legal": {
-    "lastUpdated": "Ultima actualizare"
+    "lastUpdated": "Ultima actualizare",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1289,564 @@
     "october": "Octombrie",
     "november": "Noiembrie",
     "december": "Decembrie"
+  },
+  "bulkImport": {
+    "title": "Import în masă",
+    "subtitle": "Importă date din fișiere CSV sau Excel",
+    "selectType": "Selectează tipul",
+    "uploadFile": "Încarcă fișier",
+    "preview": "Previzualizare",
+    "complete": "Finalizat",
+    "invalidFileType": "Te rugăm să încarci un fișier CSV sau Excel",
+    "importFailed": "Importul a eșuat. Te rugăm să încerci din nou.",
+    "uploadFor": "Încarcă",
+    "uploadDesc": "Trage și plasează sau clic pentru a selecta un fișier",
+    "downloadTemplate": "Descarcă șablon",
+    "dragDrop": "Trage și plasează fișierul aici, sau clic pentru a naviga",
+    "supportedFormats": "Formate acceptate: CSV, XLSX",
+    "previewData": "Previzualizare date",
+    "rowsFound": "rânduri găsite în",
+    "andMore": "Și",
+    "moreRows": "rânduri în plus...",
+    "importing": "Se importă...",
+    "startImport": "Începe importul",
+    "importComplete": "Import finalizat",
+    "successfullyImported": "Importat cu succes",
+    "of": "din",
+    "records": "înregistrări",
+    "successful": "Reușit",
+    "failed": "Eșuat",
+    "total": "Total",
+    "importMore": "Importă mai multe date",
+    "type": {
+      "employees": "Angajați",
+      "employeesDesc": "Importă profiluri angajați",
+      "shifts": "Ture",
+      "shiftsDesc": "Importă programe de ture",
+      "locations": "Locații",
+      "locationsDesc": "Importă locații",
+      "skills": "Competențe",
+      "skillsDesc": "Importă competențe"
+    }
+  },
+  "jobs": {
+    "open": "Deschis",
+    "closed": "Închis",
+    "applicants": "Candidați",
+    "created": "Postul a fost creat cu succes",
+    "createError": "Crearea postului a eșuat. Te rugăm să încerci din nou.",
+    "updated": "Postul a fost actualizat cu succes",
+    "updateError": "Actualizarea postului a eșuat. Te rugăm să încerci din nou.",
+    "fullTime": "Program complet",
+    "partTime": "Program parțial",
+    "contract": "Contract",
+    "temporary": "Temporar",
+    "subtitle": "Administrează oportunitățile interne de carieră",
+    "openPositions": "Poziții deschise",
+    "closedPositions": "Închise",
+    "totalApplicants": "Total candidați",
+    "noJobs": "Niciun post găsit",
+    "viewApplicants": "Vezi candidații",
+    "editPosting": "Editează postul",
+    "jobTitle": "Titlu post",
+    "enterTitle": "Introdu titlul postului",
+    "selectDepartment": "Selectează departamentul",
+    "selectLocation": "Selectează locația",
+    "salary": "Interval salarial",
+    "enterDescription": "Introdu descrierea postului",
+    "postJob": "Publică post",
+    "skillMatch": "potrivire competențe",
+    "noApplicants": "Niciun candidat încă"
+  },
+  "employees": {
+    "searchPlaceholder": "Caută după nume sau email...",
+    "employees": "angajați",
+    "noResults": "Niciun angajat găsit pentru criteriile tale",
+    "details": "Detalii angajat",
+    "hireDate": "Data angajării",
+    "assigned": "atribuit",
+    "leaveDetails": "Detalii concediu",
+    "until": "Până la",
+    "terminationDetails": "Detalii reziliere",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Hub de integrări",
+    "subtitle": "Conectează Uplift la instrumentele tale existente",
+    "apiFactory": "Fabrică API",
+    "addIntegration": "Adaugă integrare",
+    "configure": "Configurează",
+    "connect": "Conectează",
+    "cancel": "Anulează",
+    "back": "Înapoi",
+    "saveChanges": "Salvează modificările",
+    "syncNow": "Sincronizează acum",
+    "disconnect": "Deconectează {{name}}",
+    "disconnectConfirm": "Deconectezi {{name}}? Aceasta va opri toate sincronizările.",
+    "settingsSaved": "Setări salvate",
+    "browseMarketplace": "Explorează piața",
+    "loadingIntegrations": "Se încarcă integrările...",
+    "noIntegrations": "Nicio integrare conectată",
+    "noIntegrationsDesc": "Conectează prima ta integrare pentru a începe sincronizarea datelor",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Se sincronizează..."
+    },
+    "stats": {
+      "connected": "Conectate",
+      "available": "Disponibile",
+      "syncsToday": "Sincronizări astăzi",
+      "errors": "Erori",
+      "totalSyncs": "Total sincronizări",
+      "lastSync": "Ultima sincronizare",
+      "records": "înregistrări"
+    },
+    "tabs": {
+      "connected": "Conectate",
+      "marketplace": "Piață",
+      "restApi": "REST API",
+      "apiFactory": "Fabrică API",
+      "activityLog": "Jurnal activitate",
+      "settings": "Setări",
+      "fieldMapping": "Mapare câmpuri",
+      "syncHistory": "Istoric sincronizări",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Ultima sincronizare",
+      "frequency": "Frecvență",
+      "status": "Status",
+      "healthy": "Sănătos",
+      "errors": "erori"
+    },
+    "connectModal": {
+      "title": "Conectează {{name}}",
+      "whatItDoes": "Ce face această integrare:",
+      "redirectNotice": "Vei fi redirecționat către {{name}}",
+      "authorizeMessage": "Autentifică-te și autorizează Uplift să acceseze datele tale. Solicităm doar permisiunile necesare.",
+      "connectWith": "Conectează cu {{name}}",
+      "connecting": "Se conectează la {{name}}...",
+      "completeAuth": "Te rugăm să finalizezi autorizarea în fereastra popup",
+      "successConnected": "Conectat cu succes!",
+      "configureSyncSettings": "Configurează setările de sincronizare mai jos.",
+      "completeSetup": "Finalizează configurarea",
+      "connected": "{{name}} conectat!",
+      "firstSyncSoon": "Prima sincronizare va începe în curând",
+      "hris": {
+        "syncEmployees": "Sincronizează automat înregistrările angajaților",
+        "importDepts": "Importă departamente și locații",
+        "syncTimeOff": "Menține soldurile de concediu sincronizate"
+      },
+      "payroll": {
+        "exportTimesheets": "Exportă foile de pontaj aprobate",
+        "syncPayRates": "Sincronizează tarifele și orele suplimentare",
+        "autoReconciliation": "Reconciliere automată salarizare"
+      },
+      "comms": {
+        "shiftReminders": "Trimite memento-uri pentru ture",
+        "postRecognition": "Publică recunoașterea pe canale",
+        "swapNotifications": "Notificări cereri de schimb"
+      },
+      "identity": {
+        "sso": "Autentificare unică (SSO)",
+        "autoProvisioning": "Creare automată utilizatori",
+        "directorySync": "Sincronizare director"
+      },
+      "other": {
+        "bidirectional": "Sincronizare bidirecțională a datelor",
+        "realtimeWebhooks": "Actualizări în timp real prin webhooks",
+        "auditTrail": "Jurnal de audit complet"
+      }
+    },
+    "configureModal": {
+      "title": "Setări {{name}}",
+      "connectedSince": "Conectat {{date}}"
+    },
+    "settings": {
+      "autoSync": "Sincronizare automată",
+      "autoSyncDesc": "Sincronizează automat datele conform programului",
+      "autoSyncScheduleDesc": "Sincronizare automată conform programului",
+      "syncFrequency": "Frecvența sincronizării",
+      "nextScheduledSync": "Următoarea sincronizare programată",
+      "dataToSync": "Date de sincronizat",
+      "frequency": {
+        "realtime": "Timp real",
+        "hourly": "Orar",
+        "daily": "Zilnic",
+        "weekly": "Săptămânal"
+      },
+      "data": {
+        "employees": "Angajați",
+        "timeEntries": "Înregistrări de timp",
+        "departments": "Departamente",
+        "locations": "Locații"
+      }
+    },
+    "mapping": {
+      "description": "Maparea câmpurilor controlează cum datele din {{name}} se mapează la câmpurile Uplift. Modificările intră în vigoare la următoarea sincronizare.",
+      "sourceField": "Câmp {{name}}",
+      "upliftField": "Câmp Uplift",
+      "status": "Status",
+      "selectField": "Selectează câmpul...",
+      "mapped": "Mapat",
+      "unmapped": "Nemapat"
+    },
+    "history": {
+      "noHistory": "Niciun istoric de sincronizare încă",
+      "sync": "Sincronizare",
+      "duration": "Durată",
+      "records": "Înregistrări",
+      "created": "Create",
+      "updated": "Actualizate"
+    },
+    "webhooks": {
+      "description": "Webhook-urile notifică {{name}} când apar evenimente în Uplift",
+      "addWebhook": "Adaugă webhook",
+      "noWebhooks": "Niciun webhook configurat",
+      "createFirst": "Creează primul tău webhook",
+      "active": "Activ",
+      "paused": "Suspendat",
+      "sendTestPayload": "Trimite payload de test",
+      "pauseWebhook": "Suspendă webhook-ul",
+      "enableWebhook": "Activează webhook-ul",
+      "deleteWebhook": "Șterge webhook-ul",
+      "lastTriggered": "Ultima declanșare",
+      "never": "Niciodată",
+      "successRate": "Rata de succes",
+      "sendEventsTo": "Trimite evenimente către {{name}}",
+      "endpointUrl": "URL endpoint",
+      "eventsToSend": "Evenimente de trimis",
+      "hmacInfo": "Vom semna toate payload-urile webhook cu HMAC-SHA256. Vei primi semnătura în",
+      "header": "antet.",
+      "createWebhook": "Creează webhook",
+      "validationError": "Te rugăm să introduci un URL și să selectezi cel puțin un eveniment",
+      "createdSuccess": "Webhook creat cu succes!",
+      "testSent": "Payload de test trimis către",
+      "testStatus": "Status",
+      "deleteConfirm": "Ștergi acest webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Caută integrări...",
+      "allCategories": "Toate categoriile",
+      "infoBannerTitle": "Uplift funcționează cu instrumentele tale existente",
+      "infoBannerDesc": "Conectează sistemele tale HRIS, salarizare și comunicare. Sincronizăm datele — nu înlocuim stack-ul tău.",
+      "noResults": "Nicio integrare nu corespunde căutării",
+      "dontSeeSystem": "Nu vezi sistemul tău?",
+      "alwaysAdding": "Adăugăm mereu integrări noi. Spune-ne ce ai nevoie.",
+      "requestIntegration": "Solicită integrare"
+    },
+    "activity": {
+      "recentActivity": "Activitate recentă integrări",
+      "exportLog": "Exportă jurnal"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "Fabrică API",
+    "subtitle": "Construiește integrări REST API personalizate fără a scrie cod",
+    "newIntegration": "Integrare nouă",
+    "searchPlaceholder": "Caută integrări...",
+    "loadingIntegrations": "Se încarcă integrările...",
+    "noIntegrationsFound": "Nicio integrare găsită",
+    "noIntegrationsYet": "Nicio integrare personalizată încă",
+    "tryDifferentSearch": "Încearcă un termen diferit de căutare",
+    "createFirstDesc": "Creează prima ta integrare API personalizată pentru a conecta orice REST API",
+    "createIntegration": "Creează integrare",
+    "deleteConfirm": "Ești sigur că vrei să ștergi această integrare?",
+    "list": {
+      "eventsCount": "{{count}} evenimente",
+      "scheduled": "Programat",
+      "incomingWebhook": "Webhook de intrare",
+      "manual": "Manual",
+      "runsCount": "{{count}} execuții",
+      "errorsCount": "{{count}} erori",
+      "disabled": "Dezactivat",
+      "edit": "Editează",
+      "test": "Testează",
+      "viewLogs": "Vezi jurnale",
+      "delete": "Șterge",
+      "lastRun": "Ultima execuție"
+    },
+    "stats": {
+      "totalIntegrations": "Total integrări",
+      "active": "Active",
+      "runsToday": "Execuții astăzi",
+      "totalErrors": "Total erori"
+    },
+    "editor": {
+      "editTitle": "Editează integrare API",
+      "createTitle": "Creează integrare API",
+      "subtitle": "Configurează conexiunea ta REST API personalizată",
+      "integrationName": "Nume integrare",
+      "integrationNamePlaceholder": "ex: Sincronizare cu sistemul de salarizare",
+      "description": "Descriere",
+      "descriptionPlaceholder": "Ce face această integrare?",
+      "method": "Metodă",
+      "url": "URL",
+      "headers": "Antete",
+      "addHeader": "Adaugă antet",
+      "headerName": "Nume antet",
+      "headerValue": "Valoare",
+      "requestBodyJson": "Corp cerere (JSON)",
+      "useVariables": "Folosește {{field}} pentru variabile",
+      "availableVariables": "Variabile disponibile",
+      "authenticationType": "Tip autentificare",
+      "apiKeyLocation": "Locația cheii API",
+      "header": "Antet",
+      "queryParameter": "Parametru query",
+      "keyName": "Nume cheie",
+      "keyNamePlaceholder": "ex: X-API-Key",
+      "apiKey": "Cheie API",
+      "enterApiKey": "Introdu cheia ta API",
+      "bearerToken": "Token Bearer",
+      "enterToken": "Introdu token-ul tău",
+      "username": "Nume utilizator",
+      "password": "Parolă",
+      "tokenUrl": "URL token",
+      "clientId": "ID client",
+      "clientSecret": "Secret client",
+      "scopes": "Domenii (separate prin virgulă)",
+      "whenShouldRun": "Când ar trebui să ruleze această integrare?",
+      "selectEvents": "Selectează evenimente",
+      "schedule": "Program",
+      "cronExpression": "Expresie CRON",
+      "scheduleUtcNote": "Programul folosește fusul orar UTC. CRON curent",
+      "yourWebhookUrl": "URL-ul tău webhook",
+      "webhookPostNote": "Trimite cereri POST la acest URL. Vom procesa datele primite și le vom mapa în Uplift.",
+      "fieldMappings": "Mapări câmpuri",
+      "fieldMappingsDesc": "Mapează câmpurile Uplift la câmpurile API-ului extern",
+      "addMapping": "Adaugă mapare",
+      "noFieldMappings": "Nicio mapare de câmpuri încă",
+      "addMappingsDesc": "Adaugă mapări pentru a transforma datele între sisteme",
+      "addFirstMapping": "Adaugă prima mapare",
+      "selectUpliftField": "Selectează câmp Uplift...",
+      "externalFieldName": "Nume câmp extern",
+      "noTransform": "Fără transformare",
+      "dateIso": "Dată → ISO",
+      "dateUk": "Dată → format UK",
+      "boolYn": "Bool → D/N",
+      "fieldMappingTip": "Mapările de câmpuri sunt folosite pentru a construi automat corpul cererii. Poți folosi și sintaxa {{field}} în tab-ul Cerere pentru structuri JSON personalizate.",
+      "testConfiguration": "Testează configurarea",
+      "testDescription": "Trimite o cerere de test pentru a verifica configurarea. Vom folosi date de exemplu.",
+      "testing": "Se testează...",
+      "sendTestRequest": "Trimite cerere de test",
+      "success": "Succes",
+      "failed": "Eșuat",
+      "status": "Status",
+      "time": "Timp",
+      "response": "Răspuns",
+      "enableIntegration": "Activează integrarea",
+      "cancel": "Anulează",
+      "saveChanges": "Salvează modificările",
+      "createIntegration": "Creează integrare",
+      "tabs": {
+        "request": "Cerere",
+        "authentication": "Autentificare",
+        "trigger": "Declanșator",
+        "fieldMapping": "Mapare câmpuri",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Jurnale de execuție",
+      "export": "Exportă",
+      "noData": "Nicio dată încă. Jurnalele de execuție vor apărea aici când integrările rulează.",
+      "unknown": "Necunoscut",
+      "error": "Eroare"
+    },
+    "helpBanner": {
+      "title": "Ai nevoie de ajutor pentru construirea unei integrări?",
+      "description": "Consultă documentația noastră API pentru exemple, sau contactează asistența pentru cazuri complexe."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "Chei REST API",
+    "subtitle": "Generează chei API pentru a accesa datele Uplift din aplicațiile tale",
+    "apiDocs": "Documentație API",
+    "createKey": "Creează cheie",
+    "createApiKey": "Creează cheie API",
+    "loadingKeys": "Se încarcă cheile API...",
+    "loadError": "Încărcarea cheilor API a eșuat.",
+    "noKeysYet": "Nicio cheie API încă",
+    "createFirstDesc": "Creează prima ta cheie API pentru a începe integrarea cu Uplift",
+    "retry": "Reîncearcă",
+    "revokeConfirm": "Revoci cheia API \"{{name}}\"? Această acțiune nu poate fi anulată.",
+    "regenerateConfirm": "Regenerezi secretul pentru \"{{name}}\"? Secretul vechi va înceta să funcționeze imediat.",
+    "regenerateSuccess": "Nouă cheie secretă: {{secret}}\n\nSalveaz-o acum - nu o vei mai vedea!",
+    "regenerateError": "Regenerarea secretului a eșuat: {{message}}",
+    "usageStats": "Statistici utilizare pentru {{name}}:\n\nTotal cereri: {{requests}}\nUltima utilizare: {{lastUsed}}",
+    "card": {
+      "noDescription": "Fără descriere",
+      "expired": "Expirat",
+      "active": "Activ",
+      "inactive": "Inactiv",
+      "keyId": "ID cheie",
+      "requests": "Cereri",
+      "lastUsed": "Ultima utilizare",
+      "never": "Niciodată",
+      "rateLimit": "Limită de rată",
+      "standard": "Standard",
+      "hideDetails": "Ascunde detalii",
+      "showDetails": "Arată detalii",
+      "scopes": "DOMENII",
+      "created": "Creat",
+      "expires": "Expiră",
+      "usage": "Utilizare",
+      "regenerate": "Regenerează",
+      "revoke": "Revocă"
+    },
+    "create": {
+      "keyCreatedTitle": "Cheie API creată",
+      "createTitle": "Creează cheie API",
+      "keyCreatedSuccess": "Cheie API creată cu succes",
+      "copySecretWarning": "Copiază cheia secretă acum. Nu o vei mai putea vedea!",
+      "keyIdLabel": "ID cheie",
+      "secretKeyLabel": "Cheie secretă",
+      "fullApiKeyLabel": "Cheie API completă (pentru antetul Authorization)",
+      "fullKeyLabel": "Cheie completă",
+      "authHeaderNote": "Folosește aceasta în antetul tău Authorization",
+      "done": "Gata",
+      "keyName": "Nume cheie",
+      "keyNamePlaceholder": "ex: Cheie API producție",
+      "description": "Descriere",
+      "descriptionPlaceholder": "Pentru ce va fi folosită această cheie?",
+      "permissions": "Permisiuni",
+      "rateLimit": "Limită de rată",
+      "expiration": "Expirare",
+      "neverExpires": "Nu expiră niciodată",
+      "thirtyDays": "30 de zile",
+      "ninetyDays": "90 de zile",
+      "oneYear": "1 an",
+      "createError": "Crearea cheii API a eșuat. Te rugăm să încerci din nou.",
+      "cancel": "Anulează",
+      "createKey": "Creează cheie"
+    },
+    "docs": {
+      "quickStart": "Ghid rapid",
+      "authentication": "Autentificare",
+      "exampleResponse": "Exemplu de răspuns",
+      "viewFullDocs": "Vezi documentația completă",
+      "downloadSpec": "Descarcă specificația OpenAPI"
+    },
+    "securityBanner": {
+      "title": "Securitate chei API",
+      "description": "Păstrează cheile API în siguranță. Nu le expune niciodată în codul client sau în depozite publice. Dacă o cheie este compromisă, revoc-o imediat și creează una nouă."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Configurare organizație",
+    "subtitle": "Hai să configurăm organizația ta",
+    "steps": {
+      "orgDetails": "Detalii organizație",
+      "locations": "Locații",
+      "departments": "Departamente",
+      "roles": "Roluri și permisiuni",
+      "review": "Revizuire și lansare"
+    },
+    "orgDetails": {
+      "companyName": "Nume companie",
+      "companyNamePlaceholder": "ex: Acme SRL",
+      "tradingName": "Nume comercial (opțional)",
+      "tradingNamePlaceholder": "Nume public",
+      "industry": "Industrie",
+      "selectIndustry": "Selectează industria",
+      "companySize": "Dimensiune companie",
+      "selectSize": "Selectează dimensiunea",
+      "timezone": "Fus orar implicit",
+      "currency": "Monedă implicită",
+      "weekStart": "Săptămâna începe",
+      "logo": "Logo companie",
+      "uploadLogo": "Încarcă logo",
+      "uploadLogoDesc": "PNG sau SVG, recomandat 200×200px"
+    },
+    "locations": {
+      "title": "Locații",
+      "subtitle": "Adaugă birourile, sediile sau sucursalele tale",
+      "addLocation": "Adaugă locație",
+      "name": "Nume locație",
+      "namePlaceholder": "ex: Sediul central",
+      "address": "Adresă",
+      "addressPlaceholder": "Adresa completă",
+      "timezone": "Fus orar",
+      "noLocations": "Nicio locație adăugată încă",
+      "addFirst": "Adaugă prima ta locație pentru a începe"
+    },
+    "departments": {
+      "title": "Departamente",
+      "subtitle": "Configurează structura departamentelor",
+      "addDepartment": "Adaugă departament",
+      "name": "Nume departament",
+      "namePlaceholder": "ex: Inginerie",
+      "parentDepartment": "Departament părinte (opțional)",
+      "none": "Niciunul (nivel superior)",
+      "manager": "Manager departament",
+      "selectManager": "Selectează managerul",
+      "noDepartments": "Niciun departament adăugat încă",
+      "addFirst": "Adaugă primul tău departament"
+    },
+    "roles": {
+      "title": "Roluri și permisiuni",
+      "subtitle": "Configurează nivelurile de acces pentru echipa ta",
+      "addRole": "Adaugă rol personalizat",
+      "builtIn": "Încorporat",
+      "custom": "Personalizat",
+      "name": "Nume rol",
+      "namePlaceholder": "ex: Supervizor de tură",
+      "description": "Descriere",
+      "descriptionPlaceholder": "Ce poate face acest rol?",
+      "permissions": "Permisiuni",
+      "permissionGroups": {
+        "scheduling": "Programare",
+        "timeTracking": "Pontaj",
+        "employees": "Angajați",
+        "reports": "Rapoarte",
+        "settings": "Setări"
+      }
+    },
+    "review": {
+      "title": "Revizuire și lansare",
+      "subtitle": "Verifică dacă totul este corect înainte de lansare",
+      "orgInfo": "Informații organizație",
+      "locationsCount": "{{count}} locații configurate",
+      "departmentsCount": "{{count}} departamente configurate",
+      "rolesCount": "{{count}} roluri configurate",
+      "allLooksGood": "Totul arată bine!",
+      "launch": "Lansează organizația",
+      "launchDesc": "Aceasta va activa organizația ta și va trimite invitații membrilor echipei adăugați."
+    },
+    "navigation": {
+      "back": "Înapoi",
+      "next": "Următorul",
+      "skip": "Sări peste",
+      "finish": "Finalizează configurarea"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

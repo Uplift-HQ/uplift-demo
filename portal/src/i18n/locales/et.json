@@ -54,7 +54,6 @@
     "viewMyCareer": "Vaata minu karjääri",
     "timeOffBalance": "Puhkusejääk"
   },
-
   "nav": {
     "dashboard": "Töölaud",
     "employees": "Töötajad",
@@ -150,7 +149,20 @@
     "active": "Aktiivne",
     "inactive": "Mitteaktiivne",
     "enabled": "Lubatud",
-    "disabled": "Keelatud"
+    "disabled": "Keelatud",
+    "approveSelected": "Kinnita valitud",
+    "rejectSelected": "Lükka valitud tagasi",
+    "clearSelection": "Tühjenda",
+    "showing": "Kuvatakse",
+    "of": "/",
+    "page": "Lehekülg",
+    "previous": "Eelmine",
+    "terminated": "Lõpetatud",
+    "sunday": "P",
+    "monday": "E",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
   "auth": {
     "login": "Logi sisse",
@@ -177,9 +189,6 @@
     "requestAccessMsg": "Uplifti juurdepääsu saamiseks võta palun ühendust oma juhi või personaliosakonnaga. Nad saadavad sulle kutselingi.",
     "enterEmailPassword": "Palun sisesta e-post ja parool",
     "loginFailed": "Sisselogimine ebaõnnestus",
-    "demoAccounts": "Demo kontod:",
-    "demoWorker": "Töötaja: worker@uplift.work / Demo123!",
-    "demoManager": "Juht: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Kaheastmeline autentimine",
     "enterMfaCode": "Sisesta kood oma autentimisrakendusest",
     "verificationCode": "Kinnituskood",
@@ -193,7 +202,15 @@
     "invalidCode": "Vigane kood",
     "allRightsReserved": "Kõik õigused kaitstud",
     "termsOfService": "Teenuse tingimused",
-    "privacyPolicy": "Privaatsuspoliitika"
+    "privacyPolicy": "Privaatsuspoliitika",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
   "navigation": {
     "home": "Avaleht",
@@ -289,7 +306,21 @@
     "yourShift": "Sinu vahetus",
     "theirShift": "Nende vahetus",
     "sendRequest": "Saada taotlus",
-    "cancelSwap": "Tühista vahetus"
+    "cancelSwap": "Tühista vahetus",
+    "allLocations": "Kõik asukohad",
+    "tuesday": "T",
+    "wednesday": "K",
+    "thursday": "N",
+    "friday": "R",
+    "saturday": "L",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
   "timeTracking": {
     "title": "Ajaregistreerimine",
@@ -321,7 +352,24 @@
     "tapToClockIn": "Puuduta sisselogimiseks",
     "onBreakSince": "Pausil alates {{time}}",
     "workingSince": "Tööl alates {{time}}",
-    "shiftEnded": "Vahetus lõppenud"
+    "shiftEnded": "Vahetus lõppenud",
+    "entriesApproved": "{{count}} kirjet kinnitatud",
+    "approveError": "Kirjete kinnitamine ebaõnnestus. Palun proovi uuesti.",
+    "entriesRejected": "{{count}} kirjet tagasi lükatud",
+    "rejectError": "Kirjete tagasilükkamine ebaõnnestus. Palun proovi uuesti.",
+    "clockInError": "Sisselogimine ebaõnnestus. Palun proovi uuesti.",
+    "clockOutError": "Väljaklogimine ebaõnnestus. Palun proovi uuesti.",
+    "breakError": "Pausi oleku uuendamine ebaõnnestus. Palun proovi uuesti.",
+    "noPending": "Ootel kirjeid pole üle vaadata",
+    "noEntries": "Ajakirjeid ei leitud",
+    "history": "Ajalugu",
+    "managerSubtitle": "Vaata üle ja kinnita tööajatabeleid",
+    "employeeSubtitle": "Jälgi oma töötunde",
+    "clockIn": "Logi sisse",
+    "clockOut": "Logi välja",
+    "startBreak": "Alusta pausi",
+    "endBreak": "Lõpeta paus",
+    "totalHours": "Kokku tunde"
   },
   "timeOff": {
     "title": "Puhkus",
@@ -353,7 +401,15 @@
     "selectDates": "Vali kuupäevad",
     "selectType": "Vali tüüp",
     "addNotes": "Lisa märkmed (valikuline)",
-    "reviewRequest": "Vaata taotlust üle"
+    "reviewRequest": "Vaata taotlust üle",
+    "oneDay": "1 päev",
+    "days": "päeva",
+    "dates": "Kuupäevad",
+    "duration": "Kestus",
+    "noRequests": "Taotlusi ei leitud",
+    "requestDetails": "Puhkusetaotluse üksikasjad",
+    "noReason": "Põhjust pole esitatud",
+    "submitted": "Esitatud"
   },
   "feed": {
     "title": "Voog",
@@ -726,7 +782,22 @@
     "featureAccess": "Funktsioonide ligipääs",
     "enableAll": "Luba kõik",
     "disableAll": "Keela kõik",
-    "aboutEmployeeVisibility": "Need seaded kontrollivad, millised funktsioonid on igale töötajale nähtavad."
+    "aboutEmployeeVisibility": "Need seaded kontrollivad, millised funktsioonid on igale töötajale nähtavad.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
   "tasks": {
     "title": "Ülesanded",
@@ -908,9 +979,11 @@
     "enterRejectionReason": "Sisesta tagasilükkamise põhjus...",
     "confirmRejection": "Kinnita tagasilükkamine",
     "approve": "Kinnita",
-    "reject": "Lükka tagasi"
+    "reject": "Lükka tagasi",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Teavituste eelistused",
     "subtitle": "Vali, kuidas ja millal teavitusi saad",
@@ -952,7 +1025,6 @@
     "disableConfirm": "Kas oled kindel, et soovid keelata kõik teavitused? Saad need igal ajal uuesti lubada.",
     "disableSuccess": "Kõik teavitused on keelatud."
   },
-
   "employeeDetail": {
     "notFound": "Töötajat ei leitud",
     "backToEmployees": "Tagasi töötajate juurde",
@@ -968,7 +1040,6 @@
     "basic": "Algtase",
     "adding": "Lisamine..."
   },
-
   "reports": {
     "title": "Aruanded",
     "subtitle": "Analüütika, ülevaated ja kohandatud aruanded",
@@ -1004,9 +1075,35 @@
     "thisMonth": "See kuu",
     "lastMonth": "Eelmine kuu",
     "last7Days": "Viimased 7 päeva",
-    "last30Days": "Viimased 30 päeva"
+    "last30Days": "Viimased 30 päeva",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
+  "accessibility": {
+    "menu": "Menüü",
+    "closeMenu": "Sulge menüü",
+    "openMenu": "Ava menüü",
+    "goBack": "Mine tagasi",
+    "selected": "Valitud",
+    "notSelected": "Pole valitud",
+    "loading": "Laadimine",
+    "loaded": "Laaditud",
+    "error": "Viga",
+    "required": "Nõutud",
+    "optional": "Valikuline"
+  },
   "shiftTemplates": {
     "title": "Vahetuse mallid",
     "subtitle": "Loo korduvkasutatavaid vahetuse mustreid",
@@ -1038,23 +1135,117 @@
     "shiftsLabel": "vahetust",
     "generating": "Genereerimine..."
   },
-
   "legal": {
-    "lastUpdated": "Viimati uuendatud"
-  },
-
-  "accessibility": {
-    "menu": "Menüü",
-    "closeMenu": "Sulge menüü",
-    "openMenu": "Ava menüü",
-    "goBack": "Mine tagasi",
-    "selected": "Valitud",
-    "notSelected": "Pole valitud",
-    "loading": "Laadimine",
-    "loaded": "Laaditud",
-    "error": "Viga",
-    "required": "Nõutud",
-    "optional": "Valikuline"
+    "lastUpdated": "Viimati uuendatud",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
   "dateTime": {
     "am": "AM",
@@ -1098,5 +1289,564 @@
     "october": "Oktoober",
     "november": "November",
     "december": "Detsember"
+  },
+  "bulkImport": {
+    "title": "Hulgiimport",
+    "subtitle": "Impordi andmeid CSV- või Excel-failidest",
+    "selectType": "Vali tüüp",
+    "uploadFile": "Laadi fail üles",
+    "preview": "Eelvaade",
+    "complete": "Lõpetatud",
+    "invalidFileType": "Palun laadi üles CSV- või Excel-fail",
+    "importFailed": "Import ebaõnnestus. Palun proovi uuesti.",
+    "uploadFor": "Laadi üles",
+    "uploadDesc": "Lohista ja kukuta või kliki faili valimiseks",
+    "downloadTemplate": "Laadi mall alla",
+    "dragDrop": "Lohista ja kukuta oma fail siia või kliki sirvimiseks",
+    "supportedFormats": "Toetatud formaadid: CSV, XLSX",
+    "previewData": "Andmete eelvaade",
+    "rowsFound": "rida leitud failist",
+    "andMore": "Ja",
+    "moreRows": "rida veel...",
+    "importing": "Importimine...",
+    "startImport": "Alusta importimist",
+    "importComplete": "Import lõpetatud",
+    "successfullyImported": "Edukalt imporditud",
+    "of": "/",
+    "records": "kirjet",
+    "successful": "Õnnestunud",
+    "failed": "Ebaõnnestunud",
+    "total": "Kokku",
+    "importMore": "Impordi rohkem andmeid",
+    "type": {
+      "employees": "Töötajad",
+      "employeesDesc": "Impordi töötajate profiilid",
+      "shifts": "Vahetused",
+      "shiftsDesc": "Impordi vahetuste graafikud",
+      "locations": "Asukohad",
+      "locationsDesc": "Impordi asukohad",
+      "skills": "Oskused",
+      "skillsDesc": "Impordi oskused"
+    }
+  },
+  "jobs": {
+    "open": "Avatud",
+    "closed": "Suletud",
+    "applicants": "Kandidaadid",
+    "created": "Tööpakkumine edukalt loodud",
+    "createError": "Tööpakkumise loomine ebaõnnestus. Palun proovi uuesti.",
+    "updated": "Tööpakkumine edukalt uuendatud",
+    "updateError": "Tööpakkumise uuendamine ebaõnnestus. Palun proovi uuesti.",
+    "fullTime": "Täiskohaga",
+    "partTime": "Osalise tööajaga",
+    "contract": "Leping",
+    "temporary": "Ajutine",
+    "subtitle": "Halda sisemisi karjäärivõimalusi",
+    "openPositions": "Avatud positsioonid",
+    "closedPositions": "Suletud",
+    "totalApplicants": "Kandidaate kokku",
+    "noJobs": "Tööpakkumisi ei leitud",
+    "viewApplicants": "Vaata kandidaate",
+    "editPosting": "Muuda tööpakkumist",
+    "jobTitle": "Ametinimetus",
+    "enterTitle": "Sisesta ametinimetus",
+    "selectDepartment": "Vali osakond",
+    "selectLocation": "Vali asukoht",
+    "salary": "Palgavahemik",
+    "enterDescription": "Sisesta töökirjeldus",
+    "postJob": "Postita töökoht",
+    "skillMatch": "oskuste sobivus",
+    "noApplicants": "Kandidaate pole veel"
+  },
+  "employees": {
+    "searchPlaceholder": "Otsi nime või e-posti järgi...",
+    "employees": "töötajat",
+    "noResults": "Sinu kriteeriumidele vastavaid töötajaid ei leitud",
+    "details": "Töötaja üksikasjad",
+    "hireDate": "Tööle võtmise kuupäev",
+    "assigned": "määratud",
+    "leaveDetails": "Puhkuse üksikasjad",
+    "until": "Kuni",
+    "terminationDetails": "Lõpetamise üksikasjad",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Integratsioonikeskus",
+    "subtitle": "Ühenda Uplift oma olemasolevatest tööriistadega",
+    "apiFactory": "API tehas",
+    "addIntegration": "Lisa integratsioon",
+    "configure": "Seadista",
+    "connect": "Ühenda",
+    "cancel": "Tühista",
+    "back": "Tagasi",
+    "saveChanges": "Salvesta muudatused",
+    "syncNow": "Sünkrooni nüüd",
+    "disconnect": "Ühenda lahti {{name}}",
+    "disconnectConfirm": "Ühendada lahti {{name}}? See peatab kõik sünkroonimised.",
+    "settingsSaved": "Seaded salvestatud",
+    "browseMarketplace": "Sirvi turgu",
+    "loadingIntegrations": "Integratsioonide laadimine...",
+    "noIntegrations": "Ühtegi integratsiooni pole ühendatud",
+    "noIntegrationsDesc": "Ühenda oma esimene integratsioon andmete sünkroonimise alustamiseks",
+    "status": {
+      "beta": "Beeta",
+      "syncing": "Sünkroonimine..."
+    },
+    "stats": {
+      "connected": "Ühendatud",
+      "available": "Saadaval",
+      "syncsToday": "Sünkroonimisi täna",
+      "errors": "Vead",
+      "totalSyncs": "Sünkroonimisi kokku",
+      "lastSync": "Viimane sünkroonimine",
+      "records": "kirjet"
+    },
+    "tabs": {
+      "connected": "Ühendatud",
+      "marketplace": "Turg",
+      "restApi": "REST API",
+      "apiFactory": "API tehas",
+      "activityLog": "Tegevuslogi",
+      "settings": "Seaded",
+      "fieldMapping": "Väljade kaardistamine",
+      "syncHistory": "Sünkroonimise ajalugu",
+      "webhooks": "Webhookid"
+    },
+    "connection": {
+      "lastSync": "Viimane sünkroonimine",
+      "frequency": "Sagedus",
+      "status": "Olek",
+      "healthy": "Korras",
+      "errors": "viga"
+    },
+    "connectModal": {
+      "title": "Ühenda {{name}}",
+      "whatItDoes": "Mida see integratsioon teeb:",
+      "redirectNotice": "Sind suunatakse ümber {{name}}",
+      "authorizeMessage": "Logi sisse ja volita Uplift oma andmetele juurdepääsuks. Küsime ainult vajalikke õigusi.",
+      "connectWith": "Ühenda {{name}}-ga",
+      "connecting": "Ühendamine {{name}}-ga...",
+      "completeAuth": "Palun lõpeta autoriseerimine hüpikaknas",
+      "successConnected": "Edukalt ühendatud!",
+      "configureSyncSettings": "Seadista oma sünkroonimise seaded allpool.",
+      "completeSetup": "Lõpeta seadistamine",
+      "connected": "{{name}} ühendatud!",
+      "firstSyncSoon": "Esimene sünkroonimine algab peagi",
+      "hris": {
+        "syncEmployees": "Sünkrooni töötajate kirjed automaatselt",
+        "importDepts": "Impordi osakonnad ja asukohad",
+        "syncTimeOff": "Hoia puhkusejäägid sünkroonis"
+      },
+      "payroll": {
+        "exportTimesheets": "Ekspordi kinnitatud tööajatabelid",
+        "syncPayRates": "Sünkrooni palgamäärad ja ületunnid",
+        "autoReconciliation": "Automaatne palgaarvestuse ühildamine"
+      },
+      "comms": {
+        "shiftReminders": "Saada vahetuse meeldetuletusi",
+        "postRecognition": "Postita tunnustust kanalitesse",
+        "swapNotifications": "Vahetuse vahetamise teavitused"
+      },
+      "identity": {
+        "sso": "Ühekordne sisselogimine (SSO)",
+        "autoProvisioning": "Automaatne kasutajate loomine",
+        "directorySync": "Kataloogisünkroonimine"
+      },
+      "other": {
+        "bidirectional": "Kahesuunaline andmete sünkroonimine",
+        "realtimeWebhooks": "Reaalajas uuendused webhookide kaudu",
+        "auditTrail": "Täielik auditijälg"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} seaded",
+      "connectedSince": "Ühendatud {{date}}"
+    },
+    "settings": {
+      "autoSync": "Automaatne sünkroonimine",
+      "autoSyncDesc": "Sünkrooni andmeid automaatselt ajakava järgi",
+      "autoSyncScheduleDesc": "Sünkrooni automaatselt ajakava järgi",
+      "syncFrequency": "Sünkroonimise sagedus",
+      "nextScheduledSync": "Järgmine planeeritud sünkroonimine",
+      "dataToSync": "Sünkroonitavad andmed",
+      "frequency": {
+        "realtime": "Reaalajas",
+        "hourly": "Iga tund",
+        "daily": "Iga päev",
+        "weekly": "Iga nädal"
+      },
+      "data": {
+        "employees": "Töötajad",
+        "timeEntries": "Ajakirjed",
+        "departments": "Osakonnad",
+        "locations": "Asukohad"
+      }
+    },
+    "mapping": {
+      "description": "Väljade kaardistamine kontrollib, kuidas andmed {{name}}-st Uplifti väljadele kaardistuvad. Muudatused jõustuvad järgmisel sünkroonimisel.",
+      "sourceField": "{{name}} väli",
+      "upliftField": "Uplifti väli",
+      "status": "Olek",
+      "selectField": "Vali väli...",
+      "mapped": "Kaardistatud",
+      "unmapped": "Kaardistamata"
+    },
+    "history": {
+      "noHistory": "Sünkroonimise ajalugu pole veel",
+      "sync": "Sünkroonimine",
+      "duration": "Kestus",
+      "records": "Kirjed",
+      "created": "Loodud",
+      "updated": "Uuendatud"
+    },
+    "webhooks": {
+      "description": "Webhookid teavitavad {{name}}, kui Upliftis toimuvad sündmused",
+      "addWebhook": "Lisa webhook",
+      "noWebhooks": "Webhookid pole seadistatud",
+      "createFirst": "Loo oma esimene webhook",
+      "active": "Aktiivne",
+      "paused": "Peatatud",
+      "sendTestPayload": "Saada testkoorem",
+      "pauseWebhook": "Peata webhook",
+      "enableWebhook": "Luba webhook",
+      "deleteWebhook": "Kustuta webhook",
+      "lastTriggered": "Viimati käivitatud",
+      "never": "Mitte kunagi",
+      "successRate": "Õnnestumismäär",
+      "sendEventsTo": "Saada sündmused {{name}}",
+      "endpointUrl": "Lõpp-punkti URL",
+      "eventsToSend": "Saadetavad sündmused",
+      "hmacInfo": "Allkirjastame kõik webhookide koormad HMAC-SHA256-ga. Allkiri saadetakse päises",
+      "header": "päis.",
+      "createWebhook": "Loo webhook",
+      "validationError": "Palun sisesta URL ja vali vähemalt üks sündmus",
+      "createdSuccess": "Webhook edukalt loodud!",
+      "testSent": "Testkoorem saadetud",
+      "testStatus": "Olek",
+      "deleteConfirm": "Kustuta see webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Otsi integratsioone...",
+      "allCategories": "Kõik kategooriad",
+      "infoBannerTitle": "Uplift töötab sinu olemasolevatest tööriistadega",
+      "infoBannerDesc": "Ühenda oma HRIS, palgaarvestuse ja suhtlussüsteemid. Me sünkroonime andmeid – me ei asenda sinu süsteeme.",
+      "noResults": "Ühtegi integratsiooni ei vasta otsingule",
+      "dontSeeSystem": "Ei näe oma süsteemi?",
+      "alwaysAdding": "Lisame pidevalt uusi integratsioone. Anna meile teada, mida vajad.",
+      "requestIntegration": "Taotle integratsiooni"
+    },
+    "activity": {
+      "recentActivity": "Viimased integratsioonitegevused",
+      "exportLog": "Ekspordi logi"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API tehas",
+    "subtitle": "Ehita kohandatud REST API integratsioone ilma koodi kirjutamata",
+    "newIntegration": "Uus integratsioon",
+    "searchPlaceholder": "Otsi integratsioone...",
+    "loadingIntegrations": "Integratsioonide laadimine...",
+    "noIntegrationsFound": "Integratsioone ei leitud",
+    "noIntegrationsYet": "Kohandatud integratsioone pole veel",
+    "tryDifferentSearch": "Proovi teist otsingusõna",
+    "createFirstDesc": "Loo oma esimene kohandatud API integratsioon mis tahes REST API ühendamiseks",
+    "createIntegration": "Loo integratsioon",
+    "deleteConfirm": "Kas oled kindel, et soovid selle integratsiooni kustutada?",
+    "list": {
+      "eventsCount": "{{count}} sündmust",
+      "scheduled": "Ajakava järgi",
+      "incomingWebhook": "Sissetulev webhook",
+      "manual": "Käsitsi",
+      "runsCount": "{{count}} käivitust",
+      "errorsCount": "{{count}} viga",
+      "disabled": "Keelatud",
+      "edit": "Muuda",
+      "test": "Testi",
+      "viewLogs": "Vaata logisid",
+      "delete": "Kustuta",
+      "lastRun": "Viimane käivitus"
+    },
+    "stats": {
+      "totalIntegrations": "Integratsioone kokku",
+      "active": "Aktiivsed",
+      "runsToday": "Käivitusi täna",
+      "totalErrors": "Vigu kokku"
+    },
+    "editor": {
+      "editTitle": "Muuda API integratsiooni",
+      "createTitle": "Loo API integratsioon",
+      "subtitle": "Seadista oma kohandatud REST API ühendus",
+      "integrationName": "Integratsiooni nimi",
+      "integrationNamePlaceholder": "nt Sünkrooni palgasüsteemi",
+      "description": "Kirjeldus",
+      "descriptionPlaceholder": "Mida see integratsioon teeb?",
+      "method": "Meetod",
+      "url": "URL",
+      "headers": "Päised",
+      "addHeader": "Lisa päis",
+      "headerName": "Päise nimi",
+      "headerValue": "Väärtus",
+      "requestBodyJson": "Päringu keha (JSON)",
+      "useVariables": "Kasuta {{field}} muutujate jaoks",
+      "availableVariables": "Saadaolevad muutujad",
+      "authenticationType": "Autentimise tüüp",
+      "apiKeyLocation": "API võtme asukoht",
+      "header": "Päis",
+      "queryParameter": "Päringuparameeter",
+      "keyName": "Võtme nimi",
+      "keyNamePlaceholder": "nt X-API-Key",
+      "apiKey": "API võti",
+      "enterApiKey": "Sisesta oma API võti",
+      "bearerToken": "Kandjatunnus",
+      "enterToken": "Sisesta oma tunnus",
+      "username": "Kasutajanimi",
+      "password": "Parool",
+      "tokenUrl": "Tunnuse URL",
+      "clientId": "Kliendi ID",
+      "clientSecret": "Kliendi saladus",
+      "scopes": "Ulatused (komadega eraldatud)",
+      "whenShouldRun": "Millal peaks see integratsioon käivituma?",
+      "selectEvents": "Vali sündmused",
+      "schedule": "Ajakava",
+      "cronExpression": "CRON-avaldis",
+      "scheduleUtcNote": "Ajakava kasutab UTC ajavööndit. Praegune CRON",
+      "yourWebhookUrl": "Sinu webhooki URL",
+      "webhookPostNote": "Saada POST-päringuid sellele URL-ile. Töötleme sissetulevad andmed ja kaardistame need Upliftile.",
+      "fieldMappings": "Väljade kaardistamised",
+      "fieldMappingsDesc": "Kaardista Uplifti väljad oma välise API väljadele",
+      "addMapping": "Lisa kaardistamine",
+      "noFieldMappings": "Väljade kaardistamisi pole veel",
+      "addMappingsDesc": "Lisa kaardistamised andmete teisendamiseks süsteemide vahel",
+      "addFirstMapping": "Lisa esimene kaardistamine",
+      "selectUpliftField": "Vali Uplifti väli...",
+      "externalFieldName": "Välise välja nimi",
+      "noTransform": "Teisendust pole",
+      "dateIso": "Kuupäev → ISO",
+      "dateUk": "Kuupäev → UK formaat",
+      "boolYn": "Bool → J/E",
+      "fieldMappingTip": "Väljade kaardistamisi kasutatakse päringu keha automaatseks koostamiseks. Saad kasutada ka {{field}} süntaksit Päringu vahekaardil kohandatud JSON-struktuuride jaoks.",
+      "testConfiguration": "Testi konfiguratsiooni",
+      "testDescription": "Saada testpäring oma konfiguratsiooni kontrollimiseks. Kasutame näidisandmeid.",
+      "testing": "Testimine...",
+      "sendTestRequest": "Saada testpäring",
+      "success": "Õnnestus",
+      "failed": "Ebaõnnestus",
+      "status": "Olek",
+      "time": "Aeg",
+      "response": "Vastus",
+      "enableIntegration": "Luba integratsioon",
+      "cancel": "Tühista",
+      "saveChanges": "Salvesta muudatused",
+      "createIntegration": "Loo integratsioon",
+      "tabs": {
+        "request": "Päring",
+        "authentication": "Autentimine",
+        "trigger": "Käiviti",
+        "fieldMapping": "Väljade kaardistamine",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Käivituslogid",
+      "export": "Ekspordi",
+      "noData": "Andmeid pole veel. Käivituslogid ilmuvad siia, kui integratsioonid käivituvad.",
+      "unknown": "Teadmata",
+      "error": "Viga"
+    },
+    "helpBanner": {
+      "title": "Vajad abi integratsiooni ehitamisel?",
+      "description": "Vaata meie API dokumentatsiooni näidete jaoks või võta keeruliste juhtumite korral ühendust toega."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API võtmed",
+    "subtitle": "Genereeri API võtmed Uplifti andmetele juurdepääsuks oma rakendustest",
+    "apiDocs": "API dokumentatsioon",
+    "createKey": "Loo võti",
+    "createApiKey": "Loo API võti",
+    "loadingKeys": "API võtmete laadimine...",
+    "loadError": "API võtmete laadimine ebaõnnestus.",
+    "noKeysYet": "API võtmeid pole veel",
+    "createFirstDesc": "Loo oma esimene API võti Upliftiga integreerimise alustamiseks",
+    "retry": "Proovi uuesti",
+    "revokeConfirm": "Tühista API võti \"{{name}}\"? Seda toimingut ei saa tagasi võtta.",
+    "regenerateConfirm": "Genereeri uuesti saladus \"{{name}}\" jaoks? Vana saladus lõpetab kohe töö.",
+    "regenerateSuccess": "Uus salajane võti: {{secret}}\n\nSalvesta see nüüd - sa ei näe seda enam!",
+    "regenerateError": "Saladuse uuesti genereerimine ebaõnnestus: {{message}}",
+    "usageStats": "Kasutusstatistika {{name}} jaoks:\n\nPäringuid kokku: {{requests}}\nViimati kasutatud: {{lastUsed}}",
+    "card": {
+      "noDescription": "Kirjeldus puudub",
+      "expired": "Aegunud",
+      "active": "Aktiivne",
+      "inactive": "Mitteaktiivne",
+      "keyId": "Võtme ID",
+      "requests": "Päringud",
+      "lastUsed": "Viimati kasutatud",
+      "never": "Mitte kunagi",
+      "rateLimit": "Kiirusepiirang",
+      "standard": "Standardne",
+      "hideDetails": "Peida üksikasjad",
+      "showDetails": "Näita üksikasju",
+      "scopes": "ULATUSED",
+      "created": "Loodud",
+      "expires": "Aegub",
+      "usage": "Kasutamine",
+      "regenerate": "Genereeri uuesti",
+      "revoke": "Tühista"
+    },
+    "create": {
+      "keyCreatedTitle": "API võti loodud",
+      "createTitle": "Loo API võti",
+      "keyCreatedSuccess": "API võti edukalt loodud",
+      "copySecretWarning": "Kopeeri oma salajane võti nüüd. Sa ei näe seda enam!",
+      "keyIdLabel": "Võtme ID",
+      "secretKeyLabel": "Salajane võti",
+      "fullApiKeyLabel": "Täielik API võti (autoriseerpäise jaoks)",
+      "fullKeyLabel": "Täielik võti",
+      "authHeaderNote": "Kasuta seda oma autoriseerpäises",
+      "done": "Valmis",
+      "keyName": "Võtme nimi",
+      "keyNamePlaceholder": "nt Tootmise API võti",
+      "description": "Kirjeldus",
+      "descriptionPlaceholder": "Milleks seda võtit kasutatakse?",
+      "permissions": "Õigused",
+      "rateLimit": "Kiirusepiirang",
+      "expiration": "Aegumistähtaeg",
+      "neverExpires": "Ei aegu kunagi",
+      "thirtyDays": "30 päeva",
+      "ninetyDays": "90 päeva",
+      "oneYear": "1 aasta",
+      "createError": "API võtme loomine ebaõnnestus. Palun proovi uuesti.",
+      "cancel": "Tühista",
+      "createKey": "Loo võti"
+    },
+    "docs": {
+      "quickStart": "Kiirjuhend",
+      "authentication": "Autentimine",
+      "exampleResponse": "Näidisvastus",
+      "viewFullDocs": "Vaata täielikku dokumentatsiooni",
+      "downloadSpec": "Laadi alla OpenAPI spetsifikatsioon"
+    },
+    "securityBanner": {
+      "title": "API võtme turvalisus",
+      "description": "Hoia oma API võtmed turvaliselt. Ära avalda neid kliendipoolses koodis ega avalikes hoidlates. Kui võti on kompromiteeritud, tühista see kohe ja loo uus."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Organisatsiooni seadistamine",
+    "subtitle": "Seadistame sinu organisatsiooni",
+    "steps": {
+      "orgDetails": "Organisatsiooni andmed",
+      "locations": "Asukohad",
+      "departments": "Osakonnad",
+      "roles": "Rollid ja õigused",
+      "review": "Ülevaade ja käivitamine"
+    },
+    "orgDetails": {
+      "companyName": "Ettevõtte nimi",
+      "companyNamePlaceholder": "nt Acme OÜ",
+      "tradingName": "Kaubandusnimi (valikuline)",
+      "tradingNamePlaceholder": "Avalik nimi",
+      "industry": "Tööstusharu",
+      "selectIndustry": "Vali tööstusharu",
+      "companySize": "Ettevõtte suurus",
+      "selectSize": "Vali suurus",
+      "timezone": "Vaikimisi ajavöönd",
+      "currency": "Vaikimisi valuuta",
+      "weekStart": "Nädal algab",
+      "logo": "Ettevõtte logo",
+      "uploadLogo": "Laadi logo üles",
+      "uploadLogoDesc": "PNG või SVG, soovituslik 200×200px"
+    },
+    "locations": {
+      "title": "Asukohad",
+      "subtitle": "Lisa oma kontorid, objektid või filiaalid",
+      "addLocation": "Lisa asukoht",
+      "name": "Asukoha nimi",
+      "namePlaceholder": "nt Peakontor",
+      "address": "Aadress",
+      "addressPlaceholder": "Täisaadress",
+      "timezone": "Ajavöönd",
+      "noLocations": "Asukohti pole veel lisatud",
+      "addFirst": "Lisa oma esimene asukoht alustamiseks"
+    },
+    "departments": {
+      "title": "Osakonnad",
+      "subtitle": "Seadista oma osakondade struktuur",
+      "addDepartment": "Lisa osakond",
+      "name": "Osakonna nimi",
+      "namePlaceholder": "nt Inseneeria",
+      "parentDepartment": "Ülemosakond (valikuline)",
+      "none": "Puudub (tipptase)",
+      "manager": "Osakonna juht",
+      "selectManager": "Vali juht",
+      "noDepartments": "Osakondade pole veel lisatud",
+      "addFirst": "Lisa oma esimene osakond"
+    },
+    "roles": {
+      "title": "Rollid ja õigused",
+      "subtitle": "Seadista oma meeskonna juurdepääsutasemed",
+      "addRole": "Lisa kohandatud roll",
+      "builtIn": "Sisseehitatud",
+      "custom": "Kohandatud",
+      "name": "Rolli nimi",
+      "namePlaceholder": "nt Vahetuse juhendaja",
+      "description": "Kirjeldus",
+      "descriptionPlaceholder": "Mida see roll saab teha?",
+      "permissions": "Õigused",
+      "permissionGroups": {
+        "scheduling": "Ajakava koostamine",
+        "timeTracking": "Ajaregistreerimine",
+        "employees": "Töötajad",
+        "reports": "Aruanded",
+        "settings": "Seaded"
+      }
+    },
+    "review": {
+      "title": "Ülevaade ja käivitamine",
+      "subtitle": "Kontrolli, et kõik näeb õige välja enne käivitamist",
+      "orgInfo": "Organisatsiooni info",
+      "locationsCount": "{{count}} asukohta seadistatud",
+      "departmentsCount": "{{count}} osakonda seadistatud",
+      "rolesCount": "{{count}} rolli seadistatud",
+      "allLooksGood": "Kõik näeb hea välja!",
+      "launch": "Käivita organisatsioon",
+      "launchDesc": "See aktiveerib sinu organisatsiooni ja saadab kutsed kõigile lisatud meeskonnaliikmetele."
+    },
+    "navigation": {
+      "back": "Tagasi",
+      "next": "Järgmine",
+      "skip": "Jäta praegu vahele",
+      "finish": "Lõpeta seadistamine"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

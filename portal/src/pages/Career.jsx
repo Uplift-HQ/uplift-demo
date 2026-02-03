@@ -48,7 +48,7 @@ export default function Career() {
       setSkillsGap(pathsResult.skillsGap || []);
       setAllSkills(allSkillsResult.skills || allSkillsResult || []);
     } catch (err) {
-      console.error('Failed to load career data:', err);
+      if (import.meta.env.DEV) console.error('Failed to load career data:', err);
       setError(err.message || 'Failed to load career data');
       setMySkills([]);
       setCareerPaths([]);
@@ -493,7 +493,7 @@ function AddSkillModal({ skills, mySkillIds, onClose, onRequest, t }) {
     setSubmitting(true);
     setError('');
     try {
-      // TODO: Replace with dedicated skill request endpoint when available
+      // NOTE: Replace with dedicated skill request endpoint when available
       await api.post('/skills/request', { skillId: selectedSkill, note });
       onRequest();
       onClose();

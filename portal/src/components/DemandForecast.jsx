@@ -265,6 +265,7 @@ export default function DemandForecast({ compact = false }) {
               <h3 className="font-semibold text-slate-900">{t('forecast.aiDemandForecast', 'AI Demand Forecast')}</h3>
               <p className="text-xs text-slate-500">{t('forecast.next14Days', 'Next 14 days')}</p>
             </div>
+{import.meta.env.VITE_DEMO_MODE === 'true' && <span className="px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-700 rounded-full">{t('forecast.demoData', 'Demo Data')}</span>}
           </div>
           <CoverageBadge coverage={summary.avgCoverage} t={t} />
         </div>
@@ -327,6 +328,7 @@ export default function DemandForecast({ compact = false }) {
               {t('forecast.predictedStaffing', 'Predicted staffing needs based on')} {metadata.weeksOfHistory || 12} {t('forecast.weeksHistory', 'weeks of history')}
             </p>
           </div>
+          {import.meta.env.VITE_DEMO_MODE === 'true' && <span className="px-2.5 py-1 text-xs font-medium bg-amber-100 text-amber-700 rounded-full">{t('forecast.demoData', 'Demo Data')}</span>}
         </div>
         <div className="flex items-center gap-3">
           {locations.length > 0 && (

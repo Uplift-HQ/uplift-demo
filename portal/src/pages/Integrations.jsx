@@ -50,7 +50,7 @@ export default function Integrations() {
       setIntegrations(intResult?.integrations || intResult || []);
       setApiKeys(keyResult?.apiKeys || keyResult || []);
     } catch (err) {
-      console.error('Failed to load integrations:', err);
+      if (import.meta.env.DEV) console.error('Failed to load integrations:', err);
       setError(err.message || 'Failed to load integrations');
       setIntegrations([]);
       setApiKeys([]);
@@ -70,7 +70,7 @@ export default function Integrations() {
       if (integration.status === 'connected') {
         // Navigate to configuration - for now fetch details
         const details = await integrationsApi.get(integration.id);
-        // TODO: Open configuration modal with details
+        // NOTE: Open configuration modal with details when implemented
         showToast(t('integrations.configLoaded', 'Configuration loaded'));
       } else {
         // Start connection
@@ -98,8 +98,12 @@ export default function Integrations() {
 
   const handleCopyKey = async (key) => {
     try {
-      await navigator.clipboard.writeText(key.prefix + '••••••••••••');
-      showToast(t('integrations.keyCopied', 'API key copied to clipboard'));
+      const actualKey = key.key || key.secret || key.id;
+      await navigator.clipboard.writeText(actualKey);
+      const message = (key.key || key.secret)
+        ? t('integrations.keyCopied', 'API key copied to clipboard')
+        : t('integrations.keyIdCopied', 'Key ID copied to clipboard');
+      showToast(message);
     } catch {
       showToast('Failed to copy to clipboard', 'error');
     }
@@ -381,7 +385,7 @@ export default function Integrations() {
                     { method: 'GET', path: '/time-entries', desc: t('integrations.listTimeEntries', 'List time entries') },
                     { method: 'POST', path: '/webhooks', desc: t('integrations.registerWebhook', 'Register a webhook') },
                   ].map((endpoint, i) => (
-                    <div key={i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                    <div key={i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                       <span className={`px-2 py-1 rounded text-xs font-medium ${
                         endpoint.method === 'GET' ? 'bg-blue-100 text-blue-700' :
                         endpoint.method === 'POST' ? 'bg-green-100 text-green-700' :

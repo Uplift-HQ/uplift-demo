@@ -54,7 +54,6 @@
     "viewMyCareer": "Skatīt manu karjeru",
     "timeOffBalance": "Atvaļinājuma atlikums"
   },
-
   "nav": {
     "dashboard": "Pārskats",
     "employees": "Darbinieki",
@@ -150,9 +149,21 @@
     "active": "Aktīvs",
     "inactive": "Neaktīvs",
     "enabled": "Iespējots",
-    "disabled": "Atspējots"
+    "disabled": "Atspējots",
+    "approveSelected": "Apstiprināt atlasītos",
+    "rejectSelected": "Noraidīt atlasītos",
+    "clearSelection": "Notīrīt",
+    "showing": "Rāda",
+    "of": "no",
+    "page": "Lapa",
+    "previous": "Iepriekšējais",
+    "terminated": "Atlaists",
+    "sunday": "Sv",
+    "monday": "Pr",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Pieslēgties",
     "logout": "Iziet",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Lai saņemtu piekļuvi Uplift, lūdzu, sazinieties ar savu vadītāju vai personāla nodaļu. Viņi jums nosūtīs uzaicinājuma saiti.",
     "enterEmailPassword": "Lūdzu, ievadiet e-pastu un paroli",
     "loginFailed": "Pieslēgšanās neizdevās",
-    "demoAccounts": "Demo konti:",
-    "demoWorker": "Darbinieks: worker@uplift.work / Demo123!",
-    "demoManager": "Vadītājs: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Divfaktoru autentifikācija",
     "enterMfaCode": "Ievadiet kodu no autentifikācijas lietotnes",
     "verificationCode": "Verifikācijas kods",
@@ -194,9 +202,16 @@
     "invalidCode": "Nederīgs kods",
     "allRightsReserved": "Visas tiesības aizsargātas",
     "termsOfService": "Lietošanas noteikumi",
-    "privacyPolicy": "Privātuma politika"
+    "privacyPolicy": "Privātuma politika",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Sākums",
     "schedule": "Grafiks",
@@ -214,7 +229,6 @@
     "leaderboard": "Līderu tabula",
     "badges": "Nozīmītes"
   },
-
   "home": {
     "welcome": "Laipni lūdzam atpakaļ, {{name}}!",
     "welcomeBack": "Laipni lūdzam atpakaļ,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Pieejamās iespējas",
     "noOpportunities": "Pašlaik nav iespēju, kas atbilst jūsu prasmēm"
   },
-
   "schedule": {
     "title": "Mans grafiks",
     "weekView": "Nedēļa",
@@ -293,9 +306,22 @@
     "yourShift": "Jūsu maiņa",
     "theirShift": "Viņu maiņa",
     "sendRequest": "Nosūtīt pieprasījumu",
-    "cancelSwap": "Atcelt apmaiņu"
+    "cancelSwap": "Atcelt apmaiņu",
+    "allLocations": "Visas vietas",
+    "tuesday": "Ot",
+    "wednesday": "Tr",
+    "thursday": "Ce",
+    "friday": "Pk",
+    "saturday": "Se",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Laika uzskaite",
     "clockedIn": "Reģistrēts ienākšanas laiks",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Pieskarieties, lai reģistrētu ierašanos",
     "onBreakSince": "Pārtraukumā kopš {{time}}",
     "workingSince": "Strādā kopš {{time}}",
-    "shiftEnded": "Maiņa beigusies"
+    "shiftEnded": "Maiņa beigusies",
+    "entriesApproved": "{{count}} ieraksti apstiprināti",
+    "approveError": "Neizdevās apstiprināt ierakstus. Lūdzu, mēģiniet vēlreiz.",
+    "entriesRejected": "{{count}} ieraksti noraidīti",
+    "rejectError": "Neizdevās noraidīt ierakstus. Lūdzu, mēģiniet vēlreiz.",
+    "clockInError": "Neizdevās reģistrēt ierašanos. Lūdzu, mēģiniet vēlreiz.",
+    "clockOutError": "Neizdevās reģistrēt aiziešanu. Lūdzu, mēģiniet vēlreiz.",
+    "breakError": "Neizdevās atjaunināt pārtraukuma statusu. Lūdzu, mēģiniet vēlreiz.",
+    "noPending": "Nav ierakstu, kas gaida pārskatīšanu",
+    "noEntries": "Laika ieraksti nav atrasti",
+    "history": "Vēsture",
+    "managerSubtitle": "Pārskatiet un apstipriniet darba laika uzskaites",
+    "employeeSubtitle": "Sekojiet savām darba stundām",
+    "clockIn": "Reģistrēt ierašanos",
+    "clockOut": "Reģistrēt aiziešanu",
+    "startBreak": "Sākt pārtraukumu",
+    "endBreak": "Beigt pārtraukumu",
+    "totalHours": "Kopējās stundas"
   },
-
   "timeOff": {
     "title": "Atvaļinājums",
     "request": "Pieprasīt atvaļinājumu",
@@ -359,9 +401,16 @@
     "selectDates": "Izvēlēties datumus",
     "selectType": "Izvēlēties veidu",
     "addNotes": "Pievienot piezīmes (neobligāti)",
-    "reviewRequest": "Pārskatīt pieprasījumu"
+    "reviewRequest": "Pārskatīt pieprasījumu",
+    "oneDay": "1 diena",
+    "days": "dienas",
+    "dates": "Datumi",
+    "duration": "Ilgums",
+    "noRequests": "Pieprasījumi nav atrasti",
+    "requestDetails": "Atvaļinājuma pieprasījuma detaļas",
+    "noReason": "Iemesls nav norādīts",
+    "submitted": "Iesniegts"
   },
-
   "feed": {
     "title": "Plūsma",
     "newPost": "Jauns ieraksts",
@@ -401,7 +450,6 @@
     "hoursAgo": "pirms {{count}} st",
     "daysAgo": "pirms {{count}} d"
   },
-
   "messages": {
     "title": "Ziņas",
     "newMessage": "Jauna ziņa",
@@ -419,7 +467,6 @@
     "translateMessage": "Tulkot",
     "showOriginal": "Rādīt oriģinālu"
   },
-
   "profile": {
     "title": "Profils",
     "editProfile": "Rediģēt profilu",
@@ -447,7 +494,6 @@
     "viewProfile": "Skatīt profilu",
     "memberSince": "Dalībnieks kopš {{date}}"
   },
-
   "skills": {
     "title": "Prasmes",
     "mySkills": "Manas prasmes",
@@ -474,7 +520,6 @@
     "skillAdded": "Prasme veiksmīgi pievienota",
     "verificationRequested": "Verificēšana pieprasīta"
   },
-
   "career": {
     "title": "Karjera",
     "careerPath": "Karjeras ceļš",
@@ -549,7 +594,6 @@
     "expired": "Beidzies derīgums",
     "expires": "Derīgums beidzas {{date}}"
   },
-
   "gamification": {
     "level": "Līmenis {{level}}",
     "levelShort": "Līm. {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Iegūta {{date}}",
     "progressToEarn": "{{percent}}% progress līdz iegūšanai"
   },
-
   "notifications": {
     "title": "Paziņojumi",
     "markAllRead": "Atzīmēt visus kā izlasītus",
@@ -605,7 +648,6 @@
     "allCaught": "Jūs esat informēts par visu!",
     "checkBackLater": "Atgriezieties vēlāk, lai skatītu jaunus paziņojumus"
   },
-
   "settings": {
     "title": "Iestatījumi",
     "subtitle": "Pārvaldiet savu organizāciju un kontu",
@@ -740,9 +782,23 @@
     "featureAccess": "Funkciju piekļuve",
     "enableAll": "Iespējot visus",
     "disableAll": "Atspējot visus",
-    "aboutEmployeeVisibility": "Šie iestatījumi kontrolē, kuras funkcijas ir redzamas katram darbiniekam."
+    "aboutEmployeeVisibility": "Šie iestatījumi kontrolē, kuras funkcijas ir redzamas katram darbiniekam.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Uzdevumi",
     "myTasks": "Mani uzdevumi",
@@ -781,7 +837,6 @@
     "takePhoto": "Uzņemt fotoattēlu",
     "chooseFromLibrary": "Izvēlēties no bibliotēkas"
   },
-
   "expenses": {
     "title": "Izdevumi",
     "myExpenses": "Mani izdevumi",
@@ -808,7 +863,6 @@
     "totalApproved": "Kopā apstiprināts",
     "totalReimbursed": "Kopā atmaksāts"
   },
-
   "rewards": {
     "title": "Balvas",
     "myRewards": "Manas balvas",
@@ -828,7 +882,6 @@
     "validUntil": "Derīgs līdz {{date}}",
     "termsConditions": "Noteikumi un nosacījumi"
   },
-
   "manager": {
     "dashboard": "Vadītāja pārskats",
     "teamOverview": "Komandas pārskats",
@@ -859,7 +912,6 @@
     "attendance": "Apmeklētība",
     "performance": "Sniegums"
   },
-
   "onboarding": {
     "welcome": "Laipni lūdzam Uplift!",
     "getStarted": "Sāksim iestatīšanu",
@@ -877,7 +929,6 @@
     "allSet": "Viss gatavs!",
     "startExploring": "Sāciet pētīt maiņas un iespējas"
   },
-
   "errors": {
     "networkError": "Tīkla kļūda. Lūdzu, pārbaudiet savienojumu.",
     "serverError": "Servera kļūda. Lūdzu, mēģiniet vēlāk.",
@@ -898,7 +949,6 @@
     "tryAgain": "Lūdzu, mēģiniet vēlreiz",
     "somethingWentWrong": "Kaut kas nogāja greizi"
   },
-
   "activity": {
     "title": "Aktivitāšu pārskats",
     "subtitle": "Pārskatiet uzdevumu pabeigšanu, pierādījumu augšupielādes un veidlapu iesniegšanu",
@@ -912,7 +962,7 @@
     "formSubmission": "Veidlapas iesniegšana",
     "clockVerification": "Laika verifikācija",
     "activity": "Aktivitāte",
-    "searchSubmissions": "Meklēt iesnegumus...",
+    "searchSubmissions": "Meklēt iesniegumus...",
     "allTypes": "Visi veidi",
     "taskCompletions": "Uzdevumu pabeigšana",
     "formSubmissions": "Veidlapu iesniegšana",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Ievadiet noraidīšanas iemeslu...",
     "confirmRejection": "Apstiprināt noraidīšanu",
     "approve": "Apstiprināt",
-    "reject": "Noraidīt"
+    "reject": "Noraidīt",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Paziņojumu preferences",
     "subtitle": "Izvēlieties, kā un kad saņemt paziņojumus",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Vai tiešām vēlaties atspējot visus paziņojumus? Tos var atkārtoti iespējot jebkurā laikā.",
     "disableSuccess": "Visi paziņojumi ir atspējoti."
   },
-
   "employeeDetail": {
     "notFound": "Darbinieks nav atrasts",
     "backToEmployees": "Atpakaļ uz darbiniekiem",
@@ -989,7 +1040,6 @@
     "basic": "Pamata",
     "adding": "Pievieno..."
   },
-
   "reports": {
     "title": "Atskaites",
     "subtitle": "Analītika, ieskati un pielāgotas atskaites",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Šomēnes",
     "lastMonth": "Pagājušajā mēnesī",
     "last7Days": "Pēdējās 7 dienas",
-    "last30Days": "Pēdējās 30 dienas"
+    "last30Days": "Pēdējās 30 dienas",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Izvēlne",
     "closeMenu": "Aizvērt izvēlni",
@@ -1041,7 +1104,6 @@
     "required": "Obligāts",
     "optional": "Neobligāts"
   },
-
   "shiftTemplates": {
     "title": "Maiņu veidnes",
     "subtitle": "Izveidojiet atkārtoti lietojamus maiņu modeļus",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "maiņas",
     "generating": "Ģenerē..."
   },
-
   "legal": {
-    "lastUpdated": "Pēdējo reizi atjaunināts"
+    "lastUpdated": "Pēdējo reizi atjaunināts",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1289,564 @@
     "october": "Oktobris",
     "november": "Novembris",
     "december": "Decembris"
+  },
+  "bulkImport": {
+    "title": "Masveida imports",
+    "subtitle": "Importējiet datus no CSV vai Excel failiem",
+    "selectType": "Izvēlēties veidu",
+    "uploadFile": "Augšupielādēt failu",
+    "preview": "Priekšskatījums",
+    "complete": "Pabeigts",
+    "invalidFileType": "Lūdzu, augšupielādējiet CSV vai Excel failu",
+    "importFailed": "Importēšana neizdevās. Lūdzu, mēģiniet vēlreiz.",
+    "uploadFor": "Augšupielādēt",
+    "uploadDesc": "Velciet un nometiet vai noklikšķiniet, lai izvēlētos failu",
+    "downloadTemplate": "Lejupielādēt veidni",
+    "dragDrop": "Velciet un nometiet failu šeit vai noklikšķiniet, lai pārlūkotu",
+    "supportedFormats": "Atbalstītie formāti: CSV, XLSX",
+    "previewData": "Datu priekšskatījums",
+    "rowsFound": "rindas atrastas",
+    "andMore": "Un",
+    "moreRows": "vairāk rindu...",
+    "importing": "Importē...",
+    "startImport": "Sākt importēšanu",
+    "importComplete": "Importēšana pabeigta",
+    "successfullyImported": "Veiksmīgi importēti",
+    "of": "no",
+    "records": "ieraksti",
+    "successful": "Veiksmīgi",
+    "failed": "Neizdevās",
+    "total": "Kopā",
+    "importMore": "Importēt vairāk datu",
+    "type": {
+      "employees": "Darbinieki",
+      "employeesDesc": "Importēt darbinieku profilus",
+      "shifts": "Maiņas",
+      "shiftsDesc": "Importēt maiņu grafikus",
+      "locations": "Atrašanās vietas",
+      "locationsDesc": "Importēt atrašanās vietas",
+      "skills": "Prasmes",
+      "skillsDesc": "Importēt prasmes"
+    }
+  },
+  "jobs": {
+    "open": "Atvērts",
+    "closed": "Slēgts",
+    "applicants": "Pretendenti",
+    "created": "Darba sludinājums veiksmīgi izveidots",
+    "createError": "Neizdevās izveidot darba sludinājumu. Lūdzu, mēģiniet vēlreiz.",
+    "updated": "Darba sludinājums veiksmīgi atjaunināts",
+    "updateError": "Neizdevās atjaunināt darba sludinājumu. Lūdzu, mēģiniet vēlreiz.",
+    "fullTime": "Pilna laika",
+    "partTime": "Nepilna laika",
+    "contract": "Līgumdarbs",
+    "temporary": "Pagaidu",
+    "subtitle": "Pārvaldiet iekšējās karjeras iespējas",
+    "openPositions": "Atvērtās pozīcijas",
+    "closedPositions": "Slēgtās",
+    "totalApplicants": "Kopā pretendentu",
+    "noJobs": "Darba sludinājumi nav atrasti",
+    "viewApplicants": "Skatīt pretendentus",
+    "editPosting": "Rediģēt darba sludinājumu",
+    "jobTitle": "Amata nosaukums",
+    "enterTitle": "Ievadiet amata nosaukumu",
+    "selectDepartment": "Izvēlēties nodaļu",
+    "selectLocation": "Izvēlēties atrašanās vietu",
+    "salary": "Algas diapazons",
+    "enterDescription": "Ievadiet darba aprakstu",
+    "postJob": "Publicēt vakanci",
+    "skillMatch": "prasmju atbilstība",
+    "noApplicants": "Vēl nav pretendentu"
+  },
+  "employees": {
+    "searchPlaceholder": "Meklēt pēc vārda vai e-pasta...",
+    "employees": "darbinieki",
+    "noResults": "Nav atrasts neviens darbinieks, kas atbilst kritērijiem",
+    "details": "Darbinieka detaļas",
+    "hireDate": "Pieņemšanas datums",
+    "assigned": "piešķirts",
+    "leaveDetails": "Atvaļinājuma detaļas",
+    "until": "Līdz",
+    "terminationDetails": "Atlaišanas detaļas",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Integrāciju centrs",
+    "subtitle": "Savienojiet Uplift ar esošajiem rīkiem",
+    "apiFactory": "API rūpnīca",
+    "addIntegration": "Pievienot integrāciju",
+    "configure": "Konfigurēt",
+    "connect": "Savienot",
+    "cancel": "Atcelt",
+    "back": "Atpakaļ",
+    "saveChanges": "Saglabāt izmaiņas",
+    "syncNow": "Sinhronizēt tagad",
+    "disconnect": "Atvienot {{name}}",
+    "disconnectConfirm": "Atvienot {{name}}? Tas apturēs visas sinhronizācijas.",
+    "settingsSaved": "Iestatījumi saglabāti",
+    "browseMarketplace": "Pārlūkot tirgu",
+    "loadingIntegrations": "Ielādē integrācijas...",
+    "noIntegrations": "Nav savienotu integrāciju",
+    "noIntegrationsDesc": "Savienojiet savu pirmo integrāciju, lai sāktu datu sinhronizāciju",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Sinhronizē..."
+    },
+    "stats": {
+      "connected": "Savienots",
+      "available": "Pieejams",
+      "syncsToday": "Sinhronizācijas šodien",
+      "errors": "Kļūdas",
+      "totalSyncs": "Kopā sinhronizāciju",
+      "lastSync": "Pēdējā sinhronizācija",
+      "records": "ieraksti"
+    },
+    "tabs": {
+      "connected": "Savienotie",
+      "marketplace": "Tirgus",
+      "restApi": "REST API",
+      "apiFactory": "API rūpnīca",
+      "activityLog": "Aktivitāšu žurnāls",
+      "settings": "Iestatījumi",
+      "fieldMapping": "Lauku kartēšana",
+      "syncHistory": "Sinhronizāciju vēsture",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Pēdējā sinhronizācija",
+      "frequency": "Biežums",
+      "status": "Statuss",
+      "healthy": "Veselīgs",
+      "errors": "kļūdas"
+    },
+    "connectModal": {
+      "title": "Savienot {{name}}",
+      "whatItDoes": "Ko šī integrācija dara:",
+      "redirectNotice": "Jūs tiksiet novirzīts uz {{name}}",
+      "authorizeMessage": "Piesakieties un autorizējiet Uplift piekļūt jūsu datiem. Mēs pieprasām tikai nepieciešamās atļaujas.",
+      "connectWith": "Savienot ar {{name}}",
+      "connecting": "Savienojas ar {{name}}...",
+      "completeAuth": "Lūdzu, pabeidziet autorizāciju uznirstošajā logā",
+      "successConnected": "Veiksmīgi savienots!",
+      "configureSyncSettings": "Konfigurējiet sinhronizācijas iestatījumus zemāk.",
+      "completeSetup": "Pabeigt iestatīšanu",
+      "connected": "{{name}} savienots!",
+      "firstSyncSoon": "Jūsu pirmā sinhronizācija sāksies drīzumā",
+      "hris": {
+        "syncEmployees": "Automātiski sinhronizēt darbinieku ierakstus",
+        "importDepts": "Importēt nodaļas un atrašanās vietas",
+        "syncTimeOff": "Uzturēt atvaļinājuma atlikumus sinhronizētus"
+      },
+      "payroll": {
+        "exportTimesheets": "Eksportēt apstiprinātās darba laika uzskaites",
+        "syncPayRates": "Sinhronizēt algu likmes un virsstundas",
+        "autoReconciliation": "Automātiska algu saskaņošana"
+      },
+      "comms": {
+        "shiftReminders": "Sūtīt maiņu atgādinājumus",
+        "postRecognition": "Publicēt atzinību kanālos",
+        "swapNotifications": "Maiņu apmaiņas paziņojumi"
+      },
+      "identity": {
+        "sso": "Vienotā pieteikšanās (SSO)",
+        "autoProvisioning": "Automātiska lietotāju izveide",
+        "directorySync": "Direktoriju sinhronizācija"
+      },
+      "other": {
+        "bidirectional": "Divvirzienu datu sinhronizācija",
+        "realtimeWebhooks": "Reāllaika atjauninājumi ar webhooks",
+        "auditTrail": "Pilna audita pēda"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} iestatījumi",
+      "connectedSince": "Savienots {{date}}"
+    },
+    "settings": {
+      "autoSync": "Automātiskā sinhronizācija",
+      "autoSyncDesc": "Automātiski sinhronizēt datus pēc grafika",
+      "autoSyncScheduleDesc": "Sinhronizēt automātiski pēc grafika",
+      "syncFrequency": "Sinhronizācijas biežums",
+      "nextScheduledSync": "Nākamā plānotā sinhronizācija",
+      "dataToSync": "Sinhronizējamie dati",
+      "frequency": {
+        "realtime": "Reāllaikā",
+        "hourly": "Katru stundu",
+        "daily": "Katru dienu",
+        "weekly": "Katru nedēļu"
+      },
+      "data": {
+        "employees": "Darbinieki",
+        "timeEntries": "Laika ieraksti",
+        "departments": "Nodaļas",
+        "locations": "Atrašanās vietas"
+      }
+    },
+    "mapping": {
+      "description": "Lauku kartēšana kontrolē, kā dati no {{name}} tiek kartēti uz Uplift laukiem. Izmaiņas stāsies spēkā nākamajā sinhronizācijā.",
+      "sourceField": "{{name}} lauks",
+      "upliftField": "Uplift lauks",
+      "status": "Statuss",
+      "selectField": "Izvēlēties lauku...",
+      "mapped": "Kartēts",
+      "unmapped": "Nav kartēts"
+    },
+    "history": {
+      "noHistory": "Vēl nav sinhronizāciju vēstures",
+      "sync": "Sinhronizācija",
+      "duration": "Ilgums",
+      "records": "Ieraksti",
+      "created": "Izveidoti",
+      "updated": "Atjaunināti"
+    },
+    "webhooks": {
+      "description": "Webhooks paziņo {{name}}, kad notiek notikumi Uplift",
+      "addWebhook": "Pievienot Webhook",
+      "noWebhooks": "Nav konfigurētu webhook",
+      "createFirst": "Izveidojiet savu pirmo webhook",
+      "active": "Aktīvs",
+      "paused": "Apturēts",
+      "sendTestPayload": "Nosūtīt testa datus",
+      "pauseWebhook": "Apturēt webhook",
+      "enableWebhook": "Iespējot webhook",
+      "deleteWebhook": "Dzēst webhook",
+      "lastTriggered": "Pēdējo reizi aktivizēts",
+      "never": "Nekad",
+      "successRate": "Panākumu rādītājs",
+      "sendEventsTo": "Sūtīt notikumus uz {{name}}",
+      "endpointUrl": "Galapunkta URL",
+      "eventsToSend": "Sūtāmie notikumi",
+      "hmacInfo": "Mēs parakstīsim visus webhook datus ar HMAC-SHA256. Jūs saņemsiet parakstu",
+      "header": "galvenē.",
+      "createWebhook": "Izveidot Webhook",
+      "validationError": "Lūdzu, ievadiet URL un izvēlieties vismaz vienu notikumu",
+      "createdSuccess": "Webhook veiksmīgi izveidots!",
+      "testSent": "Testa dati nosūtīti uz",
+      "testStatus": "Statuss",
+      "deleteConfirm": "Dzēst šo webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Meklēt integrācijas...",
+      "allCategories": "Visas kategorijas",
+      "infoBannerTitle": "Uplift darbojas ar jūsu esošajiem rīkiem",
+      "infoBannerDesc": "Savienojiet savu HRIS, algu un komunikācijas sistēmu. Mēs sinhronizējam datus — neaizstājam jūsu sistēmu.",
+      "noResults": "Neviena integrācija neatbilst meklēšanai",
+      "dontSeeSystem": "Neredzat savu sistēmu?",
+      "alwaysAdding": "Mēs pastāvīgi pievienojam jaunas integrācijas. Paziņojiet mums, kas jums nepieciešams.",
+      "requestIntegration": "Pieprasīt integrāciju"
+    },
+    "activity": {
+      "recentActivity": "Nesenā integrāciju aktivitāte",
+      "exportLog": "Eksportēt žurnālu"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API rūpnīca",
+    "subtitle": "Izveidojiet pielāgotas REST API integrācijas bez programmēšanas",
+    "newIntegration": "Jauna integrācija",
+    "searchPlaceholder": "Meklēt integrācijas...",
+    "loadingIntegrations": "Ielādē integrācijas...",
+    "noIntegrationsFound": "Integrācijas nav atrastas",
+    "noIntegrationsYet": "Vēl nav pielāgotu integrāciju",
+    "tryDifferentSearch": "Izmēģiniet citu meklēšanas terminu",
+    "createFirstDesc": "Izveidojiet savu pirmo pielāgoto API integrāciju, lai savienotu jebkuru REST API",
+    "createIntegration": "Izveidot integrāciju",
+    "deleteConfirm": "Vai tiešām vēlaties dzēst šo integrāciju?",
+    "list": {
+      "eventsCount": "{{count}} notikumi",
+      "scheduled": "Ieplānots",
+      "incomingWebhook": "Ienākošais webhook",
+      "manual": "Manuāls",
+      "runsCount": "{{count}} izpildes",
+      "errorsCount": "{{count}} kļūdas",
+      "disabled": "Atspējots",
+      "edit": "Rediģēt",
+      "test": "Testēt",
+      "viewLogs": "Skatīt žurnālus",
+      "delete": "Dzēst",
+      "lastRun": "Pēdējā izpilde"
+    },
+    "stats": {
+      "totalIntegrations": "Kopā integrāciju",
+      "active": "Aktīvas",
+      "runsToday": "Izpildes šodien",
+      "totalErrors": "Kopā kļūdu"
+    },
+    "editor": {
+      "editTitle": "Rediģēt API integrāciju",
+      "createTitle": "Izveidot API integrāciju",
+      "subtitle": "Konfigurējiet savu pielāgoto REST API savienojumu",
+      "integrationName": "Integrācijas nosaukums",
+      "integrationNamePlaceholder": "piem., Sinhronizēt ar algu sistēmu",
+      "description": "Apraksts",
+      "descriptionPlaceholder": "Ko šī integrācija dara?",
+      "method": "Metode",
+      "url": "URL",
+      "headers": "Galvenes",
+      "addHeader": "Pievienot galveni",
+      "headerName": "Galvenes nosaukums",
+      "headerValue": "Vērtība",
+      "requestBodyJson": "Pieprasījuma pamatteksts (JSON)",
+      "useVariables": "Izmantojiet {{field}} mainīgajiem",
+      "availableVariables": "Pieejamie mainīgie",
+      "authenticationType": "Autentifikācijas veids",
+      "apiKeyLocation": "API atslēgas atrašanās vieta",
+      "header": "Galvene",
+      "queryParameter": "Vaicājuma parametrs",
+      "keyName": "Atslēgas nosaukums",
+      "keyNamePlaceholder": "piem., X-API-Key",
+      "apiKey": "API atslēga",
+      "enterApiKey": "Ievadiet savu API atslēgu",
+      "bearerToken": "Nesēja marķieris",
+      "enterToken": "Ievadiet savu marķieri",
+      "username": "Lietotājvārds",
+      "password": "Parole",
+      "tokenUrl": "Marķiera URL",
+      "clientId": "Klienta ID",
+      "clientSecret": "Klienta noslēpums",
+      "scopes": "Tvērumi (ar komatu atdalīti)",
+      "whenShouldRun": "Kad šai integrācijai jādarbojas?",
+      "selectEvents": "Izvēlēties notikumus",
+      "schedule": "Grafiks",
+      "cronExpression": "CRON izteiksme",
+      "scheduleUtcNote": "Grafiks izmanto UTC laika joslu. Pašreizējais CRON",
+      "yourWebhookUrl": "Jūsu Webhook URL",
+      "webhookPostNote": "Sūtiet POST pieprasījumus uz šo URL. Mēs apstrādāsim ienākošos datus un kartēsim tos uz Uplift.",
+      "fieldMappings": "Lauku kartēšana",
+      "fieldMappingsDesc": "Kartējiet Uplift laukus uz ārējiem API laukiem",
+      "addMapping": "Pievienot kartējumu",
+      "noFieldMappings": "Vēl nav lauku kartējumu",
+      "addMappingsDesc": "Pievienojiet kartējumus, lai pārveidotu datus starp sistēmām",
+      "addFirstMapping": "Pievienot pirmo kartējumu",
+      "selectUpliftField": "Izvēlēties Uplift lauku...",
+      "externalFieldName": "Ārējā lauka nosaukums",
+      "noTransform": "Bez pārveidošanas",
+      "dateIso": "Datums → ISO",
+      "dateUk": "Datums → UK formāts",
+      "boolYn": "Bool → J/N",
+      "fieldMappingTip": "Lauku kartējumi tiek izmantoti, lai automātiski izveidotu pieprasījuma pamattekstu. Varat arī izmantot {{field}} sintaksi cilnē Pieprasījums pielāgotām JSON struktūrām.",
+      "testConfiguration": "Testēt konfigurāciju",
+      "testDescription": "Nosūtiet testa pieprasījumu, lai pārbaudītu konfigurāciju. Mēs izmantosim parauga datus.",
+      "testing": "Testē...",
+      "sendTestRequest": "Nosūtīt testa pieprasījumu",
+      "success": "Veiksmīgi",
+      "failed": "Neizdevās",
+      "status": "Statuss",
+      "time": "Laiks",
+      "response": "Atbilde",
+      "enableIntegration": "Iespējot integrāciju",
+      "cancel": "Atcelt",
+      "saveChanges": "Saglabāt izmaiņas",
+      "createIntegration": "Izveidot integrāciju",
+      "tabs": {
+        "request": "Pieprasījums",
+        "authentication": "Autentifikācija",
+        "trigger": "Trigeris",
+        "fieldMapping": "Lauku kartēšana",
+        "test": "Tests"
+      }
+    },
+    "logs": {
+      "executionLogs": "Izpildes žurnāli",
+      "export": "Eksportēt",
+      "noData": "Vēl nav datu. Izpildes žurnāli parādīsies šeit, kad integrācijas darbosies.",
+      "unknown": "Nezināms",
+      "error": "Kļūda"
+    },
+    "helpBanner": {
+      "title": "Nepieciešama palīdzība integrācijas izveidē?",
+      "description": "Apskatiet mūsu API dokumentāciju piemēriem vai sazinieties ar atbalstu sarežģītos gadījumos."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API atslēgas",
+    "subtitle": "Ģenerējiet API atslēgas, lai piekļūtu Uplift datiem no savām lietojumprogrammām",
+    "apiDocs": "API dokumentācija",
+    "createKey": "Izveidot atslēgu",
+    "createApiKey": "Izveidot API atslēgu",
+    "loadingKeys": "Ielādē API atslēgas...",
+    "loadError": "Neizdevās ielādēt API atslēgas.",
+    "noKeysYet": "Vēl nav API atslēgu",
+    "createFirstDesc": "Izveidojiet savu pirmo API atslēgu, lai sāktu integrāciju ar Uplift",
+    "retry": "Mēģināt vēlreiz",
+    "revokeConfirm": "Atsaukt API atslēgu \"{{name}}\"? Šo darbību nevar atsaukt.",
+    "regenerateConfirm": "Atkārtoti ģenerēt noslēpumu \"{{name}}\"? Vecais noslēpums nekavējoties pārstās darboties.",
+    "regenerateSuccess": "Jaunā slepenā atslēga: {{secret}}\n\nSaglabājiet to tagad - jūs to vairs neredzēsiet!",
+    "regenerateError": "Neizdevās atkārtoti ģenerēt noslēpumu: {{message}}",
+    "usageStats": "Lietošanas statistika {{name}}:\n\nKopā pieprasījumu: {{requests}}\nPēdējo reizi lietots: {{lastUsed}}",
+    "card": {
+      "noDescription": "Nav apraksta",
+      "expired": "Beidzies derīgums",
+      "active": "Aktīvs",
+      "inactive": "Neaktīvs",
+      "keyId": "Atslēgas ID",
+      "requests": "Pieprasījumi",
+      "lastUsed": "Pēdējo reizi lietots",
+      "never": "Nekad",
+      "rateLimit": "Ātruma ierobežojums",
+      "standard": "Standarta",
+      "hideDetails": "Slēpt detaļas",
+      "showDetails": "Rādīt detaļas",
+      "scopes": "TVĒRUMI",
+      "created": "Izveidots",
+      "expires": "Beidzas",
+      "usage": "Lietošana",
+      "regenerate": "Atkārtoti ģenerēt",
+      "revoke": "Atsaukt"
+    },
+    "create": {
+      "keyCreatedTitle": "API atslēga izveidota",
+      "createTitle": "Izveidot API atslēgu",
+      "keyCreatedSuccess": "API atslēga veiksmīgi izveidota",
+      "copySecretWarning": "Nokopējiet savu slepeno atslēgu tagad. Jūs to vairs nevarēsiet redzēt!",
+      "keyIdLabel": "Atslēgas ID",
+      "secretKeyLabel": "Slepenā atslēga",
+      "fullApiKeyLabel": "Pilnā API atslēga (Authorization galvenei)",
+      "fullKeyLabel": "Pilnā atslēga",
+      "authHeaderNote": "Izmantojiet to savā Authorization galvenē",
+      "done": "Gatavs",
+      "keyName": "Atslēgas nosaukums",
+      "keyNamePlaceholder": "piem., Produkcijas API atslēga",
+      "description": "Apraksts",
+      "descriptionPlaceholder": "Kādam nolūkam tiks izmantota šī atslēga?",
+      "permissions": "Atļaujas",
+      "rateLimit": "Ātruma ierobežojums",
+      "expiration": "Derīguma termiņš",
+      "neverExpires": "Nekad nebeidzas",
+      "thirtyDays": "30 dienas",
+      "ninetyDays": "90 dienas",
+      "oneYear": "1 gads",
+      "createError": "Neizdevās izveidot API atslēgu. Lūdzu, mēģiniet vēlreiz.",
+      "cancel": "Atcelt",
+      "createKey": "Izveidot atslēgu"
+    },
+    "docs": {
+      "quickStart": "Ātrais sākums",
+      "authentication": "Autentifikācija",
+      "exampleResponse": "Atbildes piemērs",
+      "viewFullDocs": "Skatīt pilnu dokumentāciju",
+      "downloadSpec": "Lejupielādēt OpenAPI specifikāciju"
+    },
+    "securityBanner": {
+      "title": "API atslēgu drošība",
+      "description": "Uzturiet savas API atslēgas drošībā. Nekad neatklājiet tās klienta puses kodā vai publiskos repozitorijos. Ja atslēga ir kompromitēta, nekavējoties atsauciet to un izveidojiet jaunu."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Organizācijas iestatīšana",
+    "subtitle": "Konfigurēsim jūsu organizāciju",
+    "steps": {
+      "orgDetails": "Organizācijas detaļas",
+      "locations": "Atrašanās vietas",
+      "departments": "Nodaļas",
+      "roles": "Lomas un atļaujas",
+      "review": "Pārskats un palaišana"
+    },
+    "orgDetails": {
+      "companyName": "Uzņēmuma nosaukums",
+      "companyNamePlaceholder": "piem., Acme SIA",
+      "tradingName": "Tirdzniecības nosaukums (neobligāti)",
+      "tradingNamePlaceholder": "Publiski redzamais nosaukums",
+      "industry": "Nozare",
+      "selectIndustry": "Izvēlēties nozari",
+      "companySize": "Uzņēmuma lielums",
+      "selectSize": "Izvēlēties lielumu",
+      "timezone": "Noklusējuma laika josla",
+      "currency": "Noklusējuma valūta",
+      "weekStart": "Nedēļa sākas",
+      "logo": "Uzņēmuma logotips",
+      "uploadLogo": "Augšupielādēt logotipu",
+      "uploadLogoDesc": "PNG vai SVG, ieteicams 200×200px"
+    },
+    "locations": {
+      "title": "Atrašanās vietas",
+      "subtitle": "Pievienojiet savus birojus, objektus vai filiāles",
+      "addLocation": "Pievienot atrašanās vietu",
+      "name": "Vietas nosaukums",
+      "namePlaceholder": "piem., Galvenais birojs",
+      "address": "Adrese",
+      "addressPlaceholder": "Pilna adrese",
+      "timezone": "Laika josla",
+      "noLocations": "Vēl nav pievienotas atrašanās vietas",
+      "addFirst": "Pievienojiet savu pirmo atrašanās vietu, lai sāktu"
+    },
+    "departments": {
+      "title": "Nodaļas",
+      "subtitle": "Iestatiet savu nodaļu struktūru",
+      "addDepartment": "Pievienot nodaļu",
+      "name": "Nodaļas nosaukums",
+      "namePlaceholder": "piem., Inženierija",
+      "parentDepartment": "Augstākā nodaļa (neobligāti)",
+      "none": "Nav (augstākais līmenis)",
+      "manager": "Nodaļas vadītājs",
+      "selectManager": "Izvēlēties vadītāju",
+      "noDepartments": "Vēl nav pievienotas nodaļas",
+      "addFirst": "Pievienojiet savu pirmo nodaļu"
+    },
+    "roles": {
+      "title": "Lomas un atļaujas",
+      "subtitle": "Konfigurējiet piekļuves līmeņus savai komandai",
+      "addRole": "Pievienot pielāgotu lomu",
+      "builtIn": "Iebūvēta",
+      "custom": "Pielāgota",
+      "name": "Lomas nosaukums",
+      "namePlaceholder": "piem., Maiņu vadītājs",
+      "description": "Apraksts",
+      "descriptionPlaceholder": "Ko šī loma var darīt?",
+      "permissions": "Atļaujas",
+      "permissionGroups": {
+        "scheduling": "Plānošana",
+        "timeTracking": "Laika uzskaite",
+        "employees": "Darbinieki",
+        "reports": "Atskaites",
+        "settings": "Iestatījumi"
+      }
+    },
+    "review": {
+      "title": "Pārskats un palaišana",
+      "subtitle": "Pārbaudiet, vai viss izskatās pareizi pirms palaišanas",
+      "orgInfo": "Organizācijas informācija",
+      "locationsCount": "{{count}} konfigurētas atrašanās vietas",
+      "departmentsCount": "{{count}} konfigurētas nodaļas",
+      "rolesCount": "{{count}} konfigurētas lomas",
+      "allLooksGood": "Viss izskatās labi!",
+      "launch": "Palaist organizāciju",
+      "launchDesc": "Tas aktivizēs jūsu organizāciju un nosūtīs uzaicinājumus pievienotajiem komandas dalībniekiem."
+    },
+    "navigation": {
+      "back": "Atpakaļ",
+      "next": "Tālāk",
+      "skip": "Izlaist pagaidām",
+      "finish": "Pabeigt iestatīšanu"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

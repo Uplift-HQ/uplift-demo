@@ -54,7 +54,6 @@
     "viewMyCareer": "Lihat Karier Saya",
     "timeOffBalance": "Saldo Cuti"
   },
-
   "nav": {
     "dashboard": "Dasbor",
     "employees": "Karyawan",
@@ -150,9 +149,21 @@
     "active": "Aktif",
     "inactive": "Tidak Aktif",
     "enabled": "Diaktifkan",
-    "disabled": "Dinonaktifkan"
+    "disabled": "Dinonaktifkan",
+    "approveSelected": "Setujui yang Dipilih",
+    "rejectSelected": "Tolak yang Dipilih",
+    "clearSelection": "Hapus",
+    "showing": "Menampilkan",
+    "of": "dari",
+    "page": "Halaman",
+    "previous": "Sebelumnya",
+    "terminated": "Diberhentikan",
+    "sunday": "Min",
+    "monday": "Sen",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Masuk",
     "logout": "Keluar",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Untuk mendapatkan akses ke Uplift, silakan hubungi manajer atau departemen SDM Anda. Mereka akan mengirimkan tautan undangan.",
     "enterEmailPassword": "Silakan masukkan email dan kata sandi",
     "loginFailed": "Gagal Masuk",
-    "demoAccounts": "Akun Demo:",
-    "demoWorker": "Pekerja: worker@uplift.work / Demo123!",
-    "demoManager": "Manajer: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Autentikasi Dua Faktor",
     "enterMfaCode": "Masukkan kode dari aplikasi autentikator Anda",
     "verificationCode": "Kode Verifikasi",
@@ -194,9 +202,16 @@
     "invalidCode": "Kode tidak valid",
     "allRightsReserved": "Hak cipta dilindungi",
     "termsOfService": "Ketentuan Layanan",
-    "privacyPolicy": "Kebijakan Privasi"
+    "privacyPolicy": "Kebijakan Privasi",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Beranda",
     "schedule": "Jadwal",
@@ -214,7 +229,6 @@
     "leaderboard": "Papan Peringkat",
     "badges": "Lencana"
   },
-
   "home": {
     "welcome": "Selamat datang kembali, {{name}}!",
     "welcomeBack": "Selamat datang kembali,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Peluang Terbuka",
     "noOpportunities": "Tidak ada peluang yang cocok dengan keahlian Anda saat ini"
   },
-
   "schedule": {
     "title": "Jadwal Saya",
     "weekView": "Minggu",
@@ -293,9 +306,22 @@
     "yourShift": "Shift Anda",
     "theirShift": "Shift Mereka",
     "sendRequest": "Kirim Permintaan",
-    "cancelSwap": "Batalkan Pertukaran"
+    "cancelSwap": "Batalkan Pertukaran",
+    "allLocations": "Semua Lokasi",
+    "tuesday": "Sel",
+    "wednesday": "Rab",
+    "thursday": "Kam",
+    "friday": "Jum",
+    "saturday": "Sab",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Pelacakan Waktu",
     "clockedIn": "Sudah Absen Masuk",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Ketuk untuk absen masuk",
     "onBreakSince": "Istirahat sejak {{time}}",
     "workingSince": "Bekerja sejak {{time}}",
-    "shiftEnded": "Shift selesai"
+    "shiftEnded": "Shift selesai",
+    "entriesApproved": "{{count}} entri disetujui",
+    "approveError": "Gagal menyetujui entri. Silakan coba lagi.",
+    "entriesRejected": "{{count}} entri ditolak",
+    "rejectError": "Gagal menolak entri. Silakan coba lagi.",
+    "clockInError": "Gagal absen masuk. Silakan coba lagi.",
+    "clockOutError": "Gagal absen keluar. Silakan coba lagi.",
+    "breakError": "Gagal memperbarui status istirahat. Silakan coba lagi.",
+    "noPending": "Tidak ada entri tertunda untuk ditinjau",
+    "noEntries": "Tidak ada entri waktu ditemukan",
+    "history": "Riwayat",
+    "managerSubtitle": "Tinjau dan setujui lembar waktu",
+    "employeeSubtitle": "Lacak jam kerja Anda",
+    "clockIn": "Absen Masuk",
+    "clockOut": "Absen Keluar",
+    "startBreak": "Mulai Istirahat",
+    "endBreak": "Selesai Istirahat",
+    "totalHours": "Total Jam"
   },
-
   "timeOff": {
     "title": "Cuti",
     "request": "Ajukan Cuti",
@@ -359,9 +401,16 @@
     "selectDates": "Pilih Tanggal",
     "selectType": "Pilih Tipe",
     "addNotes": "Tambah Catatan (Opsional)",
-    "reviewRequest": "Tinjau Permintaan"
+    "reviewRequest": "Tinjau Permintaan",
+    "oneDay": "1 hari",
+    "days": "hari",
+    "dates": "Tanggal",
+    "duration": "Durasi",
+    "noRequests": "Tidak ada permintaan ditemukan",
+    "requestDetails": "Detail Permintaan Cuti",
+    "noReason": "Tidak ada alasan diberikan",
+    "submitted": "Dikirim"
   },
-
   "feed": {
     "title": "Umpan",
     "newPost": "Posting Baru",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}} jam yang lalu",
     "daysAgo": "{{count}} hari yang lalu"
   },
-
   "messages": {
     "title": "Pesan",
     "newMessage": "Pesan Baru",
@@ -419,7 +467,6 @@
     "translateMessage": "Terjemahkan",
     "showOriginal": "Tampilkan Asli"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Edit Profil",
@@ -447,7 +494,6 @@
     "viewProfile": "Lihat Profil",
     "memberSince": "Anggota sejak {{date}}"
   },
-
   "skills": {
     "title": "Keahlian",
     "mySkills": "Keahlian Saya",
@@ -474,7 +520,6 @@
     "skillAdded": "Keahlian berhasil ditambahkan",
     "verificationRequested": "Verifikasi diminta"
   },
-
   "career": {
     "title": "Karier",
     "careerPath": "Jalur Karier",
@@ -549,7 +594,6 @@
     "expired": "Kedaluwarsa",
     "expires": "Berakhir {{date}}"
   },
-
   "gamification": {
     "level": "Level {{level}}",
     "levelShort": "Lvl {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Diperoleh pada {{date}}",
     "progressToEarn": "{{percent}}% kemajuan untuk mendapatkan"
   },
-
   "notifications": {
     "title": "Notifikasi",
     "markAllRead": "Tandai Semua Dibaca",
@@ -605,7 +648,6 @@
     "allCaught": "Anda sudah melihat semuanya!",
     "checkBackLater": "Periksa kembali nanti untuk notifikasi baru"
   },
-
   "settings": {
     "title": "Pengaturan",
     "subtitle": "Kelola organisasi dan akun Anda",
@@ -740,9 +782,23 @@
     "featureAccess": "Akses Fitur",
     "enableAll": "Aktifkan Semua",
     "disableAll": "Nonaktifkan Semua",
-    "aboutEmployeeVisibility": "Pengaturan ini mengontrol fitur mana yang terlihat untuk setiap karyawan."
+    "aboutEmployeeVisibility": "Pengaturan ini mengontrol fitur mana yang terlihat untuk setiap karyawan.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Tugas",
     "myTasks": "Tugas Saya",
@@ -781,7 +837,6 @@
     "takePhoto": "Ambil Foto",
     "chooseFromLibrary": "Pilih dari Galeri"
   },
-
   "expenses": {
     "title": "Pengeluaran",
     "myExpenses": "Pengeluaran Saya",
@@ -808,7 +863,6 @@
     "totalApproved": "Total Disetujui",
     "totalReimbursed": "Total Diganti"
   },
-
   "rewards": {
     "title": "Hadiah",
     "myRewards": "Hadiah Saya",
@@ -828,7 +882,6 @@
     "validUntil": "Berlaku sampai {{date}}",
     "termsConditions": "Syarat & Ketentuan"
   },
-
   "manager": {
     "dashboard": "Dasbor Manajer",
     "teamOverview": "Ringkasan Tim",
@@ -859,7 +912,6 @@
     "attendance": "Kehadiran",
     "performance": "Kinerja"
   },
-
   "onboarding": {
     "welcome": "Selamat Datang di Uplift!",
     "getStarted": "Mari kita siapkan akun Anda",
@@ -877,7 +929,6 @@
     "allSet": "Anda Sudah Siap!",
     "startExploring": "Mulai jelajahi shift dan peluang"
   },
-
   "errors": {
     "networkError": "Kesalahan jaringan. Silakan periksa koneksi Anda.",
     "serverError": "Kesalahan server. Silakan coba lagi nanti.",
@@ -898,7 +949,6 @@
     "tryAgain": "Silakan coba lagi",
     "somethingWentWrong": "Terjadi kesalahan"
   },
-
   "activity": {
     "title": "Tinjauan Aktivitas",
     "subtitle": "Tinjau penyelesaian tugas, unggahan bukti, dan pengiriman formulir",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Masukkan alasan penolakan...",
     "confirmRejection": "Konfirmasi Penolakan",
     "approve": "Setujui",
-    "reject": "Tolak"
+    "reject": "Tolak",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Preferensi Notifikasi",
     "subtitle": "Pilih bagaimana dan kapan Anda menerima notifikasi",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Apakah Anda yakin ingin menonaktifkan semua notifikasi? Anda dapat mengaktifkannya kembali kapan saja.",
     "disableSuccess": "Semua notifikasi telah dinonaktifkan."
   },
-
   "employeeDetail": {
     "notFound": "Karyawan tidak ditemukan",
     "backToEmployees": "Kembali ke Karyawan",
@@ -989,7 +1040,6 @@
     "basic": "Dasar",
     "adding": "Menambahkan..."
   },
-
   "reports": {
     "title": "Laporan",
     "subtitle": "Analitik, wawasan, dan laporan kustom",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Bulan Ini",
     "lastMonth": "Bulan Lalu",
     "last7Days": "7 Hari Terakhir",
-    "last30Days": "30 Hari Terakhir"
+    "last30Days": "30 Hari Terakhir",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Menu",
     "closeMenu": "Tutup menu",
@@ -1041,7 +1104,6 @@
     "required": "Wajib",
     "optional": "Opsional"
   },
-
   "shiftTemplates": {
     "title": "Template Shift",
     "subtitle": "Buat pola shift yang dapat digunakan kembali",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "shift",
     "generating": "Membuat..."
   },
-
   "legal": {
-    "lastUpdated": "Terakhir diperbarui"
+    "lastUpdated": "Terakhir diperbarui",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1289,564 @@
     "october": "Oktober",
     "november": "November",
     "december": "Desember"
+  },
+  "bulkImport": {
+    "title": "Impor Massal",
+    "subtitle": "Impor data dari file CSV atau Excel",
+    "selectType": "Pilih Tipe",
+    "uploadFile": "Unggah File",
+    "preview": "Pratinjau",
+    "complete": "Selesai",
+    "invalidFileType": "Silakan unggah file CSV atau Excel",
+    "importFailed": "Impor gagal. Silakan coba lagi.",
+    "uploadFor": "Unggah",
+    "uploadDesc": "Seret dan lepas atau klik untuk memilih file",
+    "downloadTemplate": "Unduh Template",
+    "dragDrop": "Seret dan lepas file Anda di sini, atau klik untuk menelusuri",
+    "supportedFormats": "Format yang didukung: CSV, XLSX",
+    "previewData": "Pratinjau Data",
+    "rowsFound": "baris ditemukan di",
+    "andMore": "Dan",
+    "moreRows": "baris lagi...",
+    "importing": "Mengimpor...",
+    "startImport": "Mulai Impor",
+    "importComplete": "Impor Selesai",
+    "successfullyImported": "Berhasil diimpor",
+    "of": "dari",
+    "records": "catatan",
+    "successful": "Berhasil",
+    "failed": "Gagal",
+    "total": "Total",
+    "importMore": "Impor Data Lagi",
+    "type": {
+      "employees": "Karyawan",
+      "employeesDesc": "Impor profil karyawan",
+      "shifts": "Shift",
+      "shiftsDesc": "Impor jadwal shift",
+      "locations": "Lokasi",
+      "locationsDesc": "Impor lokasi",
+      "skills": "Keahlian",
+      "skillsDesc": "Impor keahlian"
+    }
+  },
+  "jobs": {
+    "open": "Terbuka",
+    "closed": "Ditutup",
+    "applicants": "Pelamar",
+    "created": "Lowongan kerja berhasil dibuat",
+    "createError": "Gagal membuat lowongan kerja. Silakan coba lagi.",
+    "updated": "Lowongan kerja berhasil diperbarui",
+    "updateError": "Gagal memperbarui lowongan kerja. Silakan coba lagi.",
+    "fullTime": "Penuh Waktu",
+    "partTime": "Paruh Waktu",
+    "contract": "Kontrak",
+    "temporary": "Sementara",
+    "subtitle": "Kelola peluang karier internal",
+    "openPositions": "Posisi Terbuka",
+    "closedPositions": "Ditutup",
+    "totalApplicants": "Total Pelamar",
+    "noJobs": "Tidak ada lowongan kerja ditemukan",
+    "viewApplicants": "Lihat Pelamar",
+    "editPosting": "Edit Lowongan Kerja",
+    "jobTitle": "Judul Pekerjaan",
+    "enterTitle": "Masukkan judul pekerjaan",
+    "selectDepartment": "Pilih departemen",
+    "selectLocation": "Pilih lokasi",
+    "salary": "Rentang Gaji",
+    "enterDescription": "Masukkan deskripsi pekerjaan",
+    "postJob": "Pasang Lowongan",
+    "skillMatch": "kecocokan keahlian",
+    "noApplicants": "Belum ada pelamar"
+  },
+  "employees": {
+    "searchPlaceholder": "Cari berdasarkan nama atau email...",
+    "employees": "karyawan",
+    "noResults": "Tidak ada karyawan yang cocok dengan kriteria Anda",
+    "details": "Detail Karyawan",
+    "hireDate": "Tanggal Bergabung",
+    "assigned": "ditugaskan",
+    "leaveDetails": "Detail Cuti",
+    "until": "Sampai",
+    "terminationDetails": "Detail Pemberhentian",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Hub Integrasi",
+    "subtitle": "Hubungkan Uplift ke alat yang sudah ada",
+    "apiFactory": "Pabrik API",
+    "addIntegration": "Tambah Integrasi",
+    "configure": "Konfigurasi",
+    "connect": "Hubungkan",
+    "cancel": "Batal",
+    "back": "Kembali",
+    "saveChanges": "Simpan Perubahan",
+    "syncNow": "Sinkronkan Sekarang",
+    "disconnect": "Putuskan {{name}}",
+    "disconnectConfirm": "Putuskan {{name}}? Ini akan menghentikan semua sinkronisasi.",
+    "settingsSaved": "Pengaturan disimpan",
+    "browseMarketplace": "Telusuri Marketplace",
+    "loadingIntegrations": "Memuat integrasi...",
+    "noIntegrations": "Tidak ada integrasi terhubung",
+    "noIntegrationsDesc": "Hubungkan integrasi pertama Anda untuk mulai menyinkronkan data",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Menyinkronkan..."
+    },
+    "stats": {
+      "connected": "Terhubung",
+      "available": "Tersedia",
+      "syncsToday": "Sinkronisasi Hari Ini",
+      "errors": "Error",
+      "totalSyncs": "Total Sinkronisasi",
+      "lastSync": "Sinkronisasi Terakhir",
+      "records": "catatan"
+    },
+    "tabs": {
+      "connected": "Terhubung",
+      "marketplace": "Marketplace",
+      "restApi": "REST API",
+      "apiFactory": "Pabrik API",
+      "activityLog": "Log Aktivitas",
+      "settings": "Pengaturan",
+      "fieldMapping": "Pemetaan Field",
+      "syncHistory": "Riwayat Sinkronisasi",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Sinkronisasi Terakhir",
+      "frequency": "Frekuensi",
+      "status": "Status",
+      "healthy": "Sehat",
+      "errors": "error"
+    },
+    "connectModal": {
+      "title": "Hubungkan {{name}}",
+      "whatItDoes": "Apa yang dilakukan integrasi ini:",
+      "redirectNotice": "Anda akan diarahkan ke {{name}}",
+      "authorizeMessage": "Masuk dan otorisasi Uplift untuk mengakses data Anda. Kami hanya meminta izin yang diperlukan.",
+      "connectWith": "Hubungkan dengan {{name}}",
+      "connecting": "Menghubungkan ke {{name}}...",
+      "completeAuth": "Silakan selesaikan otorisasi di jendela popup",
+      "successConnected": "Berhasil terhubung!",
+      "configureSyncSettings": "Konfigurasi pengaturan sinkronisasi Anda di bawah.",
+      "completeSetup": "Selesaikan Pengaturan",
+      "connected": "{{name}} Terhubung!",
+      "firstSyncSoon": "Sinkronisasi pertama Anda akan segera dimulai",
+      "hris": {
+        "syncEmployees": "Sinkronkan catatan karyawan secara otomatis",
+        "importDepts": "Impor departemen dan lokasi",
+        "syncTimeOff": "Jaga saldo cuti tetap sinkron"
+      },
+      "payroll": {
+        "exportTimesheets": "Ekspor lembar waktu yang disetujui",
+        "syncPayRates": "Sinkronkan tarif gaji dan lembur",
+        "autoReconciliation": "Rekonsiliasi penggajian otomatis"
+      },
+      "comms": {
+        "shiftReminders": "Kirim pengingat shift",
+        "postRecognition": "Posting penghargaan ke channel",
+        "swapNotifications": "Notifikasi permintaan pertukaran"
+      },
+      "identity": {
+        "sso": "Single sign-on (SSO)",
+        "autoProvisioning": "Penyediaan pengguna otomatis",
+        "directorySync": "Sinkronisasi direktori"
+      },
+      "other": {
+        "bidirectional": "Sinkronisasi data dua arah",
+        "realtimeWebhooks": "Pembaruan real-time via webhooks",
+        "auditTrail": "Jejak audit lengkap"
+      }
+    },
+    "configureModal": {
+      "title": "Pengaturan {{name}}",
+      "connectedSince": "Terhubung {{date}}"
+    },
+    "settings": {
+      "autoSync": "Sinkronisasi Otomatis",
+      "autoSyncDesc": "Sinkronkan data secara otomatis sesuai jadwal",
+      "autoSyncScheduleDesc": "Sinkronkan secara otomatis sesuai jadwal",
+      "syncFrequency": "Frekuensi Sinkronisasi",
+      "nextScheduledSync": "Sinkronisasi Terjadwal Berikutnya",
+      "dataToSync": "Data untuk Disinkronkan",
+      "frequency": {
+        "realtime": "Real-time",
+        "hourly": "Per Jam",
+        "daily": "Harian",
+        "weekly": "Mingguan"
+      },
+      "data": {
+        "employees": "Karyawan",
+        "timeEntries": "Entri Waktu",
+        "departments": "Departemen",
+        "locations": "Lokasi"
+      }
+    },
+    "mapping": {
+      "description": "Pemetaan field mengontrol bagaimana data dari {{name}} dipetakan ke field Uplift. Perubahan berlaku pada sinkronisasi berikutnya.",
+      "sourceField": "Field {{name}}",
+      "upliftField": "Field Uplift",
+      "status": "Status",
+      "selectField": "Pilih field...",
+      "mapped": "Dipetakan",
+      "unmapped": "Belum Dipetakan"
+    },
+    "history": {
+      "noHistory": "Belum ada riwayat sinkronisasi",
+      "sync": "Sinkronisasi",
+      "duration": "Durasi",
+      "records": "Catatan",
+      "created": "Dibuat",
+      "updated": "Diperbarui"
+    },
+    "webhooks": {
+      "description": "Webhooks memberi tahu {{name}} ketika event terjadi di Uplift",
+      "addWebhook": "Tambah Webhook",
+      "noWebhooks": "Tidak ada webhooks dikonfigurasi",
+      "createFirst": "Buat webhook pertama Anda",
+      "active": "Aktif",
+      "paused": "Dijeda",
+      "sendTestPayload": "Kirim payload uji",
+      "pauseWebhook": "Jeda webhook",
+      "enableWebhook": "Aktifkan webhook",
+      "deleteWebhook": "Hapus webhook",
+      "lastTriggered": "Terakhir dipicu",
+      "never": "Tidak pernah",
+      "successRate": "Tingkat keberhasilan",
+      "sendEventsTo": "Kirim event ke {{name}}",
+      "endpointUrl": "URL Endpoint",
+      "eventsToSend": "Event untuk Dikirim",
+      "hmacInfo": "Kami akan menandatangani semua payload webhook dengan HMAC-SHA256. Anda akan menerima tanda tangan di",
+      "header": "header.",
+      "createWebhook": "Buat Webhook",
+      "validationError": "Silakan masukkan URL dan pilih setidaknya satu event",
+      "createdSuccess": "Webhook berhasil dibuat!",
+      "testSent": "Payload uji dikirim ke",
+      "testStatus": "Status",
+      "deleteConfirm": "Hapus webhook ini?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Cari integrasi...",
+      "allCategories": "Semua Kategori",
+      "infoBannerTitle": "Uplift bekerja dengan alat yang sudah ada",
+      "infoBannerDesc": "Hubungkan HRIS, penggajian, dan sistem komunikasi Anda. Kami menyinkronkan data - kami tidak menggantikan sistem Anda.",
+      "noResults": "Tidak ada integrasi yang cocok dengan pencarian Anda",
+      "dontSeeSystem": "Tidak melihat sistem Anda?",
+      "alwaysAdding": "Kami selalu menambahkan integrasi baru. Beri tahu kami apa yang Anda butuhkan.",
+      "requestIntegration": "Minta Integrasi"
+    },
+    "activity": {
+      "recentActivity": "Aktivitas integrasi terbaru",
+      "exportLog": "Ekspor Log"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "Pabrik API",
+    "subtitle": "Bangun integrasi REST API kustom tanpa menulis kode",
+    "newIntegration": "Integrasi Baru",
+    "searchPlaceholder": "Cari integrasi...",
+    "loadingIntegrations": "Memuat integrasi...",
+    "noIntegrationsFound": "Tidak ada integrasi ditemukan",
+    "noIntegrationsYet": "Belum ada integrasi kustom",
+    "tryDifferentSearch": "Coba kata kunci pencarian yang berbeda",
+    "createFirstDesc": "Buat integrasi API kustom pertama Anda untuk menghubungkan REST API apa pun",
+    "createIntegration": "Buat Integrasi",
+    "deleteConfirm": "Apakah Anda yakin ingin menghapus integrasi ini?",
+    "list": {
+      "eventsCount": "{{count}} event",
+      "scheduled": "Terjadwal",
+      "incomingWebhook": "Webhook masuk",
+      "manual": "Manual",
+      "runsCount": "{{count}} eksekusi",
+      "errorsCount": "{{count}} error",
+      "disabled": "Dinonaktifkan",
+      "edit": "Edit",
+      "test": "Uji",
+      "viewLogs": "Lihat Log",
+      "delete": "Hapus",
+      "lastRun": "Eksekusi terakhir"
+    },
+    "stats": {
+      "totalIntegrations": "Total Integrasi",
+      "active": "Aktif",
+      "runsToday": "Eksekusi Hari Ini",
+      "totalErrors": "Total Error"
+    },
+    "editor": {
+      "editTitle": "Edit Integrasi API",
+      "createTitle": "Buat Integrasi API",
+      "subtitle": "Konfigurasi koneksi REST API kustom Anda",
+      "integrationName": "Nama Integrasi",
+      "integrationNamePlaceholder": "misalnya, Sinkronkan ke Sistem Penggajian",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Apa yang dilakukan integrasi ini?",
+      "method": "Metode",
+      "url": "URL",
+      "headers": "Header",
+      "addHeader": "Tambah Header",
+      "headerName": "Nama header",
+      "headerValue": "Nilai",
+      "requestBodyJson": "Body Permintaan (JSON)",
+      "useVariables": "Gunakan {{field}} untuk variabel",
+      "availableVariables": "Variabel yang tersedia",
+      "authenticationType": "Tipe Autentikasi",
+      "apiKeyLocation": "Lokasi Kunci API",
+      "header": "Header",
+      "queryParameter": "Parameter Query",
+      "keyName": "Nama Kunci",
+      "keyNamePlaceholder": "misalnya, X-API-Key",
+      "apiKey": "Kunci API",
+      "enterApiKey": "Masukkan kunci API Anda",
+      "bearerToken": "Bearer Token",
+      "enterToken": "Masukkan token Anda",
+      "username": "Nama Pengguna",
+      "password": "Kata Sandi",
+      "tokenUrl": "URL Token",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scopes": "Scope (dipisahkan koma)",
+      "whenShouldRun": "Kapan integrasi ini harus berjalan?",
+      "selectEvents": "Pilih Event",
+      "schedule": "Jadwal",
+      "cronExpression": "Ekspresi CRON",
+      "scheduleUtcNote": "Jadwal menggunakan zona waktu UTC. CRON saat ini",
+      "yourWebhookUrl": "URL Webhook Anda",
+      "webhookPostNote": "Kirim permintaan POST ke URL ini. Kami akan memproses data masuk dan memetakannya ke Uplift.",
+      "fieldMappings": "Pemetaan Field",
+      "fieldMappingsDesc": "Petakan field Uplift ke field API eksternal Anda",
+      "addMapping": "Tambah Pemetaan",
+      "noFieldMappings": "Belum ada pemetaan field",
+      "addMappingsDesc": "Tambahkan pemetaan untuk mentransformasi data antar sistem",
+      "addFirstMapping": "Tambah Pemetaan Pertama",
+      "selectUpliftField": "Pilih field Uplift...",
+      "externalFieldName": "Nama field eksternal",
+      "noTransform": "Tanpa transformasi",
+      "dateIso": "Tanggal → ISO",
+      "dateUk": "Tanggal → Format UK",
+      "boolYn": "Bool → Y/T",
+      "fieldMappingTip": "Pemetaan field digunakan untuk membangun body permintaan secara otomatis. Anda juga dapat menggunakan sintaks {{field}} di tab Permintaan untuk struktur JSON kustom.",
+      "testConfiguration": "Uji Konfigurasi",
+      "testDescription": "Kirim permintaan uji untuk memverifikasi konfigurasi Anda. Kami akan menggunakan data sampel.",
+      "testing": "Menguji...",
+      "sendTestRequest": "Kirim Permintaan Uji",
+      "success": "Berhasil",
+      "failed": "Gagal",
+      "status": "Status",
+      "time": "Waktu",
+      "response": "Respons",
+      "enableIntegration": "Aktifkan integrasi",
+      "cancel": "Batal",
+      "saveChanges": "Simpan Perubahan",
+      "createIntegration": "Buat Integrasi",
+      "tabs": {
+        "request": "Permintaan",
+        "authentication": "Autentikasi",
+        "trigger": "Pemicu",
+        "fieldMapping": "Pemetaan Field",
+        "test": "Uji"
+      }
+    },
+    "logs": {
+      "executionLogs": "Log Eksekusi",
+      "export": "Ekspor",
+      "noData": "Belum ada data. Log eksekusi akan muncul di sini setelah integrasi berjalan.",
+      "unknown": "Tidak diketahui",
+      "error": "Error"
+    },
+    "helpBanner": {
+      "title": "Butuh bantuan membangun integrasi?",
+      "description": "Periksa dokumentasi API kami untuk contoh, atau hubungi dukungan untuk kasus yang kompleks."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "Kunci REST API",
+    "subtitle": "Buat kunci API untuk mengakses data Uplift dari aplikasi Anda",
+    "apiDocs": "Dokumentasi API",
+    "createKey": "Buat Kunci",
+    "createApiKey": "Buat Kunci API",
+    "loadingKeys": "Memuat kunci API...",
+    "loadError": "Gagal memuat kunci API.",
+    "noKeysYet": "Belum ada kunci API",
+    "createFirstDesc": "Buat kunci API pertama Anda untuk mulai berintegrasi dengan Uplift",
+    "retry": "Coba Lagi",
+    "revokeConfirm": "Cabut kunci API \"{{name}}\"? Tindakan ini tidak dapat dibatalkan.",
+    "regenerateConfirm": "Regenerasi rahasia untuk \"{{name}}\"? Rahasia lama akan langsung berhenti bekerja.",
+    "regenerateSuccess": "Kunci rahasia baru: {{secret}}\n\nSimpan sekarang - Anda tidak akan melihatnya lagi!",
+    "regenerateError": "Gagal meregenerasi rahasia: {{message}}",
+    "usageStats": "Statistik penggunaan untuk {{name}}:\n\nTotal permintaan: {{requests}}\nTerakhir digunakan: {{lastUsed}}",
+    "card": {
+      "noDescription": "Tanpa deskripsi",
+      "expired": "Kedaluwarsa",
+      "active": "Aktif",
+      "inactive": "Tidak Aktif",
+      "keyId": "ID Kunci",
+      "requests": "Permintaan",
+      "lastUsed": "Terakhir Digunakan",
+      "never": "Tidak pernah",
+      "rateLimit": "Batas Kecepatan",
+      "standard": "Standar",
+      "hideDetails": "Sembunyikan detail",
+      "showDetails": "Tampilkan detail",
+      "scopes": "LINGKUP",
+      "created": "Dibuat",
+      "expires": "Kedaluwarsa",
+      "usage": "Penggunaan",
+      "regenerate": "Regenerasi",
+      "revoke": "Cabut"
+    },
+    "create": {
+      "keyCreatedTitle": "Kunci API Dibuat",
+      "createTitle": "Buat Kunci API",
+      "keyCreatedSuccess": "Kunci API berhasil dibuat",
+      "copySecretWarning": "Salin kunci rahasia Anda sekarang. Anda tidak akan bisa melihatnya lagi!",
+      "keyIdLabel": "ID Kunci",
+      "secretKeyLabel": "Kunci Rahasia",
+      "fullApiKeyLabel": "Kunci API Lengkap (untuk header Authorization)",
+      "fullKeyLabel": "Kunci Lengkap",
+      "authHeaderNote": "Gunakan ini di header Authorization Anda",
+      "done": "Selesai",
+      "keyName": "Nama Kunci",
+      "keyNamePlaceholder": "misalnya, Kunci API Produksi",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Untuk apa kunci ini akan digunakan?",
+      "permissions": "Izin",
+      "rateLimit": "Batas Kecepatan",
+      "expiration": "Kedaluwarsa",
+      "neverExpires": "Tidak pernah kedaluwarsa",
+      "thirtyDays": "30 hari",
+      "ninetyDays": "90 hari",
+      "oneYear": "1 tahun",
+      "createError": "Gagal membuat kunci API. Silakan coba lagi.",
+      "cancel": "Batal",
+      "createKey": "Buat Kunci"
+    },
+    "docs": {
+      "quickStart": "Mulai Cepat",
+      "authentication": "Autentikasi",
+      "exampleResponse": "Contoh Respons",
+      "viewFullDocs": "Lihat Dokumentasi Lengkap",
+      "downloadSpec": "Unduh Spesifikasi OpenAPI"
+    },
+    "securityBanner": {
+      "title": "Keamanan Kunci API",
+      "description": "Jaga keamanan kunci API Anda. Jangan pernah mengekspos di kode sisi klien atau repositori publik. Jika kunci terkompromi, segera cabut dan buat yang baru."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Pengaturan Organisasi",
+    "subtitle": "Mari konfigurasi organisasi Anda",
+    "steps": {
+      "orgDetails": "Detail Organisasi",
+      "locations": "Lokasi",
+      "departments": "Departemen",
+      "roles": "Peran & Izin",
+      "review": "Tinjau & Luncurkan"
+    },
+    "orgDetails": {
+      "companyName": "Nama Perusahaan",
+      "companyNamePlaceholder": "misalnya, PT Acme",
+      "tradingName": "Nama Dagang (opsional)",
+      "tradingNamePlaceholder": "Nama publik",
+      "industry": "Industri",
+      "selectIndustry": "Pilih industri",
+      "companySize": "Ukuran Perusahaan",
+      "selectSize": "Pilih ukuran",
+      "timezone": "Zona Waktu Default",
+      "currency": "Mata Uang Default",
+      "weekStart": "Minggu Dimulai Pada",
+      "logo": "Logo Perusahaan",
+      "uploadLogo": "Unggah Logo",
+      "uploadLogoDesc": "PNG atau SVG, disarankan 200x200px"
+    },
+    "locations": {
+      "title": "Lokasi",
+      "subtitle": "Tambahkan kantor, situs, atau cabang Anda",
+      "addLocation": "Tambah Lokasi",
+      "name": "Nama Lokasi",
+      "namePlaceholder": "misalnya, Kantor Pusat",
+      "address": "Alamat",
+      "addressPlaceholder": "Alamat lengkap",
+      "timezone": "Zona Waktu",
+      "noLocations": "Belum ada lokasi ditambahkan",
+      "addFirst": "Tambahkan lokasi pertama Anda untuk memulai"
+    },
+    "departments": {
+      "title": "Departemen",
+      "subtitle": "Siapkan struktur departemen Anda",
+      "addDepartment": "Tambah Departemen",
+      "name": "Nama Departemen",
+      "namePlaceholder": "misalnya, Teknik",
+      "parentDepartment": "Departemen Induk (opsional)",
+      "none": "Tidak ada (tingkat atas)",
+      "manager": "Manajer Departemen",
+      "selectManager": "Pilih manajer",
+      "noDepartments": "Belum ada departemen ditambahkan",
+      "addFirst": "Tambahkan departemen pertama Anda"
+    },
+    "roles": {
+      "title": "Peran & Izin",
+      "subtitle": "Konfigurasi tingkat akses untuk tim Anda",
+      "addRole": "Tambah Peran Kustom",
+      "builtIn": "Bawaan",
+      "custom": "Kustom",
+      "name": "Nama Peran",
+      "namePlaceholder": "misalnya, Supervisor Shift",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Apa yang bisa dilakukan peran ini?",
+      "permissions": "Izin",
+      "permissionGroups": {
+        "scheduling": "Penjadwalan",
+        "timeTracking": "Pelacakan Waktu",
+        "employees": "Karyawan",
+        "reports": "Laporan",
+        "settings": "Pengaturan"
+      }
+    },
+    "review": {
+      "title": "Tinjau & Luncurkan",
+      "subtitle": "Periksa apakah semuanya sudah benar sebelum diluncurkan",
+      "orgInfo": "Info Organisasi",
+      "locationsCount": "{{count}} lokasi dikonfigurasi",
+      "departmentsCount": "{{count}} departemen dikonfigurasi",
+      "rolesCount": "{{count}} peran dikonfigurasi",
+      "allLooksGood": "Semuanya terlihat bagus!",
+      "launch": "Luncurkan Organisasi",
+      "launchDesc": "Ini akan mengaktifkan organisasi Anda dan mengirimkan undangan ke semua anggota tim yang ditambahkan."
+    },
+    "navigation": {
+      "back": "Kembali",
+      "next": "Berikutnya",
+      "skip": "Lewati untuk sekarang",
+      "finish": "Selesaikan Pengaturan"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

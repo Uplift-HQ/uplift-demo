@@ -54,7 +54,6 @@
     "viewMyCareer": "مشاهده مسیر شغلی من",
     "timeOffBalance": "مانده مرخصی"
   },
-
   "nav": {
     "dashboard": "داشبورد",
     "employees": "کارمندان",
@@ -150,7 +149,20 @@
     "active": "فعال",
     "inactive": "غیرفعال",
     "enabled": "فعال",
-    "disabled": "غیرفعال"
+    "disabled": "غیرفعال",
+    "approveSelected": "تأیید انتخاب شده‌ها",
+    "rejectSelected": "رد انتخاب شده‌ها",
+    "clearSelection": "پاک کردن",
+    "showing": "نمایش",
+    "of": "از",
+    "page": "صفحه",
+    "previous": "قبلی",
+    "terminated": "خاتمه یافته",
+    "sunday": "یکشنبه",
+    "monday": "دوشنبه",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
   "auth": {
     "login": "ورود",
@@ -177,9 +189,6 @@
     "requestAccessMsg": "برای دسترسی به Uplift، لطفاً با مدیر یا بخش منابع انسانی خود تماس بگیرید. آنها یک لینک دعوت برای شما ارسال خواهند کرد.",
     "enterEmailPassword": "لطفاً ایمیل و رمز عبور را وارد کنید",
     "loginFailed": "ورود ناموفق",
-    "demoAccounts": "حساب‌های نمایشی:",
-    "demoWorker": "کارگر: worker@uplift.work / Demo123!",
-    "demoManager": "مدیر: manager@uplift.work / Demo123!",
     "twoFactorAuth": "احراز هویت دو مرحله‌ای",
     "enterMfaCode": "کد برنامه احراز هویت خود را وارد کنید",
     "verificationCode": "کد تأیید",
@@ -193,7 +202,15 @@
     "invalidCode": "کد نامعتبر",
     "allRightsReserved": "تمامی حقوق محفوظ است",
     "termsOfService": "شرایط خدمات",
-    "privacyPolicy": "سیاست حفظ حریم خصوصی"
+    "privacyPolicy": "سیاست حفظ حریم خصوصی",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
   "navigation": {
     "home": "خانه",
@@ -289,7 +306,21 @@
     "yourShift": "شیفت شما",
     "theirShift": "شیفت آنها",
     "sendRequest": "ارسال درخواست",
-    "cancelSwap": "لغو تعویض"
+    "cancelSwap": "لغو تعویض",
+    "allLocations": "همه مکان‌ها",
+    "tuesday": "سه‌شنبه",
+    "wednesday": "چهارشنبه",
+    "thursday": "پنج‌شنبه",
+    "friday": "جمعه",
+    "saturday": "شنبه",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
   "timeTracking": {
     "title": "پیگیری زمان",
@@ -321,7 +352,24 @@
     "tapToClockIn": "برای ورود ضربه بزنید",
     "onBreakSince": "در استراحت از {{time}}",
     "workingSince": "در حال کار از {{time}}",
-    "shiftEnded": "شیفت پایان یافت"
+    "shiftEnded": "شیفت پایان یافت",
+    "entriesApproved": "{{count}} ورودی تأیید شد",
+    "approveError": "تأیید ورودی‌ها ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "entriesRejected": "{{count}} ورودی رد شد",
+    "rejectError": "رد ورودی‌ها ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "clockInError": "ورود ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "clockOutError": "خروج ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "breakError": "به‌روزرسانی وضعیت استراحت ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "noPending": "ورودی در انتظار بررسی وجود ندارد",
+    "noEntries": "ورودی زمانی یافت نشد",
+    "history": "تاریخچه",
+    "managerSubtitle": "بررسی و تأیید برگه‌های زمانی",
+    "employeeSubtitle": "ساعات کاری خود را پیگیری کنید",
+    "clockIn": "ورود",
+    "clockOut": "خروج",
+    "startBreak": "شروع استراحت",
+    "endBreak": "پایان استراحت",
+    "totalHours": "کل ساعات"
   },
   "timeOff": {
     "title": "مرخصی",
@@ -353,7 +401,15 @@
     "selectDates": "انتخاب تاریخ‌ها",
     "selectType": "انتخاب نوع",
     "addNotes": "افزودن یادداشت (اختیاری)",
-    "reviewRequest": "بررسی درخواست"
+    "reviewRequest": "بررسی درخواست",
+    "oneDay": "۱ روز",
+    "days": "روز",
+    "dates": "تاریخ‌ها",
+    "duration": "مدت",
+    "noRequests": "درخواستی یافت نشد",
+    "requestDetails": "جزئیات درخواست مرخصی",
+    "noReason": "دلیلی ارائه نشده",
+    "submitted": "ارسال شده"
   },
   "feed": {
     "title": "فید",
@@ -726,7 +782,22 @@
     "featureAccess": "دسترسی به ویژگی‌ها",
     "enableAll": "فعال کردن همه",
     "disableAll": "غیرفعال کردن همه",
-    "aboutEmployeeVisibility": "این تنظیمات کنترل می‌کنند کدام ویژگی‌ها برای هر کارمند قابل مشاهده باشند."
+    "aboutEmployeeVisibility": "این تنظیمات کنترل می‌کنند کدام ویژگی‌ها برای هر کارمند قابل مشاهده باشند.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
   "tasks": {
     "title": "وظایف",
@@ -908,9 +979,11 @@
     "enterRejectionReason": "دلیل رد را وارد کنید...",
     "confirmRejection": "تأیید رد",
     "approve": "تأیید",
-    "reject": "رد"
+    "reject": "رد",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "ترجیحات اعلان",
     "subtitle": "انتخاب کنید چگونه و چه زمانی اعلان دریافت کنید",
@@ -952,7 +1025,6 @@
     "disableConfirm": "آیا مطمئن هستید که می‌خواهید همه اعلان‌ها را غیرفعال کنید؟ می‌توانید هر زمان دوباره فعال کنید.",
     "disableSuccess": "همه اعلان‌ها غیرفعال شدند."
   },
-
   "employeeDetail": {
     "notFound": "کارمند یافت نشد",
     "backToEmployees": "بازگشت به کارمندان",
@@ -968,7 +1040,6 @@
     "basic": "پایه",
     "adding": "در حال افزودن..."
   },
-
   "reports": {
     "title": "گزارش‌ها",
     "subtitle": "تحلیل‌ها، بینش‌ها و گزارش‌های سفارشی",
@@ -1004,9 +1075,22 @@
     "thisMonth": "این ماه",
     "lastMonth": "ماه گذشته",
     "last7Days": "۷ روز گذشته",
-    "last30Days": "۳۰ روز گذشته"
+    "last30Days": "۳۰ روز گذشته",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "منو",
     "closeMenu": "بستن منو",
@@ -1020,7 +1104,6 @@
     "required": "الزامی",
     "optional": "اختیاری"
   },
-
   "shiftTemplates": {
     "title": "قالب‌های شیفت",
     "subtitle": "ایجاد الگوهای شیفت قابل استفاده مجدد",
@@ -1052,11 +1135,118 @@
     "shiftsLabel": "شیفت",
     "generating": "در حال تولید..."
   },
-
   "legal": {
-    "lastUpdated": "آخرین به‌روزرسانی"
+    "lastUpdated": "آخرین به‌روزرسانی",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "ق.ظ",
     "pm": "ب.ظ",
@@ -1099,5 +1289,564 @@
     "october": "اکتبر",
     "november": "نوامبر",
     "december": "دسامبر"
+  },
+  "bulkImport": {
+    "title": "ورود گروهی",
+    "subtitle": "ورود داده‌ها از فایل‌های CSV یا اکسل",
+    "selectType": "انتخاب نوع",
+    "uploadFile": "آپلود فایل",
+    "preview": "پیش‌نمایش",
+    "complete": "تکمیل",
+    "invalidFileType": "لطفاً یک فایل CSV یا اکسل آپلود کنید",
+    "importFailed": "ورود ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "uploadFor": "آپلود",
+    "uploadDesc": "بکشید و رها کنید یا کلیک کنید تا فایلی انتخاب کنید",
+    "downloadTemplate": "دانلود قالب",
+    "dragDrop": "فایل خود را بکشید و اینجا رها کنید، یا کلیک کنید تا مرور کنید",
+    "supportedFormats": "فرمت‌های پشتیبانی شده: CSV, XLSX",
+    "previewData": "پیش‌نمایش داده‌ها",
+    "rowsFound": "ردیف یافت شد در",
+    "andMore": "و",
+    "moreRows": "ردیف دیگر...",
+    "importing": "در حال ورود...",
+    "startImport": "شروع ورود",
+    "importComplete": "ورود کامل شد",
+    "successfullyImported": "با موفقیت وارد شد",
+    "of": "از",
+    "records": "رکورد",
+    "successful": "موفق",
+    "failed": "ناموفق",
+    "total": "کل",
+    "importMore": "ورود داده‌های بیشتر",
+    "type": {
+      "employees": "کارمندان",
+      "employeesDesc": "ورود پروفایل‌های کارمندان",
+      "shifts": "شیفت‌ها",
+      "shiftsDesc": "ورود برنامه‌های شیفت",
+      "locations": "مکان‌ها",
+      "locationsDesc": "ورود مکان‌ها",
+      "skills": "مهارت‌ها",
+      "skillsDesc": "ورود مهارت‌ها"
+    }
+  },
+  "jobs": {
+    "open": "باز",
+    "closed": "بسته",
+    "applicants": "متقاضیان",
+    "created": "آگهی شغلی با موفقیت ایجاد شد",
+    "createError": "ایجاد آگهی شغلی ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "updated": "آگهی شغلی با موفقیت به‌روزرسانی شد",
+    "updateError": "به‌روزرسانی آگهی شغلی ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "fullTime": "تمام وقت",
+    "partTime": "پاره وقت",
+    "contract": "قراردادی",
+    "temporary": "موقت",
+    "subtitle": "مدیریت فرصت‌های شغلی داخلی",
+    "openPositions": "موقعیت‌های باز",
+    "closedPositions": "بسته شده",
+    "totalApplicants": "کل متقاضیان",
+    "noJobs": "آگهی شغلی یافت نشد",
+    "viewApplicants": "مشاهده متقاضیان",
+    "editPosting": "ویرایش آگهی شغلی",
+    "jobTitle": "عنوان شغل",
+    "enterTitle": "عنوان شغل را وارد کنید",
+    "selectDepartment": "بخش را انتخاب کنید",
+    "selectLocation": "مکان را انتخاب کنید",
+    "salary": "محدوده حقوق",
+    "enterDescription": "شرح شغل را وارد کنید",
+    "postJob": "انتشار شغل",
+    "skillMatch": "تطابق مهارت",
+    "noApplicants": "هنوز متقاضی وجود ندارد"
+  },
+  "employees": {
+    "searchPlaceholder": "جستجو بر اساس نام یا ایمیل...",
+    "employees": "کارمندان",
+    "noResults": "کارمندی مطابق با معیارهای شما یافت نشد",
+    "details": "جزئیات کارمند",
+    "hireDate": "تاریخ استخدام",
+    "assigned": "تخصیص داده شده",
+    "leaveDetails": "جزئیات مرخصی",
+    "until": "تا",
+    "terminationDetails": "جزئیات خاتمه",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "مرکز یکپارچه‌سازی",
+    "subtitle": "Uplift را به ابزارهای موجود خود متصل کنید",
+    "apiFactory": "کارخانه API",
+    "addIntegration": "افزودن یکپارچه‌سازی",
+    "configure": "پیکربندی",
+    "connect": "اتصال",
+    "cancel": "لغو",
+    "back": "بازگشت",
+    "saveChanges": "ذخیره تغییرات",
+    "syncNow": "همگام‌سازی اکنون",
+    "disconnect": "قطع اتصال {{name}}",
+    "disconnectConfirm": "اتصال {{name}} قطع شود؟ این کار تمام همگام‌سازی‌ها را متوقف می‌کند.",
+    "settingsSaved": "تنظیمات ذخیره شد",
+    "browseMarketplace": "مرور فروشگاه",
+    "loadingIntegrations": "در حال بارگذاری یکپارچه‌سازی‌ها...",
+    "noIntegrations": "هیچ یکپارچه‌سازی متصل نیست",
+    "noIntegrationsDesc": "اولین یکپارچه‌سازی خود را متصل کنید تا شروع به همگام‌سازی داده‌ها کنید",
+    "status": {
+      "beta": "بتا",
+      "syncing": "در حال همگام‌سازی..."
+    },
+    "stats": {
+      "connected": "متصل",
+      "available": "موجود",
+      "syncsToday": "همگام‌سازی‌های امروز",
+      "errors": "خطاها",
+      "totalSyncs": "کل همگام‌سازی‌ها",
+      "lastSync": "آخرین همگام‌سازی",
+      "records": "رکورد"
+    },
+    "tabs": {
+      "connected": "متصل",
+      "marketplace": "فروشگاه",
+      "restApi": "REST API",
+      "apiFactory": "کارخانه API",
+      "activityLog": "گزارش فعالیت",
+      "settings": "تنظیمات",
+      "fieldMapping": "نگاشت فیلد",
+      "syncHistory": "تاریخچه همگام‌سازی",
+      "webhooks": "وب‌هوک‌ها"
+    },
+    "connection": {
+      "lastSync": "آخرین همگام‌سازی",
+      "frequency": "تناوب",
+      "status": "وضعیت",
+      "healthy": "سالم",
+      "errors": "خطا"
+    },
+    "connectModal": {
+      "title": "اتصال {{name}}",
+      "whatItDoes": "این یکپارچه‌سازی چه کار می‌کند:",
+      "redirectNotice": "شما به {{name}} هدایت خواهید شد",
+      "authorizeMessage": "وارد شوید و به Uplift اجازه دسترسی به داده‌های خود را بدهید. ما فقط مجوزهای مورد نیاز را درخواست می‌کنیم.",
+      "connectWith": "اتصال با {{name}}",
+      "connecting": "در حال اتصال به {{name}}...",
+      "completeAuth": "لطفاً مجوزدهی را در پنجره بازشو تکمیل کنید",
+      "successConnected": "با موفقیت متصل شد!",
+      "configureSyncSettings": "تنظیمات همگام‌سازی خود را در زیر پیکربندی کنید.",
+      "completeSetup": "تکمیل راه‌اندازی",
+      "connected": "{{name}} متصل شد!",
+      "firstSyncSoon": "اولین همگام‌سازی شما به زودی شروع خواهد شد",
+      "hris": {
+        "syncEmployees": "همگام‌سازی خودکار رکوردهای کارمندان",
+        "importDepts": "ورود بخش‌ها و مکان‌ها",
+        "syncTimeOff": "همگام نگه داشتن مانده مرخصی"
+      },
+      "payroll": {
+        "exportTimesheets": "خروجی برگه‌های زمانی تأیید شده",
+        "syncPayRates": "همگام‌سازی نرخ‌های حقوق و اضافه‌کاری",
+        "autoReconciliation": "تطبیق خودکار حقوق و دستمزد"
+      },
+      "comms": {
+        "shiftReminders": "ارسال یادآوری شیفت",
+        "postRecognition": "انتشار قدردانی در کانال‌ها",
+        "swapNotifications": "اعلان‌های درخواست تعویض"
+      },
+      "identity": {
+        "sso": "ورود یکپارچه (SSO)",
+        "autoProvisioning": "ایجاد خودکار حساب کاربری",
+        "directorySync": "همگام‌سازی دایرکتوری"
+      },
+      "other": {
+        "bidirectional": "همگام‌سازی داده دوطرفه",
+        "realtimeWebhooks": "به‌روزرسانی بلادرنگ از طریق وب‌هوک‌ها",
+        "auditTrail": "رد پای کامل بازرسی"
+      }
+    },
+    "configureModal": {
+      "title": "تنظیمات {{name}}",
+      "connectedSince": "متصل از {{date}}"
+    },
+    "settings": {
+      "autoSync": "همگام‌سازی خودکار",
+      "autoSyncDesc": "همگام‌سازی خودکار داده‌ها بر اساس برنامه",
+      "autoSyncScheduleDesc": "همگام‌سازی خودکار بر اساس برنامه",
+      "syncFrequency": "تناوب همگام‌سازی",
+      "nextScheduledSync": "همگام‌سازی برنامه‌ریزی شده بعدی",
+      "dataToSync": "داده‌ها برای همگام‌سازی",
+      "frequency": {
+        "realtime": "بلادرنگ",
+        "hourly": "ساعتی",
+        "daily": "روزانه",
+        "weekly": "هفتگی"
+      },
+      "data": {
+        "employees": "کارمندان",
+        "timeEntries": "ورودی‌های زمانی",
+        "departments": "بخش‌ها",
+        "locations": "مکان‌ها"
+      }
+    },
+    "mapping": {
+      "description": "نگاشت فیلد نحوه نگاشت داده‌ها از {{name}} به فیلدهای Uplift را کنترل می‌کند. تغییرات در همگام‌سازی بعدی اعمال می‌شوند.",
+      "sourceField": "فیلد {{name}}",
+      "upliftField": "فیلد Uplift",
+      "status": "وضعیت",
+      "selectField": "انتخاب فیلد...",
+      "mapped": "نگاشت شده",
+      "unmapped": "نگاشت نشده"
+    },
+    "history": {
+      "noHistory": "هنوز تاریخچه همگام‌سازی وجود ندارد",
+      "sync": "همگام‌سازی",
+      "duration": "مدت",
+      "records": "رکورد",
+      "created": "ایجاد شده",
+      "updated": "به‌روزرسانی شده"
+    },
+    "webhooks": {
+      "description": "وب‌هوک‌ها {{name}} را هنگام وقوع رویدادها در Uplift مطلع می‌کنند",
+      "addWebhook": "افزودن وب‌هوک",
+      "noWebhooks": "وب‌هوکی پیکربندی نشده",
+      "createFirst": "اولین وب‌هوک خود را ایجاد کنید",
+      "active": "فعال",
+      "paused": "متوقف",
+      "sendTestPayload": "ارسال بار آزمایشی",
+      "pauseWebhook": "توقف وب‌هوک",
+      "enableWebhook": "فعال کردن وب‌هوک",
+      "deleteWebhook": "حذف وب‌هوک",
+      "lastTriggered": "آخرین فعال‌سازی",
+      "never": "هرگز",
+      "successRate": "نرخ موفقیت",
+      "sendEventsTo": "ارسال رویدادها به {{name}}",
+      "endpointUrl": "URL نقطه پایانی",
+      "eventsToSend": "رویدادها برای ارسال",
+      "hmacInfo": "ما تمام بارهای وب‌هوک را با HMAC-SHA256 امضا خواهیم کرد. امضا را در",
+      "header": "هدر دریافت خواهید کرد.",
+      "createWebhook": "ایجاد وب‌هوک",
+      "validationError": "لطفاً یک URL وارد کنید و حداقل یک رویداد انتخاب کنید",
+      "createdSuccess": "وب‌هوک با موفقیت ایجاد شد!",
+      "testSent": "بار آزمایشی ارسال شد به",
+      "testStatus": "وضعیت",
+      "deleteConfirm": "این وب‌هوک حذف شود؟"
+    },
+    "marketplace": {
+      "searchPlaceholder": "جستجوی یکپارچه‌سازی‌ها...",
+      "allCategories": "همه دسته‌بندی‌ها",
+      "infoBannerTitle": "Uplift با ابزارهای موجود شما کار می‌کند",
+      "infoBannerDesc": "سیستم‌های HRIS، حقوق و دستمزد و ارتباطات خود را متصل کنید. ما داده‌ها را همگام‌سازی می‌کنیم - جایگزین پشته شما نمی‌شویم.",
+      "noResults": "یکپارچه‌سازی مطابقی یافت نشد",
+      "dontSeeSystem": "سیستم خود را نمی‌بینید؟",
+      "alwaysAdding": "ما همیشه در حال افزودن یکپارچه‌سازی‌های جدید هستیم. به ما بگویید چه نیاز دارید.",
+      "requestIntegration": "درخواست یکپارچه‌سازی"
+    },
+    "activity": {
+      "recentActivity": "فعالیت اخیر یکپارچه‌سازی",
+      "exportLog": "خروجی گزارش"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "کارخانه API",
+    "subtitle": "ایجاد یکپارچه‌سازی‌های REST API سفارشی بدون کدنویسی",
+    "newIntegration": "یکپارچه‌سازی جدید",
+    "searchPlaceholder": "جستجوی یکپارچه‌سازی‌ها...",
+    "loadingIntegrations": "در حال بارگذاری یکپارچه‌سازی‌ها...",
+    "noIntegrationsFound": "یکپارچه‌سازی یافت نشد",
+    "noIntegrationsYet": "هنوز یکپارچه‌سازی سفارشی وجود ندارد",
+    "tryDifferentSearch": "عبارت جستجوی دیگری را امتحان کنید",
+    "createFirstDesc": "اولین یکپارچه‌سازی API سفارشی خود را برای اتصال هر REST API ایجاد کنید",
+    "createIntegration": "ایجاد یکپارچه‌سازی",
+    "deleteConfirm": "آیا مطمئن هستید که می‌خواهید این یکپارچه‌سازی را حذف کنید؟",
+    "list": {
+      "eventsCount": "{{count}} رویداد",
+      "scheduled": "برنامه‌ریزی شده",
+      "incomingWebhook": "وب‌هوک ورودی",
+      "manual": "دستی",
+      "runsCount": "{{count}} اجرا",
+      "errorsCount": "{{count}} خطا",
+      "disabled": "غیرفعال",
+      "edit": "ویرایش",
+      "test": "آزمایش",
+      "viewLogs": "مشاهده گزارش‌ها",
+      "delete": "حذف",
+      "lastRun": "آخرین اجرا"
+    },
+    "stats": {
+      "totalIntegrations": "کل یکپارچه‌سازی‌ها",
+      "active": "فعال",
+      "runsToday": "اجراهای امروز",
+      "totalErrors": "کل خطاها"
+    },
+    "editor": {
+      "editTitle": "ویرایش یکپارچه‌سازی API",
+      "createTitle": "ایجاد یکپارچه‌سازی API",
+      "subtitle": "پیکربندی اتصال REST API سفارشی خود",
+      "integrationName": "نام یکپارچه‌سازی",
+      "integrationNamePlaceholder": "مثلاً همگام‌سازی با سیستم حقوق و دستمزد",
+      "description": "توضیحات",
+      "descriptionPlaceholder": "این یکپارچه‌سازی چه کار می‌کند؟",
+      "method": "متد",
+      "url": "URL",
+      "headers": "هدرها",
+      "addHeader": "افزودن هدر",
+      "headerName": "نام هدر",
+      "headerValue": "مقدار",
+      "requestBodyJson": "بدنه درخواست (JSON)",
+      "useVariables": "از {{field}} برای متغیرها استفاده کنید",
+      "availableVariables": "متغیرهای موجود",
+      "authenticationType": "نوع احراز هویت",
+      "apiKeyLocation": "مکان کلید API",
+      "header": "هدر",
+      "queryParameter": "پارامتر کوئری",
+      "keyName": "نام کلید",
+      "keyNamePlaceholder": "مثلاً X-API-Key",
+      "apiKey": "کلید API",
+      "enterApiKey": "کلید API خود را وارد کنید",
+      "bearerToken": "توکن Bearer",
+      "enterToken": "توکن خود را وارد کنید",
+      "username": "نام کاربری",
+      "password": "رمز عبور",
+      "tokenUrl": "URL توکن",
+      "clientId": "شناسه کلاینت",
+      "clientSecret": "رمز کلاینت",
+      "scopes": "محدوده‌ها (جدا شده با ویرگول)",
+      "whenShouldRun": "این یکپارچه‌سازی چه زمانی باید اجرا شود؟",
+      "selectEvents": "انتخاب رویدادها",
+      "schedule": "برنامه",
+      "cronExpression": "عبارت CRON",
+      "scheduleUtcNote": "برنامه از منطقه زمانی UTC استفاده می‌کند. CRON فعلی",
+      "yourWebhookUrl": "URL وب‌هوک شما",
+      "webhookPostNote": "درخواست‌های POST را به این URL ارسال کنید. ما داده‌های ورودی را پردازش و به Uplift نگاشت خواهیم کرد.",
+      "fieldMappings": "نگاشت فیلدها",
+      "fieldMappingsDesc": "نگاشت فیلدهای Uplift به فیلدهای API خارجی شما",
+      "addMapping": "افزودن نگاشت",
+      "noFieldMappings": "هنوز نگاشت فیلدی وجود ندارد",
+      "addMappingsDesc": "نگاشت‌هایی اضافه کنید تا داده‌ها بین سیستم‌ها تبدیل شوند",
+      "addFirstMapping": "افزودن اولین نگاشت",
+      "selectUpliftField": "فیلد Uplift را انتخاب کنید...",
+      "externalFieldName": "نام فیلد خارجی",
+      "noTransform": "بدون تبدیل",
+      "dateIso": "تاریخ به ISO",
+      "dateUk": "تاریخ به فرمت UK",
+      "boolYn": "بولی به بله/خیر",
+      "fieldMappingTip": "نگاشت فیلدها برای ساخت خودکار بدنه درخواست استفاده می‌شوند. همچنین می‌توانید از نحو {{field}} در تب درخواست برای ساختارهای JSON سفارشی استفاده کنید.",
+      "testConfiguration": "آزمایش پیکربندی",
+      "testDescription": "یک درخواست آزمایشی ارسال کنید تا پیکربندی خود را تأیید کنید. ما از داده‌های نمونه استفاده خواهیم کرد.",
+      "testing": "در حال آزمایش...",
+      "sendTestRequest": "ارسال درخواست آزمایشی",
+      "success": "موفق",
+      "failed": "ناموفق",
+      "status": "وضعیت",
+      "time": "زمان",
+      "response": "پاسخ",
+      "enableIntegration": "فعال کردن یکپارچه‌سازی",
+      "cancel": "لغو",
+      "saveChanges": "ذخیره تغییرات",
+      "createIntegration": "ایجاد یکپارچه‌سازی",
+      "tabs": {
+        "request": "درخواست",
+        "authentication": "احراز هویت",
+        "trigger": "محرک",
+        "fieldMapping": "نگاشت فیلد",
+        "test": "آزمایش"
+      }
+    },
+    "logs": {
+      "executionLogs": "گزارش‌های اجرا",
+      "export": "خروجی",
+      "noData": "هنوز داده‌ای وجود ندارد. گزارش‌های اجرا پس از اجرای یکپارچه‌سازی‌ها در اینجا نمایش داده خواهند شد.",
+      "unknown": "ناشناخته",
+      "error": "خطا"
+    },
+    "helpBanner": {
+      "title": "برای ساخت یکپارچه‌سازی کمک نیاز دارید؟",
+      "description": "مستندات API ما را برای مثال‌ها بررسی کنید، یا برای موارد پیچیده با پشتیبانی تماس بگیرید."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "کلیدهای REST API",
+    "subtitle": "کلیدهای API برای دسترسی به داده‌های Uplift از برنامه‌های خود ایجاد کنید",
+    "apiDocs": "مستندات API",
+    "createKey": "ایجاد کلید",
+    "createApiKey": "ایجاد کلید API",
+    "loadingKeys": "در حال بارگذاری کلیدهای API...",
+    "loadError": "بارگذاری کلیدهای API ناموفق بود.",
+    "noKeysYet": "هنوز کلید API وجود ندارد",
+    "createFirstDesc": "اولین کلید API خود را برای شروع یکپارچه‌سازی با Uplift ایجاد کنید",
+    "retry": "تلاش مجدد",
+    "revokeConfirm": "کلید API \"{{name}}\" لغو شود؟ این عمل قابل بازگشت نیست.",
+    "regenerateConfirm": "رمز \"{{name}}\" مجدداً ایجاد شود؟ رمز قدیمی فوراً از کار می‌افتد.",
+    "regenerateSuccess": "کلید رمز جدید: {{secret}}\n\nاکنون آن را ذخیره کنید - دیگر نخواهید دید!",
+    "regenerateError": "ایجاد مجدد رمز ناموفق بود: {{message}}",
+    "usageStats": "آمار استفاده برای {{name}}:\n\nکل درخواست‌ها: {{requests}}\nآخرین استفاده: {{lastUsed}}",
+    "card": {
+      "noDescription": "بدون توضیحات",
+      "expired": "منقضی شده",
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "keyId": "شناسه کلید",
+      "requests": "درخواست‌ها",
+      "lastUsed": "آخرین استفاده",
+      "never": "هرگز",
+      "rateLimit": "محدودیت نرخ",
+      "standard": "استاندارد",
+      "hideDetails": "پنهان کردن جزئیات",
+      "showDetails": "نمایش جزئیات",
+      "scopes": "محدوده‌ها",
+      "created": "ایجاد شده",
+      "expires": "منقضی می‌شود",
+      "usage": "استفاده",
+      "regenerate": "ایجاد مجدد",
+      "revoke": "لغو"
+    },
+    "create": {
+      "keyCreatedTitle": "کلید API ایجاد شد",
+      "createTitle": "ایجاد کلید API",
+      "keyCreatedSuccess": "کلید API با موفقیت ایجاد شد",
+      "copySecretWarning": "کلید رمز خود را اکنون کپی کنید. دیگر نخواهید توانست آن را ببینید!",
+      "keyIdLabel": "شناسه کلید",
+      "secretKeyLabel": "کلید رمز",
+      "fullApiKeyLabel": "کلید API کامل (برای هدر Authorization)",
+      "fullKeyLabel": "کلید کامل",
+      "authHeaderNote": "از این در هدر Authorization خود استفاده کنید",
+      "done": "انجام شد",
+      "keyName": "نام کلید",
+      "keyNamePlaceholder": "مثلاً کلید API تولید",
+      "description": "توضیحات",
+      "descriptionPlaceholder": "این کلید برای چه استفاده خواهد شد؟",
+      "permissions": "مجوزها",
+      "rateLimit": "محدودیت نرخ",
+      "expiration": "انقضا",
+      "neverExpires": "هرگز منقضی نمی‌شود",
+      "thirtyDays": "۳۰ روز",
+      "ninetyDays": "۹۰ روز",
+      "oneYear": "۱ سال",
+      "createError": "ایجاد کلید API ناموفق بود. لطفاً دوباره تلاش کنید.",
+      "cancel": "لغو",
+      "createKey": "ایجاد کلید"
+    },
+    "docs": {
+      "quickStart": "شروع سریع",
+      "authentication": "احراز هویت",
+      "exampleResponse": "پاسخ نمونه",
+      "viewFullDocs": "مشاهده مستندات کامل",
+      "downloadSpec": "دانلود مشخصات OpenAPI"
+    },
+    "securityBanner": {
+      "title": "امنیت کلید API",
+      "description": "کلیدهای API خود را ایمن نگه دارید. هرگز آنها را در کد سمت کلاینت یا مخازن عمومی قرار ندهید. اگر کلیدی به خطر افتاد، فوراً آن را لغو کنید و کلید جدید ایجاد کنید."
+    }
+  },
+  "orgOnboarding": {
+    "title": "راه‌اندازی سازمان",
+    "subtitle": "بیایید سازمان شما را پیکربندی کنیم",
+    "steps": {
+      "orgDetails": "جزئیات سازمان",
+      "locations": "مکان‌ها",
+      "departments": "بخش‌ها",
+      "roles": "نقش‌ها و مجوزها",
+      "review": "بررسی و راه‌اندازی"
+    },
+    "orgDetails": {
+      "companyName": "نام شرکت",
+      "companyNamePlaceholder": "مثلاً شرکت آکمه",
+      "tradingName": "نام تجاری (اختیاری)",
+      "tradingNamePlaceholder": "نام عمومی",
+      "industry": "صنعت",
+      "selectIndustry": "صنعت را انتخاب کنید",
+      "companySize": "اندازه شرکت",
+      "selectSize": "اندازه را انتخاب کنید",
+      "timezone": "منطقه زمانی پیش‌فرض",
+      "currency": "واحد پول پیش‌فرض",
+      "weekStart": "هفته شروع می‌شود از",
+      "logo": "لوگوی شرکت",
+      "uploadLogo": "آپلود لوگو",
+      "uploadLogoDesc": "PNG یا SVG، توصیه شده ۲۰۰×۲۰۰ پیکسل"
+    },
+    "locations": {
+      "title": "مکان‌ها",
+      "subtitle": "دفاتر، سایت‌ها یا شعب خود را اضافه کنید",
+      "addLocation": "افزودن مکان",
+      "name": "نام مکان",
+      "namePlaceholder": "مثلاً دفتر مرکزی",
+      "address": "آدرس",
+      "addressPlaceholder": "آدرس کامل",
+      "timezone": "منطقه زمانی",
+      "noLocations": "هنوز مکانی اضافه نشده",
+      "addFirst": "اولین مکان خود را برای شروع اضافه کنید"
+    },
+    "departments": {
+      "title": "بخش‌ها",
+      "subtitle": "ساختار بخش‌های خود را تنظیم کنید",
+      "addDepartment": "افزودن بخش",
+      "name": "نام بخش",
+      "namePlaceholder": "مثلاً مهندسی",
+      "parentDepartment": "بخش مادر (اختیاری)",
+      "none": "هیچ (سطح بالا)",
+      "manager": "مدیر بخش",
+      "selectManager": "مدیر را انتخاب کنید",
+      "noDepartments": "هنوز بخشی اضافه نشده",
+      "addFirst": "اولین بخش خود را اضافه کنید"
+    },
+    "roles": {
+      "title": "نقش‌ها و مجوزها",
+      "subtitle": "سطوح دسترسی برای تیم خود را پیکربندی کنید",
+      "addRole": "افزودن نقش سفارشی",
+      "builtIn": "پیش‌فرض",
+      "custom": "سفارشی",
+      "name": "نام نقش",
+      "namePlaceholder": "مثلاً سرپرست شیفت",
+      "description": "توضیحات",
+      "descriptionPlaceholder": "این نقش چه کار می‌تواند انجام دهد؟",
+      "permissions": "مجوزها",
+      "permissionGroups": {
+        "scheduling": "زمان‌بندی",
+        "timeTracking": "پیگیری زمان",
+        "employees": "کارمندان",
+        "reports": "گزارش‌ها",
+        "settings": "تنظیمات"
+      }
+    },
+    "review": {
+      "title": "بررسی و راه‌اندازی",
+      "subtitle": "قبل از شروع بررسی کنید که همه چیز درست به نظر می‌رسد",
+      "orgInfo": "اطلاعات سازمان",
+      "locationsCount": "{{count}} مکان پیکربندی شده",
+      "departmentsCount": "{{count}} بخش پیکربندی شده",
+      "rolesCount": "{{count}} نقش پیکربندی شده",
+      "allLooksGood": "همه چیز خوب به نظر می‌رسد!",
+      "launch": "راه‌اندازی سازمان",
+      "launchDesc": "این سازمان شما را فعال می‌کند و دعوت‌نامه‌ها را به اعضای تیم اضافه شده ارسال می‌کند."
+    },
+    "navigation": {
+      "back": "بازگشت",
+      "next": "بعدی",
+      "skip": "فعلاً رد شو",
+      "finish": "تکمیل راه‌اندازی"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

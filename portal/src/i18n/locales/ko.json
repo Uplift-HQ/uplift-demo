@@ -54,7 +54,6 @@
     "viewMyCareer": "내 경력 보기",
     "timeOffBalance": "휴가 잔여일"
   },
-
   "nav": {
     "dashboard": "대시보드",
     "employees": "직원",
@@ -150,9 +149,21 @@
     "active": "활성",
     "inactive": "비활성",
     "enabled": "활성화됨",
-    "disabled": "비활성화됨"
+    "disabled": "비활성화됨",
+    "approveSelected": "선택 항목 승인",
+    "rejectSelected": "선택 항목 거절",
+    "clearSelection": "초기화",
+    "showing": "표시 중",
+    "of": "중",
+    "page": "페이지",
+    "previous": "이전",
+    "terminated": "퇴사",
+    "sunday": "일",
+    "monday": "월",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "로그인",
     "logout": "로그아웃",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Uplift 접근 권한을 얻으시려면 관리자 또는 인사팀에 문의해 주세요. 초대 링크를 보내드립니다.",
     "enterEmailPassword": "이메일과 비밀번호를 입력해 주세요",
     "loginFailed": "로그인 실패",
-    "demoAccounts": "데모 계정:",
-    "demoWorker": "직원: worker@uplift.work / Demo123!",
-    "demoManager": "관리자: manager@uplift.work / Demo123!",
     "twoFactorAuth": "2단계 인증",
     "enterMfaCode": "인증 앱의 코드를 입력해 주세요",
     "verificationCode": "인증 코드",
@@ -194,9 +202,16 @@
     "invalidCode": "유효하지 않은 코드",
     "allRightsReserved": "All rights reserved",
     "termsOfService": "이용약관",
-    "privacyPolicy": "개인정보처리방침"
+    "privacyPolicy": "개인정보처리방침",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "홈",
     "schedule": "스케줄",
@@ -214,7 +229,6 @@
     "leaderboard": "순위표",
     "badges": "배지"
   },
-
   "home": {
     "welcome": "{{name}}님, 다시 오신 것을 환영합니다!",
     "welcomeBack": "다시 오신 것을 환영합니다,",
@@ -239,7 +253,6 @@
     "openOpportunities": "열린 기회",
     "noOpportunities": "현재 스킬에 맞는 기회가 없습니다"
   },
-
   "schedule": {
     "title": "내 스케줄",
     "weekView": "주간",
@@ -293,9 +306,22 @@
     "yourShift": "내 근무",
     "theirShift": "상대방 근무",
     "sendRequest": "요청 보내기",
-    "cancelSwap": "교환 취소"
+    "cancelSwap": "교환 취소",
+    "allLocations": "전체 근무지",
+    "tuesday": "화",
+    "wednesday": "수",
+    "thursday": "목",
+    "friday": "금",
+    "saturday": "토",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "근태 관리",
     "clockedIn": "출근 완료",
@@ -326,9 +352,25 @@
     "tapToClockIn": "탭하여 출근",
     "onBreakSince": "{{time}}부터 휴식 중",
     "workingSince": "{{time}}부터 근무 중",
-    "shiftEnded": "근무 종료"
+    "shiftEnded": "근무 종료",
+    "entriesApproved": "{{count}}건이 승인되었습니다",
+    "approveError": "승인에 실패했습니다. 다시 시도해 주세요.",
+    "entriesRejected": "{{count}}건이 거절되었습니다",
+    "rejectError": "거절에 실패했습니다. 다시 시도해 주세요.",
+    "clockInError": "출근 처리에 실패했습니다. 다시 시도해 주세요.",
+    "clockOutError": "퇴근 처리에 실패했습니다. 다시 시도해 주세요.",
+    "breakError": "휴식 상태 변경에 실패했습니다. 다시 시도해 주세요.",
+    "noPending": "검토할 대기 중인 항목이 없습니다",
+    "noEntries": "근무 기록이 없습니다",
+    "history": "이력",
+    "managerSubtitle": "근무 기록 검토 및 승인",
+    "employeeSubtitle": "근무 시간 추적",
+    "clockIn": "출근",
+    "clockOut": "퇴근",
+    "startBreak": "휴식 시작",
+    "endBreak": "휴식 종료",
+    "totalHours": "총 시간"
   },
-
   "timeOff": {
     "title": "휴가",
     "request": "휴가 요청",
@@ -359,9 +401,16 @@
     "selectDates": "날짜 선택",
     "selectType": "유형 선택",
     "addNotes": "메모 추가 (선택사항)",
-    "reviewRequest": "요청 검토"
+    "reviewRequest": "요청 검토",
+    "oneDay": "1일",
+    "days": "일",
+    "dates": "날짜",
+    "duration": "기간",
+    "noRequests": "요청이 없습니다",
+    "requestDetails": "휴가 요청 상세",
+    "noReason": "사유가 제공되지 않았습니다",
+    "submitted": "제출됨"
   },
-
   "feed": {
     "title": "피드",
     "newPost": "새 게시물",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}}시간 전",
     "daysAgo": "{{count}}일 전"
   },
-
   "messages": {
     "title": "메시지",
     "newMessage": "새 메시지",
@@ -419,7 +467,6 @@
     "translateMessage": "번역",
     "showOriginal": "원문 보기"
   },
-
   "profile": {
     "title": "프로필",
     "editProfile": "프로필 수정",
@@ -447,7 +494,6 @@
     "viewProfile": "프로필 보기",
     "memberSince": "{{date}}부터 함께함"
   },
-
   "skills": {
     "title": "스킬",
     "mySkills": "내 스킬",
@@ -474,7 +520,6 @@
     "skillAdded": "스킬이 추가되었습니다",
     "verificationRequested": "인증이 요청되었습니다"
   },
-
   "career": {
     "title": "경력",
     "careerPath": "경력 경로",
@@ -549,7 +594,6 @@
     "expired": "만료됨",
     "expires": "{{date}} 만료"
   },
-
   "gamification": {
     "level": "레벨 {{level}}",
     "levelShort": "Lv {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "{{date}} 획득",
     "progressToEarn": "획득까지 {{percent}}% 진행"
   },
-
   "notifications": {
     "title": "알림",
     "markAllRead": "모두 읽음 표시",
@@ -605,7 +648,6 @@
     "allCaught": "모든 알림을 확인했습니다!",
     "checkBackLater": "나중에 새 알림을 확인해 주세요"
   },
-
   "settings": {
     "title": "설정",
     "subtitle": "조직 및 계정 관리",
@@ -740,9 +782,23 @@
     "featureAccess": "기능 접근",
     "enableAll": "모두 활성화",
     "disableAll": "모두 비활성화",
-    "aboutEmployeeVisibility": "이 설정은 각 직원에게 표시되는 기능을 제어합니다."
+    "aboutEmployeeVisibility": "이 설정은 각 직원에게 표시되는 기능을 제어합니다.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "업무",
     "myTasks": "내 업무",
@@ -781,7 +837,6 @@
     "takePhoto": "사진 촬영",
     "chooseFromLibrary": "라이브러리에서 선택"
   },
-
   "expenses": {
     "title": "경비",
     "myExpenses": "내 경비",
@@ -808,7 +863,6 @@
     "totalApproved": "승인 합계",
     "totalReimbursed": "정산 합계"
   },
-
   "rewards": {
     "title": "리워드",
     "myRewards": "내 리워드",
@@ -828,7 +882,6 @@
     "validUntil": "{{date}}까지 유효",
     "termsConditions": "이용약관"
   },
-
   "manager": {
     "dashboard": "관리자 대시보드",
     "teamOverview": "팀 개요",
@@ -859,7 +912,6 @@
     "attendance": "출근율",
     "performance": "성과"
   },
-
   "onboarding": {
     "welcome": "Uplift에 오신 것을 환영합니다!",
     "getStarted": "설정을 시작하겠습니다",
@@ -877,7 +929,6 @@
     "allSet": "모든 설정이 완료되었습니다!",
     "startExploring": "근무와 기회를 탐색해 보세요"
   },
-
   "errors": {
     "networkError": "네트워크 오류입니다. 연결을 확인해 주세요.",
     "serverError": "서버 오류입니다. 나중에 다시 시도해 주세요.",
@@ -898,7 +949,6 @@
     "tryAgain": "다시 시도해 주세요",
     "somethingWentWrong": "문제가 발생했습니다"
   },
-
   "activity": {
     "title": "활동 검토",
     "subtitle": "업무 완료, 증빙 업로드, 양식 제출 검토",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "거절 사유를 입력하세요...",
     "confirmRejection": "거절 확인",
     "approve": "승인",
-    "reject": "거절"
+    "reject": "거절",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "알림 환경설정",
     "subtitle": "알림 수신 방법과 시기를 선택하세요",
@@ -973,7 +1025,6 @@
     "disableConfirm": "모든 알림을 비활성화하시겠습니까? 언제든 다시 활성화할 수 있습니다.",
     "disableSuccess": "모든 알림이 비활성화되었습니다."
   },
-
   "employeeDetail": {
     "notFound": "직원을 찾을 수 없습니다",
     "backToEmployees": "직원 목록으로 돌아가기",
@@ -989,7 +1040,6 @@
     "basic": "기초",
     "adding": "추가 중..."
   },
-
   "reports": {
     "title": "리포트",
     "subtitle": "분석, 인사이트, 맞춤 리포트",
@@ -1025,9 +1075,22 @@
     "thisMonth": "이번 달",
     "lastMonth": "지난 달",
     "last7Days": "최근 7일",
-    "last30Days": "최근 30일"
+    "last30Days": "최근 30일",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "메뉴",
     "closeMenu": "메뉴 닫기",
@@ -1041,7 +1104,6 @@
     "required": "필수",
     "optional": "선택사항"
   },
-
   "shiftTemplates": {
     "title": "근무 템플릿",
     "subtitle": "재사용 가능한 근무 패턴 생성",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "개 근무가 생성됩니다",
     "generating": "생성 중..."
   },
-
   "legal": {
-    "lastUpdated": "최종 업데이트"
+    "lastUpdated": "최종 업데이트",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "오전",
     "pm": "오후",
@@ -1120,5 +1289,564 @@
     "october": "10월",
     "november": "11월",
     "december": "12월"
+  },
+  "bulkImport": {
+    "title": "일괄 가져오기",
+    "subtitle": "CSV 또는 Excel 파일에서 데이터 가져오기",
+    "selectType": "유형 선택",
+    "uploadFile": "파일 업로드",
+    "preview": "미리보기",
+    "complete": "완료",
+    "invalidFileType": "CSV 또는 Excel 파일을 업로드해 주세요",
+    "importFailed": "가져오기에 실패했습니다. 다시 시도해 주세요.",
+    "uploadFor": "업로드",
+    "uploadDesc": "파일을 드래그 앤 드롭하거나 클릭하여 선택하세요",
+    "downloadTemplate": "템플릿 다운로드",
+    "dragDrop": "파일을 여기에 드래그 앤 드롭하거나 클릭하여 탐색하세요",
+    "supportedFormats": "지원 형식: CSV, XLSX",
+    "previewData": "데이터 미리보기",
+    "rowsFound": "행이 발견됨",
+    "andMore": "추가로",
+    "moreRows": "행 더...",
+    "importing": "가져오는 중...",
+    "startImport": "가져오기 시작",
+    "importComplete": "가져오기 완료",
+    "successfullyImported": "성공적으로 가져옴",
+    "of": "중",
+    "records": "레코드",
+    "successful": "성공",
+    "failed": "실패",
+    "total": "합계",
+    "importMore": "추가 데이터 가져오기",
+    "type": {
+      "employees": "직원",
+      "employeesDesc": "직원 프로필 가져오기",
+      "shifts": "근무",
+      "shiftsDesc": "근무 스케줄 가져오기",
+      "locations": "근무지",
+      "locationsDesc": "근무지 가져오기",
+      "skills": "스킬",
+      "skillsDesc": "스킬 가져오기"
+    }
+  },
+  "jobs": {
+    "open": "진행 중",
+    "closed": "마감",
+    "applicants": "지원자",
+    "created": "채용 공고가 생성되었습니다",
+    "createError": "채용 공고 생성에 실패했습니다. 다시 시도해 주세요.",
+    "updated": "채용 공고가 업데이트되었습니다",
+    "updateError": "채용 공고 업데이트에 실패했습니다. 다시 시도해 주세요.",
+    "fullTime": "정규직",
+    "partTime": "파트타임",
+    "contract": "계약직",
+    "temporary": "임시직",
+    "subtitle": "사내 경력 기회 관리",
+    "openPositions": "진행 중인 포지션",
+    "closedPositions": "마감됨",
+    "totalApplicants": "전체 지원자",
+    "noJobs": "채용 공고가 없습니다",
+    "viewApplicants": "지원자 보기",
+    "editPosting": "채용 공고 수정",
+    "jobTitle": "직무명",
+    "enterTitle": "직무명을 입력하세요",
+    "selectDepartment": "부서 선택",
+    "selectLocation": "근무지 선택",
+    "salary": "급여 범위",
+    "enterDescription": "직무 설명을 입력하세요",
+    "postJob": "채용 공고 게시",
+    "skillMatch": "스킬 매칭",
+    "noApplicants": "아직 지원자가 없습니다"
+  },
+  "employees": {
+    "searchPlaceholder": "이름 또는 이메일로 검색...",
+    "employees": "직원",
+    "noResults": "조건에 맞는 직원이 없습니다",
+    "details": "직원 상세",
+    "hireDate": "입사일",
+    "assigned": "배정됨",
+    "leaveDetails": "휴가 상세",
+    "until": "까지",
+    "terminationDetails": "퇴사 상세",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "연동 허브",
+    "subtitle": "Uplift를 기존 도구에 연결하세요",
+    "apiFactory": "API 팩토리",
+    "addIntegration": "연동 추가",
+    "configure": "설정",
+    "connect": "연결",
+    "cancel": "취소",
+    "back": "뒤로",
+    "saveChanges": "변경사항 저장",
+    "syncNow": "지금 동기화",
+    "disconnect": "{{name}} 연결 해제",
+    "disconnectConfirm": "{{name}} 연결을 해제하시겠습니까? 모든 동기화가 중지됩니다.",
+    "settingsSaved": "설정이 저장되었습니다",
+    "browseMarketplace": "마켓플레이스 탐색",
+    "loadingIntegrations": "연동 로딩 중...",
+    "noIntegrations": "연결된 연동이 없습니다",
+    "noIntegrationsDesc": "첫 번째 연동을 연결하여 데이터 동기화를 시작하세요",
+    "status": {
+      "beta": "베타",
+      "syncing": "동기화 중..."
+    },
+    "stats": {
+      "connected": "연결됨",
+      "available": "사용 가능",
+      "syncsToday": "오늘 동기화",
+      "errors": "오류",
+      "totalSyncs": "전체 동기화",
+      "lastSync": "마지막 동기화",
+      "records": "레코드"
+    },
+    "tabs": {
+      "connected": "연결됨",
+      "marketplace": "마켓플레이스",
+      "restApi": "REST API",
+      "apiFactory": "API 팩토리",
+      "activityLog": "활동 로그",
+      "settings": "설정",
+      "fieldMapping": "필드 매핑",
+      "syncHistory": "동기화 이력",
+      "webhooks": "웹훅"
+    },
+    "connection": {
+      "lastSync": "마지막 동기화",
+      "frequency": "빈도",
+      "status": "상태",
+      "healthy": "정상",
+      "errors": "오류"
+    },
+    "connectModal": {
+      "title": "{{name}} 연결",
+      "whatItDoes": "이 연동의 기능:",
+      "redirectNotice": "{{name}}으로 리다이렉트됩니다",
+      "authorizeMessage": "로그인하고 Uplift가 데이터에 접근할 수 있도록 승인하세요. 필요한 권한만 요청합니다.",
+      "connectWith": "{{name}}으로 연결",
+      "connecting": "{{name}}에 연결 중...",
+      "completeAuth": "팝업 창에서 승인을 완료해 주세요",
+      "successConnected": "성공적으로 연결되었습니다!",
+      "configureSyncSettings": "아래에서 동기화 설정을 구성하세요.",
+      "completeSetup": "설정 완료",
+      "connected": "{{name}} 연결됨!",
+      "firstSyncSoon": "첫 번째 동기화가 곧 시작됩니다",
+      "hris": {
+        "syncEmployees": "직원 기록 자동 동기화",
+        "importDepts": "부서 및 근무지 가져오기",
+        "syncTimeOff": "휴가 잔여일 동기화 유지"
+      },
+      "payroll": {
+        "exportTimesheets": "승인된 근무 기록 내보내기",
+        "syncPayRates": "급여율 및 초과 근무 동기화",
+        "autoReconciliation": "자동 급여 대사"
+      },
+      "comms": {
+        "shiftReminders": "근무 알림 보내기",
+        "postRecognition": "채널에 칭찬 게시",
+        "swapNotifications": "교환 요청 알림"
+      },
+      "identity": {
+        "sso": "통합 인증(SSO)",
+        "autoProvisioning": "자동 사용자 프로비저닝",
+        "directorySync": "디렉토리 동기화"
+      },
+      "other": {
+        "bidirectional": "양방향 데이터 동기화",
+        "realtimeWebhooks": "웹훅을 통한 실시간 업데이트",
+        "auditTrail": "전체 감사 추적"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} 설정",
+      "connectedSince": "{{date}}부터 연결됨"
+    },
+    "settings": {
+      "autoSync": "자동 동기화",
+      "autoSyncDesc": "스케줄에 따라 자동으로 데이터 동기화",
+      "autoSyncScheduleDesc": "스케줄에 따라 자동 동기화",
+      "syncFrequency": "동기화 빈도",
+      "nextScheduledSync": "다음 예정 동기화",
+      "dataToSync": "동기화할 데이터",
+      "frequency": {
+        "realtime": "실시간",
+        "hourly": "매시간",
+        "daily": "매일",
+        "weekly": "매주"
+      },
+      "data": {
+        "employees": "직원",
+        "timeEntries": "근무 기록",
+        "departments": "부서",
+        "locations": "근무지"
+      }
+    },
+    "mapping": {
+      "description": "필드 매핑은 {{name}}의 데이터가 Uplift 필드에 어떻게 매핑되는지 제어합니다. 변경사항은 다음 동기화에 적용됩니다.",
+      "sourceField": "{{name}} 필드",
+      "upliftField": "Uplift 필드",
+      "status": "상태",
+      "selectField": "필드 선택...",
+      "mapped": "매핑됨",
+      "unmapped": "미매핑"
+    },
+    "history": {
+      "noHistory": "아직 동기화 이력이 없습니다",
+      "sync": "동기화",
+      "duration": "소요 시간",
+      "records": "레코드",
+      "created": "생성됨",
+      "updated": "업데이트됨"
+    },
+    "webhooks": {
+      "description": "웹훅은 Uplift에서 이벤트가 발생할 때 {{name}}에 알립니다",
+      "addWebhook": "웹훅 추가",
+      "noWebhooks": "설정된 웹훅이 없습니다",
+      "createFirst": "첫 번째 웹훅을 만드세요",
+      "active": "활성",
+      "paused": "일시 중지",
+      "sendTestPayload": "테스트 페이로드 전송",
+      "pauseWebhook": "웹훅 일시 중지",
+      "enableWebhook": "웹훅 활성화",
+      "deleteWebhook": "웹훅 삭제",
+      "lastTriggered": "마지막 실행",
+      "never": "없음",
+      "successRate": "성공률",
+      "sendEventsTo": "{{name}}에 이벤트 전송",
+      "endpointUrl": "엔드포인트 URL",
+      "eventsToSend": "전송할 이벤트",
+      "hmacInfo": "모든 웹훅 페이로드에 HMAC-SHA256으로 서명합니다. 서명은",
+      "header": "헤더에 포함됩니다.",
+      "createWebhook": "웹훅 생성",
+      "validationError": "URL을 입력하고 최소 하나의 이벤트를 선택하세요",
+      "createdSuccess": "웹훅이 성공적으로 생성되었습니다!",
+      "testSent": "테스트 페이로드가 전송됨",
+      "testStatus": "상태",
+      "deleteConfirm": "이 웹훅을 삭제하시겠습니까?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "연동 검색...",
+      "allCategories": "전체 카테고리",
+      "infoBannerTitle": "Uplift는 기존 도구와 함께 작동합니다",
+      "infoBannerDesc": "HRIS, 급여, 커뮤니케이션 시스템을 연결하세요. 데이터를 동기화하며 기존 시스템을 대체하지 않습니다.",
+      "noResults": "검색과 일치하는 연동이 없습니다",
+      "dontSeeSystem": "사용 중인 시스템이 보이지 않나요?",
+      "alwaysAdding": "새로운 연동을 지속적으로 추가하고 있습니다. 필요한 것을 알려주세요.",
+      "requestIntegration": "연동 요청"
+    },
+    "activity": {
+      "recentActivity": "최근 연동 활동",
+      "exportLog": "로그 내보내기"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API 팩토리",
+    "subtitle": "코드 없이 맞춤 REST API 연동 구축",
+    "newIntegration": "새 연동",
+    "searchPlaceholder": "연동 검색...",
+    "loadingIntegrations": "연동 로딩 중...",
+    "noIntegrationsFound": "연동을 찾을 수 없습니다",
+    "noIntegrationsYet": "아직 맞춤 연동이 없습니다",
+    "tryDifferentSearch": "다른 검색어를 시도해 보세요",
+    "createFirstDesc": "첫 번째 맞춤 API 연동을 만들어 REST API에 연결하세요",
+    "createIntegration": "연동 생성",
+    "deleteConfirm": "이 연동을 삭제하시겠습니까?",
+    "list": {
+      "eventsCount": "{{count}}개 이벤트",
+      "scheduled": "예약됨",
+      "incomingWebhook": "수신 웹훅",
+      "manual": "수동",
+      "runsCount": "{{count}}회 실행",
+      "errorsCount": "{{count}}개 오류",
+      "disabled": "비활성화됨",
+      "edit": "수정",
+      "test": "테스트",
+      "viewLogs": "로그 보기",
+      "delete": "삭제",
+      "lastRun": "마지막 실행"
+    },
+    "stats": {
+      "totalIntegrations": "전체 연동",
+      "active": "활성",
+      "runsToday": "오늘 실행",
+      "totalErrors": "전체 오류"
+    },
+    "editor": {
+      "editTitle": "API 연동 수정",
+      "createTitle": "API 연동 생성",
+      "subtitle": "맞춤 REST API 연결 구성",
+      "integrationName": "연동 이름",
+      "integrationNamePlaceholder": "예: 급여 시스템에 동기화",
+      "description": "설명",
+      "descriptionPlaceholder": "이 연동의 역할은?",
+      "method": "메서드",
+      "url": "URL",
+      "headers": "헤더",
+      "addHeader": "헤더 추가",
+      "headerName": "헤더 이름",
+      "headerValue": "값",
+      "requestBodyJson": "요청 본문 (JSON)",
+      "useVariables": "변수에는 {{field}}를 사용하세요",
+      "availableVariables": "사용 가능한 변수",
+      "authenticationType": "인증 유형",
+      "apiKeyLocation": "API 키 위치",
+      "header": "헤더",
+      "queryParameter": "쿼리 매개변수",
+      "keyName": "키 이름",
+      "keyNamePlaceholder": "예: X-API-Key",
+      "apiKey": "API 키",
+      "enterApiKey": "API 키를 입력하세요",
+      "bearerToken": "Bearer 토큰",
+      "enterToken": "토큰을 입력하세요",
+      "username": "사용자 이름",
+      "password": "비밀번호",
+      "tokenUrl": "토큰 URL",
+      "clientId": "클라이언트 ID",
+      "clientSecret": "클라이언트 시크릿",
+      "scopes": "범위 (쉼표로 구분)",
+      "whenShouldRun": "이 연동은 언제 실행해야 하나요?",
+      "selectEvents": "이벤트 선택",
+      "schedule": "스케줄",
+      "cronExpression": "CRON 표현식",
+      "scheduleUtcNote": "스케줄은 UTC 시간대를 사용합니다. 현재 CRON",
+      "yourWebhookUrl": "웹훅 URL",
+      "webhookPostNote": "이 URL로 POST 요청을 보내세요. 수신 데이터를 처리하여 Uplift에 매핑합니다.",
+      "fieldMappings": "필드 매핑",
+      "fieldMappingsDesc": "Uplift 필드를 외부 API 필드에 매핑",
+      "addMapping": "매핑 추가",
+      "noFieldMappings": "아직 필드 매핑이 없습니다",
+      "addMappingsDesc": "시스템 간 데이터를 변환하기 위한 매핑을 추가하세요",
+      "addFirstMapping": "첫 번째 매핑 추가",
+      "selectUpliftField": "Uplift 필드 선택...",
+      "externalFieldName": "외부 필드 이름",
+      "noTransform": "변환 없음",
+      "dateIso": "날짜 → ISO",
+      "dateUk": "날짜 → UK 형식",
+      "boolYn": "불리언 → Y/N",
+      "fieldMappingTip": "필드 매핑은 요청 본문을 자동으로 구성하는 데 사용됩니다. 맞춤 JSON 구조에는 요청 탭에서 {{field}} 구문을 사용할 수도 있습니다.",
+      "testConfiguration": "구성 테스트",
+      "testDescription": "구성을 확인하기 위해 테스트 요청을 보냅니다. 샘플 데이터를 사용합니다.",
+      "testing": "테스트 중...",
+      "sendTestRequest": "테스트 요청 보내기",
+      "success": "성공",
+      "failed": "실패",
+      "status": "상태",
+      "time": "시간",
+      "response": "응답",
+      "enableIntegration": "연동 활성화",
+      "cancel": "취소",
+      "saveChanges": "변경사항 저장",
+      "createIntegration": "연동 생성",
+      "tabs": {
+        "request": "요청",
+        "authentication": "인증",
+        "trigger": "트리거",
+        "fieldMapping": "필드 매핑",
+        "test": "테스트"
+      }
+    },
+    "logs": {
+      "executionLogs": "실행 로그",
+      "export": "내보내기",
+      "noData": "아직 데이터가 없습니다. 연동이 실행되면 실행 로그가 여기에 표시됩니다.",
+      "unknown": "알 수 없음",
+      "error": "오류"
+    },
+    "helpBanner": {
+      "title": "연동 구축에 도움이 필요하신가요?",
+      "description": "예제는 API 문서를 확인하거나 복잡한 경우 지원팀에 문의하세요."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API 키",
+    "subtitle": "애플리케이션에서 Uplift 데이터에 접근하기 위한 API 키 생성",
+    "apiDocs": "API 문서",
+    "createKey": "키 생성",
+    "createApiKey": "API 키 생성",
+    "loadingKeys": "API 키 로딩 중...",
+    "loadError": "API 키 로드에 실패했습니다.",
+    "noKeysYet": "아직 API 키가 없습니다",
+    "createFirstDesc": "첫 번째 API 키를 생성하여 Uplift와 연동을 시작하세요",
+    "retry": "다시 시도",
+    "revokeConfirm": "API 키 \"{{name}}\"을(를) 해지하시겠습니까? 이 작업은 취소할 수 없습니다.",
+    "regenerateConfirm": "\"{{name}}\"의 비밀 키를 재생성하시겠습니까? 기존 비밀 키는 즉시 작동하지 않습니다.",
+    "regenerateSuccess": "새 비밀 키: {{secret}}\n\n지금 저장하세요 - 다시 볼 수 없습니다!",
+    "regenerateError": "비밀 키 재생성 실패: {{message}}",
+    "usageStats": "{{name}}의 사용 통계:\n\n총 요청: {{requests}}\n마지막 사용: {{lastUsed}}",
+    "card": {
+      "noDescription": "설명 없음",
+      "expired": "만료됨",
+      "active": "활성",
+      "inactive": "비활성",
+      "keyId": "키 ID",
+      "requests": "요청",
+      "lastUsed": "마지막 사용",
+      "never": "없음",
+      "rateLimit": "속도 제한",
+      "standard": "표준",
+      "hideDetails": "상세 숨기기",
+      "showDetails": "상세 보기",
+      "scopes": "범위",
+      "created": "생성됨",
+      "expires": "만료",
+      "usage": "사용량",
+      "regenerate": "재생성",
+      "revoke": "해지"
+    },
+    "create": {
+      "keyCreatedTitle": "API 키 생성됨",
+      "createTitle": "API 키 생성",
+      "keyCreatedSuccess": "API 키가 성공적으로 생성되었습니다",
+      "copySecretWarning": "비밀 키를 지금 복사하세요. 다시 볼 수 없습니다!",
+      "keyIdLabel": "키 ID",
+      "secretKeyLabel": "비밀 키",
+      "fullApiKeyLabel": "전체 API 키 (Authorization 헤더용)",
+      "fullKeyLabel": "전체 키",
+      "authHeaderNote": "Authorization 헤더에 사용하세요",
+      "done": "완료",
+      "keyName": "키 이름",
+      "keyNamePlaceholder": "예: 프로덕션 API 키",
+      "description": "설명",
+      "descriptionPlaceholder": "이 키의 용도는?",
+      "permissions": "권한",
+      "rateLimit": "속도 제한",
+      "expiration": "만료",
+      "neverExpires": "만료 없음",
+      "thirtyDays": "30일",
+      "ninetyDays": "90일",
+      "oneYear": "1년",
+      "createError": "API 키 생성에 실패했습니다. 다시 시도해 주세요.",
+      "cancel": "취소",
+      "createKey": "키 생성"
+    },
+    "docs": {
+      "quickStart": "빠른 시작",
+      "authentication": "인증",
+      "exampleResponse": "응답 예시",
+      "viewFullDocs": "전체 문서 보기",
+      "downloadSpec": "OpenAPI 사양 다운로드"
+    },
+    "securityBanner": {
+      "title": "API 키 보안",
+      "description": "API 키를 안전하게 보관하세요. 클라이언트 측 코드나 공개 저장소에 노출하지 마세요. 키가 유출된 경우 즉시 해지하고 새 키를 만드세요."
+    }
+  },
+  "orgOnboarding": {
+    "title": "조직 설정",
+    "subtitle": "조직을 구성해 보겠습니다",
+    "steps": {
+      "orgDetails": "조직 정보",
+      "locations": "근무지",
+      "departments": "부서",
+      "roles": "역할 및 권한",
+      "review": "검토 및 시작"
+    },
+    "orgDetails": {
+      "companyName": "회사명",
+      "companyNamePlaceholder": "예: 주식회사 에이스",
+      "tradingName": "상호명 (선택사항)",
+      "tradingNamePlaceholder": "공개 표시 이름",
+      "industry": "산업",
+      "selectIndustry": "산업 선택",
+      "companySize": "회사 규모",
+      "selectSize": "규모 선택",
+      "timezone": "기본 시간대",
+      "currency": "기본 통화",
+      "weekStart": "주 시작 요일",
+      "logo": "회사 로고",
+      "uploadLogo": "로고 업로드",
+      "uploadLogoDesc": "PNG 또는 SVG, 200×200px 권장"
+    },
+    "locations": {
+      "title": "근무지",
+      "subtitle": "사무실, 사이트 또는 지점을 추가하세요",
+      "addLocation": "근무지 추가",
+      "name": "근무지 이름",
+      "namePlaceholder": "예: 본사",
+      "address": "주소",
+      "addressPlaceholder": "전체 주소",
+      "timezone": "시간대",
+      "noLocations": "아직 근무지가 추가되지 않았습니다",
+      "addFirst": "시작하려면 첫 번째 근무지를 추가하세요"
+    },
+    "departments": {
+      "title": "부서",
+      "subtitle": "부서 구조를 설정하세요",
+      "addDepartment": "부서 추가",
+      "name": "부서명",
+      "namePlaceholder": "예: 엔지니어링",
+      "parentDepartment": "상위 부서 (선택사항)",
+      "none": "없음 (최상위)",
+      "manager": "부서 관리자",
+      "selectManager": "관리자 선택",
+      "noDepartments": "아직 부서가 추가되지 않았습니다",
+      "addFirst": "첫 번째 부서를 추가하세요"
+    },
+    "roles": {
+      "title": "역할 및 권한",
+      "subtitle": "팀의 접근 수준을 구성하세요",
+      "addRole": "맞춤 역할 추가",
+      "builtIn": "기본 제공",
+      "custom": "맞춤",
+      "name": "역할 이름",
+      "namePlaceholder": "예: 교대 관리자",
+      "description": "설명",
+      "descriptionPlaceholder": "이 역할은 무엇을 할 수 있나요?",
+      "permissions": "권한",
+      "permissionGroups": {
+        "scheduling": "스케줄링",
+        "timeTracking": "근태 관리",
+        "employees": "직원",
+        "reports": "리포트",
+        "settings": "설정"
+      }
+    },
+    "review": {
+      "title": "검토 및 시작",
+      "subtitle": "시작하기 전에 모든 내용을 확인하세요",
+      "orgInfo": "조직 정보",
+      "locationsCount": "{{count}}개 근무지 구성됨",
+      "departmentsCount": "{{count}}개 부서 구성됨",
+      "rolesCount": "{{count}}개 역할 구성됨",
+      "allLooksGood": "모든 준비가 완료되었습니다!",
+      "launch": "조직 시작",
+      "launchDesc": "조직이 활성화되고 추가된 팀원에게 초대가 발송됩니다."
+    },
+    "navigation": {
+      "back": "뒤로",
+      "next": "다음",
+      "skip": "나중에 하기",
+      "finish": "설정 완료"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

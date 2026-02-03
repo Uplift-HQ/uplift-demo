@@ -18,7 +18,7 @@
     "teamHealth": "Saħħa tat-Tim",
     "retentionRate": "Rata ta' Żamma",
     "newHires": "Impjegati Ġodda",
-    "onboarding": "Onboarding",
+    "onboarding": "Introduzzjoni",
     "avgTenure": "Tenure Medju",
     "recognition": "Rikonoxximent",
     "giveRecognition": "Agħti Rikonoxximent",
@@ -54,12 +54,11 @@
     "viewMyCareer": "Ara l-Karriera Tiegħi",
     "timeOffBalance": "Bilanċ tal-Leave"
   },
-
   "nav": {
     "dashboard": "Dashboard",
     "employees": "Impjegati",
     "schedule": "Skeda",
-    "templates": "Templates",
+    "templates": "Mudelli",
     "timeTracking": "Tracking taż-Żmien",
     "timeOff": "Leave",
     "locations": "Postijiet",
@@ -150,9 +149,21 @@
     "active": "Attiv",
     "inactive": "Mhux attiv",
     "enabled": "Attivat",
-    "disabled": "Diżattivat"
+    "disabled": "Diżattivat",
+    "approveSelected": "Approva l-Magħżula",
+    "rejectSelected": "Irrifjuta l-Magħżula",
+    "clearSelection": "Imsaħ",
+    "showing": "Qed juri",
+    "of": "minn",
+    "page": "Paġna",
+    "previous": "Ta' Qabel",
+    "terminated": "Terminat",
+    "sunday": "Ħad",
+    "monday": "Tne",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Idħol",
     "logout": "Oħroġ",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Biex tikseb aċċess għal Uplift, jekk jogħġbok ikkuntattja l-maniġer jew id-dipartiment tar-riżorsi umani tiegħek. Huma jibagħtulek link ta' stedina.",
     "enterEmailPassword": "Jekk jogħġbok daħħal l-email u l-password",
     "loginFailed": "Id-Dħul Falla",
-    "demoAccounts": "Kontijiet Demo:",
-    "demoWorker": "Ħaddiem: worker@uplift.work / Demo123!",
-    "demoManager": "Maniġer: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Awtentikazzjoni b'Żewġ Fatturi",
     "enterMfaCode": "Daħħal il-kodiċi mill-app ta' awtentikazzjoni tiegħek",
     "verificationCode": "Kodiċi ta' Verifika",
@@ -194,9 +202,16 @@
     "invalidCode": "Kodiċi invalidu",
     "allRightsReserved": "Drittijiet kollha riżervati",
     "termsOfService": "Termini tas-Servizz",
-    "privacyPolicy": "Politika tal-Privatezza"
+    "privacyPolicy": "Politika tal-Privatezza",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Dar",
     "schedule": "Skeda",
@@ -214,7 +229,6 @@
     "leaderboard": "Klassifika",
     "badges": "Badges"
   },
-
   "home": {
     "welcome": "Merħba lura, {{name}}!",
     "welcomeBack": "Merħba lura,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Opportunitajiet Miftuħa",
     "noOpportunities": "L-ebda opportunitajiet li jaqblu mal-ħiliet tiegħek bħalissa"
   },
-
   "schedule": {
     "title": "L-Iskeda Tiegħi",
     "weekView": "Ġimgħa",
@@ -293,9 +306,22 @@
     "yourShift": "Ix-Xift Tiegħek",
     "theirShift": "Ix-Xift Tagħhom",
     "sendRequest": "Ibgħat Talba",
-    "cancelSwap": "Ikkanċella l-Bdil"
+    "cancelSwap": "Ikkanċella l-Bdil",
+    "allLocations": "Postijiet Kollha",
+    "tuesday": "Tli",
+    "wednesday": "Erb",
+    "thursday": "Ħam",
+    "friday": "Ġim",
+    "saturday": "Sib",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Tracking taż-Żmien",
     "clockedIn": "Dħalt",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Tektek biex tidħol",
     "onBreakSince": "Fuq pawża minn {{time}}",
     "workingSince": "Qed taħdem minn {{time}}",
-    "shiftEnded": "Ix-xift spiċċa"
+    "shiftEnded": "Ix-xift spiċċa",
+    "entriesApproved": "{{count}} entrati approvati",
+    "approveError": "Ma rnexxilux japprova l-entrati. Erġa' pprova.",
+    "entriesRejected": "{{count}} entrati miċħuda",
+    "rejectError": "Ma rnexxilux jiċħad l-entrati. Erġa' pprova.",
+    "clockInError": "Ma rnexxilux tidħol. Erġa' pprova.",
+    "clockOutError": "Ma rnexxilux toħroġ. Erġa' pprova.",
+    "breakError": "Ma rnexxilux taġġorna l-istatus tal-pawża. Erġa' pprova.",
+    "noPending": "L-ebda entrati pendenti biex tirrevedi",
+    "noEntries": "L-ebda entrati taż-żmien misjuba",
+    "history": "Storja",
+    "managerSubtitle": "Irrevedi u approva timesheets",
+    "employeeSubtitle": "Issegwi l-ħin tax-xogħol tiegħek",
+    "clockIn": "Idħol",
+    "clockOut": "Oħroġ",
+    "startBreak": "Ibda Pawża",
+    "endBreak": "Temm Pawża",
+    "totalHours": "Sigħat Totali"
   },
-
   "timeOff": {
     "title": "Leave",
     "request": "Itlob Leave",
@@ -359,9 +401,16 @@
     "selectDates": "Agħżel id-Dati",
     "selectType": "Agħżel it-Tip",
     "addNotes": "Żid Noti (Mhux obbligatorju)",
-    "reviewRequest": "Irrevedi t-Talba"
+    "reviewRequest": "Irrevedi t-Talba",
+    "oneDay": "jum wieħed",
+    "days": "ġranet",
+    "dates": "Dati",
+    "duration": "Tul",
+    "noRequests": "L-ebda talbiet misjuba",
+    "requestDetails": "Dettalji tat-Talba għal-Leave",
+    "noReason": "L-ebda raġuni mogħtija",
+    "submitted": "Sottomessa"
   },
-
   "feed": {
     "title": "Feed",
     "newPost": "Post Ġdid",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}}s ilu",
     "daysAgo": "{{count}}ġ ilu"
   },
-
   "messages": {
     "title": "Messaġġi",
     "newMessage": "Messaġġ Ġdid",
@@ -419,7 +467,6 @@
     "translateMessage": "Ittraduċi",
     "showOriginal": "Uri l-Oriġinal"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Editja l-Profil",
@@ -447,7 +494,6 @@
     "viewProfile": "Ara l-Profil",
     "memberSince": "Membru minn {{date}}"
   },
-
   "skills": {
     "title": "Ħiliet",
     "mySkills": "Il-Ħiliet Tiegħi",
@@ -474,7 +520,6 @@
     "skillAdded": "Ħila miżjuda b'suċċess",
     "verificationRequested": "Verifika mitluba"
   },
-
   "career": {
     "title": "Karriera",
     "careerPath": "Triq tal-Karriera",
@@ -549,7 +594,6 @@
     "expired": "Skadut",
     "expires": "Jiskadi {{date}}"
   },
-
   "gamification": {
     "level": "Livell {{level}}",
     "levelShort": "Liv {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Miksub fi {{date}}",
     "progressToEarn": "{{percent}}% progress biex tikseb"
   },
-
   "notifications": {
     "title": "Notifiki",
     "markAllRead": "Immarka Kollox Bħala Moqri",
@@ -605,7 +648,6 @@
     "allCaught": "M'hawnx aktar notifiki!",
     "checkBackLater": "Erġa' iċċekkja aktar tard għal notifiki ġodda"
   },
-
   "settings": {
     "title": "Settings",
     "subtitle": "Immaniġġja l-organizzazzjoni u l-kont tiegħek",
@@ -740,9 +782,23 @@
     "featureAccess": "Aċċess għall-Features",
     "enableAll": "Attiva Kollox",
     "disableAll": "Diżattiva Kollox",
-    "aboutEmployeeVisibility": "Dawn is-settings jikkontrollaw liema features huma viżibbli għal kull impjegat."
+    "aboutEmployeeVisibility": "Dawn is-settings jikkontrollaw liema features huma viżibbli għal kull impjegat.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Kompiti",
     "myTasks": "Il-Kompiti Tiegħi",
@@ -781,7 +837,6 @@
     "takePhoto": "Ħu Ritratt",
     "chooseFromLibrary": "Agħżel mill-Librerija"
   },
-
   "expenses": {
     "title": "Spejjeż",
     "myExpenses": "L-Ispejjeż Tiegħi",
@@ -808,7 +863,6 @@
     "totalApproved": "Total Approvati",
     "totalReimbursed": "Total Rimborżati"
   },
-
   "rewards": {
     "title": "Premjijiet",
     "myRewards": "Il-Premjijiet Tiegħi",
@@ -828,7 +882,6 @@
     "validUntil": "Validu sa {{date}}",
     "termsConditions": "Termini u Kundizzjonijiet"
   },
-
   "manager": {
     "dashboard": "Dashboard tal-Maniġer",
     "teamOverview": "Ħarsa Ġenerali tat-Tim",
@@ -859,7 +912,6 @@
     "attendance": "Attendenza",
     "performance": "Prestazzjoni"
   },
-
   "onboarding": {
     "welcome": "Merħba f'Uplift!",
     "getStarted": "Ejja nħejjuk",
@@ -877,7 +929,6 @@
     "allSet": "Kollu Lest!",
     "startExploring": "Ibda esplora xiftijiet u opportunitajiet"
   },
-
   "errors": {
     "networkError": "Żball tan-network. Jekk jogħġbok iċċekkja l-konnessjoni tiegħek.",
     "serverError": "Żball tas-server. Jekk jogħġbok erġa' pprova aktar tard.",
@@ -898,7 +949,6 @@
     "tryAgain": "Jekk jogħġbok erġa' pprova",
     "somethingWentWrong": "Xi ħaġa marret ħażin"
   },
-
   "activity": {
     "title": "Reviżjoni tal-Attività",
     "subtitle": "Irrevedi kompletazzjonijiet ta' kompiti, uploads ta' provi, u sottomissjonijiet ta' formoli",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Daħħal ir-raġuni għaċ-ċaħda...",
     "confirmRejection": "Ikkonferma ċ-Ċaħda",
     "approve": "Approva",
-    "reject": "Irrifjuta"
+    "reject": "Irrifjuta",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Preferenzi tan-Notifiki",
     "subtitle": "Agħżel kif u meta tirċievi notifiki",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Żgur li trid tiddiżattiva n-notifiki kollha? Tista' terġa' tattivahom meta trid.",
     "disableSuccess": "In-notifiki kollha ġew diżattivati."
   },
-
   "employeeDetail": {
     "notFound": "Impjegat ma nstabx",
     "backToEmployees": "Lura għall-Impjegati",
@@ -989,7 +1040,6 @@
     "basic": "Bażiku",
     "adding": "Qed iżid..."
   },
-
   "reports": {
     "title": "Rapporti",
     "subtitle": "Analitika, insights, u rapporti personalizzati",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Dan ix-Xahar",
     "lastMonth": "Ix-Xahar li Għadda",
     "last7Days": "L-Aħħar 7 Ijiem",
-    "last30Days": "L-Aħħar 30 Jum"
+    "last30Days": "L-Aħħar 30 Jum",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Menu",
     "closeMenu": "Agħlaq il-menu",
@@ -1041,7 +1104,6 @@
     "required": "Meħtieġ",
     "optional": "Mhux obbligatorju"
   },
-
   "shiftTemplates": {
     "title": "Templates tax-Xiftijiet",
     "subtitle": "Oħloq patterns ta' xiftijiet li jistgħu jerġgħu jintużaw",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "xiftijiet",
     "generating": "Qed jiġġenera..."
   },
-
   "legal": {
-    "lastUpdated": "L-aħħar aġġornat"
+    "lastUpdated": "L-aħħar aġġornat",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1289,564 @@
     "october": "Ottubru",
     "november": "Novembru",
     "december": "Diċembru"
+  },
+  "bulkImport": {
+    "title": "Importazzjoni Massiva",
+    "subtitle": "Importa data minn fajls CSV jew Excel",
+    "selectType": "Agħżel it-Tip",
+    "uploadFile": "Ittella' Fajl",
+    "preview": "Ħarsa Preliminari",
+    "complete": "Lest",
+    "invalidFileType": "Jekk jogħġbok ittella' fajl CSV jew Excel",
+    "importFailed": "L-importazzjoni falliet. Erġa' pprova.",
+    "uploadFor": "Ittella'",
+    "uploadDesc": "Ċaqlaq u erħi jew ikklikkja biex tagħżel fajl",
+    "downloadTemplate": "Niżżel Template",
+    "dragDrop": "Ċaqlaq u erħi l-fajl tiegħek hawn, jew ikklikkja biex tibrowżja",
+    "supportedFormats": "Formati appoġġjati: CSV, XLSX",
+    "previewData": "Ħarsa Preliminari tad-Data",
+    "rowsFound": "ringi misjuba fi",
+    "andMore": "U",
+    "moreRows": "ringi oħra...",
+    "importing": "Qed jimporta...",
+    "startImport": "Ibda l-Importazzjoni",
+    "importComplete": "Importazzjoni Lesta",
+    "successfullyImported": "Importati b'suċċess",
+    "of": "minn",
+    "records": "rekordi",
+    "successful": "B'suċċess",
+    "failed": "Fallew",
+    "total": "Total",
+    "importMore": "Importa Aktar Data",
+    "type": {
+      "employees": "Impjegati",
+      "employeesDesc": "Importa profili tal-impjegati",
+      "shifts": "Xiftijiet",
+      "shiftsDesc": "Importa skedi tax-xiftijiet",
+      "locations": "Postijiet",
+      "locationsDesc": "Importa postijiet",
+      "skills": "Ħiliet",
+      "skillsDesc": "Importa ħiliet"
+    }
+  },
+  "jobs": {
+    "open": "Miftuħ",
+    "closed": "Magħluq",
+    "applicants": "Applikanti",
+    "created": "Post tax-xogħol maħluq b'suċċess",
+    "createError": "Ma rnexxilux joħloq il-post tax-xogħol. Erġa' pprova.",
+    "updated": "Post tax-xogħol aġġornat b'suċċess",
+    "updateError": "Ma rnexxilux jaġġorna l-post tax-xogħol. Erġa' pprova.",
+    "fullTime": "Full Time",
+    "partTime": "Part Time",
+    "contract": "Kuntratt",
+    "temporary": "Temporanju",
+    "subtitle": "Immaniġġja opportunitajiet ta' karriera interni",
+    "openPositions": "Pożizzjonijiet Miftuħa",
+    "closedPositions": "Magħluqa",
+    "totalApplicants": "Applikanti Totali",
+    "noJobs": "L-ebda postijiet tax-xogħol misjuba",
+    "viewApplicants": "Ara l-Applikanti",
+    "editPosting": "Editja l-Post tax-Xogħol",
+    "jobTitle": "Titlu tax-Xogħol",
+    "enterTitle": "Daħħal it-titlu",
+    "selectDepartment": "Agħżel id-dipartiment",
+    "selectLocation": "Agħżel il-post",
+    "salary": "Firxa tas-Salarju",
+    "enterDescription": "Daħħal id-deskrizzjoni tax-xogħol",
+    "postJob": "Ippowstja Xogħol",
+    "skillMatch": "tqabbil tal-ħiliet",
+    "noApplicants": "Għad m'hawn applikanti"
+  },
+  "employees": {
+    "searchPlaceholder": "Fittex bl-isem jew email...",
+    "employees": "impjegati",
+    "noResults": "L-ebda impjegati misjuba li jaqblu mal-kriterji tiegħek",
+    "details": "Dettalji tal-Impjegat",
+    "hireDate": "Data tal-Ingaġġ",
+    "assigned": "assenjati",
+    "leaveDetails": "Dettalji tal-Leave",
+    "until": "Sa",
+    "terminationDetails": "Dettalji tat-Terminazzjoni",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Ħub tal-Integrazzjonijiet",
+    "subtitle": "Qabbad Uplift mal-għodda eżistenti tiegħek",
+    "apiFactory": "Fabbrika tal-API",
+    "addIntegration": "Żid Integrazzjoni",
+    "configure": "Ikkonfigura",
+    "connect": "Qabbad",
+    "cancel": "Ikkanċella",
+    "back": "Lura",
+    "saveChanges": "Issejvja l-Bidliet",
+    "syncNow": "Issinkronizza Issa",
+    "disconnect": "Aqta' {{name}}",
+    "disconnectConfirm": "Aqta' {{name}}? Dan se jwaqqaf is-sinkronizzazzjonijiet kollha.",
+    "settingsSaved": "Settings issejvjati",
+    "browseMarketplace": "Ibrowżja s-Suq",
+    "loadingIntegrations": "Qed jitgħabbew l-integrazzjonijiet...",
+    "noIntegrations": "L-ebda integrazzjonijiet ikkonnettjati",
+    "noIntegrationsDesc": "Qabbad l-ewwel integrazzjoni tiegħek biex tibda tissinkronizza d-data",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Qed jissinkronizza..."
+    },
+    "stats": {
+      "connected": "Ikkonnettjati",
+      "available": "Disponibbli",
+      "syncsToday": "Syncs Illum",
+      "errors": "Żbalji",
+      "totalSyncs": "Syncs Totali",
+      "lastSync": "L-Aħħar Sync",
+      "records": "rekordi"
+    },
+    "tabs": {
+      "connected": "Ikkonnettjati",
+      "marketplace": "Suq",
+      "restApi": "REST API",
+      "apiFactory": "Fabbrika tal-API",
+      "activityLog": "Log tal-Attività",
+      "settings": "Settings",
+      "fieldMapping": "Mapping tal-Fields",
+      "syncHistory": "Storja tas-Sync",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "L-Aħħar Sync",
+      "frequency": "Frekwenza",
+      "status": "Status",
+      "healthy": "Tajjeb",
+      "errors": "żbalji"
+    },
+    "connectModal": {
+      "title": "Qabbad {{name}}",
+      "whatItDoes": "X'tagħmel din l-integrazzjoni:",
+      "redirectNotice": "Se tiġi ridirezzjonat lejn {{name}}",
+      "authorizeMessage": "Idħol u awtorizza Uplift jaċċessa d-data tiegħek. Nitolbu biss il-permessi meħtieġa.",
+      "connectWith": "Qabbad ma' {{name}}",
+      "connecting": "Qed jiqabbad ma' {{name}}...",
+      "completeAuth": "Jekk jogħġbok lesti l-awtorizzazzjoni fit-tieqa pop-up",
+      "successConnected": "Ikkonnettjat b'suċċess!",
+      "configureSyncSettings": "Ikkonfigura s-settings tas-sync tiegħek hawn taħt.",
+      "completeSetup": "Lesti l-Issettjar",
+      "connected": "{{name}} Ikkonnettjat!",
+      "firstSyncSoon": "L-ewwel sync tiegħek dalwaqt tibda",
+      "hris": {
+        "syncEmployees": "Issinkronizza rekordi tal-impjegati awtomatikament",
+        "importDepts": "Importa dipartimenti u postijiet",
+        "syncTimeOff": "Żomm bilanċi tal-leave aġġornati"
+      },
+      "payroll": {
+        "exportTimesheets": "Esportja timesheets approvati",
+        "syncPayRates": "Issinkronizza rati tal-paga u overtime",
+        "autoReconciliation": "Rikonċiljazzjoni tal-payroll awtomatika"
+      },
+      "comms": {
+        "shiftReminders": "Ibgħat tfakkiriet tax-xiftijiet",
+        "postRecognition": "Ippowstja rikonoxximent fil-kanali",
+        "swapNotifications": "Notifiki ta' talbiet għal bdil"
+      },
+      "identity": {
+        "sso": "Single sign-on (SSO)",
+        "autoProvisioning": "Provvista awtomatika tal-utenti",
+        "directorySync": "Sinkronizzazzjoni tad-direttorju"
+      },
+      "other": {
+        "bidirectional": "Sinkronizzazzjoni tad-data f'żewġ direzzjonijiet",
+        "realtimeWebhooks": "Aġġornamenti f'ħin reali permezz ta' webhooks",
+        "auditTrail": "Audit trail sħiħ"
+      }
+    },
+    "configureModal": {
+      "title": "Settings ta' {{name}}",
+      "connectedSince": "Ikkonnettjat {{date}}"
+    },
+    "settings": {
+      "autoSync": "Auto Sync",
+      "autoSyncDesc": "Issinkronizza d-data awtomatikament fuq skeda",
+      "autoSyncScheduleDesc": "Issinkronizza awtomatikament fuq skeda",
+      "syncFrequency": "Frekwenza tas-Sync",
+      "nextScheduledSync": "Sync li Jmiss Skedat",
+      "dataToSync": "Data biex Tissinkronizza",
+      "frequency": {
+        "realtime": "F'ħin reali",
+        "hourly": "Kull siegħa",
+        "daily": "Kuljum",
+        "weekly": "Kull ġimgħa"
+      },
+      "data": {
+        "employees": "Impjegati",
+        "timeEntries": "Entrati taż-Żmien",
+        "departments": "Dipartimenti",
+        "locations": "Postijiet"
+      }
+    },
+    "mapping": {
+      "description": "Il-mapping tal-fields jikkontrolla kif id-data minn {{name}} tiġi mmappjata għall-fields ta' Uplift. Il-bidliet jieħdu effett fis-sync li jmiss.",
+      "sourceField": "Field ta' {{name}}",
+      "upliftField": "Field ta' Uplift",
+      "status": "Status",
+      "selectField": "Agħżel field...",
+      "mapped": "Immappjat",
+      "unmapped": "Mhux immappjat"
+    },
+    "history": {
+      "noHistory": "Għad m'hawn storja ta' sync",
+      "sync": "Sync",
+      "duration": "Tul",
+      "records": "Rekordi",
+      "created": "Maħluqa",
+      "updated": "Aġġornati"
+    },
+    "webhooks": {
+      "description": "Webhooks jinnotifikaw {{name}} meta jiġru events f'Uplift",
+      "addWebhook": "Żid Webhook",
+      "noWebhooks": "L-ebda webhooks ikkonfigurati",
+      "createFirst": "Oħloq l-ewwel webhook tiegħek",
+      "active": "Attiv",
+      "paused": "Ippawżat",
+      "sendTestPayload": "Ibgħat test payload",
+      "pauseWebhook": "Ippawża l-webhook",
+      "enableWebhook": "Attiva l-webhook",
+      "deleteWebhook": "Ħassar il-webhook",
+      "lastTriggered": "L-aħħar triggerjat",
+      "never": "Qatt",
+      "successRate": "Rata ta' suċċess",
+      "sendEventsTo": "Ibgħat events lil {{name}}",
+      "endpointUrl": "URL tal-Endpoint",
+      "eventsToSend": "Events biex Tibgħat",
+      "hmacInfo": "Niffirmaw il-payloads tal-webhooks kollha b'HMAC-SHA256. Tirċievi l-firma fil-",
+      "header": "header.",
+      "createWebhook": "Oħloq Webhook",
+      "validationError": "Jekk jogħġbok daħħal URL u agħżel mill-inqas event wieħed",
+      "createdSuccess": "Webhook maħluq b'suċċess!",
+      "testSent": "Test payload mibgħut lil",
+      "testStatus": "Status",
+      "deleteConfirm": "Ħassar dan il-webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Fittex integrazzjonijiet...",
+      "allCategories": "Kategoriji Kollha",
+      "infoBannerTitle": "Uplift jaħdem mal-għodda eżistenti tiegħek",
+      "infoBannerDesc": "Qabbad is-sistemi HRIS, payroll, u komunikazzjoni tiegħek. Aħna nissinkronizzaw id-data - ma nibdlux is-sistemi tiegħek.",
+      "noResults": "L-ebda integrazzjonijiet li jaqblu mat-tfittxija tiegħek",
+      "dontSeeSystem": "Ma tarax is-sistema tiegħek?",
+      "alwaysAdding": "Dejjem qed inżidu integrazzjonijiet ġodda. Għidilna x'għandek bżonn.",
+      "requestIntegration": "Itlob Integrazzjoni"
+    },
+    "activity": {
+      "recentActivity": "Attività reċenti tal-integrazzjonijiet",
+      "exportLog": "Esportja l-Log"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "Fabbrika tal-API",
+    "subtitle": "Ibni integrazzjonijiet REST API personalizzati mingħajr ma tikteb kodiċi",
+    "newIntegration": "Integrazzjoni Ġdida",
+    "searchPlaceholder": "Fittex integrazzjonijiet...",
+    "loadingIntegrations": "Qed jitgħabbew l-integrazzjonijiet...",
+    "noIntegrationsFound": "L-ebda integrazzjonijiet misjuba",
+    "noIntegrationsYet": "Għad m'hawn integrazzjonijiet personalizzati",
+    "tryDifferentSearch": "Ipprova terminu ta' tfittxija differenti",
+    "createFirstDesc": "Oħloq l-ewwel integrazzjoni API personalizzata tiegħek biex tqabbad ma' kwalunkwe REST API",
+    "createIntegration": "Oħloq Integrazzjoni",
+    "deleteConfirm": "Żgur li trid tħassar din l-integrazzjoni?",
+    "list": {
+      "eventsCount": "{{count}} events",
+      "scheduled": "Skedat",
+      "incomingWebhook": "Webhook dieħel",
+      "manual": "Manwali",
+      "runsCount": "{{count}} runs",
+      "errorsCount": "{{count}} żbalji",
+      "disabled": "Diżattivat",
+      "edit": "Editja",
+      "test": "Ittestja",
+      "viewLogs": "Ara l-Logs",
+      "delete": "Ħassar",
+      "lastRun": "L-aħħar run"
+    },
+    "stats": {
+      "totalIntegrations": "Integrazzjonijiet Totali",
+      "active": "Attivi",
+      "runsToday": "Runs Illum",
+      "totalErrors": "Żbalji Totali"
+    },
+    "editor": {
+      "editTitle": "Editja Integrazzjoni API",
+      "createTitle": "Oħloq Integrazzjoni API",
+      "subtitle": "Ikkonfigura l-konnessjoni REST API personalizzata tiegħek",
+      "integrationName": "Isem tal-Integrazzjoni",
+      "integrationNamePlaceholder": "eż., Issinkronizza mas-Sistema tal-Payroll",
+      "description": "Deskrizzjoni",
+      "descriptionPlaceholder": "X'tagħmel din l-integrazzjoni?",
+      "method": "Metodu",
+      "url": "URL",
+      "headers": "Headers",
+      "addHeader": "Żid Header",
+      "headerName": "Isem tal-header",
+      "headerValue": "Valur",
+      "requestBodyJson": "Request Body (JSON)",
+      "useVariables": "Uża {{field}} għal varjabbli",
+      "availableVariables": "Varjabbli disponibbli",
+      "authenticationType": "Tip ta' Awtentikazzjoni",
+      "apiKeyLocation": "Post tal-API Key",
+      "header": "Header",
+      "queryParameter": "Query Parameter",
+      "keyName": "Isem tal-Key",
+      "keyNamePlaceholder": "eż., X-API-Key",
+      "apiKey": "API Key",
+      "enterApiKey": "Daħħal l-API key tiegħek",
+      "bearerToken": "Bearer Token",
+      "enterToken": "Daħħal it-token tiegħek",
+      "username": "Username",
+      "password": "Password",
+      "tokenUrl": "Token URL",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scopes": "Scopes (separati b'virgola)",
+      "whenShouldRun": "Meta għandha taħdem din l-integrazzjoni?",
+      "selectEvents": "Agħżel Events",
+      "schedule": "Skeda",
+      "cronExpression": "Espressjoni CRON",
+      "scheduleUtcNote": "L-iskeda tuża ż-żona tal-ħin UTC. CRON kurrenti",
+      "yourWebhookUrl": "Il-Webhook URL Tiegħek",
+      "webhookPostNote": "Ibgħat POST request lil dan l-URL. Nipproċessaw id-data dieħla u nimmappjawha għal Uplift.",
+      "fieldMappings": "Mapping tal-Fields",
+      "fieldMappingsDesc": "Immappja l-fields ta' Uplift għall-fields tal-API esterna tiegħek",
+      "addMapping": "Żid Mapping",
+      "noFieldMappings": "Għad m'hawn field mappings",
+      "addMappingsDesc": "Żid mappings biex titrasforma d-data bejn is-sistemi",
+      "addFirstMapping": "Żid l-Ewwel Mapping",
+      "selectUpliftField": "Agħżel field ta' Uplift...",
+      "externalFieldName": "Isem tal-field estern",
+      "noTransform": "L-ebda trasformazzjoni",
+      "dateIso": "Data → ISO",
+      "dateUk": "Data → Format UK",
+      "boolYn": "Bool → I/L",
+      "fieldMappingTip": "Il-field mappings jintużaw biex jibnu l-request body awtomatikament. Tista' wkoll tuża s-sintassi {{field}} fit-tab tar-Request għal struttura JSON personalizzata.",
+      "testConfiguration": "Ittestja l-Konfigurazzjoni",
+      "testDescription": "Ibgħat test request biex tivverifika l-konfigurazzjoni tiegħek. Nużaw data ta' kampjun.",
+      "testing": "Qed jittestja...",
+      "sendTestRequest": "Ibgħat Test Request",
+      "success": "Suċċess",
+      "failed": "Falla",
+      "status": "Status",
+      "time": "Ħin",
+      "response": "Risposta",
+      "enableIntegration": "Attiva l-integrazzjoni",
+      "cancel": "Ikkanċella",
+      "saveChanges": "Issejvja l-Bidliet",
+      "createIntegration": "Oħloq Integrazzjoni",
+      "tabs": {
+        "request": "Request",
+        "authentication": "Awtentikazzjoni",
+        "trigger": "Trigger",
+        "fieldMapping": "Mapping tal-Fields",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Logs tal-Eżekuzzjoni",
+      "export": "Esportja",
+      "noData": "Għad m'hawn data. Il-logs tal-eżekuzzjoni jidhru hawn hekk kif l-integrazzjoni taħdem.",
+      "unknown": "Mhux magħruf",
+      "error": "Żball"
+    },
+    "helpBanner": {
+      "title": "Għandek bżonn għajnuna biex tibni integrazzjoni?",
+      "description": "Iċċekkja d-dokumentazzjoni tal-API tagħna għal eżempji, jew ikkuntattja s-support għal każi ta' użu kumplessi."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "API Keys REST",
+    "subtitle": "Iġġenera API keys biex taċċessa d-data ta' Uplift mill-applikazzjonijiet tiegħek",
+    "apiDocs": "Dokumentazzjoni tal-API",
+    "createKey": "Oħloq Key",
+    "createApiKey": "Oħloq API Key",
+    "loadingKeys": "Qed jitgħabbew l-API keys...",
+    "loadError": "Ma rnexxilux jitgħabbew l-API keys.",
+    "noKeysYet": "Għad m'hawn API keys",
+    "createFirstDesc": "Oħloq l-ewwel API key tiegħek biex tibda tintegra ma' Uplift",
+    "retry": "Erġa' Pprova",
+    "revokeConfirm": "Irrevoka l-API key \"{{name}}\"? Din l-azzjoni ma tistax titreġġa.",
+    "regenerateConfirm": "Iġġenera mill-ġdid is-sigriet għal \"{{name}}\"? Is-sigriet l-antik jieqaf jaħdem immedjatament.",
+    "regenerateSuccess": "Sigriet ġdid tal-key: {{secret}}\n\nIssejvjah issa - mhux se terah aktar!",
+    "regenerateError": "Ma rnexxilux jiġġenera mill-ġdid is-sigriet: {{message}}",
+    "usageStats": "Statistika tal-użu għal {{name}}:\n\nTalbiet totali: {{requests}}\nL-aħħar użat: {{lastUsed}}",
+    "card": {
+      "noDescription": "L-ebda deskrizzjoni",
+      "expired": "Skadut",
+      "active": "Attiv",
+      "inactive": "Mhux attiv",
+      "keyId": "ID tal-Key",
+      "requests": "Talbiet",
+      "lastUsed": "L-Aħħar Użat",
+      "never": "Qatt",
+      "rateLimit": "Rate Limit",
+      "standard": "Standard",
+      "hideDetails": "Aħbi d-dettalji",
+      "showDetails": "Uri d-dettalji",
+      "scopes": "SCOPES",
+      "created": "Maħluq",
+      "expires": "Jiskadi",
+      "usage": "Użu",
+      "regenerate": "Iġġenera mill-Ġdid",
+      "revoke": "Irrevoka"
+    },
+    "create": {
+      "keyCreatedTitle": "API Key Maħluq",
+      "createTitle": "Oħloq API Key",
+      "keyCreatedSuccess": "API key maħluq b'suċċess",
+      "copySecretWarning": "Ikkopja l-key sigriet tiegħek issa. Mhux se tkun tista' terah aktar!",
+      "keyIdLabel": "ID tal-Key",
+      "secretKeyLabel": "Key Sigriet",
+      "fullApiKeyLabel": "API Key Sħiħ (għall-Authorization header)",
+      "fullKeyLabel": "Key Sħiħ",
+      "authHeaderNote": "Uża dan fl-Authorization header tiegħek",
+      "done": "Lest",
+      "keyName": "Isem tal-Key",
+      "keyNamePlaceholder": "eż., API Key tal-Produzzjoni",
+      "description": "Deskrizzjoni",
+      "descriptionPlaceholder": "Għalxiex se jintuża dan il-key?",
+      "permissions": "Permessi",
+      "rateLimit": "Rate Limit",
+      "expiration": "Skadenza",
+      "neverExpires": "Ma jiskadix",
+      "thirtyDays": "30 jum",
+      "ninetyDays": "90 jum",
+      "oneYear": "Sena",
+      "createError": "Ma rnexxilux joħloq API key. Erġa' pprova.",
+      "cancel": "Ikkanċella",
+      "createKey": "Oħloq Key"
+    },
+    "docs": {
+      "quickStart": "Bidu Malajr",
+      "authentication": "Awtentikazzjoni",
+      "exampleResponse": "Risposta ta' Eżempju",
+      "viewFullDocs": "Ara d-Dokumentazzjoni Sħiħa",
+      "downloadSpec": "Niżżel l-Ispeċifikazzjoni OpenAPI"
+    },
+    "securityBanner": {
+      "title": "Sigurtà tal-API Key",
+      "description": "Żomm l-API keys tiegħek siguri. Tesponiehomx f'kodiċi tan-naħa tal-klijent jew f'repositories pubbliċi. Jekk key jiġi kompromess, irrevokah immedjatament u oħloq wieħed ġdid."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Issettjar tal-Organizzazzjoni",
+    "subtitle": "Ejja nissettjaw l-organizzazzjoni tiegħek",
+    "steps": {
+      "orgDetails": "Dettalji tal-Organizzazzjoni",
+      "locations": "Postijiet",
+      "departments": "Dipartimenti",
+      "roles": "Rwoli u Permessi",
+      "review": "Irrevedi u Vvara"
+    },
+    "orgDetails": {
+      "companyName": "Isem tal-Kumpanija",
+      "companyNamePlaceholder": "eż., Acme Ltd",
+      "tradingName": "Isem Kummerċjali (mhux obbligatorju)",
+      "tradingNamePlaceholder": "Isem pubbliku",
+      "industry": "Industrija",
+      "selectIndustry": "Agħżel l-industrija",
+      "companySize": "Daqs tal-Kumpanija",
+      "selectSize": "Agħżel id-daqs",
+      "timezone": "Żona tal-Ħin Default",
+      "currency": "Munita Default",
+      "weekStart": "Il-Ġimgħa Tibda",
+      "logo": "Logo tal-Kumpanija",
+      "uploadLogo": "Ittella' Logo",
+      "uploadLogoDesc": "PNG jew SVG, 200x200px rakkomandat"
+    },
+    "locations": {
+      "title": "Postijiet",
+      "subtitle": "Żid l-uffiċċji, siti, jew fergħat tiegħek",
+      "addLocation": "Żid Post",
+      "name": "Isem tal-Post",
+      "namePlaceholder": "eż., Uffiċċju Ċentrali",
+      "address": "Indirizz",
+      "addressPlaceholder": "Indirizz sħiħ",
+      "timezone": "Żona tal-Ħin",
+      "noLocations": "Għad ma żdiedx postijiet",
+      "addFirst": "Żid l-ewwel post tiegħek biex tibda"
+    },
+    "departments": {
+      "title": "Dipartimenti",
+      "subtitle": "Issettja l-istruttura tad-dipartimenti tiegħek",
+      "addDepartment": "Żid Dipartiment",
+      "name": "Isem tad-Dipartiment",
+      "namePlaceholder": "eż., Inġinerija",
+      "parentDepartment": "Dipartiment Ġenitur (mhux obbligatorju)",
+      "none": "Xejn (livell ta' fuq)",
+      "manager": "Maniġer tad-Dipartiment",
+      "selectManager": "Agħżel maniġer",
+      "noDepartments": "Għad ma żdiedx dipartimenti",
+      "addFirst": "Żid l-ewwel dipartiment tiegħek"
+    },
+    "roles": {
+      "title": "Rwoli u Permessi",
+      "subtitle": "Ikkonfigura l-livelli ta' aċċess għat-tim tiegħek",
+      "addRole": "Żid Rwol Personalizzat",
+      "builtIn": "Built-in",
+      "custom": "Personalizzat",
+      "name": "Isem tar-Rwol",
+      "namePlaceholder": "eż., Superviżur tax-Xift",
+      "description": "Deskrizzjoni",
+      "descriptionPlaceholder": "X'jista' jagħmel dan ir-rwol?",
+      "permissions": "Permessi",
+      "permissionGroups": {
+        "scheduling": "Skedar",
+        "timeTracking": "Tracking taż-Żmien",
+        "employees": "Impjegati",
+        "reports": "Rapporti",
+        "settings": "Settings"
+      }
+    },
+    "review": {
+      "title": "Irrevedi u Vvara",
+      "subtitle": "Ikkonferma li kollox jidher tajjeb qabel tibda",
+      "orgInfo": "Informazzjoni tal-Organizzazzjoni",
+      "locationsCount": "{{count}} postijiet ikkonfigurati",
+      "departmentsCount": "{{count}} dipartimenti ikkonfigurati",
+      "rolesCount": "{{count}} rwoli ikkonfigurati",
+      "allLooksGood": "Kollox jidher tajjeb!",
+      "launch": "Vvara l-Organizzazzjoni",
+      "launchDesc": "Dan se jattiva l-organizzazzjoni tiegħek u jibgħat stediniet lil kwalunkwe membru tat-tim miżjud."
+    },
+    "navigation": {
+      "back": "Lura",
+      "next": "Li Jmiss",
+      "skip": "Aqbeż għalissa",
+      "finish": "Lesti l-Issettjar"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

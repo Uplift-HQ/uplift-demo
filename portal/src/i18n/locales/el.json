@@ -54,7 +54,6 @@
     "viewMyCareer": "Προβολή Καριέρας Μου",
     "timeOffBalance": "Υπόλοιπο Άδειας"
   },
-
   "nav": {
     "dashboard": "Πίνακας Ελέγχου",
     "employees": "Υπάλληλοι",
@@ -150,9 +149,21 @@
     "active": "Ενεργό",
     "inactive": "Ανενεργό",
     "enabled": "Ενεργοποιημένο",
-    "disabled": "Απενεργοποιημένο"
+    "disabled": "Απενεργοποιημένο",
+    "approveSelected": "Έγκριση επιλεγμένων",
+    "rejectSelected": "Απόρριψη επιλεγμένων",
+    "clearSelection": "Εκκαθάριση",
+    "showing": "Εμφάνιση",
+    "of": "από",
+    "page": "Σελίδα",
+    "previous": "Προηγούμενο",
+    "terminated": "Απολυμένος",
+    "sunday": "Κυρ",
+    "monday": "Δευ",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Σύνδεση",
     "logout": "Αποσύνδεση",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Για να αποκτήσετε πρόσβαση στο Uplift, επικοινωνήστε με τον διευθυντή σας ή το τμήμα HR. Θα σας στείλουν έναν σύνδεσμο πρόσκλησης.",
     "enterEmailPassword": "Παρακαλώ εισάγετε email και κωδικό",
     "loginFailed": "Η σύνδεση απέτυχε",
-    "demoAccounts": "Demo Λογαριασμοί:",
-    "demoWorker": "Εργαζόμενος: worker@uplift.work / Demo123!",
-    "demoManager": "Διευθυντής: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Έλεγχος Ταυτότητας Δύο Παραγόντων",
     "enterMfaCode": "Εισάγετε τον κωδικό από την εφαρμογή ελέγχου ταυτότητας",
     "verificationCode": "Κωδικός Επαλήθευσης",
@@ -194,9 +202,16 @@
     "invalidCode": "Μη έγκυρος κωδικός",
     "allRightsReserved": "Με επιφύλαξη παντός δικαιώματος",
     "termsOfService": "Όροι Χρήσης",
-    "privacyPolicy": "Πολιτική Απορρήτου"
+    "privacyPolicy": "Πολιτική Απορρήτου",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Αρχική",
     "schedule": "Πρόγραμμα",
@@ -214,7 +229,6 @@
     "leaderboard": "Κατάταξη",
     "badges": "Σήματα"
   },
-
   "home": {
     "welcome": "Καλώς ήρθατε, {{name}}!",
     "welcomeBack": "Καλώς ήρθατε πίσω,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Ανοιχτές Ευκαιρίες",
     "noOpportunities": "Δεν υπάρχουν ευκαιρίες που ταιριάζουν με τις δεξιότητές σας αυτή τη στιγμή"
   },
-
   "schedule": {
     "title": "Το πρόγραμμά μου",
     "weekView": "Εβδομάδα",
@@ -293,9 +306,22 @@
     "yourShift": "Η Βάρδια Σας",
     "theirShift": "Η Βάρδια Τους",
     "sendRequest": "Αποστολή Αιτήματος",
-    "cancelSwap": "Ακύρωση Ανταλλαγής"
+    "cancelSwap": "Ακύρωση Ανταλλαγής",
+    "allLocations": "Όλες οι τοποθεσίες",
+    "tuesday": "Τρί",
+    "wednesday": "Τετ",
+    "thursday": "Πέμ",
+    "friday": "Παρ",
+    "saturday": "Σάβ",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Καταγραφή χρόνου",
     "clockedIn": "Είσοδος καταχωρήθηκε",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Πατήστε για είσοδο",
     "onBreakSince": "Σε διάλειμμα από τις {{time}}",
     "workingSince": "Εργάζεται από τις {{time}}",
-    "shiftEnded": "Η βάρδια τελείωσε"
+    "shiftEnded": "Η βάρδια τελείωσε",
+    "entriesApproved": "{{count}} εγγραφές εγκρίθηκαν",
+    "approveError": "Αποτυχία έγκρισης εγγραφών. Δοκιμάστε ξανά.",
+    "entriesRejected": "{{count}} εγγραφές απορρίφθηκαν",
+    "rejectError": "Αποτυχία απόρριψης εγγραφών. Δοκιμάστε ξανά.",
+    "clockInError": "Αποτυχία καταγραφής άφιξης. Δοκιμάστε ξανά.",
+    "clockOutError": "Αποτυχία καταγραφής αποχώρησης. Δοκιμάστε ξανά.",
+    "breakError": "Αποτυχία ενημέρωσης διαλείμματος. Δοκιμάστε ξανά.",
+    "noPending": "Δεν υπάρχουν εκκρεμείς εγγραφές",
+    "noEntries": "Δεν βρέθηκαν χρονικές εγγραφές",
+    "history": "Ιστορικό",
+    "managerSubtitle": "Έλεγχος και έγκριση φύλλων ωρών",
+    "employeeSubtitle": "Καταγραφή ωρών εργασίας",
+    "clockIn": "Άφιξη",
+    "clockOut": "Αποχώρηση",
+    "startBreak": "Έναρξη διαλείμματος",
+    "endBreak": "Λήξη διαλείμματος",
+    "totalHours": "Σύνολο ωρών"
   },
-
   "timeOff": {
     "title": "Άδεια",
     "request": "Αίτημα Άδειας",
@@ -359,9 +401,16 @@
     "selectDates": "Επιλογή Ημερομηνιών",
     "selectType": "Επιλογή Τύπου",
     "addNotes": "Προσθήκη Σημειώσεων (Προαιρετικό)",
-    "reviewRequest": "Επισκόπηση Αιτήματος"
+    "reviewRequest": "Επισκόπηση Αιτήματος",
+    "oneDay": "1 ημέρα",
+    "days": "ημέρες",
+    "dates": "Ημερομηνίες",
+    "duration": "Διάρκεια",
+    "noRequests": "Δεν βρέθηκαν αιτήματα",
+    "requestDetails": "Λεπτομέρειες αιτήματος άδειας",
+    "noReason": "Δεν δόθηκε αιτιολογία",
+    "submitted": "Υποβλήθηκε"
   },
-
   "feed": {
     "title": "Ροή",
     "newPost": "Νέα Δημοσίευση",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}}ώ πριν",
     "daysAgo": "{{count}}μ πριν"
   },
-
   "messages": {
     "title": "Μηνύματα",
     "newMessage": "Νέο Μήνυμα",
@@ -419,7 +467,6 @@
     "translateMessage": "Μετάφραση",
     "showOriginal": "Εμφάνιση Πρωτοτύπου"
   },
-
   "profile": {
     "title": "Προφίλ",
     "editProfile": "Επεξεργασία Προφίλ",
@@ -447,7 +494,6 @@
     "viewProfile": "Προβολή Προφίλ",
     "memberSince": "Μέλος από {{date}}"
   },
-
   "skills": {
     "title": "Δεξιότητες",
     "mySkills": "Οι Δεξιότητές Μου",
@@ -474,7 +520,6 @@
     "skillAdded": "Η δεξιότητα προστέθηκε επιτυχώς",
     "verificationRequested": "Το αίτημα επαλήθευσης υποβλήθηκε"
   },
-
   "career": {
     "title": "Καριέρα",
     "careerPath": "Επαγγελματική Πορεία",
@@ -549,7 +594,6 @@
     "expired": "Έληξε",
     "expires": "Λήγει {{date}}"
   },
-
   "gamification": {
     "level": "Επίπεδο {{level}}",
     "levelShort": "Επ {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Κερδήθηκε στις {{date}}",
     "progressToEarn": "{{percent}}% πρόοδος για απόκτηση"
   },
-
   "notifications": {
     "title": "Ειδοποιήσεις",
     "markAllRead": "Σήμανση Όλων ως Αναγνωσμένα",
@@ -605,7 +648,6 @@
     "allCaught": "Είστε ενημερωμένοι!",
     "checkBackLater": "Ελέγξτε αργότερα για νέες ειδοποιήσεις"
   },
-
   "settings": {
     "title": "Ρυθμίσεις",
     "subtitle": "Διαχειριστείτε τον οργανισμό και τον λογαριασμό σας",
@@ -740,9 +782,23 @@
     "featureAccess": "Πρόσβαση Λειτουργιών",
     "enableAll": "Ενεργοποίηση Όλων",
     "disableAll": "Απενεργοποίηση Όλων",
-    "aboutEmployeeVisibility": "Αυτές οι ρυθμίσεις ελέγχουν ποιες λειτουργίες είναι ορατές σε κάθε υπάλληλο."
+    "aboutEmployeeVisibility": "Αυτές οι ρυθμίσεις ελέγχουν ποιες λειτουργίες είναι ορατές σε κάθε υπάλληλο.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Εργασίες",
     "myTasks": "Οι Εργασίες Μου",
@@ -781,7 +837,6 @@
     "takePhoto": "Λήψη Φωτογραφίας",
     "chooseFromLibrary": "Επιλογή από Βιβλιοθήκη"
   },
-
   "expenses": {
     "title": "Έξοδα",
     "myExpenses": "Τα Έξοδά Μου",
@@ -808,7 +863,6 @@
     "totalApproved": "Σύνολο Εγκεκριμένων",
     "totalReimbursed": "Σύνολο Αποζημιώσεων"
   },
-
   "rewards": {
     "title": "Ανταμοιβές",
     "myRewards": "Οι Ανταμοιβές Μου",
@@ -828,7 +882,6 @@
     "validUntil": "Ισχύει έως {{date}}",
     "termsConditions": "Όροι & Προϋποθέσεις"
   },
-
   "manager": {
     "dashboard": "Πίνακας Ελέγχου Διευθυντή",
     "teamOverview": "Επισκόπηση Ομάδας",
@@ -859,7 +912,6 @@
     "attendance": "Παρουσίες",
     "performance": "Απόδοση"
   },
-
   "onboarding": {
     "welcome": "Καλώς ήρθατε στο Uplift!",
     "getStarted": "Ας ξεκινήσουμε τη ρύθμιση",
@@ -877,7 +929,6 @@
     "allSet": "Είστε Έτοιμοι!",
     "startExploring": "Ξεκινήστε να εξερευνάτε βάρδιες και ευκαιρίες"
   },
-
   "errors": {
     "networkError": "Σφάλμα δικτύου. Παρακαλώ ελέγξτε τη σύνδεσή σας.",
     "serverError": "Σφάλμα διακομιστή. Παρακαλώ δοκιμάστε ξανά αργότερα.",
@@ -898,7 +949,6 @@
     "tryAgain": "Παρακαλώ δοκιμάστε ξανά",
     "somethingWentWrong": "Κάτι πήγε στραβά"
   },
-
   "activity": {
     "title": "Επισκόπηση Δραστηριότητας",
     "subtitle": "Επισκόπηση ολοκληρώσεων εργασιών, αποδείξεων και υποβολών φορμών",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Εισάγετε λόγο απόρριψης...",
     "confirmRejection": "Επιβεβαίωση Απόρριψης",
     "approve": "Έγκριση",
-    "reject": "Απόρριψη"
+    "reject": "Απόρριψη",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Προτιμήσεις Ειδοποιήσεων",
     "subtitle": "Επιλέξτε πώς και πότε λαμβάνετε ειδοποιήσεις",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Είστε σίγουροι ότι θέλετε να απενεργοποιήσετε όλες τις ειδοποιήσεις; Μπορείτε να τις ενεργοποιήσετε ξανά ανά πάσα στιγμή.",
     "disableSuccess": "Όλες οι ειδοποιήσεις έχουν απενεργοποιηθεί."
   },
-
   "employeeDetail": {
     "notFound": "Ο υπάλληλος δεν βρέθηκε",
     "backToEmployees": "Πίσω στους Υπαλλήλους",
@@ -989,7 +1040,6 @@
     "basic": "Βασικό",
     "adding": "Προσθήκη..."
   },
-
   "reports": {
     "title": "Αναφορές",
     "subtitle": "Αναλυτικά στοιχεία, πληροφορίες και προσαρμοσμένες αναφορές",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Αυτόν τον Μήνα",
     "lastMonth": "Προηγούμενος Μήνας",
     "last7Days": "Τελευταίες 7 Ημέρες",
-    "last30Days": "Τελευταίες 30 Ημέρες"
+    "last30Days": "Τελευταίες 30 Ημέρες",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Μενού",
     "closeMenu": "Κλείσιμο μενού",
@@ -1041,7 +1104,6 @@
     "required": "Απαιτείται",
     "optional": "Προαιρετικό"
   },
-
   "shiftTemplates": {
     "title": "Πρότυπα Βαρδιών",
     "subtitle": "Δημιουργήστε επαναχρησιμοποιήσιμα μοτίβα βαρδιών",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "βάρδιες",
     "generating": "Δημιουργία..."
   },
-
   "legal": {
-    "lastUpdated": "Τελευταία ενημέρωση"
+    "lastUpdated": "Τελευταία ενημέρωση",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "ΠΜ",
     "pm": "ΜΜ",
@@ -1120,5 +1289,564 @@
     "october": "Οκτώβριος",
     "november": "Νοέμβριος",
     "december": "Δεκέμβριος"
+  },
+  "bulkImport": {
+    "title": "Μαζική εισαγωγή",
+    "subtitle": "Εισαγωγή δεδομένων από αρχεία CSV ή Excel",
+    "selectType": "Επιλογή τύπου",
+    "uploadFile": "Μεταφόρτωση αρχείου",
+    "preview": "Προεπισκόπηση",
+    "complete": "Ολοκλήρωση",
+    "invalidFileType": "Μεταφορτώστε αρχείο CSV ή Excel",
+    "importFailed": "Η εισαγωγή απέτυχε. Δοκιμάστε ξανά.",
+    "uploadFor": "Μεταφόρτωση",
+    "uploadDesc": "Σύρετε και αποθέστε ή κάντε κλικ για επιλογή αρχείου",
+    "downloadTemplate": "Λήψη προτύπου",
+    "dragDrop": "Σύρετε και αποθέστε το αρχείο εδώ ή κάντε κλικ για αναζήτηση",
+    "supportedFormats": "Υποστηριζόμενες μορφές: CSV, XLSX",
+    "previewData": "Προεπισκόπηση δεδομένων",
+    "rowsFound": "γραμμές βρέθηκαν σε",
+    "andMore": "Και",
+    "moreRows": "ακόμα γραμμές...",
+    "importing": "Εισαγωγή...",
+    "startImport": "Έναρξη εισαγωγής",
+    "importComplete": "Η εισαγωγή ολοκληρώθηκε",
+    "successfullyImported": "Επιτυχής εισαγωγή",
+    "of": "από",
+    "records": "εγγραφές",
+    "successful": "Επιτυχείς",
+    "failed": "Αποτυχημένες",
+    "total": "Σύνολο",
+    "importMore": "Εισαγωγή περισσότερων δεδομένων",
+    "type": {
+      "employees": "Εργαζόμενοι",
+      "employeesDesc": "Εισαγωγή προφίλ εργαζομένων",
+      "shifts": "Βάρδιες",
+      "shiftsDesc": "Εισαγωγή προγραμμάτων βαρδιών",
+      "locations": "Τοποθεσίες",
+      "locationsDesc": "Εισαγωγή τοποθεσιών",
+      "skills": "Δεξιότητες",
+      "skillsDesc": "Εισαγωγή δεξιοτήτων"
+    }
+  },
+  "jobs": {
+    "open": "Ανοιχτή",
+    "closed": "Κλειστή",
+    "applicants": "Υποψήφιοι",
+    "created": "Η αγγελία δημιουργήθηκε",
+    "createError": "Αποτυχία δημιουργίας αγγελίας. Δοκιμάστε ξανά.",
+    "updated": "Η αγγελία ενημερώθηκε",
+    "updateError": "Αποτυχία ενημέρωσης αγγελίας. Δοκιμάστε ξανά.",
+    "fullTime": "Πλήρης απασχόληση",
+    "partTime": "Μερική απασχόληση",
+    "contract": "Σύμβαση",
+    "temporary": "Προσωρινή",
+    "subtitle": "Διαχείριση εσωτερικών ευκαιριών καριέρας",
+    "openPositions": "Ανοιχτές θέσεις",
+    "closedPositions": "Κλειστές",
+    "totalApplicants": "Σύνολο υποψηφίων",
+    "noJobs": "Δεν βρέθηκαν αγγελίες",
+    "viewApplicants": "Προβολή υποψηφίων",
+    "editPosting": "Επεξεργασία αγγελίας",
+    "jobTitle": "Τίτλος θέσης",
+    "enterTitle": "Εισάγετε τίτλο θέσης",
+    "selectDepartment": "Επιλέξτε τμήμα",
+    "selectLocation": "Επιλέξτε τοποθεσία",
+    "salary": "Μισθολογικό εύρος",
+    "enterDescription": "Εισάγετε περιγραφή θέσης",
+    "postJob": "Δημοσίευση θέσης",
+    "skillMatch": "αντιστοίχιση δεξιοτήτων",
+    "noApplicants": "Δεν υπάρχουν υποψήφιοι ακόμα"
+  },
+  "employees": {
+    "searchPlaceholder": "Αναζήτηση με όνομα ή email...",
+    "employees": "εργαζόμενοι",
+    "noResults": "Δεν βρέθηκαν εργαζόμενοι",
+    "details": "Στοιχεία εργαζόμενου",
+    "hireDate": "Ημερομηνία πρόσληψης",
+    "assigned": "ανατεθειμένοι",
+    "leaveDetails": "Στοιχεία άδειας",
+    "until": "Έως",
+    "terminationDetails": "Στοιχεία αποχώρησης",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Κέντρο ενσωματώσεων",
+    "subtitle": "Συνδέστε το Uplift με τα υπάρχοντα εργαλεία σας",
+    "apiFactory": "Εργοστάσιο API",
+    "addIntegration": "Προσθήκη ενσωμάτωσης",
+    "configure": "Διαμόρφωση",
+    "connect": "Σύνδεση",
+    "cancel": "Ακύρωση",
+    "back": "Πίσω",
+    "saveChanges": "Αποθήκευση αλλαγών",
+    "syncNow": "Συγχρονισμός τώρα",
+    "disconnect": "Αποσύνδεση {{name}}",
+    "disconnectConfirm": "Αποσύνδεση {{name}}; Θα σταματήσουν όλοι οι συγχρονισμοί.",
+    "settingsSaved": "Ρυθμίσεις αποθηκεύτηκαν",
+    "browseMarketplace": "Περιήγηση αγοράς",
+    "loadingIntegrations": "Φόρτωση ενσωματώσεων...",
+    "noIntegrations": "Δεν υπάρχουν συνδεδεμένες ενσωματώσεις",
+    "noIntegrationsDesc": "Συνδέστε την πρώτη σας ενσωμάτωση για να ξεκινήσετε τον συγχρονισμό",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Συγχρονισμός..."
+    },
+    "stats": {
+      "connected": "Συνδεδεμένες",
+      "available": "Διαθέσιμες",
+      "syncsToday": "Συγχρονισμοί σήμερα",
+      "errors": "Σφάλματα",
+      "totalSyncs": "Σύνολο συγχρονισμών",
+      "lastSync": "Τελευταίος συγχρονισμός",
+      "records": "εγγραφές"
+    },
+    "tabs": {
+      "connected": "Συνδεδεμένες",
+      "marketplace": "Αγορά",
+      "restApi": "REST API",
+      "apiFactory": "Εργοστάσιο API",
+      "activityLog": "Αρχείο δραστηριότητας",
+      "settings": "Ρυθμίσεις",
+      "fieldMapping": "Αντιστοίχιση πεδίων",
+      "syncHistory": "Ιστορικό συγχρονισμού",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Τελευταίος συγχρονισμός",
+      "frequency": "Συχνότητα",
+      "status": "Κατάσταση",
+      "healthy": "Υγιής",
+      "errors": "σφάλματα"
+    },
+    "connectModal": {
+      "title": "Σύνδεση {{name}}",
+      "whatItDoes": "Τι κάνει αυτή η ενσωμάτωση:",
+      "redirectNotice": "Θα ανακατευθυνθείτε στο {{name}}",
+      "authorizeMessage": "Συνδεθείτε και εξουσιοδοτήστε το Uplift να αποκτήσει πρόσβαση στα δεδομένα σας. Ζητάμε μόνο τα απαραίτητα δικαιώματα.",
+      "connectWith": "Σύνδεση μέσω {{name}}",
+      "connecting": "Σύνδεση σε {{name}}...",
+      "completeAuth": "Ολοκληρώστε την εξουσιοδότηση στο αναδυόμενο παράθυρο",
+      "successConnected": "Επιτυχής σύνδεση!",
+      "configureSyncSettings": "Διαμορφώστε τις ρυθμίσεις συγχρονισμού παρακάτω.",
+      "completeSetup": "Ολοκλήρωση ρύθμισης",
+      "connected": "{{name}} συνδέθηκε!",
+      "firstSyncSoon": "Ο πρώτος συγχρονισμός θα ξεκινήσει σύντομα",
+      "hris": {
+        "syncEmployees": "Αυτόματος συγχρονισμός αρχείων εργαζομένων",
+        "importDepts": "Εισαγωγή τμημάτων και τοποθεσιών",
+        "syncTimeOff": "Συγχρονισμός υπολοίπων αδειών"
+      },
+      "payroll": {
+        "exportTimesheets": "Εξαγωγή εγκεκριμένων φύλλων ωρών",
+        "syncPayRates": "Συγχρονισμός μισθών και υπερωριών",
+        "autoReconciliation": "Αυτόματη συμφιλίωση μισθοδοσίας"
+      },
+      "comms": {
+        "shiftReminders": "Αποστολή υπενθυμίσεων βαρδιών",
+        "postRecognition": "Δημοσίευση αναγνώρισης σε κανάλια",
+        "swapNotifications": "Ειδοποιήσεις ανταλλαγής βαρδιών"
+      },
+      "identity": {
+        "sso": "Ενιαία σύνδεση (SSO)",
+        "autoProvisioning": "Αυτόματη δημιουργία χρηστών",
+        "directorySync": "Συγχρονισμός καταλόγου"
+      },
+      "other": {
+        "bidirectional": "Αμφίδρομος συγχρονισμός",
+        "realtimeWebhooks": "Ενημερώσεις σε πραγματικό χρόνο μέσω webhooks",
+        "auditTrail": "Πλήρες αρχείο ελέγχου"
+      }
+    },
+    "configureModal": {
+      "title": "Ρυθμίσεις {{name}}",
+      "connectedSince": "Συνδεδεμένο {{date}}"
+    },
+    "settings": {
+      "autoSync": "Αυτόματος συγχρονισμός",
+      "autoSyncDesc": "Αυτόματος συγχρονισμός δεδομένων σε πρόγραμμα",
+      "autoSyncScheduleDesc": "Αυτόματος συγχρονισμός σε πρόγραμμα",
+      "syncFrequency": "Συχνότητα συγχρονισμού",
+      "nextScheduledSync": "Επόμενος προγραμματισμένος συγχρονισμός",
+      "dataToSync": "Δεδομένα προς συγχρονισμό",
+      "frequency": {
+        "realtime": "Πραγματικός χρόνος",
+        "hourly": "Κάθε ώρα",
+        "daily": "Καθημερινά",
+        "weekly": "Εβδομαδιαία"
+      },
+      "data": {
+        "employees": "Εργαζόμενοι",
+        "timeEntries": "Χρονικές εγγραφές",
+        "departments": "Τμήματα",
+        "locations": "Τοποθεσίες"
+      }
+    },
+    "mapping": {
+      "description": "Η αντιστοίχιση πεδίων ελέγχει πώς τα δεδομένα από {{name}} αντιστοιχίζονται σε πεδία Uplift. Οι αλλαγές εφαρμόζονται στον επόμενο συγχρονισμό.",
+      "sourceField": "Πεδίο {{name}}",
+      "upliftField": "Πεδίο Uplift",
+      "status": "Κατάσταση",
+      "selectField": "Επιλέξτε πεδίο...",
+      "mapped": "Αντιστοιχισμένο",
+      "unmapped": "Μη αντιστοιχισμένο"
+    },
+    "history": {
+      "noHistory": "Δεν υπάρχει ιστορικό συγχρονισμού",
+      "sync": "Συγχρονισμός",
+      "duration": "Διάρκεια",
+      "records": "Εγγραφές",
+      "created": "Δημιουργήθηκε",
+      "updated": "Ενημερώθηκε"
+    },
+    "webhooks": {
+      "description": "Τα webhooks ειδοποιούν το {{name}} όταν συμβαίνουν γεγονότα στο Uplift",
+      "addWebhook": "Προσθήκη webhook",
+      "noWebhooks": "Δεν υπάρχουν webhooks",
+      "createFirst": "Δημιουργήστε το πρώτο webhook",
+      "active": "Ενεργό",
+      "paused": "Σε παύση",
+      "sendTestPayload": "Αποστολή δοκιμαστικών δεδομένων",
+      "pauseWebhook": "Παύση webhook",
+      "enableWebhook": "Ενεργοποίηση webhook",
+      "deleteWebhook": "Διαγραφή webhook",
+      "lastTriggered": "Τελευταία ενεργοποίηση",
+      "never": "Ποτέ",
+      "successRate": "Ποσοστό επιτυχίας",
+      "sendEventsTo": "Αποστολή συμβάντων στο {{name}}",
+      "endpointUrl": "URL τελικού σημείου",
+      "eventsToSend": "Συμβάντα προς αποστολή",
+      "hmacInfo": "Θα υπογράψουμε όλα τα webhook μηνύματα με HMAC-SHA256. Η υπογραφή στέλνεται στο",
+      "header": "header.",
+      "createWebhook": "Δημιουργία webhook",
+      "validationError": "Εισάγετε URL και επιλέξτε τουλάχιστον ένα συμβάν",
+      "createdSuccess": "Το webhook δημιουργήθηκε!",
+      "testSent": "Δοκιμαστικά δεδομένα στάλθηκαν στο",
+      "testStatus": "Κατάσταση",
+      "deleteConfirm": "Διαγραφή αυτού του webhook;"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Αναζήτηση ενσωματώσεων...",
+      "allCategories": "Όλες οι κατηγορίες",
+      "infoBannerTitle": "Το Uplift λειτουργεί με τα εργαλεία σας",
+      "infoBannerDesc": "Συνδέστε HRIS, μισθοδοσία και συστήματα επικοινωνίας. Συγχρονίζουμε δεδομένα — δεν αντικαθιστούμε το stack σας.",
+      "noResults": "Δεν βρέθηκαν ενσωματώσεις",
+      "dontSeeSystem": "Δεν βλέπετε το σύστημά σας;",
+      "alwaysAdding": "Προσθέτουμε συνεχώς νέες ενσωματώσεις. Πείτε μας τι χρειάζεστε.",
+      "requestIntegration": "Αίτηση ενσωμάτωσης"
+    },
+    "activity": {
+      "recentActivity": "Πρόσφατη δραστηριότητα ενσωματώσεων",
+      "exportLog": "Εξαγωγή αρχείου"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "Εργοστάσιο API",
+    "subtitle": "Δημιουργήστε προσαρμοσμένες REST API ενσωματώσεις χωρίς κώδικα",
+    "newIntegration": "Νέα ενσωμάτωση",
+    "searchPlaceholder": "Αναζήτηση ενσωματώσεων...",
+    "loadingIntegrations": "Φόρτωση ενσωματώσεων...",
+    "noIntegrationsFound": "Δεν βρέθηκαν ενσωματώσεις",
+    "noIntegrationsYet": "Δεν υπάρχουν προσαρμοσμένες ενσωματώσεις",
+    "tryDifferentSearch": "Δοκιμάστε διαφορετικό όρο αναζήτησης",
+    "createFirstDesc": "Δημιουργήστε την πρώτη σας ενσωμάτωση API",
+    "createIntegration": "Δημιουργία ενσωμάτωσης",
+    "deleteConfirm": "Σίγουρα θέλετε να διαγράψετε αυτή την ενσωμάτωση;",
+    "list": {
+      "eventsCount": "{{count}} συμβάντα",
+      "scheduled": "Προγραμματισμένο",
+      "incomingWebhook": "Εισερχόμενο webhook",
+      "manual": "Χειροκίνητο",
+      "runsCount": "{{count}} εκτελέσεις",
+      "errorsCount": "{{count}} σφάλματα",
+      "disabled": "Απενεργοποιημένο",
+      "edit": "Επεξεργασία",
+      "test": "Δοκιμή",
+      "viewLogs": "Προβολή αρχείων",
+      "delete": "Διαγραφή",
+      "lastRun": "Τελευταία εκτέλεση"
+    },
+    "stats": {
+      "totalIntegrations": "Σύνολο ενσωματώσεων",
+      "active": "Ενεργές",
+      "runsToday": "Εκτελέσεις σήμερα",
+      "totalErrors": "Σύνολο σφαλμάτων"
+    },
+    "editor": {
+      "editTitle": "Επεξεργασία API ενσωμάτωσης",
+      "createTitle": "Δημιουργία API ενσωμάτωσης",
+      "subtitle": "Διαμορφώστε τη σύνδεση REST API",
+      "integrationName": "Όνομα ενσωμάτωσης",
+      "integrationNamePlaceholder": "π.χ. Συγχρονισμός μισθοδοσίας",
+      "description": "Περιγραφή",
+      "descriptionPlaceholder": "Τι κάνει αυτή η ενσωμάτωση;",
+      "method": "Μέθοδος",
+      "url": "URL",
+      "headers": "Κεφαλίδες",
+      "addHeader": "Προσθήκη κεφαλίδας",
+      "headerName": "Όνομα κεφαλίδας",
+      "headerValue": "Τιμή",
+      "requestBodyJson": "Σώμα αιτήματος (JSON)",
+      "useVariables": "Χρησιμοποιήστε {{field}} για μεταβλητές",
+      "availableVariables": "Διαθέσιμες μεταβλητές",
+      "authenticationType": "Τύπος πιστοποίησης",
+      "apiKeyLocation": "Θέση κλειδιού API",
+      "header": "Κεφαλίδα",
+      "queryParameter": "Παράμετρος ερωτήματος",
+      "keyName": "Όνομα κλειδιού",
+      "keyNamePlaceholder": "π.χ. X-API-Key",
+      "apiKey": "Κλειδί API",
+      "enterApiKey": "Εισάγετε το κλειδί API",
+      "bearerToken": "Bearer Token",
+      "enterToken": "Εισάγετε το token",
+      "username": "Όνομα χρήστη",
+      "password": "Κωδικός",
+      "tokenUrl": "URL Token",
+      "clientId": "ID πελάτη",
+      "clientSecret": "Μυστικό πελάτη",
+      "scopes": "Πεδία εφαρμογής (χωρισμένα με κόμμα)",
+      "whenShouldRun": "Πότε πρέπει να εκτελεστεί;",
+      "selectEvents": "Επιλογή συμβάντων",
+      "schedule": "Πρόγραμμα",
+      "cronExpression": "Έκφραση CRON",
+      "scheduleUtcNote": "Το πρόγραμμα χρησιμοποιεί ζώνη ώρας UTC. Τρέχον CRON",
+      "yourWebhookUrl": "Το webhook URL σας",
+      "webhookPostNote": "Στείλτε POST αιτήματα σε αυτό το URL. Θα επεξεργαστούμε τα εισερχόμενα δεδομένα.",
+      "fieldMappings": "Αντιστοιχίσεις πεδίων",
+      "fieldMappingsDesc": "Αντιστοιχίστε πεδία Uplift σε πεδία εξωτερικού API",
+      "addMapping": "Προσθήκη αντιστοίχισης",
+      "noFieldMappings": "Δεν υπάρχουν αντιστοιχίσεις",
+      "addMappingsDesc": "Προσθέστε αντιστοιχίσεις για μετασχηματισμό δεδομένων",
+      "addFirstMapping": "Προσθήκη πρώτης αντιστοίχισης",
+      "selectUpliftField": "Επιλέξτε πεδίο Uplift...",
+      "externalFieldName": "Όνομα εξωτερικού πεδίου",
+      "noTransform": "Χωρίς μετασχηματισμό",
+      "dateIso": "Ημερομηνία → ISO",
+      "dateUk": "Ημερομηνία → UK",
+      "boolYn": "Bool → Ν/Ό",
+      "fieldMappingTip": "Οι αντιστοιχίσεις πεδίων δημιουργούν αυτόματα το σώμα αιτήματος. Μπορείτε επίσης να χρησιμοποιήσετε σύνταξη {{field}} στην καρτέλα Αίτημα.",
+      "testConfiguration": "Δοκιμή διαμόρφωσης",
+      "testDescription": "Στείλτε δοκιμαστικό αίτημα με δείγμα δεδομένων.",
+      "testing": "Δοκιμή...",
+      "sendTestRequest": "Αποστολή δοκιμαστικού αιτήματος",
+      "success": "Επιτυχία",
+      "failed": "Αποτυχία",
+      "status": "Κατάσταση",
+      "time": "Χρόνος",
+      "response": "Απόκριση",
+      "enableIntegration": "Ενεργοποίηση ενσωμάτωσης",
+      "cancel": "Ακύρωση",
+      "saveChanges": "Αποθήκευση αλλαγών",
+      "createIntegration": "Δημιουργία ενσωμάτωσης",
+      "tabs": {
+        "request": "Αίτημα",
+        "authentication": "Πιστοποίηση",
+        "trigger": "Ενεργοποιητής",
+        "fieldMapping": "Αντιστοίχιση πεδίων",
+        "test": "Δοκιμή"
+      }
+    },
+    "logs": {
+      "executionLogs": "Αρχεία εκτέλεσης",
+      "export": "Εξαγωγή",
+      "noData": "Δεν υπάρχουν δεδομένα. Τα αρχεία εκτέλεσης θα εμφανιστούν εδώ.",
+      "unknown": "Άγνωστο",
+      "error": "Σφάλμα"
+    },
+    "helpBanner": {
+      "title": "Χρειάζεστε βοήθεια;",
+      "description": "Δείτε την τεκμηρίωση API για παραδείγματα ή επικοινωνήστε με την υποστήριξη."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "Κλειδιά REST API",
+    "subtitle": "Δημιουργήστε κλειδιά API για πρόσβαση στα δεδομένα Uplift",
+    "apiDocs": "Τεκμηρίωση API",
+    "createKey": "Δημιουργία κλειδιού",
+    "createApiKey": "Δημιουργία κλειδιού API",
+    "loadingKeys": "Φόρτωση κλειδιών API...",
+    "loadError": "Αποτυχία φόρτωσης κλειδιών API.",
+    "noKeysYet": "Δεν υπάρχουν κλειδιά API",
+    "createFirstDesc": "Δημιουργήστε το πρώτο κλειδί API σας",
+    "retry": "Επανάληψη",
+    "revokeConfirm": "Ανάκληση κλειδιού API \"{{name}}\"; Αυτή η ενέργεια δεν αναιρείται.",
+    "regenerateConfirm": "Αναδημιουργία μυστικού για \"{{name}}\"; Το παλιό θα σταματήσει αμέσως.",
+    "regenerateSuccess": "Νέο μυστικό κλειδί: {{secret}}\n\nΑποθηκεύστε το τώρα!",
+    "regenerateError": "Αποτυχία αναδημιουργίας: {{message}}",
+    "usageStats": "Στατιστικά χρήσης για {{name}}:\n\nΣύνολο αιτημάτων: {{requests}}\nΤελευταία χρήση: {{lastUsed}}",
+    "card": {
+      "noDescription": "Χωρίς περιγραφή",
+      "expired": "Ληγμένο",
+      "active": "Ενεργό",
+      "inactive": "Ανενεργό",
+      "keyId": "ID κλειδιού",
+      "requests": "Αιτήματα",
+      "lastUsed": "Τελευταία χρήση",
+      "never": "Ποτέ",
+      "rateLimit": "Όριο αιτημάτων",
+      "standard": "Τυπικό",
+      "hideDetails": "Απόκρυψη λεπτομερειών",
+      "showDetails": "Εμφάνιση λεπτομερειών",
+      "scopes": "ΠΕΔΙΑ",
+      "created": "Δημιουργήθηκε",
+      "expires": "Λήγει",
+      "usage": "Χρήση",
+      "regenerate": "Αναδημιουργία",
+      "revoke": "Ανάκληση"
+    },
+    "create": {
+      "keyCreatedTitle": "Κλειδί API δημιουργήθηκε",
+      "createTitle": "Δημιουργία κλειδιού API",
+      "keyCreatedSuccess": "Το κλειδί API δημιουργήθηκε",
+      "copySecretWarning": "Αντιγράψτε το μυστικό κλειδί τώρα. Δεν θα το δείτε ξανά!",
+      "keyIdLabel": "ID κλειδιού",
+      "secretKeyLabel": "Μυστικό κλειδί",
+      "fullApiKeyLabel": "Πλήρες κλειδί API (για Authorization header)",
+      "fullKeyLabel": "Πλήρες κλειδί",
+      "authHeaderNote": "Χρησιμοποιήστε το στο Authorization header",
+      "done": "Τέλος",
+      "keyName": "Όνομα κλειδιού",
+      "keyNamePlaceholder": "π.χ. Κλειδί παραγωγής",
+      "description": "Περιγραφή",
+      "descriptionPlaceholder": "Για τι θα χρησιμοποιηθεί αυτό το κλειδί;",
+      "permissions": "Δικαιώματα",
+      "rateLimit": "Όριο αιτημάτων",
+      "expiration": "Λήξη",
+      "neverExpires": "Δεν λήγει ποτέ",
+      "thirtyDays": "30 ημέρες",
+      "ninetyDays": "90 ημέρες",
+      "oneYear": "1 έτος",
+      "createError": "Αποτυχία δημιουργίας κλειδιού API. Δοκιμάστε ξανά.",
+      "cancel": "Ακύρωση",
+      "createKey": "Δημιουργία κλειδιού"
+    },
+    "docs": {
+      "quickStart": "Γρήγορη εκκίνηση",
+      "authentication": "Πιστοποίηση",
+      "exampleResponse": "Παράδειγμα απόκρισης",
+      "viewFullDocs": "Πλήρης τεκμηρίωση",
+      "downloadSpec": "Λήψη OpenAPI Spec"
+    },
+    "securityBanner": {
+      "title": "Ασφάλεια κλειδιών API",
+      "description": "Κρατήστε τα κλειδιά API ασφαλή. Μην τα εκθέτετε σε κώδικα πελάτη ή δημόσια αποθετήρια. Αν ένα κλειδί παραβιαστεί, ανακαλέστε το αμέσως."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Ρύθμιση οργανισμού",
+    "subtitle": "Ας διαμορφώσουμε τον οργανισμό σας",
+    "steps": {
+      "orgDetails": "Στοιχεία οργανισμού",
+      "locations": "Τοποθεσίες",
+      "departments": "Τμήματα",
+      "roles": "Ρόλοι και δικαιώματα",
+      "review": "Έλεγχος και εκκίνηση"
+    },
+    "orgDetails": {
+      "companyName": "Επωνυμία εταιρείας",
+      "companyNamePlaceholder": "π.χ. Acme Α.Ε.",
+      "tradingName": "Εμπορική επωνυμία (προαιρετικό)",
+      "tradingNamePlaceholder": "Δημόσιο όνομα",
+      "industry": "Κλάδος",
+      "selectIndustry": "Επιλέξτε κλάδο",
+      "companySize": "Μέγεθος εταιρείας",
+      "selectSize": "Επιλέξτε μέγεθος",
+      "timezone": "Προεπιλεγμένη ζώνη ώρας",
+      "currency": "Προεπιλεγμένο νόμισμα",
+      "weekStart": "Η εβδομάδα ξεκινά",
+      "logo": "Λογότυπο εταιρείας",
+      "uploadLogo": "Μεταφόρτωση λογότυπου",
+      "uploadLogoDesc": "PNG ή SVG, προτεινόμενο 200×200px"
+    },
+    "locations": {
+      "title": "Τοποθεσίες",
+      "subtitle": "Προσθέστε γραφεία, εγκαταστάσεις ή υποκαταστήματα",
+      "addLocation": "Προσθήκη τοποθεσίας",
+      "name": "Όνομα τοποθεσίας",
+      "namePlaceholder": "π.χ. Κεντρικά γραφεία",
+      "address": "Διεύθυνση",
+      "addressPlaceholder": "Πλήρης διεύθυνση",
+      "timezone": "Ζώνη ώρας",
+      "noLocations": "Δεν υπάρχουν τοποθεσίες",
+      "addFirst": "Προσθέστε την πρώτη τοποθεσία"
+    },
+    "departments": {
+      "title": "Τμήματα",
+      "subtitle": "Ρυθμίστε τη δομή τμημάτων",
+      "addDepartment": "Προσθήκη τμήματος",
+      "name": "Όνομα τμήματος",
+      "namePlaceholder": "π.χ. Μηχανική",
+      "parentDepartment": "Γονικό τμήμα (προαιρετικό)",
+      "none": "Κανένα (ανώτατο)",
+      "manager": "Διευθυντής τμήματος",
+      "selectManager": "Επιλέξτε διευθυντή",
+      "noDepartments": "Δεν υπάρχουν τμήματα",
+      "addFirst": "Προσθέστε το πρώτο τμήμα"
+    },
+    "roles": {
+      "title": "Ρόλοι και δικαιώματα",
+      "subtitle": "Διαμορφώστε τα επίπεδα πρόσβασης",
+      "addRole": "Προσθήκη ρόλου",
+      "builtIn": "Ενσωματωμένος",
+      "custom": "Προσαρμοσμένος",
+      "name": "Όνομα ρόλου",
+      "namePlaceholder": "π.χ. Επόπτης βάρδιας",
+      "description": "Περιγραφή",
+      "descriptionPlaceholder": "Τι μπορεί να κάνει αυτός ο ρόλος;",
+      "permissions": "Δικαιώματα",
+      "permissionGroups": {
+        "scheduling": "Προγραμματισμός",
+        "timeTracking": "Παρακολούθηση χρόνου",
+        "employees": "Εργαζόμενοι",
+        "reports": "Αναφορές",
+        "settings": "Ρυθμίσεις"
+      }
+    },
+    "review": {
+      "title": "Έλεγχος και εκκίνηση",
+      "subtitle": "Ελέγξτε ότι όλα είναι σωστά πριν ξεκινήσετε",
+      "orgInfo": "Πληροφορίες οργανισμού",
+      "locationsCount": "{{count}} τοποθεσίες",
+      "departmentsCount": "{{count}} τμήματα",
+      "rolesCount": "{{count}} ρόλοι",
+      "allLooksGood": "Όλα φαίνονται καλά!",
+      "launch": "Εκκίνηση οργανισμού",
+      "launchDesc": "Αυτό θα ενεργοποιήσει τον οργανισμό σας και θα στείλει προσκλήσεις."
+    },
+    "navigation": {
+      "back": "Πίσω",
+      "next": "Επόμενο",
+      "skip": "Παράλειψη",
+      "finish": "Ολοκλήρωση ρύθμισης"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

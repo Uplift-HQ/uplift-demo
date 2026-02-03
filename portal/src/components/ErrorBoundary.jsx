@@ -20,7 +20,7 @@ export class ErrorBoundary extends React.Component {
     this.setState({ error, errorInfo });
     
     // Log to error reporting service
-    console.error('React Error Boundary caught:', error, errorInfo);
+    if (import.meta.env.DEV) console.error('React Error Boundary caught:', error, errorInfo);
     
     // In production, send to error tracking (Sentry, etc.)
     if (import.meta.env.PROD) {

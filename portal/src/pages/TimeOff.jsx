@@ -30,7 +30,7 @@ export default function TimeOff() {
       }));
       setRequests(enriched);
     } catch (err) {
-      console.error('Failed to load time-off requests:', err);
+      if (import.meta.env.DEV) console.error('Failed to load time-off requests:', err);
       setError('Failed to load time-off requests. Please try again.');
     } finally {
       setLoading(false);

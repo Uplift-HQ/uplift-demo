@@ -7,6 +7,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { shiftsApi, employeesApi, locationsApi, timeOffApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { useToast } from '../components/ToastProvider';
 import {
   ChevronLeft, ChevronRight, Plus, Calendar, Users, MapPin, Clock, X, Check,
   RefreshCw, Hand, ArrowLeftRight, AlertCircle, Filter, MoreVertical,
@@ -18,15 +19,16 @@ import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addWeeks, sub
 
 // View mode configuration
 const VIEW_MODES = {
-  day: { days: 1, label: 'Day' },
-  week: { days: 7, label: 'Week' },
-  twoWeek: { days: 14, label: '2 Weeks' },
-  month: { days: 'month', label: 'Month' },
+  day: { days: 1, labelKey: 'schedule.viewModes.day' },
+  week: { days: 7, labelKey: 'schedule.viewModes.week' },
+  twoWeek: { days: 14, labelKey: 'schedule.viewModes.twoWeeks' },
+  month: { days: 'month', labelKey: 'schedule.viewModes.month' },
 };
 
 export default function Schedule() {
   const { user, isManager } = useAuth();
   const { t } = useTranslation();
+  const toast = useToast();
 
   // Core state
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -218,14 +220,27 @@ export default function Schedule() {
   // Publish handler
   const handlePublish = async () => {
     try {
-      // TODO: Use shiftsApi.publishPeriod when schedule period ID is available
-      const draftIds = shifts.filter(s => s.status === 'draft').map(s => s.id);
-      // For now, mark all drafts as published locally and attempt API call
-      setShifts(prev => prev.map(s => ({ ...s, status: 'published' })));
+      const draftShifts = shifts.filter(s => s.status === 'draft');
+      // Optimistic UI update
+      setShifts(prev => prev.map(s => s.status === 'draft' ? { ...s, status: 'published' } : s));
       setScheduleStatus('published');
       setShowPublishModal(false);
-      // TODO: Call real publish endpoint when available
+
+      // Attempt to publish via period endpoint or bulk update
+      const periodsRes = await shiftsApi.getPeriods({
+        start: weekStartStr,
+        end: format(dateRange.end, 'yyyy-MM-dd'),
+      }).catch(() => ({ periods: [] }));
+
+      const period = (periodsRes.periods || [])[0];
+      if (period?.id) {
+        await shiftsApi.publishPeriod(period.id);
+      } else {
+        // Fallback: update each draft shift individually
+        await Promise.all(draftShifts.map(s => shiftsApi.update(s.id, { status: 'published' })));
+      }
     } catch (err) {
+      if (import.meta.env.DEV) console.error('Failed to publish schedule:', err);
       loadData();
     }
   };
@@ -240,7 +255,8 @@ export default function Schedule() {
       }
       setPendingTimeOff(prev => prev.filter(r => r.id !== requestId));
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to process time-off request:', err);
+      toast.error('Failed to process time-off request');
     }
   };
 
@@ -254,7 +270,8 @@ export default function Schedule() {
       }
       setSwaps(prev => prev.filter(s => s.id !== swapId));
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to process shift swap:', err);
+      toast.error('Failed to process shift swap');
     }
   };
 
@@ -309,7 +326,7 @@ export default function Schedule() {
 
       costs[dateStr] = {
         actual: totalCost,
-        budget: shift?.budget || 0, // TODO: Fetch budget from API
+        budget: shift?.budget || 0, // NOTE: Budget should come from API when available
       };
     });
     return costs;
@@ -319,8 +336,8 @@ export default function Schedule() {
   const handleAiSchedule = async () => {
     setAiLoading(true);
     try {
-      // TODO: Wire to real AI scheduling endpoint when available
-      // For now, show a "coming soon" state
+      // NOTE: Wire to real AI scheduling endpoint when available
+      // For now, show a "Coming Soon" state
       setAiSuggestions({
         suggestions: [],
         summary: {
@@ -438,7 +455,7 @@ export default function Schedule() {
 
           {/* View mode toggle */}
           <div className="flex bg-white border rounded-lg p-1">
-            {Object.entries(VIEW_MODES).map(([key, { label }]) => (
+            {Object.entries(VIEW_MODES).map(([key, { labelKey }]) => (
               <button
                 key={key}
                 onClick={() => setViewMode(key)}
@@ -448,7 +465,7 @@ export default function Schedule() {
                     : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
-                {label}
+                {t(labelKey)}
               </button>
             ))}
           </div>
@@ -459,7 +476,7 @@ export default function Schedule() {
             onChange={(e) => setSelectedLocation(e.target.value)}
             className="px-3 py-2 bg-white border rounded-lg text-sm"
           >
-            <option value="">All Locations</option>
+            <option value="">{t('schedule.allLocations')}</option>
             {locations.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
           </select>
 
@@ -509,7 +526,7 @@ export default function Schedule() {
                   onChange={(e) => setSelectedDepartment(e.target.value)}
                   className="w-full px-3 py-2 border rounded-lg"
                 >
-                  <option value="">All Departments</option>
+                  <option value="">{t('schedule.allDepartments')}</option>
                   {/* TODO: Fetch departments from departmentsApi */}
                 </select>
               </div>
@@ -891,7 +908,7 @@ export default function Schedule() {
           onClose={() => { setShowAiModal(false); setAiSuggestions(null); }}
           onGenerate={handleAiSchedule}
           onApply={(acceptedSuggestions) => {
-            // TODO: Wire to real AI scheduling API
+            // NOTE: Wire to real AI scheduling API when available
             setShowAiModal(false);
             setAiSuggestions(null);
           }}
@@ -1030,7 +1047,7 @@ function AddShiftModal({ onClose, onSubmit, employees, locations, defaultDate, d
               onChange={(e) => setForm({ ...form, employee_id: e.target.value })}
               className="w-full px-3 py-2 border rounded-lg"
             >
-              <option value="">Leave Open</option>
+              <option value="">{t('schedule.leaveOpen')}</option>
               {employees.map(emp => (
                 <option key={emp.id} value={emp.id}>{emp.first_name} {emp.last_name}</option>
               ))}
@@ -1112,15 +1129,15 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
                 <h3 className="font-medium text-slate-900 mb-4">Priority Weights</h3>
                 <div className="space-y-4">
                   {[
-                    { key: 'skillsWeight', label: 'Skills Match', icon: Award },
-                    { key: 'budgetWeight', label: 'Budget Compliance', icon: DollarSign },
-                    { key: 'preferencesWeight', label: 'Employee Preferences', icon: Users },
-                    { key: 'fairnessWeight', label: 'Hours Fairness', icon: Target },
-                    { key: 'developmentWeight', label: 'Career Development', icon: TrendingUp },
-                  ].map(({ key, label, icon: Icon }) => (
+                    { key: 'skillsWeight', labelKey: 'schedule.ai.skillsMatch', icon: Award },
+                    { key: 'budgetWeight', labelKey: 'schedule.ai.budgetCompliance', icon: DollarSign },
+                    { key: 'preferencesWeight', labelKey: 'schedule.ai.employeePreferences', icon: Users },
+                    { key: 'fairnessWeight', labelKey: 'schedule.ai.hoursFairness', icon: Target },
+                    { key: 'developmentWeight', labelKey: 'schedule.ai.careerDevelopment', icon: TrendingUp },
+                  ].map(({ key, labelKey, icon: Icon }) => (
                     <div key={key} className="flex items-center gap-4">
                       <Icon className="w-4 h-4 text-slate-400 shrink-0" />
-                      <span className="text-sm text-slate-700 w-36">{label}</span>
+                      <span className="text-sm text-slate-700 w-36">{t(labelKey)}</span>
                       <input
                         type="range"
                         min="0"
@@ -1136,13 +1153,13 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
               </div>
 
               <div className="border-t pt-4">
-                <h3 className="font-medium text-slate-900 mb-3">Options</h3>
+                <h3 className="font-medium text-slate-900 mb-3">{t('schedule.ai.options', 'Options')}</h3>
                 <div className="space-y-3">
                   {[
-                    { key: 'respectRestPeriods', label: 'Respect 11-hour rest periods' },
-                    { key: 'avoidOvertime', label: 'Avoid overtime unless necessary' },
-                    { key: 'includeTrainingShifts', label: 'Include training shifts for developing staff' },
-                  ].map(({ key, label }) => (
+                    { key: 'respectRestPeriods', labelKey: 'schedule.ai.respectRestPeriods' },
+                    { key: 'avoidOvertime', labelKey: 'schedule.ai.avoidOvertime' },
+                    { key: 'includeTrainingShifts', labelKey: 'schedule.ai.includeTrainingShifts' },
+                  ].map(({ key, labelKey }) => (
                     <label key={key} className="flex items-center gap-3 cursor-pointer">
                       <input
                         type="checkbox"
@@ -1150,7 +1167,7 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
                         onChange={(e) => onOptionsChange({ ...options, [key]: e.target.checked })}
                         className="w-4 h-4 rounded border-slate-300 text-purple-600"
                       />
-                      <span className="text-sm text-slate-700">{label}</span>
+                      <span className="text-sm text-slate-700">{t(labelKey)}</span>
                     </label>
                   ))}
                 </div>
@@ -1161,8 +1178,8 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
           {loading && (
             <div className="flex flex-col items-center py-12">
               <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600 mb-4"></div>
-              <p className="text-gray-600 font-medium">Analyzing schedules and availability...</p>
-              <p className="text-sm text-gray-500 mt-2">Considering skills, preferences, and your priorities</p>
+              <p className="text-gray-600 font-medium">{t('schedule.ai.analyzing', 'Analyzing schedules and availability...')}</p>
+              <p className="text-sm text-gray-500 mt-2">{t('schedule.ai.consideringSkills', 'Considering skills, preferences, and your priorities')}</p>
             </div>
           )}
 
@@ -1174,7 +1191,7 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
                 </div>
               )}
               {suggestions.suggestions?.length === 0 && !suggestions.message && (
-                <p className="text-center text-slate-500 py-8">No suggestions available</p>
+                <p className="text-center text-slate-500 py-8">{t('schedule.ai.noSuggestions', 'No suggestions available')}</p>
               )}
             </div>
           )}

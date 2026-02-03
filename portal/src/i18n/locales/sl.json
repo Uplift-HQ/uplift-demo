@@ -54,7 +54,6 @@
     "viewMyCareer": "Prikaži mojo kariero",
     "timeOffBalance": "Stanje dopusta"
   },
-
   "nav": {
     "dashboard": "Nadzorna plošča",
     "employees": "Zaposleni",
@@ -150,9 +149,21 @@
     "active": "Aktivno",
     "inactive": "Neaktivno",
     "enabled": "Omogočeno",
-    "disabled": "Onemogočeno"
+    "disabled": "Onemogočeno",
+    "approveSelected": "Odobri izbrane",
+    "rejectSelected": "Zavrni izbrane",
+    "clearSelection": "Počisti",
+    "showing": "Prikazujem",
+    "of": "od",
+    "page": "Stran",
+    "previous": "Prejšnja",
+    "terminated": "Prekinjen",
+    "sunday": "Ned",
+    "monday": "Pon",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Prijava",
     "logout": "Odjava",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Za dostop do Uplift kontaktirajte svojega vodjo ali kadrovsko službo. Poslali vam bodo povezavo za povabilo.",
     "enterEmailPassword": "Prosimo, vnesite e-pošto in geslo",
     "loginFailed": "Prijava ni uspela",
-    "demoAccounts": "Demo računi:",
-    "demoWorker": "Delavec: worker@uplift.work / Demo123!",
-    "demoManager": "Vodja: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Dvostopenjska avtentikacija",
     "enterMfaCode": "Vnesite kodo iz aplikacije za avtentikacijo",
     "verificationCode": "Potrditvena koda",
@@ -194,9 +202,16 @@
     "invalidCode": "Neveljavna koda",
     "allRightsReserved": "Vse pravice pridržane",
     "termsOfService": "Pogoji uporabe",
-    "privacyPolicy": "Politika zasebnosti"
+    "privacyPolicy": "Politika zasebnosti",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Domov",
     "schedule": "Urnik",
@@ -214,7 +229,6 @@
     "leaderboard": "Lestvica",
     "badges": "Značke"
   },
-
   "home": {
     "welcome": "Dobrodošli, {{name}}!",
     "welcomeBack": "Dobrodošli nazaj,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Odprte priložnosti",
     "noOpportunities": "Trenutno ni priložnosti, ki ustrezajo vašim veščinam"
   },
-
   "schedule": {
     "title": "Moj urnik",
     "weekView": "Teden",
@@ -293,9 +306,22 @@
     "yourShift": "Vaša izmena",
     "theirShift": "Njihova izmena",
     "sendRequest": "Pošlji zahtevo",
-    "cancelSwap": "Prekliči zamenjavo"
+    "cancelSwap": "Prekliči zamenjavo",
+    "allLocations": "Vse lokacije",
+    "tuesday": "Tor",
+    "wednesday": "Sre",
+    "thursday": "Čet",
+    "friday": "Pet",
+    "saturday": "Sob",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Beleženje časa",
     "clockedIn": "Prihod zabeležen",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Tapnite za prijavo",
     "onBreakSince": "Na odmoru od {{time}}",
     "workingSince": "Delate od {{time}}",
-    "shiftEnded": "Izmena se je končala"
+    "shiftEnded": "Izmena se je končala",
+    "entriesApproved": "{{count}} vnosov odobrenih",
+    "approveError": "Odobritev vnosov ni uspela. Prosimo, poskusite znova.",
+    "entriesRejected": "{{count}} vnosov zavrnjenih",
+    "rejectError": "Zavrnitev vnosov ni uspela. Prosimo, poskusite znova.",
+    "clockInError": "Prijava ni uspela. Prosimo, poskusite znova.",
+    "clockOutError": "Odjava ni uspela. Prosimo, poskusite znova.",
+    "breakError": "Posodobitev statusa odmora ni uspela. Prosimo, poskusite znova.",
+    "noPending": "Ni čakajočih vnosov za pregled",
+    "noEntries": "Ni najdenih vnosov časa",
+    "history": "Zgodovina",
+    "managerSubtitle": "Preglejte in odobrite evidenco ur",
+    "employeeSubtitle": "Sledite svojim delovnim uram",
+    "clockIn": "Prijava",
+    "clockOut": "Odjava",
+    "startBreak": "Začni odmor",
+    "endBreak": "Končaj odmor",
+    "totalHours": "Skupaj ur"
   },
-
   "timeOff": {
     "title": "Dopust",
     "request": "Zahtevaj dopust",
@@ -359,9 +401,16 @@
     "selectDates": "Izberi datume",
     "selectType": "Izberi vrsto",
     "addNotes": "Dodaj opombe (neobvezno)",
-    "reviewRequest": "Preglej zahtevo"
+    "reviewRequest": "Preglej zahtevo",
+    "oneDay": "1 dan",
+    "days": "dni",
+    "dates": "Datumi",
+    "duration": "Trajanje",
+    "noRequests": "Ni najdenih zahtev",
+    "requestDetails": "Podrobnosti zahteve za dopust",
+    "noReason": "Razlog ni naveden",
+    "submitted": "Oddano"
   },
-
   "feed": {
     "title": "Vir",
     "newPost": "Nova objava",
@@ -401,7 +450,6 @@
     "hoursAgo": "pred {{count}} ur",
     "daysAgo": "pred {{count}} dn"
   },
-
   "messages": {
     "title": "Sporočila",
     "newMessage": "Novo sporočilo",
@@ -419,7 +467,6 @@
     "translateMessage": "Prevedi",
     "showOriginal": "Prikaži izvirnik"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Uredi profil",
@@ -447,7 +494,6 @@
     "viewProfile": "Prikaži profil",
     "memberSince": "Član od {{date}}"
   },
-
   "skills": {
     "title": "Veščine",
     "mySkills": "Moje veščine",
@@ -474,7 +520,6 @@
     "skillAdded": "Veščina uspešno dodana",
     "verificationRequested": "Preverjanje zahtevano"
   },
-
   "career": {
     "title": "Kariera",
     "careerPath": "Karierna pot",
@@ -549,7 +594,6 @@
     "expired": "Poteklo",
     "expires": "Poteče {{date}}"
   },
-
   "gamification": {
     "level": "Raven {{level}}",
     "levelShort": "Rav {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Pridobljeno {{date}}",
     "progressToEarn": "{{percent}}% napredka do pridobitve"
   },
-
   "notifications": {
     "title": "Obvestila",
     "markAllRead": "Označi vse kot prebrano",
@@ -605,7 +648,6 @@
     "allCaught": "Vse ste pregledali!",
     "checkBackLater": "Preverite pozneje za nova obvestila"
   },
-
   "settings": {
     "title": "Nastavitve",
     "subtitle": "Upravljajte svojo organizacijo in račun",
@@ -740,9 +782,23 @@
     "featureAccess": "Dostop do funkcij",
     "enableAll": "Omogoči vse",
     "disableAll": "Onemogoči vse",
-    "aboutEmployeeVisibility": "Te nastavitve nadzorujejo, katere funkcije so vidne vsakemu zaposlenemu."
+    "aboutEmployeeVisibility": "Te nastavitve nadzorujejo, katere funkcije so vidne vsakemu zaposlenemu.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Naloge",
     "myTasks": "Moje naloge",
@@ -781,7 +837,6 @@
     "takePhoto": "Posnemi fotografijo",
     "chooseFromLibrary": "Izberi iz knjižnice"
   },
-
   "expenses": {
     "title": "Stroški",
     "myExpenses": "Moji stroški",
@@ -808,7 +863,6 @@
     "totalApproved": "Skupaj odobreno",
     "totalReimbursed": "Skupaj povrnjeno"
   },
-
   "rewards": {
     "title": "Nagrade",
     "myRewards": "Moje nagrade",
@@ -828,7 +882,6 @@
     "validUntil": "Veljavno do {{date}}",
     "termsConditions": "Pogoji in določila"
   },
-
   "manager": {
     "dashboard": "Nadzorna plošča vodje",
     "teamOverview": "Pregled ekipe",
@@ -859,7 +912,6 @@
     "attendance": "Prisotnost",
     "performance": "Uspešnost"
   },
-
   "onboarding": {
     "welcome": "Dobrodošli v Uplift!",
     "getStarted": "Nastavimo vas",
@@ -877,7 +929,6 @@
     "allSet": "Vse je nastavljeno!",
     "startExploring": "Začnite raziskovati izmene in priložnosti"
   },
-
   "errors": {
     "networkError": "Napaka omrežja. Prosimo, preverite povezavo.",
     "serverError": "Napaka strežnika. Prosimo, poskusite pozneje.",
@@ -898,7 +949,6 @@
     "tryAgain": "Prosimo, poskusite znova",
     "somethingWentWrong": "Nekaj je šlo narobe"
   },
-
   "activity": {
     "title": "Pregled dejavnosti",
     "subtitle": "Preglejte zaključke nalog, nalaganja dokazil in oddaje obrazcev",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Vnesite razlog za zavrnitev...",
     "confirmRejection": "Potrdi zavrnitev",
     "approve": "Odobri",
-    "reject": "Zavrni"
+    "reject": "Zavrni",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Nastavitve obvestil",
     "subtitle": "Izberite, kako in kdaj prejemate obvestila",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Ali ste prepričani, da želite onemogočiti vsa obvestila? Kadar koli jih lahko znova omogočite.",
     "disableSuccess": "Vsa obvestila so bila onemogočena."
   },
-
   "employeeDetail": {
     "notFound": "Zaposleni ni najden",
     "backToEmployees": "Nazaj na zaposlene",
@@ -989,7 +1040,6 @@
     "basic": "Osnovna",
     "adding": "Dodajanje..."
   },
-
   "reports": {
     "title": "Poročila",
     "subtitle": "Analitika, vpogledi in poročila po meri",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Ta mesec",
     "lastMonth": "Prejšnji mesec",
     "last7Days": "Zadnjih 7 dni",
-    "last30Days": "Zadnjih 30 dni"
+    "last30Days": "Zadnjih 30 dni",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Meni",
     "closeMenu": "Zapri meni",
@@ -1041,7 +1104,6 @@
     "required": "Obvezno",
     "optional": "Neobvezno"
   },
-
   "shiftTemplates": {
     "title": "Predloge izmen",
     "subtitle": "Ustvarite vzorce izmen za ponovno uporabo",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "izmen",
     "generating": "Generiranje..."
   },
-
   "legal": {
-    "lastUpdated": "Nazadnje posodobljeno"
+    "lastUpdated": "Nazadnje posodobljeno",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "dop.",
     "pm": "pop.",
@@ -1120,5 +1289,564 @@
     "october": "Oktober",
     "november": "November",
     "december": "December"
+  },
+  "bulkImport": {
+    "title": "Masovni uvoz",
+    "subtitle": "Uvozite podatke iz CSV ali Excel datotek",
+    "selectType": "Izberi vrsto",
+    "uploadFile": "Naloži datoteko",
+    "preview": "Predogled",
+    "complete": "Zaključi",
+    "invalidFileType": "Prosimo, naložite CSV ali Excel datoteko",
+    "importFailed": "Uvoz ni uspel. Prosimo, poskusite znova.",
+    "uploadFor": "Naloži",
+    "uploadDesc": "Povlecite in spustite ali kliknite za izbiro datoteke",
+    "downloadTemplate": "Prenesi predlogo",
+    "dragDrop": "Povlecite in spustite datoteko sem ali kliknite za brskanje",
+    "supportedFormats": "Podprti formati: CSV, XLSX",
+    "previewData": "Predogled podatkov",
+    "rowsFound": "vrstic najdenih v",
+    "andMore": "In",
+    "moreRows": "več vrstic...",
+    "importing": "Uvažam...",
+    "startImport": "Začni uvoz",
+    "importComplete": "Uvoz zaključen",
+    "successfullyImported": "Uspešno uvoženo",
+    "of": "od",
+    "records": "zapisov",
+    "successful": "Uspešno",
+    "failed": "Neuspešno",
+    "total": "Skupaj",
+    "importMore": "Uvozi več podatkov",
+    "type": {
+      "employees": "Zaposleni",
+      "employeesDesc": "Uvozi profile zaposlenih",
+      "shifts": "Izmene",
+      "shiftsDesc": "Uvozi urnike izmen",
+      "locations": "Lokacije",
+      "locationsDesc": "Uvozi lokacije",
+      "skills": "Veščine",
+      "skillsDesc": "Uvozi veščine"
+    }
+  },
+  "jobs": {
+    "open": "Odprto",
+    "closed": "Zaprto",
+    "applicants": "Kandidati",
+    "created": "Delovno mesto uspešno ustvarjeno",
+    "createError": "Ustvarjanje delovnega mesta ni uspelo. Prosimo, poskusite znova.",
+    "updated": "Delovno mesto uspešno posodobljeno",
+    "updateError": "Posodobitev delovnega mesta ni uspela. Prosimo, poskusite znova.",
+    "fullTime": "Polni delovni čas",
+    "partTime": "Krajši delovni čas",
+    "contract": "Pogodba",
+    "temporary": "Začasno",
+    "subtitle": "Upravljajte notranje karierne priložnosti",
+    "openPositions": "Odprta delovna mesta",
+    "closedPositions": "Zaprta",
+    "totalApplicants": "Skupaj kandidatov",
+    "noJobs": "Ni najdenih objav delovnih mest",
+    "viewApplicants": "Prikaži kandidate",
+    "editPosting": "Uredi objavo delovnega mesta",
+    "jobTitle": "Naziv delovnega mesta",
+    "enterTitle": "Vnesite naziv delovnega mesta",
+    "selectDepartment": "Izberi oddelek",
+    "selectLocation": "Izberi lokacijo",
+    "salary": "Razpon plače",
+    "enterDescription": "Vnesite opis delovnega mesta",
+    "postJob": "Objavi delovno mesto",
+    "skillMatch": "ujemanje veščin",
+    "noApplicants": "Še ni kandidatov"
+  },
+  "employees": {
+    "searchPlaceholder": "Iskanje po imenu ali e-pošti...",
+    "employees": "zaposleni",
+    "noResults": "Ni najdenih zaposlenih, ki ustrezajo vašim kriterijem",
+    "details": "Podrobnosti zaposlenega",
+    "hireDate": "Datum zaposlitve",
+    "assigned": "dodeljeno",
+    "leaveDetails": "Podrobnosti odsotnosti",
+    "until": "Do",
+    "terminationDetails": "Podrobnosti prekinitve",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Središče za integracije",
+    "subtitle": "Povežite Uplift s svojimi obstoječimi orodji",
+    "apiFactory": "API tovarna",
+    "addIntegration": "Dodaj integracijo",
+    "configure": "Konfiguriraj",
+    "connect": "Poveži",
+    "cancel": "Prekliči",
+    "back": "Nazaj",
+    "saveChanges": "Shrani spremembe",
+    "syncNow": "Sinhroniziraj zdaj",
+    "disconnect": "Prekini povezavo z {{name}}",
+    "disconnectConfirm": "Prekiniti povezavo z {{name}}? To bo ustavilo vso sinhronizacijo.",
+    "settingsSaved": "Nastavitve shranjene",
+    "browseMarketplace": "Prebrskaj tržnico",
+    "loadingIntegrations": "Nalaganje integracij...",
+    "noIntegrations": "Ni povezanih integracij",
+    "noIntegrationsDesc": "Povežite svojo prvo integracijo za začetek sinhronizacije podatkov",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Sinhronizacija..."
+    },
+    "stats": {
+      "connected": "Povezano",
+      "available": "Na voljo",
+      "syncsToday": "Sinhronizacije danes",
+      "errors": "Napake",
+      "totalSyncs": "Skupaj sinhronizacij",
+      "lastSync": "Zadnja sinhronizacija",
+      "records": "zapisov"
+    },
+    "tabs": {
+      "connected": "Povezano",
+      "marketplace": "Tržnica",
+      "restApi": "REST API",
+      "apiFactory": "API tovarna",
+      "activityLog": "Dnevnik dejavnosti",
+      "settings": "Nastavitve",
+      "fieldMapping": "Preslikava polj",
+      "syncHistory": "Zgodovina sinhronizacij",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "Zadnja sinhronizacija",
+      "frequency": "Pogostost",
+      "status": "Status",
+      "healthy": "Zdravo",
+      "errors": "napake"
+    },
+    "connectModal": {
+      "title": "Poveži {{name}}",
+      "whatItDoes": "Kaj ta integracija počne:",
+      "redirectNotice": "Preusmerjeni boste na {{name}}",
+      "authorizeMessage": "Prijavite se in pooblastite Uplift za dostop do vaših podatkov. Zahtevamo samo potrebna dovoljenja.",
+      "connectWith": "Poveži z {{name}}",
+      "connecting": "Povezovanje z {{name}}...",
+      "completeAuth": "Prosimo, dokončajte avtorizacijo v pojavnem oknu",
+      "successConnected": "Uspešno povezano!",
+      "configureSyncSettings": "Konfigurirajte nastavitve sinhronizacije spodaj.",
+      "completeSetup": "Zaključi nastavitev",
+      "connected": "{{name}} povezan!",
+      "firstSyncSoon": "Vaša prva sinhronizacija se bo kmalu začela",
+      "hris": {
+        "syncEmployees": "Samodejno sinhronizirajte zapise zaposlenih",
+        "importDepts": "Uvozite oddelke in lokacije",
+        "syncTimeOff": "Ohranjajte stanja dopustov sinhronizirana"
+      },
+      "payroll": {
+        "exportTimesheets": "Izvozite odobrene evidence ur",
+        "syncPayRates": "Sinhronizirajte plačne tarife in nadure",
+        "autoReconciliation": "Samodejna uskladitev plač"
+      },
+      "comms": {
+        "shiftReminders": "Pošiljajte opomnike za izmene",
+        "postRecognition": "Objavljajte priznanja v kanalih",
+        "swapNotifications": "Obvestila o zahtevah za zamenjavo"
+      },
+      "identity": {
+        "sso": "Enotna prijava (SSO)",
+        "autoProvisioning": "Samodejna priprava uporabnikov",
+        "directorySync": "Sinhronizacija imenika"
+      },
+      "other": {
+        "bidirectional": "Dvosmerna sinhronizacija podatkov",
+        "realtimeWebhooks": "Posodobitve v realnem času prek webhookov",
+        "auditTrail": "Popolna revizijska sled"
+      }
+    },
+    "configureModal": {
+      "title": "Nastavitve {{name}}",
+      "connectedSince": "Povezano {{date}}"
+    },
+    "settings": {
+      "autoSync": "Samodejna sinhronizacija",
+      "autoSyncDesc": "Samodejno sinhronizirajte podatke po urniku",
+      "autoSyncScheduleDesc": "Sinhronizirajte samodejno po urniku",
+      "syncFrequency": "Pogostost sinhronizacije",
+      "nextScheduledSync": "Naslednja načrtovana sinhronizacija",
+      "dataToSync": "Podatki za sinhronizacijo",
+      "frequency": {
+        "realtime": "V realnem času",
+        "hourly": "Vsako uro",
+        "daily": "Dnevno",
+        "weekly": "Tedensko"
+      },
+      "data": {
+        "employees": "Zaposleni",
+        "timeEntries": "Vnosi časa",
+        "departments": "Oddelki",
+        "locations": "Lokacije"
+      }
+    },
+    "mapping": {
+      "description": "Preslikava polj nadzoruje, kako se podatki iz {{name}} preslikajo v polja Uplift. Spremembe začnejo veljati ob naslednji sinhronizaciji.",
+      "sourceField": "Polje {{name}}",
+      "upliftField": "Polje Uplift",
+      "status": "Status",
+      "selectField": "Izberi polje...",
+      "mapped": "Preslikano",
+      "unmapped": "Nepreslikano"
+    },
+    "history": {
+      "noHistory": "Še ni zgodovine sinhronizacij",
+      "sync": "Sinhronizacija",
+      "duration": "Trajanje",
+      "records": "Zapisi",
+      "created": "Ustvarjeno",
+      "updated": "Posodobljeno"
+    },
+    "webhooks": {
+      "description": "Webhooks obvestijo {{name}}, ko se v Upliftu zgodijo dogodki",
+      "addWebhook": "Dodaj webhook",
+      "noWebhooks": "Ni konfiguriranih webhookov",
+      "createFirst": "Ustvarite svoj prvi webhook",
+      "active": "Aktiven",
+      "paused": "Začasno ustavljen",
+      "sendTestPayload": "Pošlji testni podatek",
+      "pauseWebhook": "Začasno ustavi webhook",
+      "enableWebhook": "Omogoči webhook",
+      "deleteWebhook": "Izbriši webhook",
+      "lastTriggered": "Nazadnje sproženo",
+      "never": "Nikoli",
+      "successRate": "Stopnja uspešnosti",
+      "sendEventsTo": "Pošlji dogodke na {{name}}",
+      "endpointUrl": "URL končne točke",
+      "eventsToSend": "Dogodki za pošiljanje",
+      "hmacInfo": "Vsa sporočila webhook bomo podpisali z HMAC-SHA256. Podpis boste prejeli v",
+      "header": "glavi.",
+      "createWebhook": "Ustvari webhook",
+      "validationError": "Prosimo, vnesite URL in izberite vsaj en dogodek",
+      "createdSuccess": "Webhook uspešno ustvarjen!",
+      "testSent": "Testni podatek poslan na",
+      "testStatus": "Status",
+      "deleteConfirm": "Izbrisati ta webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Išči integracije...",
+      "allCategories": "Vse kategorije",
+      "infoBannerTitle": "Uplift deluje z vašimi obstoječimi orodji",
+      "infoBannerDesc": "Povežite svoj HRIS, sistem za plače in komunikacijska orodja. Sinhroniziramo podatke — ne nadomeščamo vaše infrastrukture.",
+      "noResults": "Nobena integracija ne ustreza vašemu iskanju",
+      "dontSeeSystem": "Ne vidite svojega sistema?",
+      "alwaysAdding": "Nenehno dodajamo nove integracije. Povejte nam, kaj potrebujete.",
+      "requestIntegration": "Zahtevaj integracijo"
+    },
+    "activity": {
+      "recentActivity": "Nedavna dejavnost integracij",
+      "exportLog": "Izvozi dnevnik"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API tovarna",
+    "subtitle": "Ustvarite REST API integracije po meri brez pisanja kode",
+    "newIntegration": "Nova integracija",
+    "searchPlaceholder": "Išči integracije...",
+    "loadingIntegrations": "Nalaganje integracij...",
+    "noIntegrationsFound": "Ni najdenih integracij",
+    "noIntegrationsYet": "Še ni integracij po meri",
+    "tryDifferentSearch": "Poskusite z drugim iskalnim izrazom",
+    "createFirstDesc": "Ustvarite svojo prvo API integracijo po meri za povezavo s katerim koli REST API",
+    "createIntegration": "Ustvari integracijo",
+    "deleteConfirm": "Ali ste prepričani, da želite izbrisati to integracijo?",
+    "list": {
+      "eventsCount": "{{count}} dogodkov",
+      "scheduled": "Načrtovano",
+      "incomingWebhook": "Dohodni webhook",
+      "manual": "Ročno",
+      "runsCount": "{{count}} zagonov",
+      "errorsCount": "{{count}} napak",
+      "disabled": "Onemogočeno",
+      "edit": "Uredi",
+      "test": "Testiraj",
+      "viewLogs": "Prikaži dnevnike",
+      "delete": "Izbriši",
+      "lastRun": "Zadnji zagon"
+    },
+    "stats": {
+      "totalIntegrations": "Skupaj integracij",
+      "active": "Aktivno",
+      "runsToday": "Zagoni danes",
+      "totalErrors": "Skupaj napak"
+    },
+    "editor": {
+      "editTitle": "Uredi API integracijo",
+      "createTitle": "Ustvari API integracijo",
+      "subtitle": "Konfigurirajte svojo REST API povezavo po meri",
+      "integrationName": "Ime integracije",
+      "integrationNamePlaceholder": "npr. Sinhronizacija s plačnim sistemom",
+      "description": "Opis",
+      "descriptionPlaceholder": "Kaj počne ta integracija?",
+      "method": "Metoda",
+      "url": "URL",
+      "headers": "Glave",
+      "addHeader": "Dodaj glavo",
+      "headerName": "Ime glave",
+      "headerValue": "Vrednost",
+      "requestBodyJson": "Telo zahteve (JSON)",
+      "useVariables": "Uporabite {{field}} za spremenljivke",
+      "availableVariables": "Razpoložljive spremenljivke",
+      "authenticationType": "Vrsta avtentikacije",
+      "apiKeyLocation": "Lokacija API ključa",
+      "header": "Glava",
+      "queryParameter": "Parameter poizvedbe",
+      "keyName": "Ime ključa",
+      "keyNamePlaceholder": "npr. X-API-Key",
+      "apiKey": "API ključ",
+      "enterApiKey": "Vnesite svoj API ključ",
+      "bearerToken": "Bearer žeton",
+      "enterToken": "Vnesite svoj žeton",
+      "username": "Uporabniško ime",
+      "password": "Geslo",
+      "tokenUrl": "URL žetona",
+      "clientId": "ID odjemalca",
+      "clientSecret": "Skrivnost odjemalca",
+      "scopes": "Obsegi (ločeni z vejico)",
+      "whenShouldRun": "Kdaj naj se ta integracija zažene?",
+      "selectEvents": "Izberi dogodke",
+      "schedule": "Urnik",
+      "cronExpression": "CRON izraz",
+      "scheduleUtcNote": "Urnik uporablja UTC časovni pas. Trenutni CRON",
+      "yourWebhookUrl": "Vaš webhook URL",
+      "webhookPostNote": "Pošiljajte POST zahteve na ta URL. Obdelali bomo dohodne podatke in jih preslikali v Uplift.",
+      "fieldMappings": "Preslikave polj",
+      "fieldMappingsDesc": "Preslikajte polja Uplift v vaša zunanja API polja",
+      "addMapping": "Dodaj preslikavo",
+      "noFieldMappings": "Še ni preslikav polj",
+      "addMappingsDesc": "Dodajte preslikave za pretvorbo podatkov med sistemi",
+      "addFirstMapping": "Dodaj prvo preslikavo",
+      "selectUpliftField": "Izberi polje Uplift...",
+      "externalFieldName": "Ime zunanjega polja",
+      "noTransform": "Brez pretvorbe",
+      "dateIso": "Datum → ISO",
+      "dateUk": "Datum → UK format",
+      "boolYn": "Bool → D/N",
+      "fieldMappingTip": "Preslikave polj se uporabljajo za samodejno sestavljanje telesa zahteve. Za strukture JSON po meri lahko v zavihku Zahteva uporabite tudi sintakso {{field}}.",
+      "testConfiguration": "Testna konfiguracija",
+      "testDescription": "Pošljite testno zahtevo za preverjanje vaše konfiguracije. Uporabili bomo vzorčne podatke.",
+      "testing": "Testiranje...",
+      "sendTestRequest": "Pošlji testno zahtevo",
+      "success": "Uspeh",
+      "failed": "Neuspeh",
+      "status": "Status",
+      "time": "Čas",
+      "response": "Odgovor",
+      "enableIntegration": "Omogoči integracijo",
+      "cancel": "Prekliči",
+      "saveChanges": "Shrani spremembe",
+      "createIntegration": "Ustvari integracijo",
+      "tabs": {
+        "request": "Zahteva",
+        "authentication": "Avtentikacija",
+        "trigger": "Sprožilec",
+        "fieldMapping": "Preslikava polj",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Dnevniki izvajanja",
+      "export": "Izvozi",
+      "noData": "Še ni podatkov. Dnevniki izvajanja se bodo pojavili, ko se integracije zaženejo.",
+      "unknown": "Neznano",
+      "error": "Napaka"
+    },
+    "helpBanner": {
+      "title": "Potrebujete pomoč pri gradnji integracije?",
+      "description": "Preverite našo API dokumentacijo za primere ali kontaktirajte podporo za zahtevne primere uporabe."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API ključi",
+    "subtitle": "Generirajte API ključe za dostop do podatkov Uplift iz vaših aplikacij",
+    "apiDocs": "API dokumentacija",
+    "createKey": "Ustvari ključ",
+    "createApiKey": "Ustvari API ključ",
+    "loadingKeys": "Nalaganje API ključev...",
+    "loadError": "Nalaganje API ključev ni uspelo.",
+    "noKeysYet": "Še ni API ključev",
+    "createFirstDesc": "Ustvarite svoj prvi API ključ za začetek integracije z Upliftom",
+    "retry": "Ponovi",
+    "revokeConfirm": "Preklicati API ključ \"{{name}}\"? Tega dejanja ni mogoče razveljaviti.",
+    "regenerateConfirm": "Regenerirati skrivnost za \"{{name}}\"? Stara skrivnost bo takoj prenehala delovati.",
+    "regenerateSuccess": "Nov tajni ključ: {{secret}}\n\nShranite ga zdaj – ne boste ga več videli!",
+    "regenerateError": "Regeneracija skrivnosti ni uspela: {{message}}",
+    "usageStats": "Statistika uporabe za {{name}}:\n\nSkupaj zahtev: {{requests}}\nZadnja uporaba: {{lastUsed}}",
+    "card": {
+      "noDescription": "Brez opisa",
+      "expired": "Poteklo",
+      "active": "Aktiven",
+      "inactive": "Neaktiven",
+      "keyId": "ID ključa",
+      "requests": "Zahteve",
+      "lastUsed": "Zadnja uporaba",
+      "never": "Nikoli",
+      "rateLimit": "Omejitev zahtev",
+      "standard": "Standardno",
+      "hideDetails": "Skrij podrobnosti",
+      "showDetails": "Prikaži podrobnosti",
+      "scopes": "OBSEGI",
+      "created": "Ustvarjeno",
+      "expires": "Poteče",
+      "usage": "Uporaba",
+      "regenerate": "Regeneriraj",
+      "revoke": "Prekliči"
+    },
+    "create": {
+      "keyCreatedTitle": "API ključ ustvarjen",
+      "createTitle": "Ustvari API ključ",
+      "keyCreatedSuccess": "API ključ uspešno ustvarjen",
+      "copySecretWarning": "Kopirajte svoj tajni ključ zdaj. Ne boste ga več videli!",
+      "keyIdLabel": "ID ključa",
+      "secretKeyLabel": "Tajni ključ",
+      "fullApiKeyLabel": "Celoten API ključ (za glavo Authorization)",
+      "fullKeyLabel": "Celoten ključ",
+      "authHeaderNote": "Uporabite to v svoji glavi Authorization",
+      "done": "Končano",
+      "keyName": "Ime ključa",
+      "keyNamePlaceholder": "npr. Produkcijski API ključ",
+      "description": "Opis",
+      "descriptionPlaceholder": "Za kaj bo ta ključ uporabljen?",
+      "permissions": "Dovoljenja",
+      "rateLimit": "Omejitev zahtev",
+      "expiration": "Veljavnost",
+      "neverExpires": "Nikoli ne poteče",
+      "thirtyDays": "30 dni",
+      "ninetyDays": "90 dni",
+      "oneYear": "1 leto",
+      "createError": "Ustvarjanje API ključa ni uspelo. Prosimo, poskusite znova.",
+      "cancel": "Prekliči",
+      "createKey": "Ustvari ključ"
+    },
+    "docs": {
+      "quickStart": "Hiter začetek",
+      "authentication": "Avtentikacija",
+      "exampleResponse": "Primer odgovora",
+      "viewFullDocs": "Prikaži celotno dokumentacijo",
+      "downloadSpec": "Prenesi OpenAPI specifikacijo"
+    },
+    "securityBanner": {
+      "title": "Varnost API ključev",
+      "description": "Hranite svoje API ključe na varnem. Nikoli jih ne izpostavljajte v kodi na strani odjemalca ali javnih repozitorijih. Če je ključ ogrožen, ga takoj prekličite in ustvarite novega."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Nastavitev organizacije",
+    "subtitle": "Konfigurirajmo vašo organizacijo",
+    "steps": {
+      "orgDetails": "Podrobnosti organizacije",
+      "locations": "Lokacije",
+      "departments": "Oddelki",
+      "roles": "Vloge in dovoljenja",
+      "review": "Pregled in zagon"
+    },
+    "orgDetails": {
+      "companyName": "Ime podjetja",
+      "companyNamePlaceholder": "npr. Podjetje d.o.o.",
+      "tradingName": "Poslovno ime (neobvezno)",
+      "tradingNamePlaceholder": "Javno ime",
+      "industry": "Panoga",
+      "selectIndustry": "Izberi panogo",
+      "companySize": "Velikost podjetja",
+      "selectSize": "Izberi velikost",
+      "timezone": "Privzeti časovni pas",
+      "currency": "Privzeta valuta",
+      "weekStart": "Teden se začne",
+      "logo": "Logotip podjetja",
+      "uploadLogo": "Naloži logotip",
+      "uploadLogoDesc": "PNG ali SVG, priporočena velikost 200×200px"
+    },
+    "locations": {
+      "title": "Lokacije",
+      "subtitle": "Dodajte svoje pisarne, lokacije ali podružnice",
+      "addLocation": "Dodaj lokacijo",
+      "name": "Ime lokacije",
+      "namePlaceholder": "npr. Sedež podjetja",
+      "address": "Naslov",
+      "addressPlaceholder": "Polni naslov",
+      "timezone": "Časovni pas",
+      "noLocations": "Še ni dodanih lokacij",
+      "addFirst": "Dodajte svojo prvo lokacijo za začetek"
+    },
+    "departments": {
+      "title": "Oddelki",
+      "subtitle": "Nastavite strukturo oddelkov",
+      "addDepartment": "Dodaj oddelek",
+      "name": "Ime oddelka",
+      "namePlaceholder": "npr. Inženiring",
+      "parentDepartment": "Nadrejeni oddelek (neobvezno)",
+      "none": "Brez (najvišja raven)",
+      "manager": "Vodja oddelka",
+      "selectManager": "Izberi vodjo",
+      "noDepartments": "Še ni dodanih oddelkov",
+      "addFirst": "Dodajte svoj prvi oddelek"
+    },
+    "roles": {
+      "title": "Vloge in dovoljenja",
+      "subtitle": "Konfigurirajte ravni dostopa za vašo ekipo",
+      "addRole": "Dodaj vlogo po meri",
+      "builtIn": "Vgrajena",
+      "custom": "Po meri",
+      "name": "Ime vloge",
+      "namePlaceholder": "npr. Vodja izmen",
+      "description": "Opis",
+      "descriptionPlaceholder": "Kaj lahko ta vloga počne?",
+      "permissions": "Dovoljenja",
+      "permissionGroups": {
+        "scheduling": "Razporejanje",
+        "timeTracking": "Beleženje časa",
+        "employees": "Zaposleni",
+        "reports": "Poročila",
+        "settings": "Nastavitve"
+      }
+    },
+    "review": {
+      "title": "Pregled in zagon",
+      "subtitle": "Preverite, ali je vse v redu, preden začnete",
+      "orgInfo": "Podatki o organizaciji",
+      "locationsCount": "{{count}} konfiguriranih lokacij",
+      "departmentsCount": "{{count}} konfiguriranih oddelkov",
+      "rolesCount": "{{count}} konfiguriranih vlog",
+      "allLooksGood": "Vse izgleda dobro!",
+      "launch": "Zaženi organizacijo",
+      "launchDesc": "To bo aktiviralo vašo organizacijo in poslalo povabila dodanim članom ekipe."
+    },
+    "navigation": {
+      "back": "Nazaj",
+      "next": "Naprej",
+      "skip": "Preskoči za zdaj",
+      "finish": "Zaključi nastavitev"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

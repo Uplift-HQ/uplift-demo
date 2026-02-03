@@ -54,7 +54,6 @@
     "viewMyCareer": "ดูอาชีพของฉัน",
     "timeOffBalance": "วันหยุดคงเหลือ"
   },
-
   "nav": {
     "dashboard": "แดชบอร์ด",
     "employees": "พนักงาน",
@@ -150,9 +149,21 @@
     "active": "ใช้งานอยู่",
     "inactive": "ไม่ใช้งาน",
     "enabled": "เปิดใช้งาน",
-    "disabled": "ปิดใช้งาน"
+    "disabled": "ปิดใช้งาน",
+    "approveSelected": "อนุมัติที่เลือก",
+    "rejectSelected": "ปฏิเสธที่เลือก",
+    "clearSelection": "ล้าง",
+    "showing": "แสดง",
+    "of": "จาก",
+    "page": "หน้า",
+    "previous": "ก่อนหน้า",
+    "terminated": "สิ้นสุดสัญญา",
+    "sunday": "อา.",
+    "monday": "จ.",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "เข้าสู่ระบบ",
     "logout": "ออกจากระบบ",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "เพื่อเข้าถึง Uplift กรุณาติดต่อผู้จัดการหรือฝ่ายทรัพยากรบุคคล พวกเขาจะส่งลิงก์เชิญให้คุณ",
     "enterEmailPassword": "กรุณากรอกอีเมลและรหัสผ่าน",
     "loginFailed": "เข้าสู่ระบบล้มเหลว",
-    "demoAccounts": "บัญชีสาธิต:",
-    "demoWorker": "พนักงาน: worker@uplift.work / Demo123!",
-    "demoManager": "ผู้จัดการ: manager@uplift.work / Demo123!",
     "twoFactorAuth": "การยืนยันตัวตนสองขั้นตอน",
     "enterMfaCode": "กรอกรหัสจากแอปยืนยันตัวตน",
     "verificationCode": "รหัสยืนยัน",
@@ -194,9 +202,16 @@
     "invalidCode": "รหัสไม่ถูกต้อง",
     "allRightsReserved": "สงวนลิขสิทธิ์",
     "termsOfService": "ข้อกำหนดการให้บริการ",
-    "privacyPolicy": "นโยบายความเป็นส่วนตัว"
+    "privacyPolicy": "นโยบายความเป็นส่วนตัว",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "หน้าแรก",
     "schedule": "ตารางงาน",
@@ -214,7 +229,6 @@
     "leaderboard": "กระดานผู้นำ",
     "badges": "เหรียญตรา"
   },
-
   "home": {
     "welcome": "ยินดีต้อนรับ {{name}}!",
     "welcomeBack": "ยินดีต้อนรับกลับ",
@@ -239,7 +253,6 @@
     "openOpportunities": "โอกาสที่เปิดรับ",
     "noOpportunities": "ไม่มีโอกาสที่ตรงกับทักษะของคุณในขณะนี้"
   },
-
   "schedule": {
     "title": "ตารางงานของฉัน",
     "weekView": "สัปดาห์",
@@ -293,9 +306,22 @@
     "yourShift": "กะของคุณ",
     "theirShift": "กะของพวกเขา",
     "sendRequest": "ส่งคำขอ",
-    "cancelSwap": "ยกเลิกการสลับ"
+    "cancelSwap": "ยกเลิกการสลับ",
+    "allLocations": "ทุกสถานที่",
+    "tuesday": "อ.",
+    "wednesday": "พ.",
+    "thursday": "พฤ.",
+    "friday": "ศ.",
+    "saturday": "ส.",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "บันทึกเวลา",
     "clockedIn": "เข้างานแล้ว",
@@ -326,9 +352,25 @@
     "tapToClockIn": "แตะเพื่อเข้างาน",
     "onBreakSince": "พักเบรกตั้งแต่ {{time}}",
     "workingSince": "ทำงานตั้งแต่ {{time}}",
-    "shiftEnded": "สิ้นสุดกะแล้ว"
+    "shiftEnded": "สิ้นสุดกะแล้ว",
+    "entriesApproved": "อนุมัติ {{count}} รายการ",
+    "approveError": "ไม่สามารถอนุมัติรายการได้ กรุณาลองใหม่อีกครั้ง",
+    "entriesRejected": "ปฏิเสธ {{count}} รายการ",
+    "rejectError": "ไม่สามารถปฏิเสธรายการได้ กรุณาลองใหม่อีกครั้ง",
+    "clockInError": "ไม่สามารถลงเวลาเข้าได้ กรุณาลองใหม่อีกครั้ง",
+    "clockOutError": "ไม่สามารถลงเวลาออกได้ กรุณาลองใหม่อีกครั้ง",
+    "breakError": "ไม่สามารถอัปเดตสถานะพักได้ กรุณาลองใหม่อีกครั้ง",
+    "noPending": "ไม่มีรายการที่รอตรวจสอบ",
+    "noEntries": "ไม่พบรายการเวลา",
+    "history": "ประวัติ",
+    "managerSubtitle": "ตรวจสอบและอนุมัติใบบันทึกเวลา",
+    "employeeSubtitle": "ติดตามชั่วโมงการทำงานของคุณ",
+    "clockIn": "ลงเวลาเข้า",
+    "clockOut": "ลงเวลาออก",
+    "startBreak": "เริ่มพัก",
+    "endBreak": "หยุดพัก",
+    "totalHours": "ชั่วโมงรวม"
   },
-
   "timeOff": {
     "title": "วันหยุด",
     "request": "ขอลางาน",
@@ -359,9 +401,16 @@
     "selectDates": "เลือกวันที่",
     "selectType": "เลือกประเภท",
     "addNotes": "เพิ่มหมายเหตุ (ไม่บังคับ)",
-    "reviewRequest": "ตรวจสอบคำขอ"
+    "reviewRequest": "ตรวจสอบคำขอ",
+    "oneDay": "1 วัน",
+    "days": "วัน",
+    "dates": "วันที่",
+    "duration": "ระยะเวลา",
+    "noRequests": "ไม่พบคำขอ",
+    "requestDetails": "รายละเอียดคำขอลา",
+    "noReason": "ไม่ได้ระบุเหตุผล",
+    "submitted": "ส่งแล้ว"
   },
-
   "feed": {
     "title": "ฟีด",
     "newPost": "โพสต์ใหม่",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}} ชั่วโมงที่แล้ว",
     "daysAgo": "{{count}} วันที่แล้ว"
   },
-
   "messages": {
     "title": "ข้อความ",
     "newMessage": "ข้อความใหม่",
@@ -419,7 +467,6 @@
     "translateMessage": "แปล",
     "showOriginal": "แสดงต้นฉบับ"
   },
-
   "profile": {
     "title": "โปรไฟล์",
     "editProfile": "แก้ไขโปรไฟล์",
@@ -447,7 +494,6 @@
     "viewProfile": "ดูโปรไฟล์",
     "memberSince": "สมาชิกตั้งแต่ {{date}}"
   },
-
   "skills": {
     "title": "ทักษะ",
     "mySkills": "ทักษะของฉัน",
@@ -474,7 +520,6 @@
     "skillAdded": "เพิ่มทักษะสำเร็จ",
     "verificationRequested": "ขอการยืนยันแล้ว"
   },
-
   "career": {
     "title": "อาชีพ",
     "careerPath": "เส้นทางอาชีพ",
@@ -549,7 +594,6 @@
     "expired": "หมดอายุแล้ว",
     "expires": "หมดอายุ {{date}}"
   },
-
   "gamification": {
     "level": "ระดับ {{level}}",
     "levelShort": "ระดับ {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "ได้รับเมื่อ {{date}}",
     "progressToEarn": "{{percent}}% ความก้าวหน้าในการรับ"
   },
-
   "notifications": {
     "title": "การแจ้งเตือน",
     "markAllRead": "ทำเครื่องหมายอ่านทั้งหมด",
@@ -605,7 +648,6 @@
     "allCaught": "คุณติดตามข่าวสารล่าสุดแล้ว!",
     "checkBackLater": "กลับมาตรวจสอบใหม่เพื่อดูการแจ้งเตือนใหม่"
   },
-
   "settings": {
     "title": "ตั้งค่า",
     "subtitle": "จัดการองค์กรและบัญชีของคุณ",
@@ -740,9 +782,23 @@
     "featureAccess": "การเข้าถึงฟีเจอร์",
     "enableAll": "เปิดใช้งานทั้งหมด",
     "disableAll": "ปิดใช้งานทั้งหมด",
-    "aboutEmployeeVisibility": "การตั้งค่าเหล่านี้ควบคุมฟีเจอร์ที่มองเห็นได้สำหรับพนักงานแต่ละคน"
+    "aboutEmployeeVisibility": "การตั้งค่าเหล่านี้ควบคุมฟีเจอร์ที่มองเห็นได้สำหรับพนักงานแต่ละคน",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "งาน",
     "myTasks": "งานของฉัน",
@@ -781,7 +837,6 @@
     "takePhoto": "ถ่ายรูป",
     "chooseFromLibrary": "เลือกจากคลัง"
   },
-
   "expenses": {
     "title": "ค่าใช้จ่าย",
     "myExpenses": "ค่าใช้จ่ายของฉัน",
@@ -808,7 +863,6 @@
     "totalApproved": "รวมที่อนุมัติ",
     "totalReimbursed": "รวมที่คืนเงิน"
   },
-
   "rewards": {
     "title": "รางวัล",
     "myRewards": "รางวัลของฉัน",
@@ -828,7 +882,6 @@
     "validUntil": "ใช้ได้ถึง {{date}}",
     "termsConditions": "ข้อกำหนดและเงื่อนไข"
   },
-
   "manager": {
     "dashboard": "แดชบอร์ดผู้จัดการ",
     "teamOverview": "ภาพรวมทีม",
@@ -859,7 +912,6 @@
     "attendance": "การเข้างาน",
     "performance": "ผลงาน"
   },
-
   "onboarding": {
     "welcome": "ยินดีต้อนรับสู่ Uplift!",
     "getStarted": "มาเริ่มตั้งค่าให้คุณ",
@@ -877,7 +929,6 @@
     "allSet": "ตั้งค่าเรียบร้อยแล้ว!",
     "startExploring": "เริ่มสำรวจกะและโอกาส"
   },
-
   "errors": {
     "networkError": "ข้อผิดพลาดเครือข่าย กรุณาตรวจสอบการเชื่อมต่อ",
     "serverError": "ข้อผิดพลาดเซิร์ฟเวอร์ กรุณาลองอีกครั้งในภายหลัง",
@@ -898,7 +949,6 @@
     "tryAgain": "กรุณาลองอีกครั้ง",
     "somethingWentWrong": "มีบางอย่างผิดพลาด"
   },
-
   "activity": {
     "title": "ตรวจสอบกิจกรรม",
     "subtitle": "ตรวจสอบการทำงานเสร็จ การอัปโหลดหลักฐาน และการส่งแบบฟอร์ม",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "กรอกเหตุผลการปฏิเสธ...",
     "confirmRejection": "ยืนยันการปฏิเสธ",
     "approve": "อนุมัติ",
-    "reject": "ปฏิเสธ"
+    "reject": "ปฏิเสธ",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "การตั้งค่าการแจ้งเตือน",
     "subtitle": "เลือกวิธีและเวลาที่คุณต้องการรับการแจ้งเตือน",
@@ -973,7 +1025,6 @@
     "disableConfirm": "คุณแน่ใจหรือไม่ว่าต้องการปิดการแจ้งเตือนทั้งหมด? คุณสามารถเปิดใช้งานอีกครั้งได้ทุกเมื่อ",
     "disableSuccess": "ปิดการแจ้งเตือนทั้งหมดแล้ว"
   },
-
   "employeeDetail": {
     "notFound": "ไม่พบพนักงาน",
     "backToEmployees": "กลับไปยังพนักงาน",
@@ -989,7 +1040,6 @@
     "basic": "พื้นฐาน",
     "adding": "กำลังเพิ่ม..."
   },
-
   "reports": {
     "title": "รายงาน",
     "subtitle": "การวิเคราะห์ ข้อมูลเชิงลึก และรายงานที่กำหนดเอง",
@@ -1025,9 +1075,22 @@
     "thisMonth": "เดือนนี้",
     "lastMonth": "เดือนที่แล้ว",
     "last7Days": "7 วันที่ผ่านมา",
-    "last30Days": "30 วันที่ผ่านมา"
+    "last30Days": "30 วันที่ผ่านมา",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "เมนู",
     "closeMenu": "ปิดเมนู",
@@ -1041,7 +1104,6 @@
     "required": "จำเป็น",
     "optional": "ไม่บังคับ"
   },
-
   "shiftTemplates": {
     "title": "เทมเพลตกะ",
     "subtitle": "สร้างรูปแบบกะที่ใช้ซ้ำได้",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "กะ",
     "generating": "กำลังสร้าง..."
   },
-
   "legal": {
-    "lastUpdated": "อัปเดตล่าสุด"
+    "lastUpdated": "อัปเดตล่าสุด",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "AM",
     "pm": "PM",
@@ -1120,5 +1289,564 @@
     "october": "ตุลาคม",
     "november": "พฤศจิกายน",
     "december": "ธันวาคม"
+  },
+  "bulkImport": {
+    "title": "นำเข้าข้อมูลจำนวนมาก",
+    "subtitle": "นำเข้าข้อมูลจากไฟล์ CSV หรือ Excel",
+    "selectType": "เลือกประเภท",
+    "uploadFile": "อัปโหลดไฟล์",
+    "preview": "ตัวอย่าง",
+    "complete": "เสร็จสิ้น",
+    "invalidFileType": "กรุณาอัปโหลดไฟล์ CSV หรือ Excel",
+    "importFailed": "การนำเข้าล้มเหลว กรุณาลองอีกครั้ง",
+    "uploadFor": "อัปโหลด",
+    "uploadDesc": "ลากและวางหรือคลิกเพื่อเลือกไฟล์",
+    "downloadTemplate": "ดาวน์โหลดเทมเพลต",
+    "dragDrop": "ลากและวางไฟล์ที่นี่ หรือคลิกเพื่อเรียกดู",
+    "supportedFormats": "รูปแบบที่รองรับ: CSV, XLSX",
+    "previewData": "ตัวอย่างข้อมูล",
+    "rowsFound": "แถวที่พบใน",
+    "andMore": "และ",
+    "moreRows": "แถวเพิ่มเติม...",
+    "importing": "กำลังนำเข้า...",
+    "startImport": "เริ่มนำเข้า",
+    "importComplete": "นำเข้าเสร็จสมบูรณ์",
+    "successfullyImported": "นำเข้าสำเร็จ",
+    "of": "จาก",
+    "records": "รายการ",
+    "successful": "สำเร็จ",
+    "failed": "ล้มเหลว",
+    "total": "ทั้งหมด",
+    "importMore": "นำเข้าข้อมูลเพิ่มเติม",
+    "type": {
+      "employees": "พนักงาน",
+      "employeesDesc": "นำเข้าโปรไฟล์พนักงาน",
+      "shifts": "กะการทำงาน",
+      "shiftsDesc": "นำเข้าตารางกะ",
+      "locations": "สถานที่",
+      "locationsDesc": "นำเข้าสถานที่",
+      "skills": "ทักษะ",
+      "skillsDesc": "นำเข้าทักษะ"
+    }
+  },
+  "jobs": {
+    "open": "เปิดรับ",
+    "closed": "ปิดแล้ว",
+    "applicants": "ผู้สมัคร",
+    "created": "สร้างประกาศรับสมัครงานสำเร็จ",
+    "createError": "ไม่สามารถสร้างประกาศรับสมัครงานได้ กรุณาลองอีกครั้ง",
+    "updated": "อัปเดตประกาศรับสมัครงานสำเร็จ",
+    "updateError": "ไม่สามารถอัปเดตประกาศรับสมัครงานได้ กรุณาลองอีกครั้ง",
+    "fullTime": "เต็มเวลา",
+    "partTime": "พาร์ทไทม์",
+    "contract": "สัญญาจ้าง",
+    "temporary": "ชั่วคราว",
+    "subtitle": "จัดการโอกาสงานภายใน",
+    "openPositions": "ตำแหน่งที่เปิดรับ",
+    "closedPositions": "ปิดแล้ว",
+    "totalApplicants": "ผู้สมัครทั้งหมด",
+    "noJobs": "ไม่พบประกาศรับสมัครงาน",
+    "viewApplicants": "ดูผู้สมัคร",
+    "editPosting": "แก้ไขประกาศรับสมัครงาน",
+    "jobTitle": "ตำแหน่งงาน",
+    "enterTitle": "ป้อนตำแหน่งงาน",
+    "selectDepartment": "เลือกแผนก",
+    "selectLocation": "เลือกสถานที่",
+    "salary": "ช่วงเงินเดือน",
+    "enterDescription": "ป้อนรายละเอียดงาน",
+    "postJob": "โพสต์งาน",
+    "skillMatch": "ทักษะตรงกัน",
+    "noApplicants": "ยังไม่มีผู้สมัคร"
+  },
+  "employees": {
+    "searchPlaceholder": "ค้นหาด้วยชื่อหรืออีเมล...",
+    "employees": "พนักงาน",
+    "noResults": "ไม่พบพนักงานที่ตรงกับเกณฑ์ของคุณ",
+    "details": "รายละเอียดพนักงาน",
+    "hireDate": "วันที่เริ่มงาน",
+    "assigned": "มอบหมายแล้ว",
+    "leaveDetails": "รายละเอียดการลา",
+    "until": "จนถึง",
+    "terminationDetails": "รายละเอียดการเลิกจ้าง",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "ศูนย์กลางการเชื่อมต่อ",
+    "subtitle": "เชื่อมต่อ Uplift กับเครื่องมือที่คุณใช้อยู่",
+    "apiFactory": "โรงงาน API",
+    "addIntegration": "เพิ่มการเชื่อมต่อ",
+    "configure": "กำหนดค่า",
+    "connect": "เชื่อมต่อ",
+    "cancel": "ยกเลิก",
+    "back": "ย้อนกลับ",
+    "saveChanges": "บันทึกการเปลี่ยนแปลง",
+    "syncNow": "ซิงค์ตอนนี้",
+    "disconnect": "ยกเลิกการเชื่อมต่อ {{name}}",
+    "disconnectConfirm": "ยกเลิกการเชื่อมต่อ {{name}}? การซิงค์ทั้งหมดจะหยุดลง",
+    "settingsSaved": "บันทึกการตั้งค่าแล้ว",
+    "browseMarketplace": "เรียกดูมาร์เก็ตเพลส",
+    "loadingIntegrations": "กำลังโหลดการเชื่อมต่อ...",
+    "noIntegrations": "ไม่มีการเชื่อมต่อ",
+    "noIntegrationsDesc": "เชื่อมต่อการเชื่อมต่อแรกของคุณเพื่อเริ่มซิงค์ข้อมูล",
+    "status": {
+      "beta": "เบต้า",
+      "syncing": "กำลังซิงค์..."
+    },
+    "stats": {
+      "connected": "เชื่อมต่อแล้ว",
+      "available": "พร้อมใช้งาน",
+      "syncsToday": "ซิงค์วันนี้",
+      "errors": "ข้อผิดพลาด",
+      "totalSyncs": "ซิงค์ทั้งหมด",
+      "lastSync": "ซิงค์ล่าสุด",
+      "records": "รายการ"
+    },
+    "tabs": {
+      "connected": "เชื่อมต่อแล้ว",
+      "marketplace": "มาร์เก็ตเพลส",
+      "restApi": "REST API",
+      "apiFactory": "โรงงาน API",
+      "activityLog": "บันทึกกิจกรรม",
+      "settings": "การตั้งค่า",
+      "fieldMapping": "การแมปฟิลด์",
+      "syncHistory": "ประวัติการซิงค์",
+      "webhooks": "เว็บฮุก"
+    },
+    "connection": {
+      "lastSync": "ซิงค์ล่าสุด",
+      "frequency": "ความถี่",
+      "status": "สถานะ",
+      "healthy": "ปกติ",
+      "errors": "ข้อผิดพลาด"
+    },
+    "connectModal": {
+      "title": "เชื่อมต่อ {{name}}",
+      "whatItDoes": "สิ่งที่การเชื่อมต่อนี้ทำ:",
+      "redirectNotice": "คุณจะถูกนำไปยัง {{name}}",
+      "authorizeMessage": "ลงชื่อเข้าใช้และอนุญาตให้ Uplift เข้าถึงข้อมูลของคุณ เราขอเฉพาะสิทธิ์ที่จำเป็นเท่านั้น",
+      "connectWith": "เชื่อมต่อกับ {{name}}",
+      "connecting": "กำลังเชื่อมต่อกับ {{name}}...",
+      "completeAuth": "กรุณาทำการอนุญาตในหน้าต่างป็อปอัพให้เสร็จสิ้น",
+      "successConnected": "เชื่อมต่อสำเร็จ!",
+      "configureSyncSettings": "กำหนดค่าการตั้งค่าซิงค์ด้านล่าง",
+      "completeSetup": "ตั้งค่าเสร็จสมบูรณ์",
+      "connected": "{{name}} เชื่อมต่อแล้ว!",
+      "firstSyncSoon": "การซิงค์ครั้งแรกจะเริ่มในไม่ช้า",
+      "hris": {
+        "syncEmployees": "ซิงค์ข้อมูลพนักงานอัตโนมัติ",
+        "importDepts": "นำเข้าแผนกและสถานที่",
+        "syncTimeOff": "ซิงค์ยอดวันลาให้ตรงกัน"
+      },
+      "payroll": {
+        "exportTimesheets": "ส่งออกใบบันทึกเวลาที่อนุมัติแล้ว",
+        "syncPayRates": "ซิงค์อัตราค่าจ้างและค่าล่วงเวลา",
+        "autoReconciliation": "การกระทบยอดเงินเดือนอัตโนมัติ"
+      },
+      "comms": {
+        "shiftReminders": "ส่งการแจ้งเตือนกะ",
+        "postRecognition": "โพสต์การยกย่องไปยังช่องทาง",
+        "swapNotifications": "แจ้งเตือนคำขอสลับกะ"
+      },
+      "identity": {
+        "sso": "การลงชื่อเข้าใช้ครั้งเดียว (SSO)",
+        "autoProvisioning": "การจัดเตรียมผู้ใช้อัตโนมัติ",
+        "directorySync": "ซิงค์ไดเรกทอรี"
+      },
+      "other": {
+        "bidirectional": "ซิงค์ข้อมูลแบบสองทิศทาง",
+        "realtimeWebhooks": "อัปเดตแบบเรียลไทม์ผ่านเว็บฮุก",
+        "auditTrail": "บันทึกการตรวจสอบทั้งหมด"
+      }
+    },
+    "configureModal": {
+      "title": "การตั้งค่า {{name}}",
+      "connectedSince": "เชื่อมต่อเมื่อ {{date}}"
+    },
+    "settings": {
+      "autoSync": "ซิงค์อัตโนมัติ",
+      "autoSyncDesc": "ซิงค์ข้อมูลอัตโนมัติตามกำหนดเวลา",
+      "autoSyncScheduleDesc": "ซิงค์อัตโนมัติตามกำหนดเวลา",
+      "syncFrequency": "ความถี่ในการซิงค์",
+      "nextScheduledSync": "การซิงค์ถัดไปที่กำหนด",
+      "dataToSync": "ข้อมูลที่จะซิงค์",
+      "frequency": {
+        "realtime": "เรียลไทม์",
+        "hourly": "ทุกชั่วโมง",
+        "daily": "ทุกวัน",
+        "weekly": "ทุกสัปดาห์"
+      },
+      "data": {
+        "employees": "พนักงาน",
+        "timeEntries": "รายการเวลา",
+        "departments": "แผนก",
+        "locations": "สถานที่"
+      }
+    },
+    "mapping": {
+      "description": "การแมปฟิลด์ควบคุมวิธีที่ข้อมูลจาก {{name}} แมปกับฟิลด์ Uplift การเปลี่ยนแปลงจะมีผลในการซิงค์ครั้งถัดไป",
+      "sourceField": "ฟิลด์ {{name}}",
+      "upliftField": "ฟิลด์ Uplift",
+      "status": "สถานะ",
+      "selectField": "เลือกฟิลด์...",
+      "mapped": "แมปแล้ว",
+      "unmapped": "ยังไม่ได้แมป"
+    },
+    "history": {
+      "noHistory": "ยังไม่มีประวัติการซิงค์",
+      "sync": "ซิงค์",
+      "duration": "ระยะเวลา",
+      "records": "รายการ",
+      "created": "สร้างแล้ว",
+      "updated": "อัปเดตแล้ว"
+    },
+    "webhooks": {
+      "description": "เว็บฮุกจะแจ้ง {{name}} เมื่อมีเหตุการณ์เกิดขึ้นใน Uplift",
+      "addWebhook": "เพิ่มเว็บฮุก",
+      "noWebhooks": "ไม่มีเว็บฮุกที่กำหนดค่า",
+      "createFirst": "สร้างเว็บฮุกแรกของคุณ",
+      "active": "ใช้งานอยู่",
+      "paused": "หยุดชั่วคราว",
+      "sendTestPayload": "ส่ง payload ทดสอบ",
+      "pauseWebhook": "หยุดเว็บฮุกชั่วคราว",
+      "enableWebhook": "เปิดใช้งานเว็บฮุก",
+      "deleteWebhook": "ลบเว็บฮุก",
+      "lastTriggered": "เรียกใช้ล่าสุด",
+      "never": "ไม่เคย",
+      "successRate": "อัตราความสำเร็จ",
+      "sendEventsTo": "ส่งเหตุการณ์ไปยัง {{name}}",
+      "endpointUrl": "URL ปลายทาง",
+      "eventsToSend": "เหตุการณ์ที่จะส่ง",
+      "hmacInfo": "เราจะลงนาม payload เว็บฮุกทั้งหมดด้วย HMAC-SHA256 คุณจะได้รับลายเซ็นใน",
+      "header": "ส่วนหัว",
+      "createWebhook": "สร้างเว็บฮุก",
+      "validationError": "กรุณาป้อน URL และเลือกอย่างน้อยหนึ่งเหตุการณ์",
+      "createdSuccess": "สร้างเว็บฮุกสำเร็จ!",
+      "testSent": "ส่ง payload ทดสอบไปยัง",
+      "testStatus": "สถานะ",
+      "deleteConfirm": "ลบเว็บฮุกนี้?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "ค้นหาการเชื่อมต่อ...",
+      "allCategories": "ทุกหมวดหมู่",
+      "infoBannerTitle": "Uplift ทำงานร่วมกับเครื่องมือที่คุณใช้อยู่",
+      "infoBannerDesc": "เชื่อมต่อระบบ HRIS เงินเดือน และการสื่อสารของคุณ เราซิงค์ข้อมูล ไม่ได้มาแทนที่ระบบของคุณ",
+      "noResults": "ไม่มีการเชื่อมต่อที่ตรงกับการค้นหา",
+      "dontSeeSystem": "ไม่เห็นระบบของคุณ?",
+      "alwaysAdding": "เรากำลังเพิ่มการเชื่อมต่อใหม่ตลอดเวลา แจ้งให้เราทราบสิ่งที่คุณต้องการ",
+      "requestIntegration": "ขอการเชื่อมต่อ"
+    },
+    "activity": {
+      "recentActivity": "กิจกรรมการเชื่อมต่อล่าสุด",
+      "exportLog": "ส่งออกบันทึก"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "โรงงาน API",
+    "subtitle": "สร้างการเชื่อมต่อ REST API แบบกำหนดเองโดยไม่ต้องเขียนโค้ด",
+    "newIntegration": "การเชื่อมต่อใหม่",
+    "searchPlaceholder": "ค้นหาการเชื่อมต่อ...",
+    "loadingIntegrations": "กำลังโหลดการเชื่อมต่อ...",
+    "noIntegrationsFound": "ไม่พบการเชื่อมต่อ",
+    "noIntegrationsYet": "ยังไม่มีการเชื่อมต่อแบบกำหนดเอง",
+    "tryDifferentSearch": "ลองคำค้นหาอื่น",
+    "createFirstDesc": "สร้างการเชื่อมต่อ API แบบกำหนดเองแรกของคุณเพื่อเชื่อมต่อ REST API ใดก็ได้",
+    "createIntegration": "สร้างการเชื่อมต่อ",
+    "deleteConfirm": "คุณแน่ใจหรือไม่ว่าต้องการลบการเชื่อมต่อนี้?",
+    "list": {
+      "eventsCount": "{{count}} เหตุการณ์",
+      "scheduled": "ตามกำหนด",
+      "incomingWebhook": "เว็บฮุกขาเข้า",
+      "manual": "ด้วยตนเอง",
+      "runsCount": "{{count}} ครั้ง",
+      "errorsCount": "{{count}} ข้อผิดพลาด",
+      "disabled": "ปิดใช้งาน",
+      "edit": "แก้ไข",
+      "test": "ทดสอบ",
+      "viewLogs": "ดูบันทึก",
+      "delete": "ลบ",
+      "lastRun": "รันล่าสุด"
+    },
+    "stats": {
+      "totalIntegrations": "การเชื่อมต่อทั้งหมด",
+      "active": "ใช้งานอยู่",
+      "runsToday": "รันวันนี้",
+      "totalErrors": "ข้อผิดพลาดทั้งหมด"
+    },
+    "editor": {
+      "editTitle": "แก้ไขการเชื่อมต่อ API",
+      "createTitle": "สร้างการเชื่อมต่อ API",
+      "subtitle": "กำหนดค่าการเชื่อมต่อ REST API แบบกำหนดเอง",
+      "integrationName": "ชื่อการเชื่อมต่อ",
+      "integrationNamePlaceholder": "เช่น ซิงค์ไปยังระบบเงินเดือน",
+      "description": "คำอธิบาย",
+      "descriptionPlaceholder": "การเชื่อมต่อนี้ทำอะไร?",
+      "method": "เมธอด",
+      "url": "URL",
+      "headers": "ส่วนหัว",
+      "addHeader": "เพิ่มส่วนหัว",
+      "headerName": "ชื่อส่วนหัว",
+      "headerValue": "ค่า",
+      "requestBodyJson": "เนื้อหาคำขอ (JSON)",
+      "useVariables": "ใช้ {{field}} สำหรับตัวแปร",
+      "availableVariables": "ตัวแปรที่ใช้ได้",
+      "authenticationType": "ประเภทการยืนยันตัวตน",
+      "apiKeyLocation": "ตำแหน่ง API Key",
+      "header": "ส่วนหัว",
+      "queryParameter": "พารามิเตอร์คิวรี",
+      "keyName": "ชื่อคีย์",
+      "keyNamePlaceholder": "เช่น X-API-Key",
+      "apiKey": "API Key",
+      "enterApiKey": "ป้อน API key ของคุณ",
+      "bearerToken": "Bearer Token",
+      "enterToken": "ป้อนโทเค็นของคุณ",
+      "username": "ชื่อผู้ใช้",
+      "password": "รหัสผ่าน",
+      "tokenUrl": "URL โทเค็น",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scopes": "ขอบเขต (คั่นด้วยเครื่องหมายจุลภาค)",
+      "whenShouldRun": "การเชื่อมต่อนี้ควรทำงานเมื่อใด?",
+      "selectEvents": "เลือกเหตุการณ์",
+      "schedule": "กำหนดเวลา",
+      "cronExpression": "นิพจน์ CRON",
+      "scheduleUtcNote": "กำหนดเวลาใช้โซนเวลา UTC CRON ปัจจุบัน",
+      "yourWebhookUrl": "URL เว็บฮุกของคุณ",
+      "webhookPostNote": "ส่งคำขอ POST ไปยัง URL นี้ เราจะประมวลผลข้อมูลขาเข้าและแมปกับ Uplift",
+      "fieldMappings": "การแมปฟิลด์",
+      "fieldMappingsDesc": "แมปฟิลด์ Uplift กับฟิลด์ API ภายนอก",
+      "addMapping": "เพิ่มการแมป",
+      "noFieldMappings": "ยังไม่มีการแมปฟิลด์",
+      "addMappingsDesc": "เพิ่มการแมปเพื่อแปลงข้อมูลระหว่างระบบ",
+      "addFirstMapping": "เพิ่มการแมปแรก",
+      "selectUpliftField": "เลือกฟิลด์ Uplift...",
+      "externalFieldName": "ชื่อฟิลด์ภายนอก",
+      "noTransform": "ไม่แปลง",
+      "dateIso": "วันที่ → ISO",
+      "dateUk": "วันที่ → รูปแบบ UK",
+      "boolYn": "บูลีน → Y/N",
+      "fieldMappingTip": "การแมปฟิลด์ใช้สร้างเนื้อหาคำขออัตโนมัติ คุณยังสามารถใช้ไวยากรณ์ {{field}} ในแท็บคำขอสำหรับโครงสร้าง JSON แบบกำหนดเอง",
+      "testConfiguration": "ทดสอบการกำหนดค่า",
+      "testDescription": "ส่งคำขอทดสอบเพื่อตรวจสอบการกำหนดค่าของคุณ เราจะใช้ข้อมูลตัวอย่าง",
+      "testing": "กำลังทดสอบ...",
+      "sendTestRequest": "ส่งคำขอทดสอบ",
+      "success": "สำเร็จ",
+      "failed": "ล้มเหลว",
+      "status": "สถานะ",
+      "time": "เวลา",
+      "response": "การตอบกลับ",
+      "enableIntegration": "เปิดใช้งานการเชื่อมต่อ",
+      "cancel": "ยกเลิก",
+      "saveChanges": "บันทึกการเปลี่ยนแปลง",
+      "createIntegration": "สร้างการเชื่อมต่อ",
+      "tabs": {
+        "request": "คำขอ",
+        "authentication": "การยืนยันตัวตน",
+        "trigger": "ทริกเกอร์",
+        "fieldMapping": "การแมปฟิลด์",
+        "test": "ทดสอบ"
+      }
+    },
+    "logs": {
+      "executionLogs": "บันทึกการทำงาน",
+      "export": "ส่งออก",
+      "noData": "ยังไม่มีข้อมูล บันทึกการทำงานจะปรากฏที่นี่เมื่อการเชื่อมต่อทำงาน",
+      "unknown": "ไม่ทราบ",
+      "error": "ข้อผิดพลาด"
+    },
+    "helpBanner": {
+      "title": "ต้องการความช่วยเหลือในการสร้างการเชื่อมต่อ?",
+      "description": "ตรวจสอบเอกสาร API ของเราสำหรับตัวอย่าง หรือติดต่อฝ่ายสนับสนุนสำหรับกรณีการใช้งานที่ซับซ้อน"
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "คีย์ REST API",
+    "subtitle": "สร้างคีย์ API เพื่อเข้าถึงข้อมูล Uplift จากแอปพลิเคชันของคุณ",
+    "apiDocs": "เอกสาร API",
+    "createKey": "สร้างคีย์",
+    "createApiKey": "สร้างคีย์ API",
+    "loadingKeys": "กำลังโหลดคีย์ API...",
+    "loadError": "ไม่สามารถโหลดคีย์ API ได้",
+    "noKeysYet": "ยังไม่มีคีย์ API",
+    "createFirstDesc": "สร้างคีย์ API แรกของคุณเพื่อเริ่มเชื่อมต่อกับ Uplift",
+    "retry": "ลองอีกครั้ง",
+    "revokeConfirm": "เพิกถอนคีย์ API \"{{name}}\"? การดำเนินการนี้ไม่สามารถย้อนกลับได้",
+    "regenerateConfirm": "สร้างซีเคร็ตใหม่สำหรับ \"{{name}}\"? ซีเคร็ตเดิมจะหยุดทำงานทันที",
+    "regenerateSuccess": "คีย์ซีเคร็ตใหม่: {{secret}}\n\nบันทึกตอนนี้ คุณจะไม่เห็นอีก!",
+    "regenerateError": "ไม่สามารถสร้างซีเคร็ตใหม่: {{message}}",
+    "usageStats": "สถิติการใช้งานสำหรับ {{name}}:\n\nคำขอทั้งหมด: {{requests}}\nใช้ล่าสุด: {{lastUsed}}",
+    "card": {
+      "noDescription": "ไม่มีคำอธิบาย",
+      "expired": "หมดอายุ",
+      "active": "ใช้งานอยู่",
+      "inactive": "ไม่ใช้งาน",
+      "keyId": "รหัสคีย์",
+      "requests": "คำขอ",
+      "lastUsed": "ใช้ล่าสุด",
+      "never": "ไม่เคย",
+      "rateLimit": "จำกัดอัตรา",
+      "standard": "มาตรฐาน",
+      "hideDetails": "ซ่อนรายละเอียด",
+      "showDetails": "แสดงรายละเอียด",
+      "scopes": "ขอบเขต",
+      "created": "สร้างเมื่อ",
+      "expires": "หมดอายุ",
+      "usage": "การใช้งาน",
+      "regenerate": "สร้างใหม่",
+      "revoke": "เพิกถอน"
+    },
+    "create": {
+      "keyCreatedTitle": "สร้างคีย์ API แล้ว",
+      "createTitle": "สร้างคีย์ API",
+      "keyCreatedSuccess": "สร้างคีย์ API สำเร็จ",
+      "copySecretWarning": "คัดลอกคีย์ซีเคร็ตของคุณตอนนี้ คุณจะไม่สามารถดูได้อีก!",
+      "keyIdLabel": "รหัสคีย์",
+      "secretKeyLabel": "คีย์ซีเคร็ต",
+      "fullApiKeyLabel": "คีย์ API แบบเต็ม (สำหรับส่วนหัว Authorization)",
+      "fullKeyLabel": "คีย์แบบเต็ม",
+      "authHeaderNote": "ใช้สิ่งนี้ในส่วนหัว Authorization ของคุณ",
+      "done": "เสร็จสิ้น",
+      "keyName": "ชื่อคีย์",
+      "keyNamePlaceholder": "เช่น คีย์ API สำหรับโปรดักชัน",
+      "description": "คำอธิบาย",
+      "descriptionPlaceholder": "คีย์นี้จะใช้ทำอะไร?",
+      "permissions": "สิทธิ์",
+      "rateLimit": "จำกัดอัตรา",
+      "expiration": "วันหมดอายุ",
+      "neverExpires": "ไม่มีวันหมดอายุ",
+      "thirtyDays": "30 วัน",
+      "ninetyDays": "90 วัน",
+      "oneYear": "1 ปี",
+      "createError": "ไม่สามารถสร้างคีย์ API ได้ กรุณาลองอีกครั้ง",
+      "cancel": "ยกเลิก",
+      "createKey": "สร้างคีย์"
+    },
+    "docs": {
+      "quickStart": "เริ่มต้นอย่างรวดเร็ว",
+      "authentication": "การยืนยันตัวตน",
+      "exampleResponse": "ตัวอย่างการตอบกลับ",
+      "viewFullDocs": "ดูเอกสารฉบับเต็ม",
+      "downloadSpec": "ดาวน์โหลด OpenAPI Spec"
+    },
+    "securityBanner": {
+      "title": "ความปลอดภัยคีย์ API",
+      "description": "รักษาคีย์ API ของคุณให้ปลอดภัย อย่าเปิดเผยในโค้ดฝั่งไคลเอนต์หรือที่เก็บข้อมูลสาธารณะ หากคีย์ถูกเปิดเผย ให้เพิกถอนทันทีและสร้างคีย์ใหม่"
+    }
+  },
+  "orgOnboarding": {
+    "title": "ตั้งค่าองค์กร",
+    "subtitle": "มาตั้งค่าองค์กรของคุณกัน",
+    "steps": {
+      "orgDetails": "รายละเอียดองค์กร",
+      "locations": "สถานที่",
+      "departments": "แผนก",
+      "roles": "บทบาทและสิทธิ์",
+      "review": "ตรวจสอบและเปิดใช้งาน"
+    },
+    "orgDetails": {
+      "companyName": "ชื่อบริษัท",
+      "companyNamePlaceholder": "เช่น บริษัท ABC จำกัด",
+      "tradingName": "ชื่อทางการค้า (ไม่บังคับ)",
+      "tradingNamePlaceholder": "ชื่อที่ใช้ต่อสาธารณะ",
+      "industry": "อุตสาหกรรม",
+      "selectIndustry": "เลือกอุตสาหกรรม",
+      "companySize": "ขนาดบริษัท",
+      "selectSize": "เลือกขนาด",
+      "timezone": "โซนเวลาเริ่มต้น",
+      "currency": "สกุลเงินเริ่มต้น",
+      "weekStart": "สัปดาห์เริ่มต้นวัน",
+      "logo": "โลโก้บริษัท",
+      "uploadLogo": "อัปโหลดโลโก้",
+      "uploadLogoDesc": "PNG หรือ SVG แนะนำ 200×200px"
+    },
+    "locations": {
+      "title": "สถานที่",
+      "subtitle": "เพิ่มสำนักงาน สาขา หรือไซต์ของคุณ",
+      "addLocation": "เพิ่มสถานที่",
+      "name": "ชื่อสถานที่",
+      "namePlaceholder": "เช่น สำนักงานใหญ่",
+      "address": "ที่อยู่",
+      "addressPlaceholder": "ที่อยู่เต็ม",
+      "timezone": "โซนเวลา",
+      "noLocations": "ยังไม่ได้เพิ่มสถานที่",
+      "addFirst": "เพิ่มสถานที่แรกของคุณเพื่อเริ่มต้น"
+    },
+    "departments": {
+      "title": "แผนก",
+      "subtitle": "ตั้งค่าโครงสร้างแผนกของคุณ",
+      "addDepartment": "เพิ่มแผนก",
+      "name": "ชื่อแผนก",
+      "namePlaceholder": "เช่น วิศวกรรม",
+      "parentDepartment": "แผนกหลัก (ไม่บังคับ)",
+      "none": "ไม่มี (ระดับบนสุด)",
+      "manager": "ผู้จัดการแผนก",
+      "selectManager": "เลือกผู้จัดการ",
+      "noDepartments": "ยังไม่ได้เพิ่มแผนก",
+      "addFirst": "เพิ่มแผนกแรกของคุณ"
+    },
+    "roles": {
+      "title": "บทบาทและสิทธิ์",
+      "subtitle": "กำหนดค่าระดับการเข้าถึงสำหรับทีมของคุณ",
+      "addRole": "เพิ่มบทบาทแบบกำหนดเอง",
+      "builtIn": "ในตัว",
+      "custom": "กำหนดเอง",
+      "name": "ชื่อบทบาท",
+      "namePlaceholder": "เช่น หัวหน้ากะ",
+      "description": "คำอธิบาย",
+      "descriptionPlaceholder": "บทบาทนี้ทำอะไรได้บ้าง?",
+      "permissions": "สิทธิ์",
+      "permissionGroups": {
+        "scheduling": "การจัดตารางเวลา",
+        "timeTracking": "การติดตามเวลา",
+        "employees": "พนักงาน",
+        "reports": "รายงาน",
+        "settings": "การตั้งค่า"
+      }
+    },
+    "review": {
+      "title": "ตรวจสอบและเปิดใช้งาน",
+      "subtitle": "ตรวจสอบว่าทุกอย่างถูกต้องก่อนเปิดใช้งาน",
+      "orgInfo": "ข้อมูลองค์กร",
+      "locationsCount": "กำหนดค่า {{count}} สถานที่แล้ว",
+      "departmentsCount": "กำหนดค่า {{count}} แผนกแล้ว",
+      "rolesCount": "กำหนดค่า {{count}} บทบาทแล้ว",
+      "allLooksGood": "ทุกอย่างดูดี!",
+      "launch": "เปิดใช้งานองค์กร",
+      "launchDesc": "การดำเนินการนี้จะเปิดใช้งานองค์กรของคุณและส่งคำเชิญไปยังสมาชิกทีมที่เพิ่มไว้"
+    },
+    "navigation": {
+      "back": "ย้อนกลับ",
+      "next": "ถัดไป",
+      "skip": "ข้ามไปก่อน",
+      "finish": "ตั้งค่าเสร็จสิ้น"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

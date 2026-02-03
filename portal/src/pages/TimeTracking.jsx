@@ -40,6 +40,7 @@ export default function TimeTracking() {
   const [currentEntry, setCurrentEntry] = useState(null);
   const [clockTime, setClockTime] = useState(new Date());
   const [isOnBreak, setIsOnBreak] = useState(false);
+  const [clockingLoading, setClockingLoading] = useState(false); // NM-14: Double-click protection
 
   useEffect(() => { loadData(); const interval = setInterval(() => setClockTime(new Date()), 1000); return () => clearInterval(interval); }, []);
 
@@ -57,7 +58,7 @@ export default function TimeTracking() {
         setPendingEntries(pendingRes.entries || []);
       }
     } catch (err) {
-      console.error('Failed to load time tracking data:', err);
+      if (import.meta.env.DEV) console.error('Failed to load time tracking data:', err);
       setError('Failed to load time tracking data. Please try again.');
     } finally {
       setLoading(false);
@@ -87,33 +88,38 @@ export default function TimeTracking() {
   };
 
   const handleClockIn = async () => {
+    if (clockingLoading) return; // NM-14: Prevent double-click
+    setClockingLoading(true);
     try {
-      // TODO: timeApi.clockIn is not in the API client yet
       const result = await timeApi.clockIn({ locationId: locations[0]?.id });
       setCurrentEntry(result.entry);
       setToast({ type: 'success', message: t('timeTracking.clockedIn', 'Clocked in successfully') });
     } catch (err) {
       setToast({ type: 'error', message: t('timeTracking.clockInError', 'Failed to clock in. Please try again.') });
+    } finally {
+      setClockingLoading(false);
     }
   };
 
   const handleClockOut = async () => {
-    if (!currentEntry) return;
+    if (!currentEntry || clockingLoading) return; // NM-14: Prevent double-click
+    setClockingLoading(true);
     try {
-      // TODO: timeApi.clockOut is not in the API client yet
       await timeApi.clockOut(currentEntry.id);
       setCurrentEntry(null);
       setIsOnBreak(false);
       setToast({ type: 'success', message: t('timeTracking.clockedOut', 'Clocked out successfully') });
     } catch (err) {
       setToast({ type: 'error', message: t('timeTracking.clockOutError', 'Failed to clock out. Please try again.') });
+    } finally {
+      setClockingLoading(false);
     }
   };
 
   const handleBreak = async () => {
-    if (!currentEntry) return;
+    if (!currentEntry || clockingLoading) return; // NM-14: Prevent double-click
+    setClockingLoading(true);
     try {
-      // TODO: timeApi.startBreak/endBreak are not in the API client yet
       if (isOnBreak) {
         await timeApi.endBreak(currentEntry.id);
         setIsOnBreak(false);
@@ -125,6 +131,8 @@ export default function TimeTracking() {
       }
     } catch (err) {
       setToast({ type: 'error', message: t('timeTracking.breakError', 'Failed to update break status. Please try again.') });
+    } finally {
+      setClockingLoading(false);
     }
   };
 
@@ -184,12 +192,12 @@ export default function TimeTracking() {
               <div className="space-y-4">
                 <div className="bg-green-50 rounded-lg p-4 inline-block"><p className="text-sm text-green-600">{t('timeTracking.workingTime', 'Working Time')}</p><p className="text-3xl font-bold text-green-700">{getWorkingTime()}</p></div>
                 <div className="flex justify-center gap-4">
-                  <button onClick={handleBreak} className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium ${isOnBreak ? 'bg-amber-500 text-white hover:bg-amber-600' : 'bg-amber-100 text-amber-700 hover:bg-amber-200'}`}><Coffee className="h-5 w-5" />{isOnBreak ? t('timeTracking.endBreak', 'End Break') : t('timeTracking.startBreak', 'Start Break')}</button>
-                  <button onClick={handleClockOut} className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700"><Square className="h-5 w-5" />{t('timeTracking.clockOut', 'Clock Out')}</button>
+                  <button onClick={handleBreak} disabled={clockingLoading} className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed ${isOnBreak ? 'bg-amber-500 text-white hover:bg-amber-600' : 'bg-amber-100 text-amber-700 hover:bg-amber-200'}`}><Coffee className="h-5 w-5" />{isOnBreak ? t('timeTracking.endBreak', 'End Break') : t('timeTracking.startBreak', 'Start Break')}</button>
+                  <button onClick={handleClockOut} disabled={clockingLoading} className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"><Square className="h-5 w-5" />{t('timeTracking.clockOut', 'Clock Out')}</button>
                 </div>
               </div>
             ) : (
-              <button onClick={handleClockIn} className="flex items-center gap-2 px-8 py-4 bg-green-600 text-white rounded-lg font-medium text-lg hover:bg-green-700 mx-auto"><Play className="h-6 w-6" />{t('timeTracking.clockIn', 'Clock In')}</button>
+              <button onClick={handleClockIn} disabled={clockingLoading} className="flex items-center gap-2 px-8 py-4 bg-green-600 text-white rounded-lg font-medium text-lg hover:bg-green-700 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"><Play className="h-6 w-6" />{t('timeTracking.clockIn', 'Clock In')}</button>
             )}
           </div>
         </div>

@@ -54,7 +54,6 @@
     "viewMyCareer": "Karrierem megtekintése",
     "timeOffBalance": "Szabadság egyenleg"
   },
-
   "nav": {
     "dashboard": "Vezérlőpult",
     "employees": "Alkalmazottak",
@@ -150,9 +149,21 @@
     "active": "Aktív",
     "inactive": "Inaktív",
     "enabled": "Engedélyezve",
-    "disabled": "Letiltva"
+    "disabled": "Letiltva",
+    "approveSelected": "Kiválasztottak jóváhagyása",
+    "rejectSelected": "Kiválasztottak elutasítása",
+    "clearSelection": "Törlés",
+    "showing": "Megjelenítve",
+    "of": "-ból/-ből",
+    "page": "Oldal",
+    "previous": "Előző",
+    "terminated": "Elbocsátott",
+    "sunday": "V",
+    "monday": "H",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Bejelentkezés",
     "logout": "Kijelentkezés",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Az Uplift eléréséhez kérjük, lépjen kapcsolatba a vezetőjével vagy a HR osztállyal. Meghívó linket fognak küldeni.",
     "enterEmailPassword": "Kérjük, adja meg az e-mail címet és jelszót",
     "loginFailed": "Sikertelen bejelentkezés",
-    "demoAccounts": "Demo fiókok:",
-    "demoWorker": "Dolgozó: worker@uplift.work / Demo123!",
-    "demoManager": "Vezető: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Kétfaktoros hitelesítés",
     "enterMfaCode": "Adja meg a hitelesítő alkalmazás kódját",
     "verificationCode": "Ellenőrző kód",
@@ -194,9 +202,16 @@
     "invalidCode": "Érvénytelen kód",
     "allRightsReserved": "Minden jog fenntartva",
     "termsOfService": "Szolgáltatási feltételek",
-    "privacyPolicy": "Adatvédelmi irányelvek"
+    "privacyPolicy": "Adatvédelmi irányelvek",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Főoldal",
     "schedule": "Beosztás",
@@ -214,7 +229,6 @@
     "leaderboard": "Ranglista",
     "badges": "Jelvények"
   },
-
   "home": {
     "welcome": "Üdvözöljük, {{name}}!",
     "welcomeBack": "Üdvözöljük újra,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Nyitott lehetőségek",
     "noOpportunities": "Jelenleg nincs a készségeihez illő lehetőség"
   },
-
   "schedule": {
     "title": "Beosztásom",
     "weekView": "Hét",
@@ -293,9 +306,22 @@
     "yourShift": "Az Ön műszakja",
     "theirShift": "Az ő műszakja",
     "sendRequest": "Kérés küldése",
-    "cancelSwap": "Csere megszakítása"
+    "cancelSwap": "Csere megszakítása",
+    "allLocations": "Összes helyszín",
+    "tuesday": "K",
+    "wednesday": "Sze",
+    "thursday": "Cs",
+    "friday": "P",
+    "saturday": "Szo",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Időkövetés",
     "clockedIn": "Bejelentkezve",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Koppintson a bejelentkezéshez",
     "onBreakSince": "Szüneten {{time}} óta",
     "workingSince": "Dolgozik {{time}} óta",
-    "shiftEnded": "Műszak befejeződött"
+    "shiftEnded": "Műszak befejeződött",
+    "entriesApproved": "{{count}} bejegyzés jóváhagyva",
+    "approveError": "A jóváhagyás sikertelen. Kérjük, próbálja újra.",
+    "entriesRejected": "{{count}} bejegyzés elutasítva",
+    "rejectError": "Az elutasítás sikertelen. Kérjük, próbálja újra.",
+    "clockInError": "A bejelentkezés sikertelen. Kérjük, próbálja újra.",
+    "clockOutError": "A kijelentkezés sikertelen. Kérjük, próbálja újra.",
+    "breakError": "A szünet állapotának frissítése sikertelen. Kérjük, próbálja újra.",
+    "noPending": "Nincs áttekintendő bejegyzés",
+    "noEntries": "Nem találhatók időbejegyzések",
+    "history": "Előzmények",
+    "managerSubtitle": "Jelenléti ívek áttekintése és jóváhagyása",
+    "employeeSubtitle": "Munkaidő nyomon követése",
+    "clockIn": "Bejelentkezés",
+    "clockOut": "Kijelentkezés",
+    "startBreak": "Szünet kezdése",
+    "endBreak": "Szünet befejezése",
+    "totalHours": "Összes óra"
   },
-
   "timeOff": {
     "title": "Szabadság",
     "request": "Szabadság kérése",
@@ -359,9 +401,16 @@
     "selectDates": "Dátumok kiválasztása",
     "selectType": "Típus kiválasztása",
     "addNotes": "Megjegyzések hozzáadása (opcionális)",
-    "reviewRequest": "Kérelem áttekintése"
+    "reviewRequest": "Kérelem áttekintése",
+    "oneDay": "1 nap",
+    "days": "nap",
+    "dates": "Dátumok",
+    "duration": "Időtartam",
+    "noRequests": "Nem találhatók kérelmek",
+    "requestDetails": "Szabadságkérelem részletei",
+    "noReason": "Nem adott meg indokot",
+    "submitted": "Beküldve"
   },
-
   "feed": {
     "title": "Hírfolyam",
     "newPost": "Új bejegyzés",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}} órája",
     "daysAgo": "{{count}} napja"
   },
-
   "messages": {
     "title": "Üzenetek",
     "newMessage": "Új üzenet",
@@ -419,7 +467,6 @@
     "translateMessage": "Fordítás",
     "showOriginal": "Eredeti megjelenítése"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Profil szerkesztése",
@@ -447,7 +494,6 @@
     "viewProfile": "Profil megtekintése",
     "memberSince": "Tag {{date}} óta"
   },
-
   "skills": {
     "title": "Készségek",
     "mySkills": "Készségeim",
@@ -474,7 +520,6 @@
     "skillAdded": "Készség sikeresen hozzáadva",
     "verificationRequested": "Ellenőrzés kérelmezve"
   },
-
   "career": {
     "title": "Karrier",
     "careerPath": "Karrierút",
@@ -549,7 +594,6 @@
     "expired": "Lejárt",
     "expires": "Lejár: {{date}}"
   },
-
   "gamification": {
     "level": "{{level}}. szint",
     "levelShort": "{{level}}. sz.",
@@ -564,7 +608,7 @@
     "points": "Pontok",
     "streak": "{{days}} napos sorozat",
     "dayStreak": "Napi sorozat",
-    "newBadge": "Új jelvény szerzett!",
+    "newBadge": "Új jelvény megszerzve!",
     "badgeUnlocked": "Új jelvényt oldott fel",
     "levelUp": "Szintlépés!",
     "congratulations": "Gratulálunk!",
@@ -583,7 +627,6 @@
     "earnedOn": "Megszerzés dátuma: {{date}}",
     "progressToEarn": "{{percent}}% haladás a megszerzéshez"
   },
-
   "notifications": {
     "title": "Értesítések",
     "markAllRead": "Összes olvasottnak jelölése",
@@ -600,12 +643,11 @@
     "swapRejected": "Csere elutasítva",
     "newMessage": "Új üzenet",
     "newAnnouncement": "Új közlemény",
-    "badgeEarned": "Jelvény szerzett",
+    "badgeEarned": "Jelvény megszerzve",
     "levelUp": "Szintlépés!",
     "allCaught": "Naprakész!",
     "checkBackLater": "Nézzen vissza később új értesítésekért"
   },
-
   "settings": {
     "title": "Beállítások",
     "subtitle": "Szervezet és fiók kezelése",
@@ -740,9 +782,23 @@
     "featureAccess": "Funkció hozzáférés",
     "enableAll": "Összes engedélyezése",
     "disableAll": "Összes letiltása",
-    "aboutEmployeeVisibility": "Ezek a beállítások szabályozzák, mely funkciók láthatók minden alkalmazott számára."
+    "aboutEmployeeVisibility": "Ezek a beállítások szabályozzák, mely funkciók láthatók minden alkalmazott számára.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Feladatok",
     "myTasks": "Feladataim",
@@ -781,7 +837,6 @@
     "takePhoto": "Fénykép készítése",
     "chooseFromLibrary": "Választás a galériából"
   },
-
   "expenses": {
     "title": "Költségek",
     "myExpenses": "Költségeim",
@@ -808,7 +863,6 @@
     "totalApproved": "Összes jóváhagyva",
     "totalReimbursed": "Összes megtérítve"
   },
-
   "rewards": {
     "title": "Jutalmak",
     "myRewards": "Jutalmaim",
@@ -828,7 +882,6 @@
     "validUntil": "Érvényes: {{date}}-ig",
     "termsConditions": "Feltételek és kikötések"
   },
-
   "manager": {
     "dashboard": "Vezetői vezérlőpult",
     "teamOverview": "Csapat áttekintése",
@@ -859,7 +912,6 @@
     "attendance": "Jelenlét",
     "performance": "Teljesítmény"
   },
-
   "onboarding": {
     "welcome": "Üdvözöljük az Upliftben!",
     "getStarted": "Kezdjük el a beállítást",
@@ -877,7 +929,6 @@
     "allSet": "Minden készen áll!",
     "startExploring": "Kezdje el felfedezni a műszakokat és lehetőségeket"
   },
-
   "errors": {
     "networkError": "Hálózati hiba. Kérjük, ellenőrizze a kapcsolatot.",
     "serverError": "Szerverhiba. Kérjük, próbálja újra később.",
@@ -898,7 +949,6 @@
     "tryAgain": "Kérjük, próbálja újra",
     "somethingWentWrong": "Valami hiba történt"
   },
-
   "activity": {
     "title": "Tevékenység áttekintése",
     "subtitle": "Feladatteljesítések, bizonyíték feltöltések és űrlapbeküldések áttekintése",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Adja meg az elutasítás okát...",
     "confirmRejection": "Elutasítás megerősítése",
     "approve": "Jóváhagyás",
-    "reject": "Elutasítás"
+    "reject": "Elutasítás",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Értesítési beállítások",
     "subtitle": "Válassza ki, hogyan és mikor kapjon értesítéseket",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Biztosan letiltja az összes értesítést? Bármikor újra engedélyezheti őket.",
     "disableSuccess": "Minden értesítés letiltva."
   },
-
   "employeeDetail": {
     "notFound": "Alkalmazott nem található",
     "backToEmployees": "Vissza az alkalmazottakhoz",
@@ -989,7 +1040,6 @@
     "basic": "Alap",
     "adding": "Hozzáadás..."
   },
-
   "reports": {
     "title": "Jelentések",
     "subtitle": "Elemzések, betekintések és egyéni jelentések",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Ez a hónap",
     "lastMonth": "Múlt hónap",
     "last7Days": "Utolsó 7 nap",
-    "last30Days": "Utolsó 30 nap"
+    "last30Days": "Utolsó 30 nap",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Menü",
     "closeMenu": "Menü bezárása",
@@ -1041,7 +1104,6 @@
     "required": "Kötelező",
     "optional": "Opcionális"
   },
-
   "shiftTemplates": {
     "title": "Műszaksablonok",
     "subtitle": "Újrahasználható műszakminták létrehozása",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "műszak",
     "generating": "Generálás..."
   },
-
   "legal": {
-    "lastUpdated": "Utoljára frissítve"
+    "lastUpdated": "Utoljára frissítve",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "DE",
     "pm": "DU",
@@ -1120,5 +1289,564 @@
     "october": "Október",
     "november": "November",
     "december": "December"
+  },
+  "bulkImport": {
+    "title": "Tömeges importálás",
+    "subtitle": "Adatok importálása CSV vagy Excel fájlokból",
+    "selectType": "Típus kiválasztása",
+    "uploadFile": "Fájl feltöltése",
+    "preview": "Előnézet",
+    "complete": "Befejezés",
+    "invalidFileType": "Kérjük, töltsön fel CSV vagy Excel fájlt",
+    "importFailed": "Az importálás sikertelen. Kérjük, próbálja újra.",
+    "uploadFor": "Feltöltés",
+    "uploadDesc": "Húzza ide vagy kattintson a fájl kiválasztásához",
+    "downloadTemplate": "Sablon letöltése",
+    "dragDrop": "Húzza ide a fájlt, vagy kattintson a tallózáshoz",
+    "supportedFormats": "Támogatott formátumok: CSV, XLSX",
+    "previewData": "Adatok előnézete",
+    "rowsFound": "sor található",
+    "andMore": "És",
+    "moreRows": "további sor...",
+    "importing": "Importálás...",
+    "startImport": "Importálás indítása",
+    "importComplete": "Importálás befejezve",
+    "successfullyImported": "Sikeresen importálva",
+    "of": "-ból/-ből",
+    "records": "rekord",
+    "successful": "Sikeres",
+    "failed": "Sikertelen",
+    "total": "Összesen",
+    "importMore": "További adatok importálása",
+    "type": {
+      "employees": "Alkalmazottak",
+      "employeesDesc": "Alkalmazotti profilok importálása",
+      "shifts": "Műszakok",
+      "shiftsDesc": "Műszakbeosztások importálása",
+      "locations": "Helyszínek",
+      "locationsDesc": "Helyszínek importálása",
+      "skills": "Készségek",
+      "skillsDesc": "Készségek importálása"
+    }
+  },
+  "jobs": {
+    "open": "Nyitott",
+    "closed": "Lezárt",
+    "applicants": "Pályázók",
+    "created": "Állásajánlat sikeresen létrehozva",
+    "createError": "Az állásajánlat létrehozása sikertelen. Kérjük, próbálja újra.",
+    "updated": "Állásajánlat sikeresen frissítve",
+    "updateError": "Az állásajánlat frissítése sikertelen. Kérjük, próbálja újra.",
+    "fullTime": "Teljes munkaidős",
+    "partTime": "Részmunkaidős",
+    "contract": "Szerződéses",
+    "temporary": "Ideiglenes",
+    "subtitle": "Belső karrierlehetőségek kezelése",
+    "openPositions": "Nyitott pozíciók",
+    "closedPositions": "Lezárt",
+    "totalApplicants": "Összes pályázó",
+    "noJobs": "Nem találhatók állásajánlatok",
+    "viewApplicants": "Pályázók megtekintése",
+    "editPosting": "Állásajánlat szerkesztése",
+    "jobTitle": "Munkakör megnevezése",
+    "enterTitle": "Adja meg a munkakör megnevezését",
+    "selectDepartment": "Részleg kiválasztása",
+    "selectLocation": "Helyszín kiválasztása",
+    "salary": "Fizetési sáv",
+    "enterDescription": "Adja meg a munkakör leírását",
+    "postJob": "Állás közzététele",
+    "skillMatch": "készségegyezés",
+    "noApplicants": "Még nincsenek pályázók"
+  },
+  "employees": {
+    "searchPlaceholder": "Keresés név vagy e-mail alapján...",
+    "employees": "alkalmazottak",
+    "noResults": "Nem találhatók a feltételeknek megfelelő alkalmazottak",
+    "details": "Alkalmazott részletei",
+    "hireDate": "Felvétel dátuma",
+    "assigned": "kiosztva",
+    "leaveDetails": "Szabadság részletei",
+    "until": "Eddig",
+    "terminationDetails": "Elbocsátás részletei",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Integrációs központ",
+    "subtitle": "Kapcsolja össze az Upliftot meglévő eszközeivel",
+    "apiFactory": "API gyár",
+    "addIntegration": "Integráció hozzáadása",
+    "configure": "Konfigurálás",
+    "connect": "Csatlakozás",
+    "cancel": "Mégse",
+    "back": "Vissza",
+    "saveChanges": "Módosítások mentése",
+    "syncNow": "Szinkronizálás most",
+    "disconnect": "{{name}} leválasztása",
+    "disconnectConfirm": "Leválasztja a(z) {{name}} szolgáltatást? Ez leállítja az összes szinkronizálást.",
+    "settingsSaved": "Beállítások mentve",
+    "browseMarketplace": "Piactér böngészése",
+    "loadingIntegrations": "Integrációk betöltése...",
+    "noIntegrations": "Nincsenek csatlakoztatott integrációk",
+    "noIntegrationsDesc": "Csatlakoztassa első integrációját az adatszinkronizálás megkezdéséhez",
+    "status": {
+      "beta": "Béta",
+      "syncing": "Szinkronizálás..."
+    },
+    "stats": {
+      "connected": "Csatlakoztatva",
+      "available": "Elérhető",
+      "syncsToday": "Mai szinkronizálások",
+      "errors": "Hibák",
+      "totalSyncs": "Összes szinkronizálás",
+      "lastSync": "Utolsó szinkronizálás",
+      "records": "rekord"
+    },
+    "tabs": {
+      "connected": "Csatlakoztatva",
+      "marketplace": "Piactér",
+      "restApi": "REST API",
+      "apiFactory": "API gyár",
+      "activityLog": "Tevékenységnapló",
+      "settings": "Beállítások",
+      "fieldMapping": "Mezőleképezés",
+      "syncHistory": "Szinkronizálási előzmények",
+      "webhooks": "Webhookok"
+    },
+    "connection": {
+      "lastSync": "Utolsó szinkronizálás",
+      "frequency": "Gyakoriság",
+      "status": "Állapot",
+      "healthy": "Egészséges",
+      "errors": "hiba"
+    },
+    "connectModal": {
+      "title": "{{name}} csatlakoztatása",
+      "whatItDoes": "Mit csinál ez az integráció:",
+      "redirectNotice": "Átirányítjuk a(z) {{name}} oldalára",
+      "authorizeMessage": "Jelentkezzen be és engedélyezze az Uplift számára az adataihoz való hozzáférést. Csak a szükséges engedélyeket kérjük.",
+      "connectWith": "Csatlakozás a(z) {{name}} szolgáltatáshoz",
+      "connecting": "Csatlakozás a(z) {{name}} szolgáltatáshoz...",
+      "completeAuth": "Kérjük, fejezze be az engedélyezést a felugró ablakban",
+      "successConnected": "Sikeresen csatlakoztatva!",
+      "configureSyncSettings": "Konfigurálja a szinkronizálási beállításokat alább.",
+      "completeSetup": "Beállítás befejezése",
+      "connected": "{{name}} csatlakoztatva!",
+      "firstSyncSoon": "Az első szinkronizálás hamarosan megkezdődik",
+      "hris": {
+        "syncEmployees": "Alkalmazotti nyilvántartás automatikus szinkronizálása",
+        "importDepts": "Részlegek és helyszínek importálása",
+        "syncTimeOff": "Szabadság egyenlegek szinkronban tartása"
+      },
+      "payroll": {
+        "exportTimesheets": "Jóváhagyott jelenléti ívek exportálása",
+        "syncPayRates": "Bérek és túlóradíjak szinkronizálása",
+        "autoReconciliation": "Automatikus bérszámfejtési egyeztetés"
+      },
+      "comms": {
+        "shiftReminders": "Műszak emlékeztetők küldése",
+        "postRecognition": "Elismerések közzététele csatornákon",
+        "swapNotifications": "Cserekérelem értesítések"
+      },
+      "identity": {
+        "sso": "Egyszeri bejelentkezés (SSO)",
+        "autoProvisioning": "Automatikus felhasználó létrehozás",
+        "directorySync": "Címtár szinkronizálás"
+      },
+      "other": {
+        "bidirectional": "Kétirányú adatszinkronizálás",
+        "realtimeWebhooks": "Valós idejű frissítések webhookokon keresztül",
+        "auditTrail": "Teljes audit napló"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} beállítások",
+      "connectedSince": "Csatlakoztatva {{date}}"
+    },
+    "settings": {
+      "autoSync": "Automatikus szinkronizálás",
+      "autoSyncDesc": "Adatok automatikus szinkronizálása ütemezés szerint",
+      "autoSyncScheduleDesc": "Szinkronizálás automatikusan ütemezés szerint",
+      "syncFrequency": "Szinkronizálási gyakoriság",
+      "nextScheduledSync": "Következő ütemezett szinkronizálás",
+      "dataToSync": "Szinkronizálandó adatok",
+      "frequency": {
+        "realtime": "Valós idejű",
+        "hourly": "Óránként",
+        "daily": "Naponta",
+        "weekly": "Hetente"
+      },
+      "data": {
+        "employees": "Alkalmazottak",
+        "timeEntries": "Időbejegyzések",
+        "departments": "Részlegek",
+        "locations": "Helyszínek"
+      }
+    },
+    "mapping": {
+      "description": "A mezőleképezés szabályozza, hogyan kerülnek a(z) {{name}} adatai az Uplift mezőire. A módosítások a következő szinkronizáláskor lépnek érvénybe.",
+      "sourceField": "{{name}} mező",
+      "upliftField": "Uplift mező",
+      "status": "Állapot",
+      "selectField": "Mező kiválasztása...",
+      "mapped": "Leképezve",
+      "unmapped": "Nincs leképezve"
+    },
+    "history": {
+      "noHistory": "Még nincs szinkronizálási előzmény",
+      "sync": "Szinkronizálás",
+      "duration": "Időtartam",
+      "records": "Rekordok",
+      "created": "Létrehozva",
+      "updated": "Frissítve"
+    },
+    "webhooks": {
+      "description": "A webhookok értesítik a(z) {{name}} szolgáltatást, amikor események történnek az Upliftben",
+      "addWebhook": "Webhook hozzáadása",
+      "noWebhooks": "Nincsenek konfigurált webhookok",
+      "createFirst": "Hozza létre első webhookját",
+      "active": "Aktív",
+      "paused": "Szüneteltetve",
+      "sendTestPayload": "Teszt adat küldése",
+      "pauseWebhook": "Webhook szüneteltetése",
+      "enableWebhook": "Webhook engedélyezése",
+      "deleteWebhook": "Webhook törlése",
+      "lastTriggered": "Utoljára aktiválva",
+      "never": "Soha",
+      "successRate": "Sikerességi arány",
+      "sendEventsTo": "Események küldése ide: {{name}}",
+      "endpointUrl": "Végpont URL",
+      "eventsToSend": "Küldendő események",
+      "hmacInfo": "Minden webhook tartalmat HMAC-SHA256-tal írunk alá. Az aláírást a",
+      "header": "fejlécben kapja meg.",
+      "createWebhook": "Webhook létrehozása",
+      "validationError": "Kérjük, adjon meg egy URL-t és válasszon legalább egy eseményt",
+      "createdSuccess": "Webhook sikeresen létrehozva!",
+      "testSent": "Teszt adat elküldve ide:",
+      "testStatus": "Állapot",
+      "deleteConfirm": "Törli ezt a webhookot?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Integrációk keresése...",
+      "allCategories": "Összes kategória",
+      "infoBannerTitle": "Az Uplift együttműködik meglévő eszközeivel",
+      "infoBannerDesc": "Csatlakoztassa HRIS, bérszámfejtési és kommunikációs rendszereit. Mi szinkronizáljuk az adatokat - nem cseréljük le a rendszereit.",
+      "noResults": "Nincs a keresésnek megfelelő integráció",
+      "dontSeeSystem": "Nem látja a rendszerét?",
+      "alwaysAdding": "Folyamatosan bővítjük az integrációkat. Tudassa velünk, mire van szüksége.",
+      "requestIntegration": "Integráció kérése"
+    },
+    "activity": {
+      "recentActivity": "Legutóbbi integrációs tevékenység",
+      "exportLog": "Napló exportálása"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API gyár",
+    "subtitle": "Egyéni REST API integrációk létrehozása kódírás nélkül",
+    "newIntegration": "Új integráció",
+    "searchPlaceholder": "Integrációk keresése...",
+    "loadingIntegrations": "Integrációk betöltése...",
+    "noIntegrationsFound": "Nem találhatók integrációk",
+    "noIntegrationsYet": "Még nincsenek egyéni integrációk",
+    "tryDifferentSearch": "Próbáljon más keresési kifejezést",
+    "createFirstDesc": "Hozza létre első egyéni API integrációját bármely REST API csatlakoztatásához",
+    "createIntegration": "Integráció létrehozása",
+    "deleteConfirm": "Biztosan törli ezt az integrációt?",
+    "list": {
+      "eventsCount": "{{count}} esemény",
+      "scheduled": "Ütemezett",
+      "incomingWebhook": "Bejövő webhook",
+      "manual": "Kézi",
+      "runsCount": "{{count}} futás",
+      "errorsCount": "{{count}} hiba",
+      "disabled": "Letiltva",
+      "edit": "Szerkesztés",
+      "test": "Teszt",
+      "viewLogs": "Naplók megtekintése",
+      "delete": "Törlés",
+      "lastRun": "Utolsó futás"
+    },
+    "stats": {
+      "totalIntegrations": "Összes integráció",
+      "active": "Aktív",
+      "runsToday": "Mai futások",
+      "totalErrors": "Összes hiba"
+    },
+    "editor": {
+      "editTitle": "API integráció szerkesztése",
+      "createTitle": "API integráció létrehozása",
+      "subtitle": "Egyéni REST API kapcsolat konfigurálása",
+      "integrationName": "Integráció neve",
+      "integrationNamePlaceholder": "pl. Szinkronizálás bérszámfejtési rendszerrel",
+      "description": "Leírás",
+      "descriptionPlaceholder": "Mit csinál ez az integráció?",
+      "method": "Metódus",
+      "url": "URL",
+      "headers": "Fejlécek",
+      "addHeader": "Fejléc hozzáadása",
+      "headerName": "Fejléc neve",
+      "headerValue": "Érték",
+      "requestBodyJson": "Kérés törzse (JSON)",
+      "useVariables": "Használja a {{field}} változókat",
+      "availableVariables": "Elérhető változók",
+      "authenticationType": "Hitelesítés típusa",
+      "apiKeyLocation": "API kulcs helye",
+      "header": "Fejléc",
+      "queryParameter": "Lekérdezési paraméter",
+      "keyName": "Kulcs neve",
+      "keyNamePlaceholder": "pl. X-API-Key",
+      "apiKey": "API kulcs",
+      "enterApiKey": "Adja meg API kulcsát",
+      "bearerToken": "Bearer token",
+      "enterToken": "Adja meg tokenjét",
+      "username": "Felhasználónév",
+      "password": "Jelszó",
+      "tokenUrl": "Token URL",
+      "clientId": "Ügyfél azonosító",
+      "clientSecret": "Ügyfél titkos kulcs",
+      "scopes": "Hatókörök (vesszővel elválasztva)",
+      "whenShouldRun": "Mikor fusson ez az integráció?",
+      "selectEvents": "Események kiválasztása",
+      "schedule": "Ütemezés",
+      "cronExpression": "CRON kifejezés",
+      "scheduleUtcNote": "Az ütemezés UTC időzónát használ. Jelenlegi CRON",
+      "yourWebhookUrl": "Az Ön webhook URL-je",
+      "webhookPostNote": "Küldjön POST kéréseket erre az URL-re. Feldolgozzuk a bejövő adatokat és leképezzük az Upliftre.",
+      "fieldMappings": "Mezőleképezések",
+      "fieldMappingsDesc": "Uplift mezők leképezése a külső API mezőire",
+      "addMapping": "Leképezés hozzáadása",
+      "noFieldMappings": "Még nincsenek mezőleképezések",
+      "addMappingsDesc": "Adjon hozzá leképezéseket az adatok átalakításához a rendszerek között",
+      "addFirstMapping": "Első leképezés hozzáadása",
+      "selectUpliftField": "Uplift mező kiválasztása...",
+      "externalFieldName": "Külső mező neve",
+      "noTransform": "Nincs átalakítás",
+      "dateIso": "Dátum → ISO",
+      "dateUk": "Dátum → UK formátum",
+      "boolYn": "Bool → I/N",
+      "fieldMappingTip": "A mezőleképezések a kérés törzsének automatikus összeállításához használatosak. A Kérés fülön {{field}} szintaxist is használhat egyéni JSON struktúrákhoz.",
+      "testConfiguration": "Konfiguráció tesztelése",
+      "testDescription": "Teszt kérés küldése a konfiguráció ellenőrzéséhez. Mintaadatokat használunk.",
+      "testing": "Tesztelés...",
+      "sendTestRequest": "Teszt kérés küldése",
+      "success": "Sikeres",
+      "failed": "Sikertelen",
+      "status": "Állapot",
+      "time": "Idő",
+      "response": "Válasz",
+      "enableIntegration": "Integráció engedélyezése",
+      "cancel": "Mégse",
+      "saveChanges": "Módosítások mentése",
+      "createIntegration": "Integráció létrehozása",
+      "tabs": {
+        "request": "Kérés",
+        "authentication": "Hitelesítés",
+        "trigger": "Eseményindító",
+        "fieldMapping": "Mezőleképezés",
+        "test": "Teszt"
+      }
+    },
+    "logs": {
+      "executionLogs": "Végrehajtási naplók",
+      "export": "Exportálás",
+      "noData": "Még nincsenek adatok. A végrehajtási naplók megjelennek, amint az integrációk futnak.",
+      "unknown": "Ismeretlen",
+      "error": "Hiba"
+    },
+    "helpBanner": {
+      "title": "Segítségre van szüksége az integráció létrehozásához?",
+      "description": "Tekintse meg API dokumentációnkat példákért, vagy lépjen kapcsolatba a támogatással összetett esetekben."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API kulcsok",
+    "subtitle": "API kulcsok generálása az Uplift adatainak eléréséhez alkalmazásaiból",
+    "apiDocs": "API dokumentáció",
+    "createKey": "Kulcs létrehozása",
+    "createApiKey": "API kulcs létrehozása",
+    "loadingKeys": "API kulcsok betöltése...",
+    "loadError": "Az API kulcsok betöltése sikertelen.",
+    "noKeysYet": "Még nincsenek API kulcsok",
+    "createFirstDesc": "Hozza létre első API kulcsát az Uplift integrálásának megkezdéséhez",
+    "retry": "Újrapróbálás",
+    "revokeConfirm": "Visszavonja a(z) \"{{name}}\" API kulcsot? Ez a művelet nem vonható vissza.",
+    "regenerateConfirm": "Újragenerálja a(z) \"{{name}}\" titkos kulcsát? A régi titkos kulcs azonnal érvénytelenné válik.",
+    "regenerateSuccess": "Új titkos kulcs: {{secret}}\n\nMentse el most - többé nem fogja látni!",
+    "regenerateError": "A titkos kulcs újragenerálása sikertelen: {{message}}",
+    "usageStats": "Használati statisztika - {{name}}:\n\nÖsszes kérés: {{requests}}\nUtolsó használat: {{lastUsed}}",
+    "card": {
+      "noDescription": "Nincs leírás",
+      "expired": "Lejárt",
+      "active": "Aktív",
+      "inactive": "Inaktív",
+      "keyId": "Kulcs azonosító",
+      "requests": "Kérések",
+      "lastUsed": "Utolsó használat",
+      "never": "Soha",
+      "rateLimit": "Sebességkorlát",
+      "standard": "Standard",
+      "hideDetails": "Részletek elrejtése",
+      "showDetails": "Részletek megjelenítése",
+      "scopes": "HATÓKÖRÖK",
+      "created": "Létrehozva",
+      "expires": "Lejárat",
+      "usage": "Használat",
+      "regenerate": "Újragenerálás",
+      "revoke": "Visszavonás"
+    },
+    "create": {
+      "keyCreatedTitle": "API kulcs létrehozva",
+      "createTitle": "API kulcs létrehozása",
+      "keyCreatedSuccess": "API kulcs sikeresen létrehozva",
+      "copySecretWarning": "Másolja ki titkos kulcsát most. Nem fogja tudni újra megtekinteni!",
+      "keyIdLabel": "Kulcs azonosító",
+      "secretKeyLabel": "Titkos kulcs",
+      "fullApiKeyLabel": "Teljes API kulcs (Authorization fejléchez)",
+      "fullKeyLabel": "Teljes kulcs",
+      "authHeaderNote": "Használja ezt az Authorization fejlécben",
+      "done": "Kész",
+      "keyName": "Kulcs neve",
+      "keyNamePlaceholder": "pl. Éles API kulcs",
+      "description": "Leírás",
+      "descriptionPlaceholder": "Mire fogja használni ezt a kulcsot?",
+      "permissions": "Jogosultságok",
+      "rateLimit": "Sebességkorlát",
+      "expiration": "Lejárat",
+      "neverExpires": "Soha nem jár le",
+      "thirtyDays": "30 nap",
+      "ninetyDays": "90 nap",
+      "oneYear": "1 év",
+      "createError": "Az API kulcs létrehozása sikertelen. Kérjük, próbálja újra.",
+      "cancel": "Mégse",
+      "createKey": "Kulcs létrehozása"
+    },
+    "docs": {
+      "quickStart": "Gyors kezdés",
+      "authentication": "Hitelesítés",
+      "exampleResponse": "Példa válasz",
+      "viewFullDocs": "Teljes dokumentáció megtekintése",
+      "downloadSpec": "OpenAPI specifikáció letöltése"
+    },
+    "securityBanner": {
+      "title": "API kulcs biztonság",
+      "description": "Tartsa API kulcsait biztonságban. Soha ne tegye közzé őket kliensoldali kódban vagy nyilvános tárolókban. Ha egy kulcs kompromittálódik, azonnal vonja vissza és hozzon létre újat."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Szervezet beállítása",
+    "subtitle": "Konfiguráljuk a szervezetét",
+    "steps": {
+      "orgDetails": "Szervezet részletei",
+      "locations": "Helyszínek",
+      "departments": "Részlegek",
+      "roles": "Szerepkörök és jogosultságok",
+      "review": "Áttekintés és indítás"
+    },
+    "orgDetails": {
+      "companyName": "Cégnév",
+      "companyNamePlaceholder": "pl. Acme Kft.",
+      "tradingName": "Kereskedelmi név (opcionális)",
+      "tradingNamePlaceholder": "Nyilvános megjelenésű név",
+      "industry": "Iparág",
+      "selectIndustry": "Iparág kiválasztása",
+      "companySize": "Cégméret",
+      "selectSize": "Méret kiválasztása",
+      "timezone": "Alapértelmezett időzóna",
+      "currency": "Alapértelmezett pénznem",
+      "weekStart": "A hét kezdete",
+      "logo": "Céges logó",
+      "uploadLogo": "Logó feltöltése",
+      "uploadLogoDesc": "PNG vagy SVG, ajánlott 200×200px"
+    },
+    "locations": {
+      "title": "Helyszínek",
+      "subtitle": "Adja hozzá irodáit, telephelyeit vagy fiókjait",
+      "addLocation": "Helyszín hozzáadása",
+      "name": "Helyszín neve",
+      "namePlaceholder": "pl. Központi iroda",
+      "address": "Cím",
+      "addressPlaceholder": "Teljes cím",
+      "timezone": "Időzóna",
+      "noLocations": "Még nincsenek hozzáadott helyszínek",
+      "addFirst": "Adja hozzá első helyszínét a kezdéshez"
+    },
+    "departments": {
+      "title": "Részlegek",
+      "subtitle": "Állítsa be a részlegek struktúráját",
+      "addDepartment": "Részleg hozzáadása",
+      "name": "Részleg neve",
+      "namePlaceholder": "pl. Mérnöki",
+      "parentDepartment": "Szülő részleg (opcionális)",
+      "none": "Nincs (legfelső szint)",
+      "manager": "Részlegvezető",
+      "selectManager": "Vezető kiválasztása",
+      "noDepartments": "Még nincsenek hozzáadott részlegek",
+      "addFirst": "Adja hozzá első részlegét"
+    },
+    "roles": {
+      "title": "Szerepkörök és jogosultságok",
+      "subtitle": "Hozzáférési szintek konfigurálása a csapat számára",
+      "addRole": "Egyéni szerepkör hozzáadása",
+      "builtIn": "Beépített",
+      "custom": "Egyéni",
+      "name": "Szerepkör neve",
+      "namePlaceholder": "pl. Műszakvezető",
+      "description": "Leírás",
+      "descriptionPlaceholder": "Mit tehet ez a szerepkör?",
+      "permissions": "Jogosultságok",
+      "permissionGroups": {
+        "scheduling": "Beosztás tervezés",
+        "timeTracking": "Időkövetés",
+        "employees": "Alkalmazottak",
+        "reports": "Jelentések",
+        "settings": "Beállítások"
+      }
+    },
+    "review": {
+      "title": "Áttekintés és indítás",
+      "subtitle": "Ellenőrizze, hogy minden rendben van-e az indítás előtt",
+      "orgInfo": "Szervezeti adatok",
+      "locationsCount": "{{count}} helyszín konfigurálva",
+      "departmentsCount": "{{count}} részleg konfigurálva",
+      "rolesCount": "{{count}} szerepkör konfigurálva",
+      "allLooksGood": "Minden rendben van!",
+      "launch": "Szervezet indítása",
+      "launchDesc": "Ez aktiválja szervezetét és meghívókat küld a hozzáadott csapattagoknak."
+    },
+    "navigation": {
+      "back": "Vissza",
+      "next": "Következő",
+      "skip": "Kihagyás most",
+      "finish": "Beállítás befejezése"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

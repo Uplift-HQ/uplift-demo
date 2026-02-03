@@ -54,7 +54,6 @@
     "viewMyCareer": "Моя кар'єра",
     "timeOffBalance": "Баланс відпусток"
   },
-
   "nav": {
     "dashboard": "Панель керування",
     "employees": "Працівники",
@@ -150,9 +149,21 @@
     "active": "Активний",
     "inactive": "Неактивний",
     "enabled": "Увімкнено",
-    "disabled": "Вимкнено"
+    "disabled": "Вимкнено",
+    "approveSelected": "Схвалити вибрані",
+    "rejectSelected": "Відхилити вибрані",
+    "clearSelection": "Очистити",
+    "showing": "Показано",
+    "of": "з",
+    "page": "Сторінка",
+    "previous": "Попередня",
+    "terminated": "Звільнено",
+    "sunday": "Нд",
+    "monday": "Пн",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Увійти",
     "logout": "Вийти",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Щоб отримати доступ до Uplift, зверніться до вашого керівника або відділу кадрів. Вони надішлють вам запрошення.",
     "enterEmailPassword": "Будь ласка, введіть електронну пошту та пароль",
     "loginFailed": "Помилка входу",
-    "demoAccounts": "Демо-акаунти:",
-    "demoWorker": "Працівник: worker@uplift.work / Demo123!",
-    "demoManager": "Менеджер: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Двофакторна автентифікація",
     "enterMfaCode": "Введіть код з вашого додатку автентифікації",
     "verificationCode": "Код підтвердження",
@@ -194,9 +202,16 @@
     "invalidCode": "Невірний код",
     "allRightsReserved": "Усі права захищено",
     "termsOfService": "Умови використання",
-    "privacyPolicy": "Політика конфіденційності"
+    "privacyPolicy": "Політика конфіденційності",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Головна",
     "schedule": "Розклад",
@@ -214,7 +229,6 @@
     "leaderboard": "Таблиця лідерів",
     "badges": "Значки"
   },
-
   "home": {
     "welcome": "З поверненням, {{name}}!",
     "welcomeBack": "З поверненням,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Відкриті можливості",
     "noOpportunities": "Зараз немає можливостей, що відповідають вашим навичкам"
   },
-
   "schedule": {
     "title": "Мій розклад",
     "weekView": "Тиждень",
@@ -293,9 +306,22 @@
     "yourShift": "Ваша зміна",
     "theirShift": "Їхня зміна",
     "sendRequest": "Надіслати запит",
-    "cancelSwap": "Скасувати обмін"
+    "cancelSwap": "Скасувати обмін",
+    "allLocations": "Всі локації",
+    "tuesday": "Вт",
+    "wednesday": "Ср",
+    "thursday": "Чт",
+    "friday": "Пт",
+    "saturday": "Сб",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Облік часу",
     "clockedIn": "Відмічено прихід",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Натисніть для відмітки приходу",
     "onBreakSince": "На перерві з {{time}}",
     "workingSince": "Працює з {{time}}",
-    "shiftEnded": "Зміна завершена"
+    "shiftEnded": "Зміна завершена",
+    "entriesApproved": "{{count}} записів схвалено",
+    "approveError": "Не вдалося схвалити записи. Будь ласка, спробуйте ще раз.",
+    "entriesRejected": "{{count}} записів відхилено",
+    "rejectError": "Не вдалося відхилити записи. Будь ласка, спробуйте ще раз.",
+    "clockInError": "Не вдалося відмітити прихід. Будь ласка, спробуйте ще раз.",
+    "clockOutError": "Не вдалося відмітити вихід. Будь ласка, спробуйте ще раз.",
+    "breakError": "Не вдалося оновити статус перерви. Будь ласка, спробуйте ще раз.",
+    "noPending": "Немає записів для перегляду",
+    "noEntries": "Записів часу не знайдено",
+    "history": "Історія",
+    "managerSubtitle": "Перегляд та схвалення табелів",
+    "employeeSubtitle": "Відстежуйте свої робочі години",
+    "clockIn": "Відмітити прихід",
+    "clockOut": "Відмітити вихід",
+    "startBreak": "Почати перерву",
+    "endBreak": "Завершити перерву",
+    "totalHours": "Всього годин"
   },
-
   "timeOff": {
     "title": "Відпустки",
     "request": "Запросити відпустку",
@@ -359,9 +401,16 @@
     "selectDates": "Вибрати дати",
     "selectType": "Вибрати тип",
     "addNotes": "Додати нотатки (необов'язково)",
-    "reviewRequest": "Переглянути запит"
+    "reviewRequest": "Переглянути запит",
+    "oneDay": "1 день",
+    "days": "днів",
+    "dates": "Дати",
+    "duration": "Тривалість",
+    "noRequests": "Запитів не знайдено",
+    "requestDetails": "Деталі запиту на відпустку",
+    "noReason": "Причина не вказана",
+    "submitted": "Надіслано"
   },
-
   "feed": {
     "title": "Стрічка",
     "newPost": "Новий пост",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}}год тому",
     "daysAgo": "{{count}}дн тому"
   },
-
   "messages": {
     "title": "Повідомлення",
     "newMessage": "Нове повідомлення",
@@ -419,7 +467,6 @@
     "translateMessage": "Перекласти",
     "showOriginal": "Показати оригінал"
   },
-
   "profile": {
     "title": "Профіль",
     "editProfile": "Редагувати профіль",
@@ -447,7 +494,6 @@
     "viewProfile": "Переглянути профіль",
     "memberSince": "Учасник з {{date}}"
   },
-
   "skills": {
     "title": "Навички",
     "mySkills": "Мої навички",
@@ -474,7 +520,6 @@
     "skillAdded": "Навичку успішно додано",
     "verificationRequested": "Запит на підтвердження надіслано"
   },
-
   "career": {
     "title": "Кар'єра",
     "careerPath": "Кар'єрний шлях",
@@ -549,7 +594,6 @@
     "expired": "Прострочено",
     "expires": "Діє до {{date}}"
   },
-
   "gamification": {
     "level": "Рівень {{level}}",
     "levelShort": "Рів. {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "Отримано {{date}}",
     "progressToEarn": "{{percent}}% прогресу для отримання"
   },
-
   "notifications": {
     "title": "Сповіщення",
     "markAllRead": "Позначити все як прочитане",
@@ -605,7 +648,6 @@
     "allCaught": "Ви все переглянули!",
     "checkBackLater": "Перевірте пізніше на наявність нових сповіщень"
   },
-
   "settings": {
     "title": "Налаштування",
     "subtitle": "Керуйте організацією та обліковим записом",
@@ -740,9 +782,23 @@
     "featureAccess": "Доступ до функцій",
     "enableAll": "Увімкнути все",
     "disableAll": "Вимкнути все",
-    "aboutEmployeeVisibility": "Ці налаштування контролюють, які функції видимі для кожного працівника."
+    "aboutEmployeeVisibility": "Ці налаштування контролюють, які функції видимі для кожного працівника.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Завдання",
     "myTasks": "Мої завдання",
@@ -781,7 +837,6 @@
     "takePhoto": "Зробити фото",
     "chooseFromLibrary": "Вибрати з бібліотеки"
   },
-
   "expenses": {
     "title": "Витрати",
     "myExpenses": "Мої витрати",
@@ -808,7 +863,6 @@
     "totalApproved": "Схвалено всього",
     "totalReimbursed": "Відшкодовано всього"
   },
-
   "rewards": {
     "title": "Винагороди",
     "myRewards": "Мої винагороди",
@@ -828,7 +882,6 @@
     "validUntil": "Дійсно до {{date}}",
     "termsConditions": "Умови та положення"
   },
-
   "manager": {
     "dashboard": "Панель керівника",
     "teamOverview": "Огляд команди",
@@ -859,7 +912,6 @@
     "attendance": "Відвідуваність",
     "performance": "Продуктивність"
   },
-
   "onboarding": {
     "welcome": "Ласкаво просимо до Uplift!",
     "getStarted": "Давайте налаштуємо ваш обліковий запис",
@@ -877,7 +929,6 @@
     "allSet": "Все готово!",
     "startExploring": "Почніть досліджувати зміни та можливості"
   },
-
   "errors": {
     "networkError": "Помилка мережі. Будь ласка, перевірте з'єднання.",
     "serverError": "Помилка сервера. Будь ласка, спробуйте пізніше.",
@@ -898,7 +949,6 @@
     "tryAgain": "Будь ласка, спробуйте ще раз",
     "somethingWentWrong": "Щось пішло не так"
   },
-
   "activity": {
     "title": "Перегляд активності",
     "subtitle": "Переглядайте виконання завдань, завантаження доказів та подання форм",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Введіть причину відхилення...",
     "confirmRejection": "Підтвердити відхилення",
     "approve": "Схвалити",
-    "reject": "Відхилити"
+    "reject": "Відхилити",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Налаштування сповіщень",
     "subtitle": "Виберіть, як і коли отримувати сповіщення",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Ви впевнені, що хочете вимкнути всі сповіщення? Ви можете увімкнути їх будь-коли.",
     "disableSuccess": "Всі сповіщення вимкнено."
   },
-
   "employeeDetail": {
     "notFound": "Працівника не знайдено",
     "backToEmployees": "Назад до працівників",
@@ -989,7 +1040,6 @@
     "basic": "Базовий",
     "adding": "Додавання..."
   },
-
   "reports": {
     "title": "Звіти",
     "subtitle": "Аналітика, інсайти та користувацькі звіти",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Цього місяця",
     "lastMonth": "Минулого місяця",
     "last7Days": "Останні 7 днів",
-    "last30Days": "Останні 30 днів"
+    "last30Days": "Останні 30 днів",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Меню",
     "closeMenu": "Закрити меню",
@@ -1041,7 +1104,6 @@
     "required": "Обов'язково",
     "optional": "Необов'язково"
   },
-
   "shiftTemplates": {
     "title": "Шаблони змін",
     "subtitle": "Створюйте багаторазові шаблони змін",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "змін",
     "generating": "Генерування..."
   },
-
   "legal": {
-    "lastUpdated": "Останнє оновлення"
+    "lastUpdated": "Останнє оновлення",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "ДП",
     "pm": "ПП",
@@ -1120,5 +1289,564 @@
     "october": "Жовтень",
     "november": "Листопад",
     "december": "Грудень"
+  },
+  "bulkImport": {
+    "title": "Масовий імпорт",
+    "subtitle": "Імпорт даних з CSV або Excel файлів",
+    "selectType": "Вибрати тип",
+    "uploadFile": "Завантажити файл",
+    "preview": "Попередній перегляд",
+    "complete": "Завершено",
+    "invalidFileType": "Будь ласка, завантажте CSV або Excel файл",
+    "importFailed": "Імпорт не вдався. Будь ласка, спробуйте ще раз.",
+    "uploadFor": "Завантажити",
+    "uploadDesc": "Перетягніть або натисніть, щоб вибрати файл",
+    "downloadTemplate": "Завантажити шаблон",
+    "dragDrop": "Перетягніть файл сюди або натисніть для вибору",
+    "supportedFormats": "Підтримувані формати: CSV, XLSX",
+    "previewData": "Попередній перегляд даних",
+    "rowsFound": "рядків знайдено в",
+    "andMore": "Та",
+    "moreRows": "ще рядків...",
+    "importing": "Імпорт...",
+    "startImport": "Почати імпорт",
+    "importComplete": "Імпорт завершено",
+    "successfullyImported": "Успішно імпортовано",
+    "of": "з",
+    "records": "записів",
+    "successful": "Успішно",
+    "failed": "Невдало",
+    "total": "Всього",
+    "importMore": "Імпортувати ще",
+    "type": {
+      "employees": "Працівники",
+      "employeesDesc": "Імпорт профілів працівників",
+      "shifts": "Зміни",
+      "shiftsDesc": "Імпорт розкладу змін",
+      "locations": "Локації",
+      "locationsDesc": "Імпорт локацій",
+      "skills": "Навички",
+      "skillsDesc": "Імпорт навичок"
+    }
+  },
+  "jobs": {
+    "open": "Відкрито",
+    "closed": "Закрито",
+    "applicants": "Кандидати",
+    "created": "Вакансію успішно створено",
+    "createError": "Не вдалося створити вакансію. Будь ласка, спробуйте ще раз.",
+    "updated": "Вакансію успішно оновлено",
+    "updateError": "Не вдалося оновити вакансію. Будь ласка, спробуйте ще раз.",
+    "fullTime": "Повна зайнятість",
+    "partTime": "Часткова зайнятість",
+    "contract": "Контракт",
+    "temporary": "Тимчасовий",
+    "subtitle": "Керуйте внутрішніми кар'єрними можливостями",
+    "openPositions": "Відкриті позиції",
+    "closedPositions": "Закриті",
+    "totalApplicants": "Всього кандидатів",
+    "noJobs": "Вакансій не знайдено",
+    "viewApplicants": "Переглянути кандидатів",
+    "editPosting": "Редагувати вакансію",
+    "jobTitle": "Назва посади",
+    "enterTitle": "Введіть назву посади",
+    "selectDepartment": "Вибрати відділ",
+    "selectLocation": "Вибрати локацію",
+    "salary": "Діапазон зарплати",
+    "enterDescription": "Введіть опис посади",
+    "postJob": "Опублікувати вакансію",
+    "skillMatch": "відповідність навичок",
+    "noApplicants": "Кандидатів ще немає"
+  },
+  "employees": {
+    "searchPlaceholder": "Пошук за ім'ям або email...",
+    "employees": "працівників",
+    "noResults": "Не знайдено працівників за вашими критеріями",
+    "details": "Деталі працівника",
+    "hireDate": "Дата прийняття",
+    "assigned": "призначено",
+    "leaveDetails": "Деталі відпустки",
+    "until": "До",
+    "terminationDetails": "Деталі звільнення",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Центр інтеграцій",
+    "subtitle": "Підключіть Uplift до ваших існуючих інструментів",
+    "apiFactory": "Фабрика API",
+    "addIntegration": "Додати інтеграцію",
+    "configure": "Налаштувати",
+    "connect": "Підключити",
+    "cancel": "Скасувати",
+    "back": "Назад",
+    "saveChanges": "Зберегти зміни",
+    "syncNow": "Синхронізувати зараз",
+    "disconnect": "Від'єднати {{name}}",
+    "disconnectConfirm": "Від'єднати {{name}}? Це зупинить всі синхронізації.",
+    "settingsSaved": "Налаштування збережено",
+    "browseMarketplace": "Переглянути маркетплейс",
+    "loadingIntegrations": "Завантаження інтеграцій...",
+    "noIntegrations": "Інтеграцій не підключено",
+    "noIntegrationsDesc": "Підключіть першу інтеграцію для початку синхронізації даних",
+    "status": {
+      "beta": "Бета",
+      "syncing": "Синхронізація..."
+    },
+    "stats": {
+      "connected": "Підключено",
+      "available": "Доступно",
+      "syncsToday": "Синхронізацій сьогодні",
+      "errors": "Помилки",
+      "totalSyncs": "Всього синхронізацій",
+      "lastSync": "Остання синхронізація",
+      "records": "записів"
+    },
+    "tabs": {
+      "connected": "Підключені",
+      "marketplace": "Маркетплейс",
+      "restApi": "REST API",
+      "apiFactory": "Фабрика API",
+      "activityLog": "Журнал активності",
+      "settings": "Налаштування",
+      "fieldMapping": "Зіставлення полів",
+      "syncHistory": "Історія синхронізацій",
+      "webhooks": "Вебхуки"
+    },
+    "connection": {
+      "lastSync": "Остання синхронізація",
+      "frequency": "Частота",
+      "status": "Статус",
+      "healthy": "Працює",
+      "errors": "помилок"
+    },
+    "connectModal": {
+      "title": "Підключити {{name}}",
+      "whatItDoes": "Що робить ця інтеграція:",
+      "redirectNotice": "Вас буде перенаправлено до {{name}}",
+      "authorizeMessage": "Увійдіть та авторизуйте Uplift для доступу до ваших даних. Ми запитуємо лише необхідні дозволи.",
+      "connectWith": "Підключити через {{name}}",
+      "connecting": "Підключення до {{name}}...",
+      "completeAuth": "Будь ласка, завершіть авторизацію у спливаючому вікні",
+      "successConnected": "Успішно підключено!",
+      "configureSyncSettings": "Налаштуйте параметри синхронізації нижче.",
+      "completeSetup": "Завершити налаштування",
+      "connected": "{{name}} підключено!",
+      "firstSyncSoon": "Перша синхронізація почнеться незабаром",
+      "hris": {
+        "syncEmployees": "Автоматична синхронізація записів працівників",
+        "importDepts": "Імпорт відділів та локацій",
+        "syncTimeOff": "Синхронізація залишків відпусток"
+      },
+      "payroll": {
+        "exportTimesheets": "Експорт затверджених табелів",
+        "syncPayRates": "Синхронізація ставок оплати та понаднормових",
+        "autoReconciliation": "Автоматична звірка зарплати"
+      },
+      "comms": {
+        "shiftReminders": "Надсилання нагадувань про зміни",
+        "postRecognition": "Публікація визнань у каналах",
+        "swapNotifications": "Сповіщення про запити на обмін"
+      },
+      "identity": {
+        "sso": "Єдиний вхід (SSO)",
+        "autoProvisioning": "Автоматичне створення користувачів",
+        "directorySync": "Синхронізація каталогу"
+      },
+      "other": {
+        "bidirectional": "Двонаправлена синхронізація даних",
+        "realtimeWebhooks": "Оновлення в реальному часі через вебхуки",
+        "auditTrail": "Повний журнал аудиту"
+      }
+    },
+    "configureModal": {
+      "title": "Налаштування {{name}}",
+      "connectedSince": "Підключено {{date}}"
+    },
+    "settings": {
+      "autoSync": "Автосинхронізація",
+      "autoSyncDesc": "Автоматична синхронізація даних за розкладом",
+      "autoSyncScheduleDesc": "Синхронізувати автоматично за розкладом",
+      "syncFrequency": "Частота синхронізації",
+      "nextScheduledSync": "Наступна запланована синхронізація",
+      "dataToSync": "Дані для синхронізації",
+      "frequency": {
+        "realtime": "В реальному часі",
+        "hourly": "Щогодини",
+        "daily": "Щодня",
+        "weekly": "Щотижня"
+      },
+      "data": {
+        "employees": "Працівники",
+        "timeEntries": "Записи часу",
+        "departments": "Відділи",
+        "locations": "Локації"
+      }
+    },
+    "mapping": {
+      "description": "Зіставлення полів визначає, як дані з {{name}} відповідають полям Uplift. Зміни набувають чинності при наступній синхронізації.",
+      "sourceField": "Поле {{name}}",
+      "upliftField": "Поле Uplift",
+      "status": "Статус",
+      "selectField": "Вибрати поле...",
+      "mapped": "Зіставлено",
+      "unmapped": "Не зіставлено"
+    },
+    "history": {
+      "noHistory": "Історії синхронізацій ще немає",
+      "sync": "Синхронізація",
+      "duration": "Тривалість",
+      "records": "Записів",
+      "created": "Створено",
+      "updated": "Оновлено"
+    },
+    "webhooks": {
+      "description": "Вебхуки повідомляють {{name}} про події в Uplift",
+      "addWebhook": "Додати вебхук",
+      "noWebhooks": "Вебхуків не налаштовано",
+      "createFirst": "Створіть перший вебхук",
+      "active": "Активний",
+      "paused": "Призупинено",
+      "sendTestPayload": "Надіслати тестове повідомлення",
+      "pauseWebhook": "Призупинити вебхук",
+      "enableWebhook": "Увімкнути вебхук",
+      "deleteWebhook": "Видалити вебхук",
+      "lastTriggered": "Останній запуск",
+      "never": "Ніколи",
+      "successRate": "Рівень успіху",
+      "sendEventsTo": "Надсилати події до {{name}}",
+      "endpointUrl": "URL кінцевої точки",
+      "eventsToSend": "Події для надсилання",
+      "hmacInfo": "Ми підпишемо всі вебхук-повідомлення за допомогою HMAC-SHA256. Підпис буде у",
+      "header": "заголовку.",
+      "createWebhook": "Створити вебхук",
+      "validationError": "Будь ласка, введіть URL та виберіть хоча б одну подію",
+      "createdSuccess": "Вебхук успішно створено!",
+      "testSent": "Тестове повідомлення надіслано до",
+      "testStatus": "Статус",
+      "deleteConfirm": "Видалити цей вебхук?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Пошук інтеграцій...",
+      "allCategories": "Всі категорії",
+      "infoBannerTitle": "Uplift працює з вашими існуючими інструментами",
+      "infoBannerDesc": "Підключіть вашу HRIS, зарплатну та комунікаційну системи. Ми синхронізуємо дані — не замінюємо ваш стек.",
+      "noResults": "Інтеграцій за вашим пошуком не знайдено",
+      "dontSeeSystem": "Не бачите вашу систему?",
+      "alwaysAdding": "Ми постійно додаємо нові інтеграції. Повідомте нам, що вам потрібно.",
+      "requestIntegration": "Запросити інтеграцію"
+    },
+    "activity": {
+      "recentActivity": "Нещодавня активність інтеграцій",
+      "exportLog": "Експортувати журнал"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "Фабрика API",
+    "subtitle": "Створюйте власні REST API інтеграції без написання коду",
+    "newIntegration": "Нова інтеграція",
+    "searchPlaceholder": "Пошук інтеграцій...",
+    "loadingIntegrations": "Завантаження інтеграцій...",
+    "noIntegrationsFound": "Інтеграцій не знайдено",
+    "noIntegrationsYet": "Власних інтеграцій ще немає",
+    "tryDifferentSearch": "Спробуйте інший пошуковий запит",
+    "createFirstDesc": "Створіть першу власну API інтеграцію для підключення будь-якого REST API",
+    "createIntegration": "Створити інтеграцію",
+    "deleteConfirm": "Ви впевнені, що хочете видалити цю інтеграцію?",
+    "list": {
+      "eventsCount": "{{count}} подій",
+      "scheduled": "За розкладом",
+      "incomingWebhook": "Вхідний вебхук",
+      "manual": "Вручну",
+      "runsCount": "{{count}} запусків",
+      "errorsCount": "{{count}} помилок",
+      "disabled": "Вимкнено",
+      "edit": "Редагувати",
+      "test": "Тестувати",
+      "viewLogs": "Переглянути журнал",
+      "delete": "Видалити",
+      "lastRun": "Останній запуск"
+    },
+    "stats": {
+      "totalIntegrations": "Всього інтеграцій",
+      "active": "Активних",
+      "runsToday": "Запусків сьогодні",
+      "totalErrors": "Всього помилок"
+    },
+    "editor": {
+      "editTitle": "Редагувати API інтеграцію",
+      "createTitle": "Створити API інтеграцію",
+      "subtitle": "Налаштуйте власне REST API з'єднання",
+      "integrationName": "Назва інтеграції",
+      "integrationNamePlaceholder": "напр., Синхронізація із зарплатною системою",
+      "description": "Опис",
+      "descriptionPlaceholder": "Що робить ця інтеграція?",
+      "method": "Метод",
+      "url": "URL",
+      "headers": "Заголовки",
+      "addHeader": "Додати заголовок",
+      "headerName": "Назва заголовка",
+      "headerValue": "Значення",
+      "requestBodyJson": "Тіло запиту (JSON)",
+      "useVariables": "Використовуйте {{field}} для змінних",
+      "availableVariables": "Доступні змінні",
+      "authenticationType": "Тип автентифікації",
+      "apiKeyLocation": "Розташування API ключа",
+      "header": "Заголовок",
+      "queryParameter": "Параметр запиту",
+      "keyName": "Назва ключа",
+      "keyNamePlaceholder": "напр., X-API-Key",
+      "apiKey": "API ключ",
+      "enterApiKey": "Введіть ваш API ключ",
+      "bearerToken": "Bearer Token",
+      "enterToken": "Введіть ваш токен",
+      "username": "Ім'я користувача",
+      "password": "Пароль",
+      "tokenUrl": "URL токена",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scopes": "Scope (через кому)",
+      "whenShouldRun": "Коли запускати цю інтеграцію?",
+      "selectEvents": "Вибрати події",
+      "schedule": "Розклад",
+      "cronExpression": "CRON вираз",
+      "scheduleUtcNote": "Розклад використовує часовий пояс UTC. Поточний CRON",
+      "yourWebhookUrl": "Ваш URL вебхука",
+      "webhookPostNote": "Надсилайте POST запити на цей URL. Ми обробимо вхідні дані та зіставимо їх з Uplift.",
+      "fieldMappings": "Зіставлення полів",
+      "fieldMappingsDesc": "Зіставте поля Uplift з полями зовнішнього API",
+      "addMapping": "Додати зіставлення",
+      "noFieldMappings": "Зіставлень полів ще немає",
+      "addMappingsDesc": "Додайте зіставлення для перетворення даних між системами",
+      "addFirstMapping": "Додати перше зіставлення",
+      "selectUpliftField": "Виберіть поле Uplift...",
+      "externalFieldName": "Назва зовнішнього поля",
+      "noTransform": "Без перетворення",
+      "dateIso": "Дата → ISO",
+      "dateUk": "Дата → формат UK",
+      "boolYn": "Bool → Т/Н",
+      "fieldMappingTip": "Зіставлення полів використовується для автоматичної побудови тіла запиту. Ви також можете використовувати синтаксис {{field}} у вкладці Запит для власних JSON структур.",
+      "testConfiguration": "Тестувати конфігурацію",
+      "testDescription": "Надіслати тестовий запит для перевірки конфігурації. Будуть використані тестові дані.",
+      "testing": "Тестування...",
+      "sendTestRequest": "Надіслати тестовий запит",
+      "success": "Успіх",
+      "failed": "Невдача",
+      "status": "Статус",
+      "time": "Час",
+      "response": "Відповідь",
+      "enableIntegration": "Увімкнути інтеграцію",
+      "cancel": "Скасувати",
+      "saveChanges": "Зберегти зміни",
+      "createIntegration": "Створити інтеграцію",
+      "tabs": {
+        "request": "Запит",
+        "authentication": "Автентифікація",
+        "trigger": "Тригер",
+        "fieldMapping": "Зіставлення полів",
+        "test": "Тест"
+      }
+    },
+    "logs": {
+      "executionLogs": "Журнал виконань",
+      "export": "Експорт",
+      "noData": "Даних ще немає. Журнал виконань з'явиться після запуску інтеграцій.",
+      "unknown": "Невідомо",
+      "error": "Помилка"
+    },
+    "helpBanner": {
+      "title": "Потрібна допомога зі створенням інтеграції?",
+      "description": "Перегляньте нашу документацію API для прикладів або зверніться до служби підтримки для складних випадків."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API ключі",
+    "subtitle": "Генеруйте API ключі для доступу до даних Uplift з ваших додатків",
+    "apiDocs": "Документація API",
+    "createKey": "Створити ключ",
+    "createApiKey": "Створити API ключ",
+    "loadingKeys": "Завантаження API ключів...",
+    "loadError": "Не вдалося завантажити API ключі.",
+    "noKeysYet": "API ключів ще немає",
+    "createFirstDesc": "Створіть перший API ключ для початку інтеграції з Uplift",
+    "retry": "Повторити",
+    "revokeConfirm": "Відкликати API ключ \"{{name}}\"? Цю дію неможливо скасувати.",
+    "regenerateConfirm": "Перегенерувати секрет для \"{{name}}\"? Старий секрет негайно перестане працювати.",
+    "regenerateSuccess": "Новий секретний ключ: {{secret}}\n\nЗбережіть зараз - ви більше його не побачите!",
+    "regenerateError": "Не вдалося перегенерувати секрет: {{message}}",
+    "usageStats": "Статистика використання для {{name}}:\n\nВсього запитів: {{requests}}\nОстаннє використання: {{lastUsed}}",
+    "card": {
+      "noDescription": "Без опису",
+      "expired": "Прострочено",
+      "active": "Активний",
+      "inactive": "Неактивний",
+      "keyId": "ID ключа",
+      "requests": "Запитів",
+      "lastUsed": "Останнє використання",
+      "never": "Ніколи",
+      "rateLimit": "Ліміт запитів",
+      "standard": "Стандартний",
+      "hideDetails": "Сховати деталі",
+      "showDetails": "Показати деталі",
+      "scopes": "ДОЗВОЛИ",
+      "created": "Створено",
+      "expires": "Закінчується",
+      "usage": "Використання",
+      "regenerate": "Перегенерувати",
+      "revoke": "Відкликати"
+    },
+    "create": {
+      "keyCreatedTitle": "API ключ створено",
+      "createTitle": "Створити API ключ",
+      "keyCreatedSuccess": "API ключ успішно створено",
+      "copySecretWarning": "Скопіюйте секретний ключ зараз. Ви більше не зможете його побачити!",
+      "keyIdLabel": "ID ключа",
+      "secretKeyLabel": "Секретний ключ",
+      "fullApiKeyLabel": "Повний API ключ (для заголовка Authorization)",
+      "fullKeyLabel": "Повний ключ",
+      "authHeaderNote": "Використовуйте це у заголовку Authorization",
+      "done": "Готово",
+      "keyName": "Назва ключа",
+      "keyNamePlaceholder": "напр., Продакшн API ключ",
+      "description": "Опис",
+      "descriptionPlaceholder": "Для чого буде використовуватись цей ключ?",
+      "permissions": "Дозволи",
+      "rateLimit": "Ліміт запитів",
+      "expiration": "Термін дії",
+      "neverExpires": "Безстроковий",
+      "thirtyDays": "30 днів",
+      "ninetyDays": "90 днів",
+      "oneYear": "1 рік",
+      "createError": "Не вдалося створити API ключ. Будь ласка, спробуйте ще раз.",
+      "cancel": "Скасувати",
+      "createKey": "Створити ключ"
+    },
+    "docs": {
+      "quickStart": "Швидкий старт",
+      "authentication": "Автентифікація",
+      "exampleResponse": "Приклад відповіді",
+      "viewFullDocs": "Переглянути повну документацію",
+      "downloadSpec": "Завантажити OpenAPI специфікацію"
+    },
+    "securityBanner": {
+      "title": "Безпека API ключів",
+      "description": "Зберігайте ваші API ключі в безпеці. Ніколи не розкривайте їх у клієнтському коді або публічних репозиторіях. Якщо ключ скомпрометовано, негайно відкличте його та створіть новий."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Налаштування організації",
+    "subtitle": "Давайте налаштуємо вашу організацію",
+    "steps": {
+      "orgDetails": "Деталі організації",
+      "locations": "Локації",
+      "departments": "Відділи",
+      "roles": "Ролі та дозволи",
+      "review": "Перегляд та запуск"
+    },
+    "orgDetails": {
+      "companyName": "Назва компанії",
+      "companyNamePlaceholder": "напр., Компанія ТОВ",
+      "tradingName": "Торгова назва (необов'язково)",
+      "tradingNamePlaceholder": "Публічна назва",
+      "industry": "Галузь",
+      "selectIndustry": "Вибрати галузь",
+      "companySize": "Розмір компанії",
+      "selectSize": "Вибрати розмір",
+      "timezone": "Часовий пояс за замовчуванням",
+      "currency": "Валюта за замовчуванням",
+      "weekStart": "Тиждень починається з",
+      "logo": "Логотип компанії",
+      "uploadLogo": "Завантажити логотип",
+      "uploadLogoDesc": "PNG або SVG, рекомендовано 200×200px"
+    },
+    "locations": {
+      "title": "Локації",
+      "subtitle": "Додайте ваші офіси, об'єкти або філії",
+      "addLocation": "Додати локацію",
+      "name": "Назва локації",
+      "namePlaceholder": "напр., Головний офіс",
+      "address": "Адреса",
+      "addressPlaceholder": "Повна адреса",
+      "timezone": "Часовий пояс",
+      "noLocations": "Локацій ще не додано",
+      "addFirst": "Додайте першу локацію для початку"
+    },
+    "departments": {
+      "title": "Відділи",
+      "subtitle": "Налаштуйте структуру відділів",
+      "addDepartment": "Додати відділ",
+      "name": "Назва відділу",
+      "namePlaceholder": "напр., Інженерія",
+      "parentDepartment": "Батьківський відділ (необов'язково)",
+      "none": "Немає (верхній рівень)",
+      "manager": "Керівник відділу",
+      "selectManager": "Вибрати керівника",
+      "noDepartments": "Відділів ще не додано",
+      "addFirst": "Додайте перший відділ"
+    },
+    "roles": {
+      "title": "Ролі та дозволи",
+      "subtitle": "Налаштуйте рівні доступу для вашої команди",
+      "addRole": "Додати власну роль",
+      "builtIn": "Вбудована",
+      "custom": "Власна",
+      "name": "Назва ролі",
+      "namePlaceholder": "напр., Начальник зміни",
+      "description": "Опис",
+      "descriptionPlaceholder": "Що може робити ця роль?",
+      "permissions": "Дозволи",
+      "permissionGroups": {
+        "scheduling": "Планування",
+        "timeTracking": "Облік часу",
+        "employees": "Працівники",
+        "reports": "Звіти",
+        "settings": "Налаштування"
+      }
+    },
+    "review": {
+      "title": "Перегляд та запуск",
+      "subtitle": "Перевірте, що все правильно перед запуском",
+      "orgInfo": "Інформація про організацію",
+      "locationsCount": "{{count}} локацій налаштовано",
+      "departmentsCount": "{{count}} відділів налаштовано",
+      "rolesCount": "{{count}} ролей налаштовано",
+      "allLooksGood": "Все виглядає добре!",
+      "launch": "Запустити організацію",
+      "launchDesc": "Це активує вашу організацію та надішле запрошення всім доданим членам команди."
+    },
+    "navigation": {
+      "back": "Назад",
+      "next": "Далі",
+      "skip": "Пропустити поки що",
+      "finish": "Завершити налаштування"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

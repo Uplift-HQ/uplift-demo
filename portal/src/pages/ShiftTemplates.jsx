@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { shiftsApi, locationsApi, skillsApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { useToast } from '../components/ToastProvider';
 import {
   Copy, Plus, Edit, Trash, Calendar, Clock, MapPin, Users,
   Play, X, ChevronRight, CheckCircle, AlertCircle, Award, Target,
@@ -16,6 +17,7 @@ import { format, addDays } from 'date-fns';
 export default function ShiftTemplates() {
   const { t } = useTranslation();
   const { isManager } = useAuth();
+  const toast = useToast();
   const [templates, setTemplates] = useState([]);
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,11 +51,11 @@ export default function ShiftTemplates() {
   const handleDelete = async (id) => {
     if (!confirm('Delete this template?')) return;
     try {
-      await shiftsApi.createTemplate && await fetch(`/api/shift-templates/${id}`, { method: 'DELETE' });
-      // TODO: Use a dedicated deleteTemplate API method when available
+      await shiftsApi.deleteTemplate(id);
       loadData();
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to delete template:', err);
+      toast.error('Failed to delete template');
     }
   };
 
@@ -212,6 +214,7 @@ const ROTATION_PATTERNS = [
 ];
 
 function TemplateModal({ template, locations, onClose, onSave, t }) {
+  const toast = useToast();
   const [form, setForm] = useState({
     name: template?.name || '',
     locationId: template?.location_id || '',
@@ -277,19 +280,15 @@ function TemplateModal({ template, locations, onClose, onSave, t }) {
     setSaving(true);
     try {
       if (template) {
-        // TODO: Use dedicated updateTemplate API method when available
-        await fetch(`/api/shift-templates/${template.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        });
+        await shiftsApi.updateTemplate(template.id, form);
       } else {
         await shiftsApi.createTemplate(form);
       }
       onSave();
       onClose();
     } catch (err) {
-      // TODO: Show error toast
+      if (import.meta.env.DEV) console.error('Failed to save template:', err);
+      toast.error('Failed to save template');
     } finally {
       setSaving(false);
     }

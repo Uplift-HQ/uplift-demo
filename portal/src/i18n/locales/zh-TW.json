@@ -54,7 +54,6 @@
     "viewMyCareer": "查看我的職涯",
     "timeOffBalance": "假期餘額"
   },
-
   "nav": {
     "dashboard": "儀表板",
     "employees": "員工",
@@ -150,9 +149,21 @@
     "active": "啟用",
     "inactive": "停用",
     "enabled": "已啟用",
-    "disabled": "已停用"
+    "disabled": "已停用",
+    "approveSelected": "核准已選項目",
+    "rejectSelected": "拒絕已選項目",
+    "clearSelection": "清除",
+    "showing": "顯示",
+    "of": "共",
+    "page": "頁",
+    "previous": "上一頁",
+    "terminated": "已離職",
+    "sunday": "週日",
+    "monday": "週一",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "登入",
     "logout": "登出",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "如需取得 Uplift 的存取權限，請聯繫您的主管或人資部門。他們將會寄送邀請連結給您。",
     "enterEmailPassword": "請輸入電子郵件和密碼",
     "loginFailed": "登入失敗",
-    "demoAccounts": "示範帳戶：",
-    "demoWorker": "員工：worker@uplift.work / Demo123!",
-    "demoManager": "主管：manager@uplift.work / Demo123!",
     "twoFactorAuth": "雙重驗證",
     "enterMfaCode": "請輸入驗證器應用程式中的驗證碼",
     "verificationCode": "驗證碼",
@@ -194,9 +202,16 @@
     "invalidCode": "驗證碼無效",
     "allRightsReserved": "版權所有",
     "termsOfService": "服務條款",
-    "privacyPolicy": "隱私權政策"
+    "privacyPolicy": "隱私權政策",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "首頁",
     "schedule": "排班",
@@ -214,7 +229,6 @@
     "leaderboard": "排行榜",
     "badges": "徽章"
   },
-
   "home": {
     "welcome": "歡迎回來，{{name}}！",
     "welcomeBack": "歡迎回來，",
@@ -239,7 +253,6 @@
     "openOpportunities": "開放機會",
     "noOpportunities": "目前沒有符合您技能的機會"
   },
-
   "schedule": {
     "title": "我的排班",
     "weekView": "週",
@@ -293,9 +306,22 @@
     "yourShift": "您的班次",
     "theirShift": "對方的班次",
     "sendRequest": "送出申請",
-    "cancelSwap": "取消換班"
+    "cancelSwap": "取消換班",
+    "allLocations": "所有地點",
+    "tuesday": "週二",
+    "wednesday": "週三",
+    "thursday": "週四",
+    "friday": "週五",
+    "saturday": "週六",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "時間追蹤",
     "clockedIn": "已打卡上班",
@@ -326,9 +352,25 @@
     "tapToClockIn": "點擊打卡上班",
     "onBreakSince": "從 {{time}} 開始休息",
     "workingSince": "從 {{time}} 開始工作",
-    "shiftEnded": "班次已結束"
+    "shiftEnded": "班次已結束",
+    "entriesApproved": "已核准 {{count}} 筆記錄",
+    "approveError": "核准失敗，請重試。",
+    "entriesRejected": "已拒絕 {{count}} 筆記錄",
+    "rejectError": "拒絕失敗，請重試。",
+    "clockInError": "打卡上班失敗，請重試。",
+    "clockOutError": "打卡下班失敗，請重試。",
+    "breakError": "更新休息狀態失敗，請重試。",
+    "noPending": "沒有待審核的記錄",
+    "noEntries": "找不到時間記錄",
+    "history": "歷史記錄",
+    "managerSubtitle": "審核和核准工時表",
+    "employeeSubtitle": "追蹤您的工作時數",
+    "clockIn": "打卡上班",
+    "clockOut": "打卡下班",
+    "startBreak": "開始休息",
+    "endBreak": "結束休息",
+    "totalHours": "總時數"
   },
-
   "timeOff": {
     "title": "請假",
     "request": "申請請假",
@@ -359,9 +401,16 @@
     "selectDates": "選擇日期",
     "selectType": "選擇類型",
     "addNotes": "新增備註（選填）",
-    "reviewRequest": "檢視申請"
+    "reviewRequest": "檢視申請",
+    "oneDay": "1 天",
+    "days": "天",
+    "dates": "日期",
+    "duration": "時長",
+    "noRequests": "找不到請求",
+    "requestDetails": "請假詳情",
+    "noReason": "未提供原因",
+    "submitted": "已提交"
   },
-
   "feed": {
     "title": "動態",
     "newPost": "新貼文",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}} 小時前",
     "daysAgo": "{{count}} 天前"
   },
-
   "messages": {
     "title": "訊息",
     "newMessage": "新訊息",
@@ -419,7 +467,6 @@
     "translateMessage": "翻譯",
     "showOriginal": "顯示原文"
   },
-
   "profile": {
     "title": "個人檔案",
     "editProfile": "編輯個人檔案",
@@ -447,7 +494,6 @@
     "viewProfile": "查看個人檔案",
     "memberSince": "加入日期：{{date}}"
   },
-
   "skills": {
     "title": "技能",
     "mySkills": "我的技能",
@@ -474,7 +520,6 @@
     "skillAdded": "技能新增成功",
     "verificationRequested": "已申請驗證"
   },
-
   "career": {
     "title": "職涯",
     "careerPath": "職涯路徑",
@@ -549,7 +594,6 @@
     "expired": "已過期",
     "expires": "到期日 {{date}}"
   },
-
   "gamification": {
     "level": "等級 {{level}}",
     "levelShort": "Lv {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "獲得日期：{{date}}",
     "progressToEarn": "已完成 {{percent}}%"
   },
-
   "notifications": {
     "title": "通知",
     "markAllRead": "全部標為已讀",
@@ -605,7 +648,6 @@
     "allCaught": "您已閱讀所有通知！",
     "checkBackLater": "稍後再查看新通知"
   },
-
   "settings": {
     "title": "設定",
     "subtitle": "管理您的組織和帳戶",
@@ -740,9 +782,23 @@
     "featureAccess": "功能存取",
     "enableAll": "全部啟用",
     "disableAll": "全部停用",
-    "aboutEmployeeVisibility": "這些設定控制每位員工可見的功能。"
+    "aboutEmployeeVisibility": "這些設定控制每位員工可見的功能。",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "任務",
     "myTasks": "我的任務",
@@ -781,7 +837,6 @@
     "takePhoto": "拍照",
     "chooseFromLibrary": "從相簿選擇"
   },
-
   "expenses": {
     "title": "費用",
     "myExpenses": "我的費用",
@@ -808,7 +863,6 @@
     "totalApproved": "已核准總額",
     "totalReimbursed": "已報銷總額"
   },
-
   "rewards": {
     "title": "獎勵",
     "myRewards": "我的獎勵",
@@ -828,7 +882,6 @@
     "validUntil": "有效期限至 {{date}}",
     "termsConditions": "條款與條件"
   },
-
   "manager": {
     "dashboard": "主管儀表板",
     "teamOverview": "團隊概覽",
@@ -859,7 +912,6 @@
     "attendance": "出勤",
     "performance": "績效"
   },
-
   "onboarding": {
     "welcome": "歡迎使用 Uplift！",
     "getStarted": "讓我們開始設定",
@@ -877,7 +929,6 @@
     "allSet": "設定完成！",
     "startExploring": "開始探索班次和機會"
   },
-
   "errors": {
     "networkError": "網路錯誤，請檢查您的連線。",
     "serverError": "伺服器錯誤，請稍後再試。",
@@ -898,7 +949,6 @@
     "tryAgain": "請重試",
     "somethingWentWrong": "發生錯誤"
   },
-
   "activity": {
     "title": "活動審核",
     "subtitle": "審核任務完成、證明上傳和表單提交",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "輸入拒絕原因...",
     "confirmRejection": "確認拒絕",
     "approve": "核准",
-    "reject": "拒絕"
+    "reject": "拒絕",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "通知偏好設定",
     "subtitle": "選擇接收通知的方式和時間",
@@ -973,7 +1025,6 @@
     "disableConfirm": "您確定要停用所有通知嗎？您可以隨時重新啟用。",
     "disableSuccess": "所有通知已停用。"
   },
-
   "employeeDetail": {
     "notFound": "找不到員工",
     "backToEmployees": "返回員工列表",
@@ -989,7 +1040,6 @@
     "basic": "基礎",
     "adding": "新增中..."
   },
-
   "reports": {
     "title": "報表",
     "subtitle": "分析、洞察和自訂報表",
@@ -1025,9 +1075,22 @@
     "thisMonth": "本月",
     "lastMonth": "上月",
     "last7Days": "過去 7 天",
-    "last30Days": "過去 30 天"
+    "last30Days": "過去 30 天",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "選單",
     "closeMenu": "關閉選單",
@@ -1041,7 +1104,6 @@
     "required": "必填",
     "optional": "選填"
   },
-
   "shiftTemplates": {
     "title": "班次範本",
     "subtitle": "建立可重複使用的班次模式",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "個班次",
     "generating": "產生中..."
   },
-
   "legal": {
-    "lastUpdated": "最後更新"
+    "lastUpdated": "最後更新",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "上午",
     "pm": "下午",
@@ -1120,5 +1289,564 @@
     "october": "十月",
     "november": "十一月",
     "december": "十二月"
+  },
+  "bulkImport": {
+    "title": "批量匯入",
+    "subtitle": "從 CSV 或 Excel 檔案匯入資料",
+    "selectType": "選擇類型",
+    "uploadFile": "上傳檔案",
+    "preview": "預覽",
+    "complete": "完成",
+    "invalidFileType": "請上傳 CSV 或 Excel 檔案",
+    "importFailed": "匯入失敗，請重試。",
+    "uploadFor": "上傳",
+    "uploadDesc": "拖放或點擊選擇檔案",
+    "downloadTemplate": "下載範本",
+    "dragDrop": "將檔案拖放到此處，或點擊瀏覽",
+    "supportedFormats": "支援格式：CSV、XLSX",
+    "previewData": "預覽資料",
+    "rowsFound": "列找到於",
+    "andMore": "還有",
+    "moreRows": "更多列...",
+    "importing": "匯入中...",
+    "startImport": "開始匯入",
+    "importComplete": "匯入完成",
+    "successfullyImported": "成功匯入",
+    "of": "共",
+    "records": "筆記錄",
+    "successful": "成功",
+    "failed": "失敗",
+    "total": "總計",
+    "importMore": "匯入更多資料",
+    "type": {
+      "employees": "員工",
+      "employeesDesc": "匯入員工資料",
+      "shifts": "班次",
+      "shiftsDesc": "匯入班次排程",
+      "locations": "地點",
+      "locationsDesc": "匯入地點",
+      "skills": "技能",
+      "skillsDesc": "匯入技能"
+    }
+  },
+  "jobs": {
+    "open": "開放中",
+    "closed": "已關閉",
+    "applicants": "應徵者",
+    "created": "職位發布已成功建立",
+    "createError": "無法建立職位發布，請重試。",
+    "updated": "職位發布已成功更新",
+    "updateError": "無法更新職位發布，請重試。",
+    "fullTime": "全職",
+    "partTime": "兼職",
+    "contract": "合約",
+    "temporary": "臨時",
+    "subtitle": "管理內部職涯機會",
+    "openPositions": "開放職位",
+    "closedPositions": "已關閉",
+    "totalApplicants": "總應徵者",
+    "noJobs": "找不到職位發布",
+    "viewApplicants": "檢視應徵者",
+    "editPosting": "編輯職位發布",
+    "jobTitle": "職稱",
+    "enterTitle": "輸入職稱",
+    "selectDepartment": "選擇部門",
+    "selectLocation": "選擇地點",
+    "salary": "薪資範圍",
+    "enterDescription": "輸入職位描述",
+    "postJob": "發布職位",
+    "skillMatch": "技能匹配",
+    "noApplicants": "尚無應徵者"
+  },
+  "employees": {
+    "searchPlaceholder": "依姓名或電子郵件搜尋...",
+    "employees": "員工",
+    "noResults": "找不到符合條件的員工",
+    "details": "員工詳情",
+    "hireDate": "入職日期",
+    "assigned": "已分配",
+    "leaveDetails": "請假詳情",
+    "until": "至",
+    "terminationDetails": "離職詳情",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "整合中心",
+    "subtitle": "將 Uplift 連接到您現有的工具",
+    "apiFactory": "API 工廠",
+    "addIntegration": "新增整合",
+    "configure": "設定",
+    "connect": "連接",
+    "cancel": "取消",
+    "back": "返回",
+    "saveChanges": "儲存變更",
+    "syncNow": "立即同步",
+    "disconnect": "中斷 {{name}} 連接",
+    "disconnectConfirm": "中斷 {{name}} 連接？所有同步將停止。",
+    "settingsSaved": "設定已儲存",
+    "browseMarketplace": "瀏覽市集",
+    "loadingIntegrations": "載入整合中...",
+    "noIntegrations": "尚未連接整合",
+    "noIntegrationsDesc": "連接您的第一個整合以開始同步資料",
+    "status": {
+      "beta": "測試版",
+      "syncing": "同步中..."
+    },
+    "stats": {
+      "connected": "已連接",
+      "available": "可用",
+      "syncsToday": "今日同步",
+      "errors": "錯誤",
+      "totalSyncs": "總同步次數",
+      "lastSync": "上次同步",
+      "records": "筆記錄"
+    },
+    "tabs": {
+      "connected": "已連接",
+      "marketplace": "市集",
+      "restApi": "REST API",
+      "apiFactory": "API 工廠",
+      "activityLog": "活動日誌",
+      "settings": "設定",
+      "fieldMapping": "欄位對應",
+      "syncHistory": "同步歷史",
+      "webhooks": "Webhook"
+    },
+    "connection": {
+      "lastSync": "上次同步",
+      "frequency": "頻率",
+      "status": "狀態",
+      "healthy": "正常",
+      "errors": "錯誤"
+    },
+    "connectModal": {
+      "title": "連接 {{name}}",
+      "whatItDoes": "此整合的功能：",
+      "redirectNotice": "您將被重新導向至 {{name}}",
+      "authorizeMessage": "登入並授權 Uplift 存取您的資料。我們只請求必要的權限。",
+      "connectWith": "連接 {{name}}",
+      "connecting": "正在連接 {{name}}...",
+      "completeAuth": "請在彈出視窗中完成授權",
+      "successConnected": "連接成功！",
+      "configureSyncSettings": "在下方設定您的同步設定。",
+      "completeSetup": "完成設定",
+      "connected": "{{name}} 已連接！",
+      "firstSyncSoon": "您的首次同步即將開始",
+      "hris": {
+        "syncEmployees": "自動同步員工記錄",
+        "importDepts": "匯入部門和地點",
+        "syncTimeOff": "保持請假餘額同步"
+      },
+      "payroll": {
+        "exportTimesheets": "匯出已核准的工時表",
+        "syncPayRates": "同步薪資和加班費",
+        "autoReconciliation": "自動薪資對帳"
+      },
+      "comms": {
+        "shiftReminders": "傳送班次提醒",
+        "postRecognition": "發布表揚到頻道",
+        "swapNotifications": "換班請求通知"
+      },
+      "identity": {
+        "sso": "單一登入（SSO）",
+        "autoProvisioning": "自動使用者配置",
+        "directorySync": "目錄同步"
+      },
+      "other": {
+        "bidirectional": "雙向資料同步",
+        "realtimeWebhooks": "透過 webhook 即時更新",
+        "auditTrail": "完整稽核軌跡"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} 設定",
+      "connectedSince": "已連接 {{date}}"
+    },
+    "settings": {
+      "autoSync": "自動同步",
+      "autoSyncDesc": "按排程自動同步資料",
+      "autoSyncScheduleDesc": "按排程自動同步",
+      "syncFrequency": "同步頻率",
+      "nextScheduledSync": "下次排程同步",
+      "dataToSync": "要同步的資料",
+      "frequency": {
+        "realtime": "即時",
+        "hourly": "每小時",
+        "daily": "每日",
+        "weekly": "每週"
+      },
+      "data": {
+        "employees": "員工",
+        "timeEntries": "時間記錄",
+        "departments": "部門",
+        "locations": "地點"
+      }
+    },
+    "mapping": {
+      "description": "欄位對應控制 {{name}} 的資料如何對應到 Uplift 欄位。變更將在下次同步時生效。",
+      "sourceField": "{{name}} 欄位",
+      "upliftField": "Uplift 欄位",
+      "status": "狀態",
+      "selectField": "選擇欄位...",
+      "mapped": "已對應",
+      "unmapped": "未對應"
+    },
+    "history": {
+      "noHistory": "尚無同步歷史",
+      "sync": "同步",
+      "duration": "持續時間",
+      "records": "記錄",
+      "created": "已建立",
+      "updated": "已更新"
+    },
+    "webhooks": {
+      "description": "Webhook 在 Uplift 發生事件時通知 {{name}}",
+      "addWebhook": "新增 Webhook",
+      "noWebhooks": "尚未設定 webhook",
+      "createFirst": "建立您的第一個 webhook",
+      "active": "啟用中",
+      "paused": "已暫停",
+      "sendTestPayload": "傳送測試 payload",
+      "pauseWebhook": "暫停 webhook",
+      "enableWebhook": "啟用 webhook",
+      "deleteWebhook": "刪除 webhook",
+      "lastTriggered": "上次觸發",
+      "never": "從未",
+      "successRate": "成功率",
+      "sendEventsTo": "傳送事件至 {{name}}",
+      "endpointUrl": "端點 URL",
+      "eventsToSend": "要傳送的事件",
+      "hmacInfo": "我們將使用 HMAC-SHA256 簽署所有 webhook payload。您將在以下位置收到簽章",
+      "header": "標頭。",
+      "createWebhook": "建立 Webhook",
+      "validationError": "請輸入 URL 並選擇至少一個事件",
+      "createdSuccess": "Webhook 建立成功！",
+      "testSent": "已傳送測試 payload 至",
+      "testStatus": "狀態",
+      "deleteConfirm": "刪除此 webhook？"
+    },
+    "marketplace": {
+      "searchPlaceholder": "搜尋整合...",
+      "allCategories": "所有類別",
+      "infoBannerTitle": "Uplift 可與您現有的工具整合",
+      "infoBannerDesc": "連接您的 HRIS、薪資和通訊系統。我們同步資料，而非取代您的系統。",
+      "noResults": "沒有符合搜尋的整合",
+      "dontSeeSystem": "找不到您的系統？",
+      "alwaysAdding": "我們持續新增整合。請告訴我們您需要什麼。",
+      "requestIntegration": "請求整合"
+    },
+    "activity": {
+      "recentActivity": "最近整合活動",
+      "exportLog": "匯出日誌"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API 工廠",
+    "subtitle": "無需撰寫程式碼即可建立自訂 REST API 整合",
+    "newIntegration": "新增整合",
+    "searchPlaceholder": "搜尋整合...",
+    "loadingIntegrations": "載入整合中...",
+    "noIntegrationsFound": "找不到整合",
+    "noIntegrationsYet": "尚無自訂整合",
+    "tryDifferentSearch": "嘗試不同的搜尋詞",
+    "createFirstDesc": "建立您的第一個自訂 API 整合以連接任何 REST API",
+    "createIntegration": "建立整合",
+    "deleteConfirm": "確定要刪除此整合嗎？",
+    "list": {
+      "eventsCount": "{{count}} 個事件",
+      "scheduled": "已排程",
+      "incomingWebhook": "傳入 webhook",
+      "manual": "手動",
+      "runsCount": "{{count}} 次執行",
+      "errorsCount": "{{count}} 個錯誤",
+      "disabled": "已停用",
+      "edit": "編輯",
+      "test": "測試",
+      "viewLogs": "檢視日誌",
+      "delete": "刪除",
+      "lastRun": "上次執行"
+    },
+    "stats": {
+      "totalIntegrations": "總整合數",
+      "active": "啟用中",
+      "runsToday": "今日執行",
+      "totalErrors": "總錯誤數"
+    },
+    "editor": {
+      "editTitle": "編輯 API 整合",
+      "createTitle": "建立 API 整合",
+      "subtitle": "設定您的自訂 REST API 連接",
+      "integrationName": "整合名稱",
+      "integrationNamePlaceholder": "例如：同步至薪資系統",
+      "description": "描述",
+      "descriptionPlaceholder": "此整合的功能是什麼？",
+      "method": "方法",
+      "url": "URL",
+      "headers": "標頭",
+      "addHeader": "新增標頭",
+      "headerName": "標頭名稱",
+      "headerValue": "值",
+      "requestBodyJson": "請求主體（JSON）",
+      "useVariables": "使用 {{field}} 作為變數",
+      "availableVariables": "可用變數",
+      "authenticationType": "驗證類型",
+      "apiKeyLocation": "API 金鑰位置",
+      "header": "標頭",
+      "queryParameter": "查詢參數",
+      "keyName": "金鑰名稱",
+      "keyNamePlaceholder": "例如：X-API-Key",
+      "apiKey": "API 金鑰",
+      "enterApiKey": "輸入您的 API 金鑰",
+      "bearerToken": "Bearer Token",
+      "enterToken": "輸入您的 token",
+      "username": "使用者名稱",
+      "password": "密碼",
+      "tokenUrl": "Token URL",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scopes": "範圍（以逗號分隔）",
+      "whenShouldRun": "此整合應何時執行？",
+      "selectEvents": "選擇事件",
+      "schedule": "排程",
+      "cronExpression": "CRON 表達式",
+      "scheduleUtcNote": "排程使用 UTC 時區。目前 CRON",
+      "yourWebhookUrl": "您的 Webhook URL",
+      "webhookPostNote": "將 POST 請求傳送至此 URL。我們將處理傳入的資料並對應至 Uplift。",
+      "fieldMappings": "欄位對應",
+      "fieldMappingsDesc": "將 Uplift 欄位對應至您的外部 API 欄位",
+      "addMapping": "新增對應",
+      "noFieldMappings": "尚無欄位對應",
+      "addMappingsDesc": "新增對應以在系統之間轉換資料",
+      "addFirstMapping": "新增第一個對應",
+      "selectUpliftField": "選擇 Uplift 欄位...",
+      "externalFieldName": "外部欄位名稱",
+      "noTransform": "不轉換",
+      "dateIso": "日期 → ISO",
+      "dateUk": "日期 → UK 格式",
+      "boolYn": "布林 → Y/N",
+      "fieldMappingTip": "欄位對應用於自動建立請求主體。您也可以在請求頁籤中使用 {{field}} 語法來自訂 JSON 結構。",
+      "testConfiguration": "測試設定",
+      "testDescription": "傳送測試請求以驗證您的設定。我們將使用範例資料。",
+      "testing": "測試中...",
+      "sendTestRequest": "傳送測試請求",
+      "success": "成功",
+      "failed": "失敗",
+      "status": "狀態",
+      "time": "時間",
+      "response": "回應",
+      "enableIntegration": "啟用整合",
+      "cancel": "取消",
+      "saveChanges": "儲存變更",
+      "createIntegration": "建立整合",
+      "tabs": {
+        "request": "請求",
+        "authentication": "驗證",
+        "trigger": "觸發器",
+        "fieldMapping": "欄位對應",
+        "test": "測試"
+      }
+    },
+    "logs": {
+      "executionLogs": "執行日誌",
+      "export": "匯出",
+      "noData": "尚無資料。整合執行後，執行日誌將顯示在此處。",
+      "unknown": "未知",
+      "error": "錯誤"
+    },
+    "helpBanner": {
+      "title": "需要建立整合的協助嗎？",
+      "description": "查看我們的 API 文件以獲取範例，或聯繫支援處理複雜的使用案例。"
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API 金鑰",
+    "subtitle": "產生 API 金鑰以從您的應用程式存取 Uplift 資料",
+    "apiDocs": "API 文件",
+    "createKey": "建立金鑰",
+    "createApiKey": "建立 API 金鑰",
+    "loadingKeys": "載入 API 金鑰中...",
+    "loadError": "無法載入 API 金鑰。",
+    "noKeysYet": "尚無 API 金鑰",
+    "createFirstDesc": "建立您的第一個 API 金鑰以開始與 Uplift 整合",
+    "retry": "重試",
+    "revokeConfirm": "撤銷 API 金鑰「{{name}}」？此操作無法復原。",
+    "regenerateConfirm": "重新產生「{{name}}」的密鑰？舊密鑰將立即失效。",
+    "regenerateSuccess": "新密鑰：{{secret}}\n\n請立即儲存，您將無法再次查看！",
+    "regenerateError": "無法重新產生密鑰：{{message}}",
+    "usageStats": "{{name}} 的使用統計：\n\n總請求數：{{requests}}\n上次使用：{{lastUsed}}",
+    "card": {
+      "noDescription": "無描述",
+      "expired": "已過期",
+      "active": "啟用中",
+      "inactive": "已停用",
+      "keyId": "金鑰 ID",
+      "requests": "請求",
+      "lastUsed": "上次使用",
+      "never": "從未",
+      "rateLimit": "速率限制",
+      "standard": "標準",
+      "hideDetails": "隱藏詳情",
+      "showDetails": "顯示詳情",
+      "scopes": "範圍",
+      "created": "建立時間",
+      "expires": "到期時間",
+      "usage": "使用量",
+      "regenerate": "重新產生",
+      "revoke": "撤銷"
+    },
+    "create": {
+      "keyCreatedTitle": "API 金鑰已建立",
+      "createTitle": "建立 API 金鑰",
+      "keyCreatedSuccess": "API 金鑰建立成功",
+      "copySecretWarning": "請立即複製您的密鑰。您將無法再次查看！",
+      "keyIdLabel": "金鑰 ID",
+      "secretKeyLabel": "密鑰",
+      "fullApiKeyLabel": "完整 API 金鑰（用於 Authorization 標頭）",
+      "fullKeyLabel": "完整金鑰",
+      "authHeaderNote": "在您的 Authorization 標頭中使用此金鑰",
+      "done": "完成",
+      "keyName": "金鑰名稱",
+      "keyNamePlaceholder": "例如：正式環境 API 金鑰",
+      "description": "描述",
+      "descriptionPlaceholder": "此金鑰將用於什麼？",
+      "permissions": "權限",
+      "rateLimit": "速率限制",
+      "expiration": "到期時間",
+      "neverExpires": "永不過期",
+      "thirtyDays": "30 天",
+      "ninetyDays": "90 天",
+      "oneYear": "1 年",
+      "createError": "無法建立 API 金鑰，請重試。",
+      "cancel": "取消",
+      "createKey": "建立金鑰"
+    },
+    "docs": {
+      "quickStart": "快速入門",
+      "authentication": "驗證",
+      "exampleResponse": "範例回應",
+      "viewFullDocs": "檢視完整文件",
+      "downloadSpec": "下載 OpenAPI 規格"
+    },
+    "securityBanner": {
+      "title": "API 金鑰安全性",
+      "description": "保護您的 API 金鑰安全。切勿在客戶端程式碼或公開儲存庫中暴露。如果金鑰被洩露，請立即撤銷並建立新的金鑰。"
+    }
+  },
+  "orgOnboarding": {
+    "title": "組織設定",
+    "subtitle": "讓我們來設定您的組織",
+    "steps": {
+      "orgDetails": "組織詳情",
+      "locations": "地點",
+      "departments": "部門",
+      "roles": "角色與權限",
+      "review": "檢閱與啟動"
+    },
+    "orgDetails": {
+      "companyName": "公司名稱",
+      "companyNamePlaceholder": "例如：ABC 有限公司",
+      "tradingName": "商業名稱（選填）",
+      "tradingNamePlaceholder": "對外名稱",
+      "industry": "產業",
+      "selectIndustry": "選擇產業",
+      "companySize": "公司規模",
+      "selectSize": "選擇規模",
+      "timezone": "預設時區",
+      "currency": "預設貨幣",
+      "weekStart": "每週開始於",
+      "logo": "公司標誌",
+      "uploadLogo": "上傳標誌",
+      "uploadLogoDesc": "PNG 或 SVG，建議 200×200px"
+    },
+    "locations": {
+      "title": "地點",
+      "subtitle": "新增您的辦公室、據點或分公司",
+      "addLocation": "新增地點",
+      "name": "地點名稱",
+      "namePlaceholder": "例如：總公司",
+      "address": "地址",
+      "addressPlaceholder": "完整地址",
+      "timezone": "時區",
+      "noLocations": "尚未新增地點",
+      "addFirst": "新增您的第一個地點以開始"
+    },
+    "departments": {
+      "title": "部門",
+      "subtitle": "設定您的部門結構",
+      "addDepartment": "新增部門",
+      "name": "部門名稱",
+      "namePlaceholder": "例如：工程部",
+      "parentDepartment": "上級部門（選填）",
+      "none": "無（最高層級）",
+      "manager": "部門主管",
+      "selectManager": "選擇主管",
+      "noDepartments": "尚未新增部門",
+      "addFirst": "新增您的第一個部門"
+    },
+    "roles": {
+      "title": "角色與權限",
+      "subtitle": "為您的團隊設定存取層級",
+      "addRole": "新增自訂角色",
+      "builtIn": "內建",
+      "custom": "自訂",
+      "name": "角色名稱",
+      "namePlaceholder": "例如：班長",
+      "description": "描述",
+      "descriptionPlaceholder": "此角色可以做什麼？",
+      "permissions": "權限",
+      "permissionGroups": {
+        "scheduling": "排班",
+        "timeTracking": "時間追蹤",
+        "employees": "員工",
+        "reports": "報表",
+        "settings": "設定"
+      }
+    },
+    "review": {
+      "title": "檢閱與啟動",
+      "subtitle": "確認一切正確後再上線",
+      "orgInfo": "組織資訊",
+      "locationsCount": "已設定 {{count}} 個地點",
+      "departmentsCount": "已設定 {{count}} 個部門",
+      "rolesCount": "已設定 {{count}} 個角色",
+      "allLooksGood": "一切看起來很好！",
+      "launch": "啟動組織",
+      "launchDesc": "這將啟用您的組織並向已新增的團隊成員傳送邀請。"
+    },
+    "navigation": {
+      "back": "返回",
+      "next": "下一步",
+      "skip": "暫時跳過",
+      "finish": "完成設定"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

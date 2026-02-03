@@ -10,6 +10,7 @@ import {
   Code, Download, ExternalLink, Lock, Settings, Info
 } from 'lucide-react';
 import { api } from '../lib/api';
+import { useTranslation } from 'react-i18next';
 
 // -------------------- CONSTANTS --------------------
 
@@ -46,7 +47,7 @@ const Badge = ({ children, variant = 'default' }) => {
     warning: 'bg-amber-100 text-amber-700',
     error: 'bg-red-100 text-red-700',
   };
-  
+
   return (
     <span className={cn('px-2 py-0.5 rounded-full text-xs font-semibold', variants[variant])}>
       {children}
@@ -56,13 +57,13 @@ const Badge = ({ children, variant = 'default' }) => {
 
 const CopyButton = ({ text, label }) => {
   const [copied, setCopied] = useState(false);
-  
+
   const handleCopy = async () => {
     await navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  
+
   return (
     <button
       onClick={handleCopy}
@@ -81,12 +82,13 @@ const CopyButton = ({ text, label }) => {
 // -------------------- API KEY CARD --------------------
 
 const ApiKeyCard = ({ apiKey, onRevoke, onRegenerate, onViewUsage }) => {
+  const { t } = useTranslation();
   const [showKey, setShowKey] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  
+
   const isExpired = apiKey.expiresAt && new Date(apiKey.expiresAt) < new Date();
   const scopes = typeof apiKey.scopes === 'string' ? JSON.parse(apiKey.scopes) : apiKey.scopes;
-  
+
   return (
     <div className={cn(
       'bg-white dark:bg-slate-800 rounded-xl border p-4 transition-all',
@@ -103,62 +105,62 @@ const ApiKeyCard = ({ apiKey, onRevoke, onRegenerate, onViewUsage }) => {
           </div>
           <div>
             <h3 className="font-semibold text-slate-900 dark:text-white">{apiKey.name}</h3>
-            <p className="text-xs text-slate-500">{apiKey.description || 'No description'}</p>
+            <p className="text-xs text-slate-500">{apiKey.description || t('restApiKeys.card.noDescription', 'No description')}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           {isExpired ? (
-            <Badge variant="error">Expired</Badge>
+            <Badge variant="error">{t('restApiKeys.card.expired', 'Expired')}</Badge>
           ) : apiKey.isActive ? (
-            <Badge variant="success">Active</Badge>
+            <Badge variant="success">{t('restApiKeys.card.active', 'Active')}</Badge>
           ) : (
-            <Badge variant="warning">Inactive</Badge>
+            <Badge variant="warning">{t('restApiKeys.card.inactive', 'Inactive')}</Badge>
           )}
         </div>
       </div>
-      
+
       {/* Key ID */}
       <div className="flex items-center gap-2 mb-3 p-2 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
         <code className="text-sm font-mono text-slate-700 dark:text-slate-300 flex-1">
           {apiKey.maskedKeyId || apiKey.keyId?.substring(0, 20) + '...'}
         </code>
-        <CopyButton text={apiKey.keyId} label="Key ID" />
+        <CopyButton text={apiKey.keyId} label={t('restApiKeys.card.keyId', 'Key ID')} />
       </div>
-      
+
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-3 text-sm">
         <div>
-          <span className="text-slate-500">Requests</span>
+          <span className="text-slate-500">{t('restApiKeys.card.requests', 'Requests')}</span>
           <p className="font-medium">{apiKey.requestCount?.toLocaleString() || 0}</p>
         </div>
         <div>
-          <span className="text-slate-500">Last Used</span>
+          <span className="text-slate-500">{t('restApiKeys.card.lastUsed', 'Last Used')}</span>
           <p className="font-medium">
-            {apiKey.lastUsedAt 
-              ? new Date(apiKey.lastUsedAt).toLocaleDateString() 
-              : 'Never'}
+            {apiKey.lastUsedAt
+              ? new Date(apiKey.lastUsedAt).toLocaleDateString()
+              : t('restApiKeys.card.never', 'Never')}
           </p>
         </div>
         <div>
-          <span className="text-slate-500">Rate Limit</span>
-          <p className="font-medium capitalize">{apiKey.rateLimitTier || 'Standard'}</p>
+          <span className="text-slate-500">{t('restApiKeys.card.rateLimit', 'Rate Limit')}</span>
+          <p className="font-medium capitalize">{apiKey.rateLimitTier || t('restApiKeys.card.standard', 'Standard')}</p>
         </div>
       </div>
-      
+
       {/* Expand/Collapse */}
       <button
         onClick={() => setExpanded(!expanded)}
         className="w-full flex items-center justify-center gap-1 py-2 text-sm text-slate-500 hover:text-slate-700"
       >
         {expanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-        {expanded ? 'Hide details' : 'Show details'}
+        {expanded ? t('restApiKeys.card.hideDetails', 'Hide details') : t('restApiKeys.card.showDetails', 'Show details')}
       </button>
-      
+
       {expanded && (
         <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-700 space-y-3">
           {/* Scopes */}
           <div>
-            <h4 className="text-xs font-medium text-slate-500 mb-2">SCOPES</h4>
+            <h4 className="text-xs font-medium text-slate-500 mb-2">{t('restApiKeys.card.scopes', 'SCOPES')}</h4>
             <div className="flex flex-wrap gap-1">
               {scopes?.map(scope => (
                 <span key={scope} className="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-xs">
@@ -167,42 +169,42 @@ const ApiKeyCard = ({ apiKey, onRevoke, onRegenerate, onViewUsage }) => {
               ))}
             </div>
           </div>
-          
+
           {/* Dates */}
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-slate-500">Created</span>
+              <span className="text-slate-500">{t('restApiKeys.card.created', 'Created')}</span>
               <p>{new Date(apiKey.createdAt).toLocaleDateString()}</p>
             </div>
             {apiKey.expiresAt && (
               <div>
-                <span className="text-slate-500">Expires</span>
+                <span className="text-slate-500">{t('restApiKeys.card.expires', 'Expires')}</span>
                 <p className={isExpired ? 'text-red-500' : ''}>
                   {new Date(apiKey.expiresAt).toLocaleDateString()}
                 </p>
               </div>
             )}
           </div>
-          
+
           {/* Actions */}
           <div className="flex gap-2 pt-2">
             <button
               onClick={() => onViewUsage(apiKey)}
               className="flex-1 px-3 py-2 text-sm font-medium bg-slate-100 dark:bg-slate-700 rounded-lg hover:bg-slate-200 flex items-center justify-center gap-1"
             >
-              <Activity className="w-4 h-4" /> Usage
+              <Activity className="w-4 h-4" /> {t('restApiKeys.card.usage', 'Usage')}
             </button>
             <button
               onClick={() => onRegenerate(apiKey)}
               className="flex-1 px-3 py-2 text-sm font-medium bg-slate-100 dark:bg-slate-700 rounded-lg hover:bg-slate-200 flex items-center justify-center gap-1"
             >
-              <RefreshCw className="w-4 h-4" /> Regenerate
+              <RefreshCw className="w-4 h-4" /> {t('restApiKeys.card.regenerate', 'Regenerate')}
             </button>
             <button
               onClick={() => onRevoke(apiKey)}
               className="px-3 py-2 text-sm font-medium text-red-500 hover:bg-red-50 rounded-lg flex items-center gap-1"
             >
-              <Trash2 className="w-4 h-4" /> Revoke
+              <Trash2 className="w-4 h-4" /> {t('restApiKeys.card.revoke', 'Revoke')}
             </button>
           </div>
         </div>
@@ -214,6 +216,7 @@ const ApiKeyCard = ({ apiKey, onRevoke, onRegenerate, onViewUsage }) => {
 // -------------------- CREATE KEY MODAL --------------------
 
 const CreateKeyModal = ({ open, onClose, onCreate }) => {
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [selectedScopes, setSelectedScopes] = useState(['employees:read', 'schedules:read']);
@@ -222,11 +225,13 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
   const [creating, setCreating] = useState(false);
   const [createdKey, setCreatedKey] = useState(null);
   const [showSecret, setShowSecret] = useState(false);
-  
+  const [createError, setCreateError] = useState(null);
+
   const handleCreate = async () => {
     if (!name) return;
-    
+
     setCreating(true);
+    setCreateError(null);
     try {
       // Calculate expiration
       let expiresAt = null;
@@ -234,7 +239,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
         const days = parseInt(expiresIn);
         expiresAt = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString();
       }
-      
+
       const result = await api.post('/integrations/api-keys', {
         name,
         description,
@@ -242,23 +247,16 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
         rateLimitTier: rateTier,
         expiresAt,
       });
-      
+
       setCreatedKey(result);
     } catch (error) {
-      console.error('Failed to create API key:', error);
-      // Fallback for demo
-      setCreatedKey({
-        keyId: 'uplift_' + Math.random().toString(36).substring(2, 18),
-        secretKey: Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2),
-        fullKey: 'uplift_demo.' + Math.random().toString(36).substring(2, 30),
-        name,
-        scopes: selectedScopes,
-      });
+      if (import.meta.env.DEV) console.error('Failed to create API key:', error);
+      setCreateError(error.message || t('restApiKeys.create.createError', 'Failed to create API key. Please try again.'));
     } finally {
       setCreating(false);
     }
   };
-  
+
   const handleClose = () => {
     if (createdKey) {
       onCreate?.(createdKey);
@@ -269,7 +267,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
     setCreatedKey(null);
     onClose();
   };
-  
+
   const toggleScope = (scope) => {
     if (selectedScopes.includes(scope)) {
       setSelectedScopes(selectedScopes.filter(s => s !== scope));
@@ -277,21 +275,21 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
       setSelectedScopes([...selectedScopes, scope]);
     }
   };
-  
+
   if (!open) return null;
-  
+
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-            {createdKey ? 'API Key Created' : 'Create API Key'}
+            {createdKey ? t('restApiKeys.create.keyCreatedTitle', 'API Key Created') : t('restApiKeys.create.createTitle', 'Create API Key')}
           </h2>
           <button onClick={handleClose} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
             <X className="w-5 h-5 text-slate-500" />
           </button>
         </div>
-        
+
         <div className="p-6">
           {createdKey ? (
             <div className="space-y-4">
@@ -299,33 +297,33 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                 <div className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-emerald-500 mt-0.5" />
                   <div>
-                    <p className="font-medium text-emerald-700 dark:text-emerald-300">API key created successfully</p>
+                    <p className="font-medium text-emerald-700 dark:text-emerald-300">{t('restApiKeys.create.keyCreatedSuccess', 'API key created successfully')}</p>
                     <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-1">
-                      Copy your secret key now. You won't be able to see it again!
+                      {t('restApiKeys.create.copySecretWarning', "Copy your secret key now. You won't be able to see it again!")}
                     </p>
                   </div>
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Key ID
+                  {t('restApiKeys.create.keyIdLabel', 'Key ID')}
                 </label>
                 <div className="flex items-center gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
                   <code className="text-sm font-mono flex-1 text-slate-600 dark:text-slate-400">
                     {createdKey.keyId}
                   </code>
-                  <CopyButton text={createdKey.keyId} label="Key ID" />
+                  <CopyButton text={createdKey.keyId} label={t('restApiKeys.create.keyIdLabel', 'Key ID')} />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Secret Key
+                  {t('restApiKeys.create.secretKeyLabel', 'Secret Key')}
                 </label>
                 <div className="flex items-center gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
                   <code className="text-sm font-mono flex-1 text-slate-600 dark:text-slate-400 break-all">
-                    {showSecret ? createdKey.secretKey : '•'.repeat(40)}
+                    {showSecret ? createdKey.secretKey : '\u2022'.repeat(40)}
                   </code>
                   <button
                     onClick={() => setShowSecret(!showSecret)}
@@ -333,63 +331,63 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                   >
                     {showSecret ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
-                  <CopyButton text={createdKey.secretKey} label="Secret Key" />
+                  <CopyButton text={createdKey.secretKey} label={t('restApiKeys.create.secretKeyLabel', 'Secret Key')} />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Full API Key (for Authorization header)
+                  {t('restApiKeys.create.fullApiKeyLabel', 'Full API Key (for Authorization header)')}
                 </label>
                 <div className="flex items-center gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
                   <code className="text-sm font-mono flex-1 text-slate-600 dark:text-slate-400 break-all">
-                    {showSecret ? createdKey.fullKey : createdKey.keyId + '.•••••••••••'}
+                    {showSecret ? createdKey.fullKey : createdKey.keyId + '.\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'}
                   </code>
-                  <CopyButton text={createdKey.fullKey} label="Full Key" />
+                  <CopyButton text={createdKey.fullKey} label={t('restApiKeys.create.fullKeyLabel', 'Full Key')} />
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
-                  Use this in your Authorization header: <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">Bearer {'{'}full_key{'}'}</code>
+                  {t('restApiKeys.create.authHeaderNote', 'Use this in your Authorization header')}: <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">Bearer {'{'}full_key{'}'}</code>
                 </p>
               </div>
-              
+
               <button
                 onClick={handleClose}
                 className="w-full py-3 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600"
               >
-                Done
+                {t('restApiKeys.create.done', 'Done')}
               </button>
             </div>
           ) : (
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Key Name *
+                  {t('restApiKeys.create.keyName', 'Key Name')} *
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  placeholder="e.g., Production API Key"
+                  placeholder={t('restApiKeys.create.keyNamePlaceholder', 'e.g., Production API Key')}
                   className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Description
+                  {t('restApiKeys.create.description', 'Description')}
                 </label>
                 <input
                   type="text"
                   value={description}
                   onChange={e => setDescription(e.target.value)}
-                  placeholder="What will this key be used for?"
+                  placeholder={t('restApiKeys.create.descriptionPlaceholder', 'What will this key be used for?')}
                   className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Permissions
+                  {t('restApiKeys.create.permissions', 'Permissions')}
                 </label>
                 <div className="max-h-48 overflow-y-auto p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg space-y-2">
                   {Object.entries(SCOPES).map(([scope, desc]) => (
@@ -408,11 +406,11 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    Rate Limit
+                    {t('restApiKeys.create.rateLimit', 'Rate Limit')}
                   </label>
                   <select
                     value={rateTier}
@@ -426,30 +424,36 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    Expiration
+                    {t('restApiKeys.create.expiration', 'Expiration')}
                   </label>
                   <select
                     value={expiresIn}
                     onChange={e => setExpiresIn(e.target.value)}
                     className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800"
                   >
-                    <option value="never">Never expires</option>
-                    <option value="30">30 days</option>
-                    <option value="90">90 days</option>
-                    <option value="365">1 year</option>
+                    <option value="never">{t('restApiKeys.create.neverExpires', 'Never expires')}</option>
+                    <option value="30">{t('restApiKeys.create.thirtyDays', '30 days')}</option>
+                    <option value="90">{t('restApiKeys.create.ninetyDays', '90 days')}</option>
+                    <option value="365">{t('restApiKeys.create.oneYear', '1 year')}</option>
                   </select>
                 </div>
               </div>
-              
+
+              {createError && (
+                <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <p className="text-sm text-red-700 dark:text-red-400">{createError}</p>
+                </div>
+              )}
+
               <div className="flex gap-3 pt-4">
                 <button
                   onClick={onClose}
                   className="flex-1 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl font-medium hover:bg-slate-50"
                 >
-                  Cancel
+                  {t('restApiKeys.create.cancel', 'Cancel')}
                 </button>
                 <button
                   onClick={handleCreate}
@@ -457,7 +461,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                   className="flex-1 py-2.5 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {creating && <RefreshCw className="w-4 h-4 animate-spin" />}
-                  Create Key
+                  {t('restApiKeys.create.createKey', 'Create Key')}
                 </button>
               </div>
             </div>
@@ -471,58 +475,31 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
 // -------------------- MAIN COMPONENT --------------------
 
 const RestApiKeys = () => {
+  const { t } = useTranslation();
   const [apiKeys, setApiKeys] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDocs, setShowDocs] = useState(false);
-  
+  const [loadError, setLoadError] = useState(null);
+
   useEffect(() => {
     loadApiKeys();
   }, []);
-  
+
   const loadApiKeys = async () => {
     setLoading(true);
     try {
       const result = await api.get('/integrations/api-keys');
       setApiKeys(result.keys || []);
     } catch (error) {
-      console.error('Failed to load API keys:', error);
-      // Demo data fallback
-      setApiKeys([
-        {
-          id: '1',
-          keyId: 'uplift_pk_demo123456789',
-          maskedKeyId: 'uplift_pk_demo...789',
-          name: 'Production API Key',
-          description: 'Main integration with payroll system',
-          scopes: ['employees:read', 'schedules:read', 'time:read'],
-          rateLimitTier: 'standard',
-          isActive: true,
-          requestCount: 12456,
-          lastUsedAt: new Date().toISOString(),
-          createdAt: '2025-11-01T00:00:00Z',
-          expiresAt: null,
-        },
-        {
-          id: '2',
-          keyId: 'uplift_pk_test987654321',
-          maskedKeyId: 'uplift_pk_test...321',
-          name: 'Development Key',
-          description: 'For testing in staging environment',
-          scopes: ['employees:read', 'employees:write', 'schedules:read', 'schedules:write'],
-          rateLimitTier: 'basic',
-          isActive: true,
-          requestCount: 234,
-          lastUsedAt: '2026-01-08T00:00:00Z',
-          createdAt: '2025-12-15T00:00:00Z',
-          expiresAt: '2026-03-15T00:00:00Z',
-        },
-      ]);
+      if (import.meta.env.DEV) console.error('Failed to load API keys:', error);
+      setApiKeys([]);
+      setLoadError(error.message || t('restApiKeys.loadError', 'Failed to load API keys.'));
     } finally {
       setLoading(false);
     }
   };
-  
+
   const handleCreate = (newKey) => {
     setApiKeys([...apiKeys, {
       ...newKey,
@@ -533,34 +510,38 @@ const RestApiKeys = () => {
       createdAt: new Date().toISOString(),
     }]);
   };
-  
+
   const handleRevoke = async (key) => {
-    if (!window.confirm(`Revoke API key "${key.name}"? This action cannot be undone.`)) return;
-    
+    if (!window.confirm(t('restApiKeys.revokeConfirm', 'Revoke API key "{{name}}"? This action cannot be undone.', { name: key.name }))) return;
+
     try {
       await api.delete(`/integrations/api-keys/${key.keyId}`);
     } catch (error) {
-      console.error('Failed to revoke key:', error);
+      if (import.meta.env.DEV) console.error('Failed to revoke key:', error);
     }
     setApiKeys(apiKeys.filter(k => k.id !== key.id));
   };
-  
+
   const handleRegenerate = async (key) => {
-    if (!window.confirm(`Regenerate secret for "${key.name}"? The old secret will stop working immediately.`)) return;
-    
+    if (!window.confirm(t('restApiKeys.regenerateConfirm', 'Regenerate secret for "{{name}}"? The old secret will stop working immediately.', { name: key.name }))) return;
+
     try {
       const result = await api.post(`/integrations/api-keys/${key.keyId}/regenerate`);
-      alert(`New secret key: ${result.secretKey}\n\nSave this now - you won't see it again!`);
+      alert(t('restApiKeys.regenerateSuccess', "New secret key: {{secret}}\n\nSave this now - you won't see it again!", { secret: result.secretKey }));
     } catch (error) {
-      console.error('Failed to regenerate:', error);
-      alert('New secret: ' + Math.random().toString(36).substring(2, 30) + '\n\nSave this now!');
+      if (import.meta.env.DEV) console.error('Failed to regenerate:', error);
+      alert(t('restApiKeys.regenerateError', 'Failed to regenerate secret: {{message}}', { message: error.message || 'Please try again.' }));
     }
   };
-  
+
   const handleViewUsage = (key) => {
-    alert(`Usage stats for ${key.name}:\n\nTotal requests: ${key.requestCount?.toLocaleString()}\nLast used: ${key.lastUsedAt ? new Date(key.lastUsedAt).toLocaleString() : 'Never'}`);
+    alert(t('restApiKeys.usageStats', 'Usage stats for {{name}}:\n\nTotal requests: {{requests}}\nLast used: {{lastUsed}}', {
+      name: key.name,
+      requests: key.requestCount?.toLocaleString(),
+      lastUsed: key.lastUsedAt ? new Date(key.lastUsedAt).toLocaleString() : t('restApiKeys.card.never', 'Never'),
+    }));
   };
-  
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -568,10 +549,10 @@ const RestApiKeys = () => {
         <div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <Key className="w-6 h-6 text-orange-500" />
-            REST API Keys
+            {t('restApiKeys.title', 'REST API Keys')}
           </h2>
           <p className="text-sm text-slate-500 mt-1">
-            Generate API keys to access Uplift data from your applications
+            {t('restApiKeys.subtitle', 'Generate API keys to access Uplift data from your applications')}
           </p>
         </div>
         <div className="flex gap-2">
@@ -579,35 +560,35 @@ const RestApiKeys = () => {
             onClick={() => setShowDocs(!showDocs)}
             className="px-4 py-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl font-medium flex items-center gap-2"
           >
-            <Code className="w-4 h-4" /> API Docs
+            <Code className="w-4 h-4" /> {t('restApiKeys.apiDocs', 'API Docs')}
           </button>
-          <button 
+          <button
             onClick={() => setShowCreateModal(true)}
             className="px-4 py-2.5 bg-orange-500 text-white rounded-xl font-medium flex items-center gap-2 shadow-lg shadow-orange-500/30"
           >
-            <Plus className="w-4 h-4" /> Create Key
+            <Plus className="w-4 h-4" /> {t('restApiKeys.createKey', 'Create Key')}
           </button>
         </div>
       </div>
-      
+
       {/* API Docs Panel */}
       {showDocs && (
         <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 space-y-4">
           <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-            <Code className="w-5 h-5" /> Quick Start
+            <Code className="w-5 h-5" /> {t('restApiKeys.docs.quickStart', 'Quick Start')}
           </h3>
-          
+
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-              <h4 className="text-sm font-medium mb-2">Authentication</h4>
+              <h4 className="text-sm font-medium mb-2">{t('restApiKeys.docs.authentication', 'Authentication')}</h4>
               <pre className="text-xs bg-slate-900 text-slate-300 p-3 rounded overflow-x-auto">
 {`curl -X GET "https://api.uplift.hr/v1/employees" \\
   -H "Authorization: Bearer YOUR_API_KEY"`}
               </pre>
             </div>
-            
+
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-              <h4 className="text-sm font-medium mb-2">Example Response</h4>
+              <h4 className="text-sm font-medium mb-2">{t('restApiKeys.docs.exampleResponse', 'Example Response')}</h4>
               <pre className="text-xs bg-slate-900 text-slate-300 p-3 rounded overflow-x-auto">
 {`{
   "employees": [...],
@@ -617,58 +598,65 @@ const RestApiKeys = () => {
               </pre>
             </div>
           </div>
-          
+
           <div className="flex gap-3">
             <a
               href="/api/integrations/api-docs"
               target="_blank"
               className="text-sm text-orange-500 hover:text-orange-600 font-medium flex items-center gap-1"
             >
-              View Full Documentation <ExternalLink className="w-3 h-3" />
+              {t('restApiKeys.docs.viewFullDocs', 'View Full Documentation')} <ExternalLink className="w-3 h-3" />
             </a>
             <a
               href="/api/integrations/api-docs"
               target="_blank"
               className="text-sm text-orange-500 hover:text-orange-600 font-medium flex items-center gap-1"
             >
-              Download OpenAPI Spec <Download className="w-3 h-3" />
+              {t('restApiKeys.docs.downloadSpec', 'Download OpenAPI Spec')} <Download className="w-3 h-3" />
             </a>
           </div>
         </div>
       )}
-      
+
       {/* Info Banner */}
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex items-start gap-3">
         <Info className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm text-blue-900 dark:text-blue-100 font-medium">API Key Security</p>
+          <p className="text-sm text-blue-900 dark:text-blue-100 font-medium">{t('restApiKeys.securityBanner.title', 'API Key Security')}</p>
           <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
-            Keep your API keys secure. Never expose them in client-side code or public repositories. 
-            If a key is compromised, revoke it immediately and create a new one.
+            {t('restApiKeys.securityBanner.description', 'Keep your API keys secure. Never expose them in client-side code or public repositories. If a key is compromised, revoke it immediately and create a new one.')}
           </p>
         </div>
       </div>
-      
+
       {/* Keys List */}
+      {loadError && (
+        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-center gap-3">
+          <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0" />
+          <p className="text-sm text-red-700 dark:text-red-400">{loadError}</p>
+          <button onClick={loadApiKeys} className="ml-auto text-sm text-red-600 hover:text-red-800 font-medium">{t('restApiKeys.retry', 'Retry')}</button>
+        </div>
+      )}
+
       {loading ? (
         <div className="text-center py-12">
           <RefreshCw className="w-8 h-8 mx-auto mb-2 text-slate-400 animate-spin" />
-          <p className="text-slate-500">Loading API keys...</p>
+          <p className="text-slate-500">{t('restApiKeys.loadingKeys', 'Loading API keys...')}</p>
         </div>
       ) : apiKeys.length === 0 ? (
         <div className="text-center py-12 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
           <Key className="w-12 h-12 mx-auto mb-4 text-slate-300" />
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-            No API keys yet
+            {t('restApiKeys.noKeysYet', 'No API keys yet')}
           </h3>
           <p className="text-slate-500 mb-6">
-            Create your first API key to start integrating with Uplift
+            {t('restApiKeys.createFirstDesc', 'Create your first API key to start integrating with Uplift')}
           </p>
           <button
             onClick={() => setShowCreateModal(true)}
             className="px-4 py-2.5 bg-orange-500 text-white rounded-xl font-medium inline-flex items-center gap-2"
           >
-            <Plus className="w-4 h-4" /> Create API Key
+            <Plus className="w-4 h-4" /> {t('restApiKeys.createApiKey', 'Create API Key')}
           </button>
         </div>
       ) : (
@@ -684,7 +672,7 @@ const RestApiKeys = () => {
           ))}
         </div>
       )}
-      
+
       {/* Create Modal */}
       <CreateKeyModal
         open={showCreateModal}

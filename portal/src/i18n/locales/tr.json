@@ -54,7 +54,6 @@
     "viewMyCareer": "Kariyerimi Görüntüle",
     "timeOffBalance": "İzin Bakiyesi"
   },
-
   "nav": {
     "dashboard": "Kontrol Paneli",
     "employees": "Çalışanlar",
@@ -150,9 +149,21 @@
     "active": "Aktif",
     "inactive": "Pasif",
     "enabled": "Etkin",
-    "disabled": "Devre Dışı"
+    "disabled": "Devre Dışı",
+    "approveSelected": "Seçilenleri Onayla",
+    "rejectSelected": "Seçilenleri Reddet",
+    "clearSelection": "Temizle",
+    "showing": "Gösteriliyor",
+    "of": "/",
+    "page": "Sayfa",
+    "previous": "Önceki",
+    "terminated": "Feshedildi",
+    "sunday": "Paz",
+    "monday": "Pzt",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "Giriş Yap",
     "logout": "Çıkış Yap",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "Uplift'e erişim sağlamak için lütfen yöneticiniz veya İK departmanınızla iletişime geçin. Size bir davet bağlantısı gönderecekler.",
     "enterEmailPassword": "Lütfen e-posta ve şifre girin",
     "loginFailed": "Giriş Başarısız",
-    "demoAccounts": "Demo Hesapları:",
-    "demoWorker": "Çalışan: worker@uplift.work / Demo123!",
-    "demoManager": "Yönetici: manager@uplift.work / Demo123!",
     "twoFactorAuth": "İki Faktörlü Kimlik Doğrulama",
     "enterMfaCode": "Kimlik doğrulama uygulamanızdan kodu girin",
     "verificationCode": "Doğrulama Kodu",
@@ -194,9 +202,16 @@
     "invalidCode": "Geçersiz kod",
     "allRightsReserved": "Tüm hakları saklıdır",
     "termsOfService": "Hizmet Şartları",
-    "privacyPolicy": "Gizlilik Politikası"
+    "privacyPolicy": "Gizlilik Politikası",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "Ana Sayfa",
     "schedule": "Çizelge",
@@ -214,7 +229,6 @@
     "leaderboard": "Sıralama",
     "badges": "Rozetler"
   },
-
   "home": {
     "welcome": "Tekrar hoş geldiniz, {{name}}!",
     "welcomeBack": "Tekrar hoş geldiniz,",
@@ -239,7 +253,6 @@
     "openOpportunities": "Açık Fırsatlar",
     "noOpportunities": "Şu anda yeteneklerinizle eşleşen fırsat yok"
   },
-
   "schedule": {
     "title": "Çizelgem",
     "weekView": "Hafta",
@@ -293,9 +306,22 @@
     "yourShift": "Sizin Vardiyanız",
     "theirShift": "Onların Vardiyası",
     "sendRequest": "Talep Gönder",
-    "cancelSwap": "Değişimi İptal Et"
+    "cancelSwap": "Değişimi İptal Et",
+    "allLocations": "Tüm Lokasyonlar",
+    "tuesday": "Sal",
+    "wednesday": "Çar",
+    "thursday": "Per",
+    "friday": "Cum",
+    "saturday": "Cmt",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "Zaman Takibi",
     "clockedIn": "Giriş Yapıldı",
@@ -326,9 +352,25 @@
     "tapToClockIn": "Giriş yapmak için dokunun",
     "onBreakSince": "{{time}} tarihinden beri molada",
     "workingSince": "{{time}} tarihinden beri çalışıyor",
-    "shiftEnded": "Vardiya sona erdi"
+    "shiftEnded": "Vardiya sona erdi",
+    "entriesApproved": "{{count}} kayıt onaylandı",
+    "approveError": "Kayıtlar onaylanamadı. Lütfen tekrar deneyin.",
+    "entriesRejected": "{{count}} kayıt reddedildi",
+    "rejectError": "Kayıtlar reddedilemedi. Lütfen tekrar deneyin.",
+    "clockInError": "Giriş yapılamadı. Lütfen tekrar deneyin.",
+    "clockOutError": "Çıkış yapılamadı. Lütfen tekrar deneyin.",
+    "breakError": "Mola durumu güncellenemedi. Lütfen tekrar deneyin.",
+    "noPending": "İncelenecek bekleyen kayıt yok",
+    "noEntries": "Zaman kaydı bulunamadı",
+    "history": "Geçmiş",
+    "managerSubtitle": "Zaman çizelgelerini inceleyin ve onaylayın",
+    "employeeSubtitle": "Çalışma saatlerinizi takip edin",
+    "clockIn": "Giriş Yap",
+    "clockOut": "Çıkış Yap",
+    "startBreak": "Molaya Başla",
+    "endBreak": "Molayı Bitir",
+    "totalHours": "Toplam Saat"
   },
-
   "timeOff": {
     "title": "İzin",
     "request": "İzin Talep Et",
@@ -359,9 +401,16 @@
     "selectDates": "Tarihleri Seç",
     "selectType": "Tür Seç",
     "addNotes": "Not Ekle (İsteğe Bağlı)",
-    "reviewRequest": "Talebi İncele"
+    "reviewRequest": "Talebi İncele",
+    "oneDay": "1 gün",
+    "days": "gün",
+    "dates": "Tarihler",
+    "duration": "Süre",
+    "noRequests": "Talep bulunamadı",
+    "requestDetails": "İzin Talebi Ayrıntıları",
+    "noReason": "Sebep belirtilmedi",
+    "submitted": "Gönderildi"
   },
-
   "feed": {
     "title": "Akış",
     "newPost": "Yeni Gönderi",
@@ -401,7 +450,6 @@
     "hoursAgo": "{{count}}s önce",
     "daysAgo": "{{count}}g önce"
   },
-
   "messages": {
     "title": "Mesajlar",
     "newMessage": "Yeni Mesaj",
@@ -419,7 +467,6 @@
     "translateMessage": "Çevir",
     "showOriginal": "Orijinali Göster"
   },
-
   "profile": {
     "title": "Profil",
     "editProfile": "Profili Düzenle",
@@ -447,7 +494,6 @@
     "viewProfile": "Profili Görüntüle",
     "memberSince": "{{date}} tarihinden beri üye"
   },
-
   "skills": {
     "title": "Yetenekler",
     "mySkills": "Yeteneklerim",
@@ -474,7 +520,6 @@
     "skillAdded": "Yetenek başarıyla eklendi",
     "verificationRequested": "Doğrulama talep edildi"
   },
-
   "career": {
     "title": "Kariyer",
     "careerPath": "Kariyer Yolu",
@@ -549,7 +594,6 @@
     "expired": "Süresi Doldu",
     "expires": "{{date}} tarihinde sona eriyor"
   },
-
   "gamification": {
     "level": "Seviye {{level}}",
     "levelShort": "Svy {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "{{date}} tarihinde kazanıldı",
     "progressToEarn": "Kazanmak için %{{percent}} ilerleme"
   },
-
   "notifications": {
     "title": "Bildirimler",
     "markAllRead": "Tümünü Okundu İşaretle",
@@ -605,7 +648,6 @@
     "allCaught": "Her şey tamam!",
     "checkBackLater": "Yeni bildirimler için daha sonra tekrar bakın"
   },
-
   "settings": {
     "title": "Ayarlar",
     "subtitle": "Kuruluşunuzu ve hesabınızı yönetin",
@@ -740,9 +782,23 @@
     "featureAccess": "Özellik Erişimi",
     "enableAll": "Tümünü Etkinleştir",
     "disableAll": "Tümünü Devre Dışı Bırak",
-    "aboutEmployeeVisibility": "Bu ayarlar her çalışan için hangi özelliklerin görünür olduğunu kontrol eder."
+    "aboutEmployeeVisibility": "Bu ayarlar her çalışan için hangi özelliklerin görünür olduğunu kontrol eder.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "Görevler",
     "myTasks": "Görevlerim",
@@ -781,7 +837,6 @@
     "takePhoto": "Fotoğraf Çek",
     "chooseFromLibrary": "Galeriden Seç"
   },
-
   "expenses": {
     "title": "Harcamalar",
     "myExpenses": "Harcamalarım",
@@ -808,7 +863,6 @@
     "totalApproved": "Toplam Onaylanan",
     "totalReimbursed": "Toplam Geri Ödenen"
   },
-
   "rewards": {
     "title": "Ödüller",
     "myRewards": "Ödüllerim",
@@ -828,7 +882,6 @@
     "validUntil": "{{date}} tarihine kadar geçerli",
     "termsConditions": "Şartlar ve Koşullar"
   },
-
   "manager": {
     "dashboard": "Yönetici Kontrol Paneli",
     "teamOverview": "Ekibe Genel Bakış",
@@ -859,7 +912,6 @@
     "attendance": "Devamlılık",
     "performance": "Performans"
   },
-
   "onboarding": {
     "welcome": "Uplift'e Hoş Geldiniz!",
     "getStarted": "Sizi ayarlayalım",
@@ -877,7 +929,6 @@
     "allSet": "Hazırsınız!",
     "startExploring": "Vardiyaları ve fırsatları keşfetmeye başlayın"
   },
-
   "errors": {
     "networkError": "Ağ hatası. Lütfen bağlantınızı kontrol edin.",
     "serverError": "Sunucu hatası. Lütfen daha sonra tekrar deneyin.",
@@ -898,7 +949,6 @@
     "tryAgain": "Lütfen tekrar deneyin",
     "somethingWentWrong": "Bir şeyler ters gitti"
   },
-
   "activity": {
     "title": "Etkinlik İnceleme",
     "subtitle": "Görev tamamlamalarını, kanıt yüklemelerini ve form gönderimlerini inceleyin",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "Ret sebebini girin...",
     "confirmRejection": "Reddi Onayla",
     "approve": "Onayla",
-    "reject": "Reddet"
+    "reject": "Reddet",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Bildirim Tercihleri",
     "subtitle": "Bildirimleri nasıl ve ne zaman alacağınızı seçin",
@@ -973,7 +1025,6 @@
     "disableConfirm": "Tüm bildirimleri devre dışı bırakmak istediğinizden emin misiniz? İstediğiniz zaman yeniden etkinleştirebilirsiniz.",
     "disableSuccess": "Tüm bildirimler devre dışı bırakıldı."
   },
-
   "employeeDetail": {
     "notFound": "Çalışan bulunamadı",
     "backToEmployees": "Çalışanlara Dön",
@@ -989,7 +1040,6 @@
     "basic": "Temel",
     "adding": "Ekleniyor..."
   },
-
   "reports": {
     "title": "Raporlar",
     "subtitle": "Analitik, içgörüler ve özel raporlar",
@@ -1025,9 +1075,22 @@
     "thisMonth": "Bu Ay",
     "lastMonth": "Geçen Ay",
     "last7Days": "Son 7 Gün",
-    "last30Days": "Son 30 Gün"
+    "last30Days": "Son 30 Gün",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Menü",
     "closeMenu": "Menüyü kapat",
@@ -1041,7 +1104,6 @@
     "required": "Zorunlu",
     "optional": "İsteğe bağlı"
   },
-
   "shiftTemplates": {
     "title": "Vardiya Şablonları",
     "subtitle": "Yeniden kullanılabilir vardiya kalıpları oluşturun",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "vardiya",
     "generating": "Oluşturuluyor..."
   },
-
   "legal": {
-    "lastUpdated": "Son güncelleme"
+    "lastUpdated": "Son güncelleme",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "ÖÖ",
     "pm": "ÖS",
@@ -1120,5 +1289,564 @@
     "october": "Ekim",
     "november": "Kasım",
     "december": "Aralık"
+  },
+  "bulkImport": {
+    "title": "Toplu İçe Aktarma",
+    "subtitle": "CSV veya Excel dosyalarından veri içe aktarın",
+    "selectType": "Tür Seç",
+    "uploadFile": "Dosya Yükle",
+    "preview": "Önizleme",
+    "complete": "Tamamla",
+    "invalidFileType": "Lütfen bir CSV veya Excel dosyası yükleyin",
+    "importFailed": "İçe aktarma başarısız. Lütfen tekrar deneyin.",
+    "uploadFor": "Yükle",
+    "uploadDesc": "Sürükleyip bırakın veya dosya seçmek için tıklayın",
+    "downloadTemplate": "Şablon İndir",
+    "dragDrop": "Dosyanızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
+    "supportedFormats": "Desteklenen formatlar: CSV, XLSX",
+    "previewData": "Verileri Önizle",
+    "rowsFound": "satır bulundu",
+    "andMore": "Ve",
+    "moreRows": "daha fazla satır...",
+    "importing": "İçe aktarılıyor...",
+    "startImport": "İçe Aktarmayı Başlat",
+    "importComplete": "İçe Aktarma Tamamlandı",
+    "successfullyImported": "Başarıyla içe aktarıldı",
+    "of": "/",
+    "records": "kayıt",
+    "successful": "Başarılı",
+    "failed": "Başarısız",
+    "total": "Toplam",
+    "importMore": "Daha Fazla Veri İçe Aktar",
+    "type": {
+      "employees": "Çalışanlar",
+      "employeesDesc": "Çalışan profillerini içe aktarın",
+      "shifts": "Vardiyalar",
+      "shiftsDesc": "Vardiya çizelgelerini içe aktarın",
+      "locations": "Lokasyonlar",
+      "locationsDesc": "Lokasyonları içe aktarın",
+      "skills": "Yetenekler",
+      "skillsDesc": "Yetenekleri içe aktarın"
+    }
+  },
+  "jobs": {
+    "open": "Açık",
+    "closed": "Kapalı",
+    "applicants": "Başvuranlar",
+    "created": "İş ilanı başarıyla oluşturuldu",
+    "createError": "İş ilanı oluşturulamadı. Lütfen tekrar deneyin.",
+    "updated": "İş ilanı başarıyla güncellendi",
+    "updateError": "İş ilanı güncellenemedi. Lütfen tekrar deneyin.",
+    "fullTime": "Tam Zamanlı",
+    "partTime": "Yarı Zamanlı",
+    "contract": "Sözleşmeli",
+    "temporary": "Geçici",
+    "subtitle": "İç kariyer fırsatlarını yönetin",
+    "openPositions": "Açık Pozisyonlar",
+    "closedPositions": "Kapalı",
+    "totalApplicants": "Toplam Başvuran",
+    "noJobs": "İş ilanı bulunamadı",
+    "viewApplicants": "Başvuranları Görüntüle",
+    "editPosting": "İş İlanını Düzenle",
+    "jobTitle": "İş Unvanı",
+    "enterTitle": "İş unvanı girin",
+    "selectDepartment": "Departman seçin",
+    "selectLocation": "Lokasyon seçin",
+    "salary": "Maaş Aralığı",
+    "enterDescription": "İş tanımı girin",
+    "postJob": "İş İlanı Ver",
+    "skillMatch": "yetenek eşleşmesi",
+    "noApplicants": "Henüz başvuran yok"
+  },
+  "employees": {
+    "searchPlaceholder": "İsim veya e-posta ile ara...",
+    "employees": "çalışan",
+    "noResults": "Kriterlerinizle eşleşen çalışan bulunamadı",
+    "details": "Çalışan Ayrıntıları",
+    "hireDate": "İşe Alım Tarihi",
+    "assigned": "atandı",
+    "leaveDetails": "İzin Ayrıntıları",
+    "until": "Bitiş",
+    "terminationDetails": "Fesih Ayrıntıları",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Entegrasyon Merkezi",
+    "subtitle": "Uplift'i mevcut araçlarınıza bağlayın",
+    "apiFactory": "API Fabrikası",
+    "addIntegration": "Entegrasyon Ekle",
+    "configure": "Yapılandır",
+    "connect": "Bağlan",
+    "cancel": "İptal",
+    "back": "Geri",
+    "saveChanges": "Değişiklikleri Kaydet",
+    "syncNow": "Şimdi Senkronize Et",
+    "disconnect": "{{name}} Bağlantısını Kes",
+    "disconnectConfirm": "{{name}} bağlantısı kesilsin mi? Tüm senkronizasyonlar duracaktır.",
+    "settingsSaved": "Ayarlar kaydedildi",
+    "browseMarketplace": "Pazar Yerine Göz At",
+    "loadingIntegrations": "Entegrasyonlar yükleniyor...",
+    "noIntegrations": "Bağlı entegrasyon yok",
+    "noIntegrationsDesc": "Veri senkronizasyonu başlatmak için ilk entegrasyonunuzu bağlayın",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Senkronize ediliyor..."
+    },
+    "stats": {
+      "connected": "Bağlı",
+      "available": "Mevcut",
+      "syncsToday": "Bugünkü Senkronizasyonlar",
+      "errors": "Hatalar",
+      "totalSyncs": "Toplam Senkronizasyon",
+      "lastSync": "Son Senkronizasyon",
+      "records": "kayıt"
+    },
+    "tabs": {
+      "connected": "Bağlı",
+      "marketplace": "Pazar Yeri",
+      "restApi": "REST API",
+      "apiFactory": "API Fabrikası",
+      "activityLog": "Etkinlik Günlüğü",
+      "settings": "Ayarlar",
+      "fieldMapping": "Alan Eşleme",
+      "syncHistory": "Senkronizasyon Geçmişi",
+      "webhooks": "Web Kancaları"
+    },
+    "connection": {
+      "lastSync": "Son Senkronizasyon",
+      "frequency": "Sıklık",
+      "status": "Durum",
+      "healthy": "Sağlıklı",
+      "errors": "hata"
+    },
+    "connectModal": {
+      "title": "{{name}} Bağlan",
+      "whatItDoes": "Bu entegrasyon ne yapar:",
+      "redirectNotice": "{{name}} sayfasına yönlendirileceksiniz",
+      "authorizeMessage": "Oturum açın ve Uplift'in verilerinize erişmesini yetkilendirin. Yalnızca gerekli izinleri talep ediyoruz.",
+      "connectWith": "{{name}} ile Bağlan",
+      "connecting": "{{name}} ile bağlanılıyor...",
+      "completeAuth": "Lütfen açılır pencerede yetkilendirmeyi tamamlayın",
+      "successConnected": "Başarıyla bağlandı!",
+      "configureSyncSettings": "Aşağıda senkronizasyon ayarlarınızı yapılandırın.",
+      "completeSetup": "Kurulumu Tamamla",
+      "connected": "{{name}} Bağlandı!",
+      "firstSyncSoon": "İlk senkronizasyonunuz kısa süre içinde başlayacak",
+      "hris": {
+        "syncEmployees": "Çalışan kayıtlarını otomatik senkronize edin",
+        "importDepts": "Departmanları ve lokasyonları içe aktarın",
+        "syncTimeOff": "İzin bakiyelerini senkronize tutun"
+      },
+      "payroll": {
+        "exportTimesheets": "Onaylanmış zaman çizelgelerini dışa aktarın",
+        "syncPayRates": "Ücret oranlarını ve fazla mesaiyi senkronize edin",
+        "autoReconciliation": "Otomatik bordro mutabakatı"
+      },
+      "comms": {
+        "shiftReminders": "Vardiya hatırlatmaları gönderin",
+        "postRecognition": "Takdirleri kanallara gönderin",
+        "swapNotifications": "Değişim talebi bildirimleri"
+      },
+      "identity": {
+        "sso": "Tek oturum açma (SSO)",
+        "autoProvisioning": "Otomatik kullanıcı oluşturma",
+        "directorySync": "Dizin senkronizasyonu"
+      },
+      "other": {
+        "bidirectional": "Çift yönlü veri senkronizasyonu",
+        "realtimeWebhooks": "Web kancaları ile gerçek zamanlı güncellemeler",
+        "auditTrail": "Tam denetim izi"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} Ayarları",
+      "connectedSince": "{{date}} tarihinden beri bağlı"
+    },
+    "settings": {
+      "autoSync": "Otomatik Senkronizasyon",
+      "autoSyncDesc": "Verileri otomatik olarak programa göre senkronize edin",
+      "autoSyncScheduleDesc": "Programa göre otomatik senkronize et",
+      "syncFrequency": "Senkronizasyon Sıklığı",
+      "nextScheduledSync": "Sonraki Planlanan Senkronizasyon",
+      "dataToSync": "Senkronize Edilecek Veriler",
+      "frequency": {
+        "realtime": "Gerçek Zamanlı",
+        "hourly": "Saatlik",
+        "daily": "Günlük",
+        "weekly": "Haftalık"
+      },
+      "data": {
+        "employees": "Çalışanlar",
+        "timeEntries": "Zaman Kayıtları",
+        "departments": "Departmanlar",
+        "locations": "Lokasyonlar"
+      }
+    },
+    "mapping": {
+      "description": "Alan eşleme, {{name}} verilerinin Uplift alanlarıyla nasıl eşleşeceğini kontrol eder. Değişiklikler bir sonraki senkronizasyonda geçerli olur.",
+      "sourceField": "{{name}} Alanı",
+      "upliftField": "Uplift Alanı",
+      "status": "Durum",
+      "selectField": "Alan seçin...",
+      "mapped": "Eşlenmiş",
+      "unmapped": "Eşlenmemiş"
+    },
+    "history": {
+      "noHistory": "Henüz senkronizasyon geçmişi yok",
+      "sync": "Senkronizasyon",
+      "duration": "Süre",
+      "records": "Kayıtlar",
+      "created": "Oluşturuldu",
+      "updated": "Güncellendi"
+    },
+    "webhooks": {
+      "description": "Web kancaları, Uplift'te olaylar gerçekleştiğinde {{name}} uygulamasını bilgilendirir",
+      "addWebhook": "Web Kancası Ekle",
+      "noWebhooks": "Yapılandırılmış web kancası yok",
+      "createFirst": "İlk web kancanızı oluşturun",
+      "active": "Aktif",
+      "paused": "Duraklatıldı",
+      "sendTestPayload": "Test yükü gönder",
+      "pauseWebhook": "Web kancasını duraklat",
+      "enableWebhook": "Web kancasını etkinleştir",
+      "deleteWebhook": "Web kancasını sil",
+      "lastTriggered": "Son tetikleme",
+      "never": "Hiçbir zaman",
+      "successRate": "Başarı oranı",
+      "sendEventsTo": "Olayları {{name}} uygulamasına gönder",
+      "endpointUrl": "Uç Nokta URL'si",
+      "eventsToSend": "Gönderilecek Olaylar",
+      "hmacInfo": "Tüm web kancası yüklerini HMAC-SHA256 ile imzalayacağız. İmzayı",
+      "header": "başlığında alacaksınız.",
+      "createWebhook": "Web Kancası Oluştur",
+      "validationError": "Lütfen bir URL girin ve en az bir olay seçin",
+      "createdSuccess": "Web kancası başarıyla oluşturuldu!",
+      "testSent": "Test yükü gönderildi",
+      "testStatus": "Durum",
+      "deleteConfirm": "Bu web kancası silinsin mi?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Entegrasyon ara...",
+      "allCategories": "Tüm Kategoriler",
+      "infoBannerTitle": "Uplift mevcut araçlarınızla çalışır",
+      "infoBannerDesc": "İK, bordro ve iletişim sistemlerinizi bağlayın. Verileri senkronize ediyoruz - yığınınızı değiştirmiyoruz.",
+      "noResults": "Aramanızla eşleşen entegrasyon bulunamadı",
+      "dontSeeSystem": "Sisteminizi görmüyor musunuz?",
+      "alwaysAdding": "Sürekli yeni entegrasyonlar ekliyoruz. Neye ihtiyacınız olduğunu bize bildirin.",
+      "requestIntegration": "Entegrasyon Talep Et"
+    },
+    "activity": {
+      "recentActivity": "Son entegrasyon etkinliği",
+      "exportLog": "Günlüğü Dışa Aktar"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API Fabrikası",
+    "subtitle": "Kod yazmadan özel REST API entegrasyonları oluşturun",
+    "newIntegration": "Yeni Entegrasyon",
+    "searchPlaceholder": "Entegrasyon ara...",
+    "loadingIntegrations": "Entegrasyonlar yükleniyor...",
+    "noIntegrationsFound": "Entegrasyon bulunamadı",
+    "noIntegrationsYet": "Henüz özel entegrasyon yok",
+    "tryDifferentSearch": "Farklı bir arama terimi deneyin",
+    "createFirstDesc": "Herhangi bir REST API'yi bağlamak için ilk özel API entegrasyonunuzu oluşturun",
+    "createIntegration": "Entegrasyon Oluştur",
+    "deleteConfirm": "Bu entegrasyonu silmek istediğinizden emin misiniz?",
+    "list": {
+      "eventsCount": "{{count}} olay",
+      "scheduled": "Zamanlanmış",
+      "incomingWebhook": "Gelen web kancası",
+      "manual": "Manuel",
+      "runsCount": "{{count}} çalıştırma",
+      "errorsCount": "{{count}} hata",
+      "disabled": "Devre Dışı",
+      "edit": "Düzenle",
+      "test": "Test",
+      "viewLogs": "Günlükleri Görüntüle",
+      "delete": "Sil",
+      "lastRun": "Son çalıştırma"
+    },
+    "stats": {
+      "totalIntegrations": "Toplam Entegrasyon",
+      "active": "Aktif",
+      "runsToday": "Bugünkü Çalıştırmalar",
+      "totalErrors": "Toplam Hata"
+    },
+    "editor": {
+      "editTitle": "API Entegrasyonunu Düzenle",
+      "createTitle": "API Entegrasyonu Oluştur",
+      "subtitle": "Özel REST API bağlantınızı yapılandırın",
+      "integrationName": "Entegrasyon Adı",
+      "integrationNamePlaceholder": "ör. Bordro Sistemine Senkronize Et",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Bu entegrasyon ne yapıyor?",
+      "method": "Yöntem",
+      "url": "URL",
+      "headers": "Başlıklar",
+      "addHeader": "Başlık Ekle",
+      "headerName": "Başlık adı",
+      "headerValue": "Değer",
+      "requestBodyJson": "İstek Gövdesi (JSON)",
+      "useVariables": "Değişkenler için {{field}} kullanın",
+      "availableVariables": "Mevcut değişkenler",
+      "authenticationType": "Kimlik Doğrulama Türü",
+      "apiKeyLocation": "API Anahtarı Konumu",
+      "header": "Başlık",
+      "queryParameter": "Sorgu Parametresi",
+      "keyName": "Anahtar Adı",
+      "keyNamePlaceholder": "ör. X-API-Key",
+      "apiKey": "API Anahtarı",
+      "enterApiKey": "API anahtarınızı girin",
+      "bearerToken": "Bearer Token",
+      "enterToken": "Token'ınızı girin",
+      "username": "Kullanıcı Adı",
+      "password": "Şifre",
+      "tokenUrl": "Token URL",
+      "clientId": "İstemci Kimliği",
+      "clientSecret": "İstemci Sırrı",
+      "scopes": "Kapsamlar (virgülle ayrılmış)",
+      "whenShouldRun": "Bu entegrasyon ne zaman çalışmalı?",
+      "selectEvents": "Olayları Seç",
+      "schedule": "Zamanlama",
+      "cronExpression": "CRON İfadesi",
+      "scheduleUtcNote": "Zamanlama UTC saat dilimini kullanır. Mevcut CRON",
+      "yourWebhookUrl": "Web Kancası URL'niz",
+      "webhookPostNote": "Bu URL'ye POST istekleri gönderin. Gelen verileri işleyip Uplift'e eşleyeceğiz.",
+      "fieldMappings": "Alan Eşlemeleri",
+      "fieldMappingsDesc": "Uplift alanlarını harici API alanlarına eşleyin",
+      "addMapping": "Eşleme Ekle",
+      "noFieldMappings": "Henüz alan eşlemesi yok",
+      "addMappingsDesc": "Sistemler arasında verileri dönüştürmek için eşlemeler ekleyin",
+      "addFirstMapping": "İlk Eşlemeyi Ekle",
+      "selectUpliftField": "Uplift alanı seçin...",
+      "externalFieldName": "Harici alan adı",
+      "noTransform": "Dönüşüm yok",
+      "dateIso": "Tarih → ISO",
+      "dateUk": "Tarih → İngiltere formatı",
+      "boolYn": "Bool → E/H",
+      "fieldMappingTip": "Alan eşlemeleri istek gövdesini otomatik olarak oluşturmak için kullanılır. Özel JSON yapıları için İstek sekmesinde {{field}} sözdizimini de kullanabilirsiniz.",
+      "testConfiguration": "Yapılandırmayı Test Et",
+      "testDescription": "Yapılandırmanızı doğrulamak için bir test isteği gönderin. Örnek verileri kullanacağız.",
+      "testing": "Test ediliyor...",
+      "sendTestRequest": "Test İsteği Gönder",
+      "success": "Başarılı",
+      "failed": "Başarısız",
+      "status": "Durum",
+      "time": "Zaman",
+      "response": "Yanıt",
+      "enableIntegration": "Entegrasyonu etkinleştir",
+      "cancel": "İptal",
+      "saveChanges": "Değişiklikleri Kaydet",
+      "createIntegration": "Entegrasyon Oluştur",
+      "tabs": {
+        "request": "İstek",
+        "authentication": "Kimlik Doğrulama",
+        "trigger": "Tetikleyici",
+        "fieldMapping": "Alan Eşleme",
+        "test": "Test"
+      }
+    },
+    "logs": {
+      "executionLogs": "Çalıştırma Günlükleri",
+      "export": "Dışa Aktar",
+      "noData": "Henüz veri yok. Entegrasyonlar çalıştığında çalıştırma günlükleri burada görünecek.",
+      "unknown": "Bilinmeyen",
+      "error": "Hata"
+    },
+    "helpBanner": {
+      "title": "Entegrasyon oluşturmada yardım mı gerekiyor?",
+      "description": "Örnekler için API belgelerimize bakın veya karmaşık durumlar için destekle iletişime geçin."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API Anahtarları",
+    "subtitle": "Uygulamalarınızdan Uplift verilerine erişmek için API anahtarları oluşturun",
+    "apiDocs": "API Belgeleri",
+    "createKey": "Anahtar Oluştur",
+    "createApiKey": "API Anahtarı Oluştur",
+    "loadingKeys": "API anahtarları yükleniyor...",
+    "loadError": "API anahtarları yüklenemedi.",
+    "noKeysYet": "Henüz API anahtarı yok",
+    "createFirstDesc": "Uplift ile entegrasyona başlamak için ilk API anahtarınızı oluşturun",
+    "retry": "Tekrar Dene",
+    "revokeConfirm": "\"{{name}}\" API anahtarı iptal edilsin mi? Bu işlem geri alınamaz.",
+    "regenerateConfirm": "\"{{name}}\" için gizli anahtar yenilensin mi? Eski gizli anahtar hemen çalışmayı durduracak.",
+    "regenerateSuccess": "Yeni gizli anahtar: {{secret}}\n\nBunu şimdi kaydedin - tekrar göremeyeceksiniz!",
+    "regenerateError": "Gizli anahtar yenilenemedi: {{message}}",
+    "usageStats": "{{name}} kullanım istatistikleri:\n\nToplam istek: {{requests}}\nSon kullanım: {{lastUsed}}",
+    "card": {
+      "noDescription": "Açıklama yok",
+      "expired": "Süresi Doldu",
+      "active": "Aktif",
+      "inactive": "Pasif",
+      "keyId": "Anahtar Kimliği",
+      "requests": "İstekler",
+      "lastUsed": "Son Kullanım",
+      "never": "Hiçbir zaman",
+      "rateLimit": "Hız Sınırı",
+      "standard": "Standart",
+      "hideDetails": "Ayrıntıları gizle",
+      "showDetails": "Ayrıntıları göster",
+      "scopes": "KAPSAMLAR",
+      "created": "Oluşturulma",
+      "expires": "Bitiş",
+      "usage": "Kullanım",
+      "regenerate": "Yenile",
+      "revoke": "İptal Et"
+    },
+    "create": {
+      "keyCreatedTitle": "API Anahtarı Oluşturuldu",
+      "createTitle": "API Anahtarı Oluştur",
+      "keyCreatedSuccess": "API anahtarı başarıyla oluşturuldu",
+      "copySecretWarning": "Gizli anahtarınızı şimdi kopyalayın. Tekrar göremeyeceksiniz!",
+      "keyIdLabel": "Anahtar Kimliği",
+      "secretKeyLabel": "Gizli Anahtar",
+      "fullApiKeyLabel": "Tam API Anahtarı (Authorization başlığı için)",
+      "fullKeyLabel": "Tam Anahtar",
+      "authHeaderNote": "Bunu Authorization başlığınızda kullanın",
+      "done": "Tamamlandı",
+      "keyName": "Anahtar Adı",
+      "keyNamePlaceholder": "ör. Üretim API Anahtarı",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Bu anahtar ne için kullanılacak?",
+      "permissions": "İzinler",
+      "rateLimit": "Hız Sınırı",
+      "expiration": "Süre Sonu",
+      "neverExpires": "Süresiz",
+      "thirtyDays": "30 gün",
+      "ninetyDays": "90 gün",
+      "oneYear": "1 yıl",
+      "createError": "API anahtarı oluşturulamadı. Lütfen tekrar deneyin.",
+      "cancel": "İptal",
+      "createKey": "Anahtar Oluştur"
+    },
+    "docs": {
+      "quickStart": "Hızlı Başlangıç",
+      "authentication": "Kimlik Doğrulama",
+      "exampleResponse": "Örnek Yanıt",
+      "viewFullDocs": "Tam Belgeleri Görüntüle",
+      "downloadSpec": "OpenAPI Spesifikasyonunu İndir"
+    },
+    "securityBanner": {
+      "title": "API Anahtarı Güvenliği",
+      "description": "API anahtarlarınızı güvende tutun. İstemci tarafı kodunda veya herkese açık depolarda asla ifşa etmeyin. Bir anahtar ele geçirilirse hemen iptal edin ve yeni bir tane oluşturun."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Kuruluş Kurulumu",
+    "subtitle": "Kuruluşunuzu yapılandıralım",
+    "steps": {
+      "orgDetails": "Kuruluş Ayrıntıları",
+      "locations": "Lokasyonlar",
+      "departments": "Departmanlar",
+      "roles": "Roller ve İzinler",
+      "review": "İnceleme ve Başlatma"
+    },
+    "orgDetails": {
+      "companyName": "Şirket Adı",
+      "companyNamePlaceholder": "ör. Acme Ltd",
+      "tradingName": "Ticari Unvan (isteğe bağlı)",
+      "tradingNamePlaceholder": "Kamuya açık ad",
+      "industry": "Sektör",
+      "selectIndustry": "Sektör seçin",
+      "companySize": "Şirket Büyüklüğü",
+      "selectSize": "Büyüklük seçin",
+      "timezone": "Varsayılan Saat Dilimi",
+      "currency": "Varsayılan Para Birimi",
+      "weekStart": "Hafta Başlangıcı",
+      "logo": "Şirket Logosu",
+      "uploadLogo": "Logo Yükle",
+      "uploadLogoDesc": "PNG veya SVG, önerilen 200×200 piksel"
+    },
+    "locations": {
+      "title": "Lokasyonlar",
+      "subtitle": "Ofislerinizi, tesislerinizi veya şubelerinizi ekleyin",
+      "addLocation": "Lokasyon Ekle",
+      "name": "Lokasyon Adı",
+      "namePlaceholder": "ör. Merkez Ofis",
+      "address": "Adres",
+      "addressPlaceholder": "Tam adres",
+      "timezone": "Saat Dilimi",
+      "noLocations": "Henüz lokasyon eklenmedi",
+      "addFirst": "Başlamak için ilk lokasyonunuzu ekleyin"
+    },
+    "departments": {
+      "title": "Departmanlar",
+      "subtitle": "Departman yapınızı kurun",
+      "addDepartment": "Departman Ekle",
+      "name": "Departman Adı",
+      "namePlaceholder": "ör. Mühendislik",
+      "parentDepartment": "Üst Departman (isteğe bağlı)",
+      "none": "Yok (üst düzey)",
+      "manager": "Departman Yöneticisi",
+      "selectManager": "Yönetici seçin",
+      "noDepartments": "Henüz departman eklenmedi",
+      "addFirst": "İlk departmanınızı ekleyin"
+    },
+    "roles": {
+      "title": "Roller ve İzinler",
+      "subtitle": "Ekibiniz için erişim seviyelerini yapılandırın",
+      "addRole": "Özel Rol Ekle",
+      "builtIn": "Yerleşik",
+      "custom": "Özel",
+      "name": "Rol Adı",
+      "namePlaceholder": "ör. Vardiya Süpervizörü",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Bu rol ne yapabilir?",
+      "permissions": "İzinler",
+      "permissionGroups": {
+        "scheduling": "Çizelgeleme",
+        "timeTracking": "Zaman Takibi",
+        "employees": "Çalışanlar",
+        "reports": "Raporlar",
+        "settings": "Ayarlar"
+      }
+    },
+    "review": {
+      "title": "İnceleme ve Başlatma",
+      "subtitle": "Yayına almadan önce her şeyin doğru göründüğünden emin olun",
+      "orgInfo": "Kuruluş Bilgileri",
+      "locationsCount": "{{count}} lokasyon yapılandırıldı",
+      "departmentsCount": "{{count}} departman yapılandırıldı",
+      "rolesCount": "{{count}} rol yapılandırıldı",
+      "allLooksGood": "Her şey harika görünüyor!",
+      "launch": "Kuruluşu Başlat",
+      "launchDesc": "Bu, kuruluşunuzu etkinleştirecek ve eklenen ekip üyelerine davetler gönderecektir."
+    },
+    "navigation": {
+      "back": "Geri",
+      "next": "İleri",
+      "skip": "Şimdilik atla",
+      "finish": "Kurulumu Tamamla"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

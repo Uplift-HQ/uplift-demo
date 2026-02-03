@@ -12,6 +12,8 @@ import {
   TestTube, History, Webhook, Server, Activity, Link, Unlink, Info,
   PlusCircle, MinusCircle, GripVertical, MoreVertical, ExternalLink
 } from 'lucide-react';
+import { integrationsApi } from '../lib/api';
+import { useTranslation } from 'react-i18next';
 
 // -------------------- TYPES & CONSTANTS --------------------
 
@@ -99,8 +101,6 @@ const SCHEDULE_OPTIONS = [
   { id: 'weekly_monday', label: 'Weekly on Monday', cron: '0 0 * * 1' },
   { id: 'custom', label: 'Custom CRON', cron: '' },
 ];
-
-// Mock existing custom APIs
 const INITIAL_CUSTOM_APIS = [
   {
     id: 'api-1',
@@ -162,13 +162,13 @@ const Badge = ({ children, variant = 'default', size = 'sm' }) => {
     info: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
     purple: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
   };
-  
+
   const sizes = {
     xs: 'px-1.5 py-0.5 text-xs',
     sm: 'px-2 py-0.5 text-xs',
     md: 'px-2.5 py-1 text-sm',
   };
-  
+
   return (
     <span className={cn('rounded-full font-medium', variants[variant], sizes[size])}>
       {children}
@@ -184,13 +184,13 @@ const Button = ({ children, variant = 'default', size = 'md', className, ...prop
     ghost: 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400',
     outline: 'border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800',
   };
-  
+
   const sizes = {
     sm: 'px-3 py-1.5 text-sm',
     md: 'px-4 py-2 text-sm',
     lg: 'px-5 py-2.5',
   };
-  
+
   return (
     <button
       className={cn(
@@ -262,7 +262,7 @@ const formatDate = (date) => {
   const diffMs = now - d;
   const diffMins = Math.floor(diffMs / 60000);
   const diffHours = Math.floor(diffMs / 3600000);
-  
+
   if (diffMins < 1) return 'Just now';
   if (diffMins < 60) return `${diffMins}m ago`;
   if (diffHours < 24) return `${diffHours}h ago`;
@@ -271,27 +271,28 @@ const formatDate = (date) => {
 
 // -------------------- API LIST VIEW --------------------
 
-const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest }) => {
+const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest, onViewLogs }) => {
+  const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
-  
+
   const getTriggerLabel = () => {
     switch (api.triggerType) {
       case 'event':
-        return `${api.triggerEvents?.length || 0} events`;
+        return t('apiFactory.list.eventsCount', '{{count}} events', { count: api.triggerEvents?.length || 0 });
       case 'schedule':
-        return SCHEDULE_OPTIONS.find(s => s.id === api.schedule)?.label || 'Scheduled';
+        return SCHEDULE_OPTIONS.find(s => s.id === api.schedule)?.label || t('apiFactory.list.scheduled', 'Scheduled');
       case 'webhook':
-        return 'Incoming webhook';
+        return t('apiFactory.list.incomingWebhook', 'Incoming webhook');
       default:
-        return 'Manual';
+        return t('apiFactory.list.manual', 'Manual');
     }
   };
-  
+
   return (
     <div className={cn(
       'bg-white dark:bg-slate-800 rounded-xl border p-4 transition-all',
-      api.enabled 
-        ? 'border-slate-200 dark:border-slate-700' 
+      api.enabled
+        ? 'border-slate-200 dark:border-slate-700'
         : 'border-slate-200 dark:border-slate-700 opacity-60'
     )}>
       <div className="flex items-start justify-between gap-4">
@@ -301,7 +302,7 @@ const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest }) => {
             <Badge variant={api.method === 'GET' ? 'info' : api.method === 'POST' ? 'success' : 'warning'}>
               {api.method}
             </Badge>
-            {!api.enabled && <Badge variant="default">Disabled</Badge>}
+            {!api.enabled && <Badge variant="default">{t('apiFactory.list.disabled', 'Disabled')}</Badge>}
           </div>
           <p className="text-sm text-slate-500 dark:text-slate-400 truncate mb-2">{api.description}</p>
           <div className="flex items-center gap-4 text-xs text-slate-500">
@@ -313,36 +314,36 @@ const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest }) => {
               {getTriggerLabel()}
             </span>
             <span>•</span>
-            <span>{api.runCount} runs</span>
+            <span>{t('apiFactory.list.runsCount', '{{count}} runs', { count: api.runCount })}</span>
             {api.errorCount > 0 && (
               <>
                 <span>•</span>
-                <span className="text-red-500">{api.errorCount} errors</span>
+                <span className="text-red-500">{t('apiFactory.list.errorsCount', '{{count}} errors', { count: api.errorCount })}</span>
               </>
             )}
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           {api.lastStatus && (
             <div className={cn(
               'w-8 h-8 rounded-lg flex items-center justify-center',
               api.lastStatus === 'success' ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'
             )}>
-              {api.lastStatus === 'success' 
+              {api.lastStatus === 'success'
                 ? <CheckCircle className="w-4 h-4 text-emerald-500" />
                 : <AlertCircle className="w-4 h-4 text-red-500" />
               }
             </div>
           )}
-          
+
           <Toggle enabled={api.enabled} onChange={() => onToggle(api.id)} />
-          
+
           <div className="relative">
             <Button variant="ghost" size="sm" onClick={() => setShowMenu(!showMenu)}>
               <MoreVertical className="w-4 h-4" />
             </Button>
-            
+
             {showMenu && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setShowMenu(false)} />
@@ -351,26 +352,26 @@ const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest }) => {
                     onClick={() => { onEdit(api); setShowMenu(false); }}
                     className="w-full px-4 py-2 text-left text-sm hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2"
                   >
-                    <Edit2 className="w-4 h-4" /> Edit
+                    <Edit2 className="w-4 h-4" /> {t('apiFactory.list.edit', 'Edit')}
                   </button>
                   <button
                     onClick={() => { onTest(api); setShowMenu(false); }}
                     className="w-full px-4 py-2 text-left text-sm hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2"
                   >
-                    <TestTube className="w-4 h-4" /> Test
+                    <TestTube className="w-4 h-4" /> {t('apiFactory.list.test', 'Test')}
                   </button>
                   <button
-                    onClick={() => { setShowMenu(false); }}
+                    onClick={() => { setShowMenu(false); onViewLogs && onViewLogs(); }}
                     className="w-full px-4 py-2 text-left text-sm hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2"
                   >
-                    <History className="w-4 h-4" /> View Logs
+                    <History className="w-4 h-4" /> {t('apiFactory.list.viewLogs', 'View Logs')}
                   </button>
                   <hr className="my-1 border-slate-200 dark:border-slate-700" />
                   <button
                     onClick={() => { onDelete(api.id); setShowMenu(false); }}
                     className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-2"
                   >
-                    <Trash2 className="w-4 h-4" /> Delete
+                    <Trash2 className="w-4 h-4" /> {t('apiFactory.list.delete', 'Delete')}
                   </button>
                 </div>
               </>
@@ -378,12 +379,12 @@ const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest }) => {
           </div>
         </div>
       </div>
-      
+
       <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs text-slate-500">
         <code className="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded truncate max-w-[60%]">
           {api.url}
         </code>
-        <span>Last run: {formatDate(api.lastRun)}</span>
+        <span>{t('apiFactory.list.lastRun', 'Last run')}: {formatDate(api.lastRun)}</span>
       </div>
     </div>
   );
@@ -392,6 +393,7 @@ const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest }) => {
 // -------------------- API EDITOR --------------------
 
 const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -410,44 +412,44 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
     enabled: true,
     ...api,
   });
-  
+
   const [activeTab, setActiveTab] = useState('request');
   const [testResult, setTestResult] = useState(null);
   const [testing, setTesting] = useState(false);
   const [showSecrets, setShowSecrets] = useState(false);
-  
+
   const updateField = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
-  
+
   const updateAuthConfig = (field, value) => {
     setFormData(prev => ({
       ...prev,
       authConfig: { ...prev.authConfig, [field]: value }
     }));
   };
-  
+
   const addHeader = () => {
     setFormData(prev => ({
       ...prev,
       headers: [...prev.headers, { key: '', value: '' }]
     }));
   };
-  
+
   const updateHeader = (index, field, value) => {
     setFormData(prev => ({
       ...prev,
       headers: prev.headers.map((h, i) => i === index ? { ...h, [field]: value } : h)
     }));
   };
-  
+
   const removeHeader = (index) => {
     setFormData(prev => ({
       ...prev,
       headers: prev.headers.filter((_, i) => i !== index)
     }));
   };
-  
+
   const toggleEvent = (eventId) => {
     setFormData(prev => ({
       ...prev,
@@ -456,62 +458,78 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
         : [...prev.triggerEvents, eventId]
     }));
   };
-  
+
   const addFieldMapping = () => {
     setFormData(prev => ({
       ...prev,
       fieldMappings: [...prev.fieldMappings, { upliftField: '', externalField: '', transform: 'none' }]
     }));
   };
-  
+
   const updateFieldMapping = (index, field, value) => {
     setFormData(prev => ({
       ...prev,
       fieldMappings: prev.fieldMappings.map((m, i) => i === index ? { ...m, [field]: value } : m)
     }));
   };
-  
+
   const removeFieldMapping = (index) => {
     setFormData(prev => ({
       ...prev,
       fieldMappings: prev.fieldMappings.filter((_, i) => i !== index)
     }));
   };
-  
+
   const handleTest = async () => {
     setTesting(true);
     setTestResult(null);
-    
-    // Simulate API test
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setTestResult({
-      success: Math.random() > 0.3,
-      statusCode: Math.random() > 0.3 ? 200 : 401,
-      duration: Math.floor(Math.random() * 500) + 100,
-      response: Math.random() > 0.3 
-        ? { success: true, id: 'emp_123', message: 'Employee synced successfully' }
-        : { error: 'Unauthorized', message: 'Invalid API key' },
-    });
-    
-    setTesting(false);
+
+    try {
+      if (formData.id) {
+        const result = await integrationsApi.test(formData.id);
+        setTestResult({
+          success: result?.success ?? true,
+          statusCode: result?.statusCode ?? 200,
+          duration: result?.duration ?? 0,
+          response: result?.response ?? result,
+        });
+      } else {
+        // No saved ID yet, cannot test against backend
+        setTestResult({
+          success: false,
+          statusCode: 0,
+          duration: 0,
+          response: { error: 'Save the integration first before testing' },
+        });
+      }
+    } catch (error) {
+      if (import.meta.env.DEV) console.error('Test failed:', error);
+      setTestResult({
+        success: false,
+        statusCode: error.status || 0,
+        duration: 0,
+        response: { error: error.message || 'Test request failed' },
+      });
+    } finally {
+      setTesting(false);
+    }
   };
-  
+
   const handleSave = () => {
     onSave({
       ...formData,
       headers: formData.headers.filter(h => h.key),
     });
   };
-  
+
   const tabs = [
-    { id: 'request', label: 'Request', icon: Globe },
-    { id: 'auth', label: 'Authentication', icon: Lock },
-    { id: 'trigger', label: 'Trigger', icon: Zap },
-    { id: 'mapping', label: 'Field Mapping', icon: ArrowLeftRight },
-    { id: 'test', label: 'Test', icon: TestTube },
+    { id: 'request', label: t('apiFactory.editor.tabs.request', 'Request'), icon: Globe },
+    { id: 'auth', label: t('apiFactory.editor.tabs.authentication', 'Authentication'), icon: Lock },
+    { id: 'trigger', label: t('apiFactory.editor.tabs.trigger', 'Trigger'), icon: Zap },
+    { id: 'mapping', label: t('apiFactory.editor.tabs.fieldMapping', 'Field Mapping'), icon: ArrowLeftRight },
+    { id: 'test', label: t('apiFactory.editor.tabs.test', 'Test'), icon: TestTube },
   ];
-  
+
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
@@ -519,31 +537,31 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
         <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
           <div>
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-              {api ? 'Edit API Integration' : 'Create API Integration'}
+              {api ? t('apiFactory.editor.editTitle', 'Edit API Integration') : t('apiFactory.editor.createTitle', 'Create API Integration')}
             </h2>
-            <p className="text-sm text-slate-500 mt-1">Configure your custom REST API connection</p>
+            <p className="text-sm text-slate-500 mt-1">{t('apiFactory.editor.subtitle', 'Configure your custom REST API connection')}</p>
           </div>
           <button onClick={onCancel} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
             <X className="w-5 h-5 text-slate-500" />
           </button>
         </div>
-        
+
         {/* Name & Description */}
         <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
           <Input
-            label="Integration Name"
-            placeholder="e.g., Sync to Payroll System"
+            label={t('apiFactory.editor.integrationName', 'Integration Name')}
+            placeholder={t('apiFactory.editor.integrationNamePlaceholder', 'e.g., Sync to Payroll System')}
             value={formData.name}
             onChange={e => updateField('name', e.target.value)}
           />
           <Input
-            label="Description"
-            placeholder="What does this integration do?"
+            label={t('apiFactory.editor.description', 'Description')}
+            placeholder={t('apiFactory.editor.descriptionPlaceholder', 'What does this integration do?')}
             value={formData.description}
             onChange={e => updateField('description', e.target.value)}
           />
         </div>
-        
+
         {/* Tabs */}
         <div className="flex border-b border-slate-200 dark:border-slate-700 px-6">
           {tabs.map(tab => (
@@ -562,7 +580,7 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
             </button>
           ))}
         </div>
-        
+
         {/* Tab Content */}
         <div className="flex-1 overflow-y-auto p-6">
           {/* Request Tab */}
@@ -571,40 +589,40 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
               {/* Method & URL */}
               <div className="flex gap-3">
                 <Select
-                  label="Method"
+                  label={t('apiFactory.editor.method', 'Method')}
                   value={formData.method}
                   onChange={e => updateField('method', e.target.value)}
                   options={HTTP_METHODS.map(m => ({ value: m, label: m }))}
                   className="w-32"
                 />
                 <Input
-                  label="URL"
+                  label={t('apiFactory.editor.url', 'URL')}
                   placeholder="https://api.example.com/endpoint"
                   value={formData.url}
                   onChange={e => updateField('url', e.target.value)}
                   className="flex-1"
                 />
               </div>
-              
+
               {/* Headers */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Headers</label>
+                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t('apiFactory.editor.headers', 'Headers')}</label>
                   <Button variant="ghost" size="sm" onClick={addHeader}>
-                    <Plus className="w-4 h-4" /> Add Header
+                    <Plus className="w-4 h-4" /> {t('apiFactory.editor.addHeader', 'Add Header')}
                   </Button>
                 </div>
                 <div className="space-y-2">
                   {formData.headers.map((header, index) => (
                     <div key={index} className="flex gap-2">
                       <Input
-                        placeholder="Header name"
+                        placeholder={t('apiFactory.editor.headerName', 'Header name')}
                         value={header.key}
                         onChange={e => updateHeader(index, 'key', e.target.value)}
                         className="flex-1"
                       />
                       <Input
-                        placeholder="Value"
+                        placeholder={t('apiFactory.editor.headerValue', 'Value')}
                         value={header.value}
                         onChange={e => updateHeader(index, 'value', e.target.value)}
                         className="flex-1"
@@ -616,12 +634,12 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   ))}
                 </div>
               </div>
-              
+
               {/* Request Body */}
               {['POST', 'PUT', 'PATCH'].includes(formData.method) && (
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    Request Body (JSON)
+                    {t('apiFactory.editor.requestBodyJson', 'Request Body (JSON)')}
                   </label>
                   <div className="relative">
                     <textarea
@@ -631,23 +649,23 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                       placeholder='{"field": "{{employee.first_name}}"}'
                     />
                     <div className="absolute top-2 right-2">
-                      <Badge variant="info" size="xs">Use {`{{field}}`} for variables</Badge>
+                      <Badge variant="info" size="xs">{t('apiFactory.editor.useVariables', 'Use {{field}} for variables')}</Badge>
                     </div>
                   </div>
                   <p className="mt-2 text-xs text-slate-500">
-                    Available variables: {`{{employee.id}}`}, {`{{employee.first_name}}`}, {`{{employee.email}}`}, etc.
+                    {t('apiFactory.editor.availableVariables', 'Available variables')}: {`{{employee.id}}`}, {`{{employee.first_name}}`}, {`{{employee.email}}`}, etc.
                   </p>
                 </div>
               )}
             </div>
           )}
-          
+
           {/* Auth Tab */}
           {activeTab === 'auth' && (
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
-                  Authentication Type
+                  {t('apiFactory.editor.authenticationType', 'Authentication Type')}
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {AUTH_TYPES.map(auth => (
@@ -670,30 +688,30 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   ))}
                 </div>
               </div>
-              
+
               {/* Auth Config */}
               {formData.authType === 'api_key' && (
                 <div className="space-y-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <Select
-                    label="API Key Location"
+                    label={t('apiFactory.editor.apiKeyLocation', 'API Key Location')}
                     value={formData.authConfig.location || 'header'}
                     onChange={e => updateAuthConfig('location', e.target.value)}
                     options={[
-                      { value: 'header', label: 'Header' },
-                      { value: 'query', label: 'Query Parameter' },
+                      { value: 'header', label: t('apiFactory.editor.header', 'Header') },
+                      { value: 'query', label: t('apiFactory.editor.queryParameter', 'Query Parameter') },
                     ]}
                   />
                   <Input
-                    label="Key Name"
-                    placeholder="e.g., X-API-Key"
+                    label={t('apiFactory.editor.keyName', 'Key Name')}
+                    placeholder={t('apiFactory.editor.keyNamePlaceholder', 'e.g., X-API-Key')}
                     value={formData.authConfig.keyName || ''}
                     onChange={e => updateAuthConfig('keyName', e.target.value)}
                   />
                   <div className="relative">
                     <Input
-                      label="API Key"
+                      label={t('apiFactory.editor.apiKey', 'API Key')}
                       type={showSecrets ? 'text' : 'password'}
-                      placeholder="Enter your API key"
+                      placeholder={t('apiFactory.editor.enterApiKey', 'Enter your API key')}
                       value={formData.authConfig.apiKey || ''}
                       onChange={e => updateAuthConfig('apiKey', e.target.value)}
                     />
@@ -707,14 +725,14 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   </div>
                 </div>
               )}
-              
+
               {formData.authType === 'bearer' && (
                 <div className="space-y-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <div className="relative">
                     <Input
-                      label="Bearer Token"
+                      label={t('apiFactory.editor.bearerToken', 'Bearer Token')}
                       type={showSecrets ? 'text' : 'password'}
-                      placeholder="Enter your token"
+                      placeholder={t('apiFactory.editor.enterToken', 'Enter your token')}
                       value={formData.authConfig.token || ''}
                       onChange={e => updateAuthConfig('token', e.target.value)}
                     />
@@ -728,17 +746,17 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   </div>
                 </div>
               )}
-              
+
               {formData.authType === 'basic' && (
                 <div className="space-y-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <Input
-                    label="Username"
+                    label={t('apiFactory.editor.username', 'Username')}
                     value={formData.authConfig.username || ''}
                     onChange={e => updateAuthConfig('username', e.target.value)}
                   />
                   <div className="relative">
                     <Input
-                      label="Password"
+                      label={t('apiFactory.editor.password', 'Password')}
                       type={showSecrets ? 'text' : 'password'}
                       value={formData.authConfig.password || ''}
                       onChange={e => updateAuthConfig('password', e.target.value)}
@@ -753,23 +771,23 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   </div>
                 </div>
               )}
-              
+
               {formData.authType === 'oauth2' && (
                 <div className="space-y-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <Input
-                    label="Token URL"
+                    label={t('apiFactory.editor.tokenUrl', 'Token URL')}
                     placeholder="https://auth.example.com/oauth/token"
                     value={formData.authConfig.tokenUrl || ''}
                     onChange={e => updateAuthConfig('tokenUrl', e.target.value)}
                   />
                   <Input
-                    label="Client ID"
+                    label={t('apiFactory.editor.clientId', 'Client ID')}
                     value={formData.authConfig.clientId || ''}
                     onChange={e => updateAuthConfig('clientId', e.target.value)}
                   />
                   <div className="relative">
                     <Input
-                      label="Client Secret"
+                      label={t('apiFactory.editor.clientSecret', 'Client Secret')}
                       type={showSecrets ? 'text' : 'password'}
                       value={formData.authConfig.clientSecret || ''}
                       onChange={e => updateAuthConfig('clientSecret', e.target.value)}
@@ -783,7 +801,7 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                     </button>
                   </div>
                   <Input
-                    label="Scopes (comma-separated)"
+                    label={t('apiFactory.editor.scopes', 'Scopes (comma-separated)')}
                     placeholder="read,write"
                     value={formData.authConfig.scopes || ''}
                     onChange={e => updateAuthConfig('scopes', e.target.value)}
@@ -792,13 +810,13 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
               )}
             </div>
           )}
-          
+
           {/* Trigger Tab */}
           {activeTab === 'trigger' && (
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
-                  When should this integration run?
+                  {t('apiFactory.editor.whenShouldRun', 'When should this integration run?')}
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   {TRIGGER_TYPES.map(trigger => (
@@ -822,12 +840,12 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   ))}
                 </div>
               </div>
-              
+
               {/* Event Selection */}
               {formData.triggerType === 'event' && (
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
-                    Select Events
+                    {t('apiFactory.editor.selectEvents', 'Select Events')}
                   </label>
                   <div className="space-y-4">
                     {Object.entries(
@@ -860,19 +878,19 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   </div>
                 </div>
               )}
-              
+
               {/* Schedule Selection */}
               {formData.triggerType === 'schedule' && (
                 <div className="space-y-4">
                   <Select
-                    label="Schedule"
+                    label={t('apiFactory.editor.schedule', 'Schedule')}
                     value={formData.schedule}
                     onChange={e => updateField('schedule', e.target.value)}
                     options={SCHEDULE_OPTIONS.map(s => ({ value: s.id, label: s.label }))}
                   />
                   {formData.schedule === 'custom' && (
                     <Input
-                      label="CRON Expression"
+                      label={t('apiFactory.editor.cronExpression', 'CRON Expression')}
                       placeholder="0 6 * * *"
                       value={formData.customCron}
                       onChange={e => updateField('customCron', e.target.value)}
@@ -881,56 +899,56 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                     <p className="text-sm text-blue-700 dark:text-blue-300">
                       <Info className="w-4 h-4 inline mr-1" />
-                      Schedule uses UTC timezone. Current CRON: <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+                      {t('apiFactory.editor.scheduleUtcNote', 'Schedule uses UTC timezone. Current CRON')}: <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
                         {SCHEDULE_OPTIONS.find(s => s.id === formData.schedule)?.cron || formData.customCron}
                       </code>
                     </p>
                   </div>
                 </div>
               )}
-              
+
               {/* Webhook Info */}
               {formData.triggerType === 'webhook' && (
                 <div className="space-y-4">
                   <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Your Webhook URL</p>
+                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{t('apiFactory.editor.yourWebhookUrl', 'Your Webhook URL')}</p>
                     <div className="flex items-center gap-2">
                       <code className="flex-1 bg-white dark:bg-slate-900 px-3 py-2 rounded-lg text-sm border border-slate-200 dark:border-slate-700">
                         https://api.uplift.hr/webhooks/custom/{formData.id || 'new'}
                       </code>
-                      <Button variant="ghost" size="sm">
+                      <Button variant="ghost" size="sm" onClick={() => { navigator.clipboard.writeText(`https://api.uplift.hr/webhooks/custom/${formData.id || 'new'}`); }}>
                         <Copy className="w-4 h-4" />
                       </Button>
                     </div>
                     <p className="text-xs text-slate-500 mt-2">
-                      Send POST requests to this URL. We'll process incoming data and map it to Uplift.
+                      {t('apiFactory.editor.webhookPostNote', "Send POST requests to this URL. We'll process incoming data and map it to Uplift.")}
                     </p>
                   </div>
                 </div>
               )}
             </div>
           )}
-          
+
           {/* Mapping Tab */}
           {activeTab === 'mapping' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-medium text-slate-900 dark:text-white">Field Mappings</h3>
-                  <p className="text-sm text-slate-500">Map Uplift fields to your external API fields</p>
+                  <h3 className="font-medium text-slate-900 dark:text-white">{t('apiFactory.editor.fieldMappings', 'Field Mappings')}</h3>
+                  <p className="text-sm text-slate-500">{t('apiFactory.editor.fieldMappingsDesc', 'Map Uplift fields to your external API fields')}</p>
                 </div>
                 <Button variant="outline" size="sm" onClick={addFieldMapping}>
-                  <Plus className="w-4 h-4" /> Add Mapping
+                  <Plus className="w-4 h-4" /> {t('apiFactory.editor.addMapping', 'Add Mapping')}
                 </Button>
               </div>
-              
+
               {formData.fieldMappings.length === 0 ? (
                 <div className="text-center py-12 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <ArrowLeftRight className="w-8 h-8 mx-auto mb-3 text-slate-300" />
-                  <p className="text-slate-500">No field mappings yet</p>
-                  <p className="text-sm text-slate-400 mt-1">Add mappings to transform data between systems</p>
+                  <p className="text-slate-500">{t('apiFactory.editor.noFieldMappings', 'No field mappings yet')}</p>
+                  <p className="text-sm text-slate-400 mt-1">{t('apiFactory.editor.addMappingsDesc', 'Add mappings to transform data between systems')}</p>
                   <Button variant="primary" size="sm" className="mt-4" onClick={addFieldMapping}>
-                    <Plus className="w-4 h-4" /> Add First Mapping
+                    <Plus className="w-4 h-4" /> {t('apiFactory.editor.addFirstMapping', 'Add First Mapping')}
                   </Button>
                 </div>
               ) : (
@@ -938,40 +956,40 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   {formData.fieldMappings.map((mapping, index) => (
                     <div key={index} className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
                       <GripVertical className="w-4 h-4 text-slate-300 cursor-move" />
-                      
+
                       <Select
                         value={mapping.upliftField}
                         onChange={e => updateFieldMapping(index, 'upliftField', e.target.value)}
                         options={[
-                          { value: '', label: 'Select Uplift field...' },
+                          { value: '', label: t('apiFactory.editor.selectUpliftField', 'Select Uplift field...') },
                           ...UPLIFT_FIELDS.employee.map(f => ({ value: `employee.${f.id}`, label: f.label })),
                         ]}
                         className="flex-1"
                       />
-                      
+
                       <ArrowRight className="w-4 h-4 text-slate-400 flex-shrink-0" />
-                      
+
                       <Input
-                        placeholder="External field name"
+                        placeholder={t('apiFactory.editor.externalFieldName', 'External field name')}
                         value={mapping.externalField}
                         onChange={e => updateFieldMapping(index, 'externalField', e.target.value)}
                         className="flex-1"
                       />
-                      
+
                       <Select
                         value={mapping.transform}
                         onChange={e => updateFieldMapping(index, 'transform', e.target.value)}
                         options={[
-                          { value: 'none', label: 'No transform' },
+                          { value: 'none', label: t('apiFactory.editor.noTransform', 'No transform') },
                           { value: 'uppercase', label: 'UPPERCASE' },
                           { value: 'lowercase', label: 'lowercase' },
-                          { value: 'date_iso', label: 'Date → ISO' },
-                          { value: 'date_uk', label: 'Date → UK format' },
-                          { value: 'bool_yn', label: 'Bool → Y/N' },
+                          { value: 'date_iso', label: t('apiFactory.editor.dateIso', 'Date → ISO') },
+                          { value: 'date_uk', label: t('apiFactory.editor.dateUk', 'Date → UK format') },
+                          { value: 'bool_yn', label: t('apiFactory.editor.boolYn', 'Bool → Y/N') },
                         ]}
                         className="w-40"
                       />
-                      
+
                       <Button variant="ghost" size="sm" onClick={() => removeFieldMapping(index)}>
                         <X className="w-4 h-4" />
                       </Button>
@@ -979,25 +997,25 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   ))}
                 </div>
               )}
-              
+
               <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl">
                 <p className="text-sm text-amber-700 dark:text-amber-300">
                   <Info className="w-4 h-4 inline mr-1" />
-                  Field mappings are used to build the request body automatically. You can also use {`{{field}}`} syntax in the Request tab for custom JSON structures.
+                  {t('apiFactory.editor.fieldMappingTip', 'Field mappings are used to build the request body automatically. You can also use {{field}} syntax in the Request tab for custom JSON structures.')}
                 </p>
               </div>
             </div>
           )}
-          
+
           {/* Test Tab */}
           {activeTab === 'test' && (
             <div className="space-y-6">
               <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                <h3 className="font-medium text-slate-900 dark:text-white mb-2">Test Configuration</h3>
+                <h3 className="font-medium text-slate-900 dark:text-white mb-2">{t('apiFactory.editor.testConfiguration', 'Test Configuration')}</h3>
                 <p className="text-sm text-slate-500 mb-4">
-                  Send a test request to verify your configuration. We'll use sample data.
+                  {t('apiFactory.editor.testDescription', "Send a test request to verify your configuration. We'll use sample data.")}
                 </p>
-                
+
                 <div className="flex items-center gap-3">
                   <Badge variant="info">{formData.method}</Badge>
                   <code className="text-sm text-slate-600 dark:text-slate-400 truncate flex-1">
@@ -1005,41 +1023,41 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   </code>
                 </div>
               </div>
-              
-              <Button 
-                variant="primary" 
-                onClick={handleTest} 
+
+              <Button
+                variant="primary"
+                onClick={handleTest}
                 disabled={testing || !formData.url}
                 className="w-full"
               >
                 {testing ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin" />
-                    Testing...
+                    {t('apiFactory.editor.testing', 'Testing...')}
                   </>
                 ) : (
                   <>
                     <Play className="w-4 h-4" />
-                    Send Test Request
+                    {t('apiFactory.editor.sendTestRequest', 'Send Test Request')}
                   </>
                 )}
               </Button>
-              
+
               {testResult && (
                 <div className={cn(
                   'rounded-xl border-2 overflow-hidden',
-                  testResult.success 
-                    ? 'border-emerald-200 dark:border-emerald-800' 
+                  testResult.success
+                    ? 'border-emerald-200 dark:border-emerald-800'
                     : 'border-red-200 dark:border-red-800'
                 )}>
                   <div className={cn(
                     'px-4 py-3 flex items-center justify-between',
-                    testResult.success 
-                      ? 'bg-emerald-50 dark:bg-emerald-900/30' 
+                    testResult.success
+                      ? 'bg-emerald-50 dark:bg-emerald-900/30'
                       : 'bg-red-50 dark:bg-red-900/30'
                   )}>
                     <div className="flex items-center gap-3">
-                      {testResult.success 
+                      {testResult.success
                         ? <CheckCircle className="w-5 h-5 text-emerald-500" />
                         : <AlertCircle className="w-5 h-5 text-red-500" />
                       }
@@ -1047,16 +1065,16 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                         'font-medium',
                         testResult.success ? 'text-emerald-700 dark:text-emerald-300' : 'text-red-700 dark:text-red-300'
                       )}>
-                        {testResult.success ? 'Success' : 'Failed'}
+                        {testResult.success ? t('apiFactory.editor.success', 'Success') : t('apiFactory.editor.failed', 'Failed')}
                       </span>
                     </div>
                     <div className="flex items-center gap-4 text-sm">
-                      <span className="text-slate-500">Status: <strong>{testResult.statusCode}</strong></span>
-                      <span className="text-slate-500">Time: <strong>{testResult.duration}ms</strong></span>
+                      <span className="text-slate-500">{t('apiFactory.editor.status', 'Status')}: <strong>{testResult.statusCode}</strong></span>
+                      <span className="text-slate-500">{t('apiFactory.editor.time', 'Time')}: <strong>{testResult.duration}ms</strong></span>
                     </div>
                   </div>
                   <div className="p-4 bg-slate-900">
-                    <p className="text-xs text-slate-400 mb-2">Response</p>
+                    <p className="text-xs text-slate-400 mb-2">{t('apiFactory.editor.response', 'Response')}</p>
                     <pre className="text-sm text-emerald-400 font-mono overflow-x-auto">
                       {JSON.stringify(testResult.response, null, 2)}
                     </pre>
@@ -1066,19 +1084,19 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
             </div>
           )}
         </div>
-        
+
         {/* Footer */}
         <div className="flex items-center justify-between p-6 border-t border-slate-200 dark:border-slate-700">
           <Toggle
             enabled={formData.enabled}
             onChange={v => updateField('enabled', v)}
-            label="Enable integration"
+            label={t('apiFactory.editor.enableIntegration', 'Enable integration')}
           />
           <div className="flex gap-3">
-            <Button variant="outline" onClick={onCancel}>Cancel</Button>
+            <Button variant="outline" onClick={onCancel}>{t('apiFactory.editor.cancel', 'Cancel')}</Button>
             <Button variant="primary" onClick={handleSave} disabled={!formData.name || !formData.url}>
               <Save className="w-4 h-4" />
-              {api ? 'Save Changes' : 'Create Integration'}
+              {api ? t('apiFactory.editor.saveChanges', 'Save Changes') : t('apiFactory.editor.createIntegration', 'Create Integration')}
             </Button>
           </div>
         </div>
@@ -1090,71 +1108,113 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
 // -------------------- MAIN COMPONENT --------------------
 
 const ApiFactory = () => {
-  const [customApis, setCustomApis] = useState(INITIAL_CUSTOM_APIS);
+  const { t } = useTranslation();
+  const [customApis, setCustomApis] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [editorOpen, setEditorOpen] = useState(false);
   const [editingApi, setEditingApi] = useState(null);
   const [viewMode, setViewMode] = useState('list'); // 'list' | 'logs'
-  
+
+  // Load custom APIs from backend on mount
+  useEffect(() => {
+    const loadApis = async () => {
+      try {
+        setLoading(true);
+        const data = await integrationsApi.getApiKeys();
+        setCustomApis(Array.isArray(data) ? data : data?.apiKeys || data?.data || []);
+      } catch (error) {
+        if (import.meta.env.DEV) console.error('Failed to load custom APIs:', error);
+        setCustomApis([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadApis();
+  }, []);
+
   const filteredApis = customApis.filter(api =>
-    api.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    api.description.toLowerCase().includes(searchQuery.toLowerCase())
+    (api.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (api.description || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
-  
+
   const handleCreate = () => {
     setEditingApi(null);
     setEditorOpen(true);
   };
-  
+
   const handleEdit = (api) => {
     setEditingApi(api);
     setEditorOpen(true);
   };
-  
-  const handleSave = (apiData) => {
-    if (editingApi) {
-      setCustomApis(prev => prev.map(api => 
-        api.id === editingApi.id ? { ...api, ...apiData } : api
-      ));
-    } else {
-      setCustomApis(prev => [...prev, {
-        ...apiData,
-        id: `api-${Date.now()}`,
-        lastRun: null,
-        lastStatus: null,
-        runCount: 0,
-        errorCount: 0,
-      }]);
+
+  const handleSave = async (apiData) => {
+    try {
+      if (editingApi) {
+        const updated = await integrationsApi.update(editingApi.id, apiData);
+        setCustomApis(prev => prev.map(api =>
+          api.id === editingApi.id ? { ...api, ...apiData, ...updated } : api
+        ));
+      } else {
+        const created = await integrationsApi.createApiKey(apiData);
+        setCustomApis(prev => [...prev, {
+          ...apiData,
+          id: created?.id || `api-${Date.now()}`,
+          lastRun: null,
+          lastStatus: null,
+          runCount: 0,
+          errorCount: 0,
+          ...created,
+        }]);
+      }
+    } catch (error) {
+      if (import.meta.env.DEV) console.error('Failed to save API integration:', error);
     }
     setEditorOpen(false);
     setEditingApi(null);
   };
-  
+
   const handleToggle = (apiId) => {
     setCustomApis(prev => prev.map(api =>
       api.id === apiId ? { ...api, enabled: !api.enabled } : api
     ));
-  };
-  
-  const handleDelete = (apiId) => {
-    if (confirm('Are you sure you want to delete this integration?')) {
-      setCustomApis(prev => prev.filter(api => api.id !== apiId));
+    // Fire and forget the update
+    const api = customApis.find(a => a.id === apiId);
+    if (api) {
+      integrationsApi.update(apiId, { enabled: !api.enabled }).catch(error => {
+        if (import.meta.env.DEV) console.error('Failed to toggle API:', error);
+      });
     }
   };
-  
+
+  const handleDelete = async (apiId) => {
+    if (!confirm(t('apiFactory.deleteConfirm', 'Are you sure you want to delete this integration?'))) return;
+
+    const backup = customApis.find(a => a.id === apiId);
+    setCustomApis(prev => prev.filter(api => api.id !== apiId));
+
+    try {
+      await integrationsApi.revokeApiKey(apiId);
+    } catch (error) {
+      if (import.meta.env.DEV) console.error('Failed to delete API integration:', error);
+      // Rollback
+      if (backup) setCustomApis(prev => [...prev, backup]);
+    }
+  };
+
   const handleTest = (api) => {
     setEditingApi(api);
     setEditorOpen(true);
     // Will open to test tab
   };
-  
+
   const stats = {
     total: customApis.length,
     active: customApis.filter(a => a.enabled).length,
-    runsToday: customApis.reduce((sum, a) => sum + (a.runCount > 0 ? Math.floor(Math.random() * 10) : 0), 0),
-    errors: customApis.reduce((sum, a) => sum + a.errorCount, 0),
+    runsToday: customApis.reduce((sum, a) => sum + (a.runsToday || 0), 0),
+    errors: customApis.reduce((sum, a) => sum + (a.errorCount || 0), 0),
   };
-  
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -1162,45 +1222,45 @@ const ApiFactory = () => {
         <div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <Code className="w-6 h-6 text-orange-500" />
-            API Factory
+            {t('apiFactory.title', 'API Factory')}
           </h2>
           <p className="text-sm text-slate-500 mt-1">
-            Build custom REST API integrations without writing code
+            {t('apiFactory.subtitle', 'Build custom REST API integrations without writing code')}
           </p>
         </div>
         <Button variant="primary" onClick={handleCreate}>
           <Plus className="w-4 h-4" />
-          New Integration
+          {t('apiFactory.newIntegration', 'New Integration')}
         </Button>
       </div>
-      
+
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-          <p className="text-sm text-slate-500">Total Integrations</p>
+          <p className="text-sm text-slate-500">{t('apiFactory.stats.totalIntegrations', 'Total Integrations')}</p>
           <p className="text-2xl font-bold text-slate-900 dark:text-white">{stats.total}</p>
         </div>
         <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-          <p className="text-sm text-slate-500">Active</p>
+          <p className="text-sm text-slate-500">{t('apiFactory.stats.active', 'Active')}</p>
           <p className="text-2xl font-bold text-emerald-500">{stats.active}</p>
         </div>
         <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-          <p className="text-sm text-slate-500">Runs Today</p>
+          <p className="text-sm text-slate-500">{t('apiFactory.stats.runsToday', 'Runs Today')}</p>
           <p className="text-2xl font-bold text-blue-500">{stats.runsToday}</p>
         </div>
         <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-          <p className="text-sm text-slate-500">Total Errors</p>
+          <p className="text-sm text-slate-500">{t('apiFactory.stats.totalErrors', 'Total Errors')}</p>
           <p className="text-2xl font-bold text-red-500">{stats.errors}</p>
         </div>
       </div>
-      
+
       {/* Search & Filter */}
       <div className="flex items-center gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search integrations..."
+            placeholder={t('apiFactory.searchPlaceholder', 'Search integrations...')}
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800"
@@ -1231,26 +1291,31 @@ const ApiFactory = () => {
           </button>
         </div>
       </div>
-      
+
       {/* List View */}
       {viewMode === 'list' && (
         <>
-          {filteredApis.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-16 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+              <RefreshCw className="w-8 h-8 mx-auto mb-4 text-slate-300 animate-spin" />
+              <p className="text-slate-500">{t('apiFactory.loadingIntegrations', 'Loading integrations...')}</p>
+            </div>
+          ) : filteredApis.length === 0 ? (
             <div className="text-center py-16 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
               <Code className="w-12 h-12 mx-auto mb-4 text-slate-300" />
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-                {searchQuery ? 'No integrations found' : 'No custom integrations yet'}
+                {searchQuery ? t('apiFactory.noIntegrationsFound', 'No integrations found') : t('apiFactory.noIntegrationsYet', 'No custom integrations yet')}
               </h3>
               <p className="text-slate-500 mb-6">
-                {searchQuery 
-                  ? 'Try a different search term'
-                  : 'Create your first custom API integration to connect any REST API'
+                {searchQuery
+                  ? t('apiFactory.tryDifferentSearch', 'Try a different search term')
+                  : t('apiFactory.createFirstDesc', 'Create your first custom API integration to connect any REST API')
                 }
               </p>
               {!searchQuery && (
                 <Button variant="primary" onClick={handleCreate}>
                   <Plus className="w-4 h-4" />
-                  Create Integration
+                  {t('apiFactory.createIntegration', 'Create Integration')}
                 </Button>
               )}
             </div>
@@ -1264,62 +1329,65 @@ const ApiFactory = () => {
                   onToggle={handleToggle}
                   onDelete={handleDelete}
                   onTest={handleTest}
+                  onViewLogs={() => setViewMode('logs')}
                 />
               ))}
             </div>
           )}
         </>
       )}
-      
+
       {/* Logs View */}
       {viewMode === 'logs' && (
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-            <h3 className="font-semibold">Execution Logs</h3>
-            <Button variant="ghost" size="sm">
-              <Download className="w-4 h-4" /> Export
+            <h3 className="font-semibold">{t('apiFactory.logs.executionLogs', 'Execution Logs')}</h3>
+            <Button variant="ghost" size="sm" onClick={() => alert('Export coming soon')}>
+              <Download className="w-4 h-4" /> {t('apiFactory.logs.export', 'Export')}
             </Button>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-700">
-            {[...Array(10)].map((_, i) => {
-              const success = Math.random() > 0.2;
-              const api = customApis[Math.floor(Math.random() * customApis.length)];
-              return (
-                <div key={i} className="px-4 py-3 flex items-center gap-4 text-sm">
+            {customApis.length === 0 ? (
+              <div className="px-4 py-8 text-center text-slate-500 text-sm">
+                {t('apiFactory.logs.noData', 'No data yet. Execution logs will appear here once integrations run.')}
+              </div>
+            ) : (
+              customApis.filter(a => a.lastRun).map((api) => (
+                <div key={api.id} className="px-4 py-3 flex items-center gap-4 text-sm">
                   <div className={cn(
                     'w-2 h-2 rounded-full',
-                    success ? 'bg-emerald-500' : 'bg-red-500'
+                    api.lastStatus === 'success' ? 'bg-emerald-500' : 'bg-red-500'
                   )} />
                   <span className="font-medium text-slate-900 dark:text-white w-48 truncate">
-                    {api?.name || 'Unknown'}
+                    {api.name || t('apiFactory.logs.unknown', 'Unknown')}
                   </span>
-                  <Badge variant={success ? 'success' : 'error'} size="xs">
-                    {success ? '200 OK' : '401 Error'}
+                  <Badge variant={api.lastStatus === 'success' ? 'success' : 'error'} size="xs">
+                    {api.lastStatus === 'success' ? '200 OK' : t('apiFactory.logs.error', 'Error')}
                   </Badge>
-                  <span className="text-slate-500">{Math.floor(Math.random() * 500) + 50}ms</span>
+                  <span className="text-slate-500">{t('apiFactory.list.runsCount', '{{count}} runs', { count: api.runCount || 0 })}</span>
                   <span className="text-slate-400 ml-auto">
-                    {new Date(Date.now() - i * 3600000 * Math.random()).toLocaleString()}
+                    {api.lastRun ? formatDate(api.lastRun) : '-'}
                   </span>
                 </div>
-              );
-            })}
+              ))
+            )}
           </div>
         </div>
       )}
-      
+
       {/* Info Banner */}
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex items-start gap-3">
         <Info className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
         <div>
           <p className="text-sm text-blue-900 dark:text-blue-100 font-medium">
-            Need help building an integration?
+            {t('apiFactory.helpBanner.title', 'Need help building an integration?')}
           </p>
           <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
-            Check our <a href="#" className="underline">API documentation</a> for examples, or contact support for complex use cases.
+            {t('apiFactory.helpBanner.description', 'Check our API documentation for examples, or contact support for complex use cases.')}
           </p>
         </div>
       </div>
-      
+
       {/* Editor Modal */}
       {editorOpen && (
         <ApiEditor

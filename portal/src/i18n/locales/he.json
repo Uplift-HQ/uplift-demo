@@ -54,7 +54,6 @@
     "viewMyCareer": "צפה בקריירה שלי",
     "timeOffBalance": "יתרת חופשה"
   },
-
   "nav": {
     "dashboard": "לוח בקרה",
     "employees": "עובדים",
@@ -150,9 +149,21 @@
     "active": "פעיל",
     "inactive": "לא פעיל",
     "enabled": "מופעל",
-    "disabled": "מושבת"
+    "disabled": "מושבת",
+    "approveSelected": "אשר נבחרים",
+    "rejectSelected": "דחה נבחרים",
+    "clearSelection": "נקה",
+    "showing": "מציג",
+    "of": "מתוך",
+    "page": "עמוד",
+    "previous": "הקודם",
+    "terminated": "פוטר",
+    "sunday": "ראשון",
+    "monday": "שני",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
-
   "auth": {
     "login": "התחברות",
     "logout": "התנתקות",
@@ -178,9 +189,6 @@
     "requestAccessMsg": "לקבלת גישה ל-Uplift, אנא פנה למנהל שלך או למחלקת משאבי אנוש. הם ישלחו לך קישור הזמנה.",
     "enterEmailPassword": "אנא הזן דוא״ל וסיסמה",
     "loginFailed": "ההתחברות נכשלה",
-    "demoAccounts": "חשבונות דמו:",
-    "demoWorker": "עובד: worker@uplift.work / Demo123!",
-    "demoManager": "מנהל: manager@uplift.work / Demo123!",
     "twoFactorAuth": "אימות דו-שלבי",
     "enterMfaCode": "הזן את הקוד מאפליקציית האימות שלך",
     "verificationCode": "קוד אימות",
@@ -194,9 +202,16 @@
     "invalidCode": "קוד לא תקין",
     "allRightsReserved": "כל הזכויות שמורות",
     "termsOfService": "תנאי שימוש",
-    "privacyPolicy": "מדיניות פרטיות"
+    "privacyPolicy": "מדיניות פרטיות",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
-
   "navigation": {
     "home": "בית",
     "schedule": "לוח זמנים",
@@ -214,7 +229,6 @@
     "leaderboard": "טבלת מובילים",
     "badges": "תגים"
   },
-
   "home": {
     "welcome": "ברוך הבא, {{name}}!",
     "welcomeBack": "ברוך שובך,",
@@ -239,7 +253,6 @@
     "openOpportunities": "הזדמנויות פתוחות",
     "noOpportunities": "אין הזדמנויות התואמות את הכישורים שלך כרגע"
   },
-
   "schedule": {
     "title": "לוח הזמנים שלי",
     "weekView": "שבוע",
@@ -293,9 +306,22 @@
     "yourShift": "המשמרת שלך",
     "theirShift": "המשמרת שלהם",
     "sendRequest": "שלח בקשה",
-    "cancelSwap": "בטל החלפה"
+    "cancelSwap": "בטל החלפה",
+    "allLocations": "כל המיקומים",
+    "tuesday": "שלישי",
+    "wednesday": "רביעי",
+    "thursday": "חמישי",
+    "friday": "שישי",
+    "saturday": "שבת",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
-
   "timeTracking": {
     "title": "מעקב זמן",
     "clockedIn": "נכנסת",
@@ -326,9 +352,25 @@
     "tapToClockIn": "הקש לכניסה",
     "onBreakSince": "בהפסקה מאז {{time}}",
     "workingSince": "עובד מאז {{time}}",
-    "shiftEnded": "המשמרת הסתיימה"
+    "shiftEnded": "המשמרת הסתיימה",
+    "entriesApproved": "{{count}} רשומות אושרו",
+    "approveError": "אישור הרשומות נכשל. נסה שוב.",
+    "entriesRejected": "{{count}} רשומות נדחו",
+    "rejectError": "דחיית הרשומות נכשלה. נסה שוב.",
+    "clockInError": "הכניסה נכשלה. נסה שוב.",
+    "clockOutError": "היציאה נכשלה. נסה שוב.",
+    "breakError": "עדכון ההפסקה נכשל. נסה שוב.",
+    "noPending": "אין רשומות ממתינות לבדיקה",
+    "noEntries": "לא נמצאו רשומות זמן",
+    "history": "היסטוריה",
+    "managerSubtitle": "בדיקה ואישור גליונות שעות",
+    "employeeSubtitle": "מעקב אחר שעות עבודה",
+    "clockIn": "כניסה",
+    "clockOut": "יציאה",
+    "startBreak": "התחל הפסקה",
+    "endBreak": "סיים הפסקה",
+    "totalHours": "סה\"כ שעות"
   },
-
   "timeOff": {
     "title": "חופשה",
     "request": "בקש חופשה",
@@ -359,9 +401,16 @@
     "selectDates": "בחר תאריכים",
     "selectType": "בחר סוג",
     "addNotes": "הוסף הערות (אופציונלי)",
-    "reviewRequest": "סקור בקשה"
+    "reviewRequest": "סקור בקשה",
+    "oneDay": "יום אחד",
+    "days": "ימים",
+    "dates": "תאריכים",
+    "duration": "משך",
+    "noRequests": "לא נמצאו בקשות",
+    "requestDetails": "פרטי בקשת חופשה",
+    "noReason": "לא צוינה סיבה",
+    "submitted": "הוגש"
   },
-
   "feed": {
     "title": "פיד",
     "newPost": "פוסט חדש",
@@ -401,7 +450,6 @@
     "hoursAgo": "לפני {{count}} שעות",
     "daysAgo": "לפני {{count}} ימים"
   },
-
   "messages": {
     "title": "הודעות",
     "newMessage": "הודעה חדשה",
@@ -419,7 +467,6 @@
     "translateMessage": "תרגם",
     "showOriginal": "הצג מקור"
   },
-
   "profile": {
     "title": "פרופיל",
     "editProfile": "ערוך פרופיל",
@@ -447,7 +494,6 @@
     "viewProfile": "צפה בפרופיל",
     "memberSince": "חבר מאז {{date}}"
   },
-
   "skills": {
     "title": "כישורים",
     "mySkills": "הכישורים שלי",
@@ -474,7 +520,6 @@
     "skillAdded": "הכישור נוסף בהצלחה",
     "verificationRequested": "בקשת אימות נשלחה"
   },
-
   "career": {
     "title": "קריירה",
     "careerPath": "מסלול קריירה",
@@ -549,7 +594,6 @@
     "expired": "פג תוקף",
     "expires": "פג תוקף ב-{{date}}"
   },
-
   "gamification": {
     "level": "רמה {{level}}",
     "levelShort": "רמה {{level}}",
@@ -583,7 +627,6 @@
     "earnedOn": "נצבר ב-{{date}}",
     "progressToEarn": "{{percent}}% התקדמות לצבירה"
   },
-
   "notifications": {
     "title": "התראות",
     "markAllRead": "סמן הכל כנקרא",
@@ -605,7 +648,6 @@
     "allCaught": "אתה מעודכן!",
     "checkBackLater": "בדוק שוב מאוחר יותר להתראות חדשות"
   },
-
   "settings": {
     "title": "הגדרות",
     "subtitle": "נהל את הארגון והחשבון שלך",
@@ -740,9 +782,23 @@
     "featureAccess": "גישה לתכונות",
     "enableAll": "הפעל הכל",
     "disableAll": "השבת הכל",
-    "aboutEmployeeVisibility": "הגדרות אלה שולטות באילו תכונות נראות לכל עובד."
+    "aboutEmployeeVisibility": "הגדרות אלה שולטות באילו תכונות נראות לכל עובד.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
-
   "tasks": {
     "title": "משימות",
     "myTasks": "המשימות שלי",
@@ -781,7 +837,6 @@
     "takePhoto": "צלם תמונה",
     "chooseFromLibrary": "בחר מהספרייה"
   },
-
   "expenses": {
     "title": "הוצאות",
     "myExpenses": "ההוצאות שלי",
@@ -808,7 +863,6 @@
     "totalApproved": "סה״כ אושר",
     "totalReimbursed": "סה״כ הוחזר"
   },
-
   "rewards": {
     "title": "תגמולים",
     "myRewards": "התגמולים שלי",
@@ -828,7 +882,6 @@
     "validUntil": "בתוקף עד {{date}}",
     "termsConditions": "תנאים והגבלות"
   },
-
   "manager": {
     "dashboard": "לוח בקרה",
     "teamOverview": "סקירת צוות",
@@ -859,7 +912,6 @@
     "attendance": "נוכחות",
     "performance": "ביצועים"
   },
-
   "onboarding": {
     "welcome": "ברוכים הבאים ל-Uplift!",
     "getStarted": "בואו נתחיל",
@@ -877,7 +929,6 @@
     "allSet": "הכל מוכן!",
     "startExploring": "התחל לחקור משמרות והזדמנויות"
   },
-
   "errors": {
     "networkError": "שגיאת רשת. בדוק את החיבור שלך.",
     "serverError": "שגיאת שרת. נסה שוב מאוחר יותר.",
@@ -898,7 +949,6 @@
     "tryAgain": "נסה שוב",
     "somethingWentWrong": "משהו השתבש"
   },
-
   "activity": {
     "title": "סקירת פעילות",
     "subtitle": "סקור השלמות משימות, העלאות הוכחות והגשות טפסים",
@@ -929,9 +979,11 @@
     "enterRejectionReason": "הזן סיבה לדחייה...",
     "confirmRejection": "אשר דחייה",
     "approve": "אשר",
-    "reject": "דחה"
+    "reject": "דחה",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "העדפות התראות",
     "subtitle": "בחר איך ומתי לקבל התראות",
@@ -973,7 +1025,6 @@
     "disableConfirm": "האם אתה בטוח שברצונך להשבית את כל ההתראות? תוכל להפעיל אותן מחדש בכל עת.",
     "disableSuccess": "כל ההתראות הושבתו."
   },
-
   "employeeDetail": {
     "notFound": "העובד לא נמצא",
     "backToEmployees": "חזרה לעובדים",
@@ -989,7 +1040,6 @@
     "basic": "בסיסי",
     "adding": "מוסיף..."
   },
-
   "reports": {
     "title": "דוחות",
     "subtitle": "אנליטיקה, תובנות ודוחות מותאמים",
@@ -1025,9 +1075,22 @@
     "thisMonth": "החודש",
     "lastMonth": "חודש שעבר",
     "last7Days": "7 ימים אחרונים",
-    "last30Days": "30 ימים אחרונים"
+    "last30Days": "30 ימים אחרונים",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "תפריט",
     "closeMenu": "סגור תפריט",
@@ -1041,7 +1104,6 @@
     "required": "נדרש",
     "optional": "אופציונלי"
   },
-
   "shiftTemplates": {
     "title": "תבניות משמרות",
     "subtitle": "צור תבניות משמרות לשימוש חוזר",
@@ -1073,11 +1135,118 @@
     "shiftsLabel": "משמרות",
     "generating": "מייצר..."
   },
-
   "legal": {
-    "lastUpdated": "עודכן לאחרונה"
+    "lastUpdated": "עודכן לאחרונה",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "בוקר",
     "pm": "אחה״צ",
@@ -1120,5 +1289,564 @@
     "october": "אוקטובר",
     "november": "נובמבר",
     "december": "דצמבר"
+  },
+  "bulkImport": {
+    "title": "ייבוא בכמויות",
+    "subtitle": "ייבוא נתונים מקבצי CSV או Excel",
+    "selectType": "בחר סוג",
+    "uploadFile": "העלה קובץ",
+    "preview": "תצוגה מקדימה",
+    "complete": "הושלם",
+    "invalidFileType": "העלה קובץ CSV או Excel",
+    "importFailed": "הייבוא נכשל. נסה שוב.",
+    "uploadFor": "העלאה",
+    "uploadDesc": "גרור ושחרר או לחץ לבחירת קובץ",
+    "downloadTemplate": "הורד תבנית",
+    "dragDrop": "גרור ושחרר את הקובץ כאן, או לחץ לעיון",
+    "supportedFormats": "פורמטים נתמכים: CSV, XLSX",
+    "previewData": "תצוגה מקדימה של נתונים",
+    "rowsFound": "שורות נמצאו ב",
+    "andMore": "ועוד",
+    "moreRows": "שורות נוספות...",
+    "importing": "מייבא...",
+    "startImport": "התחל ייבוא",
+    "importComplete": "הייבוא הושלם",
+    "successfullyImported": "יובאו בהצלחה",
+    "of": "מתוך",
+    "records": "רשומות",
+    "successful": "הצליחו",
+    "failed": "נכשלו",
+    "total": "סה\"כ",
+    "importMore": "ייבא עוד נתונים",
+    "type": {
+      "employees": "עובדים",
+      "employeesDesc": "ייבוא פרופילי עובדים",
+      "shifts": "משמרות",
+      "shiftsDesc": "ייבוא לוחות משמרות",
+      "locations": "מיקומים",
+      "locationsDesc": "ייבוא מיקומים",
+      "skills": "כישורים",
+      "skillsDesc": "ייבוא כישורים"
+    }
+  },
+  "jobs": {
+    "open": "פתוח",
+    "closed": "סגור",
+    "applicants": "מועמדים",
+    "created": "המשרה פורסמה בהצלחה",
+    "createError": "פרסום המשרה נכשל. נסה שוב.",
+    "updated": "המשרה עודכנה בהצלחה",
+    "updateError": "עדכון המשרה נכשל. נסה שוב.",
+    "fullTime": "משרה מלאה",
+    "partTime": "משרה חלקית",
+    "contract": "חוזה",
+    "temporary": "זמני",
+    "subtitle": "ניהול הזדמנויות קריירה פנימיות",
+    "openPositions": "משרות פתוחות",
+    "closedPositions": "סגורות",
+    "totalApplicants": "סה\"כ מועמדים",
+    "noJobs": "לא נמצאו משרות",
+    "viewApplicants": "צפה במועמדים",
+    "editPosting": "ערוך משרה",
+    "jobTitle": "כותרת משרה",
+    "enterTitle": "הזן כותרת משרה",
+    "selectDepartment": "בחר מחלקה",
+    "selectLocation": "בחר מיקום",
+    "salary": "טווח שכר",
+    "enterDescription": "הזן תיאור משרה",
+    "postJob": "פרסם משרה",
+    "skillMatch": "התאמת כישורים",
+    "noApplicants": "אין מועמדים עדיין"
+  },
+  "employees": {
+    "searchPlaceholder": "חיפוש לפי שם או אימייל...",
+    "employees": "עובדים",
+    "noResults": "לא נמצאו עובדים",
+    "details": "פרטי עובד",
+    "hireDate": "תאריך קליטה",
+    "assigned": "שויכו",
+    "leaveDetails": "פרטי חופשה",
+    "until": "עד",
+    "terminationDetails": "פרטי סיום העסקה",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "מרכז אינטגרציות",
+    "subtitle": "חבר את Uplift לכלים הקיימים שלך",
+    "apiFactory": "מפעל API",
+    "addIntegration": "הוסף אינטגרציה",
+    "configure": "הגדר",
+    "connect": "חבר",
+    "cancel": "בטל",
+    "back": "חזרה",
+    "saveChanges": "שמור שינויים",
+    "syncNow": "סנכרן עכשיו",
+    "disconnect": "נתק {{name}}",
+    "disconnectConfirm": "לנתק את {{name}}? כל הסנכרונים ייעצרו.",
+    "settingsSaved": "ההגדרות נשמרו",
+    "browseMarketplace": "עיין בשוק",
+    "loadingIntegrations": "טוען אינטגרציות...",
+    "noIntegrations": "אין אינטגרציות מחוברות",
+    "noIntegrationsDesc": "חבר את האינטגרציה הראשונה שלך כדי להתחיל לסנכרן נתונים",
+    "status": {
+      "beta": "בטא",
+      "syncing": "מסנכרן..."
+    },
+    "stats": {
+      "connected": "מחוברות",
+      "available": "זמינות",
+      "syncsToday": "סנכרונים היום",
+      "errors": "שגיאות",
+      "totalSyncs": "סה\"כ סנכרונים",
+      "lastSync": "סנכרון אחרון",
+      "records": "רשומות"
+    },
+    "tabs": {
+      "connected": "מחוברות",
+      "marketplace": "שוק",
+      "restApi": "REST API",
+      "apiFactory": "מפעל API",
+      "activityLog": "יומן פעילות",
+      "settings": "הגדרות",
+      "fieldMapping": "מיפוי שדות",
+      "syncHistory": "היסטוריית סנכרון",
+      "webhooks": "Webhooks"
+    },
+    "connection": {
+      "lastSync": "סנכרון אחרון",
+      "frequency": "תדירות",
+      "status": "סטטוס",
+      "healthy": "תקין",
+      "errors": "שגיאות"
+    },
+    "connectModal": {
+      "title": "חבר {{name}}",
+      "whatItDoes": "מה האינטגרציה הזו עושה:",
+      "redirectNotice": "תועבר ל-{{name}}",
+      "authorizeMessage": "התחבר ואשר ל-Uplift גישה לנתונים שלך. אנו מבקשים רק הרשאות נדרשות.",
+      "connectWith": "התחבר עם {{name}}",
+      "connecting": "מתחבר ל-{{name}}...",
+      "completeAuth": "השלם את ההרשאה בחלון הקופץ",
+      "successConnected": "חובר בהצלחה!",
+      "configureSyncSettings": "הגדר את הסנכרון למטה.",
+      "completeSetup": "השלם הגדרה",
+      "connected": "{{name}} מחובר!",
+      "firstSyncSoon": "הסנכרון הראשון יתחיל בקרוב",
+      "hris": {
+        "syncEmployees": "סנכרון אוטומטי של רשומות עובדים",
+        "importDepts": "ייבוא מחלקות ומיקומים",
+        "syncTimeOff": "סנכרון יתרות חופשה"
+      },
+      "payroll": {
+        "exportTimesheets": "ייצוא גליונות שעות מאושרים",
+        "syncPayRates": "סנכרון תעריפי שכר ושעות נוספות",
+        "autoReconciliation": "התאמת שכר אוטומטית"
+      },
+      "comms": {
+        "shiftReminders": "שליחת תזכורות משמרת",
+        "postRecognition": "פרסום הכרה בערוצים",
+        "swapNotifications": "הודעות על בקשות החלפה"
+      },
+      "identity": {
+        "sso": "כניסה אחידה (SSO)",
+        "autoProvisioning": "הקצאת משתמשים אוטומטית",
+        "directorySync": "סנכרון מדריך"
+      },
+      "other": {
+        "bidirectional": "סנכרון דו-כיווני",
+        "realtimeWebhooks": "עדכונים בזמן אמת דרך webhooks",
+        "auditTrail": "מעקב ביקורת מלא"
+      }
+    },
+    "configureModal": {
+      "title": "הגדרות {{name}}",
+      "connectedSince": "מחובר {{date}}"
+    },
+    "settings": {
+      "autoSync": "סנכרון אוטומטי",
+      "autoSyncDesc": "סנכרן נתונים אוטומטית לפי לוח זמנים",
+      "autoSyncScheduleDesc": "סנכרון אוטומטי לפי תזמון",
+      "syncFrequency": "תדירות סנכרון",
+      "nextScheduledSync": "הסנכרון המתוזמן הבא",
+      "dataToSync": "נתונים לסנכרון",
+      "frequency": {
+        "realtime": "זמן אמת",
+        "hourly": "כל שעה",
+        "daily": "יומי",
+        "weekly": "שבועי"
+      },
+      "data": {
+        "employees": "עובדים",
+        "timeEntries": "רשומות זמן",
+        "departments": "מחלקות",
+        "locations": "מיקומים"
+      }
+    },
+    "mapping": {
+      "description": "מיפוי שדות קובע איך נתונים מ-{{name}} ממופים לשדות Uplift. שינויים יחולו בסנכרון הבא.",
+      "sourceField": "שדה {{name}}",
+      "upliftField": "שדה Uplift",
+      "status": "סטטוס",
+      "selectField": "בחר שדה...",
+      "mapped": "ממופה",
+      "unmapped": "לא ממופה"
+    },
+    "history": {
+      "noHistory": "אין היסטוריית סנכרון",
+      "sync": "סנכרון",
+      "duration": "משך",
+      "records": "רשומות",
+      "created": "נוצרו",
+      "updated": "עודכנו"
+    },
+    "webhooks": {
+      "description": "Webhooks מודיעים ל-{{name}} כשמתרחשים אירועים ב-Uplift",
+      "addWebhook": "הוסף webhook",
+      "noWebhooks": "אין webhooks מוגדרים",
+      "createFirst": "צור את ה-webhook הראשון שלך",
+      "active": "פעיל",
+      "paused": "מושהה",
+      "sendTestPayload": "שלח נתוני בדיקה",
+      "pauseWebhook": "השהה webhook",
+      "enableWebhook": "הפעל webhook",
+      "deleteWebhook": "מחק webhook",
+      "lastTriggered": "הופעל לאחרונה",
+      "never": "אף פעם",
+      "successRate": "אחוז הצלחה",
+      "sendEventsTo": "שלח אירועים ל-{{name}}",
+      "endpointUrl": "כתובת URL של נקודת קצה",
+      "eventsToSend": "אירועים לשליחה",
+      "hmacInfo": "נחתום את כל הודעות ה-webhook עם HMAC-SHA256. החתימה תתקבל ב-",
+      "header": "header.",
+      "createWebhook": "צור webhook",
+      "validationError": "הזן URL ובחר לפחות אירוע אחד",
+      "createdSuccess": "Webhook נוצר בהצלחה!",
+      "testSent": "נתוני בדיקה נשלחו ל-",
+      "testStatus": "סטטוס",
+      "deleteConfirm": "למחוק webhook זה?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "חיפוש אינטגרציות...",
+      "allCategories": "כל הקטגוריות",
+      "infoBannerTitle": "Uplift עובד עם הכלים הקיימים שלך",
+      "infoBannerDesc": "חבר מערכות HRIS, שכר ותקשורת. אנו מסנכרנים נתונים — לא מחליפים את ה-stack שלך.",
+      "noResults": "לא נמצאו אינטגרציות",
+      "dontSeeSystem": "לא רואה את המערכת שלך?",
+      "alwaysAdding": "אנו מוסיפים כל הזמן אינטגרציות חדשות. ספר לנו מה אתה צריך.",
+      "requestIntegration": "בקש אינטגרציה"
+    },
+    "activity": {
+      "recentActivity": "פעילות אינטגרציות אחרונה",
+      "exportLog": "ייצוא יומן"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "מפעל API",
+    "subtitle": "בנה אינטגרציות REST API מותאמות ללא כתיבת קוד",
+    "newIntegration": "אינטגרציה חדשה",
+    "searchPlaceholder": "חיפוש אינטגרציות...",
+    "loadingIntegrations": "טוען אינטגרציות...",
+    "noIntegrationsFound": "לא נמצאו אינטגרציות",
+    "noIntegrationsYet": "אין עדיין אינטגרציות מותאמות",
+    "tryDifferentSearch": "נסה מונח חיפוש אחר",
+    "createFirstDesc": "צור את האינטגרציה המותאמת הראשונה שלך",
+    "createIntegration": "צור אינטגרציה",
+    "deleteConfirm": "בטוח שברצונך למחוק אינטגרציה זו?",
+    "list": {
+      "eventsCount": "{{count}} אירועים",
+      "scheduled": "מתוזמן",
+      "incomingWebhook": "webhook נכנס",
+      "manual": "ידני",
+      "runsCount": "{{count}} הרצות",
+      "errorsCount": "{{count}} שגיאות",
+      "disabled": "מושבת",
+      "edit": "ערוך",
+      "test": "בדיקה",
+      "viewLogs": "הצג יומנים",
+      "delete": "מחק",
+      "lastRun": "הרצה אחרונה"
+    },
+    "stats": {
+      "totalIntegrations": "סה\"כ אינטגרציות",
+      "active": "פעילות",
+      "runsToday": "הרצות היום",
+      "totalErrors": "סה\"כ שגיאות"
+    },
+    "editor": {
+      "editTitle": "ערוך אינטגרציית API",
+      "createTitle": "צור אינטגרציית API",
+      "subtitle": "הגדר חיבור REST API מותאם",
+      "integrationName": "שם אינטגרציה",
+      "integrationNamePlaceholder": "לדוגמה, סנכרון למערכת שכר",
+      "description": "תיאור",
+      "descriptionPlaceholder": "מה האינטגרציה הזו עושה?",
+      "method": "שיטה",
+      "url": "URL",
+      "headers": "כותרות",
+      "addHeader": "הוסף כותרת",
+      "headerName": "שם כותרת",
+      "headerValue": "ערך",
+      "requestBodyJson": "גוף הבקשה (JSON)",
+      "useVariables": "השתמש ב-{{field}} למשתנים",
+      "availableVariables": "משתנים זמינים",
+      "authenticationType": "סוג אימות",
+      "apiKeyLocation": "מיקום מפתח API",
+      "header": "כותרת",
+      "queryParameter": "פרמטר שאילתה",
+      "keyName": "שם מפתח",
+      "keyNamePlaceholder": "לדוגמה, X-API-Key",
+      "apiKey": "מפתח API",
+      "enterApiKey": "הזן את מפתח ה-API שלך",
+      "bearerToken": "Bearer Token",
+      "enterToken": "הזן את ה-token שלך",
+      "username": "שם משתמש",
+      "password": "סיסמה",
+      "tokenUrl": "כתובת Token",
+      "clientId": "מזהה לקוח",
+      "clientSecret": "סוד לקוח",
+      "scopes": "היקפים (מופרדים בפסיקים)",
+      "whenShouldRun": "מתי האינטגרציה צריכה לרוץ?",
+      "selectEvents": "בחר אירועים",
+      "schedule": "תזמון",
+      "cronExpression": "ביטוי CRON",
+      "scheduleUtcNote": "התזמון משתמש באזור זמן UTC. CRON נוכחי",
+      "yourWebhookUrl": "כתובת ה-Webhook שלך",
+      "webhookPostNote": "שלח בקשות POST לכתובת זו. נעבד את הנתונים הנכנסים ונמפה אותם ל-Uplift.",
+      "fieldMappings": "מיפוי שדות",
+      "fieldMappingsDesc": "מפה שדות Uplift לשדות ה-API החיצוני שלך",
+      "addMapping": "הוסף מיפוי",
+      "noFieldMappings": "אין עדיין מיפויי שדות",
+      "addMappingsDesc": "הוסף מיפויים להמרת נתונים בין מערכות",
+      "addFirstMapping": "הוסף מיפוי ראשון",
+      "selectUpliftField": "בחר שדה Uplift...",
+      "externalFieldName": "שם שדה חיצוני",
+      "noTransform": "ללא המרה",
+      "dateIso": "תאריך → ISO",
+      "dateUk": "תאריך → פורמט UK",
+      "boolYn": "Bool → כ/ל",
+      "fieldMappingTip": "מיפויי שדות משמשים לבניית גוף הבקשה אוטומטית. ניתן גם להשתמש בתחביר {{field}} בלשונית הבקשה.",
+      "testConfiguration": "הגדרת בדיקה",
+      "testDescription": "שלח בקשת בדיקה עם נתוני דוגמה.",
+      "testing": "בודק...",
+      "sendTestRequest": "שלח בקשת בדיקה",
+      "success": "הצלחה",
+      "failed": "נכשל",
+      "status": "סטטוס",
+      "time": "זמן",
+      "response": "תגובה",
+      "enableIntegration": "הפעל אינטגרציה",
+      "cancel": "בטל",
+      "saveChanges": "שמור שינויים",
+      "createIntegration": "צור אינטגרציה",
+      "tabs": {
+        "request": "בקשה",
+        "authentication": "אימות",
+        "trigger": "טריגר",
+        "fieldMapping": "מיפוי שדות",
+        "test": "בדיקה"
+      }
+    },
+    "logs": {
+      "executionLogs": "יומני הרצה",
+      "export": "ייצוא",
+      "noData": "אין עדיין נתונים. יומני הרצה יופיעו כאן לאחר הפעלת אינטגרציות.",
+      "unknown": "לא ידוע",
+      "error": "שגיאה"
+    },
+    "helpBanner": {
+      "title": "צריך עזרה בבניית אינטגרציה?",
+      "description": "עיין בתיעוד ה-API לדוגמאות, או פנה לתמיכה למקרים מורכבים."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "מפתחות REST API",
+    "subtitle": "צור מפתחות API לגישה לנתוני Uplift מהאפליקציות שלך",
+    "apiDocs": "תיעוד API",
+    "createKey": "צור מפתח",
+    "createApiKey": "צור מפתח API",
+    "loadingKeys": "טוען מפתחות API...",
+    "loadError": "טעינת מפתחות API נכשלה.",
+    "noKeysYet": "אין עדיין מפתחות API",
+    "createFirstDesc": "צור את מפתח ה-API הראשון שלך כדי להתחיל לשלב עם Uplift",
+    "retry": "נסה שוב",
+    "revokeConfirm": "לבטל מפתח API \"{{name}}\"? פעולה זו בלתי הפיכה.",
+    "regenerateConfirm": "ליצור מחדש סוד ל-\"{{name}}\"? הסוד הישן יפסיק לעבוד מיד.",
+    "regenerateSuccess": "מפתח סודי חדש: {{secret}}\n\nשמור אותו עכשיו — לא תראה אותו שוב!",
+    "regenerateError": "יצירת סוד מחדש נכשלה: {{message}}",
+    "usageStats": "סטטיסטיקות שימוש עבור {{name}}:\n\nסה\"כ בקשות: {{requests}}\nשימוש אחרון: {{lastUsed}}",
+    "card": {
+      "noDescription": "ללא תיאור",
+      "expired": "פג תוקף",
+      "active": "פעיל",
+      "inactive": "לא פעיל",
+      "keyId": "מזהה מפתח",
+      "requests": "בקשות",
+      "lastUsed": "שימוש אחרון",
+      "never": "אף פעם",
+      "rateLimit": "מגבלת קצב",
+      "standard": "רגיל",
+      "hideDetails": "הסתר פרטים",
+      "showDetails": "הצג פרטים",
+      "scopes": "היקפים",
+      "created": "נוצר",
+      "expires": "פג תוקף",
+      "usage": "שימוש",
+      "regenerate": "צור מחדש",
+      "revoke": "בטל"
+    },
+    "create": {
+      "keyCreatedTitle": "מפתח API נוצר",
+      "createTitle": "צור מפתח API",
+      "keyCreatedSuccess": "מפתח API נוצר בהצלחה",
+      "copySecretWarning": "העתק את המפתח הסודי עכשיו. לא תוכל לראות אותו שוב!",
+      "keyIdLabel": "מזהה מפתח",
+      "secretKeyLabel": "מפתח סודי",
+      "fullApiKeyLabel": "מפתח API מלא (ל-Authorization header)",
+      "fullKeyLabel": "מפתח מלא",
+      "authHeaderNote": "השתמש ב-Authorization header",
+      "done": "סיום",
+      "keyName": "שם מפתח",
+      "keyNamePlaceholder": "לדוגמה, מפתח API לייצור",
+      "description": "תיאור",
+      "descriptionPlaceholder": "למה ישמש מפתח זה?",
+      "permissions": "הרשאות",
+      "rateLimit": "מגבלת קצב",
+      "expiration": "תפוגה",
+      "neverExpires": "ללא תפוגה",
+      "thirtyDays": "30 יום",
+      "ninetyDays": "90 יום",
+      "oneYear": "שנה",
+      "createError": "יצירת מפתח API נכשלה. נסה שוב.",
+      "cancel": "בטל",
+      "createKey": "צור מפתח"
+    },
+    "docs": {
+      "quickStart": "התחלה מהירה",
+      "authentication": "אימות",
+      "exampleResponse": "תגובת דוגמה",
+      "viewFullDocs": "צפה בתיעוד מלא",
+      "downloadSpec": "הורד OpenAPI Spec"
+    },
+    "securityBanner": {
+      "title": "אבטחת מפתחות API",
+      "description": "שמור על מפתחות ה-API שלך מאובטחים. אל תחשוף אותם בקוד צד לקוח או מאגרים ציבוריים. אם מפתח נפרץ, בטל אותו מיד וצור חדש."
+    }
+  },
+  "orgOnboarding": {
+    "title": "הגדרת ארגון",
+    "subtitle": "בוא נגדיר את הארגון שלך",
+    "steps": {
+      "orgDetails": "פרטי ארגון",
+      "locations": "מיקומים",
+      "departments": "מחלקות",
+      "roles": "תפקידים והרשאות",
+      "review": "סקירה והשקה"
+    },
+    "orgDetails": {
+      "companyName": "שם חברה",
+      "companyNamePlaceholder": "לדוגמה, אקמה בע\"מ",
+      "tradingName": "שם מסחרי (אופציונלי)",
+      "tradingNamePlaceholder": "שם ציבורי",
+      "industry": "תעשייה",
+      "selectIndustry": "בחר תעשייה",
+      "companySize": "גודל חברה",
+      "selectSize": "בחר גודל",
+      "timezone": "אזור זמן ברירת מחדל",
+      "currency": "מטבע ברירת מחדל",
+      "weekStart": "השבוע מתחיל ב",
+      "logo": "לוגו חברה",
+      "uploadLogo": "העלה לוגו",
+      "uploadLogoDesc": "PNG או SVG, מומלץ 200×200px"
+    },
+    "locations": {
+      "title": "מיקומים",
+      "subtitle": "הוסף משרדים, אתרים או סניפים",
+      "addLocation": "הוסף מיקום",
+      "name": "שם מיקום",
+      "namePlaceholder": "לדוגמה, משרד ראשי",
+      "address": "כתובת",
+      "addressPlaceholder": "כתובת מלאה",
+      "timezone": "אזור זמן",
+      "noLocations": "לא נוספו מיקומים",
+      "addFirst": "הוסף את המיקום הראשון שלך"
+    },
+    "departments": {
+      "title": "מחלקות",
+      "subtitle": "הגדר את מבנה המחלקות",
+      "addDepartment": "הוסף מחלקה",
+      "name": "שם מחלקה",
+      "namePlaceholder": "לדוגמה, הנדסה",
+      "parentDepartment": "מחלקת אב (אופציונלי)",
+      "none": "ללא (רמה עליונה)",
+      "manager": "מנהל מחלקה",
+      "selectManager": "בחר מנהל",
+      "noDepartments": "לא נוספו מחלקות",
+      "addFirst": "הוסף את המחלקה הראשונה"
+    },
+    "roles": {
+      "title": "תפקידים והרשאות",
+      "subtitle": "הגדר רמות גישה לצוות שלך",
+      "addRole": "הוסף תפקיד מותאם",
+      "builtIn": "מובנה",
+      "custom": "מותאם",
+      "name": "שם תפקיד",
+      "namePlaceholder": "לדוגמה, מפקח משמרת",
+      "description": "תיאור",
+      "descriptionPlaceholder": "מה תפקיד זה יכול לעשות?",
+      "permissions": "הרשאות",
+      "permissionGroups": {
+        "scheduling": "תזמון",
+        "timeTracking": "מעקב זמן",
+        "employees": "עובדים",
+        "reports": "דוחות",
+        "settings": "הגדרות"
+      }
+    },
+    "review": {
+      "title": "סקירה והשקה",
+      "subtitle": "וודא שהכל נראה טוב לפני ההשקה",
+      "orgInfo": "מידע על הארגון",
+      "locationsCount": "{{count}} מיקומים מוגדרים",
+      "departmentsCount": "{{count}} מחלקות מוגדרות",
+      "rolesCount": "{{count}} תפקידים מוגדרים",
+      "allLooksGood": "הכל נראה מצוין!",
+      "launch": "השק ארגון",
+      "launchDesc": "פעולה זו תפעיל את הארגון ותשלח הזמנות לחברי צוות."
+    },
+    "navigation": {
+      "back": "חזרה",
+      "next": "הבא",
+      "skip": "דלג",
+      "finish": "סיים הגדרה"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }

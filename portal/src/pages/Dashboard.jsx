@@ -3,9 +3,9 @@
 // All data fetched from dashboardApi — no demo data
 // ============================================================
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { dashboardApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import {
@@ -40,10 +40,12 @@ import DemandForecast from '../components/DemandForecast';
 
 export default function Dashboard() {
   const { t } = useTranslation();
-  const { user, isManager } = useAuth();
+  const { user, isManager, isAdmin } = useAuth();
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const orgOnboardingChecked = useRef(false);
 
   // State for showing compliance detail modal
   const [selectedAlert, setSelectedAlert] = useState(null);
@@ -63,6 +65,24 @@ export default function Dashboard() {
       setLoading(false);
     }
   };
+
+  // Redirect admins with no employees to org onboarding (once per session)
+  useEffect(() => {
+    if (
+      !loading &&
+      data &&
+      isAdmin &&
+      !orgOnboardingChecked.current &&
+      !sessionStorage.getItem('org_onboarding_shown')
+    ) {
+      orgOnboardingChecked.current = true;
+      const employeeCount = data.activeEmployees ?? data.totalEmployees ?? null;
+      if (employeeCount === 0) {
+        sessionStorage.setItem('org_onboarding_shown', '1');
+        navigate('/org-onboarding', { replace: true });
+      }
+    }
+  }, [loading, data, isAdmin, navigate]);
 
   if (loading) {
     return (

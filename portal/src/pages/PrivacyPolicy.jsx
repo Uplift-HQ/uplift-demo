@@ -28,114 +28,96 @@ export default function PrivacyPolicy() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('settings.privacyPolicy', 'Privacy Policy')}</h1>
-        <p className="text-slate-600 mb-8">{t('legal.lastUpdated', 'Last updated')}: January 2026</p>
+        <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('legal.privacy.title', 'Privacy Policy')}</h1>
+        <p className="text-slate-600 mb-8">{t('legal.privacy.lastUpdated', 'Last updated: January 2026')}</p>
 
         <div className="prose prose-slate max-w-none">
-          <h2>1. Introduction</h2>
-          <p>
-            Uplift ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.
-          </p>
+          <h2>{t('legal.privacy.s1Title', '1. Introduction')}</h2>
+          <p>{t('legal.privacy.s1Text', 'Uplift ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.')}</p>
 
-          <h2>2. Information We Collect</h2>
-          
-          <h3>2.1 Personal Information</h3>
-          <p>We may collect personal information that you provide directly, including:</p>
+          <h2>{t('legal.privacy.s2Title', '2. Information We Collect')}</h2>
+
+          <h3>{t('legal.privacy.s2aTitle', '2.1 Personal Information')}</h3>
+          <p>{t('legal.privacy.s2aText', 'We may collect personal information that you provide directly, including:')}</p>
           <ul>
-            <li>Name, email address, and phone number</li>
-            <li>Employment details (job title, department, work location)</li>
-            <li>Skills and certifications</li>
-            <li>Work schedule preferences and availability</li>
-            <li>Time and attendance data</li>
+            <li>{t('legal.privacy.s2aItem1', 'Name, email address, and phone number')}</li>
+            <li>{t('legal.privacy.s2aItem2', 'Employment details (job title, department, work location)')}</li>
+            <li>{t('legal.privacy.s2aItem3', 'Skills and certifications')}</li>
+            <li>{t('legal.privacy.s2aItem4', 'Work schedule preferences and availability')}</li>
+            <li>{t('legal.privacy.s2aItem5', 'Time and attendance data')}</li>
           </ul>
 
-          <h3>2.2 Usage Data</h3>
-          <p>We automatically collect certain information when you use the Service:</p>
+          <h3>{t('legal.privacy.s2bTitle', '2.2 Usage Data')}</h3>
+          <p>{t('legal.privacy.s2bText', 'We automatically collect certain information when you use the Service:')}</p>
           <ul>
-            <li>Device information (browser type, operating system)</li>
-            <li>IP address and location data</li>
-            <li>Usage patterns and feature interactions</li>
-            <li>Login times and session duration</li>
+            <li>{t('legal.privacy.s2bItem1', 'Device information (browser type, operating system)')}</li>
+            <li>{t('legal.privacy.s2bItem2', 'IP address and location data')}</li>
+            <li>{t('legal.privacy.s2bItem3', 'Usage patterns and feature interactions')}</li>
+            <li>{t('legal.privacy.s2bItem4', 'Login times and session duration')}</li>
           </ul>
 
-          <h2>3. How We Use Your Information</h2>
-          <p>We use the information we collect to:</p>
+          <h2>{t('legal.privacy.s3Title', '3. How We Use Your Information')}</h2>
+          <p>{t('legal.privacy.s3Text', 'We use the information we collect to:')}</p>
           <ul>
-            <li>Provide and maintain the Service</li>
-            <li>Process scheduling and workforce management functions</li>
-            <li>Send notifications about shifts, time off, and opportunities</li>
-            <li>Generate analytics and insights for your organization</li>
-            <li>Improve our Service and develop new features</li>
-            <li>Communicate with you about updates and support</li>
-            <li>Comply with legal obligations</li>
+            <li>{t('legal.privacy.s3Item1', 'Provide and maintain the Service')}</li>
+            <li>{t('legal.privacy.s3Item2', 'Process scheduling and workforce management functions')}</li>
+            <li>{t('legal.privacy.s3Item3', 'Send notifications about shifts, time off, and opportunities')}</li>
+            <li>{t('legal.privacy.s3Item4', 'Generate analytics and insights for your organization')}</li>
+            <li>{t('legal.privacy.s3Item5', 'Improve our Service and develop new features')}</li>
+            <li>{t('legal.privacy.s3Item6', 'Communicate with you about updates and support')}</li>
+            <li>{t('legal.privacy.s3Item7', 'Comply with legal obligations')}</li>
           </ul>
 
-          <h2>4. Data Sharing</h2>
-          <p>We may share your information with:</p>
+          <h2>{t('legal.privacy.s4Title', '4. Data Sharing')}</h2>
+          <p>{t('legal.privacy.s4Text', 'We may share your information with:')}</p>
           <ul>
-            <li><strong>Your Employer:</strong> As the platform is provided to organizations, your employer has access to work-related data</li>
-            <li><strong>Service Providers:</strong> Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)</li>
-            <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
+            <li><strong>{t('legal.privacy.s4Item1Label', 'Your Employer:')}</strong> {t('legal.privacy.s4Item1Text', 'As the platform is provided to organizations, your employer has access to work-related data')}</li>
+            <li><strong>{t('legal.privacy.s4Item2Label', 'Service Providers:')}</strong> {t('legal.privacy.s4Item2Text', 'Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)')}</li>
+            <li><strong>{t('legal.privacy.s4Item3Label', 'Legal Requirements:')}</strong> {t('legal.privacy.s4Item3Text', 'When required by law or to protect our rights')}</li>
           </ul>
-          <p>We do not sell your personal information to third parties.</p>
+          <p>{t('legal.privacy.s4NoSell', 'We do not sell your personal information to third parties.')}</p>
 
-          <h2>5. Data Security</h2>
-          <p>
-            We implement appropriate technical and organizational measures to protect your personal information, including:
-          </p>
+          <h2>{t('legal.privacy.s5Title', '5. Data Security')}</h2>
+          <p>{t('legal.privacy.s5Text', 'We implement appropriate technical and organizational measures to protect your personal information, including:')}</p>
           <ul>
-            <li>Encryption of data in transit and at rest</li>
-            <li>Regular security assessments and penetration testing</li>
-            <li>Access controls and authentication mechanisms</li>
-            <li>Employee training on data protection</li>
+            <li>{t('legal.privacy.s5Item1', 'Encryption of data in transit and at rest')}</li>
+            <li>{t('legal.privacy.s5Item2', 'Regular security assessments and penetration testing')}</li>
+            <li>{t('legal.privacy.s5Item3', 'Access controls and authentication mechanisms')}</li>
+            <li>{t('legal.privacy.s5Item4', 'Employee training on data protection')}</li>
           </ul>
 
-          <h2>6. Data Retention</h2>
-          <p>
-            We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.
-          </p>
+          <h2>{t('legal.privacy.s6Title', '6. Data Retention')}</h2>
+          <p>{t('legal.privacy.s6Text', 'We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.')}</p>
 
-          <h2>7. Your Rights (GDPR)</h2>
-          <p>If you are in the European Economic Area, you have the right to:</p>
+          <h2>{t('legal.privacy.s7Title', '7. Your Rights (GDPR)')}</h2>
+          <p>{t('legal.privacy.s7Text', 'If you are in the European Economic Area, you have the right to:')}</p>
           <ul>
-            <li><strong>Access:</strong> Request a copy of your personal data</li>
-            <li><strong>Rectification:</strong> Request correction of inaccurate data</li>
-            <li><strong>Erasure:</strong> Request deletion of your data ("right to be forgotten")</li>
-            <li><strong>Portability:</strong> Receive your data in a machine-readable format</li>
-            <li><strong>Objection:</strong> Object to certain processing of your data</li>
-            <li><strong>Restriction:</strong> Request restriction of processing</li>
+            <li><strong>{t('legal.privacy.s7Item1Label', 'Access:')}</strong> {t('legal.privacy.s7Item1Text', 'Request a copy of your personal data')}</li>
+            <li><strong>{t('legal.privacy.s7Item2Label', 'Rectification:')}</strong> {t('legal.privacy.s7Item2Text', 'Request correction of inaccurate data')}</li>
+            <li><strong>{t('legal.privacy.s7Item3Label', 'Erasure:')}</strong> {t('legal.privacy.s7Item3Text', 'Request deletion of your data ("right to be forgotten")')}</li>
+            <li><strong>{t('legal.privacy.s7Item4Label', 'Portability:')}</strong> {t('legal.privacy.s7Item4Text', 'Receive your data in a machine-readable format')}</li>
+            <li><strong>{t('legal.privacy.s7Item5Label', 'Objection:')}</strong> {t('legal.privacy.s7Item5Text', 'Object to certain processing of your data')}</li>
+            <li><strong>{t('legal.privacy.s7Item6Label', 'Restriction:')}</strong> {t('legal.privacy.s7Item6Text', 'Request restriction of processing')}</li>
           </ul>
-          <p>
-            To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.
-          </p>
+          <p>{t('legal.privacy.s7Contact', 'To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.')}</p>
 
-          <h2>8. Cookies</h2>
-          <p>
-            We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.
-          </p>
+          <h2>{t('legal.privacy.s8Title', '8. Cookies')}</h2>
+          <p>{t('legal.privacy.s8Text', 'We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.')}</p>
 
-          <h2>9. International Transfers</h2>
-          <p>
-            Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.
-          </p>
+          <h2>{t('legal.privacy.s9Title', '9. International Transfers')}</h2>
+          <p>{t('legal.privacy.s9Text', 'Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.')}</p>
 
-          <h2>10. Children's Privacy</h2>
-          <p>
-            Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.
-          </p>
+          <h2>{t('legal.privacy.s10Title', "10. Children's Privacy")}</h2>
+          <p>{t('legal.privacy.s10Text', 'Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.')}</p>
 
-          <h2>11. Changes to This Policy</h2>
-          <p>
-            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last updated" date.
-          </p>
+          <h2>{t('legal.privacy.s11Title', '11. Changes to This Policy')}</h2>
+          <p>{t('legal.privacy.s11Text', 'We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last updated" date.')}</p>
 
-          <h2>12. Contact Us</h2>
+          <h2>{t('legal.privacy.s12Title', '12. Contact Us')}</h2>
+          <p>{t('legal.privacy.s12Text', 'If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:')}</p>
           <p>
-            If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:
-          </p>
-          <p>
-            <strong>Data Protection Officer:</strong> privacy@getuplift.io<br />
-            <strong>Address:</strong> London, United Kingdom
+            <strong>{t('legal.privacy.dpoLabel', 'Data Protection Officer:')}</strong> privacy@getuplift.io<br />
+            <strong>{t('legal.privacy.addressLabel', 'Address:')}</strong> {t('legal.privacy.address', 'London, United Kingdom')}
           </p>
         </div>
       </div>

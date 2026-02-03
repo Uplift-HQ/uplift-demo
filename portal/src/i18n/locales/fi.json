@@ -54,7 +54,6 @@
     "viewMyCareer": "Näytä urani",
     "timeOffBalance": "Vapaa-aikasaldo"
   },
-
   "nav": {
     "dashboard": "Hallintapaneeli",
     "employees": "Työntekijät",
@@ -150,7 +149,20 @@
     "active": "Aktiivinen",
     "inactive": "Ei aktiivinen",
     "enabled": "Käytössä",
-    "disabled": "Pois käytöstä"
+    "disabled": "Pois käytöstä",
+    "approveSelected": "Hyväksy valitut",
+    "rejectSelected": "Hylkää valitut",
+    "clearSelection": "Tyhjennä",
+    "showing": "Näytetään",
+    "of": "/",
+    "page": "Sivu",
+    "previous": "Edellinen",
+    "terminated": "Irtisanottu",
+    "sunday": "Su",
+    "monday": "Ma",
+    "placeholder": {
+      "search": "Search..."
+    }
   },
   "auth": {
     "login": "Kirjaudu",
@@ -177,9 +189,6 @@
     "requestAccessMsg": "Saadaksesi käyttöoikeuden Upliftiin, ota yhteyttä esimieheesi tai HR-osastoon. He lähettävät sinulle kutsulinkin.",
     "enterEmailPassword": "Anna sähköposti ja salasana",
     "loginFailed": "Kirjautuminen epäonnistui",
-    "demoAccounts": "Demotilit:",
-    "demoWorker": "Työntekijä: worker@uplift.work / Demo123!",
-    "demoManager": "Esimies: manager@uplift.work / Demo123!",
     "twoFactorAuth": "Kaksivaiheinen tunnistautuminen",
     "enterMfaCode": "Syötä koodi tunnistussovelluksestasi",
     "verificationCode": "Vahvistuskoodi",
@@ -193,7 +202,15 @@
     "invalidCode": "Virheellinen koodi",
     "allRightsReserved": "Kaikki oikeudet pidätetään",
     "termsOfService": "Käyttöehdot",
-    "privacyPolicy": "Tietosuojakäytäntö"
+    "privacyPolicy": "Tietosuojakäytäntö",
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "mfaCode": "Enter 6-digit code"
+    }
   },
   "navigation": {
     "home": "Koti",
@@ -289,7 +306,21 @@
     "yourShift": "Sinun vuorosi",
     "theirShift": "Heidän vuoronsa",
     "sendRequest": "Lähetä pyyntö",
-    "cancelSwap": "Peruuta vaihto"
+    "cancelSwap": "Peruuta vaihto",
+    "allLocations": "Kaikki sijainnit",
+    "tuesday": "Ti",
+    "wednesday": "Ke",
+    "thursday": "To",
+    "friday": "Pe",
+    "saturday": "La",
+    "allDepartments": "All Departments",
+    "leaveOpen": "Leave Open",
+    "shiftPublished": "Shift published successfully",
+    "shiftUpdated": "Shift updated successfully",
+    "placeholder": {
+      "searchEmployees": "Search employees...",
+      "addNotes": "Add notes..."
+    }
   },
   "timeTracking": {
     "title": "Ajan seuranta",
@@ -321,7 +352,24 @@
     "tapToClockIn": "Napauta kirjautuaksesi sisään",
     "onBreakSince": "Tauolla kello {{time}} lähtien",
     "workingSince": "Työssä kello {{time}} lähtien",
-    "shiftEnded": "Vuoro päättynyt"
+    "shiftEnded": "Vuoro päättynyt",
+    "entriesApproved": "{{count}} merkintää hyväksytty",
+    "approveError": "Merkintöjen hyväksyminen epäonnistui. Yritä uudelleen.",
+    "entriesRejected": "{{count}} merkintää hylätty",
+    "rejectError": "Merkintöjen hylkääminen epäonnistui. Yritä uudelleen.",
+    "clockInError": "Sisäänkirjautuminen epäonnistui. Yritä uudelleen.",
+    "clockOutError": "Uloskirjautuminen epäonnistui. Yritä uudelleen.",
+    "breakError": "Taukotilan päivittäminen epäonnistui. Yritä uudelleen.",
+    "noPending": "Ei odottavia merkintöjä tarkistettavaksi",
+    "noEntries": "Aikamerkintöjä ei löytynyt",
+    "history": "Historia",
+    "managerSubtitle": "Tarkista ja hyväksy työaikakortit",
+    "employeeSubtitle": "Seuraa työtuntejasi",
+    "clockIn": "Leimaa sisään",
+    "clockOut": "Leimaa ulos",
+    "startBreak": "Aloita tauko",
+    "endBreak": "Lopeta tauko",
+    "totalHours": "Tunnit yhteensä"
   },
   "timeOff": {
     "title": "Vapaa-aika",
@@ -353,7 +401,15 @@
     "selectDates": "Valitse päivämäärät",
     "selectType": "Valitse tyyppi",
     "addNotes": "Lisää muistiinpanoja (valinnainen)",
-    "reviewRequest": "Tarkista pyyntö"
+    "reviewRequest": "Tarkista pyyntö",
+    "oneDay": "1 päivä",
+    "days": "päivää",
+    "dates": "Päivämäärät",
+    "duration": "Kesto",
+    "noRequests": "Pyyntöjä ei löytynyt",
+    "requestDetails": "Vapaa-aikapyynnön tiedot",
+    "noReason": "Syytä ei annettu",
+    "submitted": "Lähetetty"
   },
   "feed": {
     "title": "Syöte",
@@ -726,7 +782,22 @@
     "featureAccess": "Ominaisuuksien käyttöoikeus",
     "enableAll": "Ota kaikki käyttöön",
     "disableAll": "Poista kaikki käytöstä",
-    "aboutEmployeeVisibility": "Nämä asetukset hallitsevat mitkä ominaisuudet näkyvät kullekin työntekijälle."
+    "aboutEmployeeVisibility": "Nämä asetukset hallitsevat mitkä ominaisuudet näkyvät kullekin työntekijälle.",
+    "monday": "Monday",
+    "sunday": "Sunday",
+    "worker": "Worker",
+    "manager": "Manager",
+    "admin": "Admin",
+    "utcMinus5": "(UTC-05:00) Eastern Time",
+    "utcMinus6": "(UTC-06:00) Central Time",
+    "utcMinus7": "(UTC-07:00) Mountain Time",
+    "utcMinus8": "(UTC-08:00) Pacific Time",
+    "utc0": "(UTC+00:00) London",
+    "placeholder": {
+      "companyName": "Company name",
+      "email": "Email address",
+      "phone": "Phone number"
+    }
   },
   "tasks": {
     "title": "Tehtävät",
@@ -908,9 +979,11 @@
     "enterRejectionReason": "Syötä hylkäyksen syy...",
     "confirmRejection": "Vahvista hylkäys",
     "approve": "Hyväksy",
-    "reject": "Hylkää"
+    "reject": "Hylkää",
+    "placeholder": {
+      "search": "Search activity..."
+    }
   },
-
   "notificationSettings": {
     "title": "Ilmoitusasetukset",
     "subtitle": "Valitse miten ja milloin saat ilmoituksia",
@@ -952,7 +1025,6 @@
     "disableConfirm": "Haluatko varmasti poistaa kaikki ilmoitukset käytöstä? Voit ottaa ne uudelleen käyttöön milloin tahansa.",
     "disableSuccess": "Kaikki ilmoitukset on poistettu käytöstä."
   },
-
   "employeeDetail": {
     "notFound": "Työntekijää ei löytynyt",
     "backToEmployees": "Takaisin työntekijöihin",
@@ -968,7 +1040,6 @@
     "basic": "Perustaso",
     "adding": "Lisätään..."
   },
-
   "reports": {
     "title": "Raportit",
     "subtitle": "Analytiikka, näkymät ja mukautetut raportit",
@@ -1004,9 +1075,22 @@
     "thisMonth": "Tämä kuukausi",
     "lastMonth": "Viime kuukausi",
     "last7Days": "Viimeiset 7 päivää",
-    "last30Days": "Viimeiset 30 päivää"
+    "last30Days": "Viimeiset 30 päivää",
+    "allDepartments": "All Departments",
+    "nameLabel": "Name:",
+    "typeLabel": "Type:",
+    "period": "Period",
+    "date": "Date",
+    "location": "Location",
+    "department": "Department",
+    "printReport": "Print Report",
+    "overtime": "Overtime",
+    "placeholder": {
+      "searchReports": "Search reports...",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
   },
-
   "accessibility": {
     "menu": "Valikko",
     "closeMenu": "Sulje valikko",
@@ -1020,7 +1104,6 @@
     "required": "Pakollinen",
     "optional": "Valinnainen"
   },
-
   "shiftTemplates": {
     "title": "Vuoromallit",
     "subtitle": "Luo uudelleenkäytettäviä vuorokuvioita",
@@ -1052,11 +1135,118 @@
     "shiftsLabel": "vuoroa",
     "generating": "Luodaan..."
   },
-
   "legal": {
-    "lastUpdated": "Viimeksi päivitetty"
+    "lastUpdated": "Viimeksi päivitetty",
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Introduction",
+      "s1Text": "Uplift (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our workforce intelligence platform.",
+      "s2Title": "2. Information We Collect",
+      "s2aTitle": "2.1 Personal Information",
+      "s2aText": "We may collect personal information that you provide directly, including:",
+      "s2aItem1": "Name, email address, and phone number",
+      "s2aItem2": "Employment details (job title, department, work location)",
+      "s2aItem3": "Skills and certifications",
+      "s2aItem4": "Work schedule preferences and availability",
+      "s2aItem5": "Time and attendance data",
+      "s2bTitle": "2.2 Usage Data",
+      "s2bText": "We automatically collect certain information when you use the Service:",
+      "s2bItem1": "Device information (browser type, operating system)",
+      "s2bItem2": "IP address and location data",
+      "s2bItem3": "Usage patterns and feature interactions",
+      "s2bItem4": "Login times and session duration",
+      "s3Title": "3. How We Use Your Information",
+      "s3Text": "We use the information we collect to:",
+      "s3Item1": "Provide and maintain the Service",
+      "s3Item2": "Process scheduling and workforce management functions",
+      "s3Item3": "Send notifications about shifts, time off, and opportunities",
+      "s3Item4": "Generate analytics and insights for your organization",
+      "s3Item5": "Improve our Service and develop new features",
+      "s3Item6": "Communicate with you about updates and support",
+      "s3Item7": "Comply with legal obligations",
+      "s4Title": "4. Data Sharing",
+      "s4Text": "We may share your information with:",
+      "s4Item1Label": "Your Employer:",
+      "s4Item1Text": "As the platform is provided to organizations, your employer has access to work-related data",
+      "s4Item2Label": "Service Providers:",
+      "s4Item2Text": "Third parties who assist us in operating the Service (e.g., cloud hosting, payment processing)",
+      "s4Item3Label": "Legal Requirements:",
+      "s4Item3Text": "When required by law or to protect our rights",
+      "s4NoSell": "We do not sell your personal information to third parties.",
+      "s5Title": "5. Data Security",
+      "s5Text": "We implement appropriate technical and organizational measures to protect your personal information, including:",
+      "s5Item1": "Encryption of data in transit and at rest",
+      "s5Item2": "Regular security assessments and penetration testing",
+      "s5Item3": "Access controls and authentication mechanisms",
+      "s5Item4": "Employee training on data protection",
+      "s6Title": "6. Data Retention",
+      "s6Text": "We retain your personal information for as long as necessary to provide the Service and fulfill the purposes outlined in this policy, unless a longer retention period is required by law.",
+      "s7Title": "7. Your Rights (GDPR)",
+      "s7Text": "If you are in the European Economic Area, you have the right to:",
+      "s7Item1Label": "Access:",
+      "s7Item1Text": "Request a copy of your personal data",
+      "s7Item2Label": "Rectification:",
+      "s7Item2Text": "Request correction of inaccurate data",
+      "s7Item3Label": "Erasure:",
+      "s7Item3Text": "Request deletion of your data (\"right to be forgotten\")",
+      "s7Item4Label": "Portability:",
+      "s7Item4Text": "Receive your data in a machine-readable format",
+      "s7Item5Label": "Objection:",
+      "s7Item5Text": "Object to certain processing of your data",
+      "s7Item6Label": "Restriction:",
+      "s7Item6Text": "Request restriction of processing",
+      "s7Contact": "To exercise these rights, contact us at privacy@getuplift.io or use the self-service options in your account settings.",
+      "s8Title": "8. Cookies",
+      "s8Text": "We use cookies and similar tracking technologies to track activity on our Service. These are used for authentication, preferences, and analytics. You can control cookie settings through your browser.",
+      "s9Title": "9. International Transfers",
+      "s9Text": "Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws.",
+      "s10Title": "10. Children's Privacy",
+      "s10Text": "Our Service is not directed to individuals under 16. We do not knowingly collect personal information from children under 16.",
+      "s11Title": "11. Changes to This Policy",
+      "s11Text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "s12Title": "12. Contact Us",
+      "s12Text": "If you have questions about this Privacy Policy or wish to exercise your data rights, please contact us:",
+      "dpoLabel": "Data Protection Officer:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2026",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Text": "By accessing or using Uplift's workforce intelligence platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "s2Title": "2. Description of Service",
+      "s2Text": "Uplift provides a workforce intelligence SaaS platform that includes AI scheduling, skills tracking, career path visibility, and gamification features designed to help organizations manage their workforce more effectively.",
+      "s3Title": "3. User Accounts",
+      "s3Text1": "When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.",
+      "s3Text2": "You are responsible for safeguarding your password and for all activities that occur under your account. You agree not to disclose your password to any third party.",
+      "s4Title": "4. Data Protection",
+      "s4Text": "We take data protection seriously. Your use of the Service is also governed by our Privacy Policy, which describes how we collect, use, and protect your personal information.",
+      "s5Title": "5. Acceptable Use",
+      "s5Text": "You agree not to:",
+      "s5Item1": "Use the Service for any unlawful purpose",
+      "s5Item2": "Attempt to gain unauthorized access to any part of the Service",
+      "s5Item3": "Interfere with or disrupt the Service or servers",
+      "s5Item4": "Upload malicious code or content",
+      "s5Item5": "Share account credentials with unauthorized users",
+      "s6Title": "6. Intellectual Property",
+      "s6Text": "The Service and its original content, features, and functionality are owned by Uplift and are protected by international copyright, trademark, and other intellectual property laws.",
+      "s7Title": "7. Subscription and Payment",
+      "s7Text": "Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring basis. Billing cycles are set on a monthly or annual basis, depending on your subscription plan.",
+      "s8Title": "8. Termination",
+      "s8Text": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service will cease immediately.",
+      "s9Title": "9. Limitation of Liability",
+      "s9Text": "In no event shall Uplift, its directors, employees, partners, or suppliers be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.",
+      "s10Title": "10. Changes to Terms",
+      "s10Text": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes by posting the new Terms on this page and updating the \"Last updated\" date.",
+      "s11Title": "11. Contact Us",
+      "s11Text": "If you have any questions about these Terms, please contact us at:",
+      "emailLabel": "Email:",
+      "addressLabel": "Address:",
+      "address": "London, United Kingdom"
+    }
   },
-
   "dateTime": {
     "am": "ap.",
     "pm": "ip.",
@@ -1099,5 +1289,564 @@
     "october": "Lokakuu",
     "november": "Marraskuu",
     "december": "Joulukuu"
+  },
+  "bulkImport": {
+    "title": "Massatuonti",
+    "subtitle": "Tuo tietoja CSV- tai Excel-tiedostoista",
+    "selectType": "Valitse tyyppi",
+    "uploadFile": "Lataa tiedosto",
+    "preview": "Esikatselu",
+    "complete": "Valmis",
+    "invalidFileType": "Lataa CSV- tai Excel-tiedosto",
+    "importFailed": "Tuonti epäonnistui. Yritä uudelleen.",
+    "uploadFor": "Lataa",
+    "uploadDesc": "Vedä ja pudota tai napsauta valitaksesi tiedosto",
+    "downloadTemplate": "Lataa malli",
+    "dragDrop": "Vedä ja pudota tiedosto tähän tai napsauta selataksesi",
+    "supportedFormats": "Tuetut muodot: CSV, XLSX",
+    "previewData": "Esikatsele tietoja",
+    "rowsFound": "riviä löytyi",
+    "andMore": "Ja",
+    "moreRows": "lisää riviä...",
+    "importing": "Tuodaan...",
+    "startImport": "Aloita tuonti",
+    "importComplete": "Tuonti valmis",
+    "successfullyImported": "Tuotu onnistuneesti",
+    "of": "/",
+    "records": "tietuetta",
+    "successful": "Onnistuneet",
+    "failed": "Epäonnistuneet",
+    "total": "Yhteensä",
+    "importMore": "Tuo lisää tietoja",
+    "type": {
+      "employees": "Työntekijät",
+      "employeesDesc": "Tuo työntekijäprofiileja",
+      "shifts": "Vuorot",
+      "shiftsDesc": "Tuo vuoroaikatauluja",
+      "locations": "Sijainnit",
+      "locationsDesc": "Tuo sijainteja",
+      "skills": "Taidot",
+      "skillsDesc": "Tuo taitoja"
+    }
+  },
+  "jobs": {
+    "open": "Avoin",
+    "closed": "Suljettu",
+    "applicants": "Hakijat",
+    "created": "Työpaikkailmoitus luotu onnistuneesti",
+    "createError": "Työpaikkailmoituksen luominen epäonnistui. Yritä uudelleen.",
+    "updated": "Työpaikkailmoitus päivitetty onnistuneesti",
+    "updateError": "Työpaikkailmoituksen päivittäminen epäonnistui. Yritä uudelleen.",
+    "fullTime": "Kokoaikainen",
+    "partTime": "Osa-aikainen",
+    "contract": "Sopimus",
+    "temporary": "Tilapäinen",
+    "subtitle": "Hallitse sisäisiä uramahdollisuuksia",
+    "openPositions": "Avoimet paikat",
+    "closedPositions": "Suljetut",
+    "totalApplicants": "Hakijat yhteensä",
+    "noJobs": "Työpaikkailmoituksia ei löytynyt",
+    "viewApplicants": "Näytä hakijat",
+    "editPosting": "Muokkaa työpaikkailmoitusta",
+    "jobTitle": "Työnimike",
+    "enterTitle": "Syötä työnimike",
+    "selectDepartment": "Valitse osasto",
+    "selectLocation": "Valitse sijainti",
+    "salary": "Palkkaväli",
+    "enterDescription": "Syötä työnkuvaus",
+    "postJob": "Julkaise työpaikka",
+    "skillMatch": "taitovastaavuus",
+    "noApplicants": "Ei hakijoita vielä"
+  },
+  "employees": {
+    "searchPlaceholder": "Hae nimellä tai sähköpostilla...",
+    "employees": "työntekijää",
+    "noResults": "Hakuehtojasi vastaavia työntekijöitä ei löytynyt",
+    "details": "Työntekijän tiedot",
+    "hireDate": "Työsuhteen alkamispäivä",
+    "assigned": "määrätty",
+    "leaveDetails": "Poissaolon tiedot",
+    "until": "Asti",
+    "terminationDetails": "Irtisanomisen tiedot",
+    "allDepartments": "All Departments",
+    "allLocations": "All Locations",
+    "placeholder": {
+      "searchEmployees": "Search employees..."
+    }
+  },
+  "integrationHub": {
+    "title": "Integraatiokeskus",
+    "subtitle": "Yhdistä Uplift olemassa oleviin työkaluihisi",
+    "apiFactory": "API-tehdas",
+    "addIntegration": "Lisää integraatio",
+    "configure": "Määritä",
+    "connect": "Yhdistä",
+    "cancel": "Peruuta",
+    "back": "Takaisin",
+    "saveChanges": "Tallenna muutokset",
+    "syncNow": "Synkronoi nyt",
+    "disconnect": "Katkaise yhteys {{name}}",
+    "disconnectConfirm": "Katkaise yhteys {{name}}? Tämä pysäyttää kaikki synkronoinnit.",
+    "settingsSaved": "Asetukset tallennettu",
+    "browseMarketplace": "Selaa kauppapaikkaa",
+    "loadingIntegrations": "Ladataan integraatioita...",
+    "noIntegrations": "Ei yhdistettyjä integraatioita",
+    "noIntegrationsDesc": "Yhdistä ensimmäinen integraatiosi aloittaaksesi tietojen synkronoinnin",
+    "status": {
+      "beta": "Beta",
+      "syncing": "Synkronoidaan..."
+    },
+    "stats": {
+      "connected": "Yhdistetty",
+      "available": "Saatavilla",
+      "syncsToday": "Synkronoinnit tänään",
+      "errors": "Virheet",
+      "totalSyncs": "Synkronoinnit yhteensä",
+      "lastSync": "Viimeisin synkronointi",
+      "records": "tietuetta"
+    },
+    "tabs": {
+      "connected": "Yhdistetty",
+      "marketplace": "Kauppapaikka",
+      "restApi": "REST API",
+      "apiFactory": "API-tehdas",
+      "activityLog": "Toimintaloki",
+      "settings": "Asetukset",
+      "fieldMapping": "Kenttien kohdistus",
+      "syncHistory": "Synkronointihistoria",
+      "webhooks": "Webhookit"
+    },
+    "connection": {
+      "lastSync": "Viimeisin synkronointi",
+      "frequency": "Tiheys",
+      "status": "Tila",
+      "healthy": "Terve",
+      "errors": "virheitä"
+    },
+    "connectModal": {
+      "title": "Yhdistä {{name}}",
+      "whatItDoes": "Mitä tämä integraatio tekee:",
+      "redirectNotice": "Sinut ohjataan palveluun {{name}}",
+      "authorizeMessage": "Kirjaudu sisään ja valtuuta Uplift käyttämään tietojasi. Pyydämme vain tarvittavat oikeudet.",
+      "connectWith": "Yhdistä palveluun {{name}}",
+      "connecting": "Yhdistetään palveluun {{name}}...",
+      "completeAuth": "Suorita valtuutus ponnahdusikkunassa",
+      "successConnected": "Yhdistetty onnistuneesti!",
+      "configureSyncSettings": "Määritä synkronointiasetukset alla.",
+      "completeSetup": "Viimeistele asennus",
+      "connected": "{{name}} yhdistetty!",
+      "firstSyncSoon": "Ensimmäinen synkronointi alkaa pian",
+      "hris": {
+        "syncEmployees": "Synkronoi työntekijätietueet automaattisesti",
+        "importDepts": "Tuo osastot ja sijainnit",
+        "syncTimeOff": "Pidä vapaa-aikasaldot synkronoituina"
+      },
+      "payroll": {
+        "exportTimesheets": "Vie hyväksytyt työaikakortit",
+        "syncPayRates": "Synkronoi palkat ja ylityöt",
+        "autoReconciliation": "Automaattinen palkanlaskennan täsmäytys"
+      },
+      "comms": {
+        "shiftReminders": "Lähetä vuoromuistutuksia",
+        "postRecognition": "Julkaise tunnustukset kanavilla",
+        "swapNotifications": "Vuoronvaihtoilmoitukset"
+      },
+      "identity": {
+        "sso": "Kertakirjautuminen (SSO)",
+        "autoProvisioning": "Automaattinen käyttäjien luonti",
+        "directorySync": "Hakemistosynkronointi"
+      },
+      "other": {
+        "bidirectional": "Kaksisuuntainen tietojen synkronointi",
+        "realtimeWebhooks": "Reaaliaikaiset päivitykset webhookien kautta",
+        "auditTrail": "Täydellinen tarkastuspolku"
+      }
+    },
+    "configureModal": {
+      "title": "{{name}} asetukset",
+      "connectedSince": "Yhdistetty {{date}}"
+    },
+    "settings": {
+      "autoSync": "Automaattinen synkronointi",
+      "autoSyncDesc": "Synkronoi tiedot automaattisesti aikataulun mukaan",
+      "autoSyncScheduleDesc": "Synkronoi automaattisesti aikataulun mukaan",
+      "syncFrequency": "Synkronointitiheys",
+      "nextScheduledSync": "Seuraava ajoitettu synkronointi",
+      "dataToSync": "Synkronoitavat tiedot",
+      "frequency": {
+        "realtime": "Reaaliaikainen",
+        "hourly": "Tunneittain",
+        "daily": "Päivittäin",
+        "weekly": "Viikoittain"
+      },
+      "data": {
+        "employees": "Työntekijät",
+        "timeEntries": "Aikamerkinnät",
+        "departments": "Osastot",
+        "locations": "Sijainnit"
+      }
+    },
+    "mapping": {
+      "description": "Kenttien kohdistus hallitsee miten {{name}}-tiedot kohdistetaan Uplift-kenttiin. Muutokset tulevat voimaan seuraavassa synkronoinnissa.",
+      "sourceField": "{{name}}-kenttä",
+      "upliftField": "Uplift-kenttä",
+      "status": "Tila",
+      "selectField": "Valitse kenttä...",
+      "mapped": "Kohdistettu",
+      "unmapped": "Kohdistamaton"
+    },
+    "history": {
+      "noHistory": "Ei synkronointihistoriaa vielä",
+      "sync": "Synkronointi",
+      "duration": "Kesto",
+      "records": "Tietueet",
+      "created": "Luotu",
+      "updated": "Päivitetty"
+    },
+    "webhooks": {
+      "description": "Webhookit ilmoittavat {{name}}-palvelulle kun tapahtumia ilmenee Upliftissa",
+      "addWebhook": "Lisää webhook",
+      "noWebhooks": "Ei määritettyjä webhookeja",
+      "createFirst": "Luo ensimmäinen webhookisi",
+      "active": "Aktiivinen",
+      "paused": "Keskeytetty",
+      "sendTestPayload": "Lähetä testikuorma",
+      "pauseWebhook": "Keskeytä webhook",
+      "enableWebhook": "Ota webhook käyttöön",
+      "deleteWebhook": "Poista webhook",
+      "lastTriggered": "Viimeksi lauennut",
+      "never": "Ei koskaan",
+      "successRate": "Onnistumisaste",
+      "sendEventsTo": "Lähetä tapahtumat palveluun {{name}}",
+      "endpointUrl": "Päätepisteen URL",
+      "eventsToSend": "Lähetettävät tapahtumat",
+      "hmacInfo": "Allekirjoitamme kaikki webhook-kuormat HMAC-SHA256:lla. Saat allekirjoituksen",
+      "header": "otsikossa.",
+      "createWebhook": "Luo webhook",
+      "validationError": "Syötä URL ja valitse vähintään yksi tapahtuma",
+      "createdSuccess": "Webhook luotu onnistuneesti!",
+      "testSent": "Testikuorma lähetetty",
+      "testStatus": "Tila",
+      "deleteConfirm": "Poista tämä webhook?"
+    },
+    "marketplace": {
+      "searchPlaceholder": "Hae integraatioita...",
+      "allCategories": "Kaikki kategoriat",
+      "infoBannerTitle": "Uplift toimii olemassa olevien työkalujesi kanssa",
+      "infoBannerDesc": "Yhdistä HR-, palkanlaskenta- ja viestintäjärjestelmäsi. Synkronoimme tiedot - emme korvaa järjestelmiäsi.",
+      "noResults": "Hakuasi vastaavia integraatioita ei löytynyt",
+      "dontSeeSystem": "Etkö näe järjestelmääsi?",
+      "alwaysAdding": "Lisäämme jatkuvasti uusia integraatioita. Kerro mitä tarvitset.",
+      "requestIntegration": "Pyydä integraatiota"
+    },
+    "activity": {
+      "recentActivity": "Viimeaikainen integraatioaktiviteetti",
+      "exportLog": "Vie loki"
+    },
+    "placeholder": {
+      "search": "Search integrations..."
+    }
+  },
+  "apiFactory": {
+    "title": "API-tehdas",
+    "subtitle": "Rakenna mukautettuja REST API -integraatioita ilman koodausta",
+    "newIntegration": "Uusi integraatio",
+    "searchPlaceholder": "Hae integraatioita...",
+    "loadingIntegrations": "Ladataan integraatioita...",
+    "noIntegrationsFound": "Integraatioita ei löytynyt",
+    "noIntegrationsYet": "Ei mukautettuja integraatioita vielä",
+    "tryDifferentSearch": "Kokeile eri hakutermiä",
+    "createFirstDesc": "Luo ensimmäinen mukautettu API-integraatiosi minkä tahansa REST API:n yhdistämiseksi",
+    "createIntegration": "Luo integraatio",
+    "deleteConfirm": "Haluatko varmasti poistaa tämän integraation?",
+    "list": {
+      "eventsCount": "{{count}} tapahtumaa",
+      "scheduled": "Ajoitettu",
+      "incomingWebhook": "Saapuva webhook",
+      "manual": "Manuaalinen",
+      "runsCount": "{{count}} ajoa",
+      "errorsCount": "{{count}} virhettä",
+      "disabled": "Pois käytöstä",
+      "edit": "Muokkaa",
+      "test": "Testaa",
+      "viewLogs": "Näytä lokit",
+      "delete": "Poista",
+      "lastRun": "Viimeisin ajo"
+    },
+    "stats": {
+      "totalIntegrations": "Integraatiot yhteensä",
+      "active": "Aktiiviset",
+      "runsToday": "Ajot tänään",
+      "totalErrors": "Virheet yhteensä"
+    },
+    "editor": {
+      "editTitle": "Muokkaa API-integraatiota",
+      "createTitle": "Luo API-integraatio",
+      "subtitle": "Määritä mukautettu REST API -yhteys",
+      "integrationName": "Integraation nimi",
+      "integrationNamePlaceholder": "esim. Synkronoi palkanlaskentajärjestelmään",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Mitä tämä integraatio tekee?",
+      "method": "Metodi",
+      "url": "URL",
+      "headers": "Otsikot",
+      "addHeader": "Lisää otsikko",
+      "headerName": "Otsikon nimi",
+      "headerValue": "Arvo",
+      "requestBodyJson": "Pyynnön sisältö (JSON)",
+      "useVariables": "Käytä {{field}} muuttujiin",
+      "availableVariables": "Käytettävissä olevat muuttujat",
+      "authenticationType": "Tunnistautumistyyppi",
+      "apiKeyLocation": "API-avaimen sijainti",
+      "header": "Otsikko",
+      "queryParameter": "Kyselyparametri",
+      "keyName": "Avaimen nimi",
+      "keyNamePlaceholder": "esim. X-API-Key",
+      "apiKey": "API-avain",
+      "enterApiKey": "Syötä API-avaimesi",
+      "bearerToken": "Bearer-tunnus",
+      "enterToken": "Syötä tunnuksesi",
+      "username": "Käyttäjänimi",
+      "password": "Salasana",
+      "tokenUrl": "Tunnuksen URL",
+      "clientId": "Asiakas-ID",
+      "clientSecret": "Asiakassalaisuus",
+      "scopes": "Laajuudet (pilkuilla erotettuna)",
+      "whenShouldRun": "Milloin tämä integraatio tulisi ajaa?",
+      "selectEvents": "Valitse tapahtumat",
+      "schedule": "Aikataulu",
+      "cronExpression": "CRON-lauseke",
+      "scheduleUtcNote": "Aikataulu käyttää UTC-aikavyöhykettä. Nykyinen CRON",
+      "yourWebhookUrl": "Webhook-URL:si",
+      "webhookPostNote": "Lähetä POST-pyynnöt tähän URL:iin. Käsittelemme saapuvat tiedot ja kohdistamme ne Upliftiin.",
+      "fieldMappings": "Kenttien kohdistukset",
+      "fieldMappingsDesc": "Kohdista Uplift-kentät ulkoisen API:n kenttiin",
+      "addMapping": "Lisää kohdistus",
+      "noFieldMappings": "Ei kenttäkohdistuksia vielä",
+      "addMappingsDesc": "Lisää kohdistuksia tietojen muuntamiseksi järjestelmien välillä",
+      "addFirstMapping": "Lisää ensimmäinen kohdistus",
+      "selectUpliftField": "Valitse Uplift-kenttä...",
+      "externalFieldName": "Ulkoisen kentän nimi",
+      "noTransform": "Ei muunnosta",
+      "dateIso": "Päivämäärä -> ISO",
+      "dateUk": "Päivämäärä -> UK-muoto",
+      "boolYn": "Totuusarvo -> K/E",
+      "fieldMappingTip": "Kenttäkohdistuksia käytetään pyynnön sisällön automaattiseen rakentamiseen. Voit myös käyttää {{field}}-syntaksia Pyyntö-välilehdellä mukautetuille JSON-rakenteille.",
+      "testConfiguration": "Testaa määritys",
+      "testDescription": "Lähetä testipyyntö varmistaaksesi määrityksen. Käytämme näytetietoja.",
+      "testing": "Testataan...",
+      "sendTestRequest": "Lähetä testipyyntö",
+      "success": "Onnistui",
+      "failed": "Epäonnistui",
+      "status": "Tila",
+      "time": "Aika",
+      "response": "Vastaus",
+      "enableIntegration": "Ota integraatio käyttöön",
+      "cancel": "Peruuta",
+      "saveChanges": "Tallenna muutokset",
+      "createIntegration": "Luo integraatio",
+      "tabs": {
+        "request": "Pyyntö",
+        "authentication": "Tunnistautuminen",
+        "trigger": "Laukaisin",
+        "fieldMapping": "Kenttien kohdistus",
+        "test": "Testi"
+      }
+    },
+    "logs": {
+      "executionLogs": "Suorituslokit",
+      "export": "Vie",
+      "noData": "Ei tietoja vielä. Suorituslokit näkyvät täällä kun integraatiot suoritetaan.",
+      "unknown": "Tuntematon",
+      "error": "Virhe"
+    },
+    "helpBanner": {
+      "title": "Tarvitsetko apua integraation rakentamisessa?",
+      "description": "Tutustu API-dokumentaatioomme esimerkkien osalta tai ota yhteyttä tukeen monimutkaisissa tapauksissa."
+    },
+    "placeholder": {
+      "apiName": "API name",
+      "baseUrl": "Base URL",
+      "apiKey": "API key"
+    }
+  },
+  "restApiKeys": {
+    "title": "REST API -avaimet",
+    "subtitle": "Luo API-avaimia Uplift-tietojen käyttämiseksi sovelluksistasi",
+    "apiDocs": "API-dokumentaatio",
+    "createKey": "Luo avain",
+    "createApiKey": "Luo API-avain",
+    "loadingKeys": "Ladataan API-avaimia...",
+    "loadError": "API-avainten lataaminen epäonnistui.",
+    "noKeysYet": "Ei API-avaimia vielä",
+    "createFirstDesc": "Luo ensimmäinen API-avaimesi aloittaaksesi integroinnin Upliftiin",
+    "retry": "Yritä uudelleen",
+    "revokeConfirm": "Peruuta API-avain \"{{name}}\"? Tätä toimintoa ei voi perua.",
+    "regenerateConfirm": "Luo uudelleen salaisuus avaimelle \"{{name}}\"? Vanha salaisuus lakkaa toimimasta välittömästi.",
+    "regenerateSuccess": "Uusi salainen avain: {{secret}}\n\nTallenna tämä nyt - et näe sitä enää!",
+    "regenerateError": "Salaisuuden uudelleenluonti epäonnistui: {{message}}",
+    "usageStats": "Käyttötilastot avaimelle {{name}}:\n\nPyynnöt yhteensä: {{requests}}\nViimeksi käytetty: {{lastUsed}}",
+    "card": {
+      "noDescription": "Ei kuvausta",
+      "expired": "Vanhentunut",
+      "active": "Aktiivinen",
+      "inactive": "Ei aktiivinen",
+      "keyId": "Avaimen tunnus",
+      "requests": "Pyynnöt",
+      "lastUsed": "Viimeksi käytetty",
+      "never": "Ei koskaan",
+      "rateLimit": "Nopeusrajoitus",
+      "standard": "Vakio",
+      "hideDetails": "Piilota tiedot",
+      "showDetails": "Näytä tiedot",
+      "scopes": "LAAJUUDET",
+      "created": "Luotu",
+      "expires": "Vanhenee",
+      "usage": "Käyttö",
+      "regenerate": "Luo uudelleen",
+      "revoke": "Peruuta"
+    },
+    "create": {
+      "keyCreatedTitle": "API-avain luotu",
+      "createTitle": "Luo API-avain",
+      "keyCreatedSuccess": "API-avain luotu onnistuneesti",
+      "copySecretWarning": "Kopioi salainen avaimesi nyt. Et voi nähdä sitä enää!",
+      "keyIdLabel": "Avaimen tunnus",
+      "secretKeyLabel": "Salainen avain",
+      "fullApiKeyLabel": "Täydellinen API-avain (Authorization-otsikkoon)",
+      "fullKeyLabel": "Täydellinen avain",
+      "authHeaderNote": "Käytä tätä Authorization-otsikossa",
+      "done": "Valmis",
+      "keyName": "Avaimen nimi",
+      "keyNamePlaceholder": "esim. Tuotannon API-avain",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Mihin tätä avainta käytetään?",
+      "permissions": "Oikeudet",
+      "rateLimit": "Nopeusrajoitus",
+      "expiration": "Vanheneminen",
+      "neverExpires": "Ei vanhene koskaan",
+      "thirtyDays": "30 päivää",
+      "ninetyDays": "90 päivää",
+      "oneYear": "1 vuosi",
+      "createError": "API-avaimen luominen epäonnistui. Yritä uudelleen.",
+      "cancel": "Peruuta",
+      "createKey": "Luo avain"
+    },
+    "docs": {
+      "quickStart": "Pikaopas",
+      "authentication": "Tunnistautuminen",
+      "exampleResponse": "Esimerkkivastaus",
+      "viewFullDocs": "Näytä täydellinen dokumentaatio",
+      "downloadSpec": "Lataa OpenAPI-spesifikaatio"
+    },
+    "securityBanner": {
+      "title": "API-avaimen turvallisuus",
+      "description": "Pidä API-avaimesi turvassa. Älä koskaan paljasta niitä asiakaspuolen koodissa tai julkisissa arkistoissa. Jos avain on vaarantunut, peruuta se välittömästi ja luo uusi."
+    }
+  },
+  "orgOnboarding": {
+    "title": "Organisaation asennus",
+    "subtitle": "Määritetään organisaatiosi",
+    "steps": {
+      "orgDetails": "Organisaation tiedot",
+      "locations": "Sijainnit",
+      "departments": "Osastot",
+      "roles": "Roolit ja oikeudet",
+      "review": "Tarkista ja käynnistä"
+    },
+    "orgDetails": {
+      "companyName": "Yrityksen nimi",
+      "companyNamePlaceholder": "esim. Acme Oy",
+      "tradingName": "Kauppanimi (valinnainen)",
+      "tradingNamePlaceholder": "Julkinen nimi",
+      "industry": "Toimiala",
+      "selectIndustry": "Valitse toimiala",
+      "companySize": "Yrityksen koko",
+      "selectSize": "Valitse koko",
+      "timezone": "Oletusaikavyöhyke",
+      "currency": "Oletusvaluutta",
+      "weekStart": "Viikko alkaa",
+      "logo": "Yrityksen logo",
+      "uploadLogo": "Lataa logo",
+      "uploadLogoDesc": "PNG tai SVG, suositeltu 200x200px"
+    },
+    "locations": {
+      "title": "Sijainnit",
+      "subtitle": "Lisää toimistosi, toimipaikkasi tai sivukonttorisi",
+      "addLocation": "Lisää sijainti",
+      "name": "Sijainnin nimi",
+      "namePlaceholder": "esim. Pääkonttori",
+      "address": "Osoite",
+      "addressPlaceholder": "Täydellinen osoite",
+      "timezone": "Aikavyöhyke",
+      "noLocations": "Ei sijainteja vielä",
+      "addFirst": "Lisää ensimmäinen sijaintisi aloittaaksesi"
+    },
+    "departments": {
+      "title": "Osastot",
+      "subtitle": "Määritä osastorakenne",
+      "addDepartment": "Lisää osasto",
+      "name": "Osaston nimi",
+      "namePlaceholder": "esim. Tekniikka",
+      "parentDepartment": "Yläosasto (valinnainen)",
+      "none": "Ei mikään (ylätaso)",
+      "manager": "Osaston esimies",
+      "selectManager": "Valitse esimies",
+      "noDepartments": "Ei osastoja vielä",
+      "addFirst": "Lisää ensimmäinen osastosi"
+    },
+    "roles": {
+      "title": "Roolit ja oikeudet",
+      "subtitle": "Määritä käyttöoikeustasot tiimillesi",
+      "addRole": "Lisää mukautettu rooli",
+      "builtIn": "Sisäänrakennettu",
+      "custom": "Mukautettu",
+      "name": "Roolin nimi",
+      "namePlaceholder": "esim. Vuorovastaava",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Mitä tämä rooli voi tehdä?",
+      "permissions": "Oikeudet",
+      "permissionGroups": {
+        "scheduling": "Aikataulutus",
+        "timeTracking": "Ajan seuranta",
+        "employees": "Työntekijät",
+        "reports": "Raportit",
+        "settings": "Asetukset"
+      }
+    },
+    "review": {
+      "title": "Tarkista ja käynnistä",
+      "subtitle": "Tarkista että kaikki näyttää oikealta ennen käynnistämistä",
+      "orgInfo": "Organisaation tiedot",
+      "locationsCount": "{{count}} sijaintia määritetty",
+      "departmentsCount": "{{count}} osastoa määritetty",
+      "rolesCount": "{{count}} roolia määritetty",
+      "allLooksGood": "Kaikki näyttää hyvältä!",
+      "launch": "Käynnistä organisaatio",
+      "launchDesc": "Tämä aktivoi organisaatiosi ja lähettää kutsut lisätyille tiimin jäsenille."
+    },
+    "navigation": {
+      "back": "Takaisin",
+      "next": "Seuraava",
+      "skip": "Ohita toistaiseksi",
+      "finish": "Viimeistele asennus"
+    },
+    "selectIndustry": "Select industry...",
+    "selectTimezone": "Select timezone...",
+    "selectSize": "Select company size...",
+    "selectCountry": "Select country...",
+    "selectCurrency": "Select currency..."
+  },
+  "locations": {
+    "placeholder": {
+      "search": "Search locations...",
+      "name": "Location name",
+      "address": "Address"
+    }
+  },
+  "integrations": {
+    "placeholder": {
+      "search": "Search integrations..."
+    }
   }
 }
