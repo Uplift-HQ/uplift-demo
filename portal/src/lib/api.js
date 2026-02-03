@@ -5,41 +5,90 @@
 // ============================================================
 
 import {
-  DEMO_DASHBOARD,
-  DEMO_EMPLOYEES,
-  DEMO_LOCATIONS,
-  DEMO_DEPARTMENTS,
-  DEMO_OPPORTUNITIES,
-  DEMO_TIME_ENTRIES,
-  DEMO_SKILLS,
-  DEMO_INTEGRATIONS,
-  DEMO_USERS,
-  DEMO_SESSIONS,
-  DEMO_WEBHOOKS,
-  DEMO_ORGANIZATION,
-  DEMO_BRANDING,
-  DEMO_NAVIGATION,
-  DEMO_EMPLOYEE_VISIBILITY,
-  DEMO_ACTIVITIES,
-  DEMO_CAREER,
-  DEMO_IMPORT_TEMPLATES,
-  DEMO_HOURS_REPORT,
-  DEMO_ATTENDANCE_REPORT,
-  DEMO_LABOR_COST_REPORT,
-  DEMO_SHIFT_TEMPLATES,
-  DEMO_API_KEYS,
-  DEMO_CUSTOM_INTEGRATIONS,
-  DEMO_NOTIFICATIONS,
-  DEMO_TIME_OFF_POLICIES,
-  DEMO_TIME_OFF_REQUESTS,
-  DEMO_TIME_OFF_BALANCES,
-  DEMO_SHIFT_SWAPS,
-  DEMO_SCHEDULE_PERIODS,
-  DEMO_ROLES,
-  DEMO_USER,
-  generateDemoShifts,
+  locations,
+  employees,
+  skills,
+  rewards,
+  timeOff,
+  activity,
+  integrations,
+  reports,
+  settings,
+  dashboard,
+  demoUser,
+  departments,
+  roles,
+  generateShifts,
+  generateTimeEntries,
+  timeEntries,
   getWeekStart,
-} from './demoData';
+} from '../data/mockData';
+
+// Map mockData to expected names for compatibility
+const DEMO_LOCATIONS = locations;
+const DEMO_EMPLOYEES = employees;
+const DEMO_SKILLS = skills;
+const DEMO_INTEGRATIONS = integrations;
+const DEMO_DEPARTMENTS = departments;
+const DEMO_ROLES = roles;
+const DEMO_DASHBOARD = dashboard;
+const DEMO_USER = demoUser;
+const DEMO_ACTIVITIES = activity;
+const DEMO_TIME_ENTRIES = timeEntries;
+const DEMO_TIME_OFF_REQUESTS = timeOff.requests;
+const DEMO_TIME_OFF_BALANCES = [
+  { id: 'bal-1', policy_name: 'Annual Leave', entitlement: 25, used: timeOff.balances.annual.used, pending: 0, remaining: timeOff.balances.annual.total - timeOff.balances.annual.used },
+  { id: 'bal-2', policy_name: 'Sick Leave', entitlement: 10, used: timeOff.balances.sick.used, pending: 0, remaining: timeOff.balances.sick.total - timeOff.balances.sick.used },
+  { id: 'bal-3', policy_name: 'Personal', entitlement: 5, used: timeOff.balances.personal.used, pending: 0, remaining: timeOff.balances.personal.total - timeOff.balances.personal.used },
+];
+const DEMO_TIME_OFF_POLICIES = [
+  { id: 'pol-1', name: 'Annual Leave', days_per_year: 25, carry_over_limit: 5 },
+  { id: 'pol-2', name: 'Sick Leave', days_per_year: 10, carry_over_limit: 0 },
+  { id: 'pol-3', name: 'Personal', days_per_year: 5, carry_over_limit: 0 },
+];
+const DEMO_USERS = settings.users;
+const DEMO_SESSIONS = [
+  { id: 'sess-1', device: 'Chrome on MacOS', ip: '192.168.1.100', location: 'London, UK', lastActive: new Date().toISOString(), current: true },
+];
+const DEMO_WEBHOOKS = [
+  { id: 'wh-1', name: 'Slack Notifications', url: 'https://hooks.slack.com/services/xxx', events: ['shift.created', 'employee.added'], status: 'active', lastTriggered: new Date(Date.now() - 1800000).toISOString(), successRate: 99 },
+];
+const DEMO_ORGANIZATION = settings.organization;
+const DEMO_BRANDING = { primaryColor: '#6366f1', companyName: settings.organization.name, logo: null, favicon: null };
+const DEMO_NAVIGATION = { employees: true, schedule: true, templates: true, timeTracking: true, timeOff: true, locations: true, skills: true, jobs: true, career: true, bulkImport: true, reports: true, integrations: true, activity: true };
+const DEMO_EMPLOYEE_VISIBILITY = { email: { managers: true, employees: false }, phone: { managers: true, employees: false }, address: { managers: true, employees: false }, salary: { managers: false, employees: false }, emergencyContact: { managers: true, employees: false }, performanceScore: { managers: true, employees: true }, skills: { managers: true, employees: true } };
+const DEMO_OPPORTUNITIES = [
+  { id: 'opp-001', title: 'Front of House Supervisor', location: 'Manchester Central', location_id: 'l1', department: 'Front of House', salary_min: 28000, salary_max: 32000, salary_display: '£28,000 - £32,000', type: 'Promotion', employment_type: 'Full-time', deadline: '2026-02-15', posted: '2026-01-10', status: 'open', description: 'Lead our main restaurant team.', requirements: ['2+ years FOH experience', 'Food Safety Level 3'], applications: 3 },
+  { id: 'opp-002', title: 'Bar Team Lead', location: 'London Victoria', location_id: 'l2', department: 'Bar', salary_min: 25000, salary_max: 28000, salary_display: '£25,000 - £28,000', type: 'Promotion', employment_type: 'Full-time', deadline: '2026-02-20', posted: '2026-01-12', status: 'open', description: 'Lead the bar team.', requirements: ['Personal License Holder', 'Cocktail expertise'], applications: 4 },
+];
+const DEMO_CAREER = { paths: [], insights: employees.slice(0, 5).map(e => ({ employeeId: e.id, employeeName: e.name, currentRole: e.role, nextRole: 'Supervisor', readiness: 75, gapCount: 2 })) };
+const DEMO_IMPORT_TEMPLATES = [
+  { id: 'tpl-1', name: 'Employees', description: 'Import employee records', fields: ['first_name', 'last_name', 'email', 'phone', 'role', 'department', 'start_date'] },
+  { id: 'tpl-2', name: 'Shifts', description: 'Import shift schedules', fields: ['date', 'start_time', 'end_time', 'location', 'employee_email', 'role'] },
+];
+const DEMO_HOURS_REPORT = { summary: { totalScheduled: 1248, totalWorked: 1192, variance: -4.5, overtime: 48 }, byEmployee: employees.map(e => ({ id: e.id, name: e.name, scheduled: 140, worked: 132, overtime: 0 })) };
+const DEMO_ATTENDANCE_REPORT = { summary: { totalShifts: 156, onTime: 142, late: 10, noShow: 4, punctualityRate: 91 }, byEmployee: employees.map(e => ({ id: e.id, name: e.name, shifts: 20, onTime: 18, late: 2, noShow: 0, punctualityRate: 90 })) };
+const DEMO_LABOR_COST_REPORT = { summary: { totalCost: reports.laborCost.current, scheduledCost: reports.laborCost.budget, variance: reports.laborCost.variance, averageRate: 12.25 }, byLocation: locations.map(l => ({ id: l.id, name: l.name, cost: Math.round(Math.random() * 3000 + 2000), hours: Math.round(Math.random() * 200 + 100) })), trend: reports.laborCost.data.map((v, i) => ({ week: `Week ${i + 1}`, cost: v })) };
+const DEMO_SHIFT_TEMPLATES = [
+  { id: 'tpl-1', name: 'Weekday Standard', description: 'Mon-Fri typical coverage', shifts_count: 15, locations: ['Manchester Central', 'London Victoria'], created_at: '2025-12-01' },
+  { id: 'tpl-2', name: 'Weekend Busy', description: 'Enhanced weekend staffing', shifts_count: 20, locations: ['Manchester Central', 'London Victoria', 'Birmingham'], created_at: '2025-12-05' },
+];
+const DEMO_API_KEYS = [
+  { id: 'key-1', name: 'Production API Key', prefix: 'uplift_live_7x9k...mP2q', created_at: '2025-10-15', last_used: new Date(Date.now() - 300000).toISOString(), scope: 'Full access' },
+];
+const DEMO_CUSTOM_INTEGRATIONS = [];
+const DEMO_NOTIFICATIONS = [
+  { id: 'notif-1', type: 'shift_swap', title: 'Shift swap request', message: 'Thomas Cane requested to swap shifts', read: false, created_at: new Date().toISOString() },
+  { id: 'notif-2', type: 'time_off', title: 'Time off request', message: 'Marc Hunt submitted a time off request', read: false, created_at: new Date(Date.now() - 3600000).toISOString() },
+];
+const DEMO_SHIFT_SWAPS = [
+  { id: 'swap-1', from_employee: 'Thomas Cane', to_employee: 'Marc Hunt', shift_date: '2026-02-05', status: 'pending', reason: 'Personal appointment' },
+];
+const DEMO_SCHEDULE_PERIODS = [
+  { id: 'period-1', name: 'Week 5 2026', start_date: '2026-01-27', end_date: '2026-02-02', status: 'published' },
+  { id: 'period-2', name: 'Week 6 2026', start_date: '2026-02-03', end_date: '2026-02-09', status: 'draft' },
+];
+const generateDemoShifts = generateShifts;
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 

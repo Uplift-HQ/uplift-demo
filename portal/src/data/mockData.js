@@ -1,0 +1,304 @@
+// ============================================================
+// MOCK DATA FOR DEMO
+// Field names match what pages expect
+// ============================================================
+
+// Locations - field names match Locations.jsx expectations
+export const locations = [
+  { id: 'l1', name: 'Manchester Central', address: '45 Deansgate, Manchester M3 2EG', address_line1: '45 Deansgate', city: 'Manchester', postcode: 'M3 2EG', status: 'active', employee_count: 24, shiftsThisWeek: 42, manager: 'Sarah Chen' },
+  { id: 'l2', name: 'London Victoria', address: '12 Palace Street, London SW1E 5BA', address_line1: '12 Palace Street', city: 'London', postcode: 'SW1E 5BA', status: 'active', employee_count: 31, shiftsThisWeek: 56, manager: 'James Williams' },
+  { id: 'l3', name: 'Birmingham New St', address: '8 New Street, Birmingham B2 4QA', address_line1: '8 New Street', city: 'Birmingham', postcode: 'B2 4QA', status: 'active', employee_count: 18, shiftsThisWeek: 34, manager: 'Priya Patel' },
+  { id: 'l4', name: 'Leeds Central', address: '22 The Headrow, Leeds LS1 8EQ', address_line1: '22 The Headrow', city: 'Leeds', postcode: 'LS1 8EQ', status: 'active', employee_count: 15, shiftsThisWeek: 28, manager: 'Tom Richards' },
+  { id: 'l5', name: 'Edinburgh Princes St', address: '55 Princes Street, Edinburgh EH2 2DG', address_line1: '55 Princes Street', city: 'Edinburgh', postcode: 'EH2 2DG', status: 'active', employee_count: 20, shiftsThisWeek: 38, manager: 'Fiona Campbell' }
+];
+
+// Employees (15 staff) - field names match Employees.jsx expectations
+export const employees = [
+  { id: 'e1', first_name: 'Marc', last_name: 'Hunt', name: 'Marc Hunt', role: 'Server', department: 'Front of House', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 82, start_date: '2025-05-15', email: 'marc.hunt@grandmetro.com', phone: '+44 7700 900123' },
+  { id: 'e2', first_name: 'Jessica', last_name: 'Bano', name: 'Jessica Bano', role: 'Bartender', department: 'Bar', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 91, start_date: '2024-11-01', email: 'jessica.bano@grandmetro.com', phone: '+44 7700 900124' },
+  { id: 'e3', first_name: 'Thomas', last_name: 'Cane', name: 'Thomas Cane', role: 'Line Cook', department: 'Kitchen', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 76, start_date: '2025-02-20', email: 'thomas.cane@grandmetro.com', phone: '+44 7700 900125' },
+  { id: 'e4', first_name: 'Anna', last_name: 'Martinez', name: 'Anna Martinez', role: 'Server', department: 'Front of House', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 88, start_date: '2024-08-10', email: 'anna.martinez@grandmetro.com', phone: '+44 7700 900126' },
+  { id: 'e5', first_name: 'Sofia', last_name: 'Chen', name: 'Sofia Chen', role: 'Hostess', department: 'Front of House', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 79, start_date: '2025-01-05', email: 'sofia.chen@grandmetro.com', phone: '+44 7700 900127' },
+  { id: 'e6', first_name: 'James', last_name: 'Williams', name: 'James Williams', role: 'Shift Supervisor', department: 'Management', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 94, start_date: '2023-06-15', email: 'james.williams@grandmetro.com', phone: '+44 7700 900128' },
+  { id: 'e7', first_name: 'Priya', last_name: 'Patel', name: 'Priya Patel', role: 'Sous Chef', department: 'Kitchen', location: 'Birmingham New St', location_id: 'l3', status: 'active', momentum_score: 85, start_date: '2024-03-01', email: 'priya.patel@grandmetro.com', phone: '+44 7700 900129' },
+  { id: 'e8', first_name: 'Tom', last_name: 'Richards', name: 'Tom Richards', role: 'Shift Supervisor', department: 'Management', location: 'Leeds Central', location_id: 'l4', status: 'active', momentum_score: 90, start_date: '2023-09-20', email: 'tom.richards@grandmetro.com', phone: '+44 7700 900130' },
+  { id: 'e9', first_name: 'Fiona', last_name: 'Campbell', name: 'Fiona Campbell', role: 'Restaurant Manager', department: 'Management', location: 'Edinburgh Princes St', location_id: 'l5', status: 'active', momentum_score: 96, start_date: '2022-11-01', email: 'fiona.campbell@grandmetro.com', phone: '+44 7700 900131' },
+  { id: 'e10', first_name: 'Liam', last_name: 'O\'Brien', name: 'Liam O\'Brien', role: 'Server', department: 'Front of House', location: 'Leeds Central', location_id: 'l4', status: 'active', momentum_score: 71, start_date: '2025-06-01', email: 'liam.obrien@grandmetro.com', phone: '+44 7700 900132' },
+  { id: 'e11', first_name: 'Emma', last_name: 'Watson', name: 'Emma Watson', role: 'Barista', department: 'Bar', location: 'Edinburgh Princes St', location_id: 'l5', status: 'active', momentum_score: 83, start_date: '2024-12-15', email: 'emma.watson@grandmetro.com', phone: '+44 7700 900133' },
+  { id: 'e12', first_name: 'David', last_name: 'Kim', name: 'David Kim', role: 'Line Cook', department: 'Kitchen', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 77, start_date: '2025-03-10', email: 'david.kim@grandmetro.com', phone: '+44 7700 900134' },
+  { id: 'e13', first_name: 'Rachel', last_name: 'Green', name: 'Rachel Green', role: 'Server', department: 'Front of House', location: 'Birmingham New St', location_id: 'l3', status: 'on_leave', momentum_score: 80, start_date: '2024-07-22', email: 'rachel.green@grandmetro.com', phone: '+44 7700 900135' },
+  { id: 'e14', first_name: 'Ahmed', last_name: 'Hassan', name: 'Ahmed Hassan', role: 'Kitchen Porter', department: 'Kitchen', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 74, start_date: '2025-04-05', email: 'ahmed.hassan@grandmetro.com', phone: '+44 7700 900136' },
+  { id: 'e15', first_name: 'Lucy', last_name: 'Taylor', name: 'Lucy Taylor', role: 'Hostess', department: 'Front of House', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 86, start_date: '2024-10-30', email: 'lucy.taylor@grandmetro.com', phone: '+44 7700 900137' }
+];
+
+// Skills - field names match Skills.jsx expectations
+export const skills = [
+  { id: 'sk1', name: 'Food Safety Level 2', category: 'Compliance', employee_count: 12, verified_count: 10, mandatory: true },
+  { id: 'sk2', name: 'Customer Service', category: 'Core', employee_count: 15, verified_count: 14, mandatory: true },
+  { id: 'sk3', name: 'Cash Handling', category: 'Core', employee_count: 11, verified_count: 9, mandatory: true },
+  { id: 'sk4', name: 'Team Leadership', category: 'Management', employee_count: 5, verified_count: 4, mandatory: false },
+  { id: 'sk5', name: 'Conflict Resolution', category: 'Management', employee_count: 4, verified_count: 3, mandatory: false },
+  { id: 'sk6', name: 'Barista Training', category: 'Specialist', employee_count: 6, verified_count: 6, mandatory: false },
+  { id: 'sk7', name: 'Wine Knowledge', category: 'Specialist', employee_count: 8, verified_count: 7, mandatory: false },
+  { id: 'sk8', name: 'First Aid', category: 'Compliance', employee_count: 9, verified_count: 8, mandatory: true },
+  { id: 'sk9', name: 'Allergen Awareness', category: 'Compliance', employee_count: 15, verified_count: 15, mandatory: true },
+  { id: 'sk10', name: 'POS Systems', category: 'Core', employee_count: 13, verified_count: 12, mandatory: true }
+];
+
+// Rewards / Perks
+export const rewards = {
+  points: 2450,
+  level: 'Diamond',
+  levelNumber: 12,
+  totalSaved: 848,
+  perks: [
+    { id: 'r1', name: '20% off Nando\'s', category: 'Dining', provider: 'Nando\'s', discount: '20%', description: 'Valid at all UK locations', pointsCost: 0, type: 'perk' },
+    { id: 'r2', name: 'Free coffee at Costa', category: 'Dining', provider: 'Costa Coffee', discount: '100%', description: 'One free drink per week', pointsCost: 0, type: 'perk' },
+    { id: 'r3', name: '15% off Pizza Express', category: 'Dining', provider: 'Pizza Express', discount: '15%', description: 'Dine-in and takeaway', pointsCost: 0, type: 'perk' },
+    { id: 'r4', name: '10% off ASOS', category: 'Shopping', provider: 'ASOS', discount: '10%', description: 'Full price items only', pointsCost: 0, type: 'perk' },
+    { id: 'r5', name: '£5 off Boots', category: 'Shopping', provider: 'Boots', discount: '£5', description: 'When you spend £20+', pointsCost: 0, type: 'perk' },
+    { id: 'r6', name: '2-for-1 Odeon cinema', category: 'Entertainment', provider: 'Odeon', discount: '50%', description: 'Any standard screening', pointsCost: 0, type: 'perk' },
+    { id: 'r7', name: '30% off PureGym', category: 'Wellness', provider: 'PureGym', discount: '30%', description: 'Monthly membership', pointsCost: 0, type: 'perk' },
+    { id: 'r8', name: 'Free month Spotify Premium', category: 'Entertainment', provider: 'Spotify', discount: '100%', description: 'New subscribers', pointsCost: 200, type: 'reward' },
+    { id: 'r9', name: '£10 Amazon voucher', category: 'Shopping', provider: 'Amazon', discount: '£10', description: 'Emailed within 24hrs', pointsCost: 500, type: 'reward' },
+    { id: 'r10', name: 'Extra day off', category: 'Wellness', provider: 'Grand Metro', discount: '1 day', description: 'Use within 3 months', pointsCost: 1000, type: 'reward' }
+  ]
+};
+
+// Time Off
+export const timeOff = {
+  balances: { annual: { used: 8, total: 25 }, sick: { used: 1, total: 10 }, personal: { used: 2, total: 5 } },
+  requests: [
+    { id: 'to1', employee_id: 'e1', employee_name: 'Marc Hunt', type: 'Annual Leave', start_date: '2026-02-10', end_date: '2026-02-14', days: 5, status: 'pending', reason: 'Family holiday' },
+    { id: 'to2', employee_id: 'e2', employee_name: 'Jessica Bano', type: 'Personal', start_date: '2026-01-20', end_date: '2026-01-20', days: 1, status: 'approved', reason: 'Appointment' },
+    { id: 'to3', employee_id: 'e3', employee_name: 'Thomas Cane', type: 'Sick Leave', start_date: '2026-01-06', end_date: '2026-01-07', days: 2, status: 'approved', reason: 'Flu' },
+    { id: 'to4', employee_id: 'e4', employee_name: 'Anna Martinez', type: 'Annual Leave', start_date: '2026-03-01', end_date: '2026-03-05', days: 5, status: 'pending', reason: 'Visiting family in Spain' },
+    { id: 'to5', employee_id: 'e10', employee_name: 'Liam O\'Brien', type: 'Personal', start_date: '2026-01-22', end_date: '2026-01-22', days: 1, status: 'pending', reason: 'Moving house' }
+  ]
+};
+
+// Activity
+export const activity = [
+  { id: 'act1', type: 'clock_in', user: 'Marc Hunt', action: 'clocked in', location: 'Manchester Central', time: '5 min ago' },
+  { id: 'act2', type: 'clock_in', user: 'Jessica Bano', action: 'clocked in', location: 'Manchester Central', time: '15 min ago' },
+  { id: 'act3', type: 'shift_swap', user: 'Thomas Cane', action: 'requested shift swap', message: 'Fri 5-11pm → Sat 11-7pm', time: '30 min ago' },
+  { id: 'act4', type: 'skill_verified', user: 'Anna Martinez', action: 'completed skill verification', message: 'Food Safety Level 2', time: '1 hr ago' },
+  { id: 'act5', type: 'time_off', user: 'Marc Hunt', action: 'submitted time off request', message: 'Feb 10-14 (Annual Leave)', time: '2 hr ago' },
+  { id: 'act6', type: 'schedule_published', user: 'Sarah Chen', action: 'published schedule', message: 'Week of Jan 12-18', time: '4 hr ago' },
+  { id: 'act7', type: 'employee_added', user: 'Admin', target: 'Ahmed Hassan', message: 'Kitchen Porter - Manchester Central', time: '1 day ago' },
+  { id: 'act8', type: 'employee_promoted', user: 'Admin', target: 'James Williams', message: 'Promoted to Shift Supervisor', time: '2 days ago' }
+];
+
+// Integrations
+export const integrations = [
+  { id: 'int1', name: 'BambooHR', type: 'hris', category: 'HRIS', status: 'connected', last_sync: new Date(Date.now() - 900000).toISOString(), logo: '🎋' },
+  { id: 'int2', name: 'Slack', type: 'communication', category: 'Communication', status: 'connected', last_sync: new Date(Date.now() - 300000).toISOString(), logo: '💬' },
+  { id: 'int3', name: 'Google Calendar', type: 'calendar', category: 'Calendar', status: 'connected', last_sync: new Date(Date.now() - 480000).toISOString(), logo: '📅' },
+  { id: 'int4', name: 'QuickBooks', type: 'payroll', category: 'Payroll', status: 'connected', last_sync: new Date(Date.now() - 3600000).toISOString(), logo: '📗' },
+  { id: 'int5', name: 'Xero', type: 'payroll', category: 'Payroll', status: 'connected', last_sync: new Date(Date.now() - 3300000).toISOString(), logo: '📊' },
+  { id: 'int6', name: 'ADP Workforce Now', type: 'hris', category: 'HRIS', status: 'available', last_sync: null, logo: '💵' },
+  { id: 'int7', name: 'Workday', type: 'hris', category: 'HRIS', status: 'available', last_sync: null, logo: '☀️' },
+  { id: 'int8', name: 'Microsoft Teams', type: 'communication', category: 'Communication', status: 'available', last_sync: null, logo: '🟣' },
+  { id: 'int9', name: 'SAP SuccessFactors', type: 'hris', category: 'HRIS', status: 'available', last_sync: null, logo: '🔷' },
+  { id: 'int10', name: 'Gusto', type: 'payroll', category: 'Payroll', status: 'available', last_sync: null, logo: '💰' }
+];
+
+// Reports data
+export const reports = {
+  momentum: { current: 78, previous: 72, trend: 'up', data: [65, 68, 70, 72, 71, 74, 76, 78] },
+  retention: { current: 91, previous: 87, trend: 'up', data: [84, 85, 86, 87, 88, 89, 90, 91] },
+  shiftFill: { current: 94, previous: 90, trend: 'up', data: [88, 89, 90, 91, 92, 93, 93, 94] },
+  laborCost: { current: 12400, budget: 14000, variance: -1600, data: [13200, 12800, 13100, 12600, 12900, 12500, 12700, 12400] },
+  overtime: { hours: 24, cost: 720, employees: 4 },
+  topPerformers: [
+    { name: 'Fiona Campbell', score: 96, role: 'Restaurant Manager' },
+    { name: 'James Williams', score: 94, role: 'Shift Supervisor' },
+    { name: 'Jessica Bano', score: 91, role: 'Bartender' },
+    { name: 'Tom Richards', score: 90, role: 'Shift Supervisor' },
+    { name: 'Anna Martinez', score: 88, role: 'Server' }
+  ]
+};
+
+// Settings
+export const settings = {
+  organization: { name: 'Grand Metro Hotels', industry: 'Hospitality', timezone: 'Europe/London', currency: 'GBP', logo: null },
+  users: [
+    { id: 'u1', firstName: 'Sarah', lastName: 'Chen', email: 'sarah.chen@grandmetro.com', role: 'admin', status: 'active', lastLogin: new Date(Date.now() - 120000).toISOString() },
+    { id: 'u2', firstName: 'James', lastName: 'Williams', email: 'james.williams@grandmetro.com', role: 'manager', status: 'active', lastLogin: new Date(Date.now() - 3600000).toISOString() },
+    { id: 'u3', firstName: 'Priya', lastName: 'Patel', email: 'priya.patel@grandmetro.com', role: 'manager', status: 'active', lastLogin: new Date(Date.now() - 10800000).toISOString() }
+  ]
+};
+
+// Dashboard stats (for the manager portal dashboard)
+export const dashboard = {
+  realtime: { onShiftNow: 6, onBreak: 2, clockedIn: 3, runningLate: 1, openShifts: 4 },
+  today: { shifts: { total: 24, filled: 22 } },
+  activeEmployees: employees.length,
+  openShifts: 4,
+  pendingApprovals: { timesheets: 8, time_off: 3, swaps: 2 },
+  lifecycleMetrics: { retentionRate: 91, newHires: 2, onboarding: 1, avgTenure: '2.4 years' },
+  weekMetrics: { scheduled: 312, worked: 298, cost_scheduled: 4680, cost_actual: 4470 },
+  weeklyChart: [
+    { day: 'Mon', scheduled: 48, worked: 46 },
+    { day: 'Tue', scheduled: 52, worked: 50 },
+    { day: 'Wed', scheduled: 44, worked: 44 },
+    { day: 'Thu', scheduled: 48, worked: 45 },
+    { day: 'Fri', scheduled: 56, worked: 54 },
+    { day: 'Sat', scheduled: 40, worked: 38 },
+    { day: 'Sun', scheduled: 24, worked: 21 },
+  ],
+  complianceAlerts: [
+    { id: 'alert-1', type: 'expiring', severity: 'warning', title: 'Certifications expiring within 30 days', employees: [
+      { id: 'e13', name: 'Rachel Green', skill: 'Allergen Awareness', expiresIn: '12 days' },
+    ]},
+  ],
+  activityFeed: activity.slice(0, 5),
+  recentRecognitions: [
+    { id: 'rec-1', emoji: '🌟', message: 'Outstanding guest feedback!', from: 'Sarah Chen', to: 'James Williams', likes: 12 },
+    { id: 'rec-2', emoji: '🍷', message: 'Perfect wine pairing', from: 'Manager', to: 'Fiona Campbell', likes: 8 },
+  ],
+  metrics: {
+    totalEmployees: employees.length,
+    activeToday: 6, onShiftNow: 6, onBreak: 2, clockedIn: 3, runningLate: 1,
+    openShifts: 4, pendingApprovals: 13, certificationsExpiring: 3, trainingOverdue: 1,
+    avgMomentum: 78, shiftsFilled: 94, retention: 91, hoursThisWeek: 312, taskCompletion: 87,
+  },
+};
+
+// Demo user for login
+export const demoUser = {
+  id: 'demo-user',
+  email: 'demo@grandmetro.com',
+  firstName: 'Sarah',
+  lastName: 'Chen',
+  role: 'admin',
+  permissions: ['manage_employees', 'manage_schedules', 'approve_time', 'view_reports', 'manage_settings', 'manage_integrations', 'manage_org'],
+};
+
+// Departments
+export const departments = [
+  { id: 'dept-foh', name: 'Front of House', code: 'FOH' },
+  { id: 'dept-bar', name: 'Bar', code: 'BAR' },
+  { id: 'dept-kitchen', name: 'Kitchen', code: 'KITCHEN' },
+  { id: 'dept-mgmt', name: 'Management', code: 'MGMT' },
+];
+
+// Roles
+export const roles = [
+  { id: 'role-1', name: 'Server', department: 'Front of House' },
+  { id: 'role-2', name: 'Bartender', department: 'Bar' },
+  { id: 'role-3', name: 'Line Cook', department: 'Kitchen' },
+  { id: 'role-4', name: 'Hostess', department: 'Front of House' },
+  { id: 'role-5', name: 'Shift Supervisor', department: 'Management' },
+  { id: 'role-6', name: 'Restaurant Manager', department: 'Management' },
+  { id: 'role-7', name: 'Sous Chef', department: 'Kitchen' },
+  { id: 'role-8', name: 'Kitchen Porter', department: 'Kitchen' },
+  { id: 'role-9', name: 'Barista', department: 'Bar' },
+];
+
+// Shift generation helper
+export const generateShifts = (weekStart) => {
+  const shifts = [];
+  const patterns = [
+    { name: 'Morning', start: '06:00', end: '14:00' },
+    { name: 'Day', start: '09:00', end: '17:00' },
+    { name: 'Evening', start: '14:00', end: '22:00' },
+  ];
+  locations.forEach(loc => {
+    for (let day = 0; day < 7; day++) {
+      const date = new Date(weekStart);
+      date.setDate(date.getDate() + day);
+      const dateStr = date.toISOString().split('T')[0];
+      const staffNeeded = Math.min(4, Math.floor(loc.employee_count / 5) + 1);
+      const availableEmps = employees.filter(e => e.location_id === loc.id);
+      for (let i = 0; i < Math.min(staffNeeded, availableEmps.length); i++) {
+        const emp = availableEmps[i];
+        const pattern = patterns[i % patterns.length];
+        shifts.push({
+          id: `shift-${loc.id}-${dateStr}-${i}`,
+          date: dateStr,
+          start_time: `${dateStr}T${pattern.start}:00`,
+          end_time: `${dateStr}T${pattern.end}:00`,
+          shift_type: pattern.name,
+          location_id: loc.id,
+          location_name: loc.name,
+          employee_id: emp.id,
+          employee_name: emp.name,
+          employee_role: emp.role,
+          is_open: false,
+          status: 'confirmed',
+          hourly_rate: 12.50,
+          cost: 100,
+        });
+      }
+      // Add open shift
+      if (day % 2 === 0) {
+        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+        shifts.push({
+          id: `open-${loc.id}-${dateStr}`,
+          date: dateStr,
+          start_time: `${dateStr}T${pattern.start}:00`,
+          end_time: `${dateStr}T${pattern.end}:00`,
+          shift_type: pattern.name,
+          location_id: loc.id,
+          location_name: loc.name,
+          employee_id: null,
+          employee_name: null,
+          is_open: true,
+          status: 'open',
+          required_skills: ['Food Safety Level 2'],
+          hourly_rate: 12.00,
+          cost: 96,
+        });
+      }
+    }
+  });
+  return shifts;
+};
+
+// Time entries generation
+export const generateTimeEntries = () => {
+  const entries = [];
+  const today = new Date();
+  employees.forEach(emp => {
+    for (let day = 0; day < 14; day++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - day);
+      if (date.getDay() === 0) continue; // Skip Sundays
+      const dateStr = date.toISOString().split('T')[0];
+      const patterns = [
+        { start: '09:00', end: '17:00' },
+        { start: '10:00', end: '18:00' },
+        { start: '14:00', end: '22:00' },
+      ];
+      const pattern = patterns[day % patterns.length];
+      entries.push({
+        id: `time-${emp.id}-${dateStr}`,
+        employee_id: emp.id,
+        employee_name: emp.name,
+        date: dateStr,
+        location: emp.location,
+        location_id: emp.location_id,
+        scheduled_start: `${dateStr}T${pattern.start}:00`,
+        scheduled_end: `${dateStr}T${pattern.end}:00`,
+        clock_in: `${dateStr}T${pattern.start}:00`,
+        clock_out: `${dateStr}T${pattern.end}:00`,
+        scheduled_hours: 8,
+        actual_hours: 8,
+        status: 'completed',
+        approved: day > 3,
+      });
+    }
+  });
+  return entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+};
+
+export const timeEntries = generateTimeEntries();
+
+// Get week start helper
+export const getWeekStart = () => {
+  const now = new Date();
+  const day = now.getDay();
+  const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(now.setDate(diff));
+};
