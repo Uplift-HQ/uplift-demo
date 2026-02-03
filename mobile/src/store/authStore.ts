@@ -9,8 +9,27 @@ const DEMO_MODE =
   process.env.EXPO_PUBLIC_DEMO_MODE === 'true' ||
   (typeof window !== 'undefined' && window.location?.hostname?.includes('demo'));
 
+// Check if this is the manager demo (by URL path)
+const IS_MANAGER_DEMO =
+  typeof window !== 'undefined' && window.location?.pathname?.includes('manager');
+
 // Demo user for demo mode (with extended properties for UI)
-const DEMO_USER: User & Record<string, any> = {
+const DEMO_USER: User & Record<string, any> = IS_MANAGER_DEMO ? {
+  id: 'demo-manager-1',
+  email: 'manager@grandhotel.com',
+  firstName: 'James',
+  lastName: 'Wilson',
+  role: 'manager',
+  organizationId: 'org-demo',
+  employeeId: 'mgr-001',
+  avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
+  momentumScore: 94,
+  level: 15,
+  xp: 3200,
+  companyName: 'The Grand Hotel',
+  companyLogo: null,
+  unreadMessages: 5,
+} : {
   id: 'demo-worker-1',
   email: 'demo@grandhotel.com',
   firstName: 'Sarah',
@@ -20,11 +39,10 @@ const DEMO_USER: User & Record<string, any> = {
   employeeId: 'emp-001',
   avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
   momentumScore: 87,
-  // Extended properties for UI
   level: 12,
   xp: 2450,
   companyName: 'The Grand Hotel',
-  companyLogo: null, // Will show initials
+  companyLogo: null,
   unreadMessages: 3,
 };
 
