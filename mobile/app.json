@@ -1,0 +1,101 @@
+{
+  "expo": {
+    "name": "Uplift",
+    "slug": "uplift-workforce",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FF6B35"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.uplift.workforce",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Uplift needs camera access for profile photos and task verification",
+        "NSLocationWhenInUseUsageDescription": "Uplift needs location access for clock-in verification",
+        "NSPhotoLibraryUsageDescription": "Uplift needs photo library access to upload profile pictures",
+        "CFBundleAllowMixedLocalizations": true
+      }
+    },
+    "android": {
+      "package": "com.uplift.workforce",
+      "versionCode": 1,
+      "targetSdkVersion": 35,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FF6B35"
+      },
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "notification": {
+      "icon": "./assets/notification-icon.png",
+      "color": "#FF6B35"
+    },
+    "locales": {
+      "fr": "./src/i18n/ios/fr.json",
+      "de": "./src/i18n/ios/de.json",
+      "es": "./src/i18n/ios/es.json",
+      "pt": "./src/i18n/ios/pt.json",
+      "nl": "./src/i18n/ios/nl.json"
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "minSdkVersion": 24
+          }
+        }
+      ],
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Uplift needs camera access for profile photos and task verification"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Uplift needs location access for clock-in verification"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Uplift needs photo library access to upload profile pictures",
+          "cameraPermission": "Uplift needs camera access for profile photos and task verification"
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "https://uplift-demo-production.up.railway.app/api",
+      "demoMode": true,
+      "eas": {
+        "projectId": "72b56cf4-c5b0-40fb-b426-b75e38d37136"
+      }
+    },
+    "owner": "dazevedo90"
+  }
+}

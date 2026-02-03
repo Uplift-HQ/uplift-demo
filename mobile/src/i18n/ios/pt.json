@@ -1,0 +1,5 @@
+{
+  "NSCameraUsageDescription": "O Uplift precisa de acesso à câmera para fotos de perfil e verificação de tarefas",
+  "NSLocationWhenInUseUsageDescription": "O Uplift precisa de acesso à localização para verificar o registo de ponto",
+  "NSPhotoLibraryUsageDescription": "O Uplift precisa de acesso à fototeca para carregar fotos de perfil"
+}

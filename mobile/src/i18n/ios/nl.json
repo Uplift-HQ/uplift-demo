@@ -1,0 +1,5 @@
+{
+  "NSCameraUsageDescription": "Uplift heeft cameratoegang nodig voor profielfoto's en taakverificatie",
+  "NSLocationWhenInUseUsageDescription": "Uplift heeft locatietoegang nodig voor klok-in verificatie",
+  "NSPhotoLibraryUsageDescription": "Uplift heeft toegang tot de fotobibliotheek nodig om profielfoto's te uploaden"
+}

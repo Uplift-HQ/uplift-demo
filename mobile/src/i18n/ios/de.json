@@ -1,0 +1,5 @@
+{
+  "NSCameraUsageDescription": "Uplift benötigt Kamerazugriff für Profilfotos und Aufgabenüberprüfung",
+  "NSLocationWhenInUseUsageDescription": "Uplift benötigt Standortzugriff zur Stempeluhr-Verifizierung",
+  "NSPhotoLibraryUsageDescription": "Uplift benötigt Zugriff auf die Fotomediathek zum Hochladen von Profilbildern"
+}
