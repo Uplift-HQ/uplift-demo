@@ -214,25 +214,25 @@
     "event": "Event",
     "processing": "Processing...",
     "creating": "Creating...",
-    "location": "Location",
-    "department": "Department",
+    "location": "অবস্থান",
+    "department": "বিভাগ",
     "roles": {
-      "server": "Server",
-      "bartender": "Bartender",
-      "linecook": "Line Cook",
-      "hostess": "Hostess",
-      "host": "Host",
-      "manager": "Manager",
-      "chef": "Chef",
-      "cashier": "Cashier",
-      "waiter": "Waiter",
-      "waitress": "Waitress",
-      "busser": "Busser",
-      "dishwasher": "Dishwasher",
-      "cook": "Cook",
-      "barback": "Barback",
-      "sous": "Sous Chef",
-      "expeditor": "Expeditor"
+      "server": "সার্ভার",
+      "bartender": "বারটেন্ডার",
+      "linecook": "লাইন কুক",
+      "hostess": "হোস্টেস",
+      "host": "হোস্ট",
+      "manager": "ম্যানেজার",
+      "chef": "শেফ",
+      "cashier": "ক্যাশিয়ার",
+      "waiter": "ওয়েটার",
+      "waitress": "ওয়েট্রেস",
+      "busser": "বাসার",
+      "dishwasher": "ডিশওয়াশার",
+      "cook": "রাঁধুনি",
+      "barback": "বারব্যাক",
+      "sous": "সু শেফ",
+      "expeditor": "এক্সপেডিটর"
     }
   },
   "auth": {
@@ -405,8 +405,8 @@
       "analyzing": "शेड्यूल और उपलब्धता का विश्लेषण...",
       "consideringSkills": "कौशल, प्राथमिकताएं और आपकी प्राथमिकताओं पर विचार करना",
       "noSuggestions": "कोई सुझाव उपलब्ध नहीं",
-      "priorityWeights": "Priority Weights",
-      "generateSchedule": "Generate Schedule"
+      "priorityWeights": "অগ্রাধিকার ওজন",
+      "generateSchedule": "সময়সূচী তৈরি করুন"
     },
     "viewModes": {
       "day": "दिन",
@@ -421,7 +421,7 @@
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
       "notification3": "Changes after this will trigger new notifications",
-      "whatHappens": "What happens when you publish:"
+      "whatHappens": "প্রকাশ করলে যা হবে:"
     },
     "today": "Today",
     "filters": "Filters",
@@ -435,20 +435,20 @@
     "shiftSwaps": "Shift Swaps",
     "noPendingSwaps": "No pending swaps",
     "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
-    "aiSchedule": "AI Schedule",
-    "addShift": "Add Shift",
-    "requiredSkills": "Required Skills",
-    "skillFiltersPlaceholder": "Skill filters will be available when skills data is loaded from the API.",
-    "clearAllFilters": "Clear all filters",
-    "noEmployeesAvailable": "No employees available",
-    "labourCost": "Labour Cost",
-    "weeklyLabourCost": "Weekly Labour Cost",
-    "scheduled": "Scheduled",
-    "createShift": "Create Shift",
-    "publishSchedule": "Publish Schedule",
-    "publishConfirmation": "You are about to publish {{count}} draft shift(s). This will notify all affected employees about their upcoming shifts.",
-    "publishNow": "Publish Now",
-    "aiScheduleBuilder": "AI Schedule Builder"
+    "aiSchedule": "AI সময়সূচী",
+    "addShift": "শিফট যোগ করুন",
+    "requiredSkills": "প্রয়োজনীয় দক্ষতা",
+    "skillFiltersPlaceholder": "ডেটা লোড হলে দক্ষতা ফিল্টার উপলব্ধ হবে।",
+    "clearAllFilters": "সব ফিল্টার মুছুন",
+    "noEmployeesAvailable": "কোন কর্মী উপলব্ধ নেই",
+    "labourCost": "শ্রম খরচ",
+    "weeklyLabourCost": "সাপ্তাহিক শ্রম খরচ",
+    "scheduled": "নির্ধারিত",
+    "createShift": "শিফট তৈরি করুন",
+    "publishSchedule": "সময়সূচী প্রকাশ করুন",
+    "publishConfirmation": "আপনি {{count}} খসড়া শিফট প্রকাশ করতে যাচ্ছেন।",
+    "publishNow": "এখনই প্রকাশ করুন",
+    "aiScheduleBuilder": "AI সময়সূচী নির্মাতা"
   },
   "timeTracking": {
     "title": "সময় ট্র্যাকিং",
@@ -548,9 +548,9 @@
       "maternity": "Maternity",
       "paternity": "Paternity",
       "unpaid": "Unpaid Leave",
-      "sickleave": "Sick Leave",
-      "annualleave": "Annual Leave",
-      "sickleaveshort": "Sick Leave"
+      "sickleave": "অসুস্থতার ছুটি",
+      "annualleave": "বার্ষিক ছুটি",
+      "sickleaveshort": "অসুস্থতার ছুটি"
     }
   },
   "feed": {

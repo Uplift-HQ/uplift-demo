@@ -214,25 +214,25 @@
     "event": "Event",
     "processing": "Processing...",
     "creating": "Creating...",
-    "location": "Location",
-    "department": "Department",
+    "location": "Konum",
+    "department": "Departman",
     "roles": {
-      "server": "Server",
-      "bartender": "Bartender",
-      "linecook": "Line Cook",
-      "hostess": "Hostess",
-      "host": "Host",
-      "manager": "Manager",
-      "chef": "Chef",
-      "cashier": "Cashier",
-      "waiter": "Waiter",
-      "waitress": "Waitress",
-      "busser": "Busser",
-      "dishwasher": "Dishwasher",
-      "cook": "Cook",
-      "barback": "Barback",
-      "sous": "Sous Chef",
-      "expeditor": "Expeditor"
+      "server": "Garson",
+      "bartender": "Barmen",
+      "linecook": "Hat aşçısı",
+      "hostess": "Hostes",
+      "host": "Ev sahibi",
+      "manager": "Yönetici",
+      "chef": "Şef",
+      "cashier": "Kasiyer",
+      "waiter": "Garson",
+      "waitress": "Bayan garson",
+      "busser": "Masa temizleyici",
+      "dishwasher": "Bulaşıkçı",
+      "cook": "Aşçı",
+      "barback": "Bar yardımcısı",
+      "sous": "Sous Şef",
+      "expeditor": "Ekspeditor"
     }
   },
   "auth": {
@@ -405,8 +405,8 @@
       "analyzing": "Analyzing schedules and availability...",
       "consideringSkills": "Considering skills, preferences, and your priorities",
       "noSuggestions": "No suggestions available",
-      "priorityWeights": "Priority Weights",
-      "generateSchedule": "Generate Schedule"
+      "priorityWeights": "Öncelik ağırlıkları",
+      "generateSchedule": "Çizelge oluştur"
     },
     "viewModes": {
       "day": "Day",
@@ -421,7 +421,7 @@
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
       "notification3": "Changes after this will trigger new notifications",
-      "whatHappens": "What happens when you publish:"
+      "whatHappens": "Yayınlama sırasında ne olur:"
     },
     "today": "Today",
     "filters": "Filters",
@@ -435,20 +435,20 @@
     "shiftSwaps": "Shift Swaps",
     "noPendingSwaps": "No pending swaps",
     "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
-    "aiSchedule": "AI Schedule",
-    "addShift": "Add Shift",
-    "requiredSkills": "Required Skills",
-    "skillFiltersPlaceholder": "Skill filters will be available when skills data is loaded from the API.",
-    "clearAllFilters": "Clear all filters",
-    "noEmployeesAvailable": "No employees available",
-    "labourCost": "Labour Cost",
-    "weeklyLabourCost": "Weekly Labour Cost",
-    "scheduled": "Scheduled",
-    "createShift": "Create Shift",
-    "publishSchedule": "Publish Schedule",
-    "publishConfirmation": "You are about to publish {{count}} draft shift(s). This will notify all affected employees about their upcoming shifts.",
-    "publishNow": "Publish Now",
-    "aiScheduleBuilder": "AI Schedule Builder"
+    "aiSchedule": "AI Çizelge",
+    "addShift": "Vardiya ekle",
+    "requiredSkills": "Gerekli beceriler",
+    "skillFiltersPlaceholder": "Beceri filtreleri veriler yüklendikten sonra kullanılabilir olacak.",
+    "clearAllFilters": "Tüm filtreleri temizle",
+    "noEmployeesAvailable": "Müsait çalışan yok",
+    "labourCost": "İşçilik maliyeti",
+    "weeklyLabourCost": "Haftalık işçilik maliyeti",
+    "scheduled": "Planlandı",
+    "createShift": "Vardiya oluştur",
+    "publishSchedule": "Çizelge yayınla",
+    "publishConfirmation": "{{count}} taslak vardiya yayınlamak üzeresiniz. Tüm ilgili çalışanlar bilgilendirilecek.",
+    "publishNow": "Şimdi yayınla",
+    "aiScheduleBuilder": "AI Çizelge Oluşturucu"
   },
   "timeTracking": {
     "title": "Zaman Takibi",
@@ -548,9 +548,9 @@
       "maternity": "Maternity",
       "paternity": "Paternity",
       "unpaid": "Unpaid Leave",
-      "sickleave": "Sick Leave",
-      "annualleave": "Annual Leave",
-      "sickleaveshort": "Sick Leave"
+      "sickleave": "Hastalık izni",
+      "annualleave": "Yıllık izin",
+      "sickleaveshort": "Hastalık izni"
     }
   },
   "feed": {

@@ -214,25 +214,25 @@
     "event": "Event",
     "processing": "Processing...",
     "creating": "Creating...",
-    "location": "Location",
-    "department": "Department",
+    "location": "위치",
+    "department": "부서",
     "roles": {
-      "server": "Server",
-      "bartender": "Bartender",
-      "linecook": "Line Cook",
-      "hostess": "Hostess",
-      "host": "Host",
-      "manager": "Manager",
-      "chef": "Chef",
-      "cashier": "Cashier",
-      "waiter": "Waiter",
-      "waitress": "Waitress",
-      "busser": "Busser",
-      "dishwasher": "Dishwasher",
-      "cook": "Cook",
-      "barback": "Barback",
-      "sous": "Sous Chef",
-      "expeditor": "Expeditor"
+      "server": "서버",
+      "bartender": "바텐더",
+      "linecook": "라인 쿡",
+      "hostess": "호스티스",
+      "host": "호스트",
+      "manager": "매니저",
+      "chef": "셰프",
+      "cashier": "캐셔",
+      "waiter": "웨이터",
+      "waitress": "웨이트리스",
+      "busser": "버서",
+      "dishwasher": "설거지 담당",
+      "cook": "요리사",
+      "barback": "바백",
+      "sous": "수 셰프",
+      "expeditor": "익스페디터"
     }
   },
   "auth": {
@@ -405,8 +405,8 @@
       "analyzing": "일정과 가용성 분석 중...",
       "consideringSkills": "기술, 선호도 및 우선순위 고려",
       "noSuggestions": "제안 없음",
-      "priorityWeights": "Priority Weights",
-      "generateSchedule": "Generate Schedule"
+      "priorityWeights": "우선순위 가중치",
+      "generateSchedule": "일정 생성"
     },
     "viewModes": {
       "day": "일",
@@ -421,7 +421,7 @@
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
       "notification3": "Changes after this will trigger new notifications",
-      "whatHappens": "What happens when you publish:"
+      "whatHappens": "게시 시 일어나는 일:"
     },
     "today": "Today",
     "filters": "Filters",
@@ -435,20 +435,20 @@
     "shiftSwaps": "Shift Swaps",
     "noPendingSwaps": "No pending swaps",
     "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
-    "aiSchedule": "AI Schedule",
-    "addShift": "Add Shift",
-    "requiredSkills": "Required Skills",
-    "skillFiltersPlaceholder": "Skill filters will be available when skills data is loaded from the API.",
-    "clearAllFilters": "Clear all filters",
-    "noEmployeesAvailable": "No employees available",
-    "labourCost": "Labour Cost",
-    "weeklyLabourCost": "Weekly Labour Cost",
-    "scheduled": "Scheduled",
-    "createShift": "Create Shift",
-    "publishSchedule": "Publish Schedule",
-    "publishConfirmation": "You are about to publish {{count}} draft shift(s). This will notify all affected employees about their upcoming shifts.",
-    "publishNow": "Publish Now",
-    "aiScheduleBuilder": "AI Schedule Builder"
+    "aiSchedule": "AI 일정",
+    "addShift": "근무 추가",
+    "requiredSkills": "필요 기술",
+    "skillFiltersPlaceholder": "데이터 로드 후 기술 필터를 사용할 수 있습니다.",
+    "clearAllFilters": "모든 필터 지우기",
+    "noEmployeesAvailable": "가용 직원 없음",
+    "labourCost": "인건비",
+    "weeklyLabourCost": "주간 인건비",
+    "scheduled": "예정됨",
+    "createShift": "근무 생성",
+    "publishSchedule": "일정 게시",
+    "publishConfirmation": "{{count}}개의 초안 근무를 게시하려 합니다. 모든 관련 직원에게 알림이 전송됩니다.",
+    "publishNow": "지금 게시",
+    "aiScheduleBuilder": "AI 일정 빌더"
   },
   "timeTracking": {
     "title": "근태 관리",
@@ -548,9 +548,9 @@
       "maternity": "Maternity",
       "paternity": "Paternity",
       "unpaid": "Unpaid Leave",
-      "sickleave": "Sick Leave",
-      "annualleave": "Annual Leave",
-      "sickleaveshort": "Sick Leave"
+      "sickleave": "병가",
+      "annualleave": "연차",
+      "sickleaveshort": "병가"
     }
   },
   "feed": {

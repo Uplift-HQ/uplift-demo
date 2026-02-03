@@ -214,25 +214,25 @@
     "event": "Event",
     "processing": "Processing...",
     "creating": "Creating...",
-    "location": "Location",
-    "department": "Department",
+    "location": "ਸਥਾਨ",
+    "department": "ਵਿਭਾਗ",
     "roles": {
-      "server": "Server",
-      "bartender": "Bartender",
-      "linecook": "Line Cook",
-      "hostess": "Hostess",
-      "host": "Host",
-      "manager": "Manager",
-      "chef": "Chef",
-      "cashier": "Cashier",
-      "waiter": "Waiter",
-      "waitress": "Waitress",
-      "busser": "Busser",
-      "dishwasher": "Dishwasher",
-      "cook": "Cook",
-      "barback": "Barback",
-      "sous": "Sous Chef",
-      "expeditor": "Expeditor"
+      "server": "ਸਰਵਰ",
+      "bartender": "ਬਾਰਟੈਂਡਰ",
+      "linecook": "ਲਾਈਨ ਕੁੱਕ",
+      "hostess": "ਹੋਸਟੈਸ",
+      "host": "ਹੋਸਟ",
+      "manager": "ਮੈਨੇਜਰ",
+      "chef": "ਸ਼ੈੱਫ",
+      "cashier": "ਕੈਸ਼ੀਅਰ",
+      "waiter": "ਵੇਟਰ",
+      "waitress": "ਵੇਟਰੈਸ",
+      "busser": "ਬੱਸਰ",
+      "dishwasher": "ਡਿਸ਼ਵਾਸ਼ਰ",
+      "cook": "ਰਸੋਈਆ",
+      "barback": "ਬਾਰਬੈਕ",
+      "sous": "ਸੂ ਸ਼ੈੱਫ",
+      "expeditor": "ਐਕਸਪੀਡੀਟਰ"
     }
   },
   "auth": {
@@ -405,8 +405,8 @@
       "analyzing": "शेड्यूल और उपलब्धता का विश्लेषण...",
       "consideringSkills": "कौशल, प्राथमिकताएं और आपकी प्राथमिकताओं पर विचार करना",
       "noSuggestions": "कोई सुझाव उपलब्ध नहीं",
-      "priorityWeights": "Priority Weights",
-      "generateSchedule": "Generate Schedule"
+      "priorityWeights": "ਤਰਜੀਹ ਭਾਰ",
+      "generateSchedule": "ਸ਼ਡਿਊਲ ਤਿਆਰ ਕਰੋ"
     },
     "viewModes": {
       "day": "दिन",
@@ -421,7 +421,7 @@
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
       "notification3": "Changes after this will trigger new notifications",
-      "whatHappens": "What happens when you publish:"
+      "whatHappens": "ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਨ ਤੇ ਕੀ ਹੁੰਦਾ ਹੈ:"
     },
     "today": "Today",
     "filters": "Filters",
@@ -435,20 +435,20 @@
     "shiftSwaps": "Shift Swaps",
     "noPendingSwaps": "No pending swaps",
     "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
-    "aiSchedule": "AI Schedule",
-    "addShift": "Add Shift",
-    "requiredSkills": "Required Skills",
-    "skillFiltersPlaceholder": "Skill filters will be available when skills data is loaded from the API.",
-    "clearAllFilters": "Clear all filters",
-    "noEmployeesAvailable": "No employees available",
-    "labourCost": "Labour Cost",
-    "weeklyLabourCost": "Weekly Labour Cost",
-    "scheduled": "Scheduled",
-    "createShift": "Create Shift",
-    "publishSchedule": "Publish Schedule",
-    "publishConfirmation": "You are about to publish {{count}} draft shift(s). This will notify all affected employees about their upcoming shifts.",
-    "publishNow": "Publish Now",
-    "aiScheduleBuilder": "AI Schedule Builder"
+    "aiSchedule": "AI ਸ਼ਡਿਊਲ",
+    "addShift": "ਸ਼ਿਫ਼ਟ ਸ਼ਾਮਲ ਕਰੋ",
+    "requiredSkills": "ਲੋੜੀਂਦੇ ਹੁਨਰ",
+    "skillFiltersPlaceholder": "ਡੇਟਾ ਲੋਡ ਹੋਣ ਤੋਂ ਬਾਅਦ ਹੁਨਰ ਫ਼ਿਲਟਰ ਉਪਲਬਧ ਹੋਣਗੇ।",
+    "clearAllFilters": "ਸਾਰੇ ਫ਼ਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
+    "noEmployeesAvailable": "ਕੋਈ ਕਰਮਚਾਰੀ ਉਪਲਬਧ ਨਹੀਂ",
+    "labourCost": "ਕਿਰਤ ਲਾਗਤ",
+    "weeklyLabourCost": "ਹਫ਼ਤਾਵਾਰੀ ਕਿਰਤ ਲਾਗਤ",
+    "scheduled": "ਅਨੁਸੂਚਿਤ",
+    "createShift": "ਸ਼ਿਫ਼ਟ ਬਣਾਓ",
+    "publishSchedule": "ਸ਼ਡਿਊਲ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
+    "publishConfirmation": "ਤੁਸੀਂ {{count}} ਡ੍ਰਾਫ਼ਟ ਸ਼ਿਫ਼ਟਾਂ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਨ ਵਾਲੇ ਹੋ।",
+    "publishNow": "ਹੁਣੇ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
+    "aiScheduleBuilder": "AI ਸ਼ਡਿਊਲ ਬਿਲਡਰ"
   },
   "timeTracking": {
     "title": "ਸਮਾਂ ਟਰੈਕਿੰਗ",
@@ -548,9 +548,9 @@
       "maternity": "Maternity",
       "paternity": "Paternity",
       "unpaid": "Unpaid Leave",
-      "sickleave": "Sick Leave",
-      "annualleave": "Annual Leave",
-      "sickleaveshort": "Sick Leave"
+      "sickleave": "ਬਿਮਾਰੀ ਦੀ ਛੁੱਟੀ",
+      "annualleave": "ਸਾਲਾਨਾ ਛੁੱਟੀ",
+      "sickleaveshort": "ਬਿਮਾਰੀ ਦੀ ਛੁੱਟੀ"
     }
   },
   "feed": {
