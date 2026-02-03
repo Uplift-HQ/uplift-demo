@@ -213,7 +213,27 @@
     "failed": "Failed",
     "event": "Event",
     "processing": "Processing...",
-    "creating": "Creating..."
+    "creating": "Creating...",
+    "location": "Location",
+    "department": "Department",
+    "roles": {
+      "server": "Server",
+      "bartender": "Bartender",
+      "linecook": "Line Cook",
+      "hostess": "Hostess",
+      "host": "Host",
+      "manager": "Manager",
+      "chef": "Chef",
+      "cashier": "Cashier",
+      "waiter": "Waiter",
+      "waitress": "Waitress",
+      "busser": "Busser",
+      "dishwasher": "Dishwasher",
+      "cook": "Cook",
+      "barback": "Barback",
+      "sous": "Sous Chef",
+      "expeditor": "Expeditor"
+    }
   },
   "auth": {
     "login": "Mag-log In",
@@ -384,7 +404,9 @@
       "options": "Opsi",
       "analyzing": "Menganalisis jadwal dan ketersediaan...",
       "consideringSkills": "Mempertimbangkan keterampilan, preferensi, dan prioritas Anda",
-      "noSuggestions": "Tidak ada saran"
+      "noSuggestions": "Tidak ada saran",
+      "priorityWeights": "Priority Weights",
+      "generateSchedule": "Generate Schedule"
     },
     "viewModes": {
       "day": "Hari",
@@ -398,7 +420,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "What happens when you publish:"
     },
     "today": "Today",
     "filters": "Filters",
@@ -411,7 +434,21 @@
     "noPendingRequests": "No pending requests",
     "shiftSwaps": "Shift Swaps",
     "noPendingSwaps": "No pending swaps",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "AI Schedule",
+    "addShift": "Add Shift",
+    "requiredSkills": "Required Skills",
+    "skillFiltersPlaceholder": "Skill filters will be available when skills data is loaded from the API.",
+    "clearAllFilters": "Clear all filters",
+    "noEmployeesAvailable": "No employees available",
+    "labourCost": "Labour Cost",
+    "weeklyLabourCost": "Weekly Labour Cost",
+    "scheduled": "Scheduled",
+    "createShift": "Create Shift",
+    "publishSchedule": "Publish Schedule",
+    "publishConfirmation": "You are about to publish {{count}} draft shift(s). This will notify all affected employees about their upcoming shifts.",
+    "publishNow": "Publish Now",
+    "aiScheduleBuilder": "AI Schedule Builder"
   },
   "timeTracking": {
     "title": "Pagsubaybay ng Oras",
@@ -510,7 +547,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "Sick Leave",
+      "annualleave": "Annual Leave",
+      "sickleaveshort": "Sick Leave"
     }
   },
   "feed": {

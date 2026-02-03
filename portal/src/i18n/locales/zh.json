@@ -520,7 +520,27 @@
     "failed": "失败",
     "event": "事件",
     "processing": "处理中...",
-    "creating": "创建中..."
+    "creating": "创建中...",
+    "location": "地点",
+    "department": "部门",
+    "roles": {
+      "server": "服务员",
+      "bartender": "调酒师",
+      "linecook": "配菜厨师",
+      "hostess": "女接待",
+      "host": "接待",
+      "manager": "经理",
+      "chef": "主厨",
+      "cashier": "收银员",
+      "waiter": "服务生",
+      "waitress": "女服务生",
+      "busser": "清洁员",
+      "dishwasher": "洗碗工",
+      "cook": "厨师",
+      "barback": "酒吧助理",
+      "sous": "副主厨",
+      "expeditor": "传菜员"
+    }
   },
   "auth": {
     "login": "登录",
@@ -691,7 +711,9 @@
       "options": "选项",
       "analyzing": "正在分析排班和可用性...",
       "consideringSkills": "考虑技能、偏好和您的优先级",
-      "noSuggestions": "暂无建议"
+      "noSuggestions": "暂无建议",
+      "priorityWeights": "优先级权重",
+      "generateSchedule": "生成排班"
     },
     "viewModes": {
       "day": "日",
@@ -705,7 +727,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "发布后会发生什么:"
     },
     "today": "今天",
     "filters": "筛选",
@@ -718,7 +741,21 @@
     "noPendingRequests": "无待处理请求",
     "shiftSwaps": "换班",
     "noPendingSwaps": "无待处理换班",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "AI排班",
+    "addShift": "添加班次",
+    "requiredSkills": "所需技能",
+    "skillFiltersPlaceholder": "数据加载后技能过滤器将可用。",
+    "clearAllFilters": "清除所有过滤器",
+    "noEmployeesAvailable": "没有可用的员工",
+    "labourCost": "劳动成本",
+    "weeklyLabourCost": "每周劳动成本",
+    "scheduled": "已安排",
+    "createShift": "创建班次",
+    "publishSchedule": "发布排班",
+    "publishConfirmation": "您即将发布 {{count}} 个草稿班次。这将通知所有相关员工。",
+    "publishNow": "立即发布",
+    "aiScheduleBuilder": "AI排班构建器"
   },
   "timeTracking": {
     "title": "考勤",
@@ -817,7 +854,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "病假",
+      "annualleave": "年假",
+      "sickleaveshort": "病假"
     }
   },
   "feed": {

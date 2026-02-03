@@ -213,7 +213,27 @@
     "failed": "Échoué",
     "event": "Événement",
     "processing": "Traitement...",
-    "creating": "Création..."
+    "creating": "Création...",
+    "location": "Emplacement",
+    "department": "Département",
+    "roles": {
+      "server": "Serveur",
+      "bartender": "Barman",
+      "linecook": "Cuisinier de ligne",
+      "hostess": "Hôtesse",
+      "host": "Hôte",
+      "manager": "Directeur",
+      "chef": "Chef",
+      "cashier": "Caissier",
+      "waiter": "Serveur",
+      "waitress": "Serveuse",
+      "busser": "Commis débarrasseur",
+      "dishwasher": "Plongeur",
+      "cook": "Cuisinier",
+      "barback": "Aide-barman",
+      "sous": "Sous-chef",
+      "expeditor": "Expéditeur"
+    }
   },
   "auth": {
     "login": "Se connecter",
@@ -384,7 +404,9 @@
       "options": "Options",
       "analyzing": "Analyse des horaires et de la disponibilité...",
       "consideringSkills": "Prise en compte des compétences, préférences et vos priorités",
-      "noSuggestions": "Aucune suggestion disponible"
+      "noSuggestions": "Aucune suggestion disponible",
+      "priorityWeights": "Poids des priorités",
+      "generateSchedule": "Générer l'horaire"
     },
     "viewModes": {
       "day": "Jour",
@@ -398,7 +420,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "Ce qui se passe lors de la publication :"
     },
     "today": "Aujourd'hui",
     "filters": "Filtres",
@@ -411,7 +434,21 @@
     "noPendingRequests": "Aucune demande en attente",
     "shiftSwaps": "Échanges de postes",
     "noPendingSwaps": "Aucun échange en attente",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "Horaire IA",
+    "addShift": "Ajouter un quart",
+    "requiredSkills": "Compétences requises",
+    "skillFiltersPlaceholder": "Les filtres de compétences seront disponibles lorsque les données seront chargées.",
+    "clearAllFilters": "Effacer tous les filtres",
+    "noEmployeesAvailable": "Aucun employé disponible",
+    "labourCost": "Coût de main-d'œuvre",
+    "weeklyLabourCost": "Coût hebdomadaire de main-d'œuvre",
+    "scheduled": "Planifié",
+    "createShift": "Créer un quart",
+    "publishSchedule": "Publier l'horaire",
+    "publishConfirmation": "Vous êtes sur le point de publier {{count}} quart(s) brouillon(s). Cela notifiera tous les employés concernés.",
+    "publishNow": "Publier maintenant",
+    "aiScheduleBuilder": "Constructeur d'horaire IA"
   },
   "timeTracking": {
     "title": "Suivi du temps",
@@ -510,7 +547,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "Congé maladie",
+      "annualleave": "Congé annuel",
+      "sickleaveshort": "Congé maladie"
     }
   },
   "feed": {

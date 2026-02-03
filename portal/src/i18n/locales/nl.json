@@ -213,7 +213,27 @@
     "failed": "Mislukt",
     "event": "Gebeurtenis",
     "processing": "Verwerken...",
-    "creating": "Aanmaken..."
+    "creating": "Aanmaken...",
+    "location": "Locatie",
+    "department": "Afdeling",
+    "roles": {
+      "server": "Ober",
+      "bartender": "Barman",
+      "linecook": "Lijnkok",
+      "hostess": "Gastvrouw",
+      "host": "Gastheer",
+      "manager": "Manager",
+      "chef": "Chef-kok",
+      "cashier": "Kassier",
+      "waiter": "Ober",
+      "waitress": "Serveerster",
+      "busser": "Afruimer",
+      "dishwasher": "Afwasser",
+      "cook": "Kok",
+      "barback": "Bar-assistent",
+      "sous": "Sous-chef",
+      "expeditor": "Expeditor"
+    }
   },
   "auth": {
     "login": "Inloggen",
@@ -384,7 +404,9 @@
       "options": "Opties",
       "analyzing": "Roosters en beschikbaarheid analyseren...",
       "consideringSkills": "Rekening houdend met vaardigheden, voorkeuren en uw prioriteiten",
-      "noSuggestions": "Geen suggesties beschikbaar"
+      "noSuggestions": "Geen suggesties beschikbaar",
+      "priorityWeights": "Prioriteitsgewichten",
+      "generateSchedule": "Rooster genereren"
     },
     "viewModes": {
       "day": "Dag",
@@ -398,7 +420,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "Wat gebeurt er bij publicatie:"
     },
     "today": "Vandaag",
     "filters": "Filters",
@@ -411,7 +434,21 @@
     "noPendingRequests": "Geen openstaande verzoeken",
     "shiftSwaps": "Dienstruilingen",
     "noPendingSwaps": "Geen openstaande ruilingen",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "AI Rooster",
+    "addShift": "Dienst toevoegen",
+    "requiredSkills": "Vereiste vaardigheden",
+    "skillFiltersPlaceholder": "Vaardigheidsfilters zijn beschikbaar wanneer de gegevens zijn geladen.",
+    "clearAllFilters": "Alle filters wissen",
+    "noEmployeesAvailable": "Geen medewerkers beschikbaar",
+    "labourCost": "Loonkosten",
+    "weeklyLabourCost": "Wekelijkse loonkosten",
+    "scheduled": "Gepland",
+    "createShift": "Dienst aanmaken",
+    "publishSchedule": "Rooster publiceren",
+    "publishConfirmation": "U staat op het punt {{count}} conceptdienst(en) te publiceren. Alle betrokken medewerkers worden geïnformeerd.",
+    "publishNow": "Nu publiceren",
+    "aiScheduleBuilder": "AI Roosterbouwer"
   },
   "timeTracking": {
     "title": "Tijdregistratie",
@@ -510,7 +547,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "Ziekteverlof",
+      "annualleave": "Jaarlijks verlof",
+      "sickleaveshort": "Ziekteverlof"
     }
   },
   "feed": {

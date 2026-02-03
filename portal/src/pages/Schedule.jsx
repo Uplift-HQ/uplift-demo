@@ -364,9 +364,9 @@ export default function Schedule() {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-center">
         <AlertCircle className="w-10 h-10 text-red-400 mb-3" />
-        <p className="text-slate-700 font-medium mb-1">Failed to load schedule</p>
+        <p className="text-slate-700 font-medium mb-1">{t('schedule.loadError', 'Failed to load schedule')}</p>
         <p className="text-slate-500 text-sm mb-4">{error}</p>
-        <button onClick={loadData} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Retry</button>
+        <button onClick={loadData} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">{t('common.retry', 'Retry')}</button>
       </div>
     );
   }
@@ -402,7 +402,7 @@ export default function Schedule() {
                   className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                 >
                   <Sparkles className="w-4 h-4" />
-                  AI Schedule
+                  {t('schedule.aiSchedule', 'AI Schedule')}
                 </button>
                 <button
                   onClick={() => setShowPublishModal(true)}
@@ -414,14 +414,14 @@ export default function Schedule() {
                   }`}
                 >
                   <Send className="w-4 h-4" />
-                  Publish
+                  {t('schedule.publish', 'Publish')}
                 </button>
                 <button
                   onClick={() => setShowAddModal(true)}
                   className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   <Plus className="w-4 h-4" />
-                  Add Shift
+                  {t('schedule.addShift', 'Add Shift')}
                 </button>
               </>
             )}
@@ -520,7 +520,7 @@ export default function Schedule() {
           <div className="p-4 bg-white border-b space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Department</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('common.department', 'Department')}</label>
                 <select
                   value={selectedDepartment}
                   onChange={(e) => setSelectedDepartment(e.target.value)}
@@ -531,8 +531,8 @@ export default function Schedule() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Required Skills</label>
-                <p className="text-sm text-slate-500">Skill filters will be available when skills data is loaded from the API.</p>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('schedule.requiredSkills', 'Required Skills')}</label>
+                <p className="text-sm text-slate-500">{t('schedule.skillFiltersPlaceholder', 'Skill filters will be available when skills data is loaded from the API.')}</p>
               </div>
             </div>
             {activeFiltersCount > 0 && (
@@ -541,7 +541,7 @@ export default function Schedule() {
                   onClick={() => { setSelectedLocation(''); setSelectedDepartment(''); setSelectedSkills([]); }}
                   className="text-sm text-blue-600 hover:text-blue-700"
                 >
-                  Clear all filters
+                  {t('schedule.clearAllFilters', 'Clear all filters')}
                 </button>
               </div>
             )}
@@ -557,7 +557,7 @@ export default function Schedule() {
               {/* Header row */}
               <div className={`grid border-b border-slate-200 sticky top-0 bg-white z-10`} style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}>
                 <div className="p-3 bg-slate-50 border-r border-slate-200">
-                  <span className="text-sm font-semibold text-slate-500">Employee</span>
+                  <span className="text-sm font-semibold text-slate-500">{t('common.employee', 'Employee')}</span>
                 </div>
                 {dateRange.days.map((day) => {
                   const dateStr = format(day, 'yyyy-MM-dd');
@@ -571,7 +571,7 @@ export default function Schedule() {
                         isToday ? 'bg-blue-50' : 'bg-slate-50'
                       }`}
                     >
-                      <p className="text-xs text-slate-500">{format(day, 'EEE')}</p>
+                      <p className="text-xs text-slate-500">{t(`common.days.${format(day, 'EEEE').toLowerCase()}Short`, format(day, 'EEE'))}</p>
                       <p className={`text-lg font-semibold ${isToday ? 'text-blue-600' : 'text-slate-900'}`}>
                         {format(day, 'd')}
                       </p>
@@ -592,7 +592,7 @@ export default function Schedule() {
               {/* Employee rows */}
               {(filteredEmployees.length > 0 ? filteredEmployees : employees).length === 0 ? (
                 <div className="text-center py-12 text-slate-500">
-                  No employees available
+                  {t('schedule.noEmployeesAvailable', 'No employees available')}
                 </div>
               ) : (
                 (filteredEmployees.length > 0 ? filteredEmployees : employees).slice(0, 15).map((employee) => (
@@ -609,7 +609,7 @@ export default function Schedule() {
                         <p className="text-sm font-medium text-slate-900 truncate">
                           {employee.first_name} {employee.last_name}
                         </p>
-                        <p className="text-xs text-slate-500 truncate">{employee.role}</p>
+                        <p className="text-xs text-slate-500 truncate">{t(`common.roles.${employee.role?.toLowerCase().replace(/\s+/g, '')}`, employee.role)}</p>
                       </div>
                     </div>
 
@@ -663,7 +663,7 @@ export default function Schedule() {
                   <div className="w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center">
                     <Users className="w-4 h-4" />
                   </div>
-                  <span className="text-sm font-medium text-slate-700">Open Shifts</span>
+                  <span className="text-sm font-medium text-slate-700">{t('schedule.openShifts', 'Open Shifts')}</span>
                 </div>
                 {dateRange.days.map((day) => {
                   const dayOpenShifts = getShiftsForDay(day).filter(s => s.is_open && !s.employee_id);
@@ -696,7 +696,7 @@ export default function Schedule() {
                   <div className="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
                     <DollarSign className="w-4 h-4" />
                   </div>
-                  <span className="text-sm font-medium text-slate-700">Labour Cost</span>
+                  <span className="text-sm font-medium text-slate-700">{t('schedule.labourCost', 'Labour Cost')}</span>
                 </div>
                 {dateRange.days.map((day) => {
                   const dateStr = format(day, 'yyyy-MM-dd');
@@ -771,7 +771,7 @@ export default function Schedule() {
                     <div key={request.id} className="p-2 bg-slate-50 rounded-lg">
                       <p className="text-sm font-medium text-slate-900">{request.employee_name}</p>
                       <p className="text-xs text-slate-500">{request.start_date} - {request.end_date}</p>
-                      <p className="text-xs text-slate-500">{request.type}</p>
+                      <p className="text-xs text-slate-500">{t(`timeOff.types.${request.type?.toLowerCase().replace(/\s+/g, '')}`, request.type)}</p>
                       {isManager && (
                         <div className="flex gap-2 mt-2">
                           <button
@@ -839,7 +839,7 @@ export default function Schedule() {
             <div className="bg-white rounded-lg p-4 border">
               <h4 className="font-medium text-slate-900 mb-3 flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-green-600" />
-                Weekly Labour Cost
+                {t('schedule.weeklyLabourCost', 'Weekly Labour Cost')}
               </h4>
               {(() => {
                 const totalActual = Object.values(labourCosts).reduce((sum, c) => sum + c.actual, 0);
@@ -847,7 +847,7 @@ export default function Schedule() {
                 return (
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-slate-600">Scheduled</span>
+                      <span className="text-sm text-slate-600">{t('schedule.scheduled', 'Scheduled')}</span>
                       <span className="text-sm font-medium">£{totalActual.toLocaleString()}</span>
                     </div>
                   </div>
@@ -993,14 +993,14 @@ function AddShiftModal({ onClose, onSubmit, employees, locations, defaultDate, d
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Add Shift</h2>
+          <h2 className="text-lg font-semibold">{t('schedule.addShift', 'Add Shift')}</h2>
           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded">
             <X className="h-5 w-5 text-gray-500" />
           </button>
         </div>
         <form onSubmit={(e) => { e.preventDefault(); onSubmit(form); }} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('common.date', 'Date')}</label>
             <input
               type="date"
               value={form.date}
@@ -1010,7 +1010,7 @@ function AddShiftModal({ onClose, onSubmit, employees, locations, defaultDate, d
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('schedule.startTime', 'Start Time')}</label>
               <input
                 type="time"
                 value={form.start_time}
@@ -1019,7 +1019,7 @@ function AddShiftModal({ onClose, onSubmit, employees, locations, defaultDate, d
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">End Time</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('schedule.endTime', 'End Time')}</label>
               <input
                 type="time"
                 value={form.end_time}
@@ -1029,7 +1029,7 @@ function AddShiftModal({ onClose, onSubmit, employees, locations, defaultDate, d
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('common.location', 'Location')}</label>
             <select
               value={form.location_id}
               onChange={(e) => setForm({ ...form, location_id: e.target.value })}
@@ -1041,7 +1041,7 @@ function AddShiftModal({ onClose, onSubmit, employees, locations, defaultDate, d
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Employee</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('common.employee', 'Employee')}</label>
             <select
               value={form.employee_id}
               onChange={(e) => setForm({ ...form, employee_id: e.target.value })}
@@ -1055,10 +1055,10 @@ function AddShiftModal({ onClose, onSubmit, employees, locations, defaultDate, d
           </div>
           <div className="flex justify-end gap-3 pt-4">
             <button type="button" onClick={onClose} className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </button>
             <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Create Shift
+              {t('schedule.createShift', 'Create Shift')}
             </button>
           </div>
         </form>
@@ -1074,7 +1074,7 @@ function PublishModal({ draftCount, onClose, onPublish, t }) {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <Send className="w-5 h-5 text-green-600" />
-            Publish Schedule
+            {t('schedule.publishSchedule', 'Publish Schedule')}
           </h2>
           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded">
             <X className="h-5 w-5 text-gray-500" />
@@ -1082,11 +1082,10 @@ function PublishModal({ draftCount, onClose, onPublish, t }) {
         </div>
         <div className="space-y-4">
           <p className="text-slate-600">
-            You are about to publish <strong>{draftCount} draft shift{draftCount > 1 ? 's' : ''}</strong>.
-            This will notify all affected employees about their upcoming shifts.
+            {t('schedule.publishConfirmation', 'You are about to publish {{count}} draft shift(s). This will notify all affected employees about their upcoming shifts.', { count: draftCount })}
           </p>
           <div className="bg-blue-50 p-3 rounded-lg text-sm text-blue-700">
-            <p className="font-medium">What happens when you publish:</p>
+            <p className="font-medium">{t('schedule.publish.whatHappens', 'What happens when you publish:')}</p>
             <ul className="mt-2 space-y-1 list-disc list-inside">
               <li>{t('schedule.publish.notification1', 'Employees receive push notifications')}</li>
               <li>{t('schedule.publish.notification2', 'Shifts appear in employee apps')}</li>
@@ -1096,11 +1095,11 @@ function PublishModal({ draftCount, onClose, onPublish, t }) {
         </div>
         <div className="flex justify-end gap-3 pt-6">
           <button onClick={onClose} className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
-            Cancel
+            {t('common.cancel', 'Cancel')}
           </button>
           <button onClick={onPublish} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2">
             <Send className="w-4 h-4" />
-            Publish Now
+            {t('schedule.publishNow', 'Publish Now')}
           </button>
         </div>
       </div>
@@ -1115,7 +1114,7 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
         <div className="flex justify-between items-center p-6 border-b shrink-0">
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-purple-600" />
-            AI Schedule Builder
+            {t('schedule.aiScheduleBuilder', 'AI Schedule Builder')}
           </h2>
           <button onClick={onClose} className="p-1.5 hover:bg-gray-100 rounded-lg">
             <X className="h-5 w-5 text-gray-500" />
@@ -1126,7 +1125,7 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
           {!suggestions && !loading && (
             <div className="space-y-6">
               <div>
-                <h3 className="font-medium text-slate-900 mb-4">Priority Weights</h3>
+                <h3 className="font-medium text-slate-900 mb-4">{t('schedule.ai.priorityWeights', 'Priority Weights')}</h3>
                 <div className="space-y-4">
                   {[
                     { key: 'skillsWeight', labelKey: 'schedule.ai.skillsMatch', icon: Award },
@@ -1199,7 +1198,7 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
 
         <div className="p-6 border-t bg-white shrink-0 flex justify-end gap-3">
           <button onClick={onClose} className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
-            Cancel
+            {t('common.cancel', 'Cancel')}
           </button>
           {!suggestions && (
             <button
@@ -1207,7 +1206,7 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
               className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2"
             >
               <Sparkles className="w-4 h-4" />
-              Generate Schedule
+              {t('schedule.ai.generateSchedule', 'Generate Schedule')}
             </button>
           )}
         </div>

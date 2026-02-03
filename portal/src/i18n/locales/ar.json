@@ -213,7 +213,27 @@
     "failed": "فشل",
     "event": "حدث",
     "processing": "جاري المعالجة...",
-    "creating": "جاري الإنشاء..."
+    "creating": "جاري الإنشاء...",
+    "location": "الموقع",
+    "department": "القسم",
+    "roles": {
+      "server": "نادل",
+      "bartender": "نادل البار",
+      "linecook": "طباخ الخط",
+      "hostess": "مضيفة",
+      "host": "مضيف",
+      "manager": "مدير",
+      "chef": "طاهٍ",
+      "cashier": "أمين صندوق",
+      "waiter": "نادل",
+      "waitress": "نادلة",
+      "busser": "عامل تنظيف الطاولات",
+      "dishwasher": "غاسل صحون",
+      "cook": "طباخ",
+      "barback": "مساعد البار",
+      "sous": "نائب الشيف",
+      "expeditor": "منسق الطلبات"
+    }
   },
   "auth": {
     "login": "تسجيل الدخول",
@@ -384,7 +404,9 @@
       "options": "خيارات",
       "analyzing": "تحليل الجداول والتوفر...",
       "consideringSkills": "مراعاة المهارات والتفضيلات وأولوياتك",
-      "noSuggestions": "لا توجد اقتراحات"
+      "noSuggestions": "لا توجد اقتراحات",
+      "priorityWeights": "أوزان الأولوية",
+      "generateSchedule": "إنشاء الجدول"
     },
     "viewModes": {
       "day": "يوم",
@@ -398,7 +420,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "ما يحدث عند النشر:"
     },
     "today": "اليوم",
     "filters": "فلاتر",
@@ -411,7 +434,21 @@
     "noPendingRequests": "لا توجد طلبات معلقة",
     "shiftSwaps": "تبديل الورديات",
     "noPendingSwaps": "لا توجد تبديلات معلقة",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "جدول الذكاء الاصطناعي",
+    "addShift": "إضافة وردية",
+    "requiredSkills": "المهارات المطلوبة",
+    "skillFiltersPlaceholder": "ستكون فلاتر المهارات متاحة عند تحميل البيانات.",
+    "clearAllFilters": "مسح جميع الفلاتر",
+    "noEmployeesAvailable": "لا يوجد موظفون متاحون",
+    "labourCost": "تكلفة العمالة",
+    "weeklyLabourCost": "تكلفة العمالة الأسبوعية",
+    "scheduled": "مجدول",
+    "createShift": "إنشاء وردية",
+    "publishSchedule": "نشر الجدول",
+    "publishConfirmation": "أنت على وشك نشر {{count}} وردية مسودة. سيتم إخطار جميع الموظفين المعنيين.",
+    "publishNow": "نشر الآن",
+    "aiScheduleBuilder": "منشئ جدول الذكاء الاصطناعي"
   },
   "timeTracking": {
     "title": "تتبع الوقت",
@@ -510,7 +547,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "إجازة مرضية",
+      "annualleave": "إجازة سنوية",
+      "sickleaveshort": "إجازة مرضية"
     }
   },
   "feed": {

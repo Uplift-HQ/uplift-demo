@@ -213,7 +213,27 @@
     "failed": "Falhou",
     "event": "Evento",
     "processing": "Processando...",
-    "creating": "Criando..."
+    "creating": "Criando...",
+    "location": "Localização",
+    "department": "Departamento",
+    "roles": {
+      "server": "Garçom",
+      "bartender": "Barman",
+      "linecook": "Cozinheiro de linha",
+      "hostess": "Recepcionista",
+      "host": "Recepcionista",
+      "manager": "Gerente",
+      "chef": "Chef",
+      "cashier": "Caixa",
+      "waiter": "Garçom",
+      "waitress": "Garçonete",
+      "busser": "Auxiliar de salão",
+      "dishwasher": "Lavador de louça",
+      "cook": "Cozinheiro",
+      "barback": "Auxiliar de bar",
+      "sous": "Sous Chef",
+      "expeditor": "Expedidor"
+    }
   },
   "auth": {
     "login": "Entrar",
@@ -384,7 +404,9 @@
       "options": "Opções",
       "analyzing": "Analisando horários e disponibilidade...",
       "consideringSkills": "Considerando habilidades, preferências e suas prioridades",
-      "noSuggestions": "Nenhuma sugestão disponível"
+      "noSuggestions": "Nenhuma sugestão disponível",
+      "priorityWeights": "Pesos de prioridade",
+      "generateSchedule": "Gerar agenda"
     },
     "viewModes": {
       "day": "Dia",
@@ -398,7 +420,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "O que acontece ao publicar:"
     },
     "today": "Hoje",
     "filters": "Filtros",
@@ -411,7 +434,21 @@
     "noPendingRequests": "Sem solicitações pendentes",
     "shiftSwaps": "Trocas de turno",
     "noPendingSwaps": "Sem trocas pendentes",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "Agenda IA",
+    "addShift": "Adicionar turno",
+    "requiredSkills": "Habilidades necessárias",
+    "skillFiltersPlaceholder": "Os filtros de habilidades estarão disponíveis quando os dados forem carregados.",
+    "clearAllFilters": "Limpar todos os filtros",
+    "noEmployeesAvailable": "Nenhum funcionário disponível",
+    "labourCost": "Custo de mão de obra",
+    "weeklyLabourCost": "Custo semanal de mão de obra",
+    "scheduled": "Agendado",
+    "createShift": "Criar turno",
+    "publishSchedule": "Publicar agenda",
+    "publishConfirmation": "Você está prestes a publicar {{count}} turno(s) rascunho(s). Isso notificará todos os funcionários afetados.",
+    "publishNow": "Publicar agora",
+    "aiScheduleBuilder": "Construtor de agenda IA"
   },
   "timeTracking": {
     "title": "Controle de ponto",
@@ -510,7 +547,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "Licença médica",
+      "annualleave": "Férias anuais",
+      "sickleaveshort": "Licença médica"
     }
   },
   "feed": {

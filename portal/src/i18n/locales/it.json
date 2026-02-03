@@ -213,7 +213,27 @@
     "failed": "Fallito",
     "event": "Evento",
     "processing": "Elaborazione...",
-    "creating": "Creazione..."
+    "creating": "Creazione...",
+    "location": "Posizione",
+    "department": "Reparto",
+    "roles": {
+      "server": "Cameriere",
+      "bartender": "Barista",
+      "linecook": "Cuoco di linea",
+      "hostess": "Hostess",
+      "host": "Host",
+      "manager": "Manager",
+      "chef": "Chef",
+      "cashier": "Cassiere",
+      "waiter": "Cameriere",
+      "waitress": "Cameriera",
+      "busser": "Aiuto cameriere",
+      "dishwasher": "Lavapiatti",
+      "cook": "Cuoco",
+      "barback": "Aiuto barista",
+      "sous": "Sous Chef",
+      "expeditor": "Expeditor"
+    }
   },
   "auth": {
     "login": "Accedi",
@@ -384,7 +404,9 @@
       "options": "Opzioni",
       "analyzing": "Analisi degli orari e della disponibilità...",
       "consideringSkills": "Considerando competenze, preferenze e le tue priorità",
-      "noSuggestions": "Nessun suggerimento disponibile"
+      "noSuggestions": "Nessun suggerimento disponibile",
+      "priorityWeights": "Pesi delle priorità",
+      "generateSchedule": "Genera programma"
     },
     "viewModes": {
       "day": "Giorno",
@@ -398,7 +420,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "Cosa succede quando pubblichi:"
     },
     "today": "Oggi",
     "filters": "Filtri",
@@ -411,7 +434,21 @@
     "noPendingRequests": "Nessuna richiesta in attesa",
     "shiftSwaps": "Scambi turno",
     "noPendingSwaps": "Nessuno scambio in attesa",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "Programma IA",
+    "addShift": "Aggiungi turno",
+    "requiredSkills": "Competenze richieste",
+    "skillFiltersPlaceholder": "I filtri delle competenze saranno disponibili quando i dati saranno caricati.",
+    "clearAllFilters": "Cancella tutti i filtri",
+    "noEmployeesAvailable": "Nessun dipendente disponibile",
+    "labourCost": "Costo del lavoro",
+    "weeklyLabourCost": "Costo settimanale del lavoro",
+    "scheduled": "Programmato",
+    "createShift": "Crea turno",
+    "publishSchedule": "Pubblica programma",
+    "publishConfirmation": "Stai per pubblicare {{count}} turno/i in bozza. Questo notificherà tutti i dipendenti interessati.",
+    "publishNow": "Pubblica ora",
+    "aiScheduleBuilder": "Costruttore di programmi IA"
   },
   "timeTracking": {
     "title": "Rilevazione presenze",
@@ -510,7 +547,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "Congedo per malattia",
+      "annualleave": "Ferie annuali",
+      "sickleaveshort": "Congedo per malattia"
     }
   },
   "feed": {

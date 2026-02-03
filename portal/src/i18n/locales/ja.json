@@ -213,7 +213,27 @@
     "failed": "失敗",
     "event": "イベント",
     "processing": "処理中...",
-    "creating": "作成中..."
+    "creating": "作成中...",
+    "location": "場所",
+    "department": "部門",
+    "roles": {
+      "server": "サーバー",
+      "bartender": "バーテンダー",
+      "linecook": "ラインコック",
+      "hostess": "ホステス",
+      "host": "ホスト",
+      "manager": "マネージャー",
+      "chef": "シェフ",
+      "cashier": "レジ係",
+      "waiter": "ウェイター",
+      "waitress": "ウェイトレス",
+      "busser": "バッサー",
+      "dishwasher": "皿洗い",
+      "cook": "調理師",
+      "barback": "バーバック",
+      "sous": "副料理長",
+      "expeditor": "エキスペディター"
+    }
   },
   "auth": {
     "login": "ログイン",
@@ -384,7 +404,9 @@
       "options": "オプション",
       "analyzing": "スケジュールと空き状況を分析中...",
       "consideringSkills": "スキル、希望、優先事項を考慮",
-      "noSuggestions": "提案はありません"
+      "noSuggestions": "提案はありません",
+      "priorityWeights": "優先度の重み",
+      "generateSchedule": "スケジュールを生成"
     },
     "viewModes": {
       "day": "日",
@@ -398,7 +420,8 @@
     "publish": {
       "notification1": "Employees receive push notifications",
       "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications"
+      "notification3": "Changes after this will trigger new notifications",
+      "whatHappens": "公開すると:"
     },
     "today": "今日",
     "filters": "フィルター",
@@ -411,7 +434,21 @@
     "noPendingRequests": "保留中のリクエストなし",
     "shiftSwaps": "シフト交換",
     "noPendingSwaps": "保留中の交換なし",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedule": "AIスケジュール",
+    "addShift": "シフトを追加",
+    "requiredSkills": "必要なスキル",
+    "skillFiltersPlaceholder": "データが読み込まれるとスキルフィルターが利用可能になります。",
+    "clearAllFilters": "すべてのフィルターをクリア",
+    "noEmployeesAvailable": "利用可能な従業員がいません",
+    "labourCost": "人件費",
+    "weeklyLabourCost": "週間人件費",
+    "scheduled": "予定済み",
+    "createShift": "シフトを作成",
+    "publishSchedule": "スケジュールを公開",
+    "publishConfirmation": "{{count}}件の下書きシフトを公開しようとしています。すべての関係する従業員に通知されます。",
+    "publishNow": "今すぐ公開",
+    "aiScheduleBuilder": "AIスケジュールビルダー"
   },
   "timeTracking": {
     "title": "勤怠管理",
@@ -510,7 +547,10 @@
       "bereavement": "Bereavement",
       "maternity": "Maternity",
       "paternity": "Paternity",
-      "unpaid": "Unpaid Leave"
+      "unpaid": "Unpaid Leave",
+      "sickleave": "病気休暇",
+      "annualleave": "年次休暇",
+      "sickleaveshort": "病気休暇"
     }
   },
   "feed": {
