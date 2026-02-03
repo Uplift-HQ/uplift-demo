@@ -170,6 +170,14 @@ export const dashboard = {
     { id: 'alert-1', type: 'expiring', severity: 'warning', title: 'Certifications expiring within 30 days', employees: [
       { id: 'e13', name: 'Rachel Green', skill: 'Allergen Awareness', expiresIn: '12 days' },
     ]},
+    { id: 'alert-2', type: 'training', severity: 'info', title: 'Training in progress or pending', employees: [
+      { id: 'e1', name: 'Marc Hunt', skill: 'Food Safety Level 3', status: 'in_progress' },
+      { id: 'e10', name: 'Liam O\'Brien', skill: 'Customer Service Excellence', status: 'pending' },
+      { id: 'e14', name: 'Ahmed Hassan', skill: 'Kitchen Safety', status: 'in_progress' },
+    ]},
+    { id: 'alert-3', type: 'document', severity: 'warning', title: 'Probation reviews due', employees: [
+      { id: 'e10', name: 'Liam O\'Brien', reviewDue: '5 days' },
+    ]},
   ],
   activityFeed: activity.slice(0, 5),
   recentRecognitions: [

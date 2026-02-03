@@ -201,7 +201,7 @@ export default function Dashboard() {
                       alert.severity === 'error' ? 'text-red-600' :
                       alert.severity === 'warning' ? 'text-amber-600' :
                       'text-blue-600'
-                    }`}>{alert.employees?.length || 0} employees - Click to see who</p>
+                    }`}>{alert.employees?.length || 0} {(alert.employees?.length || 0) === 1 ? 'employee' : 'employees'} - Click to see who</p>
                   </div>
                   <ChevronRight className="w-5 h-5 text-slate-400" />
                 </button>
@@ -231,7 +231,7 @@ export default function Dashboard() {
                       </div>
                       <div>
                         <h2 className="font-semibold text-slate-900">{selectedAlert.title}</h2>
-                        <p className="text-sm text-slate-600">{selectedAlert.employees?.length || 0} employees affected</p>
+                        <p className="text-sm text-slate-600">{selectedAlert.employees?.length || 0} {(selectedAlert.employees?.length || 0) === 1 ? 'employee' : 'employees'} affected</p>
                       </div>
                     </div>
                     <button
