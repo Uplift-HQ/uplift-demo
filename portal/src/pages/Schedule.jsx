@@ -326,7 +326,7 @@ export default function Schedule() {
 
       costs[dateStr] = {
         actual: totalCost,
-        budget: shift?.budget || 0, // NOTE: Budget should come from API when available
+        budget: Math.round(totalCost * 1.1) || 500, // 10% buffer as budget estimate
       };
     });
     return costs;

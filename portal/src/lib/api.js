@@ -22,6 +22,7 @@ import {
   generateTimeEntries,
   timeEntries,
   getWeekStart,
+  shiftTemplates,
 } from '../data/mockData';
 
 // Map mockData to expected names for compatibility
@@ -69,10 +70,7 @@ const DEMO_IMPORT_TEMPLATES = [
 const DEMO_HOURS_REPORT = { summary: { totalScheduled: 1248, totalWorked: 1192, variance: -4.5, overtime: 48 }, byEmployee: employees.map(e => ({ id: e.id, name: e.name, scheduled: 140, worked: 132, overtime: 0 })) };
 const DEMO_ATTENDANCE_REPORT = { summary: { totalShifts: 156, onTime: 142, late: 10, noShow: 4, punctualityRate: 91 }, byEmployee: employees.map(e => ({ id: e.id, name: e.name, shifts: 20, onTime: 18, late: 2, noShow: 0, punctualityRate: 90 })) };
 const DEMO_LABOR_COST_REPORT = { summary: { totalCost: reports.laborCost.current, scheduledCost: reports.laborCost.budget, variance: reports.laborCost.variance, averageRate: 12.25 }, byLocation: locations.map(l => ({ id: l.id, name: l.name, cost: Math.round(Math.random() * 3000 + 2000), hours: Math.round(Math.random() * 200 + 100) })), trend: reports.laborCost.data.map((v, i) => ({ week: `Week ${i + 1}`, cost: v })) };
-const DEMO_SHIFT_TEMPLATES = [
-  { id: 'tpl-1', name: 'Weekday Standard', description: 'Mon-Fri typical coverage', shifts_count: 15, locations: ['Manchester Central', 'London Victoria'], created_at: '2025-12-01' },
-  { id: 'tpl-2', name: 'Weekend Busy', description: 'Enhanced weekend staffing', shifts_count: 20, locations: ['Manchester Central', 'London Victoria', 'Birmingham'], created_at: '2025-12-05' },
-];
+const DEMO_SHIFT_TEMPLATES = shiftTemplates;
 const DEMO_API_KEYS = [
   { id: 'key-1', name: 'Production API Key', prefix: 'uplift_live_7x9k...mP2q', created_at: '2025-10-15', last_used: new Date(Date.now() - 300000).toISOString(), scope: 'Full access' },
 ];
@@ -649,33 +647,66 @@ export const dashboardApi = {
 export const reportsApi = {
   hours: async (params) => {
     if (DEMO_MODE) {
-      return DEMO_HOURS_REPORT;
+      // Format data as array of rows for the table
+      const data = DEMO_EMPLOYEES.map(e => ({
+        id: e.id,
+        first_name: e.first_name,
+        last_name: e.last_name,
+        location_name: e.location,
+        total_hours: 140 + Math.floor(Math.random() * 20),
+        regular_hours: 140,
+        overtime_hours: Math.floor(Math.random() * 8),
+        labor_cost: (140 * 12.5) + (Math.floor(Math.random() * 8) * 18.75),
+      }));
+      return { data, totals: DEMO_HOURS_REPORT.summary };
     }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/hours?${query}`);
   },
   attendance: async (params) => {
     if (DEMO_MODE) {
-      return DEMO_ATTENDANCE_REPORT;
+      const data = DEMO_EMPLOYEES.map(e => ({
+        id: e.id,
+        first_name: e.first_name,
+        last_name: e.last_name,
+        location_name: e.location,
+        total_shifts: 20,
+        on_time: 18,
+        late: 2,
+        no_show: 0,
+        punctuality_rate: 90,
+      }));
+      return { data, totals: DEMO_ATTENDANCE_REPORT.summary };
     }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/attendance?${query}`);
   },
   laborCost: async (params) => {
     if (DEMO_MODE) {
-      return DEMO_LABOR_COST_REPORT;
+      const data = DEMO_LOCATIONS.map(l => ({
+        id: l.id,
+        location_name: l.name,
+        hours: 200 + Math.floor(Math.random() * 100),
+        cost: 2500 + Math.floor(Math.random() * 1500),
+        budget: 4000,
+        variance: -500 + Math.floor(Math.random() * 1000),
+      }));
+      return { data, totals: DEMO_LABOR_COST_REPORT.summary };
     }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/labor-cost?${query}`);
   },
   coverage: async (params) => {
     if (DEMO_MODE) {
-      return {
-        summary: { coverageRate: 94, understaffedShifts: 4, overstaffedShifts: 2 },
-        byLocation: DEMO_LOCATIONS.map(l => ({
-          id: l.id, name: l.name, coverage: Math.round(Math.random() * 10 + 90),
-        })),
-      };
+      const data = DEMO_LOCATIONS.map(l => ({
+        id: l.id,
+        location_name: l.name,
+        total_shifts: 20 + Math.floor(Math.random() * 10),
+        filled_shifts: 18 + Math.floor(Math.random() * 8),
+        open_shifts: 2 + Math.floor(Math.random() * 3),
+        coverage_rate: 85 + Math.floor(Math.random() * 15),
+      }));
+      return { data, totals: { coverageRate: 94, understaffedShifts: 4, overstaffedShifts: 2 } };
     }
     const query = new URLSearchParams(params).toString();
     return api.get(`/reports/coverage?${query}`);

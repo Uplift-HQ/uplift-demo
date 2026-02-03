@@ -302,3 +302,13 @@ export const getWeekStart = () => {
   const diff = now.getDate() - day + (day === 0 ? -6 : 1);
   return new Date(now.setDate(diff));
 };
+
+// Shift Templates - field names match ShiftTemplates.jsx expectations
+export const shiftTemplates = [
+  { id: 'st1', name: 'Morning Server', role: 'Server', start_time: '07:00', end_time: '15:00', duration: 8, location_id: 'l1', location_name: 'Manchester Central', break_minutes: 30, notes: 'Opening duties included', days_of_week: [1, 2, 3, 4, 5], headcount: 2 },
+  { id: 'st2', name: 'Evening Server', role: 'Server', start_time: '15:00', end_time: '23:00', duration: 8, location_id: 'l1', location_name: 'Manchester Central', break_minutes: 30, notes: 'Closing duties included', days_of_week: [1, 2, 3, 4, 5], headcount: 3 },
+  { id: 'st3', name: 'Bar Shift', role: 'Bartender', start_time: '16:00', end_time: '00:00', duration: 8, location_id: 'l1', location_name: 'Manchester Central', break_minutes: 30, notes: 'Stock check at end of shift', days_of_week: [4, 5, 6], headcount: 2 },
+  { id: 'st4', name: 'Kitchen AM', role: 'Line Cook', start_time: '06:00', end_time: '14:00', duration: 8, location_id: 'l1', location_name: 'Manchester Central', break_minutes: 30, notes: 'Prep for lunch service', days_of_week: [1, 2, 3, 4, 5, 6], headcount: 2 },
+  { id: 'st5', name: 'Kitchen PM', role: 'Line Cook', start_time: '14:00', end_time: '22:00', duration: 8, location_id: 'l1', location_name: 'Manchester Central', break_minutes: 30, notes: 'Dinner service', days_of_week: [1, 2, 3, 4, 5, 6], headcount: 2 },
+  { id: 'st6', name: 'Weekend Brunch', role: 'Server', start_time: '09:00', end_time: '16:00', duration: 7, location_id: 'l2', location_name: 'London Victoria', break_minutes: 30, notes: 'Sat/Sun only', days_of_week: [0, 6], headcount: 4 }
+];
