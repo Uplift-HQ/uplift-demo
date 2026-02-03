@@ -77,7 +77,7 @@ export const timeOff = {
   ]
 };
 
-// Activity
+// Activity (dashboard feed)
 export const activity = [
   { id: 'act1', type: 'clock_in', user: 'Marc Hunt', action: 'clocked in', location: 'Manchester Central', time: '5 min ago' },
   { id: 'act2', type: 'clock_in', user: 'Jessica Bano', action: 'clocked in', location: 'Manchester Central', time: '15 min ago' },
@@ -87,6 +87,22 @@ export const activity = [
   { id: 'act6', type: 'schedule_published', user: 'Sarah Chen', action: 'published schedule', message: 'Week of Jan 12-18', time: '4 hr ago' },
   { id: 'act7', type: 'employee_added', user: 'Admin', target: 'Ahmed Hassan', message: 'Kitchen Porter - Manchester Central', time: '1 day ago' },
   { id: 'act8', type: 'employee_promoted', user: 'Admin', target: 'James Williams', message: 'Promoted to Shift Supervisor', time: '2 days ago' }
+];
+
+// Submissions (for Activity review page) - status: pending, approved, rejected; type: task_completion, proof_upload, form_submission
+export const submissions = [
+  { id: 'sub1', type: 'task_completion', status: 'pending', employee_id: 'e1', employee_name: 'Marc Hunt', title: 'Complete opening checklist', description: 'Daily opening duties completed', submitted_at: new Date(Date.now() - 1800000).toISOString(), location: 'Manchester Central' },
+  { id: 'sub2', type: 'proof_upload', status: 'pending', employee_id: 'e2', employee_name: 'Jessica Bano', title: 'Food Safety Certificate', description: 'Uploaded Level 2 certificate', submitted_at: new Date(Date.now() - 3600000).toISOString(), location: 'Manchester Central', attachment: 'certificate.pdf' },
+  { id: 'sub3', type: 'form_submission', status: 'pending', employee_id: 'e3', employee_name: 'Thomas Cane', title: 'Incident Report', description: 'Minor slip reported in kitchen', submitted_at: new Date(Date.now() - 5400000).toISOString(), location: 'Manchester Central' },
+  { id: 'sub4', type: 'task_completion', status: 'pending', employee_id: 'e4', employee_name: 'Anna Martinez', title: 'Complete closing checklist', description: 'End of shift duties completed', submitted_at: new Date(Date.now() - 7200000).toISOString(), location: 'London Victoria' },
+  { id: 'sub5', type: 'proof_upload', status: 'pending', employee_id: 'e5', employee_name: 'Sofia Chen', title: 'Allergen Training Certificate', description: 'Completed allergen awareness training', submitted_at: new Date(Date.now() - 10800000).toISOString(), location: 'Manchester Central', attachment: 'allergen_cert.pdf' },
+  { id: 'sub6', type: 'task_completion', status: 'approved', employee_id: 'e6', employee_name: 'James Williams', title: 'Complete inventory count', description: 'Weekly stock take completed', submitted_at: new Date(Date.now() - 86400000).toISOString(), location: 'London Victoria', approved_by: 'Sarah Chen', approved_at: new Date(Date.now() - 82800000).toISOString() },
+  { id: 'sub7', type: 'proof_upload', status: 'approved', employee_id: 'e7', employee_name: 'Priya Patel', title: 'First Aid Certificate', description: 'Renewed first aid certification', submitted_at: new Date(Date.now() - 172800000).toISOString(), location: 'Birmingham New St', attachment: 'firstaid.pdf', approved_by: 'Tom Richards', approved_at: new Date(Date.now() - 169200000).toISOString() },
+  { id: 'sub8', type: 'form_submission', status: 'approved', employee_id: 'e8', employee_name: 'Tom Richards', title: 'Equipment Request', description: 'New blender for bar', submitted_at: new Date(Date.now() - 259200000).toISOString(), location: 'Leeds Central', approved_by: 'Fiona Campbell', approved_at: new Date(Date.now() - 255600000).toISOString() },
+  { id: 'sub9', type: 'task_completion', status: 'approved', employee_id: 'e9', employee_name: 'Fiona Campbell', title: 'Monthly safety audit', description: 'Completed fire safety check', submitted_at: new Date(Date.now() - 345600000).toISOString(), location: 'Edinburgh Princes St', approved_by: 'Admin', approved_at: new Date(Date.now() - 342000000).toISOString() },
+  { id: 'sub10', type: 'form_submission', status: 'rejected', employee_id: 'e10', employee_name: 'Liam O\'Brien', title: 'Time off request', description: 'Requested 2 weeks during peak season', submitted_at: new Date(Date.now() - 432000000).toISOString(), location: 'Leeds Central', rejected_by: 'Tom Richards', rejected_at: new Date(Date.now() - 428400000).toISOString(), rejection_reason: 'Insufficient coverage during peak period' },
+  { id: 'sub11', type: 'proof_upload', status: 'pending', employee_id: 'e11', employee_name: 'Emma Watson', title: 'Barista Certification', description: 'Coffee machine training completed', submitted_at: new Date(Date.now() - 14400000).toISOString(), location: 'Edinburgh Princes St', attachment: 'barista_cert.pdf' },
+  { id: 'sub12', type: 'task_completion', status: 'pending', employee_id: 'e12', employee_name: 'David Kim', title: 'Kitchen deep clean', description: 'Weekly deep clean completed', submitted_at: new Date(Date.now() - 21600000).toISOString(), location: 'London Victoria' }
 ];
 
 // Integrations

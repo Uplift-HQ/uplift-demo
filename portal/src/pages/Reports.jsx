@@ -689,11 +689,11 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                     onChange={(e) => setReport({ ...report, groupBy: e.target.value })}
                     className="input"
                   >
-                    <option value="employee">{t('reports.employee')}</option>
-                    <option value="location">{t('reports.location')}</option>
-                    <option value="department">{t('reports.department')}</option>
-                    <option value="day">{t('common.day')}</option>
-                    <option value="week">{t('common.week')}</option>
+                    <option value="employee">Employee</option>
+                    <option value="location">Location</option>
+                    <option value="department">Department</option>
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
                   </select>
                 </div>
                 <div>
@@ -718,9 +718,9 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                 <label className="block text-sm font-medium text-slate-700 mb-2">Filters</label>
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm text-slate-600">{t('reports.location')}</label>
+                    <label className="text-sm text-slate-600">Location</label>
                     <select className="input mt-1">
-                      <option value="">{t('reports.allLocations')}</option>
+                      <option value="">All Locations</option>
                       {(locations || []).map((l) => (
                         <option key={l.id} value={l.id}>{l.name}</option>
                       ))}
@@ -792,9 +792,9 @@ function HoursTable({ data, groupBy }) {
       <thead>
         <tr>
           <th>{groupBy === 'employee' ? 'Employee' : groupBy === 'location' ? 'Location' : 'Date'}</th>
-          <th className="text-right">{t('reports.totalHours')}</th>
+          <th className="text-right">Total Hours</th>
           <th className="text-right">Regular</th>
-          <th className="text-right">{t('reports.overtime')}</th>
+          <th className="text-right">Overtime</th>
           {groupBy === 'employee' && <th className="text-right">Labor Cost</th>}
         </tr>
       </thead>
@@ -826,7 +826,7 @@ function AttendanceTable({ data }) {
     <table className="table">
       <thead>
         <tr>
-          <th>{t('reports.employee')}</th>
+          <th>Employee</th>
           <th className="text-right">Scheduled</th>
           <th className="text-right">Worked</th>
           <th className="text-right">Missed</th>
@@ -865,7 +865,7 @@ function LaborCostTable({ data }) {
     <table className="table">
       <thead>
         <tr>
-          <th>{t('reports.period')}</th>
+          <th>Period</th>
           <th className="text-right">Employees</th>
           <th className="text-right">Hours</th>
           <th className="text-right">Regular Cost</th>
@@ -894,8 +894,8 @@ function CoverageTable({ data }) {
     <table className="table">
       <thead>
         <tr>
-          <th>{t('reports.date')}</th>
-          <th>{t('reports.location')}</th>
+          <th>Date</th>
+          <th>Location</th>
           <th className="text-right">Total Shifts</th>
           <th className="text-right">Filled</th>
           <th className="text-right">Open</th>

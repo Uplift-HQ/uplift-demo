@@ -11,6 +11,7 @@ import {
   rewards,
   timeOff,
   activity,
+  submissions,
   integrations,
   reports,
   settings,
@@ -291,7 +292,7 @@ class ApiClient {
 
     // Activity
     if (path.startsWith('/activity')) {
-      return { activities: DEMO_ACTIVITIES };
+      return { activities: DEMO_ACTIVITIES, submissions: submissions };
     }
 
     // Career
