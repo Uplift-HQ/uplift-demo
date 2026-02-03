@@ -162,6 +162,30 @@
     "monday": "月",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "日",
+    "week": "週",
+    "days": {
+      "monday": "月曜日",
+      "tuesday": "火曜日",
+      "wednesday": "水曜日",
+      "thursday": "木曜日",
+      "friday": "金曜日",
+      "saturday": "土曜日",
+      "sunday": "日曜日",
+      "mondayShort": "月",
+      "tuesdayShort": "火",
+      "wednesdayShort": "水",
+      "thursdayShort": "木",
+      "fridayShort": "金",
+      "saturdayShort": "土",
+      "sundayShort": "日"
+    },
+    "shifts": {
+      "morning": "午前",
+      "afternoon": "午後",
+      "evening": "夕方",
+      "night": "夜間"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "スキルマッチ",
+      "budgetCompliance": "予算遵守",
+      "employeePreferences": "従業員の希望",
+      "hoursFairness": "時間の公平性",
+      "careerDevelopment": "キャリア開発",
+      "respectRestPeriods": "11時間の休息期間を尊重",
+      "avoidOvertime": "必要でない限り残業を避ける",
+      "includeTrainingShifts": "育成中スタッフの研修シフトを含める",
+      "options": "オプション",
+      "analyzing": "スケジュールと空き状況を分析中...",
+      "consideringSkills": "スキル、希望、優先事項を考慮",
+      "noSuggestions": "提案はありません"
+    },
+    "viewModes": {
+      "day": "日",
+      "week": "週",
+      "twoWeeks": "2週間",
+      "month": "月"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "希望時間",
     "maxHoursPerWeek": "週最大時間",
     "allSet": "準備完了！",
-    "startExploring": "シフトと機会の探索を始めましょう"
+    "startExploring": "シフトと機会の探索を始めましょう",
+    "availabilityDesc": "従業員の勤務可能時間とスケジュール設定を行います。",
+    "availabilityTitle": "勤務可能時間と設定",
+    "daysAvailable": "勤務可能日",
+    "preferredShiftTimes": "希望シフト時間",
+    "steps": {
+      "employeeDetails": "従業員情報",
+      "roleDepartment": "役職と部門",
+      "skillsCerts": "スキルと資格",
+      "availability": "勤務可能時間",
+      "invitation": "招待"
+    },
+    "selectType": "タイプを選択...",
+    "selectDepartment": "部門を選択...",
+    "selectRole": "役職を選択...",
+    "selectLocation": "勤務地を選択...",
+    "selectManager": "マネージャーを選択（任意）..."
   },
   "errors": {
     "networkError": "ネットワークエラー。接続を確認してください。",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "テーブル",
+      "bar": "棒グラフ",
+      "line": "折れ線グラフ",
+      "pie": "円グラフ"
+    },
+    "columns": {
+      "employeeName": "従業員名",
+      "totalHours": "合計時間",
+      "regularHours": "通常時間",
+      "overtimeHours": "残業時間",
+      "laborCost": "人件費",
+      "location": "勤務地",
+      "department": "部門",
+      "scheduledShifts": "予定シフト",
+      "workedShifts": "勤務シフト",
+      "missedShifts": "欠勤シフト",
+      "lateArrivals": "遅刻回数",
+      "avgArrivalDiff": "平均到着差",
+      "date": "日付",
+      "totalShifts": "総シフト数",
+      "filledShifts": "充足シフト",
+      "openShifts": "空きシフト",
+      "fillRate": "充足率"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "デモデータ"
   }
 }

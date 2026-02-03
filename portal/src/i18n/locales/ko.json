@@ -162,6 +162,30 @@
     "monday": "월",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "일",
+    "week": "주",
+    "days": {
+      "monday": "월요일",
+      "tuesday": "화요일",
+      "wednesday": "수요일",
+      "thursday": "목요일",
+      "friday": "금요일",
+      "saturday": "토요일",
+      "sunday": "일요일",
+      "mondayShort": "월",
+      "tuesdayShort": "화",
+      "wednesdayShort": "수",
+      "thursdayShort": "목",
+      "fridayShort": "금",
+      "saturdayShort": "토",
+      "sundayShort": "일"
+    },
+    "shifts": {
+      "morning": "오전",
+      "afternoon": "오후",
+      "evening": "저녁",
+      "night": "야간"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "기술 매칭",
+      "budgetCompliance": "예산 준수",
+      "employeePreferences": "직원 선호",
+      "hoursFairness": "시간 공정성",
+      "careerDevelopment": "경력 개발",
+      "respectRestPeriods": "11시간 휴식 기간 준수",
+      "avoidOvertime": "불필요한 초과근무 회피",
+      "includeTrainingShifts": "성장 중인 직원을 위한 교육 근무 포함",
+      "options": "옵션",
+      "analyzing": "일정과 가용성 분석 중...",
+      "consideringSkills": "기술, 선호도 및 우선순위 고려",
+      "noSuggestions": "제안 없음"
+    },
+    "viewModes": {
+      "day": "일",
+      "week": "주",
+      "twoWeeks": "2주",
+      "month": "월"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "선호 근무 시간",
     "maxHoursPerWeek": "주당 최대 근무 시간",
     "allSet": "모든 설정이 완료되었습니다!",
-    "startExploring": "근무와 기회를 탐색해 보세요"
+    "startExploring": "근무와 기회를 탐색해 보세요",
+    "availabilityDesc": "직원의 가용 시간과 일정 선호도를 설정하세요.",
+    "availabilityTitle": "가용성 및 선호도",
+    "daysAvailable": "근무 가능일",
+    "preferredShiftTimes": "선호 근무 시간",
+    "steps": {
+      "employeeDetails": "직원 정보",
+      "roleDepartment": "직책 및 부서",
+      "skillsCerts": "기술 및 자격증",
+      "availability": "가용성",
+      "invitation": "초대"
+    },
+    "selectType": "유형 선택...",
+    "selectDepartment": "부서 선택...",
+    "selectRole": "직책 선택...",
+    "selectLocation": "위치 선택...",
+    "selectManager": "관리자 선택 (선택사항)..."
   },
   "errors": {
     "networkError": "네트워크 오류입니다. 연결을 확인해 주세요.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "테이블",
+      "bar": "막대 차트",
+      "line": "꺾은선 차트",
+      "pie": "원형 차트"
+    },
+    "columns": {
+      "employeeName": "직원 이름",
+      "totalHours": "총 시간",
+      "regularHours": "정규 시간",
+      "overtimeHours": "초과 근무",
+      "laborCost": "인건비",
+      "location": "위치",
+      "department": "부서",
+      "scheduledShifts": "예정된 근무",
+      "workedShifts": "근무한 시프트",
+      "missedShifts": "놓친 근무",
+      "lateArrivals": "지각 횟수",
+      "avgArrivalDiff": "평균 도착 차이",
+      "date": "날짜",
+      "totalShifts": "총 근무",
+      "filledShifts": "채워진 근무",
+      "openShifts": "빈 근무",
+      "fillRate": "충원율"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "데모 데이터"
   }
 }

@@ -213,7 +213,7 @@
     "requestAccessMsg": "To get access to Uplift, please contact your manager or HR department. They will send you an invitation link.",
     "enterEmailPassword": "Please enter email and password",
     "loginFailed": "Login Failed",
-        "twoFactorAuth": "Two-Factor Authentication",
+    "twoFactorAuth": "Two-Factor Authentication",
     "enterMfaCode": "Enter the code from your authenticator app",
     "verificationCode": "Verification Code",
     "verify": "Verify",
@@ -982,7 +982,12 @@
     "preferredHours": "Preferred Hours",
     "maxHoursPerWeek": "Max Hours Per Week",
     "allSet": "You're All Set!",
-    "startExploring": "Start exploring shifts and opportunities"
+    "startExploring": "Start exploring shifts and opportunities",
+    "selectType": "Select type...",
+    "selectDepartment": "Select department...",
+    "selectRole": "Select role...",
+    "selectLocation": "Select location...",
+    "selectManager": "Select manager (optional)..."
   },
   "errors": {
     "networkError": "Network error. Please check your connection.",

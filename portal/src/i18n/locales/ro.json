@@ -162,6 +162,30 @@
     "monday": "Lun",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Zi",
+    "week": "Saptamana",
+    "days": {
+      "monday": "Luni",
+      "tuesday": "Marti",
+      "wednesday": "Miercuri",
+      "thursday": "Joi",
+      "friday": "Vineri",
+      "saturday": "Sambata",
+      "sunday": "Duminica",
+      "mondayShort": "Lun",
+      "tuesdayShort": "Mar",
+      "wednesdayShort": "Mie",
+      "thursdayShort": "Joi",
+      "fridayShort": "Vin",
+      "saturdayShort": "Sam",
+      "sundayShort": "Dum"
+    },
+    "shifts": {
+      "morning": "Dimineata",
+      "afternoon": "Dupa-amiaza",
+      "evening": "Seara",
+      "night": "Noapte"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Potrivire Competente",
+      "budgetCompliance": "Conformitate Buget",
+      "employeePreferences": "Preferinte Angajat",
+      "hoursFairness": "Echitate Ore",
+      "careerDevelopment": "Dezvoltare Cariera",
+      "respectRestPeriods": "Respectati perioadele de odihna de 11 ore",
+      "avoidOvertime": "Evitati ore suplimentare daca nu e necesar",
+      "includeTrainingShifts": "Includeti schimburi de instruire pentru personalul in dezvoltare",
+      "options": "Optiuni",
+      "analyzing": "Analizam programele si disponibilitatea...",
+      "consideringSkills": "Consideram competentele, preferintele si prioritatile dvs",
+      "noSuggestions": "Fara sugestii disponibile"
+    },
+    "viewModes": {
+      "day": "Zi",
+      "week": "Saptamana",
+      "twoWeeks": "2 Saptamani",
+      "month": "Luna"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Ore preferate",
     "maxHoursPerWeek": "Ore maxime pe săptămână",
     "allSet": "Totul e pregătit!",
-    "startExploring": "Începe să explorezi ture și oportunități"
+    "startExploring": "Începe să explorezi ture și oportunități",
+    "availabilityDesc": "Setati disponibilitatea si preferintele de program ale angajatului.",
+    "availabilityTitle": "Disponibilitate si Preferinte",
+    "daysAvailable": "Zile Disponibile",
+    "preferredShiftTimes": "Orele de Schimb Preferate",
+    "steps": {
+      "employeeDetails": "Detalii Angajat",
+      "roleDepartment": "Rol si Departament",
+      "skillsCerts": "Competente si Certificate",
+      "availability": "Disponibilitate",
+      "invitation": "Invitatie"
+    },
+    "selectType": "Selectati tipul...",
+    "selectDepartment": "Selectati departamentul...",
+    "selectRole": "Selectati rolul...",
+    "selectLocation": "Selectati locatia...",
+    "selectManager": "Selectati managerul (optional)..."
   },
   "errors": {
     "networkError": "Eroare de rețea. Verifică-ți conexiunea.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabel",
+      "bar": "Grafic cu Bare",
+      "line": "Grafic Liniar",
+      "pie": "Grafic Circular"
+    },
+    "columns": {
+      "employeeName": "Numele Angajatului",
+      "totalHours": "Total Ore",
+      "regularHours": "Ore Normale",
+      "overtimeHours": "Ore Suplimentare",
+      "laborCost": "Cost Forta de Munca",
+      "location": "Locatie",
+      "department": "Departament",
+      "scheduledShifts": "Schimburi Programate",
+      "workedShifts": "Schimburi Lucrate",
+      "missedShifts": "Schimburi Ratate",
+      "lateArrivals": "Intarzieri",
+      "avgArrivalDiff": "Diferenta Medie de Sosire",
+      "date": "Data",
+      "totalShifts": "Total Schimburi",
+      "filledShifts": "Schimburi Ocupate",
+      "openShifts": "Schimburi Libere",
+      "fillRate": "Rata de Ocupare"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Date demonstrative"
   }
 }

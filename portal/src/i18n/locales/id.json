@@ -162,6 +162,30 @@
     "monday": "Sen",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Hari",
+    "week": "Minggu",
+    "days": {
+      "monday": "Senin",
+      "tuesday": "Selasa",
+      "wednesday": "Rabu",
+      "thursday": "Kamis",
+      "friday": "Jumat",
+      "saturday": "Sabtu",
+      "sunday": "Minggu",
+      "mondayShort": "Sen",
+      "tuesdayShort": "Sel",
+      "wednesdayShort": "Rab",
+      "thursdayShort": "Kam",
+      "fridayShort": "Jum",
+      "saturdayShort": "Sab",
+      "sundayShort": "Min"
+    },
+    "shifts": {
+      "morning": "Pagi",
+      "afternoon": "Siang",
+      "evening": "Sore",
+      "night": "Malam"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Kecocokan Keterampilan",
+      "budgetCompliance": "Kepatuhan Anggaran",
+      "employeePreferences": "Preferensi Karyawan",
+      "hoursFairness": "Keadilan Jam",
+      "careerDevelopment": "Pengembangan Karir",
+      "respectRestPeriods": "Hormati periode istirahat 11 jam",
+      "avoidOvertime": "Hindari lembur kecuali diperlukan",
+      "includeTrainingShifts": "Sertakan shift pelatihan untuk staf yang berkembang",
+      "options": "Opsi",
+      "analyzing": "Menganalisis jadwal dan ketersediaan...",
+      "consideringSkills": "Mempertimbangkan keterampilan, preferensi, dan prioritas Anda",
+      "noSuggestions": "Tidak ada saran"
+    },
+    "viewModes": {
+      "day": "Hari",
+      "week": "Minggu",
+      "twoWeeks": "2 Minggu",
+      "month": "Bulan"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Jam Pilihan",
     "maxHoursPerWeek": "Maksimal Jam Per Minggu",
     "allSet": "Anda Sudah Siap!",
-    "startExploring": "Mulai jelajahi shift dan peluang"
+    "startExploring": "Mulai jelajahi shift dan peluang",
+    "availabilityDesc": "Atur ketersediaan dan preferensi jadwal karyawan.",
+    "availabilityTitle": "Ketersediaan dan Preferensi",
+    "daysAvailable": "Hari Tersedia",
+    "preferredShiftTimes": "Waktu Shift Pilihan",
+    "steps": {
+      "employeeDetails": "Detail Karyawan",
+      "roleDepartment": "Peran dan Departemen",
+      "skillsCerts": "Keterampilan dan Sertifikat",
+      "availability": "Ketersediaan",
+      "invitation": "Undangan"
+    },
+    "selectType": "Pilih tipe...",
+    "selectDepartment": "Pilih departemen...",
+    "selectRole": "Pilih peran...",
+    "selectLocation": "Pilih lokasi...",
+    "selectManager": "Pilih manajer (opsional)..."
   },
   "errors": {
     "networkError": "Kesalahan jaringan. Silakan periksa koneksi Anda.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabel",
+      "bar": "Grafik Batang",
+      "line": "Grafik Garis",
+      "pie": "Grafik Lingkaran"
+    },
+    "columns": {
+      "employeeName": "Nama Karyawan",
+      "totalHours": "Total Jam",
+      "regularHours": "Jam Reguler",
+      "overtimeHours": "Jam Lembur",
+      "laborCost": "Biaya Tenaga Kerja",
+      "location": "Lokasi",
+      "department": "Departemen",
+      "scheduledShifts": "Shift Terjadwal",
+      "workedShifts": "Shift Dikerjakan",
+      "missedShifts": "Shift Terlewat",
+      "lateArrivals": "Keterlambatan",
+      "avgArrivalDiff": "Rata-rata Selisih Kedatangan",
+      "date": "Tanggal",
+      "totalShifts": "Total Shift",
+      "filledShifts": "Shift Terisi",
+      "openShifts": "Shift Kosong",
+      "fillRate": "Tingkat Pengisian"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Data Demo"
   }
 }

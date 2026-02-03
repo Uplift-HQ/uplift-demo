@@ -162,6 +162,30 @@
     "monday": "שני",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "יום",
+    "week": "שבוע",
+    "days": {
+      "monday": "יום שני",
+      "tuesday": "יום שלישי",
+      "wednesday": "יום רביעי",
+      "thursday": "יום חמישי",
+      "friday": "יום שישי",
+      "saturday": "שבת",
+      "sunday": "יום ראשון",
+      "mondayShort": "ב'",
+      "tuesdayShort": "ג'",
+      "wednesdayShort": "ד'",
+      "thursdayShort": "ה'",
+      "fridayShort": "ו'",
+      "saturdayShort": "ש'",
+      "sundayShort": "א'"
+    },
+    "shifts": {
+      "morning": "בוקר",
+      "afternoon": "צהריים",
+      "evening": "ערב",
+      "night": "לילה"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "התאמת כישורים",
+      "budgetCompliance": "עמידה בתקציב",
+      "employeePreferences": "העדפות עובד",
+      "hoursFairness": "הוגנות שעות",
+      "careerDevelopment": "פיתוח קריירה",
+      "respectRestPeriods": "כבד תקופות מנוחה של 11 שעות",
+      "avoidOvertime": "הימנע משעות נוספות אלא אם הכרחי",
+      "includeTrainingShifts": "כלול משמרות הכשרה לצוות מתפתח",
+      "options": "אפשרויות",
+      "analyzing": "מנתח לוחות זמנים וזמינות...",
+      "consideringSkills": "מתחשב בכישורים, העדפות ובעדיפויות שלך",
+      "noSuggestions": "אין הצעות זמינות"
+    },
+    "viewModes": {
+      "day": "יום",
+      "week": "שבוע",
+      "twoWeeks": "שבועיים",
+      "month": "חודש"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "שעות מועדפות",
     "maxHoursPerWeek": "מקסימום שעות בשבוע",
     "allSet": "הכל מוכן!",
-    "startExploring": "התחל לחקור משמרות והזדמנויות"
+    "startExploring": "התחל לחקור משמרות והזדמנויות",
+    "availabilityDesc": "הגדר את הזמינות והעדפות לוח הזמנים של העובד.",
+    "availabilityTitle": "זמינות והעדפות",
+    "daysAvailable": "ימים זמינים",
+    "preferredShiftTimes": "שעות משמרת מועדפות",
+    "steps": {
+      "employeeDetails": "פרטי עובד",
+      "roleDepartment": "תפקיד ומחלקה",
+      "skillsCerts": "כישורים ותעודות",
+      "availability": "זמינות",
+      "invitation": "הזמנה"
+    },
+    "selectType": "בחר סוג...",
+    "selectDepartment": "בחר מחלקה...",
+    "selectRole": "בחר תפקיד...",
+    "selectLocation": "בחר מיקום...",
+    "selectManager": "בחר מנהל (אופציונלי)..."
   },
   "errors": {
     "networkError": "שגיאת רשת. בדוק את החיבור שלך.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "טבלה",
+      "bar": "תרשים עמודות",
+      "line": "תרשים קווי",
+      "pie": "תרשים עוגה"
+    },
+    "columns": {
+      "employeeName": "שם העובד",
+      "totalHours": "סה״כ שעות",
+      "regularHours": "שעות רגילות",
+      "overtimeHours": "שעות נוספות",
+      "laborCost": "עלות עבודה",
+      "location": "מיקום",
+      "department": "מחלקה",
+      "scheduledShifts": "משמרות מתוכננות",
+      "workedShifts": "משמרות שעבדו",
+      "missedShifts": "משמרות שהוחמצו",
+      "lateArrivals": "איחורים",
+      "avgArrivalDiff": "הפרש הגעה ממוצע",
+      "date": "תאריך",
+      "totalShifts": "סה״כ משמרות",
+      "filledShifts": "משמרות מאוישות",
+      "openShifts": "משמרות פתוחות",
+      "fillRate": "שיעור מילוי"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "נתוני הדגמה"
   }
 }

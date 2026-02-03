@@ -162,6 +162,30 @@
     "monday": "Пн",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "День",
+    "week": "Тиждень",
+    "days": {
+      "monday": "Понеділок",
+      "tuesday": "Вівторок",
+      "wednesday": "Середа",
+      "thursday": "Четвер",
+      "friday": "П'ятниця",
+      "saturday": "Субота",
+      "sunday": "Неділя",
+      "mondayShort": "Пн",
+      "tuesdayShort": "Вт",
+      "wednesdayShort": "Ср",
+      "thursdayShort": "Чт",
+      "fridayShort": "Пт",
+      "saturdayShort": "Сб",
+      "sundayShort": "Нд"
+    },
+    "shifts": {
+      "morning": "Ранок",
+      "afternoon": "День",
+      "evening": "Вечір",
+      "night": "Ніч"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Відповідність Навичок",
+      "budgetCompliance": "Дотримання Бюджету",
+      "employeePreferences": "Переваги Працівника",
+      "hoursFairness": "Справедливість Годин",
+      "careerDevelopment": "Кар'єрний Розвиток",
+      "respectRestPeriods": "Дотримуватись 11-годинних періодів відпочинку",
+      "avoidOvertime": "Уникати понаднормових, якщо не потрібно",
+      "includeTrainingShifts": "Включити навчальні зміни для персоналу, що розвивається",
+      "options": "Опції",
+      "analyzing": "Аналіз розкладу та доступності...",
+      "consideringSkills": "Врахування навичок, переваг та ваших пріоритетів",
+      "noSuggestions": "Немає пропозицій"
+    },
+    "viewModes": {
+      "day": "День",
+      "week": "Тиждень",
+      "twoWeeks": "2 Тижні",
+      "month": "Місяць"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Бажані години",
     "maxHoursPerWeek": "Макс. годин на тиждень",
     "allSet": "Все готово!",
-    "startExploring": "Почніть досліджувати зміни та можливості"
+    "startExploring": "Почніть досліджувати зміни та можливості",
+    "availabilityDesc": "Встановіть доступність та переваги розкладу працівника.",
+    "availabilityTitle": "Доступність та Переваги",
+    "daysAvailable": "Доступні Дні",
+    "preferredShiftTimes": "Бажаний Час Змін",
+    "steps": {
+      "employeeDetails": "Дані Працівника",
+      "roleDepartment": "Посада та Відділ",
+      "skillsCerts": "Навички та Сертифікати",
+      "availability": "Доступність",
+      "invitation": "Запрошення"
+    },
+    "selectType": "Виберіть тип...",
+    "selectDepartment": "Виберіть відділ...",
+    "selectRole": "Виберіть посаду...",
+    "selectLocation": "Виберіть місцезнаходження...",
+    "selectManager": "Виберіть менеджера (необов'язково)..."
   },
   "errors": {
     "networkError": "Помилка мережі. Будь ласка, перевірте з'єднання.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Таблиця",
+      "bar": "Стовпчаста Діаграма",
+      "line": "Лінійна Діаграма",
+      "pie": "Кругова Діаграма"
+    },
+    "columns": {
+      "employeeName": "Ім'я Працівника",
+      "totalHours": "Загальні Години",
+      "regularHours": "Звичайні Години",
+      "overtimeHours": "Понаднормові",
+      "laborCost": "Витрати на Працю",
+      "location": "Місцезнаходження",
+      "department": "Відділ",
+      "scheduledShifts": "Заплановані Зміни",
+      "workedShifts": "Відпрацьовані Зміни",
+      "missedShifts": "Пропущені Зміни",
+      "lateArrivals": "Запізнення",
+      "avgArrivalDiff": "Середнє Відхилення Приходу",
+      "date": "Дата",
+      "totalShifts": "Всього Змін",
+      "filledShifts": "Заповнені Зміни",
+      "openShifts": "Відкриті Зміни",
+      "fillRate": "Коефіцієнт Заповнення"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Демо-дані"
   }
 }

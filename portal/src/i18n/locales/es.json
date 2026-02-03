@@ -162,6 +162,30 @@
     "monday": "Lun",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Día",
+    "week": "Semana",
+    "days": {
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "mondayShort": "Lun",
+      "tuesdayShort": "Mar",
+      "wednesdayShort": "Mié",
+      "thursdayShort": "Jue",
+      "fridayShort": "Vie",
+      "saturdayShort": "Sáb",
+      "sundayShort": "Dom"
+    },
+    "shifts": {
+      "morning": "Mañana",
+      "afternoon": "Tarde",
+      "evening": "Noche",
+      "night": "Madrugada"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Coincidencia de Habilidades",
+      "budgetCompliance": "Cumplimiento Presupuestario",
+      "employeePreferences": "Preferencias del Empleado",
+      "hoursFairness": "Equidad de Horas",
+      "careerDevelopment": "Desarrollo Profesional",
+      "respectRestPeriods": "Respetar períodos de descanso de 11 horas",
+      "avoidOvertime": "Evitar horas extra excepto cuando sea necesario",
+      "includeTrainingShifts": "Incluir turnos de capacitación para personal en desarrollo",
+      "options": "Opciones",
+      "analyzing": "Analizando horarios y disponibilidad...",
+      "consideringSkills": "Considerando habilidades, preferencias y sus prioridades",
+      "noSuggestions": "No hay sugerencias disponibles"
+    },
+    "viewModes": {
+      "day": "Día",
+      "week": "Semana",
+      "twoWeeks": "2 Semanas",
+      "month": "Mes"
     }
   },
   "timeTracking": {
@@ -968,7 +1012,23 @@
     "preferredHours": "Horas preferidas",
     "maxHoursPerWeek": "Horas máx por semana",
     "allSet": "¡Todo listo!",
-    "startExploring": "Comienza a explorar turnos y oportunidades"
+    "startExploring": "Comienza a explorar turnos y oportunidades",
+    "availabilityDesc": "Configure la disponibilidad y preferencias de horario del empleado.",
+    "availabilityTitle": "Disponibilidad y Preferencias",
+    "daysAvailable": "Días Disponibles",
+    "preferredShiftTimes": "Horarios de Turno Preferidos",
+    "steps": {
+      "employeeDetails": "Datos del Empleado",
+      "roleDepartment": "Puesto y Departamento",
+      "skillsCerts": "Habilidades y Certificados",
+      "availability": "Disponibilidad",
+      "invitation": "Invitación"
+    },
+    "selectType": "Seleccione el tipo...",
+    "selectDepartment": "Seleccione el departamento...",
+    "selectRole": "Seleccione el puesto...",
+    "selectLocation": "Seleccione la ubicación...",
+    "selectManager": "Seleccione el gerente (opcional)..."
   },
   "errors": {
     "networkError": "Error de red. Verifica tu conexión.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabla",
+      "bar": "Gráfico de Barras",
+      "line": "Gráfico de Líneas",
+      "pie": "Gráfico Circular"
+    },
+    "columns": {
+      "employeeName": "Nombre del Empleado",
+      "totalHours": "Horas Totales",
+      "regularHours": "Horas Regulares",
+      "overtimeHours": "Horas Extra",
+      "laborCost": "Costo Laboral",
+      "location": "Ubicación",
+      "department": "Departamento",
+      "scheduledShifts": "Turnos Programados",
+      "workedShifts": "Turnos Trabajados",
+      "missedShifts": "Turnos Perdidos",
+      "lateArrivals": "Llegadas Tardías",
+      "avgArrivalDiff": "Diferencia Promedio de Llegada",
+      "date": "Fecha",
+      "totalShifts": "Total de Turnos",
+      "filledShifts": "Turnos Cubiertos",
+      "openShifts": "Turnos Abiertos",
+      "fillRate": "Tasa de Cobertura"
     }
   },
   "shiftTemplates": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Datos de demostración"
   }
 }

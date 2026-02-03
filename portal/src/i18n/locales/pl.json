@@ -90,6 +90,30 @@
     "monday": "Pn",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Dzień",
+    "week": "Tydzień",
+    "days": {
+      "monday": "Poniedziałek",
+      "tuesday": "Wtorek",
+      "wednesday": "Środa",
+      "thursday": "Czwartek",
+      "friday": "Piątek",
+      "saturday": "Sobota",
+      "sunday": "Niedziela",
+      "mondayShort": "Pon",
+      "tuesdayShort": "Wt",
+      "wednesdayShort": "Śr",
+      "thursdayShort": "Czw",
+      "fridayShort": "Pt",
+      "saturdayShort": "Sob",
+      "sundayShort": "Ndz"
+    },
+    "shifts": {
+      "morning": "Rano",
+      "afternoon": "Popołudnie",
+      "evening": "Wieczór",
+      "night": "Noc"
     }
   },
   "auth": {
@@ -248,6 +272,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Dopasowanie Umiejętności",
+      "budgetCompliance": "Zgodność z Budżetem",
+      "employeePreferences": "Preferencje Pracownika",
+      "hoursFairness": "Sprawiedliwość Godzin",
+      "careerDevelopment": "Rozwój Kariery",
+      "respectRestPeriods": "Przestrzegaj 11-godzinnych okresów odpoczynku",
+      "avoidOvertime": "Unikaj nadgodzin, chyba że to konieczne",
+      "includeTrainingShifts": "Uwzględnij zmiany szkoleniowe dla rozwijającego się personelu",
+      "options": "Opcje",
+      "analyzing": "Analiza harmonogramów i dostępności...",
+      "consideringSkills": "Uwzględnianie umiejętności, preferencji i Twoich priorytetów",
+      "noSuggestions": "Brak sugestii"
+    },
+    "viewModes": {
+      "day": "Dzień",
+      "week": "Tydzień",
+      "twoWeeks": "2 Tygodnie",
+      "month": "Miesiąc"
     }
   },
   "timeTracking": {
@@ -855,7 +899,23 @@
     "preferredHours": "Preferred Hours",
     "maxHoursPerWeek": "Max Hours Per Week",
     "allSet": "You're All Set!",
-    "startExploring": "Start exploring shifts and opportunities"
+    "startExploring": "Start exploring shifts and opportunities",
+    "availabilityDesc": "Ustaw dostępność i preferencje harmonogramu pracownika.",
+    "availabilityTitle": "Dostępność i Preferencje",
+    "daysAvailable": "Dostępne Dni",
+    "preferredShiftTimes": "Preferowane Godziny Zmian",
+    "steps": {
+      "employeeDetails": "Dane Pracownika",
+      "roleDepartment": "Stanowisko i Dział",
+      "skillsCerts": "Umiejętności i Certyfikaty",
+      "availability": "Dostępność",
+      "invitation": "Zaproszenie"
+    },
+    "selectType": "Wybierz typ...",
+    "selectDepartment": "Wybierz dział...",
+    "selectRole": "Wybierz stanowisko...",
+    "selectLocation": "Wybierz lokalizację...",
+    "selectManager": "Wybierz menedżera (opcjonalnie)..."
   },
   "errors": {
     "networkError": "Błąd sieci",
@@ -1093,6 +1153,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabela",
+      "bar": "Wykres Słupkowy",
+      "line": "Wykres Liniowy",
+      "pie": "Wykres Kołowy"
+    },
+    "columns": {
+      "employeeName": "Imię Pracownika",
+      "totalHours": "Łączne Godziny",
+      "regularHours": "Godziny Regularne",
+      "overtimeHours": "Nadgodziny",
+      "laborCost": "Koszt Pracy",
+      "location": "Lokalizacja",
+      "department": "Dział",
+      "scheduledShifts": "Zaplanowane Zmiany",
+      "workedShifts": "Przepracowane Zmiany",
+      "missedShifts": "Opuszczone Zmiany",
+      "lateArrivals": "Spóźnienia",
+      "avgArrivalDiff": "Średnia Różnica Przyjścia",
+      "date": "Data",
+      "totalShifts": "Łączne Zmiany",
+      "filledShifts": "Obsadzone Zmiany",
+      "openShifts": "Otwarte Zmiany",
+      "fillRate": "Wskaźnik Obsadzenia"
     }
   },
   "shiftTemplates": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Dane demonstracyjne"
   }
 }

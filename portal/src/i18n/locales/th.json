@@ -162,6 +162,30 @@
     "monday": "จ.",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "วัน",
+    "week": "สัปดาห์",
+    "days": {
+      "monday": "วันจันทร์",
+      "tuesday": "วันอังคาร",
+      "wednesday": "วันพุธ",
+      "thursday": "วันพฤหัสบดี",
+      "friday": "วันศุกร์",
+      "saturday": "วันเสาร์",
+      "sunday": "วันอาทิตย์",
+      "mondayShort": "จ.",
+      "tuesdayShort": "อ.",
+      "wednesdayShort": "พ.",
+      "thursdayShort": "พฤ.",
+      "fridayShort": "ศ.",
+      "saturdayShort": "ส.",
+      "sundayShort": "อา."
+    },
+    "shifts": {
+      "morning": "เช้า",
+      "afternoon": "บ่าย",
+      "evening": "เย็น",
+      "night": "กลางคืน"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "การจับคู่ทักษะ",
+      "budgetCompliance": "การปฏิบัติตามงบประมาณ",
+      "employeePreferences": "ความต้องการของพนักงาน",
+      "hoursFairness": "ความเป็นธรรมของชั่วโมง",
+      "careerDevelopment": "การพัฒนาอาชีพ",
+      "respectRestPeriods": "เคารพช่วงพัก 11 ชั่วโมง",
+      "avoidOvertime": "หลีกเลี่ยงการทำงานล่วงเวลาหากไม่จำเป็น",
+      "includeTrainingShifts": "รวมกะฝึกอบรมสำหรับพนักงานที่กำลังพัฒนา",
+      "options": "ตัวเลือก",
+      "analyzing": "กำลังวิเคราะห์ตารางและความพร้อม...",
+      "consideringSkills": "พิจารณาทักษะ ความต้องการ และลำดับความสำคัญของคุณ",
+      "noSuggestions": "ไม่มีข้อเสนอแนะ"
+    },
+    "viewModes": {
+      "day": "วัน",
+      "week": "สัปดาห์",
+      "twoWeeks": "2 สัปดาห์",
+      "month": "เดือน"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "ชั่วโมงที่ต้องการ",
     "maxHoursPerWeek": "ชั่วโมงสูงสุดต่อสัปดาห์",
     "allSet": "ตั้งค่าเรียบร้อยแล้ว!",
-    "startExploring": "เริ่มสำรวจกะและโอกาส"
+    "startExploring": "เริ่มสำรวจกะและโอกาส",
+    "availabilityDesc": "ตั้งค่าความพร้อมและการตั้งค่าตารางของพนักงาน",
+    "availabilityTitle": "ความพร้อมและการตั้งค่า",
+    "daysAvailable": "วันที่พร้อมทำงาน",
+    "preferredShiftTimes": "เวลากะที่ต้องการ",
+    "steps": {
+      "employeeDetails": "รายละเอียดพนักงาน",
+      "roleDepartment": "ตำแหน่งและแผนก",
+      "skillsCerts": "ทักษะและใบรับรอง",
+      "availability": "ความพร้อม",
+      "invitation": "คำเชิญ"
+    },
+    "selectType": "เลือกประเภท...",
+    "selectDepartment": "เลือกแผนก...",
+    "selectRole": "เลือกตำแหน่ง...",
+    "selectLocation": "เลือกสถานที่...",
+    "selectManager": "เลือกผู้จัดการ (ไม่บังคับ)..."
   },
   "errors": {
     "networkError": "ข้อผิดพลาดเครือข่าย กรุณาตรวจสอบการเชื่อมต่อ",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "ตาราง",
+      "bar": "แผนภูมิแท่ง",
+      "line": "แผนภูมิเส้น",
+      "pie": "แผนภูมิวงกลม"
+    },
+    "columns": {
+      "employeeName": "ชื่อพนักงาน",
+      "totalHours": "ชั่วโมงรวม",
+      "regularHours": "ชั่วโมงปกติ",
+      "overtimeHours": "ชั่วโมงล่วงเวลา",
+      "laborCost": "ต้นทุนแรงงาน",
+      "location": "สถานที่",
+      "department": "แผนก",
+      "scheduledShifts": "กะที่กำหนด",
+      "workedShifts": "กะที่ทำงาน",
+      "missedShifts": "กะที่ขาด",
+      "lateArrivals": "การมาสาย",
+      "avgArrivalDiff": "ความต่างเวลาเข้าเฉลี่ย",
+      "date": "วันที่",
+      "totalShifts": "กะทั้งหมด",
+      "filledShifts": "กะที่เติมแล้ว",
+      "openShifts": "กะว่าง",
+      "fillRate": "อัตราการเติม"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "ข้อมูลตัวอย่าง"
   }
 }

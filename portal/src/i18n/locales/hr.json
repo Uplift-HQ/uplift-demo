@@ -162,6 +162,30 @@
     "monday": "Pon",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Day",
+    "week": "Week",
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "mondayShort": "Mon",
+      "tuesdayShort": "Tue",
+      "wednesdayShort": "Wed",
+      "thursdayShort": "Thu",
+      "fridayShort": "Fri",
+      "saturdayShort": "Sat",
+      "sundayShort": "Sun"
+    },
+    "shifts": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "night": "Night"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Skills Match",
+      "budgetCompliance": "Budget Compliance",
+      "employeePreferences": "Employee Preferences",
+      "hoursFairness": "Hours Fairness",
+      "careerDevelopment": "Career Development",
+      "respectRestPeriods": "Respect 11-hour rest periods",
+      "avoidOvertime": "Avoid overtime unless necessary",
+      "includeTrainingShifts": "Include training shifts for developing staff",
+      "options": "Options",
+      "analyzing": "Analyzing schedules and availability...",
+      "consideringSkills": "Considering skills, preferences, and your priorities",
+      "noSuggestions": "No suggestions available"
+    },
+    "viewModes": {
+      "day": "Day",
+      "week": "Week",
+      "twoWeeks": "2 Weeks",
+      "month": "Month"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Preferirani sati",
     "maxHoursPerWeek": "Maksimalno sati tjedno",
     "allSet": "Sve je spremno!",
-    "startExploring": "Pocnite istrazivati smjene i prilike"
+    "startExploring": "Pocnite istrazivati smjene i prilike",
+    "availabilityDesc": "Set the employee's availability and scheduling preferences.",
+    "availabilityTitle": "Availability & Preferences",
+    "daysAvailable": "Days Available",
+    "preferredShiftTimes": "Preferred Shift Times",
+    "steps": {
+      "employeeDetails": "Employee Details",
+      "roleDepartment": "Role & Department",
+      "skillsCerts": "Skills & Certs",
+      "availability": "Availability",
+      "invitation": "Invitation"
+    },
+    "selectType": "Select type...",
+    "selectDepartment": "Select department...",
+    "selectRole": "Select role...",
+    "selectLocation": "Select location...",
+    "selectManager": "Select manager (optional)..."
   },
   "errors": {
     "networkError": "Mrezna greska. Provjerite svoju vezu.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Table",
+      "bar": "Bar Chart",
+      "line": "Line Chart",
+      "pie": "Pie Chart"
+    },
+    "columns": {
+      "employeeName": "Employee Name",
+      "totalHours": "Total Hours",
+      "regularHours": "Regular Hours",
+      "overtimeHours": "Overtime Hours",
+      "laborCost": "Labor Cost",
+      "location": "Location",
+      "department": "Department",
+      "scheduledShifts": "Scheduled Shifts",
+      "workedShifts": "Worked Shifts",
+      "missedShifts": "Missed Shifts",
+      "lateArrivals": "Late Arrivals",
+      "avgArrivalDiff": "Avg Arrival Diff",
+      "date": "Date",
+      "totalShifts": "Total Shifts",
+      "filledShifts": "Filled Shifts",
+      "openShifts": "Open Shifts",
+      "fillRate": "Fill Rate"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Demo Data"
   }
 }

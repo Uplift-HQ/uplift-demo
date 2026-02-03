@@ -162,6 +162,30 @@
     "monday": "Seg",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Dia",
+    "week": "Semana",
+    "days": {
+      "monday": "Segunda-feira",
+      "tuesday": "Terça-feira",
+      "wednesday": "Quarta-feira",
+      "thursday": "Quinta-feira",
+      "friday": "Sexta-feira",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "mondayShort": "Seg",
+      "tuesdayShort": "Ter",
+      "wednesdayShort": "Qua",
+      "thursdayShort": "Qui",
+      "fridayShort": "Sex",
+      "saturdayShort": "Sáb",
+      "sundayShort": "Dom"
+    },
+    "shifts": {
+      "morning": "Manhã",
+      "afternoon": "Tarde",
+      "evening": "Noite",
+      "night": "Madrugada"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Correspondência de Habilidades",
+      "budgetCompliance": "Conformidade Orçamentária",
+      "employeePreferences": "Preferências do Funcionário",
+      "hoursFairness": "Equidade de Horas",
+      "careerDevelopment": "Desenvolvimento de Carreira",
+      "respectRestPeriods": "Respeitar períodos de descanso de 11 horas",
+      "avoidOvertime": "Evitar horas extras, exceto quando necessário",
+      "includeTrainingShifts": "Incluir turnos de treinamento para equipe em desenvolvimento",
+      "options": "Opções",
+      "analyzing": "Analisando horários e disponibilidade...",
+      "consideringSkills": "Considerando habilidades, preferências e suas prioridades",
+      "noSuggestions": "Nenhuma sugestão disponível"
+    },
+    "viewModes": {
+      "day": "Dia",
+      "week": "Semana",
+      "twoWeeks": "2 Semanas",
+      "month": "Mês"
     }
   },
   "timeTracking": {
@@ -968,7 +1012,23 @@
     "preferredHours": "Horários preferidos",
     "maxHoursPerWeek": "Máximo de horas por semana",
     "allSet": "Tudo pronto!",
-    "startExploring": "Comece a explorar turnos e oportunidades"
+    "startExploring": "Comece a explorar turnos e oportunidades",
+    "availabilityDesc": "Defina a disponibilidade e preferências de horário do funcionário.",
+    "availabilityTitle": "Disponibilidade e Preferências",
+    "daysAvailable": "Dias Disponíveis",
+    "preferredShiftTimes": "Horários de Turno Preferidos",
+    "steps": {
+      "employeeDetails": "Dados do Funcionário",
+      "roleDepartment": "Cargo e Departamento",
+      "skillsCerts": "Habilidades e Certificações",
+      "availability": "Disponibilidade",
+      "invitation": "Convite"
+    },
+    "selectType": "Selecione o tipo...",
+    "selectDepartment": "Selecione o departamento...",
+    "selectRole": "Selecione o cargo...",
+    "selectLocation": "Selecione o local...",
+    "selectManager": "Selecione o gerente (opcional)..."
   },
   "errors": {
     "networkError": "Erro de rede. Verifique sua conexão.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabela",
+      "bar": "Gráfico de Barras",
+      "line": "Gráfico de Linhas",
+      "pie": "Gráfico de Pizza"
+    },
+    "columns": {
+      "employeeName": "Nome do Funcionário",
+      "totalHours": "Total de Horas",
+      "regularHours": "Horas Regulares",
+      "overtimeHours": "Horas Extras",
+      "laborCost": "Custo de Mão de Obra",
+      "location": "Local",
+      "department": "Departamento",
+      "scheduledShifts": "Turnos Agendados",
+      "workedShifts": "Turnos Trabalhados",
+      "missedShifts": "Turnos Perdidos",
+      "lateArrivals": "Chegadas Atrasadas",
+      "avgArrivalDiff": "Diferença Média de Chegada",
+      "date": "Data",
+      "totalShifts": "Total de Turnos",
+      "filledShifts": "Turnos Preenchidos",
+      "openShifts": "Turnos Abertos",
+      "fillRate": "Taxa de Preenchimento"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Dados de demonstração"
   }
 }

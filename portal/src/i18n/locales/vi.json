@@ -162,6 +162,30 @@
     "monday": "T2",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Ngày",
+    "week": "Tuần",
+    "days": {
+      "monday": "Thứ Hai",
+      "tuesday": "Thứ Ba",
+      "wednesday": "Thứ Tư",
+      "thursday": "Thứ Năm",
+      "friday": "Thứ Sáu",
+      "saturday": "Thứ Bảy",
+      "sunday": "Chủ Nhật",
+      "mondayShort": "T2",
+      "tuesdayShort": "T3",
+      "wednesdayShort": "T4",
+      "thursdayShort": "T5",
+      "fridayShort": "T6",
+      "saturdayShort": "T7",
+      "sundayShort": "CN"
+    },
+    "shifts": {
+      "morning": "Sáng",
+      "afternoon": "Chiều",
+      "evening": "Tối",
+      "night": "Đêm"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Khớp Kỹ năng",
+      "budgetCompliance": "Tuân thủ Ngân sách",
+      "employeePreferences": "Tùy chọn Nhân viên",
+      "hoursFairness": "Công bằng Giờ",
+      "careerDevelopment": "Phát triển Nghề nghiệp",
+      "respectRestPeriods": "Tôn trọng thời gian nghỉ 11 giờ",
+      "avoidOvertime": "Tránh tăng ca trừ khi cần thiết",
+      "includeTrainingShifts": "Bao gồm ca đào tạo cho nhân viên đang phát triển",
+      "options": "Tùy chọn",
+      "analyzing": "Đang phân tích lịch và tình trạng sẵn sàng...",
+      "consideringSkills": "Xem xét kỹ năng, tùy chọn và ưu tiên của bạn",
+      "noSuggestions": "Không có gợi ý"
+    },
+    "viewModes": {
+      "day": "Ngày",
+      "week": "Tuần",
+      "twoWeeks": "2 Tuần",
+      "month": "Tháng"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Giờ ưa thích",
     "maxHoursPerWeek": "Số giờ tối đa mỗi tuần",
     "allSet": "Bạn đã sẵn sàng!",
-    "startExploring": "Bắt đầu khám phá ca làm và cơ hội"
+    "startExploring": "Bắt đầu khám phá ca làm và cơ hội",
+    "availabilityDesc": "Đặt lịch trình và tùy chọn sẵn sàng của nhân viên.",
+    "availabilityTitle": "Sẵn sàng và Tùy chọn",
+    "daysAvailable": "Ngày Sẵn sàng",
+    "preferredShiftTimes": "Thời gian Ca Ưa thích",
+    "steps": {
+      "employeeDetails": "Chi tiết Nhân viên",
+      "roleDepartment": "Vai trò và Phòng ban",
+      "skillsCerts": "Kỹ năng và Chứng chỉ",
+      "availability": "Sẵn sàng",
+      "invitation": "Lời mời"
+    },
+    "selectType": "Chọn loại...",
+    "selectDepartment": "Chọn phòng ban...",
+    "selectRole": "Chọn vai trò...",
+    "selectLocation": "Chọn địa điểm...",
+    "selectManager": "Chọn quản lý (tùy chọn)..."
   },
   "errors": {
     "networkError": "Lỗi mạng. Vui lòng kiểm tra kết nối.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Bảng",
+      "bar": "Biểu đồ Cột",
+      "line": "Biểu đồ Đường",
+      "pie": "Biểu đồ Tròn"
+    },
+    "columns": {
+      "employeeName": "Tên Nhân viên",
+      "totalHours": "Tổng Giờ",
+      "regularHours": "Giờ Thường",
+      "overtimeHours": "Giờ Tăng ca",
+      "laborCost": "Chi phí Lao động",
+      "location": "Địa điểm",
+      "department": "Phòng ban",
+      "scheduledShifts": "Ca Đã lên lịch",
+      "workedShifts": "Ca Đã làm",
+      "missedShifts": "Ca Bỏ lỡ",
+      "lateArrivals": "Đến Muộn",
+      "avgArrivalDiff": "Chênh lệch Đến Trung bình",
+      "date": "Ngày",
+      "totalShifts": "Tổng Ca",
+      "filledShifts": "Ca Đã điền",
+      "openShifts": "Ca Trống",
+      "fillRate": "Tỷ lệ Điền"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Dữ liệu demo"
   }
 }

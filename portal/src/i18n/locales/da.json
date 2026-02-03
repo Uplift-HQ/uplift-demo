@@ -162,6 +162,30 @@
     "monday": "Man",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Dag",
+    "week": "Uge",
+    "days": {
+      "monday": "Mandag",
+      "tuesday": "Tirsdag",
+      "wednesday": "Onsdag",
+      "thursday": "Torsdag",
+      "friday": "Fredag",
+      "saturday": "Lørdag",
+      "sunday": "Søndag",
+      "mondayShort": "Man",
+      "tuesdayShort": "Tir",
+      "wednesdayShort": "Ons",
+      "thursdayShort": "Tor",
+      "fridayShort": "Fre",
+      "saturdayShort": "Lør",
+      "sundayShort": "Søn"
+    },
+    "shifts": {
+      "morning": "Morgen",
+      "afternoon": "Eftermiddag",
+      "evening": "Aften",
+      "night": "Nat"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Færdighedsmatch",
+      "budgetCompliance": "Budgetoverholdelse",
+      "employeePreferences": "Medarbejderpræferencer",
+      "hoursFairness": "Timeretfærdighed",
+      "careerDevelopment": "Karriereudvikling",
+      "respectRestPeriods": "Respekter 11-timers hvileperioder",
+      "avoidOvertime": "Undgå overtid medmindre nødvendigt",
+      "includeTrainingShifts": "Inkluder træningsvagter for udviklende personale",
+      "options": "Muligheder",
+      "analyzing": "Analyserer vagtplaner og tilgængelighed...",
+      "consideringSkills": "Overvejer færdigheder, præferencer og dine prioriteter",
+      "noSuggestions": "Ingen forslag tilgængelige"
+    },
+    "viewModes": {
+      "day": "Dag",
+      "week": "Uge",
+      "twoWeeks": "2 Uger",
+      "month": "Måned"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Foretrukne timer",
     "maxHoursPerWeek": "Maks timer pr. uge",
     "allSet": "Du er klar!",
-    "startExploring": "Begynd at udforske vagter og muligheder"
+    "startExploring": "Begynd at udforske vagter og muligheder",
+    "availabilityDesc": "Indstil medarbejderens tilgængelighed og vagtplanpræferencer.",
+    "availabilityTitle": "Tilgængelighed og Præferencer",
+    "daysAvailable": "Tilgængelige Dage",
+    "preferredShiftTimes": "Foretrukne Vagttider",
+    "steps": {
+      "employeeDetails": "Medarbejderdetaljer",
+      "roleDepartment": "Rolle og Afdeling",
+      "skillsCerts": "Færdigheder og Certifikater",
+      "availability": "Tilgængelighed",
+      "invitation": "Invitation"
+    },
+    "selectType": "Vælg type...",
+    "selectDepartment": "Vælg afdeling...",
+    "selectRole": "Vælg rolle...",
+    "selectLocation": "Vælg sted...",
+    "selectManager": "Vælg leder (valgfrit)..."
   },
   "errors": {
     "networkError": "Netværksfejl. Kontroller venligst din forbindelse.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabel",
+      "bar": "Søjlediagram",
+      "line": "Linjediagram",
+      "pie": "Cirkeldiagram"
+    },
+    "columns": {
+      "employeeName": "Medarbejdernavn",
+      "totalHours": "Samlede Timer",
+      "regularHours": "Normale Timer",
+      "overtimeHours": "Overtid",
+      "laborCost": "Lønomkostninger",
+      "location": "Sted",
+      "department": "Afdeling",
+      "scheduledShifts": "Planlagte Vagter",
+      "workedShifts": "Arbejdede Vagter",
+      "missedShifts": "Missede Vagter",
+      "lateArrivals": "Sene Ankomster",
+      "avgArrivalDiff": "Gennemsnitlig Ankomstforskel",
+      "date": "Dato",
+      "totalShifts": "Samlede Vagter",
+      "filledShifts": "Udfyldte Vagter",
+      "openShifts": "Åbne Vagter",
+      "fillRate": "Udfyldningsrate"
     }
   },
   "shiftTemplates": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Demodata"
   }
 }

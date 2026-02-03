@@ -162,6 +162,30 @@
     "monday": "H",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Nap",
+    "week": "Het",
+    "days": {
+      "monday": "Hetfo",
+      "tuesday": "Kedd",
+      "wednesday": "Szerda",
+      "thursday": "Csutortok",
+      "friday": "Pentek",
+      "saturday": "Szombat",
+      "sunday": "Vasarnap",
+      "mondayShort": "H",
+      "tuesdayShort": "K",
+      "wednesdayShort": "Sze",
+      "thursdayShort": "Cs",
+      "fridayShort": "P",
+      "saturdayShort": "Szo",
+      "sundayShort": "V"
+    },
+    "shifts": {
+      "morning": "Reggel",
+      "afternoon": "Delutan",
+      "evening": "Este",
+      "night": "Ejszaka"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Kepesseg Egyezes",
+      "budgetCompliance": "Koltsegvetes Megfeles",
+      "employeePreferences": "Munkavallalo Preferanciai",
+      "hoursFairness": "Orak Igazsagossaga",
+      "careerDevelopment": "Karrierfejlesztes",
+      "respectRestPeriods": "Tartsa be a 11 oras pihenoidoszakokat",
+      "avoidOvertime": "Kerulje a tulorakat, ha nem szukseges",
+      "includeTrainingShifts": "Foglaljon bele kepzesi muszakokat a fejlodo szemelyzet szamara",
+      "options": "Opciok",
+      "analyzing": "Beosztasok es elerhetseg elemzese...",
+      "consideringSkills": "Kepessegek, preferanciak es prioritasok figyelembevetele",
+      "noSuggestions": "Nincs elerheto javaslat"
+    },
+    "viewModes": {
+      "day": "Nap",
+      "week": "Het",
+      "twoWeeks": "2 Het",
+      "month": "Honap"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Preferált órák",
     "maxHoursPerWeek": "Maximum órák hetente",
     "allSet": "Minden készen áll!",
-    "startExploring": "Kezdje el felfedezni a műszakokat és lehetőségeket"
+    "startExploring": "Kezdje el felfedezni a műszakokat és lehetőségeket",
+    "availabilityDesc": "Allitsa be a munkavallalo elerheteseget es beosztasi preferenciait.",
+    "availabilityTitle": "Elerhetoseg es Preferanciak",
+    "daysAvailable": "Elerheto Napok",
+    "preferredShiftTimes": "Preferalt Mukszakidok",
+    "steps": {
+      "employeeDetails": "Munkavallalo Adatai",
+      "roleDepartment": "Szerepkor es Osztaly",
+      "skillsCerts": "Kepessegek es Tanusitvanyok",
+      "availability": "Elerhetoseg",
+      "invitation": "Meghivo"
+    },
+    "selectType": "Valasszon tipust...",
+    "selectDepartment": "Valasszon osztalyt...",
+    "selectRole": "Valasszon szerepkort...",
+    "selectLocation": "Valasszon helyszint...",
+    "selectManager": "Valasszon menedzsert (opcionalis)..."
   },
   "errors": {
     "networkError": "Hálózati hiba. Kérjük, ellenőrizze a kapcsolatot.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tablazat",
+      "bar": "Oszlopdiagram",
+      "line": "Vonaldiagram",
+      "pie": "Kordiagram"
+    },
+    "columns": {
+      "employeeName": "Munkavallalo Neve",
+      "totalHours": "Osszes Ora",
+      "regularHours": "Rendes Orak",
+      "overtimeHours": "Tulorak",
+      "laborCost": "Munkaero Koltseg",
+      "location": "Helyszin",
+      "department": "Osztaly",
+      "scheduledShifts": "Tervezett Muszakok",
+      "workedShifts": "Ledolgozott Muszakok",
+      "missedShifts": "Elmulasztott Muszakok",
+      "lateArrivals": "Kesesek",
+      "avgArrivalDiff": "Atlagos Erkezesi Kulonbseg",
+      "date": "Datum",
+      "totalShifts": "Osszes Muszak",
+      "filledShifts": "Betoltott Muszakok",
+      "openShifts": "Nyitott Muszakok",
+      "fillRate": "Betoltesi Arany"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Demo adatok"
   }
 }

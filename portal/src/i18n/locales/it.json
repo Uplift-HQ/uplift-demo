@@ -162,6 +162,30 @@
     "monday": "Lun",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Giorno",
+    "week": "Settimana",
+    "days": {
+      "monday": "Lunedì",
+      "tuesday": "Martedì",
+      "wednesday": "Mercoledì",
+      "thursday": "Giovedì",
+      "friday": "Venerdì",
+      "saturday": "Sabato",
+      "sunday": "Domenica",
+      "mondayShort": "Lun",
+      "tuesdayShort": "Mar",
+      "wednesdayShort": "Mer",
+      "thursdayShort": "Gio",
+      "fridayShort": "Ven",
+      "saturdayShort": "Sab",
+      "sundayShort": "Dom"
+    },
+    "shifts": {
+      "morning": "Mattina",
+      "afternoon": "Pomeriggio",
+      "evening": "Sera",
+      "night": "Notte"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Corrispondenza Competenze",
+      "budgetCompliance": "Conformità al Budget",
+      "employeePreferences": "Preferenze Dipendente",
+      "hoursFairness": "Equità delle Ore",
+      "careerDevelopment": "Sviluppo Carriera",
+      "respectRestPeriods": "Rispettare periodi di riposo di 11 ore",
+      "avoidOvertime": "Evitare straordinari se non necessario",
+      "includeTrainingShifts": "Includere turni di formazione per il personale in sviluppo",
+      "options": "Opzioni",
+      "analyzing": "Analisi degli orari e della disponibilità...",
+      "consideringSkills": "Considerando competenze, preferenze e le tue priorità",
+      "noSuggestions": "Nessun suggerimento disponibile"
+    },
+    "viewModes": {
+      "day": "Giorno",
+      "week": "Settimana",
+      "twoWeeks": "2 Settimane",
+      "month": "Mese"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Orari preferiti",
     "maxHoursPerWeek": "Ore massime settimanali",
     "allSet": "Tutto pronto!",
-    "startExploring": "Inizia a esplorare turni e opportunità"
+    "startExploring": "Inizia a esplorare turni e opportunità",
+    "availabilityDesc": "Imposta la disponibilità e le preferenze di programmazione del dipendente.",
+    "availabilityTitle": "Disponibilità e Preferenze",
+    "daysAvailable": "Giorni Disponibili",
+    "preferredShiftTimes": "Orari di Turno Preferiti",
+    "steps": {
+      "employeeDetails": "Dettagli Dipendente",
+      "roleDepartment": "Ruolo e Reparto",
+      "skillsCerts": "Competenze e Certificati",
+      "availability": "Disponibilità",
+      "invitation": "Invito"
+    },
+    "selectType": "Seleziona tipo...",
+    "selectDepartment": "Seleziona reparto...",
+    "selectRole": "Seleziona ruolo...",
+    "selectLocation": "Seleziona sede...",
+    "selectManager": "Seleziona manager (opzionale)..."
   },
   "errors": {
     "networkError": "Errore di rete. Controlla la tua connessione.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabella",
+      "bar": "Grafico a Barre",
+      "line": "Grafico a Linee",
+      "pie": "Grafico a Torta"
+    },
+    "columns": {
+      "employeeName": "Nome Dipendente",
+      "totalHours": "Ore Totali",
+      "regularHours": "Ore Regolari",
+      "overtimeHours": "Ore Straordinarie",
+      "laborCost": "Costo del Lavoro",
+      "location": "Sede",
+      "department": "Reparto",
+      "scheduledShifts": "Turni Programmati",
+      "workedShifts": "Turni Lavorati",
+      "missedShifts": "Turni Mancati",
+      "lateArrivals": "Arrivi in Ritardo",
+      "avgArrivalDiff": "Differenza Media di Arrivo",
+      "date": "Data",
+      "totalShifts": "Turni Totali",
+      "filledShifts": "Turni Coperti",
+      "openShifts": "Turni Aperti",
+      "fillRate": "Tasso di Copertura"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Dati dimostrativi"
   }
 }

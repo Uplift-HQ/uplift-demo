@@ -162,6 +162,30 @@
     "monday": "Mån",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Dag",
+    "week": "Vecka",
+    "days": {
+      "monday": "Måndag",
+      "tuesday": "Tisdag",
+      "wednesday": "Onsdag",
+      "thursday": "Torsdag",
+      "friday": "Fredag",
+      "saturday": "Lördag",
+      "sunday": "Söndag",
+      "mondayShort": "Mån",
+      "tuesdayShort": "Tis",
+      "wednesdayShort": "Ons",
+      "thursdayShort": "Tor",
+      "fridayShort": "Fre",
+      "saturdayShort": "Lör",
+      "sundayShort": "Sön"
+    },
+    "shifts": {
+      "morning": "Morgon",
+      "afternoon": "Eftermiddag",
+      "evening": "Kväll",
+      "night": "Natt"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Färdighetsmatchning",
+      "budgetCompliance": "Budgetöverensstämmelse",
+      "employeePreferences": "Medarbetarpreferenser",
+      "hoursFairness": "Timrättvisa",
+      "careerDevelopment": "Karriärutveckling",
+      "respectRestPeriods": "Respektera 11 timmars viloperioder",
+      "avoidOvertime": "Undvik övertid om inte nödvändigt",
+      "includeTrainingShifts": "Inkludera utbildningsskift för utvecklande personal",
+      "options": "Alternativ",
+      "analyzing": "Analyserar scheman och tillgänglighet...",
+      "consideringSkills": "Beaktar färdigheter, preferenser och dina prioriteringar",
+      "noSuggestions": "Inga förslag tillgängliga"
+    },
+    "viewModes": {
+      "day": "Dag",
+      "week": "Vecka",
+      "twoWeeks": "2 Veckor",
+      "month": "Månad"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Önskade timmar",
     "maxHoursPerWeek": "Max timmar per vecka",
     "allSet": "Du är redo!",
-    "startExploring": "Börja utforska pass och möjligheter"
+    "startExploring": "Börja utforska pass och möjligheter",
+    "availabilityDesc": "Ange medarbetarens tillgänglighet och schemapreferenser.",
+    "availabilityTitle": "Tillgänglighet och Preferenser",
+    "daysAvailable": "Tillgängliga Dagar",
+    "preferredShiftTimes": "Föredragna Skifttider",
+    "steps": {
+      "employeeDetails": "Medarbetardetaljer",
+      "roleDepartment": "Roll och Avdelning",
+      "skillsCerts": "Färdigheter och Certifikat",
+      "availability": "Tillgänglighet",
+      "invitation": "Inbjudan"
+    },
+    "selectType": "Välj typ...",
+    "selectDepartment": "Välj avdelning...",
+    "selectRole": "Välj roll...",
+    "selectLocation": "Välj plats...",
+    "selectManager": "Välj chef (valfritt)..."
   },
   "errors": {
     "networkError": "Nätverksfel. Kontrollera din anslutning.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabell",
+      "bar": "Stapeldiagram",
+      "line": "Linjediagram",
+      "pie": "Cirkeldiagram"
+    },
+    "columns": {
+      "employeeName": "Medarbetarnamn",
+      "totalHours": "Totala Timmar",
+      "regularHours": "Ordinarie Timmar",
+      "overtimeHours": "Övertid",
+      "laborCost": "Arbetskostnad",
+      "location": "Plats",
+      "department": "Avdelning",
+      "scheduledShifts": "Schemalagda Skift",
+      "workedShifts": "Arbetade Skift",
+      "missedShifts": "Missade Skift",
+      "lateArrivals": "Sena Ankomster",
+      "avgArrivalDiff": "Genomsnittlig Ankomstskillnad",
+      "date": "Datum",
+      "totalShifts": "Totala Skift",
+      "filledShifts": "Fyllda Skift",
+      "openShifts": "Öppna Skift",
+      "fillRate": "Fyllnadsgrad"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Demodata"
   }
 }

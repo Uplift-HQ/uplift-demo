@@ -162,6 +162,30 @@
     "monday": "सोम",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "दिन",
+    "week": "सप्ताह",
+    "days": {
+      "monday": "सोमवार",
+      "tuesday": "मंगलवार",
+      "wednesday": "बुधवार",
+      "thursday": "गुरुवार",
+      "friday": "शुक्रवार",
+      "saturday": "शनिवार",
+      "sunday": "रविवार",
+      "mondayShort": "सोम",
+      "tuesdayShort": "मंगल",
+      "wednesdayShort": "बुध",
+      "thursdayShort": "गुरु",
+      "fridayShort": "शुक्र",
+      "saturdayShort": "शनि",
+      "sundayShort": "रवि"
+    },
+    "shifts": {
+      "morning": "सुबह",
+      "afternoon": "दोपहर",
+      "evening": "शाम",
+      "night": "रात"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "कौशल मिलान",
+      "budgetCompliance": "बजट अनुपालन",
+      "employeePreferences": "कर्मचारी प्राथमिकताएं",
+      "hoursFairness": "घंटों की निष्पक्षता",
+      "careerDevelopment": "कैरियर विकास",
+      "respectRestPeriods": "11 घंटे की विश्राम अवधि का सम्मान करें",
+      "avoidOvertime": "आवश्यक न हो तो ओवरटाइम से बचें",
+      "includeTrainingShifts": "विकासशील स्टाफ के लिए प्रशिक्षण शिफ्ट शामिल करें",
+      "options": "विकल्प",
+      "analyzing": "शेड्यूल और उपलब्धता का विश्लेषण...",
+      "consideringSkills": "कौशल, प्राथमिकताएं और आपकी प्राथमिकताओं पर विचार करना",
+      "noSuggestions": "कोई सुझाव उपलब्ध नहीं"
+    },
+    "viewModes": {
+      "day": "दिन",
+      "week": "सप्ताह",
+      "twoWeeks": "2 सप्ताह",
+      "month": "महीना"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "पसंदीदा घंटे",
     "maxHoursPerWeek": "प्रति सप्ताह अधिकतम घंटे",
     "allSet": "सब तैयार है!",
-    "startExploring": "शिफ्ट और अवसर खोजना शुरू करें"
+    "startExploring": "शिफ्ट और अवसर खोजना शुरू करें",
+    "availabilityDesc": "कर्मचारी की उपलब्धता और शेड्यूल प्राथमिकताएं सेट करें।",
+    "availabilityTitle": "उपलब्धता और प्राथमिकताएं",
+    "daysAvailable": "उपलब्ध दिन",
+    "preferredShiftTimes": "पसंदीदा शिफ्ट समय",
+    "steps": {
+      "employeeDetails": "कर्मचारी विवरण",
+      "roleDepartment": "भूमिका और विभाग",
+      "skillsCerts": "कौशल और प्रमाणपत्र",
+      "availability": "उपलब्धता",
+      "invitation": "आमंत्रण"
+    },
+    "selectType": "प्रकार चुनें...",
+    "selectDepartment": "विभाग चुनें...",
+    "selectRole": "भूमिका चुनें...",
+    "selectLocation": "स्थान चुनें...",
+    "selectManager": "प्रबंधक चुनें (वैकल्पिक)..."
   },
   "errors": {
     "networkError": "नेटवर्क त्रुटि। अपना कनेक्शन जांचें।",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "तालिका",
+      "bar": "बार चार्ट",
+      "line": "लाइन चार्ट",
+      "pie": "पाई चार्ट"
+    },
+    "columns": {
+      "employeeName": "कर्मचारी का नाम",
+      "totalHours": "कुल घंटे",
+      "regularHours": "नियमित घंटे",
+      "overtimeHours": "ओवरटाइम घंटे",
+      "laborCost": "श्रम लागत",
+      "location": "स्थान",
+      "department": "विभाग",
+      "scheduledShifts": "निर्धारित शिफ्ट",
+      "workedShifts": "काम की गई शिफ्ट",
+      "missedShifts": "छूटी शिफ्ट",
+      "lateArrivals": "देर से आगमन",
+      "avgArrivalDiff": "औसत आगमन अंतर",
+      "date": "तारीख",
+      "totalShifts": "कुल शिफ्ट",
+      "filledShifts": "भरी गई शिफ्ट",
+      "openShifts": "खाली शिफ्ट",
+      "fillRate": "भरण दर"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "डेमो डेटा"
   }
 }

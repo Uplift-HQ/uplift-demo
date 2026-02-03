@@ -162,6 +162,30 @@
     "monday": "Пон",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "День",
+    "week": "Неделя",
+    "days": {
+      "monday": "Понедельник",
+      "tuesday": "Вторник",
+      "wednesday": "Среда",
+      "thursday": "Четверг",
+      "friday": "Пятница",
+      "saturday": "Суббота",
+      "sunday": "Воскресенье",
+      "mondayShort": "Пн",
+      "tuesdayShort": "Вт",
+      "wednesdayShort": "Ср",
+      "thursdayShort": "Чт",
+      "fridayShort": "Пт",
+      "saturdayShort": "Сб",
+      "sundayShort": "Вс"
+    },
+    "shifts": {
+      "morning": "Утро",
+      "afternoon": "День",
+      "evening": "Вечер",
+      "night": "Ночь"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Соответствие Навыков",
+      "budgetCompliance": "Соблюдение Бюджета",
+      "employeePreferences": "Предпочтения Сотрудника",
+      "hoursFairness": "Справедливость Часов",
+      "careerDevelopment": "Карьерное Развитие",
+      "respectRestPeriods": "Соблюдать 11-часовые периоды отдыха",
+      "avoidOvertime": "Избегать сверхурочных, если не необходимо",
+      "includeTrainingShifts": "Включить обучающие смены для развивающегося персонала",
+      "options": "Опции",
+      "analyzing": "Анализ расписания и доступности...",
+      "consideringSkills": "Учет навыков, предпочтений и ваших приоритетов",
+      "noSuggestions": "Нет предложений"
+    },
+    "viewModes": {
+      "day": "День",
+      "week": "Неделя",
+      "twoWeeks": "2 Недели",
+      "month": "Месяц"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Предпочитани часове",
     "maxHoursPerWeek": "Максимум часове на седмица",
     "allSet": "Всичко е готово!",
-    "startExploring": "Започнете да разглеждате смени и възможности"
+    "startExploring": "Започнете да разглеждате смени и възможности",
+    "availabilityDesc": "Установите доступность и предпочтения по расписанию сотрудника.",
+    "availabilityTitle": "Доступность и Предпочтения",
+    "daysAvailable": "Доступные Дни",
+    "preferredShiftTimes": "Предпочтительное Время Смен",
+    "steps": {
+      "employeeDetails": "Данные Сотрудника",
+      "roleDepartment": "Должность и Отдел",
+      "skillsCerts": "Навыки и Сертификаты",
+      "availability": "Доступность",
+      "invitation": "Приглашение"
+    },
+    "selectType": "Выберите тип...",
+    "selectDepartment": "Выберите отдел...",
+    "selectRole": "Выберите должность...",
+    "selectLocation": "Выберите местоположение...",
+    "selectManager": "Выберите менеджера (необязательно)..."
   },
   "errors": {
     "networkError": "Мрежова грешка. Моля, проверете връзката си.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Таблица",
+      "bar": "Столбчатая Диаграмма",
+      "line": "Линейная Диаграмма",
+      "pie": "Круговая Диаграмма"
+    },
+    "columns": {
+      "employeeName": "Имя Сотрудника",
+      "totalHours": "Всего Часов",
+      "regularHours": "Обычные Часы",
+      "overtimeHours": "Сверхурочные",
+      "laborCost": "Затраты на Труд",
+      "location": "Местоположение",
+      "department": "Отдел",
+      "scheduledShifts": "Запланированные Смены",
+      "workedShifts": "Отработанные Смены",
+      "missedShifts": "Пропущенные Смены",
+      "lateArrivals": "Опоздания",
+      "avgArrivalDiff": "Среднее Отклонение Прихода",
+      "date": "Дата",
+      "totalShifts": "Всего Смен",
+      "filledShifts": "Заполненные Смены",
+      "openShifts": "Открытые Смены",
+      "fillRate": "Коэффициент Заполнения"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Демо-данные"
   }
 }

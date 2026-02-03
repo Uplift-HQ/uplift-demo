@@ -162,6 +162,30 @@
     "monday": "Lun",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Jour",
+    "week": "Semaine",
+    "days": {
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche",
+      "mondayShort": "Lun",
+      "tuesdayShort": "Mar",
+      "wednesdayShort": "Mer",
+      "thursdayShort": "Jeu",
+      "fridayShort": "Ven",
+      "saturdayShort": "Sam",
+      "sundayShort": "Dim"
+    },
+    "shifts": {
+      "morning": "Matin",
+      "afternoon": "Après-midi",
+      "evening": "Soir",
+      "night": "Nuit"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Correspondance des Compétences",
+      "budgetCompliance": "Conformité Budgétaire",
+      "employeePreferences": "Préférences de l'Employé",
+      "hoursFairness": "Équité des Heures",
+      "careerDevelopment": "Développement de Carrière",
+      "respectRestPeriods": "Respecter les périodes de repos de 11 heures",
+      "avoidOvertime": "Éviter les heures supplémentaires sauf si nécessaire",
+      "includeTrainingShifts": "Inclure des postes de formation pour le personnel en développement",
+      "options": "Options",
+      "analyzing": "Analyse des horaires et de la disponibilité...",
+      "consideringSkills": "Prise en compte des compétences, préférences et vos priorités",
+      "noSuggestions": "Aucune suggestion disponible"
+    },
+    "viewModes": {
+      "day": "Jour",
+      "week": "Semaine",
+      "twoWeeks": "2 Semaines",
+      "month": "Mois"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Heures préférées",
     "maxHoursPerWeek": "Max heures par semaine",
     "allSet": "Tout est prêt !",
-    "startExploring": "Commencez à explorer les postes et opportunités"
+    "startExploring": "Commencez à explorer les postes et opportunités",
+    "availabilityDesc": "Définissez la disponibilité et les préférences d'horaires de l'employé.",
+    "availabilityTitle": "Disponibilité et Préférences",
+    "daysAvailable": "Jours Disponibles",
+    "preferredShiftTimes": "Horaires de Travail Préférés",
+    "steps": {
+      "employeeDetails": "Détails de l'Employé",
+      "roleDepartment": "Poste et Département",
+      "skillsCerts": "Compétences et Certificats",
+      "availability": "Disponibilité",
+      "invitation": "Invitation"
+    },
+    "selectType": "Sélectionnez le type...",
+    "selectDepartment": "Sélectionnez le département...",
+    "selectRole": "Sélectionnez le poste...",
+    "selectLocation": "Sélectionnez le lieu...",
+    "selectManager": "Sélectionnez le responsable (optionnel)..."
   },
   "errors": {
     "networkError": "Erreur réseau. Vérifiez votre connexion.",
@@ -1102,6 +1162,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tableau",
+      "bar": "Graphique à Barres",
+      "line": "Graphique Linéaire",
+      "pie": "Graphique Circulaire"
+    },
+    "columns": {
+      "employeeName": "Nom de l'Employé",
+      "totalHours": "Heures Totales",
+      "regularHours": "Heures Régulières",
+      "overtimeHours": "Heures Supplémentaires",
+      "laborCost": "Coût de Main-d'œuvre",
+      "location": "Lieu",
+      "department": "Département",
+      "scheduledShifts": "Postes Planifiés",
+      "workedShifts": "Postes Travaillés",
+      "missedShifts": "Postes Manqués",
+      "lateArrivals": "Arrivées en Retard",
+      "avgArrivalDiff": "Différence Moyenne d'Arrivée",
+      "date": "Date",
+      "totalShifts": "Total des Postes",
+      "filledShifts": "Postes Pourvus",
+      "openShifts": "Postes Vacants",
+      "fillRate": "Taux de Remplissage"
     }
   },
   "shiftTemplates": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Données de démonstration"
   }
 }

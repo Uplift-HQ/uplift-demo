@@ -162,6 +162,30 @@
     "monday": "Po",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Den",
+    "week": "Tyden",
+    "days": {
+      "monday": "Pondeli",
+      "tuesday": "Utery",
+      "wednesday": "Streda",
+      "thursday": "Ctvrtek",
+      "friday": "Patek",
+      "saturday": "Sobota",
+      "sunday": "Nedele",
+      "mondayShort": "Po",
+      "tuesdayShort": "Ut",
+      "wednesdayShort": "St",
+      "thursdayShort": "Ct",
+      "fridayShort": "Pa",
+      "saturdayShort": "So",
+      "sundayShort": "Ne"
+    },
+    "shifts": {
+      "morning": "Rano",
+      "afternoon": "Odpoledne",
+      "evening": "Vecer",
+      "night": "Noc"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Shoda Dovednosti",
+      "budgetCompliance": "Soulad s Rozpoctem",
+      "employeePreferences": "Preference Zamestnance",
+      "hoursFairness": "Spravedlnost Hodin",
+      "careerDevelopment": "Karierni Rozvoj",
+      "respectRestPeriods": "Dodrzujte 11hodinove doby odpocinku",
+      "avoidOvertime": "Vyhybejte se prescasum, pokud to neni nutne",
+      "includeTrainingShifts": "Zahrnout skolici smeny pro rozvijejici se personal",
+      "options": "Moznosti",
+      "analyzing": "Analyzuji rozvrhy a dostupnost...",
+      "consideringSkills": "Zvazuji dovednosti, preference a vase priority",
+      "noSuggestions": "Zadne navrhy k dispozici"
+    },
+    "viewModes": {
+      "day": "Den",
+      "week": "Tyden",
+      "twoWeeks": "2 Tydny",
+      "month": "Mesic"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Preferred Hours",
     "maxHoursPerWeek": "Max Hours Per Week",
     "allSet": "You're All Set!",
-    "startExploring": "Start exploring shifts and opportunities"
+    "startExploring": "Start exploring shifts and opportunities",
+    "availabilityDesc": "Nastavte dostupnost a preference rozvrhu zamestnance.",
+    "availabilityTitle": "Dostupnost a Preference",
+    "daysAvailable": "Dostupne Dny",
+    "preferredShiftTimes": "Preferovane Casy Smen",
+    "steps": {
+      "employeeDetails": "Udaje Zamestnance",
+      "roleDepartment": "Role a Oddeleni",
+      "skillsCerts": "Dovednosti a Certifikaty",
+      "availability": "Dostupnost",
+      "invitation": "Pozvanka"
+    },
+    "selectType": "Vyberte typ...",
+    "selectDepartment": "Vyberte oddeleni...",
+    "selectRole": "Vyberte roli...",
+    "selectLocation": "Vyberte misto...",
+    "selectManager": "Vyberte manaera (volitelne)..."
   },
   "errors": {
     "networkError": "Chyba sítě",
@@ -1145,6 +1205,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabulka",
+      "bar": "Sloupcovy Graf",
+      "line": "Carovy Graf",
+      "pie": "Kolacovy Graf"
+    },
+    "columns": {
+      "employeeName": "Jmeno Zamestnance",
+      "totalHours": "Celkem Hodin",
+      "regularHours": "Bezne Hodiny",
+      "overtimeHours": "Prescasy",
+      "laborCost": "Naklady na Praci",
+      "location": "Misto",
+      "department": "Oddeleni",
+      "scheduledShifts": "Naplanovane Smeny",
+      "workedShifts": "Odpracovane Smeny",
+      "missedShifts": "Zmeskane Smeny",
+      "lateArrivals": "Pozdni Prichody",
+      "avgArrivalDiff": "Prumerny Rozdil Prichodu",
+      "date": "Datum",
+      "totalShifts": "Celkem Smen",
+      "filledShifts": "Obsazene Smeny",
+      "openShifts": "Volne Smeny",
+      "fillRate": "Mira Obsazeni"
     }
   },
   "shiftTemplates": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Demodata"
   }
 }

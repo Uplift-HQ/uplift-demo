@@ -162,6 +162,30 @@
     "monday": "إثن",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "يوم",
+    "week": "أسبوع",
+    "days": {
+      "monday": "الاثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة",
+      "saturday": "السبت",
+      "sunday": "الأحد",
+      "mondayShort": "اثن",
+      "tuesdayShort": "ثلث",
+      "wednesdayShort": "أرب",
+      "thursdayShort": "خمس",
+      "fridayShort": "جمع",
+      "saturdayShort": "سبت",
+      "sundayShort": "أحد"
+    },
+    "shifts": {
+      "morning": "صباح",
+      "afternoon": "بعد الظهر",
+      "evening": "مساء",
+      "night": "ليل"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "تطابق المهارات",
+      "budgetCompliance": "الالتزام بالميزانية",
+      "employeePreferences": "تفضيلات الموظف",
+      "hoursFairness": "عدالة الساعات",
+      "careerDevelopment": "التطوير الوظيفي",
+      "respectRestPeriods": "احترام فترات الراحة 11 ساعة",
+      "avoidOvertime": "تجنب العمل الإضافي إلا عند الضرورة",
+      "includeTrainingShifts": "تضمين ورديات التدريب للموظفين في التطوير",
+      "options": "خيارات",
+      "analyzing": "تحليل الجداول والتوفر...",
+      "consideringSkills": "مراعاة المهارات والتفضيلات وأولوياتك",
+      "noSuggestions": "لا توجد اقتراحات"
+    },
+    "viewModes": {
+      "day": "يوم",
+      "week": "أسبوع",
+      "twoWeeks": "أسبوعان",
+      "month": "شهر"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "الساعات المفضلة",
     "maxHoursPerWeek": "الحد الأقصى للساعات أسبوعياً",
     "allSet": "كل شيء جاهز!",
-    "startExploring": "ابدأ باستكشاف الورديات والفرص"
+    "startExploring": "ابدأ باستكشاف الورديات والفرص",
+    "availabilityDesc": "حدد توفر الموظف وتفضيلات الجدول الزمني.",
+    "availabilityTitle": "التوفر والتفضيلات",
+    "daysAvailable": "الأيام المتاحة",
+    "preferredShiftTimes": "أوقات الورديات المفضلة",
+    "steps": {
+      "employeeDetails": "تفاصيل الموظف",
+      "roleDepartment": "الدور والقسم",
+      "skillsCerts": "المهارات والشهادات",
+      "availability": "التوفر",
+      "invitation": "الدعوة"
+    },
+    "selectType": "اختر النوع...",
+    "selectDepartment": "اختر القسم...",
+    "selectRole": "اختر الدور...",
+    "selectLocation": "اختر الموقع...",
+    "selectManager": "اختر المدير (اختياري)..."
   },
   "errors": {
     "networkError": "خطأ في الشبكة. تحقق من اتصالك.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "جدول",
+      "bar": "مخطط شريطي",
+      "line": "مخطط خطي",
+      "pie": "مخطط دائري"
+    },
+    "columns": {
+      "employeeName": "اسم الموظف",
+      "totalHours": "إجمالي الساعات",
+      "regularHours": "الساعات العادية",
+      "overtimeHours": "ساعات إضافية",
+      "laborCost": "تكلفة العمالة",
+      "location": "الموقع",
+      "department": "القسم",
+      "scheduledShifts": "الورديات المجدولة",
+      "workedShifts": "الورديات المنجزة",
+      "missedShifts": "الورديات الفائتة",
+      "lateArrivals": "التأخيرات",
+      "avgArrivalDiff": "متوسط فرق الوصول",
+      "date": "التاريخ",
+      "totalShifts": "إجمالي الورديات",
+      "filledShifts": "الورديات المملوءة",
+      "openShifts": "الورديات المفتوحة",
+      "fillRate": "معدل الملء"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "بيانات تجريبية"
   }
 }

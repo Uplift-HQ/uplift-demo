@@ -162,6 +162,30 @@
     "monday": "Man",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Dag",
+    "week": "Uke",
+    "days": {
+      "monday": "Mandag",
+      "tuesday": "Tirsdag",
+      "wednesday": "Onsdag",
+      "thursday": "Torsdag",
+      "friday": "Fredag",
+      "saturday": "Lørdag",
+      "sunday": "Søndag",
+      "mondayShort": "Man",
+      "tuesdayShort": "Tir",
+      "wednesdayShort": "Ons",
+      "thursdayShort": "Tor",
+      "fridayShort": "Fre",
+      "saturdayShort": "Lør",
+      "sundayShort": "Søn"
+    },
+    "shifts": {
+      "morning": "Morgen",
+      "afternoon": "Ettermiddag",
+      "evening": "Kveld",
+      "night": "Natt"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Ferdighetsmatch",
+      "budgetCompliance": "Budsjettoverholdelse",
+      "employeePreferences": "Ansattpreferanser",
+      "hoursFairness": "Timerettferdighet",
+      "careerDevelopment": "Karriereutvikling",
+      "respectRestPeriods": "Respekter 11-timers hvileperioder",
+      "avoidOvertime": "Unngå overtid med mindre nødvendig",
+      "includeTrainingShifts": "Inkluder opplæringsskift for utviklende personale",
+      "options": "Alternativer",
+      "analyzing": "Analyserer timeplaner og tilgjengelighet...",
+      "consideringSkills": "Vurderer ferdigheter, preferanser og dine prioriteringer",
+      "noSuggestions": "Ingen forslag tilgjengelig"
+    },
+    "viewModes": {
+      "day": "Dag",
+      "week": "Uke",
+      "twoWeeks": "2 Uker",
+      "month": "Måned"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Foretrukne timer",
     "maxHoursPerWeek": "Maks timer per uke",
     "allSet": "Du er klar!",
-    "startExploring": "Begynn å utforske vakter og muligheter"
+    "startExploring": "Begynn å utforske vakter og muligheter",
+    "availabilityDesc": "Angi ansattes tilgjengelighet og timeplanpreferanser.",
+    "availabilityTitle": "Tilgjengelighet og Preferanser",
+    "daysAvailable": "Tilgjengelige Dager",
+    "preferredShiftTimes": "Foretrukne Skifttider",
+    "steps": {
+      "employeeDetails": "Ansattdetaljer",
+      "roleDepartment": "Rolle og Avdeling",
+      "skillsCerts": "Ferdigheter og Sertifikater",
+      "availability": "Tilgjengelighet",
+      "invitation": "Invitasjon"
+    },
+    "selectType": "Velg type...",
+    "selectDepartment": "Velg avdeling...",
+    "selectRole": "Velg rolle...",
+    "selectLocation": "Velg sted...",
+    "selectManager": "Velg leder (valgfritt)..."
   },
   "errors": {
     "networkError": "Nettverksfeil. Vennligst sjekk tilkoblingen din.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabell",
+      "bar": "Søylediagram",
+      "line": "Linjediagram",
+      "pie": "Sektordiagram"
+    },
+    "columns": {
+      "employeeName": "Ansattnavn",
+      "totalHours": "Totale Timer",
+      "regularHours": "Ordinære Timer",
+      "overtimeHours": "Overtid",
+      "laborCost": "Arbeidskostnad",
+      "location": "Sted",
+      "department": "Avdeling",
+      "scheduledShifts": "Planlagte Skift",
+      "workedShifts": "Arbeidede Skift",
+      "missedShifts": "Tapte Skift",
+      "lateArrivals": "Sene Ankomster",
+      "avgArrivalDiff": "Gjennomsnittlig Ankomstforskjell",
+      "date": "Dato",
+      "totalShifts": "Totale Skift",
+      "filledShifts": "Fylte Skift",
+      "openShifts": "Åpne Skift",
+      "fillRate": "Fyllingsgrad"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Demodata"
   }
 }

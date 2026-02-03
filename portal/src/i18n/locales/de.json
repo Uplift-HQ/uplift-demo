@@ -90,6 +90,30 @@
     "monday": "Mo",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Tag",
+    "week": "Woche",
+    "days": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag",
+      "mondayShort": "Mo",
+      "tuesdayShort": "Di",
+      "wednesdayShort": "Mi",
+      "thursdayShort": "Do",
+      "fridayShort": "Fr",
+      "saturdayShort": "Sa",
+      "sundayShort": "So"
+    },
+    "shifts": {
+      "morning": "Morgen",
+      "afternoon": "Nachmittag",
+      "evening": "Abend",
+      "night": "Nacht"
     }
   },
   "auth": {
@@ -248,6 +272,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Fähigkeitsübereinstimmung",
+      "budgetCompliance": "Budgetkonformität",
+      "employeePreferences": "Mitarbeiterpräferenzen",
+      "hoursFairness": "Stundengerechtigkeit",
+      "careerDevelopment": "Karriereentwicklung",
+      "respectRestPeriods": "11-stündige Ruhezeiten einhalten",
+      "avoidOvertime": "Überstunden vermeiden, außer wenn nötig",
+      "includeTrainingShifts": "Schulungsschichten für Entwicklungspersonal einbeziehen",
+      "options": "Optionen",
+      "analyzing": "Analysiere Zeitpläne und Verfügbarkeit...",
+      "consideringSkills": "Berücksichtigung von Fähigkeiten, Präferenzen und Ihren Prioritäten",
+      "noSuggestions": "Keine Vorschläge verfügbar"
+    },
+    "viewModes": {
+      "day": "Tag",
+      "week": "Woche",
+      "twoWeeks": "2 Wochen",
+      "month": "Monat"
     }
   },
   "timeTracking": {
@@ -855,7 +899,23 @@
     "preferredHours": "Bevorzugte Stunden",
     "maxHoursPerWeek": "Max. Stunden pro Woche",
     "allSet": "Alles erledigt!",
-    "startExploring": "Beginnen Sie mit der Erkundung von Schichten und Möglichkeiten"
+    "startExploring": "Beginnen Sie mit der Erkundung von Schichten und Möglichkeiten",
+    "availabilityDesc": "Legen Sie die Verfügbarkeit und Zeitplanpräferenzen des Mitarbeiters fest.",
+    "availabilityTitle": "Verfügbarkeit und Präferenzen",
+    "daysAvailable": "Verfügbare Tage",
+    "preferredShiftTimes": "Bevorzugte Schichtzeiten",
+    "steps": {
+      "employeeDetails": "Mitarbeiterdaten",
+      "roleDepartment": "Rolle und Abteilung",
+      "skillsCerts": "Fähigkeiten und Zertifikate",
+      "availability": "Verfügbarkeit",
+      "invitation": "Einladung"
+    },
+    "selectType": "Typ auswählen...",
+    "selectDepartment": "Abteilung auswählen...",
+    "selectRole": "Rolle auswählen...",
+    "selectLocation": "Standort auswählen...",
+    "selectManager": "Manager auswählen (optional)..."
   },
   "errors": {
     "networkError": "Netzwerkfehler. Überprüfen Sie Ihre Verbindung.",
@@ -1144,6 +1204,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Tabelle",
+      "bar": "Balkendiagramm",
+      "line": "Liniendiagramm",
+      "pie": "Kreisdiagramm"
+    },
+    "columns": {
+      "employeeName": "Mitarbeitername",
+      "totalHours": "Gesamtstunden",
+      "regularHours": "Reguläre Stunden",
+      "overtimeHours": "Überstunden",
+      "laborCost": "Arbeitskosten",
+      "location": "Standort",
+      "department": "Abteilung",
+      "scheduledShifts": "Geplante Schichten",
+      "workedShifts": "Gearbeitete Schichten",
+      "missedShifts": "Verpasste Schichten",
+      "lateArrivals": "Verspätete Ankünfte",
+      "avgArrivalDiff": "Durchschnittliche Ankunftsdifferenz",
+      "date": "Datum",
+      "totalShifts": "Gesamtschichten",
+      "filledShifts": "Besetzte Schichten",
+      "openShifts": "Offene Schichten",
+      "fillRate": "Besetzungsrate"
     }
   },
   "shiftTemplates": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Demodaten"
   }
 }

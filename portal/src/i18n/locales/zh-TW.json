@@ -162,6 +162,30 @@
     "monday": "週一",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "天",
+    "week": "周",
+    "days": {
+      "monday": "星期一",
+      "tuesday": "星期二",
+      "wednesday": "星期三",
+      "thursday": "星期四",
+      "friday": "星期五",
+      "saturday": "星期六",
+      "sunday": "星期日",
+      "mondayShort": "一",
+      "tuesdayShort": "二",
+      "wednesdayShort": "三",
+      "thursdayShort": "四",
+      "fridayShort": "五",
+      "saturdayShort": "六",
+      "sundayShort": "日"
+    },
+    "shifts": {
+      "morning": "早班",
+      "afternoon": "下午班",
+      "evening": "晚班",
+      "night": "夜班"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "技能匹配",
+      "budgetCompliance": "预算合规",
+      "employeePreferences": "员工偏好",
+      "hoursFairness": "工时公平",
+      "careerDevelopment": "职业发展",
+      "respectRestPeriods": "遵守11小时休息期",
+      "avoidOvertime": "避免不必要的加班",
+      "includeTrainingShifts": "为发展中员工安排培训班次",
+      "options": "选项",
+      "analyzing": "正在分析排班和可用性...",
+      "consideringSkills": "考虑技能、偏好和您的优先级",
+      "noSuggestions": "暂无建议"
+    },
+    "viewModes": {
+      "day": "日",
+      "week": "周",
+      "twoWeeks": "两周",
+      "month": "月"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "偏好時段",
     "maxHoursPerWeek": "每週最高工時",
     "allSet": "設定完成！",
-    "startExploring": "開始探索班次和機會"
+    "startExploring": "開始探索班次和機會",
+    "availabilityDesc": "设置员工的可用时间和排班偏好。",
+    "availabilityTitle": "可用性和偏好",
+    "daysAvailable": "可用天数",
+    "preferredShiftTimes": "首选班次时间",
+    "steps": {
+      "employeeDetails": "员工详情",
+      "roleDepartment": "职位和部门",
+      "skillsCerts": "技能和证书",
+      "availability": "可用性",
+      "invitation": "邀请"
+    },
+    "selectType": "选择类型...",
+    "selectDepartment": "选择部门...",
+    "selectRole": "选择职位...",
+    "selectLocation": "选择地点...",
+    "selectManager": "选择经理（可选）..."
   },
   "errors": {
     "networkError": "網路錯誤，請檢查您的連線。",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "表格",
+      "bar": "柱状图",
+      "line": "折线图",
+      "pie": "饼图"
+    },
+    "columns": {
+      "employeeName": "员工姓名",
+      "totalHours": "总工时",
+      "regularHours": "正常工时",
+      "overtimeHours": "加班工时",
+      "laborCost": "人工成本",
+      "location": "地点",
+      "department": "部门",
+      "scheduledShifts": "已排班次",
+      "workedShifts": "已工作班次",
+      "missedShifts": "缺勤班次",
+      "lateArrivals": "迟到次数",
+      "avgArrivalDiff": "平均到达差异",
+      "date": "日期",
+      "totalShifts": "总班次",
+      "filledShifts": "已填充班次",
+      "openShifts": "空缺班次",
+      "fillRate": "填充率"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "演示数据"
   }
 }

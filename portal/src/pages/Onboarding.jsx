@@ -55,6 +55,7 @@ function generateEmployeeId() {
 // STEP 1: Employee Details
 // ============================================================
 function StepEmployeeDetails({ data, onChange, errors, employees }) {
+  const { t } = useTranslation();
   const update = (field, value) => onChange({ ...data, [field]: value });
   const [emailWarning, setEmailWarning] = useState('');
 
@@ -151,7 +152,7 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
               errors.employmentType ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
           >
-            <option value="">Select type...</option>
+            <option value="">{t('onboarding.selectType', 'Select type...')}</option>
             {EMPLOYMENT_TYPES.map((type) => (
               <option key={type} value={type}>
                 {type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ')}
@@ -194,6 +195,7 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
 // STEP 2: Role & Department
 // ============================================================
 function StepRoleDepartment({ data, onChange, errors, departments, roles, locations, employees }) {
+  const { t } = useTranslation();
   const update = (field, value) => onChange({ ...data, [field]: value });
 
   return (
@@ -213,7 +215,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
               errors.department ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
           >
-            <option value="">Select department...</option>
+            <option value="">{t('onboarding.selectDepartment', 'Select department...')}</option>
             {departments.map((d) => (
               <option key={d.id} value={d.id}>{d.name}</option>
             ))}
@@ -230,7 +232,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
               errors.role ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
           >
-            <option value="">Select role...</option>
+            <option value="">{t('onboarding.selectRole', 'Select role...')}</option>
             {roles.map((r) => (
               <option key={r.id} value={r.id}>{r.name}</option>
             ))}
@@ -247,7 +249,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
               errors.location ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
           >
-            <option value="">Select location...</option>
+            <option value="">{t('onboarding.selectLocation', 'Select location...')}</option>
             {locations.map((l) => (
               <option key={l.id} value={l.id}>{l.name}</option>
             ))}
@@ -290,7 +292,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
             onChange={(e) => update('managerId', e.target.value)}
             className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
           >
-            <option value="">Select manager (optional)...</option>
+            <option value="">{t('onboarding.selectManager', 'Select manager (optional)...')}</option>
             {employees.map((emp) => (
               <option key={emp.id} value={emp.id}>
                 {emp.first_name} {emp.last_name}

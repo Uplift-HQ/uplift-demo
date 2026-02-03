@@ -162,6 +162,30 @@
     "monday": "E",
     "placeholder": {
       "search": "Search..."
+    },
+    "day": "Päivä",
+    "week": "Viikko",
+    "days": {
+      "monday": "Maanantai",
+      "tuesday": "Tiistai",
+      "wednesday": "Keskiviikko",
+      "thursday": "Torstai",
+      "friday": "Perjantai",
+      "saturday": "Lauantai",
+      "sunday": "Sunnuntai",
+      "mondayShort": "Ma",
+      "tuesdayShort": "Ti",
+      "wednesdayShort": "Ke",
+      "thursdayShort": "To",
+      "fridayShort": "Pe",
+      "saturdayShort": "La",
+      "sundayShort": "Su"
+    },
+    "shifts": {
+      "morning": "Aamu",
+      "afternoon": "Iltapäivä",
+      "evening": "Ilta",
+      "night": "Yö"
     }
   },
   "auth": {
@@ -320,6 +344,26 @@
     "placeholder": {
       "searchEmployees": "Search employees...",
       "addNotes": "Add notes..."
+    },
+    "ai": {
+      "skillsMatch": "Taitojen Vastaavuus",
+      "budgetCompliance": "Budjettinoudattaminen",
+      "employeePreferences": "Työntekijän Preferenssit",
+      "hoursFairness": "Tuntien Oikeudenmukaisuus",
+      "careerDevelopment": "Urakehitys",
+      "respectRestPeriods": "Kunnioita 11 tunnin lepojaksoja",
+      "avoidOvertime": "Vältä ylitöitä ellei välttämätöntä",
+      "includeTrainingShifts": "Sisällytä koulutusvuorot kehittyvälle henkilöstölle",
+      "options": "Vaihtoehdot",
+      "analyzing": "Analysoidaan aikatauluja ja saatavuutta...",
+      "consideringSkills": "Huomioidaan taidot, preferenssit ja prioriteettisi",
+      "noSuggestions": "Ei ehdotuksia saatavilla"
+    },
+    "viewModes": {
+      "day": "Päivä",
+      "week": "Viikko",
+      "twoWeeks": "2 Viikkoa",
+      "month": "Kuukausi"
     }
   },
   "timeTracking": {
@@ -927,7 +971,23 @@
     "preferredHours": "Eelistatud tunnid",
     "maxHoursPerWeek": "Maksimaalsed tunnid nädalas",
     "allSet": "Kõik on valmis!",
-    "startExploring": "Alusta vahetuste ja võimaluste avastamist"
+    "startExploring": "Alusta vahetuste ja võimaluste avastamist",
+    "availabilityDesc": "Aseta työntekijän saatavuus ja aikataulupreferenssit.",
+    "availabilityTitle": "Saatavuus ja Preferenssit",
+    "daysAvailable": "Saatavilla Olevat Päivät",
+    "preferredShiftTimes": "Suositut Vuoroajat",
+    "steps": {
+      "employeeDetails": "Työntekijän Tiedot",
+      "roleDepartment": "Rooli ja Osasto",
+      "skillsCerts": "Taidot ja Sertifikaatit",
+      "availability": "Saatavuus",
+      "invitation": "Kutsu"
+    },
+    "selectType": "Valitse tyyppi...",
+    "selectDepartment": "Valitse osasto...",
+    "selectRole": "Valitse rooli...",
+    "selectLocation": "Valitse sijainti...",
+    "selectManager": "Valitse esimies (valinnainen)..."
   },
   "errors": {
     "networkError": "Võrgu viga. Palun kontrolli oma ühendust.",
@@ -1089,6 +1149,31 @@
       "searchReports": "Search reports...",
       "startDate": "Start date",
       "endDate": "End date"
+    },
+    "chartTypes": {
+      "table": "Taulukko",
+      "bar": "Pylväskaavio",
+      "line": "Viivakaavio",
+      "pie": "Ympyräkaavio"
+    },
+    "columns": {
+      "employeeName": "Työntekijän Nimi",
+      "totalHours": "Kokonaistunnit",
+      "regularHours": "Normaalit Tunnit",
+      "overtimeHours": "Ylityötunnit",
+      "laborCost": "Työkustannus",
+      "location": "Sijainti",
+      "department": "Osasto",
+      "scheduledShifts": "Aikataulutetut Vuorot",
+      "workedShifts": "Työskentelevät Vuorot",
+      "missedShifts": "Menetetyt Vuorot",
+      "lateArrivals": "Myöhästymiset",
+      "avgArrivalDiff": "Keskimääräinen Saapumisero",
+      "date": "Päivämäärä",
+      "totalShifts": "Vuorot Yhteensä",
+      "filledShifts": "Täytetyt Vuorot",
+      "openShifts": "Avoimet Vuorot",
+      "fillRate": "Täyttöaste"
     }
   },
   "accessibility": {
@@ -1848,5 +1933,8 @@
     "placeholder": {
       "search": "Search integrations..."
     }
+  },
+  "forecast": {
+    "demoData": "Esittelydata"
   }
 }
