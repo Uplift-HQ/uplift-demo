@@ -6,15 +6,23 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../lib/api';
 import { Upload, FileSpreadsheet, Check, X, AlertCircle, Download, ChevronRight, Users, Calendar, MapPin, Award } from 'lucide-react';
 
-const IMPORT_TYPES = [
-  { id: 'employees', name: 'Employees', icon: Users, description: 'Import employee profiles', template: 'employees-template.csv' },
-  { id: 'shifts', name: 'Shifts', icon: Calendar, description: 'Import shift schedules', template: 'shifts-template.csv' },
-  { id: 'locations', name: 'Locations', icon: MapPin, description: 'Import locations', template: 'locations-template.csv' },
-  { id: 'skills', name: 'Skills', icon: Award, description: 'Import skills', template: 'skills-template.csv' },
+const IMPORT_TYPE_IDS = [
+  { id: 'employees', icon: Users, template: 'employees-template.csv' },
+  { id: 'shifts', icon: Calendar, template: 'shifts-template.csv' },
+  { id: 'locations', icon: MapPin, template: 'locations-template.csv' },
+  { id: 'skills', icon: Award, template: 'skills-template.csv' },
 ];
 
 export default function BulkImport() {
   const { t } = useTranslation();
+
+  // Build IMPORT_TYPES with translated strings
+  const IMPORT_TYPES = IMPORT_TYPE_IDS.map(type => ({
+    ...type,
+    name: t(`bulkImport.types.${type.id}`, type.id.charAt(0).toUpperCase() + type.id.slice(1)),
+    description: t(`bulkImport.types.${type.id}Desc`, `Import ${type.id}`),
+  }));
+
   const [step, setStep] = useState(1);
   const [selectedType, setSelectedType] = useState(null);
   const [file, setFile] = useState(null);
@@ -147,8 +155,8 @@ export default function BulkImport() {
               className="p-6 bg-white rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-colors text-left"
             >
               <type.icon className="h-8 w-8 text-blue-600 mb-3" />
-              <h3 className="font-semibold text-gray-900">{t(`bulkImport.type.${type.id}`, type.name)}</h3>
-              <p className="text-sm text-gray-500 mt-1">{t(`bulkImport.type.${type.id}Desc`, type.description)}</p>
+              <h3 className="font-semibold text-gray-900">{type.name}</h3>
+              <p className="text-sm text-gray-500 mt-1">{type.description}</p>
             </button>
           ))}
         </div>
@@ -159,7 +167,7 @@ export default function BulkImport() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-semibold text-gray-900">{t('bulkImport.uploadFor', 'Upload')} {t(`bulkImport.type.${selectedType.id}`, selectedType.name)}</h2>
+              <h2 className="font-semibold text-gray-900">{t('bulkImport.uploadFor', 'Upload')} {selectedType.name}</h2>
               <p className="text-sm text-gray-500">{t('bulkImport.uploadDesc', 'Drag and drop or click to select a file')}</p>
             </div>
             <button onClick={() => downloadTemplate(selectedType)} className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50">

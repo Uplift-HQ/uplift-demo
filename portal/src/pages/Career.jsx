@@ -49,7 +49,7 @@ export default function Career() {
       setAllSkills(allSkillsResult.skills || allSkillsResult || []);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load career data:', err);
-      setError(err.message || 'Failed to load career data');
+      setError(err.message || t('career.loadError', 'Failed to load career data'));
       setMySkills([]);
       setCareerPaths([]);
       setSkillsGap([]);

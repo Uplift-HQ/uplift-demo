@@ -52,7 +52,22 @@
     "growYourCareer": "Développez votre carrière",
     "trackSkillsDesc": "Suivez vos compétences et découvrez les opportunités internes",
     "viewMyCareer": "Voir ma carrière",
-    "timeOffBalance": "Solde de congés"
+    "timeOffBalance": "Solde de congés",
+    "loadError": "Échec du chargement du tableau de bord",
+    "live": "EN DIRECT",
+    "clickToSeeWho": "Cliquez pour voir qui",
+    "affected": "affecté(s)",
+    "expiresIn": "Expire dans",
+    "overdueBy": "En retard de",
+    "manageAll": "Tout gérer",
+    "noRecentActivity": "Aucune activité récente",
+    "noRecentRecognitions": "Aucune reconnaissance récente",
+    "available": "Disponible",
+    "alerts": {
+      "expiring": "Certifications expirant dans 30 jours",
+      "training": "Formation en cours ou en attente",
+      "document": "Évaluations de période d'essai dues"
+    }
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -186,7 +201,19 @@
       "afternoon": "Après-midi",
       "evening": "Soir",
       "night": "Nuit"
-    }
+    },
+    "viewDetails": "View Details",
+    "unknownEmployee": "Unknown Employee",
+    "saving": "Saving...",
+    "unknown": "Unknown",
+    "employee": "employé",
+    "employees": "employés",
+    "at": "à",
+    "deny": "Refuser",
+    "failed": "Échoué",
+    "event": "Événement",
+    "processing": "Traitement...",
+    "creating": "Création..."
   },
   "auth": {
     "login": "Se connecter",
@@ -364,7 +391,27 @@
       "week": "Semaine",
       "twoWeeks": "2 Semaines",
       "month": "Mois"
-    }
+    },
+    "loadError": "Failed to load schedule data",
+    "hideSidebar": "Hide sidebar",
+    "showSidebar": "Show sidebar",
+    "publish": {
+      "notification1": "Employees receive push notifications",
+      "notification2": "Shifts appear in employee apps",
+      "notification3": "Changes after this will trigger new notifications"
+    },
+    "today": "Aujourd'hui",
+    "filters": "Filtres",
+    "published": "Publié",
+    "draft": "Brouillon",
+    "open": "Ouvert",
+    "scheduleOverview": "Aperçu du planning",
+    "thisWeeksStaffing": "Effectifs de cette semaine",
+    "pendingTimeOff": "Congés en attente",
+    "noPendingRequests": "Aucune demande en attente",
+    "shiftSwaps": "Échanges de postes",
+    "noPendingSwaps": "Aucun échange en attente",
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
   },
   "timeTracking": {
     "title": "Suivi du temps",
@@ -413,7 +460,8 @@
     "clockOut": "Pointer la sortie",
     "startBreak": "Commencer la pause",
     "endBreak": "Terminer la pause",
-    "totalHours": "Heures totales"
+    "totalHours": "Heures totales",
+    "loadError": "Failed to load time tracking data. Please try again."
   },
   "timeOff": {
     "title": "Congés",
@@ -453,7 +501,17 @@
     "noRequests": "Aucune demande trouvée",
     "requestDetails": "Détails de la demande de congé",
     "noReason": "Aucun motif fourni",
-    "submitted": "Soumise"
+    "submitted": "Soumise",
+    "loadError": "Failed to load time-off requests. Please try again.",
+    "types": {
+      "annualLeave": "Annual Leave",
+      "sickLeave": "Sick Leave",
+      "personal": "Personal",
+      "bereavement": "Bereavement",
+      "maternity": "Maternity",
+      "paternity": "Paternity",
+      "unpaid": "Unpaid Leave"
+    }
   },
   "feed": {
     "title": "Fil d'actualité",
@@ -562,7 +620,8 @@
     "browseSkills": "Parcourir les compétences",
     "searchSkills": "Rechercher des compétences...",
     "skillAdded": "Compétence ajoutée avec succès",
-    "verificationRequested": "Vérification demandée"
+    "verificationRequested": "Vérification demandée",
+    "loadError": "Failed to load skills. Please try again."
   },
   "career": {
     "title": "Carrière",
@@ -636,7 +695,8 @@
     "skillRequestSubmitted": "Demande de compétence soumise ! Votre responsable l'examinera.",
     "expiringSoon": "Expire bientôt",
     "expired": "Expiré",
-    "expires": "Expire le {{date}}"
+    "expires": "Expire le {{date}}",
+    "loadError": "Failed to load career data"
   },
   "gamification": {
     "level": "Niveau {{level}}",
@@ -732,8 +792,23 @@
     "organization": "Organisation",
     "navigation": "Navigation",
     "employeeVisibility": "Visibilité des employés",
-    "users": "Utilisateurs",
-    "webhooks": "Webhooks",
+    "users": {
+      "never": "Never",
+      "accountUnlocked": "Account unlocked",
+      "accountDeactivated": "Account deactivated",
+      "accountReactivated": "Account reactivated",
+      "roleUpdated": "Role updated",
+      "passwordResetRequired": "Password reset required on next login",
+      "invitationResent": "Invitation resent",
+      "invitationCancelled": "Invitation cancelled",
+      "sessionsRevoked": "All sessions revoked"
+    },
+    "webhooks": {
+      "viewDetails": "View details",
+      "deleteWebhook": "Delete webhook",
+      "namePlaceholder": "e.g., Slack Notifications",
+      "secretPlaceholder": "Your webhook secret for signature verification"
+    },
     "sessions": "Sessions",
     "organizationSettings": "Paramètres de l'organisation",
     "configurePreferences": "Configurez les préférences de votre organisation",
@@ -841,7 +916,46 @@
       "companyName": "Company name",
       "email": "Email address",
       "phone": "Phone number"
-    }
+    },
+    "timezones": {
+      "london": "London (GMT/BST)",
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "singapore": "Singapore (SGT)"
+    },
+    "branding": {
+      "primaryLogo": "Primary Logo",
+      "primaryLogoDesc": "Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB.",
+      "darkModeLogo": "Dark Mode Logo",
+      "darkModeLogoDesc": "Used on dark backgrounds. Should be light/white version of your logo.",
+      "favicon": "Favicon",
+      "faviconDesc": "Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO.",
+      "loginBackground": "Login Background",
+      "loginBackgroundDesc": "Background image for the login screen. Recommended 1920x1080.",
+      "customLogo": "Custom Logo",
+      "brandColors": "Brand Colors",
+      "loginScreen": "Login Screen",
+      "customFavicon": "Custom Favicon"
+    },
+    "organizationSaved": "Organization settings saved",
+    "brandingSaved": "Branding settings saved",
+    "invitationSent": "Invitation sent",
+    "inviteError": "Failed to send invitation",
+    "saveBranding": "Save Branding",
+    "companyNamePlaceholder": "Your Company Name",
+    "searchEmployeesPlaceholder": "Search employees...",
+    "passwordPlaceholder": "Your password",
+    "unknownDevice": "Unknown Device",
+    "currentSession": "Current",
+    "noActivityRecorded": "No activity recorded",
+    "noWebhooksConfigured": "No webhooks configured",
+    "addWebhookToIntegrate": "Add a webhook to integrate with external systems",
+    "noDeliveriesYet": "No deliveries yet",
+    "response": "Response",
+    "noPagesConfigured": "No pages configured",
+    "eventsSelected": "events selected",
+    "createWebhook": "Create Webhook",
+    "enterPasswordToConfirm": "Enter your password to confirm"
   },
   "tasks": {
     "title": "Tâches",
@@ -987,7 +1101,98 @@
     "selectDepartment": "Sélectionnez le département...",
     "selectRole": "Sélectionnez le poste...",
     "selectLocation": "Sélectionnez le lieu...",
-    "selectManager": "Sélectionnez le responsable (optionnel)..."
+    "selectManager": "Sélectionnez le responsable (optionnel)...",
+    "employeeDetailsTitle": "Détails de l'Employé",
+    "employeeDetailsDesc": "Saisissez les informations de base du nouvel employé.",
+    "firstName": "Prénom",
+    "firstNamePlaceholder": "ex. Jean",
+    "lastName": "Nom",
+    "lastNamePlaceholder": "ex. Dupont",
+    "emailAddress": "Adresse Email",
+    "emailPlaceholder": "ex. jean.dupont@entreprise.com",
+    "emailExistsWarning": "Un employé avec cet email existe déjà ({{name}}).",
+    "phoneNumber": "Téléphone",
+    "phonePlaceholder": "ex. +33 6 12 34 56 78",
+    "employmentType": "Type de Contrat",
+    "startDate": "Date de Début",
+    "employeeId": "ID Employé",
+    "employeeIdPlaceholder": "Généré automatiquement si vide",
+    "employeeIdHelper": "Laisser vide pour générer automatiquement.",
+    "roleDepartmentTitle": "Rôle et Département",
+    "roleDepartmentDesc": "Assignez l'employé à un département, rôle et site.",
+    "department": "Département",
+    "role": "Rôle",
+    "location": "Site",
+    "payRate": "Salaire",
+    "perHour": "/ heure",
+    "perYear": "/ an",
+    "reportingManager": "Responsable Hiérarchique",
+    "skillsCertsTitle": "Compétences et Certifications",
+    "skillsCertsDesc": "Sélectionnez les compétences et ajoutez les certifications de l'employé.",
+    "skills": "Compétences",
+    "noSkillsDefined": "Aucune compétence définie. Ajoutez des compétences dans la page Compétences d'abord.",
+    "setProficiencyLevels": "Définir les Niveaux de Maîtrise",
+    "certifications": "Certifications",
+    "addCertification": "Ajouter une Certification",
+    "noCertificationsYet": "Aucune certification ajoutée pour l'instant.",
+    "certificationNamePlaceholder": "Nom de la certification",
+    "issuingBodyPlaceholder": "Organisme émetteur",
+    "maxHoursPlaceholder": "ex. 40",
+    "restrictionsNotes": "Restrictions / Notes",
+    "notesPlaceholder": "Restrictions d'horaires, préférences ou notes...",
+    "reviewInviteTitle": "Vérifier et Envoyer l'Invitation",
+    "reviewInviteDesc": "Vérifiez les détails et invitez l'employé sur l'app Uplift.",
+    "summary": "Résumé",
+    "summaryName": "Nom",
+    "summaryEmail": "Email",
+    "summaryPhone": "Téléphone",
+    "summaryType": "Type",
+    "summaryStartDate": "Date de Début",
+    "summaryEmployeeId": "ID Employé",
+    "summarySkills": "Compétences",
+    "summaryAvailable": "Disponible",
+    "autoGenerated": "Généré automatiquement",
+    "sendInvitationEmail": "Envoyer l'email d'invitation",
+    "sendInvitationEmailDesc": "L'employé recevra un email pour télécharger l'app Uplift et configurer son compte.",
+    "setTempPassword": "Définir un mot de passe temporaire",
+    "setTempPasswordDesc": "Définissez un mot de passe temporaire que l'employé pourra utiliser pour se connecter.",
+    "tempPasswordPlaceholder": "Mot de passe temporaire",
+    "successTitle": "Employé Enregistré avec Succès !",
+    "successDesc": "a été ajouté au système et une invitation a été envoyée à",
+    "viewEmployees": "Voir les Employés",
+    "onboardAnother": "Ajouter un Autre",
+    "pageTitle": "Intégration d'Employé",
+    "pageDesc": "Ajoutez un nouvel employé et invitez-le sur l'app Uplift.",
+    "bulkImportLink": "Besoin d'ajouter plusieurs employés ? Utilisez l'Import en Masse",
+    "loadingData": "Chargement des données de l'organisation...",
+    "stepOf": "Étape {{current}} sur {{total}}",
+    "creating": "Création...",
+    "createEmployee": "Créer l'Employé",
+    "inviteEmailFailed": "Employé créé mais l'email d'invitation a échoué. Vous pouvez le renvoyer depuis la page Employés.",
+    "createFailed": "Échec de la création de l'employé. Veuillez réessayer.",
+    "employmentTypes": {
+      "full-time": "Temps plein",
+      "part-time": "Temps partiel",
+      "casual": "Occasionnel",
+      "contractor": "Prestataire"
+    },
+    "proficiency": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "errors": {
+      "firstNameRequired": "Le prénom est requis",
+      "lastNameRequired": "Le nom est requis",
+      "emailRequired": "L'email est requis",
+      "invalidEmail": "Adresse email invalide",
+      "employmentTypeRequired": "Le type de contrat est requis",
+      "startDateRequired": "La date de début est requise",
+      "departmentRequired": "Le département est requis",
+      "roleRequired": "Le rôle est requis",
+      "locationRequired": "Le site est requis",
+      "payRateRequired": "Un salaire valide est requis"
+    }
   },
   "errors": {
     "networkError": "Erreur réseau. Vérifiez votre connexion.",
@@ -1055,7 +1260,9 @@
     "reject": "Rejeter",
     "placeholder": {
       "search": "Search activity..."
-    }
+    },
+    "loadError": "Failed to load activity data",
+    "rejectionReasonPlaceholder": "Enter reason for rejection..."
   },
   "notificationSettings": {
     "title": "Préférences de notification",
@@ -1111,7 +1318,11 @@
     "chooseSkill": "Choisir une compétence...",
     "proficiencyLevel": "Niveau de maîtrise",
     "basic": "Basique",
-    "adding": "Ajout en cours..."
+    "adding": "Ajout en cours...",
+    "loadError": "Failed to load employee",
+    "verifySkill": "Verify skill",
+    "removeSkill": "Remove skill",
+    "confirmRemoveSkill": "Remove this skill from the employee?"
   },
   "reports": {
     "title": "Rapports",
@@ -1186,8 +1397,33 @@
       "totalShifts": "Total des Postes",
       "filledShifts": "Postes Pourvus",
       "openShifts": "Postes Vacants",
-      "fillRate": "Taux de Remplissage"
-    }
+      "fillRate": "Taux de Remplissage",
+      "employee": "Employee",
+      "period": "Period",
+      "regularCost": "Regular Cost",
+      "overtimeCost": "Overtime Cost",
+      "totalCost": "Total Cost"
+    },
+    "loadError": "Failed to load report data",
+    "saveError": "Failed to save report",
+    "namePlaceholder": "e.g., Weekly Overtime Analysis",
+    "groupByOptions": {
+      "employee": "Employee",
+      "location": "Location",
+      "department": "Department",
+      "day": "Day",
+      "week": "Week"
+    },
+    "summary": {
+      "title": "Report Summary",
+      "name": "Name",
+      "type": "Type",
+      "columns": "Columns",
+      "groupBy": "Group by"
+    },
+    "untitledReport": "Untitled Report",
+    "saveReport": "Save Report",
+    "selectColumns": "Select Columns"
   },
   "shiftTemplates": {
     "title": "Modèles de postes",
@@ -1218,7 +1454,27 @@
     "developmentHint": "Le remplissage IA privilégiera les travailleurs en voie de promotion",
     "willCreate": "Cela créera environ",
     "shiftsLabel": "postes",
-    "generating": "Génération en cours..."
+    "generating": "Génération en cours...",
+    "loadError": "Failed to load templates",
+    "confirmDelete": "Delete this template?",
+    "generateError": "Failed to generate shifts",
+    "patterns": {
+      "customDays": "Custom Days",
+      "customDaysDesc": "Select specific days",
+      "monFri": "Monday to Friday",
+      "monFriDesc": "Standard work week",
+      "weekend": "Weekend Only",
+      "weekendDesc": "Saturday and Sunday",
+      "4on4off": "4 On / 4 Off",
+      "4on4offDesc": "Continental shift pattern",
+      "2week": "2 Week Rotation",
+      "2weekDesc": "Alternating fortnight pattern",
+      "3on3off": "3 On / 3 Off",
+      "3on3offDesc": "Common retail pattern",
+      "5on2off": "5 On / 2 Off",
+      "5on2offDesc": "Standard with rotating days off"
+    },
+    "allDays": "All days"
   },
   "legal": {
     "lastUpdated": "Dernière mise à jour",
@@ -1412,6 +1668,16 @@
       "locationsDesc": "Importer des sites",
       "skills": "Compétences",
       "skillsDesc": "Importer des compétences"
+    },
+    "types": {
+      "employees": "Employees",
+      "employeesDesc": "Import employee profiles",
+      "shifts": "Shifts",
+      "shiftsDesc": "Import shift schedules",
+      "locations": "Locations",
+      "locationsDesc": "Import locations",
+      "skills": "Skills",
+      "skillsDesc": "Import skills"
     }
   },
   "jobs": {
@@ -1441,7 +1707,8 @@
     "enterDescription": "Entrez la description du poste",
     "postJob": "Publier l'offre",
     "skillMatch": "correspondance de compétences",
-    "noApplicants": "Aucun candidat pour le moment"
+    "noApplicants": "Aucun candidat pour le moment",
+    "loadError": "Failed to load job postings. Please try again."
   },
   "employees": {
     "searchPlaceholder": "Rechercher par nom ou e-mail...",
@@ -1457,7 +1724,8 @@
     "allLocations": "All Locations",
     "placeholder": {
       "searchEmployees": "Search employees..."
-    }
+    },
+    "loadError": "Failed to load employees"
   },
   "integrationHub": {
     "title": "Hub d'intégrations",
@@ -1612,7 +1880,8 @@
       "createdSuccess": "Webhook créé avec succès !",
       "testSent": "Charge test envoyée à",
       "testStatus": "Statut",
-      "deleteConfirm": "Supprimer ce webhook ?"
+      "deleteConfirm": "Supprimer ce webhook ?",
+      "skillExpired": "Skill Expired"
     },
     "marketplace": {
       "searchPlaceholder": "Rechercher des intégrations...",
@@ -1837,7 +2106,12 @@
       "locations": "Sites",
       "departments": "Départements",
       "roles": "Rôles et permissions",
-      "review": "Vérification et lancement"
+      "review": "Vérification et lancement",
+      "companyInfo": "Company Info",
+      "branding": "Branding & Timezone",
+      "inviteAdmin": "Invite Admin",
+      "addEmployees": "Add Employees",
+      "done": "Done"
     },
     "orgDetails": {
       "companyName": "Nom de l'entreprise",
@@ -1920,19 +2194,162 @@
     "selectTimezone": "Select timezone...",
     "selectSize": "Select company size...",
     "selectCountry": "Select country...",
-    "selectCurrency": "Select currency..."
+    "selectCurrency": "Select currency...",
+    "industries": {
+      "retail": "Retail",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "construction": "Construction",
+      "logistics": "Logistics",
+      "foodBeverage": "Food & Beverage",
+      "education": "Education",
+      "technology": "Technology",
+      "finance": "Finance",
+      "government": "Government",
+      "nonprofit": "Non-profit",
+      "other": "Other"
+    }
   },
   "locations": {
     "placeholder": {
       "search": "Search locations...",
       "name": "Location name",
       "address": "Address"
-    }
+    },
+    "loadError": "Failed to load locations. Please try again.",
+    "codePlaceholder": "LON-01",
+    "noEmployeesAssigned": "No employees assigned to this location"
   },
   "integrations": {
     "placeholder": {
       "search": "Search integrations..."
-    }
+    },
+    "scopes": {
+      "employeesRead": "View employee information",
+      "employeesWrite": "Create and update employees",
+      "schedulesRead": "View schedules and shifts",
+      "schedulesWrite": "Create and modify schedules",
+      "timeRead": "View time entries",
+      "timeWrite": "Create and modify time entries",
+      "skillsRead": "View skills and certifications",
+      "skillsWrite": "Manage skills and verifications",
+      "locationsRead": "View location information",
+      "locationsWrite": "Manage locations",
+      "reportsRead": "Access reports data",
+      "webhooksManage": "Configure webhooks",
+      "admin": "Full administrative access"
+    },
+    "rateLimits": {
+      "basic": "Basic",
+      "standard": "Standard",
+      "premium": "Premium"
+    },
+    "copied": "Copied!",
+    "copy": "Copy",
+    "loadError": "Failed to load integrations",
+    "apiKeyPlaceholder": "e.g., Production API Key",
+    "categories": {
+      "hris": "HRIS",
+      "hrisDesc": "Human Resource Information Systems",
+      "payroll": "Payroll",
+      "payrollDesc": "Payroll & compensation",
+      "comms": "Communications",
+      "commsDesc": "Team messaging & notifications",
+      "identity": "Identity & SSO",
+      "identityDesc": "Single sign-on & provisioning",
+      "time": "Time & Attendance",
+      "timeDesc": "Time tracking systems",
+      "pos": "Point of Sale",
+      "posDesc": "POS & retail systems",
+      "scheduling": "Migration",
+      "schedulingDesc": "Import from other tools",
+      "learning": "Learning",
+      "learningDesc": "Training & certifications",
+      "analytics": "Analytics",
+      "analyticsDesc": "BI & reporting tools",
+      "custom": "Custom",
+      "customDesc": "API & automation"
+    },
+    "providers": {
+      "hibobDesc": "Modern HR platform for mid-size businesses",
+      "workdayDesc": "Enterprise HCM and finance platform",
+      "sapSuccessfactorsDesc": "Enterprise talent management",
+      "bamboohrDesc": "HR software for SMBs",
+      "personioDesc": "European HR platform",
+      "sageHrDesc": "UK HR & people management",
+      "adpDesc": "Enterprise payroll & HR services",
+      "paychexDesc": "Payroll & HR solutions",
+      "gustoDesc": "Modern payroll for small business",
+      "xeroDesc": "Cloud accounting with payroll",
+      "sagePayrollDesc": "UK payroll software",
+      "slackDesc": "Team collaboration & notifications",
+      "microsoftTeamsDesc": "Microsoft 365 collaboration",
+      "whatsappBusinessDesc": "Direct worker messaging",
+      "googleWorkspaceDesc": "Google SSO & directory sync",
+      "microsoftEntraDesc": "Azure AD SSO & SCIM",
+      "oktaDesc": "Enterprise identity management",
+      "squareDesc": "POS & team management",
+      "lightspeedDesc": "Retail & hospitality POS",
+      "deputyDesc": "Import from Deputy",
+      "connecteamDesc": "Import from Connecteam",
+      "kronosDesc": "Enterprise workforce management",
+      "linkedinLearningDesc": "Training completion sync",
+      "powerBiDesc": "Export to Power BI",
+      "lookerDesc": "BI data export",
+      "zapierDesc": "5,000+ app connections",
+      "customApiDesc": "Build your own integration"
+    },
+    "mapping": {
+      "customField1": "customField1",
+      "customField2": "customField2",
+      "notes": "notes"
+    },
+    "api": {
+      "authNone": "No Authentication",
+      "authApiKey": "API Key",
+      "authBearer": "Bearer Token",
+      "authBasic": "Basic Auth",
+      "authOAuth2": "OAuth 2.0",
+      "triggerManual": "Manual",
+      "triggerManualDesc": "Run on demand",
+      "triggerScheduled": "Scheduled",
+      "triggerScheduledDesc": "Run on a schedule",
+      "triggerEvent": "Event-based",
+      "triggerEventDesc": "Triggered by Uplift events",
+      "triggerWebhook": "Incoming Webhook",
+      "triggerWebhookDesc": "Receive data from external systems",
+      "scopePlaceholder": "read,write",
+      "saveFirstBeforeTesting": "Save the integration first before testing",
+      "testRequestFailed": "Test request failed"
+    },
+    "events": {
+      "employeeCreated": "Employee Created",
+      "employeeUpdated": "Employee Updated",
+      "employeeDeactivated": "Employee Deactivated",
+      "shiftCreated": "Shift Created",
+      "shiftUpdated": "Shift Updated",
+      "shiftDeleted": "Shift Deleted",
+      "shiftClaimed": "Shift Claimed",
+      "clockIn": "Clock In",
+      "clockOut": "Clock Out",
+      "timeEntryApproved": "Time Entry Approved",
+      "timeOffRequested": "Time Off Requested",
+      "timeOffApproved": "Time Off Approved",
+      "timeOffRejected": "Time Off Rejected",
+      "skillVerified": "Skill Verified",
+      "jobApplication": "Job Application",
+      "categoryEmployees": "Employees",
+      "categoryScheduling": "Scheduling",
+      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeOff": "Time Off",
+      "categorySkills": "Skills",
+      "categoryCareer": "Career"
+    },
+    "noIntegrationsFound": "No integrations found",
+    "noIntegrationsAvailable": "No integrations are available yet.",
+    "noApiKeys": "No API keys",
+    "createApiKeyToStart": "Create an API key to get started with the API."
   },
   "forecast": {
     "demoData": "Données de démonstration"

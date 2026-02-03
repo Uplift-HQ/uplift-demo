@@ -52,7 +52,22 @@
     "growYourCareer": "మీ కెరీర్‌ను పెంచుకోండి",
     "trackSkillsDesc": "మీ నైపుణ్యాలను ట్రాక్ చేయండి మరియు అంతర్గత అవకాశాలను కనుగొనండి",
     "viewMyCareer": "నా కెరీర్ చూడండి",
-    "timeOffBalance": "సెలవు బ్యాలెన్స్"
+    "timeOffBalance": "సెలవు బ్యాలెన్స్",
+    "loadError": "Failed to load dashboard",
+    "live": "LIVE",
+    "clickToSeeWho": "Click to see who",
+    "affected": "affected",
+    "expiresIn": "Expires in",
+    "overdueBy": "Overdue by",
+    "manageAll": "Manage All",
+    "noRecentActivity": "No recent activity",
+    "noRecentRecognitions": "No recent recognitions",
+    "available": "Available",
+    "alerts": {
+      "expiring": "Certifications expiring within 30 days",
+      "training": "Training in progress or pending",
+      "document": "Probation reviews due"
+    }
   },
   "nav": {
     "dashboard": "డ్యాష్‌బోర్డ్",
@@ -186,7 +201,19 @@
       "afternoon": "दोपहर",
       "evening": "शाम",
       "night": "रात"
-    }
+    },
+    "viewDetails": "View Details",
+    "unknownEmployee": "Unknown Employee",
+    "saving": "Saving...",
+    "unknown": "Unknown",
+    "employee": "employee",
+    "employees": "employees",
+    "at": "at",
+    "deny": "Deny",
+    "failed": "Failed",
+    "event": "Event",
+    "processing": "Processing...",
+    "creating": "Creating..."
   },
   "auth": {
     "login": "లాగిన్",
@@ -364,7 +391,27 @@
       "week": "सप्ताह",
       "twoWeeks": "2 सप्ताह",
       "month": "महीना"
-    }
+    },
+    "loadError": "Failed to load schedule data",
+    "hideSidebar": "Hide sidebar",
+    "showSidebar": "Show sidebar",
+    "publish": {
+      "notification1": "Employees receive push notifications",
+      "notification2": "Shifts appear in employee apps",
+      "notification3": "Changes after this will trigger new notifications"
+    },
+    "today": "Today",
+    "filters": "Filters",
+    "published": "Published",
+    "draft": "Draft",
+    "open": "Open",
+    "scheduleOverview": "Schedule Overview",
+    "thisWeeksStaffing": "This Week's Staffing",
+    "pendingTimeOff": "Pending Time Off",
+    "noPendingRequests": "No pending requests",
+    "shiftSwaps": "Shift Swaps",
+    "noPendingSwaps": "No pending swaps",
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
   },
   "timeTracking": {
     "title": "సమయ ట్రాకింగ్",
@@ -413,7 +460,8 @@
     "clockOut": "క్లాక్ ఔట్",
     "startBreak": "విరామం ప్రారంభించు",
     "endBreak": "విరామం ముగించు",
-    "totalHours": "మొత్తం గంటలు"
+    "totalHours": "మొత్తం గంటలు",
+    "loadError": "Failed to load time tracking data. Please try again."
   },
   "timeOff": {
     "title": "సెలవు",
@@ -453,7 +501,17 @@
     "noRequests": "అభ్యర్థనలు కనుగొనబడలేదు",
     "requestDetails": "సెలవు అభ్యర్థన వివరాలు",
     "noReason": "కారణం అందించబడలేదు",
-    "submitted": "సమర్పించబడింది"
+    "submitted": "సమర్పించబడింది",
+    "loadError": "Failed to load time-off requests. Please try again.",
+    "types": {
+      "annualLeave": "Annual Leave",
+      "sickLeave": "Sick Leave",
+      "personal": "Personal",
+      "bereavement": "Bereavement",
+      "maternity": "Maternity",
+      "paternity": "Paternity",
+      "unpaid": "Unpaid Leave"
+    }
   },
   "feed": {
     "title": "ఫీడ్",
@@ -562,7 +620,8 @@
     "browseSkills": "నైపుణ్యాలు బ్రౌజ్ చేయండి",
     "searchSkills": "నైపుణ్యాలు వెతకండి...",
     "skillAdded": "నైపుణ్యం విజయవంతంగా జోడించబడింది",
-    "verificationRequested": "ధృవీకరణ అభ్యర్థించబడింది"
+    "verificationRequested": "ధృవీకరణ అభ్యర్థించబడింది",
+    "loadError": "Failed to load skills. Please try again."
   },
   "career": {
     "title": "కెరీర్",
@@ -636,7 +695,8 @@
     "skillRequestSubmitted": "నైపుణ్య అభ్యర్థన సమర్పించబడింది! మీ మేనేజర్ సమీక్షిస్తారు.",
     "expiringSoon": "త్వరలో గడువు ముగుస్తుంది",
     "expired": "గడువు ముగిసింది",
-    "expires": "{{date}}న గడువు ముగుస్తుంది"
+    "expires": "{{date}}న గడువు ముగుస్తుంది",
+    "loadError": "Failed to load career data"
   },
   "gamification": {
     "level": "లెవెల్ {{level}}",
@@ -732,8 +792,23 @@
     "organization": "సంస్థ",
     "navigation": "నావిగేషన్",
     "employeeVisibility": "ఉద్యోగి దృశ్యమానత",
-    "users": "వినియోగదారులు",
-    "webhooks": "వెబ్‌హుక్స్",
+    "users": {
+      "never": "Never",
+      "accountUnlocked": "Account unlocked",
+      "accountDeactivated": "Account deactivated",
+      "accountReactivated": "Account reactivated",
+      "roleUpdated": "Role updated",
+      "passwordResetRequired": "Password reset required on next login",
+      "invitationResent": "Invitation resent",
+      "invitationCancelled": "Invitation cancelled",
+      "sessionsRevoked": "All sessions revoked"
+    },
+    "webhooks": {
+      "viewDetails": "View details",
+      "deleteWebhook": "Delete webhook",
+      "namePlaceholder": "e.g., Slack Notifications",
+      "secretPlaceholder": "Your webhook secret for signature verification"
+    },
     "sessions": "సెషన్లు",
     "organizationSettings": "సంస్థ సెట్టింగ్‌లు",
     "configurePreferences": "మీ సంస్థ ప్రాధాన్యతలను కాన్ఫిగర్ చేయండి",
@@ -841,7 +916,46 @@
       "companyName": "Company name",
       "email": "Email address",
       "phone": "Phone number"
-    }
+    },
+    "timezones": {
+      "london": "London (GMT/BST)",
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "singapore": "Singapore (SGT)"
+    },
+    "branding": {
+      "primaryLogo": "Primary Logo",
+      "primaryLogoDesc": "Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB.",
+      "darkModeLogo": "Dark Mode Logo",
+      "darkModeLogoDesc": "Used on dark backgrounds. Should be light/white version of your logo.",
+      "favicon": "Favicon",
+      "faviconDesc": "Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO.",
+      "loginBackground": "Login Background",
+      "loginBackgroundDesc": "Background image for the login screen. Recommended 1920x1080.",
+      "customLogo": "Custom Logo",
+      "brandColors": "Brand Colors",
+      "loginScreen": "Login Screen",
+      "customFavicon": "Custom Favicon"
+    },
+    "organizationSaved": "Organization settings saved",
+    "brandingSaved": "Branding settings saved",
+    "invitationSent": "Invitation sent",
+    "inviteError": "Failed to send invitation",
+    "saveBranding": "Save Branding",
+    "companyNamePlaceholder": "Your Company Name",
+    "searchEmployeesPlaceholder": "Search employees...",
+    "passwordPlaceholder": "Your password",
+    "unknownDevice": "Unknown Device",
+    "currentSession": "Current",
+    "noActivityRecorded": "No activity recorded",
+    "noWebhooksConfigured": "No webhooks configured",
+    "addWebhookToIntegrate": "Add a webhook to integrate with external systems",
+    "noDeliveriesYet": "No deliveries yet",
+    "response": "Response",
+    "noPagesConfigured": "No pages configured",
+    "eventsSelected": "events selected",
+    "createWebhook": "Create Webhook",
+    "enterPasswordToConfirm": "Enter your password to confirm"
   },
   "tasks": {
     "title": "టాస్క్‌లు",
@@ -987,7 +1101,98 @@
     "selectDepartment": "विभाग चुनें...",
     "selectRole": "भूमिका चुनें...",
     "selectLocation": "स्थान चुनें...",
-    "selectManager": "प्रबंधक चुनें (वैकल्पिक)..."
+    "selectManager": "प्रबंधक चुनें (वैकल्पिक)...",
+    "employeeDetailsTitle": "कर्मचारी विवरण",
+    "employeeDetailsDesc": "नए कर्मचारी की बुनियादी जानकारी दर्ज करें।",
+    "firstName": "पहला नाम",
+    "firstNamePlaceholder": "जैसे राज",
+    "lastName": "अंतिम नाम",
+    "lastNamePlaceholder": "जैसे शर्मा",
+    "emailAddress": "ईमेल पता",
+    "emailPlaceholder": "जैसे raj.sharma@company.in",
+    "emailExistsWarning": "इस ईमेल वाला कर्मचारी पहले से मौजूद है ({{name}})।",
+    "phoneNumber": "फ़ोन नंबर",
+    "phonePlaceholder": "जैसे +91 98765 43210",
+    "employmentType": "रोजगार प्रकार",
+    "startDate": "आरंभ तिथि",
+    "employeeId": "कर्मचारी आईडी",
+    "employeeIdPlaceholder": "खाली छोड़ने पर स्वतः उत्पन्न",
+    "employeeIdHelper": "स्वतः उत्पन्न के लिए खाली छोड़ें।",
+    "roleDepartmentTitle": "भूमिका और विभाग",
+    "roleDepartmentDesc": "कर्मचारी को विभाग, भूमिका और स्थान आवंटित करें।",
+    "department": "विभाग",
+    "role": "भूमिका",
+    "location": "स्थान",
+    "payRate": "वेतन",
+    "perHour": "/ घंटा",
+    "perYear": "/ वर्ष",
+    "reportingManager": "रिपोर्टिंग प्रबंधक",
+    "skillsCertsTitle": "कौशल और प्रमाणपत्र",
+    "skillsCertsDesc": "कौशल चुनें और कर्मचारी के प्रमाणपत्र जोड़ें।",
+    "skills": "कौशल",
+    "noSkillsDefined": "अभी तक कोई कौशल परिभाषित नहीं। पहले कौशल पृष्ठ में कौशल जोड़ें।",
+    "setProficiencyLevels": "दक्षता स्तर सेट करें",
+    "certifications": "प्रमाणपत्र",
+    "addCertification": "प्रमाणपत्र जोड़ें",
+    "noCertificationsYet": "अभी तक कोई प्रमाणपत्र नहीं जोड़ा गया।",
+    "certificationNamePlaceholder": "प्रमाणपत्र का नाम",
+    "issuingBodyPlaceholder": "जारीकर्ता संस्था",
+    "maxHoursPlaceholder": "जैसे 40",
+    "restrictionsNotes": "प्रतिबंध / नोट्स",
+    "notesPlaceholder": "शेड्यूलिंग प्रतिबंध, प्राथमिकताएं या नोट्स...",
+    "reviewInviteTitle": "समीक्षा करें और निमंत्रण भेजें",
+    "reviewInviteDesc": "विवरण की समीक्षा करें और कर्मचारी को Uplift ऐप में आमंत्रित करें।",
+    "summary": "सारांश",
+    "summaryName": "नाम",
+    "summaryEmail": "ईमेल",
+    "summaryPhone": "फ़ोन",
+    "summaryType": "प्रकार",
+    "summaryStartDate": "आरंभ तिथि",
+    "summaryEmployeeId": "कर्मचारी आईडी",
+    "summarySkills": "कौशल",
+    "summaryAvailable": "उपलब्ध",
+    "autoGenerated": "स्वतः उत्पन्न",
+    "sendInvitationEmail": "निमंत्रण ईमेल भेजें",
+    "sendInvitationEmailDesc": "कर्मचारी को Uplift ऐप डाउनलोड करने और खाता सेट करने के लिए ईमेल मिलेगा।",
+    "setTempPassword": "अस्थायी पासवर्ड सेट करें",
+    "setTempPasswordDesc": "एक अस्थायी पासवर्ड सेट करें जिसे कर्मचारी लॉग इन के लिए उपयोग कर सके।",
+    "tempPasswordPlaceholder": "अस्थायी पासवर्ड",
+    "successTitle": "कर्मचारी सफलतापूर्वक जोड़ा गया!",
+    "successDesc": "सिस्टम में जोड़ा गया और निमंत्रण भेजा गया",
+    "viewEmployees": "कर्मचारी देखें",
+    "onboardAnother": "एक और जोड़ें",
+    "pageTitle": "कर्मचारी ऑनबोर्डिंग",
+    "pageDesc": "नया कर्मचारी जोड़ें और उन्हें Uplift ऐप में आमंत्रित करें।",
+    "bulkImportLink": "कई कर्मचारी जोड़ने हैं? बल्क इम्पोर्ट का उपयोग करें",
+    "loadingData": "संगठन डेटा लोड हो रहा है...",
+    "stepOf": "चरण {{current}} / {{total}}",
+    "creating": "बना रहा है...",
+    "createEmployee": "कर्मचारी बनाएं",
+    "inviteEmailFailed": "कर्मचारी बनाया गया लेकिन निमंत्रण ईमेल विफल। आप कर्मचारी पृष्ठ से पुनः भेज सकते हैं।",
+    "createFailed": "कर्मचारी बनाने में विफल। कृपया पुनः प्रयास करें।",
+    "employmentTypes": {
+      "full-time": "पूर्णकालिक",
+      "part-time": "अंशकालिक",
+      "casual": "आकस्मिक",
+      "contractor": "ठेकेदार"
+    },
+    "proficiency": {
+      "beginner": "शुरुआती",
+      "intermediate": "मध्यवर्ती",
+      "advanced": "उन्नत"
+    },
+    "errors": {
+      "firstNameRequired": "पहला नाम आवश्यक है",
+      "lastNameRequired": "अंतिम नाम आवश्यक है",
+      "emailRequired": "ईमेल आवश्यक है",
+      "invalidEmail": "अमान्य ईमेल पता",
+      "employmentTypeRequired": "रोजगार प्रकार आवश्यक है",
+      "startDateRequired": "आरंभ तिथि आवश्यक है",
+      "departmentRequired": "विभाग आवश्यक है",
+      "roleRequired": "भूमिका आवश्यक है",
+      "locationRequired": "स्थान आवश्यक है",
+      "payRateRequired": "वैध वेतन आवश्यक है"
+    }
   },
   "errors": {
     "networkError": "నెట్‌వర్క్ లోపం. దయచేసి మీ కనెక్షన్ తనిఖీ చేయండి.",
@@ -1042,7 +1247,9 @@
     "reject": "తిరస్కరించు",
     "placeholder": {
       "search": "Search activity..."
-    }
+    },
+    "loadError": "Failed to load activity data",
+    "rejectionReasonPlaceholder": "Enter reason for rejection..."
   },
   "notificationSettings": {
     "title": "నోటిఫికేషన్ ప్రాధాన్యతలు",
@@ -1098,7 +1305,11 @@
     "chooseSkill": "నైపుణ్యం ఎంచుకోండి...",
     "proficiencyLevel": "ప్రావీణ్య స్థాయి",
     "basic": "ప్రాథమిక",
-    "adding": "జోడిస్తోంది..."
+    "adding": "జోడిస్తోంది...",
+    "loadError": "Failed to load employee",
+    "verifySkill": "Verify skill",
+    "removeSkill": "Remove skill",
+    "confirmRemoveSkill": "Remove this skill from the employee?"
   },
   "reports": {
     "title": "రిపోర్ట్‌లు",
@@ -1173,8 +1384,33 @@
       "totalShifts": "कुल शिफ्ट",
       "filledShifts": "भरी गई शिफ्ट",
       "openShifts": "खाली शिफ्ट",
-      "fillRate": "भरण दर"
-    }
+      "fillRate": "भरण दर",
+      "employee": "Employee",
+      "period": "Period",
+      "regularCost": "Regular Cost",
+      "overtimeCost": "Overtime Cost",
+      "totalCost": "Total Cost"
+    },
+    "loadError": "Failed to load report data",
+    "saveError": "Failed to save report",
+    "namePlaceholder": "e.g., Weekly Overtime Analysis",
+    "groupByOptions": {
+      "employee": "Employee",
+      "location": "Location",
+      "department": "Department",
+      "day": "Day",
+      "week": "Week"
+    },
+    "summary": {
+      "title": "Report Summary",
+      "name": "Name",
+      "type": "Type",
+      "columns": "Columns",
+      "groupBy": "Group by"
+    },
+    "untitledReport": "Untitled Report",
+    "saveReport": "Save Report",
+    "selectColumns": "Select Columns"
   },
   "accessibility": {
     "menu": "మెనూ",
@@ -1218,7 +1454,27 @@
     "developmentHint": "AI ఫిల్ ప్రమోషన్ల వైపు నిర్మిస్తున్న కార్మికులకు ప్రాధాన్యత ఇస్తుంది",
     "willCreate": "ఇది సుమారుగా సృష్టిస్తుంది",
     "shiftsLabel": "షిఫ్ట్‌లు",
-    "generating": "జనరేట్ చేస్తోంది..."
+    "generating": "జనరేట్ చేస్తోంది...",
+    "loadError": "Failed to load templates",
+    "confirmDelete": "Delete this template?",
+    "generateError": "Failed to generate shifts",
+    "patterns": {
+      "customDays": "Custom Days",
+      "customDaysDesc": "Select specific days",
+      "monFri": "Monday to Friday",
+      "monFriDesc": "Standard work week",
+      "weekend": "Weekend Only",
+      "weekendDesc": "Saturday and Sunday",
+      "4on4off": "4 On / 4 Off",
+      "4on4offDesc": "Continental shift pattern",
+      "2week": "2 Week Rotation",
+      "2weekDesc": "Alternating fortnight pattern",
+      "3on3off": "3 On / 3 Off",
+      "3on3offDesc": "Common retail pattern",
+      "5on2off": "5 On / 2 Off",
+      "5on2offDesc": "Standard with rotating days off"
+    },
+    "allDays": "All days"
   },
   "legal": {
     "lastUpdated": "చివరిగా అప్‌డేట్ చేయబడింది",
@@ -1412,6 +1668,16 @@
       "locationsDesc": "స్థానాలు ఇంపోర్ట్ చేయండి",
       "skills": "నైపుణ్యాలు",
       "skillsDesc": "నైపుణ్యాలు ఇంపోర్ట్ చేయండి"
+    },
+    "types": {
+      "employees": "Employees",
+      "employeesDesc": "Import employee profiles",
+      "shifts": "Shifts",
+      "shiftsDesc": "Import shift schedules",
+      "locations": "Locations",
+      "locationsDesc": "Import locations",
+      "skills": "Skills",
+      "skillsDesc": "Import skills"
     }
   },
   "jobs": {
@@ -1441,7 +1707,8 @@
     "enterDescription": "ఉద్యోగ వివరణ నమోదు చేయండి",
     "postJob": "ఉద్యోగం పోస్ట్ చేయి",
     "skillMatch": "నైపుణ్య మ్యాచ్",
-    "noApplicants": "ఇంకా దరఖాస్తుదారులు లేరు"
+    "noApplicants": "ఇంకా దరఖాస్తుదారులు లేరు",
+    "loadError": "Failed to load job postings. Please try again."
   },
   "employees": {
     "searchPlaceholder": "పేరు లేదా ఇమెయిల్ ద్వారా వెతకండి...",
@@ -1457,7 +1724,8 @@
     "allLocations": "All Locations",
     "placeholder": {
       "searchEmployees": "Search employees..."
-    }
+    },
+    "loadError": "Failed to load employees"
   },
   "integrationHub": {
     "title": "ఇంటిగ్రేషన్ హబ్",
@@ -1612,7 +1880,8 @@
       "createdSuccess": "వెబ్‌హుక్ విజయవంతంగా సృష్టించబడింది!",
       "testSent": "టెస్ట్ పేలోడ్ పంపబడింది",
       "testStatus": "స్థితి",
-      "deleteConfirm": "ఈ వెబ్‌హుక్‌ను తొలగించాలా?"
+      "deleteConfirm": "ఈ వెబ్‌హుక్‌ను తొలగించాలా?",
+      "skillExpired": "Skill Expired"
     },
     "marketplace": {
       "searchPlaceholder": "ఇంటిగ్రేషన్లు వెతకండి...",
@@ -1837,7 +2106,12 @@
       "locations": "స్థానాలు",
       "departments": "విభాగాలు",
       "roles": "పాత్రలు & అనుమతులు",
-      "review": "సమీక్ష & లాంచ్"
+      "review": "సమీక్ష & లాంచ్",
+      "companyInfo": "Company Info",
+      "branding": "Branding & Timezone",
+      "inviteAdmin": "Invite Admin",
+      "addEmployees": "Add Employees",
+      "done": "Done"
     },
     "orgDetails": {
       "companyName": "కంపెనీ పేరు",
@@ -1920,19 +2194,162 @@
     "selectTimezone": "Select timezone...",
     "selectSize": "Select company size...",
     "selectCountry": "Select country...",
-    "selectCurrency": "Select currency..."
+    "selectCurrency": "Select currency...",
+    "industries": {
+      "retail": "Retail",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "construction": "Construction",
+      "logistics": "Logistics",
+      "foodBeverage": "Food & Beverage",
+      "education": "Education",
+      "technology": "Technology",
+      "finance": "Finance",
+      "government": "Government",
+      "nonprofit": "Non-profit",
+      "other": "Other"
+    }
   },
   "locations": {
     "placeholder": {
       "search": "Search locations...",
       "name": "Location name",
       "address": "Address"
-    }
+    },
+    "loadError": "Failed to load locations. Please try again.",
+    "codePlaceholder": "LON-01",
+    "noEmployeesAssigned": "No employees assigned to this location"
   },
   "integrations": {
     "placeholder": {
       "search": "Search integrations..."
-    }
+    },
+    "scopes": {
+      "employeesRead": "View employee information",
+      "employeesWrite": "Create and update employees",
+      "schedulesRead": "View schedules and shifts",
+      "schedulesWrite": "Create and modify schedules",
+      "timeRead": "View time entries",
+      "timeWrite": "Create and modify time entries",
+      "skillsRead": "View skills and certifications",
+      "skillsWrite": "Manage skills and verifications",
+      "locationsRead": "View location information",
+      "locationsWrite": "Manage locations",
+      "reportsRead": "Access reports data",
+      "webhooksManage": "Configure webhooks",
+      "admin": "Full administrative access"
+    },
+    "rateLimits": {
+      "basic": "Basic",
+      "standard": "Standard",
+      "premium": "Premium"
+    },
+    "copied": "Copied!",
+    "copy": "Copy",
+    "loadError": "Failed to load integrations",
+    "apiKeyPlaceholder": "e.g., Production API Key",
+    "categories": {
+      "hris": "HRIS",
+      "hrisDesc": "Human Resource Information Systems",
+      "payroll": "Payroll",
+      "payrollDesc": "Payroll & compensation",
+      "comms": "Communications",
+      "commsDesc": "Team messaging & notifications",
+      "identity": "Identity & SSO",
+      "identityDesc": "Single sign-on & provisioning",
+      "time": "Time & Attendance",
+      "timeDesc": "Time tracking systems",
+      "pos": "Point of Sale",
+      "posDesc": "POS & retail systems",
+      "scheduling": "Migration",
+      "schedulingDesc": "Import from other tools",
+      "learning": "Learning",
+      "learningDesc": "Training & certifications",
+      "analytics": "Analytics",
+      "analyticsDesc": "BI & reporting tools",
+      "custom": "Custom",
+      "customDesc": "API & automation"
+    },
+    "providers": {
+      "hibobDesc": "Modern HR platform for mid-size businesses",
+      "workdayDesc": "Enterprise HCM and finance platform",
+      "sapSuccessfactorsDesc": "Enterprise talent management",
+      "bamboohrDesc": "HR software for SMBs",
+      "personioDesc": "European HR platform",
+      "sageHrDesc": "UK HR & people management",
+      "adpDesc": "Enterprise payroll & HR services",
+      "paychexDesc": "Payroll & HR solutions",
+      "gustoDesc": "Modern payroll for small business",
+      "xeroDesc": "Cloud accounting with payroll",
+      "sagePayrollDesc": "UK payroll software",
+      "slackDesc": "Team collaboration & notifications",
+      "microsoftTeamsDesc": "Microsoft 365 collaboration",
+      "whatsappBusinessDesc": "Direct worker messaging",
+      "googleWorkspaceDesc": "Google SSO & directory sync",
+      "microsoftEntraDesc": "Azure AD SSO & SCIM",
+      "oktaDesc": "Enterprise identity management",
+      "squareDesc": "POS & team management",
+      "lightspeedDesc": "Retail & hospitality POS",
+      "deputyDesc": "Import from Deputy",
+      "connecteamDesc": "Import from Connecteam",
+      "kronosDesc": "Enterprise workforce management",
+      "linkedinLearningDesc": "Training completion sync",
+      "powerBiDesc": "Export to Power BI",
+      "lookerDesc": "BI data export",
+      "zapierDesc": "5,000+ app connections",
+      "customApiDesc": "Build your own integration"
+    },
+    "mapping": {
+      "customField1": "customField1",
+      "customField2": "customField2",
+      "notes": "notes"
+    },
+    "api": {
+      "authNone": "No Authentication",
+      "authApiKey": "API Key",
+      "authBearer": "Bearer Token",
+      "authBasic": "Basic Auth",
+      "authOAuth2": "OAuth 2.0",
+      "triggerManual": "Manual",
+      "triggerManualDesc": "Run on demand",
+      "triggerScheduled": "Scheduled",
+      "triggerScheduledDesc": "Run on a schedule",
+      "triggerEvent": "Event-based",
+      "triggerEventDesc": "Triggered by Uplift events",
+      "triggerWebhook": "Incoming Webhook",
+      "triggerWebhookDesc": "Receive data from external systems",
+      "scopePlaceholder": "read,write",
+      "saveFirstBeforeTesting": "Save the integration first before testing",
+      "testRequestFailed": "Test request failed"
+    },
+    "events": {
+      "employeeCreated": "Employee Created",
+      "employeeUpdated": "Employee Updated",
+      "employeeDeactivated": "Employee Deactivated",
+      "shiftCreated": "Shift Created",
+      "shiftUpdated": "Shift Updated",
+      "shiftDeleted": "Shift Deleted",
+      "shiftClaimed": "Shift Claimed",
+      "clockIn": "Clock In",
+      "clockOut": "Clock Out",
+      "timeEntryApproved": "Time Entry Approved",
+      "timeOffRequested": "Time Off Requested",
+      "timeOffApproved": "Time Off Approved",
+      "timeOffRejected": "Time Off Rejected",
+      "skillVerified": "Skill Verified",
+      "jobApplication": "Job Application",
+      "categoryEmployees": "Employees",
+      "categoryScheduling": "Scheduling",
+      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeOff": "Time Off",
+      "categorySkills": "Skills",
+      "categoryCareer": "Career"
+    },
+    "noIntegrationsFound": "No integrations found",
+    "noIntegrationsAvailable": "No integrations are available yet.",
+    "noApiKeys": "No API keys",
+    "createApiKeyToStart": "Create an API key to get started with the API."
   },
   "forecast": {
     "demoData": "डेमो डेटा"

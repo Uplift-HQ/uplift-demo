@@ -1,6 +1,7 @@
 // ============================================================
 // ONBOARDING WIZARD PAGE
 // Multi-step wizard for onboarding new employees
+// Fully internationalized - all strings use t() for translation
 // ============================================================
 
 import { useState, useEffect, useCallback } from 'react';
@@ -66,7 +67,7 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
         (emp) => (emp.email || '').toLowerCase() === email
       );
       if (match) {
-        setEmailWarning(`An employee with this email already exists (${match.first_name} ${match.last_name}).`);
+        setEmailWarning(t('onboarding.emailExistsWarning', 'An employee with this email already exists ({{name}}).', { name: `${match.first_name} ${match.last_name}` }));
       } else {
         setEmailWarning('');
       }
@@ -78,13 +79,13 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-1">Employee Details</h3>
-        <p className="text-sm text-slate-500">Enter the basic information for the new employee.</p>
+        <h3 className="text-lg font-semibold text-slate-900 mb-1">{t('onboarding.employeeDetailsTitle', 'Employee Details')}</h3>
+        <p className="text-sm text-slate-500">{t('onboarding.employeeDetailsDesc', 'Enter the basic information for the new employee.')}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">First Name *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.firstName', 'First Name')} *</label>
           <input
             type="text"
             value={data.firstName || ''}
@@ -92,13 +93,13 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
             className={`w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 ${
               errors.firstName ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
-            placeholder="e.g. John"
+            placeholder={t('onboarding.firstNamePlaceholder', 'e.g. John')}
           />
           {errors.firstName && <p className="mt-1 text-xs text-red-600">{errors.firstName}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Last Name *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.lastName', 'Last Name')} *</label>
           <input
             type="text"
             value={data.lastName || ''}
@@ -106,13 +107,13 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
             className={`w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 ${
               errors.lastName ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
-            placeholder="e.g. Smith"
+            placeholder={t('onboarding.lastNamePlaceholder', 'e.g. Smith')}
           />
           {errors.lastName && <p className="mt-1 text-xs text-red-600">{errors.lastName}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Email Address *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.emailAddress', 'Email Address')} *</label>
           <input
             type="email"
             value={data.email || ''}
@@ -121,7 +122,7 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
             className={`w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 ${
               errors.email ? 'border-red-300 bg-red-50' : 'border-slate-300'
             }`}
-            placeholder="e.g. john.smith@company.com"
+            placeholder={t('onboarding.emailPlaceholder', 'e.g. john.smith@company.com')}
           />
           {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
           {emailWarning && !errors.email && (
@@ -133,18 +134,18 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.phoneNumber', 'Phone Number')}</label>
           <input
             type="tel"
             value={data.phone || ''}
             onChange={(e) => update('phone', e.target.value)}
             className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
-            placeholder="e.g. +44 7700 900000"
+            placeholder={t('onboarding.phonePlaceholder', 'e.g. +44 7700 900000')}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Employment Type *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.employmentType', 'Employment Type')} *</label>
           <select
             value={data.employmentType || ''}
             onChange={(e) => update('employmentType', e.target.value)}
@@ -155,7 +156,7 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
             <option value="">{t('onboarding.selectType', 'Select type...')}</option>
             {EMPLOYMENT_TYPES.map((type) => (
               <option key={type} value={type}>
-                {type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ')}
+                {t(`onboarding.employmentTypes.${type}`, type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' '))}
               </option>
             ))}
           </select>
@@ -163,7 +164,7 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Start Date *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.startDate', 'Start Date')} *</label>
           <input
             type="date"
             value={data.startDate || ''}
@@ -176,15 +177,15 @@ function StepEmployeeDetails({ data, onChange, errors, employees }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Employee ID</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.employeeId', 'Employee ID')}</label>
           <input
             type="text"
             value={data.employeeId || ''}
             onChange={(e) => update('employeeId', e.target.value)}
             className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
-            placeholder="Auto-generated if left blank"
+            placeholder={t('onboarding.employeeIdPlaceholder', 'Auto-generated if left blank')}
           />
-          <p className="mt-1 text-xs text-slate-400">Leave blank to auto-generate.</p>
+          <p className="mt-1 text-xs text-slate-400">{t('onboarding.employeeIdHelper', 'Leave blank to auto-generate.')}</p>
         </div>
       </div>
     </div>
@@ -201,13 +202,13 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-1">Role & Department</h3>
-        <p className="text-sm text-slate-500">Assign the employee to a department, role and location.</p>
+        <h3 className="text-lg font-semibold text-slate-900 mb-1">{t('onboarding.roleDepartmentTitle', 'Role & Department')}</h3>
+        <p className="text-sm text-slate-500">{t('onboarding.roleDepartmentDesc', 'Assign the employee to a department, role and location.')}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Department *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.department', 'Department')} *</label>
           <select
             value={data.department || ''}
             onChange={(e) => update('department', e.target.value)}
@@ -224,7 +225,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Role *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.role', 'Role')} *</label>
           <select
             value={data.role || ''}
             onChange={(e) => update('role', e.target.value)}
@@ -241,7 +242,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Location *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.location', 'Location')} *</label>
           <select
             value={data.location || ''}
             onChange={(e) => update('location', e.target.value)}
@@ -258,7 +259,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Pay Rate *</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.payRate', 'Pay Rate')} *</label>
           <div className="flex gap-2">
             <div className="relative flex-1">
               <input
@@ -278,15 +279,15 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
               onChange={(e) => update('payType', e.target.value)}
               className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
             >
-              <option value="hourly">/ hour</option>
-              <option value="salary">/ year</option>
+              <option value="hourly">{t('onboarding.perHour', '/ hour')}</option>
+              <option value="salary">{t('onboarding.perYear', '/ year')}</option>
             </select>
           </div>
           {errors.payRate && <p className="mt-1 text-xs text-red-600">{errors.payRate}</p>}
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-slate-700 mb-1">Reporting Manager</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.reportingManager', 'Reporting Manager')}</label>
           <select
             value={data.managerId || ''}
             onChange={(e) => update('managerId', e.target.value)}
@@ -309,6 +310,7 @@ function StepRoleDepartment({ data, onChange, errors, departments, roles, locati
 // STEP 3: Skills & Certifications
 // ============================================================
 function StepSkillsCertifications({ data, onChange, availableSkills }) {
+  const { t } = useTranslation();
   const selectedSkills = data.skills || [];
   const certifications = data.certifications || [];
 
@@ -348,12 +350,12 @@ function StepSkillsCertifications({ data, onChange, availableSkills }) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-1">Skills & Certifications</h3>
-        <p className="text-sm text-slate-500">Select skills and add any certifications the employee holds.</p>
+        <h3 className="text-lg font-semibold text-slate-900 mb-1">{t('onboarding.skillsCertsTitle', 'Skills & Certifications')}</h3>
+        <p className="text-sm text-slate-500">{t('onboarding.skillsCertsDesc', 'Select skills and add any certifications the employee holds.')}</p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-2">Skills</label>
+        <label className="block text-sm font-medium text-slate-700 mb-2">{t('onboarding.skills', 'Skills')}</label>
         <div className="flex flex-wrap gap-2 mb-3">
           {availableSkills.map((skill) => {
             const isSelected = selectedSkills.some((s) => s.id === skill.id);
@@ -374,13 +376,13 @@ function StepSkillsCertifications({ data, onChange, availableSkills }) {
             );
           })}
           {availableSkills.length === 0 && (
-            <p className="text-sm text-slate-400 italic">No skills defined yet. Add skills in the Skills page first.</p>
+            <p className="text-sm text-slate-400 italic">{t('onboarding.noSkillsDefined', 'No skills defined yet. Add skills in the Skills page first.')}</p>
           )}
         </div>
 
         {selectedSkills.length > 0 && (
           <div className="bg-slate-50 rounded-lg p-4 space-y-3">
-            <p className="text-xs font-medium text-slate-500 uppercase">Set Proficiency Levels</p>
+            <p className="text-xs font-medium text-slate-500 uppercase">{t('onboarding.setProficiencyLevels', 'Set Proficiency Levels')}</p>
             {selectedSkills.map((skill) => (
               <div key={skill.id} className="flex items-center justify-between gap-4">
                 <span className="text-sm text-slate-700">{skill.name}</span>
@@ -396,7 +398,7 @@ function StepSkillsCertifications({ data, onChange, availableSkills }) {
                           : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-300'
                       }`}
                     >
-                      {level.charAt(0).toUpperCase() + level.slice(1)}
+                      {t(`onboarding.proficiency.${level}`, level.charAt(0).toUpperCase() + level.slice(1))}
                     </button>
                   ))}
                 </div>
@@ -408,19 +410,19 @@ function StepSkillsCertifications({ data, onChange, availableSkills }) {
 
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="block text-sm font-medium text-slate-700">Certifications</label>
+          <label className="block text-sm font-medium text-slate-700">{t('onboarding.certifications', 'Certifications')}</label>
           <button
             type="button"
             onClick={addCertification}
             className="flex items-center gap-1 text-sm text-momentum-600 hover:text-momentum-700 font-medium"
           >
             <Plus className="w-4 h-4" />
-            Add Certification
+            {t('onboarding.addCertification', 'Add Certification')}
           </button>
         </div>
 
         {certifications.length === 0 && (
-          <p className="text-sm text-slate-400 italic">No certifications added yet.</p>
+          <p className="text-sm text-slate-400 italic">{t('onboarding.noCertificationsYet', 'No certifications added yet.')}</p>
         )}
 
         <div className="space-y-3">
@@ -431,14 +433,14 @@ function StepSkillsCertifications({ data, onChange, availableSkills }) {
                   type="text"
                   value={cert.name}
                   onChange={(e) => updateCert(index, 'name', e.target.value)}
-                  placeholder="Certification name"
+                  placeholder={t('onboarding.certificationNamePlaceholder', 'Certification name')}
                   className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                 />
                 <input
                   type="text"
                   value={cert.issuer}
                   onChange={(e) => updateCert(index, 'issuer', e.target.value)}
-                  placeholder="Issuing body"
+                  placeholder={t('onboarding.issuingBodyPlaceholder', 'Issuing body')}
                   className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                 />
                 <input
@@ -544,18 +546,18 @@ function StepAvailability({ data, onChange }) {
           value={data.maxHoursPerWeek || ''}
           onChange={(e) => update('maxHoursPerWeek', e.target.value)}
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
-          placeholder="e.g. 40"
+          placeholder={t('onboarding.maxHoursPlaceholder', 'e.g. 40')}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Restrictions / Notes</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.restrictionsNotes', 'Restrictions / Notes')}</label>
         <textarea
           value={data.notes || ''}
           onChange={(e) => update('notes', e.target.value)}
           rows={3}
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
-          placeholder="Any scheduling restrictions, preferences or notes..."
+          placeholder={t('onboarding.notesPlaceholder', 'Any scheduling restrictions, preferences or notes...')}
         />
       </div>
     </div>
@@ -566,47 +568,48 @@ function StepAvailability({ data, onChange }) {
 // STEP 5: Invitation
 // ============================================================
 function StepInvitation({ formData, inviteSettings, onChangeInviteSettings }) {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-1">Review & Send Invitation</h3>
-        <p className="text-sm text-slate-500">Review the details and invite the employee to the Uplift app.</p>
+        <h3 className="text-lg font-semibold text-slate-900 mb-1">{t('onboarding.reviewInviteTitle', 'Review & Send Invitation')}</h3>
+        <p className="text-sm text-slate-500">{t('onboarding.reviewInviteDesc', 'Review the details and invite the employee to the Uplift app.')}</p>
       </div>
 
       <div className="bg-slate-50 rounded-xl p-5 space-y-4">
-        <h4 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Summary</h4>
+        <h4 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">{t('onboarding.summary', 'Summary')}</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
           <div>
-            <span className="text-slate-500">Name:</span>{' '}
+            <span className="text-slate-500">{t('onboarding.summaryName', 'Name')}:</span>{' '}
             <span className="font-medium text-slate-900">{formData.firstName} {formData.lastName}</span>
           </div>
           <div>
-            <span className="text-slate-500">Email:</span>{' '}
+            <span className="text-slate-500">{t('onboarding.summaryEmail', 'Email')}:</span>{' '}
             <span className="font-medium text-slate-900">{formData.email}</span>
           </div>
           {formData.phone && (
             <div>
-              <span className="text-slate-500">Phone:</span>{' '}
+              <span className="text-slate-500">{t('onboarding.summaryPhone', 'Phone')}:</span>{' '}
               <span className="font-medium text-slate-900">{formData.phone}</span>
             </div>
           )}
           <div>
-            <span className="text-slate-500">Type:</span>{' '}
+            <span className="text-slate-500">{t('onboarding.summaryType', 'Type')}:</span>{' '}
             <span className="font-medium text-slate-900 capitalize">{formData.employmentType?.replace('-', ' ')}</span>
           </div>
           <div>
-            <span className="text-slate-500">Start Date:</span>{' '}
+            <span className="text-slate-500">{t('onboarding.summaryStartDate', 'Start Date')}:</span>{' '}
             <span className="font-medium text-slate-900">{formData.startDate}</span>
           </div>
           <div>
-            <span className="text-slate-500">Employee ID:</span>{' '}
-            <span className="font-medium text-slate-900">{formData.employeeId || 'Auto-generated'}</span>
+            <span className="text-slate-500">{t('onboarding.summaryEmployeeId', 'Employee ID')}:</span>{' '}
+            <span className="font-medium text-slate-900">{formData.employeeId || t('onboarding.autoGenerated', 'Auto-generated')}</span>
           </div>
           {formData.skills?.length > 0 && (
             <div className="md:col-span-2">
-              <span className="text-slate-500">Skills:</span>{' '}
+              <span className="text-slate-500">{t('onboarding.summarySkills', 'Skills')}:</span>{' '}
               <span className="font-medium text-slate-900">
                 {formData.skills.map((s) => `${s.name} (${s.proficiency})`).join(', ')}
               </span>
@@ -614,7 +617,7 @@ function StepInvitation({ formData, inviteSettings, onChangeInviteSettings }) {
           )}
           {formData.daysAvailable?.length > 0 && (
             <div className="md:col-span-2">
-              <span className="text-slate-500">Available:</span>{' '}
+              <span className="text-slate-500">{t('onboarding.summaryAvailable', 'Available')}:</span>{' '}
               <span className="font-medium text-slate-900">
                 {formData.daysAvailable.map((d) => d.slice(0, 3)).join(', ')}
               </span>
@@ -633,8 +636,8 @@ function StepInvitation({ formData, inviteSettings, onChangeInviteSettings }) {
             className="w-4 h-4 text-momentum-500 border-slate-300 rounded focus:ring-momentum-500"
           />
           <label htmlFor="sendInvite" className="text-sm text-slate-700">
-            <span className="font-medium">Send invitation email</span>
-            <span className="block text-slate-500">The employee will receive an email to download the Uplift app and set up their account.</span>
+            <span className="font-medium">{t('onboarding.sendInvitationEmail', 'Send invitation email')}</span>
+            <span className="block text-slate-500">{t('onboarding.sendInvitationEmailDesc', 'The employee will receive an email to download the Uplift app and set up their account.')}</span>
           </label>
         </div>
 
@@ -648,8 +651,8 @@ function StepInvitation({ formData, inviteSettings, onChangeInviteSettings }) {
           />
           <div className="flex-1">
             <label htmlFor="setPassword" className="text-sm text-slate-700">
-              <span className="font-medium">Set temporary password</span>
-              <span className="block text-slate-500">Set a temporary password the employee can use to log in initially.</span>
+              <span className="font-medium">{t('onboarding.setTempPassword', 'Set temporary password')}</span>
+              <span className="block text-slate-500">{t('onboarding.setTempPasswordDesc', 'Set a temporary password the employee can use to log in initially.')}</span>
             </label>
             {inviteSettings.setPassword && (
               <div className="mt-2 relative max-w-xs">
@@ -658,7 +661,7 @@ function StepInvitation({ formData, inviteSettings, onChangeInviteSettings }) {
                   value={inviteSettings.temporaryPassword || ''}
                   onChange={(e) => onChangeInviteSettings({ ...inviteSettings, temporaryPassword: e.target.value })}
                   className="w-full px-3 py-2 pr-10 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
-                  placeholder="Temporary password"
+                  placeholder={t('onboarding.tempPasswordPlaceholder', 'Temporary password')}
                 />
                 <button
                   type="button"
@@ -680,24 +683,25 @@ function StepInvitation({ formData, inviteSettings, onChangeInviteSettings }) {
 // SUCCESS STATE
 // ============================================================
 function SuccessState({ formData, onViewEmployee, onOnboardAnother }) {
+  const { t } = useTranslation();
+
   return (
     <div className="text-center py-12">
       <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
         <CheckCircle2 className="w-8 h-8 text-green-600" />
       </div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-2">Employee Onboarded Successfully!</h2>
+      <h2 className="text-2xl font-bold text-slate-900 mb-2">{t('onboarding.successTitle', 'Employee Onboarded Successfully!')}</h2>
       <p className="text-slate-500 mb-8 max-w-md mx-auto">
-        <span className="font-medium text-slate-700">{formData.firstName} {formData.lastName}</span> has been added to the system
-        and an invitation has been sent to <span className="font-medium text-slate-700">{formData.email}</span>.
+        <span className="font-medium text-slate-700">{formData.firstName} {formData.lastName}</span> {t('onboarding.successDesc', 'has been added to the system and an invitation has been sent to')} <span className="font-medium text-slate-700">{formData.email}</span>.
       </p>
 
       <div className="bg-slate-50 rounded-xl p-6 max-w-sm mx-auto mb-8 text-left space-y-2 text-sm">
         <div className="flex justify-between">
-          <span className="text-slate-500">Employee ID</span>
+          <span className="text-slate-500">{t('onboarding.summaryEmployeeId', 'Employee ID')}</span>
           <span className="font-medium text-slate-900">{formData.employeeId}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-500">Start Date</span>
+          <span className="text-slate-500">{t('onboarding.summaryStartDate', 'Start Date')}</span>
           <span className="font-medium text-slate-900">{formData.startDate}</span>
         </div>
       </div>
@@ -707,13 +711,13 @@ function SuccessState({ formData, onViewEmployee, onOnboardAnother }) {
           onClick={onViewEmployee}
           className="px-4 py-2 bg-momentum-500 text-white rounded-lg text-sm font-medium hover:bg-momentum-600 transition-colors"
         >
-          View Employees
+          {t('onboarding.viewEmployees', 'View Employees')}
         </button>
         <button
           onClick={onOnboardAnother}
           className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
         >
-          Onboard Another
+          {t('onboarding.onboardAnother', 'Onboard Another')}
         </button>
       </div>
     </div>
@@ -790,22 +794,22 @@ export default function Onboarding() {
   const validateStep = useCallback((step) => {
     const errs = {};
     if (step === 1) {
-      if (!formData.firstName?.trim()) errs.firstName = 'First name is required';
-      if (!formData.lastName?.trim()) errs.lastName = 'Last name is required';
-      if (!formData.email?.trim()) errs.email = 'Email is required';
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = 'Invalid email address';
-      if (!formData.employmentType) errs.employmentType = 'Employment type is required';
-      if (!formData.startDate) errs.startDate = 'Start date is required';
+      if (!formData.firstName?.trim()) errs.firstName = t('onboarding.errors.firstNameRequired', 'First name is required');
+      if (!formData.lastName?.trim()) errs.lastName = t('onboarding.errors.lastNameRequired', 'Last name is required');
+      if (!formData.email?.trim()) errs.email = t('onboarding.errors.emailRequired', 'Email is required');
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = t('onboarding.errors.invalidEmail', 'Invalid email address');
+      if (!formData.employmentType) errs.employmentType = t('onboarding.errors.employmentTypeRequired', 'Employment type is required');
+      if (!formData.startDate) errs.startDate = t('onboarding.errors.startDateRequired', 'Start date is required');
     }
     if (step === 2) {
-      if (!formData.department) errs.department = 'Department is required';
-      if (!formData.role) errs.role = 'Role is required';
-      if (!formData.location) errs.location = 'Location is required';
-      if (!formData.payRate || parseFloat(formData.payRate) <= 0) errs.payRate = 'Valid pay rate is required';
+      if (!formData.department) errs.department = t('onboarding.errors.departmentRequired', 'Department is required');
+      if (!formData.role) errs.role = t('onboarding.errors.roleRequired', 'Role is required');
+      if (!formData.location) errs.location = t('onboarding.errors.locationRequired', 'Location is required');
+      if (!formData.payRate || parseFloat(formData.payRate) <= 0) errs.payRate = t('onboarding.errors.payRateRequired', 'Valid pay rate is required');
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
-  }, [formData]);
+  }, [formData, t]);
 
   const goNext = () => {
     if (validateStep(currentStep)) {
@@ -864,13 +868,13 @@ export default function Onboarding() {
           }
           await authApi.inviteUser(invitePayload);
         } catch {
-          toast.warning('Employee created but invitation email failed to send. You can resend from the Employees page.');
+          toast.warning(t('onboarding.inviteEmailFailed', 'Employee created but invitation email failed to send. You can resend from the Employees page.'));
         }
       }
       setFormData({ ...formData, employeeId });
       setCompleted(true);
     } catch (err) {
-      setGlobalError(err.message || 'Failed to create employee. Please try again.');
+      setGlobalError(err.message || t('onboarding.createFailed', 'Failed to create employee. Please try again.'));
     } finally {
       setSubmitting(false);
     }
@@ -889,7 +893,7 @@ export default function Onboarding() {
     return (
       <div>
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-slate-900">{t('nav.onboarding', 'Employee Onboarding')}</h1>
+          <h1 className="text-2xl font-bold text-slate-900">{t('onboarding.pageTitle', 'Employee Onboarding')}</h1>
         </div>
         <div className="bg-white rounded-xl shadow-sm border border-slate-200">
           <SuccessState
@@ -906,11 +910,11 @@ export default function Onboarding() {
     return (
       <div>
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-slate-900">{t('nav.onboarding', 'Employee Onboarding')}</h1>
+          <h1 className="text-2xl font-bold text-slate-900">{t('onboarding.pageTitle', 'Employee Onboarding')}</h1>
         </div>
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
           <Loader2 className="w-8 h-8 animate-spin text-momentum-500 mx-auto mb-3" />
-          <p className="text-sm text-slate-500">Loading organisation data...</p>
+          <p className="text-sm text-slate-500">{t('onboarding.loadingData', 'Loading organisation data...')}</p>
         </div>
       </div>
     );
@@ -919,10 +923,10 @@ export default function Onboarding() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-900">{t('nav.onboarding', 'Employee Onboarding')}</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t('onboarding.pageTitle', 'Employee Onboarding')}</h1>
         <p className="text-slate-500 mt-1">
-          Add a new employee and invite them to the Uplift app.
-          {' '}<Link to="/bulk-import" className="text-momentum-600 hover:text-momentum-700 text-sm font-medium">Need to add many employees? Use Bulk Import</Link>
+          {t('onboarding.pageDesc', 'Add a new employee and invite them to the Uplift app.')}
+          {' '}<Link to="/bulk-import" className="text-momentum-600 hover:text-momentum-700 text-sm font-medium">{t('onboarding.bulkImportLink', 'Need to add many employees? Use Bulk Import')}</Link>
         </p>
       </div>
 
@@ -1006,17 +1010,17 @@ export default function Onboarding() {
             }`}
           >
             <ChevronLeft className="w-4 h-4" />
-            Back
+            {t('common.back', 'Back')}
           </button>
 
-          <span className="text-sm text-slate-400">Step {currentStep} of {STEPS.length}</span>
+          <span className="text-sm text-slate-400">{t('onboarding.stepOf', 'Step {{current}} of {{total}}', { current: currentStep, total: STEPS.length })}</span>
 
           {currentStep < 5 ? (
             <button
               onClick={goNext}
               className="flex items-center gap-2 px-5 py-2 bg-momentum-500 text-white rounded-lg text-sm font-medium hover:bg-momentum-600 transition-colors"
             >
-              Next
+              {t('common.next', 'Next')}
               <ChevronRight className="w-4 h-4" />
             </button>
           ) : (
@@ -1026,9 +1030,9 @@ export default function Onboarding() {
               className="flex items-center gap-2 px-5 py-2 bg-momentum-500 text-white rounded-lg text-sm font-medium hover:bg-momentum-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? (
-                <><Loader2 className="w-4 h-4 animate-spin" />Creating...</>
+                <><Loader2 className="w-4 h-4 animate-spin" />{t('onboarding.creating', 'Creating...')}</>
               ) : (
-                <><UserPlus className="w-4 h-4" />Create Employee</>
+                <><UserPlus className="w-4 h-4" />{t('onboarding.createEmployee', 'Create Employee')}</>
               )}
             </button>
           )}

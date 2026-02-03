@@ -22,64 +22,64 @@ import { integrationsApi } from '../lib/api';
 
 // -------------------- TYPES --------------------
 
-const INTEGRATION_CATEGORIES = {
-  hris: { label: 'HRIS', description: 'Human Resource Information Systems', icon: Users },
-  payroll: { label: 'Payroll', description: 'Payroll & compensation', icon: DollarSign },
-  comms: { label: 'Communications', description: 'Team messaging & notifications', icon: MessageSquare },
-  identity: { label: 'Identity & SSO', description: 'Single sign-on & provisioning', icon: Shield },
-  time: { label: 'Time & Attendance', description: 'Time tracking systems', icon: Clock },
-  pos: { label: 'Point of Sale', description: 'POS & retail systems', icon: CreditCard },
-  scheduling: { label: 'Migration', description: 'Import from other tools', icon: ArrowLeftRight },
-  learning: { label: 'Learning', description: 'Training & certifications', icon: GraduationCap },
-  analytics: { label: 'Analytics', description: 'BI & reporting tools', icon: LineChart },
-  custom: { label: 'Custom', description: 'API & automation', icon: Code },
-};
+const getIntegrationCategories = (t) => ({
+  hris: { label: t('integrations.categories.hris', 'HRIS'), description: t('integrations.categories.hrisDesc', 'Human Resource Information Systems'), icon: Users },
+  payroll: { label: t('integrations.categories.payroll', 'Payroll'), description: t('integrations.categories.payrollDesc', 'Payroll & compensation'), icon: DollarSign },
+  comms: { label: t('integrations.categories.comms', 'Communications'), description: t('integrations.categories.commsDesc', 'Team messaging & notifications'), icon: MessageSquare },
+  identity: { label: t('integrations.categories.identity', 'Identity & SSO'), description: t('integrations.categories.identityDesc', 'Single sign-on & provisioning'), icon: Shield },
+  time: { label: t('integrations.categories.time', 'Time & Attendance'), description: t('integrations.categories.timeDesc', 'Time tracking systems'), icon: Clock },
+  pos: { label: t('integrations.categories.pos', 'Point of Sale'), description: t('integrations.categories.posDesc', 'POS & retail systems'), icon: CreditCard },
+  scheduling: { label: t('integrations.categories.scheduling', 'Migration'), description: t('integrations.categories.schedulingDesc', 'Import from other tools'), icon: ArrowLeftRight },
+  learning: { label: t('integrations.categories.learning', 'Learning'), description: t('integrations.categories.learningDesc', 'Training & certifications'), icon: GraduationCap },
+  analytics: { label: t('integrations.categories.analytics', 'Analytics'), description: t('integrations.categories.analyticsDesc', 'BI & reporting tools'), icon: LineChart },
+  custom: { label: t('integrations.categories.custom', 'Custom'), description: t('integrations.categories.customDesc', 'API & automation'), icon: Code },
+});
 
-const PROVIDERS = [
+const getProviders = (t) => [
   // HRIS
-  { id: 'hibob', name: 'HiBob', category: 'hris', color: 'bg-pink-500', icon: Users, description: 'Modern HR platform for mid-size businesses', tier: 'growth', status: 'ga' },
-  { id: 'workday', name: 'Workday', category: 'hris', color: 'bg-blue-600', icon: BarChart3, description: 'Enterprise HCM and finance platform', tier: 'enterprise', status: 'ga' },
-  { id: 'sap-successfactors', name: 'SAP SuccessFactors', category: 'hris', color: 'bg-indigo-600', icon: Building, description: 'Enterprise talent management', tier: 'enterprise', status: 'ga' },
-  { id: 'bamboohr', name: 'BambooHR', category: 'hris', color: 'bg-emerald-500', icon: Briefcase, description: 'HR software for SMBs', tier: 'starter', status: 'ga' },
-  { id: 'personio', name: 'Personio', category: 'hris', color: 'bg-violet-500', icon: Globe, description: 'European HR platform', tier: 'growth', status: 'ga' },
-  { id: 'sage-hr', name: 'Sage HR', category: 'hris', color: 'bg-green-500', icon: FileSpreadsheet, description: 'UK HR & people management', tier: 'starter', status: 'ga' },
+  { id: 'hibob', name: 'HiBob', category: 'hris', color: 'bg-pink-500', icon: Users, description: t('integrations.providers.hibobDesc', 'Modern HR platform for mid-size businesses'), tier: 'growth', status: 'ga' },
+  { id: 'workday', name: 'Workday', category: 'hris', color: 'bg-blue-600', icon: BarChart3, description: t('integrations.providers.workdayDesc', 'Enterprise HCM and finance platform'), tier: 'enterprise', status: 'ga' },
+  { id: 'sap-successfactors', name: 'SAP SuccessFactors', category: 'hris', color: 'bg-indigo-600', icon: Building, description: t('integrations.providers.sapSuccessfactorsDesc', 'Enterprise talent management'), tier: 'enterprise', status: 'ga' },
+  { id: 'bamboohr', name: 'BambooHR', category: 'hris', color: 'bg-emerald-500', icon: Briefcase, description: t('integrations.providers.bamboohrDesc', 'HR software for SMBs'), tier: 'starter', status: 'ga' },
+  { id: 'personio', name: 'Personio', category: 'hris', color: 'bg-violet-500', icon: Globe, description: t('integrations.providers.personioDesc', 'European HR platform'), tier: 'growth', status: 'ga' },
+  { id: 'sage-hr', name: 'Sage HR', category: 'hris', color: 'bg-green-500', icon: FileSpreadsheet, description: t('integrations.providers.sageHrDesc', 'UK HR & people management'), tier: 'starter', status: 'ga' },
 
   // Payroll
-  { id: 'adp', name: 'ADP', category: 'payroll', color: 'bg-red-600', icon: DollarSign, description: 'Enterprise payroll & HR services', tier: 'growth', status: 'ga' },
-  { id: 'paychex', name: 'Paychex', category: 'payroll', color: 'bg-blue-700', icon: Calculator, description: 'Payroll & HR solutions', tier: 'growth', status: 'ga' },
-  { id: 'gusto', name: 'Gusto', category: 'payroll', color: 'bg-orange-500', icon: Heart, description: 'Modern payroll for small business', tier: 'starter', status: 'ga' },
-  { id: 'xero', name: 'Xero Payroll', category: 'payroll', color: 'bg-cyan-500', icon: FileSpreadsheet, description: 'Cloud accounting with payroll', tier: 'starter', status: 'ga' },
-  { id: 'sage-payroll', name: 'Sage Payroll', category: 'payroll', color: 'bg-green-500', icon: DollarSign, description: 'UK payroll software', tier: 'starter', status: 'ga' },
+  { id: 'adp', name: 'ADP', category: 'payroll', color: 'bg-red-600', icon: DollarSign, description: t('integrations.providers.adpDesc', 'Enterprise payroll & HR services'), tier: 'growth', status: 'ga' },
+  { id: 'paychex', name: 'Paychex', category: 'payroll', color: 'bg-blue-700', icon: Calculator, description: t('integrations.providers.paychexDesc', 'Payroll & HR solutions'), tier: 'growth', status: 'ga' },
+  { id: 'gusto', name: 'Gusto', category: 'payroll', color: 'bg-orange-500', icon: Heart, description: t('integrations.providers.gustoDesc', 'Modern payroll for small business'), tier: 'starter', status: 'ga' },
+  { id: 'xero', name: 'Xero Payroll', category: 'payroll', color: 'bg-cyan-500', icon: FileSpreadsheet, description: t('integrations.providers.xeroDesc', 'Cloud accounting with payroll'), tier: 'starter', status: 'ga' },
+  { id: 'sage-payroll', name: 'Sage Payroll', category: 'payroll', color: 'bg-green-500', icon: DollarSign, description: t('integrations.providers.sagePayrollDesc', 'UK payroll software'), tier: 'starter', status: 'ga' },
 
   // Communications
-  { id: 'slack', name: 'Slack', category: 'comms', color: 'bg-purple-600', icon: MessageSquare, description: 'Team collaboration & notifications', tier: 'starter', status: 'ga' },
-  { id: 'microsoft-teams', name: 'Microsoft Teams', category: 'comms', color: 'bg-violet-600', icon: Video, description: 'Microsoft 365 collaboration', tier: 'starter', status: 'ga' },
-  { id: 'whatsapp-business', name: 'WhatsApp Business', category: 'comms', color: 'bg-green-500', icon: Phone, description: 'Direct worker messaging', tier: 'growth', status: 'beta' },
+  { id: 'slack', name: 'Slack', category: 'comms', color: 'bg-purple-600', icon: MessageSquare, description: t('integrations.providers.slackDesc', 'Team collaboration & notifications'), tier: 'starter', status: 'ga' },
+  { id: 'microsoft-teams', name: 'Microsoft Teams', category: 'comms', color: 'bg-violet-600', icon: Video, description: t('integrations.providers.microsoftTeamsDesc', 'Microsoft 365 collaboration'), tier: 'starter', status: 'ga' },
+  { id: 'whatsapp-business', name: 'WhatsApp Business', category: 'comms', color: 'bg-green-500', icon: Phone, description: t('integrations.providers.whatsappBusinessDesc', 'Direct worker messaging'), tier: 'growth', status: 'beta' },
 
   // Identity
-  { id: 'google-workspace', name: 'Google Workspace', category: 'identity', color: 'bg-blue-500', icon: Shield, description: 'Google SSO & directory sync', tier: 'starter', status: 'ga' },
-  { id: 'microsoft-entra', name: 'Microsoft Entra ID', category: 'identity', color: 'bg-blue-600', icon: Key, description: 'Azure AD SSO & SCIM', tier: 'growth', status: 'ga' },
-  { id: 'okta', name: 'Okta', category: 'identity', color: 'bg-blue-700', icon: Fingerprint, description: 'Enterprise identity management', tier: 'enterprise', status: 'ga' },
+  { id: 'google-workspace', name: 'Google Workspace', category: 'identity', color: 'bg-blue-500', icon: Shield, description: t('integrations.providers.googleWorkspaceDesc', 'Google SSO & directory sync'), tier: 'starter', status: 'ga' },
+  { id: 'microsoft-entra', name: 'Microsoft Entra ID', category: 'identity', color: 'bg-blue-600', icon: Key, description: t('integrations.providers.microsoftEntraDesc', 'Azure AD SSO & SCIM'), tier: 'growth', status: 'ga' },
+  { id: 'okta', name: 'Okta', category: 'identity', color: 'bg-blue-700', icon: Fingerprint, description: t('integrations.providers.oktaDesc', 'Enterprise identity management'), tier: 'enterprise', status: 'ga' },
 
   // POS
-  { id: 'square', name: 'Square', category: 'pos', color: 'bg-slate-800', icon: CreditCard, description: 'POS & team management', tier: 'starter', status: 'ga' },
-  { id: 'lightspeed', name: 'Lightspeed', category: 'pos', color: 'bg-red-500', icon: Zap, description: 'Retail & hospitality POS', tier: 'growth', status: 'beta' },
+  { id: 'square', name: 'Square', category: 'pos', color: 'bg-slate-800', icon: CreditCard, description: t('integrations.providers.squareDesc', 'POS & team management'), tier: 'starter', status: 'ga' },
+  { id: 'lightspeed', name: 'Lightspeed', category: 'pos', color: 'bg-red-500', icon: Zap, description: t('integrations.providers.lightspeedDesc', 'Retail & hospitality POS'), tier: 'growth', status: 'beta' },
 
   // Migration
-  { id: 'deputy', name: 'Deputy', category: 'scheduling', color: 'bg-cyan-500', icon: Clock, description: 'Import from Deputy', tier: 'starter', status: 'ga' },
-  { id: 'connecteam', name: 'Connecteam', category: 'scheduling', color: 'bg-violet-500', icon: Users, description: 'Import from Connecteam', tier: 'starter', status: 'ga' },
-  { id: 'kronos', name: 'UKG/Kronos', category: 'time', color: 'bg-blue-700', icon: Timer, description: 'Enterprise workforce management', tier: 'enterprise', status: 'ga' },
+  { id: 'deputy', name: 'Deputy', category: 'scheduling', color: 'bg-cyan-500', icon: Clock, description: t('integrations.providers.deputyDesc', 'Import from Deputy'), tier: 'starter', status: 'ga' },
+  { id: 'connecteam', name: 'Connecteam', category: 'scheduling', color: 'bg-violet-500', icon: Users, description: t('integrations.providers.connecteamDesc', 'Import from Connecteam'), tier: 'starter', status: 'ga' },
+  { id: 'kronos', name: 'UKG/Kronos', category: 'time', color: 'bg-blue-700', icon: Timer, description: t('integrations.providers.kronosDesc', 'Enterprise workforce management'), tier: 'enterprise', status: 'ga' },
 
   // Learning
-  { id: 'linkedin-learning', name: 'LinkedIn Learning', category: 'learning', color: 'bg-blue-600', icon: GraduationCap, description: 'Training completion sync', tier: 'growth', status: 'beta' },
+  { id: 'linkedin-learning', name: 'LinkedIn Learning', category: 'learning', color: 'bg-blue-600', icon: GraduationCap, description: t('integrations.providers.linkedinLearningDesc', 'Training completion sync'), tier: 'growth', status: 'beta' },
 
   // Analytics
-  { id: 'power-bi', name: 'Power BI', category: 'analytics', color: 'bg-yellow-500', icon: LineChart, description: 'Export to Power BI', tier: 'growth', status: 'ga' },
-  { id: 'looker', name: 'Looker', category: 'analytics', color: 'bg-blue-500', icon: BarChart3, description: 'BI data export', tier: 'enterprise', status: 'beta' },
+  { id: 'power-bi', name: 'Power BI', category: 'analytics', color: 'bg-yellow-500', icon: LineChart, description: t('integrations.providers.powerBiDesc', 'Export to Power BI'), tier: 'growth', status: 'ga' },
+  { id: 'looker', name: 'Looker', category: 'analytics', color: 'bg-blue-500', icon: BarChart3, description: t('integrations.providers.lookerDesc', 'BI data export'), tier: 'enterprise', status: 'beta' },
 
   // Custom
-  { id: 'zapier', name: 'Zapier', category: 'custom', color: 'bg-orange-500', icon: Workflow, description: '5,000+ app connections', tier: 'growth', status: 'ga' },
-  { id: 'custom-api', name: 'Custom API', category: 'custom', color: 'bg-slate-600', icon: Code, description: 'Build your own integration', tier: 'starter', status: 'ga' },
+  { id: 'zapier', name: 'Zapier', category: 'custom', color: 'bg-orange-500', icon: Workflow, description: t('integrations.providers.zapierDesc', '5,000+ app connections'), tier: 'growth', status: 'ga' },
+  { id: 'custom-api', name: 'Custom API', category: 'custom', color: 'bg-slate-600', icon: Code, description: t('integrations.providers.customApiDesc', 'Build your own integration'), tier: 'starter', status: 'ga' },
 ];
 const INITIAL_CONNECTIONS = [
   {
@@ -149,7 +149,7 @@ const formatDuration = (seconds) => {
   return `${Math.floor(seconds / 3600)}h ${Math.floor((seconds % 3600) / 60)}m`;
 };
 
-const getProvider = (id) => PROVIDERS.find(p => p.id === id);
+const getProvider = (id, t) => getProviders(t).find(p => p.id === id);
 
 const getTierBadge = (tier) => {
   const colors = {
@@ -247,20 +247,20 @@ const Badge = ({ children, variant = 'default' }) => {
 // -------------------- WEBHOOKS TAB --------------------
 
 const WEBHOOK_EVENTS = [
-  { id: 'employee.created', label: 'Employee Created' },
-  { id: 'employee.updated', label: 'Employee Updated' },
-  { id: 'employee.deleted', label: 'Employee Deleted' },
-  { id: 'shift.created', label: 'Shift Created' },
-  { id: 'shift.updated', label: 'Shift Updated' },
-  { id: 'shift.deleted', label: 'Shift Deleted' },
-  { id: 'shift.claimed', label: 'Shift Claimed' },
-  { id: 'time.clock_in', label: 'Clock In' },
-  { id: 'time.clock_out', label: 'Clock Out' },
-  { id: 'timeoff.requested', label: 'Time Off Requested' },
-  { id: 'timeoff.approved', label: 'Time Off Approved' },
-  { id: 'timeoff.rejected', label: 'Time Off Rejected' },
-  { id: 'skill.verified', label: 'Skill Verified' },
-  { id: 'skill.expired', label: 'Skill Expired' },
+  { id: 'employee.created', labelKey: 'integrations.events.employeeCreated', fallback: 'Employee Created' },
+  { id: 'employee.updated', labelKey: 'integrations.events.employeeUpdated', fallback: 'Employee Updated' },
+  { id: 'employee.deleted', labelKey: 'integrations.events.employeeDeactivated', fallback: 'Employee Deleted' },
+  { id: 'shift.created', labelKey: 'integrations.events.shiftCreated', fallback: 'Shift Created' },
+  { id: 'shift.updated', labelKey: 'integrations.events.shiftUpdated', fallback: 'Shift Updated' },
+  { id: 'shift.deleted', labelKey: 'integrations.events.shiftDeleted', fallback: 'Shift Deleted' },
+  { id: 'shift.claimed', labelKey: 'integrations.events.shiftClaimed', fallback: 'Shift Claimed' },
+  { id: 'time.clock_in', labelKey: 'integrations.events.clockIn', fallback: 'Clock In' },
+  { id: 'time.clock_out', labelKey: 'integrations.events.clockOut', fallback: 'Clock Out' },
+  { id: 'timeoff.requested', labelKey: 'integrations.events.timeOffRequested', fallback: 'Time Off Requested' },
+  { id: 'timeoff.approved', labelKey: 'integrations.events.timeOffApproved', fallback: 'Time Off Approved' },
+  { id: 'timeoff.rejected', labelKey: 'integrations.events.timeOffRejected', fallback: 'Time Off Rejected' },
+  { id: 'skill.verified', labelKey: 'integrations.events.skillVerified', fallback: 'Skill Verified' },
+  { id: 'skill.expired', labelKey: 'integrationHub.webhooks.skillExpired', fallback: 'Skill Expired' },
 ];
 
 const WebhooksTab = ({ provider, webhooks: initialWebhooks, connectionId }) => {
@@ -435,7 +435,7 @@ const WebhooksTab = ({ provider, webhooks: initialWebhooks, connectionId }) => {
                     }}
                     className="w-4 h-4 rounded text-orange-500"
                   />
-                  {event.label}
+                  {t(event.labelKey, event.fallback)}
                 </label>
               ))}
             </div>
@@ -513,7 +513,7 @@ const ProviderCard = ({ provider, connected, onConnect, onConfigure }) => {
             <h3 className="font-semibold text-slate-900 dark:text-white truncate">{provider.name}</h3>
             {provider.status === 'beta' && <Badge variant="info">{t('integrationHub.status.beta', 'Beta')}</Badge>}
           </div>
-          <p className="text-xs text-slate-500">{INTEGRATION_CATEGORIES[provider.category]?.label}</p>
+          <p className="text-xs text-slate-500">{getIntegrationCategories(t)[provider.category]?.label}</p>
         </div>
         {connected && (
           <div className="flex items-center gap-1">
@@ -553,7 +553,7 @@ const ProviderCard = ({ provider, connected, onConnect, onConfigure }) => {
 
 const ConnectionCard = ({ connection, onConfigure, onSync, onDisconnect }) => {
   const { t } = useTranslation();
-  const provider = getProvider(connection.providerId);
+  const provider = getProvider(connection.providerId, t);
   if (!provider) return null;
 
   const Icon = provider.icon;
@@ -568,7 +568,7 @@ const ConnectionCard = ({ connection, onConfigure, onSync, onDisconnect }) => {
           </div>
           <div>
             <h3 className="font-semibold text-slate-900 dark:text-white">{provider.name}</h3>
-            <p className="text-sm text-slate-500">{INTEGRATION_CATEGORIES[provider.category]?.label}</p>
+            <p className="text-sm text-slate-500">{getIntegrationCategories(t)[provider.category]?.label}</p>
           </div>
         </div>
         <div className={cn('px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1',
@@ -674,7 +674,7 @@ const ConnectModal = ({ provider, open, onClose, onConnect }) => {
             </div>
             <div>
               <h3 className="font-semibold text-lg">{provider.name}</h3>
-              <p className="text-sm text-slate-500">{INTEGRATION_CATEGORIES[provider.category]?.label}</p>
+              <p className="text-sm text-slate-500">{getIntegrationCategories(t)[provider.category]?.label}</p>
               <div className="flex gap-2 mt-2">
                 <Badge>{provider.tier}</Badge>
                 {provider.status === 'beta' && <Badge variant="info">{t('integrationHub.status.beta', 'Beta')}</Badge>}
@@ -967,9 +967,9 @@ const ConfigureModal = ({ connection, open, onClose, onSave, onDisconnect }) => 
                     ) : (
                       <select className="w-full text-sm border rounded px-2 py-1">
                         <option>{t('integrationHub.mapping.selectField', 'Select field...')}</option>
-                        <option>customField1</option>
-                        <option>customField2</option>
-                        <option>notes</option>
+                        <option value="customField1">{t('integrations.mapping.customField1', 'customField1')}</option>
+                        <option value="customField2">{t('integrations.mapping.customField2', 'customField2')}</option>
+                        <option value="notes">{t('integrations.mapping.notes', 'notes')}</option>
                       </select>
                     )}
                   </div>
@@ -1099,13 +1099,16 @@ export const IntegrationHub = ({ showToast, addAudit }) => {
   // Derived data
   const connectedProviderIds = connections.map(c => c.providerId);
 
+  const PROVIDERS = useMemo(() => getProviders(t), [t]);
+  const INTEGRATION_CATEGORIES = useMemo(() => getIntegrationCategories(t), [t]);
+
   const filteredProviders = useMemo(() => {
     return PROVIDERS.filter(p => {
       if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
       if (categoryFilter !== 'all' && p.category !== categoryFilter) return false;
       return true;
     });
-  }, [searchQuery, categoryFilter]);
+  }, [searchQuery, categoryFilter, PROVIDERS]);
 
   // Handlers
   const handleConnect = async (provider, config) => {
@@ -1145,7 +1148,7 @@ export const IntegrationHub = ({ showToast, addAudit }) => {
   };
 
   const handleDisconnect = async (connection) => {
-    const provider = getProvider(connection.providerId);
+    const provider = getProvider(connection.providerId, t);
     if (!window.confirm(t('integrationHub.disconnectConfirm', 'Disconnect {{name}}? This will stop all syncs.', { name: provider?.name }))) return;
 
     // Optimistic UI
@@ -1165,7 +1168,7 @@ export const IntegrationHub = ({ showToast, addAudit }) => {
   };
 
   const handleSync = async (connection) => {
-    const provider = getProvider(connection.providerId);
+    const provider = getProvider(connection.providerId, t);
 
     // Optimistic: set status to syncing
     setConnections(prev => prev.map(c =>

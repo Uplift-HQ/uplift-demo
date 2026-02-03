@@ -42,14 +42,14 @@ export default function ShiftTemplates() {
       setTemplates(templatesResult.templates || []);
       setLocations(locResult.locations || []);
     } catch (err) {
-      setError(err.message || 'Failed to load templates');
+      setError(err.message || t('shiftTemplates.loadError', 'Failed to load templates'));
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Delete this template?')) return;
+    if (!confirm(t('shiftTemplates.confirmDelete', 'Delete this template?'))) return;
     try {
       await shiftsApi.deleteTemplate(id);
       loadData();
@@ -65,7 +65,7 @@ export default function ShiftTemplates() {
       setShowApplyModal(false);
       alert('Shifts generated successfully!');
     } catch (err) {
-      alert(err.message || 'Failed to generate shifts');
+      alert(err.message || t('shiftTemplates.generateError', 'Failed to generate shifts'));
     }
   };
 
@@ -158,7 +158,7 @@ export default function ShiftTemplates() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  {template.days_of_week?.map(d => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d]).join(', ') || 'All days'}
+                  {template.days_of_week?.map(d => [t('common.sunday', 'Sun'), t('common.monday', 'Mon'), t('schedule.tuesday', 'Tue'), t('schedule.wednesday', 'Wed'), t('schedule.thursday', 'Thu'), t('schedule.friday', 'Fri'), t('schedule.saturday', 'Sat')][d]).join(', ') || t('shiftTemplates.allDays', 'All days')}
                 </div>
                 {template.headcount > 1 && (
                   <div className="flex items-center gap-2">
@@ -203,14 +203,14 @@ export default function ShiftTemplates() {
 }
 
 // Preset rotation patterns
-const ROTATION_PATTERNS = [
-  { id: 'custom', name: 'Custom Days', description: 'Select specific days', icon: Calendar },
-  { id: 'mon-fri', name: 'Monday to Friday', description: 'Standard work week', days: [1, 2, 3, 4, 5], icon: Calendar },
-  { id: 'weekend', name: 'Weekend Only', description: 'Saturday and Sunday', days: [0, 6], icon: Calendar },
-  { id: '4on4off', name: '4 On / 4 Off', description: 'Continental shift pattern', rotationDays: 8, workDays: 4, icon: Clock },
-  { id: '2week', name: '2 Week Rotation', description: 'Alternating fortnight pattern', rotationDays: 14, workDays: 10, icon: Clock },
-  { id: '3on3off', name: '3 On / 3 Off', description: 'Common retail pattern', rotationDays: 6, workDays: 3, icon: Clock },
-  { id: '5on2off', name: '5 On / 2 Off', description: 'Standard with rotating days off', rotationDays: 7, workDays: 5, icon: Clock },
+const getRotationPatterns = (t) => [
+  { id: 'custom', name: t('shiftTemplates.patterns.customDays', 'Custom Days'), description: t('shiftTemplates.patterns.customDaysDesc', 'Select specific days'), icon: Calendar },
+  { id: 'mon-fri', name: t('shiftTemplates.patterns.monFri', 'Monday to Friday'), description: t('shiftTemplates.patterns.monFriDesc', 'Standard work week'), days: [1, 2, 3, 4, 5], icon: Calendar },
+  { id: 'weekend', name: t('shiftTemplates.patterns.weekend', 'Weekend Only'), description: t('shiftTemplates.patterns.weekendDesc', 'Saturday and Sunday'), days: [0, 6], icon: Calendar },
+  { id: '4on4off', name: t('shiftTemplates.patterns.4on4off', '4 On / 4 Off'), description: t('shiftTemplates.patterns.4on4offDesc', 'Continental shift pattern'), rotationDays: 8, workDays: 4, icon: Clock },
+  { id: '2week', name: t('shiftTemplates.patterns.2week', '2 Week Rotation'), description: t('shiftTemplates.patterns.2weekDesc', 'Alternating fortnight pattern'), rotationDays: 14, workDays: 10, icon: Clock },
+  { id: '3on3off', name: t('shiftTemplates.patterns.3on3off', '3 On / 3 Off'), description: t('shiftTemplates.patterns.3on3offDesc', 'Common retail pattern'), rotationDays: 6, workDays: 3, icon: Clock },
+  { id: '5on2off', name: t('shiftTemplates.patterns.5on2off', '5 On / 2 Off'), description: t('shiftTemplates.patterns.5on2offDesc', 'Standard with rotating days off'), rotationDays: 7, workDays: 5, icon: Clock },
 ];
 
 function TemplateModal({ template, locations, onClose, onSave, t }) {
@@ -249,7 +249,8 @@ function TemplateModal({ template, locations, onClose, onSave, t }) {
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const handlePatternChange = (patternId) => {
-    const pattern = ROTATION_PATTERNS.find(p => p.id === patternId);
+    const rotationPatterns = getRotationPatterns(t);
+    const pattern = rotationPatterns.find(p => p.id === patternId);
     if (pattern?.days) {
       setForm(f => ({ ...f, rotationPattern: patternId, daysOfWeek: pattern.days }));
     } else {
@@ -358,7 +359,7 @@ function TemplateModal({ template, locations, onClose, onSave, t }) {
           <div>
             <label className="label">{t('shiftTemplates.rotationPattern', 'Rotation Pattern')}</label>
             <div className="grid grid-cols-2 gap-2 mb-3">
-              {ROTATION_PATTERNS.slice(0, 4).map((pattern) => (
+              {getRotationPatterns(t).slice(0, 4).map((pattern) => (
                 <button
                   key={pattern.id}
                   type="button"
@@ -375,7 +376,7 @@ function TemplateModal({ template, locations, onClose, onSave, t }) {
               ))}
             </div>
             <div className="grid grid-cols-3 gap-2">
-              {ROTATION_PATTERNS.slice(4).map((pattern) => (
+              {getRotationPatterns(t).slice(4).map((pattern) => (
                 <button
                   key={pattern.id}
                   type="button"
@@ -563,7 +564,7 @@ function ApplyTemplateModal({ template, onClose, onApply, t }) {
           <div className="p-4 bg-slate-50 rounded-lg">
             <h3 className="font-medium text-slate-900">{template.name}</h3>
             <p className="text-sm text-slate-600">
-              {template.start_time} - {template.end_time} - {template.days_of_week?.map(d => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d]).join(', ')}
+              {template.start_time} - {template.end_time} - {template.days_of_week?.map(d => [t('common.sunday', 'Sun'), t('common.monday', 'Mon'), t('schedule.tuesday', 'Tue'), t('schedule.wednesday', 'Wed'), t('schedule.thursday', 'Thu'), t('schedule.friday', 'Fri'), t('schedule.saturday', 'Sat')][d]).join(', ')}
             </p>
           </div>
 

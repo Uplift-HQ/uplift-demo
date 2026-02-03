@@ -114,7 +114,19 @@
       "afternoon": "Nachmittag",
       "evening": "Abend",
       "night": "Nacht"
-    }
+    },
+    "viewDetails": "View Details",
+    "unknownEmployee": "Unknown Employee",
+    "saving": "Saving...",
+    "unknown": "Unknown",
+    "employee": "Mitarbeiter",
+    "employees": "Mitarbeiter",
+    "at": "bei",
+    "deny": "Ablehnen",
+    "failed": "Fehlgeschlagen",
+    "event": "Ereignis",
+    "processing": "Verarbeitung...",
+    "creating": "Erstellen..."
   },
   "auth": {
     "login": "Anmelden",
@@ -292,7 +304,27 @@
       "week": "Woche",
       "twoWeeks": "2 Wochen",
       "month": "Monat"
-    }
+    },
+    "loadError": "Failed to load schedule data",
+    "hideSidebar": "Hide sidebar",
+    "showSidebar": "Show sidebar",
+    "publish": {
+      "notification1": "Employees receive push notifications",
+      "notification2": "Shifts appear in employee apps",
+      "notification3": "Changes after this will trigger new notifications"
+    },
+    "today": "Heute",
+    "filters": "Filter",
+    "published": "Veröffentlicht",
+    "draft": "Entwurf",
+    "open": "Offen",
+    "scheduleOverview": "Planübersicht",
+    "thisWeeksStaffing": "Besetzung diese Woche",
+    "pendingTimeOff": "Ausstehende Urlaubsanträge",
+    "noPendingRequests": "Keine ausstehenden Anfragen",
+    "shiftSwaps": "Schichttausch",
+    "noPendingSwaps": "Kein ausstehender Tausch",
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
   },
   "timeTracking": {
     "title": "Zeiterfassung",
@@ -341,7 +373,8 @@
     "clockOut": "Ausstempeln",
     "startBreak": "Pause starten",
     "endBreak": "Pause beenden",
-    "totalHours": "Gesamtstunden"
+    "totalHours": "Gesamtstunden",
+    "loadError": "Failed to load time tracking data. Please try again."
   },
   "timeOff": {
     "title": "Urlaub",
@@ -381,7 +414,17 @@
     "noRequests": "Keine Anträge gefunden",
     "requestDetails": "Details des Urlaubsantrags",
     "noReason": "Kein Grund angegeben",
-    "submitted": "Eingereicht"
+    "submitted": "Eingereicht",
+    "loadError": "Failed to load time-off requests. Please try again.",
+    "types": {
+      "annualLeave": "Annual Leave",
+      "sickLeave": "Sick Leave",
+      "personal": "Personal",
+      "bereavement": "Bereavement",
+      "maternity": "Maternity",
+      "paternity": "Paternity",
+      "unpaid": "Unpaid Leave"
+    }
   },
   "feed": {
     "title": "Feed",
@@ -490,7 +533,8 @@
     "browseSkills": "Fähigkeiten durchsuchen",
     "searchSkills": "Fähigkeiten suchen...",
     "skillAdded": "Fähigkeit erfolgreich hinzugefügt",
-    "verificationRequested": "Verifizierung angefordert"
+    "verificationRequested": "Verifizierung angefordert",
+    "loadError": "Failed to load skills. Please try again."
   },
   "career": {
     "title": "Karriere",
@@ -564,7 +608,8 @@
     "skillRequestSubmitted": "Fähigkeitsanfrage gesendet! Ihr Vorgesetzter wird sie prüfen.",
     "expiringSoon": "Läuft bald ab",
     "expired": "Abgelaufen",
-    "expires": "Läuft ab am {{date}}"
+    "expires": "Läuft ab am {{date}}",
+    "loadError": "Failed to load career data"
   },
   "gamification": {
     "level": "Level {{level}}",
@@ -660,8 +705,23 @@
     "organization": "Organisation",
     "navigation": "Navigation",
     "employeeVisibility": "Mitarbeiter-Sichtbarkeit",
-    "users": "Benutzer",
-    "webhooks": "Webhooks",
+    "users": {
+      "never": "Never",
+      "accountUnlocked": "Account unlocked",
+      "accountDeactivated": "Account deactivated",
+      "accountReactivated": "Account reactivated",
+      "roleUpdated": "Role updated",
+      "passwordResetRequired": "Password reset required on next login",
+      "invitationResent": "Invitation resent",
+      "invitationCancelled": "Invitation cancelled",
+      "sessionsRevoked": "All sessions revoked"
+    },
+    "webhooks": {
+      "viewDetails": "View details",
+      "deleteWebhook": "Delete webhook",
+      "namePlaceholder": "e.g., Slack Notifications",
+      "secretPlaceholder": "Your webhook secret for signature verification"
+    },
     "sessions": "Sitzungen",
     "organizationSettings": "Organisationseinstellungen",
     "configurePreferences": "Konfigurieren Sie die Einstellungen Ihrer Organisation",
@@ -769,7 +829,46 @@
       "companyName": "Company name",
       "email": "Email address",
       "phone": "Phone number"
-    }
+    },
+    "timezones": {
+      "london": "London (GMT/BST)",
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "singapore": "Singapore (SGT)"
+    },
+    "branding": {
+      "primaryLogo": "Primary Logo",
+      "primaryLogoDesc": "Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB.",
+      "darkModeLogo": "Dark Mode Logo",
+      "darkModeLogoDesc": "Used on dark backgrounds. Should be light/white version of your logo.",
+      "favicon": "Favicon",
+      "faviconDesc": "Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO.",
+      "loginBackground": "Login Background",
+      "loginBackgroundDesc": "Background image for the login screen. Recommended 1920x1080.",
+      "customLogo": "Custom Logo",
+      "brandColors": "Brand Colors",
+      "loginScreen": "Login Screen",
+      "customFavicon": "Custom Favicon"
+    },
+    "organizationSaved": "Organization settings saved",
+    "brandingSaved": "Branding settings saved",
+    "invitationSent": "Invitation sent",
+    "inviteError": "Failed to send invitation",
+    "saveBranding": "Save Branding",
+    "companyNamePlaceholder": "Your Company Name",
+    "searchEmployeesPlaceholder": "Search employees...",
+    "passwordPlaceholder": "Your password",
+    "unknownDevice": "Unknown Device",
+    "currentSession": "Current",
+    "noActivityRecorded": "No activity recorded",
+    "noWebhooksConfigured": "No webhooks configured",
+    "addWebhookToIntegrate": "Add a webhook to integrate with external systems",
+    "noDeliveriesYet": "No deliveries yet",
+    "response": "Response",
+    "noPagesConfigured": "No pages configured",
+    "eventsSelected": "events selected",
+    "createWebhook": "Create Webhook",
+    "enterPasswordToConfirm": "Enter your password to confirm"
   },
   "tasks": {
     "title": "Aufgaben",
@@ -915,7 +1014,98 @@
     "selectDepartment": "Abteilung auswählen...",
     "selectRole": "Rolle auswählen...",
     "selectLocation": "Standort auswählen...",
-    "selectManager": "Manager auswählen (optional)..."
+    "selectManager": "Manager auswählen (optional)...",
+    "employeeDetailsTitle": "Mitarbeiterdaten",
+    "employeeDetailsDesc": "Geben Sie die Basisdaten des neuen Mitarbeiters ein.",
+    "firstName": "Vorname",
+    "firstNamePlaceholder": "z.B. Max",
+    "lastName": "Nachname",
+    "lastNamePlaceholder": "z.B. Müller",
+    "emailAddress": "E-Mail-Adresse",
+    "emailPlaceholder": "z.B. max.mueller@firma.de",
+    "emailExistsWarning": "Ein Mitarbeiter mit dieser E-Mail existiert bereits ({{name}}).",
+    "phoneNumber": "Telefonnummer",
+    "phonePlaceholder": "z.B. +49 170 1234567",
+    "employmentType": "Beschäftigungsart",
+    "startDate": "Startdatum",
+    "employeeId": "Mitarbeiter-ID",
+    "employeeIdPlaceholder": "Wird automatisch generiert wenn leer",
+    "employeeIdHelper": "Leer lassen für automatische Generierung.",
+    "roleDepartmentTitle": "Rolle & Abteilung",
+    "roleDepartmentDesc": "Weisen Sie den Mitarbeiter einer Abteilung, Rolle und einem Standort zu.",
+    "department": "Abteilung",
+    "role": "Rolle",
+    "location": "Standort",
+    "payRate": "Gehalt",
+    "perHour": "/ Stunde",
+    "perYear": "/ Jahr",
+    "reportingManager": "Vorgesetzter",
+    "skillsCertsTitle": "Fähigkeiten & Zertifikate",
+    "skillsCertsDesc": "Wählen Sie Fähigkeiten und fügen Sie Zertifikate des Mitarbeiters hinzu.",
+    "skills": "Fähigkeiten",
+    "noSkillsDefined": "Noch keine Fähigkeiten definiert. Fügen Sie zuerst Fähigkeiten auf der Fähigkeiten-Seite hinzu.",
+    "setProficiencyLevels": "Kompetenzstufen festlegen",
+    "certifications": "Zertifikate",
+    "addCertification": "Zertifikat hinzufügen",
+    "noCertificationsYet": "Noch keine Zertifikate hinzugefügt.",
+    "certificationNamePlaceholder": "Name des Zertifikats",
+    "issuingBodyPlaceholder": "Ausstellende Organisation",
+    "maxHoursPlaceholder": "z.B. 40",
+    "restrictionsNotes": "Einschränkungen / Notizen",
+    "notesPlaceholder": "Planungseinschränkungen, Präferenzen oder Notizen...",
+    "reviewInviteTitle": "Überprüfen & Einladung senden",
+    "reviewInviteDesc": "Überprüfen Sie die Daten und laden Sie den Mitarbeiter zur Uplift-App ein.",
+    "summary": "Zusammenfassung",
+    "summaryName": "Name",
+    "summaryEmail": "E-Mail",
+    "summaryPhone": "Telefon",
+    "summaryType": "Art",
+    "summaryStartDate": "Startdatum",
+    "summaryEmployeeId": "Mitarbeiter-ID",
+    "summarySkills": "Fähigkeiten",
+    "summaryAvailable": "Verfügbar",
+    "autoGenerated": "Automatisch generiert",
+    "sendInvitationEmail": "Einladungs-E-Mail senden",
+    "sendInvitationEmailDesc": "Der Mitarbeiter erhält eine E-Mail zum Download der Uplift-App und zur Kontoeinrichtung.",
+    "setTempPassword": "Temporäres Passwort festlegen",
+    "setTempPasswordDesc": "Legen Sie ein temporäres Passwort fest, das der Mitarbeiter für die erste Anmeldung verwenden kann.",
+    "tempPasswordPlaceholder": "Temporäres Passwort",
+    "successTitle": "Mitarbeiter erfolgreich angelegt!",
+    "successDesc": "wurde dem System hinzugefügt und eine Einladung wurde gesendet an",
+    "viewEmployees": "Mitarbeiter anzeigen",
+    "onboardAnother": "Weiteren anlegen",
+    "pageTitle": "Mitarbeiter-Onboarding",
+    "pageDesc": "Fügen Sie einen neuen Mitarbeiter hinzu und laden Sie ihn zur Uplift-App ein.",
+    "bulkImportLink": "Müssen Sie viele Mitarbeiter hinzufügen? Nutzen Sie den Massenimport",
+    "loadingData": "Organisationsdaten werden geladen...",
+    "stepOf": "Schritt {{current}} von {{total}}",
+    "creating": "Wird erstellt...",
+    "createEmployee": "Mitarbeiter anlegen",
+    "inviteEmailFailed": "Mitarbeiter erstellt, aber Einladungs-E-Mail fehlgeschlagen. Sie können sie von der Mitarbeiterseite erneut senden.",
+    "createFailed": "Mitarbeiter konnte nicht erstellt werden. Bitte erneut versuchen.",
+    "employmentTypes": {
+      "full-time": "Vollzeit",
+      "part-time": "Teilzeit",
+      "casual": "Aushilfe",
+      "contractor": "Auftragnehmer"
+    },
+    "proficiency": {
+      "beginner": "Anfänger",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Experte"
+    },
+    "errors": {
+      "firstNameRequired": "Vorname ist erforderlich",
+      "lastNameRequired": "Nachname ist erforderlich",
+      "emailRequired": "E-Mail ist erforderlich",
+      "invalidEmail": "Ungültige E-Mail-Adresse",
+      "employmentTypeRequired": "Beschäftigungsart ist erforderlich",
+      "startDateRequired": "Startdatum ist erforderlich",
+      "departmentRequired": "Abteilung ist erforderlich",
+      "roleRequired": "Rolle ist erforderlich",
+      "locationRequired": "Standort ist erforderlich",
+      "payRateRequired": "Gültiges Gehalt ist erforderlich"
+    }
   },
   "errors": {
     "networkError": "Netzwerkfehler. Überprüfen Sie Ihre Verbindung.",
@@ -1046,7 +1236,22 @@
     "growYourCareer": "Entwickeln Sie Ihre Karriere",
     "trackSkillsDesc": "Verfolgen Sie Ihre Fähigkeiten und entdecken Sie interne Möglichkeiten",
     "viewMyCareer": "Meine Karriere anzeigen",
-    "timeOffBalance": "Urlaubskonto"
+    "timeOffBalance": "Urlaubskonto",
+    "loadError": "Dashboard konnte nicht geladen werden",
+    "live": "LIVE",
+    "clickToSeeWho": "Klicken um zu sehen wer",
+    "affected": "betroffen",
+    "expiresIn": "Läuft ab in",
+    "overdueBy": "Überfällig seit",
+    "manageAll": "Alle verwalten",
+    "noRecentActivity": "Keine aktuelle Aktivität",
+    "noRecentRecognitions": "Keine aktuellen Anerkennungen",
+    "available": "Verfügbar",
+    "alerts": {
+      "expiring": "Zertifizierungen laufen in 30 Tagen ab",
+      "training": "Schulung in Bearbeitung oder ausstehend",
+      "document": "Probezeit-Bewertungen fällig"
+    }
   },
   "employees": {
     "searchPlaceholder": "Nach Name oder E-Mail suchen...",
@@ -1062,7 +1267,8 @@
     "terminationDetails": "Kündigungsdetails",
     "placeholder": {
       "searchEmployees": "Search employees..."
-    }
+    },
+    "loadError": "Failed to load employees"
   },
   "activity": {
     "title": "Aktivitätsprüfung",
@@ -1097,7 +1303,9 @@
     "reject": "Ablehnen",
     "placeholder": {
       "search": "Search activity..."
-    }
+    },
+    "loadError": "Failed to load activity data",
+    "rejectionReasonPlaceholder": "Enter reason for rejection..."
   },
   "notificationSettings": {
     "title": "Benachrichtigungseinstellungen",
@@ -1153,7 +1361,11 @@
     "chooseSkill": "Wählen Sie eine Fähigkeit...",
     "proficiencyLevel": "Kompetenzstufe",
     "basic": "Grundlegend",
-    "adding": "Wird hinzugefügt..."
+    "adding": "Wird hinzugefügt...",
+    "loadError": "Failed to load employee",
+    "verifySkill": "Verify skill",
+    "removeSkill": "Remove skill",
+    "confirmRemoveSkill": "Remove this skill from the employee?"
   },
   "reports": {
     "title": "Berichte",
@@ -1228,8 +1440,33 @@
       "totalShifts": "Gesamtschichten",
       "filledShifts": "Besetzte Schichten",
       "openShifts": "Offene Schichten",
-      "fillRate": "Besetzungsrate"
-    }
+      "fillRate": "Besetzungsrate",
+      "employee": "Employee",
+      "period": "Period",
+      "regularCost": "Regular Cost",
+      "overtimeCost": "Overtime Cost",
+      "totalCost": "Total Cost"
+    },
+    "loadError": "Failed to load report data",
+    "saveError": "Failed to save report",
+    "namePlaceholder": "e.g., Weekly Overtime Analysis",
+    "groupByOptions": {
+      "employee": "Employee",
+      "location": "Location",
+      "department": "Department",
+      "day": "Day",
+      "week": "Week"
+    },
+    "summary": {
+      "title": "Report Summary",
+      "name": "Name",
+      "type": "Type",
+      "columns": "Columns",
+      "groupBy": "Group by"
+    },
+    "untitledReport": "Untitled Report",
+    "saveReport": "Save Report",
+    "selectColumns": "Select Columns"
   },
   "shiftTemplates": {
     "title": "Schichtvorlagen",
@@ -1260,7 +1497,27 @@
     "developmentHint": "KI-Füllung priorisiert Mitarbeiter, die auf Beförderungen hinarbeiten",
     "willCreate": "Es werden ungefähr erstellt",
     "shiftsLabel": "Schichten",
-    "generating": "Wird generiert..."
+    "generating": "Wird generiert...",
+    "loadError": "Failed to load templates",
+    "confirmDelete": "Delete this template?",
+    "generateError": "Failed to generate shifts",
+    "patterns": {
+      "customDays": "Custom Days",
+      "customDaysDesc": "Select specific days",
+      "monFri": "Monday to Friday",
+      "monFriDesc": "Standard work week",
+      "weekend": "Weekend Only",
+      "weekendDesc": "Saturday and Sunday",
+      "4on4off": "4 On / 4 Off",
+      "4on4offDesc": "Continental shift pattern",
+      "2week": "2 Week Rotation",
+      "2weekDesc": "Alternating fortnight pattern",
+      "3on3off": "3 On / 3 Off",
+      "3on3offDesc": "Common retail pattern",
+      "5on2off": "5 On / 2 Off",
+      "5on2offDesc": "Standard with rotating days off"
+    },
+    "allDays": "All days"
   },
   "legal": {
     "lastUpdated": "Zuletzt aktualisiert",
@@ -1428,6 +1685,16 @@
       "locationsDesc": "Standorte importieren",
       "skills": "Fähigkeiten",
       "skillsDesc": "Fähigkeiten importieren"
+    },
+    "types": {
+      "employees": "Employees",
+      "employeesDesc": "Import employee profiles",
+      "shifts": "Shifts",
+      "shiftsDesc": "Import shift schedules",
+      "locations": "Locations",
+      "locationsDesc": "Import locations",
+      "skills": "Skills",
+      "skillsDesc": "Import skills"
     }
   },
   "jobs": {
@@ -1457,7 +1724,8 @@
     "enterDescription": "Stellenbeschreibung eingeben",
     "postJob": "Stelle veröffentlichen",
     "skillMatch": "Fähigkeitsübereinstimmung",
-    "noApplicants": "Noch keine Bewerber"
+    "noApplicants": "Noch keine Bewerber",
+    "loadError": "Failed to load job postings. Please try again."
   },
   "integrationHub": {
     "title": "Integrations-Hub",
@@ -1612,7 +1880,8 @@
       "createdSuccess": "Webhook erfolgreich erstellt!",
       "testSent": "Test-Nutzlast gesendet an",
       "testStatus": "Status",
-      "deleteConfirm": "Diesen Webhook löschen?"
+      "deleteConfirm": "Diesen Webhook löschen?",
+      "skillExpired": "Skill Expired"
     },
     "marketplace": {
       "searchPlaceholder": "Integrationen suchen...",
@@ -1837,7 +2106,12 @@
       "locations": "Standorte",
       "departments": "Abteilungen",
       "roles": "Rollen und Berechtigungen",
-      "review": "Überprüfung und Start"
+      "review": "Überprüfung und Start",
+      "companyInfo": "Company Info",
+      "branding": "Branding & Timezone",
+      "inviteAdmin": "Invite Admin",
+      "addEmployees": "Add Employees",
+      "done": "Done"
     },
     "orgDetails": {
       "companyName": "Firmenname",
@@ -1920,19 +2194,162 @@
     "selectTimezone": "Select timezone...",
     "selectSize": "Select company size...",
     "selectCountry": "Select country...",
-    "selectCurrency": "Select currency..."
+    "selectCurrency": "Select currency...",
+    "industries": {
+      "retail": "Retail",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "construction": "Construction",
+      "logistics": "Logistics",
+      "foodBeverage": "Food & Beverage",
+      "education": "Education",
+      "technology": "Technology",
+      "finance": "Finance",
+      "government": "Government",
+      "nonprofit": "Non-profit",
+      "other": "Other"
+    }
   },
   "locations": {
     "placeholder": {
       "search": "Search locations...",
       "name": "Location name",
       "address": "Address"
-    }
+    },
+    "loadError": "Failed to load locations. Please try again.",
+    "codePlaceholder": "LON-01",
+    "noEmployeesAssigned": "No employees assigned to this location"
   },
   "integrations": {
     "placeholder": {
       "search": "Search integrations..."
-    }
+    },
+    "scopes": {
+      "employeesRead": "View employee information",
+      "employeesWrite": "Create and update employees",
+      "schedulesRead": "View schedules and shifts",
+      "schedulesWrite": "Create and modify schedules",
+      "timeRead": "View time entries",
+      "timeWrite": "Create and modify time entries",
+      "skillsRead": "View skills and certifications",
+      "skillsWrite": "Manage skills and verifications",
+      "locationsRead": "View location information",
+      "locationsWrite": "Manage locations",
+      "reportsRead": "Access reports data",
+      "webhooksManage": "Configure webhooks",
+      "admin": "Full administrative access"
+    },
+    "rateLimits": {
+      "basic": "Basic",
+      "standard": "Standard",
+      "premium": "Premium"
+    },
+    "copied": "Copied!",
+    "copy": "Copy",
+    "loadError": "Failed to load integrations",
+    "apiKeyPlaceholder": "e.g., Production API Key",
+    "categories": {
+      "hris": "HRIS",
+      "hrisDesc": "Human Resource Information Systems",
+      "payroll": "Payroll",
+      "payrollDesc": "Payroll & compensation",
+      "comms": "Communications",
+      "commsDesc": "Team messaging & notifications",
+      "identity": "Identity & SSO",
+      "identityDesc": "Single sign-on & provisioning",
+      "time": "Time & Attendance",
+      "timeDesc": "Time tracking systems",
+      "pos": "Point of Sale",
+      "posDesc": "POS & retail systems",
+      "scheduling": "Migration",
+      "schedulingDesc": "Import from other tools",
+      "learning": "Learning",
+      "learningDesc": "Training & certifications",
+      "analytics": "Analytics",
+      "analyticsDesc": "BI & reporting tools",
+      "custom": "Custom",
+      "customDesc": "API & automation"
+    },
+    "providers": {
+      "hibobDesc": "Modern HR platform for mid-size businesses",
+      "workdayDesc": "Enterprise HCM and finance platform",
+      "sapSuccessfactorsDesc": "Enterprise talent management",
+      "bamboohrDesc": "HR software for SMBs",
+      "personioDesc": "European HR platform",
+      "sageHrDesc": "UK HR & people management",
+      "adpDesc": "Enterprise payroll & HR services",
+      "paychexDesc": "Payroll & HR solutions",
+      "gustoDesc": "Modern payroll for small business",
+      "xeroDesc": "Cloud accounting with payroll",
+      "sagePayrollDesc": "UK payroll software",
+      "slackDesc": "Team collaboration & notifications",
+      "microsoftTeamsDesc": "Microsoft 365 collaboration",
+      "whatsappBusinessDesc": "Direct worker messaging",
+      "googleWorkspaceDesc": "Google SSO & directory sync",
+      "microsoftEntraDesc": "Azure AD SSO & SCIM",
+      "oktaDesc": "Enterprise identity management",
+      "squareDesc": "POS & team management",
+      "lightspeedDesc": "Retail & hospitality POS",
+      "deputyDesc": "Import from Deputy",
+      "connecteamDesc": "Import from Connecteam",
+      "kronosDesc": "Enterprise workforce management",
+      "linkedinLearningDesc": "Training completion sync",
+      "powerBiDesc": "Export to Power BI",
+      "lookerDesc": "BI data export",
+      "zapierDesc": "5,000+ app connections",
+      "customApiDesc": "Build your own integration"
+    },
+    "mapping": {
+      "customField1": "customField1",
+      "customField2": "customField2",
+      "notes": "notes"
+    },
+    "api": {
+      "authNone": "No Authentication",
+      "authApiKey": "API Key",
+      "authBearer": "Bearer Token",
+      "authBasic": "Basic Auth",
+      "authOAuth2": "OAuth 2.0",
+      "triggerManual": "Manual",
+      "triggerManualDesc": "Run on demand",
+      "triggerScheduled": "Scheduled",
+      "triggerScheduledDesc": "Run on a schedule",
+      "triggerEvent": "Event-based",
+      "triggerEventDesc": "Triggered by Uplift events",
+      "triggerWebhook": "Incoming Webhook",
+      "triggerWebhookDesc": "Receive data from external systems",
+      "scopePlaceholder": "read,write",
+      "saveFirstBeforeTesting": "Save the integration first before testing",
+      "testRequestFailed": "Test request failed"
+    },
+    "events": {
+      "employeeCreated": "Employee Created",
+      "employeeUpdated": "Employee Updated",
+      "employeeDeactivated": "Employee Deactivated",
+      "shiftCreated": "Shift Created",
+      "shiftUpdated": "Shift Updated",
+      "shiftDeleted": "Shift Deleted",
+      "shiftClaimed": "Shift Claimed",
+      "clockIn": "Clock In",
+      "clockOut": "Clock Out",
+      "timeEntryApproved": "Time Entry Approved",
+      "timeOffRequested": "Time Off Requested",
+      "timeOffApproved": "Time Off Approved",
+      "timeOffRejected": "Time Off Rejected",
+      "skillVerified": "Skill Verified",
+      "jobApplication": "Job Application",
+      "categoryEmployees": "Employees",
+      "categoryScheduling": "Scheduling",
+      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeOff": "Time Off",
+      "categorySkills": "Skills",
+      "categoryCareer": "Career"
+    },
+    "noIntegrationsFound": "No integrations found",
+    "noIntegrationsAvailable": "No integrations are available yet.",
+    "noApiKeys": "No API keys",
+    "createApiKeyToStart": "Create an API key to get started with the API."
   },
   "forecast": {
     "demoData": "Demodaten"

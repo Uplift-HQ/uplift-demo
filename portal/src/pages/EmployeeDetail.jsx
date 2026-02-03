@@ -41,7 +41,7 @@ export default function EmployeeDetail() {
       setSkills(skillsResult?.skills || []);
       setAllSkills(allSkillsResult?.skills || []);
     } catch (err) {
-      setError(err.message || 'Failed to load employee');
+      setError(err.message || t('employeeDetail.loadError', 'Failed to load employee'));
     } finally {
       setLoading(false);
     }
@@ -79,7 +79,7 @@ export default function EmployeeDetail() {
   };
 
   const handleRemoveSkill = async (skillId) => {
-    if (!confirm('Remove this skill from the employee?')) return;
+    if (!confirm(t('employeeDetail.confirmRemoveSkill', 'Remove this skill from the employee?'))) return;
     try {
       await api.delete(`/employees/${id}/skills/${skillId}`);
       loadEmployee();
@@ -251,7 +251,7 @@ export default function EmployeeDetail() {
                             <button
                               onClick={() => handleVerifySkill(skill.skill_id, true)}
                               className="p-1.5 text-green-600 hover:bg-green-50 rounded"
-                              title="Verify skill"
+                              title={t('employeeDetail.verifySkill', 'Verify skill')}
                             >
                               <Shield className="w-4 h-4" />
                             </button>
@@ -259,7 +259,7 @@ export default function EmployeeDetail() {
                           <button
                             onClick={() => handleRemoveSkill(skill.skill_id)}
                             className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded"
-                            title="Remove skill"
+                            title={t('employeeDetail.removeSkill', 'Remove skill')}
                           >
                             <Trash className="w-4 h-4" />
                           </button>

@@ -51,7 +51,7 @@ export default function Integrations() {
       setApiKeys(keyResult?.apiKeys || keyResult || []);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load integrations:', err);
-      setError(err.message || 'Failed to load integrations');
+      setError(err.message || t('integrations.loadError', 'Failed to load integrations'));
       setIntegrations([]);
       setApiKeys([]);
     } finally {
@@ -287,8 +287,8 @@ export default function Integrations() {
           {filteredIntegrations.length === 0 ? (
             <div className="text-center py-12">
               <Database className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900">No integrations found</h3>
-              <p className="text-gray-500 mt-1">No integrations are available yet.</p>
+              <h3 className="text-lg font-medium text-gray-900">{t('integrations.noIntegrationsFound', 'No integrations found')}</h3>
+              <p className="text-gray-500 mt-1">{t('integrations.noIntegrationsAvailable', 'No integrations are available yet.')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -483,8 +483,8 @@ export default function Integrations() {
           {apiKeys.length === 0 ? (
             <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
               <Key className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900">No API keys</h3>
-              <p className="text-gray-500 mt-1">Create an API key to get started with the API.</p>
+              <h3 className="text-lg font-medium text-gray-900">{t('integrations.noApiKeys', 'No API keys')}</h3>
+              <p className="text-gray-500 mt-1">{t('integrations.createApiKeyToStart', 'Create an API key to get started with the API.')}</p>
             </div>
           ) : (
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -596,7 +596,7 @@ function CreateApiKeyModal({ onClose, onCreate, t }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              placeholder="e.g., Production API Key"
+              placeholder={t('integrations.apiKeyPlaceholder', 'e.g., Production API Key')}
               required
             />
           </div>
@@ -605,7 +605,7 @@ function CreateApiKeyModal({ onClose, onCreate, t }) {
               {t('common.cancel', 'Cancel')}
             </button>
             <button type="submit" disabled={loading} className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50">
-              {loading ? 'Creating...' : t('common.create', 'Create')}
+              {loading ? t('common.creating', 'Creating...') : t('common.create', 'Create')}
             </button>
           </div>
         </form>

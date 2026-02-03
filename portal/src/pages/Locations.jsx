@@ -37,7 +37,7 @@ export default function Locations() {
       setLocations(result?.locations || []);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load locations:', err);
-      setError('Failed to load locations. Please try again.');
+      setError(t('locations.loadError', 'Failed to load locations. Please try again.'));
     } finally {
       setLoading(false);
     }
@@ -259,7 +259,7 @@ function LocationDetailModal({ location, onClose, onEdit, t }) {
             ) : (
               <div className="text-center py-8 bg-slate-50 rounded-lg">
                 <Users className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                <p className="text-sm text-slate-500">No employees assigned to this location</p>
+                <p className="text-sm text-slate-500">{t('locations.noEmployeesAssigned', 'No employees assigned to this location')}</p>
               </div>
             )}
           </div>
@@ -333,7 +333,7 @@ function LocationModal({ location, onClose, onSave, t }) {
                 value={formData.code}
                 onChange={(e) => setFormData({ ...formData, code: e.target.value })}
                 className="input"
-                placeholder="LON-01"
+                placeholder={t('locations.codePlaceholder', 'LON-01')}
               />
             </div>
 

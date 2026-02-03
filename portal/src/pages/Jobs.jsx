@@ -28,7 +28,7 @@ export default function Jobs() {
       setJobs(data.jobs || []);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load jobs:', err);
-      setError('Failed to load job postings. Please try again.');
+      setError(t('jobs.loadError', 'Failed to load job postings. Please try again.'));
     } finally {
       setLoading(false);
     }

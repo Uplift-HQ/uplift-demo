@@ -60,7 +60,7 @@ export default function Dashboard() {
       const result = await dashboardApi.get();
       setData(result);
     } catch (err) {
-      setError(err.message || 'Failed to load dashboard');
+      setError(err.message || t('dashboard.loadError', 'Failed to load dashboard'));
     } finally {
       setLoading(false);
     }
@@ -96,9 +96,9 @@ export default function Dashboard() {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-center">
         <AlertCircle className="w-10 h-10 text-red-400 mb-3" />
-        <p className="text-slate-700 font-medium mb-1">Failed to load dashboard</p>
+        <p className="text-slate-700 font-medium mb-1">{t('dashboard.loadError', 'Failed to load dashboard')}</p>
         <p className="text-slate-500 text-sm mb-4">{error}</p>
-        <button onClick={loadDashboard} className="btn btn-primary">Retry</button>
+        <button onClick={loadDashboard} className="btn btn-primary">{t('common.retry', 'Retry')}</button>
       </div>
     );
   }
@@ -145,7 +145,7 @@ export default function Dashboard() {
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                 <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping" />
               </div>
-              <span className="text-green-400 font-semibold text-sm">LIVE</span>
+              <span className="text-green-400 font-semibold text-sm">{t('dashboard.live', 'LIVE')}</span>
             </div>
             <div className="flex items-center gap-8">
               <Link to="/time-tracking?status=working" className="hover:opacity-80 transition-opacity">
@@ -196,12 +196,17 @@ export default function Dashboard() {
                     {alert.type === 'document' && <AlertTriangle className="w-5 h-5" />}
                   </div>
                   <div className="flex-1">
-                    <p className="font-medium text-slate-900 text-sm">{alert.title}</p>
+                    <p className="font-medium text-slate-900 text-sm">{
+                      alert.type === 'expiring' ? t('dashboard.alerts.expiring', 'Certifications expiring within 30 days') :
+                      alert.type === 'training' ? t('dashboard.alerts.training', 'Training in progress or pending') :
+                      alert.type === 'document' ? t('dashboard.alerts.document', 'Probation reviews due') :
+                      alert.title
+                    }</p>
                     <p className={`text-xs ${
                       alert.severity === 'error' ? 'text-red-600' :
                       alert.severity === 'warning' ? 'text-amber-600' :
                       'text-blue-600'
-                    }`}>{alert.employees?.length || 0} {(alert.employees?.length || 0) === 1 ? 'employee' : 'employees'} - Click to see who</p>
+                    }`}>{alert.employees?.length || 0} {(alert.employees?.length || 0) === 1 ? t('common.employee', 'employee') : t('common.employees', 'employees')} - {t('dashboard.clickToSeeWho', 'Click to see who')}</p>
                   </div>
                   <ChevronRight className="w-5 h-5 text-slate-400" />
                 </button>
@@ -230,8 +235,13 @@ export default function Dashboard() {
                         {selectedAlert.type === 'document' && <AlertTriangle className="w-5 h-5" />}
                       </div>
                       <div>
-                        <h2 className="font-semibold text-slate-900">{selectedAlert.title}</h2>
-                        <p className="text-sm text-slate-600">{selectedAlert.employees?.length || 0} {(selectedAlert.employees?.length || 0) === 1 ? 'employee' : 'employees'} affected</p>
+                        <h2 className="font-semibold text-slate-900">{
+                          selectedAlert.type === 'expiring' ? t('dashboard.alerts.expiring', 'Certifications expiring within 30 days') :
+                          selectedAlert.type === 'training' ? t('dashboard.alerts.training', 'Training in progress or pending') :
+                          selectedAlert.type === 'document' ? t('dashboard.alerts.document', 'Probation reviews due') :
+                          selectedAlert.title
+                        }</h2>
+                        <p className="text-sm text-slate-600">{selectedAlert.employees?.length || 0} {(selectedAlert.employees?.length || 0) === 1 ? t('common.employee', 'employee') : t('common.employees', 'employees')} {t('dashboard.affected', 'affected')}</p>
                       </div>
                     </div>
                     <button
@@ -259,8 +269,8 @@ export default function Dashboard() {
                             <p className="font-medium text-slate-900">{emp.name}</p>
                             <p className="text-sm text-slate-500">
                               {emp.skill || emp.document}
-                              {emp.expiresIn && <span className="text-amber-600"> - Expires in {emp.expiresIn}</span>}
-                              {emp.overdueBy && <span className="text-red-600"> - Overdue by {emp.overdueBy}</span>}
+                              {emp.expiresIn && <span className="text-amber-600"> - {t('dashboard.expiresIn', 'Expires in')} {emp.expiresIn}</span>}
+                              {emp.overdueBy && <span className="text-red-600"> - {t('dashboard.overdueBy', 'Overdue by')} {emp.overdueBy}</span>}
                               {emp.reason && <span className="text-blue-600"> - {emp.reason}</span>}
                             </p>
                           </div>
@@ -275,7 +285,7 @@ export default function Dashboard() {
                     onClick={() => setSelectedAlert(null)}
                     className="btn btn-secondary"
                   >
-                    Close
+                    {t('common.close', 'Close')}
                   </button>
                   <Link
                     to={
@@ -286,7 +296,7 @@ export default function Dashboard() {
                     onClick={() => setSelectedAlert(null)}
                     className="btn btn-primary"
                   >
-                    Manage All
+                    {t('dashboard.manageAll', 'Manage All')}
                   </Link>
                 </div>
               </div>
@@ -356,7 +366,7 @@ export default function Dashboard() {
                           <p className="text-sm text-slate-900">
                             <span className="font-medium">{activity.user}</span>
                             {' '}{activity.action}
-                            {activity.location && <span className="text-slate-500"> at {activity.location}</span>}
+                            {activity.location && <span className="text-slate-500"> {t('common.at', 'at')} {activity.location}</span>}
                           </p>
                           {activity.message && (
                             <p className="text-sm text-slate-600 mt-0.5">"{activity.message}"</p>
@@ -367,7 +377,7 @@ export default function Dashboard() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-center text-slate-500 py-8">No recent activity</p>
+                  <p className="text-center text-slate-500 py-8">{t('dashboard.noRecentActivity', 'No recent activity')}</p>
                 )}
               </div>
             </div>
@@ -445,7 +455,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                 )) : (
-                  <p className="text-center text-slate-500 py-6">No recent recognitions</p>
+                  <p className="text-center text-slate-500 py-6">{t('dashboard.noRecentRecognitions', 'No recent recognitions')}</p>
                 )}
               </div>
             </div>
@@ -776,7 +786,7 @@ export default function Dashboard() {
                       <p className="text-2xl font-bold text-slate-900">
                         {(balance.entitlement || 0) + (balance.carried_over || 0) - (balance.used || 0) - (balance.pending || 0)}
                       </p>
-                      <p className="text-sm text-slate-500">{balance.name} Available</p>
+                      <p className="text-sm text-slate-500">{balance.name} {t('dashboard.available', 'Available')}</p>
                     </div>
                   ))}
                 </div>

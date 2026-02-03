@@ -52,7 +52,22 @@
     "growYourCareer": "发展您的职业",
     "trackSkillsDesc": "跟踪您的技能并发现内部机会",
     "viewMyCareer": "查看我的职业",
-    "timeOffBalance": "休假余额"
+    "timeOffBalance": "休假余额",
+    "loadError": "加载仪表板失败",
+    "live": "实时",
+    "clickToSeeWho": "点击查看",
+    "affected": "受影响",
+    "expiresIn": "将在...到期",
+    "overdueBy": "逾期",
+    "manageAll": "全部管理",
+    "noRecentActivity": "无近期活动",
+    "noRecentRecognitions": "无近期表彰",
+    "available": "可用",
+    "alerts": {
+      "expiring": "30天内到期的证书",
+      "training": "进行中或待处理的培训",
+      "document": "试用期评估到期"
+    }
   },
   "notificationSettings": {
     "title": "通知设置",
@@ -108,7 +123,11 @@
     "chooseSkill": "选择一项技能...",
     "proficiencyLevel": "熟练程度",
     "basic": "基础",
-    "adding": "添加中..."
+    "adding": "添加中...",
+    "loadError": "Failed to load employee",
+    "verifySkill": "Verify skill",
+    "removeSkill": "Remove skill",
+    "confirmRemoveSkill": "Remove this skill from the employee?"
   },
   "reports": {
     "title": "报表",
@@ -183,8 +202,33 @@
       "totalShifts": "总班次",
       "filledShifts": "已填充班次",
       "openShifts": "空缺班次",
-      "fillRate": "填充率"
-    }
+      "fillRate": "填充率",
+      "employee": "Employee",
+      "period": "Period",
+      "regularCost": "Regular Cost",
+      "overtimeCost": "Overtime Cost",
+      "totalCost": "Total Cost"
+    },
+    "loadError": "Failed to load report data",
+    "saveError": "Failed to save report",
+    "namePlaceholder": "e.g., Weekly Overtime Analysis",
+    "groupByOptions": {
+      "employee": "Employee",
+      "location": "Location",
+      "department": "Department",
+      "day": "Day",
+      "week": "Week"
+    },
+    "summary": {
+      "title": "Report Summary",
+      "name": "Name",
+      "type": "Type",
+      "columns": "Columns",
+      "groupBy": "Group by"
+    },
+    "untitledReport": "Untitled Report",
+    "saveReport": "Save Report",
+    "selectColumns": "Select Columns"
   },
   "shiftTemplates": {
     "title": "班次模板",
@@ -215,7 +259,27 @@
     "developmentHint": "AI填充将优先安排正在晋升的员工",
     "willCreate": "这将创建大约",
     "shiftsLabel": "个班次",
-    "generating": "生成中..."
+    "generating": "生成中...",
+    "loadError": "Failed to load templates",
+    "confirmDelete": "Delete this template?",
+    "generateError": "Failed to generate shifts",
+    "patterns": {
+      "customDays": "Custom Days",
+      "customDaysDesc": "Select specific days",
+      "monFri": "Monday to Friday",
+      "monFriDesc": "Standard work week",
+      "weekend": "Weekend Only",
+      "weekendDesc": "Saturday and Sunday",
+      "4on4off": "4 On / 4 Off",
+      "4on4offDesc": "Continental shift pattern",
+      "2week": "2 Week Rotation",
+      "2weekDesc": "Alternating fortnight pattern",
+      "3on3off": "3 On / 3 Off",
+      "3on3offDesc": "Common retail pattern",
+      "5on2off": "5 On / 2 Off",
+      "5on2offDesc": "Standard with rotating days off"
+    },
+    "allDays": "All days"
   },
   "legal": {
     "lastUpdated": "最后更新",
@@ -444,7 +508,19 @@
       "afternoon": "下午班",
       "evening": "晚班",
       "night": "夜班"
-    }
+    },
+    "viewDetails": "View Details",
+    "unknownEmployee": "Unknown Employee",
+    "saving": "Saving...",
+    "unknown": "Unknown",
+    "employee": "员工",
+    "employees": "员工",
+    "at": "在",
+    "deny": "拒绝",
+    "failed": "失败",
+    "event": "事件",
+    "processing": "处理中...",
+    "creating": "创建中..."
   },
   "auth": {
     "login": "登录",
@@ -622,7 +698,27 @@
       "week": "周",
       "twoWeeks": "两周",
       "month": "月"
-    }
+    },
+    "loadError": "Failed to load schedule data",
+    "hideSidebar": "Hide sidebar",
+    "showSidebar": "Show sidebar",
+    "publish": {
+      "notification1": "Employees receive push notifications",
+      "notification2": "Shifts appear in employee apps",
+      "notification3": "Changes after this will trigger new notifications"
+    },
+    "today": "今天",
+    "filters": "筛选",
+    "published": "已发布",
+    "draft": "草稿",
+    "open": "开放",
+    "scheduleOverview": "排班概览",
+    "thisWeeksStaffing": "本周人员配置",
+    "pendingTimeOff": "待审批休假",
+    "noPendingRequests": "无待处理请求",
+    "shiftSwaps": "换班",
+    "noPendingSwaps": "无待处理换班",
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
   },
   "timeTracking": {
     "title": "考勤",
@@ -671,7 +767,8 @@
     "clockOut": "打卡下班",
     "startBreak": "开始休息",
     "endBreak": "结束休息",
-    "totalHours": "总时数"
+    "totalHours": "总时数",
+    "loadError": "Failed to load time tracking data. Please try again."
   },
   "timeOff": {
     "title": "休假",
@@ -711,7 +808,17 @@
     "noRequests": "未找到请求",
     "requestDetails": "请假详情",
     "noReason": "未提供原因",
-    "submitted": "已提交"
+    "submitted": "已提交",
+    "loadError": "Failed to load time-off requests. Please try again.",
+    "types": {
+      "annualLeave": "Annual Leave",
+      "sickLeave": "Sick Leave",
+      "personal": "Personal",
+      "bereavement": "Bereavement",
+      "maternity": "Maternity",
+      "paternity": "Paternity",
+      "unpaid": "Unpaid Leave"
+    }
   },
   "feed": {
     "title": "动态",
@@ -820,7 +927,8 @@
     "browseSkills": "浏览技能",
     "searchSkills": "搜索技能...",
     "skillAdded": "技能添加成功",
-    "verificationRequested": "已请求验证"
+    "verificationRequested": "已请求验证",
+    "loadError": "Failed to load skills. Please try again."
   },
   "career": {
     "title": "职业",
@@ -894,7 +1002,8 @@
     "skillRequestSubmitted": "技能申请已提交！您的经理将进行审核。",
     "expiringSoon": "即将过期",
     "expired": "已过期",
-    "expires": "{{date}} 过期"
+    "expires": "{{date}} 过期",
+    "loadError": "Failed to load career data"
   },
   "gamification": {
     "level": "等级 {{level}}",
@@ -992,8 +1101,23 @@
     "organization": "组织",
     "navigation": "导航",
     "employeeVisibility": "员工可见性",
-    "users": "用户",
-    "webhooks": "Webhook",
+    "users": {
+      "never": "Never",
+      "accountUnlocked": "Account unlocked",
+      "accountDeactivated": "Account deactivated",
+      "accountReactivated": "Account reactivated",
+      "roleUpdated": "Role updated",
+      "passwordResetRequired": "Password reset required on next login",
+      "invitationResent": "Invitation resent",
+      "invitationCancelled": "Invitation cancelled",
+      "sessionsRevoked": "All sessions revoked"
+    },
+    "webhooks": {
+      "viewDetails": "View details",
+      "deleteWebhook": "Delete webhook",
+      "namePlaceholder": "e.g., Slack Notifications",
+      "secretPlaceholder": "Your webhook secret for signature verification"
+    },
     "sessions": "会话",
     "organizationSettings": "组织设置",
     "configurePreferences": "配置组织偏好设置",
@@ -1099,7 +1223,46 @@
       "companyName": "Company name",
       "email": "Email address",
       "phone": "Phone number"
-    }
+    },
+    "timezones": {
+      "london": "London (GMT/BST)",
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "singapore": "Singapore (SGT)"
+    },
+    "branding": {
+      "primaryLogo": "Primary Logo",
+      "primaryLogoDesc": "Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB.",
+      "darkModeLogo": "Dark Mode Logo",
+      "darkModeLogoDesc": "Used on dark backgrounds. Should be light/white version of your logo.",
+      "favicon": "Favicon",
+      "faviconDesc": "Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO.",
+      "loginBackground": "Login Background",
+      "loginBackgroundDesc": "Background image for the login screen. Recommended 1920x1080.",
+      "customLogo": "Custom Logo",
+      "brandColors": "Brand Colors",
+      "loginScreen": "Login Screen",
+      "customFavicon": "Custom Favicon"
+    },
+    "organizationSaved": "Organization settings saved",
+    "brandingSaved": "Branding settings saved",
+    "invitationSent": "Invitation sent",
+    "inviteError": "Failed to send invitation",
+    "saveBranding": "Save Branding",
+    "companyNamePlaceholder": "Your Company Name",
+    "searchEmployeesPlaceholder": "Search employees...",
+    "passwordPlaceholder": "Your password",
+    "unknownDevice": "Unknown Device",
+    "currentSession": "Current",
+    "noActivityRecorded": "No activity recorded",
+    "noWebhooksConfigured": "No webhooks configured",
+    "addWebhookToIntegrate": "Add a webhook to integrate with external systems",
+    "noDeliveriesYet": "No deliveries yet",
+    "response": "Response",
+    "noPagesConfigured": "No pages configured",
+    "eventsSelected": "events selected",
+    "createWebhook": "Create Webhook",
+    "enterPasswordToConfirm": "Enter your password to confirm"
   },
   "tasks": {
     "title": "任务",
@@ -1245,7 +1408,98 @@
     "selectDepartment": "选择部门...",
     "selectRole": "选择职位...",
     "selectLocation": "选择地点...",
-    "selectManager": "选择经理（可选）..."
+    "selectManager": "选择经理（可选）...",
+    "employeeDetailsTitle": "员工详情",
+    "employeeDetailsDesc": "输入新员工的基本信息。",
+    "firstName": "名",
+    "firstNamePlaceholder": "例如 明",
+    "lastName": "姓",
+    "lastNamePlaceholder": "例如 李",
+    "emailAddress": "电子邮箱",
+    "emailPlaceholder": "例如 ming.li@company.cn",
+    "emailExistsWarning": "已存在使用此邮箱的员工（{{name}}）。",
+    "phoneNumber": "电话号码",
+    "phonePlaceholder": "例如 +86 138 1234 5678",
+    "employmentType": "雇佣类型",
+    "startDate": "入职日期",
+    "employeeId": "员工ID",
+    "employeeIdPlaceholder": "留空则自动生成",
+    "employeeIdHelper": "留空以自动生成。",
+    "roleDepartmentTitle": "职位与部门",
+    "roleDepartmentDesc": "将员工分配到部门、职位和工作地点。",
+    "department": "部门",
+    "role": "职位",
+    "location": "工作地点",
+    "payRate": "薪资",
+    "perHour": "/ 小时",
+    "perYear": "/ 年",
+    "reportingManager": "直属上级",
+    "skillsCertsTitle": "技能与证书",
+    "skillsCertsDesc": "选择技能并添加员工的证书。",
+    "skills": "技能",
+    "noSkillsDefined": "尚未定义技能。请先在技能页面添加技能。",
+    "setProficiencyLevels": "设置熟练程度",
+    "certifications": "证书",
+    "addCertification": "添加证书",
+    "noCertificationsYet": "尚未添加证书。",
+    "certificationNamePlaceholder": "证书名称",
+    "issuingBodyPlaceholder": "颁发机构",
+    "maxHoursPlaceholder": "例如 40",
+    "restrictionsNotes": "限制 / 备注",
+    "notesPlaceholder": "排班限制、偏好或备注...",
+    "reviewInviteTitle": "审核并发送邀请",
+    "reviewInviteDesc": "审核详情并邀请员工使用Uplift应用。",
+    "summary": "摘要",
+    "summaryName": "姓名",
+    "summaryEmail": "邮箱",
+    "summaryPhone": "电话",
+    "summaryType": "类型",
+    "summaryStartDate": "入职日期",
+    "summaryEmployeeId": "员工ID",
+    "summarySkills": "技能",
+    "summaryAvailable": "可用",
+    "autoGenerated": "自动生成",
+    "sendInvitationEmail": "发送邀请邮件",
+    "sendInvitationEmailDesc": "员工将收到一封邮件，用于下载Uplift应用并设置账户。",
+    "setTempPassword": "设置临时密码",
+    "setTempPasswordDesc": "设置员工首次登录时使用的临时密码。",
+    "tempPasswordPlaceholder": "临时密码",
+    "successTitle": "员工添加成功！",
+    "successDesc": "已添加到系统，邀请已发送至",
+    "viewEmployees": "查看员工",
+    "onboardAnother": "添加另一位",
+    "pageTitle": "员工入职",
+    "pageDesc": "添加新员工并邀请其使用Uplift应用。",
+    "bulkImportLink": "需要添加多名员工？使用批量导入",
+    "loadingData": "正在加载组织数据...",
+    "stepOf": "第 {{current}} 步，共 {{total}} 步",
+    "creating": "创建中...",
+    "createEmployee": "创建员工",
+    "inviteEmailFailed": "员工已创建，但邀请邮件发送失败。您可以从员工页面重新发送。",
+    "createFailed": "创建员工失败。请重试。",
+    "employmentTypes": {
+      "full-time": "全职",
+      "part-time": "兼职",
+      "casual": "临时工",
+      "contractor": "承包商"
+    },
+    "proficiency": {
+      "beginner": "初级",
+      "intermediate": "中级",
+      "advanced": "高级"
+    },
+    "errors": {
+      "firstNameRequired": "名字是必填项",
+      "lastNameRequired": "姓氏是必填项",
+      "emailRequired": "邮箱是必填项",
+      "invalidEmail": "邮箱地址无效",
+      "employmentTypeRequired": "雇佣类型是必填项",
+      "startDateRequired": "入职日期是必填项",
+      "departmentRequired": "部门是必填项",
+      "roleRequired": "职位是必填项",
+      "locationRequired": "工作地点是必填项",
+      "payRateRequired": "需要有效的薪资"
+    }
   },
   "errors": {
     "networkError": "网络错误，请检查连接",
@@ -1373,7 +1627,9 @@
     "reject": "拒绝",
     "placeholder": {
       "search": "Search activity..."
-    }
+    },
+    "loadError": "Failed to load activity data",
+    "rejectionReasonPlaceholder": "Enter reason for rejection..."
   },
   "bulkImport": {
     "title": "批量导入",
@@ -1412,6 +1668,16 @@
       "locationsDesc": "导入地点",
       "skills": "技能",
       "skillsDesc": "导入技能"
+    },
+    "types": {
+      "employees": "Employees",
+      "employeesDesc": "Import employee profiles",
+      "shifts": "Shifts",
+      "shiftsDesc": "Import shift schedules",
+      "locations": "Locations",
+      "locationsDesc": "Import locations",
+      "skills": "Skills",
+      "skillsDesc": "Import skills"
     }
   },
   "jobs": {
@@ -1441,7 +1707,8 @@
     "enterDescription": "输入职位描述",
     "postJob": "发布职位",
     "skillMatch": "技能匹配",
-    "noApplicants": "暂无应聘者"
+    "noApplicants": "暂无应聘者",
+    "loadError": "Failed to load job postings. Please try again."
   },
   "employees": {
     "searchPlaceholder": "按姓名或邮箱搜索...",
@@ -1457,7 +1724,8 @@
     "allLocations": "All Locations",
     "placeholder": {
       "searchEmployees": "Search employees..."
-    }
+    },
+    "loadError": "Failed to load employees"
   },
   "integrationHub": {
     "title": "集成中心",
@@ -1612,7 +1880,8 @@
       "createdSuccess": "Webhook 创建成功！",
       "testSent": "测试 payload 已发送到",
       "testStatus": "状态",
-      "deleteConfirm": "删除此 webhook？"
+      "deleteConfirm": "删除此 webhook？",
+      "skillExpired": "Skill Expired"
     },
     "marketplace": {
       "searchPlaceholder": "搜索集成...",
@@ -1837,7 +2106,12 @@
       "locations": "地点",
       "departments": "部门",
       "roles": "角色与权限",
-      "review": "审核与启动"
+      "review": "审核与启动",
+      "companyInfo": "Company Info",
+      "branding": "Branding & Timezone",
+      "inviteAdmin": "Invite Admin",
+      "addEmployees": "Add Employees",
+      "done": "Done"
     },
     "orgDetails": {
       "companyName": "公司名称",
@@ -1920,19 +2194,162 @@
     "selectTimezone": "Select timezone...",
     "selectSize": "Select company size...",
     "selectCountry": "Select country...",
-    "selectCurrency": "Select currency..."
+    "selectCurrency": "Select currency...",
+    "industries": {
+      "retail": "Retail",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "construction": "Construction",
+      "logistics": "Logistics",
+      "foodBeverage": "Food & Beverage",
+      "education": "Education",
+      "technology": "Technology",
+      "finance": "Finance",
+      "government": "Government",
+      "nonprofit": "Non-profit",
+      "other": "Other"
+    }
   },
   "locations": {
     "placeholder": {
       "search": "Search locations...",
       "name": "Location name",
       "address": "Address"
-    }
+    },
+    "loadError": "Failed to load locations. Please try again.",
+    "codePlaceholder": "LON-01",
+    "noEmployeesAssigned": "No employees assigned to this location"
   },
   "integrations": {
     "placeholder": {
       "search": "Search integrations..."
-    }
+    },
+    "scopes": {
+      "employeesRead": "View employee information",
+      "employeesWrite": "Create and update employees",
+      "schedulesRead": "View schedules and shifts",
+      "schedulesWrite": "Create and modify schedules",
+      "timeRead": "View time entries",
+      "timeWrite": "Create and modify time entries",
+      "skillsRead": "View skills and certifications",
+      "skillsWrite": "Manage skills and verifications",
+      "locationsRead": "View location information",
+      "locationsWrite": "Manage locations",
+      "reportsRead": "Access reports data",
+      "webhooksManage": "Configure webhooks",
+      "admin": "Full administrative access"
+    },
+    "rateLimits": {
+      "basic": "Basic",
+      "standard": "Standard",
+      "premium": "Premium"
+    },
+    "copied": "Copied!",
+    "copy": "Copy",
+    "loadError": "Failed to load integrations",
+    "apiKeyPlaceholder": "e.g., Production API Key",
+    "categories": {
+      "hris": "HRIS",
+      "hrisDesc": "Human Resource Information Systems",
+      "payroll": "Payroll",
+      "payrollDesc": "Payroll & compensation",
+      "comms": "Communications",
+      "commsDesc": "Team messaging & notifications",
+      "identity": "Identity & SSO",
+      "identityDesc": "Single sign-on & provisioning",
+      "time": "Time & Attendance",
+      "timeDesc": "Time tracking systems",
+      "pos": "Point of Sale",
+      "posDesc": "POS & retail systems",
+      "scheduling": "Migration",
+      "schedulingDesc": "Import from other tools",
+      "learning": "Learning",
+      "learningDesc": "Training & certifications",
+      "analytics": "Analytics",
+      "analyticsDesc": "BI & reporting tools",
+      "custom": "Custom",
+      "customDesc": "API & automation"
+    },
+    "providers": {
+      "hibobDesc": "Modern HR platform for mid-size businesses",
+      "workdayDesc": "Enterprise HCM and finance platform",
+      "sapSuccessfactorsDesc": "Enterprise talent management",
+      "bamboohrDesc": "HR software for SMBs",
+      "personioDesc": "European HR platform",
+      "sageHrDesc": "UK HR & people management",
+      "adpDesc": "Enterprise payroll & HR services",
+      "paychexDesc": "Payroll & HR solutions",
+      "gustoDesc": "Modern payroll for small business",
+      "xeroDesc": "Cloud accounting with payroll",
+      "sagePayrollDesc": "UK payroll software",
+      "slackDesc": "Team collaboration & notifications",
+      "microsoftTeamsDesc": "Microsoft 365 collaboration",
+      "whatsappBusinessDesc": "Direct worker messaging",
+      "googleWorkspaceDesc": "Google SSO & directory sync",
+      "microsoftEntraDesc": "Azure AD SSO & SCIM",
+      "oktaDesc": "Enterprise identity management",
+      "squareDesc": "POS & team management",
+      "lightspeedDesc": "Retail & hospitality POS",
+      "deputyDesc": "Import from Deputy",
+      "connecteamDesc": "Import from Connecteam",
+      "kronosDesc": "Enterprise workforce management",
+      "linkedinLearningDesc": "Training completion sync",
+      "powerBiDesc": "Export to Power BI",
+      "lookerDesc": "BI data export",
+      "zapierDesc": "5,000+ app connections",
+      "customApiDesc": "Build your own integration"
+    },
+    "mapping": {
+      "customField1": "customField1",
+      "customField2": "customField2",
+      "notes": "notes"
+    },
+    "api": {
+      "authNone": "No Authentication",
+      "authApiKey": "API Key",
+      "authBearer": "Bearer Token",
+      "authBasic": "Basic Auth",
+      "authOAuth2": "OAuth 2.0",
+      "triggerManual": "Manual",
+      "triggerManualDesc": "Run on demand",
+      "triggerScheduled": "Scheduled",
+      "triggerScheduledDesc": "Run on a schedule",
+      "triggerEvent": "Event-based",
+      "triggerEventDesc": "Triggered by Uplift events",
+      "triggerWebhook": "Incoming Webhook",
+      "triggerWebhookDesc": "Receive data from external systems",
+      "scopePlaceholder": "read,write",
+      "saveFirstBeforeTesting": "Save the integration first before testing",
+      "testRequestFailed": "Test request failed"
+    },
+    "events": {
+      "employeeCreated": "Employee Created",
+      "employeeUpdated": "Employee Updated",
+      "employeeDeactivated": "Employee Deactivated",
+      "shiftCreated": "Shift Created",
+      "shiftUpdated": "Shift Updated",
+      "shiftDeleted": "Shift Deleted",
+      "shiftClaimed": "Shift Claimed",
+      "clockIn": "Clock In",
+      "clockOut": "Clock Out",
+      "timeEntryApproved": "Time Entry Approved",
+      "timeOffRequested": "Time Off Requested",
+      "timeOffApproved": "Time Off Approved",
+      "timeOffRejected": "Time Off Rejected",
+      "skillVerified": "Skill Verified",
+      "jobApplication": "Job Application",
+      "categoryEmployees": "Employees",
+      "categoryScheduling": "Scheduling",
+      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeOff": "Time Off",
+      "categorySkills": "Skills",
+      "categoryCareer": "Career"
+    },
+    "noIntegrationsFound": "No integrations found",
+    "noIntegrationsAvailable": "No integrations are available yet.",
+    "noApiKeys": "No API keys",
+    "createApiKeyToStart": "Create an API key to get started with the API."
   },
   "forecast": {
     "demoData": "演示数据"

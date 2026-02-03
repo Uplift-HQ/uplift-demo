@@ -135,7 +135,7 @@ export default function Settings() {
               {activeTab === 'organization' && isAdmin && (
                 <OrganizationSettings
                   organization={organization}
-                  onSave={() => { loadData(); showMsg('Organization settings saved'); }}
+                  onSave={() => { loadData(); showMsg(t('settings.organizationSaved', 'Organization settings saved')); }}
                 />
               )}
               {activeTab === 'branding' && isAdmin && (
@@ -188,7 +188,7 @@ export default function Settings() {
       {showInviteModal && (
         <InviteUserModal 
           onClose={() => setShowInviteModal(false)}
-          onSuccess={() => { setShowInviteModal(false); loadData(); showMsg('Invitation sent'); }}
+          onSuccess={() => { setShowInviteModal(false); loadData(); showMsg(t('settings.invitationSent', 'Invitation sent')); }}
         />
       )}
       {showUserModal && selectedUser && (
@@ -258,10 +258,10 @@ function OrganizationSettings({ organization, onSave }) {
             onChange={e => setForm({ ...form, timezone: e.target.value })}
             className="input"
           >
-            <option value="Europe/London">London (GMT/BST)</option>
-            <option value="America/New_York">New York (EST/EDT)</option>
-            <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
-            <option value="Asia/Singapore">Singapore (SGT)</option>
+            <option value="Europe/London">{t('settings.timezones.london', 'London (GMT/BST)')}</option>
+            <option value="America/New_York">{t('settings.timezones.newYork', 'New York (EST/EDT)')}</option>
+            <option value="America/Los_Angeles">{t('settings.timezones.losAngeles', 'Los Angeles (PST/PDT)')}</option>
+            <option value="Asia/Singapore">{t('settings.timezones.singapore', 'Singapore (SGT)')}</option>
           </select>
         </div>
 
@@ -374,7 +374,7 @@ function BrandingSettings({ organization, showMsg }) {
     try {
       await brandingApi.update(form);
       updateBranding({ ...form, ...logos });
-      showMsg('Branding settings saved');
+      showMsg(t('settings.brandingSaved', 'Branding settings saved'));
     } catch (error) {
       showMsg('Failed to save branding settings', 'error');
     } finally {
@@ -450,10 +450,10 @@ function BrandingSettings({ organization, showMsg }) {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-lg mx-auto mb-6">
             {[
-              { icon: Image, label: 'Custom Logo' },
-              { icon: Palette, label: 'Brand Colors' },
-              { icon: Crown, label: 'Login Screen' },
-              { icon: Globe, label: 'Custom Favicon' },
+              { icon: Image, label: t('settings.branding.customLogo', 'Custom Logo') },
+              { icon: Palette, label: t('settings.branding.brandColors', 'Brand Colors') },
+              { icon: Crown, label: t('settings.branding.loginScreen', 'Login Screen') },
+              { icon: Globe, label: t('settings.branding.customFavicon', 'Custom Favicon') },
             ].map(item => (
               <div key={item.label} className="flex flex-col items-center gap-1.5 p-3 bg-white/70 rounded-lg">
                 <item.icon className="w-5 h-5 text-orange-500" />
@@ -483,7 +483,7 @@ function BrandingSettings({ organization, showMsg }) {
           type="text"
           value={form.brand_name}
           onChange={e => setForm({ ...form, brand_name: e.target.value })}
-          placeholder="Your Company Name"
+          placeholder={t('settings.companyNamePlaceholder', 'Your Company Name')}
           className="input"
         />
         <p className="text-xs text-slate-500 mt-1">Displayed in the sidebar and mobile app header</p>
@@ -541,16 +541,16 @@ function BrandingSettings({ organization, showMsg }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <LogoUploadZone
-            label="Primary Logo"
-            description="Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB."
+            label={t('settings.branding.primaryLogo', 'Primary Logo')}
+            description={t('settings.branding.primaryLogoDesc', 'Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB.')}
             currentUrl={logos.logo_url}
             uploading={uploading === 'logo'}
             onUpload={(file) => handleFileUpload(file, 'logo')}
             onRemove={() => handleDeleteLogo('logo')}
           />
           <LogoUploadZone
-            label="Dark Mode Logo"
-            description="Used on dark backgrounds. Should be light/white version of your logo."
+            label={t('settings.branding.darkModeLogo', 'Dark Mode Logo')}
+            description={t('settings.branding.darkModeLogoDesc', 'Used on dark backgrounds. Should be light/white version of your logo.')}
             currentUrl={logos.dark_logo_url}
             uploading={uploading === 'dark_logo'}
             onUpload={(file) => handleFileUpload(file, 'dark_logo')}
@@ -558,8 +558,8 @@ function BrandingSettings({ organization, showMsg }) {
             dark
           />
           <LogoUploadZone
-            label="Favicon"
-            description="Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO."
+            label={t('settings.branding.favicon', 'Favicon')}
+            description={t('settings.branding.faviconDesc', 'Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO.')}
             currentUrl={logos.favicon_url}
             uploading={uploading === 'favicon'}
             onUpload={(file) => handleFileUpload(file, 'favicon')}
@@ -567,8 +567,8 @@ function BrandingSettings({ organization, showMsg }) {
             small
           />
           <LogoUploadZone
-            label="Login Background"
-            description="Background image for the login screen. Recommended 1920x1080."
+            label={t('settings.branding.loginBackground', 'Login Background')}
+            description={t('settings.branding.loginBackgroundDesc', 'Background image for the login screen. Recommended 1920x1080.')}
             currentUrl={logos.login_bg_url}
             uploading={uploading === 'login_bg'}
             onUpload={(file) => handleFileUpload(file, 'login_bg')}
@@ -653,7 +653,7 @@ function BrandingSettings({ organization, showMsg }) {
       <div className="pt-4 border-t">
         <button onClick={handleSave} disabled={saving} className="btn btn-primary">
           <Save className="w-4 h-4" />
-          {saving ? 'Saving...' : 'Save Branding'}
+          {saving ? t('common.saving', 'Saving...') : t('settings.saveBranding', 'Save Branding')}
         </button>
       </div>
     </div>
@@ -661,6 +661,7 @@ function BrandingSettings({ organization, showMsg }) {
 }
 
 function LogoUploadZone({ label, description, currentUrl, uploading, onUpload, onRemove, dark, small, wide }) {
+  const { t } = useTranslation();
   const [dragOver, setDragOver] = useState(false);
 
   const handleDrop = (e) => {
@@ -693,7 +694,7 @@ function LogoUploadZone({ label, description, currentUrl, uploading, onUpload, o
           <button
             onClick={onRemove}
             className="absolute top-2 right-2 p-1.5 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-            title="Remove"
+            title={t('common.remove', 'Remove')}
           >
             <Trash2 className="w-3.5 h-3.5" />
           </button>
@@ -816,7 +817,7 @@ function UsersSettings({ users, onRefresh, showMsg, onInvite, onViewUser }) {
                 </td>
                 <td className="px-4 py-3">{getStatusBadge(u)}</td>
                 <td className="px-4 py-3 text-sm text-slate-500">
-                  {u.last_login_at ? new Date(u.last_login_at).toLocaleDateString() : 'Never'}
+                  {u.last_login_at ? new Date(u.last_login_at).toLocaleDateString() : t('settings.users.never', 'Never')}
                 </td>
                 <td className="px-4 py-3 text-right">
                   <button
@@ -840,6 +841,7 @@ function UsersSettings({ users, onRefresh, showMsg, onInvite, onViewUser }) {
 // ============================================================
 
 function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
+  const { t } = useTranslation();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [sessions, setSessions] = useState([]);
@@ -870,35 +872,35 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
       switch (action) {
         case 'unlock':
           await api.post(`/users/${user.id}/unlock`);
-          showMsg('Account unlocked');
+          showMsg(t('settings.users.accountUnlocked', 'Account unlocked'));
           break;
         case 'deactivate':
           await api.post(`/users/${user.id}/deactivate`, { reason: data.reason });
-          showMsg('Account deactivated');
+          showMsg(t('settings.users.accountDeactivated', 'Account deactivated'));
           break;
         case 'reactivate':
           await api.post(`/users/${user.id}/reactivate`);
-          showMsg('Account reactivated');
+          showMsg(t('settings.users.accountReactivated', 'Account reactivated'));
           break;
         case 'changeRole':
           await api.patch(`/users/${user.id}/role`, { role: data.role });
-          showMsg('Role updated');
+          showMsg(t('settings.users.roleUpdated', 'Role updated'));
           break;
         case 'forcePasswordReset':
           await api.post(`/users/${user.id}/force-password-reset`);
-          showMsg('Password reset required on next login');
+          showMsg(t('settings.users.passwordResetRequired', 'Password reset required on next login'));
           break;
         case 'resendInvitation':
           await api.post(`/users/${user.id}/resend-invitation`);
-          showMsg('Invitation resent');
+          showMsg(t('settings.users.invitationResent', 'Invitation resent'));
           break;
         case 'cancelInvitation':
           await api.post(`/users/${user.id}/cancel-invitation`);
-          showMsg('Invitation cancelled');
+          showMsg(t('settings.users.invitationCancelled', 'Invitation cancelled'));
           break;
         case 'revokeSessions':
           await api.post(`/users/${user.id}/sessions/revoke-all`);
-          showMsg('All sessions revoked');
+          showMsg(t('settings.users.sessionsRevoked', 'All sessions revoked'));
           loadUserData();
           break;
       }
@@ -1029,19 +1031,19 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
           {tab === 'sessions' && (
             <div className="space-y-3">
               {sessions.length === 0 ? (
-                <p className="text-slate-500 text-center py-8">No active sessions</p>
+                <p className="text-slate-500 text-center py-8">{t('settings.noActiveSessions', 'No active sessions')}</p>
               ) : (
                 sessions.map(s => (
                   <div key={s.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3">
                       {s.device_type === 'mobile' ? <Smartphone className="w-5 h-5 text-slate-400" /> : <Monitor className="w-5 h-5 text-slate-400" />}
                       <div>
-                        <p className="font-medium text-sm">{s.device_name || 'Unknown Device'}</p>
+                        <p className="font-medium text-sm">{s.device_name || t('settings.unknownDevice', 'Unknown Device')}</p>
                         <p className="text-xs text-slate-500">{s.browser} • {s.ip_address}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      {s.is_current && <span className="text-xs text-green-600 font-medium">Current</span>}
+                      {s.is_current && <span className="text-xs text-green-600 font-medium">{t('settings.currentSession', 'Current')}</span>}
                       <p className="text-xs text-slate-500">{new Date(s.last_active_at).toLocaleString()}</p>
                     </div>
                   </div>
@@ -1053,7 +1055,7 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
           {tab === 'activity' && (
             <div className="space-y-2">
               {activity.length === 0 ? (
-                <p className="text-slate-500 text-center py-8">No activity recorded</p>
+                <p className="text-slate-500 text-center py-8">{t('settings.noActivityRecorded', 'No activity recorded')}</p>
               ) : (
                 activity.map(a => (
                   <div key={a.id} className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
@@ -1062,7 +1064,7 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
                       <p className="text-xs text-slate-500">{a.ip_address}</p>
                     </div>
                     <div className="text-right">
-                      {!a.success && <span className="text-xs text-red-600">Failed</span>}
+                      {!a.success && <span className="text-xs text-red-600">{t('common.failed', 'Failed')}</span>}
                       <p className="text-xs text-slate-500">{new Date(a.created_at).toLocaleString()}</p>
                     </div>
                   </div>
@@ -1081,6 +1083,7 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
 // ============================================================
 
 function InviteUserModal({ onClose, onSuccess }) {
+  const { t } = useTranslation();
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', role: 'worker' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -1093,7 +1096,7 @@ function InviteUserModal({ onClose, onSuccess }) {
       await authApi.inviteUser(form);
       onSuccess();
     } catch (err) {
-      setError(err.message || 'Failed to send invitation');
+      setError(err.message || t('settings.inviteError', 'Failed to send invitation'));
     } finally {
       setLoading(false);
     }
@@ -1135,9 +1138,9 @@ function InviteUserModal({ onClose, onSuccess }) {
             </select>
           </div>
           <div className="flex justify-end gap-3 pt-4">
-            <button type="button" onClick={onClose} className="btn btn-secondary">Cancel</button>
+            <button type="button" onClick={onClose} className="btn btn-secondary">{t('common.cancel', 'Cancel')}</button>
             <button type="submit" disabled={loading} className="btn btn-primary">
-              {loading ? 'Sending...' : 'Send Invitation'}
+              {loading ? t('settings.sending', 'Sending...') : t('settings.sendInvitation', 'Send Invitation')}
             </button>
           </div>
         </form>
@@ -1210,7 +1213,7 @@ function AccountSettings({ user, showMsg }) {
 
       <button onClick={handleSave} disabled={saving} className="btn btn-primary">
         <Save className="w-4 h-4" />
-        {saving ? 'Saving...' : 'Save Changes'}
+        {saving ? t('common.saving', 'Saving...') : t('settings.saveChanges', 'Save Changes')}
       </button>
     </div>
   );
@@ -1485,6 +1488,7 @@ function AppearanceSettings({ showMsg }) {
 // ============================================================
 
 function WebhooksSettings({ showMsg }) {
+  const { t } = useTranslation();
   const [webhooks, setWebhooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -1558,8 +1562,8 @@ function WebhooksSettings({ showMsg }) {
       ) : webhooks.length === 0 ? (
         <div className="text-center py-12 text-slate-500">
           <Webhook className="w-12 h-12 mx-auto mb-3 text-slate-300" />
-          <p className="font-medium text-slate-700">No webhooks configured</p>
-          <p className="text-sm mt-1">Add a webhook to integrate with external systems</p>
+          <p className="font-medium text-slate-700">{t('settings.noWebhooksConfigured', 'No webhooks configured')}</p>
+          <p className="text-sm mt-1">{t('settings.addWebhookToIntegrate', 'Add a webhook to integrate with external systems')}</p>
         </div>
       ) : (
       <div className="space-y-4">
@@ -1604,14 +1608,14 @@ function WebhooksSettings({ showMsg }) {
                 <button
                   onClick={() => setSelectedWebhook(webhook)}
                   className="p-2 hover:bg-slate-100 rounded-lg"
-                  title="View details"
+                  title={t('settings.webhooks.viewDetails', 'View details')}
                 >
                   <Eye className="w-4 h-4 text-slate-400" />
                 </button>
                 <button
                   onClick={() => deleteWebhook(webhook.id)}
                   className="p-2 hover:bg-red-50 rounded-lg"
-                  title="Delete webhook"
+                  title={t('settings.webhooks.deleteWebhook', 'Delete webhook')}
                 >
                   <Trash2 className="w-4 h-4 text-red-400" />
                 </button>
@@ -1673,6 +1677,7 @@ function WebhooksSettings({ showMsg }) {
 }
 
 function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
+  const { t } = useTranslation();
   const [form, setForm] = useState({ name: '', url: '', events: [], secret: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -1724,7 +1729,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="input"
-              placeholder="e.g., Slack Notifications"
+              placeholder={t('settings.webhooks.namePlaceholder', 'e.g., Slack Notifications')}
             />
           </div>
 
@@ -1746,7 +1751,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
               value={form.secret}
               onChange={(e) => setForm({ ...form, secret: e.target.value })}
               className="input font-mono text-sm"
-              placeholder="Your webhook secret for signature verification"
+              placeholder={t('settings.webhooks.secretPlaceholder', 'Your webhook secret for signature verification')}
             />
             <p className="text-xs text-slate-500 mt-1">Used to sign webhook payloads for verification</p>
           </div>
@@ -1776,12 +1781,12 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-slate-500 mt-1">{form.events.length} events selected</p>
+            <p className="text-xs text-slate-500 mt-1">{form.events.length} {t('settings.eventsSelected', 'events selected')}</p>
           </div>
 
           <div className="flex justify-end gap-3 pt-4 border-t">
-            <button type="button" onClick={onClose} className="btn btn-secondary">Cancel</button>
-            <button type="submit" disabled={loading} className="btn btn-primary">{loading ? 'Creating...' : 'Create Webhook'}</button>
+            <button type="button" onClick={onClose} className="btn btn-secondary">{t('common.cancel', 'Cancel')}</button>
+            <button type="submit" disabled={loading} className="btn btn-primary">{loading ? t('common.creating', 'Creating...') : t('settings.createWebhook', 'Create Webhook')}</button>
           </div>
         </form>
       </div>
@@ -1883,16 +1888,16 @@ function WebhookDetailModal({ webhook, onClose }) {
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-momentum-500" />
               </div>
             ) : deliveryLogs.length === 0 ? (
-              <p className="text-slate-500 text-center py-8 text-sm">No deliveries yet</p>
+              <p className="text-slate-500 text-center py-8 text-sm">{t('settings.noDeliveriesYet', 'No deliveries yet')}</p>
             ) : (
             <div className="mt-2 border border-slate-200 rounded-lg overflow-hidden">
               <table className="w-full text-sm">
                 <thead className="bg-slate-50 border-b">
                   <tr>
-                    <th className="text-left px-4 py-2 text-slate-500 font-medium">Time</th>
-                    <th className="text-left px-4 py-2 text-slate-500 font-medium">Event</th>
-                    <th className="text-left px-4 py-2 text-slate-500 font-medium">Status</th>
-                    <th className="text-right px-4 py-2 text-slate-500 font-medium">Response</th>
+                    <th className="text-left px-4 py-2 text-slate-500 font-medium">{t('common.time', 'Time')}</th>
+                    <th className="text-left px-4 py-2 text-slate-500 font-medium">{t('common.event', 'Event')}</th>
+                    <th className="text-left px-4 py-2 text-slate-500 font-medium">{t('common.status', 'Status')}</th>
+                    <th className="text-right px-4 py-2 text-slate-500 font-medium">{t('settings.response', 'Response')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -1993,7 +1998,7 @@ function NavigationSettings({ showMsg }) {
       ) : pages.length === 0 ? (
         <div className="text-center py-12 text-slate-500">
           <Globe className="w-12 h-12 mx-auto mb-3 text-slate-300" />
-          <p className="font-medium text-slate-700">No pages configured</p>
+          <p className="font-medium text-slate-700">{t('settings.noPagesConfigured', 'No pages configured')}</p>
         </div>
       ) : (
       <div className="space-y-6">
@@ -2063,6 +2068,7 @@ function NavigationSettings({ showMsg }) {
 // ============================================================
 
 function EmployeeVisibilitySettings({ showMsg }) {
+  const { t } = useTranslation();
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -2148,7 +2154,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
       <div className="relative">
         <input
           type="text"
-          placeholder="Search employees..."
+          placeholder={t('settings.searchEmployeesPlaceholder', 'Search employees...')}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="input w-full pl-10"
@@ -2331,7 +2337,7 @@ function AccentColorPicker({ showMsg }) {
           />
         ))}
       </div>
-      <p className="text-sm text-slate-500 mt-2">Choose your preferred accent color</p>
+      <p className="text-sm text-slate-500 mt-2">{t('settings.chooseAccentColor', 'Choose your preferred accent color')}</p>
     </div>
   );
 }
@@ -2341,6 +2347,7 @@ function AccentColorPicker({ showMsg }) {
 // ============================================================
 
 function PrivacySettings({ user, showMsg, logout }) {
+  const { t } = useTranslation();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deletePassword, setDeletePassword] = useState('');
   const [deleting, setDeleting] = useState(false);
@@ -2451,22 +2458,22 @@ function PrivacySettings({ user, showMsg, logout }) {
               <h2 className="text-lg font-semibold">Delete Account</h2>
             </div>
             <p className="text-slate-600 mb-4">
-              This will schedule your account for permanent deletion. You have 30 days to cancel this request. After that, all your data will be permanently removed.
+              {t('settings.deleteAccountWarning', 'This will schedule your account for permanent deletion. You have 30 days to cancel this request. After that, all your data will be permanently removed.')}
             </p>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-slate-700 mb-1">Enter your password to confirm</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.enterPasswordToConfirm', 'Enter your password to confirm')}</label>
               <input
                 type="password"
                 value={deletePassword}
                 onChange={e => setDeletePassword(e.target.value)}
                 className="input"
-                placeholder="Your password"
+                placeholder={t('settings.passwordPlaceholder', 'Your password')}
               />
             </div>
             <div className="flex justify-end gap-3">
-              <button onClick={() => setShowDeleteConfirm(false)} className="btn btn-secondary">Cancel</button>
+              <button onClick={() => setShowDeleteConfirm(false)} className="btn btn-secondary">{t('common.cancel', 'Cancel')}</button>
               <button onClick={requestDeletion} disabled={deleting} className="btn bg-red-600 text-white hover:bg-red-700">
-                {deleting ? 'Processing...' : 'Delete My Account'}
+                {deleting ? t('common.processing', 'Processing...') : t('settings.deleteMyAccount', 'Delete My Account')}
               </button>
             </div>
           </div>

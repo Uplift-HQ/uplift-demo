@@ -52,7 +52,22 @@
     "growYourCareer": "Развивайте карьеру",
     "trackSkillsDesc": "Отслеживайте навыки и находите внутренние возможности",
     "viewMyCareer": "Моя карьера",
-    "timeOffBalance": "Баланс отпуска"
+    "timeOffBalance": "Баланс отпуска",
+    "loadError": "Failed to load dashboard",
+    "live": "LIVE",
+    "clickToSeeWho": "Click to see who",
+    "affected": "affected",
+    "expiresIn": "Expires in",
+    "overdueBy": "Overdue by",
+    "manageAll": "Manage All",
+    "noRecentActivity": "No recent activity",
+    "noRecentRecognitions": "No recent recognitions",
+    "available": "Available",
+    "alerts": {
+      "expiring": "Certifications expiring within 30 days",
+      "training": "Training in progress or pending",
+      "document": "Probation reviews due"
+    }
   },
   "nav": {
     "dashboard": "Панель управления",
@@ -186,7 +201,19 @@
       "afternoon": "День",
       "evening": "Вечер",
       "night": "Ночь"
-    }
+    },
+    "viewDetails": "View Details",
+    "unknownEmployee": "Unknown Employee",
+    "saving": "Saving...",
+    "unknown": "Unknown",
+    "employee": "employee",
+    "employees": "employees",
+    "at": "at",
+    "deny": "Deny",
+    "failed": "Failed",
+    "event": "Event",
+    "processing": "Processing...",
+    "creating": "Creating..."
   },
   "auth": {
     "login": "Войти",
@@ -364,7 +391,27 @@
       "week": "Неделя",
       "twoWeeks": "2 Недели",
       "month": "Месяц"
-    }
+    },
+    "loadError": "Failed to load schedule data",
+    "hideSidebar": "Hide sidebar",
+    "showSidebar": "Show sidebar",
+    "publish": {
+      "notification1": "Employees receive push notifications",
+      "notification2": "Shifts appear in employee apps",
+      "notification3": "Changes after this will trigger new notifications"
+    },
+    "today": "Today",
+    "filters": "Filters",
+    "published": "Published",
+    "draft": "Draft",
+    "open": "Open",
+    "scheduleOverview": "Schedule Overview",
+    "thisWeeksStaffing": "This Week's Staffing",
+    "pendingTimeOff": "Pending Time Off",
+    "noPendingRequests": "No pending requests",
+    "shiftSwaps": "Shift Swaps",
+    "noPendingSwaps": "No pending swaps",
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
   },
   "timeTracking": {
     "title": "Учёт времени",
@@ -413,7 +460,8 @@
     "clockOut": "Завершить смену",
     "startBreak": "Начать перерыв",
     "endBreak": "Закончить перерыв",
-    "totalHours": "Всего часов"
+    "totalHours": "Всего часов",
+    "loadError": "Failed to load time tracking data. Please try again."
   },
   "timeOff": {
     "title": "Отпуск",
@@ -453,7 +501,17 @@
     "noRequests": "Запросов не найдено",
     "requestDetails": "Детали запроса на отпуск",
     "noReason": "Причина не указана",
-    "submitted": "Отправлено"
+    "submitted": "Отправлено",
+    "loadError": "Failed to load time-off requests. Please try again.",
+    "types": {
+      "annualLeave": "Annual Leave",
+      "sickLeave": "Sick Leave",
+      "personal": "Personal",
+      "bereavement": "Bereavement",
+      "maternity": "Maternity",
+      "paternity": "Paternity",
+      "unpaid": "Unpaid Leave"
+    }
   },
   "feed": {
     "title": "Лента",
@@ -562,7 +620,8 @@
     "browseSkills": "Просмотр навыков",
     "searchSkills": "Поиск навыков...",
     "skillAdded": "Навык успешно добавлен",
-    "verificationRequested": "Подтверждение запрошено"
+    "verificationRequested": "Подтверждение запрошено",
+    "loadError": "Failed to load skills. Please try again."
   },
   "career": {
     "title": "Карьера",
@@ -636,7 +695,8 @@
     "skillRequestSubmitted": "Запрос на навык отправлен! Менеджер рассмотрит его.",
     "expiringSoon": "Скоро истекает",
     "expired": "Истекло",
-    "expires": "Истекает {{date}}"
+    "expires": "Истекает {{date}}",
+    "loadError": "Failed to load career data"
   },
   "gamification": {
     "level": "Уровень {{level}}",
@@ -732,8 +792,23 @@
     "organization": "Организация",
     "navigation": "Навигация",
     "employeeVisibility": "Видимость сотрудников",
-    "users": "Пользователи",
-    "webhooks": "Вебхуки",
+    "users": {
+      "never": "Never",
+      "accountUnlocked": "Account unlocked",
+      "accountDeactivated": "Account deactivated",
+      "accountReactivated": "Account reactivated",
+      "roleUpdated": "Role updated",
+      "passwordResetRequired": "Password reset required on next login",
+      "invitationResent": "Invitation resent",
+      "invitationCancelled": "Invitation cancelled",
+      "sessionsRevoked": "All sessions revoked"
+    },
+    "webhooks": {
+      "viewDetails": "View details",
+      "deleteWebhook": "Delete webhook",
+      "namePlaceholder": "e.g., Slack Notifications",
+      "secretPlaceholder": "Your webhook secret for signature verification"
+    },
     "sessions": "Сессии",
     "organizationSettings": "Настройки организации",
     "configurePreferences": "Настройте предпочтения вашей организации",
@@ -841,7 +916,46 @@
       "companyName": "Company name",
       "email": "Email address",
       "phone": "Phone number"
-    }
+    },
+    "timezones": {
+      "london": "London (GMT/BST)",
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "singapore": "Singapore (SGT)"
+    },
+    "branding": {
+      "primaryLogo": "Primary Logo",
+      "primaryLogoDesc": "Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB.",
+      "darkModeLogo": "Dark Mode Logo",
+      "darkModeLogoDesc": "Used on dark backgrounds. Should be light/white version of your logo.",
+      "favicon": "Favicon",
+      "faviconDesc": "Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO.",
+      "loginBackground": "Login Background",
+      "loginBackgroundDesc": "Background image for the login screen. Recommended 1920x1080.",
+      "customLogo": "Custom Logo",
+      "brandColors": "Brand Colors",
+      "loginScreen": "Login Screen",
+      "customFavicon": "Custom Favicon"
+    },
+    "organizationSaved": "Organization settings saved",
+    "brandingSaved": "Branding settings saved",
+    "invitationSent": "Invitation sent",
+    "inviteError": "Failed to send invitation",
+    "saveBranding": "Save Branding",
+    "companyNamePlaceholder": "Your Company Name",
+    "searchEmployeesPlaceholder": "Search employees...",
+    "passwordPlaceholder": "Your password",
+    "unknownDevice": "Unknown Device",
+    "currentSession": "Current",
+    "noActivityRecorded": "No activity recorded",
+    "noWebhooksConfigured": "No webhooks configured",
+    "addWebhookToIntegrate": "Add a webhook to integrate with external systems",
+    "noDeliveriesYet": "No deliveries yet",
+    "response": "Response",
+    "noPagesConfigured": "No pages configured",
+    "eventsSelected": "events selected",
+    "createWebhook": "Create Webhook",
+    "enterPasswordToConfirm": "Enter your password to confirm"
   },
   "tasks": {
     "title": "Задачи",
@@ -987,7 +1101,98 @@
     "selectDepartment": "Выберите отдел...",
     "selectRole": "Выберите должность...",
     "selectLocation": "Выберите местоположение...",
-    "selectManager": "Выберите менеджера (необязательно)..."
+    "selectManager": "Выберите менеджера (необязательно)...",
+    "employeeDetailsTitle": "Данные Сотрудника",
+    "employeeDetailsDesc": "Введите базовую информацию о новом сотруднике.",
+    "firstName": "Имя",
+    "firstNamePlaceholder": "напр. Иван",
+    "lastName": "Фамилия",
+    "lastNamePlaceholder": "напр. Иванов",
+    "emailAddress": "Email",
+    "emailPlaceholder": "напр. ivan.ivanov@kompaniya.ru",
+    "emailExistsWarning": "Сотрудник с таким email уже существует ({{name}}).",
+    "phoneNumber": "Телефон",
+    "phonePlaceholder": "напр. +7 900 123 4567",
+    "employmentType": "Тип Занятости",
+    "startDate": "Дата Начала",
+    "employeeId": "ID Сотрудника",
+    "employeeIdPlaceholder": "Генерируется автоматически",
+    "employeeIdHelper": "Оставьте пустым для автоматической генерации.",
+    "roleDepartmentTitle": "Должность и Отдел",
+    "roleDepartmentDesc": "Назначьте сотрудника в отдел, должность и локацию.",
+    "department": "Отдел",
+    "role": "Должность",
+    "location": "Локация",
+    "payRate": "Оклад",
+    "perHour": "/ час",
+    "perYear": "/ год",
+    "reportingManager": "Непосредственный Руководитель",
+    "skillsCertsTitle": "Навыки и Сертификаты",
+    "skillsCertsDesc": "Выберите навыки и добавьте сертификаты сотрудника.",
+    "skills": "Навыки",
+    "noSkillsDefined": "Навыки ещё не определены. Сначала добавьте навыки на странице Навыки.",
+    "setProficiencyLevels": "Установить Уровни Владения",
+    "certifications": "Сертификаты",
+    "addCertification": "Добавить Сертификат",
+    "noCertificationsYet": "Сертификаты ещё не добавлены.",
+    "certificationNamePlaceholder": "Название сертификата",
+    "issuingBodyPlaceholder": "Выдавшая организация",
+    "maxHoursPlaceholder": "напр. 40",
+    "restrictionsNotes": "Ограничения / Заметки",
+    "notesPlaceholder": "Ограничения по графику, предпочтения или заметки...",
+    "reviewInviteTitle": "Проверка и Отправка Приглашения",
+    "reviewInviteDesc": "Проверьте данные и пригласите сотрудника в приложение Uplift.",
+    "summary": "Итого",
+    "summaryName": "Имя",
+    "summaryEmail": "Email",
+    "summaryPhone": "Телефон",
+    "summaryType": "Тип",
+    "summaryStartDate": "Дата Начала",
+    "summaryEmployeeId": "ID Сотрудника",
+    "summarySkills": "Навыки",
+    "summaryAvailable": "Доступен",
+    "autoGenerated": "Сгенерировано автоматически",
+    "sendInvitationEmail": "Отправить приглашение по email",
+    "sendInvitationEmailDesc": "Сотрудник получит email для скачивания приложения Uplift и настройки аккаунта.",
+    "setTempPassword": "Установить временный пароль",
+    "setTempPasswordDesc": "Установите временный пароль, который сотрудник сможет использовать для первого входа.",
+    "tempPasswordPlaceholder": "Временный пароль",
+    "successTitle": "Сотрудник Успешно Добавлен!",
+    "successDesc": "добавлен в систему и приглашение отправлено на",
+    "viewEmployees": "Просмотр Сотрудников",
+    "onboardAnother": "Добавить Ещё",
+    "pageTitle": "Регистрация Сотрудника",
+    "pageDesc": "Добавьте нового сотрудника и пригласите его в приложение Uplift.",
+    "bulkImportLink": "Нужно добавить много сотрудников? Используйте Массовый Импорт",
+    "loadingData": "Загрузка данных организации...",
+    "stepOf": "Шаг {{current}} из {{total}}",
+    "creating": "Создание...",
+    "createEmployee": "Создать Сотрудника",
+    "inviteEmailFailed": "Сотрудник создан, но отправка приглашения не удалась. Вы можете отправить повторно со страницы Сотрудники.",
+    "createFailed": "Не удалось создать сотрудника. Попробуйте снова.",
+    "employmentTypes": {
+      "full-time": "Полная занятость",
+      "part-time": "Частичная занятость",
+      "casual": "Временная работа",
+      "contractor": "Подрядчик"
+    },
+    "proficiency": {
+      "beginner": "Начинающий",
+      "intermediate": "Средний",
+      "advanced": "Продвинутый"
+    },
+    "errors": {
+      "firstNameRequired": "Имя обязательно",
+      "lastNameRequired": "Фамилия обязательна",
+      "emailRequired": "Email обязателен",
+      "invalidEmail": "Неверный адрес email",
+      "employmentTypeRequired": "Тип занятости обязателен",
+      "startDateRequired": "Дата начала обязательна",
+      "departmentRequired": "Отдел обязателен",
+      "roleRequired": "Должность обязательна",
+      "locationRequired": "Локация обязательна",
+      "payRateRequired": "Требуется корректный оклад"
+    }
   },
   "errors": {
     "networkError": "Ошибка сети. Проверьте подключение.",
@@ -1042,7 +1247,9 @@
     "reject": "Отклонить",
     "placeholder": {
       "search": "Search activity..."
-    }
+    },
+    "loadError": "Failed to load activity data",
+    "rejectionReasonPlaceholder": "Enter reason for rejection..."
   },
   "notificationSettings": {
     "title": "Настройки уведомлений",
@@ -1098,7 +1305,11 @@
     "chooseSkill": "Выберите навык...",
     "proficiencyLevel": "Уровень владения",
     "basic": "Базовый",
-    "adding": "Добавление..."
+    "adding": "Добавление...",
+    "loadError": "Failed to load employee",
+    "verifySkill": "Verify skill",
+    "removeSkill": "Remove skill",
+    "confirmRemoveSkill": "Remove this skill from the employee?"
   },
   "reports": {
     "title": "Отчёты",
@@ -1173,8 +1384,33 @@
       "totalShifts": "Всего Смен",
       "filledShifts": "Заполненные Смены",
       "openShifts": "Открытые Смены",
-      "fillRate": "Коэффициент Заполнения"
-    }
+      "fillRate": "Коэффициент Заполнения",
+      "employee": "Employee",
+      "period": "Period",
+      "regularCost": "Regular Cost",
+      "overtimeCost": "Overtime Cost",
+      "totalCost": "Total Cost"
+    },
+    "loadError": "Failed to load report data",
+    "saveError": "Failed to save report",
+    "namePlaceholder": "e.g., Weekly Overtime Analysis",
+    "groupByOptions": {
+      "employee": "Employee",
+      "location": "Location",
+      "department": "Department",
+      "day": "Day",
+      "week": "Week"
+    },
+    "summary": {
+      "title": "Report Summary",
+      "name": "Name",
+      "type": "Type",
+      "columns": "Columns",
+      "groupBy": "Group by"
+    },
+    "untitledReport": "Untitled Report",
+    "saveReport": "Save Report",
+    "selectColumns": "Select Columns"
   },
   "accessibility": {
     "menu": "Меню",
@@ -1218,7 +1454,27 @@
     "developmentHint": "AI-заполнение отдаст приоритет сотрудникам, готовящимся к повышению",
     "willCreate": "Будет создано примерно",
     "shiftsLabel": "смен",
-    "generating": "Генерация..."
+    "generating": "Генерация...",
+    "loadError": "Failed to load templates",
+    "confirmDelete": "Delete this template?",
+    "generateError": "Failed to generate shifts",
+    "patterns": {
+      "customDays": "Custom Days",
+      "customDaysDesc": "Select specific days",
+      "monFri": "Monday to Friday",
+      "monFriDesc": "Standard work week",
+      "weekend": "Weekend Only",
+      "weekendDesc": "Saturday and Sunday",
+      "4on4off": "4 On / 4 Off",
+      "4on4offDesc": "Continental shift pattern",
+      "2week": "2 Week Rotation",
+      "2weekDesc": "Alternating fortnight pattern",
+      "3on3off": "3 On / 3 Off",
+      "3on3offDesc": "Common retail pattern",
+      "5on2off": "5 On / 2 Off",
+      "5on2offDesc": "Standard with rotating days off"
+    },
+    "allDays": "All days"
   },
   "legal": {
     "lastUpdated": "Последнее обновление",
@@ -1412,6 +1668,16 @@
       "locationsDesc": "Импорт локаций",
       "skills": "Навыки",
       "skillsDesc": "Импорт навыков"
+    },
+    "types": {
+      "employees": "Employees",
+      "employeesDesc": "Import employee profiles",
+      "shifts": "Shifts",
+      "shiftsDesc": "Import shift schedules",
+      "locations": "Locations",
+      "locationsDesc": "Import locations",
+      "skills": "Skills",
+      "skillsDesc": "Import skills"
     }
   },
   "jobs": {
@@ -1441,7 +1707,8 @@
     "enterDescription": "Введите описание вакансии",
     "postJob": "Опубликовать вакансию",
     "skillMatch": "соответствие навыков",
-    "noApplicants": "Пока нет кандидатов"
+    "noApplicants": "Пока нет кандидатов",
+    "loadError": "Failed to load job postings. Please try again."
   },
   "employees": {
     "searchPlaceholder": "Поиск по имени или email...",
@@ -1457,7 +1724,8 @@
     "allLocations": "All Locations",
     "placeholder": {
       "searchEmployees": "Search employees..."
-    }
+    },
+    "loadError": "Failed to load employees"
   },
   "integrationHub": {
     "title": "Центр интеграций",
@@ -1612,7 +1880,8 @@
       "createdSuccess": "Вебхук успешно создан!",
       "testSent": "Тестовые данные отправлены на",
       "testStatus": "Статус",
-      "deleteConfirm": "Удалить этот вебхук?"
+      "deleteConfirm": "Удалить этот вебхук?",
+      "skillExpired": "Skill Expired"
     },
     "marketplace": {
       "searchPlaceholder": "Поиск интеграций...",
@@ -1837,7 +2106,12 @@
       "locations": "Локации",
       "departments": "Отделы",
       "roles": "Роли и разрешения",
-      "review": "Проверка и запуск"
+      "review": "Проверка и запуск",
+      "companyInfo": "Company Info",
+      "branding": "Branding & Timezone",
+      "inviteAdmin": "Invite Admin",
+      "addEmployees": "Add Employees",
+      "done": "Done"
     },
     "orgDetails": {
       "companyName": "Название компании",
@@ -1920,19 +2194,162 @@
     "selectTimezone": "Select timezone...",
     "selectSize": "Select company size...",
     "selectCountry": "Select country...",
-    "selectCurrency": "Select currency..."
+    "selectCurrency": "Select currency...",
+    "industries": {
+      "retail": "Retail",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "construction": "Construction",
+      "logistics": "Logistics",
+      "foodBeverage": "Food & Beverage",
+      "education": "Education",
+      "technology": "Technology",
+      "finance": "Finance",
+      "government": "Government",
+      "nonprofit": "Non-profit",
+      "other": "Other"
+    }
   },
   "locations": {
     "placeholder": {
       "search": "Search locations...",
       "name": "Location name",
       "address": "Address"
-    }
+    },
+    "loadError": "Failed to load locations. Please try again.",
+    "codePlaceholder": "LON-01",
+    "noEmployeesAssigned": "No employees assigned to this location"
   },
   "integrations": {
     "placeholder": {
       "search": "Search integrations..."
-    }
+    },
+    "scopes": {
+      "employeesRead": "View employee information",
+      "employeesWrite": "Create and update employees",
+      "schedulesRead": "View schedules and shifts",
+      "schedulesWrite": "Create and modify schedules",
+      "timeRead": "View time entries",
+      "timeWrite": "Create and modify time entries",
+      "skillsRead": "View skills and certifications",
+      "skillsWrite": "Manage skills and verifications",
+      "locationsRead": "View location information",
+      "locationsWrite": "Manage locations",
+      "reportsRead": "Access reports data",
+      "webhooksManage": "Configure webhooks",
+      "admin": "Full administrative access"
+    },
+    "rateLimits": {
+      "basic": "Basic",
+      "standard": "Standard",
+      "premium": "Premium"
+    },
+    "copied": "Copied!",
+    "copy": "Copy",
+    "loadError": "Failed to load integrations",
+    "apiKeyPlaceholder": "e.g., Production API Key",
+    "categories": {
+      "hris": "HRIS",
+      "hrisDesc": "Human Resource Information Systems",
+      "payroll": "Payroll",
+      "payrollDesc": "Payroll & compensation",
+      "comms": "Communications",
+      "commsDesc": "Team messaging & notifications",
+      "identity": "Identity & SSO",
+      "identityDesc": "Single sign-on & provisioning",
+      "time": "Time & Attendance",
+      "timeDesc": "Time tracking systems",
+      "pos": "Point of Sale",
+      "posDesc": "POS & retail systems",
+      "scheduling": "Migration",
+      "schedulingDesc": "Import from other tools",
+      "learning": "Learning",
+      "learningDesc": "Training & certifications",
+      "analytics": "Analytics",
+      "analyticsDesc": "BI & reporting tools",
+      "custom": "Custom",
+      "customDesc": "API & automation"
+    },
+    "providers": {
+      "hibobDesc": "Modern HR platform for mid-size businesses",
+      "workdayDesc": "Enterprise HCM and finance platform",
+      "sapSuccessfactorsDesc": "Enterprise talent management",
+      "bamboohrDesc": "HR software for SMBs",
+      "personioDesc": "European HR platform",
+      "sageHrDesc": "UK HR & people management",
+      "adpDesc": "Enterprise payroll & HR services",
+      "paychexDesc": "Payroll & HR solutions",
+      "gustoDesc": "Modern payroll for small business",
+      "xeroDesc": "Cloud accounting with payroll",
+      "sagePayrollDesc": "UK payroll software",
+      "slackDesc": "Team collaboration & notifications",
+      "microsoftTeamsDesc": "Microsoft 365 collaboration",
+      "whatsappBusinessDesc": "Direct worker messaging",
+      "googleWorkspaceDesc": "Google SSO & directory sync",
+      "microsoftEntraDesc": "Azure AD SSO & SCIM",
+      "oktaDesc": "Enterprise identity management",
+      "squareDesc": "POS & team management",
+      "lightspeedDesc": "Retail & hospitality POS",
+      "deputyDesc": "Import from Deputy",
+      "connecteamDesc": "Import from Connecteam",
+      "kronosDesc": "Enterprise workforce management",
+      "linkedinLearningDesc": "Training completion sync",
+      "powerBiDesc": "Export to Power BI",
+      "lookerDesc": "BI data export",
+      "zapierDesc": "5,000+ app connections",
+      "customApiDesc": "Build your own integration"
+    },
+    "mapping": {
+      "customField1": "customField1",
+      "customField2": "customField2",
+      "notes": "notes"
+    },
+    "api": {
+      "authNone": "No Authentication",
+      "authApiKey": "API Key",
+      "authBearer": "Bearer Token",
+      "authBasic": "Basic Auth",
+      "authOAuth2": "OAuth 2.0",
+      "triggerManual": "Manual",
+      "triggerManualDesc": "Run on demand",
+      "triggerScheduled": "Scheduled",
+      "triggerScheduledDesc": "Run on a schedule",
+      "triggerEvent": "Event-based",
+      "triggerEventDesc": "Triggered by Uplift events",
+      "triggerWebhook": "Incoming Webhook",
+      "triggerWebhookDesc": "Receive data from external systems",
+      "scopePlaceholder": "read,write",
+      "saveFirstBeforeTesting": "Save the integration first before testing",
+      "testRequestFailed": "Test request failed"
+    },
+    "events": {
+      "employeeCreated": "Employee Created",
+      "employeeUpdated": "Employee Updated",
+      "employeeDeactivated": "Employee Deactivated",
+      "shiftCreated": "Shift Created",
+      "shiftUpdated": "Shift Updated",
+      "shiftDeleted": "Shift Deleted",
+      "shiftClaimed": "Shift Claimed",
+      "clockIn": "Clock In",
+      "clockOut": "Clock Out",
+      "timeEntryApproved": "Time Entry Approved",
+      "timeOffRequested": "Time Off Requested",
+      "timeOffApproved": "Time Off Approved",
+      "timeOffRejected": "Time Off Rejected",
+      "skillVerified": "Skill Verified",
+      "jobApplication": "Job Application",
+      "categoryEmployees": "Employees",
+      "categoryScheduling": "Scheduling",
+      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeOff": "Time Off",
+      "categorySkills": "Skills",
+      "categoryCareer": "Career"
+    },
+    "noIntegrationsFound": "No integrations found",
+    "noIntegrationsAvailable": "No integrations are available yet.",
+    "noApiKeys": "No API keys",
+    "createApiKeyToStart": "Create an API key to get started with the API."
   },
   "forecast": {
     "demoData": "Демо-данные"

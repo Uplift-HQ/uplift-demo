@@ -46,7 +46,7 @@ export default function Employees() {
       setDepartments(depts);
       setLocations(locs);
     } catch (err) {
-      setError(err.message || 'Failed to load employees');
+      setError(err.message || t('employees.loadError', 'Failed to load employees'));
     } finally {
       setLoading(false);
     }
@@ -277,14 +277,14 @@ export default function Employees() {
                     <button
                       onClick={() => setSelectedEmployee(emp)}
                       className="p-1 text-gray-400 hover:text-blue-600"
-                      title="View"
+                      title={t('common.view', 'View')}
                     >
                       <Eye className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => navigate(`/employees/${emp.id}`)}
                       className="p-1 text-gray-400 hover:text-gray-600"
-                      title="Edit"
+                      title={t('common.edit', 'Edit')}
                     >
                       <Edit className="h-4 w-4" />
                     </button>

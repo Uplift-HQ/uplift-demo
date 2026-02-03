@@ -201,7 +201,7 @@ export default function Login() {
                       value={forgotEmail}
                       onChange={(e) => setForgotEmail(e.target.value)}
                       className="input"
-                      placeholder="you@company.com"
+                      placeholder={t('auth.placeholder.email', 'you@company.com')}
                       required
                       autoFocus
                     />
@@ -253,7 +253,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="input"
-                placeholder="you@company.com"
+                placeholder={t('auth.placeholder.email', 'you@company.com')}
                 required
                 autoFocus
               />

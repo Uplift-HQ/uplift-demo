@@ -112,7 +112,7 @@ export default function Reports() {
       setTotals(result?.totals || null);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load report:', err);
-      setError(err.message || 'Failed to load report data');
+      setError(err.message || t('reports.loadError', 'Failed to load report data'));
       setData([]);
       setTotals(null);
     } finally {
@@ -545,6 +545,7 @@ function ChartVisualization({ data, chartType, reportType }) {
 // ============================================================
 
 function ReportBuilderModal({ onClose, onSave, locations }) {
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
@@ -602,7 +603,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
     try {
       await onSave(report);
     } catch (err) {
-      setSaveError(err.message || 'Failed to save report');
+      setSaveError(err.message || t('reports.saveError', 'Failed to save report'));
     } finally {
       setSaving(false);
     }
@@ -635,7 +636,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                   value={report.name}
                   onChange={(e) => setReport({ ...report, name: e.target.value })}
                   className="input"
-                  placeholder="e.g., Weekly Overtime Analysis"
+                  placeholder={t('reports.namePlaceholder', 'e.g., Weekly Overtime Analysis')}
                 />
               </div>
 
@@ -663,7 +664,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
           {step === 2 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Select Columns</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('reports.selectColumns', 'Select Columns')}</label>
                 <div className="grid grid-cols-2 gap-2">
                   {(availableColumns[report.type] || []).map((col) => (
                     <button
@@ -689,11 +690,11 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                     onChange={(e) => setReport({ ...report, groupBy: e.target.value })}
                     className="input"
                   >
-                    <option value="employee">Employee</option>
-                    <option value="location">Location</option>
-                    <option value="department">Department</option>
-                    <option value="day">Day</option>
-                    <option value="week">Week</option>
+                    <option value="employee">{t('reports.groupByOptions.employee', 'Employee')}</option>
+                    <option value="location">{t('reports.groupByOptions.location', 'Location')}</option>
+                    <option value="department">{t('reports.groupByOptions.department', 'Department')}</option>
+                    <option value="day">{t('reports.groupByOptions.day', 'Day')}</option>
+                    <option value="week">{t('reports.groupByOptions.week', 'Week')}</option>
                   </select>
                 </div>
                 <div>
@@ -720,7 +721,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                   <div>
                     <label className="text-sm text-slate-600">Location</label>
                     <select className="input mt-1">
-                      <option value="">All Locations</option>
+                      <option value="">{t('reports.allLocations', 'All Locations')}</option>
                       {(locations || []).map((l) => (
                         <option key={l.id} value={l.id}>{l.name}</option>
                       ))}
@@ -740,12 +741,12 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
               </div>
 
               <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                <h4 className="font-medium text-green-800 mb-2">Report Summary</h4>
+                <h4 className="font-medium text-green-800 mb-2">{t('reports.summary.title', 'Report Summary')}</h4>
                 <ul className="text-sm text-green-700 space-y-1">
-                  <li>Name: {report.name || 'Untitled Report'}</li>
-                  <li>Type: {report.type}</li>
-                  <li>Columns: {report.columns.length} selected</li>
-                  <li>Group by: {report.groupBy}</li>
+                  <li>{t('reports.summary.name', 'Name')}: {report.name || t('reports.untitledReport', 'Untitled Report')}</li>
+                  <li>{t('reports.summary.type', 'Type')}: {report.type}</li>
+                  <li>{t('reports.summary.columns', 'Columns')}: {report.columns.length} {t('common.selected', 'selected')}</li>
+                  <li>{t('reports.summary.groupBy', 'Group by')}: {report.groupBy}</li>
                 </ul>
               </div>
             </div>
@@ -757,7 +758,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
             onClick={() => step > 1 ? setStep(step - 1) : onClose()}
             className="btn btn-secondary"
           >
-            {step === 1 ? 'Cancel' : 'Back'}
+            {step === 1 ? t('common.cancel', 'Cancel') : t('common.back', 'Back')}
           </button>
           <div className="flex gap-3">
             {step < 3 ? (
@@ -772,7 +773,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
             ) : (
               <button onClick={handleSave} disabled={saving} className="btn btn-primary">
                 <Save className="w-4 h-4" />
-                {saving ? 'Saving...' : 'Save Report'}
+                {saving ? t('common.saving', 'Saving...') : t('reports.saveReport', 'Save Report')}
               </button>
             )}
           </div>
@@ -787,15 +788,16 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
 // ============================================================
 
 function HoursTable({ data, groupBy }) {
+  const { t } = useTranslation();
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>{groupBy === 'employee' ? 'Employee' : groupBy === 'location' ? 'Location' : 'Date'}</th>
-          <th className="text-right">Total Hours</th>
-          <th className="text-right">Regular</th>
-          <th className="text-right">Overtime</th>
-          {groupBy === 'employee' && <th className="text-right">Labor Cost</th>}
+          <th>{groupBy === 'employee' ? t('reports.columns.employee', 'Employee') : groupBy === 'location' ? t('reports.columns.location', 'Location') : t('reports.columns.date', 'Date')}</th>
+          <th className="text-right">{t('reports.totalHours', 'Total Hours')}</th>
+          <th className="text-right">{t('reports.regularHours', 'Regular')}</th>
+          <th className="text-right">{t('reports.overtimeHours', 'Overtime')}</th>
+          {groupBy === 'employee' && <th className="text-right">{t('reports.columns.laborCost', 'Labor Cost')}</th>}
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-100">
@@ -805,7 +807,7 @@ function HoursTable({ data, groupBy }) {
               {groupBy === 'employee'
                 ? `${row.first_name || ''} ${row.last_name || ''}`
                 : groupBy === 'location'
-                ? row.location_name || 'Unknown'
+                ? row.location_name || t('common.unknown', 'Unknown')
                 : row.date ? format(new Date(row.date), 'EEE, MMM d') : '-'}
             </td>
             <td className="text-right">{parseFloat(row.total_hours || 0).toFixed(1)}h</td>
@@ -822,16 +824,17 @@ function HoursTable({ data, groupBy }) {
 }
 
 function AttendanceTable({ data }) {
+  const { t } = useTranslation();
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>Employee</th>
-          <th className="text-right">Scheduled</th>
-          <th className="text-right">Worked</th>
-          <th className="text-right">Missed</th>
-          <th className="text-right">Late</th>
-          <th className="text-right">Avg Arrival</th>
+          <th>{t('reports.columns.employee', 'Employee')}</th>
+          <th className="text-right">{t('reports.columns.scheduledShifts', 'Scheduled')}</th>
+          <th className="text-right">{t('reports.columns.workedShifts', 'Worked')}</th>
+          <th className="text-right">{t('reports.columns.missedShifts', 'Missed')}</th>
+          <th className="text-right">{t('reports.columns.lateArrivals', 'Late')}</th>
+          <th className="text-right">{t('reports.columns.avgArrivalDiff', 'Avg Arrival')}</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-100">
@@ -861,16 +864,17 @@ function AttendanceTable({ data }) {
 }
 
 function LaborCostTable({ data }) {
+  const { t } = useTranslation();
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>Period</th>
-          <th className="text-right">Employees</th>
-          <th className="text-right">Hours</th>
-          <th className="text-right">Regular Cost</th>
-          <th className="text-right">Overtime Cost</th>
-          <th className="text-right">Total Cost</th>
+          <th>{t('reports.columns.period', 'Period')}</th>
+          <th className="text-right">{t('reports.employees', 'Employees')}</th>
+          <th className="text-right">{t('common.hours', 'Hours')}</th>
+          <th className="text-right">{t('reports.columns.regularCost', 'Regular Cost')}</th>
+          <th className="text-right">{t('reports.columns.overtimeCost', 'Overtime Cost')}</th>
+          <th className="text-right">{t('reports.columns.totalCost', 'Total Cost')}</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-100">
@@ -890,23 +894,24 @@ function LaborCostTable({ data }) {
 }
 
 function CoverageTable({ data }) {
+  const { t } = useTranslation();
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Location</th>
-          <th className="text-right">Total Shifts</th>
-          <th className="text-right">Filled</th>
-          <th className="text-right">Open</th>
-          <th className="text-right">Fill Rate</th>
+          <th>{t('reports.columns.date', 'Date')}</th>
+          <th>{t('reports.columns.location', 'Location')}</th>
+          <th className="text-right">{t('reports.columns.totalShifts', 'Total Shifts')}</th>
+          <th className="text-right">{t('reports.columns.filledShifts', 'Filled')}</th>
+          <th className="text-right">{t('reports.columns.openShifts', 'Open')}</th>
+          <th className="text-right">{t('reports.columns.fillRate', 'Fill Rate')}</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-100">
         {(data || []).map((row, i) => (
           <tr key={i}>
             <td className="font-medium">{row.date ? format(new Date(row.date), 'EEE, MMM d') : '-'}</td>
-            <td>{row.location_name || 'Unknown'}</td>
+            <td>{row.location_name || t('common.unknown', 'Unknown')}</td>
             <td className="text-right">{row.total_shifts}</td>
             <td className="text-right">{row.filled_shifts}</td>
             <td className="text-right">

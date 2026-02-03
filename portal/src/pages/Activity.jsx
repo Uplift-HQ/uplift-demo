@@ -40,7 +40,7 @@ export default function Activity() {
       setSubmissions(result?.submissions || result?.activities || []);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load activity:', err);
-      setError(err.message || 'Failed to load activity data');
+      setError(err.message || t('activity.loadError', 'Failed to load activity data'));
       setSubmissions([]);
     } finally {
       setLoading(false);
@@ -341,14 +341,14 @@ export default function Activity() {
                         <button
                           onClick={(e) => { e.stopPropagation(); handleApprove(submission.id); }}
                           className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
-                          title="Approve"
+                          title={t('common.approve', 'Approve')}
                         >
                           <ThumbsUp className="w-5 h-5" />
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); handleReject(submission.id); }}
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                          title="Reject"
+                          title={t('common.reject', 'Reject')}
                         >
                           <ThumbsDown className="w-5 h-5" />
                         </button>
@@ -381,6 +381,7 @@ export default function Activity() {
 // ============================================================
 
 function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTypeLabel }) {
+  const { t } = useTranslation();
   const [rejectReason, setRejectReason] = useState('');
   const [showRejectForm, setShowRejectForm] = useState(false);
 
@@ -520,7 +521,7 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
               <textarea
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
-                placeholder="Enter reason for rejection..."
+                placeholder={t('activity.rejectionReasonPlaceholder', 'Enter reason for rejection...')}
                 rows={3}
                 className="w-full px-3 py-2 border border-red-200 rounded-lg text-sm"
               />
@@ -550,11 +551,11 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
               className="btn btn-secondary text-red-600 hover:bg-red-50"
             >
               <ThumbsDown className="w-4 h-4" />
-              Reject
+              {t('common.reject', 'Reject')}
             </button>
             <button onClick={onApprove} className="btn btn-primary">
               <ThumbsUp className="w-4 h-4" />
-              Approve
+              {t('common.approve', 'Approve')}
             </button>
           </div>
         )}

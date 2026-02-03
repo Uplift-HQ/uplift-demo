@@ -3,7 +3,7 @@
 // Build custom REST API integrations without code
 // ============================================================
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Code, Plus, Play, Save, Trash2, Copy, Check, X, ChevronDown, ChevronRight,
   Settings, Zap, Clock, AlertCircle, CheckCircle, RefreshCw, Eye, EyeOff,
@@ -19,37 +19,37 @@ import { useTranslation } from 'react-i18next';
 
 const HTTP_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
 
-const AUTH_TYPES = [
-  { id: 'none', label: 'No Authentication', icon: Unlock },
-  { id: 'api_key', label: 'API Key', icon: Key },
-  { id: 'bearer', label: 'Bearer Token', icon: Lock },
-  { id: 'basic', label: 'Basic Auth', icon: Lock },
-  { id: 'oauth2', label: 'OAuth 2.0', icon: Lock },
+const getAuthTypes = (t) => [
+  { id: 'none', label: t('integrations.api.authNone', 'No Authentication'), icon: Unlock },
+  { id: 'api_key', label: t('integrations.api.authApiKey', 'API Key'), icon: Key },
+  { id: 'bearer', label: t('integrations.api.authBearer', 'Bearer Token'), icon: Lock },
+  { id: 'basic', label: t('integrations.api.authBasic', 'Basic Auth'), icon: Lock },
+  { id: 'oauth2', label: t('integrations.api.authOAuth2', 'OAuth 2.0'), icon: Lock },
 ];
 
-const TRIGGER_TYPES = [
-  { id: 'manual', label: 'Manual', description: 'Run on demand', icon: Play },
-  { id: 'schedule', label: 'Scheduled', description: 'Run on a schedule', icon: Clock },
-  { id: 'event', label: 'Event-based', description: 'Triggered by Uplift events', icon: Zap },
-  { id: 'webhook', label: 'Incoming Webhook', description: 'Receive data from external systems', icon: Webhook },
+const getTriggerTypes = (t) => [
+  { id: 'manual', label: t('integrations.api.triggerManual', 'Manual'), description: t('integrations.api.triggerManualDesc', 'Run on demand'), icon: Play },
+  { id: 'schedule', label: t('integrations.api.triggerScheduled', 'Scheduled'), description: t('integrations.api.triggerScheduledDesc', 'Run on a schedule'), icon: Clock },
+  { id: 'event', label: t('integrations.api.triggerEvent', 'Event-based'), description: t('integrations.api.triggerEventDesc', 'Triggered by Uplift events'), icon: Zap },
+  { id: 'webhook', label: t('integrations.api.triggerWebhook', 'Incoming Webhook'), description: t('integrations.api.triggerWebhookDesc', 'Receive data from external systems'), icon: Webhook },
 ];
 
-const UPLIFT_EVENTS = [
-  { id: 'employee.created', label: 'Employee Created', category: 'Employees' },
-  { id: 'employee.updated', label: 'Employee Updated', category: 'Employees' },
-  { id: 'employee.deactivated', label: 'Employee Deactivated', category: 'Employees' },
-  { id: 'shift.created', label: 'Shift Created', category: 'Scheduling' },
-  { id: 'shift.updated', label: 'Shift Updated', category: 'Scheduling' },
-  { id: 'shift.deleted', label: 'Shift Deleted', category: 'Scheduling' },
-  { id: 'shift.claimed', label: 'Shift Claimed', category: 'Scheduling' },
-  { id: 'timeentry.clockin', label: 'Clock In', category: 'Time Tracking' },
-  { id: 'timeentry.clockout', label: 'Clock Out', category: 'Time Tracking' },
-  { id: 'timeentry.approved', label: 'Time Entry Approved', category: 'Time Tracking' },
-  { id: 'timeoff.requested', label: 'Time Off Requested', category: 'Time Off' },
-  { id: 'timeoff.approved', label: 'Time Off Approved', category: 'Time Off' },
-  { id: 'timeoff.rejected', label: 'Time Off Rejected', category: 'Time Off' },
-  { id: 'skill.verified', label: 'Skill Verified', category: 'Skills' },
-  { id: 'job.applied', label: 'Job Application', category: 'Career' },
+const getUpliftEvents = (t) => [
+  { id: 'employee.created', label: t('integrations.events.employeeCreated', 'Employee Created'), category: t('integrations.events.categoryEmployees', 'Employees') },
+  { id: 'employee.updated', label: t('integrations.events.employeeUpdated', 'Employee Updated'), category: t('integrations.events.categoryEmployees', 'Employees') },
+  { id: 'employee.deactivated', label: t('integrations.events.employeeDeactivated', 'Employee Deactivated'), category: t('integrations.events.categoryEmployees', 'Employees') },
+  { id: 'shift.created', label: t('integrations.events.shiftCreated', 'Shift Created'), category: t('integrations.events.categoryScheduling', 'Scheduling') },
+  { id: 'shift.updated', label: t('integrations.events.shiftUpdated', 'Shift Updated'), category: t('integrations.events.categoryScheduling', 'Scheduling') },
+  { id: 'shift.deleted', label: t('integrations.events.shiftDeleted', 'Shift Deleted'), category: t('integrations.events.categoryScheduling', 'Scheduling') },
+  { id: 'shift.claimed', label: t('integrations.events.shiftClaimed', 'Shift Claimed'), category: t('integrations.events.categoryScheduling', 'Scheduling') },
+  { id: 'timeentry.clockin', label: t('integrations.events.clockIn', 'Clock In'), category: t('integrations.events.categoryTimeTracking', 'Time Tracking') },
+  { id: 'timeentry.clockout', label: t('integrations.events.clockOut', 'Clock Out'), category: t('integrations.events.categoryTimeTracking', 'Time Tracking') },
+  { id: 'timeentry.approved', label: t('integrations.events.timeEntryApproved', 'Time Entry Approved'), category: t('integrations.events.categoryTimeTracking', 'Time Tracking') },
+  { id: 'timeoff.requested', label: t('integrations.events.timeOffRequested', 'Time Off Requested'), category: t('integrations.events.categoryTimeOff', 'Time Off') },
+  { id: 'timeoff.approved', label: t('integrations.events.timeOffApproved', 'Time Off Approved'), category: t('integrations.events.categoryTimeOff', 'Time Off') },
+  { id: 'timeoff.rejected', label: t('integrations.events.timeOffRejected', 'Time Off Rejected'), category: t('integrations.events.categoryTimeOff', 'Time Off') },
+  { id: 'skill.verified', label: t('integrations.events.skillVerified', 'Skill Verified'), category: t('integrations.events.categorySkills', 'Skills') },
+  { id: 'job.applied', label: t('integrations.events.jobApplication', 'Job Application'), category: t('integrations.events.categoryCareer', 'Career') },
 ];
 
 const UPLIFT_FIELDS = {
@@ -394,6 +394,12 @@ const ApiListItem = ({ api, onEdit, onToggle, onDelete, onTest, onViewLogs }) =>
 
 const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
   const { t } = useTranslation();
+
+  // Memoized translations for constants
+  const AUTH_TYPES = useMemo(() => getAuthTypes(t), [t]);
+  const TRIGGER_TYPES = useMemo(() => getTriggerTypes(t), [t]);
+  const UPLIFT_EVENTS = useMemo(() => getUpliftEvents(t), [t]);
+
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -499,7 +505,7 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
           success: false,
           statusCode: 0,
           duration: 0,
-          response: { error: 'Save the integration first before testing' },
+          response: { error: t('integrations.api.saveFirstBeforeTesting', 'Save the integration first before testing') },
         });
       }
     } catch (error) {
@@ -508,7 +514,7 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
         success: false,
         statusCode: error.status || 0,
         duration: 0,
-        response: { error: error.message || 'Test request failed' },
+        response: { error: error.message || t('integrations.api.testRequestFailed', 'Test request failed') },
       });
     } finally {
       setTesting(false);
@@ -802,7 +808,7 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                   </div>
                   <Input
                     label={t('apiFactory.editor.scopes', 'Scopes (comma-separated)')}
-                    placeholder="read,write"
+                    placeholder={t('integrations.api.scopePlaceholder', 'read,write')}
                     value={formData.authConfig.scopes || ''}
                     onChange={e => updateAuthConfig('scopes', e.target.value)}
                   />

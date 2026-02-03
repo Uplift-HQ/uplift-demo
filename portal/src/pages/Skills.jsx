@@ -54,7 +54,7 @@ export default function Skills() {
       setSkills(enriched);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load skills:', err);
-      setError('Failed to load skills. Please try again.');
+      setError(t('skills.loadError', 'Failed to load skills. Please try again.'));
     } finally {
       setLoading(false);
     }

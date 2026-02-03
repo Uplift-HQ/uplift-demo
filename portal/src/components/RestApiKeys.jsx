@@ -14,26 +14,26 @@ import { useTranslation } from 'react-i18next';
 
 // -------------------- CONSTANTS --------------------
 
-const SCOPES = {
-  'employees:read': 'View employee information',
-  'employees:write': 'Create and update employees',
-  'schedules:read': 'View schedules and shifts',
-  'schedules:write': 'Create and modify schedules',
-  'time:read': 'View time entries',
-  'time:write': 'Create and modify time entries',
-  'skills:read': 'View skills and certifications',
-  'skills:write': 'Manage skills and verifications',
-  'locations:read': 'View location information',
-  'locations:write': 'Manage locations',
-  'reports:read': 'Access reports data',
-  'webhooks:manage': 'Configure webhooks',
-  'admin': 'Full administrative access',
-};
+const getScopesWithTranslations = (t) => ({
+  'employees:read': t('integrations.scopes.employeesRead', 'View employee information'),
+  'employees:write': t('integrations.scopes.employeesWrite', 'Create and update employees'),
+  'schedules:read': t('integrations.scopes.schedulesRead', 'View schedules and shifts'),
+  'schedules:write': t('integrations.scopes.schedulesWrite', 'Create and modify schedules'),
+  'time:read': t('integrations.scopes.timeRead', 'View time entries'),
+  'time:write': t('integrations.scopes.timeWrite', 'Create and modify time entries'),
+  'skills:read': t('integrations.scopes.skillsRead', 'View skills and certifications'),
+  'skills:write': t('integrations.scopes.skillsWrite', 'Manage skills and verifications'),
+  'locations:read': t('integrations.scopes.locationsRead', 'View location information'),
+  'locations:write': t('integrations.scopes.locationsWrite', 'Manage locations'),
+  'reports:read': t('integrations.scopes.reportsRead', 'Access reports data'),
+  'webhooks:manage': t('integrations.scopes.webhooksManage', 'Configure webhooks'),
+  'admin': t('integrations.scopes.admin', 'Full administrative access'),
+});
 
-const RATE_TIERS = [
-  { id: 'basic', name: 'Basic', requests: '60/min', daily: '10,000/day' },
-  { id: 'standard', name: 'Standard', requests: '120/min', daily: '50,000/day' },
-  { id: 'premium', name: 'Premium', requests: '300/min', daily: '200,000/day' },
+const getRateTiersWithTranslations = (t) => [
+  { id: 'basic', name: t('integrations.rateLimits.basic', 'Basic'), requests: '60/min', daily: '10,000/day' },
+  { id: 'standard', name: t('integrations.rateLimits.standard', 'Standard'), requests: '120/min', daily: '50,000/day' },
+  { id: 'premium', name: t('integrations.rateLimits.premium', 'Premium'), requests: '300/min', daily: '200,000/day' },
 ];
 
 // -------------------- HELPER COMPONENTS --------------------
@@ -55,7 +55,7 @@ const Badge = ({ children, variant = 'default' }) => {
   );
 };
 
-const CopyButton = ({ text, label }) => {
+const CopyButton = ({ text, label, t }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -68,7 +68,7 @@ const CopyButton = ({ text, label }) => {
     <button
       onClick={handleCopy}
       className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors"
-      title={copied ? 'Copied!' : `Copy ${label}`}
+      title={copied ? t('integrations.copied', 'Copied!') : t('integrations.copy', 'Copy') + ' ' + label}
     >
       {copied ? (
         <Check className="w-4 h-4 text-emerald-500" />
@@ -124,7 +124,7 @@ const ApiKeyCard = ({ apiKey, onRevoke, onRegenerate, onViewUsage }) => {
         <code className="text-sm font-mono text-slate-700 dark:text-slate-300 flex-1">
           {apiKey.maskedKeyId || apiKey.keyId?.substring(0, 20) + '...'}
         </code>
-        <CopyButton text={apiKey.keyId} label={t('restApiKeys.card.keyId', 'Key ID')} />
+        <CopyButton text={apiKey.keyId} label={t('restApiKeys.card.keyId', 'Key ID')} t={t} />
       </div>
 
       {/* Stats */}
@@ -313,7 +313,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                   <code className="text-sm font-mono flex-1 text-slate-600 dark:text-slate-400">
                     {createdKey.keyId}
                   </code>
-                  <CopyButton text={createdKey.keyId} label={t('restApiKeys.create.keyIdLabel', 'Key ID')} />
+                  <CopyButton text={createdKey.keyId} label={t('restApiKeys.create.keyIdLabel', 'Key ID')} t={t} />
                 </div>
               </div>
 
@@ -331,7 +331,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                   >
                     {showSecret ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
-                  <CopyButton text={createdKey.secretKey} label={t('restApiKeys.create.secretKeyLabel', 'Secret Key')} />
+                  <CopyButton text={createdKey.secretKey} label={t('restApiKeys.create.secretKeyLabel', 'Secret Key')} t={t} />
                 </div>
               </div>
 
@@ -343,7 +343,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                   <code className="text-sm font-mono flex-1 text-slate-600 dark:text-slate-400 break-all">
                     {showSecret ? createdKey.fullKey : createdKey.keyId + '.\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'}
                   </code>
-                  <CopyButton text={createdKey.fullKey} label={t('restApiKeys.create.fullKeyLabel', 'Full Key')} />
+                  <CopyButton text={createdKey.fullKey} label={t('restApiKeys.create.fullKeyLabel', 'Full Key')} t={t} />
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
                   {t('restApiKeys.create.authHeaderNote', 'Use this in your Authorization header')}: <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">Bearer {'{'}full_key{'}'}</code>
@@ -390,7 +390,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                   {t('restApiKeys.create.permissions', 'Permissions')}
                 </label>
                 <div className="max-h-48 overflow-y-auto p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg space-y-2">
-                  {Object.entries(SCOPES).map(([scope, desc]) => (
+                  {Object.entries(getScopesWithTranslations(t)).map(([scope, desc]) => (
                     <label key={scope} className="flex items-start gap-3 cursor-pointer hover:bg-white dark:hover:bg-slate-800 p-2 rounded-lg">
                       <input
                         type="checkbox"
@@ -417,7 +417,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
                     onChange={e => setRateTier(e.target.value)}
                     className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800"
                   >
-                    {RATE_TIERS.map(tier => (
+                    {getRateTiersWithTranslations(t).map(tier => (
                       <option key={tier.id} value={tier.id}>
                         {tier.name} ({tier.requests})
                       </option>

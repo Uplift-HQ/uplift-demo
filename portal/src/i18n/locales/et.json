@@ -52,7 +52,22 @@
     "growYourCareer": "Arenda oma karjääri",
     "trackSkillsDesc": "Jälgi oma oskusi ja avasta sisemisi võimalusi",
     "viewMyCareer": "Vaata minu karjääri",
-    "timeOffBalance": "Puhkusejääk"
+    "timeOffBalance": "Puhkusejääk",
+    "loadError": "Failed to load dashboard",
+    "live": "LIVE",
+    "clickToSeeWho": "Click to see who",
+    "affected": "affected",
+    "expiresIn": "Expires in",
+    "overdueBy": "Overdue by",
+    "manageAll": "Manage All",
+    "noRecentActivity": "No recent activity",
+    "noRecentRecognitions": "No recent recognitions",
+    "available": "Available",
+    "alerts": {
+      "expiring": "Certifications expiring within 30 days",
+      "training": "Training in progress or pending",
+      "document": "Probation reviews due"
+    }
   },
   "nav": {
     "dashboard": "Töölaud",
@@ -186,7 +201,19 @@
       "afternoon": "Iltapäivä",
       "evening": "Ilta",
       "night": "Yö"
-    }
+    },
+    "viewDetails": "View Details",
+    "unknownEmployee": "Unknown Employee",
+    "saving": "Saving...",
+    "unknown": "Unknown",
+    "employee": "employee",
+    "employees": "employees",
+    "at": "at",
+    "deny": "Deny",
+    "failed": "Failed",
+    "event": "Event",
+    "processing": "Processing...",
+    "creating": "Creating..."
   },
   "auth": {
     "login": "Logi sisse",
@@ -364,7 +391,27 @@
       "week": "Viikko",
       "twoWeeks": "2 Viikkoa",
       "month": "Kuukausi"
-    }
+    },
+    "loadError": "Failed to load schedule data",
+    "hideSidebar": "Hide sidebar",
+    "showSidebar": "Show sidebar",
+    "publish": {
+      "notification1": "Employees receive push notifications",
+      "notification2": "Shifts appear in employee apps",
+      "notification3": "Changes after this will trigger new notifications"
+    },
+    "today": "Today",
+    "filters": "Filters",
+    "published": "Published",
+    "draft": "Draft",
+    "open": "Open",
+    "scheduleOverview": "Schedule Overview",
+    "thisWeeksStaffing": "This Week's Staffing",
+    "pendingTimeOff": "Pending Time Off",
+    "noPendingRequests": "No pending requests",
+    "shiftSwaps": "Shift Swaps",
+    "noPendingSwaps": "No pending swaps",
+    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules."
   },
   "timeTracking": {
     "title": "Ajaregistreerimine",
@@ -413,7 +460,8 @@
     "clockOut": "Logi välja",
     "startBreak": "Alusta pausi",
     "endBreak": "Lõpeta paus",
-    "totalHours": "Kokku tunde"
+    "totalHours": "Kokku tunde",
+    "loadError": "Failed to load time tracking data. Please try again."
   },
   "timeOff": {
     "title": "Puhkus",
@@ -453,7 +501,17 @@
     "noRequests": "Taotlusi ei leitud",
     "requestDetails": "Puhkusetaotluse üksikasjad",
     "noReason": "Põhjust pole esitatud",
-    "submitted": "Esitatud"
+    "submitted": "Esitatud",
+    "loadError": "Failed to load time-off requests. Please try again.",
+    "types": {
+      "annualLeave": "Annual Leave",
+      "sickLeave": "Sick Leave",
+      "personal": "Personal",
+      "bereavement": "Bereavement",
+      "maternity": "Maternity",
+      "paternity": "Paternity",
+      "unpaid": "Unpaid Leave"
+    }
   },
   "feed": {
     "title": "Voog",
@@ -562,7 +620,8 @@
     "browseSkills": "Sirvi oskusi",
     "searchSkills": "Otsi oskusi...",
     "skillAdded": "Oskus edukalt lisatud",
-    "verificationRequested": "Kinnitustaotlus saadetud"
+    "verificationRequested": "Kinnitustaotlus saadetud",
+    "loadError": "Failed to load skills. Please try again."
   },
   "career": {
     "title": "Karjäär",
@@ -636,7 +695,8 @@
     "skillRequestSubmitted": "Oskuse taotlus esitatud! Sinu juht vaatab selle üle.",
     "expiringSoon": "Aegub peagi",
     "expired": "Aegunud",
-    "expires": "Aegub {{date}}"
+    "expires": "Aegub {{date}}",
+    "loadError": "Failed to load career data"
   },
   "gamification": {
     "level": "Tase {{level}}",
@@ -732,8 +792,23 @@
     "organization": "Organisatsioon",
     "navigation": "Navigeerimine",
     "employeeVisibility": "Töötaja nähtavus",
-    "users": "Kasutajad",
-    "webhooks": "Webhookid",
+    "users": {
+      "never": "Never",
+      "accountUnlocked": "Account unlocked",
+      "accountDeactivated": "Account deactivated",
+      "accountReactivated": "Account reactivated",
+      "roleUpdated": "Role updated",
+      "passwordResetRequired": "Password reset required on next login",
+      "invitationResent": "Invitation resent",
+      "invitationCancelled": "Invitation cancelled",
+      "sessionsRevoked": "All sessions revoked"
+    },
+    "webhooks": {
+      "viewDetails": "View details",
+      "deleteWebhook": "Delete webhook",
+      "namePlaceholder": "e.g., Slack Notifications",
+      "secretPlaceholder": "Your webhook secret for signature verification"
+    },
     "sessions": "Sessioonid",
     "organizationSettings": "Organisatsiooni seaded",
     "configurePreferences": "Konfigureeri oma organisatsiooni eelistusi",
@@ -841,7 +916,46 @@
       "companyName": "Company name",
       "email": "Email address",
       "phone": "Phone number"
-    }
+    },
+    "timezones": {
+      "london": "London (GMT/BST)",
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "singapore": "Singapore (SGT)"
+    },
+    "branding": {
+      "primaryLogo": "Primary Logo",
+      "primaryLogoDesc": "Displayed in the sidebar on light backgrounds. PNG, JPG, or SVG. Max 2MB.",
+      "darkModeLogo": "Dark Mode Logo",
+      "darkModeLogoDesc": "Used on dark backgrounds. Should be light/white version of your logo.",
+      "favicon": "Favicon",
+      "faviconDesc": "Browser tab icon. Ideally square, 32x32 or 64x64. PNG or ICO.",
+      "loginBackground": "Login Background",
+      "loginBackgroundDesc": "Background image for the login screen. Recommended 1920x1080.",
+      "customLogo": "Custom Logo",
+      "brandColors": "Brand Colors",
+      "loginScreen": "Login Screen",
+      "customFavicon": "Custom Favicon"
+    },
+    "organizationSaved": "Organization settings saved",
+    "brandingSaved": "Branding settings saved",
+    "invitationSent": "Invitation sent",
+    "inviteError": "Failed to send invitation",
+    "saveBranding": "Save Branding",
+    "companyNamePlaceholder": "Your Company Name",
+    "searchEmployeesPlaceholder": "Search employees...",
+    "passwordPlaceholder": "Your password",
+    "unknownDevice": "Unknown Device",
+    "currentSession": "Current",
+    "noActivityRecorded": "No activity recorded",
+    "noWebhooksConfigured": "No webhooks configured",
+    "addWebhookToIntegrate": "Add a webhook to integrate with external systems",
+    "noDeliveriesYet": "No deliveries yet",
+    "response": "Response",
+    "noPagesConfigured": "No pages configured",
+    "eventsSelected": "events selected",
+    "createWebhook": "Create Webhook",
+    "enterPasswordToConfirm": "Enter your password to confirm"
   },
   "tasks": {
     "title": "Ülesanded",
@@ -987,7 +1101,98 @@
     "selectDepartment": "Valitse osasto...",
     "selectRole": "Valitse rooli...",
     "selectLocation": "Valitse sijainti...",
-    "selectManager": "Valitse esimies (valinnainen)..."
+    "selectManager": "Valitse esimies (valinnainen)...",
+    "employeeDetailsTitle": "Työntekijätiedot",
+    "employeeDetailsDesc": "Syötä uuden työntekijän perustiedot.",
+    "firstName": "Etunimi",
+    "firstNamePlaceholder": "esim. Matti",
+    "lastName": "Sukunimi",
+    "lastNamePlaceholder": "esim. Virtanen",
+    "emailAddress": "Sähköpostiosoite",
+    "emailPlaceholder": "esim. matti.virtanen@yritys.fi",
+    "emailExistsWarning": "Tällä sähköpostilla on jo työntekijä ({{name}}).",
+    "phoneNumber": "Puhelinnumero",
+    "phonePlaceholder": "esim. +358 40 123 4567",
+    "employmentType": "Työsuhteen tyyppi",
+    "startDate": "Aloituspäivä",
+    "employeeId": "Työntekijä-ID",
+    "employeeIdPlaceholder": "Luodaan automaattisesti jos tyhjä",
+    "employeeIdHelper": "Jätä tyhjäksi automaattista luontia varten.",
+    "roleDepartmentTitle": "Rooli & Osasto",
+    "roleDepartmentDesc": "Määritä työntekijälle osasto, rooli ja sijainti.",
+    "department": "Osasto",
+    "role": "Rooli",
+    "location": "Sijainti",
+    "payRate": "Palkka",
+    "perHour": "/ tunti",
+    "perYear": "/ vuosi",
+    "reportingManager": "Lähin Esimies",
+    "skillsCertsTitle": "Taidot & Sertifikaatit",
+    "skillsCertsDesc": "Valitse taidot ja lisää työntekijän sertifikaatit.",
+    "skills": "Taidot",
+    "noSkillsDefined": "Taitoja ei ole vielä määritelty. Lisää taidot Taidot-sivulla ensin.",
+    "setProficiencyLevels": "Aseta Osaamistasot",
+    "certifications": "Sertifikaatit",
+    "addCertification": "Lisää Sertifikaatti",
+    "noCertificationsYet": "Sertifikaatteja ei ole vielä lisätty.",
+    "certificationNamePlaceholder": "Sertifikaatin nimi",
+    "issuingBodyPlaceholder": "Myöntävä organisaatio",
+    "maxHoursPlaceholder": "esim. 40",
+    "restrictionsNotes": "Rajoitukset / Huomautukset",
+    "notesPlaceholder": "Aikataulurajoitukset, mieltymykset tai huomautukset...",
+    "reviewInviteTitle": "Tarkista & Lähetä Kutsu",
+    "reviewInviteDesc": "Tarkista tiedot ja kutsu työntekijä Uplift-sovellukseen.",
+    "summary": "Yhteenveto",
+    "summaryName": "Nimi",
+    "summaryEmail": "Sähköposti",
+    "summaryPhone": "Puhelin",
+    "summaryType": "Tyyppi",
+    "summaryStartDate": "Aloituspäivä",
+    "summaryEmployeeId": "Työntekijä-ID",
+    "summarySkills": "Taidot",
+    "summaryAvailable": "Saatavilla",
+    "autoGenerated": "Automaattisesti luotu",
+    "sendInvitationEmail": "Lähetä kutsusähköposti",
+    "sendInvitationEmailDesc": "Työntekijä saa sähköpostin Uplift-sovelluksen lataamiseksi ja tilin luomiseksi.",
+    "setTempPassword": "Aseta väliaikainen salasana",
+    "setTempPasswordDesc": "Aseta väliaikainen salasana, jota työntekijä voi käyttää kirjautumiseen.",
+    "tempPasswordPlaceholder": "Väliaikainen salasana",
+    "successTitle": "Työntekijä Lisätty!",
+    "successDesc": "on lisätty järjestelmään ja kutsu on lähetetty",
+    "viewEmployees": "Näytä Työntekijät",
+    "onboardAnother": "Lisää Toinen",
+    "pageTitle": "Työntekijän Perehdytys",
+    "pageDesc": "Lisää uusi työntekijä ja kutsu hänet Uplift-sovellukseen.",
+    "bulkImportLink": "Tarvitseeko lisätä monta työntekijää? Käytä Joukkotuontia",
+    "loadingData": "Ladataan organisaatiotietoja...",
+    "stepOf": "Vaihe {{current}} / {{total}}",
+    "creating": "Luodaan...",
+    "createEmployee": "Luo Työntekijä",
+    "inviteEmailFailed": "Työntekijä luotiin, mutta kutsusähköpostin lähetys epäonnistui. Voit lähettää uudelleen Työntekijät-sivulta.",
+    "createFailed": "Työntekijän luominen epäonnistui. Yritä uudelleen.",
+    "employmentTypes": {
+      "full-time": "Kokoaikainen",
+      "part-time": "Osa-aikainen",
+      "casual": "Tilapäinen",
+      "contractor": "Urakoitsija"
+    },
+    "proficiency": {
+      "beginner": "Aloittelija",
+      "intermediate": "Keskitaso",
+      "advanced": "Edistynyt"
+    },
+    "errors": {
+      "firstNameRequired": "Etunimi on pakollinen",
+      "lastNameRequired": "Sukunimi on pakollinen",
+      "emailRequired": "Sähköposti on pakollinen",
+      "invalidEmail": "Virheellinen sähköpostiosoite",
+      "employmentTypeRequired": "Työsuhteen tyyppi on pakollinen",
+      "startDateRequired": "Aloituspäivä on pakollinen",
+      "departmentRequired": "Osasto on pakollinen",
+      "roleRequired": "Rooli on pakollinen",
+      "locationRequired": "Sijainti on pakollinen",
+      "payRateRequired": "Vaaditaan kelvollinen palkka"
+    }
   },
   "errors": {
     "networkError": "Võrgu viga. Palun kontrolli oma ühendust.",
@@ -1042,7 +1247,9 @@
     "reject": "Lükka tagasi",
     "placeholder": {
       "search": "Search activity..."
-    }
+    },
+    "loadError": "Failed to load activity data",
+    "rejectionReasonPlaceholder": "Enter reason for rejection..."
   },
   "notificationSettings": {
     "title": "Teavituste eelistused",
@@ -1098,7 +1305,11 @@
     "chooseSkill": "Vali oskus...",
     "proficiencyLevel": "Oskuse tase",
     "basic": "Algtase",
-    "adding": "Lisamine..."
+    "adding": "Lisamine...",
+    "loadError": "Failed to load employee",
+    "verifySkill": "Verify skill",
+    "removeSkill": "Remove skill",
+    "confirmRemoveSkill": "Remove this skill from the employee?"
   },
   "reports": {
     "title": "Aruanded",
@@ -1173,8 +1384,33 @@
       "totalShifts": "Vuorot Yhteensä",
       "filledShifts": "Täytetyt Vuorot",
       "openShifts": "Avoimet Vuorot",
-      "fillRate": "Täyttöaste"
-    }
+      "fillRate": "Täyttöaste",
+      "employee": "Employee",
+      "period": "Period",
+      "regularCost": "Regular Cost",
+      "overtimeCost": "Overtime Cost",
+      "totalCost": "Total Cost"
+    },
+    "loadError": "Failed to load report data",
+    "saveError": "Failed to save report",
+    "namePlaceholder": "e.g., Weekly Overtime Analysis",
+    "groupByOptions": {
+      "employee": "Employee",
+      "location": "Location",
+      "department": "Department",
+      "day": "Day",
+      "week": "Week"
+    },
+    "summary": {
+      "title": "Report Summary",
+      "name": "Name",
+      "type": "Type",
+      "columns": "Columns",
+      "groupBy": "Group by"
+    },
+    "untitledReport": "Untitled Report",
+    "saveReport": "Save Report",
+    "selectColumns": "Select Columns"
   },
   "accessibility": {
     "menu": "Menüü",
@@ -1218,7 +1454,27 @@
     "developmentHint": "AI täitmine eelistab töötajaid, kes liiguvad edutamise poole",
     "willCreate": "See loob ligikaudu",
     "shiftsLabel": "vahetust",
-    "generating": "Genereerimine..."
+    "generating": "Genereerimine...",
+    "loadError": "Failed to load templates",
+    "confirmDelete": "Delete this template?",
+    "generateError": "Failed to generate shifts",
+    "patterns": {
+      "customDays": "Custom Days",
+      "customDaysDesc": "Select specific days",
+      "monFri": "Monday to Friday",
+      "monFriDesc": "Standard work week",
+      "weekend": "Weekend Only",
+      "weekendDesc": "Saturday and Sunday",
+      "4on4off": "4 On / 4 Off",
+      "4on4offDesc": "Continental shift pattern",
+      "2week": "2 Week Rotation",
+      "2weekDesc": "Alternating fortnight pattern",
+      "3on3off": "3 On / 3 Off",
+      "3on3offDesc": "Common retail pattern",
+      "5on2off": "5 On / 2 Off",
+      "5on2offDesc": "Standard with rotating days off"
+    },
+    "allDays": "All days"
   },
   "legal": {
     "lastUpdated": "Viimati uuendatud",
@@ -1412,6 +1668,16 @@
       "locationsDesc": "Impordi asukohad",
       "skills": "Oskused",
       "skillsDesc": "Impordi oskused"
+    },
+    "types": {
+      "employees": "Employees",
+      "employeesDesc": "Import employee profiles",
+      "shifts": "Shifts",
+      "shiftsDesc": "Import shift schedules",
+      "locations": "Locations",
+      "locationsDesc": "Import locations",
+      "skills": "Skills",
+      "skillsDesc": "Import skills"
     }
   },
   "jobs": {
@@ -1441,7 +1707,8 @@
     "enterDescription": "Sisesta töökirjeldus",
     "postJob": "Postita töökoht",
     "skillMatch": "oskuste sobivus",
-    "noApplicants": "Kandidaate pole veel"
+    "noApplicants": "Kandidaate pole veel",
+    "loadError": "Failed to load job postings. Please try again."
   },
   "employees": {
     "searchPlaceholder": "Otsi nime või e-posti järgi...",
@@ -1457,7 +1724,8 @@
     "allLocations": "All Locations",
     "placeholder": {
       "searchEmployees": "Search employees..."
-    }
+    },
+    "loadError": "Failed to load employees"
   },
   "integrationHub": {
     "title": "Integratsioonikeskus",
@@ -1612,7 +1880,8 @@
       "createdSuccess": "Webhook edukalt loodud!",
       "testSent": "Testkoorem saadetud",
       "testStatus": "Olek",
-      "deleteConfirm": "Kustuta see webhook?"
+      "deleteConfirm": "Kustuta see webhook?",
+      "skillExpired": "Skill Expired"
     },
     "marketplace": {
       "searchPlaceholder": "Otsi integratsioone...",
@@ -1837,7 +2106,12 @@
       "locations": "Asukohad",
       "departments": "Osakonnad",
       "roles": "Rollid ja õigused",
-      "review": "Ülevaade ja käivitamine"
+      "review": "Ülevaade ja käivitamine",
+      "companyInfo": "Company Info",
+      "branding": "Branding & Timezone",
+      "inviteAdmin": "Invite Admin",
+      "addEmployees": "Add Employees",
+      "done": "Done"
     },
     "orgDetails": {
       "companyName": "Ettevõtte nimi",
@@ -1920,19 +2194,162 @@
     "selectTimezone": "Select timezone...",
     "selectSize": "Select company size...",
     "selectCountry": "Select country...",
-    "selectCurrency": "Select currency..."
+    "selectCurrency": "Select currency...",
+    "industries": {
+      "retail": "Retail",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "construction": "Construction",
+      "logistics": "Logistics",
+      "foodBeverage": "Food & Beverage",
+      "education": "Education",
+      "technology": "Technology",
+      "finance": "Finance",
+      "government": "Government",
+      "nonprofit": "Non-profit",
+      "other": "Other"
+    }
   },
   "locations": {
     "placeholder": {
       "search": "Search locations...",
       "name": "Location name",
       "address": "Address"
-    }
+    },
+    "loadError": "Failed to load locations. Please try again.",
+    "codePlaceholder": "LON-01",
+    "noEmployeesAssigned": "No employees assigned to this location"
   },
   "integrations": {
     "placeholder": {
       "search": "Search integrations..."
-    }
+    },
+    "scopes": {
+      "employeesRead": "View employee information",
+      "employeesWrite": "Create and update employees",
+      "schedulesRead": "View schedules and shifts",
+      "schedulesWrite": "Create and modify schedules",
+      "timeRead": "View time entries",
+      "timeWrite": "Create and modify time entries",
+      "skillsRead": "View skills and certifications",
+      "skillsWrite": "Manage skills and verifications",
+      "locationsRead": "View location information",
+      "locationsWrite": "Manage locations",
+      "reportsRead": "Access reports data",
+      "webhooksManage": "Configure webhooks",
+      "admin": "Full administrative access"
+    },
+    "rateLimits": {
+      "basic": "Basic",
+      "standard": "Standard",
+      "premium": "Premium"
+    },
+    "copied": "Copied!",
+    "copy": "Copy",
+    "loadError": "Failed to load integrations",
+    "apiKeyPlaceholder": "e.g., Production API Key",
+    "categories": {
+      "hris": "HRIS",
+      "hrisDesc": "Human Resource Information Systems",
+      "payroll": "Payroll",
+      "payrollDesc": "Payroll & compensation",
+      "comms": "Communications",
+      "commsDesc": "Team messaging & notifications",
+      "identity": "Identity & SSO",
+      "identityDesc": "Single sign-on & provisioning",
+      "time": "Time & Attendance",
+      "timeDesc": "Time tracking systems",
+      "pos": "Point of Sale",
+      "posDesc": "POS & retail systems",
+      "scheduling": "Migration",
+      "schedulingDesc": "Import from other tools",
+      "learning": "Learning",
+      "learningDesc": "Training & certifications",
+      "analytics": "Analytics",
+      "analyticsDesc": "BI & reporting tools",
+      "custom": "Custom",
+      "customDesc": "API & automation"
+    },
+    "providers": {
+      "hibobDesc": "Modern HR platform for mid-size businesses",
+      "workdayDesc": "Enterprise HCM and finance platform",
+      "sapSuccessfactorsDesc": "Enterprise talent management",
+      "bamboohrDesc": "HR software for SMBs",
+      "personioDesc": "European HR platform",
+      "sageHrDesc": "UK HR & people management",
+      "adpDesc": "Enterprise payroll & HR services",
+      "paychexDesc": "Payroll & HR solutions",
+      "gustoDesc": "Modern payroll for small business",
+      "xeroDesc": "Cloud accounting with payroll",
+      "sagePayrollDesc": "UK payroll software",
+      "slackDesc": "Team collaboration & notifications",
+      "microsoftTeamsDesc": "Microsoft 365 collaboration",
+      "whatsappBusinessDesc": "Direct worker messaging",
+      "googleWorkspaceDesc": "Google SSO & directory sync",
+      "microsoftEntraDesc": "Azure AD SSO & SCIM",
+      "oktaDesc": "Enterprise identity management",
+      "squareDesc": "POS & team management",
+      "lightspeedDesc": "Retail & hospitality POS",
+      "deputyDesc": "Import from Deputy",
+      "connecteamDesc": "Import from Connecteam",
+      "kronosDesc": "Enterprise workforce management",
+      "linkedinLearningDesc": "Training completion sync",
+      "powerBiDesc": "Export to Power BI",
+      "lookerDesc": "BI data export",
+      "zapierDesc": "5,000+ app connections",
+      "customApiDesc": "Build your own integration"
+    },
+    "mapping": {
+      "customField1": "customField1",
+      "customField2": "customField2",
+      "notes": "notes"
+    },
+    "api": {
+      "authNone": "No Authentication",
+      "authApiKey": "API Key",
+      "authBearer": "Bearer Token",
+      "authBasic": "Basic Auth",
+      "authOAuth2": "OAuth 2.0",
+      "triggerManual": "Manual",
+      "triggerManualDesc": "Run on demand",
+      "triggerScheduled": "Scheduled",
+      "triggerScheduledDesc": "Run on a schedule",
+      "triggerEvent": "Event-based",
+      "triggerEventDesc": "Triggered by Uplift events",
+      "triggerWebhook": "Incoming Webhook",
+      "triggerWebhookDesc": "Receive data from external systems",
+      "scopePlaceholder": "read,write",
+      "saveFirstBeforeTesting": "Save the integration first before testing",
+      "testRequestFailed": "Test request failed"
+    },
+    "events": {
+      "employeeCreated": "Employee Created",
+      "employeeUpdated": "Employee Updated",
+      "employeeDeactivated": "Employee Deactivated",
+      "shiftCreated": "Shift Created",
+      "shiftUpdated": "Shift Updated",
+      "shiftDeleted": "Shift Deleted",
+      "shiftClaimed": "Shift Claimed",
+      "clockIn": "Clock In",
+      "clockOut": "Clock Out",
+      "timeEntryApproved": "Time Entry Approved",
+      "timeOffRequested": "Time Off Requested",
+      "timeOffApproved": "Time Off Approved",
+      "timeOffRejected": "Time Off Rejected",
+      "skillVerified": "Skill Verified",
+      "jobApplication": "Job Application",
+      "categoryEmployees": "Employees",
+      "categoryScheduling": "Scheduling",
+      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeOff": "Time Off",
+      "categorySkills": "Skills",
+      "categoryCareer": "Career"
+    },
+    "noIntegrationsFound": "No integrations found",
+    "noIntegrationsAvailable": "No integrations are available yet.",
+    "noApiKeys": "No API keys",
+    "createApiKeyToStart": "Create an API key to get started with the API."
   },
   "forecast": {
     "demoData": "Esittelydata"

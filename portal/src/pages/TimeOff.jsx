@@ -26,12 +26,12 @@ export default function TimeOff() {
       const data = await timeOffApi.getRequests();
       const enriched = (data.requests || []).map(r => ({
         ...r,
-        employee_name: r.employee_name || (r.employee ? `${r.employee.first_name} ${r.employee.last_name}` : 'Unknown Employee')
+        employee_name: r.employee_name || (r.employee ? `${r.employee.first_name} ${r.employee.last_name}` : t('common.unknownEmployee', 'Unknown Employee'))
       }));
       setRequests(enriched);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load time-off requests:', err);
-      setError('Failed to load time-off requests. Please try again.');
+      setError(t('timeOff.loadError', 'Failed to load time-off requests. Please try again.'));
     } finally {
       setLoading(false);
     }
@@ -81,13 +81,13 @@ export default function TimeOff() {
 
   const getTypeLabel = (type) => {
     const labels = {
-      annual_leave: 'Annual Leave',
-      sick_leave: 'Sick Leave',
-      personal: 'Personal',
-      bereavement: 'Bereavement',
-      maternity: 'Maternity',
-      paternity: 'Paternity',
-      unpaid: 'Unpaid Leave'
+      annual_leave: t('timeOff.types.annualLeave', 'Annual Leave'),
+      sick_leave: t('timeOff.types.sickLeave', 'Sick Leave'),
+      personal: t('timeOff.types.personal', 'Personal'),
+      bereavement: t('timeOff.types.bereavement', 'Bereavement'),
+      maternity: t('timeOff.types.maternity', 'Maternity'),
+      paternity: t('timeOff.types.paternity', 'Paternity'),
+      unpaid: t('timeOff.types.unpaid', 'Unpaid Leave')
     };
     return labels[type] || type;
   };
@@ -268,7 +268,7 @@ export default function TimeOff() {
                     <button
                       onClick={() => setSelectedRequest(request)}
                       className="p-1 text-gray-400 hover:text-blue-600"
-                      title="View Details"
+                      title={t('common.viewDetails', 'View Details')}
                     >
                       <Eye className="h-5 w-5" />
                     </button>
@@ -277,14 +277,14 @@ export default function TimeOff() {
                         <button
                           onClick={() => handleApprove(request.id)}
                           className="p-1 text-gray-400 hover:text-green-600"
-                          title="Approve"
+                          title={t('common.approve', 'Approve')}
                         >
                           <CheckCircle className="h-5 w-5" />
                         </button>
                         <button
                           onClick={() => handleReject(request.id)}
                           className="p-1 text-gray-400 hover:text-red-600"
-                          title="Reject"
+                          title={t('common.reject', 'Reject')}
                         >
                           <XCircle className="h-5 w-5" />
                         </button>

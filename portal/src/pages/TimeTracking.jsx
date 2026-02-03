@@ -59,7 +59,7 @@ export default function TimeTracking() {
       }
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load time tracking data:', err);
-      setError('Failed to load time tracking data. Please try again.');
+      setError(t('timeTracking.loadError', 'Failed to load time tracking data. Please try again.'));
     } finally {
       setLoading(false);
     }

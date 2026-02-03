@@ -25,28 +25,28 @@ import {
   Clock,
 } from 'lucide-react';
 
-const STEPS = [
-  { id: 1, label: 'Company Info', icon: Building2 },
-  { id: 2, label: 'Branding & Timezone', icon: Image },
-  { id: 3, label: 'Invite Admin', icon: UserPlus },
-  { id: 4, label: 'Add Employees', icon: Users },
-  { id: 5, label: 'Done', icon: CheckCircle2 },
+const STEP_IDS = [
+  { id: 1, labelKey: 'companyInfo', icon: Building2 },
+  { id: 2, labelKey: 'branding', icon: Image },
+  { id: 3, labelKey: 'inviteAdmin', icon: UserPlus },
+  { id: 4, labelKey: 'addEmployees', icon: Users },
+  { id: 5, labelKey: 'done', icon: CheckCircle2 },
 ];
 
-const INDUSTRIES = [
-  'Retail',
-  'Hospitality',
-  'Healthcare',
-  'Manufacturing',
-  'Construction',
-  'Logistics',
-  'Food & Beverage',
-  'Education',
-  'Technology',
-  'Finance',
-  'Government',
-  'Non-profit',
-  'Other',
+const INDUSTRY_KEYS = [
+  { key: 'retail', fallback: 'Retail' },
+  { key: 'hospitality', fallback: 'Hospitality' },
+  { key: 'healthcare', fallback: 'Healthcare' },
+  { key: 'manufacturing', fallback: 'Manufacturing' },
+  { key: 'construction', fallback: 'Construction' },
+  { key: 'logistics', fallback: 'Logistics' },
+  { key: 'foodBeverage', fallback: 'Food & Beverage' },
+  { key: 'education', fallback: 'Education' },
+  { key: 'technology', fallback: 'Technology' },
+  { key: 'finance', fallback: 'Finance' },
+  { key: 'government', fallback: 'Government' },
+  { key: 'nonprofit', fallback: 'Non-profit' },
+  { key: 'other', fallback: 'Other' },
 ];
 
 const COMPANY_SIZES = ['1-10', '11-50', '51-200', '201-500', '500+'];
@@ -122,8 +122,8 @@ function StepCompanyInfo({ data, onChange, errors, t }) {
             }`}
           >
             <option value="">{t('orgOnboarding.selectIndustry', 'Select industry...')}</option>
-            {INDUSTRIES.map((ind) => (
-              <option key={ind} value={ind}>{ind}</option>
+            {INDUSTRY_KEYS.map((ind) => (
+              <option key={ind.key} value={ind.fallback}>{t(`orgOnboarding.industries.${ind.key}`, ind.fallback)}</option>
             ))}
           </select>
           {errors.industry && <p className="mt-1 text-xs text-red-600">{errors.industry}</p>}
@@ -405,6 +405,12 @@ export default function OrgOnboarding() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
+
+  // Build STEPS with translated labels
+  const STEPS = STEP_IDS.map(step => ({
+    ...step,
+    label: t(`orgOnboarding.steps.${step.labelKey}`, step.labelKey),
+  }));
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
