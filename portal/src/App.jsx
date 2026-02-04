@@ -41,6 +41,11 @@ import Surveys from './pages/Surveys';
 import Expenses from './pages/Expenses';
 import Offboarding from './pages/Offboarding';
 
+// Employee self-service pages
+import Momentum from './pages/Momentum';
+import Recognition from './pages/Recognition';
+import Directory from './pages/Directory';
+
 // Legal pages
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -102,6 +107,9 @@ export default function App() {
         <Route path="/surveys" element={<Surveys />} />
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/offboarding" element={<Offboarding />} />
+        <Route path="/momentum" element={<Momentum />} />
+        <Route path="/recognition" element={<Recognition />} />
+        <Route path="/directory" element={<Directory />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/settings/notifications" element={<NotificationSettings />} />
       </Route>

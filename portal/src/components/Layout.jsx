@@ -41,6 +41,12 @@ import {
   MessageSquare,
   FileText,
   Building2,
+  Heart,
+  Zap,
+  Home,
+  DollarSign,
+  UserCircle,
+  FolderOpen,
 } from 'lucide-react';
 
 // Sectioned navigation with role-based visibility
@@ -48,6 +54,56 @@ const getNavSections = (role, t) => {
   const isAdmin = role === 'admin';
   const isManager = role === 'manager' || isAdmin;
 
+  // Worker gets completely different navigation
+  if (!isManager) {
+    return [
+      {
+        label: t('nav.section.myUplift', 'MY UPLIFT'),
+        items: [
+          { name: t('nav.home', 'Home'), href: '/', icon: Home, show: true },
+          { name: t('nav.myMomentum', 'My Momentum'), href: '/momentum', icon: Zap, show: true },
+        ],
+      },
+      {
+        label: t('nav.section.myWork', 'MY WORK'),
+        items: [
+          { name: t('nav.mySchedule', 'My Schedule'), href: '/schedule', icon: Calendar, show: true },
+          { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock, show: true },
+          { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella, show: true },
+        ],
+      },
+      {
+        label: t('nav.section.myGrowth', 'MY GROWTH'),
+        items: [
+          { name: t('nav.myPerformance', 'My Performance'), href: '/performance', icon: Target, show: true },
+          { name: t('nav.myLearning', 'My Learning'), href: '/learning', icon: GraduationCap, show: true },
+          { name: t('nav.mySkillsCareer', 'My Skills & Career'), href: '/career', icon: Award, show: true },
+          { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase, show: true },
+        ],
+      },
+      {
+        label: t('nav.section.myMoney', 'MY MONEY'),
+        items: [
+          { name: t('nav.myPayslips', 'My Payslips'), href: '/compensation', icon: Wallet, show: true },
+          { name: t('nav.myExpenses', 'My Expenses'), href: '/expenses', icon: Receipt, show: true },
+        ],
+      },
+      {
+        label: t('nav.section.myPeople', 'MY PEOPLE'),
+        items: [
+          { name: t('nav.directory', 'Company Directory'), href: '/directory', icon: Users, show: true },
+          { name: t('nav.recognition', 'Recognition Wall'), href: '/recognition', icon: Heart, show: true },
+          { name: t('nav.myDocuments', 'My Documents'), href: '/documents', icon: FileText, show: true },
+          { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings, show: true },
+        ],
+      },
+    ].map(section => ({
+      ...section,
+      items: section.items.filter(item => item.show),
+    })).filter(section => section.items.length > 0);
+  }
+
+  // Admin/Manager navigation (keep existing)
   return [
     {
       label: t('nav.section.overview', 'OVERVIEW'),

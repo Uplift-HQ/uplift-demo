@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../lib/auth';
 import {
   ClipboardCheck, Target, Users, MessageSquare, BookOpen,
   Plus, X, ChevronRight, ChevronDown, Star, Calendar,
@@ -224,6 +225,9 @@ const TABS = [
 
 export default function Performance() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const isManager = user?.role === 'admin' || user?.role === 'manager';
+  const visibleTabs = isManager ? TABS : TABS.filter(t => ['reviews', 'goals', 'feedback', 'development'].includes(t.id));
   const [activeTab, setActiveTab] = useState('reviews');
 
   return (
@@ -231,17 +235,17 @@ export default function Performance() {
       {/* Page Header */}
       <div>
         <h1 className="text-2xl font-bold text-slate-900">
-          {t('performance.title', 'Performance Management')}
+          {isManager ? t('performance.title', 'Performance Management') : t('performance.myTitle', 'My Performance')}
         </h1>
         <p className="text-slate-500 mt-1">
-          {t('performance.subtitle', 'Reviews, goals, feedback, and employee development')}
+          {isManager ? t('performance.subtitle', 'Reviews, goals, feedback, and employee development') : t('performance.mySubtitle', 'Your reviews, goals, and development')}
         </p>
       </div>
 
       {/* Tab Bar */}
       <div className="border-b border-slate-200">
         <nav className="flex gap-1 -mb-px">
-          {TABS.map(tab => {
+          {visibleTabs.map(tab => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (

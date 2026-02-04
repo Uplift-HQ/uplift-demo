@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../lib/auth';
 import {
   Receipt, CreditCard, CheckCircle, XCircle, Clock, AlertTriangle,
   Filter, Search, Plus, X, Eye, Download, Upload, Edit2, Save,
@@ -106,6 +107,8 @@ const TABS = [
 
 export default function Expenses() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const isManager = user?.role === 'admin' || user?.role === 'manager';
   const [activeTab, setActiveTab] = useState('all');
   const [expenses, setExpenses] = useState(DEMO_EXPENSES);
   const [selectedExpense, setSelectedExpense] = useState(null);
@@ -1140,7 +1143,7 @@ export default function Expenses() {
       {/* Tab Navigation */}
       <div className="border-b border-slate-200">
         <nav className="flex gap-1 -mb-px overflow-x-auto">
-          {TABS.map((tab) => {
+          {(isManager ? TABS : TABS.filter(t => ['all', 'reports'].includes(t.id))).map((tab) => {
             const Icon = tab.icon;
             return (
               <button

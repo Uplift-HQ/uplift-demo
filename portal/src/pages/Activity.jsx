@@ -142,7 +142,7 @@ export default function Activity() {
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3">
           <AlertCircle className="w-5 h-5 text-red-600" />
           <span className="text-red-700">{error}</span>
-          <button onClick={loadActivity} className="ml-auto text-sm text-red-600 hover:underline">Retry</button>
+          <button onClick={loadActivity} className="ml-auto text-sm text-red-600 hover:underline">{t('common.retry', 'Retry')}</button>
         </div>
       )}
 
@@ -431,7 +431,7 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
           {/* Description */}
           {submission.description && (
             <div>
-              <h3 className="text-sm font-medium text-slate-500 mb-2">Description</h3>
+              <h3 className="text-sm font-medium text-slate-500 mb-2">{t('common.description', 'Description')}</h3>
               <p className="text-slate-700">{submission.description}</p>
             </div>
           )}
@@ -439,7 +439,7 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
           {/* Checklist (for task completions) */}
           {submission.checklist && (
             <div>
-              <h3 className="text-sm font-medium text-slate-500 mb-2">Checklist</h3>
+              <h3 className="text-sm font-medium text-slate-500 mb-2">{t('activity.checklist', 'Checklist')}</h3>
               <div className="space-y-2">
                 {submission.checklist.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
@@ -460,7 +460,7 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
           {/* Form Data (for form submissions) */}
           {submission.formData && (
             <div>
-              <h3 className="text-sm font-medium text-slate-500 mb-2">Form Details</h3>
+              <h3 className="text-sm font-medium text-slate-500 mb-2">{t('activity.formDetails', 'Form Details')}</h3>
               <div className="grid grid-cols-2 gap-4">
                 {Object.entries(submission.formData).map(([key, value]) => (
                   <div key={key} className="p-3 bg-slate-50 rounded-lg">
@@ -475,7 +475,7 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
           {/* Metadata (for proof uploads) */}
           {submission.metadata && (
             <div>
-              <h3 className="text-sm font-medium text-slate-500 mb-2">Details</h3>
+              <h3 className="text-sm font-medium text-slate-500 mb-2">{t('common.details', 'Details')}</h3>
               <div className="grid grid-cols-3 gap-4">
                 {Object.entries(submission.metadata).map(([key, value]) => (
                   <div key={key} className="p-3 bg-slate-50 rounded-lg">
@@ -517,7 +517,7 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
           {/* Reject Form */}
           {showRejectForm && (
             <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-              <h3 className="font-medium text-red-900 mb-2">Rejection Reason</h3>
+              <h3 className="font-medium text-red-900 mb-2">{t('activity.rejectionReason', 'Rejection Reason')}</h3>
               <textarea
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
@@ -530,13 +530,13 @@ function SubmissionDetailModal({ submission, onClose, onApprove, onReject, getTy
                   onClick={() => { onReject(rejectReason); }}
                   className="btn bg-red-600 text-white hover:bg-red-700"
                 >
-                  Confirm Rejection
+                  {t('activity.confirmRejection', 'Confirm Rejection')}
                 </button>
                 <button
                   onClick={() => setShowRejectForm(false)}
                   className="btn btn-secondary"
                 >
-                  Cancel
+                  {t('common.cancel', 'Cancel')}
                 </button>
               </div>
             </div>

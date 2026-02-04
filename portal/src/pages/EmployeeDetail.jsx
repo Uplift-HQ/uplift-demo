@@ -54,7 +54,7 @@ export default function EmployeeDetail() {
       setShowAddSkill(false);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to add skill:', err);
-      toast.error('Failed to add skill');
+      toast.error(t('employees.failedAddSkill', 'Failed to add skill'));
     }
   };
 
@@ -64,7 +64,7 @@ export default function EmployeeDetail() {
       loadEmployee();
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to verify skill:', err);
-      toast.error('Failed to verify skill');
+      toast.error(t('employees.failedVerifySkill', 'Failed to verify skill'));
     }
   };
 
@@ -74,7 +74,7 @@ export default function EmployeeDetail() {
       loadEmployee();
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to update skill level:', err);
-      toast.error('Failed to update skill level');
+      toast.error(t('employees.failedUpdateSkillLevel', 'Failed to update skill level'));
     }
   };
 
@@ -85,7 +85,7 @@ export default function EmployeeDetail() {
       loadEmployee();
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to remove skill:', err);
-      toast.error('Failed to remove skill');
+      toast.error(t('employees.failedRemoveSkill', 'Failed to remove skill'));
     }
   };
 
@@ -101,11 +101,11 @@ export default function EmployeeDetail() {
     return (
       <div className="text-center py-12">
         <AlertCircle className="w-10 h-10 text-red-400 mx-auto mb-3" />
-        <p className="text-slate-700 font-medium mb-1">Failed to load employee</p>
+        <p className="text-slate-700 font-medium mb-1">{t('employees.loadEmployeeError', 'Failed to load employee')}</p>
         <p className="text-slate-500 text-sm mb-4">{error}</p>
         <div className="flex justify-center gap-3">
           <Link to="/employees" className="btn btn-secondary">{t('employeeDetail.backToEmployees', 'Back to Employees')}</Link>
-          <button onClick={loadEmployee} className="btn btn-primary">Retry</button>
+          <button onClick={loadEmployee} className="btn btn-primary">{t('common.retry', 'Retry')}</button>
         </div>
       </div>
     );

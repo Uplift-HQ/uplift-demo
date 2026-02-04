@@ -69,7 +69,7 @@ export default function Locations() {
         <div className="flex flex-col items-center justify-center h-64 gap-4">
           <AlertCircle className="h-12 w-12 text-red-400" />
           <p className="text-gray-600">{error}</p>
-          <button onClick={loadLocations} className="btn btn-primary">Retry</button>
+          <button onClick={loadLocations} className="btn btn-primary">{t('common.retry', 'Retry')}</button>
         </div>
       </div>
     );
@@ -151,7 +151,7 @@ export default function Locations() {
               </div>
 
               <div className="px-6 py-3 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
-                <span className="text-xs text-slate-400">Click to view details</span>
+                <span className="text-xs text-slate-400">{t('common.clickToViewDetails', 'Click to view details')}</span>
                 <button
                   onClick={(e) => { e.stopPropagation(); setEditingLocation(location); setShowModal(true); }}
                   className="btn btn-ghost text-sm"

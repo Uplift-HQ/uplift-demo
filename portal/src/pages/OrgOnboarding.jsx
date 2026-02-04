@@ -188,7 +188,7 @@ function StepBranding({ data, onChange, logoFile, onLogoChange, t }) {
             <div className="flex flex-col items-center gap-2">
               <img
                 src={URL.createObjectURL(logoFile)}
-                alt="Logo preview"
+                alt={t('common.logoPreview', 'Logo preview')}
                 className="w-20 h-20 object-contain rounded-lg"
               />
               <p className="text-sm text-slate-600">{logoFile.name}</p>

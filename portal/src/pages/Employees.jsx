@@ -133,9 +133,9 @@ export default function Employees() {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-center">
         <AlertCircle className="w-10 h-10 text-red-400 mb-3" />
-        <p className="text-slate-700 font-medium mb-1">Failed to load employees</p>
+        <p className="text-slate-700 font-medium mb-1">{t('employees.loadError', 'Failed to load employees')}</p>
         <p className="text-slate-500 text-sm mb-4">{error}</p>
-        <button onClick={loadEmployees} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Retry</button>
+        <button onClick={loadEmployees} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">{t('common.retry', 'Retry')}</button>
       </div>
     );
   }

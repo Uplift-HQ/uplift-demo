@@ -418,13 +418,20 @@ export const api = new ApiClient();
 // API ENDPOINTS
 // ============================================================
 
+const DEMO_PERSONAS = {
+  'sarah.chen@grandmetro.com': { ...DEMO_USER, id: 'demo-admin', email: 'sarah.chen@grandmetro.com', firstName: 'Sarah', lastName: 'Chen', role: 'admin' },
+  'james.williams@grandmetro.com': { ...DEMO_USER, id: 'demo-manager', email: 'james.williams@grandmetro.com', firstName: 'James', lastName: 'Williams', role: 'manager' },
+  'marc.hunt@grandmetro.com': { ...DEMO_USER, id: 'demo-worker', email: 'marc.hunt@grandmetro.com', firstName: 'Marc', lastName: 'Hunt', role: 'worker' },
+};
+
 export const authApi = {
   login: async (email, password) => {
     if (DEMO_MODE) {
+      const persona = DEMO_PERSONAS[email] || DEMO_USER;
       const token = 'demo_token_' + Date.now();
       api.setToken(token);
-      localStorage.setItem('uplift_user', JSON.stringify(DEMO_USER));
-      return { token, user: DEMO_USER };
+      localStorage.setItem('uplift_user', JSON.stringify(persona));
+      return { token, user: persona };
     }
     const result = await api.post('/auth/login', { email, password });
     if (result.token) {
@@ -439,7 +446,8 @@ export const authApi = {
   },
   me: async () => {
     if (DEMO_MODE) {
-      return { user: DEMO_USER };
+      const stored = localStorage.getItem('uplift_user');
+      return { user: stored ? JSON.parse(stored) : DEMO_USER };
     }
     return api.get('/auth/me');
   },

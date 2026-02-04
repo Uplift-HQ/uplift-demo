@@ -4,6 +4,7 @@
 // ============================================================
 
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 
 export class ErrorBoundary extends React.Component {
@@ -46,7 +47,7 @@ export class ErrorBoundary extends React.Component {
             </div>
             
             <h1 className="text-xl font-bold text-slate-900 mb-2">
-              Something went wrong
+              {this.props.t('errors.somethingWentWrong', 'Something went wrong')}
             </h1>
             
             <p className="text-slate-600 mb-6">
@@ -59,14 +60,14 @@ export class ErrorBoundary extends React.Component {
                 className="btn btn-secondary"
               >
                 <Home className="w-4 h-4" />
-                Go Home
+                {this.props.t('errors.goHome', 'Go Home')}
               </button>
               <button
                 onClick={this.handleReload}
                 className="btn btn-primary"
               >
                 <RefreshCw className="w-4 h-4" />
-                Try Again
+                {this.props.t('errors.tryAgain', 'Try Again')}
               </button>
             </div>
 
@@ -74,7 +75,7 @@ export class ErrorBoundary extends React.Component {
             {import.meta.env.DEV && this.state.error && (
               <details className="mt-6 text-left">
                 <summary className="text-sm text-slate-500 cursor-pointer hover:text-slate-700">
-                  Technical Details
+                  {this.props.t('errors.technicalDetails', 'Technical Details')}
                 </summary>
                 <pre className="mt-2 p-3 bg-slate-100 rounded text-xs text-red-600 overflow-auto max-h-48">
                   {this.state.error.toString()}
@@ -104,4 +105,4 @@ export function useErrorHandler() {
   }, []);
 }
 
-export default ErrorBoundary;
+export default withTranslation()(ErrorBoundary);

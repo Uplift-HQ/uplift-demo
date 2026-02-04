@@ -4,6 +4,7 @@
 // ============================================================
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../lib/auth';
 import {
   PoundSterling,
   Receipt,
@@ -124,6 +125,8 @@ const DEMO_CYCLES = [
 
 export default function Compensation() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const isManager = user?.role === 'admin' || user?.role === 'manager';
   const [activeTab, setActiveTab] = useState('payslips');
   const [toast, setToast] = useState(null);
 
@@ -147,11 +150,12 @@ export default function Compensation() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const tabs = [
-    { key: 'payslips', label: t('compensation.payslips', 'Payslips'), icon: Receipt },
-    { key: 'records', label: t('compensation.compensationRecords', 'Compensation Records'), icon: TrendingUp },
-    { key: 'cycles', label: t('compensation.compensationCycles', 'Compensation Cycles'), icon: Calendar },
+  const allTabs = [
+    { key: 'payslips', label: t(isManager ? 'compensation.payslips' : 'compensation.myPayslips', isManager ? 'Payslips' : 'My Payslips'), icon: Receipt },
+    { key: 'records', label: t('compensation.compensationRecords', 'Compensation Records'), icon: TrendingUp, managerOnly: true },
+    { key: 'cycles', label: t('compensation.compensationCycles', 'Compensation Cycles'), icon: Calendar, managerOnly: true },
   ];
+  const tabs = isManager ? allTabs : allTabs.filter(tab => !tab.managerOnly);
 
   // ---- Helpers ----
 

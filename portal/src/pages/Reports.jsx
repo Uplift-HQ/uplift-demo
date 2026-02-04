@@ -183,7 +183,7 @@ export default function Reports() {
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3">
           <AlertCircle className="w-5 h-5 text-red-600" />
           <span className="text-red-700">{error}</span>
-          <button onClick={loadReport} className="ml-auto text-sm text-red-600 hover:underline">Retry</button>
+          <button onClick={loadReport} className="ml-auto text-sm text-red-600 hover:underline">{t('common.retry', 'Retry')}</button>
         </div>
       )}
 
@@ -205,7 +205,7 @@ export default function Reports() {
               </button>
             ))}
           </div>
-          <p className="text-xs text-slate-400 mt-2">Saved reports are stored locally. Persistent saved reports coming soon.</p>
+          <p className="text-xs text-slate-400 mt-2">{t('reports.savedReportsLocal', 'Saved reports are stored locally. Persistent saved reports coming soon.')}</p>
         </div>
       ) : null}
 
@@ -444,7 +444,7 @@ function ChartVisualization({ data, chartType, reportType }) {
   if (chartType === 'line') {
     return (
       <div className="space-y-4">
-        <h3 className="font-medium text-slate-700">Trend Over Time</h3>
+        <h3 className="font-medium text-slate-700">{t('reports.trendOverTime', 'Trend Over Time')}</h3>
         <div className="relative h-64 flex items-end gap-1">
           {safeData.slice(0, 20).map((row, i) => {
             const value = parseFloat(row.total_hours || row.hours || row.worked_shifts || 0);
@@ -514,7 +514,7 @@ function ChartVisualization({ data, chartType, reportType }) {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <p className="text-2xl font-bold text-slate-900">{total.toFixed(0)}</p>
-              <p className="text-xs text-slate-500">Total</p>
+              <p className="text-xs text-slate-500">{t('common.total', 'Total')}</p>
             </div>
           </div>
         </div>
@@ -614,7 +614,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
       <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b">
           <div>
-            <h2 className="text-lg font-semibold">Build Custom Report</h2>
+            <h2 className="text-lg font-semibold">{t('reports.buildCustomReport', 'Build Custom Report')}</h2>
             <p className="text-sm text-slate-500">Step {step} of 3</p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg">
@@ -630,7 +630,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
           {step === 1 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Report Name</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('reports.reportName', 'Report Name')}</label>
                 <input
                   type="text"
                   value={report.name}
@@ -641,7 +641,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Report Type</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('reports.reportType', 'Report Type')}</label>
                 <div className="grid grid-cols-3 gap-3">
                   {['hours', 'attendance', 'coverage'].map((type) => (
                     <button
@@ -684,7 +684,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Group By</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('reports.groupBy', 'Group By')}</label>
                   <select
                     value={report.groupBy}
                     onChange={(e) => setReport({ ...report, groupBy: e.target.value })}
@@ -698,7 +698,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Sort By</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('reports.sortBy', 'Sort By')}</label>
                   <select
                     value={report.sortBy}
                     onChange={(e) => setReport({ ...report, sortBy: e.target.value })}
@@ -716,10 +716,10 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
           {step === 3 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Filters</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('reports.filters', 'Filters')}</label>
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm text-slate-600">Location</label>
+                    <label className="text-sm text-slate-600">{t('common.location', 'Location')}</label>
                     <select className="input mt-1">
                       <option value="">{t('reports.allLocations', 'All Locations')}</option>
                       {(locations || []).map((l) => (
@@ -729,11 +729,11 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-slate-600">Date From</label>
+                      <label className="text-sm text-slate-600">{t('reports.dateFrom', 'Date From')}</label>
                       <input type="date" className="input mt-1" />
                     </div>
                     <div>
-                      <label className="text-sm text-slate-600">Date To</label>
+                      <label className="text-sm text-slate-600">{t('reports.dateTo', 'Date To')}</label>
                       <input type="date" className="input mt-1" />
                     </div>
                   </div>
@@ -767,7 +767,7 @@ function ReportBuilderModal({ onClose, onSave, locations }) {
                 disabled={step === 1 && !report.name}
                 className="btn btn-primary"
               >
-                Next
+                {t('common.next', 'Next')}
                 <ChevronRight className="w-4 h-4" />
               </button>
             ) : (

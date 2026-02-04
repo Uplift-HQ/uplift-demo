@@ -13,7 +13,7 @@ import {
   Monitor, Smartphone, Globe, Clock, Download, AlertTriangle,
   ChevronRight, MoreVertical, Eye, History, Sun, Moon, Webhook,
   Palette, Check, Copy, Trash2, Play, Pause, Upload, Image, Crown, Sparkles,
-  KeyRound, Link2
+  KeyRound, Link2, Layout as LayoutIcon
 } from 'lucide-react';
 import { brandingApi } from '../lib/api';
 import { useBranding } from '../lib/branding';
@@ -33,6 +33,7 @@ const TABS = [
   { id: 'security', nameKey: 'settings.security', icon: Shield, adminOnly: false },
   { id: 'sessions', nameKey: 'settings.sessions', icon: Monitor, adminOnly: false },
   { id: 'privacy', nameKey: 'settings.privacyData', icon: Eye, adminOnly: false },
+  { id: 'portal-config', nameKey: 'settings.portalConfig', icon: LayoutIcon, adminOnly: true },
 ];
 
 export default function Settings() {
@@ -183,6 +184,9 @@ export default function Settings() {
               )}
               {activeTab === 'privacy' && (
                 <PrivacySettings user={user} showMsg={showMsg} logout={logout} />
+              )}
+              {activeTab === 'portal-config' && isAdmin && (
+                <PortalConfigSettings showMsg={showMsg} />
               )}
             </>
           )}
@@ -2829,6 +2833,240 @@ function SSOSettings({ showMsg }) {
             </select>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// PORTAL CONFIGURATION SETTINGS
+// Module visibility toggles per role and platform
+// ============================================================
+
+const PORTAL_MODULES = [
+  { id: 'dashboard', label: 'Dashboard', defaults: [true, true, true, true] },
+  { id: 'schedule', label: 'Schedule', defaults: [true, true, true, true] },
+  { id: 'time-tracking', label: 'Time Tracking', defaults: [true, true, true, true] },
+  { id: 'time-off', label: 'Time Off', defaults: [true, true, true, true] },
+  { id: 'momentum', label: 'Momentum Score', defaults: [true, true, false, false] },
+  { id: 'performance', label: 'Performance', defaults: [true, false, true, true] },
+  { id: 'skills', label: 'Skills', defaults: [true, false, true, true] },
+  { id: 'learning', label: 'Learning', defaults: [true, true, true, true] },
+  { id: 'career', label: 'Career / Opportunities', defaults: [true, false, true, false] },
+  { id: 'compensation', label: 'Compensation', defaults: [true, true, true, true] },
+  { id: 'expenses', label: 'Expenses', defaults: [true, false, true, true] },
+  { id: 'surveys', label: 'Surveys', defaults: [false, false, true, true] },
+  { id: 'documents', label: 'Documents', defaults: [true, false, true, true] },
+  { id: 'reports', label: 'Reports', defaults: [false, false, true, true] },
+  { id: 'directory', label: 'Company Directory', defaults: [true, true, true, true] },
+  { id: 'recognition', label: 'Recognition Wall', defaults: [true, true, true, true] },
+  { id: 'onboarding', label: 'Onboarding', defaults: [false, false, true, false] },
+  { id: 'offboarding', label: 'Offboarding', defaults: [false, false, true, false] },
+];
+
+const HOMEPAGE_WIDGETS = [
+  { id: 'announcements', labelKey: 'settings.portalConfig.widgetAnnouncements', fallback: 'Announcements' },
+  { id: 'team-celebrations', labelKey: 'settings.portalConfig.widgetTeamCelebrations', fallback: 'Team Celebrations' },
+  { id: 'quick-actions', labelKey: 'settings.portalConfig.widgetQuickActions', fallback: 'Quick Actions' },
+  { id: 'goals-progress', labelKey: 'settings.portalConfig.widgetGoalsProgress', fallback: 'Goals Progress' },
+  { id: 'leave-balance', labelKey: 'settings.portalConfig.widgetLeaveBalance', fallback: 'Leave Balance' },
+  { id: 'achievements', labelKey: 'settings.portalConfig.widgetAchievements', fallback: 'Achievements' },
+  { id: 'recognition-feed', labelKey: 'settings.portalConfig.widgetRecognitionFeed', fallback: 'Recognition Feed' },
+  { id: 'momentum-score', labelKey: 'settings.portalConfig.widgetMomentumScore', fallback: 'Momentum Score' },
+];
+
+function PortalConfigSettings({ showMsg }) {
+  const { t } = useTranslation();
+  const toast = useToast();
+
+  // Build initial module visibility state from defaults
+  const buildInitialModuleState = () => {
+    const state = {};
+    PORTAL_MODULES.forEach(mod => {
+      state[mod.id] = {
+        workerPortal: mod.defaults[0],
+        workerMobile: mod.defaults[1],
+        managerPortal: mod.defaults[2],
+        managerMobile: mod.defaults[3],
+      };
+    });
+    return state;
+  };
+
+  const buildInitialWidgetState = () => {
+    const state = {};
+    HOMEPAGE_WIDGETS.forEach(w => {
+      state[w.id] = true;
+    });
+    return state;
+  };
+
+  const [moduleVisibility, setModuleVisibility] = useState(buildInitialModuleState);
+  const [widgetVisibility, setWidgetVisibility] = useState(buildInitialWidgetState);
+  const [saving, setSaving] = useState(false);
+
+  const toggleModule = (moduleId, field) => {
+    setModuleVisibility(prev => ({
+      ...prev,
+      [moduleId]: {
+        ...prev[moduleId],
+        [field]: !prev[moduleId][field],
+      },
+    }));
+  };
+
+  const toggleWidget = (widgetId) => {
+    setWidgetVisibility(prev => ({
+      ...prev,
+      [widgetId]: !prev[widgetId],
+    }));
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      // NOTE: Replace with actual API call when endpoint is available
+      await new Promise(resolve => setTimeout(resolve, 600));
+      toast.success(t('settings.portalConfig.saveSuccess', 'Portal configuration saved successfully'));
+    } catch (error) {
+      toast.error(t('settings.portalConfig.saveError', 'Failed to save portal configuration'));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const COLUMN_KEYS = ['workerPortal', 'workerMobile', 'managerPortal', 'managerMobile'];
+
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <div>
+        <h2 className="text-xl font-semibold text-slate-900">
+          {t('settings.portalConfig.title', 'Portal Configuration')}
+        </h2>
+        <p className="text-slate-500 mt-1">
+          {t('settings.portalConfig.subtitle', 'Control which modules are visible for each user role across portal and mobile')}
+        </p>
+      </div>
+
+      {/* Module Visibility Toggle Grid */}
+      <div>
+        <h3 className="text-lg font-medium text-slate-900 mb-4">
+          {t('settings.portalConfig.moduleVisibility', 'Module Visibility')}
+        </h3>
+        <div className="overflow-x-auto border border-slate-200 rounded-lg">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-slate-50 border-b border-slate-200">
+                <th className="text-left px-4 py-3 font-medium text-slate-700">
+                  {t('settings.portalConfig.colModule', 'Module')}
+                </th>
+                <th className="text-center px-4 py-3 font-medium text-slate-700">
+                  {t('settings.portalConfig.colWorkersPortal', 'Workers (Portal)')}
+                </th>
+                <th className="text-center px-4 py-3 font-medium text-slate-700">
+                  {t('settings.portalConfig.colWorkersMobile', 'Workers (Mobile)')}
+                </th>
+                <th className="text-center px-4 py-3 font-medium text-slate-700">
+                  {t('settings.portalConfig.colManagersPortal', 'Managers (Portal)')}
+                </th>
+                <th className="text-center px-4 py-3 font-medium text-slate-700">
+                  {t('settings.portalConfig.colManagersMobile', 'Managers (Mobile)')}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {PORTAL_MODULES.map((mod, idx) => (
+                <tr
+                  key={mod.id}
+                  className={`border-b border-slate-100 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}
+                >
+                  <td className="px-4 py-3 font-medium text-slate-800">
+                    {t(`settings.portalConfig.module.${mod.id}`, mod.label)}
+                  </td>
+                  {COLUMN_KEYS.map(field => (
+                    <td key={field} className="px-4 py-3 text-center">
+                      <button
+                        type="button"
+                        onClick={() => toggleModule(mod.id, field)}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                          moduleVisibility[mod.id][field] ? 'bg-momentum-500' : 'bg-slate-300'
+                        }`}
+                        aria-label={`${mod.label} ${field}`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                            moduleVisibility[mod.id][field] ? 'translate-x-6' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Employee Homepage Widgets */}
+      <div>
+        <h3 className="text-lg font-medium text-slate-900 mb-1">
+          {t('settings.portalConfig.homepageWidgets', 'Employee Homepage Widgets')}
+        </h3>
+        <p className="text-slate-500 text-sm mb-4">
+          {t('settings.portalConfig.homepageWidgetsSubtitle', 'Choose which widgets appear on the employee homepage')}
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {HOMEPAGE_WIDGETS.map(widget => (
+            <div
+              key={widget.id}
+              className="flex items-center justify-between p-4 bg-slate-50 rounded-lg"
+            >
+              <span className="font-medium text-slate-800">
+                {t(widget.labelKey, widget.fallback)}
+              </span>
+              <button
+                type="button"
+                onClick={() => toggleWidget(widget.id)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  widgetVisibility[widget.id] ? 'bg-momentum-500' : 'bg-slate-300'
+                }`}
+                aria-label={widget.fallback}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    widgetVisibility[widget.id] ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Branding note */}
+      <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <AlertTriangle className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+        <p className="text-sm text-blue-700">
+          {t('settings.portalConfig.brandingNote', 'Customise portal branding in the Branding tab')}
+        </p>
+      </div>
+
+      {/* Save button */}
+      <div className="flex justify-end">
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="btn btn-primary flex items-center gap-2"
+        >
+          {saving ? (
+            <RefreshCw className="w-4 h-4 animate-spin" />
+          ) : (
+            <Save className="w-4 h-4" />
+          )}
+          {t('settings.portalConfig.saveButton', 'Save Configuration')}
+        </button>
       </div>
     </div>
   );

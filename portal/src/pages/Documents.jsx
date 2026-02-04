@@ -4,6 +4,7 @@
 // ============================================================
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../lib/auth';
 import {
   FileText,
   Upload,
@@ -91,6 +92,8 @@ const DOCUMENT_CHECKLIST_ITEMS = [
 
 export default function Documents() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const isManager = user?.role === 'admin' || user?.role === 'manager';
   const [activeTab, setActiveTab] = useState('all');
   const [documents, setDocuments] = useState(DEMO_DOCUMENTS);
   const [templates] = useState(DEMO_TEMPLATES);
@@ -124,12 +127,13 @@ export default function Documents() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const tabs = [
-    { key: 'all', label: t('documents.allDocuments', 'All Documents'), icon: FileText },
-    { key: 'employee', label: t('documents.employeeDocuments', 'Employee Documents'), icon: Users },
-    { key: 'templates', label: t('documents.templates', 'Templates'), icon: FolderOpen },
+  const allTabs = [
+    { key: 'all', label: t(isManager ? 'documents.allDocuments' : 'documents.myDocuments', isManager ? 'All Documents' : 'My Documents'), icon: FileText },
+    { key: 'employee', label: t('documents.employeeDocuments', 'Employee Documents'), icon: Users, managerOnly: true },
+    { key: 'templates', label: t('documents.templates', 'Templates'), icon: FolderOpen, managerOnly: true },
     { key: 'signatures', label: t('documents.pendingSignatures', 'Pending Signatures'), icon: FileSignature },
   ];
+  const tabs = isManager ? allTabs : allTabs.filter(tab => !tab.managerOnly);
 
   // ---- Helpers ----
 

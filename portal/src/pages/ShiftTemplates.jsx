@@ -55,7 +55,7 @@ export default function ShiftTemplates() {
       loadData();
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to delete template:', err);
-      toast.error('Failed to delete template');
+      toast.error(t('shiftTemplates.failedDelete', 'Failed to delete template'));
     }
   };
 
@@ -63,7 +63,7 @@ export default function ShiftTemplates() {
     try {
       await shiftsApi.generateFromTemplate(templateId, { startDate, endDate });
       setShowApplyModal(false);
-      alert('Shifts generated successfully!');
+      alert(t('shiftTemplates.shiftsGenerated', 'Shifts generated successfully!'));
     } catch (err) {
       alert(err.message || t('shiftTemplates.generateError', 'Failed to generate shifts'));
     }
@@ -83,9 +83,9 @@ export default function ShiftTemplates() {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-center">
         <AlertCircle className="w-10 h-10 text-red-400 mb-3" />
-        <p className="text-slate-700 font-medium mb-1">Failed to load templates</p>
+        <p className="text-slate-700 font-medium mb-1">{t('shiftTemplates.loadError', 'Failed to load templates')}</p>
         <p className="text-slate-500 text-sm mb-4">{error}</p>
-        <button onClick={loadData} className="btn btn-primary">Retry</button>
+        <button onClick={loadData} className="btn btn-primary">{t('common.retry', 'Retry')}</button>
       </div>
     );
   }
@@ -289,7 +289,7 @@ function TemplateModal({ template, locations, onClose, onSave, t }) {
       onClose();
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to save template:', err);
-      toast.error('Failed to save template');
+      toast.error(t('shiftTemplates.failedSave', 'Failed to save template'));
     } finally {
       setSaving(false);
     }
@@ -300,7 +300,7 @@ function TemplateModal({ template, locations, onClose, onSave, t }) {
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col">
         <div className="p-6 border-b border-slate-100 flex items-center justify-between shrink-0">
           <h2 className="text-lg font-semibold">{template ? t('shiftTemplates.editTemplate', 'Edit Template') : t('shiftTemplates.newTemplate', 'New Template')}</h2>
-          <button onClick={onClose} className="p-1.5 hover:bg-slate-100 rounded-lg transition-colors" title="Close (ESC)">
+          <button onClick={onClose} className="p-1.5 hover:bg-slate-100 rounded-lg transition-colors" title={t('common.closeEsc', 'Close (ESC)')}>
             <X className="w-5 h-5 text-slate-400" />
           </button>
         </div>

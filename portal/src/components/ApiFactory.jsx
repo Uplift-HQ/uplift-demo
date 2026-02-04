@@ -1348,7 +1348,7 @@ const ApiFactory = () => {
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
             <h3 className="font-semibold">{t('apiFactory.logs.executionLogs', 'Execution Logs')}</h3>
-            <Button variant="ghost" size="sm" onClick={() => alert('Export coming soon')}>
+            <Button variant="ghost" size="sm" onClick={() => alert(t('common.exportComingSoon', 'Export coming soon'))}>
               <Download className="w-4 h-4" /> {t('apiFactory.logs.export', 'Export')}
             </Button>
           </div>

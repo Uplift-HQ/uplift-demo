@@ -105,7 +105,7 @@ export default function Jobs() {
       <div className="flex flex-col items-center justify-center h-64 gap-4">
         <AlertCircle className="h-12 w-12 text-red-400" />
         <p className="text-gray-600">{error}</p>
-        <button onClick={loadJobs} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Retry</button>
+        <button onClick={loadJobs} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">{t('common.retry', 'Retry')}</button>
       </div>
     );
   }
@@ -190,8 +190,8 @@ export default function Jobs() {
             <form onSubmit={editingJob ? handleUpdateJob : handleCreateJob} className="space-y-4">
               <div><label className="block text-sm font-medium text-gray-700 mb-1">{t('jobs.jobTitle', 'Job Title')} *</label><input name="title" type="text" className="w-full px-3 py-2 border rounded-lg" placeholder={t('jobs.enterTitle', 'Enter job title')} defaultValue={editingJob?.title || ''} required /></div>
               <div className="grid grid-cols-2 gap-4">
-                <div><label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.department', 'Department')}</label><select name="department" className="w-full px-3 py-2 border rounded-lg" defaultValue={editingJob?.department || ''}><option value="">{t('jobs.selectDepartment', 'Select department')}</option><option>Front of House</option><option>Kitchen</option><option>Management</option><option>Reception</option></select></div>
-                <div><label className="block text-sm font-medium text-gray-700 mb-1">{t('schedule.location', 'Location')}</label><select name="location" className="w-full px-3 py-2 border rounded-lg" defaultValue={editingJob?.location || ''}><option value="">{t('jobs.selectLocation', 'Select location')}</option><option>Grand Metro Edinburgh</option><option>Grand Metro Glasgow</option><option>Grand Metro Manchester</option></select></div>
+                <div><label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.department', 'Department')}</label><select name="department" className="w-full px-3 py-2 border rounded-lg" defaultValue={editingJob?.department || ''}><option value="">{t('jobs.selectDepartment', 'Select department')}</option><option value="Front of House">{t('jobs.departments.frontOfHouse', 'Front of House')}</option><option value="Kitchen">{t('jobs.departments.kitchen', 'Kitchen')}</option><option value="Management">{t('jobs.departments.management', 'Management')}</option><option value="Reception">{t('jobs.departments.reception', 'Reception')}</option></select></div>
+                <div><label className="block text-sm font-medium text-gray-700 mb-1">{t('schedule.location', 'Location')}</label><select name="location" className="w-full px-3 py-2 border rounded-lg" defaultValue={editingJob?.location || ''}><option value="">{t('jobs.selectLocation', 'Select location')}</option><option value="Grand Metro Edinburgh">{t('jobs.locations.edinburgh', 'Grand Metro Edinburgh')}</option><option value="Grand Metro Glasgow">{t('jobs.locations.glasgow', 'Grand Metro Glasgow')}</option><option value="Grand Metro Manchester">{t('jobs.locations.manchester', 'Grand Metro Manchester')}</option></select></div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div><label className="block text-sm font-medium text-gray-700 mb-1">{t('common.type', 'Type')}</label><select name="type" className="w-full px-3 py-2 border rounded-lg" defaultValue={editingJob?.type || 'full_time'}><option value="full_time">{t('jobs.fullTime', 'Full Time')}</option><option value="part_time">{t('jobs.partTime', 'Part Time')}</option><option value="contract">{t('jobs.contract', 'Contract')}</option></select></div>

@@ -36,6 +36,18 @@ import {
   Gift,
   Target,
   BarChart3,
+  Sun,
+  Sunset,
+  Moon,
+  CalendarOff,
+  DollarSign,
+  BookOpen,
+  FileText,
+  Cake,
+  Lock,
+  Megaphone,
+  PartyPopper,
+  Sparkles,
 } from 'lucide-react';
 import DemandForecast from '../components/DemandForecast';
 
@@ -735,94 +747,366 @@ export default function Dashboard() {
           </div>
         </>
       ) : (
-        // Worker Dashboard
-        <>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="card">
-              <div className="card-header flex items-center justify-between">
-                <h2 className="font-semibold text-slate-900">{t('dashboard.yourUpcomingShifts', 'Your Upcoming Shifts')}</h2>
-                <Link to="/schedule" className="text-sm text-momentum-500 hover:text-momentum-600">
-                  {t('common.viewMore', 'View all')}
-                </Link>
-              </div>
-              <div className="card-body">
-                {data?.upcomingShifts?.length > 0 ? (
-                  <div className="space-y-3">
-                    {data.upcomingShifts.map((shift) => (
-                      <div key={shift.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                        <div>
-                          <p className="font-medium text-slate-900">
-                            {new Date(shift.date).toLocaleDateString('en-GB', {
-                              weekday: 'short',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
-                          </p>
-                          <p className="text-sm text-slate-600">
-                            {new Date(shift.start_time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} -
-                            {new Date(shift.end_time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-slate-900">{shift.location_name}</p>
-                          <span className={`badge ${shift.status === 'confirmed' ? 'badge-success' : 'badge-info'}`}>
-                            {shift.status}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-slate-500 text-center py-8">{t('dashboard.noUpcomingShifts', 'No upcoming shifts')}</p>
-                )}
-              </div>
-            </div>
+        // Worker Dashboard — Employee Self-Service Homepage
+        (() => {
+          const hour = new Date().getHours();
+          const greetingKey = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
+          const GreetingIcon = hour < 12 ? Sun : hour < 18 ? Sunset : Moon;
+          const greetingText = {
+            morning: t('workerHome.goodMorning', 'Good morning'),
+            afternoon: t('workerHome.goodAfternoon', 'Good afternoon'),
+            evening: t('workerHome.goodEvening', 'Good evening'),
+          }[greetingKey];
+          const momentumScore = 91;
+          const momentumTrend = 3;
+          const leaveRemaining = 18;
+          const leaveTotal = 25;
+          const trainingComplete = 4;
+          const trainingTotal = 5;
+          const trainingPercent = Math.round((trainingComplete / trainingTotal) * 100);
 
-            <div className="card">
-              <div className="card-header flex items-center justify-between">
-                <h2 className="font-semibold text-slate-900">{t('dashboard.careerOpportunities', 'Career Opportunities')}</h2>
-                <Link to="/career" className="text-sm text-momentum-500 hover:text-momentum-600">
-                  {t('common.viewMore', 'View all')}
-                </Link>
-              </div>
-              <div className="card-body">
-                <div className="text-center py-6">
-                  <div className="w-12 h-12 bg-momentum-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <TrendingUp className="w-6 h-6 text-momentum-600" />
+          return (
+            <>
+              {/* ROW 1: Welcome Banner + Momentum Score */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Welcome Banner */}
+                <div className="lg:col-span-2 bg-gradient-to-br from-momentum-500 to-momentum-700 rounded-xl p-6 text-white">
+                  <div className="flex items-center gap-3 mb-2">
+                    <GreetingIcon className="w-7 h-7 text-white/80" />
+                    <h2 className="text-2xl font-bold">{greetingText}, {user?.firstName}</h2>
                   </div>
-                  <h3 className="font-medium text-slate-900 mb-1">{t('dashboard.growYourCareer', 'Grow Your Career')}</h3>
-                  <p className="text-sm text-slate-500 mb-4">
-                    {t('dashboard.trackSkillsDesc', 'Track your skills and discover internal opportunities')}
+                  <p className="text-white/80 text-sm mb-1">
+                    {t('workerHome.teamSubtitle', 'Front of House Team • The Grand Hotel, London')}
                   </p>
-                  <Link to="/career" className="btn btn-primary">
-                    <Award className="w-4 h-4" />
-                    {t('dashboard.viewMyCareer', 'View My Career')}
+                  <p className="text-white/60 text-xs">
+                    {new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                  </p>
+                </div>
+
+                {/* Momentum Score */}
+                <div className="card flex flex-col items-center justify-center py-4">
+                  <div className="relative">
+                    <svg className="w-32 h-32" viewBox="0 0 120 120">
+                      <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" strokeWidth="8" />
+                      <circle
+                        cx="60" cy="60" r="54" fill="none"
+                        stroke={momentumScore >= 80 ? '#22c55e' : momentumScore >= 60 ? '#f59e0b' : '#ef4444'}
+                        strokeWidth="8" strokeLinecap="round"
+                        strokeDasharray={`${(momentumScore / 100) * 339.3} 339.3`}
+                        transform="rotate(-90 60 60)"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-3xl font-bold text-slate-900">{momentumScore}</span>
+                    </div>
+                  </div>
+                  <p className="text-sm font-medium text-slate-700 mt-2">{t('workerHome.momentumScore', 'Your Momentum Score')}</p>
+                  <p className="text-xs text-green-600 font-medium">
+                    {t('workerHome.momentumTrend', '↑{{count}} from last month', { count: momentumTrend })}
+                  </p>
+                  <Link to="/momentum" className="text-xs text-momentum-500 hover:text-momentum-600 mt-1 flex items-center gap-1">
+                    {t('workerHome.viewDetails', 'View details')} <ChevronRight className="w-3 h-3" />
                   </Link>
                 </div>
               </div>
-            </div>
-          </div>
 
-          {data?.timeOffBalance?.length > 0 && (
-            <div className="card">
-              <div className="card-header">
-                <h2 className="font-semibold text-slate-900">{t('dashboard.timeOffBalance', 'Time Off Balance')}</h2>
+              {/* ROW 2: Quick Actions */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                <Link to="/time-off" className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <CalendarOff className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-700 text-center">{t('workerHome.requestTimeOff', 'Request Time Off')}</span>
+                </Link>
+                <Link to="/time-tracking" className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                    <Clock className="w-5 h-5 text-green-600" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-700 text-center">{t('workerHome.clockIn', 'Clock In')}</span>
+                </Link>
+                <Link to="/compensation" className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                    <DollarSign className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-700 text-center">{t('workerHome.latestPayslip', 'Latest Payslip')}</span>
+                </Link>
+                <Link to="/learning" className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-momentum-100 flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-momentum-600" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-700 text-center">{t('workerHome.continueTraining', 'Continue Training')}</span>
+                </Link>
+                <Link to="/recognition" className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center">
+                    <Heart className="w-5 h-5 text-pink-600" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-700 text-center">{t('workerHome.giveRecognition', 'Give Recognition')}</span>
+                </Link>
               </div>
-              <div className="card-body">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {data.timeOffBalance.map((balance) => (
-                    <div key={balance.id} className="text-center p-4 bg-slate-50 rounded-lg">
-                      <p className="text-2xl font-bold text-slate-900">
-                        {(balance.entitlement || 0) + (balance.carried_over || 0) - (balance.used || 0) - (balance.pending || 0)}
+
+              {/* ROW 3: Summary Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* Leave Balance */}
+                <div className="card">
+                  <div className="card-body">
+                    <div className="flex items-center gap-2 mb-3">
+                      <CalendarOff className="w-4 h-4 text-blue-500" />
+                      <h3 className="text-sm font-semibold text-slate-700">{t('workerHome.leaveBalance', 'Leave Balance')}</h3>
+                    </div>
+                    <p className="text-xl font-bold text-slate-900">{t('workerHome.daysRemaining', '{{count}} days remaining', { count: leaveRemaining })}</p>
+                    <div className="mt-3">
+                      <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-blue-500 rounded-full" style={{ width: `${(leaveRemaining / leaveTotal) * 100}%` }} />
+                      </div>
+                      <p className="text-xs text-slate-400 mt-1">{leaveRemaining}/{leaveTotal}</p>
+                    </div>
+                    <span className="inline-block mt-2 px-2 py-0.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">
+                      {t('workerHome.annualLeave', 'Annual Leave')}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Training Compliance */}
+                <div className="card">
+                  <div className="card-body">
+                    <div className="flex items-center gap-2 mb-3">
+                      <BookOpen className="w-4 h-4 text-momentum-500" />
+                      <h3 className="text-sm font-semibold text-slate-700">{t('workerHome.trainingCompliance', 'Training Compliance')}</h3>
+                    </div>
+                    <p className="text-xl font-bold text-slate-900">
+                      {t('workerHome.trainingProgress', '{{complete}} of {{total}} required complete', { complete: trainingComplete, total: trainingTotal })}
+                    </p>
+                    <div className="flex items-center gap-3 mt-3">
+                      <svg className="w-12 h-12 shrink-0" viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="20" fill="none" stroke="#e2e8f0" strokeWidth="4" />
+                        <circle cx="24" cy="24" r="20" fill="none" stroke="#f97316" strokeWidth="4" strokeLinecap="round" strokeDasharray={`${(trainingPercent / 100) * 125.7} 125.7`} transform="rotate(-90 24 24)" />
+                        <text x="24" y="28" textAnchor="middle" className="text-xs font-bold fill-slate-700">{trainingPercent}%</text>
+                      </svg>
+                      <div>
+                        <p className="text-xs text-red-500 font-medium flex items-center gap-1">
+                          <AlertTriangle className="w-3 h-3" />
+                          {t('workerHome.overdueTraining', 'Fire Safety — due Feb 10')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Next Shift */}
+                <div className="card">
+                  <div className="card-body">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Calendar className="w-4 h-4 text-green-500" />
+                      <h3 className="text-sm font-semibold text-slate-700">{t('workerHome.nextShift', 'Next Shift')}</h3>
+                    </div>
+                    <p className="text-xl font-bold text-slate-900">{t('workerHome.nextShiftTime', 'Tomorrow, 7:00 AM — 3:00 PM')}</p>
+                    <div className="mt-3 space-y-1">
+                      <p className="text-xs text-slate-500 flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        {t('workerHome.nextShiftLocation', 'The Grand Hotel, Main Restaurant')}
                       </p>
-                      <p className="text-sm text-slate-500">{balance.name} {t('dashboard.available', 'Available')}</p>
+                      <p className="text-xs text-slate-500 flex items-center gap-1">
+                        <Briefcase className="w-3 h-3" />
+                        {t('workerHome.nextShiftRole', 'Front of House')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pending Actions */}
+                <div className="card">
+                  <div className="card-body">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Bell className="w-4 h-4 text-amber-500" />
+                      <h3 className="text-sm font-semibold text-slate-700">{t('workerHome.pendingActions', 'Pending Actions')}</h3>
+                    </div>
+                    <p className="text-xl font-bold text-slate-900">{t('workerHome.pendingCount', '3 items need attention')}</p>
+                    <ul className="mt-3 space-y-1.5">
+                      <li className="text-xs text-slate-600 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                        {t('workerHome.pendingTraining', '1 training overdue')}
+                      </li>
+                      <li className="text-xs text-slate-600 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                        {t('workerHome.pendingDocument', '1 document to sign')}
+                      </li>
+                      <li className="text-xs text-slate-600 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
+                        {t('workerHome.pendingExpense', '1 expense pending')}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* ROW 4: Two-column layout */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* LEFT COLUMN */}
+                <div className="space-y-6">
+                  {/* Recent Recognition */}
+                  <div className="card">
+                    <div className="card-header flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Heart className="w-5 h-5 text-pink-500" />
+                        <h2 className="font-semibold text-slate-900">{t('workerHome.recentRecognition', 'Recent Recognition')}</h2>
+                      </div>
+                      <Link to="/recognition" className="text-sm text-momentum-500 hover:text-momentum-600">
+                        {t('common.viewMore', 'View all')}
+                      </Link>
+                    </div>
+                    <div className="card-body space-y-3">
+                      {[
+                        { emoji: '\u2B50', from: 'Sarah M.', to: 'You', message: t('workerHome.kudos1', 'Amazing service with the VIP table last night!'), time: t('workerHome.kudos1Time', '2 hours ago') },
+                        { emoji: '\uD83D\uDE4C', from: 'James T.', to: 'Maria L.', message: t('workerHome.kudos2', 'Thanks for covering my shift on short notice'), time: t('workerHome.kudos2Time', 'Yesterday') },
+                        { emoji: '\uD83C\uDF1F', from: 'Manager', to: 'You', message: t('workerHome.kudos3', 'Guest satisfaction score of 98% this week — outstanding!'), time: t('workerHome.kudos3Time', '2 days ago') },
+                        { emoji: '\uD83D\uDCAA', from: 'You', to: 'Alex R.', message: t('workerHome.kudos4', 'Great teamwork during the Saturday rush'), time: t('workerHome.kudos4Time', '3 days ago') },
+                      ].map((kudos, i) => (
+                        <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                          <span className="text-2xl">{kudos.emoji}</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-slate-900">{kudos.message}</p>
+                            <p className="text-xs text-slate-500 mt-1">{kudos.from} → {kudos.to} • {kudos.time}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Team Celebrations */}
+                  <div className="card">
+                    <div className="card-header flex items-center gap-2">
+                      <Gift className="w-5 h-5 text-momentum-500" />
+                      <h2 className="font-semibold text-slate-900">{t('workerHome.teamCelebrations', 'Team Celebrations')}</h2>
+                    </div>
+                    <div className="card-body space-y-3">
+                      <div className="flex items-center gap-3 p-3 bg-pink-50 rounded-lg">
+                        <Cake className="w-5 h-5 text-pink-500" />
+                        <div>
+                          <p className="text-sm font-medium text-slate-900">{t('workerHome.birthdayName', 'Maria Lopez')}</p>
+                          <p className="text-xs text-slate-500">{t('workerHome.birthdayLabel', 'Birthday today — wish them well!')}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-momentum-50 rounded-lg">
+                        <Award className="w-5 h-5 text-momentum-500" />
+                        <div>
+                          <p className="text-sm font-medium text-slate-900">{t('workerHome.anniversaryName', 'James Turner')}</p>
+                          <p className="text-xs text-slate-500">{t('workerHome.anniversaryLabel', '2-year work anniversary this week')}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                        <UserPlus className="w-5 h-5 text-green-500" />
+                        <div>
+                          <p className="text-sm font-medium text-slate-900">{t('workerHome.newStarterName', 'Emily Chen')}</p>
+                          <p className="text-xs text-slate-500">{t('workerHome.newStarterLabel', 'New starter — say hello!')}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* RIGHT COLUMN */}
+                <div className="space-y-6">
+                  {/* My Achievements */}
+                  <div className="card">
+                    <div className="card-header flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Award className="w-5 h-5 text-momentum-500" />
+                        <h2 className="font-semibold text-slate-900">{t('workerHome.myAchievements', 'My Achievements')}</h2>
+                      </div>
+                      <Link to="/career" className="text-sm text-momentum-500 hover:text-momentum-600">
+                        {t('common.viewMore', 'View all')}
+                      </Link>
+                    </div>
+                    <div className="card-body">
+                      <div className="grid grid-cols-3 gap-3">
+                        {/* Earned badges */}
+                        {[
+                          { emoji: '\uD83C\uDF1F', name: t('workerHome.badgeServiceStar', 'Service Star') },
+                          { emoji: '\u26A1', name: t('workerHome.badgeSpeedDemon', 'Speed Demon') },
+                          { emoji: '\uD83E\uDD1D', name: t('workerHome.badgeTeamPlayer', 'Team Player') },
+                        ].map((badge, i) => (
+                          <div key={i} className="flex flex-col items-center p-3 bg-momentum-50 rounded-xl border border-momentum-200">
+                            <span className="text-2xl mb-1">{badge.emoji}</span>
+                            <span className="text-xs font-medium text-momentum-700 text-center">{badge.name}</span>
+                          </div>
+                        ))}
+                        {/* Locked badges */}
+                        {[
+                          { emoji: '\uD83C\uDFC6', name: t('workerHome.badgeMentor', 'Mentor') },
+                          { emoji: '\uD83C\uDF93', name: t('workerHome.badgeCertified', 'Certified Pro') },
+                          { emoji: '\uD83D\uDC8E', name: t('workerHome.badgeLoyalty', '5-Year Club') },
+                        ].map((badge, i) => (
+                          <div key={i} className="flex flex-col items-center p-3 bg-slate-50 rounded-xl border border-slate-200 opacity-50">
+                            <div className="relative">
+                              <span className="text-2xl mb-1 grayscale">{badge.emoji}</span>
+                              <Lock className="w-3 h-3 text-slate-400 absolute -top-1 -right-1" />
+                            </div>
+                            <span className="text-xs font-medium text-slate-400 text-center mt-1">{badge.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Company Announcements */}
+                  <div className="card">
+                    <div className="card-header flex items-center gap-2">
+                      <Megaphone className="w-5 h-5 text-blue-500" />
+                      <h2 className="font-semibold text-slate-900">{t('workerHome.companyAnnouncements', 'Company Announcements')}</h2>
+                    </div>
+                    <div className="card-body space-y-3">
+                      <div className="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                        <p className="text-sm font-medium text-slate-900">{t('workerHome.announcement1Title', 'New Employee Wellness Programme')}</p>
+                        <p className="text-xs text-slate-600 mt-1">{t('workerHome.announcement1Body', 'Free gym membership and mental health support now available for all team members.')}</p>
+                        <p className="text-xs text-slate-400 mt-1">{t('workerHome.announcement1Date', 'HR Team • 1 day ago')}</p>
+                      </div>
+                      <div className="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
+                        <p className="text-sm font-medium text-slate-900">{t('workerHome.announcement2Title', 'Valentine\'s Day Special Service')}</p>
+                        <p className="text-xs text-slate-600 mt-1">{t('workerHome.announcement2Body', 'Special menu and service guidelines for Feb 14. Please review the briefing notes.')}</p>
+                        <p className="text-xs text-slate-400 mt-1">{t('workerHome.announcement2Date', 'Operations • 3 days ago')}</p>
+                      </div>
+                      <div className="p-3 bg-momentum-50 rounded-lg border-l-4 border-momentum-400">
+                        <p className="text-sm font-medium text-slate-900">{t('workerHome.announcement3Title', 'Q1 Team Awards Nominations Open')}</p>
+                        <p className="text-xs text-slate-600 mt-1">{t('workerHome.announcement3Body', 'Nominate a colleague who has gone above and beyond. Deadline: Feb 28.')}</p>
+                        <p className="text-xs text-slate-400 mt-1">{t('workerHome.announcement3Date', 'HR Team • 5 days ago')}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ROW 5: My Goals Progress */}
+              <div className="card">
+                <div className="card-header flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Target className="w-5 h-5 text-momentum-500" />
+                    <h2 className="font-semibold text-slate-900">{t('workerHome.myGoals', 'My Goals Progress')}</h2>
+                  </div>
+                  <Link to="/career" className="text-sm text-momentum-500 hover:text-momentum-600 flex items-center gap-1">
+                    {t('common.viewMore', 'View all')} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+                <div className="card-body space-y-5">
+                  {[
+                    { label: t('workerHome.goal1', 'Complete Food Safety Level 3'), percent: 60 },
+                    { label: t('workerHome.goal2', 'Achieve 90% guest satisfaction'), percent: 85 },
+                    { label: t('workerHome.goal3', 'Complete Wine Service certification'), percent: 30 },
+                  ].map((goal, i) => (
+                    <div key={i}>
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="text-sm font-medium text-slate-700">{goal.label}</p>
+                        <span className="text-sm font-semibold text-momentum-600">{goal.percent}%</span>
+                      </div>
+                      <div className="h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-momentum-500 rounded-full transition-all" style={{ width: `${goal.percent}%` }} />
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-          )}
-        </>
+            </>
+          );
+        })()
       )}
     </div>
   );

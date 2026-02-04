@@ -7,7 +7,7 @@ import { Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
 import { api } from '../lib/api';
-import { Eye, EyeOff, Loader2, ArrowLeft, Shield } from 'lucide-react';
+import { Eye, EyeOff, Loader2, ArrowLeft, Shield, Shield as ShieldIcon, Users as UsersIcon, User as UserIcon } from 'lucide-react';
 import { UpliftLogo } from '../components/UpliftLogo';
 
 export default function Login() {
@@ -232,7 +232,7 @@ export default function Login() {
           <div className="inline-flex flex-col items-center gap-3 mb-4">
             <UpliftLogo size={48} showWordmark={true} variant="white" />
           </div>
-          <p className="text-slate-400">{t('auth.adminPortal', 'Admin Portal')}</p>
+          <p className="text-slate-400">{t('auth.signInSubtitle', 'Sign in to your workspace')}</p>
         </div>
 
         {/* Login form */}
@@ -306,6 +306,53 @@ export default function Login() {
               )}
             </button>
           </form>
+        </div>
+
+        {/* Demo Quick Access */}
+        <div className="mt-6">
+          <div className="text-center mb-4">
+            <p className="text-slate-400 text-sm">{t('auth.demoAccess', 'Quick Demo Access')}</p>
+          </div>
+          <div className="grid grid-cols-1 gap-3">
+            {[
+              { role: 'admin', email: 'sarah.chen@grandmetro.com', name: 'Sarah Chen', title: t('auth.demoAdmin', 'HR Administrator'), desc: t('auth.demoAdminDesc', 'Full platform access — manage employees, configure settings, run reports'), icon: ShieldIcon, color: 'momentum' },
+              { role: 'manager', email: 'james.williams@grandmetro.com', name: 'James Williams', title: t('auth.demoManager', 'Department Manager'), desc: t('auth.demoManagerDesc', 'Team management — approve requests, run 1-on-1s, view team performance'), icon: UsersIcon, color: 'blue' },
+              { role: 'worker', email: 'marc.hunt@grandmetro.com', name: 'Marc Hunt', title: t('auth.demoWorker', 'Employee'), desc: t('auth.demoWorkerDesc', 'Self-service — view your Momentum Score, book leave, complete training, give recognition'), icon: UserIcon, color: 'green' },
+            ].map((persona) => (
+              <button
+                key={persona.role}
+                onClick={async () => {
+                  setError('');
+                  setLoading(true);
+                  try {
+                    await login(persona.email, 'demo');
+                  } catch (err) {
+                    setError(err.message);
+                    setLoading(false);
+                  }
+                }}
+                disabled={loading}
+                className={`w-full p-4 rounded-xl border border-slate-700 bg-slate-800/50 hover:bg-slate-800 transition-all text-left group hover:border-${persona.color === 'momentum' ? 'momentum' : persona.color}-500/50 hover:shadow-lg hover:shadow-${persona.color === 'momentum' ? 'momentum' : persona.color}-500/10`}
+              >
+                <div className="flex items-start gap-3">
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
+                    persona.color === 'momentum' ? 'bg-momentum-500/20 text-momentum-400' :
+                    persona.color === 'blue' ? 'bg-blue-500/20 text-blue-400' :
+                    'bg-green-500/20 text-green-400'
+                  }`}>
+                    <persona.icon className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-white text-sm">{persona.title}</span>
+                      <span className="text-xs text-slate-500">({persona.name})</span>
+                    </div>
+                    <p className="text-xs text-slate-400 mt-1 line-clamp-2">{persona.desc}</p>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
 
         <p className="text-center text-slate-500 text-sm mt-6">

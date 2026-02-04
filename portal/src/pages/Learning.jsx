@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../lib/auth';
 import {
   BookOpen, GraduationCap, Users, ShieldCheck, User, BarChart3,
   Plus, Search, Filter, Grid3X3, List, Clock, Award, CheckCircle,
@@ -116,7 +117,9 @@ const DIFFICULTIES = [
 
 export default function Learning() {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState('catalogue');
+  const { user } = useAuth();
+  const isManager = user?.role === 'admin' || user?.role === 'manager';
+  const [activeTab, setActiveTab] = useState(isManager ? 'catalogue' : 'my_learning');
   const [showCreateCourse, setShowCreateCourse] = useState(false);
   const [showBulkEnroll, setShowBulkEnroll] = useState(false);
 
@@ -137,7 +140,7 @@ export default function Learning() {
       {/* Tab Navigation */}
       <div className="border-b border-slate-200">
         <nav className="flex gap-1 -mb-px overflow-x-auto">
-          {TABS.map((tab) => {
+          {(isManager ? TABS : TABS.filter(t => ['catalogue', 'paths', 'my_learning'].includes(t.id))).map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (
