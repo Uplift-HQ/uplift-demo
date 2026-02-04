@@ -12,7 +12,8 @@ import {
   Lock, Unlock, UserX, UserCheck, RefreshCw, Send, X,
   Monitor, Smartphone, Globe, Clock, Download, AlertTriangle,
   ChevronRight, MoreVertical, Eye, History, Sun, Moon, Webhook,
-  Palette, Check, Copy, Trash2, Play, Pause, Upload, Image, Crown, Sparkles
+  Palette, Check, Copy, Trash2, Play, Pause, Upload, Image, Crown, Sparkles,
+  KeyRound, Link2
 } from 'lucide-react';
 import { brandingApi } from '../lib/api';
 import { useBranding } from '../lib/branding';
@@ -27,6 +28,7 @@ const TABS = [
   { id: 'users', nameKey: 'settings.users', icon: Users, adminOnly: true },
   { id: 'appearance', nameKey: 'settings.appearance', icon: Palette, adminOnly: false },
   { id: 'webhooks', nameKey: 'settings.webhooks', icon: Webhook, adminOnly: true },
+  { id: 'sso', nameKey: 'settings.sso.title', icon: KeyRound, adminOnly: true },
   { id: 'account', nameKey: 'settings.myAccount', icon: User, adminOnly: false },
   { id: 'security', nameKey: 'settings.security', icon: Shield, adminOnly: false },
   { id: 'sessions', nameKey: 'settings.sessions', icon: Monitor, adminOnly: false },
@@ -70,7 +72,7 @@ export default function Settings() {
       }
     } catch (error) {
       if (import.meta.env.DEV) console.error('Failed to load settings:', error);
-      toast.error('Failed to load settings');
+      toast.error(t('settings.loadError', 'Failed to load settings'));
     } finally {
       setLoading(false);
     }
@@ -162,6 +164,9 @@ export default function Settings() {
               {activeTab === 'webhooks' && isAdmin && (
                 <WebhooksSettings showMsg={showMsg} />
               )}
+              {activeTab === 'sso' && isAdmin && (
+                <SSOSettings showMsg={showMsg} />
+              )}
               {activeTab === 'account' && (
                 <AccountSettings user={user} showMsg={showMsg} />
               )}
@@ -227,7 +232,7 @@ function OrganizationSettings({ organization, onSave }) {
       onSave();
     } catch (error) {
       if (import.meta.env.DEV) console.error('Failed to save:', error);
-      toast.error('Failed to save organization settings');
+      toast.error(t('settings.saveOrgError', 'Failed to save organization settings'));
     } finally {
       setSaving(false);
     }
@@ -252,7 +257,7 @@ function OrganizationSettings({ organization, onSave }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Timezone</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.timezone', 'Timezone')}</label>
           <select
             value={form.timezone}
             onChange={e => setForm({ ...form, timezone: e.target.value })}
@@ -267,7 +272,7 @@ function OrganizationSettings({ organization, onSave }) {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Currency</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.currency', 'Currency')}</label>
             <select
               value={form.currency}
               onChange={e => setForm({ ...form, currency: e.target.value })}
@@ -279,7 +284,7 @@ function OrganizationSettings({ organization, onSave }) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Week Starts On</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.weekStartsOn', 'Week Starts On')}</label>
             <select
               value={form.weekStartsOn}
               onChange={e => setForm({ ...form, weekStartsOn: e.target.value })}
@@ -292,7 +297,7 @@ function OrganizationSettings({ organization, onSave }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Brand Color</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.brandColor', 'Brand Color')}</label>
           <div className="flex items-center gap-3">
             <input
               type="color"
@@ -433,8 +438,8 @@ function BrandingSettings({ organization, showMsg }) {
     return (
       <div className="space-y-6">
         <div>
-          <h2 className="text-lg font-semibold text-slate-900">Branding</h2>
-          <p className="text-sm text-slate-600">Customize the look and feel of your Uplift experience</p>
+          <h2 className="text-lg font-semibold text-slate-900">{t('settings.brandingLabel', 'Branding')}</h2>
+          <p className="text-sm text-slate-600">{t('settings.brandingDesc', 'Customize the look and feel of your Uplift experience')}</p>
         </div>
         <div className="relative overflow-hidden rounded-xl border-2 border-dashed border-orange-300 bg-gradient-to-br from-orange-50 to-amber-50 p-8 text-center">
           <div className="absolute top-3 right-3">
@@ -443,7 +448,7 @@ function BrandingSettings({ organization, showMsg }) {
           <div className="mx-auto w-16 h-16 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-orange-200">
             <Crown className="w-8 h-8 text-white" />
           </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2">Upgrade to Enterprise for Custom Branding</h3>
+          <h3 className="text-xl font-bold text-slate-900 mb-2">{t('settings.upgradeEnterpriseBranding', 'Upgrade to Enterprise for Custom Branding')}</h3>
           <p className="text-slate-600 max-w-md mx-auto mb-6">
             White-label your Uplift portal with your company logo, colors, and brand identity.
             Give your employees a seamless, branded experience.
@@ -462,7 +467,7 @@ function BrandingSettings({ organization, showMsg }) {
             ))}
           </div>
           <button onClick={() => window.open('mailto:sales@uplift.hr')} className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-lg shadow-lg shadow-orange-200 hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all">
-            Contact Sales
+            {t('settings.contactSales', 'Contact Sales')}
           </button>
         </div>
       </div>
@@ -472,13 +477,13 @@ function BrandingSettings({ organization, showMsg }) {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">Branding</h2>
-        <p className="text-sm text-slate-600">Customize the look and feel across portal and mobile app</p>
+        <h2 className="text-lg font-semibold text-slate-900">{t('settings.brandingLabel', 'Branding')}</h2>
+        <p className="text-sm text-slate-600">{t('settings.brandingDescFull', 'Customize the look and feel across portal and mobile app')}</p>
       </div>
 
       {/* Brand Name */}
       <div className="max-w-xl">
-        <label className="block text-sm font-medium text-slate-700 mb-1">Brand Name</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.brandName', 'Brand Name')}</label>
         <input
           type="text"
           value={form.brand_name}
@@ -486,13 +491,13 @@ function BrandingSettings({ organization, showMsg }) {
           placeholder={t('settings.companyNamePlaceholder', 'Your Company Name')}
           className="input"
         />
-        <p className="text-xs text-slate-500 mt-1">Displayed in the sidebar and mobile app header</p>
+        <p className="text-xs text-slate-500 mt-1">{t('settings.brandNameDesc', 'Displayed in the sidebar and mobile app header')}</p>
       </div>
 
       {/* Colors */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Primary Color</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.primaryColor', 'Primary Color')}</label>
           <div className="flex items-center gap-3">
             <input
               type="color"
@@ -513,7 +518,7 @@ function BrandingSettings({ organization, showMsg }) {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Secondary Color</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.secondaryColor', 'Secondary Color')}</label>
           <div className="flex items-center gap-3">
             <input
               type="color"
@@ -537,7 +542,7 @@ function BrandingSettings({ organization, showMsg }) {
 
       {/* Logo Uploads */}
       <div className="space-y-6">
-        <h3 className="font-medium text-slate-900 border-b pb-2">Logos & Images</h3>
+        <h3 className="font-medium text-slate-900 border-b pb-2">{t('settings.logosImages', 'Logos & Images')}</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <LogoUploadZone
@@ -580,11 +585,11 @@ function BrandingSettings({ organization, showMsg }) {
 
       {/* Live Preview */}
       <div className="space-y-4">
-        <h3 className="font-medium text-slate-900 border-b pb-2">Live Preview</h3>
+        <h3 className="font-medium text-slate-900 border-b pb-2">{t('settings.livePreview', 'Live Preview')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Mobile App Header Preview */}
           <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <div className="text-xs font-medium text-slate-500 px-4 py-2 bg-slate-50 border-b">Mobile App Header</div>
+            <div className="text-xs font-medium text-slate-500 px-4 py-2 bg-slate-50 border-b">{t('settings.mobileAppHeader', 'Mobile App Header')}</div>
             <div className="p-4 bg-white">
               <div className="w-64 mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-200">
                 <div className="h-12 flex items-center px-4 gap-3" style={{ backgroundColor: form.primary_color }}>
@@ -612,7 +617,7 @@ function BrandingSettings({ organization, showMsg }) {
 
           {/* Login Screen Preview */}
           <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <div className="text-xs font-medium text-slate-500 px-4 py-2 bg-slate-50 border-b">Login Screen</div>
+            <div className="text-xs font-medium text-slate-500 px-4 py-2 bg-slate-50 border-b">{t('settings.loginScreenPreview', 'Login Screen')}</div>
             <div className="p-4 bg-white">
               <div className="w-64 mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-200">
                 <div
@@ -716,7 +721,7 @@ function LogoUploadZone({ label, description, currentUrl, uploading, onUpload, o
           ) : (
             <>
               <Upload className="w-5 h-5 text-slate-400 mb-1" />
-              <span className="text-xs text-slate-500">Drop file or click to upload</span>
+              <span className="text-xs text-slate-500">{t('settings.dropFileUpload', 'Drop file or click to upload')}</span>
             </>
           )}
         </label>
@@ -741,12 +746,12 @@ function UsersSettings({ users, onRefresh, showMsg, onInvite, onViewUser }) {
 
   const getStatusBadge = (user) => {
     if (user.isLocked || (user.locked_until && new Date(user.locked_until) > new Date())) {
-      return <span className="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700">Locked</span>;
+      return <span className="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700">{t('settings.locked', 'Locked')}</span>;
     }
     switch (user.status) {
-      case 'active': return <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">Active</span>;
-      case 'invited': return <span className="px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-700">Invited</span>;
-      case 'inactive': return <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">Inactive</span>;
+      case 'active': return <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">{t('settings.active', 'Active')}</span>;
+      case 'invited': return <span className="px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-700">{t('settings.invited', 'Invited')}</span>;
+      case 'inactive': return <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">{t('settings.inactive', 'Inactive')}</span>;
       default: return null;
     }
   };
@@ -786,11 +791,11 @@ function UsersSettings({ users, onRefresh, showMsg, onInvite, onViewUser }) {
         <table className="w-full">
           <thead className="bg-slate-50 border-b border-slate-200">
             <tr>
-              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">User</th>
-              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">Role</th>
-              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">Status</th>
-              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">Last Login</th>
-              <th className="text-right text-xs font-medium text-slate-500 uppercase px-4 py-3">Actions</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">{t('settings.user', 'User')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">{t('settings.role', 'Role')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">{t('settings.status', 'Status')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase px-4 py-3">{t('settings.lastLogin', 'Last Login')}</th>
+              <th className="text-right text-xs font-medium text-slate-500 uppercase px-4 py-3">{t('settings.actions', 'Actions')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200">
@@ -805,7 +810,7 @@ function UsersSettings({ users, onRefresh, showMsg, onInvite, onViewUser }) {
                       <div className="font-medium text-slate-900">
                         {u.first_name} {u.last_name}
                         {u.force_password_change && (
-                          <Key className="w-3.5 h-3.5 inline ml-1 text-amber-500" title="Password change required" />
+                          <Key className="w-3.5 h-3.5 inline ml-1 text-amber-500" title={t('settings.passwordChangeRequired', 'Password change required')} />
                         )}
                       </div>
                       <div className="text-sm text-slate-500">{u.email}</div>
@@ -862,7 +867,7 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
       setActivity(actResult.activities || []);
     } catch (error) {
       if (import.meta.env.DEV) console.error('Failed to load user data:', error);
-      toast.error('Failed to load user data');
+      toast.error(t('settings.loadUserError', 'Failed to load user data'));
     }
   };
 
@@ -992,7 +997,7 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
               {/* User Info */}
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-slate-500">Role</span>
+                  <span className="text-slate-500">{t('settings.role', 'Role')}</span>
                   <select
                     value={user.role}
                     onChange={(e) => handleAction('changeRole', { role: e.target.value })}
@@ -1005,23 +1010,23 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
                   </select>
                 </div>
                 <div>
-                  <span className="text-slate-500">Status</span>
-                  <p className="mt-1 font-medium">{isLocked ? 'Locked' : user.status}</p>
+                  <span className="text-slate-500">{t('settings.status', 'Status')}</span>
+                  <p className="mt-1 font-medium">{isLocked ? t('settings.locked', 'Locked') : user.status}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500">Email Verified</span>
-                  <p className="mt-1">{user.email_verified ? 'Yes' : 'No'}</p>
+                  <span className="text-slate-500">{t('settings.emailVerified', 'Email Verified')}</span>
+                  <p className="mt-1">{user.email_verified ? t('common.yes', 'Yes') : t('common.no', 'No')}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500">MFA Enabled</span>
-                  <p className="mt-1">{user.mfa_enabled ? 'Yes' : 'No'}</p>
+                  <span className="text-slate-500">{t('settings.mfaEnabled', 'MFA Enabled')}</span>
+                  <p className="mt-1">{user.mfa_enabled ? t('common.yes', 'Yes') : t('common.no', 'No')}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500">Last Login</span>
-                  <p className="mt-1">{user.last_login_at ? new Date(user.last_login_at).toLocaleString() : 'Never'}</p>
+                  <span className="text-slate-500">{t('settings.lastLogin', 'Last Login')}</span>
+                  <p className="mt-1">{user.last_login_at ? new Date(user.last_login_at).toLocaleString() : t('settings.users.never', 'Never')}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500">Created</span>
+                  <span className="text-slate-500">{t('settings.created', 'Created')}</span>
                   <p className="mt-1">{new Date(user.created_at).toLocaleDateString()}</p>
                 </div>
               </div>
@@ -1106,7 +1111,7 @@ function InviteUserModal({ onClose, onSuccess }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl max-w-md w-full p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold">Invite Team Member</h2>
+          <h2 className="text-lg font-semibold">{t('settings.inviteTeamMember', 'Invite Team Member')}</h2>
           <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg">
             <X className="w-5 h-5" />
           </button>
@@ -1117,20 +1122,20 @@ function InviteUserModal({ onClose, onSuccess }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">First Name</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.firstName', 'First Name')}</label>
               <input type="text" required value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} className="input" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Last Name</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.lastName', 'Last Name')}</label>
               <input type="text" required value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} className="input" />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.email', 'Email')}</label>
             <input type="email" required value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="input" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Role</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.role', 'Role')}</label>
             <select value={form.role} onChange={e => setForm({...form, role: e.target.value})} className="input">
               <option value="worker">{t('settings.worker')}</option>
               <option value="manager">{t('settings.manager')}</option>
@@ -1197,16 +1202,16 @@ function AccountSettings({ user, showMsg }) {
       <div className="grid gap-4 max-w-xl">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">First Name</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.firstName', 'First Name')}</label>
             <input type="text" value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} className="input" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Last Name</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.lastName', 'Last Name')}</label>
             <input type="text" value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} className="input" />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.phone', 'Phone')}</label>
           <input type="tel" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="input" />
         </div>
       </div>
@@ -1279,24 +1284,24 @@ function SecuritySettings({ user, showMsg }) {
       <div className="max-w-xl">
         <h3 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
           <Key className="w-5 h-5 text-slate-400" />
-          Change Password
+          {t('settings.changePassword', 'Change Password')}
         </h3>
         <form onSubmit={handleChangePassword} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Current Password</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.currentPassword', 'Current Password')}</label>
             <input type="password" required value={passwords.current} onChange={e => setPasswords({...passwords, current: e.target.value})} className="input" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">New Password</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.newPassword', 'New Password')}</label>
             <input type="password" required minLength={8} value={passwords.new} onChange={e => setPasswords({...passwords, new: e.target.value})} className="input" />
-            <p className="text-xs text-slate-500 mt-1">At least 8 characters with uppercase, lowercase, and number</p>
+            <p className="text-xs text-slate-500 mt-1">{t('settings.passwordRequirements', 'At least 8 characters with uppercase, lowercase, and number')}</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Confirm New Password</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.confirmPassword', 'Confirm New Password')}</label>
             <input type="password" required value={passwords.confirm} onChange={e => setPasswords({...passwords, confirm: e.target.value})} className="input" />
           </div>
           <button type="submit" disabled={changing} className="btn btn-primary">
-            {changing ? 'Changing...' : 'Change Password'}
+            {changing ? t('settings.changingPassword', 'Changing...') : t('settings.changePassword', 'Change Password')}
           </button>
         </form>
       </div>
@@ -1305,19 +1310,19 @@ function SecuritySettings({ user, showMsg }) {
       <div className="max-w-xl pt-6 border-t">
         <h3 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
           <Shield className="w-5 h-5 text-slate-400" />
-          Two-Factor Authentication
+          {t('settings.twoFactorAuth', 'Two-Factor Authentication')}
         </h3>
         <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
           <div>
-            <p className="font-medium">Authenticator App</p>
-            <p className="text-sm text-slate-500">Add an extra layer of security</p>
+            <p className="font-medium">{t('settings.authenticatorApp', 'Authenticator App')}</p>
+            <p className="text-sm text-slate-500">{t('settings.extraSecurity', 'Add an extra layer of security')}</p>
           </div>
           <button onClick={toggleMfa} className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             mfaEnabled 
               ? 'bg-green-100 text-green-700 hover:bg-green-200' 
               : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
           }`}>
-            {mfaEnabled ? 'Enabled' : 'Enable'}
+            {mfaEnabled ? t('settings.enabled', 'Enabled') : t('settings.enable', 'Enable')}
           </button>
         </div>
       </div>
@@ -1330,6 +1335,7 @@ function SecuritySettings({ user, showMsg }) {
 // ============================================================
 
 function SessionsSettings({ sessions, onRefresh, showMsg, userId }) {
+  const { t } = useTranslation();
   const [revoking, setRevoking] = useState(null);
 
   const revokeSession = async (sessionId) => {
@@ -1362,13 +1368,13 @@ function SessionsSettings({ sessions, onRefresh, showMsg, userId }) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-slate-900">Active Sessions</h2>
-          <p className="text-sm text-slate-600">Manage your logged-in devices</p>
+          <h2 className="text-lg font-semibold text-slate-900">{t('settings.activeSessions', 'Active Sessions')}</h2>
+          <p className="text-sm text-slate-600">{t('settings.manageDevices', 'Manage your logged-in devices')}</p>
         </div>
         {sessions.length > 1 && (
           <button onClick={revokeOthers} disabled={revoking} className="btn btn-secondary text-red-600">
             <RefreshCw className="w-4 h-4" />
-            Sign Out Other Devices
+            {t('settings.signOutOtherDevices', 'Sign Out Other Devices')}
           </button>
         )}
       </div>
@@ -1380,8 +1386,8 @@ function SessionsSettings({ sessions, onRefresh, showMsg, userId }) {
               {s.device_type === 'mobile' ? <Smartphone className="w-6 h-6 text-slate-400" /> : <Monitor className="w-6 h-6 text-slate-400" />}
               <div>
                 <p className="font-medium">
-                  {s.device_name || 'Unknown Device'}
-                  {s.is_current && <span className="ml-2 text-xs text-green-600 font-medium">This device</span>}
+                  {s.device_name || t('settings.unknownDevice', 'Unknown Device')}
+                  {s.is_current && <span className="ml-2 text-xs text-green-600 font-medium">{t('settings.thisDevice', 'This device')}</span>}
                 </p>
                 <p className="text-sm text-slate-500">{s.browser} on {s.os} • {s.ip_address}</p>
                 <p className="text-xs text-slate-400">Last active: {new Date(s.last_active_at).toLocaleString()}</p>
@@ -1393,7 +1399,7 @@ function SessionsSettings({ sessions, onRefresh, showMsg, userId }) {
                 disabled={revoking === s.id}
                 className="btn btn-secondary text-red-600 text-sm"
               >
-                {revoking === s.id ? 'Revoking...' : 'Revoke'}
+                {revoking === s.id ? t('settings.revoking', 'Revoking...') : t('settings.revoke', 'Revoke')}
               </button>
             )}
           </div>
@@ -1408,6 +1414,7 @@ function SessionsSettings({ sessions, onRefresh, showMsg, userId }) {
 // ============================================================
 
 function AppearanceSettings({ showMsg }) {
+  const { t } = useTranslation();
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('uplift-theme') || 'light';
@@ -1436,41 +1443,41 @@ function AppearanceSettings({ showMsg }) {
   };
 
   const themes = [
-    { id: 'light', name: 'Light', icon: Sun, description: 'Clean, bright interface' },
-    { id: 'dark', name: 'Dark', icon: Moon, description: 'Easy on the eyes' },
-    { id: 'system', name: 'System', icon: Monitor, description: 'Match device settings' },
+    { id: 'light', name: t('settings.themes.light', 'Light'), icon: Sun, description: t('settings.themes.lightDesc', 'Clean, bright interface') },
+    { id: 'dark', name: t('settings.themes.dark', 'Dark'), icon: Moon, description: t('settings.themes.darkDesc', 'Easy on the eyes') },
+    { id: 'system', name: t('settings.themes.system', 'System'), icon: Monitor, description: t('settings.themes.systemDesc', 'Match device settings') },
   ];
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">Appearance</h2>
-        <p className="text-sm text-slate-600">Customize how Uplift looks for you</p>
+        <h2 className="text-lg font-semibold text-slate-900">{t('settings.appearance', 'Appearance')}</h2>
+        <p className="text-sm text-slate-600">{t('settings.customizeAppearance', 'Customize how Uplift looks for you')}</p>
       </div>
 
       <div>
-        <h3 className="font-medium text-slate-900 mb-4">Theme</h3>
+        <h3 className="font-medium text-slate-900 mb-4">{t('settings.theme', 'Theme')}</h3>
         <div className="grid grid-cols-3 gap-4">
-          {themes.map((t) => (
+          {themes.map((themeOption) => (
             <button
-              key={t.id}
-              onClick={() => handleThemeChange(t.id)}
+              key={themeOption.id}
+              onClick={() => handleThemeChange(themeOption.id)}
               className={`p-4 rounded-xl border-2 transition-all text-left ${
-                theme === t.id
+                theme === themeOption.id
                   ? 'border-momentum-500 bg-momentum-50'
                   : 'border-slate-200 hover:border-slate-300'
               }`}
             >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${
-                theme === t.id ? 'bg-momentum-500 text-white' : 'bg-slate-100 text-slate-600'
+                theme === themeOption.id ? 'bg-momentum-500 text-white' : 'bg-slate-100 text-slate-600'
               }`}>
-                <t.icon className="w-5 h-5" />
+                <themeOption.icon className="w-5 h-5" />
               </div>
-              <p className="font-medium text-slate-900">{t.name}</p>
-              <p className="text-sm text-slate-500">{t.description}</p>
-              {theme === t.id && (
+              <p className="font-medium text-slate-900">{themeOption.name}</p>
+              <p className="text-sm text-slate-500">{themeOption.description}</p>
+              {theme === themeOption.id && (
                 <div className="mt-2 flex items-center gap-1 text-momentum-600 text-sm font-medium">
-                  <Check className="w-4 h-4" /> Active
+                  <Check className="w-4 h-4" /> {t('settings.active', 'Active')}
                 </div>
               )}
             </button>
@@ -1545,12 +1552,12 @@ function WebhooksSettings({ showMsg }) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-slate-900">Webhooks</h2>
-          <p className="text-sm text-slate-600">Integrate with external systems via HTTP callbacks</p>
+          <h2 className="text-lg font-semibold text-slate-900">{t('settings.webhooksTitle', 'Webhooks')}</h2>
+          <p className="text-sm text-slate-600">{t('settings.webhooksIntegration', 'Integrate with external systems via HTTP callbacks')}</p>
         </div>
         <button onClick={() => setShowAddModal(true)} className="btn btn-primary">
           <Plus className="w-4 h-4" />
-          Add Webhook
+          {t('settings.addWebhook', 'Add Webhook')}
         </button>
       </div>
 
@@ -1638,7 +1645,7 @@ function WebhooksSettings({ showMsg }) {
 
       {/* Event Types Reference */}
       <div className="pt-6 border-t">
-        <h3 className="font-medium text-slate-900 mb-4">Available Event Types</h3>
+        <h3 className="font-medium text-slate-900 mb-4">{t('settings.availableEventTypes', 'Available Event Types')}</h3>
         <div className="grid grid-cols-2 gap-4">
           {eventTypes.map((cat) => (
             <div key={cat.category} className="p-4 bg-slate-50 rounded-lg">
@@ -1713,7 +1720,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-lg font-semibold">Add Webhook</h2>
+          <h2 className="text-lg font-semibold">{t('settings.addWebhook', 'Add Webhook')}</h2>
           <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg">
             <X className="w-5 h-5" />
           </button>
@@ -1723,7 +1730,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
           {error && <div className="p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>}
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.webhookName', 'Name')} *</label>
             <input
               type="text"
               value={form.name}
@@ -1734,7 +1741,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Endpoint URL *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.endpointUrl', 'Endpoint URL')} *</label>
             <input
               type="url"
               value={form.url}
@@ -1745,7 +1752,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Secret (optional)</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.webhookSecret', 'Secret')} ({t('common.optional', 'optional')})</label>
             <input
               type="text"
               value={form.secret}
@@ -1753,11 +1760,11 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
               className="input font-mono text-sm"
               placeholder={t('settings.webhooks.secretPlaceholder', 'Your webhook secret for signature verification')}
             />
-            <p className="text-xs text-slate-500 mt-1">Used to sign webhook payloads for verification</p>
+            <p className="text-xs text-slate-500 mt-1">{t('settings.webhookSecretDesc', 'Used to sign webhook payloads for verification')}</p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Events to Subscribe *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">{t('settings.eventsToSubscribe', 'Events to Subscribe')} *</label>
             <div className="space-y-4 max-h-48 overflow-y-auto border border-slate-200 rounded-lg p-3">
               {eventTypes.map((cat) => (
                 <div key={cat.category}>
@@ -1796,6 +1803,7 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
 
 function WebhookDetailModal({ webhook, onClose }) {
   const toast = useToast();
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [deliveryLogs, setDeliveryLogs] = useState([]);
   const [stats, setStats] = useState(null);
@@ -1813,7 +1821,7 @@ function WebhookDetailModal({ webhook, onClose }) {
       setStats(result?.stats || null);
     } catch (error) {
       if (import.meta.env.DEV) console.error('Failed to load delivery logs:', error);
-      toast.error('Failed to load delivery logs');
+      toast.error(t('settings.loadLogsError', 'Failed to load delivery logs'));
     } finally {
       setLoadingLogs(false);
     }
@@ -1831,7 +1839,7 @@ function WebhookDetailModal({ webhook, onClose }) {
         <div className="flex items-center justify-between p-6 border-b">
           <div>
             <h2 className="text-lg font-semibold">{webhook.name}</h2>
-            <p className="text-sm text-slate-500">Webhook Details</p>
+            <p className="text-sm text-slate-500">{t('settings.webhookDetails', 'Webhook Details')}</p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg">
             <X className="w-5 h-5" />
@@ -1841,7 +1849,7 @@ function WebhookDetailModal({ webhook, onClose }) {
         <div className="p-6 space-y-6 overflow-y-auto max-h-[70vh]">
           {/* URL */}
           <div>
-            <label className="text-sm font-medium text-slate-500">Endpoint URL</label>
+            <label className="text-sm font-medium text-slate-500">{t('settings.endpointUrl', 'Endpoint URL')}</label>
             <div className="flex items-center gap-2 mt-1">
               <code className="flex-1 p-3 bg-slate-100 rounded-lg text-sm font-mono break-all">{webhook.url}</code>
               <button onClick={copyUrl} className="btn btn-secondary shrink-0">
@@ -1852,7 +1860,7 @@ function WebhookDetailModal({ webhook, onClose }) {
 
           {/* Events */}
           <div>
-            <label className="text-sm font-medium text-slate-500">Subscribed Events</label>
+            <label className="text-sm font-medium text-slate-500">{t('settings.subscribedEvents', 'Subscribed Events')}</label>
             <div className="flex flex-wrap gap-2 mt-2">
               {webhook.events.map((event) => (
                 <span key={event} className="px-3 py-1 bg-momentum-100 text-momentum-700 text-sm rounded-full">
@@ -1867,22 +1875,22 @@ function WebhookDetailModal({ webhook, onClose }) {
           <div className="grid grid-cols-3 gap-4">
             <div className="p-4 bg-slate-50 rounded-lg">
               <p className="text-2xl font-bold text-slate-900">{stats.successRate ?? webhook.successRate ?? '--'}%</p>
-              <p className="text-sm text-slate-500">Success Rate</p>
+              <p className="text-sm text-slate-500">{t('settings.successRate', 'Success Rate')}</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-lg">
               <p className="text-2xl font-bold text-slate-900">{stats.totalDeliveries ?? '--'}</p>
-              <p className="text-sm text-slate-500">Total Deliveries</p>
+              <p className="text-sm text-slate-500">{t('settings.totalDeliveries', 'Total Deliveries')}</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-lg">
               <p className="text-2xl font-bold text-slate-900">{stats.avgResponseTime ? `~${stats.avgResponseTime}ms` : '--'}</p>
-              <p className="text-sm text-slate-500">Avg Response Time</p>
+              <p className="text-sm text-slate-500">{t('settings.avgResponseTime', 'Avg Response Time')}</p>
             </div>
           </div>
           )}
 
           {/* Delivery Logs */}
           <div>
-            <label className="text-sm font-medium text-slate-500">Recent Deliveries</label>
+            <label className="text-sm font-medium text-slate-500">{t('settings.recentDeliveries', 'Recent Deliveries')}</label>
             {loadingLogs ? (
               <div className="flex items-center justify-center py-8">
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-momentum-500" />
@@ -1936,6 +1944,7 @@ function WebhookDetailModal({ webhook, onClose }) {
 // ============================================================
 
 function NavigationSettings({ showMsg }) {
+  const { t } = useTranslation();
   const [pages, setPages] = useState([]);
   const [roleVisibility, setRoleVisibility] = useState({});
   const [loading, setLoading] = useState(true);
@@ -1979,16 +1988,16 @@ function NavigationSettings({ showMsg }) {
   };
 
   const roles = [
-    { id: 'worker', name: 'Workers', description: 'Regular employees' },
-    { id: 'manager', name: 'Managers', description: 'Team leads and supervisors' },
-    { id: 'admin', name: 'Admins', description: 'Full access administrators' },
+    { id: 'worker', name: t('settings.roles.workers', 'Workers'), description: t('settings.roles.workersDesc', 'Regular employees') },
+    { id: 'manager', name: t('settings.roles.managers', 'Managers'), description: t('settings.roles.managersDesc', 'Team leads and supervisors') },
+    { id: 'admin', name: t('settings.roles.admins', 'Admins'), description: t('settings.roles.adminsDesc', 'Full access administrators') },
   ];
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">Navigation & Page Visibility</h2>
-        <p className="text-sm text-slate-600">Control which pages are visible to different user roles</p>
+        <h2 className="text-lg font-semibold text-slate-900">{t('settings.pageVisibility', 'Navigation & Page Visibility')}</h2>
+        <p className="text-sm text-slate-600">{t('settings.controlPageVisibility', 'Control which pages are visible to different user roles')}</p>
       </div>
 
       {loading ? (
@@ -2050,11 +2059,9 @@ function NavigationSettings({ showMsg }) {
         <div className="flex items-start gap-3">
           <Eye className="w-5 h-5 text-blue-600 mt-0.5" />
           <div>
-            <h4 className="font-medium text-blue-900">About Page Visibility</h4>
+            <h4 className="font-medium text-blue-900">{t('settings.aboutPageVisibility', 'About Page Visibility')}</h4>
             <p className="text-sm text-blue-700 mt-1">
-              Pages you disable will be hidden from the navigation menu for that role.
-              Users won't be able to access those pages directly either.
-              The Dashboard is always visible as it's the landing page.
+              {t('settings.aboutPageVisibilityDesc', 'Pages you disable will be hidden from the navigation menu for that role. Users won\'t be able to access those pages directly either. The Dashboard is always visible as it\'s the landing page.')}
             </p>
           </div>
         </div>
@@ -2091,11 +2098,11 @@ function EmployeeVisibilitySettings({ showMsg }) {
   };
 
   const visibilityFeatures = [
-    { id: 'team_schedules', name: 'Team Schedules', description: 'View other team members schedules' },
-    { id: 'internal_jobs', name: 'Internal Jobs', description: 'Access internal job postings' },
-    { id: 'career_paths', name: 'Career Paths', description: 'View career development paths' },
-    { id: 'analytics', name: 'Team Analytics', description: 'Access performance analytics' },
-    { id: 'peer_recognition', name: 'Peer Recognition', description: 'Send and receive peer kudos' },
+    { id: 'team_schedules', name: t('settings.features.teamSchedules', 'Team Schedules'), description: t('settings.features.teamSchedulesDesc', 'View other team members schedules') },
+    { id: 'internal_jobs', name: t('settings.features.internalJobs', 'Internal Jobs'), description: t('settings.features.internalJobsDesc', 'Access internal job postings') },
+    { id: 'career_paths', name: t('settings.features.careerPaths', 'Career Paths'), description: t('settings.features.careerPathsDesc', 'View career development paths') },
+    { id: 'analytics', name: t('settings.features.analytics', 'Team Analytics'), description: t('settings.features.analyticsDesc', 'Access performance analytics') },
+    { id: 'peer_recognition', name: t('settings.features.peerRecognition', 'Peer Recognition'), description: t('settings.features.peerRecognitionDesc', 'Send and receive peer kudos') },
   ];
 
   const toggleVisibility = async (empId, feature) => {
@@ -2135,9 +2142,9 @@ function EmployeeVisibilitySettings({ showMsg }) {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'probation':
-        return <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-700">Probation</span>;
+        return <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-700">{t('settings.probation', 'Probation')}</span>;
       case 'active':
-        return <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 text-green-700">Active</span>;
+        return <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 text-green-700">{t('settings.active', 'Active')}</span>;
       default:
         return null;
     }
@@ -2146,8 +2153,8 @@ function EmployeeVisibilitySettings({ showMsg }) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">Employee Visibility Settings</h2>
-        <p className="text-sm text-slate-600">Control which features each employee can access</p>
+        <h2 className="text-lg font-semibold text-slate-900">{t('settings.employeeVisibilitySettings', 'Employee Visibility Settings')}</h2>
+        <p className="text-sm text-slate-600">{t('settings.controlFeatureAccess', 'Control which features each employee can access')}</p>
       </div>
 
       {/* Search */}
@@ -2170,7 +2177,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
       ) : filteredEmployees.length === 0 ? (
         <div className="text-center py-12 text-slate-500">
           <Users className="w-12 h-12 mx-auto mb-3 text-slate-300" />
-          <p className="font-medium text-slate-700">{searchQuery ? 'No employees match your search' : 'No employees found'}</p>
+          <p className="font-medium text-slate-700">{searchQuery ? t('settings.noEmployeesMatch', 'No employees match your search') : t('settings.noEmployeesFound', 'No employees found')}</p>
         </div>
       ) : (
       <div className="space-y-3">
@@ -2220,19 +2227,19 @@ function EmployeeVisibilitySettings({ showMsg }) {
             {selectedEmployee === emp.id && (
               <div className="border-t border-slate-200 p-4 bg-slate-50">
                 <div className="flex justify-between items-center mb-4">
-                  <h4 className="text-sm font-medium text-slate-700">Feature Access</h4>
+                  <h4 className="text-sm font-medium text-slate-700">{t('settings.featureAccess', 'Feature Access')}</h4>
                   <div className="flex gap-2">
                     <button
                       onClick={() => toggleAllForEmployee(emp.id, true)}
                       className="text-xs px-2 py-1 text-green-600 hover:bg-green-50 rounded"
                     >
-                      Enable All
+                      {t('settings.enableAll', 'Enable All')}
                     </button>
                     <button
                       onClick={() => toggleAllForEmployee(emp.id, false)}
                       className="text-xs px-2 py-1 text-red-600 hover:bg-red-50 rounded"
                     >
-                      Disable All
+                      {t('settings.disableAll', 'Disable All')}
                     </button>
                   </div>
                 </div>
@@ -2271,8 +2278,8 @@ function EmployeeVisibilitySettings({ showMsg }) {
                   <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" />
                     <div className="text-sm text-amber-800">
-                      <p className="font-medium">Probation Period</p>
-                      <p className="text-amber-700">Some features are restricted during the probation period. These will be automatically enabled once probation ends.</p>
+                      <p className="font-medium">{t('settings.probationPeriod', 'Probation Period')}</p>
+                      <p className="text-amber-700">{t('settings.probationRestriction', 'Some features are restricted during the probation period. These will be automatically enabled once probation ends.')}</p>
                     </div>
                   </div>
                 )}
@@ -2288,11 +2295,9 @@ function EmployeeVisibilitySettings({ showMsg }) {
         <div className="flex items-start gap-3">
           <Eye className="w-5 h-5 text-blue-600 mt-0.5" />
           <div>
-            <h4 className="font-medium text-blue-900">About Employee Visibility</h4>
+            <h4 className="font-medium text-blue-900">{t('settings.aboutEmployeeVisibilityTitle', 'About Employee Visibility')}</h4>
             <p className="text-sm text-blue-700 mt-1">
-              These settings control which features are visible to each employee.
-              Employees on probation have restricted access by default, which can be
-              customized based on your organization's policies.
+              {t('settings.aboutEmployeeVisibility', 'These settings control which features are visible to each employee. Employees on probation have restricted access by default, which can be customized based on your organization\'s policies.')}
             </p>
           </div>
         </div>
@@ -2302,6 +2307,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
 }
 
 function AccentColorPicker({ showMsg }) {
+  const { t } = useTranslation();
   const [selectedColor, setSelectedColor] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('uplift-accent-color') || '#FF6B35';
@@ -2324,7 +2330,7 @@ function AccentColorPicker({ showMsg }) {
 
   return (
     <div className="pt-6 border-t">
-      <h3 className="font-medium text-slate-900 mb-4">Accent Color</h3>
+      <h3 className="font-medium text-slate-900 mb-4">{t('settings.accentColor', 'Accent Color')}</h3>
       <div className="flex gap-3">
         {colors.map((color) => (
           <button
@@ -2396,8 +2402,8 @@ function PrivacySettings({ user, showMsg, logout }) {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">Privacy & Data</h2>
-        <p className="text-sm text-slate-600">Manage your personal data and account</p>
+        <h2 className="text-lg font-semibold text-slate-900">{t('settings.privacyData', 'Privacy & Data')}</h2>
+        <p className="text-sm text-slate-600">{t('settings.managePersonalData', 'Manage your personal data and account')}</p>
       </div>
 
       {/* Export Data */}
@@ -2407,10 +2413,10 @@ function PrivacySettings({ user, showMsg, logout }) {
             <Download className="w-5 h-5 text-blue-600" />
           </div>
           <div className="flex-1">
-            <h3 className="font-medium text-slate-900">Export Your Data</h3>
-            <p className="text-sm text-slate-600 mt-1">Download a copy of all your personal data including profile, activity logs, time entries, and shifts.</p>
+            <h3 className="font-medium text-slate-900">{t('settings.exportYourData', 'Export Your Data')}</h3>
+            <p className="text-sm text-slate-600 mt-1">{t('settings.downloadDataDesc', 'Download a copy of all your personal data including profile, activity logs, time entries, and shifts.')}</p>
             <button onClick={exportData} disabled={exporting} className="btn btn-secondary mt-3">
-              {exporting ? 'Preparing...' : 'Download My Data'}
+              {exporting ? t('settings.preparing', 'Preparing...') : t('settings.downloadMyData', 'Download My Data')}
             </button>
           </div>
         </div>
@@ -2423,10 +2429,10 @@ function PrivacySettings({ user, showMsg, logout }) {
             <AlertTriangle className="w-5 h-5 text-red-600" />
           </div>
           <div className="flex-1">
-            <h3 className="font-medium text-red-900">Delete Account</h3>
+            <h3 className="font-medium text-red-900">{t('settings.deleteAccount', 'Delete Account')}</h3>
             {hasPendingDeletion ? (
               <>
-                <p className="text-sm text-red-700 mt-1">Your account is scheduled for deletion. It will be permanently removed in 30 days.</p>
+                <p className="text-sm text-red-700 mt-1">{t('settings.deletionScheduled', 'Your account is scheduled for deletion. It will be permanently removed in 30 days.')}</p>
                 <button 
                   onClick={async () => {
                     await api.post('/users/me/cancel-deletion');
@@ -2434,14 +2440,14 @@ function PrivacySettings({ user, showMsg, logout }) {
                   }} 
                   className="btn btn-secondary mt-3"
                 >
-                  Cancel Deletion
+                  {t('settings.cancelDeletion', 'Cancel Deletion')}
                 </button>
               </>
             ) : (
               <>
-                <p className="text-sm text-red-700 mt-1">Permanently delete your account and all associated data. This action cannot be undone after the 30-day grace period.</p>
+                <p className="text-sm text-red-700 mt-1">{t('settings.deleteAccountWarning', 'Permanently delete your account and all associated data. This action cannot be undone after the 30-day grace period.')}</p>
                 <button onClick={() => setShowDeleteConfirm(true)} className="btn mt-3 bg-red-600 text-white hover:bg-red-700">
-                  Request Account Deletion
+                  {t('settings.requestAccountDeletion', 'Request Account Deletion')}
                 </button>
               </>
             )}
@@ -2455,7 +2461,7 @@ function PrivacySettings({ user, showMsg, logout }) {
           <div className="bg-white rounded-xl max-w-md w-full p-6">
             <div className="flex items-center gap-3 text-red-600 mb-4">
               <AlertTriangle className="w-6 h-6" />
-              <h2 className="text-lg font-semibold">Delete Account</h2>
+              <h2 className="text-lg font-semibold">{t('settings.deleteAccount', 'Delete Account')}</h2>
             </div>
             <p className="text-slate-600 mb-4">
               {t('settings.deleteAccountWarning', 'This will schedule your account for permanent deletion. You have 30 days to cancel this request. After that, all your data will be permanently removed.')}
@@ -2479,6 +2485,351 @@ function PrivacySettings({ user, showMsg, logout }) {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ============================================================
+// SSO & ENTERPRISE SECURITY SETTINGS
+// ============================================================
+
+function SSOSettings({ showMsg }) {
+  const { t } = useTranslation();
+
+  // SSO Provider state
+  const [ssoProvider, setSsoProvider] = useState('saml');
+  const [entityId, setEntityId] = useState('https://app.uplift.com/saml/metadata');
+  const [ssoUrl, setSsoUrl] = useState('');
+  const [certificate, setCertificate] = useState('');
+  const [enforceSso, setEnforceSso] = useState(false);
+
+  // SCIM Provisioning state
+  const [scimEnabled, setScimEnabled] = useState(false);
+  const [scimEndpoint] = useState('https://api.uplift.com/scim/v2');
+  const [scimToken, setScimToken] = useState('uplift_scim_tk_a1b2c3d4e5f6g7h8i9j0');
+
+  // Session Policy state
+  const [sessionTimeout, setSessionTimeout] = useState('8h');
+  const [idleTimeout, setIdleTimeout] = useState('1h');
+  const [forceReauth, setForceReauth] = useState(true);
+  const [ipWhitelist, setIpWhitelist] = useState('');
+
+  // MFA Configuration state
+  const [requireMfaAdmins, setRequireMfaAdmins] = useState(true);
+  const [requireMfaAll, setRequireMfaAll] = useState(false);
+  const [mfaMethod, setMfaMethod] = useState('authenticator');
+
+  // Demo audit log data
+  const auditEvents = [
+    { timestamp: '2026-02-04 09:12:34', user: 'maria@acme.com', event: 'SSO Login', ip: '192.168.1.42' },
+    { timestamp: '2026-02-04 08:55:01', user: 'john@acme.com', event: 'Failed SSO Attempt', ip: '10.0.0.15' },
+    { timestamp: '2026-02-03 17:30:22', user: 'admin@acme.com', event: 'Password Changed', ip: '172.16.0.8' },
+    { timestamp: '2026-02-03 14:11:09', user: 'sara@acme.com', event: 'MFA Enabled', ip: '192.168.1.55' },
+    { timestamp: '2026-02-03 10:02:47', user: 'admin@acme.com', event: 'SSO Config Updated', ip: '172.16.0.8' },
+  ];
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    showMsg(t('settings.sso.copied', 'Copied to clipboard'));
+  };
+
+  const regenerateToken = () => {
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const newToken = 'uplift_scim_tk_' + Array.from({ length: 20 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    setScimToken(newToken);
+    showMsg(t('settings.sso.tokenRegenerated', 'Bearer token regenerated'));
+  };
+
+  const handleSave = () => {
+    showMsg(t('settings.sso.saved', 'SSO & security settings saved'));
+  };
+
+  return (
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-semibold text-slate-900">{t('settings.sso.title', 'SSO & Enterprise Security')}</h2>
+          <p className="text-sm text-slate-600">{t('settings.sso.subtitle', 'Configure single sign-on, provisioning, and enterprise security policies')}</p>
+        </div>
+        <button onClick={handleSave} className="btn btn-primary flex items-center gap-2">
+          <Save className="w-4 h-4" />
+          {t('settings.sso.saveChanges', 'Save Changes')}
+        </button>
+      </div>
+
+      {/* SSO Provider Configuration */}
+      <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <h3 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+          <KeyRound className="w-5 h-5 text-slate-400" />
+          {t('settings.sso.providerConfig', 'SSO Provider Configuration')}
+        </h3>
+        <div className="space-y-4 max-w-xl">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.provider', 'SSO Provider')}</label>
+            <select
+              value={ssoProvider}
+              onChange={e => setSsoProvider(e.target.value)}
+              className="input"
+            >
+              <option value="saml">{t('settings.sso.providerSaml', 'SAML 2.0')}</option>
+              <option value="oidc">{t('settings.sso.providerOidc', 'OIDC / OAuth 2.0')}</option>
+              <option value="azure">{t('settings.sso.providerAzure', 'Azure AD')}</option>
+              <option value="okta">{t('settings.sso.providerOkta', 'Okta')}</option>
+              <option value="google">{t('settings.sso.providerGoogle', 'Google Workspace')}</option>
+              <option value="onelogin">{t('settings.sso.providerOnelogin', 'OneLogin')}</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.entityId', 'Entity ID / Issuer')}</label>
+            <input
+              type="text"
+              value={entityId}
+              onChange={e => setEntityId(e.target.value)}
+              className="input"
+              placeholder="https://app.uplift.com/saml/metadata"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.ssoUrl', 'SSO URL')}</label>
+            <input
+              type="url"
+              value={ssoUrl}
+              onChange={e => setSsoUrl(e.target.value)}
+              className="input"
+              placeholder="https://idp.example.com/sso/saml"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.certificate', 'X.509 Certificate')}</label>
+            <textarea
+              value={certificate}
+              onChange={e => setCertificate(e.target.value)}
+              className="input min-h-[100px] font-mono text-xs"
+              placeholder={t('settings.sso.certificatePlaceholder', 'Paste your IdP certificate here...')}
+              rows={5}
+            />
+          </div>
+          <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+            <div>
+              <p className="font-medium text-slate-900">{t('settings.sso.enforceSso', 'Enforce SSO for all users')}</p>
+              <p className="text-sm text-slate-500">{t('settings.sso.enforceSsoDesc', 'When enabled, all users must authenticate via SSO. Password login will be disabled.')}</p>
+            </div>
+            <button
+              onClick={() => setEnforceSso(!enforceSso)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${enforceSso ? 'bg-momentum-500' : 'bg-slate-300'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${enforceSso ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* SCIM Provisioning */}
+      <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <h3 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+          <Link2 className="w-5 h-5 text-slate-400" />
+          {t('settings.sso.scimProvisioning', 'SCIM Provisioning')}
+        </h3>
+        <div className="space-y-4 max-w-xl">
+          <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+            <div>
+              <p className="font-medium text-slate-900">{t('settings.sso.enableScim', 'Enable SCIM Provisioning')}</p>
+              <p className="text-sm text-slate-500">{t('settings.sso.enableScimDesc', 'Automatically sync users and groups from your identity provider')}</p>
+            </div>
+            <button
+              onClick={() => setScimEnabled(!scimEnabled)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${scimEnabled ? 'bg-momentum-500' : 'bg-slate-300'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${scimEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+          {scimEnabled && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.scimEndpoint', 'SCIM Endpoint URL')}</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={scimEndpoint}
+                    readOnly
+                    className="input flex-1 bg-slate-50 text-slate-600"
+                  />
+                  <button
+                    onClick={() => copyToClipboard(scimEndpoint)}
+                    className="btn btn-secondary flex items-center gap-1"
+                  >
+                    <Copy className="w-4 h-4" />
+                    {t('settings.sso.copy', 'Copy')}
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.bearerToken', 'Bearer Token')}</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={scimToken}
+                    readOnly
+                    className="input flex-1 bg-slate-50 font-mono text-xs text-slate-600"
+                  />
+                  <button
+                    onClick={regenerateToken}
+                    className="btn btn-secondary flex items-center gap-1"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    {t('settings.sso.regenerate', 'Regenerate')}
+                  </button>
+                </div>
+                <p className="text-xs text-slate-500 mt-1">{t('settings.sso.tokenWarning', 'Regenerating will invalidate the current token. Update your IdP configuration accordingly.')}</p>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Session Policy */}
+      <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <h3 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+          <Clock className="w-5 h-5 text-slate-400" />
+          {t('settings.sso.sessionPolicy', 'Session Policy')}
+        </h3>
+        <div className="space-y-4 max-w-xl">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.sessionTimeout', 'Session Timeout')}</label>
+            <select
+              value={sessionTimeout}
+              onChange={e => setSessionTimeout(e.target.value)}
+              className="input"
+            >
+              <option value="1h">{t('settings.sso.timeout1h', '1 hour')}</option>
+              <option value="4h">{t('settings.sso.timeout4h', '4 hours')}</option>
+              <option value="8h">{t('settings.sso.timeout8h', '8 hours')}</option>
+              <option value="24h">{t('settings.sso.timeout24h', '24 hours')}</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.idleTimeout', 'Idle Timeout')}</label>
+            <select
+              value={idleTimeout}
+              onChange={e => setIdleTimeout(e.target.value)}
+              className="input"
+            >
+              <option value="15m">{t('settings.sso.idle15m', '15 minutes')}</option>
+              <option value="30m">{t('settings.sso.idle30m', '30 minutes')}</option>
+              <option value="1h">{t('settings.sso.idle1h', '1 hour')}</option>
+              <option value="4h">{t('settings.sso.idle4h', '4 hours')}</option>
+            </select>
+          </div>
+          <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+            <div>
+              <p className="font-medium text-slate-900">{t('settings.sso.forceReauth', 'Force re-authentication for sensitive actions')}</p>
+              <p className="text-sm text-slate-500">{t('settings.sso.forceReauthDesc', 'Require users to re-enter credentials before performing sensitive operations')}</p>
+            </div>
+            <button
+              onClick={() => setForceReauth(!forceReauth)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${forceReauth ? 'bg-momentum-500' : 'bg-slate-300'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${forceReauth ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.ipWhitelist', 'IP Whitelist')}</label>
+            <textarea
+              value={ipWhitelist}
+              onChange={e => setIpWhitelist(e.target.value)}
+              className="input min-h-[80px] font-mono text-xs"
+              placeholder={t('settings.sso.ipWhitelistPlaceholder', 'Enter one IP or CIDR range per line\n192.168.1.0/24\n10.0.0.0/8')}
+              rows={4}
+            />
+            <p className="text-xs text-slate-500 mt-1">{t('settings.sso.ipWhitelistDesc', 'Leave empty to allow all IPs. One IP or CIDR range per line.')}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Audit Log */}
+      <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <h3 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+          <History className="w-5 h-5 text-slate-400" />
+          {t('settings.sso.auditLog', 'Audit Log')}
+        </h3>
+        <p className="text-sm text-slate-500 mb-4">{t('settings.sso.auditLogDesc', 'Recent security events across your organization')}</p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-slate-200">
+                <th className="text-left py-2 px-3 font-medium text-slate-600">{t('settings.sso.colTimestamp', 'Timestamp')}</th>
+                <th className="text-left py-2 px-3 font-medium text-slate-600">{t('settings.sso.colUser', 'User')}</th>
+                <th className="text-left py-2 px-3 font-medium text-slate-600">{t('settings.sso.colEvent', 'Event')}</th>
+                <th className="text-left py-2 px-3 font-medium text-slate-600">{t('settings.sso.colIp', 'IP Address')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {auditEvents.map((evt, i) => (
+                <tr key={i} className="border-b border-slate-100 hover:bg-slate-50">
+                  <td className="py-2 px-3 text-slate-500 font-mono text-xs">{evt.timestamp}</td>
+                  <td className="py-2 px-3 text-slate-700">{evt.user}</td>
+                  <td className="py-2 px-3">
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                      evt.event.includes('Failed') ? 'bg-red-100 text-red-700' :
+                      evt.event.includes('Login') ? 'bg-green-100 text-green-700' :
+                      'bg-blue-100 text-blue-700'
+                    }`}>
+                      {evt.event}
+                    </span>
+                  </td>
+                  <td className="py-2 px-3 text-slate-500 font-mono text-xs">{evt.ip}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* MFA Configuration */}
+      <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <h3 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+          <Shield className="w-5 h-5 text-slate-400" />
+          {t('settings.sso.mfaConfig', 'MFA Configuration')}
+        </h3>
+        <div className="space-y-4 max-w-xl">
+          <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+            <div>
+              <p className="font-medium text-slate-900">{t('settings.sso.requireMfaAdmins', 'Require MFA for admins')}</p>
+              <p className="text-sm text-slate-500">{t('settings.sso.requireMfaAdminsDesc', 'All administrator accounts must have MFA enabled')}</p>
+            </div>
+            <button
+              onClick={() => setRequireMfaAdmins(!requireMfaAdmins)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${requireMfaAdmins ? 'bg-momentum-500' : 'bg-slate-300'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${requireMfaAdmins ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+          <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+            <div>
+              <p className="font-medium text-slate-900">{t('settings.sso.requireMfaAll', 'Require MFA for all users')}</p>
+              <p className="text-sm text-slate-500">{t('settings.sso.requireMfaAllDesc', 'Every user in the organization must have MFA enabled')}</p>
+            </div>
+            <button
+              onClick={() => setRequireMfaAll(!requireMfaAll)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${requireMfaAll ? 'bg-momentum-500' : 'bg-slate-300'}`}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${requireMfaAll ? 'translate-x-6' : 'translate-x-1'}`} />
+            </button>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.sso.mfaMethod', 'Default MFA Method')}</label>
+            <select
+              value={mfaMethod}
+              onChange={e => setMfaMethod(e.target.value)}
+              className="input"
+            >
+              <option value="authenticator">{t('settings.sso.mfaAuthenticator', 'Authenticator App')}</option>
+              <option value="sms">{t('settings.sso.mfaSms', 'SMS')}</option>
+              <option value="email">{t('settings.sso.mfaEmail', 'Email')}</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

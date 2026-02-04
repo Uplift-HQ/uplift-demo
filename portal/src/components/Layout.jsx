@@ -39,6 +39,7 @@ import {
   Receipt,
   MessageSquare,
   FileText,
+  Building2,
 } from 'lucide-react';
 
 // Sectioned navigation with role-based visibility
@@ -130,6 +131,16 @@ export default function Layout() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
+  const [entityMenuOpen, setEntityMenuOpen] = useState(false);
+
+  const entities = [
+    { id: 'jsp-uk', name: 'JSP Global - UK', flag: '\u{1F1EC}\u{1F1E7}', employees: 312, tag: 'HQ' },
+    { id: 'jsp-de', name: 'JSP Manufacturing GmbH - Germany', flag: '\u{1F1E9}\u{1F1EA}', employees: 180, tag: null },
+    { id: 'jsp-sg', name: 'JSP Asia Pacific - Singapore', flag: '\u{1F1F8}\u{1F1EC}', employees: 95, tag: null },
+    { id: 'jsp-us', name: 'JSP North America - USA', flag: '\u{1F1FA}\u{1F1F8}', employees: 156, tag: null },
+    { id: 'jsp-es', name: 'JSP Iberia - Spain', flag: '\u{1F1EA}\u{1F1F8}', employees: 67, tag: null },
+  ];
+  const [currentEntity, setCurrentEntity] = useState(entities[0]);
   const navSections = getNavSections(user?.role, t);
 
   return (
@@ -216,6 +227,72 @@ export default function Layout() {
           </button>
 
           <div className="flex-1" />
+
+          {/* Entity / Multi-Country Selector */}
+          <div className="relative mr-1">
+            <button
+              onClick={() => setEntityMenuOpen(!entityMenuOpen)}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 rounded-lg border border-slate-200"
+            >
+              <Building2 className="w-4 h-4 text-slate-500" />
+              <span className="hidden md:block font-medium truncate max-w-[180px]">{currentEntity.name}</span>
+              <ChevronDown className="w-4 h-4 text-slate-400" />
+            </button>
+
+            {entityMenuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setEntityMenuOpen(false)}
+                />
+                <div className="absolute right-0 mt-1 w-72 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20">
+                  <div className="px-3 py-2 border-b border-slate-100">
+                    <p className="text-xs font-semibold text-slate-500 uppercase">{t('entity.selectEntity', 'Select Entity')}</p>
+                  </div>
+                  {entities.map((entity) => (
+                    <button
+                      key={entity.id}
+                      onClick={() => {
+                        setCurrentEntity(entity);
+                        setEntityMenuOpen(false);
+                      }}
+                      className={`w-full px-3 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-slate-50 ${
+                        currentEntity.id === entity.id ? 'bg-momentum-50' : ''
+                      }`}
+                    >
+                      <span className="text-lg">{entity.flag}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className={`font-medium truncate ${currentEntity.id === entity.id ? 'text-momentum-600' : 'text-slate-700'}`}>
+                          {entity.name}
+                        </p>
+                        <p className="text-xs text-slate-500">
+                          {entity.tag && (
+                            <span className="inline-block mr-1.5 px-1.5 py-0 bg-momentum-100 text-momentum-600 rounded text-[10px] font-semibold uppercase">{entity.tag}</span>
+                          )}
+                          {t('entity.employeeCount', '{{count}} employees', { count: entity.employees })}
+                        </p>
+                      </div>
+                      {currentEntity.id === entity.id && (
+                        <span className="text-momentum-500 flex-shrink-0">&#10003;</span>
+                      )}
+                    </button>
+                  ))}
+                  <div className="border-t border-slate-100 mt-1">
+                    <button
+                      onClick={() => {
+                        setEntityMenuOpen(false);
+                        navigate('/settings');
+                      }}
+                      className="w-full px-3 py-2 text-left text-sm text-momentum-600 hover:bg-slate-50 font-medium flex items-center gap-2"
+                    >
+                      <Settings className="w-4 h-4" />
+                      {t('entity.manage', 'Manage Entities')}
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
 
           {/* Language Selector */}
           <div className="relative">
