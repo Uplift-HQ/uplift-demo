@@ -28,37 +28,97 @@ import {
   TrendingUp,
   Copy,
   UserPlus,
+  UserMinus,
   Upload,
   ClipboardCheck,
   Plug,
   Globe,
+  Target,
+  GraduationCap,
+  Wallet,
+  Receipt,
+  MessageSquare,
+  FileText,
 } from 'lucide-react';
 
-// Navigation items with role-based visibility
-const getNavigation = (role, t) => {
+// Sectioned navigation with role-based visibility
+const getNavSections = (role, t) => {
   const isAdmin = role === 'admin';
   const isManager = role === 'manager' || isAdmin;
 
   return [
-    { name: t('nav.dashboard', 'Dashboard'), href: '/', icon: LayoutDashboard, show: true },
-    { name: t('nav.employees', 'Employees'), href: '/employees', icon: Users, show: isManager },
-    { name: t('nav.onboarding', 'Onboarding'), href: '/onboarding', icon: UserPlus, show: isManager },
-    { name: t('nav.schedule', 'Schedule'), href: '/schedule', icon: Calendar, show: true },
-    { name: t('nav.templates', 'Templates'), href: '/shift-templates', icon: Copy, show: isManager },
-    { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock, show: true },
-    { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella, show: true },
-    { name: t('nav.locations', 'Locations'), href: '/locations', icon: MapPin, show: isManager },
-    // Differentiators
-    { name: t('nav.skills', 'Skills'), href: '/skills', icon: Award, show: isManager, highlight: true },
-    { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase, show: true, highlight: true },
-    { name: t('nav.myCareer', 'My Career'), href: '/career', icon: TrendingUp, show: !isManager, highlight: true },
-    // Admin
-    { name: t('nav.bulkImport', 'Bulk Import'), href: '/bulk-import', icon: Upload, show: isManager },
-    { name: t('nav.activity', 'Activity'), href: '/activity', icon: ClipboardCheck, show: isManager, highlight: true },
-    { name: t('nav.reports', 'Reports'), href: '/reports', icon: BarChart3, show: isManager },
-    { name: t('nav.integrations', 'Integrations'), href: '/integrations', icon: Plug, show: isManager },
-    { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings, show: true },
-  ].filter(item => item.show);
+    {
+      label: t('nav.section.overview', 'OVERVIEW'),
+      items: [
+        { name: t('nav.dashboard', 'Dashboard'), href: '/', icon: LayoutDashboard, show: true },
+      ],
+    },
+    {
+      label: t('nav.section.people', 'PEOPLE'),
+      items: [
+        { name: t('nav.employees', 'Employees'), href: '/employees', icon: Users, show: isManager },
+        { name: t('nav.onboarding', 'Onboarding'), href: '/onboarding', icon: UserPlus, show: isManager },
+        { name: t('nav.offboarding', 'Offboarding'), href: '/offboarding', icon: UserMinus, show: isManager },
+      ],
+    },
+    {
+      label: t('nav.section.workforce', 'WORKFORCE'),
+      items: [
+        { name: t('nav.schedule', 'Schedule'), href: '/schedule', icon: Calendar, show: true },
+        { name: t('nav.templates', 'Templates'), href: '/shift-templates', icon: Copy, show: isManager },
+        { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock, show: true },
+        { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella, show: true },
+      ],
+    },
+    {
+      label: t('nav.section.talent', 'TALENT'),
+      items: [
+        { name: t('nav.performance', 'Performance'), href: '/performance', icon: Target, show: isManager },
+        { name: t('nav.skills', 'Skills'), href: '/skills', icon: Award, show: isManager },
+        { name: t('nav.learning', 'Learning'), href: '/learning', icon: GraduationCap, show: true },
+        { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase, show: true },
+        { name: t('nav.myCareer', 'My Career'), href: '/career', icon: TrendingUp, show: !isManager },
+      ],
+    },
+    {
+      label: t('nav.section.compensation', 'COMPENSATION'),
+      items: [
+        { name: t('nav.payslips', 'Payslips & Pay'), href: '/compensation', icon: Wallet, show: isManager },
+        { name: t('nav.expenses', 'Expenses'), href: '/expenses', icon: Receipt, show: true },
+      ],
+    },
+    {
+      label: t('nav.section.engagement', 'ENGAGEMENT'),
+      items: [
+        { name: t('nav.surveys', 'Surveys'), href: '/surveys', icon: MessageSquare, show: isManager },
+      ],
+    },
+    {
+      label: t('nav.section.documents', 'DOCUMENTS'),
+      items: [
+        { name: t('nav.documents', 'Documents'), href: '/documents', icon: FileText, show: isManager },
+      ],
+    },
+    {
+      label: t('nav.section.analytics', 'ANALYTICS'),
+      items: [
+        { name: t('nav.reports', 'Reports'), href: '/reports', icon: BarChart3, show: isManager },
+        { name: t('nav.activity', 'Activity'), href: '/activity', icon: ClipboardCheck, show: isManager },
+      ],
+    },
+    {
+      label: t('nav.section.admin', 'ADMIN'),
+      items: [
+        { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings, show: true },
+        { name: t('nav.integrations', 'Integrations'), href: '/integrations', icon: Plug, show: isManager },
+        { name: t('nav.locations', 'Locations'), href: '/locations', icon: MapPin, show: isManager },
+        { name: t('nav.bulkImport', 'Bulk Import'), href: '/bulk-import', icon: Upload, show: isManager },
+      ],
+    },
+  ].map(section => ({
+    ...section,
+    items: section.items.filter(item => item.show),
+  })).filter(section => section.items.length > 0);
 };
 
 export default function Layout() {
@@ -70,7 +130,7 @@ export default function Layout() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
-  const navigation = getNavigation(user?.role, t);
+  const navSections = getNavSections(user?.role, t);
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -106,29 +166,29 @@ export default function Layout() {
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-1">
-          {navigation.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.href}
-              onClick={() => setSidebarOpen(false)}
-              className={({ isActive }) => `
-                flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
-                ${isActive 
-                  ? 'bg-momentum-500 text-white' 
-                  : item.highlight
-                    ? 'text-momentum-300 hover:bg-slate-800 hover:text-white'
-                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'}
-              `}
-            >
-              <item.icon className="w-5 h-5" />
-              {item.name}
-              {item.highlight && (
-                <span className="ml-auto text-xs px-1.5 py-0.5 bg-momentum-500/20 text-momentum-300 rounded">
-                  NEW
-                </span>
-              )}
-            </NavLink>
+        <nav className="p-3 space-y-4 overflow-y-auto max-h-[calc(100vh-8rem)]">
+          {navSections.map((section) => (
+            <div key={section.label}>
+              <p className="px-3 mb-1 text-[10px] font-bold tracking-wider text-slate-500 uppercase">{section.label}</p>
+              <div className="space-y-0.5">
+                {section.items.map((item) => (
+                  <NavLink
+                    key={item.href}
+                    to={item.href}
+                    onClick={() => setSidebarOpen(false)}
+                    className={({ isActive }) => `
+                      flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                      ${isActive
+                        ? 'bg-momentum-500 text-white'
+                        : 'text-slate-300 hover:bg-slate-800 hover:text-white'}
+                    `}
+                  >
+                    <item.icon className="w-4 h-4" />
+                    {item.name}
+                  </NavLink>
+                ))}
+              </div>
+            </div>
           ))}
         </nav>
 
@@ -139,7 +199,7 @@ export default function Layout() {
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white w-full transition-colors"
           >
             <LogOut className="w-5 h-5" />
-            Sign Out
+            {t('auth.logout', 'Log Out')}
           </button>
         </div>
       </aside>
@@ -175,7 +235,7 @@ export default function Layout() {
                 />
                 <div className="absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20 max-h-80 overflow-y-auto">
                   <div className="px-3 py-2 border-b border-slate-100">
-                    <p className="text-xs font-semibold text-slate-500 uppercase">Language</p>
+                    <p className="text-xs font-semibold text-slate-500 uppercase">{t('settings.language', 'Language')}</p>
                   </div>
                   {SUPPORTED_LANGUAGES.map((lang) => (
                     <button
@@ -244,7 +304,7 @@ export default function Layout() {
                     className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
                   >
                     <LogOut className="w-4 h-4" />
-                    Sign Out
+                    {t('auth.logout', 'Log Out')}
                   </button>
                 </div>
               </>

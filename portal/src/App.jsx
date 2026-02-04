@@ -31,6 +31,15 @@ import Activity from './pages/Activity';
 import Onboarding from './pages/Onboarding';
 import OrgOnboarding from './pages/OrgOnboarding';
 
+// New E2E HR modules
+import Performance from './pages/Performance';
+import Compensation from './pages/Compensation';
+import Documents from './pages/Documents';
+import Learning from './pages/Learning';
+import Surveys from './pages/Surveys';
+import Expenses from './pages/Expenses';
+import Offboarding from './pages/Offboarding';
+
 // Legal pages
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -84,6 +93,13 @@ export default function App() {
         <Route path="/reports" element={<Reports />} />
         <Route path="/integrations" element={<Integrations />} />
         <Route path="/activity" element={<Activity />} />
+        <Route path="/performance" element={<Performance />} />
+        <Route path="/compensation" element={<Compensation />} />
+        <Route path="/documents" element={<Documents />} />
+        <Route path="/learning" element={<Learning />} />
+        <Route path="/surveys" element={<Surveys />} />
+        <Route path="/expenses" element={<Expenses />} />
+        <Route path="/offboarding" element={<Offboarding />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/settings/notifications" element={<NotificationSettings />} />
       </Route>
