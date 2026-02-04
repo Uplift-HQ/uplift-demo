@@ -233,7 +233,12 @@
       "barback": "বারব্যাক",
       "sous": "সু শেফ",
       "expeditor": "এক্সপেডিটর"
-    }
+    },
+    "new": "নতুন",
+    "exportComingSoon": "এক্সপোর্ট শীঘ্রই আসছে",
+    "clickToViewDetails": "বিস্তারিত দেখতে ক্লিক করুন",
+    "closeEsc": "বন্ধ করুন (ESC)",
+    "logoPreview": "লোগো প্রিভিউ"
   },
   "auth": {
     "login": "লগইন",
@@ -448,7 +453,16 @@
     "publishSchedule": "সময়সূচী প্রকাশ করুন",
     "publishConfirmation": "আপনি {{count}} খসড়া শিফট প্রকাশ করতে যাচ্ছেন।",
     "publishNow": "এখনই প্রকাশ করুন",
-    "aiScheduleBuilder": "AI সময়সূচী নির্মাতা"
+    "aiScheduleBuilder": "AI সময়সূচী নির্মাতা",
+    "failedTimeOffRequest": "ছুটির অনুরোধ প্রক্রিয়া ব্যর্থ",
+    "failedShiftSwap": "শিফট বিনিময় প্রক্রিয়া ব্যর্থ",
+    "publishButton": "প্রকাশ করুন",
+    "employee": "কর্মচারী",
+    "reassign": "পুনরায় নিয়োগ",
+    "shiftReassigned": "শিফট পুনরায় নিয়োগ করা হয়েছে",
+    "swapRequested": "অদলবদল অনুরোধ করা হয়েছে",
+    "shiftDeleted": "শিফট মুছে ফেলা হয়েছে",
+    "minutes": "মিনিট"
   },
   "timeTracking": {
     "title": "সময় ট্র্যাকিং",
@@ -661,7 +675,8 @@
     "searchSkills": "দক্ষতা খুঁজুন...",
     "skillAdded": "দক্ষতা সফলভাবে যোগ করা হয়েছে",
     "verificationRequested": "যাচাই অনুরোধ করা হয়েছে",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "এই দক্ষতার জন্য কর্মচারীর তালিকা শীঘ্রই আসছে।"
   },
   "career": {
     "title": "ক্যারিয়ার",
@@ -811,7 +826,7 @@
     "reminderTime": "রিমাইন্ডার সময়",
     "sound": "শব্দ",
     "vibration": "ভাইব্রেশন",
-    "changePassword": "পাসওয়ার্ড পরিবর্তন করুন",
+    "changePassword": "পাসওয়ার্ড পরিবর্তন",
     "twoFactorAuth": "টু-ফ্যাক্টর অথেন্টিকেশন",
     "biometricAuth": "বায়োমেট্রিক অথেন্টিকেশন",
     "dataExport": "আমার ডেটা এক্সপোর্ট করুন",
@@ -895,7 +910,7 @@
     "enable": "সক্ষম করুন",
     "activeSessions": "সক্রিয় সেশন",
     "manageDevices": "আপনার লগ ইন করা ডিভাইস পরিচালনা করুন",
-    "signOutOtherDevices": "অন্য ডিভাইস থেকে সাইন আউট করুন",
+    "signOutOtherDevices": "অন্য ডিভাইস থেকে সাইন আউট",
     "thisDevice": "এই ডিভাইস",
     "revoke": "প্রত্যাহার করুন",
     "revoking": "প্রত্যাহার করা হচ্ছে...",
@@ -917,14 +932,14 @@
     "preparing": "প্রস্তুত করা হচ্ছে...",
     "dataExported": "ডেটা সফলভাবে এক্সপোর্ট হয়েছে",
     "deleteAccountWarning": "আপনার অ্যাকাউন্ট এবং সমস্ত সম্পর্কিত ডেটা স্থায়ীভাবে মুছুন। ৩০ দিনের গ্রেস পিরিয়ডের পরে এই কাজ পূর্বাবস্থায় ফেরানো যাবে না।",
-    "requestAccountDeletion": "অ্যাকাউন্ট মোছার অনুরোধ করুন",
+    "requestAccountDeletion": "অ্যাকাউন্ট মুছে ফেলার অনুরোধ",
     "deletionScheduled": "আপনার অ্যাকাউন্ট মোছার জন্য নির্ধারিত। এটি ৩০ দিনের মধ্যে স্থায়ীভাবে মুছে ফেলা হবে।",
-    "cancelDeletion": "মোছা বাতিল করুন",
+    "cancelDeletion": "মুছে ফেলা বাতিল",
     "enterPasswordConfirm": "নিশ্চিত করতে আপনার পাসওয়ার্ড লিখুন",
     "deleteMyAccount": "আমার অ্যাকাউন্ট মুছুন",
     "processing": "প্রক্রিয়াকরণ হচ্ছে...",
     "webhooksIntegration": "HTTP কলব্যাকের মাধ্যমে বাহ্যিক সিস্টেমের সাথে ইন্টিগ্রেট করুন",
-    "addWebhook": "ওয়েবহুক যোগ করুন",
+    "addWebhook": "ওয়েবহুক যোগ করুন",
     "endpointUrl": "এন্ডপয়েন্ট URL",
     "subscribedEvents": "সাবস্ক্রাইব করা ইভেন্ট",
     "successRate": "সফলতার হার",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "প্রতিটি কর্মচারী কোন বৈশিষ্ট্য অ্যাক্সেস করতে পারবে তা নিয়ন্ত্রণ করুন",
     "searchEmployees": "কর্মচারী খুঁজুন...",
     "featureAccess": "বৈশিষ্ট্য অ্যাক্সেস",
-    "enableAll": "সব সক্ষম করুন",
-    "disableAll": "সব অক্ষম করুন",
+    "enableAll": "সব সক্রিয় করুন",
+    "disableAll": "সব নিষ্ক্রিয় করুন",
     "aboutEmployeeVisibility": "এই সেটিংসগুলি প্রতিটি কর্মচারীর কাছে কোন বৈশিষ্ট্যগুলি দৃশ্যমান তা নিয়ন্ত্রণ করে।",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "বিক্রয়ে যোগাযোগ করুন",
+    "changingPassword": "পরিবর্তন হচ্ছে...",
+    "loadError": "সেটিংস লোড ব্যর্থ",
+    "saveOrgError": "প্রতিষ্ঠানের সেটিংস সংরক্ষণ ব্যর্থ",
+    "loadUserError": "ব্যবহারকারীর ডেটা লোড ব্যর্থ",
+    "loadLogsError": "লগ লোড ব্যর্থ",
+    "themes": {
+      "light": "হালকা",
+      "lightDesc": "পরিষ্কার, উজ্জ্বল ইন্টারফেস",
+      "dark": "গাঢ়",
+      "darkDesc": "চোখের জন্য আরামদায়ক",
+      "system": "সিস্টেম",
+      "systemDesc": "ডিভাইস সেটিংস অনুসরণ"
+    },
+    "roles": {
+      "workers": "কর্মী",
+      "workersDesc": "নিয়মিত কর্মী",
+      "managers": "ম্যানেজার",
+      "managersDesc": "দলনেতা এবং সুপারভাইজার",
+      "admins": "প্রশাসক",
+      "adminsDesc": "সম্পূর্ণ অ্যাক্সেস"
+    },
+    "features": {
+      "teamSchedules": "দলের সময়সূচী",
+      "teamSchedulesDesc": "সদস্যদের সময়সূচী দেখুন",
+      "internalJobs": "অভ্যন্তরীণ চাকরি",
+      "internalJobsDesc": "অভ্যন্তরীণ পদে প্রবেশ",
+      "careerPaths": "ক্যারিয়ার পথ",
+      "careerPathsDesc": "উন্নয়ন পথ দেখুন",
+      "analytics": "দলের বিশ্লেষণ",
+      "analyticsDesc": "কর্মক্ষমতা বিশ্লেষণে প্রবেশ",
+      "peerRecognition": "সহকর্মী স্বীকৃতি",
+      "peerRecognitionDesc": "প্রশংসা পাঠান এবং গ্রহণ করুন"
+    },
+    "aboutEmployeeVisibilityTitle": "কর্মচারীর দৃশ্যমানতা সম্পর্কে",
+    "aboutPageVisibilityDesc": "আপনি যে পৃষ্ঠাগুলি নিষ্ক্রিয় করবেন সেগুলি সেই ভূমিকার জন্য ন্যাভিগেশন মেনু থেকে লুকানো হবে।",
+    "brandName": "ব্র্যান্ডের নাম",
+    "brandNameDesc": "সাইডবার এবং মোবাইল অ্যাপের হেডারে প্রদর্শিত হয়",
+    "brandingDesc": "আপনার Uplift অভিজ্ঞতার চেহারা কাস্টমাইজ করুন",
+    "brandingDescFull": "পোর্টাল এবং মোবাইল অ্যাপের চেহারা কাস্টমাইজ করুন",
+    "brandingLabel": "ব্র্যান্ডিং",
+    "created": "তৈরির তারিখ",
+    "dropFileUpload": "ফাইল ড্রপ করুন বা আপলোড করতে ক্লিক করুন",
+    "emailVerified": "ইমেইল যাচাইকৃত",
+    "eventsToSubscribe": "সাবস্ক্রাইব করার ইভেন্ট",
+    "livePreview": "লাইভ প্রিভিউ",
+    "loginScreenPreview": "লগইন স্ক্রিন",
+    "logosImages": "লোগো এবং ছবি",
+    "mfaEnabled": "MFA সক্রিয়",
+    "mobileAppHeader": "মোবাইল অ্যাপের হেডার",
+    "noEmployeesFound": "কোনো কর্মচারী পাওয়া যায়নি",
+    "noEmployeesMatch": "আপনার অনুসন্ধানের সাথে কোনো কর্মচারী মেলেনি",
+    "passwordChangeRequired": "পাসওয়ার্ড পরিবর্তন প্রয়োজন",
+    "primaryColor": "প্রাথমিক রঙ",
+    "probation": "পরীক্ষামূলক সময়কাল",
+    "probationPeriod": "পরীক্ষামূলক সময়কাল",
+    "probationRestriction": "পরীক্ষামূলক সময়কালে কিছু বৈশিষ্ট্য সীমাবদ্ধ। পরীক্ষামূলক সময়কাল শেষ হলে স্বয়ংক্রিয়ভাবে সক্রিয় হবে।",
+    "secondaryColor": "সেকেন্ডারি রঙ",
+    "upgradeEnterpriseBranding": "কাস্টম ব্র্যান্ডিংয়ের জন্য Enterprise-এ আপগ্রেড করুন",
+    "webhookDetails": "Webhook-এর বিস্তারিত",
+    "webhookName": "নাম",
+    "webhookSecret": "সিক্রেট",
+    "webhookSecretDesc": "যাচাইয়ের জন্য Webhook পেলোড সাইন করতে ব্যবহৃত",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "কাজ",
@@ -1251,8 +1330,10 @@
     "locationPermission": "অবস্থান অনুমতি প্রয়োজন।",
     "cameraPermission": "ক্যামেরা অনুমতি প্রয়োজন।",
     "notificationPermission": "বিজ্ঞপ্তি অনুমতি প্রয়োজন।",
-    "tryAgain": "অনুগ্রহ করে আবার চেষ্টা করুন",
-    "somethingWentWrong": "কিছু ভুল হয়েছে"
+    "tryAgain": "আবার চেষ্টা করুন",
+    "somethingWentWrong": "কিছু ভুল হয়েছে",
+    "goHome": "হোমে যান",
+    "technicalDetails": "প্রযুক্তিগত বিবরণ"
   },
   "activity": {
     "title": "কার্যকলাপ পর্যালোচনা",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "কাস্টম রিপোর্ট তৈরি করুন",
+    "dateFrom": "তারিখ থেকে",
+    "dateTo": "তারিখ পর্যন্ত",
+    "filters": "ফিল্টার",
+    "reportName": "রিপোর্টের নাম",
+    "reportType": "রিপোর্টের ধরন",
+    "savedReportsLocal": "সংরক্ষিত রিপোর্টগুলি স্থানীয়ভাবে সংরক্ষিত আছে। স্থায়ী সংরক্ষণ শীঘ্রই আসছে।",
+    "sortBy": "ক্রমানুসারে সাজান",
+    "trendOverTime": "সময়ের সাথে প্রবণতা"
   },
   "shiftTemplates": {
     "title": "শিফট টেমপ্লেট",
@@ -1501,7 +1591,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "টেমপ্লেট মুছতে ব্যর্থ",
+    "shiftsGenerated": "শিফট সফলভাবে তৈরি হয়েছে!",
+    "failedSave": "টেমপ্লেট সংরক্ষণ ব্যর্থ"
   },
   "legal": {
     "lastUpdated": "সর্বশেষ আপডেট",
@@ -1748,7 +1841,18 @@
     "postJob": "চাকরি পোস্ট করুন",
     "skillMatch": "দক্ষতা মিল",
     "noApplicants": "এখনও কোনো আবেদনকারী নেই",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ফ্রন্ট অফ হাউস",
+      "kitchen": "রান্নাঘর",
+      "management": "ব্যবস্থাপনা",
+      "reception": "রিসেপশন"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "নাম বা ইমেইল দিয়ে খুঁজুন...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "দক্ষতা যোগ করতে ব্যর্থ",
+    "failedVerifySkill": "যাচাই ব্যর্থ",
+    "failedUpdateSkillLevel": "স্তর আপডেট ব্যর্থ",
+    "failedRemoveSkill": "দক্ষতা সরাতে ব্যর্থ",
+    "loadEmployeeError": "কর্মচারী লোড করতে ব্যর্থ হয়েছে"
   },
   "integrationHub": {
     "title": "ইন্টিগ্রেশন হাব",

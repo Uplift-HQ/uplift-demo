@@ -233,7 +233,12 @@
       "barback": "Помічник бармена",
       "sous": "Су-шеф",
       "expeditor": "Експедитор"
-    }
+    },
+    "new": "НОВЕ",
+    "exportComingSoon": "Експорт незабаром",
+    "clickToViewDetails": "Натисніть, щоб переглянути деталі",
+    "closeEsc": "Закрити (ESC)",
+    "logoPreview": "Попередній перегляд логотипу"
   },
   "auth": {
     "login": "Увійти",
@@ -448,7 +453,16 @@
     "publishSchedule": "Опублікувати розклад",
     "publishConfirmation": "Ви збираєтеся опублікувати {{count}} чернеткових змін. Усі залучені працівники будуть повідомлені.",
     "publishNow": "Опублікувати зараз",
-    "aiScheduleBuilder": "ШІ Конструктор розкладів"
+    "aiScheduleBuilder": "ШІ Конструктор розкладів",
+    "failedTimeOffRequest": "Не вдалося обробити запит на відпустку",
+    "failedShiftSwap": "Не вдалося обробити обмін змінами",
+    "publishButton": "Опублікувати",
+    "employee": "Співробітник",
+    "reassign": "Переназначити",
+    "shiftReassigned": "Зміну переназначено",
+    "swapRequested": "Обмін запитано",
+    "shiftDeleted": "Зміну видалено",
+    "minutes": "хв"
   },
   "timeTracking": {
     "title": "Облік часу",
@@ -661,7 +675,8 @@
     "searchSkills": "Пошук навичок...",
     "skillAdded": "Навичку успішно додано",
     "verificationRequested": "Запит на підтвердження надіслано",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Список співробітників для цієї навички незабаром."
   },
   "career": {
     "title": "Кар'єра",
@@ -895,7 +910,7 @@
     "enable": "Увімкнути",
     "activeSessions": "Активні сесії",
     "manageDevices": "Керуйте вашими пристроями, де виконано вхід",
-    "signOutOtherDevices": "Вийти з інших пристроїв",
+    "signOutOtherDevices": "Вийти на інших пристроях",
     "thisDevice": "Цей пристрій",
     "revoke": "Відкликати",
     "revoking": "Відкликання...",
@@ -917,14 +932,14 @@
     "preparing": "Підготовка...",
     "dataExported": "Дані успішно експортовано",
     "deleteAccountWarning": "Назавжди видалити ваш обліковий запис та всі пов'язані дані. Цю дію неможливо скасувати після 30-денного пільгового періоду.",
-    "requestAccountDeletion": "Запросити видалення облікового запису",
+    "requestAccountDeletion": "Запитати видалення акаунту",
     "deletionScheduled": "Ваш обліковий запис заплановано до видалення. Його буде назавжди видалено через 30 днів.",
     "cancelDeletion": "Скасувати видалення",
     "enterPasswordConfirm": "Введіть пароль для підтвердження",
     "deleteMyAccount": "Видалити мій обліковий запис",
     "processing": "Обробка...",
     "webhooksIntegration": "Інтегруйте із зовнішніми системами через HTTP-зворотні виклики",
-    "addWebhook": "Додати вебхук",
+    "addWebhook": "Додати webhook",
     "endpointUrl": "URL кінцевої точки",
     "subscribedEvents": "Підписані події",
     "successRate": "Рівень успіху",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Зв'язатися з відділом продажів",
+    "changingPassword": "Змінюється...",
+    "loadError": "Не вдалося завантажити налаштування",
+    "saveOrgError": "Не вдалося зберегти налаштування організації",
+    "loadUserError": "Не вдалося завантажити дані користувача",
+    "loadLogsError": "Не вдалося завантажити журнали доставки",
+    "themes": {
+      "light": "Світла",
+      "lightDesc": "Чистий, світлий інтерфейс",
+      "dark": "Темна",
+      "darkDesc": "Легко для очей",
+      "system": "Системна",
+      "systemDesc": "Відповідно до налаштувань пристрою"
+    },
+    "roles": {
+      "workers": "Працівники",
+      "workersDesc": "Звичайні співробітники",
+      "managers": "Керівники",
+      "managersDesc": "Лідери команд та супервайзери",
+      "admins": "Адміністратори",
+      "adminsDesc": "Адміністратори з повним доступом"
+    },
+    "features": {
+      "teamSchedules": "Розклади команди",
+      "teamSchedulesDesc": "Перегляд розкладів інших членів команди",
+      "internalJobs": "Внутрішні вакансії",
+      "internalJobsDesc": "Доступ до внутрішніх вакансій",
+      "careerPaths": "Кар'єрні шляхи",
+      "careerPathsDesc": "Перегляд шляхів кар'єрного розвитку",
+      "analytics": "Аналітика команди",
+      "analyticsDesc": "Доступ до аналітики продуктивності",
+      "peerRecognition": "Визнання колег",
+      "peerRecognitionDesc": "Надсилайте та отримуйте подяки від колег"
+    },
+    "aboutEmployeeVisibilityTitle": "Про видимість співробітників",
+    "aboutPageVisibilityDesc": "Сторінки, які ви вимкнете, будуть приховані з меню навігації для цієї ролі.",
+    "brandName": "Назва бренду",
+    "brandNameDesc": "Відображається на бічній панелі та в заголовку мобільного додатку",
+    "brandingDesc": "Налаштуйте зовнішній вигляд вашого досвіду Uplift",
+    "brandingDescFull": "Налаштуйте зовнішній вигляд порталу та мобільного додатку",
+    "brandingLabel": "Брендинг",
+    "created": "Створено",
+    "dropFileUpload": "Перетягніть файл або натисніть для завантаження",
+    "emailVerified": "Електронну пошту підтверджено",
+    "eventsToSubscribe": "Події для підписки",
+    "livePreview": "Попередній перегляд у реальному часі",
+    "loginScreenPreview": "Екран входу",
+    "logosImages": "Логотипи та зображення",
+    "mfaEnabled": "MFA увімкнено",
+    "mobileAppHeader": "Заголовок мобільного додатку",
+    "noEmployeesFound": "Співробітників не знайдено",
+    "noEmployeesMatch": "Жоден співробітник не відповідає вашому пошуку",
+    "passwordChangeRequired": "Потрібна зміна пароля",
+    "primaryColor": "Основний колір",
+    "probation": "Випробувальний термін",
+    "probationPeriod": "Випробувальний період",
+    "probationRestriction": "Деякі функції обмежені під час випробувального періоду. Вони будуть автоматично увімкнені після завершення випробувального періоду.",
+    "secondaryColor": "Додатковий колір",
+    "upgradeEnterpriseBranding": "Оновіть до Enterprise для користувацького брендингу",
+    "webhookDetails": "Деталі вебхука",
+    "webhookName": "Назва",
+    "webhookSecret": "Секрет",
+    "webhookSecretDesc": "Використовується для підпису полезних даних вебхука для перевірки",
+    "webhooksTitle": "Вебхуки"
   },
   "tasks": {
     "title": "Завдання",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Потрібен дозвіл на місцезнаходження.",
     "cameraPermission": "Потрібен дозвіл на камеру.",
     "notificationPermission": "Потрібен дозвіл на сповіщення.",
-    "tryAgain": "Будь ласка, спробуйте ще раз",
-    "somethingWentWrong": "Щось пішло не так"
+    "tryAgain": "Спробувати знову",
+    "somethingWentWrong": "Щось пішло не так",
+    "goHome": "На головну",
+    "technicalDetails": "Технічні деталі"
   },
   "activity": {
     "title": "Перегляд активності",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Створити користувацький звіт",
+    "dateFrom": "Дата від",
+    "dateTo": "Дата до",
+    "filters": "Фільтри",
+    "reportName": "Назва звіту",
+    "reportType": "Тип звіту",
+    "savedReportsLocal": "Збережені звіти зберігаються локально. Постійне збереження звітів незабаром.",
+    "sortBy": "Сортувати за",
+    "trendOverTime": "Тенденція з часом"
   },
   "accessibility": {
     "menu": "Меню",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Не вдалося видалити шаблон",
+    "shiftsGenerated": "Зміни успішно згенеровано!",
+    "failedSave": "Не вдалося зберегти шаблон"
   },
   "legal": {
     "lastUpdated": "Останнє оновлення",
@@ -1748,7 +1841,18 @@
     "postJob": "Опублікувати вакансію",
     "skillMatch": "відповідність навичок",
     "noApplicants": "Кандидатів ще немає",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Зал обслуговування",
+      "kitchen": "Кухня",
+      "management": "Керівництво",
+      "reception": "Рецепція"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Единбург",
+      "glasgow": "Grand Metro Глазго",
+      "manchester": "Grand Metro Манчестер"
+    }
   },
   "employees": {
     "searchPlaceholder": "Пошук за ім'ям або email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Не вдалося додати навичку",
+    "failedVerifySkill": "Не вдалося підтвердити навичку",
+    "failedUpdateSkillLevel": "Не вдалося оновити рівень навички",
+    "failedRemoveSkill": "Не вдалося видалити навичку",
+    "loadEmployeeError": "Не вдалося завантажити співробітника"
   },
   "integrationHub": {
     "title": "Центр інтеграцій",

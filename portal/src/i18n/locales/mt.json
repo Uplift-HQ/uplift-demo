@@ -233,7 +233,12 @@
       "barback": "Assistent tal-bar",
       "sous": "Sous Chef",
       "expeditor": "Espeditur"
-    }
+    },
+    "exportComingSoon": "L-esportazzjoni ġejja dalwaqt",
+    "new": "ĠDID",
+    "clickToViewDetails": "Ikklikkja biex tara d-dettalji",
+    "closeEsc": "Agħlaq (ESC)",
+    "logoPreview": "Preview tal-logo"
   },
   "auth": {
     "login": "Idħol",
@@ -448,7 +453,16 @@
     "publishSchedule": "Ippubblika l-iskeda",
     "publishConfirmation": "Se tippubblika {{count}} xift abbozz. L-impjegati kollha se jiġu nnotifikati.",
     "publishNow": "Ippubblika issa",
-    "aiScheduleBuilder": "Benniena tal-Iskeda AI"
+    "aiScheduleBuilder": "Benniena tal-Iskeda AI",
+    "failedShiftSwap": "Ma rnexxiex jiġi proċessat il-bdil tax-xift",
+    "failedTimeOffRequest": "Ma rnexxiex tiġi proċessata t-talba għal-leave",
+    "publishButton": "Ippubblika",
+    "employee": "Impjegat",
+    "reassign": "Erġa' assenja",
+    "shiftReassigned": "Ix-xift ġie assenjat mill-ġdid",
+    "swapRequested": "Skambju mitlub",
+    "shiftDeleted": "Ix-xift tħassar",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Tracking taż-Żmien",
@@ -661,7 +675,8 @@
     "searchSkills": "Fittex ħiliet...",
     "skillAdded": "Ħila miżjuda b'suċċess",
     "verificationRequested": "Verifika mitluba",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Il-lista tal-impjegati għal din il-ħila se tiġi dalwaqt."
   },
   "career": {
     "title": "Karriera",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "changingPassword": "Qed jinbidel...",
+    "contactSales": "Ikkuntattja l-Bejgħ",
+    "features": {
+      "analytics": "Analitika tat-Tim",
+      "analyticsDesc": "Aċċessa analitika tal-prestazzjoni",
+      "careerPaths": "Mogħdijiet tal-Karriera",
+      "careerPathsDesc": "Ara mogħdijiet taż-żvilupp tal-karriera",
+      "internalJobs": "Impjiegi Interni",
+      "internalJobsDesc": "Aċċessa r-reklamar ta' impjiegi interni",
+      "peerRecognition": "Rikonoxximent tal-Kollegi",
+      "peerRecognitionDesc": "Ibgħat u irċievi apprezzament mill-kollegi",
+      "teamSchedules": "Skedi tat-Tim",
+      "teamSchedulesDesc": "Ara l-iskedi ta' membri oħra tat-tim"
+    },
+    "loadError": "Ma rnexxiex jitgħabbu s-settings",
+    "loadLogsError": "Ma rnexxiex jitgħabbu l-logs tal-kunsinna",
+    "loadUserError": "Ma rnexxiex jitgħabbu d-data tal-utent",
+    "roles": {
+      "admins": "Amministraturi",
+      "adminsDesc": "Amministraturi b'aċċess sħiħ",
+      "managers": "Maniġers",
+      "managersDesc": "Mexxejja tat-tim u superviżuri",
+      "workers": "Ħaddiema",
+      "workersDesc": "Impjegati regolari"
+    },
+    "saveOrgError": "Ma rnexxiex jiġu salvati s-settings tal-organizzazzjoni",
+    "themes": {
+      "dark": "Skur",
+      "darkDesc": "Komdu għall-għajnejn",
+      "light": "Ċar",
+      "lightDesc": "Interfaċċi nadifa u ċara",
+      "system": "Sistema",
+      "systemDesc": "Aqbel mas-settings tal-apparat"
+    },
+    "aboutEmployeeVisibilityTitle": "Dwar il-Viżibbiltà tal-Impjegati",
+    "aboutPageVisibilityDesc": "Paġni li tiddiżattiva se jkunu moħbija mill-menu tan-navigazzjoni għal dak ir-rwol.",
+    "brandName": "Isem il-Marka",
+    "brandNameDesc": "Muri fil-sidebar u l-header tal-app moħbi",
+    "brandingDesc": "Personalizza d-dehra u l-ħass tal-esperjenza Uplift tiegħek",
+    "brandingDescFull": "Personalizza d-dehra u l-ħass fil-portal u l-app moħbi",
+    "brandingLabel": "Branding",
+    "created": "Maħluq",
+    "dropFileUpload": "Itfa' l-fajl jew ikklikkja biex ittella'",
+    "emailVerified": "Email Verifikat",
+    "eventsToSubscribe": "Avvenimenti għal Abbonament",
+    "livePreview": "Preview Ħaj",
+    "loginScreenPreview": "Skrin tad-Dħul",
+    "logosImages": "Logos u Stampi",
+    "mfaEnabled": "MFA Attivat",
+    "mobileAppHeader": "Header tal-App Moħbi",
+    "noEmployeesFound": "L-ebda impjegati ma nstabu",
+    "noEmployeesMatch": "L-ebda impjegati ma jaqblu mat-tfittxija tiegħek",
+    "passwordChangeRequired": "Bidla tal-password meħtieġa",
+    "primaryColor": "Kulur Primarju",
+    "probation": "Prova",
+    "probationPeriod": "Perijodu ta' Prova",
+    "probationRestriction": "Xi karatteristiċi huma ristretti matul-perijodu ta' prova. Dawn se jiġu attivati awtomatikament meta tintemm il-prova.",
+    "secondaryColor": "Kulur Sekondarju",
+    "upgradeEnterpriseBranding": "Agħmel upgrade għal Enterprise għal Branding Personalizzat",
+    "webhookDetails": "Dettalji tal-Webhook",
+    "webhookName": "Isem",
+    "webhookSecret": "Sigriet",
+    "webhookSecretDesc": "Jintuża biex jiffirma l-payloads tal-webhook għall-verifika",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Kompiti",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Permess tal-kamera meħtieġ.",
     "notificationPermission": "Permess tan-notifiki meħtieġ.",
     "tryAgain": "Jekk jogħġbok erġa' pprova",
-    "somethingWentWrong": "Xi ħaġa marret ħażin"
+    "somethingWentWrong": "Xi ħaġa marret ħażin",
+    "goHome": "Mur id-Dar",
+    "technicalDetails": "Dettalji Tekniċi"
   },
   "activity": {
     "title": "Reviżjoni tal-Attività",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Ibni Rapport Personalizzat",
+    "dateFrom": "Data Minn",
+    "dateTo": "Data Sa",
+    "filters": "Filtri",
+    "reportName": "Isem ir-Rapport",
+    "reportType": "Tip ta' Rapport",
+    "savedReportsLocal": "Ir-rapporti ssejvjati huma maħżużin lokalment. Rapporti ssejvjati b'mod permanenti dalwaqt.",
+    "sortBy": "Issortja Skont",
+    "trendOverTime": "Xejra maż-Żmien"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Ma rnexxiex jitħassar it-template",
+    "failedSave": "Ma rnexxiex jiġi salvat it-template",
+    "shiftsGenerated": "Ix-xiftijiet ġew ġenerati b'suċċess!"
   },
   "legal": {
     "lastUpdated": "L-aħħar aġġornat",
@@ -1748,7 +1841,18 @@
     "postJob": "Ippowstja Xogħol",
     "skillMatch": "tqabbil tal-ħiliet",
     "noApplicants": "Għad m'hawn applikanti",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Quddiem id-Dar",
+      "kitchen": "Kcina",
+      "management": "Ġestjoni",
+      "reception": "Riċeveriment"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Fittex bl-isem jew email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Ma rnexxiex tiżdied il-ħila",
+    "failedRemoveSkill": "Ma rnexxiex titneħħa l-ħila",
+    "failedUpdateSkillLevel": "Ma rnexxiex jiġi aġġornat il-livell tal-ħila",
+    "failedVerifySkill": "Ma rnexxiex tiġi vverifikata l-ħila",
+    "loadEmployeeError": "Ma rnexxiex jitgħabba l-impjegat"
   },
   "integrationHub": {
     "title": "Ħub tal-Integrazzjonijiet",

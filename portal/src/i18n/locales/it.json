@@ -233,7 +233,12 @@
       "barback": "Aiuto barista",
       "sous": "Sous Chef",
       "expeditor": "Expeditor"
-    }
+    },
+    "new": "NUOVO",
+    "exportComingSoon": "Esportazione in arrivo",
+    "clickToViewDetails": "Clicca per visualizzare i dettagli",
+    "closeEsc": "Chiudi (ESC)",
+    "logoPreview": "Anteprima del logo"
   },
   "auth": {
     "login": "Accedi",
@@ -448,7 +453,16 @@
     "publishSchedule": "Pubblica programma",
     "publishConfirmation": "Stai per pubblicare {{count}} turno/i in bozza. Questo notificherà tutti i dipendenti interessati.",
     "publishNow": "Pubblica ora",
-    "aiScheduleBuilder": "Costruttore di programmi IA"
+    "aiScheduleBuilder": "Costruttore di programmi IA",
+    "failedTimeOffRequest": "Elaborazione richiesta ferie fallita",
+    "failedShiftSwap": "Elaborazione scambio turno fallita",
+    "publishButton": "Pubblica",
+    "employee": "Dipendente",
+    "reassign": "Riassegna",
+    "shiftReassigned": "Turno riassegnato",
+    "swapRequested": "Scambio richiesto",
+    "shiftDeleted": "Turno eliminato",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Rilevazione presenze",
@@ -661,7 +675,8 @@
     "searchSkills": "Cerca competenze...",
     "skillAdded": "Competenza aggiunta con successo",
     "verificationRequested": "Verifica richiesta",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "L’elenco dei dipendenti per questa competenza sarà disponibile a breve."
   },
   "career": {
     "title": "Carriera",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Controlla a quali funzionalità può accedere ogni dipendente",
     "searchEmployees": "Cerca dipendenti...",
     "featureAccess": "Accesso funzionalità",
-    "enableAll": "Abilita tutto",
-    "disableAll": "Disabilita tutto",
+    "enableAll": "Attiva tutto",
+    "disableAll": "Disattiva tutto",
     "aboutEmployeeVisibility": "Queste impostazioni controllano quali funzionalità sono visibili a ciascun dipendente.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Contatta vendite",
+    "changingPassword": "Modifica in corso...",
+    "loadError": "Caricamento impostazioni fallito",
+    "saveOrgError": "Salvataggio impostazioni organizzazione fallito",
+    "loadUserError": "Caricamento dati utente fallito",
+    "loadLogsError": "Caricamento registri fallito",
+    "themes": {
+      "light": "Chiaro",
+      "lightDesc": "Interfaccia pulita e luminosa",
+      "dark": "Scuro",
+      "darkDesc": "Riposante per gli occhi",
+      "system": "Sistema",
+      "systemDesc": "Usa impostazioni del dispositivo"
+    },
+    "roles": {
+      "workers": "Dipendenti",
+      "workersDesc": "Dipendenti regolari",
+      "managers": "Manager",
+      "managersDesc": "Capigruppo e supervisori",
+      "admins": "Amministratori",
+      "adminsDesc": "Accesso completo"
+    },
+    "features": {
+      "teamSchedules": "Orari del team",
+      "teamSchedulesDesc": "Visualizza orari dei membri",
+      "internalJobs": "Posizioni interne",
+      "internalJobsDesc": "Accedi alle offerte interne",
+      "careerPaths": "Percorsi di carriera",
+      "careerPathsDesc": "Visualizza percorsi di sviluppo",
+      "analytics": "Analisi del team",
+      "analyticsDesc": "Accedi alle analisi delle prestazioni",
+      "peerRecognition": "Riconoscimento tra pari",
+      "peerRecognitionDesc": "Invia e ricevi complimenti"
+    },
+    "aboutEmployeeVisibilityTitle": "Informazioni sulla visibilità dei dipendenti",
+    "aboutPageVisibilityDesc": "Le pagine disattivate saranno nascoste dal menu di navigazione per quel ruolo.",
+    "brandName": "Nome del marchio",
+    "brandNameDesc": "Visualizzato nella barra laterale e nell’intestazione dell’app mobile",
+    "brandingDesc": "Personalizza l’aspetto della tua esperienza Uplift",
+    "brandingDescFull": "Personalizza l’aspetto del portale e dell’app mobile",
+    "brandingLabel": "Identità visiva",
+    "created": "Creato",
+    "dropFileUpload": "Trascina un file o clicca per caricare",
+    "emailVerified": "E-mail verificata",
+    "eventsToSubscribe": "Eventi a cui iscriversi",
+    "livePreview": "Anteprima dal vivo",
+    "loginScreenPreview": "Schermata di accesso",
+    "logosImages": "Loghi e immagini",
+    "mfaEnabled": "MFA abilitato",
+    "mobileAppHeader": "Intestazione dell’app mobile",
+    "noEmployeesFound": "Nessun dipendente trovato",
+    "noEmployeesMatch": "Nessun dipendente corrisponde alla tua ricerca",
+    "passwordChangeRequired": "Cambio password richiesto",
+    "primaryColor": "Colore primario",
+    "probation": "Periodo di prova",
+    "probationPeriod": "Periodo di prova",
+    "probationRestriction": "Alcune funzionalità sono limitate durante il periodo di prova. Saranno automaticamente abilitate al termine del periodo di prova.",
+    "secondaryColor": "Colore secondario",
+    "upgradeEnterpriseBranding": "Passa a Enterprise per un’identità visiva personalizzata",
+    "webhookDetails": "Dettagli del webhook",
+    "webhookName": "Nome",
+    "webhookSecret": "Segreto",
+    "webhookSecretDesc": "Utilizzato per firmare i payload del webhook a scopo di verifica",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Attività",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "È richiesto il permesso della fotocamera.",
     "notificationPermission": "È richiesto il permesso delle notifiche.",
     "tryAgain": "Riprova",
-    "somethingWentWrong": "Qualcosa è andato storto"
+    "somethingWentWrong": "Qualcosa è andato storto",
+    "goHome": "Home",
+    "technicalDetails": "Dettagli tecnici"
   },
   "activity": {
     "title": "Revisione attività",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Crea report personalizzato",
+    "dateFrom": "Data da",
+    "dateTo": "Data a",
+    "filters": "Filtri",
+    "reportName": "Nome del report",
+    "reportType": "Tipo di report",
+    "savedReportsLocal": "I report salvati sono archiviati localmente. Il salvataggio persistente sarà disponibile a breve.",
+    "sortBy": "Ordina per",
+    "trendOverTime": "Tendenza nel tempo"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Eliminazione modello fallita",
+    "shiftsGenerated": "Turni generati con successo!",
+    "failedSave": "Salvataggio modello fallito"
   },
   "legal": {
     "lastUpdated": "Ultimo aggiornamento",
@@ -1748,7 +1841,18 @@
     "postJob": "Pubblica posizione",
     "skillMatch": "corrispondenza competenze",
     "noApplicants": "Nessun candidato ancora",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Sala",
+      "kitchen": "Cucina",
+      "management": "Direzione",
+      "reception": "Reception"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Cerca per nome o email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Impossibile aggiungere competenza",
+    "failedVerifySkill": "Verifica fallita",
+    "failedUpdateSkillLevel": "Aggiornamento livello fallito",
+    "failedRemoveSkill": "Rimozione competenza fallita",
+    "loadEmployeeError": "Impossibile caricare il dipendente"
   },
   "integrationHub": {
     "title": "Hub integrazioni",

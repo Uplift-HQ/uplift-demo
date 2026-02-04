@@ -233,7 +233,12 @@
       "barback": "ผู้ช่วยบาร์",
       "sous": "ซูเชฟ",
       "expeditor": "ผู้ประสานงาน"
-    }
+    },
+    "new": "ใหม่",
+    "exportComingSoon": "การส่งออกจะมาเร็วๆ นี้",
+    "clickToViewDetails": "คลิกเพื่อดูรายละเอียด",
+    "closeEsc": "ปิด (ESC)",
+    "logoPreview": "ตัวอย่างโลโก้"
   },
   "auth": {
     "login": "เข้าสู่ระบบ",
@@ -448,7 +453,16 @@
     "publishSchedule": "เผยแพร่ตารางเวลา",
     "publishConfirmation": "คุณกำลังจะเผยแพร่ {{count}} กะฉบับร่าง พนักงานทั้งหมดที่เกี่ยวข้องจะได้รับการแจ้งเตือน",
     "publishNow": "เผยแพร่ตอนนี้",
-    "aiScheduleBuilder": "ตัวสร้างตารางเวลา AI"
+    "aiScheduleBuilder": "ตัวสร้างตารางเวลา AI",
+    "failedTimeOffRequest": "ไม่สามารถดำเนินการขอลาได้",
+    "failedShiftSwap": "ไม่สามารถดำเนินการสลับกะได้",
+    "publishButton": "เผยแพร่",
+    "employee": "พนักงาน",
+    "reassign": "มอบหมายใหม่",
+    "shiftReassigned": "กะถูกมอบหมายใหม่",
+    "swapRequested": "ส่งคำขอสลับแล้ว",
+    "shiftDeleted": "ลบกะแล้ว",
+    "minutes": "นาที"
   },
   "timeTracking": {
     "title": "บันทึกเวลา",
@@ -661,7 +675,8 @@
     "searchSkills": "ค้นหาทักษะ...",
     "skillAdded": "เพิ่มทักษะสำเร็จ",
     "verificationRequested": "ขอการยืนยันแล้ว",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "รายชื่อพนักงานสำหรับทักษะนี้จะมีเร็วๆ นี้"
   },
   "career": {
     "title": "อาชีพ",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "ควบคุมฟีเจอร์ที่พนักงานแต่ละคนสามารถเข้าถึงได้",
     "searchEmployees": "ค้นหาพนักงาน...",
     "featureAccess": "การเข้าถึงฟีเจอร์",
-    "enableAll": "เปิดใช้งานทั้งหมด",
-    "disableAll": "ปิดใช้งานทั้งหมด",
+    "enableAll": "เปิดใช้ทั้งหมด",
+    "disableAll": "ปิดใช้ทั้งหมด",
     "aboutEmployeeVisibility": "การตั้งค่าเหล่านี้ควบคุมฟีเจอร์ที่มองเห็นได้สำหรับพนักงานแต่ละคน",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "ติดต่อฝ่ายขาย",
+    "changingPassword": "กำลังเปลี่ยน...",
+    "loadError": "ไม่สามารถโหลดการตั้งค่าได้",
+    "saveOrgError": "ไม่สามารถบันทึกการตั้งค่าองค์กรได้",
+    "loadUserError": "ไม่สามารถโหลดข้อมูลผู้ใช้ได้",
+    "loadLogsError": "ไม่สามารถโหลดบันทึกการส่งได้",
+    "themes": {
+      "light": "สว่าง",
+      "lightDesc": "อินเทอร์เฟซสะอาดสว่าง",
+      "dark": "มืด",
+      "darkDesc": "สบายตา",
+      "system": "ระบบ",
+      "systemDesc": "ตามการตั้งค่าอุปกรณ์"
+    },
+    "roles": {
+      "workers": "พนักงาน",
+      "workersDesc": "พนักงานทั่วไป",
+      "managers": "ผู้จัดการ",
+      "managersDesc": "หัวหน้าทีมและหัวหน้างาน",
+      "admins": "ผู้ดูแลระบบ",
+      "adminsDesc": "ผู้ดูแลระบบที่มีสิทธิ์เข้าถึงเต็มรูปแบบ"
+    },
+    "features": {
+      "teamSchedules": "ตารางทีม",
+      "teamSchedulesDesc": "ดูตารางของสมาชิกทีมคนอื่น",
+      "internalJobs": "ตำแหน่งภายใน",
+      "internalJobsDesc": "เข้าถึงประกาศตำแหน่งภายใน",
+      "careerPaths": "เส้นทางอาชีพ",
+      "careerPathsDesc": "ดูเส้นทางการพัฒนาอาชีพ",
+      "analytics": "วิเคราะห์ทีม",
+      "analyticsDesc": "เข้าถึงวิเคราะห์ประสิทธิภาพ",
+      "peerRecognition": "การยอมรับจากเพื่อนร่วมงาน",
+      "peerRecognitionDesc": "ส่งและรับคำชมจากเพื่อนร่วมงาน"
+    },
+    "aboutEmployeeVisibilityTitle": "เกี่ยวกับการมองเห็นพนักงาน",
+    "aboutPageVisibilityDesc": "หน้าที่คุณปิดใช้งานจะถูกซ่อนจากเมนูนำทางสำหรับบทบาทนั้น",
+    "brandName": "ชื่อแบรนด์",
+    "brandNameDesc": "แสดงในแถบด้านข้างและส่วนหัวของแอปมือถือ",
+    "brandingDesc": "ปรับแต่งรูปลักษณ์ของประสบการณ์ Uplift ของคุณ",
+    "brandingDescFull": "ปรับแต่งรูปลักษณ์ทั่วทั้งพอร์ทัลและแอปมือถือ",
+    "brandingLabel": "แบรนด์ดิ้ง",
+    "created": "สร้างเมื่อ",
+    "dropFileUpload": "วางไฟล์หรือคลิกเพื่ออัปโหลด",
+    "emailVerified": "ยืนยันอีเมลแล้ว",
+    "eventsToSubscribe": "เหตุการณ์ที่ต้องการสมัครรับ",
+    "livePreview": "ตัวอย่างสด",
+    "loginScreenPreview": "หน้าจอเข้าสู่ระบบ",
+    "logosImages": "โลโก้และรูปภาพ",
+    "mfaEnabled": "เปิดใช้งาน MFA แล้ว",
+    "mobileAppHeader": "ส่วนหัวแอปมือถือ",
+    "noEmployeesFound": "ไม่พบพนักงาน",
+    "noEmployeesMatch": "ไม่มีพนักงานตรงกับการค้นหาของคุณ",
+    "passwordChangeRequired": "ต้องเปลี่ยนรหัสผ่าน",
+    "primaryColor": "สีหลัก",
+    "probation": "ช่วงทดลองงาน",
+    "probationPeriod": "ระยะเวลาทดลองงาน",
+    "probationRestriction": "ฟีเจอร์บางอย่างถูกจำกัดในช่วงทดลองงาน ฟีเจอร์เหล่านี้จะเปิดใช้งานโดยอัตโนมัติเมื่อสิ้นสุดช่วงทดลองงาน",
+    "secondaryColor": "สีรอง",
+    "upgradeEnterpriseBranding": "อัปเกรดเป็น Enterprise เพื่อแบรนด์ดิ้งแบบกำหนดเอง",
+    "webhookDetails": "รายละเอียดเว็บฮุค",
+    "webhookName": "ชื่อ",
+    "webhookSecret": "คีย์ลับ",
+    "webhookSecretDesc": "ใช้สำหรับลงนามเว็บฮุคเพย์โหลดเพื่อการยืนยัน",
+    "webhooksTitle": "เว็บฮุค"
   },
   "tasks": {
     "title": "งาน",
@@ -1251,8 +1330,10 @@
     "locationPermission": "ต้องมีสิทธิ์เข้าถึงตำแหน่ง",
     "cameraPermission": "ต้องมีสิทธิ์เข้าถึงกล้อง",
     "notificationPermission": "ต้องมีสิทธิ์แจ้งเตือน",
-    "tryAgain": "กรุณาลองอีกครั้ง",
-    "somethingWentWrong": "มีบางอย่างผิดพลาด"
+    "tryAgain": "ลองอีกครั้ง",
+    "somethingWentWrong": "มีบางอย่างผิดพลาด",
+    "goHome": "กลับหน้าหลัก",
+    "technicalDetails": "รายละเอียดทางเทคนิค"
   },
   "activity": {
     "title": "ตรวจสอบกิจกรรม",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "สร้างรายงานแบบกำหนดเอง",
+    "dateFrom": "วันที่เริ่มต้น",
+    "dateTo": "วันที่สิ้นสุด",
+    "filters": "ตัวกรอง",
+    "reportName": "ชื่อรายงาน",
+    "reportType": "ประเภทรายงาน",
+    "savedReportsLocal": "รายงานที่บันทึกไว้จะถูกเก็บไว้ในเครื่อง การบันทึกรายงานถาวรจะมีเร็วๆ นี้",
+    "sortBy": "เรียงตาม",
+    "trendOverTime": "แนวโน้มตามช่วงเวลา"
   },
   "accessibility": {
     "menu": "เมนู",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "ไม่สามารถลบเทมเพลตได้",
+    "shiftsGenerated": "สร้างกะสำเร็จแล้ว!",
+    "failedSave": "ไม่สามารถบันทึกเทมเพลตได้"
   },
   "legal": {
     "lastUpdated": "อัปเดตล่าสุด",
@@ -1748,7 +1841,18 @@
     "postJob": "โพสต์งาน",
     "skillMatch": "ทักษะตรงกัน",
     "noApplicants": "ยังไม่มีผู้สมัคร",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ส่วนหน้าบ้าน",
+      "kitchen": "ครัว",
+      "management": "ฝ่ายบริหาร",
+      "reception": "แผนกต้อนรับ"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro เอดินเบอะร์",
+      "glasgow": "Grand Metro กลาสโกว์",
+      "manchester": "Grand Metro แมนเชสเตอร์"
+    }
   },
   "employees": {
     "searchPlaceholder": "ค้นหาด้วยชื่อหรืออีเมล...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "ไม่สามารถเพิ่มทักษะได้",
+    "failedVerifySkill": "ไม่สามารถยืนยันทักษะได้",
+    "failedUpdateSkillLevel": "ไม่สามารถอัปเดตระดับทักษะได้",
+    "failedRemoveSkill": "ไม่สามารถลบทักษะได้",
+    "loadEmployeeError": "ไม่สามารถโหลดข้อมูลพนักงานได้"
   },
   "integrationHub": {
     "title": "ศูนย์กลางการเชื่อมต่อ",

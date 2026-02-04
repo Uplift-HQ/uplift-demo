@@ -233,7 +233,12 @@
       "barback": "Pembantu bar",
       "sous": "Sous Chef",
       "expeditor": "Ekspeditor"
-    }
+    },
+    "exportComingSoon": "Eksport akan datang",
+    "new": "BARU",
+    "clickToViewDetails": "Klik untuk melihat butiran",
+    "closeEsc": "Tutup (ESC)",
+    "logoPreview": "Pratonton logo"
   },
   "auth": {
     "login": "Log Masuk",
@@ -448,7 +453,16 @@
     "publishSchedule": "Terbitkan jadual",
     "publishConfirmation": "Anda akan menerbitkan {{count}} draf syif. Semua pekerja berkenaan akan dimaklumkan.",
     "publishNow": "Terbitkan sekarang",
-    "aiScheduleBuilder": "Pembina Jadual AI"
+    "aiScheduleBuilder": "Pembina Jadual AI",
+    "failedShiftSwap": "Gagal memproses pertukaran syif",
+    "failedTimeOffRequest": "Gagal memproses permohonan cuti",
+    "publishButton": "Terbitkan",
+    "employee": "Pekerja",
+    "reassign": "Tugaskan semula",
+    "shiftReassigned": "Syif ditugaskan semula",
+    "swapRequested": "Pertukaran diminta",
+    "shiftDeleted": "Syif dipadam",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Jejak Masa",
@@ -661,7 +675,8 @@
     "searchSkills": "Cari kemahiran...",
     "skillAdded": "Kemahiran berjaya ditambah",
     "verificationRequested": "Pengesahan diminta",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Senarai pekerja untuk kemahiran ini akan datang tidak lama lagi."
   },
   "career": {
     "title": "Kerjaya",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "changingPassword": "Menukar...",
+    "contactSales": "Hubungi Jualan",
+    "features": {
+      "analytics": "Analitik Pasukan",
+      "analyticsDesc": "Akses analitik prestasi",
+      "careerPaths": "Laluan Kerjaya",
+      "careerPathsDesc": "Lihat laluan pembangunan kerjaya",
+      "internalJobs": "Jawatan Dalaman",
+      "internalJobsDesc": "Akses iklan jawatan dalaman",
+      "peerRecognition": "Pengiktirafan Rakan Sekerja",
+      "peerRecognitionDesc": "Hantar dan terima penghargaan rakan sekerja",
+      "teamSchedules": "Jadual Pasukan",
+      "teamSchedulesDesc": "Lihat jadual ahli pasukan lain"
+    },
+    "loadError": "Gagal memuatkan tetapan",
+    "loadLogsError": "Gagal memuatkan log penghantaran",
+    "loadUserError": "Gagal memuatkan data pengguna",
+    "roles": {
+      "admins": "Pentadbir",
+      "adminsDesc": "Pentadbir akses penuh",
+      "managers": "Pengurus",
+      "managersDesc": "Ketua pasukan dan penyelia",
+      "workers": "Pekerja",
+      "workersDesc": "Pekerja biasa"
+    },
+    "saveOrgError": "Gagal menyimpan tetapan organisasi",
+    "themes": {
+      "dark": "Gelap",
+      "darkDesc": "Selesa untuk mata",
+      "light": "Cerah",
+      "lightDesc": "Antara muka bersih dan cerah",
+      "system": "Sistem",
+      "systemDesc": "Ikut tetapan peranti"
+    },
+    "aboutEmployeeVisibilityTitle": "Tentang Keterlihatan Pekerja",
+    "aboutPageVisibilityDesc": "Halaman yang anda nyahaktifkan akan disembunyikan daripada menu navigasi untuk peranan tersebut.",
+    "brandName": "Nama Jenama",
+    "brandNameDesc": "Dipaparkan di bar sisi dan pengepala aplikasi mudah alih",
+    "brandingDesc": "Sesuaikan rupa dan rasa pengalaman Uplift anda",
+    "brandingDescFull": "Sesuaikan rupa dan rasa merentas portal dan aplikasi mudah alih",
+    "brandingLabel": "Penjenamaan",
+    "created": "Dicipta",
+    "dropFileUpload": "Lepaskan fail atau klik untuk muat naik",
+    "emailVerified": "E-mel Disahkan",
+    "eventsToSubscribe": "Acara untuk Dilanggan",
+    "livePreview": "Pratonton Langsung",
+    "loginScreenPreview": "Skrin Log Masuk",
+    "logosImages": "Logo & Imej",
+    "mfaEnabled": "MFA Diaktifkan",
+    "mobileAppHeader": "Pengepala Aplikasi Mudah Alih",
+    "noEmployeesFound": "Tiada pekerja ditemui",
+    "noEmployeesMatch": "Tiada pekerja sepadan dengan carian anda",
+    "passwordChangeRequired": "Pertukaran kata laluan diperlukan",
+    "primaryColor": "Warna Utama",
+    "probation": "Percubaan",
+    "probationPeriod": "Tempoh Percubaan",
+    "probationRestriction": "Sesetengah ciri dihadkan semasa tempoh percubaan. Ciri-ciri ini akan diaktifkan secara automatik setelah percubaan tamat.",
+    "secondaryColor": "Warna Sekunder",
+    "upgradeEnterpriseBranding": "Naik taraf ke Perusahaan untuk Penjenamaan Tersuai",
+    "webhookDetails": "Butiran Webhook",
+    "webhookName": "Nama",
+    "webhookSecret": "Rahsia",
+    "webhookSecretDesc": "Digunakan untuk menandatangani muatan webhook bagi pengesahan",
+    "webhooksTitle": "Webhook"
   },
   "tasks": {
     "title": "Tugas",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Kebenaran kamera diperlukan.",
     "notificationPermission": "Kebenaran pemberitahuan diperlukan.",
     "tryAgain": "Sila cuba lagi",
-    "somethingWentWrong": "Sesuatu tidak kena"
+    "somethingWentWrong": "Sesuatu tidak kena",
+    "goHome": "Ke Laman Utama",
+    "technicalDetails": "Butiran Teknikal"
   },
   "activity": {
     "title": "Semakan Aktiviti",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Bina Laporan Tersuai",
+    "dateFrom": "Tarikh Dari",
+    "dateTo": "Tarikh Hingga",
+    "filters": "Penapis",
+    "reportName": "Nama Laporan",
+    "reportType": "Jenis Laporan",
+    "savedReportsLocal": "Laporan yang disimpan disimpan secara setempat. Penyimpanan laporan kekal akan datang tidak lama lagi.",
+    "sortBy": "Isih Mengikut",
+    "trendOverTime": "Trend Dari Masa ke Masa"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Gagal memadam templat",
+    "failedSave": "Gagal menyimpan templat",
+    "shiftsGenerated": "Syif berjaya dijana!"
   },
   "legal": {
     "lastUpdated": "Terakhir dikemas kini",
@@ -1748,7 +1841,18 @@
     "postJob": "Iklankan Jawatan",
     "skillMatch": "padanan kemahiran",
     "noApplicants": "Tiada pemohon lagi",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Bahagian Hadapan",
+      "kitchen": "Dapur",
+      "management": "Pengurusan",
+      "reception": "Resepsi"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Cari mengikut nama atau e-mel...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Gagal menambah kemahiran",
+    "failedRemoveSkill": "Gagal mengalih keluar kemahiran",
+    "failedUpdateSkillLevel": "Gagal mengemas kini tahap kemahiran",
+    "failedVerifySkill": "Gagal mengesahkan kemahiran",
+    "loadEmployeeError": "Gagal memuatkan pekerja"
   },
   "integrationHub": {
     "title": "Hab Integrasi",

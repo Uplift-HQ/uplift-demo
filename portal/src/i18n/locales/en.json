@@ -206,8 +206,8 @@
     "placeholder": {
       "search": "Search..."
     },
-    "employee": "employee",
-    "employees": "employees",
+    "employee": "Employee",
+    "employees": "Employees",
     "at": "at",
     "deny": "Deny",
     "failed": "Failed",
@@ -233,7 +233,12 @@
       "barback": "Barback",
       "sous": "Sous Chef",
       "expeditor": "Expeditor"
-    }
+    },
+    "new": "NEW",
+    "exportComingSoon": "Export coming soon",
+    "closeEsc": "Close (ESC)",
+    "clickToViewDetails": "Click to view details",
+    "logoPreview": "Logo preview"
   },
   "auth": {
     "login": "Log In",
@@ -448,7 +453,16 @@
     "publishSchedule": "Publish Schedule",
     "publishConfirmation": "You are about to publish {{count}} draft shift(s). This will notify all affected employees about their upcoming shifts.",
     "publishNow": "Publish Now",
-    "aiScheduleBuilder": "AI Schedule Builder"
+    "aiScheduleBuilder": "AI Schedule Builder",
+    "failedTimeOffRequest": "Failed to process time-off request",
+    "failedShiftSwap": "Failed to process shift swap",
+    "publishButton": "Publish",
+    "employee": "Employee",
+    "reassign": "Reassign",
+    "shiftReassigned": "Shift reassigned",
+    "swapRequested": "Swap requested",
+    "shiftDeleted": "Shift deleted",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Time Tracking",
@@ -661,7 +675,8 @@
     "searchSkills": "Search skills...",
     "skillAdded": "Skill added successfully",
     "verificationRequested": "Verification requested",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Employee listing for this skill is coming soon."
   },
   "career": {
     "loadError": "Failed to load career data",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Contact Sales",
+    "changingPassword": "Changing...",
+    "loadError": "Failed to load settings",
+    "saveOrgError": "Failed to save organization settings",
+    "loadUserError": "Failed to load user data",
+    "loadLogsError": "Failed to load delivery logs",
+    "themes": {
+      "light": "Light",
+      "lightDesc": "Clean, bright interface",
+      "dark": "Dark",
+      "darkDesc": "Easy on the eyes",
+      "system": "System",
+      "systemDesc": "Match device settings"
+    },
+    "roles": {
+      "workers": "Workers",
+      "workersDesc": "Regular employees",
+      "managers": "Managers",
+      "managersDesc": "Team leads and supervisors",
+      "admins": "Admins",
+      "adminsDesc": "Full access administrators"
+    },
+    "features": {
+      "teamSchedules": "Team Schedules",
+      "teamSchedulesDesc": "View other team members schedules",
+      "internalJobs": "Internal Jobs",
+      "internalJobsDesc": "Access internal job postings",
+      "careerPaths": "Career Paths",
+      "careerPathsDesc": "View career development paths",
+      "analytics": "Team Analytics",
+      "analyticsDesc": "Access performance analytics",
+      "peerRecognition": "Peer Recognition",
+      "peerRecognitionDesc": "Send and receive peer kudos"
+    },
+    "aboutEmployeeVisibilityTitle": "About Employee Visibility",
+    "aboutPageVisibilityDesc": "Pages you disable will be hidden from the navigation menu for that role. Users won't be able to access those pages directly either. The Dashboard is always visible as it's the landing page.",
+    "brandName": "Brand Name",
+    "brandNameDesc": "Displayed in the sidebar and mobile app header",
+    "brandingDesc": "Customize the look and feel of your Uplift experience",
+    "brandingDescFull": "Customize the look and feel across portal and mobile app",
+    "brandingLabel": "Branding",
+    "created": "Created",
+    "dropFileUpload": "Drop file or click to upload",
+    "emailVerified": "Email Verified",
+    "eventsToSubscribe": "Events to Subscribe",
+    "livePreview": "Live Preview",
+    "loginScreenPreview": "Login Screen",
+    "logosImages": "Logos & Images",
+    "mfaEnabled": "MFA Enabled",
+    "mobileAppHeader": "Mobile App Header",
+    "noEmployeesFound": "No employees found",
+    "noEmployeesMatch": "No employees match your search",
+    "passwordChangeRequired": "Password change required",
+    "primaryColor": "Primary Color",
+    "probation": "Probation",
+    "probationPeriod": "Probation Period",
+    "probationRestriction": "Some features are restricted during the probation period. These will be automatically enabled once probation ends.",
+    "secondaryColor": "Secondary Color",
+    "upgradeEnterpriseBranding": "Upgrade to Enterprise for Custom Branding",
+    "webhookDetails": "Webhook Details",
+    "webhookName": "Name",
+    "webhookSecret": "Secret",
+    "webhookSecretDesc": "Used to sign webhook payloads for verification",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Tasks",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Location permission is required.",
     "cameraPermission": "Camera permission is required.",
     "notificationPermission": "Notification permission is required.",
-    "tryAgain": "Please try again",
-    "somethingWentWrong": "Something went wrong"
+    "tryAgain": "Try Again",
+    "somethingWentWrong": "Something went wrong",
+    "goHome": "Go Home",
+    "technicalDetails": "Technical Details"
   },
   "activity": {
     "title": "Activity Review",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "savedReportsLocal": "Saved reports are stored locally. Persistent saved reports coming soon.",
+    "trendOverTime": "Trend Over Time",
+    "buildCustomReport": "Build Custom Report",
+    "reportName": "Report Name",
+    "reportType": "Report Type",
+    "sortBy": "Sort By",
+    "filters": "Filters",
+    "dateFrom": "Date From",
+    "dateTo": "Date To"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Failed to delete template",
+    "shiftsGenerated": "Shifts generated successfully!",
+    "failedSave": "Failed to save template"
   },
   "legal": {
     "lastUpdated": "Last updated",
@@ -1748,7 +1841,18 @@
     "enterDescription": "Enter job description",
     "postJob": "Post Job",
     "skillMatch": "skill match",
-    "noApplicants": "No applicants yet"
+    "noApplicants": "No applicants yet",
+    "departments": {
+      "frontOfHouse": "Front of House",
+      "kitchen": "Kitchen",
+      "management": "Management",
+      "reception": "Reception"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Search by name or email...",
@@ -1765,7 +1869,12 @@
     "loadError": "Failed to load employees",
     "placeholder": {
       "searchEmployees": "Search employees..."
-    }
+    },
+    "failedAddSkill": "Failed to add skill",
+    "failedVerifySkill": "Failed to verify skill",
+    "failedUpdateSkillLevel": "Failed to update skill level",
+    "failedRemoveSkill": "Failed to remove skill",
+    "loadEmployeeError": "Failed to load employee"
   },
   "integrationHub": {
     "title": "Integration Hub",

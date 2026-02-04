@@ -233,7 +233,12 @@
       "barback": "Pomocník barmana",
       "sous": "Sous Chef",
       "expeditor": "Expedítor"
-    }
+    },
+    "new": "NOVÉ",
+    "exportComingSoon": "Export čoskoro",
+    "clickToViewDetails": "Kliknite pre zobrazenie podrobností",
+    "closeEsc": "Zatvoriť (ESC)",
+    "logoPreview": "Náhľad loga"
   },
   "auth": {
     "login": "Prihlásiť sa",
@@ -448,7 +453,16 @@
     "publishSchedule": "Zverejniť rozvrh",
     "publishConfirmation": "Chystáte sa zverejniť {{count}} konceptov zmien.",
     "publishNow": "Zverejniť teraz",
-    "aiScheduleBuilder": "AI Tvorca rozvrhov"
+    "aiScheduleBuilder": "AI Tvorca rozvrhov",
+    "failedTimeOffRequest": "Nepodarilo sa spracovať žiadosť o voľno",
+    "failedShiftSwap": "Nepodarilo sa spracovať výmenu zmeny",
+    "publishButton": "Publikovať",
+    "employee": "Zamestnanec",
+    "reassign": "Preradiť",
+    "shiftReassigned": "Zmena preradená",
+    "swapRequested": "Výmena požadovaná",
+    "shiftDeleted": "Zmena vymazaná",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Sledovanie času",
@@ -661,7 +675,8 @@
     "searchSkills": "Hľadať zručnosti...",
     "skillAdded": "Zručnosť úspešne pridaná",
     "verificationRequested": "Žiadosť o overenie odoslaná",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Zoznam zamestnancov pre túto zručnosť bude čoskoro k dispozícii."
   },
   "career": {
     "title": "Kariéra",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Kontaktovať obchod",
+    "changingPassword": "Mení sa...",
+    "loadError": "Nepodarilo sa načítať nastavenia",
+    "saveOrgError": "Nepodarilo sa uložiť nastavenia organizácie",
+    "loadUserError": "Nepodarilo sa načítať údaje používateľa",
+    "loadLogsError": "Nepodarilo sa načítať záznamy o doručení",
+    "themes": {
+      "light": "Svetlý",
+      "lightDesc": "Čisté, svetlé rozhranie",
+      "dark": "Tmavý",
+      "darkDesc": "Príjemné pre oči",
+      "system": "Systémový",
+      "systemDesc": "Podľa nastavenia zariadenia"
+    },
+    "roles": {
+      "workers": "Pracovníci",
+      "workersDesc": "Bežní zamestnanci",
+      "managers": "Manažéri",
+      "managersDesc": "Vedúci tímov a supervízori",
+      "admins": "Administrátori",
+      "adminsDesc": "Administrátori s plným prístupom"
+    },
+    "features": {
+      "teamSchedules": "Tímové rozvrhy",
+      "teamSchedulesDesc": "Zobraziť rozvrhy ostatných členov tímu",
+      "internalJobs": "Interné pozície",
+      "internalJobsDesc": "Prístup k interným pracovným ponúkám",
+      "careerPaths": "Kariérne cesty",
+      "careerPathsDesc": "Zobraziť cesty kariérneho rozvoja",
+      "analytics": "Tímová analytika",
+      "analyticsDesc": "Prístup k analytike výkonnosti",
+      "peerRecognition": "Ocenenie kolegov",
+      "peerRecognitionDesc": "Posielajte a prijímajte ocenenia od kolegov"
+    },
+    "aboutEmployeeVisibilityTitle": "O viditeľnosti zamestnancov",
+    "aboutPageVisibilityDesc": "Stránky, ktoré deaktivujete, budú skryté z navigačného menu pre danú rolu.",
+    "brandName": "Názov značky",
+    "brandNameDesc": "Zobrazené v bočnom paneli a hlavičke mobilnej aplikácie",
+    "brandingDesc": "Prispôsobte vzhľad vašej Uplift skúsenosti",
+    "brandingDescFull": "Prispôsobte vzhľad na portáli aj v mobilnej aplikácii",
+    "brandingLabel": "Branding",
+    "created": "Vytvorené",
+    "dropFileUpload": "Presuňte súbor alebo kliknite pre nahratie",
+    "emailVerified": "E-mail overený",
+    "eventsToSubscribe": "Udalosti na odobieranie",
+    "livePreview": "Živý náhľad",
+    "loginScreenPreview": "Prihlasovacia obrazovka",
+    "logosImages": "Logá a obrázky",
+    "mfaEnabled": "MFA povolené",
+    "mobileAppHeader": "Hlavička mobilnej aplikácie",
+    "noEmployeesFound": "Neboli nájdení žiadni zamestnanci",
+    "noEmployeesMatch": "Žiadni zamestnanci nezodpovedajú vášmu vyhľadávaniu",
+    "passwordChangeRequired": "Vyžaduje sa zmena hesla",
+    "primaryColor": "Primárna farba",
+    "probation": "Skúšobná doba",
+    "probationPeriod": "Skúšobná doba",
+    "probationRestriction": "Niektoré funkcie sú počas skúšobnej doby obmedzené. Budú automaticky povolené po ukončení skúšobnej doby.",
+    "secondaryColor": "Sekundárna farba",
+    "upgradeEnterpriseBranding": "Inovujte na Enterprise pre vlastný branding",
+    "webhookDetails": "Podrobnosti webhooku",
+    "webhookName": "Názov",
+    "webhookSecret": "Tajný kľúč",
+    "webhookSecretDesc": "Používa sa na podpisovanie webhook payloadov na účely overenia",
+    "webhooksTitle": "Webhooky"
   },
   "tasks": {
     "title": "Úlohy",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Vyžaduje sa povolenie fotoaparátu.",
     "notificationPermission": "Vyžaduje sa povolenie notifikácií.",
     "tryAgain": "Skúste to znova",
-    "somethingWentWrong": "Niečo sa pokazilo"
+    "somethingWentWrong": "Niečo sa pokazilo",
+    "goHome": "Späť na úvod",
+    "technicalDetails": "Technické podrobnosti"
   },
   "activity": {
     "title": "Kontrola aktivít",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Vytvoriť vlastnú správu",
+    "dateFrom": "Dátum od",
+    "dateTo": "Dátum do",
+    "filters": "Filtre",
+    "reportName": "Názov správy",
+    "reportType": "Typ správy",
+    "savedReportsLocal": "Uložené správy sú uložené lokálne. Trvalé ukladanie správ bude čoskoro k dispozícii.",
+    "sortBy": "Zoradiť podľa",
+    "trendOverTime": "Trend v čase"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Nepodarilo sa vymazať šablónu",
+    "shiftsGenerated": "Zmeny boli úspešne vygenerované!",
+    "failedSave": "Nepodarilo sa uložiť šablónu"
   },
   "legal": {
     "lastUpdated": "Naposledy aktualizované",
@@ -1748,7 +1841,18 @@
     "postJob": "Zverejniť pozíciu",
     "skillMatch": "zhoda zručností",
     "noApplicants": "Zatiaľ žiadni uchádzači",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Obsluha hostí",
+      "kitchen": "Kuchyňa",
+      "management": "Manažment",
+      "reception": "Recepcia"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Hľadať podľa mena alebo e-mailu...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Nepodarilo sa pridať zručnosť",
+    "failedVerifySkill": "Nepodarilo sa overiť zručnosť",
+    "failedUpdateSkillLevel": "Nepodarilo sa aktualizovať úroveň zručnosti",
+    "failedRemoveSkill": "Nepodarilo sa odstrániť zručnosť",
+    "loadEmployeeError": "Nepodarilo sa načítať zamestnanca"
   },
   "integrationHub": {
     "title": "Centrum integrácií",

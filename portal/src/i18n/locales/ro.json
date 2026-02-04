@@ -233,7 +233,12 @@
       "barback": "Ajutor de barman",
       "sous": "Sous Chef",
       "expeditor": "Expeditor"
-    }
+    },
+    "new": "NOU",
+    "exportComingSoon": "Exportul vine în curând",
+    "clickToViewDetails": "Click pentru a vedea detaliile",
+    "closeEsc": "Închide (ESC)",
+    "logoPreview": "Previzualizare logo"
   },
   "auth": {
     "login": "Autentificare",
@@ -448,7 +453,16 @@
     "publishSchedule": "Publică programul",
     "publishConfirmation": "Sunteți pe cale să publicați {{count}} ture ciornă. Toți angajații afectați vor fi notificați.",
     "publishNow": "Publică acum",
-    "aiScheduleBuilder": "Constructor program AI"
+    "aiScheduleBuilder": "Constructor program AI",
+    "failedTimeOffRequest": "Nu s-a putut procesa cererea de concediu",
+    "failedShiftSwap": "Nu s-a putut procesa schimbul de tură",
+    "publishButton": "Publică",
+    "employee": "Angajat",
+    "reassign": "Reatribuie",
+    "shiftReassigned": "Tura a fost reatribuită",
+    "swapRequested": "Schimb solicitat",
+    "shiftDeleted": "Tura a fost ștearsă",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Pontaj",
@@ -661,7 +675,8 @@
     "searchSkills": "Caută competențe...",
     "skillAdded": "Competență adăugată cu succes",
     "verificationRequested": "Verificare solicitată",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Lista angajaților pentru această competență va fi disponibilă în curând."
   },
   "career": {
     "title": "Carieră",
@@ -811,7 +826,7 @@
     "reminderTime": "Ora memento",
     "sound": "Sunet",
     "vibration": "Vibrații",
-    "changePassword": "Schimbă parola",
+    "changePassword": "Schimbați parola",
     "twoFactorAuth": "Autentificare în doi pași",
     "biometricAuth": "Autentificare biometrică",
     "dataExport": "Exportă datele mele",
@@ -895,7 +910,7 @@
     "enable": "Activează",
     "activeSessions": "Sesiuni active",
     "manageDevices": "Administrează dispozitivele conectate",
-    "signOutOtherDevices": "Deconectează alte dispozitive",
+    "signOutOtherDevices": "Deconectați alte dispozitive",
     "thisDevice": "Acest dispozitiv",
     "revoke": "Revocă",
     "revoking": "Se revocă...",
@@ -917,14 +932,14 @@
     "preparing": "Se pregătește...",
     "dataExported": "Date exportate cu succes",
     "deleteAccountWarning": "Șterge permanent contul și toate datele asociate. Această acțiune nu poate fi anulată după perioada de grație de 30 de zile.",
-    "requestAccountDeletion": "Solicită ștergerea contului",
+    "requestAccountDeletion": "Solicitați ștergerea contului",
     "deletionScheduled": "Contul tău este programat pentru ștergere. Va fi eliminat permanent în 30 de zile.",
-    "cancelDeletion": "Anulează ștergerea",
+    "cancelDeletion": "Anulați ștergerea",
     "enterPasswordConfirm": "Introdu parola pentru confirmare",
     "deleteMyAccount": "Șterge contul meu",
     "processing": "Se procesează...",
     "webhooksIntegration": "Integrare cu sisteme externe prin callback-uri HTTP",
-    "addWebhook": "Adaugă webhook",
+    "addWebhook": "Adăugați webhook",
     "endpointUrl": "URL endpoint",
     "subscribedEvents": "Evenimente abonate",
     "successRate": "Rata de succes",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Controlează ce funcționalități poate accesa fiecare angajat",
     "searchEmployees": "Caută angajați...",
     "featureAccess": "Acces funcționalități",
-    "enableAll": "Activează toate",
-    "disableAll": "Dezactivează toate",
+    "enableAll": "Activați tot",
+    "disableAll": "Dezactivați tot",
     "aboutEmployeeVisibility": "Aceste setări controlează ce funcționalități sunt vizibile pentru fiecare angajat.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Contactați vânzările",
+    "changingPassword": "Se schimbă...",
+    "loadError": "Nu s-au putut încărca setările",
+    "saveOrgError": "Nu s-au putut salva setările organizației",
+    "loadUserError": "Nu s-au putut încărca datele utilizatorului",
+    "loadLogsError": "Nu s-au putut încărca jurnalele de livrare",
+    "themes": {
+      "light": "Luminos",
+      "lightDesc": "Interfață curată și luminoasă",
+      "dark": "Întuneric",
+      "darkDesc": "Plăcut pentru ochi",
+      "system": "Sistem",
+      "systemDesc": "Potrivește cu setările dispozitivului"
+    },
+    "roles": {
+      "workers": "Angajați",
+      "workersDesc": "Angajați obișnuiți",
+      "managers": "Manageri",
+      "managersDesc": "Lideri de echipă și supervizori",
+      "admins": "Administratori",
+      "adminsDesc": "Administratori cu acces complet"
+    },
+    "features": {
+      "teamSchedules": "Programul echipei",
+      "teamSchedulesDesc": "Vizualizați programele altor membri ai echipei",
+      "internalJobs": "Posturi interne",
+      "internalJobsDesc": "Accesați posturile interne",
+      "careerPaths": "Trasee de carieră",
+      "careerPathsDesc": "Vizualizați traseele de dezvoltare a carierei",
+      "analytics": "Analitice de echipă",
+      "analyticsDesc": "Accesați analiticele de performanță",
+      "peerRecognition": "Recunoaștere colegială",
+      "peerRecognitionDesc": "Trimiteți și primiți aprecieri de la colegi"
+    },
+    "aboutEmployeeVisibilityTitle": "Despre vizibilitatea angajaților",
+    "aboutPageVisibilityDesc": "Paginile pe care le dezactivați vor fi ascunse din meniul de navigare pentru acel rol.",
+    "brandName": "Numele mărcii",
+    "brandNameDesc": "Afișat în bara laterală și antetul aplicației mobile",
+    "brandingDesc": "Personalizează aspectul experienței tale Uplift",
+    "brandingDescFull": "Personalizează aspectul pe portal și aplicația mobilă",
+    "brandingLabel": "Branding",
+    "created": "Creat",
+    "dropFileUpload": "Trage fișierul sau click pentru încărcare",
+    "emailVerified": "Email verificat",
+    "eventsToSubscribe": "Evenimente de abonat",
+    "livePreview": "Previzualizare în direct",
+    "loginScreenPreview": "Ecranul de autentificare",
+    "logosImages": "Logo-uri și imagini",
+    "mfaEnabled": "MFA activat",
+    "mobileAppHeader": "Antetul aplicației mobile",
+    "noEmployeesFound": "Niciun angajat găsit",
+    "noEmployeesMatch": "Niciun angajat nu corespunde căutării tale",
+    "passwordChangeRequired": "Schimbare parolă necesară",
+    "primaryColor": "Culoare primară",
+    "probation": "Perioadă de probă",
+    "probationPeriod": "Perioadă de probă",
+    "probationRestriction": "Unele funcționalități sunt restricționate în perioada de probă. Acestea vor fi activate automat după încheierea perioadei de probă.",
+    "secondaryColor": "Culoare secundară",
+    "upgradeEnterpriseBranding": "Treceți la Enterprise pentru branding personalizat",
+    "webhookDetails": "Detalii webhook",
+    "webhookName": "Nume",
+    "webhookSecret": "Cheie secretă",
+    "webhookSecretDesc": "Folosit pentru a semna încărcăturile webhook pentru verificare",
+    "webhooksTitle": "Webhook-uri"
   },
   "tasks": {
     "title": "Sarcini",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Este necesară permisiunea camerei.",
     "notificationPermission": "Este necesară permisiunea pentru notificări.",
     "tryAgain": "Te rugăm să încerci din nou",
-    "somethingWentWrong": "Ceva nu a funcționat corect"
+    "somethingWentWrong": "Ceva nu a funcționat corect",
+    "goHome": "Mergi acasă",
+    "technicalDetails": "Detalii tehnice"
   },
   "activity": {
     "title": "Revizuire activitate",
@@ -1282,7 +1363,7 @@
     "attachments": "Atașamente",
     "rejectionReason": "Motiv respingere",
     "enterRejectionReason": "Introdu motivul respingerii...",
-    "confirmRejection": "Confirmă respingerea",
+    "confirmRejection": "Confirmați respingerea",
     "approve": "Aprobă",
     "reject": "Respinge",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Creează raport personalizat",
+    "dateFrom": "Data de la",
+    "dateTo": "Data până la",
+    "filters": "Filtre",
+    "reportName": "Numele raportului",
+    "reportType": "Tipul raportului",
+    "savedReportsLocal": "Rapoartele salvate sunt stocate local. Salvarea persistentă a rapoartelor va fi disponibilă în curând.",
+    "sortBy": "Sortează după",
+    "trendOverTime": "Tendință în timp"
   },
   "accessibility": {
     "menu": "Meniu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Nu s-a putut șterge șablonul",
+    "shiftsGenerated": "Turele au fost generate cu succes!",
+    "failedSave": "Nu s-a putut salva șablonul"
   },
   "legal": {
     "lastUpdated": "Ultima actualizare",
@@ -1748,7 +1841,18 @@
     "postJob": "Publică post",
     "skillMatch": "potrivire competențe",
     "noApplicants": "Niciun candidat încă",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Servicii clienți",
+      "kitchen": "Bucătărie",
+      "management": "Management",
+      "reception": "Recepție"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Caută după nume sau email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Nu s-a putut adăuga competența",
+    "failedVerifySkill": "Nu s-a putut verifica competența",
+    "failedUpdateSkillLevel": "Nu s-a putut actualiza nivelul competenței",
+    "failedRemoveSkill": "Nu s-a putut șterge competența",
+    "loadEmployeeError": "Nu s-a putut încărca angajatul"
   },
   "integrationHub": {
     "title": "Hub de integrări",

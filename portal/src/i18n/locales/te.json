@@ -233,7 +233,12 @@
       "barback": "బార్‌బ్యాక్",
       "sous": "సూ షెఫ్",
       "expeditor": "ఎక్స్‌పెడిటర్"
-    }
+    },
+    "new": "కొత్త",
+    "exportComingSoon": "ఎక్స్‌పోర్ట్ త్వరలో వస్తుంది",
+    "clickToViewDetails": "వివరాలు చూడడానికి క్లిక్ చేయండి",
+    "closeEsc": "మూసివేయండి (ESC)",
+    "logoPreview": "లోగో ప్రివ్యూ"
   },
   "auth": {
     "login": "లాగిన్",
@@ -448,7 +453,16 @@
     "publishSchedule": "షెడ్యూల్ ప్రచురించు",
     "publishConfirmation": "మీరు {{count}} డ్రాఫ్ట్ షిఫ్ట్‌లను ప్రచురించబోతున్నారు.",
     "publishNow": "ఇప్పుడే ప్రచురించు",
-    "aiScheduleBuilder": "AI షెడ్యూల్ బిల్డర్"
+    "aiScheduleBuilder": "AI షెడ్యూల్ బిల్డర్",
+    "failedTimeOffRequest": "సెలవు అభ్యర్థనను ప్రాసెస్ చేయడం విఫలమైంది",
+    "failedShiftSwap": "షిఫ్ట్ మార్పిడిని ప్రాసెస్ చేయడం విఫలమైంది",
+    "publishButton": "ప్రచురించు",
+    "employee": "ఉద్యోగి",
+    "reassign": "మళ్ళీ కేటాయించు",
+    "shiftReassigned": "షిఫ్ట్ మళ్ళీ కేటాయించబడింది",
+    "swapRequested": "మార్పిడి అభ్యర్థించబడింది",
+    "shiftDeleted": "షిఫ్ట్ తొలగించబడింది",
+    "minutes": "నిమిషం"
   },
   "timeTracking": {
     "title": "సమయ ట్రాకింగ్",
@@ -661,7 +675,8 @@
     "searchSkills": "నైపుణ్యాలు వెతకండి...",
     "skillAdded": "నైపుణ్యం విజయవంతంగా జోడించబడింది",
     "verificationRequested": "ధృవీకరణ అభ్యర్థించబడింది",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "ఈ నైపుణ్యం కోసం ఉద్యోగుల జాబితా త్వరలో వస్తుంది."
   },
   "career": {
     "title": "కెరీర్",
@@ -811,7 +826,7 @@
     "reminderTime": "రిమైండర్ సమయం",
     "sound": "సౌండ్",
     "vibration": "వైబ్రేషన్",
-    "changePassword": "పాస్‌వర్డ్ మార్చు",
+    "changePassword": "పాస్‌వర్డ్ మార్చండి",
     "twoFactorAuth": "రెండు-అంశాల ప్రమాణీకరణ",
     "biometricAuth": "బయోమెట్రిక్ ప్రమాణీకరణ",
     "dataExport": "నా డేటా ఎక్స్‌పోర్ట్ చేయి",
@@ -895,7 +910,7 @@
     "enable": "ఎనేబుల్ చేయి",
     "activeSessions": "యాక్టివ్ సెషన్లు",
     "manageDevices": "మీ లాగిన్ అయిన పరికరాలను నిర్వహించండి",
-    "signOutOtherDevices": "ఇతర పరికరాలలో సైన్ ఔట్",
+    "signOutOtherDevices": "ఇతర పరికరాల నుండి సైన్ అవుట్",
     "thisDevice": "ఈ పరికరం",
     "revoke": "రద్దు చేయి",
     "revoking": "రద్దు చేస్తోంది...",
@@ -917,14 +932,14 @@
     "preparing": "సిద్ధం చేస్తోంది...",
     "dataExported": "డేటా విజయవంతంగా ఎక్స్‌పోర్ట్ చేయబడింది",
     "deleteAccountWarning": "మీ ఖాతా మరియు అన్ని సంబంధిత డేటాను శాశ్వతంగా తొలగించండి. 30-రోజుల గ్రేస్ పీరియడ్ తర్వాత ఈ చర్యను రద్దు చేయలేరు.",
-    "requestAccountDeletion": "ఖాతా తొలగింపు అభ్యర్థించు",
+    "requestAccountDeletion": "ఖాతా తొలగింపు అభ్యర్థించండి",
     "deletionScheduled": "మీ ఖాతా తొలగింపు కోసం షెడ్యూల్ చేయబడింది. 30 రోజుల్లో ఇది శాశ్వతంగా తొలగించబడుతుంది.",
-    "cancelDeletion": "తొలగింపు రద్దు చేయి",
+    "cancelDeletion": "తొలగింపు రద్దుచేయండి",
     "enterPasswordConfirm": "నిర్ధారించడానికి మీ పాస్‌వర్డ్ నమోదు చేయండి",
     "deleteMyAccount": "నా ఖాతా తొలగించు",
     "processing": "ప్రాసెస్ చేస్తోంది...",
     "webhooksIntegration": "HTTP కాల్‌బ్యాక్‌ల ద్వారా బాహ్య సిస్టమ్‌లతో ఇంటిగ్రేట్ చేయండి",
-    "addWebhook": "వెబ్‌హుక్ జోడించు",
+    "addWebhook": "వెబ్‌హుక్ జోడించండి",
     "endpointUrl": "ఎండ్‌పాయింట్ URL",
     "subscribedEvents": "సబ్‌స్క్రైబ్ చేసిన ఈవెంట్‌లు",
     "successRate": "విజయ రేటు",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "ప్రతి ఉద్యోగి ఏ ఫీచర్‌లను యాక్సెస్ చేయగలరో నియంత్రించండి",
     "searchEmployees": "ఉద్యోగులను వెతకండి...",
     "featureAccess": "ఫీచర్ యాక్సెస్",
-    "enableAll": "అన్నీ ఎనేబుల్ చేయి",
-    "disableAll": "అన్నీ డిసేబుల్ చేయి",
+    "enableAll": "అన్నీ ప్రారంభించండి",
+    "disableAll": "అన్నీ నిలిపివేయండి",
     "aboutEmployeeVisibility": "ఈ సెట్టింగ్‌లు ప్రతి ఉద్యోగికి ఏ ఫీచర్‌లు కనిపిస్తాయో నియంత్రిస్తాయి.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "అమ్మకాలను సంప్రదించండి",
+    "changingPassword": "మారుస్తున్నాం...",
+    "loadError": "సెట్టింగ్స్ లోడ్ చేయడం విఫలమైంది",
+    "saveOrgError": "సంస్థ సెట్టింగ్స్ సేవ్ చేయడం విఫలమైంది",
+    "loadUserError": "వాడుకరు డేటా లోడ్ చేయడం విఫలమైంది",
+    "loadLogsError": "డెలివరీ లాగ్స్ లోడ్ చేయడం విఫలమైంది",
+    "themes": {
+      "light": "లైట్",
+      "lightDesc": "శుభ్రమైన, ప్రకాశవంతమైన ఇంటర్‌ఫేస్",
+      "dark": "డార్క్",
+      "darkDesc": "కళ్ళకు హాయిగా ఉంటుంది",
+      "system": "సిస్టమ్",
+      "systemDesc": "పరికర సెట్టింగ్స్‌కు సరిపోలండి"
+    },
+    "roles": {
+      "workers": "కార్మికులు",
+      "workersDesc": "సాధారణ ఉద్యోగులు",
+      "managers": "మ్యానేజర్లు",
+      "managersDesc": "టీమ్ లీడర్లు మరియు సూపర్‌వైజర్లు",
+      "admins": "అడ్మిన్లు",
+      "adminsDesc": "పూర్తి ప్రాప్యత అడ్మినిస్ట్రేటర్లు"
+    },
+    "features": {
+      "teamSchedules": "టీమ్ షెడ్యూల్స్",
+      "teamSchedulesDesc": "ఇతర టీమ్ సభ్యుల షెడ్యూల్స్ చూడండి",
+      "internalJobs": "అంతర్గత ఉద్యోగాలు",
+      "internalJobsDesc": "అంతర్గత ఉద్యోగ పోస్టింగ్స్ ప్రాప్యత",
+      "careerPaths": "కెరీర్ మార్గాలు",
+      "careerPathsDesc": "కెరీర్ అభివృద్ధి మార్గాలు చూడండి",
+      "analytics": "టీమ్ విశ్లేషణలు",
+      "analyticsDesc": "ప్రదర్శన విశ్లేషణలు ప్రాప్యత",
+      "peerRecognition": "సహోద్యోగి గుర్తింపు",
+      "peerRecognitionDesc": "సహోద్యోగులకు ప్రశంసలు పంపండి మరియు అందుకోండి"
+    },
+    "aboutEmployeeVisibilityTitle": "ఉద్యోగి కనిపించే విషయం",
+    "aboutPageVisibilityDesc": "మీరు నిష్క్రియం చేసే పేజీలు ఆ పాత్ర కోసం నావిగేషన్ మెనూ నుండి దాచబడతాయి.",
+    "brandName": "బ్రాండ్ పేరు",
+    "brandNameDesc": "సైడ్‌బార్ మరియు మొబైల్ యాప్ హెడ్డర్‌లో చూపబడుతుంది",
+    "brandingDesc": "మీ Uplift అనుభవం యొక్క రూపాన్ని అనుకూలీకరించండి",
+    "brandingDescFull": "పోర్టల్ మరియు మొబైల్ యాప్ అంతట రూపాన్ని అనుకూలీకరించండి",
+    "brandingLabel": "బ్రాండింగ్",
+    "created": "సృష్టించబడింది",
+    "dropFileUpload": "ఫైల్‌ను డ్రాప్ చేయండి లేదా అప్‌లోడ్ చేయడానికి క్లిక్ చేయండి",
+    "emailVerified": "ఇమెయిల్ ధృవీకరించబడింది",
+    "eventsToSubscribe": "సబ్‌స్క్రైబ్ చేయవలసిన ఈవెంట్లు",
+    "livePreview": "లైవ్ ప్రివ్యూ",
+    "loginScreenPreview": "లాగిన్ స్క్రీన్",
+    "logosImages": "లోగోలు మరియు చిత్రాలు",
+    "mfaEnabled": "MFA ప్రారంభించబడింది",
+    "mobileAppHeader": "మొబైల్ యాప్ హెడ్డర్",
+    "noEmployeesFound": "ఉద్యోగులు కనుగొనబడలేదు",
+    "noEmployeesMatch": "మీ అన్వేషణకు సరిపోయే ఉద్యోగులు లేరు",
+    "passwordChangeRequired": "పాస్‌వర్డ్ మార్పు అవసరం",
+    "primaryColor": "ప్రాథమిక రంగు",
+    "probation": "పరీక్షా కాలం",
+    "probationPeriod": "పరీక్షా వ్యవధి",
+    "probationRestriction": "పరీక్షా కాలంలో కొన్ని ఫీచర్లు పరిమితం చేయబడతాయి. పరీక్షా కాలం ముగియాక అవి స్వయంచాలకంగా ప్రారంభించబడతాయి.",
+    "secondaryColor": "ద్వితీయ రంగు",
+    "upgradeEnterpriseBranding": "అనుకూల బ్రాండింగ్ కోసం Enterpriseకి అప్‌గ్రేడ్ చేయండి",
+    "webhookDetails": "వెబ్‌హుక్ వివరాలు",
+    "webhookName": "పేరు",
+    "webhookSecret": "రహస్యం",
+    "webhookSecretDesc": "ధృవీకరణ కోసం వెబ్‌హుక్ పేలోడ్‌లకు సంతకం చేయడానికి ఉపయోగిస్తుంది",
+    "webhooksTitle": "వెబ్‌హుక్‌లు"
   },
   "tasks": {
     "title": "టాస్క్‌లు",
@@ -1251,8 +1330,10 @@
     "locationPermission": "స్థాన అనుమతి అవసరం.",
     "cameraPermission": "కెమెరా అనుమతి అవసరం.",
     "notificationPermission": "నోటిఫికేషన్ అనుమతి అవసరం.",
-    "tryAgain": "దయచేసి మళ్ళీ ప్రయత్నించండి",
-    "somethingWentWrong": "ఏదో తప్పు జరిగింది"
+    "tryAgain": "మళ్ళీ ప్రయత్నించండి",
+    "somethingWentWrong": "ఏదో తప్పు జరిగింది",
+    "goHome": "హోమ్‌కి వెళ్ళండి",
+    "technicalDetails": "సాంకేతిక వివరాలు"
   },
   "activity": {
     "title": "కార్యకలాప సమీక్ష",
@@ -1282,7 +1363,7 @@
     "attachments": "జోడింపులు",
     "rejectionReason": "తిరస్కరణ కారణం",
     "enterRejectionReason": "తిరస్కరణ కారణం నమోదు చేయండి...",
-    "confirmRejection": "తిరస్కరణ నిర్ధారించు",
+    "confirmRejection": "తిరస్కరణను నిర్ధారించండి",
     "approve": "ఆమోదించు",
     "reject": "తిరస్కరించు",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "అనుకూల నివేదికను రూపొందించండి",
+    "dateFrom": "తేదీ నుండి",
+    "dateTo": "తేదీ వరకు",
+    "filters": "ఫిల్టర్లు",
+    "reportName": "నివేదిక పేరు",
+    "reportType": "నివేదిక రకం",
+    "savedReportsLocal": "సేవ్ చేసిన నివేదికలు స్థానికంగా నిల్వ ఉంటాయి. శాశ్వత సేవ్ నివేదికలు త్వరలో వస్తాయి.",
+    "sortBy": "క్రమపరచు",
+    "trendOverTime": "కాలంలో ధోరణి"
   },
   "accessibility": {
     "menu": "మెనూ",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "టెంప్లేట్‌ను తొలగించడం విఫలమైంది",
+    "shiftsGenerated": "షిఫ్ట్లు విజయవంతంగా రూపొందించబడ్డాయి!",
+    "failedSave": "టెంప్లేట్‌ను సేవ్ చేయడం విఫలమైంది"
   },
   "legal": {
     "lastUpdated": "చివరిగా అప్‌డేట్ చేయబడింది",
@@ -1748,7 +1841,18 @@
     "postJob": "ఉద్యోగం పోస్ట్ చేయి",
     "skillMatch": "నైపుణ్య మ్యాచ్",
     "noApplicants": "ఇంకా దరఖాస్తుదారులు లేరు",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ఫ్రంట్ ఆఫ్ హౌస్",
+      "kitchen": "వంటగది",
+      "management": "యాజమాన్యం",
+      "reception": "రిసెప్షన్"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro ఎడిన్‌బరో",
+      "glasgow": "Grand Metro గ్లాస్గో",
+      "manchester": "Grand Metro మాన్‌చెస్టర్"
+    }
   },
   "employees": {
     "searchPlaceholder": "పేరు లేదా ఇమెయిల్ ద్వారా వెతకండి...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "నైపుణ్యాన్ని జోడించడం విఫలమైంది",
+    "failedVerifySkill": "నైపుణ్యాన్ని ధృవీకరించడం విఫలమైంది",
+    "failedUpdateSkillLevel": "నైపుణ్య స్థాయిని అప్‌డేట్ చేయడం విఫలమైంది",
+    "failedRemoveSkill": "నైపుణ్యాన్ని తొలగించడం విఫలమైంది",
+    "loadEmployeeError": "ఉద్యోగిని లోడ్ చేయడం విఫలమైంది"
   },
   "integrationHub": {
     "title": "ఇంటిగ్రేషన్ హబ్",

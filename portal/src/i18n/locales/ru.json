@@ -233,7 +233,12 @@
       "barback": "Помощник бармена",
       "sous": "Су-шеф",
       "expeditor": "Экспедитор"
-    }
+    },
+    "new": "НОВОЕ",
+    "exportComingSoon": "Экспорт скоро будет доступен",
+    "clickToViewDetails": "Нажмите, чтобы посмотреть подробности",
+    "closeEsc": "Закрыть (ESC)",
+    "logoPreview": "Предпросмотр логотипа"
   },
   "auth": {
     "login": "Войти",
@@ -448,7 +453,16 @@
     "publishSchedule": "Опубликовать расписание",
     "publishConfirmation": "Вы собираетесь опубликовать {{count}} черновых смен. Все затронутые сотрудники будут уведомлены.",
     "publishNow": "Опубликовать сейчас",
-    "aiScheduleBuilder": "Конструктор расписаний ИИ"
+    "aiScheduleBuilder": "Конструктор расписаний ИИ",
+    "failedTimeOffRequest": "Не удалось обработать запрос на отпуск",
+    "failedShiftSwap": "Не удалось обработать обмен сменами",
+    "publishButton": "Опубликовать",
+    "employee": "Сотрудник",
+    "reassign": "Переназначить",
+    "shiftReassigned": "Смена переназначена",
+    "swapRequested": "Обмен запрошен",
+    "shiftDeleted": "Смена удалена",
+    "minutes": "мин"
   },
   "timeTracking": {
     "title": "Учёт времени",
@@ -661,7 +675,8 @@
     "searchSkills": "Поиск навыков...",
     "skillAdded": "Навык успешно добавлен",
     "verificationRequested": "Подтверждение запрошено",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Список сотрудников для этого навыка скоро будет доступен."
   },
   "career": {
     "title": "Карьера",
@@ -811,7 +826,7 @@
     "reminderTime": "Время напоминания",
     "sound": "Звук",
     "vibration": "Вибрация",
-    "changePassword": "Сменить пароль",
+    "changePassword": "Изменить пароль",
     "twoFactorAuth": "Двухфакторная аутентификация",
     "biometricAuth": "Биометрическая аутентификация",
     "dataExport": "Экспорт моих данных",
@@ -924,7 +939,7 @@
     "deleteMyAccount": "Удалить мой аккаунт",
     "processing": "Обработка...",
     "webhooksIntegration": "Интеграция с внешними системами через HTTP-обратные вызовы",
-    "addWebhook": "Добавить вебхук",
+    "addWebhook": "Добавить webhook",
     "endpointUrl": "URL конечной точки",
     "subscribedEvents": "Подписанные события",
     "successRate": "Процент успеха",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Связаться с отделом продаж",
+    "changingPassword": "Изменение...",
+    "loadError": "Не удалось загрузить настройки",
+    "saveOrgError": "Не удалось сохранить настройки организации",
+    "loadUserError": "Не удалось загрузить данные пользователя",
+    "loadLogsError": "Не удалось загрузить журналы доставки",
+    "themes": {
+      "light": "Светлая",
+      "lightDesc": "Чистый, светлый интерфейс",
+      "dark": "Тёмная",
+      "darkDesc": "Легко для глаз",
+      "system": "Системная",
+      "systemDesc": "Соответствует настройкам устройства"
+    },
+    "roles": {
+      "workers": "Работники",
+      "workersDesc": "Обычные сотрудники",
+      "managers": "Руководители",
+      "managersDesc": "Лидеры команд и супервайзеры",
+      "admins": "Администраторы",
+      "adminsDesc": "Администраторы с полным доступом"
+    },
+    "features": {
+      "teamSchedules": "Расписания команды",
+      "teamSchedulesDesc": "Просмотр расписаний других членов команды",
+      "internalJobs": "Внутренние вакансии",
+      "internalJobsDesc": "Доступ к внутренним вакансиям",
+      "careerPaths": "Карьерные пути",
+      "careerPathsDesc": "Просмотр путей карьерного развития",
+      "analytics": "Аналитика команды",
+      "analyticsDesc": "Доступ к аналитике производительности",
+      "peerRecognition": "Признание коллег",
+      "peerRecognitionDesc": "Отправляйте и получайте благодарности от коллег"
+    },
+    "aboutEmployeeVisibilityTitle": "О видимости сотрудников",
+    "aboutPageVisibilityDesc": "Страницы, которые вы отключите, будут скрыты из меню навигации для этой роли.",
+    "brandName": "Название бренда",
+    "brandNameDesc": "Отображается в боковой панели и заголовке мобильного приложения",
+    "brandingDesc": "Настройте внешний вид вашего Uplift",
+    "brandingDescFull": "Настройте внешний вид портала и мобильного приложения",
+    "brandingLabel": "Брендинг",
+    "created": "Создано",
+    "dropFileUpload": "Перетащите файл или нажмите для загрузки",
+    "emailVerified": "Электронная почта подтверждена",
+    "eventsToSubscribe": "События для подписки",
+    "livePreview": "Предпросмотр в реальном времени",
+    "loginScreenPreview": "Экран входа",
+    "logosImages": "Логотипы и изображения",
+    "mfaEnabled": "MFA включена",
+    "mobileAppHeader": "Заголовок мобильного приложения",
+    "noEmployeesFound": "Сотрудники не найдены",
+    "noEmployeesMatch": "Нет сотрудников, соответствующих вашему поиску",
+    "passwordChangeRequired": "Требуется смена пароля",
+    "primaryColor": "Основной цвет",
+    "probation": "Испытательный срок",
+    "probationPeriod": "Испытательный срок",
+    "probationRestriction": "Некоторые функции ограничены в течение испытательного срока. Они будут автоматически включены по окончании испытательного срока.",
+    "secondaryColor": "Дополнительный цвет",
+    "upgradeEnterpriseBranding": "Обновите до Enterprise для пользовательского брендинга",
+    "webhookDetails": "Детали вебхука",
+    "webhookName": "Название",
+    "webhookSecret": "Секретный ключ",
+    "webhookSecretDesc": "Используется для подписи полезных нагрузок вебхука для верификации",
+    "webhooksTitle": "Вебхуки"
   },
   "tasks": {
     "title": "Задачи",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Требуется разрешение на камеру.",
     "notificationPermission": "Требуется разрешение на уведомления.",
     "tryAgain": "Попробуйте снова",
-    "somethingWentWrong": "Что-то пошло не так"
+    "somethingWentWrong": "Что-то пошло не так",
+    "goHome": "На главную",
+    "technicalDetails": "Технические детали"
   },
   "activity": {
     "title": "Обзор активности",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Создать пользовательский отчёт",
+    "dateFrom": "Дата с",
+    "dateTo": "Дата по",
+    "filters": "Фильтры",
+    "reportName": "Название отчёта",
+    "reportType": "Тип отчёта",
+    "savedReportsLocal": "Сохранённые отчёты хранятся локально. Постоянное хранение отчётов скоро будет доступно.",
+    "sortBy": "Сортировать по",
+    "trendOverTime": "Тренд во времени"
   },
   "accessibility": {
     "menu": "Меню",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Не удалось удалить шаблон",
+    "shiftsGenerated": "Смены успешно сгенерированы!",
+    "failedSave": "Не удалось сохранить шаблон"
   },
   "legal": {
     "lastUpdated": "Последнее обновление",
@@ -1748,7 +1841,18 @@
     "postJob": "Опубликовать вакансию",
     "skillMatch": "соответствие навыков",
     "noApplicants": "Пока нет кандидатов",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Зал обслуживания",
+      "kitchen": "Кухня",
+      "management": "Управление",
+      "reception": "Ресепшен"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Эдинбург",
+      "glasgow": "Grand Metro Глазго",
+      "manchester": "Grand Metro Манчестер"
+    }
   },
   "employees": {
     "searchPlaceholder": "Поиск по имени или email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Не удалось добавить навык",
+    "failedVerifySkill": "Не удалось подтвердить навык",
+    "failedUpdateSkillLevel": "Не удалось обновить уровень навыка",
+    "failedRemoveSkill": "Не удалось удалить навык",
+    "loadEmployeeError": "Не удалось загрузить сотрудника"
   },
   "integrationHub": {
     "title": "Центр интеграций",

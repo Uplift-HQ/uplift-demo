@@ -233,7 +233,12 @@
       "barback": "바백",
       "sous": "수 셰프",
       "expeditor": "익스페디터"
-    }
+    },
+    "new": "새로운",
+    "exportComingSoon": "내보내기 곧 제공",
+    "clickToViewDetails": "세부 정보를 보려면 클릭하세요",
+    "closeEsc": "닫기 (ESC)",
+    "logoPreview": "로고 미리보기"
   },
   "auth": {
     "login": "로그인",
@@ -448,7 +453,16 @@
     "publishSchedule": "일정 게시",
     "publishConfirmation": "{{count}}개의 초안 근무를 게시하려 합니다. 모든 관련 직원에게 알림이 전송됩니다.",
     "publishNow": "지금 게시",
-    "aiScheduleBuilder": "AI 일정 빌더"
+    "aiScheduleBuilder": "AI 일정 빌더",
+    "failedTimeOffRequest": "휴가 요청 처리 실패",
+    "failedShiftSwap": "근무 교환 처리 실패",
+    "publishButton": "게시",
+    "employee": "직원",
+    "reassign": "재배정",
+    "shiftReassigned": "근무가 재배정되었습니다",
+    "swapRequested": "교환이 요청되었습니다",
+    "shiftDeleted": "근무가 삭제되었습니다",
+    "minutes": "분"
   },
   "timeTracking": {
     "title": "근태 관리",
@@ -661,7 +675,8 @@
     "searchSkills": "스킬 검색...",
     "skillAdded": "스킬이 추가되었습니다",
     "verificationRequested": "인증이 요청되었습니다",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "이 스킬의 직원 목록은 곧 제공될 예정입니다."
   },
   "career": {
     "title": "경력",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "영업팀 연락",
+    "changingPassword": "변경 중...",
+    "loadError": "설정 로드 실패",
+    "saveOrgError": "조직 설정 저장 실패",
+    "loadUserError": "사용자 데이터 로드 실패",
+    "loadLogsError": "로그 로드 실패",
+    "themes": {
+      "light": "밝은",
+      "lightDesc": "깔끔하고 밝은 인터페이스",
+      "dark": "어두운",
+      "darkDesc": "눈에 편안한",
+      "system": "시스템",
+      "systemDesc": "기기 설정 따르기"
+    },
+    "roles": {
+      "workers": "직원",
+      "workersDesc": "일반 직원",
+      "managers": "관리자",
+      "managersDesc": "팀 리더 및 감독자",
+      "admins": "관리자",
+      "adminsDesc": "전체 접근 권한"
+    },
+    "features": {
+      "teamSchedules": "팀 일정",
+      "teamSchedulesDesc": "팀원 일정 보기",
+      "internalJobs": "내부 채용",
+      "internalJobsDesc": "내부 공고 접근",
+      "careerPaths": "경력 경로",
+      "careerPathsDesc": "개발 경로 보기",
+      "analytics": "팀 분석",
+      "analyticsDesc": "성과 분석 접근",
+      "peerRecognition": "동료 인정",
+      "peerRecognitionDesc": "칭찬 보내기 및 받기"
+    },
+    "aboutEmployeeVisibilityTitle": "직원 가시성 정보",
+    "aboutPageVisibilityDesc": "비활성화한 페이지는 해당 역할의 탐색 메뉴에서 숨겨집니다.",
+    "brandName": "브랜드 이름",
+    "brandNameDesc": "사이드바 및 모바일 앱 헤더에 표시됩니다",
+    "brandingDesc": "Uplift 경험의 룩앵필을 맞춤 설정하세요",
+    "brandingDescFull": "포털 및 모바일 앱 전반의 룩앵필을 맞춤 설정하세요",
+    "brandingLabel": "브랜딩",
+    "created": "생성됨",
+    "dropFileUpload": "파일을 드롭하거나 클릭하여 업로드",
+    "emailVerified": "이메일 확인됨",
+    "eventsToSubscribe": "구독할 이벤트",
+    "livePreview": "실시간 미리보기",
+    "loginScreenPreview": "로그인 화면",
+    "logosImages": "로고 및 이미지",
+    "mfaEnabled": "MFA 활성화됨",
+    "mobileAppHeader": "모바일 앱 헤더",
+    "noEmployeesFound": "직원을 찾을 수 없습니다",
+    "noEmployeesMatch": "검색과 일치하는 직원이 없습니다",
+    "passwordChangeRequired": "비밀번호 변경 필요",
+    "primaryColor": "기본 색상",
+    "probation": "수습 기간",
+    "probationPeriod": "수습 기간",
+    "probationRestriction": "수습 기간 동안 일부 기능이 제한됩니다. 수습 기간이 끝나면 자동으로 활성화됩니다.",
+    "secondaryColor": "보조 색상",
+    "upgradeEnterpriseBranding": "맞춤 브랜딩을 위해 엔터프라이즈로 업그레이드하세요",
+    "webhookDetails": "웹훅 세부 정보",
+    "webhookName": "이름",
+    "webhookSecret": "비밀 키",
+    "webhookSecretDesc": "검증을 위해 웹훅 페이로드에 서명하는 데 사용됩니다",
+    "webhooksTitle": "웹훅"
   },
   "tasks": {
     "title": "업무",
@@ -1251,8 +1330,10 @@
     "locationPermission": "위치 권한이 필요합니다.",
     "cameraPermission": "카메라 권한이 필요합니다.",
     "notificationPermission": "알림 권한이 필요합니다.",
-    "tryAgain": "다시 시도해 주세요",
-    "somethingWentWrong": "문제가 발생했습니다"
+    "tryAgain": "다시 시도",
+    "somethingWentWrong": "문제가 발생했습니다",
+    "goHome": "홈으로",
+    "technicalDetails": "기술적 세부사항"
   },
   "activity": {
     "title": "활동 검토",
@@ -1282,7 +1363,7 @@
     "attachments": "첨부파일",
     "rejectionReason": "거절 사유",
     "enterRejectionReason": "거절 사유를 입력하세요...",
-    "confirmRejection": "거절 확인",
+    "confirmRejection": "거부 확인",
     "approve": "승인",
     "reject": "거절",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "맞춤 보고서 작성",
+    "dateFrom": "시작 날짜",
+    "dateTo": "종료 날짜",
+    "filters": "필터",
+    "reportName": "보고서 이름",
+    "reportType": "보고서 유형",
+    "savedReportsLocal": "저장된 보고서는 로컬에 저장됩니다. 영구 저장 기능은 곧 제공될 예정입니다.",
+    "sortBy": "정렬 기준",
+    "trendOverTime": "시간별 추세"
   },
   "accessibility": {
     "menu": "메뉴",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "템플릿 삭제 실패",
+    "shiftsGenerated": "근무가 성공적으로 생성되었습니다!",
+    "failedSave": "템플릿 저장 실패"
   },
   "legal": {
     "lastUpdated": "최종 업데이트",
@@ -1748,7 +1841,18 @@
     "postJob": "채용 공고 게시",
     "skillMatch": "스킬 매칭",
     "noApplicants": "아직 지원자가 없습니다",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "홀 서비스",
+      "kitchen": "주방",
+      "management": "관리",
+      "reception": "리셉션"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro 에든버러",
+      "glasgow": "Grand Metro 글래스고",
+      "manchester": "Grand Metro 맨체스터"
+    }
   },
   "employees": {
     "searchPlaceholder": "이름 또는 이메일로 검색...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "기술 추가 실패",
+    "failedVerifySkill": "검증 실패",
+    "failedUpdateSkillLevel": "레벨 업데이트 실패",
+    "failedRemoveSkill": "기술 제거 실패",
+    "loadEmployeeError": "직원을 불러오지 못했습니다"
   },
   "integrationHub": {
     "title": "연동 허브",

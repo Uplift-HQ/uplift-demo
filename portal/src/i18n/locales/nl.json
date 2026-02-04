@@ -233,7 +233,12 @@
       "barback": "Bar-assistent",
       "sous": "Sous-chef",
       "expeditor": "Expeditor"
-    }
+    },
+    "new": "NIEUW",
+    "exportComingSoon": "Export binnenkort beschikbaar",
+    "clickToViewDetails": "Klik om details te bekijken",
+    "closeEsc": "Sluiten (ESC)",
+    "logoPreview": "Logo-voorbeeld"
   },
   "auth": {
     "login": "Inloggen",
@@ -448,7 +453,16 @@
     "publishSchedule": "Rooster publiceren",
     "publishConfirmation": "U staat op het punt {{count}} conceptdienst(en) te publiceren. Alle betrokken medewerkers worden geïnformeerd.",
     "publishNow": "Nu publiceren",
-    "aiScheduleBuilder": "AI Roosterbouwer"
+    "aiScheduleBuilder": "AI Roosterbouwer",
+    "failedTimeOffRequest": "Verlofaanvraag verwerken mislukt",
+    "failedShiftSwap": "Dienstwissel verwerken mislukt",
+    "publishButton": "Publiceren",
+    "employee": "Medewerker",
+    "reassign": "Opnieuw toewijzen",
+    "shiftReassigned": "Dienst opnieuw toegewezen",
+    "swapRequested": "Ruil aangevraagd",
+    "shiftDeleted": "Dienst verwijderd",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Tijdregistratie",
@@ -661,7 +675,8 @@
     "searchSkills": "Vaardigheden zoeken...",
     "skillAdded": "Vaardigheid succesvol toegevoegd",
     "verificationRequested": "Verificatie aangevraagd",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "De medewerkerslijst voor deze vaardigheid komt binnenkort."
   },
   "career": {
     "title": "Carrière",
@@ -895,7 +910,7 @@
     "enable": "Inschakelen",
     "activeSessions": "Actieve sessies",
     "manageDevices": "Beheer je ingelogde apparaten",
-    "signOutOtherDevices": "Andere apparaten uitloggen",
+    "signOutOtherDevices": "Andere apparaten afmelden",
     "thisDevice": "Dit apparaat",
     "revoke": "Intrekken",
     "revoking": "Intrekken...",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Contact verkoop",
+    "changingPassword": "Wijzigen...",
+    "loadError": "Instellingen laden mislukt",
+    "saveOrgError": "Organisatie-instellingen opslaan mislukt",
+    "loadUserError": "Gebruikersgegevens laden mislukt",
+    "loadLogsError": "Logboeken laden mislukt",
+    "themes": {
+      "light": "Licht",
+      "lightDesc": "Schone, heldere interface",
+      "dark": "Donker",
+      "darkDesc": "Rustgevend voor de ogen",
+      "system": "Systeem",
+      "systemDesc": "Apparaatinstellingen volgen"
+    },
+    "roles": {
+      "workers": "Medewerkers",
+      "workersDesc": "Reguliere medewerkers",
+      "managers": "Managers",
+      "managersDesc": "Teamleiders en supervisors",
+      "admins": "Beheerders",
+      "adminsDesc": "Volledige toegang"
+    },
+    "features": {
+      "teamSchedules": "Teamroosters",
+      "teamSchedulesDesc": "Roosters van teamleden bekijken",
+      "internalJobs": "Interne vacatures",
+      "internalJobsDesc": "Interne vacatures bekijken",
+      "careerPaths": "Loopbaanpaden",
+      "careerPathsDesc": "Ontwikkelingspaden bekijken",
+      "analytics": "Teamanalyse",
+      "analyticsDesc": "Prestatieanalyses bekijken",
+      "peerRecognition": "Collegawaardering",
+      "peerRecognitionDesc": "Complimenten sturen en ontvangen"
+    },
+    "aboutEmployeeVisibilityTitle": "Over medewerkerzichtbaarheid",
+    "aboutPageVisibilityDesc": "Pagina’s die u uitschakelt, worden verborgen in het navigatiemenu voor die rol.",
+    "brandName": "Merknaam",
+    "brandNameDesc": "Weergegeven in de zijbalk en de header van de mobiele app",
+    "brandingDesc": "Pas het uiterlijk van uw Uplift-ervaring aan",
+    "brandingDescFull": "Pas het uiterlijk van het portaal en de mobiele app aan",
+    "brandingLabel": "Huisstijl",
+    "created": "Aangemaakt",
+    "dropFileUpload": "Sleep een bestand of klik om te uploaden",
+    "emailVerified": "E-mail geverifieerd",
+    "eventsToSubscribe": "Gebeurtenissen om op te abonneren",
+    "livePreview": "Live voorbeeld",
+    "loginScreenPreview": "Inlogscherm",
+    "logosImages": "Logo’s en afbeeldingen",
+    "mfaEnabled": "MFA ingeschakeld",
+    "mobileAppHeader": "Header van de mobiele app",
+    "noEmployeesFound": "Geen medewerkers gevonden",
+    "noEmployeesMatch": "Geen medewerkers komen overeen met uw zoekopdracht",
+    "passwordChangeRequired": "Wachtwoordwijziging vereist",
+    "primaryColor": "Primaire kleur",
+    "probation": "Proeftijd",
+    "probationPeriod": "Proeftijd",
+    "probationRestriction": "Sommige functies zijn beperkt tijdens de proeftijd. Deze worden automatisch ingeschakeld na afloop van de proeftijd.",
+    "secondaryColor": "Secundaire kleur",
+    "upgradeEnterpriseBranding": "Upgrade naar Enterprise voor aangepaste huisstijl",
+    "webhookDetails": "Webhook-details",
+    "webhookName": "Naam",
+    "webhookSecret": "Geheim",
+    "webhookSecretDesc": "Wordt gebruikt om webhook-payloads te ondertekenen ter verificatie",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Taken",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Locatietoestemming is vereist.",
     "cameraPermission": "Cameratoestemming is vereist.",
     "notificationPermission": "Meldingstoestemming is vereist.",
-    "tryAgain": "Probeer het opnieuw",
-    "somethingWentWrong": "Er ging iets mis"
+    "tryAgain": "Opnieuw proberen",
+    "somethingWentWrong": "Er is iets misgegaan",
+    "goHome": "Startpagina",
+    "technicalDetails": "Technische details"
   },
   "activity": {
     "title": "Activiteitsoverzicht",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Aangepast rapport maken",
+    "dateFrom": "Datum van",
+    "dateTo": "Datum tot",
+    "filters": "Filters",
+    "reportName": "Rapportnaam",
+    "reportType": "Rapporttype",
+    "savedReportsLocal": "Opgeslagen rapporten worden lokaal bewaard. Permanente opslag komt binnenkort.",
+    "sortBy": "Sorteren op",
+    "trendOverTime": "Trend in de tijd"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Sjabloon verwijderen mislukt",
+    "shiftsGenerated": "Diensten succesvol gegenereerd!",
+    "failedSave": "Sjabloon opslaan mislukt"
   },
   "legal": {
     "lastUpdated": "Laatst bijgewerkt",
@@ -1748,7 +1841,18 @@
     "postJob": "Vacature plaatsen",
     "skillMatch": "vaardigheidsmatch",
     "noApplicants": "Nog geen sollicitanten",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Bediening",
+      "kitchen": "Keuken",
+      "management": "Management",
+      "reception": "Receptie"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Zoeken op naam of e-mail...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Vaardigheid toevoegen mislukt",
+    "failedVerifySkill": "Verificatie mislukt",
+    "failedUpdateSkillLevel": "Niveau bijwerken mislukt",
+    "failedRemoveSkill": "Vaardigheid verwijderen mislukt",
+    "loadEmployeeError": "Kan medewerker niet laden"
   },
   "integrationHub": {
     "title": "Integratie-hub",

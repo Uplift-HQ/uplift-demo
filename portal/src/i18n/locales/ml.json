@@ -233,7 +233,12 @@
       "barback": "ബാർബാക്ക്",
       "sous": "സൂ ഷെഫ്",
       "expeditor": "എക്സ്പെഡിറ്റർ"
-    }
+    },
+    "exportComingSoon": "എക്സ്പോര്ട്ട് ഉടൻ വരുന്നു",
+    "new": "പുതിയത്",
+    "clickToViewDetails": "വിശദാംശങ്ങൾ കാണാൻ ക്ലിക്ക് ചെയ്യുക",
+    "closeEsc": "അടയ്ക്കുക (ESC)",
+    "logoPreview": "ലോഗോ പ്രിവ്യൂ"
   },
   "auth": {
     "login": "ലോഗിൻ",
@@ -448,7 +453,16 @@
     "publishSchedule": "ഷെഡ്യൂൾ പ്രസിദ്ധീകരിക്കുക",
     "publishConfirmation": "{{count}} ഡ്രാഫ്റ്റ് ഷിഫ്റ്റുകൾ പ്രസിദ്ധീകരിക്കാൻ പോകുന്നു.",
     "publishNow": "ഇപ്പോൾ പ്രസിദ്ധീകരിക്കുക",
-    "aiScheduleBuilder": "AI ഷെഡ്യൂൾ ബിൽഡർ"
+    "aiScheduleBuilder": "AI ഷെഡ്യൂൾ ബിൽഡർ",
+    "failedShiftSwap": "ഷിഫ്റ്റ് സ്വാപ്പ് പ്രോസസ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "failedTimeOffRequest": "ടൈം-ഓഫ് അഭ്യര്ത്ഥന പ്രോസസ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "publishButton": "പ്രസിദ്ധീകരിക്കുക",
+    "employee": "ജീവനക്കാരൻ",
+    "reassign": "പുനർനിയമിക്കുക",
+    "shiftReassigned": "ഷിഫ്റ്റ് പുനർനിയമിച്ചു",
+    "swapRequested": "കൈമാറ്റം അഭ്യർത്ഥിച്ചു",
+    "shiftDeleted": "ഷിഫ്റ്റ് ഇല്ലാതാക്കി",
+    "minutes": "മിനിറ്റ്"
   },
   "timeTracking": {
     "title": "സമയ ട്രാക്കിംഗ്",
@@ -661,7 +675,8 @@
     "searchSkills": "കഴിവുകൾ തിരയുക...",
     "skillAdded": "കഴിവ് വിജയകരമായി ചേർത്തു",
     "verificationRequested": "പരിശോധന അഭ്യർത്ഥിച്ചു",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "ഈ സ്കില്ലിനുള്ള ഉദ്യോഗസ്ഥ ലിസ്റ്റിംഗ് ഉടൻ വരും."
   },
   "career": {
     "title": "കരിയർ",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "changingPassword": "മാറ്റുന്നു...",
+    "contactSales": "വിൽപന വിഭാഗത്തെ സംബന്ധിക്കുക",
+    "features": {
+      "analytics": "ടീം അനാലിറ്റിക്സ്",
+      "analyticsDesc": "പ്രകടന അനാലിറ്റിക്സ് ആക്സസ് ചെയ്യുക",
+      "careerPaths": "കരിയര്‌ പാത്തുകൾ",
+      "careerPathsDesc": "കരിയര്‌ വികസന പാത്തുകൾ കാണുക",
+      "internalJobs": "ആഭ്യന്തര ജോലികൾ",
+      "internalJobsDesc": "ആഭ്യന്തര ജോലി പോസ്റ്റിംഗുകൾ ആക്സസ് ചെയ്യുക",
+      "peerRecognition": "പിയര്‌ റെക്കഗ്നിഷൻ",
+      "peerRecognitionDesc": "പിയര്‌ കുഡോസ് അയക്കുകയും സ്വീകരിക്കുകയും ചെയ്യുക",
+      "teamSchedules": "ടീം ഷെഡ്യൂളുകൾ",
+      "teamSchedulesDesc": "മറ്റ് ടീം അംഗങ്ങളുടെ ഷെഡ്യൂളുകൾ കാണുക"
+    },
+    "loadError": "സെറ്റിംഗ്സ് ലോഡ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "loadLogsError": "ഡെലിവറി ലോഗുകൾ ലോഡ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "loadUserError": "ഉപയോക്താവിന്റെ ഡാറ്റ ലോഡ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "roles": {
+      "admins": "അഡ്മിന്‌മാര്",
+      "adminsDesc": "പൂര്ണ്ണ ആക്സസ് അഡ്മിനിസ്ട്രേറ്റര്‌മാര്",
+      "managers": "മാനേജര്‌മാര്",
+      "managersDesc": "ടീം ലീഡുകളും സൂപ്പര്‌വൈസര്‌മാരും",
+      "workers": "തൊഴിലാളികൾ",
+      "workersDesc": "സാധാരണ ജീവനക്കാര്"
+    },
+    "saveOrgError": "സംഘടനാ സെറ്റിംഗ്സ് സേവ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "themes": {
+      "dark": "ഡാര്‌ക്ക്",
+      "darkDesc": "കണ്ണുകൾക്ക് സുഖകരം",
+      "light": "ലൈറ്റ്",
+      "lightDesc": "ക്ലീൻ, പ്രകാശമാൻ ഇന്റര്‌ഫേസ്",
+      "system": "സിസ്റ്റം",
+      "systemDesc": "ഉപകരണ സെറ്റിംഗ്സുമായി ഒത്തുപെടുക"
+    },
+    "aboutEmployeeVisibilityTitle": "ഉദ്യോഗസ്ഥ ദൃശ്യതയെക്കുറിച്ച്",
+    "aboutPageVisibilityDesc": "നിങ്ങൾ നിഷ്ക്രിയമാക്കുന്ന പേജുകൾ ആ റോളിന്റെ നാവിഗേഷൻ മെനുവിൽ നിന്ന് മറയ്ക്കപ്പെടും.",
+    "brandName": "ബ്രാന്റ് പേര്",
+    "brandNameDesc": "സൈഡ്ബാറിലും മൊബൈൽ ആപ്പ് ഹെഡ്ഡറിലും പ്രദർശിപ്പിക്കുന്നു",
+    "brandingDesc": "നിങ്ങളുടെ Uplift അനുഭവത്തിന്റെ രൂപം കസ്റ്റമൈസ് ചെയ്യുക",
+    "brandingDescFull": "പോർട്ടലിലും മൊബൈൽ ആപ്പിലും രൂപം കസ്റ്റമൈസ് ചെയ്യുക",
+    "brandingLabel": "ബ്രാൻഡിംഗ്",
+    "created": "സൃഷ്ടിച്ചു",
+    "dropFileUpload": "ഫയൽ ഡ്രോപ്പ് ചെയ്യുക അല്ലെങ്കിൽ അപ്‌ലോഡ് ചെയ്യാൻ ക്ലിക്ക് ചെയ്യുക",
+    "emailVerified": "ഇമെയിൽ സ്ഥിരീകരിച്ചു",
+    "eventsToSubscribe": "സബ്സ്‌ക്രൈബ് ചെയ്യാനുള്ള ഇവന്റുകൾ",
+    "livePreview": "ലൈവ് പ്രിവ്യൂ",
+    "loginScreenPreview": "ലോഗിൻ സ്ക്രീൻ",
+    "logosImages": "ലോഗോകളും ചിത്രങ്ങളും",
+    "mfaEnabled": "MFA സക്രിയമാക്കി",
+    "mobileAppHeader": "മൊബൈൽ ആപ്പ് ഹെഡ്ഡർ",
+    "noEmployeesFound": "ഉദ്യോഗസ്ഥരെ കണ്ടെത്തിയില്ല",
+    "noEmployeesMatch": "നിങ്ങളുടെ തിരയലുമായി ഒരു ഉദ്യോഗസ്ഥനും പൊരുത്തപ്പെടുന്നില്ല",
+    "passwordChangeRequired": "പാസ്‌വേഡ് മാറ്റം ആവശ്യമാണ്",
+    "primaryColor": "പ്രാഥമിക നിറം",
+    "probation": "പ്രൊബേഷൻ",
+    "probationPeriod": "പ്രൊബേഷൻ കാലയളവ്",
+    "probationRestriction": "പ്രൊബേഷൻ കാലയളവിൽ ചില ഫീച്ചറുകൾ നിയന്ത്രിതമാണ്. പ്രൊബേഷൻ കഴിയുമ്പോൾ അവ സ്വയമേവ സക്രിയമാകും.",
+    "secondaryColor": "ദ്വിതീയ നിറം",
+    "upgradeEnterpriseBranding": "കസ്റ്റം ബ്രാൻഡിംഗിനായി എന്റർപ്രൈസിലേക്ക് അപ്‌ഗ്രേഡ് ചെയ്യുക",
+    "webhookDetails": "Webhook വിവരങ്ങൾ",
+    "webhookName": "പേര്",
+    "webhookSecret": "രഹസ്യം",
+    "webhookSecretDesc": "സ്ഥിരീകരണത്തിനായി webhook പേലോഡുകൾ സൈൻ ചെയ്യാൻ ഉപയോഗിക്കുന്നു",
+    "webhooksTitle": "വെബ്‌ഹുക്കുകൾ"
   },
   "tasks": {
     "title": "ടാസ്‌ക്കുകൾ",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "ക്യാമറ അനുമതി ആവശ്യമാണ്.",
     "notificationPermission": "അറിയിപ്പ് അനുമതി ആവശ്യമാണ്.",
     "tryAgain": "വീണ്ടും ശ്രമിക്കുക",
-    "somethingWentWrong": "എന്തോ കുഴപ്പം സംഭവിച്ചു"
+    "somethingWentWrong": "എന്തോ കുഴപ്പം സംഭവിച്ചു",
+    "goHome": "ഹോം പേജിലേക്ക് പോകുക",
+    "technicalDetails": "ടെക്നിക്കൽ വിവരങ്ങൾ"
   },
   "activity": {
     "title": "ആക്ടിവിറ്റി അവലോകനം",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "കസ്റ്റം റിപ്പോർട്ട് നിർമ്മിക്കുക",
+    "dateFrom": "തീയതി മുതൽ",
+    "dateTo": "തീയതി വരെ",
+    "filters": "ഫിൽട്ടറുകൾ",
+    "reportName": "റിപ്പോർട്ടിന്റെ പേര്",
+    "reportType": "റിപ്പോർട്ട് തരം",
+    "savedReportsLocal": "സേവ് ചെയ്ത റിപ്പോർട്ടുകൾ ലോക്കലായി സൂക്ഷിക്കുന്നു. സ്ഥിരമായി സേവ് ചെയ്യൽ ഉടൻ വരും.",
+    "sortBy": "ക്രമീകരിക്കുക",
+    "trendOverTime": "കാലക്രമേണയുള്ള ട്രെൻഡ്"
   },
   "accessibility": {
     "menu": "മെനു",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "ടെംപ്ലേറ്റ് നീക്കം ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "failedSave": "ടെംപ്ലേറ്റ് സേവ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "shiftsGenerated": "ഷിഫ്റ്റുകൾ വിജയകരമായി ജനറേറ്റ് ചെയ്തു!"
   },
   "legal": {
     "lastUpdated": "അവസാനം അപ്ഡേറ്റ് ചെയ്തത്",
@@ -1748,7 +1841,18 @@
     "postJob": "ജോലി പോസ്റ്റ് ചെയ്യുക",
     "skillMatch": "കഴിവ് പൊരുത്തം",
     "noApplicants": "ഇതുവരെ അപേക്ഷകർ ഇല്ല",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ഫ്രണ്ട് ഓഫ് ഹൗസ്",
+      "kitchen": "അടുക്കള",
+      "management": "മാനേജ്മെന്റ്",
+      "reception": "റിസപ്ഷൻ"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro എഡിൻബറോ",
+      "glasgow": "Grand Metro ഗ്ലാസ്ഗോ",
+      "manchester": "Grand Metro മാന്ചെസ്റ്റർ"
+    }
   },
   "employees": {
     "searchPlaceholder": "പേരോ ഇമെയിലോ ഉപയോഗിച്ച് തിരയുക...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "കഴിവ് ചേര്ക്കാൻ പരാജയപ്പെട്ടു",
+    "failedRemoveSkill": "കഴിവ് നീക്കം ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "failedUpdateSkillLevel": "കഴിവ് ലെവൽ അപ്‌ഡേറ്റ് ചെയ്യാൻ പരാജയപ്പെട്ടു",
+    "failedVerifySkill": "കഴിവ് സ്ഥിരീകരിക്കാൻ പരാജയപ്പെട്ടു",
+    "loadEmployeeError": "ഉദ്യോഗസ്ഥനെ ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല"
   },
   "integrationHub": {
     "title": "ഇന്റഗ്രേഷൻ ഹബ്",

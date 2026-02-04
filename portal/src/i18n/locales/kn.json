@@ -233,7 +233,12 @@
       "barback": "ಬಾರ್‌ಬ್ಯಾಕ್",
       "sous": "ಸೂ ಶೆಫ್",
       "expeditor": "ಎಕ್ಸ್‌ಪೆಡಿಟರ್"
-    }
+    },
+    "new": "ಹೊಸ",
+    "exportComingSoon": "ರಫ್ತು ಶೀಘ್ರದಲ್ಲೇ",
+    "clickToViewDetails": "ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+    "closeEsc": "ಮುಚ್ಚಿರಿ (ESC)",
+    "logoPreview": "ಲೋಗೋ ಪೂರ್ವವೀಕ್ಷಣೆ"
   },
   "auth": {
     "login": "ಲಾಗಿನ್",
@@ -448,7 +453,16 @@
     "publishSchedule": "ವೇಳಾಪಟ್ಟಿ ಪ್ರಕಟಿಸಿ",
     "publishConfirmation": "ನೀವು {{count}} ಕರಡು ಶಿಫ್ಟ್‌ಗಳನ್ನು ಪ್ರಕಟಿಸಲಿದ್ದೀರಿ.",
     "publishNow": "ಈಗ ಪ್ರಕಟಿಸಿ",
-    "aiScheduleBuilder": "AI ವೇಳಾಪಟ್ಟಿ ಬಿಲ್ಡರ್"
+    "aiScheduleBuilder": "AI ವೇಳಾಪಟ್ಟಿ ಬಿಲ್ಡರ್",
+    "failedTimeOffRequest": "ರಜೆ ವಿನಂತಿ ಪ್ರಕ್ರಿಯೆ ವಿಫಲ",
+    "failedShiftSwap": "ಶಿಫ್ಟ್ ವಿನಿಮಯ ಪ್ರಕ್ರಿಯೆ ವಿಫಲ",
+    "publishButton": "ಪ್ರಕಟಿಸಿ",
+    "employee": "ಉದ್ಯೋಗಿ",
+    "reassign": "ಮರುನಿಯೋಜಿಸಿ",
+    "shiftReassigned": "ಶಿಫ್ಟ್ ಮರುನಿಯೋಜಿಸಲಾಗಿದೆ",
+    "swapRequested": "ವಿನಿಮಯ ವಿನಂತಿಸಲಾಗಿದೆ",
+    "shiftDeleted": "ಶಿಫ್ಟ್ ಅಳಿಸಲಾಗಿದೆ",
+    "minutes": "ನಿಮಿಷ"
   },
   "timeTracking": {
     "title": "ಸಮಯ ಟ್ರ್ಯಾಕಿಂಗ್",
@@ -661,7 +675,8 @@
     "searchSkills": "ಕೌಶಲ್ಯಗಳನ್ನು ಹುಡುಕಿ...",
     "skillAdded": "ಕೌಶಲ್ಯ ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ",
     "verificationRequested": "ಪರಿಶೀಲನೆ ವಿನಂತಿಸಲಾಗಿದೆ",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "ಈ ಕೌಶಲ್ಯಕ್ಕಾಗಿ ಉದ್ಯೋಗಿ ಪಟ್ಟಿ ಶೀಘ್ರದಲ್ಲಿ ಬರುತ್ತದೆ."
   },
   "career": {
     "title": "ವೃತ್ತಿಜೀವನ",
@@ -895,7 +910,7 @@
     "enable": "ಸಕ್ರಿಯಗೊಳಿಸಿ",
     "activeSessions": "ಸಕ್ರಿಯ ಸೆಶನ್‌ಗಳು",
     "manageDevices": "ನಿಮ್ಮ ಲಾಗಿನ್ ಸಾಧನಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
-    "signOutOtherDevices": "ಇತರ ಸಾಧನಗಳಿಂದ ಸೈನ್ ಔಟ್ ಮಾಡಿ",
+    "signOutOtherDevices": "ಇತರ ಸಾಧನಗಳಿಂದ ಸೈನ್ ಔಟ್",
     "thisDevice": "ಈ ಸಾಧನ",
     "revoke": "ರದ್ದುಮಾಡಿ",
     "revoking": "ರದ್ದುಮಾಡಲಾಗುತ್ತಿದೆ...",
@@ -924,7 +939,7 @@
     "deleteMyAccount": "ನನ್ನ ಖಾತೆ ಅಳಿಸಿ",
     "processing": "ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...",
     "webhooksIntegration": "HTTP ಕಾಲ್‌ಬ್ಯಾಕ್‌ಗಳ ಮೂಲಕ ಬಾಹ್ಯ ಸಿಸ್ಟಮ್‌ಗಳೊಂದಿಗೆ ಸಂಯೋಜಿಸಿ",
-    "addWebhook": "Webhook ಸೇರಿಸಿ",
+    "addWebhook": "ವೆಬ್‌ಹುಕ್ ಸೇರಿಸಿ",
     "endpointUrl": "ಎಂಡ್‌ಪಾಯಿಂಟ್ URL",
     "subscribedEvents": "ಚಂದಾದಾರಿಕೆ ಈವೆಂಟ್‌ಗಳು",
     "successRate": "ಯಶಸ್ಸಿನ ದರ",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "ಮಾರಾಟವನ್ನು ಸಂಪರ್ಕಿಸಿ",
+    "changingPassword": "ಬದಲಾಯಿಸಲಾಗುತ್ತಿದೆ...",
+    "loadError": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಲು ವಿಫಲ",
+    "saveOrgError": "ಸಂಸ್ಥೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಲು ವಿಫಲ",
+    "loadUserError": "ಬಳಕೆದಾರ ಡೇಟಾ ಲೋಡ್ ವಿಫಲ",
+    "loadLogsError": "ಲಾಗ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಲು ವಿಫಲ",
+    "themes": {
+      "light": "ಹಗುರ",
+      "lightDesc": "ಸ್ವಚ್ಛ, ಪ್ರಕಾಶಮಾನ ಇಂಟರ್ಫೇಸ್",
+      "dark": "ಗಾಢ",
+      "darkDesc": "ಕಣ್ಣುಗಳಿಗೆ ಆರಾಮದಾಯಕ",
+      "system": "ಸಿಸ್ಟಮ್",
+      "systemDesc": "ಸಾಧನ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಅನುಸರಿಸಿ"
+    },
+    "roles": {
+      "workers": "ಕೆಲಸಗಾರರು",
+      "workersDesc": "ನಿಯಮಿತ ಉದ್ಯೋಗಿಗಳು",
+      "managers": "ವ್ಯವಸ್ಥಾಪಕರು",
+      "managersDesc": "ತಂಡದ ನಾಯಕರು",
+      "admins": "ನಿರ್ವಾಹಕರು",
+      "adminsDesc": "ಸಂಪೂರ್ಣ ಪ್ರವೇಶ"
+    },
+    "features": {
+      "teamSchedules": "ತಂಡದ ವೇಳಾಪಟ್ಟಿ",
+      "teamSchedulesDesc": "ಸದಸ್ಯರ ವೇಳಾಪಟ್ಟಿ ನೋಡಿ",
+      "internalJobs": "ಆಂತರಿಕ ಹುದ್ದೆಗಳು",
+      "internalJobsDesc": "ಆಂತರಿಕ ಜಾಹೀರಾತುಗಳನ್ನು ಪ್ರವೇಶಿಸಿ",
+      "careerPaths": "ವೃತ್ತಿ ಮಾರ್ಗಗಳು",
+      "careerPathsDesc": "ಅಭಿವೃದ್ಧಿ ಮಾರ್ಗಗಳನ್ನು ನೋಡಿ",
+      "analytics": "ತಂಡದ ವಿಶ್ಲೇಷಣೆ",
+      "analyticsDesc": "ಕಾರ್ಯಕ್ಷಮತೆ ವಿಶ್ಲೇಷಣೆ ಪ್ರವೇಶಿಸಿ",
+      "peerRecognition": "ಸಹೋದ್ಯೋಗಿ ಮನ್ನಣೆ",
+      "peerRecognitionDesc": "ಪ್ರಶಂಸೆ ಕಳುಹಿಸಿ ಮತ್ತು ಸ್ವೀಕರಿಸಿ"
+    },
+    "aboutEmployeeVisibilityTitle": "ಉದ್ಯೋಗಿ ಗೋಚರತೆಯ ಕುರಿತು",
+    "aboutPageVisibilityDesc": "ನೀವು ನಿಷ್ಕ್ರಿಯಗೋಳಿಸುವ ಪುಟಗಳು ಆ ಪಾತ್ರಕ್ಕಾಗಿ ನ್ಯಾವಿಗೇಶನ್ ಮೆನುವಿನಿಂದ ಮರೆಮಾಡಲಾಗುತ್ತದೆ.",
+    "brandName": "ಬ್ರಾಂಡ್ ಹೆಸರು",
+    "brandNameDesc": "ಸೈಡ್‌ಬಾರ್ ಮತ್ತು ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ ಹೆಡರ್‌ನಲ್ಲಿ ಪ್ರದರ್ಶಿಸಲಾಗುತ್ತದೆ",
+    "brandingDesc": "ನಿಮ್ಮ Uplift ಅನುಭವದ ನೋಟವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ",
+    "brandingDescFull": "ಪೋರ್ಟಲ್ ಮತ್ತು ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ನೋಟವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ",
+    "brandingLabel": "ಬ್ರಾಂಡಿಂಗ್",
+    "created": "ರಚಿಸಲಾಗಿದೆ",
+    "dropFileUpload": "ಫೈಲ್ ಬಿಡಿ ಅಥವಾ ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+    "emailVerified": "ಇಮೇಲ್ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+    "eventsToSubscribe": "ಚಂದಾ ಪಡೆಯಲು ಈವೆಂಟ್‌ಗಳು",
+    "livePreview": "ಲೈವ್ ಪೂರ್ವವೀಕ್ಷಣೆ",
+    "loginScreenPreview": "ಲಾಗಿನ್ ಪರದೆ",
+    "logosImages": "ಲೋಗೋಗಳು ಮತ್ತು ಚಿತ್ರಗಳು",
+    "mfaEnabled": "MFA ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ",
+    "mobileAppHeader": "ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ ಹೆಡರ್",
+    "noEmployeesFound": "ಯಾವ ಉದ್ಯೋಗಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    "noEmployeesMatch": "ಯಾವ ಉದ್ಯೋಗಿಗಳು ನಿಮ್ಮ ಹುಡುಕಾಟಕ್ಕೆ ಹೊಂದುವುದಿಲ್ಲ",
+    "passwordChangeRequired": "ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾವಣೆ ಅಗತ್ಯ",
+    "primaryColor": "ಪ್ರಾಥಮಿಕ ಬಣ್ಣ",
+    "probation": "ಪರಿವೀಕ್ಷಾ ಅವಧಿ",
+    "probationPeriod": "ಪರಿವೀಕ್ಷಾ ಅವಧಿ",
+    "probationRestriction": "ಪರಿವೀಕ್ಷಾ ಅವಧಿಯಲ್ಲಿ ಕೆಲವು ವೈಶಿಷ್ಟ್ಯಗಳು ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ. ಪರಿವೀಕ್ಷಾ ಅವಧಿ ಮುಗಿದ ನಂತರ ಅವು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಸಕ್ರಿಯಗೊಳ್ಳುತ್ತವೆ.",
+    "secondaryColor": "ದ್ವಿತೀಯ ಬಣ್ಣ",
+    "upgradeEnterpriseBranding": "ಕಸ್ಟಮ್ ಬ್ರಾಂಡಿಂಗ್‌ಗಾಗಿ Enterprise ಗೆ ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ",
+    "webhookDetails": "Webhook ವಿವರಗಳು",
+    "webhookName": "ಹೆಸರು",
+    "webhookSecret": "ರಹಸ್ಯ",
+    "webhookSecretDesc": "ಪರಿಶೀಲನೆಗಾಗಿ webhook ಪೇಲೋಡ್‌ಗಳನ್ನು ಸಹಿ ಮಾಡಲು ಬಳಸಲಾಗುತ್ತದೆ",
+    "webhooksTitle": "ವೆಬ್‌ಹುಕ್‌ಗಳು"
   },
   "tasks": {
     "title": "ಕಾರ್ಯಗಳು",
@@ -1251,8 +1330,10 @@
     "locationPermission": "ಸ್ಥಳ ಅನುಮತಿ ಅಗತ್ಯವಿದೆ.",
     "cameraPermission": "ಕ್ಯಾಮೆರಾ ಅನುಮತಿ ಅಗತ್ಯವಿದೆ.",
     "notificationPermission": "ಅಧಿಸೂಚನೆ ಅನುಮತಿ ಅಗತ್ಯವಿದೆ.",
-    "tryAgain": "ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ",
-    "somethingWentWrong": "ಏನೋ ತಪ್ಪಾಗಿದೆ"
+    "tryAgain": "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
+    "somethingWentWrong": "ಏನೋ ತಪ್ಪಾಗಿದೆ",
+    "goHome": "ಮುಖಪುಟ",
+    "technicalDetails": "ತಾಂತ್ರಿಕ ವಿವರಗಳು"
   },
   "activity": {
     "title": "ಚಟುವಟಿಕೆ ಪರಿಶೀಲನೆ",
@@ -1282,7 +1363,7 @@
     "attachments": "ಲಗತ್ತುಗಳು",
     "rejectionReason": "ತಿರಸ್ಕಾರ ಕಾರಣ",
     "enterRejectionReason": "ತಿರಸ್ಕಾರ ಕಾರಣ ನಮೂದಿಸಿ...",
-    "confirmRejection": "ತಿರಸ್ಕಾರ ದೃಢೀಕರಿಸಿ",
+    "confirmRejection": "ತಿರಸ್ಕಾರವನ್ನು ದೃಢೀಕರಿಸಿ",
     "approve": "ಅನುಮೋದಿಸಿ",
     "reject": "ತಿರಸ್ಕರಿಸಿ",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "ಕಸ್ಟಮ್ ವರದಿ ರಚಿಸಿ",
+    "dateFrom": "ದಿನಾಂಕದಿಂದ",
+    "dateTo": "ದಿನಾಂಕದವರೆಗೆ",
+    "filters": "ಫಿಲ್ಟರ್‌ಗಳು",
+    "reportName": "ವರದಿಯ ಹೆಸರು",
+    "reportType": "ವರದಿಯ ವಿಧ",
+    "savedReportsLocal": "ಉಳಿಸಿದ ವರದಿಗಳನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ. ಶಾಶ್ವತ ವರದಿ ಉಳಿತಾಯಿಸುವಿಕೆ ಶೀಘ್ರದಲ್ಲಿ ಬರುತ್ತದೆ.",
+    "sortBy": "ಇದರ ಪ್ರಕಾರ ವಿಂಗಡಿಸಿ",
+    "trendOverTime": "ಕಾಲಾನುಕ್ರಮದ ಪ್ರವೃತ್ತಿ"
   },
   "accessibility": {
     "menu": "ಮೆನು",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "ಟೆಂಪ್ಲೇಟ್ ಅಳಿಸಲು ವಿಫಲ",
+    "shiftsGenerated": "ಶಿಫ್ಟ್‌ಗಳು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲ್ಪಟ್ಟವು!",
+    "failedSave": "ಟೆಂಪ್ಲೇಟ್ ಉಳಿಸಲು ವಿಫಲ"
   },
   "legal": {
     "lastUpdated": "ಕೊನೆಯ ನವೀಕರಣ",
@@ -1748,7 +1841,18 @@
     "postJob": "ಉದ್ಯೋಗ ಪ್ರಕಟಿಸಿ",
     "skillMatch": "ಕೌಶಲ್ಯ ಹೊಂದಾಣಿಕೆ",
     "noApplicants": "ಇನ್ನೂ ಯಾವುದೇ ಅರ್ಜಿದಾರರಿಲ್ಲ",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ಫ್ರಂಟ್ ಆಫ್ ಹೌಸ್",
+      "kitchen": "ಅಡುಗೆ",
+      "management": "ನಿರ್ವಹಣೆ",
+      "reception": "ಸ್ವಾಗತ"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro ಎಡಿನ್‌ಬರ್ಗ್",
+      "glasgow": "Grand Metro ಗ್ಲಾಸ್ಗೋ",
+      "manchester": "Grand Metro ಮ್ಯಾಂಚೆಸ್ಟರ್"
+    }
   },
   "employees": {
     "searchPlaceholder": "ಹೆಸರು ಅಥವಾ ಇಮೇಲ್ ಮೂಲಕ ಹುಡುಕಿ...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "ಕೌಶಲ್ಯ ಸೇರಿಸಲು ವಿಫಲ",
+    "failedVerifySkill": "ಪರಿಶೀಲನೆ ವಿಫಲ",
+    "failedUpdateSkillLevel": "ಮಟ್ಟ ನವೀಕರಣ ವಿಫಲ",
+    "failedRemoveSkill": "ಕೌಶಲ್ಯ ತೆಗೆಯಲು ವಿಫಲ",
+    "loadEmployeeError": "ಉದ್ಯೋಗಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ"
   },
   "integrationHub": {
     "title": "ಏಕೀಕರಣ ಹಬ್",

@@ -223,63 +223,149 @@ export const roles = [
   { id: 'role-9', name: 'Barista', department: 'Bar' },
 ];
 
-// Shift generation helper
+// Shift generation helper — handcrafted for realistic demo
 export const generateShifts = (weekStart) => {
   const shifts = [];
-  const patterns = [
-    { name: 'Morning', start: '06:00', end: '14:00' },
-    { name: 'Day', start: '09:00', end: '17:00' },
-    { name: 'Evening', start: '14:00', end: '22:00' },
+  const ws = new Date(weekStart);
+  const dateStr = (dayOffset) => {
+    const d = new Date(ws);
+    d.setDate(d.getDate() + dayOffset);
+    return d.toISOString().split('T')[0];
+  };
+  const locMap = Object.fromEntries(locations.map(l => [l.id, l.name]));
+  const empMap = Object.fromEntries(employees.map(e => [e.id, { name: e.name, role: e.role }]));
+
+  // [empId, dayOffset, start, end, locId, status]
+  const schedule = [
+    // Marc Hunt (e1) Server — 5 days, Mon-Fri mix
+    ['e1', 0, '09:00', '17:00', 'l1', 'published'],
+    ['e1', 1, '09:00', '17:00', 'l1', 'published'],
+    ['e1', 2, '14:00', '22:00', 'l1', 'published'],
+    ['e1', 3, '09:00', '17:00', 'l1', 'published'],
+    ['e1', 4, '09:00', '17:00', 'l1', 'draft'],
+    // Jessica Bano (e2) Bartender — 4 evenings
+    ['e2', 1, '16:00', '00:00', 'l1', 'published'],
+    ['e2', 2, '16:00', '00:00', 'l1', 'published'],
+    ['e2', 4, '16:00', '00:00', 'l1', 'published'],
+    ['e2', 5, '16:00', '00:00', 'l1', 'draft'],
+    // Thomas Cane (e3) Line Cook — 5 days
+    ['e3', 0, '06:00', '14:00', 'l1', 'published'],
+    ['e3', 1, '06:00', '14:00', 'l1', 'published'],
+    ['e3', 2, '06:00', '14:00', 'l1', 'published'],
+    ['e3', 3, '14:00', '22:00', 'l1', 'published'],
+    ['e3', 4, '14:00', '22:00', 'l1', 'draft'],
+    // Anna Martinez (e4) Server — 4 days
+    ['e4', 0, '10:00', '18:00', 'l2', 'published'],
+    ['e4', 1, '10:00', '18:00', 'l2', 'published'],
+    ['e4', 3, '10:00', '18:00', 'l2', 'published'],
+    ['e4', 4, '14:00', '22:00', 'l2', 'draft'],
+    // Sofia Chen (e5) Hostess — 5 days
+    ['e5', 0, '11:00', '19:00', 'l1', 'published'],
+    ['e5', 1, '11:00', '19:00', 'l1', 'published'],
+    ['e5', 2, '11:00', '19:00', 'l1', 'published'],
+    ['e5', 3, '11:00', '19:00', 'l1', 'published'],
+    ['e5', 5, '11:00', '19:00', 'l1', 'draft'],
+    // James Williams (e6) Shift Supervisor — 5 days
+    ['e6', 0, '08:00', '16:00', 'l2', 'published'],
+    ['e6', 1, '08:00', '16:00', 'l2', 'published'],
+    ['e6', 2, '08:00', '16:00', 'l2', 'published'],
+    ['e6', 3, '08:00', '16:00', 'l2', 'published'],
+    ['e6', 4, '08:00', '16:00', 'l2', 'published'],
+    // Priya Patel (e7) Sous Chef — 5 days
+    ['e7', 0, '07:00', '15:00', 'l3', 'published'],
+    ['e7', 1, '07:00', '15:00', 'l3', 'published'],
+    ['e7', 2, '14:00', '22:00', 'l3', 'published'],
+    ['e7', 3, '07:00', '15:00', 'l3', 'published'],
+    ['e7', 5, '07:00', '15:00', 'l3', 'published'],
+    // Tom Richards (e8) Shift Supervisor — 4 days
+    ['e8', 0, '08:00', '16:00', 'l4', 'published'],
+    ['e8', 1, '08:00', '16:00', 'l4', 'published'],
+    ['e8', 3, '08:00', '16:00', 'l4', 'published'],
+    ['e8', 4, '08:00', '16:00', 'l4', 'published'],
+    // Fiona Campbell (e9) Restaurant Manager — 5 days
+    ['e9', 0, '09:00', '17:00', 'l5', 'published'],
+    ['e9', 1, '09:00', '17:00', 'l5', 'published'],
+    ['e9', 2, '09:00', '17:00', 'l5', 'published'],
+    ['e9', 3, '09:00', '17:00', 'l5', 'published'],
+    ['e9', 4, '09:00', '17:00', 'l5', 'published'],
+    // Liam O'Brien (e10) Server — 4 days
+    ['e10', 1, '10:00', '18:00', 'l4', 'published'],
+    ['e10', 2, '10:00', '18:00', 'l4', 'published'],
+    ['e10', 4, '14:00', '22:00', 'l4', 'published'],
+    ['e10', 5, '10:00', '18:00', 'l4', 'draft'],
+    // Emma Watson (e11) Barista — 4 days
+    ['e11', 0, '07:00', '15:00', 'l5', 'published'],
+    ['e11', 2, '07:00', '15:00', 'l5', 'published'],
+    ['e11', 3, '07:00', '15:00', 'l5', 'published'],
+    ['e11', 5, '07:00', '15:00', 'l5', 'published'],
+    // David Kim (e12) Line Cook — 5 days
+    ['e12', 0, '06:00', '14:00', 'l2', 'published'],
+    ['e12', 1, '06:00', '14:00', 'l2', 'published'],
+    ['e12', 2, '14:00', '22:00', 'l2', 'published'],
+    ['e12', 3, '06:00', '14:00', 'l2', 'published'],
+    ['e12', 4, '06:00', '14:00', 'l2', 'published'],
+    // Rachel Green (e13) — on_leave, no shifts
+    // Ahmed Hassan (e14) Kitchen Porter — 4 part-time shifts
+    ['e14', 0, '08:00', '13:00', 'l1', 'published'],
+    ['e14', 2, '08:00', '13:00', 'l1', 'published'],
+    ['e14', 4, '08:00', '13:00', 'l1', 'draft'],
+    ['e14', 5, '09:00', '14:00', 'l1', 'draft'],
+    // Lucy Taylor (e15) Hostess — 4 days
+    ['e15', 0, '11:00', '19:00', 'l2', 'published'],
+    ['e15', 1, '11:00', '19:00', 'l2', 'published'],
+    ['e15', 3, '14:00', '22:00', 'l2', 'published'],
+    ['e15', 4, '11:00', '19:00', 'l2', 'draft'],
   ];
-  locations.forEach(loc => {
-    for (let day = 0; day < 7; day++) {
-      const date = new Date(weekStart);
-      date.setDate(date.getDate() + day);
-      const dateStr = date.toISOString().split('T')[0];
-      const staffNeeded = Math.min(4, Math.floor(loc.employee_count / 5) + 1);
-      const availableEmps = employees.filter(e => e.location_id === loc.id);
-      for (let i = 0; i < Math.min(staffNeeded, availableEmps.length); i++) {
-        const emp = availableEmps[i];
-        const pattern = patterns[i % patterns.length];
-        shifts.push({
-          id: `shift-${loc.id}-${dateStr}-${i}`,
-          date: dateStr,
-          start_time: `${dateStr}T${pattern.start}:00`,
-          end_time: `${dateStr}T${pattern.end}:00`,
-          shift_type: pattern.name,
-          location_id: loc.id,
-          location_name: loc.name,
-          employee_id: emp.id,
-          employee_name: emp.name,
-          employee_role: emp.role,
-          is_open: false,
-          status: 'confirmed',
-          hourly_rate: 12.50,
-          cost: 100,
-        });
-      }
-      // Add open shift
-      if (day % 2 === 0) {
-        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
-        shifts.push({
-          id: `open-${loc.id}-${dateStr}`,
-          date: dateStr,
-          start_time: `${dateStr}T${pattern.start}:00`,
-          end_time: `${dateStr}T${pattern.end}:00`,
-          shift_type: pattern.name,
-          location_id: loc.id,
-          location_name: loc.name,
-          employee_id: null,
-          employee_name: null,
-          is_open: true,
-          status: 'open',
-          required_skills: ['Food Safety Level 2'],
-          hourly_rate: 12.00,
-          cost: 96,
-        });
-      }
-    }
+
+  schedule.forEach(([empId, day, start, end, locId, status], i) => {
+    const ds = dateStr(day);
+    const emp = empMap[empId];
+    shifts.push({
+      id: `shift-${i + 1}`,
+      date: ds,
+      start_time: `${ds}T${start}:00`,
+      end_time: `${ds}T${end}:00`,
+      shift_type: start < '10:00' ? 'Morning' : start < '14:00' ? 'Day' : 'Evening',
+      location_id: locId,
+      location_name: locMap[locId],
+      employee_id: empId,
+      employee_name: emp.name,
+      employee_role: emp.role,
+      is_open: false,
+      status,
+      break_minutes: 30,
+      hourly_rate: 12.50,
+      cost: 100,
+    });
   });
+
+  // Open shifts (unfilled)
+  [
+    [1, '14:00', '22:00', 'l1', 'Server'],
+    [3, '06:00', '14:00', 'l3', 'Line Cook'],
+    [5, '11:00', '19:00', 'l5', 'Hostess'],
+  ].forEach(([day, start, end, locId, role], i) => {
+    const ds = dateStr(day);
+    shifts.push({
+      id: `open-${i + 1}`,
+      date: ds,
+      start_time: `${ds}T${start}:00`,
+      end_time: `${ds}T${end}:00`,
+      shift_type: start < '10:00' ? 'Morning' : start < '14:00' ? 'Day' : 'Evening',
+      location_id: locId,
+      location_name: locMap[locId],
+      employee_id: null,
+      employee_name: null,
+      employee_role: role,
+      is_open: true,
+      status: 'open',
+      required_skills: ['Food Safety Level 2'],
+      break_minutes: 30,
+      hourly_rate: 12.00,
+      cost: 96,
+    });
+  });
+
   return shifts;
 };
 

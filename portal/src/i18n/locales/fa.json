@@ -233,7 +233,12 @@
       "barback": "کمک بار",
       "sous": "معاون سرآشپز",
       "expeditor": "هماهنگ‌کننده"
-    }
+    },
+    "new": "جدید",
+    "exportComingSoon": "صادرات به زودی",
+    "clickToViewDetails": "برای مشاهده جزئیات کلیک کنید",
+    "closeEsc": "بستن (ESC)",
+    "logoPreview": "پیش‌نمایش لوگو"
   },
   "auth": {
     "login": "ورود",
@@ -448,7 +453,16 @@
     "publishSchedule": "انتشار برنامه",
     "publishConfirmation": "شما در حال انتشار {{count}} شیفت پیش‌نویس هستید. همه کارمندان مربوطه مطلع خواهند شد.",
     "publishNow": "اکنون منتشر کنید",
-    "aiScheduleBuilder": "سازنده برنامه هوش مصنوعی"
+    "aiScheduleBuilder": "سازنده برنامه هوش مصنوعی",
+    "failedTimeOffRequest": "پردازش درخواست مرخصی ناموفق",
+    "failedShiftSwap": "پردازش تعویض شیفت ناموفق",
+    "publishButton": "انتشار",
+    "employee": "کارمند",
+    "reassign": "تخصیص مجدد",
+    "shiftReassigned": "شیفت مجدداً تخصیص یافت",
+    "swapRequested": "درخواست تعویض ارسال شد",
+    "shiftDeleted": "شیفت حذف شد",
+    "minutes": "دقیقه"
   },
   "timeTracking": {
     "title": "پیگیری زمان",
@@ -661,7 +675,8 @@
     "searchSkills": "جستجوی مهارت‌ها...",
     "skillAdded": "مهارت با موفقیت اضافه شد",
     "verificationRequested": "درخواست تأیید ارسال شد",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "لیست کارمندان برای این مهارت به‌زودی ارائه می‌شود."
   },
   "career": {
     "title": "مسیر شغلی",
@@ -895,7 +910,7 @@
     "enable": "فعال کردن",
     "activeSessions": "نشست‌های فعال",
     "manageDevices": "دستگاه‌های وارد شده خود را مدیریت کنید",
-    "signOutOtherDevices": "خروج از سایر دستگاه‌ها",
+    "signOutOtherDevices": "خروج از دستگاه‌های دیگر",
     "thisDevice": "این دستگاه",
     "revoke": "لغو",
     "revoking": "در حال لغو...",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "کنترل کنید هر کارمند به کدام ویژگی‌ها دسترسی داشته باشد",
     "searchEmployees": "جستجوی کارمندان...",
     "featureAccess": "دسترسی به ویژگی‌ها",
-    "enableAll": "فعال کردن همه",
-    "disableAll": "غیرفعال کردن همه",
+    "enableAll": "فعال‌سازی همه",
+    "disableAll": "غیرفعال‌سازی همه",
     "aboutEmployeeVisibility": "این تنظیمات کنترل می‌کنند کدام ویژگی‌ها برای هر کارمند قابل مشاهده باشند.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "تماس با فروش",
+    "changingPassword": "در حال تغییر...",
+    "loadError": "بارگذاری تنظیمات ناموفق",
+    "saveOrgError": "ذخیره تنظیمات سازمان ناموفق",
+    "loadUserError": "بارگذاری اطلاعات کاربر ناموفق",
+    "loadLogsError": "بارگذاری گزارش‌ها ناموفق",
+    "themes": {
+      "light": "روشن",
+      "lightDesc": "رابط تمیز و روشن",
+      "dark": "تیره",
+      "darkDesc": "راحت برای چشم",
+      "system": "سیستم",
+      "systemDesc": "پیروی از تنظیمات دستگاه"
+    },
+    "roles": {
+      "workers": "کارکنان",
+      "workersDesc": "کارکنان عادی",
+      "managers": "مدیران",
+      "managersDesc": "سرپرستان تیم",
+      "admins": "مدیران ارشد",
+      "adminsDesc": "دسترسی کامل"
+    },
+    "features": {
+      "teamSchedules": "برنامه تیم",
+      "teamSchedulesDesc": "مشاهده برنامه اعضا",
+      "internalJobs": "فرصت‌های داخلی",
+      "internalJobsDesc": "دسترسی به آگهی‌های داخلی",
+      "careerPaths": "مسیرهای شغلی",
+      "careerPathsDesc": "مشاهده مسیرهای توسعه",
+      "analytics": "تحلیل تیم",
+      "analyticsDesc": "دسترسی به تحلیل عملکرد",
+      "peerRecognition": "قدردانی همکاران",
+      "peerRecognitionDesc": "ارسال و دریافت تشکر"
+    },
+    "aboutEmployeeVisibilityTitle": "درباره نمایش کارمندان",
+    "aboutPageVisibilityDesc": "صفحاتی که غیرفعال می‌کنید از منوی ناوبری برای آن نقش پنهان می‌شوند.",
+    "brandName": "نام برند",
+    "brandNameDesc": "در نوار کناری و سربرگ اپلیکیشن موبایل نمایش داده می‌شود",
+    "brandingDesc": "ظاهر تجربه Uplift خود را سفارشی کنید",
+    "brandingDescFull": "ظاهر را در پورتال و اپلیکیشن موبایل سفارشی کنید",
+    "brandingLabel": "برندینگ",
+    "created": "ایجاد شده",
+    "dropFileUpload": "فایل را رها کنید یا برای بارگذاری کلیک کنید",
+    "emailVerified": "ایمیل تأیید شده",
+    "eventsToSubscribe": "رویدادهای قابل اشتراک",
+    "livePreview": "پیش‌نمایش زنده",
+    "loginScreenPreview": "صفحه ورود",
+    "logosImages": "لوگوها و تصاویر",
+    "mfaEnabled": "MFA فعال",
+    "mobileAppHeader": "سربرگ اپلیکیشن موبایل",
+    "noEmployeesFound": "کارمندی یافت نشد",
+    "noEmployeesMatch": "هیچ کارمندی با جستجوی شما مطابقت ندارد",
+    "passwordChangeRequired": "تغییر رمز عبور الزامی است",
+    "primaryColor": "رنگ اصلی",
+    "probation": "دوره آزمایشی",
+    "probationPeriod": "دوره آزمایشی",
+    "probationRestriction": "برخی قابلیت‌ها در دوره آزمایشی محدود هستند. پس از پایان دوره آزمایشی به‌طور خودکار فعال می‌شوند.",
+    "secondaryColor": "رنگ ثانویه",
+    "upgradeEnterpriseBranding": "برای برندینگ سفارشی به Enterprise ارتقا دهید",
+    "webhookDetails": "جزئیات Webhook",
+    "webhookName": "نام",
+    "webhookSecret": "رمز محرمانه",
+    "webhookSecretDesc": "برای امضای داده‌های webhook جهت تأیید استفاده می‌شود",
+    "webhooksTitle": "وب‌هوک‌ها"
   },
   "tasks": {
     "title": "وظایف",
@@ -1251,8 +1330,10 @@
     "locationPermission": "مجوز مکان الزامی است.",
     "cameraPermission": "مجوز دوربین الزامی است.",
     "notificationPermission": "مجوز اعلان الزامی است.",
-    "tryAgain": "لطفاً دوباره تلاش کنید",
-    "somethingWentWrong": "مشکلی پیش آمد"
+    "tryAgain": "دوباره تلاش کنید",
+    "somethingWentWrong": "مشکلی پیش آمد",
+    "goHome": "صفحه اصلی",
+    "technicalDetails": "جزئیات فنی"
   },
   "activity": {
     "title": "بررسی فعالیت",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "ساخت گزارش سفارشی",
+    "dateFrom": "تاریخ از",
+    "dateTo": "تاریخ تا",
+    "filters": "فیلترها",
+    "reportName": "نام گزارش",
+    "reportType": "نوع گزارش",
+    "savedReportsLocal": "گزارش‌های ذخیره‌شده به‌صورت محلی ذخیره می‌شوند. ذخیره‌سازی دائمی گزارش‌ها به‌زودی ارائه می‌شود.",
+    "sortBy": "مرتب‌سازی بر اساس",
+    "trendOverTime": "روند در طول زمان"
   },
   "accessibility": {
     "menu": "منو",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "حذف قالب ناموفق",
+    "shiftsGenerated": "شیفت‌ها با موفقیت ایجاد شدند!",
+    "failedSave": "ذخیره قالب ناموفق"
   },
   "legal": {
     "lastUpdated": "آخرین به‌روزرسانی",
@@ -1748,7 +1841,18 @@
     "postJob": "انتشار شغل",
     "skillMatch": "تطابق مهارت",
     "noApplicants": "هنوز متقاضی وجود ندارد",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "پذیرش مهمانان",
+      "kitchen": "آشپزخانه",
+      "management": "مدیریت",
+      "reception": "پذیرش"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro ادینبرو",
+      "glasgow": "Grand Metro گلاسکو",
+      "manchester": "Grand Metro منچستر"
+    }
   },
   "employees": {
     "searchPlaceholder": "جستجو بر اساس نام یا ایمیل...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "افزودن مهارت ناموفق",
+    "failedVerifySkill": "تأیید ناموفق",
+    "failedUpdateSkillLevel": "به‌روزرسانی سطح ناموفق",
+    "failedRemoveSkill": "حذف مهارت ناموفق",
+    "loadEmployeeError": "بارگذاری کارمند ناموفق بود"
   },
   "integrationHub": {
     "title": "مرکز یکپارچه‌سازی",

@@ -233,7 +233,12 @@
       "barback": "مساعد البار",
       "sous": "نائب الشيف",
       "expeditor": "منسق الطلبات"
-    }
+    },
+    "new": "جديد",
+    "exportComingSoon": "التصدير قريباً",
+    "clickToViewDetails": "انقر لعرض التفاصيل",
+    "closeEsc": "إغلاق (ESC)",
+    "logoPreview": "معاينة الشعار"
   },
   "auth": {
     "login": "تسجيل الدخول",
@@ -448,7 +453,16 @@
     "publishSchedule": "نشر الجدول",
     "publishConfirmation": "أنت على وشك نشر {{count}} وردية مسودة. سيتم إخطار جميع الموظفين المعنيين.",
     "publishNow": "نشر الآن",
-    "aiScheduleBuilder": "منشئ جدول الذكاء الاصطناعي"
+    "aiScheduleBuilder": "منشئ جدول الذكاء الاصطناعي",
+    "failedTimeOffRequest": "فشل في معالجة طلب الإجازة",
+    "failedShiftSwap": "فشل في معالجة تبادل الوردية",
+    "publishButton": "نشر",
+    "employee": "موظف",
+    "reassign": "إعادة تعيين",
+    "shiftReassigned": "تم إعادة تعيين الوردية",
+    "swapRequested": "تم طلب التبادل",
+    "shiftDeleted": "تم حذف الوردية",
+    "minutes": "د"
   },
   "timeTracking": {
     "title": "تتبع الوقت",
@@ -661,7 +675,8 @@
     "searchSkills": "البحث عن المهارات...",
     "skillAdded": "تمت إضافة المهارة بنجاح",
     "verificationRequested": "تم طلب التحقق",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "قائمة الموظفين لهذه المهارة ستكون متاحة قريبًا."
   },
   "career": {
     "title": "المسار المهني",
@@ -895,7 +910,7 @@
     "enable": "تفعيل",
     "activeSessions": "الجلسات النشطة",
     "manageDevices": "إدارة أجهزتك المسجلة",
-    "signOutOtherDevices": "تسجيل الخروج من الأجهزة الأخرى",
+    "signOutOtherDevices": "تسجيل خروج الأجهزة الأخرى",
     "thisDevice": "هذا الجهاز",
     "revoke": "إلغاء",
     "revoking": "جارٍ الإلغاء...",
@@ -924,7 +939,7 @@
     "deleteMyAccount": "حذف حسابي",
     "processing": "جارٍ المعالجة...",
     "webhooksIntegration": "التكامل مع الأنظمة الخارجية عبر استدعاءات HTTP",
-    "addWebhook": "إضافة ويب هوك",
+    "addWebhook": "إضافة Webhook",
     "endpointUrl": "عنوان URL للنقطة النهائية",
     "subscribedEvents": "الأحداث المشترك فيها",
     "successRate": "معدل النجاح",
@@ -939,7 +954,7 @@
     "controlFeatureAccess": "تحكم في الميزات التي يمكن لكل موظف الوصول إليها",
     "searchEmployees": "البحث عن الموظفين...",
     "featureAccess": "الوصول للميزات",
-    "enableAll": "تفعيل الكل",
+    "enableAll": "تمكين الكل",
     "disableAll": "تعطيل الكل",
     "aboutEmployeeVisibility": "تتحكم هذه الإعدادات في الميزات المرئية لكل موظف.",
     "monday": "Monday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "اتصل بالمبيعات",
+    "changingPassword": "جاري التغيير...",
+    "loadError": "فشل في تحميل الإعدادات",
+    "saveOrgError": "فشل في حفظ إعدادات المنظمة",
+    "loadUserError": "فشل في تحميل بيانات المستخدم",
+    "loadLogsError": "فشل في تحميل السجلات",
+    "themes": {
+      "light": "فاتح",
+      "lightDesc": "واجهة نظيفة ومشرقة",
+      "dark": "داكن",
+      "darkDesc": "مريح للعيون",
+      "system": "النظام",
+      "systemDesc": "اتبع إعدادات الجهاز"
+    },
+    "roles": {
+      "workers": "الموظفون",
+      "workersDesc": "الموظفون العاديون",
+      "managers": "المدراء",
+      "managersDesc": "قادة الفرق والمشرفون",
+      "admins": "المسؤولون",
+      "adminsDesc": "وصول كامل"
+    },
+    "features": {
+      "teamSchedules": "جداول الفريق",
+      "teamSchedulesDesc": "عرض جداول أعضاء الفريق",
+      "internalJobs": "الوظائف الداخلية",
+      "internalJobsDesc": "الوصول إلى الوظائف الداخلية",
+      "careerPaths": "المسارات المهنية",
+      "careerPathsDesc": "عرض مسارات التطوير",
+      "analytics": "تحليلات الفريق",
+      "analyticsDesc": "الوصول إلى تحليلات الأداء",
+      "peerRecognition": "تقدير الزملاء",
+      "peerRecognitionDesc": "إرسال واستقبال الإشادات"
+    },
+    "aboutEmployeeVisibilityTitle": "حول رؤية الموظفين",
+    "aboutPageVisibilityDesc": "الصفحات التي تعطلها ستكون مخفية من قائمة التنقل لهذا الدور.",
+    "brandName": "اسم العلامة التجارية",
+    "brandNameDesc": "يُعرض في الشريط الجانبي ورأس التطبيق المحمول",
+    "brandingDesc": "خصّص مظهر تجربة Uplift الخاصة بك",
+    "brandingDescFull": "خصّص مظهر البوابة والتطبيق المحمول",
+    "brandingLabel": "الهوية البصرية",
+    "created": "تاريخ الإنشاء",
+    "dropFileUpload": "أسقط ملفًا أو انقر للرفع",
+    "emailVerified": "البريد الإلكتروني موثق",
+    "eventsToSubscribe": "الأحداث للاشتراك",
+    "livePreview": "معاينة مباشرة",
+    "loginScreenPreview": "شاشة تسجيل الدخول",
+    "logosImages": "الشعارات والصور",
+    "mfaEnabled": "MFA مُفعّل",
+    "mobileAppHeader": "رأس التطبيق المحمول",
+    "noEmployeesFound": "لم يتم العثور على موظفين",
+    "noEmployeesMatch": "لا يوجد موظفون يطابقون بحثك",
+    "passwordChangeRequired": "يلزم تغيير كلمة المرور",
+    "primaryColor": "اللون الأساسي",
+    "probation": "فترة الاختبار",
+    "probationPeriod": "فترة الاختبار",
+    "probationRestriction": "بعض الميزات مقيدة خلال فترة الاختبار. سيتم تفعيلها تلقائيًا بعد انتهاء فترة الاختبار.",
+    "secondaryColor": "اللون الثانوي",
+    "upgradeEnterpriseBranding": "قم بالترقية إلى Enterprise للحصول على هوية بصرية مخصصة",
+    "webhookDetails": "تفاصيل الـ Webhook",
+    "webhookName": "الاسم",
+    "webhookSecret": "المفتاح السري",
+    "webhookSecretDesc": "يُستخدم لتوقيع حمولات Webhook للتحقق",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "المهام",
@@ -1251,8 +1330,10 @@
     "locationPermission": "إذن الموقع مطلوب.",
     "cameraPermission": "إذن الكاميرا مطلوب.",
     "notificationPermission": "إذن الإشعارات مطلوب.",
-    "tryAgain": "يرجى المحاولة مرة أخرى",
-    "somethingWentWrong": "حدث خطأ ما"
+    "tryAgain": "إعادة المحاولة",
+    "somethingWentWrong": "حدث خطأ ما",
+    "goHome": "الصفحة الرئيسية",
+    "technicalDetails": "التفاصيل التقنية"
   },
   "activity": {
     "title": "مراجعة النشاط",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "إنشاء تقرير مخصص",
+    "dateFrom": "التاريخ من",
+    "dateTo": "التاريخ إلى",
+    "filters": "المرشحات",
+    "reportName": "اسم التقرير",
+    "reportType": "نوع التقرير",
+    "savedReportsLocal": "يتم تخزين التقارير المحفوظة محليًا. الحفظ الدائم قادم قريبًا.",
+    "sortBy": "ترتيب حسب",
+    "trendOverTime": "الاتجاه عبر الزمن"
   },
   "accessibility": {
     "menu": "القائمة",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "فشل في حذف القالب",
+    "shiftsGenerated": "تم إنشاء الورديات بنجاح!",
+    "failedSave": "فشل في حفظ القالب"
   },
   "legal": {
     "lastUpdated": "آخر تحديث",
@@ -1748,7 +1841,18 @@
     "postJob": "نشر الوظيفة",
     "skillMatch": "تطابق المهارات",
     "noApplicants": "لا يوجد متقدمون بعد",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "الصالة",
+      "kitchen": "المطبخ",
+      "management": "الإدارة",
+      "reception": "الاستقبال"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "البحث بالاسم أو البريد الإلكتروني...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "فشل في إضافة المهارة",
+    "failedVerifySkill": "فشل في التحقق",
+    "failedUpdateSkillLevel": "فشل في تحديث المستوى",
+    "failedRemoveSkill": "فشل في إزالة المهارة",
+    "loadEmployeeError": "فشل في تحميل الموظف"
   },
   "integrationHub": {
     "title": "مركز التكاملات",

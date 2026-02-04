@@ -233,7 +233,12 @@
       "barback": "バーバック",
       "sous": "副料理長",
       "expeditor": "エキスペディター"
-    }
+    },
+    "new": "新規",
+    "exportComingSoon": "エクスポート機能は近日公開",
+    "clickToViewDetails": "クリックして詳細を表示",
+    "closeEsc": "閉じる（ESC）",
+    "logoPreview": "ロゴプレビュー"
   },
   "auth": {
     "login": "ログイン",
@@ -448,7 +453,16 @@
     "publishSchedule": "スケジュールを公開",
     "publishConfirmation": "{{count}}件の下書きシフトを公開しようとしています。すべての関係する従業員に通知されます。",
     "publishNow": "今すぐ公開",
-    "aiScheduleBuilder": "AIスケジュールビルダー"
+    "aiScheduleBuilder": "AIスケジュールビルダー",
+    "failedTimeOffRequest": "休暇申請の処理に失敗",
+    "failedShiftSwap": "シフト交換の処理に失敗",
+    "publishButton": "公開",
+    "employee": "従業員",
+    "reassign": "再割当",
+    "shiftReassigned": "シフトが再割当されました",
+    "swapRequested": "交換がリクエストされました",
+    "shiftDeleted": "シフトが削除されました",
+    "minutes": "分"
   },
   "timeTracking": {
     "title": "勤怠管理",
@@ -661,7 +675,8 @@
     "searchSkills": "スキルを検索...",
     "skillAdded": "スキルが正常に追加されました",
     "verificationRequested": "確認がリクエストされました",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "このスキルの従業員リストは近日公開予定です。"
   },
   "career": {
     "title": "キャリア",
@@ -811,7 +826,7 @@
     "reminderTime": "リマインダー時間",
     "sound": "サウンド",
     "vibration": "バイブレーション",
-    "changePassword": "パスワードを変更",
+    "changePassword": "パスワード変更",
     "twoFactorAuth": "二要素認証",
     "biometricAuth": "生体認証",
     "dataExport": "データをエクスポート",
@@ -895,7 +910,7 @@
     "enable": "有効にする",
     "activeSessions": "アクティブセッション",
     "manageDevices": "ログイン中のデバイスを管理",
-    "signOutOtherDevices": "他のデバイスからサインアウト",
+    "signOutOtherDevices": "他のデバイスからログアウト",
     "thisDevice": "このデバイス",
     "revoke": "取り消す",
     "revoking": "取り消し中...",
@@ -917,14 +932,14 @@
     "preparing": "準備中...",
     "dataExported": "データが正常にエクスポートされました",
     "deleteAccountWarning": "アカウントと関連するすべてのデータを完全に削除します。30日間の猶予期間後は取り消しできません。",
-    "requestAccountDeletion": "アカウント削除をリクエスト",
+    "requestAccountDeletion": "アカウント削除を依頼",
     "deletionScheduled": "アカウントの削除が予定されています。30日後に完全に削除されます。",
     "cancelDeletion": "削除をキャンセル",
     "enterPasswordConfirm": "確認のためパスワードを入力",
     "deleteMyAccount": "マイアカウントを削除",
     "processing": "処理中...",
     "webhooksIntegration": "HTTPコールバックを介して外部システムと連携",
-    "addWebhook": "Webhookを追加",
+    "addWebhook": "Webhook追加",
     "endpointUrl": "エンドポイントURL",
     "subscribedEvents": "登録済みイベント",
     "successRate": "成功率",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "営業に連絡",
+    "changingPassword": "変更中...",
+    "loadError": "設定の読み込みに失敗",
+    "saveOrgError": "組織設定の保存に失敗",
+    "loadUserError": "ユーザーデータの読み込みに失敗",
+    "loadLogsError": "ログの読み込みに失敗",
+    "themes": {
+      "light": "ライト",
+      "lightDesc": "明るくクリーンなインターフェース",
+      "dark": "ダーク",
+      "darkDesc": "目に優しい",
+      "system": "システム",
+      "systemDesc": "デバイス設定に合わせる"
+    },
+    "roles": {
+      "workers": "従業員",
+      "workersDesc": "一般従業員",
+      "managers": "マネージャー",
+      "managersDesc": "チームリーダーと監督者",
+      "admins": "管理者",
+      "adminsDesc": "フルアクセス"
+    },
+    "features": {
+      "teamSchedules": "チームスケジュール",
+      "teamSchedulesDesc": "他のメンバーのスケジュールを表示",
+      "internalJobs": "社内求人",
+      "internalJobsDesc": "社内求人にアクセス",
+      "careerPaths": "キャリアパス",
+      "careerPathsDesc": "開発パスを表示",
+      "analytics": "チーム分析",
+      "analyticsDesc": "パフォーマンス分析にアクセス",
+      "peerRecognition": "ピア認識",
+      "peerRecognitionDesc": "称賛を送受信"
+    },
+    "aboutEmployeeVisibilityTitle": "従業員の表示設定について",
+    "aboutPageVisibilityDesc": "無効にしたページは、そのロールのナビゲーションメニューから非表示になります。",
+    "brandName": "ブランド名",
+    "brandNameDesc": "サイドバーとモバイルアプリのヘッダーに表示されます",
+    "brandingDesc": "Upliftの外観をカスタマイズ",
+    "brandingDescFull": "ポータルとモバイルアプリの外観をカスタマイズ",
+    "brandingLabel": "ブランディング",
+    "created": "作成日",
+    "dropFileUpload": "ファイルをドロップまたはクリックしてアップロード",
+    "emailVerified": "メール認証済み",
+    "eventsToSubscribe": "購読するイベント",
+    "livePreview": "ライブプレビュー",
+    "loginScreenPreview": "ログイン画面",
+    "logosImages": "ロゴと画像",
+    "mfaEnabled": "MFA有効",
+    "mobileAppHeader": "モバイルアプリのヘッダー",
+    "noEmployeesFound": "従業員が見つかりません",
+    "noEmployeesMatch": "検索に一致する従業員がいません",
+    "passwordChangeRequired": "パスワードの変更が必要です",
+    "primaryColor": "プライマリカラー",
+    "probation": "試用期間",
+    "probationPeriod": "試用期間",
+    "probationRestriction": "試用期間中は一部の機能が制限されます。試用期間終了後に自動的に有効になります。",
+    "secondaryColor": "セカンダリカラー",
+    "upgradeEnterpriseBranding": "カスタムブランディングにはEnterpriseへアップグレード",
+    "webhookDetails": "Webhookの詳細",
+    "webhookName": "名前",
+    "webhookSecret": "シークレット",
+    "webhookSecretDesc": "検証のためにWebhookペイロードの署名に使用されます",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "タスク",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "カメラの許可が必要です。",
     "notificationPermission": "通知の許可が必要です。",
     "tryAgain": "再試行",
-    "somethingWentWrong": "問題が発生しました"
+    "somethingWentWrong": "問題が発生しました",
+    "goHome": "ホームへ",
+    "technicalDetails": "技術的な詳細"
   },
   "activity": {
     "title": "アクティビティレビュー",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "カスタムレポートを作成",
+    "dateFrom": "開始日",
+    "dateTo": "終了日",
+    "filters": "フィルター",
+    "reportName": "レポート名",
+    "reportType": "レポートタイプ",
+    "savedReportsLocal": "保存されたレポートはローカルに保存されます。永続的な保存機能は近日公開予定です。",
+    "sortBy": "並べ替え",
+    "trendOverTime": "経時トレンド"
   },
   "accessibility": {
     "menu": "メニュー",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "テンプレートの削除に失敗",
+    "shiftsGenerated": "シフトが正常に生成されました！",
+    "failedSave": "テンプレートの保存に失敗"
   },
   "legal": {
     "lastUpdated": "最終更新",
@@ -1748,7 +1841,18 @@
     "postJob": "求人を投稿",
     "skillMatch": "スキルマッチ",
     "noApplicants": "応募者はまだいません",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ホール",
+      "kitchen": "キッチン",
+      "management": "経営管理",
+      "reception": "フロント"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "名前またはメールで検索...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "スキルの追加に失敗",
+    "failedVerifySkill": "検証に失敗",
+    "failedUpdateSkillLevel": "レベル更新に失敗",
+    "failedRemoveSkill": "スキルの削除に失敗",
+    "loadEmployeeError": "従業員の読み込みに失敗しました"
   },
   "integrationHub": {
     "title": "連携ハブ",

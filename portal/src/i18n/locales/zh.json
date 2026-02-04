@@ -228,7 +228,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "创建自定义报告",
+    "dateFrom": "开始日期",
+    "dateTo": "结束日期",
+    "filters": "筛选",
+    "reportName": "报告名称",
+    "reportType": "报告类型",
+    "savedReportsLocal": "已保存的报告存储在本地。持久化保存功能即将推出。",
+    "sortBy": "排序方式",
+    "trendOverTime": "随时间变化趋势"
   },
   "shiftTemplates": {
     "title": "班次模板",
@@ -279,7 +288,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "删除模板失败",
+    "shiftsGenerated": "班次生成成功！",
+    "failedSave": "保存模板失败"
   },
   "legal": {
     "lastUpdated": "最后更新",
@@ -540,7 +552,12 @@
       "barback": "酒吧助理",
       "sous": "副主厨",
       "expeditor": "传菜员"
-    }
+    },
+    "new": "新",
+    "exportComingSoon": "导出功能即将推出",
+    "clickToViewDetails": "点击查看详情",
+    "closeEsc": "关闭（ESC）",
+    "logoPreview": "徽标预览"
   },
   "auth": {
     "login": "登录",
@@ -755,7 +772,16 @@
     "publishSchedule": "发布排班",
     "publishConfirmation": "您即将发布 {{count}} 个草稿班次。这将通知所有相关员工。",
     "publishNow": "立即发布",
-    "aiScheduleBuilder": "AI排班构建器"
+    "aiScheduleBuilder": "AI排班构建器",
+    "failedTimeOffRequest": "处理请假申请失败",
+    "failedShiftSwap": "处理换班失败",
+    "publishButton": "发布",
+    "employee": "员工",
+    "reassign": "重新分配",
+    "shiftReassigned": "班次已重新分配",
+    "swapRequested": "已请求交换",
+    "shiftDeleted": "班次已删除",
+    "minutes": "分钟"
   },
   "timeTracking": {
     "title": "考勤",
@@ -968,7 +994,8 @@
     "searchSkills": "搜索技能...",
     "skillAdded": "技能添加成功",
     "verificationRequested": "已请求验证",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "该技能的员工列表即将推出。"
   },
   "career": {
     "title": "职业",
@@ -1202,7 +1229,7 @@
     "enable": "启用",
     "activeSessions": "活跃会话",
     "manageDevices": "管理您的登录设备",
-    "signOutOtherDevices": "退出其他设备",
+    "signOutOtherDevices": "登出其他设备",
     "thisDevice": "当前设备",
     "revoke": "撤销",
     "revoking": "撤销中...",
@@ -1224,14 +1251,14 @@
     "preparing": "准备中...",
     "dataExported": "数据导出成功",
     "deleteAccountWarning": "永久删除您的账户和所有相关数据。此操作在 30 天宽限期后无法撤销。",
-    "requestAccountDeletion": "请求删除账户",
+    "requestAccountDeletion": "申请删除账户",
     "deletionScheduled": "您的账户已计划删除。将在 30 天后被永久移除。",
     "cancelDeletion": "取消删除",
     "enterPasswordConfirm": "输入密码以确认",
     "deleteMyAccount": "删除我的账户",
     "processing": "处理中...",
     "webhooksIntegration": "通过 HTTP 回调与外部系统集成",
-    "addWebhook": "添加 Webhook",
+    "addWebhook": "添加Webhook",
     "endpointUrl": "端点 URL",
     "subscribedEvents": "订阅的事件",
     "successRate": "成功率",
@@ -1302,7 +1329,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "联系销售",
+    "changingPassword": "修改中...",
+    "loadError": "加载设置失败",
+    "saveOrgError": "保存组织设置失败",
+    "loadUserError": "加载用户数据失败",
+    "loadLogsError": "加载日志失败",
+    "themes": {
+      "light": "浅色",
+      "lightDesc": "清洁明亮的界面",
+      "dark": "深色",
+      "darkDesc": "护眼模式",
+      "system": "系统",
+      "systemDesc": "跟随设备设置"
+    },
+    "roles": {
+      "workers": "员工",
+      "workersDesc": "普通员工",
+      "managers": "经理",
+      "managersDesc": "团队负责人和主管",
+      "admins": "管理员",
+      "adminsDesc": "完全访问权限"
+    },
+    "features": {
+      "teamSchedules": "团队排班",
+      "teamSchedulesDesc": "查看团队成员排班",
+      "internalJobs": "内部职位",
+      "internalJobsDesc": "查看内部招聘",
+      "careerPaths": "职业路径",
+      "careerPathsDesc": "查看发展路径",
+      "analytics": "团队分析",
+      "analyticsDesc": "查看绩效分析",
+      "peerRecognition": "同事认可",
+      "peerRecognitionDesc": "发送和接收表扬"
+    },
+    "aboutEmployeeVisibilityTitle": "关于员工可见性",
+    "aboutPageVisibilityDesc": "您禁用的页面将从该角色的导航菜单中隐藏。",
+    "brandName": "品牌名称",
+    "brandNameDesc": "显示在侧边栏和移动应用标题中",
+    "brandingDesc": "自定义您的 Uplift 体验的外观",
+    "brandingDescFull": "自定义门户和移动应用的外观",
+    "brandingLabel": "品牌化",
+    "created": "创建时间",
+    "dropFileUpload": "拖放文件或点击上传",
+    "emailVerified": "邮箱已验证",
+    "eventsToSubscribe": "订阅事件",
+    "livePreview": "实时预览",
+    "loginScreenPreview": "登录界面",
+    "logosImages": "徽标和图片",
+    "mfaEnabled": "MFA 已启用",
+    "mobileAppHeader": "移动应用标题",
+    "noEmployeesFound": "未找到员工",
+    "noEmployeesMatch": "没有员工与您的搜索匹配",
+    "passwordChangeRequired": "需要更改密码",
+    "primaryColor": "主色",
+    "probation": "试用期",
+    "probationPeriod": "试用期",
+    "probationRestriction": "试用期间某些功能受限。试用期结束后将自动启用。",
+    "secondaryColor": "辅色",
+    "upgradeEnterpriseBranding": "升级到企业版以获取自定义品牌",
+    "webhookDetails": "Webhook 详情",
+    "webhookName": "名称",
+    "webhookSecret": "密钥",
+    "webhookSecretDesc": "用于签名 Webhook 负载以进行验证",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "任务",
@@ -1559,7 +1650,9 @@
     "invalidFileType": "无效的文件类型。",
     "locationPermission": "需要位置权限。",
     "cameraPermission": "需要相机权限。",
-    "notificationPermission": "需要通知权限。"
+    "notificationPermission": "需要通知权限。",
+    "goHome": "返回首页",
+    "technicalDetails": "技术详情"
   },
   "dateTime": {
     "today": "今天",
@@ -1748,7 +1841,18 @@
     "postJob": "发布职位",
     "skillMatch": "技能匹配",
     "noApplicants": "暂无应聘者",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "前厅",
+      "kitchen": "厨房",
+      "management": "管理层",
+      "reception": "前台"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "按姓名或邮箱搜索...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "添加技能失败",
+    "failedVerifySkill": "验证失败",
+    "failedUpdateSkillLevel": "更新级别失败",
+    "failedRemoveSkill": "删除技能失败",
+    "loadEmployeeError": "加载员工失败"
   },
   "integrationHub": {
     "title": "集成中心",

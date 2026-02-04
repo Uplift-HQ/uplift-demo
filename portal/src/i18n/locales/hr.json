@@ -233,7 +233,12 @@
       "barback": "Pomoćnik barmena",
       "sous": "Sous Chef",
       "expeditor": "Ekspeditor"
-    }
+    },
+    "new": "NOVO",
+    "exportComingSoon": "Izvoz uskoro dostupan",
+    "clickToViewDetails": "Kliknite za prikaz detalja",
+    "closeEsc": "Zatvori (ESC)",
+    "logoPreview": "Pregled logotipa"
   },
   "auth": {
     "login": "Prijava",
@@ -448,7 +453,16 @@
     "publishSchedule": "Objavi raspored",
     "publishConfirmation": "Upravo ćete objaviti {{count}} nacrt smjena. Svi pogođeni zaposlenici bit će obaviješteni.",
     "publishNow": "Objavi sada",
-    "aiScheduleBuilder": "AI Graditelj rasporeda"
+    "aiScheduleBuilder": "AI Graditelj rasporeda",
+    "failedTimeOffRequest": "Obrada zahtjeva za slobodan dan nije uspjela",
+    "failedShiftSwap": "Obrada zamjene smjene nije uspjela",
+    "publishButton": "Objavi",
+    "employee": "Zaposlenik",
+    "reassign": "Preraspodjeli",
+    "shiftReassigned": "Smjena preraspodijeljena",
+    "swapRequested": "Zamjena zatražena",
+    "shiftDeleted": "Smjena obrisana",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Pracenje vremena",
@@ -661,7 +675,8 @@
     "searchSkills": "Pretrazi vjestine...",
     "skillAdded": "Vjestina uspjesno dodana",
     "verificationRequested": "Verifikacija zatrazena",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Popis zaposlenika za ovu vještinu dolazi uskoro."
   },
   "career": {
     "title": "Karijera",
@@ -895,7 +910,7 @@
     "enable": "Omoguci",
     "activeSessions": "Aktivne sesije",
     "manageDevices": "Upravljajte prijavljenim uredjajima",
-    "signOutOtherDevices": "Odjavi ostale uredjaje",
+    "signOutOtherDevices": "Odjavi se s drugih uređaja",
     "thisDevice": "Ovaj uredjaj",
     "revoke": "Opozovi",
     "revoking": "Opozivanje...",
@@ -917,9 +932,9 @@
     "preparing": "Pripremanje...",
     "dataExported": "Podaci uspjesno izvezeni",
     "deleteAccountWarning": "Trajno obrisite svoj racun i sve povezane podatke. Ova radnja se ne moze ponistiti nakon 30-dnevnog roka.",
-    "requestAccountDeletion": "Zatrazi brisanje racuna",
+    "requestAccountDeletion": "Zatraži brisanje računa",
     "deletionScheduled": "Vas racun je zakazan za brisanje. Bit ce trajno uklonjen za 30 dana.",
-    "cancelDeletion": "Otkazi brisanje",
+    "cancelDeletion": "Otkaži brisanje",
     "enterPasswordConfirm": "Unesite lozinku za potvrdu",
     "deleteMyAccount": "Obrisi moj racun",
     "processing": "Obrada...",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Kontrolirajte kojim znacajkama svaki zaposlenik moze pristupiti",
     "searchEmployees": "Pretrazi zaposlenike...",
     "featureAccess": "Pristup znacajkama",
-    "enableAll": "Omoguci sve",
-    "disableAll": "Onemogoci sve",
+    "enableAll": "Omogući sve",
+    "disableAll": "Onemogući sve",
     "aboutEmployeeVisibility": "Ove postavke kontroliraju koje su znacajke vidljive svakom zaposleniku.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Kontaktirajte prodaju",
+    "changingPassword": "Mijenjanje...",
+    "loadError": "Učitavanje postavki nije uspjelo",
+    "saveOrgError": "Spremanje postavki organizacije nije uspjelo",
+    "loadUserError": "Učitavanje korisničkih podataka nije uspjelo",
+    "loadLogsError": "Učitavanje zapisa nije uspjelo",
+    "themes": {
+      "light": "Svijetla",
+      "lightDesc": "Čist, svijetli sučelje",
+      "dark": "Tamna",
+      "darkDesc": "Ugodno za oči",
+      "system": "Sustav",
+      "systemDesc": "Prati postavke uređaja"
+    },
+    "roles": {
+      "workers": "Zaposlenici",
+      "workersDesc": "Redovni zaposlenici",
+      "managers": "Voditelji",
+      "managersDesc": "Voditelji timova i nadzornici",
+      "admins": "Administratori",
+      "adminsDesc": "Potpuni pristup"
+    },
+    "features": {
+      "teamSchedules": "Rasporedi tima",
+      "teamSchedulesDesc": "Pregledajte rasporede članova",
+      "internalJobs": "Interne pozicije",
+      "internalJobsDesc": "Pristup internim oglasima",
+      "careerPaths": "Karijerni putevi",
+      "careerPathsDesc": "Pregledajte razvojne puteve",
+      "analytics": "Timska analitika",
+      "analyticsDesc": "Pristup analizi učinkovitosti",
+      "peerRecognition": "Priznanje kolega",
+      "peerRecognitionDesc": "Šaljite i primajte pohvale"
+    },
+    "aboutEmployeeVisibilityTitle": "O vidljivosti zaposlenika",
+    "aboutPageVisibilityDesc": "Stranice koje onemogućite bit će skrivene iz navigacijskog izbornika za tu ulogu.",
+    "brandName": "Naziv brenda",
+    "brandNameDesc": "Prikazuje se u bočnoj traci i zaglavlju mobilne aplikacije",
+    "brandingDesc": "Prilagodite izgled svog Uplift iskustva",
+    "brandingDescFull": "Prilagodite izgled na portalu i u mobilnoj aplikaciji",
+    "brandingLabel": "Brendiranje",
+    "created": "Stvoreno",
+    "dropFileUpload": "Ispustite datoteku ili kliknite za prijenos",
+    "emailVerified": "E-pošta potvrđena",
+    "eventsToSubscribe": "Događaji za pretplatu",
+    "livePreview": "Pregled uživo",
+    "loginScreenPreview": "Zaslon za prijavu",
+    "logosImages": "Logotipi i slike",
+    "mfaEnabled": "MFA omogućen",
+    "mobileAppHeader": "Zaglavlje mobilne aplikacije",
+    "noEmployeesFound": "Nisu pronađeni zaposlenici",
+    "noEmployeesMatch": "Nijedan zaposlenik ne odgovara vašoj pretrazi",
+    "passwordChangeRequired": "Potrebna je promjena lozinke",
+    "primaryColor": "Primarna boja",
+    "probation": "Probni rad",
+    "probationPeriod": "Probno razdoblje",
+    "probationRestriction": "Neke su značajke ograničene tijekom probnog razdoblja. Automatski će se omogućiti nakon završetka probnog roka.",
+    "secondaryColor": "Sekundarna boja",
+    "upgradeEnterpriseBranding": "Nadogradite na Enterprise za prilagođeno brendiranje",
+    "webhookDetails": "Pojedinosti webhooka",
+    "webhookName": "Naziv",
+    "webhookSecret": "Tajna",
+    "webhookSecretDesc": "Koristi se za potpisivanje webhook sadržaja radi provjere",
+    "webhooksTitle": "Webhookovi"
   },
   "tasks": {
     "title": "Zadaci",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Potrebna je dozvola za lokaciju.",
     "cameraPermission": "Potrebna je dozvola za kameru.",
     "notificationPermission": "Potrebna je dozvola za obavijesti.",
-    "tryAgain": "Pokusajte ponovo",
-    "somethingWentWrong": "Nesto je poslo po zlu"
+    "tryAgain": "Pokušaj ponovno",
+    "somethingWentWrong": "Nešto je pošlo po krivu",
+    "goHome": "Početna",
+    "technicalDetails": "Tehnički detalji"
   },
   "activity": {
     "title": "Pregled aktivnosti",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Izradi prilagođeno izvješće",
+    "dateFrom": "Datum od",
+    "dateTo": "Datum do",
+    "filters": "Filteri",
+    "reportName": "Naziv izvješća",
+    "reportType": "Vrsta izvješća",
+    "savedReportsLocal": "Spremljena izvješća pohranjuju se lokalno. Trajno spremanje izvješća dolazi uskoro.",
+    "sortBy": "Sortiraj po",
+    "trendOverTime": "Trend kroz vrijeme"
   },
   "accessibility": {
     "menu": "Izbornik",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Brisanje predloška nije uspjelo",
+    "shiftsGenerated": "Smjene uspješno generirane!",
+    "failedSave": "Spremanje predloška nije uspjelo"
   },
   "legal": {
     "lastUpdated": "Zadnje azurirano",
@@ -1748,7 +1841,18 @@
     "postJob": "Objavi posao",
     "skillMatch": "podudarnost vjestina",
     "noApplicants": "Jos nema kandidata",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Recepcija gostiju",
+      "kitchen": "Kuhinja",
+      "management": "Upravljanje",
+      "reception": "Recepcija"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Pretrazi po imenu ili e-mailu...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Dodavanje vještine nije uspjelo",
+    "failedVerifySkill": "Provjera nije uspjela",
+    "failedUpdateSkillLevel": "Ažuriranje razine nije uspjelo",
+    "failedRemoveSkill": "Uklanjanje vještine nije uspjelo",
+    "loadEmployeeError": "Nije uspjelo učitavanje zaposlenika"
   },
   "integrationHub": {
     "title": "Centar za integracije",

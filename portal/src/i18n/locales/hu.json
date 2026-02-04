@@ -233,7 +233,12 @@
       "barback": "Bársegéd",
       "sous": "Sous Chef",
       "expeditor": "Expeditor"
-    }
+    },
+    "new": "ÚJ",
+    "exportComingSoon": "Exportálás hamarosan",
+    "clickToViewDetails": "Kattintson a részletek megtekintéséhez",
+    "closeEsc": "Bezárás (ESC)",
+    "logoPreview": "Logó előnézet"
   },
   "auth": {
     "login": "Bejelentkezés",
@@ -448,7 +453,16 @@
     "publishSchedule": "Beosztás közzététele",
     "publishConfirmation": "{{count}} vázlat műszakot készül közzétenni. Az érintett alkalmazottak értesítést kapnak.",
     "publishNow": "Közzététel most",
-    "aiScheduleBuilder": "AI Beosztás készítő"
+    "aiScheduleBuilder": "AI Beosztás készítő",
+    "failedTimeOffRequest": "Szabadság kérelem feldolgozása sikertelen",
+    "failedShiftSwap": "Műszakcsere feldolgozása sikertelen",
+    "publishButton": "Közzététel",
+    "employee": "Alkalmazott",
+    "reassign": "Újra kiosztás",
+    "shiftReassigned": "Műszak újra kiosztva",
+    "swapRequested": "Csere kérelmezve",
+    "shiftDeleted": "Műszak törölve",
+    "minutes": "perc"
   },
   "timeTracking": {
     "title": "Időkövetés",
@@ -661,7 +675,8 @@
     "searchSkills": "Készségek keresése...",
     "skillAdded": "Készség sikeresen hozzáadva",
     "verificationRequested": "Ellenőrzés kérelmezve",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "A munkavállalói lista ehhez a készséghez hamarosan elérhető."
   },
   "career": {
     "title": "Karrier",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Értékesítés elérése",
+    "changingPassword": "Módosítás...",
+    "loadError": "Beállítások betöltése sikertelen",
+    "saveOrgError": "Szervezeti beállítások mentése sikertelen",
+    "loadUserError": "Felhasználói adatok betöltése sikertelen",
+    "loadLogsError": "Naplók betöltése sikertelen",
+    "themes": {
+      "light": "Világos",
+      "lightDesc": "Tiszta, világos felület",
+      "dark": "Sötét",
+      "darkDesc": "Szemkímélő",
+      "system": "Rendszer",
+      "systemDesc": "Eszközbeállítások követése"
+    },
+    "roles": {
+      "workers": "Munkavállalók",
+      "workersDesc": "Általános alkalmazottak",
+      "managers": "Vezetők",
+      "managersDesc": "Csoportvezetők és felügyelők",
+      "admins": "Adminisztrátorok",
+      "adminsDesc": "Teljes hozzáférés"
+    },
+    "features": {
+      "teamSchedules": "Csapatbeosztások",
+      "teamSchedulesDesc": "Tagok beosztásainak megtekintése",
+      "internalJobs": "Belső pozíciók",
+      "internalJobsDesc": "Belső álláshirdetések elérése",
+      "careerPaths": "Karrierutak",
+      "careerPathsDesc": "Fejlődési utak megtekintése",
+      "analytics": "Csapatelemzés",
+      "analyticsDesc": "Teljesítményelemzések elérése",
+      "peerRecognition": "Kollegiális elismerés",
+      "peerRecognitionDesc": "Dicséretek küldése és fogadása"
+    },
+    "aboutEmployeeVisibilityTitle": "A munkavállalói láthatóságról",
+    "aboutPageVisibilityDesc": "A letiltott oldalak el lesznek rejtve a navigációs menüből az adott szerepkör számára.",
+    "brandName": "Márkanév",
+    "brandNameDesc": "Az oldalsávban és a mobilalkalmazás fejlécében jelenik meg",
+    "brandingDesc": "Szabályozza az Uplift élmény megjelenését",
+    "brandingDescFull": "Szabályozza a megjelenést a portálon és a mobilalkalmazásban",
+    "brandingLabel": "Arculat",
+    "created": "Létrehozva",
+    "dropFileUpload": "Húzza ide a fájlt vagy kattintson a feltöltéshez",
+    "emailVerified": "E-mail megerősítve",
+    "eventsToSubscribe": "Feliratkozandó események",
+    "livePreview": "Élő előnézet",
+    "loginScreenPreview": "Bejelentkezési képernyő",
+    "logosImages": "Logók és képek",
+    "mfaEnabled": "MFA engedélyezve",
+    "mobileAppHeader": "Mobilalkalmazás fejléce",
+    "noEmployeesFound": "Nem található munkavállaló",
+    "noEmployeesMatch": "Egyetlen munkavállaló sem felel meg a keresésnek",
+    "passwordChangeRequired": "Jelszóváltozás szükséges",
+    "primaryColor": "Elsődleges szín",
+    "probation": "Próbaidő",
+    "probationPeriod": "Próbaidőszak",
+    "probationRestriction": "Egyes funkciók korlátozottak a próbaidő alatt. A próbaidő lejárta után automatikusan engedélyeződnek.",
+    "secondaryColor": "Másodlagos szín",
+    "upgradeEnterpriseBranding": "Frissítsen Enterprise-ra az egyedi arculatért",
+    "webhookDetails": "Webhook részletek",
+    "webhookName": "Név",
+    "webhookSecret": "Titok",
+    "webhookSecretDesc": "A webhook adatok aláírására használatos ellenőrzés céljából",
+    "webhooksTitle": "Webhookok"
   },
   "tasks": {
     "title": "Feladatok",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Helymeghatározási engedély szükséges.",
     "cameraPermission": "Kamera engedély szükséges.",
     "notificationPermission": "Értesítési engedély szükséges.",
-    "tryAgain": "Kérjük, próbálja újra",
-    "somethingWentWrong": "Valami hiba történt"
+    "tryAgain": "Próbálja újra",
+    "somethingWentWrong": "Valami hiba történt",
+    "goHome": "Főoldal",
+    "technicalDetails": "Technikai részletek"
   },
   "activity": {
     "title": "Tevékenység áttekintése",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Egyedi jelentés létrehozása",
+    "dateFrom": "Dátum ettől",
+    "dateTo": "Dátum eddig",
+    "filters": "Szűrők",
+    "reportName": "Jelentés neve",
+    "reportType": "Jelentés típusa",
+    "savedReportsLocal": "A mentett jelentések helyben tárolódnak. Az állandó jelentésmentés hamarosan elérhető.",
+    "sortBy": "Rendezés",
+    "trendOverTime": "Időbeli trend"
   },
   "accessibility": {
     "menu": "Menü",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Sablon törlése sikertelen",
+    "shiftsGenerated": "Műszakok sikeresen létrehozva!",
+    "failedSave": "Sablon mentése sikertelen"
   },
   "legal": {
     "lastUpdated": "Utoljára frissítve",
@@ -1748,7 +1841,18 @@
     "postJob": "Állás közzététele",
     "skillMatch": "készségegyezés",
     "noApplicants": "Még nincsenek pályázók",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Vendégfogadás",
+      "kitchen": "Konyha",
+      "management": "Vezetőség",
+      "reception": "Recepció"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Keresés név vagy e-mail alapján...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Készség hozzáadása sikertelen",
+    "failedVerifySkill": "Ellenőrzés sikertelen",
+    "failedUpdateSkillLevel": "Szint frissítése sikertelen",
+    "failedRemoveSkill": "Készség eltávolítása sikertelen",
+    "loadEmployeeError": "A munkavállaló betöltése sikertelen"
   },
   "integrationHub": {
     "title": "Integrációs központ",

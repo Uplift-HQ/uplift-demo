@@ -233,7 +233,12 @@
       "barback": "Baariapulainen",
       "sous": "Sous-kokki",
       "expeditor": "Ekspediittori"
-    }
+    },
+    "new": "UUSI",
+    "exportComingSoon": "Vienti tulossa pian",
+    "clickToViewDetails": "Napsauta nähdäksesi tiedot",
+    "closeEsc": "Sulje (ESC)",
+    "logoPreview": "Logon esikatselu"
   },
   "auth": {
     "login": "Kirjaudu",
@@ -448,7 +453,16 @@
     "publishSchedule": "Julkaise aikataulu",
     "publishConfirmation": "Olet julkaisemassa {{count}} luonnosvuoroa. Kaikki asianomaiset työntekijät saavat ilmoituksen.",
     "publishNow": "Julkaise nyt",
-    "aiScheduleBuilder": "AI Aikataulurakentaja"
+    "aiScheduleBuilder": "AI Aikataulurakentaja",
+    "failedTimeOffRequest": "Vapaa-aikapyynnön käsittely epäonnistui",
+    "failedShiftSwap": "Vuoronvaihdon käsittely epäonnistui",
+    "publishButton": "Julkaise",
+    "employee": "Työntekijä",
+    "reassign": "Uudelleenmääritä",
+    "shiftReassigned": "Vuoro uudelleenmääritetty",
+    "swapRequested": "Vaihto pyydetty",
+    "shiftDeleted": "Vuoro poistettu",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Ajan seuranta",
@@ -661,7 +675,8 @@
     "searchSkills": "Hae taitoja...",
     "skillAdded": "Taito lisätty onnistuneesti",
     "verificationRequested": "Vahvistus pyydetty",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Tämän taidon työntekijälistaus tulossa pian."
   },
   "career": {
     "title": "Ura",
@@ -895,7 +910,7 @@
     "enable": "Ota käyttöön",
     "activeSessions": "Aktiiviset istunnot",
     "manageDevices": "Hallitse kirjautuneita laitteitasi",
-    "signOutOtherDevices": "Kirjaudu ulos muilta laitteilta",
+    "signOutOtherDevices": "Kirjaudu ulos muista laitteista",
     "thisDevice": "Tämä laite",
     "revoke": "Peruuta",
     "revoking": "Peruutetaan...",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Ota yhteyttä myyntiin",
+    "changingPassword": "Vaihdetaan...",
+    "loadError": "Asetusten lataus epäonnistui",
+    "saveOrgError": "Organisaation asetusten tallennus epäonnistui",
+    "loadUserError": "Käyttäjätietojen lataus epäonnistui",
+    "loadLogsError": "Lokien lataus epäonnistui",
+    "themes": {
+      "light": "Vaalea",
+      "lightDesc": "Puhdas, valoisa käyttöliittymä",
+      "dark": "Tumma",
+      "darkDesc": "Silmille miellyttävä",
+      "system": "Järjestelmä",
+      "systemDesc": "Seuraa laitteen asetuksia"
+    },
+    "roles": {
+      "workers": "Työntekijät",
+      "workersDesc": "Tavalliset työntekijät",
+      "managers": "Esimiehet",
+      "managersDesc": "Tiiminvetäjät ja valvojat",
+      "admins": "Ylläpitäjät",
+      "adminsDesc": "Täysi pääsy"
+    },
+    "features": {
+      "teamSchedules": "Tiimin aikataulut",
+      "teamSchedulesDesc": "Näytä jäsenten aikataulut",
+      "internalJobs": "Sisäiset avoimet paikat",
+      "internalJobsDesc": "Pääsy sisäisiin ilmoituksiin",
+      "careerPaths": "Urapolut",
+      "careerPathsDesc": "Näytä kehityspolut",
+      "analytics": "Tiimianalytiikka",
+      "analyticsDesc": "Pääsy suorituskykyanalyyseihin",
+      "peerRecognition": "Vertaistunnustus",
+      "peerRecognitionDesc": "Lähetä ja vastaanota kehuja"
+    },
+    "aboutEmployeeVisibilityTitle": "Tietoja työntekijän näkyvyydestä",
+    "aboutPageVisibilityDesc": "Poistamasi sivut piilotetaan kyseisen roolin navigointivalikosta.",
+    "brandName": "Brändin nimi",
+    "brandNameDesc": "Näkyy sivupalkissa ja mobiilisovelluksen ylätunnisteessa",
+    "brandingDesc": "Mukauta Uplift-kokemuksesi ulkoasua",
+    "brandingDescFull": "Mukauta ulkoasua portaalissa ja mobiilisovelluksessa",
+    "brandingLabel": "Brändys",
+    "created": "Luotu",
+    "dropFileUpload": "Pudota tiedosto tai napsauta ladataksesi",
+    "emailVerified": "Sähköposti vahvistettu",
+    "eventsToSubscribe": "Tilattavat tapahtumat",
+    "livePreview": "Reaaliaikainen esikatselu",
+    "loginScreenPreview": "Kirjautumisnäyttö",
+    "logosImages": "Logot ja kuvat",
+    "mfaEnabled": "MFA käytössä",
+    "mobileAppHeader": "Mobiilisovelluksen ylätunniste",
+    "noEmployeesFound": "Työntekijöitä ei löytynyt",
+    "noEmployeesMatch": "Yksikään työntekijä ei vastaa hakuasi",
+    "passwordChangeRequired": "Salasanan vaihto vaaditaan",
+    "primaryColor": "Ensisijainen väri",
+    "probation": "Koeaika",
+    "probationPeriod": "Koeaika",
+    "probationRestriction": "Jotkin ominaisuudet ovat rajoitettuja koeaikana. Ne otetaan automaattisesti käyttöön koeajan päätyttyä.",
+    "secondaryColor": "Toissijainen väri",
+    "upgradeEnterpriseBranding": "Päivitä Enterprise-tasolle mukautettua brändystä varten",
+    "webhookDetails": "Webhookin tiedot",
+    "webhookName": "Nimi",
+    "webhookSecret": "Salaisuus",
+    "webhookSecretDesc": "Käytetään webhook-kuormien allekirjoittamiseen todennusta varten",
+    "webhooksTitle": "Webhookit"
   },
   "tasks": {
     "title": "Tehtävät",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Kameraoikeus vaaditaan.",
     "notificationPermission": "Ilmoitusoikeus vaaditaan.",
     "tryAgain": "Yritä uudelleen",
-    "somethingWentWrong": "Jokin meni pieleen"
+    "somethingWentWrong": "Jokin meni pieleen",
+    "goHome": "Etusivu",
+    "technicalDetails": "Tekniset tiedot"
   },
   "activity": {
     "title": "Aktiviteetin tarkastelu",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Luo mukautettu raportti",
+    "dateFrom": "Päivämäärä alkaen",
+    "dateTo": "Päivämäärä asti",
+    "filters": "Suodattimet",
+    "reportName": "Raportin nimi",
+    "reportType": "Raporttityyppi",
+    "savedReportsLocal": "Tallennetut raportit säilytetään paikallisesti. Pysyvä raporttien tallennus tulossa pian.",
+    "sortBy": "Lajittele",
+    "trendOverTime": "Trendi ajan mittaan"
   },
   "accessibility": {
     "menu": "Valikko",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Mallin poisto epäonnistui",
+    "shiftsGenerated": "Vuorot luotu onnistuneesti!",
+    "failedSave": "Mallin tallennus epäonnistui"
   },
   "legal": {
     "lastUpdated": "Viimeksi päivitetty",
@@ -1748,7 +1841,18 @@
     "postJob": "Julkaise työpaikka",
     "skillMatch": "taitovastaavuus",
     "noApplicants": "Ei hakijoita vielä",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Asiakaspalvelu",
+      "kitchen": "Keittiö",
+      "management": "Johto",
+      "reception": "Vastaanotto"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Hae nimellä tai sähköpostilla...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Taidon lisäys epäonnistui",
+    "failedVerifySkill": "Vahvistus epäonnistui",
+    "failedUpdateSkillLevel": "Tason päivitys epäonnistui",
+    "failedRemoveSkill": "Taidon poisto epäonnistui",
+    "loadEmployeeError": "Työntekijän lataaminen epäonnistui"
   },
   "integrationHub": {
     "title": "Integraatiokeskus",

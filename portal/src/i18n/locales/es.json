@@ -233,7 +233,12 @@
       "barback": "Ayudante de bar",
       "sous": "Sous Chef",
       "expeditor": "Expedidor"
-    }
+    },
+    "new": "NUEVO",
+    "exportComingSoon": "Exportación próximamente",
+    "clickToViewDetails": "Haga clic para ver los detalles",
+    "closeEsc": "Cerrar (ESC)",
+    "logoPreview": "Vista previa del logo"
   },
   "auth": {
     "login": "Iniciar sesión",
@@ -448,7 +453,16 @@
     "publishSchedule": "Publicar horario",
     "publishConfirmation": "Está a punto de publicar {{count}} turno(s) borrador(es). Esto notificará a todos los empleados afectados.",
     "publishNow": "Publicar ahora",
-    "aiScheduleBuilder": "Constructor de horarios IA"
+    "aiScheduleBuilder": "Constructor de horarios IA",
+    "failedTimeOffRequest": "Error al procesar solicitud de ausencia",
+    "failedShiftSwap": "Error al procesar intercambio de turno",
+    "publishButton": "Publicar",
+    "employee": "Empleado",
+    "reassign": "Reasignar",
+    "shiftReassigned": "Turno reasignado",
+    "swapRequested": "Intercambio solicitado",
+    "shiftDeleted": "Turno eliminado",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Control de tiempo",
@@ -661,7 +675,8 @@
     "searchSkills": "Buscar habilidades...",
     "skillAdded": "Habilidad añadida con éxito",
     "verificationRequested": "Verificación solicitada",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "La lista de empleados para esta habilidad estará disponible pronto."
   },
   "career": {
     "title": "Carrera",
@@ -965,7 +980,7 @@
     "deleteMyAccount": "Eliminar mi cuenta",
     "processing": "Procesando...",
     "webhooksIntegration": "Integra con sistemas externos mediante callbacks HTTP",
-    "addWebhook": "Añadir webhook",
+    "addWebhook": "Agregar webhook",
     "endpointUrl": "URL del endpoint",
     "subscribedEvents": "Eventos suscritos",
     "successRate": "Tasa de éxito",
@@ -980,8 +995,8 @@
     "controlFeatureAccess": "Controla qué funciones puede acceder cada empleado",
     "searchEmployees": "Buscar empleados...",
     "featureAccess": "Acceso a funciones",
-    "enableAll": "Activar todo",
-    "disableAll": "Desactivar todo",
+    "enableAll": "Habilitar todo",
+    "disableAll": "Deshabilitar todo",
     "aboutEmployeeVisibility": "Estas configuraciones controlan qué funciones son visibles para cada empleado.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -1036,7 +1051,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Contactar ventas",
+    "changingPassword": "Cambiando...",
+    "loadError": "Error al cargar ajustes",
+    "saveOrgError": "Error al guardar ajustes de organización",
+    "loadUserError": "Error al cargar datos de usuario",
+    "loadLogsError": "Error al cargar registros",
+    "themes": {
+      "light": "Claro",
+      "lightDesc": "Interfaz limpia y brillante",
+      "dark": "Oscuro",
+      "darkDesc": "Cómodo para la vista",
+      "system": "Sistema",
+      "systemDesc": "Usar ajustes del dispositivo"
+    },
+    "roles": {
+      "workers": "Empleados",
+      "workersDesc": "Empleados regulares",
+      "managers": "Gerentes",
+      "managersDesc": "Líderes de equipo y supervisores",
+      "admins": "Administradores",
+      "adminsDesc": "Acceso completo"
+    },
+    "features": {
+      "teamSchedules": "Horarios de equipo",
+      "teamSchedulesDesc": "Ver horarios de otros miembros",
+      "internalJobs": "Empleos internos",
+      "internalJobsDesc": "Acceder a ofertas internas",
+      "careerPaths": "Rutas de carrera",
+      "careerPathsDesc": "Ver rutas de desarrollo",
+      "analytics": "Analítica de equipo",
+      "analyticsDesc": "Acceder a análisis de rendimiento",
+      "peerRecognition": "Reconocimiento entre pares",
+      "peerRecognitionDesc": "Enviar y recibir felicitaciones"
+    },
+    "aboutEmployeeVisibilityTitle": "Acerca de la visibilidad de empleados",
+    "aboutPageVisibilityDesc": "Las páginas que desactive se ocultarán del menú de navegación para ese rol.",
+    "brandName": "Nombre de la marca",
+    "brandNameDesc": "Se muestra en la barra lateral y en el encabezado de la aplicación móvil",
+    "brandingDesc": "Personalice la apariencia de su experiencia Uplift",
+    "brandingDescFull": "Personalice la apariencia del portal y la aplicación móvil",
+    "brandingLabel": "Imagen de marca",
+    "created": "Creado",
+    "dropFileUpload": "Suelte un archivo o haga clic para cargar",
+    "emailVerified": "Correo electrónico verificado",
+    "eventsToSubscribe": "Eventos a los que suscribirse",
+    "livePreview": "Vista previa en vivo",
+    "loginScreenPreview": "Pantalla de inicio de sesión",
+    "logosImages": "Logos e imágenes",
+    "mfaEnabled": "MFA activado",
+    "mobileAppHeader": "Encabezado de la aplicación móvil",
+    "noEmployeesFound": "No se encontraron empleados",
+    "noEmployeesMatch": "Ningún empleado coincide con su búsqueda",
+    "passwordChangeRequired": "Se requiere cambio de contraseña",
+    "primaryColor": "Color primario",
+    "probation": "Período de prueba",
+    "probationPeriod": "Período de prueba",
+    "probationRestriction": "Algunas funciones están restringidas durante el período de prueba. Se activarán automáticamente cuando finalice el período de prueba.",
+    "secondaryColor": "Color secundario",
+    "upgradeEnterpriseBranding": "Actualice a Enterprise para imagen de marca personalizada",
+    "webhookDetails": "Detalles del webhook",
+    "webhookName": "Nombre",
+    "webhookSecret": "Secreto",
+    "webhookSecretDesc": "Se utiliza para firmar las cargas útiles del webhook con fines de verificación",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Tareas",
@@ -1292,8 +1371,10 @@
     "locationPermission": "Permiso de ubicación requerido.",
     "cameraPermission": "Permiso de cámara requerido.",
     "notificationPermission": "Permiso de notificación requerido.",
-    "tryAgain": "Intentar de nuevo",
-    "somethingWentWrong": "Algo salió mal"
+    "tryAgain": "Reintentar",
+    "somethingWentWrong": "Algo salió mal",
+    "goHome": "Inicio",
+    "technicalDetails": "Detalles técnicos"
   },
   "activity": {
     "title": "Revisión de actividad",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Crear informe personalizado",
+    "dateFrom": "Fecha desde",
+    "dateTo": "Fecha hasta",
+    "filters": "Filtros",
+    "reportName": "Nombre del informe",
+    "reportType": "Tipo de informe",
+    "savedReportsLocal": "Los informes guardados se almacenan localmente. El almacenamiento persistente estará disponible pronto.",
+    "sortBy": "Ordenar por",
+    "trendOverTime": "Tendencia a lo largo del tiempo"
   },
   "shiftTemplates": {
     "title": "Plantillas de turno",
@@ -1501,7 +1591,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Error al eliminar plantilla",
+    "shiftsGenerated": "¡Turnos generados exitosamente!",
+    "failedSave": "Error al guardar plantilla"
   },
   "legal": {
     "lastUpdated": "Última actualización",
@@ -1748,7 +1841,18 @@
     "postJob": "Publicar oferta",
     "skillMatch": "coincidencia de habilidades",
     "noApplicants": "Aún no hay candidatos",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Sala",
+      "kitchen": "Cocina",
+      "management": "Dirección",
+      "reception": "Recepción"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Buscar por nombre o correo...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Error al agregar habilidad",
+    "failedVerifySkill": "Error al verificar",
+    "failedUpdateSkillLevel": "Error al actualizar nivel",
+    "failedRemoveSkill": "Error al eliminar habilidad",
+    "loadEmployeeError": "Error al cargar el empleado"
   },
   "integrationHub": {
     "title": "Hub de integraciones",

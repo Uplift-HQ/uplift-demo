@@ -233,7 +233,12 @@
       "barback": "עוזר בר",
       "sous": "סו שף",
       "expeditor": "מתאם"
-    }
+    },
+    "new": "חדש",
+    "exportComingSoon": "ייצוא בקרוב",
+    "clickToViewDetails": "לחצו להצגת פרטים",
+    "closeEsc": "סגירה (ESC)",
+    "logoPreview": "תצוגה מקדימה של לוגו"
   },
   "auth": {
     "login": "התחברות",
@@ -448,7 +453,16 @@
     "publishSchedule": "פרסם לוח זמנים",
     "publishConfirmation": "אתה עומד לפרסם {{count}} משמרות טיוטה. כל העובדים המושפעים יקבלו הודעה.",
     "publishNow": "פרסם עכשיו",
-    "aiScheduleBuilder": "בונה לוח זמנים AI"
+    "aiScheduleBuilder": "בונה לוח זמנים AI",
+    "failedTimeOffRequest": "עיבוד בקשת חופש נכשל",
+    "failedShiftSwap": "עיבוד החלפת משמרת נכשל",
+    "publishButton": "פרסם",
+    "employee": "עובד",
+    "reassign": "הקצה מחדש",
+    "shiftReassigned": "המשמרת הוקצתה מחדש",
+    "swapRequested": "החלפה התבקשה",
+    "shiftDeleted": "המשמרת נמחקה",
+    "minutes": "דק׳"
   },
   "timeTracking": {
     "title": "מעקב זמן",
@@ -661,7 +675,8 @@
     "searchSkills": "חפש כישורים...",
     "skillAdded": "הכישור נוסף בהצלחה",
     "verificationRequested": "בקשת אימות נשלחה",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "רשימת עובדים למיומנות זו תגיע בקרוב."
   },
   "career": {
     "title": "קריירה",
@@ -924,7 +939,7 @@
     "deleteMyAccount": "מחק את החשבון שלי",
     "processing": "מעבד...",
     "webhooksIntegration": "התחבר עם מערכות חיצוניות דרך קריאות HTTP",
-    "addWebhook": "הוסף ווב-הוק",
+    "addWebhook": "הוסף webhook",
     "endpointUrl": "כתובת URL של נקודת קצה",
     "subscribedEvents": "אירועים מנויים",
     "successRate": "אחוז הצלחה",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "צור קשר עם מכירות",
+    "changingPassword": "משנה...",
+    "loadError": "טעינת הגדרות נכשלה",
+    "saveOrgError": "שמירת הגדרות ארגון נכשלה",
+    "loadUserError": "טעינת נתוני משתמש נכשלה",
+    "loadLogsError": "טעינת יומנים נכשלה",
+    "themes": {
+      "light": "בהיר",
+      "lightDesc": "ממשק נקי ובהיר",
+      "dark": "כהה",
+      "darkDesc": "נעים לעיניים",
+      "system": "מערכת",
+      "systemDesc": "עקוב אחר הגדרות המכשיר"
+    },
+    "roles": {
+      "workers": "עובדים",
+      "workersDesc": "עובדים רגילים",
+      "managers": "מנהלים",
+      "managersDesc": "ראשי צוותים ומפקחים",
+      "admins": "מנהלי מערכת",
+      "adminsDesc": "גישה מלאה"
+    },
+    "features": {
+      "teamSchedules": "לוחות צוות",
+      "teamSchedulesDesc": "צפה בלוחות חברי צוות",
+      "internalJobs": "משרות פנימיות",
+      "internalJobsDesc": "גישה למשרות פנימיות",
+      "careerPaths": "מסלולי קריירה",
+      "careerPathsDesc": "צפה במסלולי פיתוח",
+      "analytics": "אנליטיקת צוות",
+      "analyticsDesc": "גישה לניתוחי ביצועים",
+      "peerRecognition": "הכרת עמיתים",
+      "peerRecognitionDesc": "שלח וקבל מחמאות"
+    },
+    "aboutEmployeeVisibilityTitle": "אודות נראות עובדים",
+    "aboutPageVisibilityDesc": "עמודים שתשביתו יוסתרו מתפריט הניווט עבור תפקיד זה.",
+    "brandName": "שם המותג",
+    "brandNameDesc": "מוצג בסרגל הצד ובכותרת אפליקציית הנייד",
+    "brandingDesc": "התאימו אישית את המראה של חוויית Uplift שלכם",
+    "brandingDescFull": "התאימו אישית את המראה בפורטל ובאפליקציית הנייד",
+    "brandingLabel": "מיתוג",
+    "created": "נוצר",
+    "dropFileUpload": "גררו קובץ או לחצו להעלאה",
+    "emailVerified": "אימייל מאומת",
+    "eventsToSubscribe": "אירועים להרשמה",
+    "livePreview": "תצוגה מקדימה חיה",
+    "loginScreenPreview": "מסך התחברות",
+    "logosImages": "לוגואים ותמונות",
+    "mfaEnabled": "MFA מופעל",
+    "mobileAppHeader": "כותרת אפליקציית הנייד",
+    "noEmployeesFound": "לא נמצאו עובדים",
+    "noEmployeesMatch": "אין עובדים התואמים לחיפוש שלך",
+    "passwordChangeRequired": "נדרשת החלפת סיסמה",
+    "primaryColor": "צבע ראשי",
+    "probation": "תקופת ניסיון",
+    "probationPeriod": "תקופת ניסיון",
+    "probationRestriction": "חלק מהתכונות מוגבלות בתקופת הניסיון. הן יופעלו אוטומטית לאחר סיום הניסיון.",
+    "secondaryColor": "צבע משני",
+    "upgradeEnterpriseBranding": "שדרגו ל-Enterprise למיתוג מותאם אישית",
+    "webhookDetails": "פרטי Webhook",
+    "webhookName": "שם",
+    "webhookSecret": "סוד",
+    "webhookSecretDesc": "משמש לחתימת מטעני webhook לאימות",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "משימות",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "נדרשת הרשאת מצלמה.",
     "notificationPermission": "נדרשת הרשאת התראות.",
     "tryAgain": "נסה שוב",
-    "somethingWentWrong": "משהו השתבש"
+    "somethingWentWrong": "משהו השתבש",
+    "goHome": "דף הבית",
+    "technicalDetails": "פרטים טכניים"
   },
   "activity": {
     "title": "סקירת פעילות",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "בניית דוח מותאם אישית",
+    "dateFrom": "תאריך מ",
+    "dateTo": "תאריך עד",
+    "filters": "מסננים",
+    "reportName": "שם הדוח",
+    "reportType": "סוג הדוח",
+    "savedReportsLocal": "דוחות שמורים נשמרים מקומית. שמירת דוחות קבועה תגיע בקרוב.",
+    "sortBy": "מיין לפי",
+    "trendOverTime": "מגמה לאורך זמן"
   },
   "accessibility": {
     "menu": "תפריט",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "מחיקת תבנית נכשלה",
+    "shiftsGenerated": "משמרות נוצרו בהצלחה!",
+    "failedSave": "שמירת תבנית נכשלה"
   },
   "legal": {
     "lastUpdated": "עודכן לאחרונה",
@@ -1748,7 +1841,18 @@
     "postJob": "פרסם משרה",
     "skillMatch": "התאמת כישורים",
     "noApplicants": "אין מועמדים עדיין",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "קדמת הבית",
+      "kitchen": "מטבח",
+      "management": "הנהלה",
+      "reception": "קבלה"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro אדינבורג",
+      "glasgow": "Grand Metro גלאזגו",
+      "manchester": "Grand Metro מנצ'סטר"
+    }
   },
   "employees": {
     "searchPlaceholder": "חיפוש לפי שם או אימייל...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "הוספת כישור נכשלה",
+    "failedVerifySkill": "אימות נכשל",
+    "failedUpdateSkillLevel": "עדכון רמה נכשל",
+    "failedRemoveSkill": "הסרת כישור נכשלה",
+    "loadEmployeeError": "טעינת העובד נכשלה"
   },
   "integrationHub": {
     "title": "מרכז אינטגרציות",

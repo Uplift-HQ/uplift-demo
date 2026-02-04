@@ -233,7 +233,12 @@
       "barback": "Baariabi",
       "sous": "Sous-kokk",
       "expeditor": "Ekspediitor"
-    }
+    },
+    "new": "UUS",
+    "exportComingSoon": "Eksport tuleb peagi",
+    "clickToViewDetails": "Klõpsake üksikasjade vaatamiseks",
+    "closeEsc": "Sulge (ESC)",
+    "logoPreview": "Logo eelvaade"
   },
   "auth": {
     "login": "Logi sisse",
@@ -448,7 +453,16 @@
     "publishSchedule": "Avalda graafik",
     "publishConfirmation": "Olete avaldamas {{count}} mustandvahetust.",
     "publishNow": "Avalda kohe",
-    "aiScheduleBuilder": "AI Graafikukoostaja"
+    "aiScheduleBuilder": "AI Graafikukoostaja",
+    "failedTimeOffRequest": "Puhkusetaotluse töötlemine ebaõnnestus",
+    "failedShiftSwap": "Vahetuse vahetamine ebaõnnestus",
+    "publishButton": "Avalda",
+    "employee": "Töötaja",
+    "reassign": "Määra ümber",
+    "shiftReassigned": "Vahetus ümber määratud",
+    "swapRequested": "Vahetus taotletud",
+    "shiftDeleted": "Vahetus kustutatud",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Ajaregistreerimine",
@@ -661,7 +675,8 @@
     "searchSkills": "Otsi oskusi...",
     "skillAdded": "Oskus edukalt lisatud",
     "verificationRequested": "Kinnitustaotlus saadetud",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Selle oskuse töötajate loend on peagi saadaval."
   },
   "career": {
     "title": "Karjäär",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Võta müügiga ühendust",
+    "changingPassword": "Muutmine...",
+    "loadError": "Seadete laadimine ebaõnnestus",
+    "saveOrgError": "Organisatsiooni seadete salvestamine ebaõnnestus",
+    "loadUserError": "Kasutaja andmete laadimine ebaõnnestus",
+    "loadLogsError": "Logide laadimine ebaõnnestus",
+    "themes": {
+      "light": "Hele",
+      "lightDesc": "Puhas, hele liides",
+      "dark": "Tume",
+      "darkDesc": "Silmadele mugav",
+      "system": "Süsteem",
+      "systemDesc": "Järgi seadme seadeid"
+    },
+    "roles": {
+      "workers": "Töötajad",
+      "workersDesc": "Tavalliset töötajad",
+      "managers": "Juhid",
+      "managersDesc": "Meeskonnajuhid ja ülevaatajad",
+      "admins": "Administraatorid",
+      "adminsDesc": "Täielik ligipääs"
+    },
+    "features": {
+      "teamSchedules": "Meeskonna graafikud",
+      "teamSchedulesDesc": "Vaata liikmete graafikuid",
+      "internalJobs": "Sisemised ametikohad",
+      "internalJobsDesc": "Ligipääs sisemistele pakkumistele",
+      "careerPaths": "Karjääriteed",
+      "careerPathsDesc": "Vaata arenguteesid",
+      "analytics": "Meeskonna analüütika",
+      "analyticsDesc": "Ligipääs tulemusanälüüsile",
+      "peerRecognition": "Kolleegide tunnustus",
+      "peerRecognitionDesc": "Saada ja saa kiitusi"
+    },
+    "aboutEmployeeVisibilityTitle": "Töötajate nähtavuse kohta",
+    "aboutPageVisibilityDesc": "Keelatud lehed peidetakse selle rolli navigeerimismenüüst.",
+    "brandName": "Brändi nimi",
+    "brandNameDesc": "Kuvatakse külgribal ja mobiilirakenduse päises",
+    "brandingDesc": "Kohandage oma Uplift-kogemuse välimust",
+    "brandingDescFull": "Kohandage välimust portaalis ja mobiilirakenduses",
+    "brandingLabel": "Bränding",
+    "created": "Loodud",
+    "dropFileUpload": "Lohistage fail või klõpsake üleslaadimiseks",
+    "emailVerified": "E-post kinnitatud",
+    "eventsToSubscribe": "Tellitavad sündmused",
+    "livePreview": "Reaalajas eelvaade",
+    "loginScreenPreview": "Sisselogimisekraan",
+    "logosImages": "Logod ja pildid",
+    "mfaEnabled": "MFA lubatud",
+    "mobileAppHeader": "Mobiilirakenduse päis",
+    "noEmployeesFound": "Töötajaid ei leitud",
+    "noEmployeesMatch": "Ükski töötaja ei vasta teie otsingule",
+    "passwordChangeRequired": "Parooli muutmine on nõutav",
+    "primaryColor": "Põhivärv",
+    "probation": "Katseaeg",
+    "probationPeriod": "Katseperiood",
+    "probationRestriction": "Mõned funktsioonid on katseajal piiratud. Need lubatakse automaatselt pärast katseaja lõppu.",
+    "secondaryColor": "Teinevärv",
+    "upgradeEnterpriseBranding": "Täiendage Enterprise-le kohandatud brändingu jaoks",
+    "webhookDetails": "Webhooki üksikasjad",
+    "webhookName": "Nimi",
+    "webhookSecret": "Saladus",
+    "webhookSecretDesc": "Kasutatakse webhooki andmete allkirjastamiseks kontrollimise eesmärgil",
+    "webhooksTitle": "Webhookid"
   },
   "tasks": {
     "title": "Ülesanded",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Asukoha luba on nõutav.",
     "cameraPermission": "Kaamera luba on nõutav.",
     "notificationPermission": "Teavituste luba on nõutav.",
-    "tryAgain": "Palun proovi uuesti",
-    "somethingWentWrong": "Midagi läks valesti"
+    "tryAgain": "Proovi uuesti",
+    "somethingWentWrong": "Midagi läks valesti",
+    "goHome": "Avaleht",
+    "technicalDetails": "Tehnilised üksikasjad"
   },
   "activity": {
     "title": "Tegevuse ülevaade",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Loo kohandatud aruanne",
+    "dateFrom": "Kuupäev alates",
+    "dateTo": "Kuupäev kuni",
+    "filters": "Filtrid",
+    "reportName": "Aruande nimi",
+    "reportType": "Aruande tüüp",
+    "savedReportsLocal": "Salvestatud aruanded hoitakse kohalikult. Püsiv aruannete salvestamine tuleb peagi.",
+    "sortBy": "Sorteeri",
+    "trendOverTime": "Trend ajas"
   },
   "accessibility": {
     "menu": "Menüü",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Malli kustutamine ebaõnnestus",
+    "shiftsGenerated": "Vahetused edukalt loodud!",
+    "failedSave": "Malli salvestamine ebaõnnestus"
   },
   "legal": {
     "lastUpdated": "Viimati uuendatud",
@@ -1748,7 +1841,18 @@
     "postJob": "Postita töökoht",
     "skillMatch": "oskuste sobivus",
     "noApplicants": "Kandidaate pole veel",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Teenindussaal",
+      "kitchen": "Köök",
+      "management": "Juhtkond",
+      "reception": "Vastuvõtt"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Otsi nime või e-posti järgi...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Oskuse lisamine ebaõnnestus",
+    "failedVerifySkill": "Kinnitamine ebaõnnestus",
+    "failedUpdateSkillLevel": "Taseme uuendamine ebaõnnestus",
+    "failedRemoveSkill": "Oskuse eemaldamine ebaõnnestus",
+    "loadEmployeeError": "Töötaja laadimine ebaõnnestus"
   },
   "integrationHub": {
     "title": "Integratsioonikeskus",

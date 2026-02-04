@@ -233,7 +233,12 @@
       "barback": "Bāra palīgs",
       "sous": "Sous šefpavārs",
       "expeditor": "Ekspeditors"
-    }
+    },
+    "new": "JAUNS",
+    "exportComingSoon": "Eksports drīzumā",
+    "clickToViewDetails": "Noklikšķiniet, lai skatītu detalizētu informāciju",
+    "closeEsc": "Aizvērt (ESC)",
+    "logoPreview": "Logotipa priekšskatījums"
   },
   "auth": {
     "login": "Pieslēgties",
@@ -448,7 +453,16 @@
     "publishSchedule": "Publicēt grafiku",
     "publishConfirmation": "Jūs publicēsiet {{count}} melnraksta maiņas. Visi iesaistītie darbinieki tiks informēti.",
     "publishNow": "Publicēt tagad",
-    "aiScheduleBuilder": "AI Grafiku veidotājs"
+    "aiScheduleBuilder": "AI Grafiku veidotājs",
+    "failedTimeOffRequest": "Neizdevās apstrādāt brīvdienu pieprasījumu",
+    "failedShiftSwap": "Neizdevās apstrādāt maiņu apmaiņu",
+    "publishButton": "Publicēt",
+    "employee": "Darbinieks",
+    "reassign": "Pārpiešķirt",
+    "shiftReassigned": "Maiņa pārpiešķirta",
+    "swapRequested": "Maiņa pieprasīta",
+    "shiftDeleted": "Maiņa dzēsta",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Laika uzskaite",
@@ -661,7 +675,8 @@
     "searchSkills": "Meklēt prasmes...",
     "skillAdded": "Prasme veiksmīgi pievienota",
     "verificationRequested": "Verificēšana pieprasīta",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Darbinieku saraksts šai prasmei būs pieejams drīz."
   },
   "career": {
     "title": "Karjera",
@@ -924,7 +939,7 @@
     "deleteMyAccount": "Dzēst manu kontu",
     "processing": "Apstrādā...",
     "webhooksIntegration": "Integrējiet ar ārējām sistēmām, izmantojot HTTP atzvanīšanas",
-    "addWebhook": "Pievienot Webhook",
+    "addWebhook": "Pievienot webhook",
     "endpointUrl": "Galapunkta URL",
     "subscribedEvents": "Abonētie notikumi",
     "successRate": "Panākumu rādītājs",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Kontrolējiet, kurām funkcijām katrs darbinieks var piekļūt",
     "searchEmployees": "Meklēt darbiniekus...",
     "featureAccess": "Funkciju piekļuve",
-    "enableAll": "Iespējot visus",
-    "disableAll": "Atspējot visus",
+    "enableAll": "Iespējot visu",
+    "disableAll": "Atspējot visu",
     "aboutEmployeeVisibility": "Šie iestatījumi kontrolē, kuras funkcijas ir redzamas katram darbiniekam.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Sazināties ar pārdošanu",
+    "changingPassword": "Maina...",
+    "loadError": "Neizdevās ielādēt iestatījumus",
+    "saveOrgError": "Neizdevās saglabāt organizācijas iestatījumus",
+    "loadUserError": "Neizdevās ielādēt lietotāja datus",
+    "loadLogsError": "Neizdevās ielādēt žurnālus",
+    "themes": {
+      "light": "Gaišs",
+      "lightDesc": "Tīrs, gaišs interfeiss",
+      "dark": "Tumšs",
+      "darkDesc": "Ērti acīm",
+      "system": "Sistēma",
+      "systemDesc": "Sekot ierīces iestatījumiem"
+    },
+    "roles": {
+      "workers": "Darbinieki",
+      "workersDesc": "Parasti darbinieki",
+      "managers": "Vadītāji",
+      "managersDesc": "Komandu vadītāji un uzraugi",
+      "admins": "Administratori",
+      "adminsDesc": "Pilna piekļuve"
+    },
+    "features": {
+      "teamSchedules": "Komandas grafiki",
+      "teamSchedulesDesc": "Skatīt dalībnieku grafikus",
+      "internalJobs": "Iekšējās vakances",
+      "internalJobsDesc": "Piekļuve iekšējiem sludinājumiem",
+      "careerPaths": "Karjeras ceļi",
+      "careerPathsDesc": "Skatīt attīstības ceļus",
+      "analytics": "Komandas analītika",
+      "analyticsDesc": "Piekļuve veiktspējas analīzei",
+      "peerRecognition": "Kolēģu atzinība",
+      "peerRecognitionDesc": "Sūtīt un saņemt uzslavas"
+    },
+    "aboutEmployeeVisibilityTitle": "Par darbinieku redzamību",
+    "aboutPageVisibilityDesc": "Deaktivētās lapas tiks paslēptas šīs lomas navigācijas izvēlnē.",
+    "brandName": "Zīmola nosaukums",
+    "brandNameDesc": "Tiek rādīts sānjoslas un mobilas lietotnes galvenē",
+    "brandingDesc": "Pielāgojiet sava Uplift pieredzes izskatu",
+    "brandingDescFull": "Pielāgojiet izskatu portālā un mobilajā lietotnē",
+    "brandingLabel": "Zīmolāšana",
+    "created": "Izveidots",
+    "dropFileUpload": "Ievelciet failu vai noklikšķiniet, lai augšupielādētu",
+    "emailVerified": "E-pasts verificēts",
+    "eventsToSubscribe": "Notikumi, kuriem abonēt",
+    "livePreview": "Tiešraides priekšskatījums",
+    "loginScreenPreview": "Pieteikšanās ekrāns",
+    "logosImages": "Logotipi un attēli",
+    "mfaEnabled": "MFA iespējots",
+    "mobileAppHeader": "Mobilas lietotnes galvene",
+    "noEmployeesFound": "Darbinieki nav atrasti",
+    "noEmployeesMatch": "Neviens darbinieks neatbilst jūsu meklējumam",
+    "passwordChangeRequired": "Nepieciešama paroles maiņa",
+    "primaryColor": "Primārā krāsa",
+    "probation": "Pārbaudes laiks",
+    "probationPeriod": "Pārbaudes periods",
+    "probationRestriction": "Dažas funkcijas ir ierobežotas pārbaudes laikā. Tās tiks automātiski iespējotas pēc pārbaudes laika beigām.",
+    "secondaryColor": "Sekundārā krāsa",
+    "upgradeEnterpriseBranding": "Jauniniet uz uzņēmuma versiju pielāgotam zīmolam",
+    "webhookDetails": "Webhook detalizēta informācija",
+    "webhookName": "Nosaukums",
+    "webhookSecret": "Slepena atslēga",
+    "webhookSecretDesc": "Tiek izmantots webhook satura parakstīšanai verificēšanai",
+    "webhooksTitle": "Webhook"
   },
   "tasks": {
     "title": "Uzdevumi",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Nepieciešama atrašanās vietas atļauja.",
     "cameraPermission": "Nepieciešama kameras atļauja.",
     "notificationPermission": "Nepieciešama paziņojumu atļauja.",
-    "tryAgain": "Lūdzu, mēģiniet vēlreiz",
-    "somethingWentWrong": "Kaut kas nogāja greizi"
+    "tryAgain": "Mēģināt vēlreiz",
+    "somethingWentWrong": "Kaut kas nogāja greizi",
+    "goHome": "Sākumlapa",
+    "technicalDetails": "Tehniskie dati"
   },
   "activity": {
     "title": "Aktivitāšu pārskats",
@@ -1282,7 +1363,7 @@
     "attachments": "Pielikumi",
     "rejectionReason": "Noraidīšanas iemesls",
     "enterRejectionReason": "Ievadiet noraidīšanas iemeslu...",
-    "confirmRejection": "Apstiprināt noraidīšanu",
+    "confirmRejection": "Apstiprināt noraidījumu",
     "approve": "Apstiprināt",
     "reject": "Noraidīt",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Izveidot pielāgotu pārskatu",
+    "dateFrom": "Datums no",
+    "dateTo": "Datums līdz",
+    "filters": "Filtri",
+    "reportName": "Pārskata nosaukums",
+    "reportType": "Pārskata veids",
+    "savedReportsLocal": "Saglabātie pārskati tiek glabāti lokāli. Pastāvīga pārskatu saglabāšana būs pieejama drīz.",
+    "sortBy": "Kārtot pēc",
+    "trendOverTime": "Tendence laika gaitā"
   },
   "accessibility": {
     "menu": "Izvēlne",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Neizdevās dzēst veidni",
+    "shiftsGenerated": "Maiņas veiksmīgi izveidotas!",
+    "failedSave": "Neizdevās saglabāt veidni"
   },
   "legal": {
     "lastUpdated": "Pēdējo reizi atjaunināts",
@@ -1748,7 +1841,18 @@
     "postJob": "Publicēt vakanci",
     "skillMatch": "prasmju atbilstība",
     "noApplicants": "Vēl nav pretendentu",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Viesu apkalpošana",
+      "kitchen": "Virtuve",
+      "management": "Vadība",
+      "reception": "Reģistrācija"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburga",
+      "glasgow": "Grand Metro Glazgova",
+      "manchester": "Grand Metro Mančestra"
+    }
   },
   "employees": {
     "searchPlaceholder": "Meklēt pēc vārda vai e-pasta...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Neizdevās pievienot prasmi",
+    "failedVerifySkill": "Verifikācija neizdevās",
+    "failedUpdateSkillLevel": "Līmeņa atjaunināšana neizdevās",
+    "failedRemoveSkill": "Neizdevās noņemt prasmi",
+    "loadEmployeeError": "Neizdevās ielādēt darbinieku"
   },
   "integrationHub": {
     "title": "Integrāciju centrs",

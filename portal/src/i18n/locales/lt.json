@@ -233,7 +233,12 @@
       "barback": "Baro padėjėjas",
       "sous": "Sous šefas",
       "expeditor": "Ekspeditorius"
-    }
+    },
+    "new": "NAUJA",
+    "exportComingSoon": "Eksportas netrukus",
+    "clickToViewDetails": "Spustelėkite, kad peržiūrėtumėte informaciją",
+    "closeEsc": "Uždaryti (ESC)",
+    "logoPreview": "Logotipo peržiūra"
   },
   "auth": {
     "login": "Prisijungti",
@@ -448,7 +453,16 @@
     "publishSchedule": "Paskelbti grafiką",
     "publishConfirmation": "Ketinate paskelbti {{count}} juodraštinių pamainų. Visi susiję darbuotojai bus informuoti.",
     "publishNow": "Paskelbti dabar",
-    "aiScheduleBuilder": "AI Grafiko kūrėjas"
+    "aiScheduleBuilder": "AI Grafiko kūrėjas",
+    "failedTimeOffRequest": "Nepavyko apdoroti atostogų prašymo",
+    "failedShiftSwap": "Nepavyko apdoroti pamainos keitimo",
+    "publishButton": "Publikuoti",
+    "employee": "Darbuotojas",
+    "reassign": "Priskirti iš naujo",
+    "shiftReassigned": "Pamaina priskirta iš naujo",
+    "swapRequested": "Keitimas užsakytas",
+    "shiftDeleted": "Pamaina ištrinta",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Laiko sekimas",
@@ -661,7 +675,8 @@
     "searchSkills": "Ieskoti igudiziu...",
     "skillAdded": "Igudis sekmingai pridetas",
     "verificationRequested": "Patvirtinimas pareikalauta",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Darbuotojų sąrašas šiam įgūdžiui bus prieinamas netrukus."
   },
   "career": {
     "title": "Karjera",
@@ -811,7 +826,7 @@
     "reminderTime": "Priminimo laikas",
     "sound": "Garsas",
     "vibration": "Vibracija",
-    "changePassword": "Keisti slaptazodi",
+    "changePassword": "Keisti slaptažodį",
     "twoFactorAuth": "Dvieju veiksniu autentifikavimas",
     "biometricAuth": "Biometrinis autentifikavimas",
     "dataExport": "Eksportuoti mano duomenis",
@@ -895,7 +910,7 @@
     "enable": "Ijungti",
     "activeSessions": "Aktyvios sesijos",
     "manageDevices": "Valdyti prisijungusius irenginius",
-    "signOutOtherDevices": "Atsijungti is kitu irenginiu",
+    "signOutOtherDevices": "Atsijungti iš kitų įrenginių",
     "thisDevice": "Sis irenginys",
     "revoke": "Atsaukti",
     "revoking": "Atsaukiama...",
@@ -917,14 +932,14 @@
     "preparing": "Ruosiama...",
     "dataExported": "Duomenys sekmingai eksportuoti",
     "deleteAccountWarning": "Visam laikui istrinti paskyra ir visus susijusius duomenis. Sio veiksmo negalima atsaukti po 30 dienu laukimo laikotarpio.",
-    "requestAccountDeletion": "Prasyti paskyros istrynimo",
+    "requestAccountDeletion": "Prašyti paskyros trynimo",
     "deletionScheduled": "Jusu paskyra suplanuota istrinti. Ji bus visam laikui pasalinta po 30 dienu.",
-    "cancelDeletion": "Atsaukti istrynima",
+    "cancelDeletion": "Atšaukti trynimą",
     "enterPasswordConfirm": "Iveskite slaptazodi patvirtinimui",
     "deleteMyAccount": "Istrinti mano paskyra",
     "processing": "Apdorojama...",
     "webhooksIntegration": "Integracija su isolinemis sistemomis per HTTP atgalinius iskvietimus",
-    "addWebhook": "Prideti webhook",
+    "addWebhook": "Pridėti webhook",
     "endpointUrl": "Galutinio tasko URL",
     "subscribedEvents": "Prenumeruojami ivykiai",
     "successRate": "Sekmes rodiklis",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Valdyti, kurias funkcijas gali pasiekti kiekvienas darbuotojas",
     "searchEmployees": "Ieskoti darbuotoju...",
     "featureAccess": "Funkciju prieiga",
-    "enableAll": "Ijungti viska",
-    "disableAll": "Isjungti viska",
+    "enableAll": "Įjungti viską",
+    "disableAll": "Išjungti viską",
     "aboutEmployeeVisibility": "Sie nustatymai valdo, kurios funkcijos matomos kiekvienam darbuotojui.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Susisiekite su pardavimais",
+    "changingPassword": "Keičiama...",
+    "loadError": "Nepavyko įkelti nustatymų",
+    "saveOrgError": "Nepavyko išsaugoti organizacijos nustatymų",
+    "loadUserError": "Nepavyko įkelti vartotojo duomenų",
+    "loadLogsError": "Nepavyko įkelti žurnalų",
+    "themes": {
+      "light": "Šviesi",
+      "lightDesc": "Švari, šviesi sąsaja",
+      "dark": "Tamsi",
+      "darkDesc": "Patogi akims",
+      "system": "Sistema",
+      "systemDesc": "Pagal įrenginio nustatymus"
+    },
+    "roles": {
+      "workers": "Darbuotojai",
+      "workersDesc": "Eiliniai darbuotojai",
+      "managers": "Vadovai",
+      "managersDesc": "Komandų vadovai ir prižiūrėtojai",
+      "admins": "Administratoriai",
+      "adminsDesc": "Pilna prieiga"
+    },
+    "features": {
+      "teamSchedules": "Komandos grafikai",
+      "teamSchedulesDesc": "Peržiūrėti narių grafikus",
+      "internalJobs": "Vidinės pozicijos",
+      "internalJobsDesc": "Prieiga prie vidinių skelbimų",
+      "careerPaths": "Karjeros keliai",
+      "careerPathsDesc": "Peržiūrėti vystymosi kelius",
+      "analytics": "Komandos analitika",
+      "analyticsDesc": "Prieiga prie veiklos analizės",
+      "peerRecognition": "Kolegų pripažinimas",
+      "peerRecognitionDesc": "Siųsti ir gauti pagyrimus"
+    },
+    "aboutEmployeeVisibilityTitle": "Apie darbuotojų matomumą",
+    "aboutPageVisibilityDesc": "Išjungti puslapiai bus paslėpti tos rolės navigācijos meniu.",
+    "brandName": "Prekės ženklo pavadinimas",
+    "brandNameDesc": "Rodoma šoninėje juostoje ir mobiliųjų programų antraštėje",
+    "brandingDesc": "Pritaikykite savo Uplift patirties išvaizdą",
+    "brandingDescFull": "Pritaikykite išvaizdą portale ir mobiliojoje programoje",
+    "brandingLabel": "Prekės ženklas",
+    "created": "Sukurta",
+    "dropFileUpload": "Nutempkite failą arba spustelėkite įkelti",
+    "emailVerified": "El. paštas patvirtintas",
+    "eventsToSubscribe": "Įvykiai prenumeratai",
+    "livePreview": "Tiesioginė peržiūra",
+    "loginScreenPreview": "Prisijungimo ekranas",
+    "logosImages": "Logotipai ir vaizdžiai",
+    "mfaEnabled": "MFA įjungta",
+    "mobileAppHeader": "Mobiliosios programos antraštė",
+    "noEmployeesFound": "Darbuotojų nerasta",
+    "noEmployeesMatch": "Nėra darbuotojų, atitinkančių jūsų paiešką",
+    "passwordChangeRequired": "Reikia pakeisti slaptažodį",
+    "primaryColor": "Pagrindinė spalva",
+    "probation": "Bandomasis laikotarpis",
+    "probationPeriod": "Bandomasis laikotarpis",
+    "probationRestriction": "Kai kurios funkcijos yra apribotos bandomuoju laikotarpiu. Jos bus automatiškai įjungtos pasibaigus bandomajam laikotarpiui.",
+    "secondaryColor": "Antrinė spalva",
+    "upgradeEnterpriseBranding": "Atnaujinkite iki įmonės versijos dėl individualizuoto prekės ženklo",
+    "webhookDetails": "Webhook informacija",
+    "webhookName": "Pavadinimas",
+    "webhookSecret": "Slaptas raktas",
+    "webhookSecretDesc": "Naudojamas webhook turinio pasirašymui patikrinimui",
+    "webhooksTitle": "Webhook'ai"
   },
   "tasks": {
     "title": "Uzduotys",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Reikalingas vietos leidimas.",
     "cameraPermission": "Reikalingas kameros leidimas.",
     "notificationPermission": "Reikalingas pranesimu leidimas.",
-    "tryAgain": "Bandykite dar karta",
-    "somethingWentWrong": "Kazkas nepavyko"
+    "tryAgain": "Bandyti dar kartą",
+    "somethingWentWrong": "Kažkas nutiko",
+    "goHome": "Pradžia",
+    "technicalDetails": "Techninė informacija"
   },
   "activity": {
     "title": "Veiklos perziura",
@@ -1282,7 +1363,7 @@
     "attachments": "Priedai",
     "rejectionReason": "Atmetimo priezastis",
     "enterRejectionReason": "Iveskite atmetimo priezasti...",
-    "confirmRejection": "Patvirtinti atmetima",
+    "confirmRejection": "Patvirtinti atmetimą",
     "approve": "Patvirtinti",
     "reject": "Atmesti",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Kurti pasirinktą ataskaitą",
+    "dateFrom": "Data nuo",
+    "dateTo": "Data iki",
+    "filters": "Filtrai",
+    "reportName": "Ataskaitos pavadinimas",
+    "reportType": "Ataskaitos tipas",
+    "savedReportsLocal": "Išsaugotos ataskaitos saugomos lokaliai. Nuolatinės išsaugotos ataskaitos bus prieinamos netrukus.",
+    "sortBy": "Rūšiuoti pagal",
+    "trendOverTime": "Tendencija laikui bėgant"
   },
   "accessibility": {
     "menu": "Meniu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Nepavyko ištrinti šablono",
+    "shiftsGenerated": "Pamainos sėkmingai sukurtos!",
+    "failedSave": "Nepavyko išsaugoti šablono"
   },
   "legal": {
     "lastUpdated": "Paskutini karta atnaujinta",
@@ -1748,7 +1841,18 @@
     "postJob": "Skelbti darbo vieta",
     "skillMatch": "igudiziu atitikimas",
     "noApplicants": "Kandidatu dar nera",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Salės aptarnavimas",
+      "kitchen": "Virtuvė",
+      "management": "Vadyba",
+      "reception": "Registratūra"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgas",
+      "glasgow": "Grand Metro Glazgas",
+      "manchester": "Grand Metro Mančesteris"
+    }
   },
   "employees": {
     "searchPlaceholder": "Ieskoti pagal varda arba el. pasta...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Nepavyko pridėti įgūdžio",
+    "failedVerifySkill": "Patvirtinimas nepavyko",
+    "failedUpdateSkillLevel": "Lygio atnaujinimas nepavyko",
+    "failedRemoveSkill": "Nepavyko pašalinti įgūdžio",
+    "loadEmployeeError": "Nepavyko įkelti darbuotojo"
   },
   "integrationHub": {
     "title": "Integraciju centras",

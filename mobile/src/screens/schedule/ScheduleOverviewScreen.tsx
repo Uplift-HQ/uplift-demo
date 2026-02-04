@@ -80,7 +80,7 @@ const getRoleColor = (department: string): string => {
 };
 
 export const ScheduleOverviewScreen = ({ navigation }: any) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuthStore();
   const isManager = user?.role === 'manager' || user?.role === 'admin';
   const [viewMode, setViewMode] = useState<ViewMode>('week');
@@ -108,8 +108,16 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
     endDate.toISOString().split('T')[0]
   );
 
-  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const fullWeekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const weekDays = [
+    t('common.weekDaysShortMon'), t('common.weekDaysShortTue'), t('common.weekDaysShortWed'),
+    t('common.weekDaysShortThu'), t('common.weekDaysShortFri'), t('common.weekDaysShortSat'),
+    t('common.weekDaysShortSun'),
+  ];
+  const fullWeekDays = [
+    t('common.weekDaysMon'), t('common.weekDaysTue'), t('common.weekDaysWed'),
+    t('common.weekDaysThu'), t('common.weekDaysFri'), t('common.weekDaysSat'),
+    t('common.weekDaysSun'),
+  ];
 
   // Generate week data with dates
   const weekData = Array.from({ length: 7 }, (_, i) => {
@@ -119,7 +127,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
       date: d.getDate(),
       day: weekDays[i],
       fullDay: fullWeekDays[i],
-      month: d.toLocaleDateString('en-GB', { month: 'short' }),
+      month: d.toLocaleDateString(i18n.language, { month: 'short' }),
       fullDate: new Date(d),
       isToday: d.toDateString() === today.toDateString(),
       isPast: d < today && d.toDateString() !== today.toDateString(),
@@ -155,7 +163,11 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
   const shifts: Shift[] = (shiftsData?.shifts || []).map((s, index) => {
     // Safely parse date
     const shiftDate = s.date ? new Date(s.date) : new Date();
-    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const dayNames = [
+      t('common.weekDaysShortSun'), t('common.weekDaysShortMon'), t('common.weekDaysShortTue'),
+      t('common.weekDaysShortWed'), t('common.weekDaysShortThu'), t('common.weekDaysShortFri'),
+      t('common.weekDaysShortSat'),
+    ];
 
     // Safely parse times with fallback
     const startTime = s.startTime || '09:00';
@@ -173,7 +185,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
 
     return {
       id: s.id || String(Math.random()),
-      date: `${shiftDate.getDate()} ${shiftDate.toLocaleDateString('en-GB', { month: 'short' })}`,
+      date: `${shiftDate.getDate()} ${shiftDate.toLocaleDateString(i18n.language, { month: 'short' })}`,
       fullDate: shiftDate,
       dayOfWeek: dayNames[shiftDate.getDay()] || 'Mon',
       role: s.roleName || t('schedule.shift'),
@@ -181,7 +193,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
       startTime: startTime,
       endTime: endTime,
       duration: `${duration}h`,
-      location: s.locationName || 'Location TBC',
+      location: s.locationName || t('home.locationTBC', 'Location TBC'),
       weather: {
         temp: weatherTemps[index % weatherTemps.length],
         condition: weatherConditions[index % weatherConditions.length]
@@ -203,7 +215,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
     {
       id: 'avail-1',
       date: '25 Jan',
-      dayOfWeek: 'Sat',
+      dayOfWeek: t('common.weekDaysShortSat'),
       role: 'Bartender',
       department: 'Bar',
       startTime: '18:00',
@@ -216,7 +228,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
     {
       id: 'avail-2',
       date: '26 Jan',
-      dayOfWeek: 'Sun',
+      dayOfWeek: t('common.weekDaysShortSun'),
       role: 'Server',
       department: 'Front of House',
       startTime: '11:00',
@@ -229,7 +241,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
     {
       id: 'avail-3',
       date: '27 Jan',
-      dayOfWeek: 'Mon',
+      dayOfWeek: t('common.weekDaysShortMon'),
       role: 'Kitchen Porter',
       department: 'Kitchen',
       startTime: '08:00',
@@ -273,8 +285,8 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
   };
 
   const formatWeekRange = () => {
-    const startMonth = startOfWeek.toLocaleDateString('en-GB', { month: 'short' });
-    const endMonth = endOfWeek.toLocaleDateString('en-GB', { month: 'short' });
+    const startMonth = startOfWeek.toLocaleDateString(i18n.language, { month: 'short' });
+    const endMonth = endOfWeek.toLocaleDateString(i18n.language, { month: 'short' });
     if (startMonth === endMonth) {
       return `${startOfWeek.getDate()}-${endOfWeek.getDate()} ${startMonth}`;
     }
@@ -318,7 +330,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
           <Text style={styles.subtitle}>
             {viewMode === 'week'
               ? formatWeekRange()
-              : today.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
+              : today.toLocaleDateString(i18n.language, { month: 'long', year: 'numeric' })
             }
           </Text>
         </View>
@@ -357,7 +369,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
             </View>
             <View>
               <Text style={styles.statValue}>{upcomingShiftsCount}</Text>
-              <Text style={styles.statLabel}>Upcoming</Text>
+              <Text style={styles.statLabel}>{t('screens.scheduleOverview.upcoming', 'Upcoming')}</Text>
             </View>
           </View>
           <View style={styles.statDivider} />
@@ -367,7 +379,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
             </View>
             <View>
               <Text style={styles.statValue}>{confirmedCount}</Text>
-              <Text style={styles.statLabel}>Confirmed</Text>
+              <Text style={styles.statLabel}>{t('schedule.confirmed', 'Confirmed')}</Text>
             </View>
           </View>
         </View>
@@ -386,7 +398,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
                 onPress={() => setSelectedWeekOffset(0)}
                 style={styles.todayButton}
               >
-                <Text style={styles.todayButtonText}>Today</Text>
+                <Text style={styles.todayButtonText}>{t('common.today')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => navigateWeek('next')}
@@ -424,10 +436,10 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
                       } else {
                         showAlert(
                           `${dayInfo.fullDay}, ${dayInfo.date} ${dayInfo.month}`,
-                          'No shifts scheduled. Would you like to pick up an open shift?',
+                          t('screens.scheduleOverview.noShiftsPickUp', 'No shifts scheduled. Would you like to pick up an open shift?'),
                           [
-                            { text: 'Not Now', style: 'cancel' },
-                            { text: 'View Open Shifts', onPress: () => navigation.navigate('ShiftMarketplace') }
+                            { text: t('screens.scheduleOverview.notNow', 'Not Now'), style: 'cancel' },
+                            { text: t('screens.scheduleOverview.viewOpenShifts', 'View Open Shifts'), onPress: () => navigation.navigate('ShiftMarketplace') }
                           ]
                         );
                       }
@@ -590,7 +602,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
             <Text style={styles.sectionTitle}>{t('home.upcomingShifts')}</Text>
             {pendingCount > 0 && (
               <View style={styles.pendingBadge}>
-                <Text style={styles.pendingBadgeText}>{pendingCount} pending</Text>
+                <Text style={styles.pendingBadgeText}>{t('screens.scheduleOverview.pendingCount', { count: pendingCount, defaultValue: '{{count}} pending' })}</Text>
               </View>
             )}
           </View>
@@ -639,7 +651,9 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
                   <View style={[styles.statusBadge, { backgroundColor: getStatusColor(shift.status) + '15' }]}>
                     {getStatusIcon(shift.status)}
                     <Text style={[styles.statusText, { color: getStatusColor(shift.status) }]}>
-                      {shift.status}
+                      {shift.status === 'confirmed' ? t('schedule.confirmed', 'Confirmed')
+                        : shift.status === 'pending' ? t('common.pending', 'Pending')
+                        : t('screens.scheduleOverview.completed', 'Completed')}
                     </Text>
                   </View>
                 </View>
@@ -683,7 +697,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
                   </View>
                   <TouchableOpacity
                     style={styles.mapPreviewButton}
-                    onPress={() => showAlert('Location', `${shift.location}\n\nMap view available in the full app.`)}
+                    onPress={() => showAlert(t('schedule.location', 'Location'), `${shift.location}\n\n${t('screens.scheduleOverview.mapViewInfo', 'Map view available in the full app.')}`)}
                   >
                     <MapIcon size={16} color={colors.momentum} />
                   </TouchableOpacity>
@@ -702,7 +716,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
                   {shift.breakTime && (
                     <View style={styles.breakContainer}>
                       <CoffeeIcon size={14} color={colors.slate500} />
-                      <Text style={styles.breakText}>{shift.breakTime} break</Text>
+                      <Text style={styles.breakText}>{t('screens.scheduleOverview.breakTime', { time: shift.breakTime, defaultValue: '{{time}} break' })}</Text>
                     </View>
                   )}
                 </View>
@@ -745,7 +759,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
                       )}
                     </View>
                     <Text style={styles.teamCountText}>
-                      {shift.teamMembers.length} team
+                      {t('screens.scheduleOverview.teamCount', { count: shift.teamMembers.length, defaultValue: '{{count}} team' })}
                     </Text>
                   </View>
 
@@ -762,7 +776,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
             <View style={styles.sectionTitleRow}>
               <Text style={styles.sectionTitle}>{t('screens.scheduleOverview.available_shifts')}</Text>
               <View style={styles.availableBadge}>
-                <Text style={styles.availableBadgeText}>{availableShifts.length} open</Text>
+                <Text style={styles.availableBadgeText}>{t('screens.scheduleOverview.openCount', { count: availableShifts.length, defaultValue: '{{count}} open' })}</Text>
               </View>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('ShiftMarketplace')}>
@@ -786,11 +800,11 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
                     shift.urgency === 'urgent' && styles.availableShiftCardUrgent,
                   ]}
                   onPress={() => showAlert(
-                    'Claim Shift?',
-                    `${shift.role} on ${shift.date}\n${shift.startTime} - ${shift.endTime} at ${shift.location}`,
+                    t('schedule.claimThisShift', 'Claim This Shift?'),
+                    `${shift.role} — ${shift.date}\n${shift.startTime} - ${shift.endTime} @ ${shift.location}`,
                     [
-                      { text: 'Cancel', style: 'cancel' },
-                      { text: 'Claim', onPress: () => showAlert('Shift Claimed!', 'You have been added to this shift. Check your schedule for details.') }
+                      { text: t('common.cancel'), style: 'cancel' },
+                      { text: t('screens.scheduleOverview.claim', 'Claim'), onPress: () => showAlert(t('schedule.claimSuccess', 'Shift Claimed!'), t('schedule.claimSuccessMessage', 'This shift has been added to your schedule.')) }
                     ]
                   )}
                 >
@@ -830,10 +844,10 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
 
                   <TouchableOpacity
                     style={styles.claimButton}
-                    onPress={() => showAlert('Shift Claimed!', 'You have been added to this shift. Check your schedule for details.')}
+                    onPress={() => showAlert(t('schedule.claimSuccess', 'Shift Claimed!'), t('schedule.claimSuccessMessage', 'This shift has been added to your schedule.'))}
                   >
                     <PlusIcon size={16} color={colors.background} />
-                    <Text style={styles.claimButtonText}>Claim</Text>
+                    <Text style={styles.claimButtonText}>{t('screens.scheduleOverview.claim', 'Claim')}</Text>
                   </TouchableOpacity>
                 </TouchableOpacity>
               );
@@ -847,7 +861,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
               <View style={styles.viewMoreIcon}>
                 <ChevronRightIcon size={24} color={colors.momentum} />
               </View>
-              <Text style={styles.viewMoreText}>View all{'\n'}open shifts</Text>
+              <Text style={styles.viewMoreText}>{t('screens.scheduleOverview.viewAllOpenShifts', 'View all\nopen shifts')}</Text>
             </TouchableOpacity>
           </ScrollView>
         </View>

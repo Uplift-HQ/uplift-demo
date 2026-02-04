@@ -233,7 +233,12 @@
       "barback": "Barassistent",
       "sous": "Souschef",
       "expeditor": "Ekspeditor"
-    }
+    },
+    "new": "NY",
+    "exportComingSoon": "Eksport kommer snart",
+    "clickToViewDetails": "Klik for at se detaljer",
+    "closeEsc": "Luk (ESC)",
+    "logoPreview": "Logo forhåndsvisning"
   },
   "auth": {
     "login": "Log ind",
@@ -448,7 +453,16 @@
     "publishSchedule": "Udgiv vagtplan",
     "publishConfirmation": "Du er ved at udgive {{count}} kladdevagter.",
     "publishNow": "Udgiv nu",
-    "aiScheduleBuilder": "AI Vagtplanlægger"
+    "aiScheduleBuilder": "AI Vagtplanlægger",
+    "failedTimeOffRequest": "Behandling af friforespørgsel mislykkedes",
+    "failedShiftSwap": "Behandling af vagtbytte mislykkedes",
+    "publishButton": "Publicér",
+    "employee": "Medarbejder",
+    "reassign": "Omfordel",
+    "shiftReassigned": "Vagt omfordelt",
+    "swapRequested": "Bytte anmodet",
+    "shiftDeleted": "Vagt slettet",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Tidsregistrering",
@@ -661,7 +675,8 @@
     "searchSkills": "Søg kompetencer...",
     "skillAdded": "Kompetence tilføjet",
     "verificationRequested": "Verificering anmodet",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Medarbejderliste for denne kompetence kommer snart."
   },
   "career": {
     "title": "Karriere",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Kontakt salg",
+    "changingPassword": "Skifter...",
+    "loadError": "Kunne ikke indlæse indstillinger",
+    "saveOrgError": "Kunne ikke gemme organisationsindstillinger",
+    "loadUserError": "Kunne ikke indlæse brugerdata",
+    "loadLogsError": "Kunne ikke indlæse logfiler",
+    "themes": {
+      "light": "Lys",
+      "lightDesc": "Rent, lyst interface",
+      "dark": "Mørk",
+      "darkDesc": "Behageligt for øjnene",
+      "system": "System",
+      "systemDesc": "Følg enhedsindstillinger"
+    },
+    "roles": {
+      "workers": "Medarbejdere",
+      "workersDesc": "Almindelige medarbejdere",
+      "managers": "Ledere",
+      "managersDesc": "Teamledere og supervisorer",
+      "admins": "Administratorer",
+      "adminsDesc": "Fuld adgang"
+    },
+    "features": {
+      "teamSchedules": "Teamvagtplaner",
+      "teamSchedulesDesc": "Se teammedlemmers vagtplaner",
+      "internalJobs": "Interne stillinger",
+      "internalJobsDesc": "Adgang til interne opslag",
+      "careerPaths": "Karriereveje",
+      "careerPathsDesc": "Se udviklingsveje",
+      "analytics": "Teamanalyse",
+      "analyticsDesc": "Adgang til præstationsanalyser",
+      "peerRecognition": "Kollegial anerkendelse",
+      "peerRecognitionDesc": "Send og modtag ros"
+    },
+    "aboutEmployeeVisibilityTitle": "Om medarbejdersynlighed",
+    "aboutPageVisibilityDesc": "Sider du deaktiverer vil blive skjult fra navigationsmenuen for den rolle.",
+    "brandName": "Brandnavn",
+    "brandNameDesc": "Vises i sidepanelet og mobilappens header",
+    "brandingDesc": "Tilpas udseendet af din Uplift-oplevelse",
+    "brandingDescFull": "Tilpas udseendet på tværs af portal og mobilapp",
+    "brandingLabel": "Branding",
+    "created": "Oprettet",
+    "dropFileUpload": "Træk fil hertil eller klik for at uploade",
+    "emailVerified": "E-mail bekræftet",
+    "eventsToSubscribe": "Begivenheder at abonnere på",
+    "livePreview": "Live forhåndsvisning",
+    "loginScreenPreview": "Login-skærm",
+    "logosImages": "Logoer og billeder",
+    "mfaEnabled": "MFA aktiveret",
+    "mobileAppHeader": "Mobilapp-header",
+    "noEmployeesFound": "Ingen medarbejdere fundet",
+    "noEmployeesMatch": "Ingen medarbejdere matcher din søgning",
+    "passwordChangeRequired": "Adgangskodeændring kræves",
+    "primaryColor": "Primærfarve",
+    "probation": "Prøvetid",
+    "probationPeriod": "Prøveperiode",
+    "probationRestriction": "Nogle funktioner er begrænset i prøveperioden. De aktiveres automatisk, når prøveperioden slutter.",
+    "secondaryColor": "Sekundærfarve",
+    "upgradeEnterpriseBranding": "Opgrader til Enterprise for tilpasset branding",
+    "webhookDetails": "Webhook-detaljer",
+    "webhookName": "Navn",
+    "webhookSecret": "Hemmelighed",
+    "webhookSecretDesc": "Bruges til at signere webhook-payloads til verifikation",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Opgaver",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Lokationstilladelse er påkrævet.",
     "cameraPermission": "Kameratilladelse er påkrævet.",
     "notificationPermission": "Notifikationstilladelse er påkrævet.",
-    "tryAgain": "Prøv venligst igen",
-    "somethingWentWrong": "Noget gik galt"
+    "tryAgain": "Prøv igen",
+    "somethingWentWrong": "Noget gik galt",
+    "goHome": "Hjem",
+    "technicalDetails": "Tekniske detaljer"
   },
   "activity": {
     "title": "Aktivitetsgennemgang",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Opret tilpasset rapport",
+    "dateFrom": "Dato fra",
+    "dateTo": "Dato til",
+    "filters": "Filtre",
+    "reportName": "Rapportnavn",
+    "reportType": "Rapporttype",
+    "savedReportsLocal": "Gemte rapporter gemmes lokalt. Permanent lagring af rapporter kommer snart.",
+    "sortBy": "Sortér efter",
+    "trendOverTime": "Tendens over tid"
   },
   "shiftTemplates": {
     "title": "Vagtskabeloner",
@@ -1501,7 +1591,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Sletning af skabelon mislykkedes",
+    "shiftsGenerated": "Vagter genereret succesfuldt!",
+    "failedSave": "Lagring af skabelon mislykkedes"
   },
   "legal": {
     "lastUpdated": "Sidst opdateret",
@@ -1748,7 +1841,18 @@
     "postJob": "Opslå job",
     "skillMatch": "kompetencematch",
     "noApplicants": "Ingen ansøgere endnu",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Front of House",
+      "kitchen": "Køkken",
+      "management": "Ledelse",
+      "reception": "Reception"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Søg efter navn eller e-mail...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Kunne ikke tilføje færdighed",
+    "failedVerifySkill": "Verificering mislykkedes",
+    "failedUpdateSkillLevel": "Opdatering af niveau mislykkedes",
+    "failedRemoveSkill": "Fjernelse af færdighed mislykkedes",
+    "loadEmployeeError": "Kunne ikke indlæse medarbejder"
   },
   "integrationHub": {
     "title": "Integrationshub",

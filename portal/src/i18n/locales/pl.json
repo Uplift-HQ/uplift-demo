@@ -146,7 +146,12 @@
       "barback": "Pomocnik barmana",
       "sous": "Sous Chef",
       "expeditor": "Ekspedytor"
-    }
+    },
+    "new": "NOWE",
+    "exportComingSoon": "Eksport wkrótce",
+    "clickToViewDetails": "Kliknij, aby zobaczyć szczegóły",
+    "closeEsc": "Zamknij (ESC)",
+    "logoPreview": "Podgląd logo"
   },
   "auth": {
     "login": "Zaloguj się",
@@ -361,7 +366,16 @@
     "publishSchedule": "Opublikuj grafik",
     "publishConfirmation": "Zamierzasz opublikować {{count}} roboczych zmian. Wszyscy dotknięci pracownicy zostaną powiadomieni.",
     "publishNow": "Opublikuj teraz",
-    "aiScheduleBuilder": "Kreator grafiku AI"
+    "aiScheduleBuilder": "Kreator grafiku AI",
+    "failedTimeOffRequest": "Nie udało się przetworzyć wniosku o urlop",
+    "failedShiftSwap": "Nie udało się przetworzyć zamiany zmiany",
+    "publishButton": "Opublikuj",
+    "employee": "Pracownik",
+    "reassign": "Przypisz ponownie",
+    "shiftReassigned": "Zmiana przypisana ponownie",
+    "swapRequested": "Zamiana zgłoszona",
+    "shiftDeleted": "Zmiana usunięta",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Rejestracja czasu",
@@ -574,7 +588,8 @@
     "searchSkills": "Search skills...",
     "skillAdded": "Skill added successfully",
     "verificationRequested": "Verification requested",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Lista pracowników dla tej umiejętności będzie dostępna wkrótce."
   },
   "career": {
     "title": "Kariera",
@@ -721,7 +736,7 @@
     "reminderTime": "Reminder Time",
     "sound": "Sound",
     "vibration": "Vibration",
-    "changePassword": "Change Password",
+    "changePassword": "Zmień hasło",
     "twoFactorAuth": "Two-Factor Authentication",
     "biometricAuth": "Biometric Authentication",
     "dataExport": "Export My Data",
@@ -830,14 +845,14 @@
     "preparing": "Przygotowywanie...",
     "dataExported": "Dane wyeksportowane pomyślnie",
     "deleteAccountWarning": "Trwale usuń swoje konto i wszystkie powiązane dane. Tej akcji nie można cofnąć po 30-dniowym okresie karencji.",
-    "requestAccountDeletion": "Poproś o usunięcie konta",
+    "requestAccountDeletion": "Poprosi o usunięcie konta",
     "deletionScheduled": "Twoje konto jest zaplanowane do usunięcia. Zostanie trwale usunięte za 30 dni.",
     "cancelDeletion": "Anuluj usunięcie",
     "enterPasswordConfirm": "Wprowadź hasło w celu potwierdzenia",
     "deleteMyAccount": "Usuń moje konto",
     "processing": "Przetwarzanie...",
     "webhooksIntegration": "Integracja z systemami zewnętrznymi przez HTTP callbacks",
-    "addWebhook": "Dodaj Webhook",
+    "addWebhook": "Dodaj webhook",
     "endpointUrl": "URL endpointu",
     "subscribedEvents": "Subskrybowane zdarzenia",
     "successRate": "Wskaźnik sukcesu",
@@ -908,7 +923,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Skontaktuj się z działem sprzedaży",
+    "changingPassword": "Zmienianie...",
+    "loadError": "Nie udało się załadować ustawień",
+    "saveOrgError": "Nie udało się zapisać ustawień organizacji",
+    "loadUserError": "Nie udało się załadować danych użytkownika",
+    "loadLogsError": "Nie udało się załadować logów dostarczenia",
+    "themes": {
+      "light": "Jasny",
+      "lightDesc": "Czysty, jasny interfejs",
+      "dark": "Ciemny",
+      "darkDesc": "Łagodny dla oczu",
+      "system": "Systemowy",
+      "systemDesc": "Dopasuj do ustawień urządzenia"
+    },
+    "roles": {
+      "workers": "Pracownicy",
+      "workersDesc": "Zwykli pracownicy",
+      "managers": "Kierownicy",
+      "managersDesc": "Liderzy zespołów i przełożeni",
+      "admins": "Administratorzy",
+      "adminsDesc": "Administratorzy z pełnym dostępem"
+    },
+    "features": {
+      "teamSchedules": "Grafiki zespołu",
+      "teamSchedulesDesc": "Przeglądaj grafiki innych członków zespołu",
+      "internalJobs": "Oferty wewnętrzne",
+      "internalJobsDesc": "Dostęp do wewnętrznych ofert pracy",
+      "careerPaths": "Ścieżki kariery",
+      "careerPathsDesc": "Przeglądaj ścieżki rozwoju kariery",
+      "analytics": "Analityka zespołu",
+      "analyticsDesc": "Dostęp do analityki wydajności",
+      "peerRecognition": "Wyróżnienia koleżeńskie",
+      "peerRecognitionDesc": "Wysyłaj i otrzymuj wyróżnienia od kolegów"
+    },
+    "aboutEmployeeVisibilityTitle": "O widoczności pracowników",
+    "aboutPageVisibilityDesc": "Strony, które wyłączysz, będą ukryte w menu nawigacji dla tej roli.",
+    "brandName": "Nazwa marki",
+    "brandNameDesc": "Wyświetlana na pasku bocznym i w nagłówku aplikacji mobilnej",
+    "brandingDesc": "Dostosuj wygląd i styl doświadczenia Uplift",
+    "brandingDescFull": "Dostosuj wygląd i styl portalu oraz aplikacji mobilnej",
+    "brandingLabel": "Marka",
+    "created": "Utworzono",
+    "dropFileUpload": "Upuść plik lub kliknij, aby przesłać",
+    "emailVerified": "E-mail zweryfikowany",
+    "eventsToSubscribe": "Zdarzenia do subskrypcji",
+    "livePreview": "Podgląd na żywo",
+    "loginScreenPreview": "Ekran logowania",
+    "logosImages": "Logotypy i obrazy",
+    "mfaEnabled": "MFA włączone",
+    "mobileAppHeader": "Nagłówek aplikacji mobilnej",
+    "noEmployeesFound": "Nie znaleziono pracowników",
+    "noEmployeesMatch": "Żaden pracownik nie pasuje do wyszukiwania",
+    "passwordChangeRequired": "Wymagana zmiana hasła",
+    "primaryColor": "Kolor podstawowy",
+    "probation": "Okres próbny",
+    "probationPeriod": "Okres próbny",
+    "probationRestriction": "Niektóre funkcje są ograniczone w okresie próbnym. Zostaną automatycznie włączone po zakończeniu okresu próbnego.",
+    "secondaryColor": "Kolor drugorzędny",
+    "upgradeEnterpriseBranding": "Ulepsz do planu Enterprise, aby uzyskać niestandardowy branding",
+    "webhookDetails": "Szczegóły webhooka",
+    "webhookName": "Nazwa",
+    "webhookSecret": "Klucz tajny",
+    "webhookSecretDesc": "Używany do podpisywania ładunków webhook w celu weryfikacji",
+    "webhooksTitle": "Webhooki"
   },
   "tasks": {
     "title": "Zadania",
@@ -1165,7 +1244,9 @@
     "cameraPermission": "Camera permission is required.",
     "notificationPermission": "Notification permission is required.",
     "tryAgain": "Spróbuj ponownie",
-    "somethingWentWrong": "Something went wrong"
+    "somethingWentWrong": "Coś poszło nie tak",
+    "goHome": "Wróć do strony głównej",
+    "technicalDetails": "Szczegóły techniczne"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1452,7 +1533,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Utwórz raport niestandardowy",
+    "dateFrom": "Data od",
+    "dateTo": "Data do",
+    "filters": "Filtry",
+    "reportName": "Nazwa raportu",
+    "reportType": "Typ raportu",
+    "savedReportsLocal": "Zapisane raporty są przechowywane lokalnie. Trwałe zapisywanie raportów wkrótce.",
+    "sortBy": "Sortuj według",
+    "trendOverTime": "Trend w czasie"
   },
   "shiftTemplates": {
     "title": "Szablony zmian",
@@ -1503,7 +1593,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Nie udało się usunąć szablonu",
+    "shiftsGenerated": "Zmiany zostały wygenerowane!",
+    "failedSave": "Nie udało się zapisać szablonu"
   },
   "legal": {
     "lastUpdated": "Ostatnia aktualizacja",
@@ -1748,7 +1841,18 @@
     "postJob": "Opublikuj ofertę",
     "skillMatch": "dopasowanie umiejętności",
     "noApplicants": "Brak kandydatów",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Obsługa gości",
+      "kitchen": "Kuchnia",
+      "management": "Zarządzanie",
+      "reception": "Recepcja"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edynburg",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Szukaj po nazwisku lub emailu...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Nie udało się dodać umiejętności",
+    "failedVerifySkill": "Nie udało się zweryfikować umiejętności",
+    "failedUpdateSkillLevel": "Nie udało się zaktualizować poziomu umiejętności",
+    "failedRemoveSkill": "Nie udało się usunąć umiejętności",
+    "loadEmployeeError": "Nie udało się załadować pracownika"
   },
   "integrationHub": {
     "title": "Centrum integracji",

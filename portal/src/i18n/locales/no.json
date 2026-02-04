@@ -233,7 +233,12 @@
       "barback": "Barassistent",
       "sous": "Sous-sjef",
       "expeditor": "Ekspeditor"
-    }
+    },
+    "exportComingSoon": "Eksport kommer snart",
+    "new": "NY",
+    "clickToViewDetails": "Klikk for å se detaljer",
+    "closeEsc": "Lukk (ESC)",
+    "logoPreview": "Forhåndsvisning av logo"
   },
   "auth": {
     "login": "Logg inn",
@@ -448,7 +453,16 @@
     "publishSchedule": "Publiser timeplan",
     "publishConfirmation": "Du er i ferd med å publisere {{count}} utkast til vakter. Alle berørte ansatte vil bli varslet.",
     "publishNow": "Publiser nå",
-    "aiScheduleBuilder": "AI Timeplanlegger"
+    "aiScheduleBuilder": "AI Timeplanlegger",
+    "failedShiftSwap": "Kunne ikke behandle skiftbytte",
+    "failedTimeOffRequest": "Kunne ikke behandle friforespørsel",
+    "publishButton": "Publiser",
+    "employee": "Ansatt",
+    "reassign": "Omfordel",
+    "shiftReassigned": "Vakt omfordelt",
+    "swapRequested": "Bytte forespurt",
+    "shiftDeleted": "Vakt slettet",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Tidregistrering",
@@ -661,7 +675,8 @@
     "searchSkills": "Søk etter kompetanse...",
     "skillAdded": "Kompetanse lagt til",
     "verificationRequested": "Verifisering forespurt",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Ansattliste for denne ferdigheten kommer snart."
   },
   "career": {
     "title": "Karriere",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "changingPassword": "Endrer...",
+    "contactSales": "Kontakt salg",
+    "features": {
+      "analytics": "Teamanalyse",
+      "analyticsDesc": "Tilgang til prestasjonsanalyse",
+      "careerPaths": "Karriereveier",
+      "careerPathsDesc": "Se karriereutviklingsveier",
+      "internalJobs": "Interne stillinger",
+      "internalJobsDesc": "Tilgang til interne stillingsutlysninger",
+      "peerRecognition": "Kollegaanerkjennelse",
+      "peerRecognitionDesc": "Send og motta kollegiale anerkjennelser",
+      "teamSchedules": "Teamplaner",
+      "teamSchedulesDesc": "Se andre teammedlemmers planer"
+    },
+    "loadError": "Kunne ikke laste innstillinger",
+    "loadLogsError": "Kunne ikke laste leveringslogger",
+    "loadUserError": "Kunne ikke laste brukerdata",
+    "roles": {
+      "admins": "Administratorer",
+      "adminsDesc": "Administratorer med full tilgang",
+      "managers": "Ledere",
+      "managersDesc": "Teamledere og veiledere",
+      "workers": "Arbeidere",
+      "workersDesc": "Vanlige ansatte"
+    },
+    "saveOrgError": "Kunne ikke lagre organisasjonsinnstillinger",
+    "themes": {
+      "dark": "Mørk",
+      "darkDesc": "Behagelig for øynene",
+      "light": "Lys",
+      "lightDesc": "Rent, lyst grensesnitt",
+      "system": "System",
+      "systemDesc": "Følg enhetsinnstillinger"
+    },
+    "aboutEmployeeVisibilityTitle": "Om ansattes synlighet",
+    "aboutPageVisibilityDesc": "Sider du deaktiverer vil bli skjult fra navigasjonsmenyen for den rollen.",
+    "brandName": "Merkenavn",
+    "brandNameDesc": "Vises i sidefeltet og mobilapp-overskriften",
+    "brandingDesc": "Tilpass utseendet til din Uplift-opplevelse",
+    "brandingDescFull": "Tilpass utseendet på tvers av portal og mobilapp",
+    "brandingLabel": "Merkevarebygging",
+    "created": "Opprettet",
+    "dropFileUpload": "Slipp fil eller klikk for å laste opp",
+    "emailVerified": "E-post bekreftet",
+    "eventsToSubscribe": "Hendelser å abonnere på",
+    "livePreview": "Direkte forhåndsvisning",
+    "loginScreenPreview": "Innloggingsskjerm",
+    "logosImages": "Logoer og bilder",
+    "mfaEnabled": "MFA aktivert",
+    "mobileAppHeader": "Mobilapp-overskrift",
+    "noEmployeesFound": "Ingen ansatte funnet",
+    "noEmployeesMatch": "Ingen ansatte samsvarer med søket ditt",
+    "passwordChangeRequired": "Passordendring påkrevd",
+    "primaryColor": "Primærfarge",
+    "probation": "Prøvetid",
+    "probationPeriod": "Prøvetidsperiode",
+    "probationRestriction": "Noen funksjoner er begrenset i prøvetiden. Disse vil automatisk bli aktivert når prøvetiden er over.",
+    "secondaryColor": "Sekundærfarge",
+    "upgradeEnterpriseBranding": "Oppgrader til Enterprise for tilpasset merkevarebygging",
+    "webhookDetails": "Webhook-detaljer",
+    "webhookName": "Navn",
+    "webhookSecret": "Hemmelighet",
+    "webhookSecretDesc": "Brukes til å signere webhook-nyttelaster for verifisering",
+    "webhooksTitle": "Webhooker"
   },
   "tasks": {
     "title": "Oppgaver",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Kameratillatelse er påkrevd.",
     "notificationPermission": "Varslingstillatelse er påkrevd.",
     "tryAgain": "Vennligst prøv igjen",
-    "somethingWentWrong": "Noe gikk galt"
+    "somethingWentWrong": "Noe gikk galt",
+    "goHome": "Gå til hjem",
+    "technicalDetails": "Tekniske detaljer"
   },
   "activity": {
     "title": "Aktivitetsgjennomgang",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Bygg tilpasset rapport",
+    "dateFrom": "Dato fra",
+    "dateTo": "Dato til",
+    "filters": "Filtre",
+    "reportName": "Rapportnavn",
+    "reportType": "Rapporttype",
+    "savedReportsLocal": "Lagrede rapporter lagres lokalt. Permanent lagring av rapporter kommer snart.",
+    "sortBy": "Sorter etter",
+    "trendOverTime": "Trend over tid"
   },
   "accessibility": {
     "menu": "Meny",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Kunne ikke slette mal",
+    "failedSave": "Kunne ikke lagre mal",
+    "shiftsGenerated": "Skift generert!"
   },
   "legal": {
     "lastUpdated": "Sist oppdatert",
@@ -1748,7 +1841,18 @@
     "postJob": "Publiser stilling",
     "skillMatch": "kompetansematch",
     "noApplicants": "Ingen søkere ennå",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Resepsjonsområde",
+      "kitchen": "Kjøkken",
+      "management": "Ledelse",
+      "reception": "Resepsjon"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Søk etter navn eller e-post...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Kunne ikke legge til ferdighet",
+    "failedRemoveSkill": "Kunne ikke fjerne ferdighet",
+    "failedUpdateSkillLevel": "Kunne ikke oppdatere ferdighetsnivå",
+    "failedVerifySkill": "Kunne ikke verifisere ferdighet",
+    "loadEmployeeError": "Kunne ikke laste ansatt"
   },
   "integrationHub": {
     "title": "Integrasjonshub",

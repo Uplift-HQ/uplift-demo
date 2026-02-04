@@ -233,7 +233,12 @@
       "barback": "ਬਾਰਬੈਕ",
       "sous": "ਸੂ ਸ਼ੈੱਫ",
       "expeditor": "ਐਕਸਪੀਡੀਟਰ"
-    }
+    },
+    "exportComingSoon": "ਏਕਸਪੋਰਟ ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ",
+    "new": "ਨਵਾਂ",
+    "clickToViewDetails": "ਵੇਰਵੇ ਦੇਖਣ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+    "closeEsc": "ਬੰਦ ਕਰੋ (ESC)",
+    "logoPreview": "ਲੋਗੋ ਪ੍ਰੀਵਿਊ"
   },
   "auth": {
     "login": "ਲਾਗਇਨ",
@@ -448,7 +453,16 @@
     "publishSchedule": "ਸ਼ਡਿਊਲ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
     "publishConfirmation": "ਤੁਸੀਂ {{count}} ਡ੍ਰਾਫ਼ਟ ਸ਼ਿਫ਼ਟਾਂ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਨ ਵਾਲੇ ਹੋ।",
     "publishNow": "ਹੁਣੇ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
-    "aiScheduleBuilder": "AI ਸ਼ਡਿਊਲ ਬਿਲਡਰ"
+    "aiScheduleBuilder": "AI ਸ਼ਡਿਊਲ ਬਿਲਡਰ",
+    "failedShiftSwap": "ਸ਼ਿਫਟ ਬਦਲੀ ਪ੍ਰੋਸੈਸ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "failedTimeOffRequest": "ਛੁੱਟੀ ਬੇਨਤੀ ਪ੍ਰੋਸੈਸ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "publishButton": "ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
+    "employee": "ਕਰਮਚਾਰੀ",
+    "reassign": "ਦੁਬਾਰਾ ਨਿਯੁਕਤ ਕਰੋ",
+    "shiftReassigned": "ਸ਼ਿਫਟ ਦੁਬਾਰਾ ਨਿਯੁਕਤ ਕੀਤੀ ਗਈ",
+    "swapRequested": "ਅਦਲਾ-ਬਦਲੀ ਦੀ ਬੇਨਤੀ ਕੀਤੀ ਗਈ",
+    "shiftDeleted": "ਸ਼ਿਫਟ ਮਿਟਾ ਦਿੱਤੀ ਗਈ",
+    "minutes": "ਮਿੰਟ"
   },
   "timeTracking": {
     "title": "ਸਮਾਂ ਟਰੈਕਿੰਗ",
@@ -661,7 +675,8 @@
     "searchSkills": "ਹੁਨਰ ਖੋਜੋ...",
     "skillAdded": "ਹੁਨਰ ਸਫਲਤਾਪੂਰਵਕ ਜੋੜਿਆ",
     "verificationRequested": "ਪੁਸ਼ਟੀ ਦੀ ਬੇਨਤੀ ਕੀਤੀ",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "ਇਸ ਹੁਨਰ ਲਈ ਕਰਮਚਾਰੀ ਸੂਚੀ ਜਲਦੀ ਆ ਰਹੀ ਹੈ।"
   },
   "career": {
     "title": "ਕੈਰੀਅਰ",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "changingPassword": "ਬਦਲ ਰਿਹਾ ਹੈ...",
+    "contactSales": "ਵਿਕਰੀ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+    "features": {
+      "analytics": "ਟੀਮ ਅਨੈਲਿਟਿਕਸ",
+      "analyticsDesc": "ਪ੍ਰਦਰਸ਼ਨ ਅਨੈਲਿਟਿਕਸ ਤੱਕ ਪਹੁੰਚ",
+      "careerPaths": "ਕਰੀਅਰ ਮਾਰਗ",
+      "careerPathsDesc": "ਕਰੀਅਰ ਵਿਕਾਸ ਮਾਰਗ ਦੇਖੋ",
+      "internalJobs": "ਅੰਦਰੂਨੀ ਨੌਕਰੀਆਂ",
+      "internalJobsDesc": "ਅੰਦਰੂਨੀ ਨੌਕਰੀ ਪੋਸਟਿੰਗਾਂ ਤੱਕ ਪਹੁੰਚ",
+      "peerRecognition": "ਸਾਥੀ ਮਾਨਤਾ",
+      "peerRecognitionDesc": "ਸਾਥੀਆਂ ਨੂੰ ਮਾਨਤਾ ਭੇਜੋ ਅਤੇ ਪ੍ਰਾਪਤ ਕਰੋ",
+      "teamSchedules": "ਟੀਮ ਸਮਾਂਸੂਚੀਆਂ",
+      "teamSchedulesDesc": "ਹੋਰ ਟੀਮ ਮੈਂਬਰਾਂ ਦੀਆਂ ਸਮਾਂਸੂਚੀਆਂ ਦੇਖੋ"
+    },
+    "loadError": "ਸੈਟਿੰਗਾਂ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "loadLogsError": "ਡਿਲਿਵਰੀ ਲੌਗਾਂ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "loadUserError": "ਉਪਭੋਗਤਾ ਡੇਟਾ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "roles": {
+      "admins": "ਪ੍ਰਸ਼ਾਸਕ",
+      "adminsDesc": "ਪੂਰੀ ਪਹੁੰਚ ਵਾਲੇ ਪ੍ਰਸ਼ਾਸਕ",
+      "managers": "ਪ੍ਰਬੰਧਕ",
+      "managersDesc": "ਟੀਮ ਲੀਡਰ ਅਤੇ ਸੁਪਰਵਾਈਜ਼ਰ",
+      "workers": "ਕਰਮਚਾਰੀ",
+      "workersDesc": "ਆਮ ਕਰਮਚਾਰੀ"
+    },
+    "saveOrgError": "ਸੰਸਥਾ ਸੈਟਿੰਗਾਂ ਸੇਵ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "themes": {
+      "dark": "ਗੂੜ੍ਹਾ",
+      "darkDesc": "ਅੱਖਾਂ ਲਈ ਆਰਾਮਦਾਇਕ",
+      "light": "ਹਲਕਾ",
+      "lightDesc": "ਸਾਫ਼, ਚਮਕਦਾਰ ਇੰਟਰਫੇਸ",
+      "system": "ਸਿਸਟਮ",
+      "systemDesc": "ਡਿਵਾਈਸ ਸੈਟਿੰਗਾਂ ਨਾਲ ਮੇਲ ਕਰੋ"
+    },
+    "aboutEmployeeVisibilityTitle": "ਕਰਮਚਾਰੀ ਦਿੱਖ ਬਾਰੇ",
+    "aboutPageVisibilityDesc": "ਜੋ ਪੇਜ ਤੁਸੀਂ ਅਯੋਗ ਕਰਦੇ ਹੋ ਉਹ ਉਸ ਭੂਮਿਕਾ ਲਈ ਨੈਵੀਗੇਸ਼ਨ ਮੀਨੂ ਤੋਂ ਲੁਕੇ ਹੋ ਜਾਣਗੇ।",
+    "brandName": "ਬ੍ਰਾਂਡ ਦਾ ਨਾਮ",
+    "brandNameDesc": "ਸਾਈਡਬਾਰ ਅਤੇ ਮੋਬਾਇਲ ਐਪ ਹੈਡਰ ਵਿੱਚ ਦਿਖਾਇਆ ਜਾਂਦਾ ਹੈ",
+    "brandingDesc": "ਆਪਣੇ Uplift ਅਨੁਭਵ ਦੀ ਦਿੱਖ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ",
+    "brandingDescFull": "ਪੋਰਟਲ ਅਤੇ ਮੋਬਾਇਲ ਐਪ ਵਿੱਚ ਦਿੱਖ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ",
+    "brandingLabel": "ਬ੍ਰਾਂਡਿੰਗ",
+    "created": "ਬਣਾਇਆ ਗਿਆ",
+    "dropFileUpload": "ਫਾਇਲ ਛੱਡੋ ਜਾਂ ਅੱਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+    "emailVerified": "ਈਮੇਲ ਤਸਦੀਕਸ਼ੁਦਾ",
+    "eventsToSubscribe": "ਸਬਸਕ੍ਰਾਈਬ ਕਰਨ ਲਈ ਇਵੈਂਟ",
+    "livePreview": "ਲਾਈਵ ਪ੍ਰੀਵਿਊ",
+    "loginScreenPreview": "ਲਾਗਇਨ ਸਕਰੀਨ",
+    "logosImages": "ਲੋਗੋ ਅਤੇ ਤਸਵੀਰਾਂ",
+    "mfaEnabled": "MFA ਸਮਰੱਥ ਹੈ",
+    "mobileAppHeader": "ਮੋਬਾਇਲ ਐਪ ਹੈਡਰ",
+    "noEmployeesFound": "ਕੋਈ ਕਰਮਚਾਰੀ ਨਹੀਂ ਮਿਲੇ",
+    "noEmployeesMatch": "ਤੁਹਾਡੀ ਖੋਜ ਨਾਲ ਕੋਈ ਕਰਮਚਾਰੀ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ",
+    "passwordChangeRequired": "ਪਾਸਵਰਡ ਬਦਲਣਾ ਲੋੜੀਂਦਾ ਹੈ",
+    "primaryColor": "ਪ੍ਰਾਇਮਰੀ ਰੰਗ",
+    "probation": "ਪ੍ਰੋਬੇਸ਼ਨ",
+    "probationPeriod": "ਪ੍ਰੋਬੇਸ਼ਨ ਸਮਾਂ",
+    "probationRestriction": "ਪ੍ਰੋਬੇਸ਼ਨ ਸਮੇਂ ਦੌਰਾਨ ਕੁਝ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਸੀਮਤ ਹਨ। ਪ੍ਰੋਬੇਸ਼ਨ ਖਤਮ ਹੋਣ ਤੇ ਇਹ ਆਪਣੇ ਆਪ ਸਮਰੱਥ ਹੋ ਜਾਣਗੀਆਂ।",
+    "secondaryColor": "ਸੈਕੰਡਰੀ ਰੰਗ",
+    "upgradeEnterpriseBranding": "ਕਸਟਮ ਬ੍ਰਾਂਡਿੰਗ ਲਈ ਐਂਟਰਪ੍ਰਾਈਜ਼ ਵਿੱਚ ਅੱਪਗ੍ਰੇਡ ਕਰੋ",
+    "webhookDetails": "Webhook ਵੇਰਵੇ",
+    "webhookName": "ਨਾਮ",
+    "webhookSecret": "ਗੁਪਤ",
+    "webhookSecretDesc": "ਤਸਦੀਕ ਲਈ webhook ਪੇਲੋਡ ਤੇ ਦਸਤਖਤ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ",
+    "webhooksTitle": "ਵੈਬਹੁੱਕ"
   },
   "tasks": {
     "title": "ਕੰਮ",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "ਕੈਮਰਾ ਇਜਾਜ਼ਤ ਲੋੜੀਂਦੀ ਹੈ।",
     "notificationPermission": "ਸੂਚਨਾ ਇਜਾਜ਼ਤ ਲੋੜੀਂਦੀ ਹੈ।",
     "tryAgain": "ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
-    "somethingWentWrong": "ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ"
+    "somethingWentWrong": "ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ",
+    "goHome": "ਘਰ ਜਾਓ",
+    "technicalDetails": "ਤਕਨੀਕੀ ਵੇਰਵੇ"
   },
   "activity": {
     "title": "ਗਤੀਵਿਧੀ ਸਮੀਖਿਆ",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "ਕਸਟਮ ਰਿਪੋਰਟ ਬਣਾਓ",
+    "dateFrom": "ਤਾਰੀਖ ਤੋਂ",
+    "dateTo": "ਤਾਰੀਖ ਤੱਕ",
+    "filters": "ਫਿਲਟਰ",
+    "reportName": "ਰਿਪੋਰਟ ਦਾ ਨਾਮ",
+    "reportType": "ਰਿਪੋਰਟ ਦੀ ਕਿਸਮ",
+    "savedReportsLocal": "ਸੇਵ ਕੀਤੀਆਂ ਰਿਪੋਰਟਾਂ ਸਥਾਨਕ ਤੌਰ ਤੇ ਸਟੋਰ ਹੁੰਦੀਆਂ ਹਨ। ਸਥਾਈ ਸੇਵ ਕੀਤੀਆਂ ਰਿਪੋਰਟਾਂ ਜਲਦੀ ਆ ਰਹੀਆਂ ਹਨ।",
+    "sortBy": "ਇਸ ਅਨੁਸਾਰ ਕ੍ਰਮਬੱਧ ਕਰੋ",
+    "trendOverTime": "ਸਮੇਂ ਦੇ ਨਾਲ ਰੁਝਾਨ"
   },
   "accessibility": {
     "menu": "ਮੀਨੂ",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "ਟੈਂਪਲੇਟ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ",
+    "failedSave": "ਟੈਂਪਲੇਟ ਸੇਵ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "shiftsGenerated": "ਸ਼ਿਫਟਾਂ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈਆਂ ਗਈਆਂ!"
   },
   "legal": {
     "lastUpdated": "ਆਖਰੀ ਅੱਪਡੇਟ",
@@ -1748,7 +1841,18 @@
     "postJob": "ਨੌਕਰੀ ਪੋਸਟ ਕਰੋ",
     "skillMatch": "ਹੁਨਰ ਮੈਚ",
     "noApplicants": "ਅਜੇ ਕੋਈ ਅਰਜ਼ੀਦਾਰ ਨਹੀਂ",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ਫਰੰਟ ਆਫ਼ ਹਾਊਸ",
+      "kitchen": "ਰਸੋਈ",
+      "management": "ਪ੍ਰਬੰਧਨ",
+      "reception": "ਰਿਸੈਪਸ਼ਨ"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro ਐਡਿਨਬਰਗ",
+      "glasgow": "Grand Metro ਗਲਾਸਗੋ",
+      "manchester": "Grand Metro ਮੈਨਚੈਸਟਰ"
+    }
   },
   "employees": {
     "searchPlaceholder": "ਨਾਮ ਜਾਂ ਈਮੇਲ ਨਾਲ ਖੋਜੋ...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "ਹੁਨਰ ਜੋੜਨ ਵਿੱਚ ਅਸਫਲ",
+    "failedRemoveSkill": "ਹੁਨਰ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ",
+    "failedUpdateSkillLevel": "ਹੁਨਰ ਪੱਧਰ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "failedVerifySkill": "ਹੁਨਰ ਤਸਦੀਕ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "loadEmployeeError": "ਕਰਮਚਾਰੀ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ"
   },
   "integrationHub": {
     "title": "ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਹੱਬ",

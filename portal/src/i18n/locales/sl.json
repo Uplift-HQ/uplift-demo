@@ -233,7 +233,12 @@
       "barback": "Pomočnik barmana",
       "sous": "Sous Chef",
       "expeditor": "Ekspeditor"
-    }
+    },
+    "new": "NOVO",
+    "exportComingSoon": "Izvoz kmalu na voljo",
+    "clickToViewDetails": "Kliknite za ogled podrobnosti",
+    "closeEsc": "Zapri (ESC)",
+    "logoPreview": "Predogled logotipa"
   },
   "auth": {
     "login": "Prijava",
@@ -448,7 +453,16 @@
     "publishSchedule": "Objavi urnik",
     "publishConfirmation": "Objavili boste {{count}} osnutkov izmen. Vsi prizadeti zaposleni bodo obveščeni.",
     "publishNow": "Objavi zdaj",
-    "aiScheduleBuilder": "AI Ustvarjalec urnikov"
+    "aiScheduleBuilder": "AI Ustvarjalec urnikov",
+    "failedTimeOffRequest": "Zahtevka za dopust ni bilo mogoče obdelati",
+    "failedShiftSwap": "Zamenjave izmene ni bilo mogoče obdelati",
+    "publishButton": "Objavi",
+    "employee": "Zaposleni",
+    "reassign": "Prerazporedi",
+    "shiftReassigned": "Izmena prerazporejena",
+    "swapRequested": "Zamenjava zahtevana",
+    "shiftDeleted": "Izmena izbrisana",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Beleženje časa",
@@ -661,7 +675,8 @@
     "searchSkills": "Išči veščine...",
     "skillAdded": "Veščina uspešno dodana",
     "verificationRequested": "Preverjanje zahtevano",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Seznam zaposlenih za to veščino bo kmalu na voljo."
   },
   "career": {
     "title": "Kariera",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Kontaktirajte prodajo",
+    "changingPassword": "Spreminjanje...",
+    "loadError": "Nastavitev ni bilo mogoče naložiti",
+    "saveOrgError": "Nastavitev organizacije ni bilo mogoče shraniti",
+    "loadUserError": "Podatkov uporabnika ni bilo mogoče naložiti",
+    "loadLogsError": "Dnevnikov dostave ni bilo mogoče naložiti",
+    "themes": {
+      "light": "Svetlo",
+      "lightDesc": "Čist, svetel vmesnik",
+      "dark": "Temno",
+      "darkDesc": "Prijetno za oči",
+      "system": "Sistemsko",
+      "systemDesc": "Sledi nastavitvam naprave"
+    },
+    "roles": {
+      "workers": "Delavci",
+      "workersDesc": "Navadni zaposleni",
+      "managers": "Vodje",
+      "managersDesc": "Vodje ekip in nadzorniki",
+      "admins": "Administratorji",
+      "adminsDesc": "Administratorji s polnim dostopom"
+    },
+    "features": {
+      "teamSchedules": "Urniki ekipe",
+      "teamSchedulesDesc": "Oglejte si urnike drugih članov ekipe",
+      "internalJobs": "Interna delovna mesta",
+      "internalJobsDesc": "Dostop do internih zaposlitvenih oglasov",
+      "careerPaths": "Karierne poti",
+      "careerPathsDesc": "Oglejte si poti kariernega razvoja",
+      "analytics": "Analitika ekipe",
+      "analyticsDesc": "Dostop do analitike učinkovitosti",
+      "peerRecognition": "Priznanja sodelavcev",
+      "peerRecognitionDesc": "Pošiljajte in prejemajte pohvale od sodelavcev"
+    },
+    "aboutEmployeeVisibilityTitle": "O vidnosti zaposlenih",
+    "aboutPageVisibilityDesc": "Strani, ki jih onemogočite, bodo skrite iz navigacijskega menija za to vlogo.",
+    "brandName": "Ime blagovne znamke",
+    "brandNameDesc": "Prikazano v stranski vrstici in glavi mobilne aplikacije",
+    "brandingDesc": "Prilagodite videz in občutek vaše izkušnje Uplift",
+    "brandingDescFull": "Prilagodite videz in občutek portala in mobilne aplikacije",
+    "brandingLabel": "Blagovna znamka",
+    "created": "Ustvarjeno",
+    "dropFileUpload": "Spustite datoteko ali kliknite za nalaganje",
+    "emailVerified": "E-pošta potrjena",
+    "eventsToSubscribe": "Dogodki za naročnino",
+    "livePreview": "Predogled v živo",
+    "loginScreenPreview": "Zaslon za prijavo",
+    "logosImages": "Logotipi in slike",
+    "mfaEnabled": "MFA omogočen",
+    "mobileAppHeader": "Glava mobilne aplikacije",
+    "noEmployeesFound": "Ni najdenih zaposlenih",
+    "noEmployeesMatch": "Noben zaposleni ne ustreza vašemu iskanju",
+    "passwordChangeRequired": "Zahtevana je sprememba gesla",
+    "primaryColor": "Primarna barva",
+    "probation": "Poskusna doba",
+    "probationPeriod": "Poskusno obdobje",
+    "probationRestriction": "Nekatere funkcije so omejene med poskusno dobo. Samodejno bodo omogočene po koncu poskusne dobe.",
+    "secondaryColor": "Sekundarna barva",
+    "upgradeEnterpriseBranding": "Nadgradite na Enterprise za prilagojeno blagovno znamko",
+    "webhookDetails": "Podrobnosti spletne kljuke",
+    "webhookName": "Ime",
+    "webhookSecret": "Skrivnost",
+    "webhookSecretDesc": "Uporablja se za podpisovanje vsebin spletne kljuke za preverjanje",
+    "webhooksTitle": "Spletne kljuke"
   },
   "tasks": {
     "title": "Naloge",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Potrebno je dovoljenje za kamero.",
     "notificationPermission": "Potrebno je dovoljenje za obvestila.",
     "tryAgain": "Prosimo, poskusite znova",
-    "somethingWentWrong": "Nekaj je šlo narobe"
+    "somethingWentWrong": "Nekaj je šlo narobe",
+    "goHome": "Na domov",
+    "technicalDetails": "Tehnične podrobnosti"
   },
   "activity": {
     "title": "Pregled dejavnosti",
@@ -1282,7 +1363,7 @@
     "attachments": "Priloge",
     "rejectionReason": "Razlog zavrnitve",
     "enterRejectionReason": "Vnesite razlog za zavrnitev...",
-    "confirmRejection": "Potrdi zavrnitev",
+    "confirmRejection": "Potrdite zavrnitev",
     "approve": "Odobri",
     "reject": "Zavrni",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Ustvari poročilo po meri",
+    "dateFrom": "Datum od",
+    "dateTo": "Datum do",
+    "filters": "Filtri",
+    "reportName": "Ime poročila",
+    "reportType": "Vrsta poročila",
+    "savedReportsLocal": "Shranjena poročila so shranjena lokalno. Trajno shranjevanje poročil bo kmalu na voljo.",
+    "sortBy": "Razvrsti po",
+    "trendOverTime": "Trend skozi čas"
   },
   "accessibility": {
     "menu": "Meni",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Predloge ni bilo mogoče izbrisati",
+    "shiftsGenerated": "Izmene so bile uspešno ustvarjene!",
+    "failedSave": "Predloge ni bilo mogoče shraniti"
   },
   "legal": {
     "lastUpdated": "Nazadnje posodobljeno",
@@ -1748,7 +1841,18 @@
     "postJob": "Objavi delovno mesto",
     "skillMatch": "ujemanje veščin",
     "noApplicants": "Še ni kandidatov",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Strežba",
+      "kitchen": "Kuhinja",
+      "management": "Vodstvo",
+      "reception": "Recepcija"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Iskanje po imenu ali e-pošti...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Veščine ni bilo mogoče dodati",
+    "failedVerifySkill": "Veščine ni bilo mogoče potrditi",
+    "failedUpdateSkillLevel": "Ravni veščine ni bilo mogoče posodobiti",
+    "failedRemoveSkill": "Veščine ni bilo mogoče odstraniti",
+    "loadEmployeeError": "Nalaganje zaposlenega ni uspelo"
   },
   "integrationHub": {
     "title": "Središče za integracije",

@@ -94,7 +94,7 @@
     "edit": "திருத்து",
     "confirm": "உறுதிப்படுத்து",
     "back": "பின்",
-    "next": "அடுத்து",
+    "next": "அடுத்தது",
     "done": "முடிந்தது",
     "close": "மூடு",
     "submit": "சமர்ப்பி",
@@ -233,7 +233,12 @@
       "barback": "பார்பேக்",
       "sous": "சூ செஃப்",
       "expeditor": "எக்ஸ்பிடிட்டர்"
-    }
+    },
+    "new": "புதியது",
+    "exportComingSoon": "எக்ஸ்போர்ட் விரைவில் வரும்",
+    "clickToViewDetails": "விரிவுகளைப் பார்க்க கிளிக் செய்யவும்",
+    "closeEsc": "மூடு (ESC)",
+    "logoPreview": "லோகோ முன்னோட்டம்"
   },
   "auth": {
     "login": "உள்நுழை",
@@ -448,7 +453,16 @@
     "publishSchedule": "அட்டவணையை வெளியிடவும்",
     "publishConfirmation": "நீங்கள் {{count}} வரைவு ஷிப்ட்களை வெளியிடப் போகிறீர்கள்.",
     "publishNow": "இப்போதே வெளியிடவும்",
-    "aiScheduleBuilder": "AI அட்டவணை உருவாக்கி"
+    "aiScheduleBuilder": "AI அட்டவணை உருவாக்கி",
+    "failedTimeOffRequest": "விடுப்பு கோரிக்கையை செயல்படுத்த முடியவில்லை",
+    "failedShiftSwap": "ஷிப்ட் மாற்றத்தை செயல்படுத்த முடியவில்லை",
+    "publishButton": "வெளியிடு",
+    "employee": "பணியாளர்",
+    "reassign": "மீண்டும் ஒதுக்கு",
+    "shiftReassigned": "ஷிப்ட் மீண்டும் ஒதுக்கப்பட்டது",
+    "swapRequested": "மாற்றம் கோரப்பட்டது",
+    "shiftDeleted": "ஷிப்ட் நீக்கப்பட்டது",
+    "minutes": "நிமிடம்"
   },
   "timeTracking": {
     "title": "நேர கண்காணிப்பு",
@@ -661,7 +675,8 @@
     "searchSkills": "திறன்களைத் தேடு...",
     "skillAdded": "திறன் வெற்றிகரமாக சேர்க்கப்பட்டது",
     "verificationRequested": "சரிபார்ப்பு கோரப்பட்டது",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "இந்த திறனுக்கான நிருவாகங்கள் பட்டியல் விரைவில் வரும்."
   },
   "career": {
     "title": "தொழில்",
@@ -895,7 +910,7 @@
     "enable": "இயக்கு",
     "activeSessions": "செயலில் உள்ள அமர்வுகள்",
     "manageDevices": "உங்கள் உள்நுழைந்த சாதனங்களை நிர்வகிக்கவும்",
-    "signOutOtherDevices": "மற்ற சாதனங்களிலிருந்து வெளியேறு",
+    "signOutOtherDevices": "மற்ற சாதனங்களில் வெளியேறு",
     "thisDevice": "இந்த சாதனம்",
     "revoke": "திரும்பப்பெறு",
     "revoking": "திரும்பப்பெறுகிறது...",
@@ -917,14 +932,14 @@
     "preparing": "தயாரிக்கிறது...",
     "dataExported": "தரவு வெற்றிகரமாக ஏற்றுமதி செய்யப்பட்டது",
     "deleteAccountWarning": "உங்கள் கணக்கையும் அனைத்து தொடர்புடைய தரவையும் நிரந்தரமாக நீக்கவும்.",
-    "requestAccountDeletion": "கணக்கு நீக்குதலைக் கோரு",
+    "requestAccountDeletion": "கணக்கை நீக்க கோரிக்கை",
     "deletionScheduled": "உங்கள் கணக்கு நீக்குவதற்கு திட்டமிடப்பட்டுள்ளது.",
-    "cancelDeletion": "நீக்குதலை ரத்துசெய்",
+    "cancelDeletion": "நீக்கத்தை ரத்துசெய்",
     "enterPasswordConfirm": "உறுதிப்படுத்த உங்கள் கடவுச்சொல்லை உள்ளிடவும்",
     "deleteMyAccount": "என் கணக்கை நீக்கு",
     "processing": "செயலாக்குகிறது...",
     "webhooksIntegration": "HTTP கால்பேக்குகள் வழியாக வெளிப்புற அமைப்புகளுடன் ஒருங்கிணைக்கவும்",
-    "addWebhook": "வெப்ஹூக் சேர்",
+    "addWebhook": "வெப்ஹுக் சேர்",
     "endpointUrl": "எண்ட்பாயிண்ட் URL",
     "subscribedEvents": "சந்தா செலுத்தப்பட்ட நிகழ்வுகள்",
     "successRate": "வெற்றி விகிதம்",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "ஒவ்வொரு ஊழியரும் எந்த அம்சங்களை அணுக முடியும் என்பதைக் கட்டுப்படுத்தவும்",
     "searchEmployees": "ஊழியர்களைத் தேடு...",
     "featureAccess": "அம்ச அணுகல்",
-    "enableAll": "அனைத்தையும் இயக்கு",
-    "disableAll": "அனைத்தையும் முடக்கு",
+    "enableAll": "அனைத்தையும் செயல்படுத்து",
+    "disableAll": "அனைத்தையும் செயல்நீக்கு",
     "aboutEmployeeVisibility": "இந்த அமைப்புகள் ஒவ்வொரு ஊழியருக்கும் எந்த அம்சங்கள் தெரியும் என்பதைக் கட்டுப்படுத்துகின்றன.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "விற்பனைப் பிரிவைத் தொடர்புகொள்ளவும்",
+    "changingPassword": "மாற்றுகிறது...",
+    "loadError": "அமைப்புகளை ஏற்ற முடியவில்லை",
+    "saveOrgError": "நிறுவன அமைப்புகளை சேமிக்க முடியவில்லை",
+    "loadUserError": "பயனர் தரவை ஏற்ற முடியவில்லை",
+    "loadLogsError": "விநியோக பதிவுகளை ஏற்ற முடியவில்லை",
+    "themes": {
+      "light": "ஒளி",
+      "lightDesc": "தெளிவான, பிரகாசமான இணையதளம்",
+      "dark": "இருட்டு",
+      "darkDesc": "கண்களுக்கு சுகமானது",
+      "system": "சிஸ்டம்",
+      "systemDesc": "சாதன அமைப்புகளை பின்பற்று"
+    },
+    "roles": {
+      "workers": "தொழிலாளர்கள்",
+      "workersDesc": "சாதாரண செயலாளர்கள்",
+      "managers": "மேலாளர்கள்",
+      "managersDesc": "குழு தலைவர்கள் மற்றும் மேற்பார்வையாளர்கள்",
+      "admins": "நிர்வாகிகள்",
+      "adminsDesc": "முழு அணுகல் நிர்வாகிகள்"
+    },
+    "features": {
+      "teamSchedules": "குழு நேரஅட்டவணைகள்",
+      "teamSchedulesDesc": "மற்ற குழு உறுப்பினர்களின் நேரஅட்டவணைகளைப் பார்",
+      "internalJobs": "உள்ளக வேலைகள்",
+      "internalJobsDesc": "உள்ளக வேலை பதிவுகளை அணுகு",
+      "careerPaths": "தொழில் பாதைகள்",
+      "careerPathsDesc": "தொழில் வளர்ச்சி பாதைகளைப் பார்",
+      "analytics": "குழு பகுப்பாய்வு",
+      "analyticsDesc": "செயல்திறன் பகுப்பாய்வை அணுகு",
+      "peerRecognition": "சக அங்கீகாரம்",
+      "peerRecognitionDesc": "சகாக்களிடம் பாராட்டுகளை அனுப்புகவும் பெறுகவும்"
+    },
+    "aboutEmployeeVisibilityTitle": "நிருவாகத்தின் தெரிவுநிலை பற்றி",
+    "aboutPageVisibilityDesc": "நீங்கள் முடக்கும் பக்கங்கள் அந்த பங்கின் வழிசெலுத்தல் பட்டியலிலிருந்து மறைக்கப்படும்.",
+    "brandName": "பிராண்ட் பெயர்",
+    "brandNameDesc": "பக்கப்பட்டியிலும் மொபைல் ஆப் தலைப்பகுதியிலும் காட்டப்படும்",
+    "brandingDesc": "உங்கள் Uplift அனுபவத்தின் தோற்றத்தை தனிப்பயனாக்குங்கள்",
+    "brandingDescFull": "போர்ட்டல் மற்றும் மொபைல் ஆப் அச்சில் தோற்றத்தை தனிப்பயனாக்குங்கள்",
+    "brandingLabel": "பிராண்டிங்",
+    "created": "உருவாக்கப்பட்டது",
+    "dropFileUpload": "கோப்பை விடுங்கள் அல்லது பதிவேற்ற கிளிக் செய்யவும்",
+    "emailVerified": "மின்னஞ்சல் சரிபார்க்கப்பட்டது",
+    "eventsToSubscribe": "சந்தா செய்ய நிகழ்வுகள்",
+    "livePreview": "நேரடி முன்னோட்டம்",
+    "loginScreenPreview": "உள்நுழைவுத் திரை",
+    "logosImages": "லோகோக்கள் மற்றும் படங்கள்",
+    "mfaEnabled": "MFA செயல்படுத்தப்பட்டது",
+    "mobileAppHeader": "மொபைல் ஆப் தலைப்பகுதி",
+    "noEmployeesFound": "நிருவாகங்கள் கண்டறியப்படவில்லை",
+    "noEmployeesMatch": "உங்கள் தேடலுக்கு பொருந்தும் நிருவாகங்கள் இல்லை",
+    "passwordChangeRequired": "கடவுச்சொல் மாற்றம் தேவை",
+    "primaryColor": "முதன்மை நிறம்",
+    "probation": "சோதனைக் காலம்",
+    "probationPeriod": "சோதனைக் காலம்",
+    "probationRestriction": "சோதனைக் காலத்தில் சில அம்சங்கள் கட்டுப்படுத்தப்பட்டுள்ளன. சோதனை முடிந்ததும் அவை தானாகவே செயல்படுத்தப்படும்.",
+    "secondaryColor": "இரண்டாம் நிறம்",
+    "upgradeEnterpriseBranding": "தனிப்பயன் பிராண்டிங்கிற்கு Enterprise-க்கு மேம்படுத்துங்கள்",
+    "webhookDetails": "வெப்ஹுக் விரிவுகள்",
+    "webhookName": "பெயர்",
+    "webhookSecret": "ரகசியம்",
+    "webhookSecretDesc": "சரிபார்ப்புக்காக வெப்ஹுக் பேலோடுகளை கையொப்பமிட பயன்படுத்தப்படுகிறது",
+    "webhooksTitle": "வெப்ஹுக்கள்"
   },
   "tasks": {
     "title": "பணிகள்",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "கேமரா அனுமதி தேவை.",
     "notificationPermission": "அறிவிப்பு அனுமதி தேவை.",
     "tryAgain": "மீண்டும் முயற்சிக்கவும்",
-    "somethingWentWrong": "ஏதோ தவறு நடந்துவிட்டது"
+    "somethingWentWrong": "ஏதோ தவறாக போயிற்று",
+    "goHome": "முகப்பக்கத்திற்குசெல்",
+    "technicalDetails": "தொக்கநிலை விவரங்கள்"
   },
   "accessibility": {
     "menu": "மெனு",
@@ -1295,7 +1376,7 @@
     "attachments": "இணைப்புகள்",
     "rejectionReason": "நிராகரிப்பு காரணம்",
     "enterRejectionReason": "நிராகரிப்புக்கான காரணத்தை உள்ளிடவும்...",
-    "confirmRejection": "நிராகரிப்பை உறுதிசெய்",
+    "confirmRejection": "நிராகரிப்பை உறுதிப்படுத்தவும்",
     "approve": "ஒப்புதல்",
     "reject": "நிராகரி",
     "placeholder": {
@@ -1463,7 +1544,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "தனிப்பயன் அறிக்கையை உருவாக்கு",
+    "dateFrom": "தேதி முதல்",
+    "dateTo": "தேதி வரை",
+    "filters": "வடிகட்டிகள்",
+    "reportName": "அறிக்கை பெயர்",
+    "reportType": "அறிக்கை வகை",
+    "savedReportsLocal": "சேமிக்கப்பட்ட அறிக்கைகள் ஸ்தல சேமிப்பகத்தில் சேமிக்கப்பட்டுள்ளன. நிரந்தர சேமிப்பு விரைவில் வரும்.",
+    "sortBy": "வரிசைப்படுத்து",
+    "trendOverTime": "காலப்போக்கில் போக்கு"
   },
   "shiftTemplates": {
     "title": "பணி வார்ப்புருக்கள்",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "டெம்ப்ளேட்டை நீக்க முடியவில்லை",
+    "shiftsGenerated": "ஷிப்ட்கள் வெற்றிகரமாக உருவாக்கப்பட்டது!",
+    "failedSave": "டெம்ப்ளேட்டை சேமிக்க முடியவில்லை"
   },
   "legal": {
     "lastUpdated": "கடைசியாக புதுப்பிக்கப்பட்டது",
@@ -1748,7 +1841,18 @@
     "postJob": "வேலை இடு",
     "skillMatch": "திறன் பொருத்தம்",
     "noApplicants": "இன்னும் விண்ணப்பதாரர்கள் இல்லை",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "முன்னரங்கப் பகுதி",
+      "kitchen": "சமையலறை",
+      "management": "மேலாண்மை",
+      "reception": "வரவேற்பு"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro எடின்பரோ",
+      "glasgow": "Grand Metro கிளாஸ்கோ",
+      "manchester": "Grand Metro மான்செஸ்டர்"
+    }
   },
   "employees": {
     "searchPlaceholder": "பெயர் அல்லது மின்னஞ்சல் மூலம் தேடு...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "திறனை சேர்க்க முடியவில்லை",
+    "failedVerifySkill": "திறனை சரிபார்க்க முடியவில்லை",
+    "failedUpdateSkillLevel": "திறன் நிலையை புதுப்பிக்க முடியவில்லை",
+    "failedRemoveSkill": "திறனை நீக்க முடியவில்லை",
+    "loadEmployeeError": "நிருவாகத்தின் தகவல்களை ஏற்ற முடியவில்லை"
   },
   "integrationHub": {
     "title": "ஒருங்கிணைப்பு மையம்",

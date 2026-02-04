@@ -233,7 +233,12 @@
       "barback": "Βοηθός μπάρμαν",
       "sous": "Υποσέφ",
       "expeditor": "Εξπεντίτορ"
-    }
+    },
+    "new": "ΝΕΟ",
+    "exportComingSoon": "Η εξαγωγή έρχεται σύντομα",
+    "clickToViewDetails": "Κάντε κλικ για προβολή λεπτομερειών",
+    "closeEsc": "Κλείσιμο (ESC)",
+    "logoPreview": "Προεπισκόπηση λογότυπου"
   },
   "auth": {
     "login": "Σύνδεση",
@@ -448,7 +453,16 @@
     "publishSchedule": "Δημοσίευση προγράμματος",
     "publishConfirmation": "Πρόκειται να δημοσιεύσετε {{count}} πρόχειρες βάρδιες.",
     "publishNow": "Δημοσίευση τώρα",
-    "aiScheduleBuilder": "AI Δημιουργός Προγράμματος"
+    "aiScheduleBuilder": "AI Δημιουργός Προγράμματος",
+    "failedTimeOffRequest": "Αποτυχία επεξεργασίας αιτήματος άδειας",
+    "failedShiftSwap": "Αποτυχία επεξεργασίας ανταλλαγής βάρδιας",
+    "publishButton": "Δημοσίευση",
+    "employee": "Εργαζόμενος",
+    "reassign": "Ανάθεση εκ νέου",
+    "shiftReassigned": "Η βάρδια ανατέθηκε εκ νέου",
+    "swapRequested": "Ζητήθηκε ανταλλαγή",
+    "shiftDeleted": "Η βάρδια διαγράφηκε",
+    "minutes": "λεπ"
   },
   "timeTracking": {
     "title": "Καταγραφή χρόνου",
@@ -661,7 +675,8 @@
     "searchSkills": "Αναζήτηση δεξιοτήτων...",
     "skillAdded": "Η δεξιότητα προστέθηκε επιτυχώς",
     "verificationRequested": "Το αίτημα επαλήθευσης υποβλήθηκε",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Η λίστα εργαζομένων για αυτή τη δεξιότητα έρχεται σύντομα."
   },
   "career": {
     "title": "Καριέρα",
@@ -811,7 +826,7 @@
     "reminderTime": "Ώρα Υπενθύμισης",
     "sound": "Ήχος",
     "vibration": "Δόνηση",
-    "changePassword": "Αλλαγή Κωδικού",
+    "changePassword": "Αλλαγή κωδικού",
     "twoFactorAuth": "Έλεγχος Ταυτότητας Δύο Παραγόντων",
     "biometricAuth": "Βιομετρικός Έλεγχος Ταυτότητας",
     "dataExport": "Εξαγωγή των Δεδομένων Μου",
@@ -895,7 +910,7 @@
     "enable": "Ενεργοποίηση",
     "activeSessions": "Ενεργές Συνεδρίες",
     "manageDevices": "Διαχειριστείτε τις συνδεδεμένες συσκευές σας",
-    "signOutOtherDevices": "Αποσύνδεση Άλλων Συσκευών",
+    "signOutOtherDevices": "Αποσύνδεση άλλων συσκευών",
     "thisDevice": "Αυτή η συσκευή",
     "revoke": "Ανάκληση",
     "revoking": "Ανάκληση...",
@@ -917,14 +932,14 @@
     "preparing": "Προετοιμασία...",
     "dataExported": "Τα δεδομένα εξήχθησαν επιτυχώς",
     "deleteAccountWarning": "Διαγράψτε οριστικά τον λογαριασμό σας και όλα τα συσχετισμένα δεδομένα. Αυτή η ενέργεια δεν μπορεί να αναιρεθεί μετά την περίοδο χάριτος 30 ημερών.",
-    "requestAccountDeletion": "Αίτημα Διαγραφής Λογαριασμού",
+    "requestAccountDeletion": "Αίτημα διαγραφής λογαριασμού",
     "deletionScheduled": "Ο λογαριασμός σας έχει προγραμματιστεί για διαγραφή. Θα διαγραφεί οριστικά σε 30 ημέρες.",
-    "cancelDeletion": "Ακύρωση Διαγραφής",
+    "cancelDeletion": "Ακύρωση διαγραφής",
     "enterPasswordConfirm": "Εισάγετε τον κωδικό σας για επιβεβαίωση",
     "deleteMyAccount": "Διαγραφή του Λογαριασμού Μου",
     "processing": "Επεξεργασία...",
     "webhooksIntegration": "Ενσωμάτωση με εξωτερικά συστήματα μέσω HTTP callbacks",
-    "addWebhook": "Προσθήκη Webhook",
+    "addWebhook": "Προσθήκη webhook",
     "endpointUrl": "URL Τελικού Σημείου",
     "subscribedEvents": "Εγγεγραμμένα Συμβάντα",
     "successRate": "Ποσοστό Επιτυχίας",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Ελέγξτε σε ποιες λειτουργίες έχει πρόσβαση κάθε υπάλληλος",
     "searchEmployees": "Αναζήτηση υπαλλήλων...",
     "featureAccess": "Πρόσβαση Λειτουργιών",
-    "enableAll": "Ενεργοποίηση Όλων",
-    "disableAll": "Απενεργοποίηση Όλων",
+    "enableAll": "Ενεργοποίηση όλων",
+    "disableAll": "Απενεργοποίηση όλων",
     "aboutEmployeeVisibility": "Αυτές οι ρυθμίσεις ελέγχουν ποιες λειτουργίες είναι ορατές σε κάθε υπάλληλο.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Επικοινωνία με πωλήσεις",
+    "changingPassword": "Αλλαγή...",
+    "loadError": "Αποτυχία φόρτωσης ρυθμίσεων",
+    "saveOrgError": "Αποτυχία αποθήκευσης ρυθμίσεων",
+    "loadUserError": "Αποτυχία φόρτωσης δεδομένων",
+    "loadLogsError": "Αποτυχία φόρτωσης αρχείων",
+    "themes": {
+      "light": "Φωτεινό",
+      "lightDesc": "Καθαρή, φωτεινή διεπαφή",
+      "dark": "Σκοτεινό",
+      "darkDesc": "Ξεκούραστο για τα μάτια",
+      "system": "Σύστημα",
+      "systemDesc": "Ακολουθήστε τις ρυθμίσεις συσκευής"
+    },
+    "roles": {
+      "workers": "Εργαζόμενοι",
+      "workersDesc": "Κανονικοί εργαζόμενοι",
+      "managers": "Διευθυντές",
+      "managersDesc": "Αρχηγοί ομάδων",
+      "admins": "Διαχειριστές",
+      "adminsDesc": "Πλήρης πρόσβαση"
+    },
+    "features": {
+      "teamSchedules": "Προγράμματα ομάδας",
+      "teamSchedulesDesc": "Προβολή προγραμμάτων μελών",
+      "internalJobs": "Εσωτερικές θέσεις",
+      "internalJobsDesc": "Πρόσβαση σε εσωτερικές αγγελίες",
+      "careerPaths": "Καριέρα",
+      "careerPathsDesc": "Προβολή μονοπατιών ανάπτυξης",
+      "analytics": "Ανάλυση ομάδας",
+      "analyticsDesc": "Πρόσβαση σε αναλύσεις απόδοσης",
+      "peerRecognition": "Αναγνώριση συναδέλφων",
+      "peerRecognitionDesc": "Αποστολή και λήψη επαίνων"
+    },
+    "aboutEmployeeVisibilityTitle": "Σχετικά με την ορατότητα εργαζομένων",
+    "aboutPageVisibilityDesc": "Οι σελίδες που απενεργοποιείτε θα αποκρυφτούν από το μενού πλοήγησης για αυτόν τον ρόλο.",
+    "brandName": "Όνομα επωνυμίας",
+    "brandNameDesc": "Εμφανίζεται στην πλαϊνή μπάρα και στην κεφαλίδα της εφαρμογής κινητού",
+    "brandingDesc": "Προσαρμόστε την εμφάνιση της εμπειρίας Uplift",
+    "brandingDescFull": "Προσαρμόστε την εμφάνιση σε πύλη και εφαρμογή κινητού",
+    "brandingLabel": "Branding",
+    "created": "Δημιουργήθηκε",
+    "dropFileUpload": "Σύρετε αρχείο ή κάντε κλικ για μεταφόρτωση",
+    "emailVerified": "Email επαληθευμένο",
+    "eventsToSubscribe": "Γεγονότα για εγγραφή",
+    "livePreview": "Ζωντανή προεπισκόπηση",
+    "loginScreenPreview": "Οθόνη σύνδεσης",
+    "logosImages": "Λογότυπα και εικόνες",
+    "mfaEnabled": "MFA ενεργοποιημένο",
+    "mobileAppHeader": "Κεφαλίδα εφαρμογής κινητού",
+    "noEmployeesFound": "Δεν βρέθηκαν εργαζόμενοι",
+    "noEmployeesMatch": "Κανένας εργαζόμενος δεν ταιριάζει με την αναζήτησή σας",
+    "passwordChangeRequired": "Απαιτείται αλλαγή κωδικού πρόσβασης",
+    "primaryColor": "Κύριο χρώμα",
+    "probation": "Δοκιμαστική περίοδος",
+    "probationPeriod": "Περίοδος δοκιμαστικής",
+    "probationRestriction": "Ορισμένες λειτουργίες είναι περιορισμένες κατά τη δοκιμαστική περίοδο. Θα ενεργοποιηθούν αυτόματα μετά τη λήξη της.",
+    "secondaryColor": "Δευτερεύον χρώμα",
+    "upgradeEnterpriseBranding": "Αναβαθμίστε σε Enterprise για προσαρμοσμένο Branding",
+    "webhookDetails": "Λεπτομέρειες Webhook",
+    "webhookName": "Όνομα",
+    "webhookSecret": "Μυστικό",
+    "webhookSecretDesc": "Χρησιμοποιείται για την υπογραφή των webhook payloads για επαλήθευση",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Εργασίες",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Απαιτείται άδεια τοποθεσίας.",
     "cameraPermission": "Απαιτείται άδεια κάμερας.",
     "notificationPermission": "Απαιτείται άδεια ειδοποιήσεων.",
-    "tryAgain": "Παρακαλώ δοκιμάστε ξανά",
-    "somethingWentWrong": "Κάτι πήγε στραβά"
+    "tryAgain": "Δοκιμάστε ξανά",
+    "somethingWentWrong": "Κάτι πήγε στραβά",
+    "goHome": "Αρχική",
+    "technicalDetails": "Τεχνικές λεπτομέρειες"
   },
   "activity": {
     "title": "Επισκόπηση Δραστηριότητας",
@@ -1282,7 +1363,7 @@
     "attachments": "Συνημμένα",
     "rejectionReason": "Λόγος Απόρριψης",
     "enterRejectionReason": "Εισάγετε λόγο απόρριψης...",
-    "confirmRejection": "Επιβεβαίωση Απόρριψης",
+    "confirmRejection": "Επιβεβαίωση απόρριψης",
     "approve": "Έγκριση",
     "reject": "Απόρριψη",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Δημιουργία προσαρμοσμένης αναφοράς",
+    "dateFrom": "Ημερομηνία από",
+    "dateTo": "Ημερομηνία έως",
+    "filters": "Φίλτρα",
+    "reportName": "Όνομα αναφοράς",
+    "reportType": "Τύπος αναφοράς",
+    "savedReportsLocal": "Οι αποθηκευμένες αναφορές αποθηκεύονται τοπικά. Μόνιμη αποθήκευση αναφορών έρχεται σύντομα.",
+    "sortBy": "Ταξινόμηση κατά",
+    "trendOverTime": "Τάση στο χρόνο"
   },
   "accessibility": {
     "menu": "Μενού",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Αποτυχία διαγραφής προτύπου",
+    "shiftsGenerated": "Οι βάρδιες δημιουργήθηκαν επιτυχώς!",
+    "failedSave": "Αποτυχία αποθήκευσης προτύπου"
   },
   "legal": {
     "lastUpdated": "Τελευταία ενημέρωση",
@@ -1748,7 +1841,18 @@
     "postJob": "Δημοσίευση θέσης",
     "skillMatch": "αντιστοίχιση δεξιοτήτων",
     "noApplicants": "Δεν υπάρχουν υποψήφιοι ακόμα",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Υποδοχή πελατών",
+      "kitchen": "Κουζίνα",
+      "management": "Διοίκηση",
+      "reception": "Ρεσεψιόν"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Εδιμβούργο",
+      "glasgow": "Grand Metro Γλασκώβη",
+      "manchester": "Grand Metro Μάντσεστερ"
+    }
   },
   "employees": {
     "searchPlaceholder": "Αναζήτηση με όνομα ή email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Αποτυχία προσθήκης δεξιότητας",
+    "failedVerifySkill": "Αποτυχία επαλήθευσης",
+    "failedUpdateSkillLevel": "Αποτυχία ενημέρωσης επιπέδου",
+    "failedRemoveSkill": "Αποτυχία αφαίρεσης δεξιότητας",
+    "loadEmployeeError": "Αποτυχία φόρτωσης εργαζομένου"
   },
   "integrationHub": {
     "title": "Κέντρο ενσωματώσεων",

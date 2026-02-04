@@ -233,7 +233,12 @@
       "barback": "Помощник барман",
       "sous": "Заместник готвач",
       "expeditor": "Експедитор"
-    }
+    },
+    "new": "НОВО",
+    "exportComingSoon": "Експортът предстои",
+    "clickToViewDetails": "Щракнете, за да видите подробностите",
+    "closeEsc": "Затвори (ESC)",
+    "logoPreview": "Преглед на логото"
   },
   "auth": {
     "login": "Вход",
@@ -448,7 +453,16 @@
     "publishSchedule": "Публикувай графика",
     "publishConfirmation": "Ще публикувате {{count}} чернови смени. Всички засегнати служители ще бъдат уведомени.",
     "publishNow": "Публикувай сега",
-    "aiScheduleBuilder": "AI Конструктор на графици"
+    "aiScheduleBuilder": "AI Конструктор на графици",
+    "failedTimeOffRequest": "Неуспешна обработка на заявка за отпуск",
+    "failedShiftSwap": "Неуспешна обработка на размяна на смени",
+    "publishButton": "Публикувай",
+    "employee": "Служител",
+    "reassign": "Преназначи",
+    "shiftReassigned": "Смяната е преназначена",
+    "swapRequested": "Заявена е размяна",
+    "shiftDeleted": "Смяната е изтрита",
+    "minutes": "мин"
   },
   "timeTracking": {
     "title": "Отчитане на време",
@@ -661,7 +675,8 @@
     "searchSkills": "Търси умения...",
     "skillAdded": "Умението е добавено успешно",
     "verificationRequested": "Заявено е потвърждение",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Списъкът на служителите за това умение ще бъде наличен скоро."
   },
   "career": {
     "title": "Кариера",
@@ -811,7 +826,7 @@
     "reminderTime": "Време за напомняне",
     "sound": "Звук",
     "vibration": "Вибрация",
-    "changePassword": "Смени парола",
+    "changePassword": "Промяна на парола",
     "twoFactorAuth": "Двуфакторна автентикация",
     "biometricAuth": "Биометрична автентикация",
     "dataExport": "Експортирай данните ми",
@@ -895,7 +910,7 @@
     "enable": "Включи",
     "activeSessions": "Активни сесии",
     "manageDevices": "Управлявайте вашите влезли устройства",
-    "signOutOtherDevices": "Излез от други устройства",
+    "signOutOtherDevices": "Изход от други устройства",
     "thisDevice": "Това устройство",
     "revoke": "Отмени",
     "revoking": "Отменяне...",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Контролирайте до кои функции има достъп всеки служител",
     "searchEmployees": "Търси служители...",
     "featureAccess": "Достъп до функции",
-    "enableAll": "Включи всички",
-    "disableAll": "Изключи всички",
+    "enableAll": "Активирай всички",
+    "disableAll": "Деактивирай всички",
     "aboutEmployeeVisibility": "Тези настройки контролират кои функции са видими за всеки служител.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Свържете се с продажбите",
+    "changingPassword": "Променя се...",
+    "loadError": "Неуспешно зареждане на настройките",
+    "saveOrgError": "Неуспешно запазване на настройките",
+    "loadUserError": "Неуспешно зареждане на данните",
+    "loadLogsError": "Неуспешно зареждане на логовете",
+    "themes": {
+      "light": "Светла",
+      "lightDesc": "Чист, ярък интерфейс",
+      "dark": "Тъмна",
+      "darkDesc": "Лека за очите",
+      "system": "Системна",
+      "systemDesc": "Следвай настройките на устройството"
+    },
+    "roles": {
+      "workers": "Служители",
+      "workersDesc": "Редовни служители",
+      "managers": "Мениджъри",
+      "managersDesc": "Ръководители на екипи",
+      "admins": "Администратори",
+      "adminsDesc": "Пълен достъп"
+    },
+    "features": {
+      "teamSchedules": "Екипни графици",
+      "teamSchedulesDesc": "Преглед на графиците на колегите",
+      "internalJobs": "Вътрешни позиции",
+      "internalJobsDesc": "Достъп до вътрешни обяви",
+      "careerPaths": "Кариерни пътища",
+      "careerPathsDesc": "Преглед на пътища за развитие",
+      "analytics": "Екипни анализи",
+      "analyticsDesc": "Достъп до анализи на представянето",
+      "peerRecognition": "Колегиално признание",
+      "peerRecognitionDesc": "Изпращане и получаване на похвали"
+    },
+    "aboutEmployeeVisibilityTitle": "Относно видимостта на служителите",
+    "aboutPageVisibilityDesc": "Страниците, които деактивирате, ще бъдат скрити от навигационното меню за тази роля.",
+    "brandName": "Име на марката",
+    "brandNameDesc": "Показва се в страничната лента и заглавието на мобилното приложение",
+    "brandingDesc": "Персонализирайте визуалния стил на вашия Uplift",
+    "brandingDescFull": "Персонализирайте визуалния стил на портала и мобилното приложение",
+    "brandingLabel": "Брандиране",
+    "created": "Създадено",
+    "dropFileUpload": "Пуснете файл или щракнете, за да качите",
+    "emailVerified": "Имейлът е потвърден",
+    "eventsToSubscribe": "Събития за абониране",
+    "livePreview": "Преглед на живо",
+    "loginScreenPreview": "Екран за влизане",
+    "logosImages": "Лога и изображения",
+    "mfaEnabled": "MFA активирано",
+    "mobileAppHeader": "Заглавие на мобилното приложение",
+    "noEmployeesFound": "Няма намерени служители",
+    "noEmployeesMatch": "Няма служители, отговарящи на търсенето ви",
+    "passwordChangeRequired": "Изисква се смяна на паролата",
+    "primaryColor": "Основен цвят",
+    "probation": "Изпитателен срок",
+    "probationPeriod": "Изпитателен срок",
+    "probationRestriction": "Някои функции са ограничени по време на изпитателния срок. Те ще бъдат автоматично активирани след края на изпитателния срок.",
+    "secondaryColor": "Вторичен цвят",
+    "upgradeEnterpriseBranding": "Надградете до Enterprise за персонализирано брандиране",
+    "webhookDetails": "Детайли на webhook",
+    "webhookName": "Име",
+    "webhookSecret": "Тайна",
+    "webhookSecretDesc": "Използва се за подписване на webhook полезни товари за проверка",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Задачи",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Изисква се разрешение за локация.",
     "cameraPermission": "Изисква се разрешение за камера.",
     "notificationPermission": "Изисква се разрешение за известия.",
-    "tryAgain": "Моля, опитайте отново",
-    "somethingWentWrong": "Нещо се обърка"
+    "tryAgain": "Опитай отново",
+    "somethingWentWrong": "Нещо се обърка",
+    "goHome": "Начало",
+    "technicalDetails": "Технически детайли"
   },
   "activity": {
     "title": "Преглед на активността",
@@ -1282,7 +1363,7 @@
     "attachments": "Прикачени файлове",
     "rejectionReason": "Причина за отхвърляне",
     "enterRejectionReason": "Въведете причина за отхвърляне...",
-    "confirmRejection": "Потвърди отхвърляне",
+    "confirmRejection": "Потвърди отхвърлянето",
     "approve": "Одобри",
     "reject": "Отхвърли",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Създай персонализиран отчет",
+    "dateFrom": "Дата от",
+    "dateTo": "Дата до",
+    "filters": "Филтри",
+    "reportName": "Име на отчета",
+    "reportType": "Тип отчет",
+    "savedReportsLocal": "Запазените отчети се съхраняват локално. Постоянното запазване идва скоро.",
+    "sortBy": "Сортиране по",
+    "trendOverTime": "Тенденция във времето"
   },
   "accessibility": {
     "menu": "Меню",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Неуспешно изтриване на шаблон",
+    "shiftsGenerated": "Смените са генерирани успешно!",
+    "failedSave": "Неуспешно запазване на шаблон"
   },
   "legal": {
     "lastUpdated": "Последна актуализация",
@@ -1748,7 +1841,18 @@
     "postJob": "Публикувай работа",
     "skillMatch": "съвпадение на умения",
     "noApplicants": "Все още няма кандидати",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Зала",
+      "kitchen": "Кухня",
+      "management": "Управление",
+      "reception": "Рецепция"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Търсене по име или имейл...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Неуспешно добавяне на умение",
+    "failedVerifySkill": "Неуспешна проверка",
+    "failedUpdateSkillLevel": "Неуспешна актуализация на нивото",
+    "failedRemoveSkill": "Неуспешно премахване на умение",
+    "loadEmployeeError": "Неуспешно зареждане на служител"
   },
   "integrationHub": {
     "title": "Интеграционен център",

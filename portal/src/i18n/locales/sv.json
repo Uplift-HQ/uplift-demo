@@ -233,7 +233,12 @@
       "barback": "Barassistent",
       "sous": "Sous-chef",
       "expeditor": "Expeditör"
-    }
+    },
+    "new": "NY",
+    "exportComingSoon": "Export kommer snart",
+    "clickToViewDetails": "Klicka för att visa detaljer",
+    "closeEsc": "Stäng (ESC)",
+    "logoPreview": "Förhandsgranskning av logotyp"
   },
   "auth": {
     "login": "Logga in",
@@ -448,7 +453,16 @@
     "publishSchedule": "Publicera schema",
     "publishConfirmation": "Du håller på att publicera {{count}} utkast till pass. Alla berörda anställda kommer att meddelas.",
     "publishNow": "Publicera nu",
-    "aiScheduleBuilder": "AI Schemabyggare"
+    "aiScheduleBuilder": "AI Schemabyggare",
+    "failedTimeOffRequest": "Kunde inte behandla ledighetsförfrågan",
+    "failedShiftSwap": "Kunde inte behandla skiftbytet",
+    "publishButton": "Publicera",
+    "employee": "Anställd",
+    "reassign": "Omfördela",
+    "shiftReassigned": "Skift omfördelat",
+    "swapRequested": "Byte begärt",
+    "shiftDeleted": "Skift raderat",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Tidrapportering",
@@ -661,7 +675,8 @@
     "searchSkills": "Sök kompetenser...",
     "skillAdded": "Kompetens tillagd",
     "verificationRequested": "Verifiering begärd",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Anställdlista för denna färdighet kommer snart."
   },
   "career": {
     "title": "Karriär",
@@ -917,9 +932,9 @@
     "preparing": "Förbereder...",
     "dataExported": "Data exporterad",
     "deleteAccountWarning": "Ta bort ditt konto och all tillhörande data permanent. Denna åtgärd kan inte ångras efter 30-dagars karensperioden.",
-    "requestAccountDeletion": "Begär kontoborttagning",
+    "requestAccountDeletion": "Begär kontoradering",
     "deletionScheduled": "Ditt konto är schemalagt för borttagning. Det kommer att tas bort permanent om 30 dagar.",
-    "cancelDeletion": "Avbryt borttagning",
+    "cancelDeletion": "Avbryt radering",
     "enterPasswordConfirm": "Ange ditt lösenord för att bekräfta",
     "deleteMyAccount": "Ta bort mitt konto",
     "processing": "Bearbetar...",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Kontakta försäljning",
+    "changingPassword": "Ändrar...",
+    "loadError": "Kunde inte ladda inställningar",
+    "saveOrgError": "Kunde inte spara organisationsinställningar",
+    "loadUserError": "Kunde inte ladda användardata",
+    "loadLogsError": "Kunde inte ladda leveransloggar",
+    "themes": {
+      "light": "Ljust",
+      "lightDesc": "Rent, ljust gränssnitt",
+      "dark": "Mörkt",
+      "darkDesc": "Skönt för ögonen",
+      "system": "System",
+      "systemDesc": "Följ enhetsinställningar"
+    },
+    "roles": {
+      "workers": "Arbetare",
+      "workersDesc": "Vanliga anställda",
+      "managers": "Chefer",
+      "managersDesc": "Teamledare och handledare",
+      "admins": "Administratörer",
+      "adminsDesc": "Administratörer med full åtkomst"
+    },
+    "features": {
+      "teamSchedules": "Teamscheman",
+      "teamSchedulesDesc": "Visa andra teammedlemmars scheman",
+      "internalJobs": "Interna tjänster",
+      "internalJobsDesc": "Åtkomst till interna platsannonser",
+      "careerPaths": "Karriärvägar",
+      "careerPathsDesc": "Visa karriärutvecklingsvägar",
+      "analytics": "Teamanalys",
+      "analyticsDesc": "Åtkomst till prestationsanalys",
+      "peerRecognition": "Kollegaerkännande",
+      "peerRecognitionDesc": "Skicka och ta emot kollegiala erkännanden"
+    },
+    "aboutEmployeeVisibilityTitle": "Om anställdas synlighet",
+    "aboutPageVisibilityDesc": "Sidor du inaktiverar döljs från navigeringsmenyn för den rollen.",
+    "brandName": "Varumärkesnamn",
+    "brandNameDesc": "Visas i sidofältet och mobilappens rubrik",
+    "brandingDesc": "Anpassa utseendet och känslan för din Uplift-upplevelse",
+    "brandingDescFull": "Anpassa utseendet och känslan för portal och mobilapp",
+    "brandingLabel": "Varumärke",
+    "created": "Skapad",
+    "dropFileUpload": "Släpp fil eller klicka för att ladda upp",
+    "emailVerified": "E-post verifierad",
+    "eventsToSubscribe": "Händelser att prenumerera på",
+    "livePreview": "Livevisning",
+    "loginScreenPreview": "Inloggningsskärm",
+    "logosImages": "Logotyper och bilder",
+    "mfaEnabled": "MFA aktiverad",
+    "mobileAppHeader": "Mobilappens rubrik",
+    "noEmployeesFound": "Inga anställda hittades",
+    "noEmployeesMatch": "Inga anställda matchar din sökning",
+    "passwordChangeRequired": "Lösenordsändring krävs",
+    "primaryColor": "Primärfärg",
+    "probation": "Provanställning",
+    "probationPeriod": "Provanställningsperiod",
+    "probationRestriction": "Vissa funktioner är begränsade under provanställningsperioden. De aktiveras automatiskt när provanställningen är slut.",
+    "secondaryColor": "Sekundärfärg",
+    "upgradeEnterpriseBranding": "Uppgradera till Enterprise för anpassat varumärke",
+    "webhookDetails": "Webhook-detaljer",
+    "webhookName": "Namn",
+    "webhookSecret": "Hemlighet",
+    "webhookSecretDesc": "Används för att signera webhook-nyttolaster för verifiering",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Uppgifter",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "Kamerabehörighet krävs.",
     "notificationPermission": "Aviseringsbehörighet krävs.",
     "tryAgain": "Försök igen",
-    "somethingWentWrong": "Något gick fel"
+    "somethingWentWrong": "Något gick fel",
+    "goHome": "Gå till startsidan",
+    "technicalDetails": "Tekniska detaljer"
   },
   "activity": {
     "title": "Aktivitetsgranskning",
@@ -1282,7 +1363,7 @@
     "attachments": "Bilagor",
     "rejectionReason": "Avvisningsorsak",
     "enterRejectionReason": "Ange orsak för avvisning...",
-    "confirmRejection": "Bekräfta avvisning",
+    "confirmRejection": "Bekräfta avslag",
     "approve": "Godkänn",
     "reject": "Avvisa",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Skapa anpassad rapport",
+    "dateFrom": "Datum från",
+    "dateTo": "Datum till",
+    "filters": "Filter",
+    "reportName": "Rapportnamn",
+    "reportType": "Rapporttyp",
+    "savedReportsLocal": "Sparade rapporter lagras lokalt. Beständiga sparade rapporter kommer snart.",
+    "sortBy": "Sortera efter",
+    "trendOverTime": "Trend över tid"
   },
   "accessibility": {
     "menu": "Meny",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Kunde inte ta bort mallen",
+    "shiftsGenerated": "Skift har genererats!",
+    "failedSave": "Kunde inte spara mallen"
   },
   "legal": {
     "lastUpdated": "Senast uppdaterad",
@@ -1748,7 +1841,18 @@
     "postJob": "Publicera jobb",
     "skillMatch": "kompetensmatchning",
     "noApplicants": "Inga sökande ännu",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Servering",
+      "kitchen": "Kök",
+      "management": "Ledning",
+      "reception": "Reception"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Sök efter namn eller e-post...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Kunde inte lägga till kompetens",
+    "failedVerifySkill": "Kunde inte verifiera kompetens",
+    "failedUpdateSkillLevel": "Kunde inte uppdatera kompetensnivå",
+    "failedRemoveSkill": "Kunde inte ta bort kompetens",
+    "loadEmployeeError": "Det gick inte att läsa in anställd"
   },
   "integrationHub": {
     "title": "Integrationshub",

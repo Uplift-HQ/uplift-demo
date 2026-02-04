@@ -233,7 +233,12 @@
       "barback": "बारबैक",
       "sous": "सू शेफ",
       "expeditor": "एक्सपेडिटर"
-    }
+    },
+    "new": "नया",
+    "exportComingSoon": "निर्यात जल्द उपलब्ध",
+    "clickToViewDetails": "विवरण देखने के लिए क्लिक करें",
+    "closeEsc": "बंद करें (ESC)",
+    "logoPreview": "लोगो पूर्वावलोकन"
   },
   "auth": {
     "login": "लॉग इन",
@@ -448,7 +453,16 @@
     "publishSchedule": "शेड्यूल प्रकाशित करें",
     "publishConfirmation": "आप {{count}} ड्राफ्ट शिफ्ट प्रकाशित करने वाले हैं। सभी संबंधित कर्मचारियों को सूचित किया जाएगा।",
     "publishNow": "अभी प्रकाशित करें",
-    "aiScheduleBuilder": "AI शेड्यूल बिल्डर"
+    "aiScheduleBuilder": "AI शेड्यूल बिल्डर",
+    "failedTimeOffRequest": "छुट्टी अनुरोध प्रक्रिया विफल",
+    "failedShiftSwap": "शिफ्ट बदली प्रक्रिया विफल",
+    "publishButton": "प्रकाशित करें",
+    "employee": "कर्मचारी",
+    "reassign": "पुनः असाइन करें",
+    "shiftReassigned": "शिफ्ट पुनः असाइन की गई",
+    "swapRequested": "स्वैप का अनुरोध किया गया",
+    "shiftDeleted": "शिफ्ट हटाई गई",
+    "minutes": "मिनट"
   },
   "timeTracking": {
     "title": "समय ट्रैकिंग",
@@ -661,7 +675,8 @@
     "searchSkills": "कौशल खोजें...",
     "skillAdded": "कौशल सफलतापूर्वक जोड़ा गया",
     "verificationRequested": "सत्यापन का अनुरोध किया गया",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "इस कौशल के लिए कर्मचारी सूची जल्द आ रही है।"
   },
   "career": {
     "title": "करियर",
@@ -895,7 +910,7 @@
     "enable": "सक्षम करें",
     "activeSessions": "सक्रिय सत्र",
     "manageDevices": "अपने लॉग-इन उपकरणों को प्रबंधित करें",
-    "signOutOtherDevices": "अन्य उपकरणों से साइन आउट करें",
+    "signOutOtherDevices": "अन्य डिवाइस से साइन आउट",
     "thisDevice": "यह उपकरण",
     "revoke": "रद्द करें",
     "revoking": "रद्द कर रहे हैं...",
@@ -917,7 +932,7 @@
     "preparing": "तैयार कर रहे हैं...",
     "dataExported": "डेटा सफलतापूर्वक निर्यात हुआ",
     "deleteAccountWarning": "अपना खाता और सभी संबंधित डेटा स्थायी रूप से हटाएं। 30 दिन की अनुग्रह अवधि के बाद यह क्रिया पूर्ववत नहीं की जा सकती।",
-    "requestAccountDeletion": "खाता हटाने का अनुरोध करें",
+    "requestAccountDeletion": "खाता हटाने का अनुरोध",
     "deletionScheduled": "आपका खाता हटाने के लिए निर्धारित है। इसे 30 दिनों में स्थायी रूप से हटा दिया जाएगा।",
     "cancelDeletion": "हटाना रद्द करें",
     "enterPasswordConfirm": "पुष्टि के लिए अपना पासवर्ड दर्ज करें",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "बिक्री से संपर्क करें",
+    "changingPassword": "बदल रहे हैं...",
+    "loadError": "सेटिंग्स लोड करने में विफल",
+    "saveOrgError": "संगठन सेटिंग्स सहेजने में विफल",
+    "loadUserError": "उपयोगकर्ता डेटा लोड विफल",
+    "loadLogsError": "लॉग लोड विफल",
+    "themes": {
+      "light": "हल्का",
+      "lightDesc": "साफ, उज्ज्वल इंटरफेस",
+      "dark": "गहरा",
+      "darkDesc": "आंखों के लिए आरामदायक",
+      "system": "सिस्टम",
+      "systemDesc": "डिवाइस सेटिंग्स का पालन करें"
+    },
+    "roles": {
+      "workers": "कर्मचारी",
+      "workersDesc": "नियमित कर्मचारी",
+      "managers": "प्रबंधक",
+      "managersDesc": "टीम लीडर और पर्यवेक्षक",
+      "admins": "प्रशासक",
+      "adminsDesc": "पूर्ण पहुंच"
+    },
+    "features": {
+      "teamSchedules": "टीम शेड्यूल",
+      "teamSchedulesDesc": "सदस्यों के शेड्यूल देखें",
+      "internalJobs": "आंतरिक नौकरियां",
+      "internalJobsDesc": "आंतरिक पदों तक पहुंचें",
+      "careerPaths": "करियर पथ",
+      "careerPathsDesc": "विकास पथ देखें",
+      "analytics": "टीम विश्लेषण",
+      "analyticsDesc": "प्रदर्शन विश्लेषण तक पहुंचें",
+      "peerRecognition": "सहकर्मी मान्यता",
+      "peerRecognitionDesc": "प्रशंसा भेजें और प्राप्त करें"
+    },
+    "aboutEmployeeVisibilityTitle": "कर्मचारी दृश्यता के बारे में",
+    "aboutPageVisibilityDesc": "आपके द्वारा अक्षम किए गए पृष्ठ उस भूमिका के नेविगेशन मेनू से छिपा दिए जाएंगे।",
+    "brandName": "ब्रांड नाम",
+    "brandNameDesc": "साइडबार और मोबाइल एप हेडर में प्रदर्शित होता है",
+    "brandingDesc": "अपने Uplift अनुभव की दिखावट कस्टमाइज़ करें",
+    "brandingDescFull": "पोर्टल और मोबाइल एप में दिखावट कस्टमाइज़ करें",
+    "brandingLabel": "ब्रांडिंग",
+    "created": "बनाया गया",
+    "dropFileUpload": "फ़ाइल ड्रॉप करें या अपलोड करने के लिए क्लिक करें",
+    "emailVerified": "ईमेल सत्यापित",
+    "eventsToSubscribe": "सदस्यता लेने वाली घटनाएं",
+    "livePreview": "लाइव पूर्वावलोकन",
+    "loginScreenPreview": "लॉगिन स्क्रीन",
+    "logosImages": "लोगो और छवियां",
+    "mfaEnabled": "MFA सक्रिय",
+    "mobileAppHeader": "मोबाइल एप हेडर",
+    "noEmployeesFound": "कोई कर्मचारी नहीं मिला",
+    "noEmployeesMatch": "कोई कर्मचारी आपकी खोज से मेल नहीं खाता",
+    "passwordChangeRequired": "पासवर्ड बदलना आवश्यक है",
+    "primaryColor": "प्राथमिक रंग",
+    "probation": "परिवीक्षा",
+    "probationPeriod": "परिवीक्षा अवधि",
+    "probationRestriction": "परिवीक्षा अवधि के दौरान कुछ सुविधाएं प्रतिबंधित हैं। परिवीक्षा समाप्त होने पर ये स्वचालित रूप से सक्रिय हो जाएंगी।",
+    "secondaryColor": "द्वितीयक रंग",
+    "upgradeEnterpriseBranding": "कस्टम ब्रांडिंग के लिए Enterprise में अपग्रेड करें",
+    "webhookDetails": "Webhook विवरण",
+    "webhookName": "नाम",
+    "webhookSecret": "गोपनीय",
+    "webhookSecretDesc": "सत्यापन के लिए webhook पेलोड पर हस्ताक्षर करने के लिए उपयोग किया जाता है",
+    "webhooksTitle": "वेबहुक्स"
   },
   "tasks": {
     "title": "कार्य",
@@ -1252,7 +1331,9 @@
     "cameraPermission": "कैमरा अनुमति आवश्यक है।",
     "notificationPermission": "सूचना अनुमति आवश्यक है।",
     "tryAgain": "पुनः प्रयास करें",
-    "somethingWentWrong": "कुछ गलत हो गया"
+    "somethingWentWrong": "कुछ गलत हो गया",
+    "goHome": "होम",
+    "technicalDetails": "तकनीकी विवरण"
   },
   "activity": {
     "title": "गतिविधि समीक्षा",
@@ -1286,10 +1367,10 @@
     "approve": "स्वीकृत करें",
     "reject": "अस्वीकृत करें",
     "placeholder": {
-      "search": "Search activity..."
+      "search": "गतिविधि खोजें..."
     },
-    "loadError": "Failed to load activity data",
-    "rejectionReasonPlaceholder": "Enter reason for rejection..."
+    "loadError": "गतिविधि डेटा लोड करने में विफल",
+    "rejectionReasonPlaceholder": "अस्वीकृति का कारण दर्ज करें..."
   },
   "notificationSettings": {
     "title": "सूचना प्राथमिकताएं",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "कस्टम रिपोर्ट बनाएं",
+    "dateFrom": "तारीख से",
+    "dateTo": "तारीख तक",
+    "filters": "फ़िल्टर",
+    "reportName": "रिपोर्ट का नाम",
+    "reportType": "रिपोर्ट का प्रकार",
+    "savedReportsLocal": "सहेजी गई रिपोर्टें स्थानीय रूप से संग्रहीत हैं। स्थायी रिपोर्ट संग्रहण जल्द आ रहा है।",
+    "sortBy": "क्रमबद्ध करें",
+    "trendOverTime": "समय के साथ रुझान"
   },
   "accessibility": {
     "menu": "मेनू",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "टेम्पलेट हटाने में विफल",
+    "shiftsGenerated": "शिफ्ट सफलतापूर्वक बनाई गईं!",
+    "failedSave": "टेम्पलेट सहेजने में विफल"
   },
   "legal": {
     "lastUpdated": "अंतिम अपडेट",
@@ -1748,7 +1841,18 @@
     "postJob": "नौकरी पोस्ट करें",
     "skillMatch": "कौशल मिलान",
     "noApplicants": "अभी तक कोई आवेदक नहीं",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "फ्रंट ऑफ हाउस",
+      "kitchen": "रसोई",
+      "management": "प्रबंधन",
+      "reception": "रिसेप्शन"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro एडिनबर्ग",
+      "glasgow": "Grand Metro ग्लासगो",
+      "manchester": "Grand Metro मैनचेस्टर"
+    }
   },
   "employees": {
     "searchPlaceholder": "नाम या ईमेल से खोजें...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "कौशल जोड़ने में विफल",
+    "failedVerifySkill": "सत्यापन विफल",
+    "failedUpdateSkillLevel": "स्तर अपडेट विफल",
+    "failedRemoveSkill": "कौशल हटाने में विफल",
+    "loadEmployeeError": "कर्मचारी लोड करने में विफल"
   },
   "integrationHub": {
     "title": "एकीकरण केंद्र",
@@ -2059,9 +2168,9 @@
       "description": "उदाहरणों के लिए हमारा API दस्तावेज़ देखें, या जटिल मामलों के लिए सहायता से संपर्क करें।"
     },
     "placeholder": {
-      "apiName": "API name",
-      "baseUrl": "Base URL",
-      "apiKey": "API key"
+      "apiName": "API नाम",
+      "baseUrl": "बेस URL",
+      "apiKey": "API कुंजी"
     }
   },
   "restApiKeys": {

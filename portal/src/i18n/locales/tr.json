@@ -94,7 +94,7 @@
     "edit": "Düzenle",
     "confirm": "Onayla",
     "back": "Geri",
-    "next": "İleri",
+    "next": "Sonraki",
     "done": "Tamamlandı",
     "close": "Kapat",
     "submit": "Gönder",
@@ -233,7 +233,12 @@
       "barback": "Bar yardımcısı",
       "sous": "Sous Şef",
       "expeditor": "Ekspeditor"
-    }
+    },
+    "new": "YENİ",
+    "exportComingSoon": "Dışa aktarma yakında",
+    "clickToViewDetails": "Ayrıntıları görmek için tıklayın",
+    "closeEsc": "Kapat (ESC)",
+    "logoPreview": "Logo önizleme"
   },
   "auth": {
     "login": "Giriş Yap",
@@ -448,7 +453,16 @@
     "publishSchedule": "Çizelge yayınla",
     "publishConfirmation": "{{count}} taslak vardiya yayınlamak üzeresiniz. Tüm ilgili çalışanlar bilgilendirilecek.",
     "publishNow": "Şimdi yayınla",
-    "aiScheduleBuilder": "AI Çizelge Oluşturucu"
+    "aiScheduleBuilder": "AI Çizelge Oluşturucu",
+    "failedTimeOffRequest": "İzin talebi işlenemedi",
+    "failedShiftSwap": "Vardiya değişimi işlenemedi",
+    "publishButton": "Yayınla",
+    "employee": "Çalışan",
+    "reassign": "Yeniden ata",
+    "shiftReassigned": "Vardiya yeniden atandı",
+    "swapRequested": "Takas talep edildi",
+    "shiftDeleted": "Vardiya silindi",
+    "minutes": "dk"
   },
   "timeTracking": {
     "title": "Zaman Takibi",
@@ -661,7 +675,8 @@
     "searchSkills": "Yetenek ara...",
     "skillAdded": "Yetenek başarıyla eklendi",
     "verificationRequested": "Doğrulama talep edildi",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Bu beceri için çalışan listesi yakında gelecek."
   },
   "career": {
     "title": "Kariyer",
@@ -811,7 +826,7 @@
     "reminderTime": "Hatırlatma Zamanı",
     "sound": "Ses",
     "vibration": "Titreşim",
-    "changePassword": "Şifre Değiştir",
+    "changePassword": "Şifreyi değiştir",
     "twoFactorAuth": "İki Faktörlü Kimlik Doğrulama",
     "biometricAuth": "Biyometrik Kimlik Doğrulama",
     "dataExport": "Verilerimi Dışa Aktar",
@@ -895,7 +910,7 @@
     "enable": "Etkinleştir",
     "activeSessions": "Aktif Oturumlar",
     "manageDevices": "Giriş yaptığınız cihazları yönetin",
-    "signOutOtherDevices": "Diğer Cihazlardan Çıkış Yap",
+    "signOutOtherDevices": "Diğer cihazlardan çıkış yap",
     "thisDevice": "Bu cihaz",
     "revoke": "İptal Et",
     "revoking": "İptal ediliyor...",
@@ -917,14 +932,14 @@
     "preparing": "Hazırlanıyor...",
     "dataExported": "Veriler başarıyla dışa aktarıldı",
     "deleteAccountWarning": "Hesabınızı ve ilişkili tüm verileri kalıcı olarak silin. Bu işlem 30 günlük bekleme süresinden sonra geri alınamaz.",
-    "requestAccountDeletion": "Hesap Silme Talebi",
+    "requestAccountDeletion": "Hesap silme talebinde bulun",
     "deletionScheduled": "Hesabınız silinmek üzere planlandı. 30 gün içinde kalıcı olarak kaldırılacak.",
-    "cancelDeletion": "Silmeyi İptal Et",
+    "cancelDeletion": "Silmeyi iptal et",
     "enterPasswordConfirm": "Onaylamak için şifrenizi girin",
     "deleteMyAccount": "Hesabımı Sil",
     "processing": "İşleniyor...",
     "webhooksIntegration": "HTTP geri çağrıları aracılığıyla harici sistemlerle entegre olun",
-    "addWebhook": "Web Kancası Ekle",
+    "addWebhook": "Webhook ekle",
     "endpointUrl": "Uç Nokta URL'si",
     "subscribedEvents": "Abone Olunan Olaylar",
     "successRate": "Başarı Oranı",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Her çalışanın hangi özelliklere erişebileceğini kontrol edin",
     "searchEmployees": "Çalışan ara...",
     "featureAccess": "Özellik Erişimi",
-    "enableAll": "Tümünü Etkinleştir",
-    "disableAll": "Tümünü Devre Dışı Bırak",
+    "enableAll": "Tümünü etkinleştir",
+    "disableAll": "Tümünü devre dışı bırak",
     "aboutEmployeeVisibility": "Bu ayarlar her çalışan için hangi özelliklerin görünür olduğunu kontrol eder.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Satışla iletişime geç",
+    "changingPassword": "Değiştiriliyor...",
+    "loadError": "Ayarlar yüklenemedi",
+    "saveOrgError": "Organizasyon ayarları kaydedilemedi",
+    "loadUserError": "Kullanıcı verileri yüklenemedi",
+    "loadLogsError": "Teslimat günlükleri yüklenemedi",
+    "themes": {
+      "light": "Açık",
+      "lightDesc": "Temiz, aydınlık arayüz",
+      "dark": "Koyu",
+      "darkDesc": "Gözlere hoş",
+      "system": "Sistem",
+      "systemDesc": "Cihaz ayarlarına uy"
+    },
+    "roles": {
+      "workers": "Çalışanlar",
+      "workersDesc": "Normal çalışanlar",
+      "managers": "Yöneticiler",
+      "managersDesc": "Takım liderleri ve amirler",
+      "admins": "Yöneticiler",
+      "adminsDesc": "Tam erişimli yöneticiler"
+    },
+    "features": {
+      "teamSchedules": "Takım programları",
+      "teamSchedulesDesc": "Diğer takım üyelerinin programlarını gör",
+      "internalJobs": "Dahili iş ilanları",
+      "internalJobsDesc": "Dahili iş ilanlarına eriş",
+      "careerPaths": "Kariyer yolları",
+      "careerPathsDesc": "Kariyer gelişim yollarını gör",
+      "analytics": "Takım analitiği",
+      "analyticsDesc": "Performans analitiğine eriş",
+      "peerRecognition": "Meslektaş takdiri",
+      "peerRecognitionDesc": "Meslektaşlardan takdir gönder ve al"
+    },
+    "aboutEmployeeVisibilityTitle": "Çalışan Görünürlüğü Hakkında",
+    "aboutPageVisibilityDesc": "Devre dışı bıraktığınız sayfalar o rol için gezinme menüsünden gizlenir.",
+    "brandName": "Marka Adı",
+    "brandNameDesc": "Kenar çubuğunda ve mobil uygulama başlığında gösterilir",
+    "brandingDesc": "Uplift deneyiminizin görünümünü özelleştirin",
+    "brandingDescFull": "Portal ve mobil uygulama genelinde görünümü özelleştirin",
+    "brandingLabel": "Markalaşma",
+    "created": "Oluşturulma",
+    "dropFileUpload": "Dosyayı bırakın veya yüklemek için tıklayın",
+    "emailVerified": "E-posta Doğrulandı",
+    "eventsToSubscribe": "Abone Olunacak Olaylar",
+    "livePreview": "Canlı Önizleme",
+    "loginScreenPreview": "Giriş Ekranı",
+    "logosImages": "Logolar ve Görseller",
+    "mfaEnabled": "MFA Etkin",
+    "mobileAppHeader": "Mobil Uygulama Başlığı",
+    "noEmployeesFound": "Çalışan bulunamadı",
+    "noEmployeesMatch": "Aramanızla eşleşen çalışan yok",
+    "passwordChangeRequired": "Parola değişikliği gerekli",
+    "primaryColor": "Ana Renk",
+    "probation": "Deneme Süresi",
+    "probationPeriod": "Deneme Dönemi",
+    "probationRestriction": "Deneme süresi boyunca bazı özellikler kısıtlıdır. Deneme süresi sona erdiğinde otomatik olarak etkinleştirilecektir.",
+    "secondaryColor": "İkincil Renk",
+    "upgradeEnterpriseBranding": "Özel Markalaşma için Enterprise’a Yükseltin",
+    "webhookDetails": "Webhook Ayrıntıları",
+    "webhookName": "Ad",
+    "webhookSecret": "Gizli Anahtar",
+    "webhookSecretDesc": "Doğrulama için webhook yüklerini imzalamak amacıyla kullanılır",
+    "webhooksTitle": "Webhook’lar"
   },
   "tasks": {
     "title": "Görevler",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Konum izni gerekli.",
     "cameraPermission": "Kamera izni gerekli.",
     "notificationPermission": "Bildirim izni gerekli.",
-    "tryAgain": "Lütfen tekrar deneyin",
-    "somethingWentWrong": "Bir şeyler ters gitti"
+    "tryAgain": "Tekrar dene",
+    "somethingWentWrong": "Bir şeyler ters gitti",
+    "goHome": "Ana sayfaya dön",
+    "technicalDetails": "Teknik detaylar"
   },
   "activity": {
     "title": "Etkinlik İnceleme",
@@ -1282,7 +1363,7 @@
     "attachments": "Ekler",
     "rejectionReason": "Ret Sebebi",
     "enterRejectionReason": "Ret sebebini girin...",
-    "confirmRejection": "Reddi Onayla",
+    "confirmRejection": "Reddi onayla",
     "approve": "Onayla",
     "reject": "Reddet",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Özel Rapor Oluştur",
+    "dateFrom": "Başlangıç Tarihi",
+    "dateTo": "Bitiş Tarihi",
+    "filters": "Filtreler",
+    "reportName": "Rapor Adı",
+    "reportType": "Rapor Türü",
+    "savedReportsLocal": "Kaydedilen raporlar yerel olarak saklanır. Kalıcı kaydedilen raporlar yakında gelecek.",
+    "sortBy": "Sıralama Ölçütü",
+    "trendOverTime": "Zaman İçindeki Eğilim"
   },
   "accessibility": {
     "menu": "Menü",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Şablon silinemedi",
+    "shiftsGenerated": "Vardiyalar başarıyla oluşturuldu!",
+    "failedSave": "Şablon kaydedilemedi"
   },
   "legal": {
     "lastUpdated": "Son güncelleme",
@@ -1748,7 +1841,18 @@
     "postJob": "İş İlanı Ver",
     "skillMatch": "yetenek eşleşmesi",
     "noApplicants": "Henüz başvuran yok",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Ön Büro",
+      "kitchen": "Mutfak",
+      "management": "Yönetim",
+      "reception": "Resepsiyon"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "İsim veya e-posta ile ara...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Beceri eklenemedi",
+    "failedVerifySkill": "Beceri doğrulanamadı",
+    "failedUpdateSkillLevel": "Beceri seviyesi güncellenemedi",
+    "failedRemoveSkill": "Beceri kaldırılamadı",
+    "loadEmployeeError": "Çalışan yüklenemedi"
   },
   "integrationHub": {
     "title": "Entegrasyon Merkezi",

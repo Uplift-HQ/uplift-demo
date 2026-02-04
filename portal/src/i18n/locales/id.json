@@ -233,7 +233,12 @@
       "barback": "Asisten bar",
       "sous": "Sous Chef",
       "expeditor": "Ekspeditor"
-    }
+    },
+    "new": "BARU",
+    "exportComingSoon": "Ekspor segera hadir",
+    "clickToViewDetails": "Klik untuk melihat detail",
+    "closeEsc": "Tutup (ESC)",
+    "logoPreview": "Pratinjau logo"
   },
   "auth": {
     "login": "Masuk",
@@ -448,7 +453,16 @@
     "publishSchedule": "Terbitkan jadwal",
     "publishConfirmation": "Anda akan menerbitkan {{count}} draf shift. Semua karyawan terkait akan diberitahu.",
     "publishNow": "Terbitkan sekarang",
-    "aiScheduleBuilder": "Pembuat Jadwal AI"
+    "aiScheduleBuilder": "Pembuat Jadwal AI",
+    "failedTimeOffRequest": "Gagal memproses permintaan cuti",
+    "failedShiftSwap": "Gagal memproses pertukaran shift",
+    "publishButton": "Terbitkan",
+    "employee": "Karyawan",
+    "reassign": "Tugaskan ulang",
+    "shiftReassigned": "Shift ditugaskan ulang",
+    "swapRequested": "Pertukaran diminta",
+    "shiftDeleted": "Shift dihapus",
+    "minutes": "mnt"
   },
   "timeTracking": {
     "title": "Pelacakan Waktu",
@@ -661,7 +675,8 @@
     "searchSkills": "Cari keahlian...",
     "skillAdded": "Keahlian berhasil ditambahkan",
     "verificationRequested": "Verifikasi diminta",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Daftar karyawan untuk keterampilan ini akan segera hadir."
   },
   "career": {
     "title": "Karier",
@@ -811,7 +826,7 @@
     "reminderTime": "Waktu Pengingat",
     "sound": "Suara",
     "vibration": "Getaran",
-    "changePassword": "Ubah Kata Sandi",
+    "changePassword": "Ubah kata sandi",
     "twoFactorAuth": "Autentikasi Dua Faktor",
     "biometricAuth": "Autentikasi Biometrik",
     "dataExport": "Ekspor Data Saya",
@@ -895,7 +910,7 @@
     "enable": "Aktifkan",
     "activeSessions": "Sesi Aktif",
     "manageDevices": "Kelola perangkat yang masuk",
-    "signOutOtherDevices": "Keluarkan Perangkat Lain",
+    "signOutOtherDevices": "Keluar dari perangkat lain",
     "thisDevice": "Perangkat ini",
     "revoke": "Cabut",
     "revoking": "Mencabut...",
@@ -917,14 +932,14 @@
     "preparing": "Mempersiapkan...",
     "dataExported": "Data berhasil diekspor",
     "deleteAccountWarning": "Hapus akun Anda secara permanen dan semua data terkait. Tindakan ini tidak dapat dibatalkan setelah masa tenggang 30 hari.",
-    "requestAccountDeletion": "Minta Penghapusan Akun",
+    "requestAccountDeletion": "Minta penghapusan akun",
     "deletionScheduled": "Akun Anda dijadwalkan untuk dihapus. Akan dihapus secara permanen dalam 30 hari.",
-    "cancelDeletion": "Batalkan Penghapusan",
+    "cancelDeletion": "Batalkan penghapusan",
     "enterPasswordConfirm": "Masukkan kata sandi Anda untuk konfirmasi",
     "deleteMyAccount": "Hapus Akun Saya",
     "processing": "Memproses...",
     "webhooksIntegration": "Integrasikan dengan sistem eksternal melalui callback HTTP",
-    "addWebhook": "Tambah Webhook",
+    "addWebhook": "Tambah webhook",
     "endpointUrl": "URL Endpoint",
     "subscribedEvents": "Event Berlangganan",
     "successRate": "Tingkat Keberhasilan",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Kontrol fitur mana yang dapat diakses setiap karyawan",
     "searchEmployees": "Cari karyawan...",
     "featureAccess": "Akses Fitur",
-    "enableAll": "Aktifkan Semua",
-    "disableAll": "Nonaktifkan Semua",
+    "enableAll": "Aktifkan semua",
+    "disableAll": "Nonaktifkan semua",
     "aboutEmployeeVisibility": "Pengaturan ini mengontrol fitur mana yang terlihat untuk setiap karyawan.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Hubungi penjualan",
+    "changingPassword": "Mengubah...",
+    "loadError": "Gagal memuat pengaturan",
+    "saveOrgError": "Gagal menyimpan pengaturan organisasi",
+    "loadUserError": "Gagal memuat data pengguna",
+    "loadLogsError": "Gagal memuat log",
+    "themes": {
+      "light": "Terang",
+      "lightDesc": "Antarmuka bersih dan cerah",
+      "dark": "Gelap",
+      "darkDesc": "Nyaman untuk mata",
+      "system": "Sistem",
+      "systemDesc": "Ikuti pengaturan perangkat"
+    },
+    "roles": {
+      "workers": "Karyawan",
+      "workersDesc": "Karyawan reguler",
+      "managers": "Manajer",
+      "managersDesc": "Ketua tim dan supervisor",
+      "admins": "Administrator",
+      "adminsDesc": "Akses penuh"
+    },
+    "features": {
+      "teamSchedules": "Jadwal tim",
+      "teamSchedulesDesc": "Lihat jadwal anggota tim",
+      "internalJobs": "Lowongan internal",
+      "internalJobsDesc": "Akses lowongan internal",
+      "careerPaths": "Jalur karier",
+      "careerPathsDesc": "Lihat jalur pengembangan",
+      "analytics": "Analitik tim",
+      "analyticsDesc": "Akses analisis kinerja",
+      "peerRecognition": "Penghargaan rekan",
+      "peerRecognitionDesc": "Kirim dan terima pujian"
+    },
+    "aboutEmployeeVisibilityTitle": "Tentang Visibilitas Karyawan",
+    "aboutPageVisibilityDesc": "Halaman yang Anda nonaktifkan akan disembunyikan dari menu navigasi untuk peran tersebut.",
+    "brandName": "Nama Merek",
+    "brandNameDesc": "Ditampilkan di bilah sisi dan header aplikasi seluler",
+    "brandingDesc": "Sesuaikan tampilan pengalaman Uplift Anda",
+    "brandingDescFull": "Sesuaikan tampilan di portal dan aplikasi seluler",
+    "brandingLabel": "Branding",
+    "created": "Dibuat",
+    "dropFileUpload": "Seret file atau klik untuk mengunggah",
+    "emailVerified": "Email Terverifikasi",
+    "eventsToSubscribe": "Acara untuk Berlangganan",
+    "livePreview": "Pratinjau Langsung",
+    "loginScreenPreview": "Layar Login",
+    "logosImages": "Logo & Gambar",
+    "mfaEnabled": "MFA Diaktifkan",
+    "mobileAppHeader": "Header Aplikasi Seluler",
+    "noEmployeesFound": "Tidak ada karyawan ditemukan",
+    "noEmployeesMatch": "Tidak ada karyawan yang cocok dengan pencarian Anda",
+    "passwordChangeRequired": "Perubahan kata sandi diperlukan",
+    "primaryColor": "Warna Utama",
+    "probation": "Masa Percobaan",
+    "probationPeriod": "Periode Percobaan",
+    "probationRestriction": "Beberapa fitur dibatasi selama masa percobaan. Fitur-fitur ini akan diaktifkan secara otomatis setelah masa percobaan berakhir.",
+    "secondaryColor": "Warna Sekunder",
+    "upgradeEnterpriseBranding": "Tingkatkan ke Enterprise untuk Branding Kustom",
+    "webhookDetails": "Detail Webhook",
+    "webhookName": "Nama",
+    "webhookSecret": "Rahasia",
+    "webhookSecretDesc": "Digunakan untuk menandatangani payload webhook untuk verifikasi",
+    "webhooksTitle": "Webhook"
   },
   "tasks": {
     "title": "Tugas",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Izin lokasi diperlukan.",
     "cameraPermission": "Izin kamera diperlukan.",
     "notificationPermission": "Izin notifikasi diperlukan.",
-    "tryAgain": "Silakan coba lagi",
-    "somethingWentWrong": "Terjadi kesalahan"
+    "tryAgain": "Coba lagi",
+    "somethingWentWrong": "Terjadi kesalahan",
+    "goHome": "Beranda",
+    "technicalDetails": "Detail teknis"
   },
   "activity": {
     "title": "Tinjauan Aktivitas",
@@ -1282,7 +1363,7 @@
     "attachments": "Lampiran",
     "rejectionReason": "Alasan Penolakan",
     "enterRejectionReason": "Masukkan alasan penolakan...",
-    "confirmRejection": "Konfirmasi Penolakan",
+    "confirmRejection": "Konfirmasi penolakan",
     "approve": "Setujui",
     "reject": "Tolak",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Buat Laporan Kustom",
+    "dateFrom": "Tanggal Dari",
+    "dateTo": "Tanggal Sampai",
+    "filters": "Filter",
+    "reportName": "Nama Laporan",
+    "reportType": "Jenis Laporan",
+    "savedReportsLocal": "Laporan tersimpan disimpan secara lokal. Penyimpanan laporan permanen akan segera hadir.",
+    "sortBy": "Urutkan Berdasarkan",
+    "trendOverTime": "Tren Seiring Waktu"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Gagal menghapus template",
+    "shiftsGenerated": "Shift berhasil dibuat!",
+    "failedSave": "Gagal menyimpan template"
   },
   "legal": {
     "lastUpdated": "Terakhir diperbarui",
@@ -1748,7 +1841,18 @@
     "postJob": "Pasang Lowongan",
     "skillMatch": "kecocokan keahlian",
     "noApplicants": "Belum ada pelamar",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Front of House",
+      "kitchen": "Dapur",
+      "management": "Manajemen",
+      "reception": "Resepsi"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Cari berdasarkan nama atau email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Gagal menambahkan keahlian",
+    "failedVerifySkill": "Verifikasi gagal",
+    "failedUpdateSkillLevel": "Pembaruan level gagal",
+    "failedRemoveSkill": "Gagal menghapus keahlian",
+    "loadEmployeeError": "Gagal memuat karyawan"
   },
   "integrationHub": {
     "title": "Hub Integrasi",

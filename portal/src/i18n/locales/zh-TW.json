@@ -233,7 +233,12 @@
       "barback": "酒吧助理",
       "sous": "副主廚",
       "expeditor": "傳菜員"
-    }
+    },
+    "new": "新",
+    "exportComingSoon": "匯出功能即將推出",
+    "clickToViewDetails": "點擊查看詳情",
+    "closeEsc": "關閉 (ESC)",
+    "logoPreview": "標誌預覽"
   },
   "auth": {
     "login": "登入",
@@ -448,7 +453,16 @@
     "publishSchedule": "發布排班",
     "publishConfirmation": "您即將發布 {{count}} 個草稿班次。這將通知所有相關員工。",
     "publishNow": "立即發布",
-    "aiScheduleBuilder": "AI排班建構器"
+    "aiScheduleBuilder": "AI排班建構器",
+    "failedTimeOffRequest": "無法處理請假申請",
+    "failedShiftSwap": "無法處理換班申請",
+    "publishButton": "發布",
+    "employee": "員工",
+    "reassign": "重新指派",
+    "shiftReassigned": "班次已重新指派",
+    "swapRequested": "已請求交換",
+    "shiftDeleted": "班次已刪除",
+    "minutes": "分鐘"
   },
   "timeTracking": {
     "title": "時間追蹤",
@@ -661,7 +675,8 @@
     "searchSkills": "搜尋技能...",
     "skillAdded": "技能新增成功",
     "verificationRequested": "已申請驗證",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "此技能的員工列表即將推出。"
   },
   "career": {
     "title": "職涯",
@@ -917,7 +932,7 @@
     "preparing": "準備中...",
     "dataExported": "資料匯出成功",
     "deleteAccountWarning": "永久刪除您的帳戶和所有相關資料。此操作在 30 天緩衝期後將無法復原。",
-    "requestAccountDeletion": "申請刪除帳戶",
+    "requestAccountDeletion": "申請刪除帳號",
     "deletionScheduled": "您的帳戶已排程刪除，將在 30 天後永久移除。",
     "cancelDeletion": "取消刪除",
     "enterPasswordConfirm": "請輸入密碼以確認",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "聯繫業務",
+    "changingPassword": "變更中...",
+    "loadError": "無法載入設定",
+    "saveOrgError": "無法儲存組織設定",
+    "loadUserError": "無法載入使用者資料",
+    "loadLogsError": "無法載入傳送紀錄",
+    "themes": {
+      "light": "淺色",
+      "lightDesc": "乾淨明亮的介面",
+      "dark": "深色",
+      "darkDesc": "讓眼睛舒適",
+      "system": "系統",
+      "systemDesc": "跟隨裝置設定"
+    },
+    "roles": {
+      "workers": "員工",
+      "workersDesc": "一般員工",
+      "managers": "管理者",
+      "managersDesc": "團隊領導與主管",
+      "admins": "管理員",
+      "adminsDesc": "擁有完整權限的管理員"
+    },
+    "features": {
+      "teamSchedules": "團隊班表",
+      "teamSchedulesDesc": "查看其他團隊成員的班表",
+      "internalJobs": "內部職缺",
+      "internalJobsDesc": "瀏覽內部職缺公告",
+      "careerPaths": "職涯發展",
+      "careerPathsDesc": "查看職涯發展路徑",
+      "analytics": "團隊分析",
+      "analyticsDesc": "查看績效分析",
+      "peerRecognition": "同事認可",
+      "peerRecognitionDesc": "發送和接收同事認可"
+    },
+    "aboutEmployeeVisibilityTitle": "關於員工可見性",
+    "aboutPageVisibilityDesc": "您停用的頁面將從該角色的導航選單中隱藏。",
+    "brandName": "品牌名稱",
+    "brandNameDesc": "顯示在側邊欄和行動應用程式標題中",
+    "brandingDesc": "自訂您的 Uplift 體驗的外觀和風格",
+    "brandingDescFull": "自訂入口網站和行動應用程式的外觀和風格",
+    "brandingLabel": "品牌設定",
+    "created": "建立日期",
+    "dropFileUpload": "拖放檔案或點擊上傳",
+    "emailVerified": "電子郵件已驗證",
+    "eventsToSubscribe": "訂閱事件",
+    "livePreview": "即時預覽",
+    "loginScreenPreview": "登入畫面",
+    "logosImages": "標誌與圖片",
+    "mfaEnabled": "已啟用 MFA",
+    "mobileAppHeader": "行動應用程式標題",
+    "noEmployeesFound": "未找到員工",
+    "noEmployeesMatch": "沒有員工符合您的搜尋",
+    "passwordChangeRequired": "需要變更密碼",
+    "primaryColor": "主色",
+    "probation": "試用期",
+    "probationPeriod": "試用期間",
+    "probationRestriction": "試用期間某些功能會受到限制。試用期結束後將自動啟用。",
+    "secondaryColor": "輔色",
+    "upgradeEnterpriseBranding": "升級至 Enterprise 以自訂品牌",
+    "webhookDetails": "Webhook 詳情",
+    "webhookName": "名稱",
+    "webhookSecret": "密鑰",
+    "webhookSecretDesc": "用於簽署 Webhook 邀請資料以進行驗證",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "任務",
@@ -1251,8 +1330,10 @@
     "locationPermission": "需要位置權限。",
     "cameraPermission": "需要相機權限。",
     "notificationPermission": "需要通知權限。",
-    "tryAgain": "請重試",
-    "somethingWentWrong": "發生錯誤"
+    "tryAgain": "重試",
+    "somethingWentWrong": "出了點問題",
+    "goHome": "回到首頁",
+    "technicalDetails": "技術詳情"
   },
   "activity": {
     "title": "活動審核",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "建立自訂報告",
+    "dateFrom": "起始日期",
+    "dateTo": "結束日期",
+    "filters": "篩選條件",
+    "reportName": "報告名稱",
+    "reportType": "報告類型",
+    "savedReportsLocal": "已儲存的報告保存在本機。永久儲存報告功能即將推出。",
+    "sortBy": "排序依據",
+    "trendOverTime": "隨時間變化趨勢"
   },
   "accessibility": {
     "menu": "選單",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "無法刪除範本",
+    "shiftsGenerated": "班次已成功產生！",
+    "failedSave": "無法儲存範本"
   },
   "legal": {
     "lastUpdated": "最後更新",
@@ -1748,7 +1841,18 @@
     "postJob": "發布職位",
     "skillMatch": "技能匹配",
     "noApplicants": "尚無應徵者",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "前場",
+      "kitchen": "廨房",
+      "management": "管理層",
+      "reception": "接待處"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro 愛丁堡",
+      "glasgow": "Grand Metro 格拉斯哥",
+      "manchester": "Grand Metro 曼徹斯特"
+    }
   },
   "employees": {
     "searchPlaceholder": "依姓名或電子郵件搜尋...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "無法新增技能",
+    "failedVerifySkill": "無法驗證技能",
+    "failedUpdateSkillLevel": "無法更新技能等級",
+    "failedRemoveSkill": "無法移除技能",
+    "loadEmployeeError": "無法載入員工"
   },
   "integrationHub": {
     "title": "整合中心",

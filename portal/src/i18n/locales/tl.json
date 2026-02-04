@@ -233,7 +233,12 @@
       "barback": "Barback",
       "sous": "Sous Chef",
       "expeditor": "Expeditor"
-    }
+    },
+    "new": "BAGO",
+    "exportComingSoon": "Paparating na ang export",
+    "clickToViewDetails": "I-click upang tingnan ang mga detalye",
+    "closeEsc": "Isara (ESC)",
+    "logoPreview": "Preview ng logo"
   },
   "auth": {
     "login": "Mag-log In",
@@ -448,7 +453,16 @@
     "publishSchedule": "I-publish ang iskedyul",
     "publishConfirmation": "Mag-pu-publish ka ng {{count}} draft na shift. Lahat ng apektadong empleyado ay maabisuhan.",
     "publishNow": "I-publish ngayon",
-    "aiScheduleBuilder": "AI Tagagawa ng Iskedyul"
+    "aiScheduleBuilder": "AI Tagagawa ng Iskedyul",
+    "failedTimeOffRequest": "Hindi naproseso ang kahilingan sa day-off",
+    "failedShiftSwap": "Hindi naproseso ang palitan ng shift",
+    "publishButton": "I-publish",
+    "employee": "Empleyado",
+    "reassign": "Muling italaga",
+    "shiftReassigned": "Muling itinalaga ang shift",
+    "swapRequested": "Hiniling ang palitan",
+    "shiftDeleted": "Na-delete ang shift",
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Pagsubaybay ng Oras",
@@ -661,7 +675,8 @@
     "searchSkills": "Maghanap ng mga kasanayan...",
     "skillAdded": "Matagumpay na naidagdag ang kasanayan",
     "verificationRequested": "Hiniling na ang verification",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Ang listahan ng empleyado para sa kasanayang ito ay paparating na."
   },
   "career": {
     "title": "Karera",
@@ -811,7 +826,7 @@
     "reminderTime": "Oras ng Paalala",
     "sound": "Tunog",
     "vibration": "Vibration",
-    "changePassword": "Palitan ang Password",
+    "changePassword": "Palitan ang password",
     "twoFactorAuth": "Two-Factor Authentication",
     "biometricAuth": "Biometric Authentication",
     "dataExport": "I-export ang Aking Data",
@@ -895,7 +910,7 @@
     "enable": "Paganahin",
     "activeSessions": "Mga Aktibong Session",
     "manageDevices": "Pamahalaan ang iyong mga naka-log in na device",
-    "signOutOtherDevices": "Mag-sign Out sa Ibang mga Device",
+    "signOutOtherDevices": "Mag-sign out sa ibang device",
     "thisDevice": "Itong device",
     "revoke": "Bawiin",
     "revoking": "Binabawi...",
@@ -917,14 +932,14 @@
     "preparing": "Naghahanda...",
     "dataExported": "Matagumpay na na-export ang data",
     "deleteAccountWarning": "Permanenteng burahin ang iyong account at lahat ng kaugnay na data. Hindi na mababawi ang aksyong ito pagkatapos ng 30-araw na grace period.",
-    "requestAccountDeletion": "Humiling ng Pagbura ng Account",
+    "requestAccountDeletion": "Humiling ng pagbura ng account",
     "deletionScheduled": "Naka-iskedyul ang iyong account para sa pagbura. Permanente itong aalisin sa loob ng 30 araw.",
-    "cancelDeletion": "Kanselahin ang Pagbura",
+    "cancelDeletion": "Kanselahin ang pagbura",
     "enterPasswordConfirm": "Ilagay ang iyong password para kumpirmahin",
     "deleteMyAccount": "Burahin ang Aking Account",
     "processing": "Pinoproseso...",
     "webhooksIntegration": "Mag-integrate sa mga external system sa pamamagitan ng HTTP callbacks",
-    "addWebhook": "Magdagdag ng Webhook",
+    "addWebhook": "Magdagdag ng webhook",
     "endpointUrl": "Endpoint URL",
     "subscribedEvents": "Mga Naka-subscribe na Event",
     "successRate": "Success Rate",
@@ -939,8 +954,8 @@
     "controlFeatureAccess": "Kontrolin kung aling mga feature ang ma-a-access ng bawat empleyado",
     "searchEmployees": "Maghanap ng mga empleyado...",
     "featureAccess": "Access sa Feature",
-    "enableAll": "Paganahin Lahat",
-    "disableAll": "I-disable Lahat",
+    "enableAll": "I-enable lahat",
+    "disableAll": "I-disable lahat",
     "aboutEmployeeVisibility": "Kinokontrol ng mga setting na ito kung aling mga feature ang nakikita ng bawat empleyado.",
     "monday": "Monday",
     "sunday": "Sunday",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Makipag-ugnayan sa Sales",
+    "changingPassword": "Binabago...",
+    "loadError": "Hindi na-load ang mga setting",
+    "saveOrgError": "Hindi na-save ang mga setting ng organisasyon",
+    "loadUserError": "Hindi na-load ang data ng user",
+    "loadLogsError": "Hindi na-load ang mga delivery log",
+    "themes": {
+      "light": "Maliwanag",
+      "lightDesc": "Malinis, maliwanag na interface",
+      "dark": "Madilim",
+      "darkDesc": "Maginhawa sa mga mata",
+      "system": "Sistema",
+      "systemDesc": "Sumunod sa mga setting ng device"
+    },
+    "roles": {
+      "workers": "Mga manggagawa",
+      "workersDesc": "Mga regular na empleyado",
+      "managers": "Mga tagapamahala",
+      "managersDesc": "Mga team leader at supervisor",
+      "admins": "Mga admin",
+      "adminsDesc": "Mga administrator na may buong access"
+    },
+    "features": {
+      "teamSchedules": "Mga iskedyul ng team",
+      "teamSchedulesDesc": "Tingnan ang mga iskedyul ng ibang miyembro ng team",
+      "internalJobs": "Mga panloob na trabaho",
+      "internalJobsDesc": "I-access ang mga panloob na job posting",
+      "careerPaths": "Mga landas ng karera",
+      "careerPathsDesc": "Tingnan ang mga landas ng pag-unlad ng karera",
+      "analytics": "Analytics ng team",
+      "analyticsDesc": "I-access ang analytics ng performance",
+      "peerRecognition": "Pagkilala sa kapwa",
+      "peerRecognitionDesc": "Magpadala at tumanggap ng pagkilala mula sa mga kasamahan"
+    },
+    "aboutEmployeeVisibilityTitle": "Tungkol sa Visibility ng Empleyado",
+    "aboutPageVisibilityDesc": "Ang mga page na idi-disable mo ay maitatago mula sa navigation menu para sa role na iyon.",
+    "brandName": "Pangalan ng Brand",
+    "brandNameDesc": "Ipinapakita sa sidebar at header ng mobile app",
+    "brandingDesc": "I-customize ang hitsura ng iyong Uplift na karanasan",
+    "brandingDescFull": "I-customize ang hitsura sa buong portal at mobile app",
+    "brandingLabel": "Branding",
+    "created": "Nilikha",
+    "dropFileUpload": "I-drop ang file o i-click upang mag-upload",
+    "emailVerified": "Na-verify ang Email",
+    "eventsToSubscribe": "Mga Event na Isu-subscribe",
+    "livePreview": "Live na Preview",
+    "loginScreenPreview": "Screen ng Pag-login",
+    "logosImages": "Mga Logo at Larawan",
+    "mfaEnabled": "Naka-enable ang MFA",
+    "mobileAppHeader": "Header ng Mobile App",
+    "noEmployeesFound": "Walang nahanap na empleyado",
+    "noEmployeesMatch": "Walang empleyado na tumutugma sa iyong paghahanap",
+    "passwordChangeRequired": "Kinakailangang palitan ang password",
+    "primaryColor": "Pangunahing Kulay",
+    "probation": "Probasyon",
+    "probationPeriod": "Panahon ng Probasyon",
+    "probationRestriction": "Ang ilang feature ay limitado sa panahon ng probasyon. Awtomatiko itong mae-enable kapag natapos na ang probasyon.",
+    "secondaryColor": "Pangalawang Kulay",
+    "upgradeEnterpriseBranding": "Mag-upgrade sa Enterprise para sa Custom Branding",
+    "webhookDetails": "Mga Detalye ng Webhook",
+    "webhookName": "Pangalan",
+    "webhookSecret": "Sikreto",
+    "webhookSecretDesc": "Ginagamit upang lagdaan ang mga webhook payload para sa pag-verify",
+    "webhooksTitle": "Mga Webhook"
   },
   "tasks": {
     "title": "Mga Gawain",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Kinakailangan ang pahintulot sa lokasyon.",
     "cameraPermission": "Kinakailangan ang pahintulot sa camera.",
     "notificationPermission": "Kinakailangan ang pahintulot sa notifikasyon.",
-    "tryAgain": "Mangyaring subukan muli",
-    "somethingWentWrong": "May nangyaring mali"
+    "tryAgain": "Subukan muli",
+    "somethingWentWrong": "May nangyaring mali",
+    "goHome": "Bumalik sa Home",
+    "technicalDetails": "Mga teknikal na detalye"
   },
   "activity": {
     "title": "Pagsusuri ng Aktibidad",
@@ -1282,7 +1363,7 @@
     "attachments": "Mga Attachment",
     "rejectionReason": "Dahilan ng Pagtanggi",
     "enterRejectionReason": "Ilagay ang dahilan ng pagtanggi...",
-    "confirmRejection": "Kumpirmahin ang Pagtanggi",
+    "confirmRejection": "Kumpirmahin ang pagtanggi",
     "approve": "Aprubahan",
     "reject": "Tanggihan",
     "placeholder": {
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Bumuo ng Custom na Ulat",
+    "dateFrom": "Petsa Mula",
+    "dateTo": "Petsa Hanggang",
+    "filters": "Mga Filter",
+    "reportName": "Pangalan ng Ulat",
+    "reportType": "Uri ng Ulat",
+    "savedReportsLocal": "Ang mga naka-save na ulat ay lokal na naka-imbak. Permanenteng naka-save na mga ulat ay paparating na.",
+    "sortBy": "Ayusin Ayon Sa",
+    "trendOverTime": "Trend sa Paglipas ng Panahon"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Hindi nabura ang template",
+    "shiftsGenerated": "Matagumpay na nagawa ang mga shift!",
+    "failedSave": "Hindi na-save ang template"
   },
   "legal": {
     "lastUpdated": "Huling na-update",
@@ -1748,7 +1841,18 @@
     "postJob": "I-post ang Trabaho",
     "skillMatch": "tugma sa kasanayan",
     "noApplicants": "Wala pang mga aplikante",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Front of House",
+      "kitchen": "Kusina",
+      "management": "Pamamahala",
+      "reception": "Resepsyon"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Maghanap gamit ang pangalan o email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Hindi naidagdag ang kasanayan",
+    "failedVerifySkill": "Hindi naberipika ang kasanayan",
+    "failedUpdateSkillLevel": "Hindi na-update ang antas ng kasanayan",
+    "failedRemoveSkill": "Hindi naalis ang kasanayan",
+    "loadEmployeeError": "Hindi na-load ang empleyado"
   },
   "integrationHub": {
     "title": "Hub ng Integrasyon",

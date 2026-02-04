@@ -233,7 +233,12 @@
       "barback": "بار بیک",
       "sous": "سو شیف",
       "expeditor": "ایکسپیڈیٹر"
-    }
+    },
+    "new": "نیا",
+    "exportComingSoon": "ایکسپورٹ جلد آ رہا ہے",
+    "clickToViewDetails": "تفصیلات دیکھنے کے لیے کلک کریں",
+    "closeEsc": "بند کریں (ESC)",
+    "logoPreview": "لوگو پیش نظر"
   },
   "auth": {
     "login": "لاگ ان",
@@ -448,7 +453,16 @@
     "publishSchedule": "شیڈول شائع کریں",
     "publishConfirmation": "آپ {{count}} ڈرافٹ شفٹیں شائع کرنے والے ہیں۔ تمام متعلقہ ملازمین کو مطلع کیا جائے گا۔",
     "publishNow": "ابھی شائع کریں",
-    "aiScheduleBuilder": "AI شیڈول بلڈر"
+    "aiScheduleBuilder": "AI شیڈول بلڈر",
+    "failedTimeOffRequest": "چھٹی کی درخواست پر عمل نہیں ہو سکا",
+    "failedShiftSwap": "شفٹ تبدیلی پر عمل نہیں ہو سکا",
+    "publishButton": "شائع کریں",
+    "employee": "ملازم",
+    "reassign": "دوبارہ تفویض کریں",
+    "shiftReassigned": "شفٹ دوبارہ تفویض کی گئی",
+    "swapRequested": "تبادلے کی درخواست کی گئی",
+    "shiftDeleted": "شفٹ حذف کی گئی",
+    "minutes": "منٹ"
   },
   "timeTracking": {
     "title": "وقت کی ٹریکنگ",
@@ -661,7 +675,8 @@
     "searchSkills": "مہارتیں تلاش کریں...",
     "skillAdded": "مہارت کامیابی سے شامل ہوئی",
     "verificationRequested": "تصدیق کی درخواست کی گئی",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "اس مہارت کے لیے ملازمین کی فہرست جلد آ رہی ہے۔"
   },
   "career": {
     "title": "کیریئر",
@@ -895,7 +910,7 @@
     "enable": "فعال کریں",
     "activeSessions": "فعال سیشنز",
     "manageDevices": "اپنے لاگ ان شدہ آلات کا انتظام کریں",
-    "signOutOtherDevices": "دوسرے آلات سے سائن آؤٹ کریں",
+    "signOutOtherDevices": "دوسرے آلات سے سائن آؤٹ",
     "thisDevice": "یہ آلہ",
     "revoke": "منسوخ کریں",
     "revoking": "منسوخ ہو رہا ہے...",
@@ -917,7 +932,7 @@
     "preparing": "تیار ہو رہا ہے...",
     "dataExported": "ڈیٹا کامیابی سے ایکسپورٹ ہوا",
     "deleteAccountWarning": "اپنا اکاؤنٹ اور تمام متعلقہ ڈیٹا مستقل طور پر حذف کریں۔ 30 دن کی مہلت کے بعد یہ عمل واپس نہیں ہو سکتا۔",
-    "requestAccountDeletion": "اکاؤنٹ حذف کرنے کی درخواست کریں",
+    "requestAccountDeletion": "اکاؤنٹ حذف کی درخواست",
     "deletionScheduled": "آپ کا اکاؤنٹ حذف کے لیے شیڈول ہے۔ 30 دنوں میں مستقل طور پر ہٹا دیا جائے گا۔",
     "cancelDeletion": "حذف منسوخ کریں",
     "enterPasswordConfirm": "تصدیق کے لیے اپنا پاس ورڈ درج کریں",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "سیلز سے رابطہ کریں",
+    "changingPassword": "تبدیل ہو رہا ہے...",
+    "loadError": "ترتیبات لوڈ کرنے میں ناکامی",
+    "saveOrgError": "تنظیم کی ترتیبات محفوظ کرنے میں ناکامی",
+    "loadUserError": "صارف کا ڈیٹا لوڈ کرنے میں ناکامی",
+    "loadLogsError": "ڈیلیوری لاگز لوڈ کرنے میں ناکامی",
+    "themes": {
+      "light": "ہلکا",
+      "lightDesc": "صاف، روشن انٹرفیس",
+      "dark": "گہرا",
+      "darkDesc": "آنکھوں کے لیے آرامدہ",
+      "system": "سسٹم",
+      "systemDesc": "آلے کی ترتیبات کے مطابق"
+    },
+    "roles": {
+      "workers": "کارکن",
+      "workersDesc": "عام ملازمین",
+      "managers": "مینیجرز",
+      "managersDesc": "ٹیم لیڈرز اور سپروائزرز",
+      "admins": "ایڈمنز",
+      "adminsDesc": "مکمل رسائی والے ایڈمنز"
+    },
+    "features": {
+      "teamSchedules": "ٹیم شیڈیولز",
+      "teamSchedulesDesc": "دوسرے ٹیم اراکین کے شیڈیولز دیکھیں",
+      "internalJobs": "داخلی نوکریاں",
+      "internalJobsDesc": "داخلی نوکریوں کی پوسٹنگز تک رسائی",
+      "careerPaths": "کیریئر کے راستے",
+      "careerPathsDesc": "کیریئر کی ترقی کے راستے دیکھیں",
+      "analytics": "ٹیم تجزیات",
+      "analyticsDesc": "کارکردگی کے تجزیات تک رسائی",
+      "peerRecognition": "ساتھیوں کی قدردانی",
+      "peerRecognitionDesc": "ساتھیوں کو قدردانی بھیجیں اور وصول کریں"
+    },
+    "aboutEmployeeVisibilityTitle": "ملازم کی نمائیدگی کے بارے میں",
+    "aboutPageVisibilityDesc": "جو صفحات آپ غیر فعال کریں گے وہ اس کردار کے لیے نیویگیشن مینو سے چھپائے جائیں گے۔",
+    "brandName": "برانڈ کا نام",
+    "brandNameDesc": "سائڈ بار اور موبائل ایپ ہیڈر میں دکھایا جاتا ہے",
+    "brandingDesc": "اپنے Uplift تجربے کی شکل و صورت کو اپنی مرضی کے مطابق بنائیں",
+    "brandingDescFull": "پورٹل اور موبائل ایپ میں شکل و صورت کو اپنی مرضی کے مطابق بنائیں",
+    "brandingLabel": "برانڈنگ",
+    "created": "تخلیق شدہ",
+    "dropFileUpload": "فائل ڈراپ کریں یا اپ لوڈ کے لیے کلک کریں",
+    "emailVerified": "ای میل تصدیق شدہ",
+    "eventsToSubscribe": "سبسکرائب کرنے کے واقعات",
+    "livePreview": "براہ راست پیش نظر",
+    "loginScreenPreview": "لاگ ان اسکرین",
+    "logosImages": "لوگوز اور تصاویر",
+    "mfaEnabled": "MFA فعال",
+    "mobileAppHeader": "موبائل ایپ ہیڈر",
+    "noEmployeesFound": "کوئی ملازم نہیں ملا",
+    "noEmployeesMatch": "آپ کی تلاش سے کوئی ملازم میل نہیں کھاتا",
+    "passwordChangeRequired": "پاس ورڈ تبدیلی ضروری ہے",
+    "primaryColor": "بنیادی رنگ",
+    "probation": "آزمائشی مدت",
+    "probationPeriod": "آزمائشی میعاد",
+    "probationRestriction": "آزمائشی مدت کے دوران کچھ خصوصیات محدود ہیں۔ آزمائشی مدت ختم ہونے پر یہ خود بخود فعال ہو جائیں گی۔",
+    "secondaryColor": "ثانوی رنگ",
+    "upgradeEnterpriseBranding": "اپنی مرضی کی برانڈنگ کے لیے Enterprise میں اپگریڈ کریں",
+    "webhookDetails": "ویب ہک کی تفصیلات",
+    "webhookName": "نام",
+    "webhookSecret": "خفیہ",
+    "webhookSecretDesc": "تصدیق کے لیے ویب ہک پیلوڈز پر دستخط کرنے کے لیے استعمال ہوتا ہے",
+    "webhooksTitle": "ویب ہکس"
   },
   "tasks": {
     "title": "کام",
@@ -1251,8 +1330,10 @@
     "locationPermission": "مقام کی اجازت ضروری ہے۔",
     "cameraPermission": "کیمرے کی اجازت ضروری ہے۔",
     "notificationPermission": "اطلاع کی اجازت ضروری ہے۔",
-    "tryAgain": "براہ کرم دوبارہ کوشش کریں",
-    "somethingWentWrong": "کچھ غلط ہو گیا"
+    "tryAgain": "دوبارہ کوشش کریں",
+    "somethingWentWrong": "کچھ غلط ہو گیا",
+    "goHome": "ہوم پیج پر جائیں",
+    "technicalDetails": "ٹیکنیکل تفصیلات"
   },
   "activity": {
     "title": "سرگرمی کا جائزہ",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "اپنی مرضی رپورٹ بنائیں",
+    "dateFrom": "تاریخ سے",
+    "dateTo": "تاریخ تک",
+    "filters": "فلٹرز",
+    "reportName": "رپورٹ کا نام",
+    "reportType": "رپورٹ کی قسم",
+    "savedReportsLocal": "محفوظ شدہ رپورٹیں مقامی طور پر ذخیرہ ہیں۔ مستقل محفوظ رپورٹیں جلد آ رہی ہیں۔",
+    "sortBy": "ترتیب بلحاظ",
+    "trendOverTime": "وقت کے ساتھ رجحان"
   },
   "accessibility": {
     "menu": "مینو",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "ٹیمپلیٹ حذف کرنے میں ناکامی",
+    "shiftsGenerated": "شفٹیں کامیابی سے بنائی گئیں!",
+    "failedSave": "ٹیمپلیٹ محفوظ کرنے میں ناکامی"
   },
   "legal": {
     "lastUpdated": "آخری اپ ڈیٹ",
@@ -1748,7 +1841,18 @@
     "postJob": "ملازمت پوسٹ کریں",
     "skillMatch": "مہارت کی مماثلت",
     "noApplicants": "ابھی تک کوئی درخواست دہندہ نہیں",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "فرنٹ آف ہاؤس",
+      "kitchen": "باورچی خانہ",
+      "management": "انتظامیہ",
+      "reception": "استقبالیہ"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro ایڈنبرا",
+      "glasgow": "Grand Metro گلاسکو",
+      "manchester": "Grand Metro مانچسٹر"
+    }
   },
   "employees": {
     "searchPlaceholder": "نام یا ای میل سے تلاش کریں...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "مہارت شامل کرنے میں ناکامی",
+    "failedVerifySkill": "مہارت کی تصدیق میں ناکامی",
+    "failedUpdateSkillLevel": "مہارت کی سطح اپ ڈیٹ کرنے میں ناکامی",
+    "failedRemoveSkill": "مہارت ہٹانے میں ناکامی",
+    "loadEmployeeError": "ملازم لوڈ کرنے میں ناکامی"
   },
   "integrationHub": {
     "title": "انضمام ہب",

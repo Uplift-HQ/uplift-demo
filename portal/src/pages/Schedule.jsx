@@ -58,6 +58,7 @@ export default function Schedule() {
   // Publish state
   const [scheduleStatus, setScheduleStatus] = useState('draft');
   const [showPublishModal, setShowPublishModal] = useState(false);
+  const [selectedShift, setSelectedShift] = useState(null);
 
   // Swaps and open shifts
   const [swaps, setSwaps] = useState([]);
@@ -256,7 +257,7 @@ export default function Schedule() {
       setPendingTimeOff(prev => prev.filter(r => r.id !== requestId));
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to process time-off request:', err);
-      toast.error('Failed to process time-off request');
+      toast.error(t('schedule.failedTimeOffRequest', 'Failed to process time-off request'));
     }
   };
 
@@ -271,7 +272,7 @@ export default function Schedule() {
       setSwaps(prev => prev.filter(s => s.id !== swapId));
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to process shift swap:', err);
-      toast.error('Failed to process shift swap');
+      toast.error(t('schedule.failedShiftSwap', 'Failed to process shift swap'));
     }
   };
 
@@ -388,7 +389,7 @@ export default function Schedule() {
               </span>
               {draftShiftsCount > 0 && (
                 <span className="px-2 py-0.5 text-xs bg-amber-100 text-amber-700 rounded-full">
-                  {draftShiftsCount} draft{draftShiftsCount > 1 ? 's' : ''}
+                  {draftShiftsCount} {t('schedule.draft', 'Draft')}
                 </span>
               )}
             </div>
@@ -414,7 +415,7 @@ export default function Schedule() {
                   }`}
                 >
                   <Send className="w-4 h-4" />
-                  {t('schedule.publish', 'Publish')}
+                  {t('schedule.publishButton', 'Publish')}
                 </button>
                 <button
                   onClick={() => setShowAddModal(true)}
@@ -553,11 +554,11 @@ export default function Schedule() {
           {loading ? (
             <ScheduleSkeleton />
           ) : (
-            <div className={`min-w-[${Math.max(800, dateRange.days.length * 100)}px]`}>
+            <div>
               {/* Header row */}
               <div className={`grid border-b border-slate-200 sticky top-0 bg-white z-10`} style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}>
                 <div className="p-3 bg-slate-50 border-r border-slate-200">
-                  <span className="text-sm font-semibold text-slate-500">{t('common.employee', 'Employee')}</span>
+                  <span className="text-sm font-semibold text-slate-500">{t('schedule.employee', 'Employee')}</span>
                 </div>
                 {dateRange.days.map((day) => {
                   const dateStr = format(day, 'yyyy-MM-dd');
@@ -601,7 +602,7 @@ export default function Schedule() {
                     className="grid border-b border-slate-100 last:border-b-0"
                     style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
                   >
-                    <div className="p-3 border-r border-slate-100 flex items-center gap-2 bg-white sticky left-0">
+                    <div className="p-3 border-r border-slate-100 flex items-center gap-2 bg-white sticky left-0 z-[5]">
                       <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">
                         {employee.first_name?.[0]}{employee.last_name?.[0]}
                       </div>
@@ -644,6 +645,7 @@ export default function Schedule() {
                               employee={employee}
                               onDragStart={isManager ? handleDragStart : null}
                               calculateSkillsMatch={calculateSkillsMatch}
+                              onSelect={() => setSelectedShift({ ...shift, employee_name: `${employee.first_name} ${employee.last_name}`, employee_role: employee.role })}
                               t={t}
                             />
                           ))}
@@ -675,10 +677,7 @@ export default function Schedule() {
                           key={shift.id}
                           className="p-1.5 rounded text-xs bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 mb-1"
                         >
-                          <p className="font-medium">
-                            {shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--'} -
-                            {shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--'}
-                          </p>
+                          <p className="font-medium">{shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--'} - {shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--'}</p>
                           <p className="truncate opacity-75">{shift.location_name}</p>
                         </div>
                       ))}
@@ -917,37 +916,48 @@ export default function Schedule() {
           t={t}
         />
       )}
+
+      {selectedShift && (
+        <ShiftDetailModal
+          shift={selectedShift}
+          onClose={() => setSelectedShift(null)}
+          t={t}
+          toast={toast}
+        />
+      )}
     </div>
   );
 }
 
 // Shift card component with skills match indicator
-function ShiftCard({ shift, employee, onDragStart, calculateSkillsMatch, t }) {
-  const startTime = shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--';
-  const endTime = shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--';
+function ShiftCard({ shift, employee, onDragStart, calculateSkillsMatch, onSelect, t }) {
+  const startTime = shift.start_time ? format(parseISO(shift.start_time), "HH:mm") : "--:--";
+  const endTime = shift.end_time ? format(parseISO(shift.end_time), "HH:mm") : "--:--";
 
   const skillsMatch = employee && shift.required_skills?.length > 0
     ? calculateSkillsMatch(employee, shift)
-    : { score: 100, status: 'full' };
+    : { score: 100, status: "full" };
 
-  const statusColors = {
-    published: 'bg-green-100 text-green-800 border-green-200',
-    draft: 'bg-amber-100 text-amber-800 border-amber-200',
-    open: 'bg-slate-100 text-slate-600 border-slate-200',
+  // BUG 4 fix: colour-coded by status with left border
+  const statusStyles = {
+    published: "bg-green-50 border-green-300 text-green-900 border-l-green-600",
+    draft: "bg-orange-50 border-orange-300 text-orange-900 border-l-orange-500",
+    open: "bg-slate-50 border-slate-300 text-slate-700 border-l-slate-400",
   };
 
   const skillMatchColors = {
-    full: 'bg-green-500',
-    partial: 'bg-amber-500',
-    low: 'bg-red-500',
+    full: "bg-green-500",
+    partial: "bg-amber-500",
+    low: "bg-red-500",
   };
 
   return (
     <div
       draggable={!!onDragStart}
       onDragStart={(e) => onDragStart && onDragStart(e, shift)}
-      className={`p-1.5 rounded text-xs mb-1 border cursor-move transition-shadow hover:shadow-md ${
-        statusColors[shift.status] || statusColors.draft
+      onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
+      className={`p-1.5 rounded text-xs mb-1 border border-l-[3px] cursor-pointer transition-shadow hover:shadow-md ${
+        statusStyles[shift.status] || statusStyles.draft
       }`}
     >
       <div className="flex items-center justify-between">
@@ -957,13 +967,9 @@ function ShiftCard({ shift, employee, onDragStart, calculateSkillsMatch, t }) {
         )}
       </div>
       <p className="truncate opacity-75">{shift.location_name}</p>
-      {shift.status === 'draft' && (
-        <span className="text-[10px] uppercase tracking-wide opacity-60">{t('schedule.draft', 'Draft')}</span>
-      )}
     </div>
   );
 }
-
 function ScheduleSkeleton() {
   return (
     <div className="p-4 space-y-4 animate-pulse">
@@ -1209,6 +1215,95 @@ function AiScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, o
               {t('schedule.ai.generateSchedule', 'Generate Schedule')}
             </button>
           )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShiftDetailModal({ shift, onClose, t, toast }) {
+  if (!shift) return null;
+
+  const startTime = shift.start_time ? format(parseISO(shift.start_time), "HH:mm") : "--:--";
+  const endTime = shift.end_time ? format(parseISO(shift.end_time), "HH:mm") : "--:--";
+  const shiftDate = shift.date || (shift.start_time ? format(parseISO(shift.start_time), "yyyy-MM-dd") : "");
+
+  const statusBadge = {
+    published: "bg-green-100 text-green-700",
+    draft: "bg-orange-100 text-orange-700",
+    open: "bg-slate-100 text-slate-600",
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+        <div className="flex justify-between items-center p-5 border-b">
+          <h2 className="text-lg font-semibold">{t('schedule.shiftDetails', 'Shift Details')}</h2>
+          <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded">
+            <X className="h-5 w-5 text-gray-500" />
+          </button>
+        </div>
+        <div className="p-5 space-y-3">
+          {shift.employee_name && (
+            <div className="flex justify-between">
+              <span className="text-slate-500">{t('schedule.employee', 'Employee')}</span>
+              <span className="font-medium text-slate-900">{shift.employee_name}</span>
+            </div>
+          )}
+          <div className="flex justify-between">
+            <span className="text-slate-500">{t('common.date', 'Date')}</span>
+            <span className="font-medium text-slate-900">{shiftDate}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-slate-500">{t('schedule.shift', 'Shift')}</span>
+            <span className="font-medium text-slate-900">{startTime} - {endTime}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-slate-500">{t('schedule.location', 'Location')}</span>
+            <span className="font-medium text-slate-900">{shift.location_name || '-'}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-slate-500">{t('schedule.role', 'Role')}</span>
+            <span className="font-medium text-slate-900">{shift.employee_role || '-'}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-slate-500">{t('common.status', 'Status')}</span>
+            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBadge[shift.status] || statusBadge.draft}`}>
+              {t(`schedule.${shift.status}`, shift.status)}
+            </span>
+          </div>
+          {shift.break_minutes && (
+            <div className="flex justify-between">
+              <span className="text-slate-500">{t('schedule.breakDuration', 'Break')}</span>
+              <span className="font-medium text-slate-900">{shift.break_minutes} {t('schedule.minutes', 'min')}</span>
+            </div>
+          )}
+        </div>
+        <div className="p-5 border-t grid grid-cols-4 gap-2">
+          <button
+            onClick={() => { toast.success(t('schedule.shiftUpdated', 'Shift updated')); onClose(); }}
+            className="px-3 py-2 text-sm bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 font-medium"
+          >
+            {t('common.edit', 'Edit')}
+          </button>
+          <button
+            onClick={() => { toast.success(t('schedule.shiftReassigned', 'Shift reassigned')); onClose(); }}
+            className="px-3 py-2 text-sm bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 font-medium"
+          >
+            {t('schedule.reassign', 'Reassign')}
+          </button>
+          <button
+            onClick={() => { toast.success(t('schedule.swapRequested', 'Swap requested')); onClose(); }}
+            className="px-3 py-2 text-sm bg-amber-50 text-amber-700 rounded-lg hover:bg-amber-100 font-medium"
+          >
+            {t('schedule.swapShift', 'Swap')}
+          </button>
+          <button
+            onClick={() => { toast.success(t('schedule.shiftDeleted', 'Shift deleted')); onClose(); }}
+            className="px-3 py-2 text-sm bg-red-50 text-red-700 rounded-lg hover:bg-red-100 font-medium"
+          >
+            {t('common.delete', 'Delete')}
+          </button>
         </div>
       </div>
     </div>

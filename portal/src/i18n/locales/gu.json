@@ -233,7 +233,12 @@
       "barback": "બારબેક",
       "sous": "સુ શેફ",
       "expeditor": "એક્સપિડિટર"
-    }
+    },
+    "new": "નવું",
+    "exportComingSoon": "નિકાસ ટૂંક સમયમાં",
+    "clickToViewDetails": "વિગતો જોવા માટે ક્લિક કરો",
+    "closeEsc": "બંધ કરો (ESC)",
+    "logoPreview": "લોગો પૂર્વાવલોકન"
   },
   "auth": {
     "login": "લોગિન",
@@ -448,7 +453,16 @@
     "publishSchedule": "શેડ્યૂલ પ્રકાશિત કરો",
     "publishConfirmation": "તમે {{count}} ડ્રાફ્ટ શિફ્ટ પ્રકાશિત કરવા જઈ રહ્યા છો.",
     "publishNow": "હવે પ્રકાશિત કરો",
-    "aiScheduleBuilder": "AI શેડ્યૂલ બિલ્ડર"
+    "aiScheduleBuilder": "AI શેડ્યૂલ બિલ્ડર",
+    "failedTimeOffRequest": "રજા વિનંતી પ્રક્રિયા નિષ્ફળ",
+    "failedShiftSwap": "શિફ્ટ બદલી પ્રક્રિયા નિષ્ફળ",
+    "publishButton": "પ્રકાશિત કરો",
+    "employee": "કર્મચારી",
+    "reassign": "ફરીથી સોંપો",
+    "shiftReassigned": "શિફ્ટ ફરીથી સોંપવામાં આવી",
+    "swapRequested": "અદલાબદલીની વિનંતી કરવામાં આવી",
+    "shiftDeleted": "શિફ્ટ કાઢી નાખવામાં આવી",
+    "minutes": "મિનિટ"
   },
   "timeTracking": {
     "title": "સમય ટ્રેકિંગ",
@@ -661,7 +675,8 @@
     "searchSkills": "Search skills...",
     "skillAdded": "Skill added successfully",
     "verificationRequested": "Verification requested",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "આ કૌશલ્ય માટે કર્મચારી યાદી ટૂંક સમયમાં આવી રહી છે."
   },
   "career": {
     "title": "Career",
@@ -808,7 +823,7 @@
     "reminderTime": "Reminder Time",
     "sound": "Sound",
     "vibration": "Vibration",
-    "changePassword": "Change Password",
+    "changePassword": "પાસવર્ડ બદલો",
     "twoFactorAuth": "Two-Factor Authentication",
     "biometricAuth": "Biometric Authentication",
     "dataExport": "Export My Data",
@@ -917,14 +932,14 @@
     "preparing": "તૈયાર થઈ રહ્યું છે...",
     "dataExported": "ડેટા સફળતાપૂર્વક નિકાસ થયો",
     "deleteAccountWarning": "તમારું ખાતું અને બધો સંબંધિત ડેટા કાયમ માટે કાઢી નાખો. 30-દિવસની ગ્રેસ પિરિયડ પછી આ ક્રિયા પાછી ફેરવી શકાતી નથી.",
-    "requestAccountDeletion": "ખાતું કાઢી નાખવાની વિનંતી",
+    "requestAccountDeletion": "એકાઉન્ટ કાઢી નાખવાની વિનંતી",
     "deletionScheduled": "તમારું ખાતું કાઢી નાખવા માટે નિર્ધારિત છે. 30 દિવસમાં કાયમ માટે દૂર થશે.",
-    "cancelDeletion": "કાઢી નાખવું રદ કરો",
+    "cancelDeletion": "કાઢી નાખવાનું રદ કરો",
     "enterPasswordConfirm": "ખાતરી માટે પાસવર્ડ દાખલ કરો",
     "deleteMyAccount": "મારું ખાતું કાઢી નાખો",
     "processing": "પ્રક્રિયા થઈ રહી છે...",
     "webhooksIntegration": "HTTP કૉલબેક દ્વારા બાહ્ય સિસ્ટમો સાથે એકીકરણ",
-    "addWebhook": "Webhook ઉમેરો",
+    "addWebhook": "વેબહુક ઉમેરો",
     "endpointUrl": "એન્ડપૉઇન્ટ URL",
     "subscribedEvents": "સબ્સ્ક્રાઇબ કરેલ ઇવેન્ટ્સ",
     "successRate": "સફળતા દર",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "વેચાણનો સંપર્ક કરો",
+    "changingPassword": "બદલી રહ્યાં છે...",
+    "loadError": "સેટિંગ્સ લોડ કરવામાં નિષ્ફળ",
+    "saveOrgError": "સંસ્થા સેટિંગ્સ સાચવવામાં નિષ્ફળ",
+    "loadUserError": "વપરાશકર્તા ડેટા લોડ નિષ્ફળ",
+    "loadLogsError": "લોગ લોડ નિષ્ફળ",
+    "themes": {
+      "light": "હળવું",
+      "lightDesc": "સ્વચ્છ, તેજસ્વી ઇન્ટરફેસ",
+      "dark": "ઘેરું",
+      "darkDesc": "આંખો માટે આરામદાયક",
+      "system": "સિસ્ટમ",
+      "systemDesc": "ઉપકરણ સેટિંગ્સ અનુસરો"
+    },
+    "roles": {
+      "workers": "કર્મચારીઓ",
+      "workersDesc": "નિયમિત કર્મચારીઓ",
+      "managers": "મેનેજરો",
+      "managersDesc": "ટીમ લીડરો",
+      "admins": "એડમિન",
+      "adminsDesc": "સંપૂર્ણ ઍક્સેસ"
+    },
+    "features": {
+      "teamSchedules": "ટીમ શેડ્યૂલ",
+      "teamSchedulesDesc": "સભ્યોના શેડ્યૂલ જુઓ",
+      "internalJobs": "આંતરિક નોકરીઓ",
+      "internalJobsDesc": "આંતરિક જાહેરાતો ઍક્સેસ કરો",
+      "careerPaths": "કારકિર્દી માર્ગો",
+      "careerPathsDesc": "વિકાસ માર્ગો જુઓ",
+      "analytics": "ટીમ વિશ્લેષણ",
+      "analyticsDesc": "કાર્યપ્રદર્શન વિશ્લેષણ ઍક્સેસ",
+      "peerRecognition": "સહકર્મી પ્રશંસા",
+      "peerRecognitionDesc": "પ્રશંસા મોકલો અને મેળવો"
+    },
+    "aboutEmployeeVisibilityTitle": "કર્મચારી દૃશ્યતા વિશે",
+    "aboutPageVisibilityDesc": "તમે નિષ્ક્રિય કરેલા પૃષ્ઠો તે ભૂમિકા માટે નેવિગેશન મેનૂમાંથી છુપાવવામાં આવશે.",
+    "brandName": "બ્રાંડનું નામ",
+    "brandNameDesc": "સાઇડબાર અને મોબાઇલ એપ હેડરમાં બતાવવામાં આવે છે",
+    "brandingDesc": "તમારા Uplift અનુભવની દેખાવ કસ્ટમાઇઝ કરો",
+    "brandingDescFull": "પોર્ટલ અને મોબાઇલ એપમાં દેખાવ કસ્ટમાઇઝ કરો",
+    "brandingLabel": "બ્રાંડિંગ",
+    "created": "બનાવેલ",
+    "dropFileUpload": "ફાઇલ ડ્રોપ કરો અથવા અપલોડ કરવા ક્લિક કરો",
+    "emailVerified": "ઇમેઇલ ચકાસેલ",
+    "eventsToSubscribe": "સબ્સ્ક્રાઇબ કરવાની ઇવેન્ટ્સ",
+    "livePreview": "લાઇવ પૂર્વાવલોકન",
+    "loginScreenPreview": "લોગિન સ્ક્રીન",
+    "logosImages": "લોગો અને છબીઓ",
+    "mfaEnabled": "MFA સક્રિય",
+    "mobileAppHeader": "મોબાઇલ એપ હેડર",
+    "noEmployeesFound": "કોઈ કર્મચારી મળ્યા નહીં",
+    "noEmployeesMatch": "કોઈ કર્મચારી તમારી શોધ સાથે મેળ ખાતા નથી",
+    "passwordChangeRequired": "પાસવર્ડ બદલવું જરૂરી છે",
+    "primaryColor": "પ્રાથમિક રંગ",
+    "probation": "પ્રોબેશન",
+    "probationPeriod": "પ્રોબેશન સમયગાળો",
+    "probationRestriction": "પ્રોબેશન સમયગાળા દરમિયાન કેટલીક સુવિધાઓ પ્રતિબંધિત છે. પ્રોબેશન પૂરું થયા પછી તે આપોઆપ સક્રિય થશે.",
+    "secondaryColor": "ગૌણ રંગ",
+    "upgradeEnterpriseBranding": "કસ્ટમ બ્રાંડિંગ માટે Enterprise માં અપગ્રેડ કરો",
+    "webhookDetails": "Webhook વિગતો",
+    "webhookName": "નામ",
+    "webhookSecret": "ગુપ્ત",
+    "webhookSecretDesc": "ચકાસણી માટે webhook પેલોડ્સ પર સહી કરવા માટે વપરાય છે",
+    "webhooksTitle": "વેબહુક્સ"
   },
   "tasks": {
     "title": "કાર્યો",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Location permission is required.",
     "cameraPermission": "Camera permission is required.",
     "notificationPermission": "Notification permission is required.",
-    "tryAgain": "Please try again",
-    "somethingWentWrong": "Something went wrong"
+    "tryAgain": "ફરી પ્રયાસ કરો",
+    "somethingWentWrong": "કંઈક ખોટું થયું",
+    "goHome": "હોમ",
+    "technicalDetails": "ટેકનિકલ વિગતો"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1338,7 +1419,7 @@
     "attachments": "જોડાણો",
     "rejectionReason": "નકારવાનું કારણ",
     "enterRejectionReason": "નકારવાનું કારણ દાખલ કરો...",
-    "confirmRejection": "નકારવાની ખાતરી કરો",
+    "confirmRejection": "અસ્વીકાર પુષ્ટિ કરો",
     "approve": "મંજૂર",
     "reject": "નકારો",
     "placeholder": {
@@ -1506,7 +1587,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "કસ્ટમ રિપોર્ટ બનાવો",
+    "dateFrom": "તારીખ થી",
+    "dateTo": "તારીખ સુધી",
+    "filters": "ફિલ્ટર્સ",
+    "reportName": "રિપોર્ટનું નામ",
+    "reportType": "રિપોર્ટનો પ્રકાર",
+    "savedReportsLocal": "સાચવેલી રિપોર્ટ્સ સ્થાનિક રીતે સંગ્રહિત છે. કાયમી સાચવેલી રિપોર્ટ્સ ટૂંક સમયમાં આવશે.",
+    "sortBy": "આ પ્રમાણે ગોઠવો",
+    "trendOverTime": "સમય સાથે વલણ"
   },
   "shiftTemplates": {
     "title": "શિફ્ટ ટેમ્પ્લેટ્સ",
@@ -1557,7 +1647,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "ટેમ્પ્લેટ કાઢી નાખવામાં નિષ્ફળ",
+    "shiftsGenerated": "શિફ્ટ સફળતાપૂર્વક જનરેટ થઈ!",
+    "failedSave": "ટેમ્પ્લેટ સાચવવામાં નિષ્ફળ"
   },
   "legal": {
     "lastUpdated": "છેલ્લે અપડેટ થયું",
@@ -1748,7 +1841,18 @@
     "postJob": "નોકરી પોસ્ટ કરો",
     "skillMatch": "કુશળતા મેળ",
     "noApplicants": "હજુ સુધી કોઈ અરજદાર નથી",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "ફ્રંટ ઑફ હાઉસ",
+      "kitchen": "રસોડું",
+      "management": "વ્યવસ્થાપન",
+      "reception": "રિસેપ્શન"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro એડિનબર્ગ",
+      "glasgow": "Grand Metro ગ્લાસગો",
+      "manchester": "Grand Metro માન્ચેસ્ટર"
+    }
   },
   "employees": {
     "searchPlaceholder": "નામ અથવા ઈમેલથી શોધો...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "કૌશલ્ય ઉમેરવામાં નિષ્ફળ",
+    "failedVerifySkill": "ચકાસણી નિષ્ફળ",
+    "failedUpdateSkillLevel": "સ્તર અપડેટ નિષ્ફળ",
+    "failedRemoveSkill": "કૌશલ્ય દૂર કરવામાં નિષ્ફળ",
+    "loadEmployeeError": "કર્મચારી લોડ કરવામાં વિફળ"
   },
   "integrationHub": {
     "title": "ઇન્ટિગ્રેશન હબ",

@@ -233,7 +233,12 @@
       "barback": "Phụ bar",
       "sous": "Sous Chef",
       "expeditor": "Nhân viên điều phối"
-    }
+    },
+    "new": "MỚI",
+    "exportComingSoon": "Xuất dữ liệu sắp có",
+    "clickToViewDetails": "Nhấp để xem chi tiết",
+    "closeEsc": "Đóng (ESC)",
+    "logoPreview": "Xem trước logo"
   },
   "auth": {
     "login": "Đăng nhập",
@@ -448,7 +453,16 @@
     "publishSchedule": "Xuất bản lịch",
     "publishConfirmation": "Bạn sắp xuất bản {{count}} ca nháp. Tất cả nhân viên liên quan sẽ được thông báo.",
     "publishNow": "Xuất bản ngay",
-    "aiScheduleBuilder": "Trình tạo lịch AI"
+    "aiScheduleBuilder": "Trình tạo lịch AI",
+    "failedTimeOffRequest": "Không thể xử lý yêu cầu nghỉ phép",
+    "failedShiftSwap": "Không thể xử lý đổi ca",
+    "publishButton": "Xuất bản",
+    "employee": "Nhân viên",
+    "reassign": "Phân công lại",
+    "shiftReassigned": "Ca đã được phân công lại",
+    "swapRequested": "Yêu cầu trao đổi đã gửi",
+    "shiftDeleted": "Ca đã bị xóa",
+    "minutes": "phút"
   },
   "timeTracking": {
     "title": "Chấm công",
@@ -661,7 +675,8 @@
     "searchSkills": "Tìm kiếm kỹ năng...",
     "skillAdded": "Đã thêm kỹ năng thành công",
     "verificationRequested": "Đã yêu cầu xác minh",
-    "loadError": "Failed to load skills. Please try again."
+    "loadError": "Failed to load skills. Please try again.",
+    "employeeListingComingSoon": "Danh sách nhân viên cho kỹ năng này sẽ sớm ra mắt."
   },
   "career": {
     "title": "Sự nghiệp",
@@ -895,7 +910,7 @@
     "enable": "Bật",
     "activeSessions": "Phiên đang hoạt động",
     "manageDevices": "Quản lý các thiết bị đã đăng nhập",
-    "signOutOtherDevices": "Đăng xuất các thiết bị khác",
+    "signOutOtherDevices": "Đăng xuất thiết bị khác",
     "thisDevice": "Thiết bị này",
     "revoke": "Thu hồi",
     "revoking": "Đang thu hồi...",
@@ -924,7 +939,7 @@
     "deleteMyAccount": "Xóa tài khoản của tôi",
     "processing": "Đang xử lý...",
     "webhooksIntegration": "Tích hợp với hệ thống bên ngoài qua HTTP callbacks",
-    "addWebhook": "Thêm Webhook",
+    "addWebhook": "Thêm webhook",
     "endpointUrl": "URL Endpoint",
     "subscribedEvents": "Sự kiện đã đăng ký",
     "successRate": "Tỷ lệ thành công",
@@ -995,7 +1010,71 @@
     "noPagesConfigured": "No pages configured",
     "eventsSelected": "events selected",
     "createWebhook": "Create Webhook",
-    "enterPasswordToConfirm": "Enter your password to confirm"
+    "enterPasswordToConfirm": "Enter your password to confirm",
+    "contactSales": "Liên hệ bộ phận kinh doanh",
+    "changingPassword": "Đang thay đổi...",
+    "loadError": "Không thể tải cài đặt",
+    "saveOrgError": "Không thể lưu cài đặt tổ chức",
+    "loadUserError": "Không thể tải dữ liệu người dùng",
+    "loadLogsError": "Không thể tải nhật ký giao hàng",
+    "themes": {
+      "light": "Sáng",
+      "lightDesc": "Giao diện sạch, sáng",
+      "dark": "Tối",
+      "darkDesc": "Dễ chịu cho mắt",
+      "system": "Hệ thống",
+      "systemDesc": "Theo cài đặt thiết bị"
+    },
+    "roles": {
+      "workers": "Nhân viên",
+      "workersDesc": "Nhân viên thường",
+      "managers": "Quản lý",
+      "managersDesc": "Trưởng nhóm và giám sát",
+      "admins": "Quản trị viên",
+      "adminsDesc": "Quản trị viên toàn quyền"
+    },
+    "features": {
+      "teamSchedules": "Lịch nhóm",
+      "teamSchedulesDesc": "Xem lịch của thành viên nhóm khác",
+      "internalJobs": "Việc làm nội bộ",
+      "internalJobsDesc": "Truy cập các tin tuyển dụng nội bộ",
+      "careerPaths": "Lộ trình sự nghiệp",
+      "careerPathsDesc": "Xem các lộ trình phát triển sự nghiệp",
+      "analytics": "Phân tích nhóm",
+      "analyticsDesc": "Truy cập phân tích hiệu suất",
+      "peerRecognition": "Ghi nhận đồng nghiệp",
+      "peerRecognitionDesc": "Gửi và nhận lời khen từ đồng nghiệp"
+    },
+    "aboutEmployeeVisibilityTitle": "Về khả năng hiển thị nhân viên",
+    "aboutPageVisibilityDesc": "Các trang bạn tắt sẽ bị ẩn khỏi menu điều hướng cho vai trò đó.",
+    "brandName": "Tên thương hiệu",
+    "brandNameDesc": "Hiển thị trên thanh bên và tiêu đề ứng dụng di động",
+    "brandingDesc": "Tùy chỉnh giao diện trải nghiệm Uplift của bạn",
+    "brandingDescFull": "Tùy chỉnh giao diện trên cổng thông tin và ứng dụng di động",
+    "brandingLabel": "Thương hiệu",
+    "created": "Đã tạo",
+    "dropFileUpload": "Kéo thả tệp hoặc nhấp để tải lên",
+    "emailVerified": "Email đã xác minh",
+    "eventsToSubscribe": "Sự kiện đăng ký",
+    "livePreview": "Xem trước trực tiếp",
+    "loginScreenPreview": "Màn hình đăng nhập",
+    "logosImages": "Logo và hình ảnh",
+    "mfaEnabled": "MFA đã bật",
+    "mobileAppHeader": "Tiêu đề ứng dụng di động",
+    "noEmployeesFound": "Không tìm thấy nhân viên",
+    "noEmployeesMatch": "Không có nhân viên nào khớp với tìm kiếm của bạn",
+    "passwordChangeRequired": "Yêu cầu đổi mật khẩu",
+    "primaryColor": "Màu chính",
+    "probation": "Thử việc",
+    "probationPeriod": "Thời gian thử việc",
+    "probationRestriction": "Một số tính năng bị hạn chế trong thời gian thử việc. Chúng sẽ được tự động kích hoạt khi hết thời gian thử việc.",
+    "secondaryColor": "Màu phụ",
+    "upgradeEnterpriseBranding": "Nâng cấp lên Enterprise để tùy chỉnh thương hiệu",
+    "webhookDetails": "Chi tiết Webhook",
+    "webhookName": "Tên",
+    "webhookSecret": "Khóa bí mật",
+    "webhookSecretDesc": "Dùng để ký các payload webhook nhằm xác minh",
+    "webhooksTitle": "Webhooks"
   },
   "tasks": {
     "title": "Nhiệm vụ",
@@ -1251,8 +1330,10 @@
     "locationPermission": "Cần quyền truy cập vị trí.",
     "cameraPermission": "Cần quyền truy cập máy ảnh.",
     "notificationPermission": "Cần quyền gửi thông báo.",
-    "tryAgain": "Vui lòng thử lại",
-    "somethingWentWrong": "Đã xảy ra lỗi"
+    "tryAgain": "Thử lại",
+    "somethingWentWrong": "Đã xảy ra lỗi",
+    "goHome": "Về trang chủ",
+    "technicalDetails": "Chi tiết kỹ thuật"
   },
   "activity": {
     "title": "Xem xét hoạt động",
@@ -1450,7 +1531,16 @@
     },
     "untitledReport": "Untitled Report",
     "saveReport": "Save Report",
-    "selectColumns": "Select Columns"
+    "selectColumns": "Select Columns",
+    "buildCustomReport": "Tạo báo cáo tùy chỉnh",
+    "dateFrom": "Từ ngày",
+    "dateTo": "Đến ngày",
+    "filters": "Bộ lọc",
+    "reportName": "Tên báo cáo",
+    "reportType": "Loại báo cáo",
+    "savedReportsLocal": "Các báo cáo đã lưu được lưu trữ cục bộ. Tính năng lưu trữ vĩnh viễn sẽ sớm ra mắt.",
+    "sortBy": "Sắp xếp theo",
+    "trendOverTime": "Xu hướng theo thời gian"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1514,7 +1604,10 @@
       "5on2off": "5 On / 2 Off",
       "5on2offDesc": "Standard with rotating days off"
     },
-    "allDays": "All days"
+    "allDays": "All days",
+    "failedDelete": "Không thể xóa mẫu",
+    "shiftsGenerated": "Các ca đã được tạo thành công!",
+    "failedSave": "Không thể lưu mẫu"
   },
   "legal": {
     "lastUpdated": "Cập nhật lần cuối",
@@ -1748,7 +1841,18 @@
     "postJob": "Đăng việc làm",
     "skillMatch": "kỹ năng phù hợp",
     "noApplicants": "Chưa có ứng viên",
-    "loadError": "Failed to load job postings. Please try again."
+    "loadError": "Failed to load job postings. Please try again.",
+    "departments": {
+      "frontOfHouse": "Lễ tân phục vụ",
+      "kitchen": "Bếp",
+      "management": "Quản lý",
+      "reception": "Lễ tân"
+    },
+    "locations": {
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
+    }
   },
   "employees": {
     "searchPlaceholder": "Tìm theo tên hoặc email...",
@@ -1765,7 +1869,12 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees"
+    "loadError": "Failed to load employees",
+    "failedAddSkill": "Không thể thêm kỹ năng",
+    "failedVerifySkill": "Không thể xác minh kỹ năng",
+    "failedUpdateSkillLevel": "Không thể cập nhật cấp độ kỹ năng",
+    "failedRemoveSkill": "Không thể xóa kỹ năng",
+    "loadEmployeeError": "Không thể tải thông tin nhân viên"
   },
   "integrationHub": {
     "title": "Trung tâm tích hợp",
