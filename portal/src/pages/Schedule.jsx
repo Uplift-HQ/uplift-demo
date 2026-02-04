@@ -623,7 +623,7 @@ export default function Schedule() {
                       return (
                         <div
                           key={day.toISOString()}
-                          className={`p-1 border-r border-slate-100 last:border-r-0 min-h-[70px] transition-colors ${
+                          className={`p-1 border-r border-slate-100 last:border-r-0 min-h-[70px] overflow-hidden transition-colors ${
                             isToday ? 'bg-blue-50/30' : ''
                           } ${isDropZone ? 'bg-blue-100 ring-2 ring-blue-400 ring-inset' : ''} ${
                             isManager ? 'cursor-pointer hover:bg-slate-50' : ''
@@ -671,11 +671,11 @@ export default function Schedule() {
                   const dayOpenShifts = getShiftsForDay(day).filter(s => s.is_open && !s.employee_id);
 
                   return (
-                    <div key={day.toISOString()} className="p-1 border-r border-slate-200 last:border-r-0 min-h-[70px]">
+                    <div key={day.toISOString()} className="p-1 border-r border-slate-200 last:border-r-0 min-h-[70px] overflow-hidden">
                       {dayOpenShifts.map((shift) => (
                         <div
                           key={shift.id}
-                          className="p-1.5 rounded text-xs bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 mb-1"
+                          className="p-1.5 rounded text-xs bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 mb-1 w-full box-border"
                         >
                           <p className="font-medium">{shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--'} - {shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--'}</p>
                           <p className="truncate opacity-75">{shift.location_name}</p>
@@ -956,7 +956,7 @@ function ShiftCard({ shift, employee, onDragStart, calculateSkillsMatch, onSelec
       draggable={!!onDragStart}
       onDragStart={(e) => onDragStart && onDragStart(e, shift)}
       onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
-      className={`p-1.5 rounded text-xs mb-1 border border-l-[3px] cursor-pointer transition-shadow hover:shadow-md ${
+      className={`p-1.5 rounded text-xs mb-1 border border-l-[3px] cursor-pointer transition-shadow hover:shadow-md w-full box-border ${
         statusStyles[shift.status] || statusStyles.draft
       }`}
     >
