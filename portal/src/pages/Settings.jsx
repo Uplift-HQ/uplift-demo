@@ -22,12 +22,12 @@ import { useToast } from '../components/ToastProvider';
 // Tab configuration - names will be translated in the component
 const TABS = [
   { id: 'organization', nameKey: 'settings.organization', icon: Building, adminOnly: true },
-  { id: 'branding', nameKey: 'settings.branding', icon: Crown, adminOnly: true },
+  { id: 'branding', nameKey: 'settings.brandingLabel', icon: Crown, adminOnly: true },
   { id: 'navigation', nameKey: 'settings.navigation', icon: Globe, adminOnly: true },
   { id: 'employee-visibility', nameKey: 'settings.employeeVisibility', icon: Eye, adminOnly: true },
-  { id: 'users', nameKey: 'settings.users', icon: Users, adminOnly: true },
+  { id: 'users', nameKey: 'settings.teamMembers', icon: Users, adminOnly: true },
   { id: 'appearance', nameKey: 'settings.appearance', icon: Palette, adminOnly: false },
-  { id: 'webhooks', nameKey: 'settings.webhooks', icon: Webhook, adminOnly: true },
+  { id: 'webhooks', nameKey: 'settings.webhooksTitle', icon: Webhook, adminOnly: true },
   { id: 'sso', nameKey: 'settings.sso.title', icon: KeyRound, adminOnly: true },
   { id: 'account', nameKey: 'settings.myAccount', icon: User, adminOnly: false },
   { id: 'security', nameKey: 'settings.security', icon: Shield, adminOnly: false },
