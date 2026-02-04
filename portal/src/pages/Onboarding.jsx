@@ -1,10 +1,11 @@
 // ============================================================
-// ONBOARDING WIZARD PAGE
-// Multi-step wizard for onboarding new employees
+// ONBOARDING WORKFLOWS PAGE
+// 4-tab module: Active Onboardings, Templates, Add Employee
+// (wizard), and Dashboard analytics
 // Fully internationalized - all strings use t() for translation
 // ============================================================
 
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 import { useToast } from '../components/ToastProvider';
@@ -18,12 +19,14 @@ import {
 } from '../lib/api';
 import {
   User,
+  Users,
   Briefcase,
   Award,
   CalendarClock,
   Send,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Check,
   AlertCircle,
   Plus,
@@ -33,7 +36,165 @@ import {
   Loader2,
   CheckCircle2,
   UserPlus,
+  FileText,
+  BarChart3,
+  Clock,
+  Calendar,
+  X,
+  AlertTriangle,
+  TrendingUp,
+  CheckCircle,
 } from 'lucide-react';
+
+// ============================================================
+// DEMO DATA - Active Onboardings
+// ============================================================
+
+const ACTIVE_ONBOARDINGS = [
+  {
+    id: 1, name: 'Olivia Brown', role: 'Front Desk Agent', department: 'Front of House',
+    location: 'London Victoria', startDate: '2026-02-10', buddy: 'Sarah Chen',
+    status: 'on_track', tasksCompleted: 9, tasksTotal: 12,
+    tasks: [
+      { category: 'IT Setup', items: [
+        { name: 'Create email account', assignee: 'IT', due: '2026-02-07', done: true },
+        { name: 'Set up POS access', assignee: 'IT', due: '2026-02-08', done: true },
+        { name: 'Issue keycard & badges', assignee: 'IT', due: '2026-02-09', done: true },
+      ]},
+      { category: 'HR Documents', items: [
+        { name: 'Sign employment contract', assignee: 'HR', due: '2026-02-07', done: true },
+        { name: 'Complete tax forms', assignee: 'HR', due: '2026-02-08', done: true },
+        { name: 'Emergency contact form', assignee: 'HR', due: '2026-02-09', done: false },
+      ]},
+      { category: 'Training', items: [
+        { name: 'Health & safety induction', assignee: 'Manager', due: '2026-02-10', done: true },
+        { name: 'Fire safety training', assignee: 'Manager', due: '2026-02-11', done: true },
+        { name: 'Customer service standards', assignee: 'Manager', due: '2026-02-12', done: true },
+      ]},
+      { category: 'Team Introductions', items: [
+        { name: 'Meet department heads', assignee: 'Buddy', due: '2026-02-10', done: true },
+        { name: 'Shadow shift with mentor', assignee: 'Buddy', due: '2026-02-11', done: false },
+        { name: 'Welcome lunch with team', assignee: 'Buddy', due: '2026-02-12', done: false },
+      ]},
+    ]
+  },
+  {
+    id: 2, name: 'Daniel Park', role: 'Sous Chef', department: 'Kitchen',
+    location: 'Manchester Central', startDate: '2026-02-03', buddy: 'Marcus Johnson',
+    status: 'at_risk', tasksCompleted: 5, tasksTotal: 12,
+    tasks: [
+      { category: 'IT Setup', items: [
+        { name: 'Create email account', assignee: 'IT', due: '2026-01-31', done: true },
+        { name: 'Kitchen management system access', assignee: 'IT', due: '2026-02-01', done: true },
+        { name: 'Issue uniform & badges', assignee: 'IT', due: '2026-02-02', done: false },
+      ]},
+      { category: 'HR Documents', items: [
+        { name: 'Sign employment contract', assignee: 'HR', due: '2026-01-31', done: true },
+        { name: 'Food hygiene certificate check', assignee: 'HR', due: '2026-02-01', done: true },
+        { name: 'Right to work verification', assignee: 'HR', due: '2026-02-01', done: true },
+      ]},
+      { category: 'Training', items: [
+        { name: 'HACCP training', assignee: 'Manager', due: '2026-02-03', done: false },
+        { name: 'Allergen awareness', assignee: 'Manager', due: '2026-02-04', done: false },
+        { name: 'Kitchen SOPs walkthrough', assignee: 'Manager', due: '2026-02-05', done: false },
+      ]},
+      { category: 'Team Introductions', items: [
+        { name: 'Meet kitchen brigade', assignee: 'Buddy', due: '2026-02-03', done: false },
+        { name: 'Shadow service with mentor', assignee: 'Buddy', due: '2026-02-04', done: false },
+        { name: 'Chef team welcome dinner', assignee: 'Buddy', due: '2026-02-05', done: false },
+      ]},
+    ]
+  },
+  {
+    id: 3, name: 'Emma Williams', role: 'Housekeeping Supervisor', department: 'Housekeeping',
+    location: 'London Victoria', startDate: '2026-01-20', buddy: 'Priya Patel',
+    status: 'on_track', tasksCompleted: 12, tasksTotal: 12,
+    tasks: []
+  },
+  {
+    id: 4, name: 'Raj Mehta', role: 'Night Auditor', department: 'Finance',
+    location: 'Manchester Central', startDate: '2026-02-17', buddy: 'James Wilson',
+    status: 'on_track', tasksCompleted: 3, tasksTotal: 12,
+    tasks: []
+  },
+  {
+    id: 5, name: 'Fatima Al-Hassan', role: 'Spa Therapist', department: 'Spa & Wellness',
+    location: 'London Victoria', startDate: '2026-02-05', buddy: 'Lisa Zhang',
+    status: 'overdue', tasksCompleted: 4, tasksTotal: 10,
+    tasks: []
+  },
+  {
+    id: 6, name: 'Liam O\'Connor', role: 'Bar Supervisor', department: 'Food & Beverage',
+    location: 'Manchester Central', startDate: '2026-02-12', buddy: 'Thomas Brown',
+    status: 'on_track', tasksCompleted: 7, tasksTotal: 12,
+    tasks: []
+  },
+];
+
+// ============================================================
+// DEMO DATA - Templates
+// ============================================================
+
+const TEMPLATES = [
+  { id: 1, name: 'Standard Onboarding', duration: '30 days', taskCount: 24, lastUpdated: '2026-01-15', description: 'Complete onboarding for permanent employees', isDefault: true },
+  { id: 2, name: 'Manager Onboarding', duration: '60 days', taskCount: 36, lastUpdated: '2026-01-10', description: 'Extended onboarding with leadership modules' },
+  { id: 3, name: 'Seasonal Worker', duration: '14 days', taskCount: 12, lastUpdated: '2025-12-20', description: 'Fast-track onboarding for seasonal staff' },
+];
+
+// Placeholder tasks for template expanded view
+const TEMPLATE_TASKS = {
+  1: [
+    { category: 'IT Setup', items: ['Create email account', 'Set up system access', 'Issue keycard & badges', 'Configure workstation', 'Set up phone extension', 'Grant network permissions'] },
+    { category: 'HR Documents', items: ['Sign employment contract', 'Complete tax forms', 'Emergency contact form', 'Bank details for payroll', 'Photo for ID badge', 'NDA & confidentiality agreement'] },
+    { category: 'Training', items: ['Health & safety induction', 'Fire safety training', 'Data protection (GDPR)', 'Customer service standards', 'Company policies overview', 'Role-specific SOPs'] },
+    { category: 'Team Introductions', items: ['Meet department heads', 'Shadow shift with mentor', 'Welcome lunch with team', 'Tour of premises', 'Meet buddy/mentor', 'Introduction to key contacts'] },
+  ],
+  2: [
+    { category: 'IT Setup', items: ['Create email account', 'Set up system access', 'Issue keycard & badges', 'Management dashboard access', 'Reporting tools setup', 'Mobile device provisioning'] },
+    { category: 'HR Documents', items: ['Sign employment contract', 'Complete tax forms', 'Emergency contact form', 'Manager-level NDA', 'Benefits enrollment', 'Company car agreement'] },
+    { category: 'Training', items: ['Health & safety induction', 'Fire safety training', 'Leadership fundamentals', 'Performance management training', 'Budget management', 'Conflict resolution workshop'] },
+    { category: 'Leadership', items: ['Meet executive team', 'Shadow senior manager', 'Department strategy review', 'Team assessment meetings', 'Stakeholder mapping', 'First 90-day plan creation'] },
+    { category: 'Team Introductions', items: ['Meet department heads', 'All-hands introduction', 'Cross-department meetings', 'Welcome dinner with leadership', 'Meet direct reports 1:1', 'External partner introductions'] },
+  ],
+  3: [
+    { category: 'IT Setup', items: ['Create temporary email', 'Set up POS/system access', 'Issue temporary badge'] },
+    { category: 'HR Documents', items: ['Sign seasonal contract', 'Complete tax forms', 'Emergency contact form'] },
+    { category: 'Training', items: ['Health & safety induction', 'Fire safety training', 'Role-specific quick-start'] },
+    { category: 'Team Introductions', items: ['Meet team lead', 'Shadow experienced colleague', 'Tour of work area'] },
+  ],
+};
+
+// ============================================================
+// DEMO DATA - Dashboard
+// ============================================================
+
+const DEPARTMENT_CHART = [
+  { department: 'Front of House', count: 2 },
+  { department: 'Kitchen', count: 1 },
+  { department: 'Housekeeping', count: 1 },
+  { department: 'Finance', count: 1 },
+  { department: 'Spa & Wellness', count: 1 },
+  { department: 'Food & Beverage', count: 1 },
+];
+
+const COMPLETION_TREND = [
+  { month: 'Aug', rate: 88 },
+  { month: 'Sep', rate: 90 },
+  { month: 'Oct', rate: 85 },
+  { month: 'Nov', rate: 91 },
+  { month: 'Dec', rate: 94 },
+  { month: 'Jan', rate: 92 },
+];
+
+const OVERDUE_TASKS = [
+  { employee: 'Fatima Al-Hassan', task: 'Complete tax forms', assignee: 'HR', due: '2026-02-03' },
+  { employee: 'Daniel Park', task: 'Issue uniform & badges', assignee: 'IT', due: '2026-02-02' },
+  { employee: 'Daniel Park', task: 'HACCP training', assignee: 'Manager', due: '2026-02-03' },
+];
+
+// ============================================================
+// WIZARD CONSTANTS (preserved from original)
+// ============================================================
 
 const STEPS = [
   { id: 1, labelKey: 'onboarding.steps.employeeDetails', icon: User },
@@ -51,6 +212,17 @@ const EMPLOYMENT_TYPES = ['full-time', 'part-time', 'casual', 'contractor'];
 function generateEmployeeId() {
   return 'EMP-' + Math.random().toString(36).substring(2, 8).toUpperCase();
 }
+
+// ============================================================
+// TAB DEFINITIONS
+// ============================================================
+
+const TABS = [
+  { id: 'active', labelKey: 'onboarding.tabs.activeOnboardings', icon: Users },
+  { id: 'templates', labelKey: 'onboarding.tabs.templates', icon: FileText },
+  { id: 'add', labelKey: 'onboarding.tabs.addEmployee', icon: UserPlus },
+  { id: 'dashboard', labelKey: 'onboarding.tabs.dashboard', icon: BarChart3 },
+];
 
 // ============================================================
 // STEP 1: Employee Details
@@ -725,9 +897,9 @@ function SuccessState({ formData, onViewEmployee, onOnboardAnother }) {
 }
 
 // ============================================================
-// MAIN ONBOARDING COMPONENT
+// ADD EMPLOYEE WIZARD (wraps the original Onboarding wizard)
 // ============================================================
-export default function Onboarding() {
+function AddEmployeeWizard() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const toast = useToast();
@@ -891,44 +1063,31 @@ export default function Onboarding() {
 
   if (completed) {
     return (
-      <div>
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-slate-900">{t('onboarding.pageTitle', 'Employee Onboarding')}</h1>
-        </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200">
-          <SuccessState
-            formData={formData}
-            onViewEmployee={() => navigate('/employees')}
-            onOnboardAnother={resetWizard}
-          />
-        </div>
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200">
+        <SuccessState
+          formData={formData}
+          onViewEmployee={() => navigate('/employees')}
+          onOnboardAnother={resetWizard}
+        />
       </div>
     );
   }
 
   if (refDataLoading) {
     return (
-      <div>
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-slate-900">{t('onboarding.pageTitle', 'Employee Onboarding')}</h1>
-        </div>
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-momentum-500 mx-auto mb-3" />
-          <p className="text-sm text-slate-500">{t('onboarding.loadingData', 'Loading organisation data...')}</p>
-        </div>
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-momentum-500 mx-auto mb-3" />
+        <p className="text-sm text-slate-500">{t('onboarding.loadingData', 'Loading organisation data...')}</p>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-900">{t('onboarding.pageTitle', 'Employee Onboarding')}</h1>
-        <p className="text-slate-500 mt-1">
-          {t('onboarding.pageDesc', 'Add a new employee and invite them to the Uplift app.')}
-          {' '}<Link to="/bulk-import" className="text-momentum-600 hover:text-momentum-700 text-sm font-medium">{t('onboarding.bulkImportLink', 'Need to add many employees? Use Bulk Import')}</Link>
-        </p>
-      </div>
+      <p className="text-slate-500 mb-4 text-sm">
+        {t('onboarding.pageDesc', 'Add a new employee and invite them to the Uplift app.')}
+        {' '}<Link to="/bulk-import" className="text-momentum-600 hover:text-momentum-700 text-sm font-medium">{t('onboarding.bulkImportLink', 'Need to add many employees? Use Bulk Import')}</Link>
+      </p>
 
       <div className="bg-white rounded-xl shadow-sm border border-slate-200">
         {/* Progress bar */}
@@ -1038,6 +1197,476 @@ export default function Onboarding() {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ============================================================
+// TAB 1: ACTIVE ONBOARDINGS
+// ============================================================
+function ActiveOnboardingsTab() {
+  const { t } = useTranslation();
+  const [expandedRow, setExpandedRow] = useState(null);
+
+  const getInitials = (name) => {
+    return name.split(' ').map((n) => n[0]).join('').toUpperCase();
+  };
+
+  const getStatusBadge = (status) => {
+    const configs = {
+      on_track: { label: t('onboarding.status.onTrack', 'On Track'), className: 'bg-green-100 text-green-700' },
+      at_risk: { label: t('onboarding.status.atRisk', 'At Risk'), className: 'bg-amber-100 text-amber-700' },
+      overdue: { label: t('onboarding.status.overdue', 'Overdue'), className: 'bg-red-100 text-red-700' },
+    };
+    const config = configs[status] || configs.on_track;
+    return (
+      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.className}`}>
+        {config.label}
+      </span>
+    );
+  };
+
+  const getAssigneeBadge = (assignee) => {
+    const colors = {
+      IT: 'bg-blue-100 text-blue-700',
+      HR: 'bg-purple-100 text-purple-700',
+      Manager: 'bg-amber-100 text-amber-700',
+      Buddy: 'bg-green-100 text-green-700',
+    };
+    return (
+      <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${colors[assignee] || 'bg-slate-100 text-slate-700'}`}>
+        {assignee}
+      </span>
+    );
+  };
+
+  const toggleRow = (id) => {
+    setExpandedRow(expandedRow === id ? null : id);
+  };
+
+  return (
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200">
+      <div className="px-6 py-4 border-b border-slate-200">
+        <h2 className="text-lg font-semibold text-slate-900">{t('onboarding.activeOnboardingsTitle', 'Active Onboardings')}</h2>
+        <p className="text-sm text-slate-500 mt-0.5">{t('onboarding.activeOnboardingsDesc', 'Track the progress of employees currently being onboarded')}</p>
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-slate-200 bg-slate-50">
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">{t('onboarding.columnName', 'Name')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">{t('onboarding.columnRole', 'Role')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">{t('onboarding.columnDepartment', 'Department')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">{t('onboarding.columnLocation', 'Location')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">{t('onboarding.columnStartDate', 'Start Date')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">{t('onboarding.columnProgress', 'Progress')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">{t('onboarding.columnStatus', 'Status')}</th>
+              <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">{t('onboarding.columnBuddy', 'Buddy')}</th>
+              <th className="px-4 py-3 w-10"></th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200">
+            {ACTIVE_ONBOARDINGS.map((emp) => {
+              const isExpanded = expandedRow === emp.id;
+              const progressPct = Math.round((emp.tasksCompleted / emp.tasksTotal) * 100);
+              return (
+                <React.Fragment key={emp.id}>
+                  <tr
+                    className="hover:bg-slate-50 cursor-pointer transition-colors"
+                    onClick={() => toggleRow(emp.id)}
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-momentum-100 text-momentum-700 flex items-center justify-center text-xs font-semibold flex-shrink-0">
+                          {getInitials(emp.name)}
+                        </div>
+                        <span className="text-sm font-medium text-slate-900">{emp.name}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-4 text-sm text-slate-600">{emp.role}</td>
+                    <td className="px-4 py-4 text-sm text-slate-600">{emp.department}</td>
+                    <td className="px-4 py-4 text-sm text-slate-600">{emp.location}</td>
+                    <td className="px-4 py-4 text-sm text-slate-600">{emp.startDate}</td>
+                    <td className="px-4 py-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 bg-slate-200 rounded-full h-2">
+                          <div
+                            className={`h-2 rounded-full transition-all ${
+                              progressPct === 100 ? 'bg-green-500' : progressPct >= 50 ? 'bg-momentum-500' : 'bg-amber-500'
+                            }`}
+                            style={{ width: `${progressPct}%` }}
+                          />
+                        </div>
+                        <span className="text-xs text-slate-500 whitespace-nowrap">{emp.tasksCompleted}/{emp.tasksTotal}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-4">{getStatusBadge(emp.status)}</td>
+                    <td className="px-4 py-4 text-sm text-slate-600">{emp.buddy}</td>
+                    <td className="px-4 py-4">
+                      <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                    </td>
+                  </tr>
+
+                  {isExpanded && emp.tasks.length > 0 && (
+                    <tr>
+                      <td colSpan={9} className="px-6 py-4 bg-slate-50">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {emp.tasks.map((taskGroup, gi) => (
+                            <div key={gi} className="bg-white rounded-lg border border-slate-200 p-4">
+                              <h4 className="text-sm font-semibold text-slate-900 mb-3">{taskGroup.category}</h4>
+                              <div className="space-y-2">
+                                {taskGroup.items.map((task, ti) => (
+                                  <div key={ti} className="flex items-center justify-between gap-3">
+                                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                                      <div className={`w-4 h-4 rounded border flex-shrink-0 flex items-center justify-center ${
+                                        task.done ? 'bg-green-500 border-green-500' : 'border-slate-300'
+                                      }`}>
+                                        {task.done && <Check className="w-3 h-3 text-white" />}
+                                      </div>
+                                      <span className={`text-sm truncate ${task.done ? 'text-slate-400 line-through' : 'text-slate-700'}`}>
+                                        {task.name}
+                                      </span>
+                                    </div>
+                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                      {getAssigneeBadge(task.assignee)}
+                                      <span className="text-xs text-slate-400">{task.due}</span>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+
+                  {isExpanded && emp.tasks.length === 0 && (
+                    <tr>
+                      <td colSpan={9} className="px-6 py-6 bg-slate-50 text-center">
+                        <p className="text-sm text-slate-400 italic">{t('onboarding.noTaskDetails', 'Detailed task breakdown not available for this employee.')}</p>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// TAB 2: TEMPLATES
+// ============================================================
+function TemplatesTab() {
+  const { t } = useTranslation();
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [expandedTemplate, setExpandedTemplate] = useState(null);
+  const [newTemplate, setNewTemplate] = useState({ name: '', description: '', duration: '' });
+
+  const handleCreateTemplate = () => {
+    // Demo only - would save to backend
+    setShowCreateModal(false);
+    setNewTemplate({ name: '', description: '', duration: '' });
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Header with create button */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-semibold text-slate-900">{t('onboarding.templatesTitle', 'Onboarding Templates')}</h2>
+          <p className="text-sm text-slate-500 mt-0.5">{t('onboarding.templatesDesc', 'Reusable templates for different onboarding workflows')}</p>
+        </div>
+        <button
+          onClick={() => setShowCreateModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-momentum-500 text-white rounded-lg text-sm font-medium hover:bg-momentum-600 transition-colors"
+        >
+          <Plus className="w-4 h-4" />
+          {t('onboarding.createTemplate', 'Create Template')}
+        </button>
+      </div>
+
+      {/* Template cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {TEMPLATES.map((template) => (
+          <div
+            key={template.id}
+            className={`bg-white rounded-xl shadow-sm border cursor-pointer transition-all hover:shadow-md ${
+              expandedTemplate === template.id ? 'border-momentum-300 ring-1 ring-momentum-200' : 'border-slate-200'
+            }`}
+            onClick={() => setExpandedTemplate(expandedTemplate === template.id ? null : template.id)}
+          >
+            <div className="p-5">
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="text-sm font-semibold text-slate-900">{template.name}</h3>
+                {template.isDefault && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-momentum-100 text-momentum-700">
+                    {t('onboarding.default', 'Default')}
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-slate-500 mb-4">{template.description}</p>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckCircle className="w-4 h-4 text-slate-400" />
+                  <span>{t('onboarding.taskCount', '{{count}} tasks', { count: template.taskCount })}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <Clock className="w-4 h-4 text-slate-400" />
+                  <span>{template.duration}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-slate-600 col-span-2">
+                  <Calendar className="w-4 h-4 text-slate-400" />
+                  <span>{t('onboarding.lastUpdated', 'Updated {{date}}', { date: template.lastUpdated })}</span>
+                </div>
+              </div>
+            </div>
+
+            {expandedTemplate === template.id && TEMPLATE_TASKS[template.id] && (
+              <div className="border-t border-slate-200 px-5 py-4 bg-slate-50 rounded-b-xl">
+                <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">{t('onboarding.templateTasks', 'Template Tasks')}</h4>
+                <div className="space-y-3">
+                  {TEMPLATE_TASKS[template.id].map((group, gi) => (
+                    <div key={gi}>
+                      <p className="text-xs font-medium text-slate-700 mb-1.5">{group.category}</p>
+                      <div className="space-y-1">
+                        {group.items.map((item, ii) => (
+                          <div key={ii} className="flex items-center gap-2 text-sm text-slate-600">
+                            <div className="w-3.5 h-3.5 rounded border border-slate-300 flex-shrink-0" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Create Template Modal */}
+      {showCreateModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-900">{t('onboarding.createTemplateTitle', 'Create Onboarding Template')}</h3>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="p-1 text-slate-400 hover:text-slate-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.templateName', 'Template Name')} *</label>
+                <input
+                  type="text"
+                  value={newTemplate.name}
+                  onChange={(e) => setNewTemplate({ ...newTemplate, name: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                  placeholder={t('onboarding.templateNamePlaceholder', 'e.g. Graduate Programme Onboarding')}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.templateDescription', 'Description')}</label>
+                <textarea
+                  value={newTemplate.description}
+                  onChange={(e) => setNewTemplate({ ...newTemplate, description: e.target.value })}
+                  rows={3}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                  placeholder={t('onboarding.templateDescriptionPlaceholder', 'Describe the purpose of this template...')}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('onboarding.templateDuration', 'Duration')} *</label>
+                <input
+                  type="text"
+                  value={newTemplate.duration}
+                  onChange={(e) => setNewTemplate({ ...newTemplate, duration: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                  placeholder={t('onboarding.templateDurationPlaceholder', 'e.g. 30 days')}
+                />
+              </div>
+            </div>
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-200">
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+              >
+                {t('common.cancel', 'Cancel')}
+              </button>
+              <button
+                onClick={handleCreateTemplate}
+                disabled={!newTemplate.name.trim() || !newTemplate.duration.trim()}
+                className="px-4 py-2 bg-momentum-500 text-white rounded-lg text-sm font-medium hover:bg-momentum-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {t('onboarding.createTemplateBtn', 'Create Template')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// TAB 4: DASHBOARD
+// ============================================================
+function DashboardTab() {
+  const { t } = useTranslation();
+
+  const kpis = [
+    { label: t('onboarding.kpi.activeOnboardings', 'Active Onboardings'), value: '6', icon: Users, color: 'bg-blue-50 text-blue-600' },
+    { label: t('onboarding.kpi.avgCompletionTime', 'Avg Completion Time'), value: t('onboarding.kpi.days', '18 days'), icon: Clock, color: 'bg-amber-50 text-amber-600' },
+    { label: t('onboarding.kpi.completionRate', 'Completion Rate'), value: '92%', icon: TrendingUp, color: 'bg-green-50 text-green-600' },
+    { label: t('onboarding.kpi.overdueTasks', 'Overdue Tasks'), value: '3', icon: AlertTriangle, color: 'bg-red-50 text-red-600' },
+  ];
+
+  const maxDeptCount = Math.max(...DEPARTMENT_CHART.map((d) => d.count));
+  const maxTrendRate = 100;
+
+  return (
+    <div className="space-y-6">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {kpis.map((kpi, idx) => {
+          const Icon = kpi.icon;
+          return (
+            <div key={idx} className="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+              <div className="flex items-center justify-between mb-3">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${kpi.color}`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+              </div>
+              <p className="text-2xl font-bold text-slate-900">{kpi.value}</p>
+              <p className="text-sm text-slate-500 mt-0.5">{kpi.label}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Onboardings by Department */}
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-sm font-semibold text-slate-900 mb-4">{t('onboarding.dashboard.byDepartment', 'Onboardings by Department')}</h3>
+          <div className="space-y-3">
+            {DEPARTMENT_CHART.map((dept, idx) => (
+              <div key={idx} className="flex items-center gap-3">
+                <span className="text-sm text-slate-600 w-32 flex-shrink-0 truncate">{dept.department}</span>
+                <div className="flex-1 bg-slate-100 rounded-full h-6 relative">
+                  <div
+                    className="bg-momentum-500 h-6 rounded-full transition-all flex items-center justify-end pr-2"
+                    style={{ width: `${(dept.count / maxDeptCount) * 100}%`, minWidth: '2rem' }}
+                  >
+                    <span className="text-xs font-medium text-white">{dept.count}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Completion Rate Trend */}
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-sm font-semibold text-slate-900 mb-4">{t('onboarding.dashboard.completionTrend', 'Completion Rate Trend')}</h3>
+          <div className="flex items-end gap-3 h-48">
+            {COMPLETION_TREND.map((item, idx) => (
+              <div key={idx} className="flex-1 flex flex-col items-center gap-1">
+                <span className="text-xs font-medium text-slate-600">{item.rate}%</span>
+                <div className="w-full bg-slate-100 rounded-t-lg relative" style={{ height: '160px' }}>
+                  <div
+                    className="absolute bottom-0 left-0 right-0 bg-momentum-500 rounded-t-lg transition-all"
+                    style={{ height: `${(item.rate / maxTrendRate) * 100}%` }}
+                  />
+                </div>
+                <span className="text-xs text-slate-500">{item.month}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Overdue Tasks */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200">
+        <div className="px-6 py-4 border-b border-slate-200">
+          <h3 className="text-sm font-semibold text-slate-900">{t('onboarding.dashboard.overdueTasks', 'Overdue Tasks')}</h3>
+          <p className="text-xs text-slate-500 mt-0.5">{t('onboarding.dashboard.overdueTasksDesc', 'Tasks that have passed their due date')}</p>
+        </div>
+        <div className="divide-y divide-slate-200">
+          {OVERDUE_TASKS.map((task, idx) => (
+            <div key={idx} className="px-6 py-3 flex items-center justify-between hover:bg-slate-50">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-medium text-slate-900">{task.task}</p>
+                  <p className="text-xs text-slate-500">{task.employee}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600">{task.assignee}</span>
+                <span className="text-xs text-red-600 font-medium">{t('onboarding.dashboard.dueOn', 'Due {{date}}', { date: task.due })}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// MAIN ONBOARDING COMPONENT
+// ============================================================
+export default function Onboarding() {
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState('active');
+
+  return (
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-slate-900">{t('onboarding.pageTitle', 'Onboarding')}</h1>
+        <p className="text-slate-500 mt-1">{t('onboarding.pageSubtitle', 'Manage new hire onboarding workflows, templates, and analytics')}</p>
+      </div>
+
+      {/* Tab Bar */}
+      <div className="border-b border-slate-200 bg-white rounded-t-xl">
+        <nav className="flex overflow-x-auto">
+          {TABS.map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+                  activeTab === tab.id
+                    ? 'border-momentum-500 text-momentum-600'
+                    : 'border-transparent text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {t(tab.labelKey)}
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* Tab Content */}
+      {activeTab === 'active' && <ActiveOnboardingsTab />}
+      {activeTab === 'templates' && <TemplatesTab />}
+      {activeTab === 'add' && <AddEmployeeWizard />}
+      {activeTab === 'dashboard' && <DashboardTab />}
     </div>
   );
 }

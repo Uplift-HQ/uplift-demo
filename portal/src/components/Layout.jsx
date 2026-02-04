@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { useBranding } from '../lib/branding';
+import { useEntity } from '../lib/entityContext';
 import { useTranslation } from 'react-i18next';
 import { SUPPORTED_LANGUAGES, changeLanguage, getCurrentLanguage } from '../i18n';
 import {
@@ -132,15 +133,7 @@ export default function Layout() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
   const [entityMenuOpen, setEntityMenuOpen] = useState(false);
-
-  const entities = [
-    { id: 'acme-uk', name: 'Acme Corp - UK', flag: '\u{1F1EC}\u{1F1E7}', employees: 312, tag: 'HQ' },
-    { id: 'acme-de', name: 'Acme Manufacturing GmbH - Germany', flag: '\u{1F1E9}\u{1F1EA}', employees: 180, tag: null },
-    { id: 'acme-sg', name: 'Acme Asia Pacific - Singapore', flag: '\u{1F1F8}\u{1F1EC}', employees: 95, tag: null },
-    { id: 'acme-us', name: 'Acme North America - USA', flag: '\u{1F1FA}\u{1F1F8}', employees: 156, tag: null },
-    { id: 'acme-es', name: 'Acme Iberia - Spain', flag: '\u{1F1EA}\u{1F1F8}', employees: 67, tag: null },
-  ];
-  const [currentEntity, setCurrentEntity] = useState(entities[0]);
+  const { currentEntity, setCurrentEntity, entities } = useEntity();
   const navSections = getNavSections(user?.role, t);
 
   return (

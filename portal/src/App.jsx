@@ -5,6 +5,7 @@
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth, RequireAuth, RequireAdmin } from './lib/auth';
+import { EntityProvider } from './lib/entityContext';
 
 // Layout
 import Layout from './components/Layout';
@@ -62,6 +63,7 @@ export default function App() {
   }
 
   return (
+    <EntityProvider>
     <Routes>
       {/* Public routes */}
       <Route path="/login" element={<Login />} />
@@ -107,5 +109,6 @@ export default function App() {
       {/* Catch-all redirect */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </EntityProvider>
   );
 }

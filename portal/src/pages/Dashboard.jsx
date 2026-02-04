@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { dashboardApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { useEntity } from '../lib/entityContext';
 import {
   Users,
   Calendar,
@@ -38,9 +39,30 @@ import {
 } from 'lucide-react';
 import DemandForecast from '../components/DemandForecast';
 
+function scaleNumericValues(obj, multiplier) {
+  if (!obj || multiplier === 1) return obj;
+  const scaled = { ...obj };
+  for (const key of Object.keys(scaled)) {
+    if (typeof scaled[key] === 'number') {
+      scaled[key] = Math.round(scaled[key] * multiplier);
+    }
+  }
+  return scaled;
+}
+
 export default function Dashboard() {
   const { t } = useTranslation();
   const { user, isManager, isAdmin } = useAuth();
+  const { currentEntity } = useEntity();
+
+  const ENTITY_MULTIPLIERS = {
+    'gm-uk': 1,
+    'gm-de': 0.42,
+    'gm-ae': 0.57,
+    'gm-sg': 0.35,
+    'gm-us': 0.44,
+  };
+  const entityMultiplier = ENTITY_MULTIPLIERS[currentEntity?.id] || 1;
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -103,15 +125,22 @@ export default function Dashboard() {
     );
   }
 
-  const realtimeData = data?.realtime || {};
+  const realtimeData = scaleNumericValues(data?.realtime || {}, entityMultiplier);
+  const activeEmployees = Math.round((data?.activeEmployees || 0) * entityMultiplier);
+  const openShifts = Math.round((data?.openShifts || 0) * entityMultiplier);
   const complianceAlerts = data?.complianceAlerts || [];
   const activityFeed = data?.activityFeed || [];
   const timeTrackingEntries = data?.timeTrackingEntries || [];
   const careerInsights = data?.careerInsights || [];
   const recentRecognitions = data?.recentRecognitions || [];
-  const lifecycleMetrics = data?.lifecycleMetrics || {};
+  const lifecycleMetrics = {
+    ...data?.lifecycleMetrics,
+    newHires: Math.round((data?.lifecycleMetrics?.newHires || 0) * entityMultiplier),
+    onboarding: Math.round((data?.lifecycleMetrics?.onboarding || 0) * entityMultiplier),
+  };
   const jobOpenings = data?.jobOpenings || [];
   const weeklyChart = data?.weeklyChart || [];
+  const weekMetrics = scaleNumericValues(data?.weekMetrics || {}, entityMultiplier);
 
   return (
     <div className="space-y-6">
@@ -315,15 +344,15 @@ export default function Dashboard() {
             <StatCard
               icon={Users}
               label={t('dashboard.activeEmployees', 'Active Employees')}
-              value={data?.activeEmployees || 0}
+              value={activeEmployees}
               color="green"
             />
             <StatCard
               icon={AlertCircle}
               label={t('schedule.openShifts', 'Open Shifts')}
-              value={data?.openShifts || 0}
+              value={openShifts}
               color="orange"
-              alert={data?.openShifts > 0}
+              alert={openShifts > 0}
             />
             <StatCard
               icon={Clock}
@@ -510,25 +539,25 @@ export default function Dashboard() {
               <div className="grid grid-cols-4 gap-6">
                 <div className="text-center">
                   <p className="text-3xl font-bold text-slate-900">
-                    {parseFloat(data?.weekMetrics?.scheduled || 0).toFixed(0)}h
+                    {parseFloat(weekMetrics?.scheduled || 0).toFixed(0)}h
                   </p>
                   <p className="text-sm text-slate-500">{t('dashboard.hoursScheduled', 'Hours Scheduled')}</p>
                 </div>
                 <div className="text-center">
                   <p className="text-3xl font-bold text-slate-900">
-                    {parseFloat(data?.weekMetrics?.worked || 0).toFixed(0)}h
+                    {parseFloat(weekMetrics?.worked || 0).toFixed(0)}h
                   </p>
                   <p className="text-sm text-slate-500">{t('dashboard.hoursWorked', 'Hours Worked')}</p>
                 </div>
                 <div className="text-center">
                   <p className="text-3xl font-bold text-green-600">
-                    £{parseFloat(data?.weekMetrics?.cost_scheduled || 0).toFixed(0)}
+                    £{parseFloat(weekMetrics?.cost_scheduled || 0).toFixed(0)}
                   </p>
                   <p className="text-sm text-slate-500">{t('dashboard.scheduledCost', 'Scheduled Cost')}</p>
                 </div>
                 <div className="text-center">
                   <p className="text-3xl font-bold text-momentum-600">
-                    £{parseFloat(data?.weekMetrics?.cost_actual || 0).toFixed(0)}
+                    £{parseFloat(weekMetrics?.cost_actual || 0).toFixed(0)}
                   </p>
                   <p className="text-sm text-slate-500">{t('dashboard.actualCost', 'Actual Cost')}</p>
                 </div>
