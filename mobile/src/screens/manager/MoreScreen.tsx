@@ -127,6 +127,27 @@ export const ManagerMoreScreen = ({ navigation }: any) => {
       ]
     },
     {
+      title: 'HR Management',
+      items: [
+        {
+          id: 'team-performance',
+          label: 'Team Performance',
+          subtitle: 'Reviews & goals',
+          icon: TargetIcon,
+          color: colors.momentum,
+          onPress: () => navigation.navigate('TeamPerformance'),
+        },
+        {
+          id: 'offboarding',
+          label: 'Offboarding',
+          subtitle: 'Employee departures',
+          icon: UserIcon,
+          color: colors.error,
+          onPress: () => navigation.navigate('Offboarding'),
+        },
+      ]
+    },
+    {
       title: 'Account',
       items: [
         {

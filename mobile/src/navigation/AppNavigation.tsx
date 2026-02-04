@@ -47,6 +47,10 @@ import { IntegrationsScreen } from '../screens/IntegrationsScreen';
 import { HelpScreen } from '../screens/HelpScreen';
 import { ChatScreen } from '../screens/ChatScreen';
 import { MoreScreen } from '../screens/MoreScreen';
+import { LearningScreen } from '../screens/LearningScreen';
+import { DocumentsScreen } from '../screens/DocumentsScreen';
+import { PerformanceScreen } from '../screens/PerformanceScreen';
+import { SurveysScreen } from '../screens/SurveysScreen';
 
 // Manager Screens
 import { ManagerDashboardScreen } from '../screens/manager/DashboardScreen';
@@ -60,6 +64,8 @@ import { ApprovalsScreen } from '../screens/manager/ApprovalsScreen';
 import { ManagerMoreScreen } from '../screens/manager/MoreScreen';
 import { AIInsightsScreen } from '../screens/manager/AIInsightsScreen';
 import { RewardCatalogScreen } from '../screens/manager/RewardCatalogScreen';
+import { TeamPerformanceScreen } from '../screens/manager/TeamPerformanceScreen';
+import { OffboardingScreen } from '../screens/manager/OffboardingScreen';
 
 // Navigators
 const Tab = createBottomTabNavigator();
@@ -138,6 +144,10 @@ const ProfileNavigator = () => (
     <ProfileStack.Screen name="Compliance" component={ComplianceScreen} />
     <ProfileStack.Screen name="Integrations" component={IntegrationsScreen} />
     <ProfileStack.Screen name="Help" component={HelpScreen} />
+    <ProfileStack.Screen name="Learning" component={LearningScreen} />
+    <ProfileStack.Screen name="Documents" component={DocumentsScreen} />
+    <ProfileStack.Screen name="MyPerformance" component={PerformanceScreen} />
+    <ProfileStack.Screen name="MySurveys" component={SurveysScreen} />
   </ProfileStack.Navigator>
 );
 
@@ -289,12 +299,10 @@ const ManagerTabs = () => {
 // ========== MAIN APP NAVIGATION ==========
 
 export const AppNavigation = () => {
-  const { isAuthenticated, user, onboardingComplete, checkOnboarding, loadUser } = useAuthStore();
+  const { isAuthenticated, user, onboardingComplete, checkOnboarding } = useAuthStore();
 
   React.useEffect(() => {
     checkOnboarding();
-    // Attempt to load user (will auto-authenticate in demo mode)
-    loadUser();
   }, []);
 
   return (
@@ -326,6 +334,8 @@ export const AppNavigation = () => {
             <Stack.Screen name="Approvals" component={ApprovalsNavigator} />
             <Stack.Screen name="AIInsights" component={AIInsightsScreen} />
             <Stack.Screen name="RewardCatalog" component={RewardCatalogScreen} />
+            <Stack.Screen name="TeamPerformance" component={TeamPerformanceScreen} />
+            <Stack.Screen name="Offboarding" component={OffboardingScreen} />
           </Stack.Group>
         ) : (
           <Stack.Group>

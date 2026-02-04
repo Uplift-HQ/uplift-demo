@@ -7,7 +7,7 @@ import {
   HeartIcon, UserIcon, SettingsIcon, HelpCircleIcon, LogOutIcon,
   ChevronRightIcon, MessageCircleIcon, BellIcon, FileTextIcon,
   ShieldIcon, LinkIcon, CreditCardIcon, GlobeIcon, XIcon, CheckIcon,
-  GiftIcon, TargetIcon
+  GiftIcon, TargetIcon, BookOpenIcon, TrendingUpIcon
 } from '../components/Icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../theme';
 
@@ -68,6 +68,22 @@ export const MoreScreen = ({ navigation }: any) => {
           color: colors.momentum,
           onPress: () => navigation.navigate('Career', { screen: 'CareerPath' }),
         },
+        {
+          id: 'learning',
+          label: t('more.learning', 'Learning'),
+          subtitle: t('more.coursesProgress', 'Courses & progress'),
+          icon: BookOpenIcon,
+          color: colors.info,
+          onPress: () => navigation.navigate('Profile', { screen: 'Learning' }),
+        },
+        {
+          id: 'performance',
+          label: t('more.myPerformance', 'My Performance'),
+          subtitle: t('more.reviewsGoals', 'Reviews & goals'),
+          icon: TrendingUpIcon,
+          color: colors.momentum,
+          onPress: () => navigation.navigate('Profile', { screen: 'MyPerformance' }),
+        },
       ]
     },
     {
@@ -104,6 +120,22 @@ export const MoreScreen = ({ navigation }: any) => {
           icon: ShieldIcon,
           color: colors.warning,
           onPress: () => navigation.navigate('Profile', { screen: 'Compliance' }),
+        },
+        {
+          id: 'documents',
+          label: t('more.documents', 'Documents'),
+          subtitle: t('more.viewSign', 'View & sign'),
+          icon: FileTextIcon,
+          color: colors.slate700,
+          onPress: () => navigation.navigate('Profile', { screen: 'Documents' }),
+        },
+        {
+          id: 'surveys',
+          label: t('more.surveys', 'Surveys'),
+          subtitle: t('more.shareFeedback', 'Share feedback'),
+          icon: MessageCircleIcon,
+          color: colors.success,
+          onPress: () => navigation.navigate('Profile', { screen: 'MySurveys' }),
         },
       ]
     },
