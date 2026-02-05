@@ -110,7 +110,7 @@ const INITIAL_CONNECTIONS = [
     connectedAt: '2025-10-01T11:00:00Z',
     lastSyncAt: '2026-01-09T12:00:00Z',
     syncFrequency: 'realtime',
-    config: { ssoEnabled: true, scimEnabled: true, domain: 'acme.uplift.work' },
+    config: { ssoEnabled: true, scimEnabled: true, domain: 'grandmetropolitan.uplift.work' },
     stats: { ssoLogins: 1247, usersProvisioned: 8 },
   },
 ];
@@ -130,7 +130,7 @@ const WEBHOOKS = [
 const ACTIVITY_LOG = [
   { id: 'log-1', type: 'sync', integration: 'ADP', message: 'Sync completed: 8 records processed', timestamp: '2026-01-09T06:00:45Z', level: 'info' },
   { id: 'log-2', type: 'webhook', integration: 'Slack', message: 'Shift reminder sent to #shifts', timestamp: '2026-01-09T08:00:00Z', level: 'info' },
-  { id: 'log-3', type: 'auth', integration: 'Google Workspace', message: 'SSO login: sarah.chen@acme.uplift.work', timestamp: '2026-01-09T08:45:00Z', level: 'info' },
+  { id: 'log-3', type: 'auth', integration: 'Google Workspace', message: 'SSO login: sarah.chen@grandmetropolitan.uplift.work', timestamp: '2026-01-09T08:45:00Z', level: 'info' },
   { id: 'log-4', type: 'error', integration: 'ADP', message: 'Rate limit warning: 80% of quota used', timestamp: '2026-01-09T05:45:00Z', level: 'warn' },
 ];
 

@@ -17,21 +17,21 @@ const defaultVisibility = { team_schedules: true, internal_jobs: true, career_pa
 
 // Employees (15 staff) - field names match Employees.jsx expectations
 export const employees = [
-  { id: 'e1', first_name: 'Marc', last_name: 'Hunt', name: 'Marc Hunt', role: 'Server', department: 'Front of House', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 82, start_date: '2025-05-15', email: 'marc.hunt@grandmetro.com', phone: '+44 7700 900123', visibility: { ...defaultVisibility } },
-  { id: 'e2', first_name: 'Jessica', last_name: 'Bano', name: 'Jessica Bano', role: 'Bartender', department: 'Bar', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 91, start_date: '2024-11-01', email: 'jessica.bano@grandmetro.com', phone: '+44 7700 900124', visibility: { ...defaultVisibility } },
-  { id: 'e3', first_name: 'Thomas', last_name: 'Cane', name: 'Thomas Cane', role: 'Line Cook', department: 'Kitchen', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 76, start_date: '2025-02-20', email: 'thomas.cane@grandmetro.com', phone: '+44 7700 900125', visibility: { ...defaultVisibility, analytics: true } },
-  { id: 'e4', first_name: 'Anna', last_name: 'Martinez', name: 'Anna Martinez', role: 'Server', department: 'Front of House', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 88, start_date: '2024-08-10', email: 'anna.martinez@grandmetro.com', phone: '+44 7700 900126', visibility: { ...defaultVisibility } },
-  { id: 'e5', first_name: 'Sofia', last_name: 'Chen', name: 'Sofia Chen', role: 'Hostess', department: 'Front of House', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 79, start_date: '2025-01-05', email: 'sofia.chen@grandmetro.com', phone: '+44 7700 900127', visibility: { ...defaultVisibility } },
-  { id: 'e6', first_name: 'James', last_name: 'Williams', name: 'James Williams', role: 'Shift Supervisor', department: 'Management', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 94, start_date: '2023-06-15', email: 'james.williams@grandmetro.com', phone: '+44 7700 900128', visibility: { ...defaultVisibility, analytics: true } },
-  { id: 'e7', first_name: 'Priya', last_name: 'Patel', name: 'Priya Patel', role: 'Sous Chef', department: 'Kitchen', location: 'Birmingham New St', location_id: 'l3', status: 'active', momentum_score: 85, start_date: '2024-03-01', email: 'priya.patel@grandmetro.com', phone: '+44 7700 900129', visibility: { ...defaultVisibility, analytics: true } },
-  { id: 'e8', first_name: 'Tom', last_name: 'Richards', name: 'Tom Richards', role: 'Shift Supervisor', department: 'Management', location: 'Leeds Central', location_id: 'l4', status: 'active', momentum_score: 90, start_date: '2023-09-20', email: 'tom.richards@grandmetro.com', phone: '+44 7700 900130', visibility: { ...defaultVisibility, analytics: true } },
-  { id: 'e9', first_name: 'Fiona', last_name: 'Campbell', name: 'Fiona Campbell', role: 'Restaurant Manager', department: 'Management', location: 'Edinburgh Princes St', location_id: 'l5', status: 'active', momentum_score: 96, start_date: '2022-11-01', email: 'fiona.campbell@grandmetro.com', phone: '+44 7700 900131', visibility: { ...defaultVisibility, analytics: true } },
-  { id: 'e10', first_name: 'Liam', last_name: 'O\'Brien', name: 'Liam O\'Brien', role: 'Server', department: 'Front of House', location: 'Leeds Central', location_id: 'l4', status: 'active', momentum_score: 71, start_date: '2025-06-01', email: 'liam.obrien@grandmetro.com', phone: '+44 7700 900132', visibility: { ...defaultVisibility } },
-  { id: 'e11', first_name: 'Emma', last_name: 'Watson', name: 'Emma Watson', role: 'Barista', department: 'Bar', location: 'Edinburgh Princes St', location_id: 'l5', status: 'active', momentum_score: 83, start_date: '2024-12-15', email: 'emma.watson@grandmetro.com', phone: '+44 7700 900133', visibility: { ...defaultVisibility } },
-  { id: 'e12', first_name: 'David', last_name: 'Kim', name: 'David Kim', role: 'Line Cook', department: 'Kitchen', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 77, start_date: '2025-03-10', email: 'david.kim@grandmetro.com', phone: '+44 7700 900134', visibility: { ...defaultVisibility } },
-  { id: 'e13', first_name: 'Rachel', last_name: 'Green', name: 'Rachel Green', role: 'Server', department: 'Front of House', location: 'Birmingham New St', location_id: 'l3', status: 'on_leave', momentum_score: 80, start_date: '2024-07-22', email: 'rachel.green@grandmetro.com', phone: '+44 7700 900135', visibility: { ...defaultVisibility } },
-  { id: 'e14', first_name: 'Ahmed', last_name: 'Hassan', name: 'Ahmed Hassan', role: 'Kitchen Porter', department: 'Kitchen', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 74, start_date: '2025-04-05', email: 'ahmed.hassan@grandmetro.com', phone: '+44 7700 900136', visibility: { ...defaultVisibility } },
-  { id: 'e15', first_name: 'Lucy', last_name: 'Taylor', name: 'Lucy Taylor', role: 'Hostess', department: 'Front of House', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 86, start_date: '2024-10-30', email: 'lucy.taylor@grandmetro.com', phone: '+44 7700 900137', visibility: { ...defaultVisibility } }
+  { id: 'e1', first_name: 'Marc', last_name: 'Hunt', name: 'Marc Hunt', role: 'Server', department: 'Front of House', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 82, start_date: '2025-05-15', email: 'marc.hunt@grandmetropolitan.com', phone: '+44 7700 900123', visibility: { ...defaultVisibility } },
+  { id: 'e2', first_name: 'Jessica', last_name: 'Bano', name: 'Jessica Bano', role: 'Bartender', department: 'Bar', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 91, start_date: '2024-11-01', email: 'jessica.bano@grandmetropolitan.com', phone: '+44 7700 900124', visibility: { ...defaultVisibility } },
+  { id: 'e3', first_name: 'Thomas', last_name: 'Cane', name: 'Thomas Cane', role: 'Line Cook', department: 'Kitchen', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 76, start_date: '2025-02-20', email: 'thomas.cane@grandmetropolitan.com', phone: '+44 7700 900125', visibility: { ...defaultVisibility, analytics: true } },
+  { id: 'e4', first_name: 'Anna', last_name: 'Martinez', name: 'Anna Martinez', role: 'Server', department: 'Front of House', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 88, start_date: '2024-08-10', email: 'anna.martinez@grandmetropolitan.com', phone: '+44 7700 900126', visibility: { ...defaultVisibility } },
+  { id: 'e5', first_name: 'Sofia', last_name: 'Chen', name: 'Sofia Chen', role: 'Hostess', department: 'Front of House', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 79, start_date: '2025-01-05', email: 'sofia.chen@grandmetropolitan.com', phone: '+44 7700 900127', visibility: { ...defaultVisibility } },
+  { id: 'e6', first_name: 'James', last_name: 'Williams', name: 'James Williams', role: 'Shift Supervisor', department: 'Management', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 94, start_date: '2023-06-15', email: 'james.williams@grandmetropolitan.com', phone: '+44 7700 900128', visibility: { ...defaultVisibility, analytics: true } },
+  { id: 'e7', first_name: 'Priya', last_name: 'Patel', name: 'Priya Patel', role: 'Sous Chef', department: 'Kitchen', location: 'Birmingham New St', location_id: 'l3', status: 'active', momentum_score: 85, start_date: '2024-03-01', email: 'priya.patel@grandmetropolitan.com', phone: '+44 7700 900129', visibility: { ...defaultVisibility, analytics: true } },
+  { id: 'e8', first_name: 'Tom', last_name: 'Richards', name: 'Tom Richards', role: 'Shift Supervisor', department: 'Management', location: 'Leeds Central', location_id: 'l4', status: 'active', momentum_score: 90, start_date: '2023-09-20', email: 'tom.richards@grandmetropolitan.com', phone: '+44 7700 900130', visibility: { ...defaultVisibility, analytics: true } },
+  { id: 'e9', first_name: 'Fiona', last_name: 'Campbell', name: 'Fiona Campbell', role: 'Restaurant Manager', department: 'Management', location: 'Edinburgh Princes St', location_id: 'l5', status: 'active', momentum_score: 96, start_date: '2022-11-01', email: 'fiona.campbell@grandmetropolitan.com', phone: '+44 7700 900131', visibility: { ...defaultVisibility, analytics: true } },
+  { id: 'e10', first_name: 'Liam', last_name: 'O\'Brien', name: 'Liam O\'Brien', role: 'Server', department: 'Front of House', location: 'Leeds Central', location_id: 'l4', status: 'active', momentum_score: 71, start_date: '2025-06-01', email: 'liam.obrien@grandmetropolitan.com', phone: '+44 7700 900132', visibility: { ...defaultVisibility } },
+  { id: 'e11', first_name: 'Emma', last_name: 'Watson', name: 'Emma Watson', role: 'Barista', department: 'Bar', location: 'Edinburgh Princes St', location_id: 'l5', status: 'active', momentum_score: 83, start_date: '2024-12-15', email: 'emma.watson@grandmetropolitan.com', phone: '+44 7700 900133', visibility: { ...defaultVisibility } },
+  { id: 'e12', first_name: 'David', last_name: 'Kim', name: 'David Kim', role: 'Line Cook', department: 'Kitchen', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 77, start_date: '2025-03-10', email: 'david.kim@grandmetropolitan.com', phone: '+44 7700 900134', visibility: { ...defaultVisibility } },
+  { id: 'e13', first_name: 'Rachel', last_name: 'Green', name: 'Rachel Green', role: 'Server', department: 'Front of House', location: 'Birmingham New St', location_id: 'l3', status: 'on_leave', momentum_score: 80, start_date: '2024-07-22', email: 'rachel.green@grandmetropolitan.com', phone: '+44 7700 900135', visibility: { ...defaultVisibility } },
+  { id: 'e14', first_name: 'Ahmed', last_name: 'Hassan', name: 'Ahmed Hassan', role: 'Kitchen Porter', department: 'Kitchen', location: 'Manchester Central', location_id: 'l1', status: 'active', momentum_score: 74, start_date: '2025-04-05', email: 'ahmed.hassan@grandmetropolitan.com', phone: '+44 7700 900136', visibility: { ...defaultVisibility } },
+  { id: 'e15', first_name: 'Lucy', last_name: 'Taylor', name: 'Lucy Taylor', role: 'Hostess', department: 'Front of House', location: 'London Victoria', location_id: 'l2', status: 'active', momentum_score: 86, start_date: '2024-10-30', email: 'lucy.taylor@grandmetropolitan.com', phone: '+44 7700 900137', visibility: { ...defaultVisibility } }
 ];
 
 // Skills - field names match Skills.jsx expectations
@@ -64,7 +64,7 @@ export const rewards = {
     { id: 'r7', name: '30% off PureGym', category: 'Wellness', provider: 'PureGym', discount: '30%', description: 'Monthly membership', pointsCost: 0, type: 'perk' },
     { id: 'r8', name: 'Free month Spotify Premium', category: 'Entertainment', provider: 'Spotify', discount: '100%', description: 'New subscribers', pointsCost: 200, type: 'reward' },
     { id: 'r9', name: '£10 Amazon voucher', category: 'Shopping', provider: 'Amazon', discount: '£10', description: 'Emailed within 24hrs', pointsCost: 500, type: 'reward' },
-    { id: 'r10', name: 'Extra day off', category: 'Wellness', provider: 'Grand Metro', discount: '1 day', description: 'Use within 3 months', pointsCost: 1000, type: 'reward' }
+    { id: 'r10', name: 'Extra day off', category: 'Wellness', provider: 'Grand Metropolitan', discount: '1 day', description: 'Use within 3 months', pointsCost: 1000, type: 'reward' }
   ]
 };
 
@@ -140,11 +140,11 @@ export const reports = {
 
 // Settings
 export const settings = {
-  organization: { name: 'Grand Metro Hotels', industry: 'Hospitality', timezone: 'Europe/London', currency: 'GBP', logo: null },
+  organization: { name: 'The Grand Metropolitan Hotel Group', industry: 'Hospitality', timezone: 'Europe/London', currency: 'GBP', logo: null },
   users: [
-    { id: 'u1', firstName: 'Sarah', lastName: 'Chen', email: 'sarah.chen@grandmetro.com', role: 'admin', status: 'active', lastLogin: new Date(Date.now() - 120000).toISOString() },
-    { id: 'u2', firstName: 'James', lastName: 'Williams', email: 'james.williams@grandmetro.com', role: 'manager', status: 'active', lastLogin: new Date(Date.now() - 3600000).toISOString() },
-    { id: 'u3', firstName: 'Priya', lastName: 'Patel', email: 'priya.patel@grandmetro.com', role: 'manager', status: 'active', lastLogin: new Date(Date.now() - 10800000).toISOString() }
+    { id: 'u1', firstName: 'Sarah', lastName: 'Chen', email: 'sarah.chen@grandmetropolitan.com', role: 'admin', status: 'active', lastLogin: new Date(Date.now() - 120000).toISOString() },
+    { id: 'u2', firstName: 'James', lastName: 'Williams', email: 'james.williams@grandmetropolitan.com', role: 'manager', status: 'active', lastLogin: new Date(Date.now() - 3600000).toISOString() },
+    { id: 'u3', firstName: 'Priya', lastName: 'Patel', email: 'priya.patel@grandmetropolitan.com', role: 'manager', status: 'active', lastLogin: new Date(Date.now() - 10800000).toISOString() }
   ]
 };
 
@@ -195,7 +195,7 @@ export const dashboard = {
 // Demo user for login
 export const demoUser = {
   id: 'demo-user',
-  email: 'demo@grandmetro.com',
+  email: 'demo@grandmetropolitan.com',
   firstName: 'Sarah',
   lastName: 'Chen',
   role: 'admin',

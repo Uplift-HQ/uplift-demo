@@ -5,7 +5,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { api, authApi, DEMO_MODE } from './api';
+import { api, authApi } from './api';
 
 const AuthContext = createContext(null);
 
@@ -33,19 +33,6 @@ export function AuthProvider({ children }) {
     }
 
     const token = localStorage.getItem('uplift_token');
-
-    // DEMO MODE: Auto-login if no token
-    if (!token && DEMO_MODE) {
-      try {
-        const result = await authApi.login('demo@grandhotel.com', 'demo');
-        const userData = result.user || result;
-        setUser(userData);
-        setLoading(false);
-        return;
-      } catch {
-        // Fall through to normal flow
-      }
-    }
 
     // No token stored - user needs to log in
     if (!token) {
@@ -115,7 +102,10 @@ export function AuthProvider({ children }) {
     logout,
     isAuthenticated: !!user,
     isAdmin: user?.role === 'admin' || user?.role === 'superadmin',
-    isManager: user?.role === 'manager' || user?.role === 'admin' || user?.role === 'superadmin',
+    isManager: user?.role === 'manager',
+    isManagerOrAbove: user?.role === 'manager' || user?.role === 'admin' || user?.role === 'superadmin',
+    isWorker: user?.role === 'worker',
+    role: user?.role,
   };
 
   return (
@@ -173,13 +163,13 @@ export function RequireAdmin({ children }) {
 }
 
 export function RequireManager({ children }) {
-  const { user, isManager, loading } = useAuth();
+  const { user, isManagerOrAbove, loading } = useAuth();
 
   if (loading) {
     return null;
   }
 
-  if (!user || !isManager) {
+  if (!user || !isManagerOrAbove) {
     return <Navigate to="/" replace />;
   }
 

@@ -1,72 +1,759 @@
 // ============================================================
 // RECOGNITION WALL PAGE
-// Peer-to-peer recognition feed, leaderboards, and giving
-// recognition. Visible to ALL roles.
+// Peer-to-peer recognition feed, leaderboards, giving
+// recognition, and role-based analytics.
 // Route: /recognition
 // ============================================================
 
-import { useState } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
-import { Heart, Send, Star, Trophy, Zap, Brain, Rocket, Award, ThumbsUp, Filter } from 'lucide-react';
+import {
+  Star,
+  HeartHandshake,
+  Target,
+  Lightbulb,
+  Heart,
+  GraduationCap,
+  Send,
+  Trophy,
+  Award,
+  Search,
+  Filter,
+  ChevronDown,
+  CheckCircle,
+  X,
+  Users,
+  TrendingUp,
+  BarChart3,
+  Settings,
+  MapPin,
+  Calendar,
+  ArrowRight,
+} from 'lucide-react';
 
 // ============================================================
-// DEMO DATA
+// CONSTANTS
+// ============================================================
+
+const CATEGORIES = [
+  { key: 'greatWork', label: 'Great Work', Icon: Star, color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-200', activeBg: 'bg-amber-100' },
+  { key: 'teamPlayer', label: 'Team Player', Icon: HeartHandshake, color: 'text-blue-500', bg: 'bg-blue-50', border: 'border-blue-200', activeBg: 'bg-blue-100' },
+  { key: 'goalCrusher', label: 'Goal Crusher', Icon: Target, color: 'text-green-500', bg: 'bg-green-50', border: 'border-green-200', activeBg: 'bg-green-100' },
+  { key: 'innovation', label: 'Innovation', Icon: Lightbulb, color: 'text-purple-500', bg: 'bg-purple-50', border: 'border-purple-200', activeBg: 'bg-purple-100' },
+  { key: 'aboveBeyond', label: 'Above & Beyond', Icon: Heart, color: 'text-red-500', bg: 'bg-red-50', border: 'border-red-200', activeBg: 'bg-red-100' },
+  { key: 'mentor', label: 'Mentor', Icon: GraduationCap, color: 'text-teal-500', bg: 'bg-teal-50', border: 'border-teal-200', activeBg: 'bg-teal-100' },
+];
+
+const COMPANY_VALUES = [
+  { key: 'excellence', label: 'Excellence' },
+  { key: 'teamwork', label: 'Teamwork' },
+  { key: 'guestFirst', label: 'Guest First' },
+  { key: 'innovation', label: 'Innovation' },
+  { key: 'integrity', label: 'Integrity' },
+];
+
+const DEPARTMENTS = [
+  'Front Office',
+  'Housekeeping',
+  'Food & Beverage',
+  'Kitchen',
+  'Spa & Wellness',
+  'Concierge',
+  'Events',
+  'Management',
+];
+
+const LOCATIONS = ['London', 'Paris', 'Tokyo', 'Dubai', 'New York'];
+
+// ============================================================
+// EMPLOYEES
 // ============================================================
 
 const EMPLOYEES = [
-  { id: 1, name: 'Sarah Mitchell', role: 'Senior Server', dept: 'Front of House' },
-  { id: 2, name: 'James Kimani', role: 'Bartender', dept: 'Bar' },
-  { id: 3, name: 'Priya Patel', role: 'Hostess', dept: 'Front of House' },
-  { id: 4, name: 'Thomas Cane', role: 'Head Waiter', dept: 'Front of House' },
-  { id: 5, name: 'Sophie Bernard', role: 'Sommelier', dept: 'Bar' },
-  { id: 6, name: 'Alex Rivera', role: 'Server', dept: 'Front of House' },
-  { id: 7, name: 'Chen Wei', role: 'Server', dept: 'Front of House' },
-  { id: 8, name: 'Jessica Bano', role: 'Events Coordinator', dept: 'Events' },
+  { id: 1, name: 'James Williams', role: 'Front Office Manager', dept: 'Front Office', location: 'London' },
+  { id: 2, name: 'Maria Santos', role: 'Guest Relations Lead', dept: 'Front Office', location: 'London' },
+  { id: 3, name: 'Pierre Dubois', role: 'F&B Supervisor', dept: 'Food & Beverage', location: 'Paris' },
+  { id: 4, name: 'Sophie Anderson', role: 'Senior Concierge', dept: 'Concierge', location: 'London' },
+  { id: 5, name: 'Ahmed Hassan', role: 'Night Manager', dept: 'Management', location: 'Dubai' },
+  { id: 6, name: 'Yuki Tanaka', role: 'Sous Chef', dept: 'Kitchen', location: 'Tokyo' },
+  { id: 7, name: 'Emily Watson', role: 'Spa Director', dept: 'Spa & Wellness', location: 'London' },
+  { id: 8, name: 'Raj Patel', role: 'Night Auditor', dept: 'Front Office', location: 'Dubai' },
+  { id: 9, name: 'Claire Dubois', role: 'Housekeeping Lead', dept: 'Housekeeping', location: 'Paris' },
+  { id: 10, name: 'Wei Zhang', role: 'Head Chef', dept: 'Kitchen', location: 'Tokyo' },
+  { id: 11, name: 'Aiko Yamamoto', role: 'Guest Services', dept: 'Concierge', location: 'Tokyo' },
+  { id: 12, name: 'Liam O\'Connor', role: 'Events Coordinator', dept: 'Events', location: 'London' },
 ];
 
-const CATEGORIES = [
-  { emoji: '\u{1F31F}', label: 'Great Work', key: 'greatWork' },
-  { emoji: '\u{1F4AA}', label: 'Team Player', key: 'teamPlayer' },
-  { emoji: '\u{1F3AF}', label: 'Goal Crusher', key: 'goalCrusher' },
-  { emoji: '\u{1F9E0}', label: 'Problem Solver', key: 'problemSolver' },
-  { emoji: '\u{2764}\u{FE0F}', label: 'Above & Beyond', key: 'aboveAndBeyond' },
-  { emoji: '\u{1F680}', label: 'Innovation', key: 'innovation' },
-];
+// ============================================================
+// DEMO RECOGNITION DATA
+// ============================================================
+
+const now = Date.now();
+const HOUR = 3600000;
+const DAY = 86400000;
 
 const INITIAL_RECOGNITIONS = [
-  { id: 1, from: 'James Williams', to: 'Marc Hunt', emoji: '\u{1F31F}', category: 'Great Work', message: 'Great job covering the Saturday rush! Your energy kept the whole team going.', timestamp: '2 hours ago', likes: 12 },
-  { id: 2, from: 'Marc Hunt', to: 'Priya Patel', emoji: '\u{1F4AA}', category: 'Team Player', message: 'Thanks for training the new starter \u2014 you made their first week so much easier.', timestamp: '4 hours ago', likes: 8 },
-  { id: 3, from: 'Sarah Chen', to: 'Thomas Cane', emoji: '\u{1F3AF}', category: 'Goal Crusher', message: 'Brilliant Q4 guest satisfaction scores \u2014 highest in the company!', timestamp: '1 day ago', likes: 24 },
-  { id: 4, from: 'Sophie Bernard', to: 'James Kimani', emoji: '\u{1F9E0}', category: 'Problem Solver', message: 'Quick thinking fixing the reservation system before the Friday rush.', timestamp: '2 days ago', likes: 15 },
-  { id: 5, from: 'Thomas Cane', to: 'Sarah Mitchell', emoji: '\u{2764}\u{FE0F}', category: 'Above & Beyond', message: 'Staying late to help prep for the corporate dinner \u2014 truly above and beyond.', timestamp: '3 days ago', likes: 19 },
-  { id: 6, from: 'Marc Hunt', to: 'Chen Wei', emoji: '\u{1F31F}', category: 'Great Work', message: 'Your wine pairing suggestions have been getting amazing feedback from guests!', timestamp: '4 days ago', likes: 7 },
-  { id: 7, from: 'Jessica Bano', to: 'Alex Rivera', emoji: '\u{1F680}', category: 'Innovation', message: 'Love the new table layout idea for the Valentine\'s event \u2014 creative thinking!', timestamp: '5 days ago', likes: 11 },
-  { id: 8, from: 'Sarah Chen', to: 'Marc Hunt', emoji: '\u{1F4AA}', category: 'Team Player', message: 'Mentoring two new starters this month \u2014 great leadership potential.', timestamp: '1 week ago', likes: 16 },
+  {
+    id: 1,
+    fromId: 1,
+    toId: 2,
+    categoryKey: 'greatWork',
+    message: 'Handled the VIP check-in flawlessly. Guest left a 5-star review!',
+    value: 'excellence',
+    timestamp: now - 2 * HOUR,
+    likes: 14,
+    likedByMe: false,
+  },
+  {
+    id: 2,
+    fromId: 2,
+    toId: 3,
+    categoryKey: 'teamPlayer',
+    message: 'Covered my shift on short notice. True team spirit!',
+    value: 'teamwork',
+    timestamp: now - 4 * HOUR,
+    likes: 9,
+    likedByMe: false,
+  },
+  {
+    id: 3,
+    fromId: 4,
+    toId: 11,
+    categoryKey: 'aboveBeyond',
+    message: 'Stayed late to help a lost guest find their way back to the hotel',
+    value: 'guestFirst',
+    timestamp: now - 6 * HOUR,
+    likes: 22,
+    likedByMe: false,
+  },
+  {
+    id: 4,
+    fromId: 5,
+    toId: 1,
+    categoryKey: 'innovation',
+    message: 'Brilliant idea to use QR codes for the breakfast menu',
+    value: 'innovation',
+    timestamp: now - 1 * DAY,
+    likes: 17,
+    likedByMe: false,
+  },
+  {
+    id: 5,
+    fromId: 6,
+    toId: 10,
+    categoryKey: 'mentor',
+    message: 'Thank you for teaching me the proper knife techniques',
+    value: 'excellence',
+    timestamp: now - 1.5 * DAY,
+    likes: 11,
+    likedByMe: false,
+  },
+  {
+    id: 6,
+    fromId: 7,
+    toId: 9,
+    categoryKey: 'goalCrusher',
+    message: 'Achieved 100% room turnover rate this month!',
+    value: 'excellence',
+    timestamp: now - 2 * DAY,
+    likes: 26,
+    likedByMe: false,
+  },
+  {
+    id: 7,
+    fromId: 8,
+    toId: 4,
+    categoryKey: 'greatWork',
+    message: 'Your concierge recommendations got amazing feedback',
+    value: 'guestFirst',
+    timestamp: now - 2.5 * DAY,
+    likes: 8,
+    likedByMe: false,
+  },
+  {
+    id: 8,
+    fromId: 3,
+    toId: 5,
+    categoryKey: 'teamPlayer',
+    message: 'Always ready to help during rush hour',
+    value: 'teamwork',
+    timestamp: now - 3 * DAY,
+    likes: 13,
+    likedByMe: false,
+  },
+  {
+    id: 9,
+    fromId: 9,
+    toId: 8,
+    categoryKey: 'aboveBeyond',
+    message: 'Going the extra mile for night shift guests',
+    value: 'guestFirst',
+    timestamp: now - 4 * DAY,
+    likes: 19,
+    likedByMe: false,
+  },
+  {
+    id: 10,
+    fromId: 1,
+    toId: 7,
+    categoryKey: 'greatWork',
+    message: 'Spa customer satisfaction at all-time high',
+    value: 'excellence',
+    timestamp: now - 5 * DAY,
+    likes: 15,
+    likedByMe: false,
+  },
+  {
+    id: 11,
+    fromId: 10,
+    toId: 6,
+    categoryKey: 'innovation',
+    message: 'New plating style for the omakase menu is stunning',
+    value: 'innovation',
+    timestamp: now - 6 * DAY,
+    likes: 20,
+    likedByMe: false,
+  },
+  {
+    id: 12,
+    fromId: 2,
+    toId: 1,
+    categoryKey: 'mentor',
+    message: 'Your guidance during my first month made all the difference',
+    value: 'teamwork',
+    timestamp: now - 7 * DAY,
+    likes: 24,
+    likedByMe: false,
+  },
 ];
 
-const LEADERBOARD_RECEIVED = [
-  { name: 'Marc Hunt', count: 8 },
-  { name: 'Thomas Cane', count: 6 },
-  { name: 'Sarah Mitchell', count: 5 },
-  { name: 'Priya Patel', count: 4 },
-  { name: 'James Kimani', count: 3 },
-];
+// ============================================================
+// HELPERS
+// ============================================================
 
-const LEADERBOARD_GIVEN = [
-  { name: 'Sarah Chen', count: 12 },
-  { name: 'James Williams', count: 9 },
-  { name: 'Marc Hunt', count: 7 },
-  { name: 'Sophie Bernard', count: 5 },
-  { name: 'Jessica Bano', count: 4 },
-];
+function getEmployeeById(id) {
+  return EMPLOYEES.find((e) => e.id === id);
+}
 
-const FILTER_TABS = [
-  { id: 'all', labelKey: 'recognition.filters.all', label: 'All' },
-  { id: 'received', labelKey: 'recognition.filters.received', label: 'Received' },
-  { id: 'sent', labelKey: 'recognition.filters.sent', label: 'Sent' },
-  { id: 'myTeam', labelKey: 'recognition.filters.myTeam', label: 'My Team' },
-];
+function getInitials(name) {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase();
+}
+
+function getCategoryByKey(key) {
+  return CATEGORIES.find((c) => c.key === key);
+}
+
+function getValueLabel(key) {
+  const v = COMPANY_VALUES.find((cv) => cv.key === key);
+  return v ? v.label : '';
+}
+
+function formatRelativeTime(ts) {
+  const diff = Date.now() - ts;
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / HOUR);
+  const days = Math.floor(diff / DAY);
+
+  if (minutes < 1) return 'Just now';
+  if (minutes < 60) return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+  if (hours < 24) return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+  if (days === 1) return 'Yesterday';
+  if (days < 7) return `${days} days ago`;
+  if (days < 14) return '1 week ago';
+  return `${Math.floor(days / 7)} weeks ago`;
+}
+
+// Build leaderboard data from recognitions
+function buildLeaderboards(recognitions) {
+  const receivedMap = {};
+  const givenMap = {};
+
+  recognitions.forEach((r) => {
+    const receiver = getEmployeeById(r.toId);
+    const giver = getEmployeeById(r.fromId);
+
+    if (receiver) {
+      receivedMap[receiver.name] = (receivedMap[receiver.name] || 0) + 1;
+    }
+    if (giver) {
+      givenMap[giver.name] = (givenMap[giver.name] || 0) + 1;
+    }
+  });
+
+  const topReceived = Object.entries(receivedMap)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 5);
+
+  const topGiven = Object.entries(givenMap)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 5);
+
+  return { topReceived, topGiven };
+}
+
+// ============================================================
+// SEARCHABLE DROPDOWN COMPONENT
+// ============================================================
+
+function SearchableDropdown({ employees, value, onChange, placeholder, t }) {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const filtered = employees.filter((emp) =>
+    emp.name.toLowerCase().includes(search.toLowerCase()) ||
+    emp.role.toLowerCase().includes(search.toLowerCase()) ||
+    emp.dept.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const selected = employees.find((e) => e.id === value);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 bg-white"
+      >
+        <span className={selected ? 'text-slate-900' : 'text-slate-400'}>
+          {selected ? `${selected.name} -- ${selected.role}, ${selected.dept}` : placeholder}
+        </span>
+        <ChevronDown className="w-4 h-4 text-slate-400 flex-shrink-0" />
+      </button>
+
+      {open && (
+        <div className="absolute z-50 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-lg max-h-64 overflow-hidden">
+          <div className="p-2 border-b border-slate-100">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={t('recognition.searchColleague', 'Search by name, role, or department...')}
+                className="w-full pl-8 pr-3 py-2 text-sm border border-slate-200 rounded-md focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                autoFocus
+              />
+            </div>
+          </div>
+          <div className="overflow-y-auto max-h-48">
+            {filtered.length === 0 ? (
+              <div className="px-3 py-4 text-sm text-slate-400 text-center">
+                {t('recognition.noResults', 'No colleagues found')}
+              </div>
+            ) : (
+              filtered.map((emp) => (
+                <button
+                  key={emp.id}
+                  type="button"
+                  onClick={() => {
+                    onChange(emp.id);
+                    setOpen(false);
+                    setSearch('');
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-slate-50 transition-colors ${
+                    value === emp.id ? 'bg-momentum-50' : ''
+                  }`}
+                >
+                  <div className="w-8 h-8 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs flex-shrink-0">
+                    {getInitials(emp.name)}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-slate-900 truncate">{emp.name}</p>
+                    <p className="text-xs text-slate-500 truncate">{emp.role} -- {emp.dept}</p>
+                  </div>
+                  {value === emp.id && (
+                    <CheckCircle className="w-4 h-4 text-momentum-500 flex-shrink-0 ml-auto" />
+                  )}
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// RECOGNITION CARD COMPONENT
+// ============================================================
+
+function RecognitionCard({ recognition, onLike, t }) {
+  const { fromId, toId, categoryKey, message, value, timestamp, likes, likedByMe } = recognition;
+  const from = getEmployeeById(fromId);
+  const to = getEmployeeById(toId);
+  const category = getCategoryByKey(categoryKey);
+
+  if (!from || !to || !category) return null;
+
+  const CategoryIcon = category.Icon;
+
+  return (
+    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md hover:border-slate-300 transition-all">
+      <div className="p-5">
+        {/* Top row: giver -> receiver with avatars */}
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div className="flex items-center gap-2">
+            {/* Giver avatar */}
+            <div className="w-9 h-9 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-semibold text-xs flex-shrink-0">
+              {getInitials(from.name)}
+            </div>
+            <span className="text-sm font-semibold text-slate-900">{from.name}</span>
+            <ArrowRight className="w-4 h-4 text-slate-300 flex-shrink-0" />
+            {/* Receiver avatar */}
+            <div className="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-semibold text-xs flex-shrink-0">
+              {getInitials(to.name)}
+            </div>
+            <span className="text-sm font-semibold text-slate-900">{to.name}</span>
+          </div>
+          <span className="text-xs text-slate-400 whitespace-nowrap flex-shrink-0 pt-1">
+            {formatRelativeTime(timestamp)}
+          </span>
+        </div>
+
+        {/* Category badge with Lucide icon */}
+        <div className="flex items-center gap-2 mb-3 ml-11">
+          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${category.bg} ${category.border} border`}>
+            <CategoryIcon className={`w-3.5 h-3.5 ${category.color}`} />
+            {t(`recognition.categories.${categoryKey}`, category.label)}
+          </span>
+          {value && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">
+              {t(`recognition.values.${value}`, getValueLabel(value))}
+            </span>
+          )}
+        </div>
+
+        {/* Message */}
+        <p className="text-sm text-slate-700 leading-relaxed ml-11">
+          &ldquo;{message}&rdquo;
+        </p>
+
+        {/* Like button */}
+        <div className="flex items-center justify-end mt-4 pt-3 border-t border-slate-100">
+          <button
+            onClick={() => onLike(recognition.id)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors group ${
+              likedByMe
+                ? 'text-red-500 bg-red-50'
+                : 'text-slate-500 hover:text-red-500 hover:bg-red-50'
+            }`}
+          >
+            <Heart className={`w-4 h-4 transition-colors ${likedByMe ? 'fill-red-500 text-red-500' : 'group-hover:fill-red-500'}`} />
+            <span className="font-medium">{likes}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// LEADERBOARD SIDEBAR COMPONENT
+// ============================================================
+
+function LeaderboardSidebar({ recognitions, t }) {
+  const { topReceived, topGiven } = useMemo(
+    () => buildLeaderboards(recognitions),
+    [recognitions]
+  );
+
+  return (
+    <div className="space-y-6">
+      {/* Most Recognised This Month */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-5 py-4 border-b border-slate-200">
+          <div className="flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-amber-500" />
+            <h3 className="font-semibold text-slate-900">
+              {t('recognition.mostRecognised', 'Most Recognised This Month')}
+            </h3>
+          </div>
+        </div>
+        <div className="divide-y divide-slate-100">
+          {topReceived.map((entry, idx) => (
+            <div
+              key={entry.name}
+              className="px-5 py-3 flex items-center gap-3 hover:bg-slate-50 transition-colors"
+            >
+              <span className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 flex-shrink-0">
+                {idx + 1}
+              </span>
+              <div className="w-8 h-8 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs flex-shrink-0">
+                {getInitials(entry.name)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-slate-900 text-sm truncate">{entry.name}</p>
+              </div>
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <Star className="w-4 h-4 text-amber-400" />
+                <span className="text-sm font-semibold text-slate-700">{entry.count}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Most Active Givers */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-5 py-4 border-b border-slate-200">
+          <div className="flex items-center gap-2">
+            <Award className="w-5 h-5 text-momentum-500" />
+            <h3 className="font-semibold text-slate-900">
+              {t('recognition.mostActiveGivers', 'Most Active Givers')}
+            </h3>
+          </div>
+        </div>
+        <div className="divide-y divide-slate-100">
+          {topGiven.map((entry, idx) => (
+            <div
+              key={entry.name}
+              className="px-5 py-3 flex items-center gap-3 hover:bg-slate-50 transition-colors"
+            >
+              <span className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 flex-shrink-0">
+                {idx + 1}
+              </span>
+              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-medium text-xs flex-shrink-0">
+                {getInitials(entry.name)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-slate-900 text-sm truncate">{entry.name}</p>
+              </div>
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <Heart className="w-4 h-4 text-red-400" />
+                <span className="text-sm font-semibold text-slate-700">{entry.count}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// MANAGER ANALYTICS PANEL
+// ============================================================
+
+function ManagerAnalyticsPanel({ recognitions, t }) {
+  // Simulate "my team" as Front Office + Concierge for demo
+  const teamDepts = ['Front Office', 'Concierge'];
+  const teamMembers = EMPLOYEES.filter((e) => teamDepts.includes(e.dept));
+  const teamIds = teamMembers.map((e) => e.id);
+
+  const teamReceived = recognitions.filter((r) => teamIds.includes(r.toId)).length;
+  const teamGiven = recognitions.filter((r) => teamIds.includes(r.fromId)).length;
+
+  // Most recognised in team
+  const receivedCounts = {};
+  recognitions.forEach((r) => {
+    if (teamIds.includes(r.toId)) {
+      const emp = getEmployeeById(r.toId);
+      if (emp) receivedCounts[emp.name] = (receivedCounts[emp.name] || 0) + 1;
+    }
+  });
+  const topInTeam = Object.entries(receivedCounts)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 3);
+
+  return (
+    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="px-5 py-4 border-b border-slate-200">
+        <div className="flex items-center gap-2">
+          <Users className="w-5 h-5 text-blue-500" />
+          <h3 className="font-semibold text-slate-900">
+            {t('recognition.teamAnalytics', 'Team Recognition Analytics')}
+          </h3>
+        </div>
+      </div>
+      <div className="p-5">
+        <div className="grid grid-cols-2 gap-4 mb-5">
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+            <p className="text-2xl font-bold text-green-700">{teamReceived}</p>
+            <p className="text-xs text-green-600 mt-1 font-medium">
+              {t('recognition.teamReceived', 'Received by Team')}
+            </p>
+          </div>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+            <p className="text-2xl font-bold text-blue-700">{teamGiven}</p>
+            <p className="text-xs text-blue-600 mt-1 font-medium">
+              {t('recognition.teamGiven', 'Given by Team')}
+            </p>
+          </div>
+        </div>
+        {topInTeam.length > 0 && (
+          <div>
+            <p className="text-sm font-medium text-slate-700 mb-2">
+              {t('recognition.mostRecognisedInTeam', 'Most Recognised in Team')}
+            </p>
+            <div className="space-y-2">
+              {topInTeam.map((entry, idx) => (
+                <div key={entry.name} className="flex items-center gap-3">
+                  <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 flex-shrink-0">
+                    {idx + 1}
+                  </span>
+                  <div className="w-7 h-7 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs flex-shrink-0">
+                    {getInitials(entry.name)}
+                  </div>
+                  <span className="text-sm text-slate-900 font-medium flex-1 truncate">{entry.name}</span>
+                  <span className="text-sm font-semibold text-slate-600">{entry.count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// ADMIN ANALYTICS PANEL
+// ============================================================
+
+function AdminAnalyticsPanel({ recognitions, t }) {
+  const totalRecognitions = recognitions.length;
+
+  // Per-location counts
+  const locationCounts = {};
+  LOCATIONS.forEach((loc) => { locationCounts[loc] = 0; });
+  recognitions.forEach((r) => {
+    const receiver = getEmployeeById(r.toId);
+    if (receiver && locationCounts[receiver.location] !== undefined) {
+      locationCounts[receiver.location] += 1;
+    }
+  });
+
+  // Per-category counts
+  const categoryCounts = {};
+  CATEGORIES.forEach((c) => { categoryCounts[c.key] = 0; });
+  recognitions.forEach((r) => {
+    if (categoryCounts[r.categoryKey] !== undefined) {
+      categoryCounts[r.categoryKey] += 1;
+    }
+  });
+
+  // Per-department counts
+  const deptCounts = {};
+  recognitions.forEach((r) => {
+    const receiver = getEmployeeById(r.toId);
+    if (receiver) {
+      deptCounts[receiver.dept] = (deptCounts[receiver.dept] || 0) + 1;
+    }
+  });
+  const topDepts = Object.entries(deptCounts)
+    .map(([dept, count]) => ({ dept, count }))
+    .sort((a, b) => b.count - a.count);
+
+  return (
+    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="px-5 py-4 border-b border-slate-200">
+        <div className="flex items-center gap-2">
+          <BarChart3 className="w-5 h-5 text-purple-500" />
+          <h3 className="font-semibold text-slate-900">
+            {t('recognition.orgAnalytics', 'Organisation-wide Analytics')}
+          </h3>
+        </div>
+      </div>
+      <div className="p-5 space-y-5">
+        {/* Total */}
+        <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
+          <p className="text-3xl font-bold text-purple-700">{totalRecognitions}</p>
+          <p className="text-xs text-purple-600 mt-1 font-medium">
+            {t('recognition.totalRecognitions', 'Total Recognitions')}
+          </p>
+        </div>
+
+        {/* By Location */}
+        <div>
+          <p className="text-sm font-medium text-slate-700 mb-2 flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 text-slate-400" />
+            {t('recognition.byLocation', 'By Location')}
+          </p>
+          <div className="space-y-2">
+            {Object.entries(locationCounts).map(([loc, count]) => (
+              <div key={loc} className="flex items-center justify-between">
+                <span className="text-sm text-slate-600">{loc}</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-purple-400 rounded-full"
+                      style={{ width: `${totalRecognitions > 0 ? (count / totalRecognitions) * 100 : 0}%` }}
+                    />
+                  </div>
+                  <span className="text-xs font-semibold text-slate-600 w-5 text-right">{count}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* By Category */}
+        <div>
+          <p className="text-sm font-medium text-slate-700 mb-2 flex items-center gap-1.5">
+            <TrendingUp className="w-4 h-4 text-slate-400" />
+            {t('recognition.byCategory', 'By Category')}
+          </p>
+          <div className="space-y-2">
+            {CATEGORIES.map((cat) => {
+              const CatIcon = cat.Icon;
+              return (
+                <div key={cat.key} className="flex items-center justify-between">
+                  <span className="text-sm text-slate-600 flex items-center gap-1.5">
+                    <CatIcon className={`w-3.5 h-3.5 ${cat.color}`} />
+                    {t(`recognition.categories.${cat.key}`, cat.label)}
+                  </span>
+                  <span className="text-xs font-semibold text-slate-600">{categoryCounts[cat.key]}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Top Departments */}
+        <div>
+          <p className="text-sm font-medium text-slate-700 mb-2 flex items-center gap-1.5">
+            <Users className="w-4 h-4 text-slate-400" />
+            {t('recognition.topDepartments', 'Top Departments')}
+          </p>
+          <div className="space-y-2">
+            {topDepts.map(({ dept, count }) => (
+              <div key={dept} className="flex items-center justify-between">
+                <span className="text-sm text-slate-600">{dept}</span>
+                <span className="text-xs font-semibold text-slate-600">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Configure Categories (admin-only hint) */}
+        <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-600 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 transition-colors">
+          <Settings className="w-4 h-4" />
+          {t('recognition.configureCategories', 'Configure Categories')}
+        </button>
+      </div>
+    </div>
+  );
+}
 
 // ============================================================
 // MAIN COMPONENT
@@ -74,73 +761,131 @@ const FILTER_TABS = [
 
 export default function Recognition() {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, isAdmin, isManagerOrAbove } = useAuth();
+
+  // State
   const [recognitions, setRecognitions] = useState(INITIAL_RECOGNITIONS);
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [selectedRecipient, setSelectedRecipient] = useState('');
+  const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [message, setMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [messageError, setMessageError] = useState('');
+  const [successToast, setSuccessToast] = useState('');
 
-  // Derive current user display name
+  // Feed filters
+  const [filterDept, setFilterDept] = useState('');
+  const [filterCategory, setFilterCategory] = useState('');
+  const [filterDateFrom, setFilterDateFrom] = useState('');
+  const [filterDateTo, setFilterDateTo] = useState('');
+  const [searchName, setSearchName] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+
   const currentUserName = user?.name || user?.email?.split('@')[0] || 'You';
 
-  // Handle sending recognition
+  // ----------------------------------------------------------
+  // SUBMIT RECOGNITION
+  // ----------------------------------------------------------
   const handleSend = () => {
-    if (!selectedRecipient || !selectedCategory || !message.trim()) return;
+    // Validate message
+    if (!message.trim() || message.trim().length < 10) {
+      setMessageError(t('recognition.messageTooShort', 'Message must be at least 10 characters'));
+      return;
+    }
+    if (!selectedRecipient || !selectedCategory) return;
 
-    const recipient = EMPLOYEES.find((e) => String(e.id) === selectedRecipient);
+    const recipient = getEmployeeById(selectedRecipient);
     if (!recipient) return;
-
-    const cat = CATEGORIES.find((c) => c.key === selectedCategory);
-    if (!cat) return;
 
     const newRecognition = {
       id: Date.now(),
-      from: currentUserName,
-      to: recipient.name,
-      emoji: cat.emoji,
-      category: cat.label,
+      fromId: 0, // current user placeholder
+      toId: selectedRecipient,
+      categoryKey: selectedCategory,
       message: message.trim(),
-      timestamp: 'Just now',
+      value: selectedValue,
+      timestamp: Date.now(),
       likes: 0,
+      likedByMe: false,
+      // Store giver name directly for user-submitted items
+      _giverName: currentUserName,
     };
 
     setRecognitions((prev) => [newRecognition, ...prev]);
-    setSelectedRecipient('');
+    setSelectedRecipient(null);
     setSelectedCategory(null);
     setMessage('');
-    setSuccessMessage(t('recognition.successMessage', 'Recognition sent successfully!'));
-    setTimeout(() => setSuccessMessage(''), 3000);
+    setSelectedValue(null);
+    setMessageError('');
+    setSuccessToast(t('recognition.successMessage', 'Recognition sent successfully!'));
+    setTimeout(() => setSuccessToast(''), 4000);
   };
 
-  // Handle liking a recognition
+  // ----------------------------------------------------------
+  // LIKE RECOGNITION
+  // ----------------------------------------------------------
   const handleLike = (id) => {
     setRecognitions((prev) =>
-      prev.map((r) => (r.id === id ? { ...r, likes: r.likes + 1 } : r))
+      prev.map((r) =>
+        r.id === id
+          ? { ...r, likes: r.likedByMe ? r.likes - 1 : r.likes + 1, likedByMe: !r.likedByMe }
+          : r
+      )
     );
   };
 
-  // Filter recognitions based on active filter
-  const filteredRecognitions = recognitions.filter((r) => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'received') return r.to === currentUserName;
-    if (activeFilter === 'sent') return r.from === currentUserName;
-    if (activeFilter === 'myTeam') {
-      const teamNames = EMPLOYEES.filter((e) => e.dept === 'Front of House').map((e) => e.name);
-      return teamNames.includes(r.to) || teamNames.includes(r.from);
-    }
-    return true;
-  });
+  // ----------------------------------------------------------
+  // FILTERED RECOGNITIONS
+  // ----------------------------------------------------------
+  const filteredRecognitions = useMemo(() => {
+    return recognitions.filter((r) => {
+      const from = getEmployeeById(r.fromId);
+      const to = getEmployeeById(r.toId);
+      const fromName = from?.name || r._giverName || '';
+      const toName = to?.name || '';
 
-  // Medal helpers for leaderboard
-  const getMedal = (index) => {
-    if (index === 0) return '\u{1F947}';
-    if (index === 1) return '\u{1F948}';
-    if (index === 2) return '\u{1F949}';
-    return `${index + 1}.`;
+      // Department filter
+      if (filterDept) {
+        const fromDept = from?.dept || '';
+        const toDept = to?.dept || '';
+        if (fromDept !== filterDept && toDept !== filterDept) return false;
+      }
+
+      // Category filter
+      if (filterCategory && r.categoryKey !== filterCategory) return false;
+
+      // Date range filter
+      if (filterDateFrom) {
+        const fromDate = new Date(filterDateFrom).getTime();
+        if (r.timestamp < fromDate) return false;
+      }
+      if (filterDateTo) {
+        const toDate = new Date(filterDateTo).getTime() + DAY;
+        if (r.timestamp > toDate) return false;
+      }
+
+      // Name search
+      if (searchName) {
+        const q = searchName.toLowerCase();
+        if (!fromName.toLowerCase().includes(q) && !toName.toLowerCase().includes(q)) return false;
+      }
+
+      return true;
+    });
+  }, [recognitions, filterDept, filterCategory, filterDateFrom, filterDateTo, searchName]);
+
+  const hasActiveFilters = filterDept || filterCategory || filterDateFrom || filterDateTo || searchName;
+
+  const clearFilters = () => {
+    setFilterDept('');
+    setFilterCategory('');
+    setFilterDateFrom('');
+    setFilterDateTo('');
+    setSearchName('');
   };
 
+  // ----------------------------------------------------------
+  // RENDER
+  // ----------------------------------------------------------
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -153,7 +898,22 @@ export default function Recognition() {
         </p>
       </div>
 
-      {/* Give Recognition Card */}
+      {/* Success Toast */}
+      {successToast && (
+        <div className="flex items-center justify-between gap-3 px-4 py-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm font-medium animate-in fade-in slide-in-from-top-2">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="w-4 h-4 flex-shrink-0" />
+            {successToast}
+          </div>
+          <button onClick={() => setSuccessToast('')} className="text-green-500 hover:text-green-700">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
+      {/* ====================================================== */}
+      {/* GIVE RECOGNITION CARD                                   */}
+      {/* ====================================================== */}
       <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
         <div className="px-5 py-4 border-b border-slate-200">
           <div className="flex items-center gap-2">
@@ -164,92 +924,124 @@ export default function Recognition() {
           </div>
         </div>
         <div className="p-5 space-y-4">
-          {/* Success banner */}
-          {successMessage && (
-            <div className="flex items-center gap-2 px-4 py-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm font-medium">
-              <ThumbsUp className="w-4 h-4 flex-shrink-0" />
-              {successMessage}
-            </div>
-          )}
-
-          {/* Recipient Select */}
+          {/* Recipient (searchable dropdown) */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              {t('recognition.recipient', 'Recipient')}
+              {t('recognition.recipient', 'Select Colleague')}
             </label>
-            <select
+            <SearchableDropdown
+              employees={EMPLOYEES}
               value={selectedRecipient}
-              onChange={(e) => setSelectedRecipient(e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
-            >
-              <option value="">{t('recognition.selectRecipient', 'Select a colleague...')}</option>
-              {EMPLOYEES.map((emp) => (
-                <option key={emp.id} value={emp.id}>
-                  {emp.name} — {emp.role}, {emp.dept}
-                </option>
-              ))}
-            </select>
+              onChange={setSelectedRecipient}
+              placeholder={t('recognition.selectRecipient', 'Search for a colleague...')}
+              t={t}
+            />
           </div>
 
-          {/* Category Buttons */}
+          {/* Category selection */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">
               {t('recognition.category', 'Category')}
             </label>
             <div className="flex flex-wrap gap-2">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.key}
-                  onClick={() =>
-                    setSelectedCategory(selectedCategory === cat.key ? null : cat.key)
-                  }
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-all ${
-                    selectedCategory === cat.key
-                      ? 'bg-momentum-50 border-momentum-500 text-momentum-700 ring-2 ring-momentum-200'
-                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-                  }`}
-                >
-                  <span className="text-lg">{cat.emoji}</span>
-                  {t(`recognition.categories.${cat.key}`, cat.label)}
-                </button>
-              ))}
+              {CATEGORIES.map((cat) => {
+                const CatIcon = cat.Icon;
+                const isActive = selectedCategory === cat.key;
+                return (
+                  <button
+                    key={cat.key}
+                    type="button"
+                    onClick={() => setSelectedCategory(isActive ? null : cat.key)}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-all ${
+                      isActive
+                        ? `${cat.activeBg} ${cat.border} ${cat.color} ring-2 ring-opacity-30`
+                        : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+                    }`}
+                    style={isActive ? { '--tw-ring-color': 'currentColor' } : {}}
+                  >
+                    <CatIcon className={`w-4 h-4 ${isActive ? cat.color : 'text-slate-400'}`} />
+                    {t(`recognition.categories.${cat.key}`, cat.label)}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Message Textarea */}
+          {/* Message */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
               {t('recognition.message', 'Message')}
+              <span className="text-red-400 ml-0.5">*</span>
             </label>
             <textarea
               value={message}
               onChange={(e) => {
-                if (e.target.value.length <= 280) setMessage(e.target.value);
+                setMessage(e.target.value);
+                if (messageError && e.target.value.trim().length >= 10) {
+                  setMessageError('');
+                }
               }}
               rows={3}
-              placeholder={t('recognition.messagePlaceholder', 'Write a thoughtful message recognising their contribution...')}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 resize-none"
+              placeholder={t(
+                'recognition.messagePlaceholder',
+                'Write a thoughtful message recognising their contribution (min. 10 characters)...'
+              )}
+              className={`w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 resize-none ${
+                messageError ? 'border-red-300 bg-red-50' : 'border-slate-300'
+              }`}
             />
             <div className="flex items-center justify-between mt-1">
-              <span className={`text-xs ${message.length >= 260 ? 'text-amber-600 font-medium' : 'text-slate-400'}`}>
-                {message.length}/280
+              <span className="text-xs text-slate-400">
+                {message.trim().length} {t('recognition.characters', 'characters')}
+                {message.trim().length > 0 && message.trim().length < 10 && (
+                  <span className="text-amber-500 ml-1">
+                    ({10 - message.trim().length} {t('recognition.more', 'more needed')})
+                  </span>
+                )}
               </span>
-              {message.length >= 280 && (
-                <span className="text-xs text-red-500 font-medium">
-                  {t('recognition.charLimit', 'Character limit reached')}
-                </span>
+              {messageError && (
+                <span className="text-xs text-red-500 font-medium">{messageError}</span>
               )}
             </div>
           </div>
 
-          {/* Send Button */}
-          <div className="flex justify-end">
+          {/* Company Value (optional) */}
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              {t('recognition.attachValue', 'Attach to Company Value')}
+              <span className="text-slate-400 text-xs ml-1">
+                ({t('recognition.optional', 'optional')})
+              </span>
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {COMPANY_VALUES.map((val) => {
+                const isActive = selectedValue === val.key;
+                return (
+                  <button
+                    key={val.key}
+                    type="button"
+                    onClick={() => setSelectedValue(isActive ? null : val.key)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                      isActive
+                        ? 'bg-momentum-50 border-momentum-300 text-momentum-700'
+                        : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    {t(`recognition.values.${val.key}`, val.label)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Submit */}
+          <div className="flex justify-end pt-2">
             <button
               onClick={handleSend}
               disabled={!selectedRecipient || !selectedCategory || !message.trim()}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 selectedRecipient && selectedCategory && message.trim()
-                  ? 'bg-momentum-500 text-white hover:bg-momentum-600'
+                  ? 'bg-momentum-500 text-white hover:bg-momentum-600 active:bg-momentum-700'
                   : 'bg-slate-100 text-slate-400 cursor-not-allowed'
               }`}
             >
@@ -260,38 +1052,155 @@ export default function Recognition() {
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="border-b border-slate-200">
-        <nav className="flex gap-1 -mb-px overflow-x-auto">
-          {FILTER_TABS.map((tab) => {
-            const isActive = activeFilter === tab.id;
-            return (
+      {/* ====================================================== */}
+      {/* FEED FILTERS                                            */}
+      {/* ====================================================== */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-5 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3 flex-1">
+            {/* Search by name */}
+            <div className="relative flex-1 max-w-xs">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                value={searchName}
+                onChange={(e) => setSearchName(e.target.value)}
+                placeholder={t('recognition.searchByName', 'Search by name...')}
+                className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+              />
+            </div>
+
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium border rounded-lg transition-colors ${
+                showFilters || hasActiveFilters
+                  ? 'bg-momentum-50 border-momentum-300 text-momentum-700'
+                  : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+              }`}
+            >
+              <Filter className="w-4 h-4" />
+              {t('recognition.filters', 'Filters')}
+              {hasActiveFilters && (
+                <span className="w-2 h-2 rounded-full bg-momentum-500" />
+              )}
+            </button>
+
+            {hasActiveFilters && (
               <button
-                key={tab.id}
-                onClick={() => setActiveFilter(tab.id)}
-                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                  isActive
-                    ? 'border-momentum-500 text-momentum-600'
-                    : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
-                }`}
+                onClick={clearFilters}
+                className="text-xs text-slate-500 hover:text-slate-700 underline"
               >
-                {tab.id === 'all' && <Filter className="w-4 h-4" />}
-                {t(tab.labelKey, tab.label)}
+                {t('recognition.clearFilters', 'Clear all')}
               </button>
-            );
-          })}
-        </nav>
+            )}
+          </div>
+        </div>
+
+        {showFilters && (
+          <div className="px-5 py-4 border-t border-slate-100 bg-slate-50">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {/* Department */}
+              <div>
+                <label className="block text-xs font-medium text-slate-600 mb-1">
+                  {t('recognition.department', 'Department')}
+                </label>
+                <select
+                  value={filterDept}
+                  onChange={(e) => setFilterDept(e.target.value)}
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-momentum-500 bg-white"
+                >
+                  <option value="">{t('recognition.allDepartments', 'All Departments')}</option>
+                  {DEPARTMENTS.map((d) => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Category */}
+              <div>
+                <label className="block text-xs font-medium text-slate-600 mb-1">
+                  {t('recognition.categoryFilter', 'Category')}
+                </label>
+                <select
+                  value={filterCategory}
+                  onChange={(e) => setFilterCategory(e.target.value)}
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-momentum-500 bg-white"
+                >
+                  <option value="">{t('recognition.allCategories', 'All Categories')}</option>
+                  {CATEGORIES.map((c) => (
+                    <option key={c.key} value={c.key}>
+                      {t(`recognition.categories.${c.key}`, c.label)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Date From */}
+              <div>
+                <label className="block text-xs font-medium text-slate-600 mb-1">
+                  {t('recognition.dateFrom', 'From Date')}
+                </label>
+                <div className="relative">
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <input
+                    type="date"
+                    value={filterDateFrom}
+                    onChange={(e) => setFilterDateFrom(e.target.value)}
+                    className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-momentum-500 bg-white"
+                  />
+                </div>
+              </div>
+
+              {/* Date To */}
+              <div>
+                <label className="block text-xs font-medium text-slate-600 mb-1">
+                  {t('recognition.dateTo', 'To Date')}
+                </label>
+                <div className="relative">
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <input
+                    type="date"
+                    value={filterDateTo}
+                    onChange={(e) => setFilterDateTo(e.target.value)}
+                    className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-momentum-500 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Main Content: Feed + Leaderboard */}
+      {/* ====================================================== */}
+      {/* MAIN CONTENT: FEED + SIDEBAR                            */}
+      {/* ====================================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recognition Feed (left 2/3) */}
         <div className="lg:col-span-2 space-y-4">
+          {/* Manager Analytics (above feed, managers only) */}
+          {isManagerOrAbove && !isAdmin && (
+            <ManagerAnalyticsPanel recognitions={recognitions} t={t} />
+          )}
+
+          {/* Admin Analytics (above feed, admins only) */}
+          {isAdmin && (
+            <>
+              <AdminAnalyticsPanel recognitions={recognitions} t={t} />
+              <ManagerAnalyticsPanel recognitions={recognitions} t={t} />
+            </>
+          )}
+
+          {/* Feed */}
           {filteredRecognitions.length === 0 ? (
             <div className="text-center py-12 bg-white rounded-xl border border-slate-200">
               <Heart className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-              <p className="text-slate-500">
-                {t('recognition.noRecognitions', 'No recognitions to show for this filter.')}
+              <p className="text-slate-500 font-medium">
+                {t('recognition.noRecognitions', 'No recognitions to show.')}
+              </p>
+              <p className="text-slate-400 text-sm mt-1">
+                {hasActiveFilters
+                  ? t('recognition.tryDifferentFilters', 'Try adjusting your filters.')
+                  : t('recognition.beFirst', 'Be the first to recognise a colleague!')}
               </p>
             </div>
           ) : (
@@ -307,124 +1216,8 @@ export default function Recognition() {
         </div>
 
         {/* Leaderboard Sidebar (right 1/3) */}
-        <div className="space-y-6">
-          {/* Most Recognised */}
-          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-            <div className="px-5 py-4 border-b border-slate-200">
-              <div className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-amber-500" />
-                <h3 className="font-semibold text-slate-900">
-                  {t('recognition.mostRecognised', 'Most Recognised This Month')}
-                </h3>
-              </div>
-            </div>
-            <div className="divide-y divide-slate-100">
-              {LEADERBOARD_RECEIVED.map((entry, idx) => (
-                <div
-                  key={entry.name}
-                  className="px-5 py-3 flex items-center gap-3 hover:bg-slate-50 transition-colors"
-                >
-                  <span className="text-lg w-8 text-center flex-shrink-0">
-                    {getMedal(idx)}
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs flex-shrink-0">
-                    {entry.name.split(' ').map((n) => n[0]).join('')}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-slate-900 text-sm truncate">{entry.name}</p>
-                  </div>
-                  <div className="flex items-center gap-1 flex-shrink-0">
-                    <Star className="w-4 h-4 text-amber-400" />
-                    <span className="text-sm font-semibold text-slate-700">{entry.count}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Most Generous */}
-          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-            <div className="px-5 py-4 border-b border-slate-200">
-              <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-momentum-500" />
-                <h3 className="font-semibold text-slate-900">
-                  {t('recognition.mostGenerous', 'Most Generous (Given)')}
-                </h3>
-              </div>
-            </div>
-            <div className="divide-y divide-slate-100">
-              {LEADERBOARD_GIVEN.map((entry, idx) => (
-                <div
-                  key={entry.name}
-                  className="px-5 py-3 flex items-center gap-3 hover:bg-slate-50 transition-colors"
-                >
-                  <span className="text-lg w-8 text-center flex-shrink-0">
-                    {getMedal(idx)}
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-medium text-xs flex-shrink-0">
-                    {entry.name.split(' ').map((n) => n[0]).join('')}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-slate-900 text-sm truncate">{entry.name}</p>
-                  </div>
-                  <div className="flex items-center gap-1 flex-shrink-0">
-                    <Heart className="w-4 h-4 text-red-400" />
-                    <span className="text-sm font-semibold text-slate-700">{entry.count}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ============================================================
-// RECOGNITION CARD COMPONENT
-// ============================================================
-
-function RecognitionCard({ recognition, onLike, t }) {
-  const { id, from, to, emoji, category, message, timestamp, likes } = recognition;
-
-  return (
-    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md hover:border-slate-300 transition-all">
-      <div className="p-5">
-        {/* Top row: emoji + from/to + timestamp */}
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="flex items-center gap-3">
-            <span className="text-3xl flex-shrink-0">{emoji}</span>
-            <div>
-              <p className="text-sm text-slate-900">
-                <span className="font-semibold">{from}</span>
-                <span className="text-slate-400 mx-1.5">&rarr;</span>
-                <span className="font-semibold">{to}</span>
-              </p>
-              <span className="inline-block mt-1 px-2 py-0.5 bg-momentum-50 text-momentum-700 text-xs font-medium rounded-full">
-                {t(`recognition.categories.${category.replace(/\s+/g, '').replace('&', 'And')}`, category)}
-              </span>
-            </div>
-          </div>
-          <span className="text-xs text-slate-400 whitespace-nowrap flex-shrink-0 pt-0.5">
-            {timestamp}
-          </span>
-        </div>
-
-        {/* Message */}
-        <p className="text-sm text-slate-700 leading-relaxed pl-12">
-          {message}
-        </p>
-
-        {/* Like button */}
-        <div className="flex items-center justify-end mt-4 pt-3 border-t border-slate-100">
-          <button
-            onClick={() => onLike(id)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-slate-500 hover:text-red-500 hover:bg-red-50 transition-colors group"
-          >
-            <Heart className="w-4 h-4 group-hover:fill-red-500 transition-colors" />
-            <span className="font-medium">{likes}</span>
-          </button>
+        <div>
+          <LeaderboardSidebar recognitions={recognitions} t={t} />
         </div>
       </div>
     </div>

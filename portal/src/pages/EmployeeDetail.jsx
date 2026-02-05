@@ -14,7 +14,7 @@ import { ArrowLeft, Mail, Phone, MapPin, Calendar, Clock, Award, Plus, Star, Che
 export default function EmployeeDetail() {
   const { t } = useTranslation();
   const { id } = useParams();
-  const { isAdmin, isManager } = useAuth();
+  const { isManagerOrAbove } = useAuth();
   const toast = useToast();
   const [employee, setEmployee] = useState(null);
   const [skills, setSkills] = useState([]);
@@ -190,7 +190,7 @@ export default function EmployeeDetail() {
         <div className="card">
           <div className="card-header flex items-center justify-between">
             <h2 className="font-semibold text-slate-900">{t('employeeDetail.skillsCompetencies', 'Skills & Competencies')}</h2>
-            {(isAdmin || isManager) && availableSkills.length > 0 && (
+            {isManagerOrAbove && availableSkills.length > 0 && (
               <button
                 onClick={() => setShowAddSkill(true)}
                 className="btn btn-secondary text-sm py-1"
@@ -230,8 +230,8 @@ export default function EmployeeDetail() {
                         {[1,2,3,4,5].map(level => (
                           <button
                             key={level}
-                            onClick={() => (isAdmin || isManager) && handleUpdateLevel(skill.skill_id, level)}
-                            disabled={!(isAdmin || isManager)}
+                            onClick={() => isManagerOrAbove && handleUpdateLevel(skill.skill_id, level)}
+                            disabled={!isManagerOrAbove}
                             className="focus:outline-none"
                           >
                             <Star
@@ -245,7 +245,7 @@ export default function EmployeeDetail() {
                         ))}
                       </div>
                       {/* Actions */}
-                      {(isAdmin || isManager) && (
+                      {isManagerOrAbove && (
                         <div className="flex items-center gap-1">
                           {skill.requires_verification && !skill.verified && (
                             <button
@@ -273,7 +273,7 @@ export default function EmployeeDetail() {
               <div className="text-center py-6">
                 <Award className="w-10 h-10 text-slate-300 mx-auto mb-2" />
                 <p className="text-slate-500">{t('skills.noSkills', 'No skills recorded')}</p>
-                {(isAdmin || isManager) && availableSkills.length > 0 && (
+                {isManagerOrAbove && availableSkills.length > 0 && (
                   <button
                     onClick={() => setShowAddSkill(true)}
                     className="btn btn-secondary text-sm mt-3"

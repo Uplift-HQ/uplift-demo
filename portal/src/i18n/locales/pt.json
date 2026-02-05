@@ -97,14 +97,25 @@
       "engagement": "ENVOLVIMENTO"
     },
     "payslips": "Recibos de Vencimento e Remuneração",
-    "performance": "Desempenho",
+    "performance": "Avaliações",
     "onboarding": "Integração",
     "surveys": "Inquéritos",
     "offboarding": "Offboarding",
     "learning": "Formação",
-    "documents": "Documentos",
+    "documents": "Documentos RH",
     "expenses": "Despesas",
-    "sso": "SSO e Segurança"
+    "sso": "SSO e Segurança",
+    "home": "Início",
+    "myMomentum": "Meu Momentum",
+    "mySchedule": "Meu Horário",
+    "myPerformance": "Meu Desempenho",
+    "myLearning": "Minha Formação",
+    "mySkillsCareer": "Competências e Carreira",
+    "myPayslips": "Meus Recibos",
+    "myExpenses": "Minhas Despesas",
+    "directory": "Diretório de Colaboradores",
+    "recognition": "Mural de Reconhecimento",
+    "myDocuments": "Meus Documentos"
   },
   "common": {
     "loading": "Carregando...",
@@ -306,7 +317,15 @@
       "firstName": "First name",
       "lastName": "Last name",
       "mfaCode": "Enter 6-digit code"
-    }
+    },
+    "signInSubtitle": "Inicie sessão no seu espaço de trabalho",
+    "demoAccess": "Acesso rápido demo",
+    "demoAdmin": "Administrador RH",
+    "demoAdminDesc": "Acesso completo à plataforma — gerir colaboradores, configurar definições, executar relatórios",
+    "demoManager": "Gestor de Equipa",
+    "demoManagerDesc": "Gestão de equipa — aprovar pedidos, realizar reuniões 1 a 1, ver desempenho da equipa",
+    "demoWorker": "Colaborador",
+    "demoWorkerDesc": "Autoatendimento — ver a sua pontuação Momentum, marcar férias, completar formação, dar reconhecimento"
   },
   "navigation": {
     "home": "Início",

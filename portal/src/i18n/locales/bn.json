@@ -94,7 +94,12 @@
       "admin": "প্রশাসন",
       "talent": "প্রতিভা",
       "people": "মানুষ",
-      "engagement": "সম্পৃক্ততা"
+      "engagement": "সম্পৃক্ততা",
+      "myGrowth": "আমার উন্নয়ন",
+      "myMoney": "আমার অর্থ",
+      "myPeople": "আমার মানুষ",
+      "myUplift": "আমার UPLIFT",
+      "myWork": "আমার কাজ"
     },
     "payslips": "বেতন স্লিপ ও বেতন",
     "performance": "কর্মক্ষমতা",
@@ -104,7 +109,18 @@
     "learning": "শিখন",
     "documents": "ডকুমেন্ট",
     "expenses": "ব্যয়",
-    "sso": "SSO ও নিরাপত্তা"
+    "sso": "SSO ও নিরাপত্তা",
+    "directory": "কোম্পানি ডিরেক্টরি",
+    "home": "হোম",
+    "myDocuments": "আমার ডকুমেন্ট",
+    "myExpenses": "আমার খরচ",
+    "myLearning": "আমার শিক্ষা",
+    "myMomentum": "আমার Momentum",
+    "myPayslips": "আমার বেতন স্লিপ",
+    "myPerformance": "আমার কর্মক্ষমতা",
+    "mySchedule": "আমার সময়সূচী",
+    "mySkillsCareer": "আমার দক্ষতা ও ক্যারিয়ার",
+    "recognition": "স্বীকৃতি ওয়াল"
   },
   "common": {
     "loading": "লোড হচ্ছে...",
@@ -306,7 +322,15 @@
       "firstName": "First name",
       "lastName": "Last name",
       "mfaCode": "Enter 6-digit code"
-    }
+    },
+    "demoAccess": "দ্রুত ডেমো অ্যাক্সেস",
+    "demoAdmin": "HR প্রশাসক",
+    "demoAdminDesc": "সম্পূর্ণ প্ল্যাটফর্ম অ্যাক্সেস — কর্মচারী পরিচালনা, সেটিংস কনফিগার, রিপোর্ট চালান",
+    "demoManager": "বিভাগ ব্যবস্থাপক",
+    "demoManagerDesc": "দল পরিচালনা — অনুরোধ অনুমোদন, 1-on-1 পরিচালনা, দলের কর্মক্ষমতা দেখুন",
+    "demoWorker": "কর্মচারী",
+    "demoWorkerDesc": "স্বয়ং-সেবা — আপনার Momentum Score দেখুন, ছুটি বুক করুন, প্রশিক্ষণ সম্পন্ন করুন, স্বীকৃতি দিন",
+    "signInSubtitle": "আপনার ওয়ার্কস্পেসে সাইন ইন করুন"
   },
   "navigation": {
     "home": "হোম",
@@ -2785,7 +2809,8 @@
     "uploadPayslip": "বেতন স্লিপ আপলোড করুন",
     "currentSalary": "বর্তমান বেতন",
     "lastReview": "শেষ পর্যালোচনা",
-    "overtime": "ওভারটাইম"
+    "overtime": "ওভারটাইম",
+    "myPayslips": "আমার বেতন স্লিপ"
   },
   "learning": {
     "score": "স্কোর",
@@ -2923,7 +2948,8 @@
     "generateDocument": "ডকুমেন্ট তৈরি করুন",
     "policy": "নীতি",
     "idDocument": "পরিচয় ডকুমেন্ট",
-    "hasRightToWork": "কাজের অধিকার আছে"
+    "hasRightToWork": "কাজের অধিকার আছে",
+    "myDocuments": "আমার ডকুমেন্ট"
   },
   "performance": {
     "atRisk": "ঝুঁকিতে",
@@ -3019,7 +3045,9 @@
     "calibrate": "ক্যালিব্রেট করুন",
     "companyGoals": "কোম্পানির লক্ষ্য",
     "moodCheck": "আপনি কেমন অনুভব করছেন?",
-    "inReview": "পর্যালোচনায়"
+    "inReview": "পর্যালোচনায়",
+    "mySubtitle": "আপনার মূল্যায়ন, লক্ষ্য এবং উন্নয়ন",
+    "myTitle": "আমার কর্মক্ষমতা"
   },
   "surveys": {
     "templates": "টেমপ্লেট",
@@ -3112,5 +3140,99 @@
     "switchEntity": "সত্তা পরিবর্তন করুন",
     "selector": "সংস্থা",
     "hq": "প্রধান কার্যালয়"
+  },
+  "directory": {
+    "allDepartments": "সকল বিভাগ",
+    "allLocations": "সকল অবস্থান",
+    "department": "বিভাগ",
+    "directors": "পরিচালকবৃন্দ",
+    "email": "ইমেইল",
+    "grid": "গ্রিড",
+    "gridView": "গ্রিড ভিউ",
+    "list": "তালিকা",
+    "listView": "তালিকা ভিউ",
+    "location": "অবস্থান",
+    "managers": "ব্যবস্থাপকবৃন্দ",
+    "name": "নাম",
+    "noResults": "কোনো সহকর্মী পাওয়া যায়নি",
+    "noResultsHint": "আপনার অনুসন্ধান বা ফিল্টার সামঞ্জস্য করুন",
+    "orgChart": "সংগঠন চার্ট",
+    "orgChartView": "সংগঠন চার্ট ভিউ",
+    "role": "ভূমিকা",
+    "searchPlaceholder": "নাম, ভূমিকা, বিভাগ, বা অবস্থান দিয়ে খুঁজুন...",
+    "sendRecognition": "স্বীকৃতি পাঠান",
+    "showingResults": "{{count}} জন সহকর্মী দেখাচ্ছে",
+    "subtitle": "সংগঠন জুড়ে সহকর্মীদের খুঁজুন এবং সংযুক্ত হন",
+    "tier": {
+      "director": "পরিচালক",
+      "executive": "নির্বাহী",
+      "manager": "ব্যবস্থাপক"
+    },
+    "title": "কোম্পানি ডিরেক্টরি",
+    "viewProfile": "প্রোফাইল দেখুন"
+  },
+  "momentum": {
+    "attendance": "উপস্থিতি",
+    "backToDashboard": "ড্যাশবোর্ডে ফিরে যান",
+    "basedOn": "উপস্থিতি, দক্ষতা, প্রশিক্ষণ ও ফিডব্যাকের উপর ভিত্তি করে",
+    "employee": "কর্মচারী",
+    "engagement": "সম্পৃক্ততা",
+    "goals": "লক্ষ্য: 2/3 সঠিক পথে",
+    "howToImprove": "কীভাবে উন্নতি করবেন",
+    "kudos": "এই মাসে 3টি ইতিবাচক প্রশংসা",
+    "lastReview": "শেষ মূল্যায়ন: 4.2/5",
+    "mandatoryComplete": "4/5 বাধ্যতামূলক সম্পন্ন",
+    "momentum": "Momentum",
+    "onTimeRate": "সময়মতো হার: 97%",
+    "pageTitle": "আমার Momentum Score",
+    "performanceFeedback": "কর্মক্ষমতা ও ফিডব্যাক",
+    "recognitionGiven": "প্রদত্ত স্বীকৃতি: এই মাসে 5",
+    "scoreBreakdown": "স্কোর বিশ্লেষণ",
+    "scoreHistory": "স্কোর ইতিহাস",
+    "shiftCoverage": "শিফট কভারেজ: 100%",
+    "skillsTraining": "দক্ষতা ও প্রশিক্ষণ",
+    "streak": "10-দিনের ধারা 🔥",
+    "surveyCompleted": "সমীক্ষা সম্পন্ন: হ্যাঁ",
+    "tenure": "কার্যকাল: 2.3 বছর",
+    "tipAttendance": "উপস্থিতি ধারা বজায় রাখুন",
+    "tipAttendanceImpact": "উপস্থিতি +2",
+    "tipFireSafety": "অগ্নি নিরাপত্তা প্রশিক্ষণ সম্পন্ন করুন",
+    "tipFireSafetyImpact": "দক্ষতা +5",
+    "tipRecognitions": "আরও 2টি স্বীকৃতি দিন",
+    "tipRecognitionsImpact": "সম্পৃক্ততা +3",
+    "totalSkills": "মোট 12টি দক্ষতা",
+    "trendUp": "গত মাসের থেকে ↑3",
+    "verified": "3টি যাচাইকৃত",
+    "weight": "ওজন: {{pct}}%"
+  },
+  "recognition": {
+    "categories": {
+      "aboveAndBeyond": "প্রত্যাশার ঊর্ধ্বে",
+      "goalCrusher": "Goal Crusher",
+      "greatWork": "দারুণ কাজ",
+      "innovation": "উদ্ভাবন",
+      "problemSolver": "সমস্যা সমাধানকারী",
+      "teamPlayer": "Team Player"
+    },
+    "category": "বিভাগ",
+    "charLimit": "অক্ষর সীমা পূরণ হয়েছে",
+    "filters": {
+      "all": "সকল",
+      "myTeam": "আমার দল",
+      "received": "প্রাপ্ত",
+      "sent": "প্রেরিত"
+    },
+    "giveRecognition": "স্বীকৃতি দিন",
+    "message": "বার্তা",
+    "messagePlaceholder": "তাদের অবদানকে স্বীকৃতি দিয়ে একটি চিন্তাশীল বার্তা লিখুন...",
+    "mostGenerous": "সর্বাধিক উদার (প্রদত্ত)",
+    "mostRecognised": "এই মাসে সর্বাধিক স্বীকৃত",
+    "noRecognitions": "এই ফিল্টারে কোনো স্বীকৃতি দেখানোর নেই।",
+    "recipient": "প্রাপক",
+    "selectRecipient": "একজন সহকর্মী নির্বাচন করুন...",
+    "sendRecognition": "স্বীকৃতি পাঠান",
+    "subtitle": "আপনার সহকর্মীদের অর্জন উদযাপন করুন",
+    "successMessage": "স্বীকৃতি সফলভাবে পাঠানো হয়েছে!",
+    "title": "স্বীকৃতি ওয়াল"
   }
 }

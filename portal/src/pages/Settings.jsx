@@ -13,7 +13,12 @@ import {
   Monitor, Smartphone, Globe, Clock, Download, AlertTriangle,
   ChevronRight, MoreVertical, Eye, History, Sun, Moon, Webhook,
   Palette, Check, Copy, Trash2, Play, Pause, Upload, Image, Crown, Sparkles,
-  KeyRound, Link2, Layout as LayoutIcon
+  KeyRound, Link2, Layout as LayoutIcon,
+  LayoutDashboard, CalendarDays, Timer, CalendarOff, TrendingUp,
+  GraduationCap, Receipt, FileText, ClipboardList, Briefcase,
+  Award, BookUser, Coins, UserPlus, UserMinus, BarChart3,
+  Bell, BellRing, Inbox, ToggleLeft, Flag, Zap, Heart, Radio,
+  Info, RotateCcw
 } from 'lucide-react';
 import { brandingApi } from '../lib/api';
 import { useBranding } from '../lib/branding';
@@ -22,7 +27,10 @@ import { useToast } from '../components/ToastProvider';
 // Tab configuration - names will be translated in the component
 const TABS = [
   { id: 'organization', nameKey: 'settings.organization', icon: Building, adminOnly: true },
+  { id: 'portal-config', nameKey: 'settings.portalConfig', icon: LayoutIcon, adminOnly: true },
   { id: 'branding', nameKey: 'settings.brandingLabel', icon: Crown, adminOnly: true },
+  { id: 'feature-flags', nameKey: 'settings.featureFlags', icon: Flag, adminOnly: true },
+  { id: 'notifications-config', nameKey: 'settings.notificationsConfig', icon: BellRing, adminOnly: true },
   { id: 'navigation', nameKey: 'settings.navigation', icon: Globe, adminOnly: true },
   { id: 'employee-visibility', nameKey: 'settings.employeeVisibility', icon: Eye, adminOnly: true },
   { id: 'users', nameKey: 'settings.teamMembers', icon: Users, adminOnly: true },
@@ -33,7 +41,6 @@ const TABS = [
   { id: 'security', nameKey: 'settings.security', icon: Shield, adminOnly: false },
   { id: 'sessions', nameKey: 'settings.sessions', icon: Monitor, adminOnly: false },
   { id: 'privacy', nameKey: 'settings.privacyData', icon: Eye, adminOnly: false },
-  { id: 'portal-config', nameKey: 'settings.portalConfig', icon: LayoutIcon, adminOnly: true },
 ];
 
 export default function Settings() {
@@ -187,6 +194,12 @@ export default function Settings() {
               )}
               {activeTab === 'portal-config' && isAdmin && (
                 <PortalConfigSettings showMsg={showMsg} />
+              )}
+              {activeTab === 'feature-flags' && isAdmin && (
+                <FeatureFlagsSettings showMsg={showMsg} />
+              )}
+              {activeTab === 'notifications-config' && isAdmin && (
+                <NotificationConfigSettings showMsg={showMsg} />
               )}
             </>
           )}
@@ -2523,13 +2536,63 @@ function SSOSettings({ showMsg }) {
   const [requireMfaAll, setRequireMfaAll] = useState(false);
   const [mfaMethod, setMfaMethod] = useState('authenticator');
 
-  // Demo audit log data
+  // Demo audit log data (50+ realistic entries spanning past month)
   const auditEvents = [
-    { timestamp: '2026-02-04 09:12:34', user: 'maria@acme.com', event: 'SSO Login', ip: '192.168.1.42' },
-    { timestamp: '2026-02-04 08:55:01', user: 'john@acme.com', event: 'Failed SSO Attempt', ip: '10.0.0.15' },
-    { timestamp: '2026-02-03 17:30:22', user: 'admin@acme.com', event: 'Password Changed', ip: '172.16.0.8' },
-    { timestamp: '2026-02-03 14:11:09', user: 'sara@acme.com', event: 'MFA Enabled', ip: '192.168.1.55' },
-    { timestamp: '2026-02-03 10:02:47', user: 'admin@acme.com', event: 'SSO Config Updated', ip: '172.16.0.8' },
+    { timestamp: '2026-02-05 09:12:34', user: 'sarah.chen@grandmetropolitan.com', event: 'SSO Login', ip: '192.168.1.42' },
+    { timestamp: '2026-02-05 08:55:01', user: 'james.williams@grandmetropolitan.com', event: 'SSO Login', ip: '10.0.0.15' },
+    { timestamp: '2026-02-05 08:45:22', user: 'maria.santos@grandmetropolitan.com', event: 'SSO Login', ip: '192.168.1.43' },
+    { timestamp: '2026-02-05 08:30:00', user: 'pierre.dubois@grandmetropolitan.com', event: 'SSO Login', ip: '185.42.10.5' },
+    { timestamp: '2026-02-04 17:30:22', user: 'sarah.chen@grandmetropolitan.com', event: 'Password Changed', ip: '172.16.0.8' },
+    { timestamp: '2026-02-04 16:45:11', user: 'unknown', event: 'Failed Login Attempt', ip: '45.33.22.11' },
+    { timestamp: '2026-02-04 14:11:09', user: 'ahmed.hassan@grandmetropolitan.com', event: 'MFA Enabled', ip: '192.168.1.55' },
+    { timestamp: '2026-02-04 12:30:47', user: 'yuki.tanaka@grandmetropolitan.com', event: 'SSO Login', ip: '203.180.22.1' },
+    { timestamp: '2026-02-04 10:02:47', user: 'sarah.chen@grandmetropolitan.com', event: 'SSO Config Updated', ip: '172.16.0.8' },
+    { timestamp: '2026-02-04 09:15:33', user: 'claire.dubois@grandmetropolitan.com', event: 'SSO Login', ip: '185.42.10.6' },
+    { timestamp: '2026-02-03 18:22:11', user: 'sarah.chen@grandmetropolitan.com', event: 'User Role Changed', ip: '172.16.0.8' },
+    { timestamp: '2026-02-03 16:45:00', user: 'unknown', event: 'Failed Login Attempt', ip: '91.205.111.42' },
+    { timestamp: '2026-02-03 15:30:22', user: 'emily.watson@grandmetropolitan.com', event: 'SSO Login', ip: '192.168.1.44' },
+    { timestamp: '2026-02-03 14:20:11', user: 'oliver.barnes@grandmetropolitan.com', event: 'MFA Disabled', ip: '192.168.1.50' },
+    { timestamp: '2026-02-03 11:45:33', user: 'fatima.alzahra@grandmetropolitan.com', event: 'SSO Login', ip: '94.56.88.12' },
+    { timestamp: '2026-02-03 10:15:22', user: 'sarah.chen@grandmetropolitan.com', event: 'Data Export', ip: '172.16.0.8' },
+    { timestamp: '2026-02-02 17:30:00', user: 'jessica.thompson@grandmetropolitan.com', event: 'SSO Login', ip: '73.42.18.99' },
+    { timestamp: '2026-02-02 16:11:45', user: 'unknown', event: 'Failed Login Attempt', ip: '45.33.22.11' },
+    { timestamp: '2026-02-02 15:22:33', user: 'unknown', event: 'Failed Login Attempt', ip: '45.33.22.11' },
+    { timestamp: '2026-02-02 14:45:11', user: 'account locked: unknown@test.com', event: 'Account Locked', ip: '45.33.22.11' },
+    { timestamp: '2026-02-02 12:30:22', user: 'haruki.nakamura@grandmetropolitan.com', event: 'SSO Login', ip: '203.180.22.5' },
+    { timestamp: '2026-02-02 10:11:00', user: 'sarah.chen@grandmetropolitan.com', event: 'New User Created', ip: '172.16.0.8' },
+    { timestamp: '2026-02-01 18:45:33', user: 'khalid.alrashid@grandmetropolitan.com', event: 'SSO Login', ip: '94.56.88.15' },
+    { timestamp: '2026-02-01 16:22:11', user: 'michael.torres@grandmetropolitan.com', event: 'Password Reset Requested', ip: '73.42.18.101' },
+    { timestamp: '2026-02-01 15:30:00', user: 'michael.torres@grandmetropolitan.com', event: 'Password Changed', ip: '73.42.18.101' },
+    { timestamp: '2026-02-01 14:11:22', user: 'sarah.chen@grandmetropolitan.com', event: 'IP Whitelist Updated', ip: '172.16.0.8' },
+    { timestamp: '2026-02-01 11:45:00', user: 'isabelle.laurent@grandmetropolitan.com', event: 'SSO Login', ip: '185.42.10.8' },
+    { timestamp: '2026-02-01 09:30:33', user: 'victoria.sterling@grandmetropolitan.com', event: 'SSO Login', ip: '172.16.0.1' },
+    { timestamp: '2026-01-31 17:22:11', user: 'sarah.chen@grandmetropolitan.com', event: 'MFA Method Changed', ip: '172.16.0.8' },
+    { timestamp: '2026-01-31 15:11:45', user: 'david.mitchell@grandmetropolitan.com', event: 'SSO Login', ip: '192.168.1.60' },
+    { timestamp: '2026-01-31 14:30:22', user: 'priya.sharma@grandmetropolitan.com', event: 'SSO Login', ip: '192.168.1.61' },
+    { timestamp: '2026-01-31 12:45:00', user: 'sarah.chen@grandmetropolitan.com', event: 'Session Timeout Updated', ip: '172.16.0.8' },
+    { timestamp: '2026-01-31 10:22:33', user: 'tom.hughes@grandmetropolitan.com', event: 'SSO Login', ip: '192.168.1.45' },
+    { timestamp: '2026-01-30 18:11:22', user: 'sophie.martin@grandmetropolitan.com', event: 'Password Changed', ip: '185.42.10.9' },
+    { timestamp: '2026-01-30 16:45:11', user: 'camille.rousseau@grandmetropolitan.com', event: 'MFA Enabled', ip: '185.42.10.10' },
+    { timestamp: '2026-01-30 14:30:00', user: 'jean-pierre.moreau@grandmetropolitan.com', event: 'SSO Login', ip: '185.42.10.11' },
+    { timestamp: '2026-01-30 12:22:45', user: 'layla.ibrahim@grandmetropolitan.com', event: 'SSO Login', ip: '94.56.88.20' },
+    { timestamp: '2026-01-30 10:11:33', user: 'noor.bakri@grandmetropolitan.com', event: 'SSO Login', ip: '94.56.88.21' },
+    { timestamp: '2026-01-29 17:45:22', user: 'omar.mahmoud@grandmetropolitan.com', event: 'Password Reset Requested', ip: '94.56.88.22' },
+    { timestamp: '2026-01-29 16:30:11', user: 'omar.mahmoud@grandmetropolitan.com', event: 'Password Changed', ip: '94.56.88.22' },
+    { timestamp: '2026-01-29 14:22:00', user: 'marcus.johnson@grandmetropolitan.com', event: 'SSO Login', ip: '73.42.18.105' },
+    { timestamp: '2026-01-29 12:11:45', user: 'ashley.williams@grandmetropolitan.com', event: 'MFA Enabled', ip: '73.42.18.106' },
+    { timestamp: '2026-01-29 10:45:33', user: 'carlos.rodriguez@grandmetropolitan.com', event: 'SSO Login', ip: '73.42.18.107' },
+    { timestamp: '2026-01-28 18:30:22', user: 'samantha.lee@grandmetropolitan.com', event: 'SSO Login', ip: '73.42.18.108' },
+    { timestamp: '2026-01-28 16:22:11', user: 'aiko.yamamoto@grandmetropolitan.com', event: 'SSO Login', ip: '203.180.22.10' },
+    { timestamp: '2026-01-28 14:11:00', user: 'wei.zhang@grandmetropolitan.com', event: 'MFA Enabled', ip: '203.180.22.11' },
+    { timestamp: '2026-01-28 12:45:45', user: 'kenji.sato@grandmetropolitan.com', event: 'SSO Login', ip: '203.180.22.12' },
+    { timestamp: '2026-01-28 10:30:33', user: 'mei.lin@grandmetropolitan.com', event: 'SSO Login', ip: '203.180.22.13' },
+    { timestamp: '2026-01-27 17:22:22', user: 'richard.thompson@grandmetropolitan.com', event: 'SSO Login', ip: '172.16.0.5' },
+    { timestamp: '2026-01-27 15:11:11', user: 'sarah.chen@grandmetropolitan.com', event: 'SCIM Provisioning Enabled', ip: '172.16.0.8' },
+    { timestamp: '2026-01-27 14:45:00', user: 'sarah.chen@grandmetropolitan.com', event: 'SCIM Token Regenerated', ip: '172.16.0.8' },
+    { timestamp: '2026-01-27 12:30:45', user: 'unknown', event: 'Failed SSO Attempt', ip: '185.220.101.42' },
+    { timestamp: '2026-01-27 10:22:33', user: 'sarah.chen@grandmetropolitan.com', event: 'Audit Log Exported', ip: '172.16.0.8' },
+    { timestamp: '2026-01-26 18:11:22', user: 'sarah.chen@grandmetropolitan.com', event: 'New User Created', ip: '172.16.0.8' },
+    { timestamp: '2026-01-26 16:45:11', user: 'sarah.chen@grandmetropolitan.com', event: 'User Deactivated', ip: '172.16.0.8' },
   ];
 
   const copyToClipboard = (text) => {
@@ -2843,67 +2906,100 @@ function SSOSettings({ showMsg }) {
 // Module visibility toggles per role and platform
 // ============================================================
 
+// Module definitions with Lucide icons and sensible defaults
+// Columns: Worker Portal, Manager Portal, Mobile App (Worker), Mobile App (Manager)
 const PORTAL_MODULES = [
-  { id: 'dashboard', label: 'Dashboard', defaults: [true, true, true, true] },
-  { id: 'schedule', label: 'Schedule', defaults: [true, true, true, true] },
-  { id: 'time-tracking', label: 'Time Tracking', defaults: [true, true, true, true] },
-  { id: 'time-off', label: 'Time Off', defaults: [true, true, true, true] },
-  { id: 'momentum', label: 'Momentum Score', defaults: [true, true, false, false] },
-  { id: 'performance', label: 'Performance', defaults: [true, false, true, true] },
-  { id: 'skills', label: 'Skills', defaults: [true, false, true, true] },
-  { id: 'learning', label: 'Learning', defaults: [true, true, true, true] },
-  { id: 'career', label: 'Career / Opportunities', defaults: [true, false, true, false] },
-  { id: 'compensation', label: 'Compensation', defaults: [true, true, true, true] },
-  { id: 'expenses', label: 'Expenses', defaults: [true, false, true, true] },
-  { id: 'surveys', label: 'Surveys', defaults: [false, false, true, true] },
-  { id: 'documents', label: 'Documents', defaults: [true, false, true, true] },
-  { id: 'reports', label: 'Reports', defaults: [false, false, true, true] },
-  { id: 'directory', label: 'Company Directory', defaults: [true, true, true, true] },
-  { id: 'recognition', label: 'Recognition Wall', defaults: [true, true, true, true] },
-  { id: 'onboarding', label: 'Onboarding', defaults: [false, false, true, false] },
-  { id: 'offboarding', label: 'Offboarding', defaults: [false, false, true, false] },
+  { id: 'dashboard',      icon: LayoutDashboard, defaults: [true,  true,  true,  true]  },
+  { id: 'schedule',       icon: CalendarDays,    defaults: [true,  true,  true,  true]  },
+  { id: 'time-tracking',  icon: Timer,           defaults: [true,  true,  true,  true]  },
+  { id: 'time-off',       icon: CalendarOff,     defaults: [true,  true,  true,  true]  },
+  { id: 'performance',    icon: TrendingUp,      defaults: [true,  true,  true,  true]  },
+  { id: 'learning',       icon: GraduationCap,   defaults: [true,  true,  true,  true]  },
+  { id: 'expenses',       icon: Receipt,         defaults: [true,  true,  true,  true]  },
+  { id: 'documents',      icon: FileText,        defaults: [true,  true,  true,  true]  },
+  { id: 'surveys',        icon: ClipboardList,   defaults: [false, false, false, false] },
+  { id: 'career',         icon: Briefcase,       defaults: [true,  false, true,  false] },
+  { id: 'recognition',    icon: Award,           defaults: [true,  true,  true,  true]  },
+  { id: 'directory',      icon: BookUser,        defaults: [true,  true,  true,  true]  },
+  { id: 'compensation',   icon: Coins,           defaults: [true,  false, true,  false] },
+  { id: 'onboarding',     icon: UserPlus,        defaults: [false, true,  false, true]  },
+  { id: 'offboarding',    icon: UserMinus,       defaults: [false, true,  false, true]  },
+  { id: 'reports',        icon: BarChart3,       defaults: [false, true,  false, true]  },
 ];
 
-const HOMEPAGE_WIDGETS = [
-  { id: 'announcements', labelKey: 'settings.portalConfig.widgetAnnouncements', fallback: 'Announcements' },
-  { id: 'team-celebrations', labelKey: 'settings.portalConfig.widgetTeamCelebrations', fallback: 'Team Celebrations' },
-  { id: 'quick-actions', labelKey: 'settings.portalConfig.widgetQuickActions', fallback: 'Quick Actions' },
-  { id: 'goals-progress', labelKey: 'settings.portalConfig.widgetGoalsProgress', fallback: 'Goals Progress' },
-  { id: 'leave-balance', labelKey: 'settings.portalConfig.widgetLeaveBalance', fallback: 'Leave Balance' },
-  { id: 'achievements', labelKey: 'settings.portalConfig.widgetAchievements', fallback: 'Achievements' },
-  { id: 'recognition-feed', labelKey: 'settings.portalConfig.widgetRecognitionFeed', fallback: 'Recognition Feed' },
-  { id: 'momentum-score', labelKey: 'settings.portalConfig.widgetMomentumScore', fallback: 'Momentum Score' },
-];
+const MODULE_LABELS = {
+  'dashboard':     'Dashboard',
+  'schedule':      'Schedule',
+  'time-tracking': 'Time Tracking',
+  'time-off':      'Time Off',
+  'performance':   'Performance',
+  'learning':      'Learning',
+  'expenses':      'Expenses',
+  'documents':     'Documents',
+  'surveys':       'Surveys',
+  'career':        'Career / Skills',
+  'recognition':   'Recognition',
+  'directory':     'Directory',
+  'compensation':  'Compensation',
+  'onboarding':    'Onboarding',
+  'offboarding':   'Offboarding',
+  'reports':       'Reports',
+};
+
+const SURFACE_KEYS = ['workerPortal', 'managerPortal', 'workerMobile', 'managerMobile'];
+
+// Reusable custom toggle component
+function ToggleSwitch({ enabled, onChange, size = 'md', ariaLabel }) {
+  const dims = size === 'sm'
+    ? 'h-5 w-9'
+    : 'h-6 w-11';
+  const knob = size === 'sm'
+    ? 'h-3.5 w-3.5'
+    : 'h-4 w-4';
+  const translate = size === 'sm'
+    ? (enabled ? 'translate-x-[18px]' : 'translate-x-[3px]')
+    : (enabled ? 'translate-x-6' : 'translate-x-1');
+
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={enabled}
+      aria-label={ariaLabel}
+      onClick={onChange}
+      className={`relative inline-flex ${dims} items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500 ${
+        enabled ? 'bg-green-500' : 'bg-slate-300'
+      }`}
+    >
+      <span
+        className={`inline-block ${knob} transform rounded-full bg-white shadow transition-transform duration-200 ${translate}`}
+      />
+    </button>
+  );
+}
 
 function PortalConfigSettings({ showMsg }) {
   const { t } = useTranslation();
   const toast = useToast();
 
-  // Build initial module visibility state from defaults
-  const buildInitialModuleState = () => {
+  // Build default state from PORTAL_MODULES
+  const buildDefaults = () => {
     const state = {};
     PORTAL_MODULES.forEach(mod => {
       state[mod.id] = {
-        workerPortal: mod.defaults[0],
-        workerMobile: mod.defaults[1],
-        managerPortal: mod.defaults[2],
+        workerPortal:  mod.defaults[0],
+        managerPortal: mod.defaults[1],
+        workerMobile:  mod.defaults[2],
         managerMobile: mod.defaults[3],
       };
     });
     return state;
   };
 
-  const buildInitialWidgetState = () => {
-    const state = {};
-    HOMEPAGE_WIDGETS.forEach(w => {
-      state[w.id] = true;
-    });
-    return state;
-  };
-
-  const [moduleVisibility, setModuleVisibility] = useState(buildInitialModuleState);
-  const [widgetVisibility, setWidgetVisibility] = useState(buildInitialWidgetState);
+  const [moduleVisibility, setModuleVisibility] = useState(buildDefaults);
   const [saving, setSaving] = useState(false);
+
+  const defaults = buildDefaults();
 
   const toggleModule = (moduleId, field) => {
     setModuleVisibility(prev => ({
@@ -2915,12 +3011,19 @@ function PortalConfigSettings({ showMsg }) {
     }));
   };
 
-  const toggleWidget = (widgetId) => {
-    setWidgetVisibility(prev => ({
-      ...prev,
-      [widgetId]: !prev[widgetId],
-    }));
+  const resetToDefaults = () => {
+    setModuleVisibility(buildDefaults());
+    toast.info(t('settings.portalConfig.resetDone', 'Configuration reset to defaults'));
   };
+
+  // Check if any value differs from default
+  const hasDiff = (moduleId, field) => {
+    return moduleVisibility[moduleId][field] !== defaults[moduleId][field];
+  };
+
+  const hasAnyChanges = PORTAL_MODULES.some(mod =>
+    SURFACE_KEYS.some(k => moduleVisibility[mod.id][k] !== defaults[mod.id][k])
+  );
 
   const handleSave = async () => {
     setSaving(true);
@@ -2935,126 +3038,41 @@ function PortalConfigSettings({ showMsg }) {
     }
   };
 
-  const COLUMN_KEYS = ['workerPortal', 'workerMobile', 'managerPortal', 'managerMobile'];
+  const surfaceHeaders = [
+    { key: 'workerPortal',  label: t('settings.portalConfig.colWorkerPortal', 'Worker Portal'),         icon: Monitor },
+    { key: 'managerPortal', label: t('settings.portalConfig.colManagerPortal', 'Manager Portal'),        icon: Monitor },
+    { key: 'workerMobile',  label: t('settings.portalConfig.colWorkerMobile', 'Mobile App (Worker)'),    icon: Smartphone },
+    { key: 'managerMobile', label: t('settings.portalConfig.colManagerMobile', 'Mobile App (Manager)'),  icon: Smartphone },
+  ];
 
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
         <h2 className="text-xl font-semibold text-slate-900">
-          {t('settings.portalConfig.title', 'Portal Configuration')}
+          {t('settings.portalConfig.title', 'Platform Configuration')}
         </h2>
-        <p className="text-slate-500 mt-1">
-          {t('settings.portalConfig.subtitle', 'Control which modules are visible for each user role across portal and mobile')}
+        <p className="text-slate-500 mt-1 max-w-2xl">
+          {t('settings.portalConfig.subtitle', 'Customise which modules are visible for each role and platform. Changes apply to all users in the corresponding role immediately after saving.')}
         </p>
       </div>
 
-      {/* Module Visibility Toggle Grid */}
-      <div>
-        <h3 className="text-lg font-medium text-slate-900 mb-4">
-          {t('settings.portalConfig.moduleVisibility', 'Module Visibility')}
-        </h3>
-        <div className="overflow-x-auto border border-slate-200 rounded-lg">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-slate-50 border-b border-slate-200">
-                <th className="text-left px-4 py-3 font-medium text-slate-700">
-                  {t('settings.portalConfig.colModule', 'Module')}
-                </th>
-                <th className="text-center px-4 py-3 font-medium text-slate-700">
-                  {t('settings.portalConfig.colWorkersPortal', 'Workers (Portal)')}
-                </th>
-                <th className="text-center px-4 py-3 font-medium text-slate-700">
-                  {t('settings.portalConfig.colWorkersMobile', 'Workers (Mobile)')}
-                </th>
-                <th className="text-center px-4 py-3 font-medium text-slate-700">
-                  {t('settings.portalConfig.colManagersPortal', 'Managers (Portal)')}
-                </th>
-                <th className="text-center px-4 py-3 font-medium text-slate-700">
-                  {t('settings.portalConfig.colManagersMobile', 'Managers (Mobile)')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {PORTAL_MODULES.map((mod, idx) => (
-                <tr
-                  key={mod.id}
-                  className={`border-b border-slate-100 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}
-                >
-                  <td className="px-4 py-3 font-medium text-slate-800">
-                    {t(`settings.portalConfig.module.${mod.id}`, mod.label)}
-                  </td>
-                  {COLUMN_KEYS.map(field => (
-                    <td key={field} className="px-4 py-3 text-center">
-                      <button
-                        type="button"
-                        onClick={() => toggleModule(mod.id, field)}
-                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                          moduleVisibility[mod.id][field] ? 'bg-momentum-500' : 'bg-slate-300'
-                        }`}
-                        aria-label={`${mod.label} ${field}`}
-                      >
-                        <span
-                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                            moduleVisibility[mod.id][field] ? 'translate-x-6' : 'translate-x-1'
-                          }`}
-                        />
-                      </button>
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {/* Action bar */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={resetToDefaults}
+            className="btn btn-secondary flex items-center gap-2 text-sm"
+          >
+            <RotateCcw className="w-4 h-4" />
+            {t('settings.portalConfig.resetDefaults', 'Reset to Defaults')}
+          </button>
+          {hasAnyChanges && (
+            <span className="text-xs text-amber-600 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full font-medium">
+              {t('settings.portalConfig.unsavedChanges', 'Unsaved changes')}
+            </span>
+          )}
         </div>
-      </div>
-
-      {/* Employee Homepage Widgets */}
-      <div>
-        <h3 className="text-lg font-medium text-slate-900 mb-1">
-          {t('settings.portalConfig.homepageWidgets', 'Employee Homepage Widgets')}
-        </h3>
-        <p className="text-slate-500 text-sm mb-4">
-          {t('settings.portalConfig.homepageWidgetsSubtitle', 'Choose which widgets appear on the employee homepage')}
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {HOMEPAGE_WIDGETS.map(widget => (
-            <div
-              key={widget.id}
-              className="flex items-center justify-between p-4 bg-slate-50 rounded-lg"
-            >
-              <span className="font-medium text-slate-800">
-                {t(widget.labelKey, widget.fallback)}
-              </span>
-              <button
-                type="button"
-                onClick={() => toggleWidget(widget.id)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  widgetVisibility[widget.id] ? 'bg-momentum-500' : 'bg-slate-300'
-                }`}
-                aria-label={widget.fallback}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    widgetVisibility[widget.id] ? 'translate-x-6' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Branding note */}
-      <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <AlertTriangle className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-        <p className="text-sm text-blue-700">
-          {t('settings.portalConfig.brandingNote', 'Customise portal branding in the Branding tab')}
-        </p>
-      </div>
-
-      {/* Save button */}
-      <div className="flex justify-end">
         <button
           onClick={handleSave}
           disabled={saving}
@@ -3065,8 +3083,395 @@ function PortalConfigSettings({ showMsg }) {
           ) : (
             <Save className="w-4 h-4" />
           )}
-          {t('settings.portalConfig.saveButton', 'Save Configuration')}
+          {t('settings.portalConfig.saveButton', 'Save Changes')}
         </button>
+      </div>
+
+      {/* Module Toggle Grid */}
+      <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-slate-50 border-b border-slate-200">
+              <th className="text-left px-5 py-3.5 font-semibold text-slate-700 w-56">
+                {t('settings.portalConfig.colModule', 'Module')}
+              </th>
+              {surfaceHeaders.map(col => (
+                <th key={col.key} className="text-center px-3 py-3.5 font-semibold text-slate-700">
+                  <div className="flex flex-col items-center gap-1">
+                    <col.icon className="w-4 h-4 text-slate-400" />
+                    <span className="text-xs leading-tight">{col.label}</span>
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {PORTAL_MODULES.map((mod, idx) => {
+              const ModIcon = mod.icon;
+              const rowHasChange = SURFACE_KEYS.some(k => hasDiff(mod.id, k));
+              return (
+                <tr
+                  key={mod.id}
+                  className={`border-b border-slate-100 transition-colors ${
+                    rowHasChange
+                      ? 'bg-amber-50/40'
+                      : idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'
+                  }`}
+                >
+                  <td className="px-5 py-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                        <ModIcon className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <span className="font-medium text-slate-800">
+                        {t(`settings.portalConfig.module.${mod.id}`, MODULE_LABELS[mod.id] || mod.id)}
+                      </span>
+                    </div>
+                  </td>
+                  {SURFACE_KEYS.map(field => {
+                    const changed = hasDiff(mod.id, field);
+                    return (
+                      <td key={field} className="px-3 py-3 text-center">
+                        <div className="flex flex-col items-center gap-1">
+                          <ToggleSwitch
+                            enabled={moduleVisibility[mod.id][field]}
+                            onChange={() => toggleModule(mod.id, field)}
+                            ariaLabel={`${MODULE_LABELS[mod.id] || mod.id} ${field}`}
+                          />
+                          {changed && (
+                            <span className="block w-1.5 h-1.5 rounded-full bg-amber-400" title={t('settings.portalConfig.changedFromDefault', 'Changed from default')} />
+                          )}
+                        </div>
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Legend */}
+      <div className="flex items-start gap-3 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+        <Info className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
+        <div className="text-sm text-slate-600 space-y-1">
+          <p>{t('settings.portalConfig.legendLine1', 'Green toggles indicate the module is visible. Grey toggles indicate hidden.')}</p>
+          <p className="flex items-center gap-2">
+            <span className="inline-block w-2 h-2 rounded-full bg-amber-400" />
+            {t('settings.portalConfig.legendLine2', 'Amber dot means the value differs from the recommended default.')}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// FEATURE FLAGS SETTINGS
+// Toggle platform-wide features on/off
+// ============================================================
+
+const FEATURE_FLAG_ITEMS = [
+  {
+    id: 'momentum_scores',
+    icon: Zap,
+    labelKey: 'settings.featureFlags.momentumScores',
+    labelFallback: 'Momentum Scores',
+    descKey: 'settings.featureFlags.momentumScoresDesc',
+    descFallback: 'Display a composite engagement and performance score for each employee. The score combines attendance, training completion, peer recognition, and goal progress into a single metric.',
+    defaultOn: true,
+  },
+  {
+    id: 'gamification',
+    icon: Award,
+    labelKey: 'settings.featureFlags.gamification',
+    labelFallback: 'Gamification and Badges',
+    descKey: 'settings.featureFlags.gamificationDesc',
+    descFallback: 'Award badges, streaks, and achievement milestones to employees as they complete tasks, training modules, and reach performance targets.',
+    defaultOn: true,
+  },
+  {
+    id: 'recognition',
+    icon: Heart,
+    labelKey: 'settings.featureFlags.recognition',
+    labelFallback: 'Peer Recognition',
+    descKey: 'settings.featureFlags.recognitionDesc',
+    descFallback: 'Allow employees and managers to send public kudos and recognition to colleagues. Recognition appears on the Recognition Wall and in the activity feed.',
+    defaultOn: true,
+  },
+  {
+    id: 'pulse_surveys',
+    icon: Radio,
+    labelKey: 'settings.featureFlags.pulseSurveys',
+    labelFallback: 'Pulse Surveys',
+    descKey: 'settings.featureFlags.pulseSurveysDesc',
+    descFallback: 'Send short, periodic check-in surveys to employees to gauge engagement, sentiment, and satisfaction. Results are aggregated and anonymised for managers.',
+    defaultOn: false,
+  },
+];
+
+function FeatureFlagsSettings({ showMsg }) {
+  const { t } = useTranslation();
+  const toast = useToast();
+
+  const buildDefaults = () => {
+    const state = {};
+    FEATURE_FLAG_ITEMS.forEach(f => { state[f.id] = f.defaultOn; });
+    return state;
+  };
+
+  const [flags, setFlags] = useState(buildDefaults);
+  const [saving, setSaving] = useState(false);
+
+  const toggleFlag = (id) => {
+    setFlags(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      toast.success(t('settings.featureFlags.saved', 'Feature flags saved'));
+    } catch (error) {
+      toast.error(t('settings.featureFlags.saveError', 'Failed to save feature flags'));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-xl font-semibold text-slate-900">
+          {t('settings.featureFlags.title', 'Feature Flags')}
+        </h2>
+        <p className="text-slate-500 mt-1 max-w-2xl">
+          {t('settings.featureFlags.subtitle', 'Enable or disable platform-wide features. Disabled features will be hidden from all users across portal and mobile.')}
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {FEATURE_FLAG_ITEMS.map(item => {
+          const ItemIcon = item.icon;
+          const isOn = flags[item.id];
+          return (
+            <div
+              key={item.id}
+              className={`flex items-start gap-4 p-5 rounded-xl border transition-colors ${
+                isOn
+                  ? 'border-green-200 bg-green-50/30'
+                  : 'border-slate-200 bg-white'
+              }`}
+            >
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
+                isOn ? 'bg-green-100 text-green-600' : 'bg-slate-100 text-slate-400'
+              }`}>
+                <ItemIcon className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="font-medium text-slate-900">
+                    {t(item.labelKey, item.labelFallback)}
+                  </h3>
+                  <ToggleSwitch
+                    enabled={isOn}
+                    onChange={() => toggleFlag(item.id)}
+                    ariaLabel={item.labelFallback}
+                  />
+                </div>
+                <p className="text-sm text-slate-500 mt-1">
+                  {t(item.descKey, item.descFallback)}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex justify-end">
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="btn btn-primary flex items-center gap-2"
+        >
+          {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+          {t('settings.featureFlags.saveButton', 'Save Changes')}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// NOTIFICATION CONFIGURATION SETTINGS
+// Toggle notification delivery channels per notification type
+// ============================================================
+
+const NOTIFICATION_TYPES = [
+  { id: 'shift_reminders',     icon: CalendarDays,  labelKey: 'settings.notifConfig.shiftReminders',     fallback: 'Shift Reminders' },
+  { id: 'time_off_approvals',  icon: CalendarOff,   labelKey: 'settings.notifConfig.timeOffApprovals',   fallback: 'Time Off Approvals' },
+  { id: 'expense_approvals',   icon: Receipt,       labelKey: 'settings.notifConfig.expenseApprovals',   fallback: 'Expense Approvals' },
+  { id: 'recognition_received',icon: Award,         labelKey: 'settings.notifConfig.recognitionReceived',fallback: 'Recognition Received' },
+  { id: 'survey_available',    icon: ClipboardList, labelKey: 'settings.notifConfig.surveyAvailable',    fallback: 'Survey Available' },
+  { id: 'training_due',        icon: GraduationCap, labelKey: 'settings.notifConfig.trainingDue',        fallback: 'Training Due' },
+  { id: 'performance_review',  icon: TrendingUp,    labelKey: 'settings.notifConfig.performanceReview',  fallback: 'Performance Review' },
+  { id: 'announcement',        icon: Bell,          labelKey: 'settings.notifConfig.announcement',       fallback: 'Announcement' },
+];
+
+const NOTIF_CHANNELS = [
+  { key: 'email', labelKey: 'settings.notifConfig.channelEmail', fallback: 'Email',             icon: Mail },
+  { key: 'push',  labelKey: 'settings.notifConfig.channelPush',  fallback: 'Push Notification', icon: BellRing },
+  { key: 'inApp', labelKey: 'settings.notifConfig.channelInApp', fallback: 'In-App',            icon: Inbox },
+];
+
+function NotificationConfigSettings({ showMsg }) {
+  const { t } = useTranslation();
+  const toast = useToast();
+
+  const buildDefaults = () => {
+    const state = {};
+    NOTIFICATION_TYPES.forEach(nt => {
+      state[nt.id] = { email: true, push: true, inApp: true };
+    });
+    return state;
+  };
+
+  const [prefs, setPrefs] = useState(buildDefaults);
+  const [saving, setSaving] = useState(false);
+  const defaults = buildDefaults();
+
+  const toggle = (typeId, channel) => {
+    setPrefs(prev => ({
+      ...prev,
+      [typeId]: { ...prev[typeId], [channel]: !prev[typeId][channel] },
+    }));
+  };
+
+  const resetToDefaults = () => {
+    setPrefs(buildDefaults());
+    toast.info(t('settings.notifConfig.resetDone', 'Notification preferences reset to defaults'));
+  };
+
+  const hasDiff = (typeId, channel) => prefs[typeId][channel] !== defaults[typeId][channel];
+
+  const hasAnyChanges = NOTIFICATION_TYPES.some(nt =>
+    NOTIF_CHANNELS.some(ch => hasDiff(nt.id, ch.key))
+  );
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      toast.success(t('settings.notifConfig.saved', 'Notification preferences saved'));
+    } catch (error) {
+      toast.error(t('settings.notifConfig.saveError', 'Failed to save notification preferences'));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-xl font-semibold text-slate-900">
+          {t('settings.notifConfig.title', 'Notification Preferences')}
+        </h2>
+        <p className="text-slate-500 mt-1 max-w-2xl">
+          {t('settings.notifConfig.subtitle', 'Configure the default notification delivery channels for each event type. These defaults apply to all users and can be overridden individually.')}
+        </p>
+      </div>
+
+      {/* Action bar */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button onClick={resetToDefaults} className="btn btn-secondary flex items-center gap-2 text-sm">
+            <RotateCcw className="w-4 h-4" />
+            {t('settings.notifConfig.resetDefaults', 'Reset to Defaults')}
+          </button>
+          {hasAnyChanges && (
+            <span className="text-xs text-amber-600 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full font-medium">
+              {t('settings.notifConfig.unsavedChanges', 'Unsaved changes')}
+            </span>
+          )}
+        </div>
+        <button onClick={handleSave} disabled={saving} className="btn btn-primary flex items-center gap-2">
+          {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+          {t('settings.notifConfig.saveButton', 'Save Changes')}
+        </button>
+      </div>
+
+      {/* Notification Grid */}
+      <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-slate-50 border-b border-slate-200">
+              <th className="text-left px-5 py-3.5 font-semibold text-slate-700 w-56">
+                {t('settings.notifConfig.colType', 'Notification Type')}
+              </th>
+              {NOTIF_CHANNELS.map(ch => (
+                <th key={ch.key} className="text-center px-3 py-3.5 font-semibold text-slate-700">
+                  <div className="flex flex-col items-center gap-1">
+                    <ch.icon className="w-4 h-4 text-slate-400" />
+                    <span className="text-xs leading-tight">{t(ch.labelKey, ch.fallback)}</span>
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {NOTIFICATION_TYPES.map((nt, idx) => {
+              const NtIcon = nt.icon;
+              const rowChanged = NOTIF_CHANNELS.some(ch => hasDiff(nt.id, ch.key));
+              return (
+                <tr
+                  key={nt.id}
+                  className={`border-b border-slate-100 transition-colors ${
+                    rowChanged
+                      ? 'bg-amber-50/40'
+                      : idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'
+                  }`}
+                >
+                  <td className="px-5 py-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                        <NtIcon className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <span className="font-medium text-slate-800">
+                        {t(nt.labelKey, nt.fallback)}
+                      </span>
+                    </div>
+                  </td>
+                  {NOTIF_CHANNELS.map(ch => {
+                    const changed = hasDiff(nt.id, ch.key);
+                    return (
+                      <td key={ch.key} className="px-3 py-3 text-center">
+                        <div className="flex flex-col items-center gap-1">
+                          <ToggleSwitch
+                            enabled={prefs[nt.id][ch.key]}
+                            onChange={() => toggle(nt.id, ch.key)}
+                            ariaLabel={`${nt.fallback} ${ch.fallback}`}
+                          />
+                          {changed && (
+                            <span className="block w-1.5 h-1.5 rounded-full bg-amber-400" title={t('settings.notifConfig.changedFromDefault', 'Changed from default')} />
+                          )}
+                        </div>
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Info */}
+      <div className="flex items-start gap-3 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+        <Info className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
+        <p className="text-sm text-slate-600">
+          {t('settings.notifConfig.infoNote', 'These are organisation-wide defaults. Individual users can adjust their own notification preferences from their account settings.')}
+        </p>
       </div>
     </div>
   );

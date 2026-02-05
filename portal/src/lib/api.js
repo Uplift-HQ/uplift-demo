@@ -91,12 +91,14 @@ const generateDemoShifts = generateShifts;
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
-// Demo mode - always use demo data (no backend)
-export const DEMO_MODE = true;
+// Demo mode - env-driven, falls back to demo data when enabled
+export const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
 
 class ApiClient {
   constructor() {
     this.token = localStorage.getItem('uplift_token');
+    this.refreshToken = localStorage.getItem('uplift_refresh_token');
+    this._refreshPromise = null;
   }
 
   setToken(token) {
@@ -105,6 +107,15 @@ class ApiClient {
       localStorage.setItem('uplift_token', token);
     } else {
       localStorage.removeItem('uplift_token');
+    }
+  }
+
+  setRefreshToken(token) {
+    this.refreshToken = token;
+    if (token) {
+      localStorage.setItem('uplift_refresh_token', token);
+    } else {
+      localStorage.removeItem('uplift_refresh_token');
     }
   }
 
@@ -133,6 +144,7 @@ class ApiClient {
     const config = {
       method,
       headers,
+      credentials: 'include',
     };
 
     if (data && method !== 'GET') {
@@ -140,10 +152,22 @@ class ApiClient {
     }
 
     try {
-      const response = await fetch(url, config);
+      let response = await fetch(url, config);
+
+      // Token refresh on 401
+      if (response.status === 401 && this.refreshToken && !options._isRetry) {
+        const refreshed = await this._tryRefresh();
+        if (refreshed) {
+          // Retry the original request with new token
+          headers['Authorization'] = `Bearer ${this.getToken()}`;
+          config.headers = headers;
+          response = await fetch(url, { ...config });
+        }
+      }
 
       if (response.status === 401) {
         this.setToken(null);
+        this.setRefreshToken(null);
         localStorage.removeItem('uplift_user');
         const error = new Error('Session expired');
         error.status = 401;
@@ -152,11 +176,39 @@ class ApiClient {
 
       return this.handleResponse(response);
     } catch (error) {
-      if (error.name !== 'TypeError') {
+      if (error.status !== 401) {
         console.error('API Error:', error);
       }
       throw error;
     }
+  }
+
+  async _tryRefresh() {
+    // Deduplicate concurrent refresh requests
+    if (this._refreshPromise) return this._refreshPromise;
+    this._refreshPromise = (async () => {
+      try {
+        const res = await fetch(`${API_URL}/auth/refresh`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ refreshToken: this.refreshToken }),
+          credentials: 'include',
+        });
+        if (!res.ok) return false;
+        const data = await res.json();
+        if (data.accessToken) {
+          this.setToken(data.accessToken);
+          if (data.refreshToken) this.setRefreshToken(data.refreshToken);
+          return true;
+        }
+        return false;
+      } catch {
+        return false;
+      } finally {
+        this._refreshPromise = null;
+      }
+    })();
+    return this._refreshPromise;
   }
 
   // Demo data router - returns appropriate data based on path
@@ -329,9 +381,10 @@ class ApiClient {
       return { notifications: DEMO_NOTIFICATIONS };
     }
 
-    // Auth
+    // Auth - read from localStorage to respect logged-in persona
     if (path === '/auth/me') {
-      return { user: DEMO_USER };
+      const stored = localStorage.getItem('uplift_user');
+      return { user: stored ? JSON.parse(stored) : DEMO_USER };
     }
 
     // Default empty response
@@ -394,9 +447,11 @@ class ApiClient {
         method: 'POST',
         headers,
         body: formData,
+        credentials: 'include',
       });
       if (response.status === 401) {
         this.setToken(null);
+        this.setRefreshToken(null);
         localStorage.removeItem('uplift_user');
         const error = new Error('Session expired');
         error.status = 401;
@@ -419,9 +474,9 @@ export const api = new ApiClient();
 // ============================================================
 
 const DEMO_PERSONAS = {
-  'sarah.chen@grandmetro.com': { ...DEMO_USER, id: 'demo-admin', email: 'sarah.chen@grandmetro.com', firstName: 'Sarah', lastName: 'Chen', role: 'admin' },
-  'james.williams@grandmetro.com': { ...DEMO_USER, id: 'demo-manager', email: 'james.williams@grandmetro.com', firstName: 'James', lastName: 'Williams', role: 'manager' },
-  'marc.hunt@grandmetro.com': { ...DEMO_USER, id: 'demo-worker', email: 'marc.hunt@grandmetro.com', firstName: 'Marc', lastName: 'Hunt', role: 'worker' },
+  'admin@demo.com': { ...DEMO_USER, id: 'demo-admin', email: 'admin@demo.com', firstName: 'Sarah', lastName: 'Chen', role: 'admin' },
+  'manager@demo.com': { ...DEMO_USER, id: 'demo-manager', email: 'manager@demo.com', firstName: 'James', lastName: 'Williams', role: 'manager' },
+  'worker@demo.com': { ...DEMO_USER, id: 'demo-worker', email: 'worker@demo.com', firstName: 'Maria', lastName: 'Santos', role: 'worker' },
 };
 
 export const authApi = {
@@ -434,6 +489,15 @@ export const authApi = {
       return { token, user: persona };
     }
     const result = await api.post('/auth/login', { email, password });
+    // Backend returns { accessToken, refreshToken, user }
+    if (result.accessToken) {
+      api.setToken(result.accessToken);
+      if (result.refreshToken) {
+        api.setRefreshToken(result.refreshToken);
+      }
+      return { token: result.accessToken, user: result.user };
+    }
+    // Fallback for { token, user } format
     if (result.token) {
       api.setToken(result.token);
     }
@@ -441,6 +505,7 @@ export const authApi = {
   },
   logout: () => {
     api.setToken(null);
+    api.setRefreshToken(null);
     localStorage.removeItem('uplift_user');
     return Promise.resolve({ success: true });
   },

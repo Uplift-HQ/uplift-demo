@@ -232,7 +232,7 @@ export default function Login() {
           <div className="inline-flex flex-col items-center gap-3 mb-4">
             <UpliftLogo size={48} showWordmark={true} variant="white" />
           </div>
-          <p className="text-slate-400">{t('auth.signInSubtitle', 'Sign in to your workspace')}</p>
+          <p className="text-slate-400">{t('auth.signInSubtitle', 'Welcome to the Grand Metropolitan Hotel Group')}</p>
         </div>
 
         {/* Login form */}
@@ -315,9 +315,9 @@ export default function Login() {
           </div>
           <div className="grid grid-cols-1 gap-3">
             {[
-              { role: 'admin', email: 'sarah.chen@grandmetro.com', name: 'Sarah Chen', title: t('auth.demoAdmin', 'HR Administrator'), desc: t('auth.demoAdminDesc', 'Full platform access — manage employees, configure settings, run reports'), icon: ShieldIcon, color: 'momentum' },
-              { role: 'manager', email: 'james.williams@grandmetro.com', name: 'James Williams', title: t('auth.demoManager', 'Department Manager'), desc: t('auth.demoManagerDesc', 'Team management — approve requests, run 1-on-1s, view team performance'), icon: UsersIcon, color: 'blue' },
-              { role: 'worker', email: 'marc.hunt@grandmetro.com', name: 'Marc Hunt', title: t('auth.demoWorker', 'Employee'), desc: t('auth.demoWorkerDesc', 'Self-service — view your Momentum Score, book leave, complete training, give recognition'), icon: UserIcon, color: 'green' },
+              { role: 'admin', email: 'admin@demo.com', password: 'admin123', name: 'Sarah Chen', title: t('auth.demoAdmin', 'HR Administrator'), desc: t('auth.demoAdminDesc', 'Full platform access — manage employees, configure settings, run reports'), icon: ShieldIcon, color: 'momentum' },
+              { role: 'manager', email: 'manager@demo.com', password: 'manager123', name: 'James Williams', title: t('auth.demoManager', 'Department Manager'), desc: t('auth.demoManagerDesc', 'Team management — approve requests, run 1-on-1s, view team performance'), icon: UsersIcon, color: 'blue' },
+              { role: 'worker', email: 'worker@demo.com', password: 'worker123', name: 'Maria Santos', title: t('auth.demoWorker', 'Employee'), desc: t('auth.demoWorkerDesc', 'Self-service — view your Momentum Score, book leave, complete training, give recognition'), icon: UserIcon, color: 'green' },
             ].map((persona) => (
               <button
                 key={persona.role}
@@ -325,7 +325,7 @@ export default function Login() {
                   setError('');
                   setLoading(true);
                   try {
-                    await login(persona.email, 'demo');
+                    await login(persona.email, persona.password);
                   } catch (err) {
                     setError(err.message);
                     setLoading(false);

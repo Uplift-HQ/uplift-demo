@@ -4,7 +4,7 @@
 // ============================================================
 
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth, RequireAuth, RequireAdmin } from './lib/auth';
+import { useAuth, RequireAuth, RequireAdmin, RequireManager } from './lib/auth';
 import { EntityProvider } from './lib/entityContext';
 
 // Layout
@@ -83,35 +83,40 @@ export default function App() {
           </RequireAuth>
         }
       >
+        {/* Open to all roles */}
         <Route path="/" element={<Dashboard />} />
-        <Route path="/employees" element={<Employees />} />
-        <Route path="/employees/:id" element={<EmployeeDetail />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/org-onboarding" element={<RequireAdmin><OrgOnboarding /></RequireAdmin>} />
         <Route path="/schedule" element={<Schedule />} />
-        <Route path="/shift-templates" element={<ShiftTemplates />} />
         <Route path="/time-tracking" element={<TimeTracking />} />
         <Route path="/time-off" element={<TimeOff />} />
-        <Route path="/locations" element={<Locations />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/career" element={<Career />} />
-        <Route path="/bulk-import" element={<BulkImport />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/integrations" element={<Integrations />} />
-        <Route path="/activity" element={<Activity />} />
         <Route path="/performance" element={<Performance />} />
-        <Route path="/compensation" element={<Compensation />} />
-        <Route path="/documents" element={<Documents />} />
         <Route path="/learning" element={<Learning />} />
-        <Route path="/surveys" element={<Surveys />} />
+        <Route path="/compensation" element={<Compensation />} />
         <Route path="/expenses" element={<Expenses />} />
-        <Route path="/offboarding" element={<Offboarding />} />
+        <Route path="/documents" element={<Documents />} />
         <Route path="/momentum" element={<Momentum />} />
         <Route path="/recognition" element={<Recognition />} />
         <Route path="/directory" element={<Directory />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/career" element={<Career />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/skills" element={<Skills />} />
         <Route path="/settings/notifications" element={<NotificationSettings />} />
+
+        {/* Manager and above only */}
+        <Route path="/employees" element={<RequireManager><Employees /></RequireManager>} />
+        <Route path="/employees/:id" element={<RequireManager><EmployeeDetail /></RequireManager>} />
+        <Route path="/onboarding" element={<RequireManager><Onboarding /></RequireManager>} />
+        <Route path="/offboarding" element={<RequireManager><Offboarding /></RequireManager>} />
+        <Route path="/reports" element={<RequireManager><Reports /></RequireManager>} />
+
+        {/* Admin only */}
+        <Route path="/org-onboarding" element={<RequireAdmin><OrgOnboarding /></RequireAdmin>} />
+        <Route path="/shift-templates" element={<RequireAdmin><ShiftTemplates /></RequireAdmin>} />
+        <Route path="/locations" element={<RequireAdmin><Locations /></RequireAdmin>} />
+        <Route path="/bulk-import" element={<RequireAdmin><BulkImport /></RequireAdmin>} />
+        <Route path="/integrations" element={<RequireAdmin><Integrations /></RequireAdmin>} />
+        <Route path="/activity" element={<RequireAdmin><Activity /></RequireAdmin>} />
+        <Route path="/surveys" element={<RequireAdmin><Surveys /></RequireAdmin>} />
+        <Route path="/settings" element={<RequireAdmin><Settings /></RequireAdmin>} />
       </Route>
 
       {/* Catch-all redirect */}

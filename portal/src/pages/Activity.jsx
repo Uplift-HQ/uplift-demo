@@ -17,7 +17,7 @@ import {
 
 export default function Activity() {
   const { t } = useTranslation();
-  const { user, isManager, isAdmin } = useAuth();
+  const { user, isManagerOrAbove, isAdmin } = useAuth();
   const toast = useToast();
   const [activeTab, setActiveTab] = useState('pending');
   const [filter, setFilter] = useState('all');

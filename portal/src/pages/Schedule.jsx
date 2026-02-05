@@ -26,7 +26,7 @@ const VIEW_MODES = {
 };
 
 export default function Schedule() {
-  const { user, isManager } = useAuth();
+  const { user, isManagerOrAbove } = useAuth();
   const { t } = useTranslation();
   const toast = useToast();
 
@@ -193,7 +193,7 @@ export default function Schedule() {
     e.preventDefault();
     setDropTarget(null);
 
-    if (!draggedShift || !isManager) return;
+    if (!draggedShift || !isManagerOrAbove) return;
 
     const dateStr = format(day, 'yyyy-MM-dd');
     const updatedShift = {
@@ -396,7 +396,7 @@ export default function Schedule() {
           </div>
 
           <div className="flex items-center gap-3">
-            {isManager && (
+            {isManagerOrAbove && (
               <>
                 <button
                   onClick={() => setShowAiModal(true)}
@@ -626,13 +626,13 @@ export default function Schedule() {
                           className={`p-1 border-r border-slate-100 last:border-r-0 min-h-[70px] overflow-hidden transition-colors ${
                             isToday ? 'bg-blue-50/30' : ''
                           } ${isDropZone ? 'bg-blue-100 ring-2 ring-blue-400 ring-inset' : ''} ${
-                            isManager ? 'cursor-pointer hover:bg-slate-50' : ''
+                            isManagerOrAbove ? 'cursor-pointer hover:bg-slate-50' : ''
                           }`}
-                          onDragOver={(e) => isManager && handleDragOver(e, employee.id, day)}
+                          onDragOver={(e) => isManagerOrAbove && handleDragOver(e, employee.id, day)}
                           onDragLeave={handleDragLeave}
-                          onDrop={(e) => isManager && handleDrop(e, employee.id, day)}
+                          onDrop={(e) => isManagerOrAbove && handleDrop(e, employee.id, day)}
                           onClick={() => {
-                            if (isManager && dayShifts.length === 0) {
+                            if (isManagerOrAbove && dayShifts.length === 0) {
                               setSelectedSlot({ date: day, employeeId: employee.id });
                               setShowAddModal(true);
                             }
@@ -643,7 +643,7 @@ export default function Schedule() {
                               key={shift.id}
                               shift={shift}
                               employee={employee}
-                              onDragStart={isManager ? handleDragStart : null}
+                              onDragStart={isManagerOrAbove ? handleDragStart : null}
                               calculateSkillsMatch={calculateSkillsMatch}
                               onSelect={() => setSelectedShift({ ...shift, employee_name: `${employee.first_name} ${employee.last_name}`, employee_role: employee.role })}
                               t={t}
@@ -771,7 +771,7 @@ export default function Schedule() {
                       <p className="text-sm font-medium text-slate-900">{request.employee_name}</p>
                       <p className="text-xs text-slate-500">{request.start_date} - {request.end_date}</p>
                       <p className="text-xs text-slate-500">{t(`timeOff.types.${request.type?.toLowerCase().replace(/\s+/g, '')}`, request.type)}</p>
-                      {isManager && (
+                      {isManagerOrAbove && (
                         <div className="flex gap-2 mt-2">
                           <button
                             onClick={() => handleTimeOffAction(request.id, 'approve')}
@@ -812,7 +812,7 @@ export default function Schedule() {
                         {swap.requester_name} → {swap.target_name}
                       </p>
                       <p className="text-xs text-slate-500">{swap.shift_date} - {swap.shift_time}</p>
-                      {isManager && (
+                      {isManagerOrAbove && (
                         <div className="flex gap-2 mt-2">
                           <button
                             onClick={() => handleSwapAction(swap.id, 'approve')}

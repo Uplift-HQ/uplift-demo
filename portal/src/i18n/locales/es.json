@@ -97,14 +97,25 @@
       "engagement": "COMPROMISO"
     },
     "payslips": "Nóminas y Retribución",
-    "performance": "Rendimiento",
+    "performance": "Evaluaciones",
     "onboarding": "Incorporación",
     "surveys": "Encuestas",
     "offboarding": "Desvinculación",
     "learning": "Formación",
-    "documents": "Documentos",
+    "documents": "Documentos RH",
     "expenses": "Gastos",
-    "sso": "SSO y Seguridad"
+    "sso": "SSO y Seguridad",
+    "home": "Inicio",
+    "myMomentum": "Mi Momentum",
+    "mySchedule": "Mi Horario",
+    "myPerformance": "Mi Rendimiento",
+    "myLearning": "Mi Formación",
+    "mySkillsCareer": "Competencias y Carrera",
+    "myPayslips": "Mis Nóminas",
+    "myExpenses": "Mis Gastos",
+    "directory": "Directorio de Empleados",
+    "recognition": "Muro de Reconocimiento",
+    "myDocuments": "Mis Documentos"
   },
   "common": {
     "loading": "Cargando...",
@@ -306,7 +317,15 @@
       "firstName": "First name",
       "lastName": "Last name",
       "mfaCode": "Enter 6-digit code"
-    }
+    },
+    "signInSubtitle": "Inicia sesión en tu espacio de trabajo",
+    "demoAccess": "Acceso rápido demo",
+    "demoAdmin": "Administrador de RH",
+    "demoAdminDesc": "Acceso completo a la plataforma — gestionar empleados, configurar ajustes, ejecutar informes",
+    "demoManager": "Jefe de Equipo",
+    "demoManagerDesc": "Gestión de equipo — aprobar solicitudes, realizar reuniones 1 a 1, ver rendimiento del equipo",
+    "demoWorker": "Empleado",
+    "demoWorkerDesc": "Autoservicio — ver tu puntuación Momentum, solicitar vacaciones, completar formación, dar reconocimiento"
   },
   "navigation": {
     "home": "Inicio",

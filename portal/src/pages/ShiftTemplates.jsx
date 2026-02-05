@@ -16,7 +16,7 @@ import { format, addDays } from 'date-fns';
 
 export default function ShiftTemplates() {
   const { t } = useTranslation();
-  const { isManager } = useAuth();
+  const { isManagerOrAbove } = useAuth();
   const toast = useToast();
   const [templates, setTemplates] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -69,7 +69,7 @@ export default function ShiftTemplates() {
     }
   };
 
-  if (!isManager) {
+  if (!isManagerOrAbove) {
     return (
       <div className="text-center py-12">
         <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-4" />

@@ -199,7 +199,15 @@
       "firstName": "First name",
       "lastName": "Last name",
       "mfaCode": "Enter 6-digit code"
-    }
+    },
+    "signInSubtitle": "Melden Sie sich in Ihrem Arbeitsbereich an",
+    "demoAccess": "Schnellzugang Demo",
+    "demoAdmin": "HR-Administrator",
+    "demoAdminDesc": "Vollständiger Plattformzugang — Mitarbeiter verwalten, Einstellungen konfigurieren, Berichte erstellen",
+    "demoManager": "Teamleiter",
+    "demoManagerDesc": "Teamverwaltung — Anfragen genehmigen, 1-zu-1-Gespräche führen, Teamleistung einsehen",
+    "demoWorker": "Mitarbeiter",
+    "demoWorkerDesc": "Self-Service — Momentum-Score einsehen, Urlaub buchen, Schulungen absolvieren, Anerkennung geben"
   },
   "navigation": {
     "home": "Startseite",
@@ -1977,14 +1985,25 @@
       "engagement": "ENGAGEMENT"
     },
     "payslips": "Gehaltsabrechnungen & Vergütung",
-    "performance": "Leistung",
+    "performance": "Leistungsbeurteilung",
     "onboarding": "Einarbeitung",
     "surveys": "Umfragen",
     "offboarding": "Offboarding",
     "learning": "Lernen",
-    "documents": "Dokumente",
+    "documents": "HR-Dokumente",
     "expenses": "Spesen",
-    "sso": "SSO & Sicherheit"
+    "sso": "SSO & Sicherheit",
+    "home": "Startseite",
+    "myMomentum": "Mein Momentum",
+    "mySchedule": "Mein Dienstplan",
+    "myPerformance": "Meine Leistung",
+    "myLearning": "Meine Weiterbildung",
+    "mySkillsCareer": "Kompetenzen & Karriere",
+    "myPayslips": "Meine Gehaltsabrechnungen",
+    "myExpenses": "Meine Spesen",
+    "directory": "Mitarbeiterverzeichnis",
+    "recognition": "Anerkennungswand",
+    "myDocuments": "Meine Dokumente"
   },
   "bulkImport": {
     "title": "Massenimport",

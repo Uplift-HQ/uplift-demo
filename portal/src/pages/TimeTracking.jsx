@@ -26,14 +26,14 @@ const safeNum = (val) => {
 };
 
 export default function TimeTracking() {
-  const { user, isManager } = useAuth();
+  const { user, isManagerOrAbove } = useAuth();
   const { t } = useTranslation();
   const [entries, setEntries] = useState([]);
   const [pendingEntries, setPendingEntries] = useState([]);
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [tab, setTab] = useState(isManager ? 'pending' : 'clock');
+  const [tab, setTab] = useState(isManagerOrAbove ? 'pending' : 'clock');
   const [selectedEntries, setSelectedEntries] = useState([]);
   const [toast, setToast] = useState(null);
   const [filters, setFilters] = useState({ locationId: '', startDate: format(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd'), endDate: format(new Date(), 'yyyy-MM-dd') });
@@ -53,7 +53,7 @@ export default function TimeTracking() {
       ]);
       setEntries(entriesRes.entries || []);
       setLocations(locationsRes.locations || []);
-      if (isManager) {
+      if (isManagerOrAbove) {
         const pendingRes = await timeApi.getPending();
         setPendingEntries(pendingRes.entries || []);
       }
@@ -165,9 +165,9 @@ export default function TimeTracking() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{t('timeTracking.title', 'Time Tracking')}</h1>
-          <p className="text-gray-600">{isManager ? t('timeTracking.managerSubtitle', 'Review and approve timesheets') : t('timeTracking.employeeSubtitle', 'Track your working hours')}</p>
+          <p className="text-gray-600">{isManagerOrAbove ? t('timeTracking.managerSubtitle', 'Review and approve timesheets') : t('timeTracking.employeeSubtitle', 'Track your working hours')}</p>
         </div>
-        {isManager && (
+        {isManagerOrAbove && (
           <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50">
             <Download className="h-4 w-4" />
             {t('settings.dataExport', 'Export')}
@@ -177,8 +177,8 @@ export default function TimeTracking() {
 
       {/* Tabs */}
       <div className="flex gap-1 border-b">
-        {!isManager && <button onClick={() => setTab('clock')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'clock' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.clockIn', 'Clock In/Out')}</button>}
-        {isManager && <button onClick={() => setTab('pending')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'pending' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('common.pending', 'Pending')} ({pendingEntries.length})</button>}
+        {!isManagerOrAbove && <button onClick={() => setTab('clock')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'clock' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.clockIn', 'Clock In/Out')}</button>}
+        {isManagerOrAbove && <button onClick={() => setTab('pending')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'pending' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('common.pending', 'Pending')} ({pendingEntries.length})</button>}
         <button onClick={() => setTab('history')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'history' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.history', 'History')}</button>
       </div>
 
@@ -204,7 +204,7 @@ export default function TimeTracking() {
       )}
 
       {/* Pending Approvals Tab */}
-      {tab === 'pending' && isManager && (
+      {tab === 'pending' && isManagerOrAbove && (
         <div className="space-y-4">
           {selectedEntries.length > 0 && (
             <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg border border-blue-200">

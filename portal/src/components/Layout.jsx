@@ -47,140 +47,204 @@ import {
   DollarSign,
   UserCircle,
   FolderOpen,
+  Check,
 } from 'lucide-react';
 
-// Sectioned navigation with role-based visibility
-const getNavSections = (role, t) => {
-  const isAdmin = role === 'admin';
-  const isManager = role === 'manager' || isAdmin;
+// Small coloured dot/square component for location indicators (no emoji flags)
+function LocationDot({ color, size = 10 }) {
+  return (
+    <span
+      className="inline-block rounded-sm flex-shrink-0"
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: color,
+      }}
+    />
+  );
+}
 
-  // Worker gets completely different navigation
-  if (!isManager) {
+// Sectioned navigation with 3-tier role-based visibility
+const getNavSections = (role, t) => {
+  const isAdmin = role === 'admin' || role === 'superadmin';
+  const isManager = role === 'manager';
+
+  // WORKER: Personal self-service navigation
+  if (!isAdmin && !isManager) {
     return [
       {
         label: t('nav.section.myUplift', 'MY UPLIFT'),
         items: [
-          { name: t('nav.home', 'Home'), href: '/', icon: Home, show: true },
-          { name: t('nav.myMomentum', 'My Momentum'), href: '/momentum', icon: Zap, show: true },
+          { name: t('nav.home', 'Home'), href: '/', icon: Home },
+          { name: t('nav.myMomentum', 'My Momentum'), href: '/momentum', icon: Zap },
         ],
       },
       {
         label: t('nav.section.myWork', 'MY WORK'),
         items: [
-          { name: t('nav.mySchedule', 'My Schedule'), href: '/schedule', icon: Calendar, show: true },
-          { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock, show: true },
-          { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella, show: true },
+          { name: t('nav.mySchedule', 'My Schedule'), href: '/schedule', icon: Calendar },
+          { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock },
+          { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella },
         ],
       },
       {
         label: t('nav.section.myGrowth', 'MY GROWTH'),
         items: [
-          { name: t('nav.myPerformance', 'My Performance'), href: '/performance', icon: Target, show: true },
-          { name: t('nav.myLearning', 'My Learning'), href: '/learning', icon: GraduationCap, show: true },
-          { name: t('nav.mySkillsCareer', 'My Skills & Career'), href: '/career', icon: Award, show: true },
-          { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase, show: true },
+          { name: t('nav.myPerformance', 'My Performance'), href: '/performance', icon: Target },
+          { name: t('nav.myLearning', 'My Learning'), href: '/learning', icon: GraduationCap },
+          { name: t('nav.mySkillsCareer', 'My Skills & Career'), href: '/career', icon: Award },
+          { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase },
         ],
       },
       {
         label: t('nav.section.myMoney', 'MY MONEY'),
         items: [
-          { name: t('nav.myPayslips', 'My Payslips'), href: '/compensation', icon: Wallet, show: true },
-          { name: t('nav.myExpenses', 'My Expenses'), href: '/expenses', icon: Receipt, show: true },
+          { name: t('nav.myPayslips', 'My Payslips'), href: '/compensation', icon: Wallet },
+          { name: t('nav.myExpenses', 'My Expenses'), href: '/expenses', icon: Receipt },
         ],
       },
       {
-        label: t('nav.section.myPeople', 'MY PEOPLE'),
+        label: t('nav.section.myStuff', 'MY STUFF'),
         items: [
-          { name: t('nav.directory', 'Company Directory'), href: '/directory', icon: Users, show: true },
-          { name: t('nav.recognition', 'Recognition Wall'), href: '/recognition', icon: Heart, show: true },
-          { name: t('nav.myDocuments', 'My Documents'), href: '/documents', icon: FileText, show: true },
-          { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings, show: true },
+          { name: t('nav.directory', 'Company Directory'), href: '/directory', icon: Users },
+          { name: t('nav.recognition', 'Recognition Wall'), href: '/recognition', icon: Heart },
+          { name: t('nav.myDocuments', 'My Documents'), href: '/documents', icon: FileText },
+          { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings },
         ],
       },
-    ].map(section => ({
-      ...section,
-      items: section.items.filter(item => item.show),
-    })).filter(section => section.items.length > 0);
+    ];
   }
 
-  // Admin/Manager navigation (keep existing)
+  // MANAGER: Team-scoped navigation
+  if (isManager) {
+    return [
+      {
+        label: t('nav.section.overview', 'OVERVIEW'),
+        items: [
+          { name: t('nav.dashboard', 'Dashboard'), href: '/', icon: LayoutDashboard },
+        ],
+      },
+      {
+        label: t('nav.section.myTeam', 'MY TEAM'),
+        items: [
+          { name: t('nav.teamMembers', 'Team Members'), href: '/employees', icon: Users },
+          { name: t('nav.onboarding', 'Onboarding'), href: '/onboarding', icon: UserPlus },
+          { name: t('nav.offboarding', 'Offboarding'), href: '/offboarding', icon: UserMinus },
+        ],
+      },
+      {
+        label: t('nav.section.workforce', 'WORKFORCE'),
+        items: [
+          { name: t('nav.schedule', 'Schedule'), href: '/schedule', icon: Calendar },
+          { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock },
+          { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella },
+        ],
+      },
+      {
+        label: t('nav.section.talent', 'TALENT'),
+        items: [
+          { name: t('nav.performance', 'Performance'), href: '/performance', icon: Target },
+          { name: t('nav.learning', 'Learning'), href: '/learning', icon: GraduationCap },
+        ],
+      },
+      {
+        label: t('nav.section.compensation', 'COMPENSATION'),
+        items: [
+          { name: t('nav.expenses', 'Expenses'), href: '/expenses', icon: Receipt },
+        ],
+      },
+      {
+        label: t('nav.section.engagement', 'ENGAGEMENT'),
+        items: [
+          { name: t('nav.recognition', 'Recognition Wall'), href: '/recognition', icon: Heart },
+          { name: t('nav.directory', 'Directory'), href: '/directory', icon: Users },
+        ],
+      },
+      {
+        label: t('nav.section.admin', 'ADMIN'),
+        items: [
+          { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings },
+        ],
+      },
+    ];
+  }
+
+  // ADMIN: Full platform access
   return [
     {
       label: t('nav.section.overview', 'OVERVIEW'),
       items: [
-        { name: t('nav.dashboard', 'Dashboard'), href: '/', icon: LayoutDashboard, show: true },
+        { name: t('nav.dashboard', 'Dashboard'), href: '/', icon: LayoutDashboard },
       ],
     },
     {
       label: t('nav.section.people', 'PEOPLE'),
       items: [
-        { name: t('nav.employees', 'Employees'), href: '/employees', icon: Users, show: isManager },
-        { name: t('nav.onboarding', 'Onboarding'), href: '/onboarding', icon: UserPlus, show: isManager },
-        { name: t('nav.offboarding', 'Offboarding'), href: '/offboarding', icon: UserMinus, show: isManager },
+        { name: t('nav.employees', 'Employees'), href: '/employees', icon: Users },
+        { name: t('nav.onboarding', 'Onboarding'), href: '/onboarding', icon: UserPlus },
+        { name: t('nav.offboarding', 'Offboarding'), href: '/offboarding', icon: UserMinus },
       ],
     },
     {
       label: t('nav.section.workforce', 'WORKFORCE'),
       items: [
-        { name: t('nav.schedule', 'Schedule'), href: '/schedule', icon: Calendar, show: true },
-        { name: t('nav.templates', 'Templates'), href: '/shift-templates', icon: Copy, show: isManager },
-        { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock, show: true },
-        { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella, show: true },
+        { name: t('nav.schedule', 'Schedule'), href: '/schedule', icon: Calendar },
+        { name: t('nav.templates', 'Templates'), href: '/shift-templates', icon: Copy },
+        { name: t('nav.timeTracking', 'Time Tracking'), href: '/time-tracking', icon: Clock },
+        { name: t('nav.timeOff', 'Time Off'), href: '/time-off', icon: Umbrella },
       ],
     },
     {
       label: t('nav.section.talent', 'TALENT'),
       items: [
-        { name: t('nav.performance', 'Performance'), href: '/performance', icon: Target, show: isManager },
-        { name: t('nav.skills', 'Skills'), href: '/skills', icon: Award, show: isManager },
-        { name: t('nav.learning', 'Learning'), href: '/learning', icon: GraduationCap, show: true },
-        { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase, show: true },
-        { name: t('nav.myCareer', 'My Career'), href: '/career', icon: TrendingUp, show: !isManager },
+        { name: t('nav.performance', 'Performance'), href: '/performance', icon: Target },
+        { name: t('nav.skills', 'Skills'), href: '/skills', icon: Award },
+        { name: t('nav.learning', 'Learning'), href: '/learning', icon: GraduationCap },
+        { name: t('nav.opportunities', 'Opportunities'), href: '/jobs', icon: Briefcase },
       ],
     },
     {
       label: t('nav.section.compensation', 'COMPENSATION'),
       items: [
-        { name: t('nav.payslips', 'Payslips & Pay'), href: '/compensation', icon: Wallet, show: isManager },
-        { name: t('nav.expenses', 'Expenses'), href: '/expenses', icon: Receipt, show: true },
+        { name: t('nav.payslips', 'Payslips & Pay'), href: '/compensation', icon: Wallet },
+        { name: t('nav.expenses', 'Expenses'), href: '/expenses', icon: Receipt },
       ],
     },
     {
       label: t('nav.section.engagement', 'ENGAGEMENT'),
       items: [
-        { name: t('nav.surveys', 'Surveys'), href: '/surveys', icon: MessageSquare, show: isManager },
+        { name: t('nav.surveys', 'Surveys'), href: '/surveys', icon: MessageSquare },
+        { name: t('nav.recognition', 'Recognition Wall'), href: '/recognition', icon: Heart },
+        { name: t('nav.directory', 'Directory'), href: '/directory', icon: Users },
       ],
     },
     {
       label: t('nav.section.documents', 'DOCUMENTS'),
       items: [
-        { name: t('nav.documents', 'Documents'), href: '/documents', icon: FileText, show: isManager },
+        { name: t('nav.documents', 'Documents'), href: '/documents', icon: FileText },
       ],
     },
     {
       label: t('nav.section.analytics', 'ANALYTICS'),
       items: [
-        { name: t('nav.reports', 'Reports'), href: '/reports', icon: BarChart3, show: isManager },
-        { name: t('nav.activity', 'Activity'), href: '/activity', icon: ClipboardCheck, show: isManager },
+        { name: t('nav.reports', 'Reports'), href: '/reports', icon: BarChart3 },
+        { name: t('nav.activity', 'Activity'), href: '/activity', icon: ClipboardCheck },
       ],
     },
     {
       label: t('nav.section.admin', 'ADMIN'),
       items: [
-        { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings, show: true },
-        { name: t('nav.integrations', 'Integrations'), href: '/integrations', icon: Plug, show: isManager },
-        { name: t('nav.locations', 'Locations'), href: '/locations', icon: MapPin, show: isManager },
-        { name: t('nav.bulkImport', 'Bulk Import'), href: '/bulk-import', icon: Upload, show: isManager },
+        { name: t('nav.settings', 'Settings'), href: '/settings', icon: Settings },
+        { name: t('nav.integrations', 'Integrations'), href: '/integrations', icon: Plug },
+        { name: t('nav.locations', 'Locations'), href: '/locations', icon: MapPin },
+        { name: t('nav.bulkImport', 'Bulk Import'), href: '/bulk-import', icon: Upload },
       ],
     },
-  ].map(section => ({
-    ...section,
-    items: section.items.filter(item => item.show),
-  })).filter(section => section.items.length > 0);
+  ];
 };
 
 export default function Layout() {
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
   const { branding } = useBranding();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -189,14 +253,22 @@ export default function Layout() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
   const [entityMenuOpen, setEntityMenuOpen] = useState(false);
-  const { currentEntity, setCurrentEntity, entities } = useEntity();
+  const { selectedLocation, setSelectedLocation, locations } = useEntity();
   const navSections = getNavSections(user?.role, t);
+
+  // Determine if user can switch locations (admin/superadmin only)
+  const canSwitchLocation = user?.role === 'admin' || user?.role === 'superadmin';
+
+  // For non-admin users, show their assigned location (default: London Mayfair)
+  const userLocation = canSwitchLocation
+    ? selectedLocation
+    : (locations.find((l) => l.id === 'london') || locations[1]);
 
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
@@ -215,9 +287,9 @@ export default function Layout() {
             ) : (
               <img src="/logo.svg" alt="Uplift" className="w-8 h-8" />
             )}
-            <span className="text-white font-semibold text-lg">{branding.brand_name || 'Uplift'}</span>
+            <span className="text-white font-semibold text-sm leading-tight">{branding.brand_name || t('brand.grandMetropolitan', 'Grand Metropolitan')}</span>
           </div>
-          <button 
+          <button
             onClick={() => setSidebarOpen(false)}
             className="lg:hidden text-slate-400 hover:text-white"
           >
@@ -277,69 +349,93 @@ export default function Layout() {
 
           <div className="flex-1" />
 
-          {/* Entity / Multi-Country Selector */}
+          {/* Entity / Location Selector */}
           <div className="relative mr-1">
-            <button
-              onClick={() => setEntityMenuOpen(!entityMenuOpen)}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 rounded-lg border border-slate-200"
-            >
-              <Building2 className="w-4 h-4 text-slate-500" />
-              <span className="hidden md:block font-medium truncate max-w-[180px]">{currentEntity.name}</span>
-              <ChevronDown className="w-4 h-4 text-slate-400" />
-            </button>
-
-            {entityMenuOpen && (
+            {canSwitchLocation ? (
               <>
-                <div
-                  className="fixed inset-0 z-10"
-                  onClick={() => setEntityMenuOpen(false)}
-                />
-                <div className="absolute right-0 mt-1 w-72 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20">
-                  <div className="px-3 py-2 border-b border-slate-100">
-                    <p className="text-xs font-semibold text-slate-500 uppercase">{t('entity.selectEntity', 'Select Entity')}</p>
-                  </div>
-                  {entities.map((entity) => (
-                    <button
-                      key={entity.id}
-                      onClick={() => {
-                        setCurrentEntity(entity);
-                        setEntityMenuOpen(false);
-                      }}
-                      className={`w-full px-3 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-slate-50 ${
-                        currentEntity.id === entity.id ? 'bg-momentum-50' : ''
-                      }`}
-                    >
-                      <span className="text-lg">{entity.flag}</span>
-                      <div className="flex-1 min-w-0">
-                        <p className={`font-medium truncate ${currentEntity.id === entity.id ? 'text-momentum-600' : 'text-slate-700'}`}>
-                          {entity.name}
-                        </p>
-                        <p className="text-xs text-slate-500">
-                          {entity.tag && (
-                            <span className="inline-block mr-1.5 px-1.5 py-0 bg-momentum-100 text-momentum-600 rounded text-[10px] font-semibold uppercase">{entity.tag}</span>
-                          )}
-                          {t('entity.employeeCount', '{{count}} employees', { count: entity.employees })}
-                        </p>
+                {/* Admin: clickable dropdown */}
+                <button
+                  onClick={() => setEntityMenuOpen(!entityMenuOpen)}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 rounded-lg border border-slate-200"
+                >
+                  <LocationDot color={selectedLocation.color} size={10} />
+                  <span className="hidden md:block font-medium truncate max-w-[180px]">
+                    {selectedLocation.name}
+                    {selectedLocation.code !== 'ALL' && (
+                      <span className="text-slate-400 ml-1">[{selectedLocation.code}]</span>
+                    )}
+                  </span>
+                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                </button>
+
+                {entityMenuOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-10"
+                      onClick={() => setEntityMenuOpen(false)}
+                    />
+                    <div className="absolute right-0 mt-1 w-72 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20">
+                      <div className="px-3 py-2 border-b border-slate-100">
+                        <p className="text-xs font-semibold text-slate-500 uppercase">{t('entity.selectLocation', 'Select Location')}</p>
                       </div>
-                      {currentEntity.id === entity.id && (
-                        <span className="text-momentum-500 flex-shrink-0">&#10003;</span>
-                      )}
-                    </button>
-                  ))}
-                  <div className="border-t border-slate-100 mt-1">
-                    <button
-                      onClick={() => {
-                        setEntityMenuOpen(false);
-                        navigate('/settings');
-                      }}
-                      className="w-full px-3 py-2 text-left text-sm text-momentum-600 hover:bg-slate-50 font-medium flex items-center gap-2"
-                    >
-                      <Settings className="w-4 h-4" />
-                      {t('entity.manage', 'Manage Entities')}
-                    </button>
-                  </div>
-                </div>
+                      {locations.map((location) => (
+                        <button
+                          key={location.id}
+                          onClick={() => {
+                            setSelectedLocation(location.id);
+                            setEntityMenuOpen(false);
+                          }}
+                          className={`w-full px-3 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-slate-50 ${
+                            selectedLocation.id === location.id ? 'bg-momentum-50' : ''
+                          }`}
+                        >
+                          <LocationDot color={location.color} size={12} />
+                          <div className="flex-1 min-w-0">
+                            <p className={`font-medium truncate ${selectedLocation.id === location.id ? 'text-momentum-600' : 'text-slate-700'}`}>
+                              {location.name}
+                              {location.code !== 'ALL' && (
+                                <span className="text-slate-400 font-normal ml-1">({location.code})</span>
+                              )}
+                            </p>
+                            <p className="text-xs text-slate-500">
+                              {location.tag && (
+                                <span className="inline-block mr-1.5 px-1.5 py-0 bg-momentum-100 text-momentum-600 rounded text-[10px] font-semibold uppercase">{location.tag}</span>
+                              )}
+                              {location.country
+                                ? t('entity.locationCountry', '{{country}} -- {{count}} employees', { country: location.country, count: location.employees })
+                                : t('entity.employeeCount', '{{count}} employees', { count: location.employees })
+                              }
+                            </p>
+                          </div>
+                          {selectedLocation.id === location.id && (
+                            <Check className="w-4 h-4 text-momentum-500 flex-shrink-0" />
+                          )}
+                        </button>
+                      ))}
+                      <div className="border-t border-slate-100 mt-1">
+                        <button
+                          onClick={() => {
+                            setEntityMenuOpen(false);
+                            navigate('/locations');
+                          }}
+                          className="w-full px-3 py-2 text-left text-sm text-momentum-600 hover:bg-slate-50 font-medium flex items-center gap-2"
+                        >
+                          <Settings className="w-4 h-4" />
+                          {t('entity.manageLocations', 'Manage Locations')}
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
               </>
+            ) : (
+              /* Manager / Worker: static location label (no dropdown) */
+              <div className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-700 rounded-lg border border-slate-100 bg-slate-50">
+                <LocationDot color={userLocation.color} size={10} />
+                <span className="hidden md:block font-medium truncate max-w-[180px]">
+                  {userLocation.name}
+                </span>
+              </div>
             )}
           </div>
 
@@ -350,7 +446,7 @@ export default function Layout() {
               className="flex items-center gap-1 p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"
             >
               <Globe className="w-5 h-5" />
-              <span className="hidden sm:block text-xs font-medium">{currentLang.flag || '🌐'}</span>
+              <span className="hidden sm:block text-xs font-medium uppercase">{currentLang.code || 'EN'}</span>
             </button>
 
             {langMenuOpen && (
@@ -375,10 +471,10 @@ export default function Layout() {
                         currentLang.code === lang.code ? 'bg-momentum-50 text-momentum-600' : 'text-slate-700'
                       }`}
                     >
-                      <span className="text-lg">{lang.flag}</span>
+                      <span className="text-xs font-mono w-6 text-center uppercase text-slate-400">{lang.code}</span>
                       <span className="flex-1">{lang.nativeName}</span>
                       {currentLang.code === lang.code && (
-                        <span className="text-momentum-500">✓</span>
+                        <Check className="w-4 h-4 text-momentum-500" />
                       )}
                     </button>
                   ))}
@@ -413,9 +509,9 @@ export default function Layout() {
 
             {userMenuOpen && (
               <>
-                <div 
+                <div
                   className="fixed inset-0 z-10"
-                  onClick={() => setUserMenuOpen(false)} 
+                  onClick={() => setUserMenuOpen(false)}
                 />
                 <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20">
                   <div className="px-4 py-2 border-b border-slate-100">
