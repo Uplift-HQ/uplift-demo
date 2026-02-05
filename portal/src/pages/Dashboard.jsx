@@ -61,6 +61,7 @@ import {
   ChevronDown,
   Gauge,
   Wallet,
+  Palmtree,
 } from 'lucide-react';
 import DemandForecast from '../components/DemandForecast';
 
