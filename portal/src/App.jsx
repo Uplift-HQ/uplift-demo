@@ -6,6 +6,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth, RequireAuth, RequireAdmin, RequireManager } from './lib/auth';
 import { EntityProvider } from './lib/entityContext';
+import { ViewProvider } from './lib/viewContext';
 
 // Layout
 import Layout from './components/Layout';
@@ -79,7 +80,9 @@ export default function App() {
       <Route
         element={
           <RequireAuth>
-            <Layout />
+            <ViewProvider>
+              <Layout />
+            </ViewProvider>
           </RequireAuth>
         }
       >

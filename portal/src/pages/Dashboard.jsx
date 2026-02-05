@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { dashboardApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { useEntity } from '../lib/entityContext';
+import { useView } from '../lib/viewContext';
 import {
   Users,
   Calendar,
@@ -58,6 +59,8 @@ import {
   Info,
   X,
   ChevronDown,
+  Gauge,
+  Wallet,
 } from 'lucide-react';
 import DemandForecast from '../components/DemandForecast';
 
@@ -84,6 +87,7 @@ export default function Dashboard() {
   const { t } = useTranslation();
   const { user, isManagerOrAbove, isAdmin, isManager, isWorker } = useAuth();
   const { currentEntity } = useEntity();
+  const { isPersonalView } = useView();
   const navigate = useNavigate();
 
   const ENTITY_MULTIPLIERS = {
@@ -160,6 +164,18 @@ export default function Dashboard() {
   // ============================================================
   // ROLE ROUTING
   // ============================================================
+
+  // If Admin or Manager is in "My View", show personal dashboard
+  if (isPersonalView && (isAdmin || isManager)) {
+    return (
+      <PersonalDashboard
+        t={t}
+        user={user}
+        showTipsModal={showTipsModal}
+        setShowTipsModal={setShowTipsModal}
+      />
+    );
+  }
 
   if (isAdmin) {
     return (
@@ -1525,6 +1541,259 @@ function WorkerDashboard({ t, user, showTipsModal, setShowTipsModal }) {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ============================================================
+// PERSONAL DASHBOARD — "My View" for Admins and Managers
+// Same personal employee experience as Workers
+// ============================================================
+
+function PersonalDashboard({ t, user, showTipsModal, setShowTipsModal }) {
+  const [scoreAnimated, setScoreAnimated] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setScoreAnimated(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const firstName = user?.firstName || 'Sarah';
+
+  // Demo personal data
+  const momentumScore = 85;
+  const leaveBalance = 22;
+  const nextShift = user?.role === 'admin' ? null : 'Tomorrow, 09:00 - 17:00'; // Admins typically don't have shifts
+  const trainingCompleted = 8;
+  const trainingTotal = 10;
+  const trainingCompliancePercent = Math.round((trainingCompleted / trainingTotal) * 100);
+
+  // Personal action items
+  const personalActions = [
+    { id: 1, type: 'expense', label: t('personal.pendingExpenses', 'Pending expense claims'), count: 2, amount: '£245.00', href: '/expenses' },
+    { id: 2, type: 'training', label: t('personal.overdueTraining', 'Overdue training courses'), count: 1, urgency: 'warning', href: '/learning' },
+    { id: 3, type: 'review', label: t('personal.upcomingReview', 'Upcoming performance review'), date: '15 Feb 2026', with: 'James Chen', href: '/performance' },
+    { id: 4, type: 'recognition', label: t('personal.unreadRecognition', 'Unread recognition'), count: 3, href: '/recognition' },
+  ];
+
+  // Personal activity feed
+  const activityFeed = [
+    { id: 1, type: 'recognition', message: t('personal.activity.recognition', 'You received recognition from Emma Watson'), time: '2 hours ago', icon: Heart },
+    { id: 2, type: 'training', message: t('personal.activity.trainingCompleted', 'Completed GDPR Refresher Course'), time: 'Yesterday', icon: GraduationCap },
+    { id: 3, type: 'payslip', message: t('personal.activity.payslipAvailable', 'January 2026 payslip is available'), time: '3 days ago', icon: FileText },
+    { id: 4, type: 'document', message: t('personal.activity.documentUploaded', 'HR uploaded updated employment contract'), time: '1 week ago', icon: FileText },
+  ];
+
+  // SVG ring calculations
+  const RING_RADIUS = 54;
+  const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
+  const ringOffset = RING_CIRCUMFERENCE - (momentumScore / 100) * RING_CIRCUMFERENCE;
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">
+          {t('personal.welcome', 'Welcome')}, {firstName}
+        </h1>
+        <p className="text-slate-600">
+          {t('personal.subtitle', 'Your personal dashboard and employee self-service')}
+        </p>
+      </div>
+
+      {/* Top row — personal status cards (4 cards) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Momentum Score Card */}
+        <div className="bg-white rounded-xl border border-slate-200 p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-slate-500 mb-1">{t('personal.myMomentum', 'My Momentum')}</p>
+              <p className="text-3xl font-bold text-momentum-500">{momentumScore}</p>
+              <div className="flex items-center gap-1 mt-1">
+                <TrendingUp className="w-3 h-3 text-green-500" />
+                <span className="text-xs text-green-600">{t('personal.top15', 'Top 15% in your team')}</span>
+              </div>
+            </div>
+            <div className="relative">
+              <svg className="w-16 h-16" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r={RING_RADIUS} fill="none" stroke="#f1f5f9" strokeWidth="8" />
+                <circle
+                  cx="60" cy="60" r={RING_RADIUS}
+                  fill="none"
+                  stroke="#F26522"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  strokeDasharray={RING_CIRCUMFERENCE}
+                  strokeDashoffset={scoreAnimated ? ringOffset : RING_CIRCUMFERENCE}
+                  transform="rotate(-90 60 60)"
+                  style={{ transition: 'stroke-dashoffset 1s ease-out' }}
+                />
+              </svg>
+              <Zap className="w-6 h-6 text-momentum-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            </div>
+          </div>
+        </div>
+
+        {/* Leave Balance Card */}
+        <div className="bg-white rounded-xl border border-slate-200 p-4">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+              <Palmtree className="w-5 h-5 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-sm text-slate-500">{t('personal.leaveBalance', 'Leave Balance')}</p>
+              <p className="text-2xl font-bold text-slate-900">{leaveBalance} {t('personal.days', 'days')}</p>
+            </div>
+          </div>
+          <p className="text-xs text-slate-500">{t('personal.nextLeave', 'Next booked')}: 20-24 Mar</p>
+        </div>
+
+        {/* Next Shift Card */}
+        <div className="bg-white rounded-xl border border-slate-200 p-4">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+              <Calendar className="w-5 h-5 text-green-600" />
+            </div>
+            <div>
+              <p className="text-sm text-slate-500">{t('personal.nextShift', 'Next Shift')}</p>
+              {nextShift ? (
+                <p className="text-lg font-semibold text-slate-900">{nextShift}</p>
+              ) : (
+                <p className="text-sm text-slate-400">{t('personal.noShiftsScheduled', 'No shifts scheduled')}</p>
+              )}
+            </div>
+          </div>
+          {nextShift && (
+            <Link to="/schedule" className="text-xs text-momentum-500 hover:text-momentum-600">
+              {t('personal.viewSchedule', 'View full schedule')}
+            </Link>
+          )}
+        </div>
+
+        {/* Training Status Card */}
+        <div className="bg-white rounded-xl border border-slate-200 p-4">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+              <GraduationCap className="w-5 h-5 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-sm text-slate-500">{t('personal.myTraining', 'My Training')}</p>
+              <p className="text-lg font-semibold text-slate-900">{trainingCompleted}/{trainingTotal} {t('personal.complete', 'complete')}</p>
+            </div>
+          </div>
+          <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-purple-500 rounded-full transition-all duration-1000"
+              style={{ width: scoreAnimated ? `${trainingCompliancePercent}%` : '0%' }}
+            />
+          </div>
+          <p className="text-xs text-slate-500 mt-1">{t('personal.nextDue', 'Next due')}: Fire Safety (7 days)</p>
+        </div>
+      </div>
+
+      {/* Second row — personal action items */}
+      <div className="card">
+        <div className="card-header flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-5 h-5 text-amber-500" />
+            <h2 className="font-semibold text-slate-900">{t('personal.actionItems', 'Action Items')}</h2>
+          </div>
+        </div>
+        <div className="card-body">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {personalActions.map((action) => (
+              <Link
+                key={action.id}
+                to={action.href}
+                className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                  action.type === 'expense' ? 'bg-purple-100 text-purple-600' :
+                  action.type === 'training' ? 'bg-amber-100 text-amber-600' :
+                  action.type === 'review' ? 'bg-blue-100 text-blue-600' :
+                  'bg-pink-100 text-pink-600'
+                }`}>
+                  {action.type === 'expense' && <Receipt className="w-5 h-5" />}
+                  {action.type === 'training' && <GraduationCap className="w-5 h-5" />}
+                  {action.type === 'review' && <Target className="w-5 h-5" />}
+                  {action.type === 'recognition' && <Heart className="w-5 h-5" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-slate-900">{action.label}</p>
+                  {action.count && (
+                    <p className="text-xs text-slate-500">{action.count} {action.amount ? `(${action.amount})` : ''}</p>
+                  )}
+                  {action.date && (
+                    <p className="text-xs text-slate-500">{action.date} {action.with ? `with ${action.with}` : ''}</p>
+                  )}
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Third row — Two columns: Quick links + Activity feed */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Quick Links */}
+        <div className="card">
+          <div className="card-header">
+            <h2 className="font-semibold text-slate-900">{t('personal.quickLinks', 'Quick Links')}</h2>
+          </div>
+          <div className="card-body">
+            <div className="grid grid-cols-2 gap-3">
+              <Link to="/career" className="flex flex-col items-center gap-2 p-4 bg-momentum-50 rounded-xl hover:bg-momentum-100 transition-colors">
+                <TrendingUp className="w-6 h-6 text-momentum-600" />
+                <span className="text-sm font-medium text-momentum-700">{t('personal.myCareer', 'My Career')}</span>
+              </Link>
+              <Link to="/compensation" className="flex flex-col items-center gap-2 p-4 bg-green-50 rounded-xl hover:bg-green-100 transition-colors">
+                <Wallet className="w-6 h-6 text-green-600" />
+                <span className="text-sm font-medium text-green-700">{t('personal.myPayslips', 'My Payslips')}</span>
+              </Link>
+              <Link to="/documents" className="flex flex-col items-center gap-2 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors">
+                <FileText className="w-6 h-6 text-blue-600" />
+                <span className="text-sm font-medium text-blue-700">{t('personal.myDocuments', 'My Documents')}</span>
+              </Link>
+              <Link to="/momentum" className="flex flex-col items-center gap-2 p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                <Gauge className="w-6 h-6 text-purple-600" />
+                <span className="text-sm font-medium text-purple-700">{t('personal.momentumBreakdown', 'Momentum Breakdown')}</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Activity Feed */}
+        <div className="card">
+          <div className="card-header flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Activity className="w-5 h-5 text-momentum-500" />
+              <h2 className="font-semibold text-slate-900">{t('personal.recentActivity', 'Recent Activity')}</h2>
+            </div>
+          </div>
+          <div className="card-body space-y-3">
+            {activityFeed.map((activity) => {
+              const ActivityIcon = activity.icon;
+              return (
+                <div key={activity.id} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
+                    activity.type === 'recognition' ? 'bg-pink-100 text-pink-600' :
+                    activity.type === 'training' ? 'bg-green-100 text-green-600' :
+                    activity.type === 'payslip' ? 'bg-blue-100 text-blue-600' :
+                    'bg-purple-100 text-purple-600'
+                  }`}>
+                    <ActivityIcon className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-slate-700">{activity.message}</p>
+                    <p className="text-xs text-slate-400 mt-0.5">{activity.time}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
