@@ -587,165 +587,289 @@ function AdminDashboard({ t, user, data, entityMultiplier, selectedAlert, setSel
 }
 
 // ============================================================
-// MANAGER DASHBOARD
+// MANAGER DASHBOARD — THE OPERATIONS COCKPIT
+// Real-time status, action queue, today's schedule
+// This is NOT a stripped-down admin view — it's a scheduling command center
 // ============================================================
 
 function ManagerDashboard({ t, user }) {
+  // Team roster with real-time status
   const teamMembers = [
-    { id: 1, name: 'Maria Santos', role: t('manager.role.frontDesk', 'Front Desk Associate'), shift: '07:00 - 15:00', status: 'on-shift', momentum: 82 },
-    { id: 2, name: 'Pierre Dubois', role: t('manager.role.concierge', 'Concierge'), shift: '07:00 - 15:00', status: 'on-shift', momentum: 79 },
-    { id: 3, name: 'Aiko Yamamoto', role: t('manager.role.hostess', 'Restaurant Hostess'), shift: '11:00 - 19:00', status: 'scheduled', momentum: 91 },
-    { id: 4, name: 'Raj Patel', role: t('manager.role.nightAuditor', 'Night Auditor'), shift: '23:00 - 07:00', status: 'off-today', momentum: 68 },
-    { id: 5, name: 'Elena Rossi', role: t('manager.role.barista', 'Barista'), shift: '06:00 - 14:00', status: 'on-break', momentum: 85 },
-    { id: 6, name: 'Thomas Cane', role: t('manager.role.waiter', 'Waiter'), shift: '11:00 - 19:00', status: 'scheduled', momentum: 74 },
+    { id: 1, name: 'Maria Santos', role: 'Front Desk', shift: '07:00-15:00', status: 'on-shift', clockedIn: '06:58', momentum: 82 },
+    { id: 2, name: 'Pierre Dubois', role: 'Concierge', shift: '07:00-15:00', status: 'on-shift', clockedIn: '07:02', momentum: 79 },
+    { id: 3, name: 'Elena Rossi', role: 'Barista', shift: '06:00-14:00', status: 'on-break', clockedIn: '05:55', momentum: 85 },
+    { id: 4, name: 'Aiko Yamamoto', role: 'Restaurant Host', shift: '11:00-19:00', status: 'scheduled', momentum: 91 },
+    { id: 5, name: 'Thomas Cane', role: 'Waiter', shift: '11:00-19:00', status: 'scheduled', momentum: 74 },
+    { id: 6, name: 'Sophie Martin', role: 'Bartender', shift: '15:00-23:00', status: 'scheduled', momentum: 88 },
+    { id: 7, name: 'Raj Patel', role: 'Night Auditor', shift: '23:00-07:00', status: 'off-today', momentum: 68 },
+    { id: 8, name: 'Kenji Tanaka', role: 'Room Service', shift: '15:00-23:00', status: 'scheduled', momentum: 76 },
   ];
 
-  const avgMomentum = Math.round(teamMembers.reduce((sum, m) => sum + m.momentum, 0) / teamMembers.length);
-  const onShiftNow = teamMembers.filter(m => m.status === 'on-shift' || m.status === 'on-break').length;
+  // Action items that need manager decision NOW
+  const actionQueue = [
+    { id: 1, type: 'time-off', urgency: 'high', employee: 'Maria Santos', detail: 'Thursday 6 Feb — full day', impact: '1 short on PM shift', href: '/time-off' },
+    { id: 2, type: 'expense', urgency: 'medium', employee: 'Pierre Dubois', detail: '£85 — Guest gift replacement', impact: 'Within policy', href: '/expenses' },
+    { id: 3, type: 'expense', urgency: 'medium', employee: 'Elena Rossi', detail: '£60 — Taxi (late night event)', impact: 'Within policy', href: '/expenses' },
+    { id: 4, type: 'shift-swap', urgency: 'low', employee: 'Thomas Cane', detail: 'Swap Wed ↔ Thu with Aiko', impact: 'No coverage issue', href: '/schedule' },
+    { id: 5, type: 'training', urgency: 'high', employee: 'Raj Patel', detail: 'Fire Safety — 3 days overdue', impact: 'Compliance risk', href: '/learning' },
+  ];
 
-  const statusConfig = {
-    'on-shift': { label: t('manager.status.onShift', 'On Shift'), bg: 'bg-green-100 text-green-700' },
-    'on-break': { label: t('manager.status.onBreak', 'On Break'), bg: 'bg-yellow-100 text-yellow-700' },
-    'scheduled': { label: t('manager.status.scheduled', 'Scheduled'), bg: 'bg-blue-100 text-blue-700' },
-    'off-today': { label: t('manager.status.offToday', 'Off Today'), bg: 'bg-slate-100 text-slate-500' },
+  // Compliance status
+  const compliance = [
+    { name: 'Fire Safety', completed: 7, total: 8, status: 'warning' },
+    { name: 'Food Hygiene', completed: 8, total: 8, status: 'ok' },
+    { name: 'Manual Handling', completed: 6, total: 8, status: 'warning' },
+    { name: 'First Aid', completed: 5, total: 8, status: 'alert' },
+  ];
+
+  // Weekly schedule coverage
+  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const weekCoverage = [
+    { day: 'Mon', filled: 8, required: 8, status: 'ok' },
+    { day: 'Tue', filled: 7, required: 8, status: 'warning' },
+    { day: 'Wed', filled: 8, required: 8, status: 'ok' },
+    { day: 'Thu', filled: 6, required: 8, status: 'alert' },
+    { day: 'Fri', filled: 8, required: 8, status: 'ok' },
+    { day: 'Sat', filled: 8, required: 10, status: 'warning' },
+    { day: 'Sun', filled: 7, required: 8, status: 'warning' },
+  ];
+
+  const onShiftNow = teamMembers.filter(m => m.status === 'on-shift' || m.status === 'on-break').length;
+  const absentToday = 1; // One call-out
+  const openShifts = 2;
+  const avgMomentum = Math.round(teamMembers.reduce((sum, m) => sum + m.momentum, 0) / teamMembers.length);
+
+  const statusStyles = {
+    'on-shift': 'bg-green-500',
+    'on-break': 'bg-yellow-500',
+    'scheduled': 'bg-blue-400',
+    'off-today': 'bg-slate-300',
+  };
+
+  const urgencyConfig = {
+    high: { bg: 'bg-red-50 border-red-200', icon: 'text-red-500', badge: 'bg-red-100 text-red-700' },
+    medium: { bg: 'bg-amber-50 border-amber-200', icon: 'text-amber-500', badge: 'bg-amber-100 text-amber-700' },
+    low: { bg: 'bg-slate-50 border-slate-200', icon: 'text-slate-400', badge: 'bg-slate-100 text-slate-600' },
   };
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">
-            {t('manager.myTeam', 'My Team')}
-          </h1>
-          <p className="text-slate-600">
-            {t('manager.subtitle', 'Food & Beverage Department')} — {teamMembers.length} {t('manager.members', 'members')}
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <Link to="/schedule" className="btn btn-primary">
-            <Calendar className="w-4 h-4" />
-            {t('dashboard.createSchedule', 'Create Schedule')}
-          </Link>
-        </div>
-      </div>
-
-      {/* Manager KPI Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
-          icon={Zap}
-          label={t('manager.teamMomentum', 'Team Momentum')}
-          value={avgMomentum}
-          subValue={t('manager.avgScore', 'avg score')}
-          color="momentum"
-        />
-        <StatCard
-          icon={UserCheck}
-          label={t('manager.onShiftNow', 'On Shift Now')}
-          value={onShiftNow}
-          subValue={`${t('manager.of', 'of')} ${teamMembers.length}`}
-          color="green"
-        />
-        <StatCard
-          icon={Clock}
-          label={t('manager.pendingApprovals', 'Pending Approvals')}
-          value={4}
-          color="orange"
-          alert
-        />
-        <StatCard
-          icon={AlertTriangle}
-          label={t('manager.trainingOverdue', 'Training Overdue')}
-          value={2}
-          color="red"
-          alert
-        />
-      </div>
-
-      {/* Team Schedule Overview */}
-      <div className="card">
-        <div className="card-header flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-momentum-500" />
-            <h2 className="font-semibold text-slate-900">{t('manager.todaysSchedule', "Today's Schedule")}</h2>
+      {/* HEADER — Operations cockpit style */}
+      <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl p-6 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold">{t('manager.opsCockpit', 'Operations Cockpit')}</h1>
+            <p className="text-slate-300 mt-1">
+              {t('manager.location', 'London Mayfair')} — {t('manager.fAndB', 'Food & Beverage')} — {teamMembers.length} {t('manager.teamMembers', 'team members')}
+            </p>
           </div>
-          <Link to="/schedule" className="text-sm text-momentum-500 hover:text-momentum-600 flex items-center gap-1">
-            {t('manager.fullSchedule', 'Full Schedule')} <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link to="/schedule" className="bg-momentum-500 hover:bg-momentum-600 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors">
+              <Calendar className="w-4 h-4" />
+              {t('manager.manageSchedule', 'Manage Schedule')}
+            </Link>
+          </div>
         </div>
-        <div className="card-body">
-          <div className="space-y-3">
-            {teamMembers.map((member) => (
-              <div key={member.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-sm">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">{member.name}</p>
-                    <p className="text-xs text-slate-500">{member.role}</p>
-                  </div>
+
+        {/* Live status indicators */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
+          <div className="bg-white/10 rounded-lg p-3 text-center">
+            <div className="text-3xl font-bold text-green-400">{onShiftNow}</div>
+            <div className="text-xs text-slate-300 mt-1">{t('manager.onShiftNow', 'On Shift Now')}</div>
+          </div>
+          <div className="bg-white/10 rounded-lg p-3 text-center">
+            <div className="text-3xl font-bold text-red-400">{absentToday}</div>
+            <div className="text-xs text-slate-300 mt-1">{t('manager.absentToday', 'Absent Today')}</div>
+          </div>
+          <div className="bg-white/10 rounded-lg p-3 text-center">
+            <div className="text-3xl font-bold text-amber-400">{openShifts}</div>
+            <div className="text-xs text-slate-300 mt-1">{t('manager.openShifts', 'Open Shifts')}</div>
+          </div>
+          <div className="bg-white/10 rounded-lg p-3 text-center">
+            <div className="text-3xl font-bold text-blue-400">{actionQueue.length}</div>
+            <div className="text-xs text-slate-300 mt-1">{t('manager.pendingActions', 'Pending Actions')}</div>
+          </div>
+          <div className="bg-white/10 rounded-lg p-3 text-center">
+            <div className="text-3xl font-bold text-momentum-400">{avgMomentum}</div>
+            <div className="text-xs text-slate-300 mt-1">{t('manager.teamMomentum', 'Team Momentum')}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ACTION REQUIRED — The heart of the operations cockpit */}
+      <div className="card border-2 border-amber-200 bg-amber-50/30">
+        <div className="card-header bg-amber-100/50 flex items-center gap-2">
+          <AlertTriangle className="w-5 h-5 text-amber-600" />
+          <h2 className="font-bold text-slate-900">{t('manager.needsYourAction', 'NEEDS YOUR ACTION')} ({actionQueue.length})</h2>
+        </div>
+        <div className="divide-y divide-amber-100">
+          {actionQueue.map((item) => (
+            <div key={item.id} className={`p-4 flex items-center justify-between ${urgencyConfig[item.urgency].bg} border-l-4 ${item.urgency === 'high' ? 'border-l-red-500' : item.urgency === 'medium' ? 'border-l-amber-500' : 'border-l-slate-300'}`}>
+              <div className="flex items-center gap-4">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${urgencyConfig[item.urgency].badge}`}>
+                  {item.type === 'time-off' && <Coffee className="w-5 h-5" />}
+                  {item.type === 'expense' && <Receipt className="w-5 h-5" />}
+                  {item.type === 'shift-swap' && <Calendar className="w-5 h-5" />}
+                  {item.type === 'training' && <GraduationCap className="w-5 h-5" />}
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
-                    <p className="text-sm text-slate-700">{member.shift}</p>
-                    <div className="flex items-center gap-1 justify-end">
-                      <Zap className="w-3 h-3 text-momentum-500" />
-                      <span className="text-xs text-slate-500">{member.momentum}</span>
-                    </div>
+                <div>
+                  <p className="font-semibold text-slate-900">{item.employee}</p>
+                  <p className="text-sm text-slate-600">{item.detail}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{t('manager.impact', 'Impact')}: {item.impact}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button className="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors">
+                  {t('manager.approve', 'Approve')}
+                </button>
+                <button className="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 text-sm font-medium rounded-lg border border-slate-200 transition-colors">
+                  {t('manager.deny', 'Deny')}
+                </button>
+                <Link to={item.href} className="p-1.5 text-slate-400 hover:text-slate-600">
+                  <ChevronRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Two columns: Today's Schedule + Team Compliance */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* TODAY'S SCHEDULE — Timeline view */}
+        <div className="card">
+          <div className="card-header flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Clock className="w-5 h-5 text-momentum-500" />
+              <h2 className="font-semibold text-slate-900">{t('manager.todaysSchedule', "Today's Schedule")}</h2>
+            </div>
+            <Link to="/schedule" className="text-sm text-momentum-500 hover:text-momentum-600 flex items-center gap-1">
+              {t('manager.fullSchedule', 'Full Schedule')} <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="card-body">
+            {/* Shift periods */}
+            {['AM (06:00-14:00)', 'PM (14:00-22:00)', 'Night (22:00-06:00)'].map((period, idx) => (
+              <div key={period} className={idx > 0 ? 'mt-4 pt-4 border-t border-slate-100' : ''}>
+                <p className="text-xs font-semibold text-slate-500 uppercase mb-2">{period}</p>
+                <div className="space-y-2">
+                  {teamMembers
+                    .filter(m => {
+                      const hour = parseInt(m.shift.split(':')[0]);
+                      if (idx === 0) return hour >= 5 && hour < 12;
+                      if (idx === 1) return hour >= 11 && hour < 20;
+                      return hour >= 20 || hour < 6;
+                    })
+                    .map(member => (
+                      <div key={member.id} className="flex items-center justify-between p-2 bg-slate-50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-2 h-2 rounded-full ${statusStyles[member.status]}`} />
+                          <div className="w-8 h-8 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs">
+                            {member.name.split(' ').map(n => n[0]).join('')}
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-slate-900">{member.name}</p>
+                            <p className="text-xs text-slate-500">{member.role}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm text-slate-700">{member.shift}</p>
+                          {member.clockedIn && (
+                            <p className="text-xs text-green-600">{t('manager.clockedIn', 'In')}: {member.clockedIn}</p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* TEAM COMPLIANCE + WEEKLY COVERAGE */}
+        <div className="space-y-6">
+          {/* Compliance status */}
+          <div className="card">
+            <div className="card-header flex items-center gap-2">
+              <Shield className="w-5 h-5 text-green-500" />
+              <h2 className="font-semibold text-slate-900">{t('manager.teamCompliance', 'Team Compliance')}</h2>
+            </div>
+            <div className="card-body space-y-3">
+              {compliance.map((item) => (
+                <div key={item.name} className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    {item.status === 'ok' && <CheckCircle className="w-4 h-4 text-green-500" />}
+                    {item.status === 'warning' && <AlertTriangle className="w-4 h-4 text-amber-500" />}
+                    {item.status === 'alert' && <XCircle className="w-4 h-4 text-red-500" />}
+                    <span className="text-sm text-slate-700">{item.name}</span>
                   </div>
-                  <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${statusConfig[member.status]?.bg}`}>
-                    {statusConfig[member.status]?.label}
+                  <span className={`text-sm font-medium ${item.status === 'ok' ? 'text-green-600' : item.status === 'warning' ? 'text-amber-600' : 'text-red-600'}`}>
+                    {item.completed}/{item.total}
                   </span>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Two column */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Pending Approvals */}
-        <div className="card">
-          <div className="card-header flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-amber-500" />
-              <h2 className="font-semibold text-slate-900">{t('manager.pendingApprovals', 'Pending Approvals')}</h2>
+              ))}
             </div>
           </div>
-          <div className="card-body space-y-3">
-            <ApprovalItem icon={Coffee} label={t('manager.timeOffReqs', 'Time Off Requests')} count={2} href="/time-off" />
-            <ApprovalItem icon={Clock} label={t('manager.timesheets', 'Timesheets')} count={1} href="/time-tracking" />
-            <ApprovalItem icon={Calendar} label={t('manager.shiftSwaps', 'Shift Swaps')} count={1} href="/schedule" />
-          </div>
-        </div>
 
-        {/* Team Performance Summary */}
-        <div className="card">
-          <div className="card-header flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-green-500" />
-              <h2 className="font-semibold text-slate-900">{t('manager.teamPerformance', 'Team Performance')}</h2>
+          {/* Weekly coverage */}
+          <div className="card">
+            <div className="card-header flex items-center gap-2">
+              <CalendarDays className="w-5 h-5 text-blue-500" />
+              <h2 className="font-semibold text-slate-900">{t('manager.weekCoverage', "This Week's Coverage")}</h2>
+            </div>
+            <div className="card-body">
+              <div className="grid grid-cols-7 gap-2">
+                {weekCoverage.map((day) => (
+                  <div key={day.day} className={`text-center p-2 rounded-lg ${day.status === 'ok' ? 'bg-green-50' : day.status === 'warning' ? 'bg-amber-50' : 'bg-red-50'}`}>
+                    <p className="text-xs font-medium text-slate-500">{day.day}</p>
+                    <p className={`text-lg font-bold ${day.status === 'ok' ? 'text-green-600' : day.status === 'warning' ? 'text-amber-600' : 'text-red-600'}`}>
+                      {day.filled}
+                    </p>
+                    <p className="text-xs text-slate-400">/{day.required}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="card-body space-y-4">
-            {[
-              { label: t('manager.perf.attendance', 'Attendance Rate'), value: 96, color: 'bg-green-500' },
-              { label: t('manager.perf.punctuality', 'Punctuality'), value: 91, color: 'bg-blue-500' },
-              { label: t('manager.perf.guestSatisfaction', 'Guest Satisfaction'), value: 88, color: 'bg-momentum-500' },
-              { label: t('manager.perf.trainingCompletion', 'Training Completion'), value: 78, color: 'bg-amber-500' },
-            ].map((metric) => (
-              <div key={metric.label}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm text-slate-700">{metric.label}</span>
-                  <span className="text-sm font-semibold text-slate-900">{metric.value}%</span>
+
+          {/* Team Momentum */}
+          <div className="card">
+            <div className="card-header flex items-center gap-2">
+              <Zap className="w-5 h-5 text-momentum-500" />
+              <h2 className="font-semibold text-slate-900">{t('manager.teamMomentum', 'Team Momentum')}</h2>
+            </div>
+            <div className="card-body">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="text-4xl font-bold text-momentum-500">{avgMomentum}</p>
+                  <p className="text-sm text-slate-500">{t('manager.avgScore', 'avg score')}</p>
                 </div>
-                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <div className={`h-full rounded-full ${metric.color}`} style={{ width: `${metric.value}%` }} />
+                <div className="text-right">
+                  <div className="flex items-center gap-1 text-green-600">
+                    <TrendingUp className="w-4 h-4" />
+                    <span className="text-sm font-medium">+3 {t('manager.thisMonth', 'this month')}</span>
+                  </div>
                 </div>
               </div>
-            ))}
+              <div className="space-y-2">
+                {teamMembers.slice(0, 4).map(member => (
+                  <div key={member.id} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs">
+                      {member.name.split(' ')[0][0]}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-600">{member.name.split(' ')[0]}</span>
+                        <span className="text-xs font-medium text-slate-900">{member.momentum}</span>
+                      </div>
+                      <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden mt-1">
+                        <div className="h-full bg-momentum-500 rounded-full" style={{ width: `${member.momentum}%` }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
