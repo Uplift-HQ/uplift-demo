@@ -41,6 +41,11 @@ interface Payslip {
   hoursWorked: number;
   overtimeHours: number;
   bonuses: number;
+  performanceBonus?: {
+    amount: number;
+    period: string;
+    scorePercentage: number;
+  };
 }
 
 interface YearToDateSummary {
@@ -58,13 +63,18 @@ const demoPayslips: Payslip[] = [
     periodStart: '2026-01-01',
     periodEnd: '2026-01-31',
     payDate: '2026-01-31',
-    grossPay: 2850.00,
-    netPay: 2180.45,
-    deductions: { tax: 342.00, nationalInsurance: 198.55, pension: 85.50, studentLoan: 43.50, other: 0 },
+    grossPay: 4260.00,
+    netPay: 3180.45,
+    deductions: { tax: 511.20, nationalInsurance: 297.18, pension: 127.80, studentLoan: 63.37, other: 0 },
     status: 'pending',
     hoursWorked: 168,
     overtimeHours: 8,
     bonuses: 100,
+    performanceBonus: {
+      amount: 1410.00,
+      period: '2025-Q4',
+      scorePercentage: 94.0,
+    },
   },
   {
     id: '2',
@@ -100,13 +110,18 @@ const demoPayslips: Payslip[] = [
     periodStart: '2025-10-01',
     periodEnd: '2025-10-31',
     payDate: '2025-10-31',
-    grossPay: 2800.00,
-    netPay: 2138.70,
-    deductions: { tax: 336.00, nationalInsurance: 194.30, pension: 84.00, studentLoan: 47.00, other: 0 },
+    grossPay: 4187.50,
+    netPay: 3138.70,
+    deductions: { tax: 502.50, nationalInsurance: 291.80, pension: 125.63, studentLoan: 78.87, other: 0 },
     status: 'paid',
     hoursWorked: 168,
     overtimeHours: 6,
     bonuses: 50,
+    performanceBonus: {
+      amount: 1387.50,
+      period: '2025-Q3',
+      scorePercentage: 92.5,
+    },
   },
   {
     id: '5',
@@ -432,6 +447,15 @@ export const PayslipsScreen = ({ navigation }: any) => {
                 </View>
               </View>
 
+              {payslip.performanceBonus && (
+                <View style={styles.performanceBonusBadge}>
+                  <TrendingUpIcon size={14} color={colors.success} />
+                  <Text style={styles.performanceBonusBadgeText}>
+                    +{formatCurrency(payslip.performanceBonus.amount)} {t('payslips.performanceBonus') || 'Performance Bonus'}
+                  </Text>
+                </View>
+              )}
+
               <View style={styles.payslipFooter}>
                 <TouchableOpacity
                   style={styles.downloadButton}
@@ -566,6 +590,21 @@ export const PayslipsScreen = ({ navigation }: any) => {
                         <Text style={styles.detailLabel}>{t('payslips.bonuses') || 'Bonuses'}</Text>
                         <Text style={[styles.detailValue, { color: colors.success }]}>
                           +{formatCurrency(selectedPayslip.bonuses)}
+                        </Text>
+                      </View>
+                    )}
+                    {selectedPayslip.performanceBonus && (
+                      <View style={styles.performanceBonusRow}>
+                        <View>
+                          <Text style={styles.detailLabel}>
+                            {t('payslips.performanceBonus') || 'Performance Bonus'}
+                          </Text>
+                          <Text style={styles.performanceBonusDetail}>
+                            {selectedPayslip.performanceBonus.period} • {selectedPayslip.performanceBonus.scorePercentage}% {t('payslips.siteScore') || 'site score'}
+                          </Text>
+                        </View>
+                        <Text style={[styles.detailValue, { color: colors.success }]}>
+                          +{formatCurrency(selectedPayslip.performanceBonus.amount)}
                         </Text>
                       </View>
                     )}
@@ -982,6 +1021,36 @@ const styles = StyleSheet.create({
     ...typography.h3,
     color: colors.slate900,
     fontWeight: '800',
+  },
+  performanceBonusRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+    backgroundColor: colors.success + '10',
+    borderRadius: borderRadius.md,
+    paddingHorizontal: spacing.sm,
+    marginVertical: spacing.xs,
+  },
+  performanceBonusDetail: {
+    ...typography.caption,
+    color: colors.slate500,
+    marginTop: 2,
+  },
+  performanceBonusBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    backgroundColor: colors.success + '15',
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.md,
+    marginTop: spacing.md,
+  },
+  performanceBonusBadgeText: {
+    ...typography.caption,
+    color: colors.success,
+    fontWeight: '700',
   },
   netPaySection: {
     backgroundColor: colors.success + '15',
