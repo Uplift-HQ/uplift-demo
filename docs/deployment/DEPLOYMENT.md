@@ -168,8 +168,8 @@ docker build -t uplift/api:latest .
 # Portal
 cd portal && docker build -t uplift/portal:latest .
 
-# Backoffice
-cd backoffice && docker build -t uplift/backoffice:latest .
+# Ops Portal
+cd apps/ops && docker build -t uplift/ops:latest .
 ```
 
 ### 2. Docker Compose (Production)

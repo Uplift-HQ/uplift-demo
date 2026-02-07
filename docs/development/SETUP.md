@@ -90,8 +90,7 @@ uplift/
 │   │   └── navigation/      # React Navigation setup
 │   └── app.config.js        # Expo configuration
 │
-├── backoffice/              # Anthropic Admin Portal
-├── ops-portal/              # Anthropic Ops Portal
+│   └── ops/                 # Internal Ops Portal (apps/ops/)
 │
 ├── database/
 │   ├── schema.sql           # Full schema (reference)
