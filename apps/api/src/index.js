@@ -32,6 +32,7 @@ import utilitiesRoutes from './routes/utilities.js';
 import billingRoutes from './routes/billing.js';
 import adminRoutes from './routes/admin.js';
 import opsRoutes from './routes/ops.js';
+import opsUsersRoutes from './routes/ops-users.js';
 import licenseRoutes from './routes/licenses.js';
 import aiRoutes from './routes/ai.js';
 import integrationsRoutes from './routes/integrations.js';
@@ -264,6 +265,9 @@ app.use('/api/ops', apiLimiter, opsRoutes);
 
 // License key routes (under ops namespace)
 app.use('/api/ops/licenses', apiLimiter, licenseRoutes);
+
+// Ops user management routes (under ops namespace)
+app.use('/api/ops/users', apiLimiter, opsUsersRoutes);
 
 // Core routes (employees, locations, departments, roles, skills)
 app.use('/api', apiLimiter, csrfProtection, coreRoutes);

@@ -6,7 +6,8 @@ import {
   TrendingUp, DollarSign, Calendar, Mail, Phone, Globe, Settings, Filter,
   MoreVertical, Edit, Trash, Plus, RefreshCw, Download, ExternalLink, Eye,
   ChevronRight, ArrowUpRight, ArrowDownRight, Copy, Check, X, Pause, Play,
-  MapPin, Building, FileText, CreditCard as CardIcon, AlertCircle, Info
+  MapPin, Building, FileText, CreditCard as CardIcon, AlertCircle, Info,
+  Shield, ShieldCheck, Lock, Unlock, User, UserCog, History, Smartphone
 } from 'lucide-react';
 
 // ============================================================
@@ -43,29 +44,82 @@ export function useAuth() {
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const authChecked = React.useRef(false);
 
   useEffect(() => {
+    // Prevent React StrictMode double-execution
+    if (authChecked.current) return;
+    authChecked.current = true;
+
     const token = localStorage.getItem('ops_token');
-    if (token) {
-      api('GET', '/auth/me')
-        .then(data => setUser(data.user))
-        .catch(() => localStorage.removeItem('ops_token'))
-        .finally(() => setLoading(false));
-    } else {
+    if (!token) {
       setLoading(false);
+      return;
     }
+
+    // Check auth - try new endpoint, fall back to legacy
+    const checkAuth = async () => {
+      try {
+        const data = await api('GET', '/users/auth/me');
+        setUser(data.user);
+      } catch {
+        try {
+          const data = await api('GET', '/auth/me');
+          setUser(data.user);
+        } catch {
+          localStorage.removeItem('ops_token');
+        }
+      }
+      setLoading(false);
+    };
+    checkAuth();
   }, []);
 
-  const login = async (email, password) => {
-    const data = await api('POST', '/auth/login', { email, password });
-    localStorage.setItem('ops_token', data.token);
-    setUser(data.user);
+  const login = async (email, password, mfaCode = null) => {
+    // Try new endpoint first
+    try {
+      const data = await api('POST', '/users/auth/login', { email, password, mfaCode });
+      if (data.requiresMfa) {
+        return { requiresMfa: true };
+      }
+      localStorage.setItem('ops_token', data.token);
+      setUser(data.user);
+      return { success: true, forcePasswordChange: data.user?.forcePasswordChange };
+    } catch (newErr) {
+      // Fall back to legacy endpoint
+      try {
+        const data = await api('POST', '/auth/login', { email, password });
+        localStorage.setItem('ops_token', data.token);
+        setUser(data.user);
+        return { success: true };
+      } catch {
+        throw newErr;
+      }
+    }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await api('POST', '/users/auth/logout');
+    } catch {
+      // Ignore - might be using legacy auth
+    }
     localStorage.removeItem('ops_token');
     setUser(null);
   };
+
+  const refreshUser = async () => {
+    try {
+      const data = await api('GET', '/users/auth/me');
+      setUser(data.user);
+    } catch {
+      const data = await api('GET', '/auth/me');
+      setUser(data.user);
+    }
+  };
+
+  // Permission helpers - default to true if no permissions object
+  const can = (permission) => user?.permissions?.[permission] ?? true;
 
   if (loading) {
     return (
@@ -76,7 +130,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, refreshUser, can }}>
       {children}
     </AuthContext.Provider>
   );
@@ -86,18 +140,24 @@ function AuthProvider({ children }) {
 // Layout
 // ============================================================
 function Layout({ children }) {
-  const { user, logout } = useAuth();
+  const { user, logout, can } = useAuth();
   const location = useLocation();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/onboarding', label: 'Onboarding', icon: UserPlus },
-    { path: '/customers', label: 'Customers', icon: Building2 },
-    { path: '/licenses', label: 'Licenses', icon: Key },
-    { path: '/features', label: 'Features', icon: Sliders },
-    { path: '/billing', label: 'Billing', icon: CreditCard },
-    { path: '/activity', label: 'Activity', icon: Activity },
+    { path: '/onboarding', label: 'Onboarding', icon: UserPlus, permission: 'canOnboardCustomers' },
+    { path: '/customers', label: 'Customers', icon: Building2, permission: 'canViewCustomers' },
+    { path: '/licenses', label: 'Licenses', icon: Key, permission: 'canManageLicenses' },
+    { path: '/features', label: 'Features', icon: Sliders, permission: 'canManageFeatures' },
+    { path: '/billing', label: 'Billing', icon: CreditCard, permission: 'canViewBilling' },
+    { path: '/activity', label: 'Activity', icon: Activity, permission: 'canViewActivity' },
+    { path: '/audit', label: 'Audit', icon: Shield, permission: 'canViewAuditLog' },
+    { path: '/users', label: 'Users', icon: Users, permission: 'canManageUsers' },
   ];
+
+  // Filter nav items by permission
+  const visibleNavItems = navItems.filter(item => !item.permission || can(item.permission));
 
   return (
     <div className="min-h-screen bg-slate-100">
@@ -106,7 +166,7 @@ function Layout({ children }) {
           <div className="flex items-center gap-8">
             <h1 className="text-xl font-bold text-orange-500">Uplift Ops</h1>
             <nav className="flex gap-1">
-              {navItems.map(item => {
+              {visibleNavItems.map(item => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path ||
                   (item.path !== '/' && location.pathname.startsWith(item.path));
@@ -127,16 +187,45 @@ function Layout({ children }) {
               })}
             </nav>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-slate-400">
-              {user?.firstName} {user?.lastName}
-            </span>
+          <div className="relative">
             <button
-              onClick={logout}
-              className="text-sm text-slate-400 hover:text-white flex items-center gap-1"
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-800 transition-colors"
             >
-              <LogOut className="w-4 h-4" />
+              <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm font-medium">
+                {user?.firstName?.[0]}{user?.lastName?.[0]}
+              </div>
+              <span className="text-sm text-slate-300">
+                {user?.firstName} {user?.lastName}
+              </span>
             </button>
+            {userMenuOpen && (
+              <>
+                <div className="fixed inset-0 z-10" onClick={() => setUserMenuOpen(false)} />
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 z-20">
+                  <div className="px-4 py-2 border-b border-slate-100">
+                    <p className="font-medium text-slate-900">{user?.firstName} {user?.lastName}</p>
+                    <p className="text-sm text-slate-500">{user?.email}</p>
+                    <p className="text-xs text-orange-600 mt-1">{user?.roleDisplayName || user?.role}</p>
+                  </div>
+                  <Link
+                    to="/settings"
+                    onClick={() => setUserMenuOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                  >
+                    <Settings className="w-4 h-4" />
+                    My Account
+                  </Link>
+                  <button
+                    onClick={() => { setUserMenuOpen(false); logout(); }}
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full text-left"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -315,6 +404,8 @@ function CopyButton({ text }) {
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [mfaCode, setMfaCode] = useState('');
+  const [requiresMfa, setRequiresMfa] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -325,11 +416,19 @@ function LoginPage() {
     setLoading(true);
     setError('');
     try {
-      await login(email, password);
-      navigate('/');
+      const result = await login(email, password, requiresMfa ? mfaCode : null);
+      if (result.requiresMfa) {
+        setRequiresMfa(true);
+        setLoading(false);
+        return;
+      }
+      if (result.forcePasswordChange) {
+        navigate('/settings?changePassword=true');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       setError(err.message || 'Invalid credentials');
-    } finally {
       setLoading(false);
     }
   };
@@ -345,22 +444,48 @@ function LoginPage() {
               {error}
             </div>
           )}
-          <Input
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <Input
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          {!requiresMfa ? (
+            <>
+              <Input
+                label="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="you@uplifthq.co.uk"
+              />
+              <Input
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </>
+          ) : (
+            <div className="space-y-4">
+              <div className="text-center">
+                <ShieldCheck className="w-12 h-12 text-orange-500 mx-auto mb-2" />
+                <p className="text-slate-600">Enter the code from your authenticator app</p>
+              </div>
+              <Input
+                label="6-digit code"
+                type="text"
+                value={mfaCode}
+                onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                placeholder="000000"
+              />
+              <button
+                type="button"
+                onClick={() => { setRequiresMfa(false); setMfaCode(''); setError(''); }}
+                className="text-sm text-slate-500 hover:text-slate-700"
+              >
+                Back to login
+              </button>
+            </div>
+          )}
           <Button type="submit" disabled={loading} className="w-full">
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Verifying...' : requiresMfa ? 'Verify' : 'Sign In'}
           </Button>
         </form>
       </Card>
@@ -2313,6 +2438,914 @@ function ActivityPage() {
 }
 
 // ============================================================
+// Users Page (super_admin only)
+// ============================================================
+function UsersPage() {
+  const [users, setUsers] = useState([]);
+  const [roles, setRoles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const [usersData, rolesData] = await Promise.all([
+        api('GET', '/users'),
+        api('GET', '/users/roles')
+      ]);
+      setUsers(usersData.users || []);
+      setRoles(rolesData.roles || []);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { loadData(); }, []);
+
+  if (loading) return <LoadingSpinner />;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-slate-900">User Management</h2>
+        <Button onClick={() => setShowCreateModal(true)}>
+          <Plus className="w-4 h-4 mr-1" /> Add User
+        </Button>
+      </div>
+
+      <Card>
+        <table className="w-full">
+          <thead className="bg-slate-50">
+            <tr>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">User</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Role</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Status</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">MFA</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Last Login</th>
+              <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {users.map(u => (
+              <tr key={u.id} className="hover:bg-slate-50">
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-medium">
+                      {u.first_name?.[0]}{u.last_name?.[0]}
+                    </div>
+                    <div>
+                      <p className="font-medium text-slate-900">{u.first_name} {u.last_name}</p>
+                      <p className="text-sm text-slate-500">{u.email}</p>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                    {u.role_display_name || u.role_name || u.role}
+                  </span>
+                </td>
+                <td className="px-6 py-4">
+                  {u.locked_until && new Date(u.locked_until) > new Date() ? (
+                    <span className="inline-flex items-center gap-1 text-red-600">
+                      <Lock className="w-4 h-4" /> Locked
+                    </span>
+                  ) : u.is_active ? (
+                    <span className="inline-flex items-center gap-1 text-green-600">
+                      <CheckCircle className="w-4 h-4" /> Active
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 text-slate-400">
+                      <XCircle className="w-4 h-4" /> Inactive
+                    </span>
+                  )}
+                </td>
+                <td className="px-6 py-4">
+                  {u.mfa_enabled ? (
+                    <span className="inline-flex items-center gap-1 text-green-600">
+                      <ShieldCheck className="w-4 h-4" />
+                    </span>
+                  ) : (
+                    <span className="text-slate-400">-</span>
+                  )}
+                </td>
+                <td className="px-6 py-4 text-sm text-slate-500">
+                  {u.last_login_at ? new Date(u.last_login_at).toLocaleString() : 'Never'}
+                </td>
+                <td className="px-6 py-4 text-right">
+                  <Button variant="ghost" size="sm" onClick={() => setSelectedUser(u)}>
+                    Manage
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {users.length === 0 && (
+          <EmptyState icon={Users} title="No users" description="Add your first ops user" />
+        )}
+      </Card>
+
+      <CreateUserModal
+        open={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        roles={roles}
+        onCreated={loadData}
+      />
+
+      <ManageUserModal
+        user={selectedUser}
+        roles={roles}
+        onClose={() => setSelectedUser(null)}
+        onUpdated={loadData}
+      />
+    </div>
+  );
+}
+
+function CreateUserModal({ open, onClose, roles, onCreated }) {
+  const [form, setForm] = useState({ email: '', firstName: '', lastName: '', roleId: '', password: '' });
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const data = await api('POST', '/users', form);
+      setResult(data);
+      onCreated();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!open) return null;
+
+  return (
+    <Modal open={open} onClose={() => { onClose(); setResult(null); setForm({ email: '', firstName: '', lastName: '', roleId: '', password: '' }); }} title="Create User">
+      {result ? (
+        <div className="space-y-4">
+          <div className="bg-green-50 text-green-700 p-4 rounded-lg">
+            <CheckCircle className="w-5 h-5 inline mr-2" />
+            User created successfully!
+          </div>
+          {result.temporaryPassword && (
+            <div className="bg-amber-50 p-4 rounded-lg">
+              <p className="font-medium text-amber-800 mb-2">Temporary Password</p>
+              <div className="flex items-center gap-2">
+                <code className="bg-white px-2 py-1 rounded text-sm">{result.temporaryPassword}</code>
+                <CopyButton text={result.temporaryPassword} />
+              </div>
+              <p className="text-sm text-amber-600 mt-2">User must change this on first login.</p>
+            </div>
+          )}
+          <Button onClick={() => { onClose(); setResult(null); }} className="w-full">Done</Button>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            label="Email"
+            type="email"
+            value={form.email}
+            onChange={e => setForm({ ...form, email: e.target.value })}
+            placeholder="user@uplifthq.co.uk"
+            required
+          />
+          <div className="grid grid-cols-2 gap-4">
+            <Input
+              label="First Name"
+              value={form.firstName}
+              onChange={e => setForm({ ...form, firstName: e.target.value })}
+              required
+            />
+            <Input
+              label="Last Name"
+              value={form.lastName}
+              onChange={e => setForm({ ...form, lastName: e.target.value })}
+              required
+            />
+          </div>
+          <Select
+            label="Role"
+            value={form.roleId}
+            onChange={e => setForm({ ...form, roleId: e.target.value })}
+            options={[{ value: '', label: 'Select role...' }, ...roles.map(r => ({ value: r.id, label: r.display_name }))]}
+            required
+          />
+          <Input
+            label="Password (optional - will generate if empty)"
+            type="password"
+            value={form.password}
+            onChange={e => setForm({ ...form, password: e.target.value })}
+            placeholder="Min 12 chars, upper, lower, number, special"
+          />
+          <div className="flex gap-2 justify-end">
+            <Button variant="secondary" onClick={onClose}>Cancel</Button>
+            <Button type="submit" disabled={loading}>{loading ? 'Creating...' : 'Create User'}</Button>
+          </div>
+        </form>
+      )}
+    </Modal>
+  );
+}
+
+function ManageUserModal({ user, roles, onClose, onUpdated }) {
+  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({});
+
+  useEffect(() => {
+    if (user) {
+      setForm({
+        firstName: user.first_name,
+        lastName: user.last_name,
+        roleId: user.role_id,
+        isActive: user.is_active
+      });
+    }
+  }, [user]);
+
+  if (!user) return null;
+
+  const handleSave = async () => {
+    setLoading(true);
+    try {
+      await api('PATCH', `/users/${user.id}`, form);
+      onUpdated();
+      onClose();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUnlock = async () => {
+    setLoading(true);
+    try {
+      await api('POST', `/users/${user.id}/unlock`);
+      onUpdated();
+      onClose();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async () => {
+    if (!confirm('Reset password? User will need to change it on next login.')) return;
+    setLoading(true);
+    try {
+      const result = await api('POST', `/users/${user.id}/reset-password`);
+      alert(`Password reset. Temporary: ${result.temporaryPassword}`);
+      onUpdated();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDisableMfa = async () => {
+    if (!confirm('Disable MFA for this user?')) return;
+    setLoading(true);
+    try {
+      await api('POST', `/users/${user.id}/disable-mfa`);
+      onUpdated();
+      onClose();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const isLocked = user.locked_until && new Date(user.locked_until) > new Date();
+
+  return (
+    <Modal open={!!user} onClose={onClose} title="Manage User" size="lg">
+      <div className="space-y-6">
+        <div className="flex items-center gap-4 pb-4 border-b">
+          <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-2xl font-medium text-orange-600">
+            {user.first_name?.[0]}{user.last_name?.[0]}
+          </div>
+          <div>
+            <p className="text-lg font-medium">{user.first_name} {user.last_name}</p>
+            <p className="text-slate-500">{user.email}</p>
+            <div className="flex gap-2 mt-1">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700">
+                {user.role_display_name || user.role_name}
+              </span>
+              {user.mfa_enabled && (
+                <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 flex items-center gap-1">
+                  <ShieldCheck className="w-3 h-3" /> MFA
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <Input
+            label="First Name"
+            value={form.firstName || ''}
+            onChange={e => setForm({ ...form, firstName: e.target.value })}
+          />
+          <Input
+            label="Last Name"
+            value={form.lastName || ''}
+            onChange={e => setForm({ ...form, lastName: e.target.value })}
+          />
+        </div>
+
+        <Select
+          label="Role"
+          value={form.roleId || ''}
+          onChange={e => setForm({ ...form, roleId: e.target.value })}
+          options={roles.map(r => ({ value: r.id, label: r.display_name }))}
+        />
+
+        <div className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            id="isActive"
+            checked={form.isActive ?? true}
+            onChange={e => setForm({ ...form, isActive: e.target.checked })}
+            className="rounded"
+          />
+          <label htmlFor="isActive" className="text-sm text-slate-700">Account Active</label>
+        </div>
+
+        <div className="border-t pt-4 space-y-3">
+          <h4 className="font-medium text-slate-900">Account Actions</h4>
+
+          {isLocked && (
+            <button
+              onClick={handleUnlock}
+              className="flex items-center gap-2 text-sm text-green-600 hover:text-green-700"
+              disabled={loading}
+            >
+              <Unlock className="w-4 h-4" /> Unlock Account
+            </button>
+          )}
+
+          <button
+            onClick={handleResetPassword}
+            className="flex items-center gap-2 text-sm text-amber-600 hover:text-amber-700"
+            disabled={loading}
+          >
+            <Key className="w-4 h-4" /> Reset Password
+          </button>
+
+          {user.mfa_enabled && (
+            <button
+              onClick={handleDisableMfa}
+              className="flex items-center gap-2 text-sm text-red-600 hover:text-red-700"
+              disabled={loading}
+            >
+              <Shield className="w-4 h-4" /> Disable MFA
+            </button>
+          )}
+        </div>
+
+        <div className="flex gap-2 justify-end pt-4 border-t">
+          <Button variant="secondary" onClick={onClose}>Cancel</Button>
+          <Button onClick={handleSave} disabled={loading}>
+            {loading ? 'Saving...' : 'Save Changes'}
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+// ============================================================
+// Audit Log Page
+// ============================================================
+function AuditPage() {
+  const [audit, setAudit] = useState([]);
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({ category: '', severity: '', limit: 100 });
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({ ...filters });
+      const [auditData, statsData] = await Promise.all([
+        api('GET', `/users/audit?${params}`),
+        api('GET', '/users/audit/stats')
+      ]);
+      setAudit(auditData.audit || []);
+      setStats(statsData);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { loadData(); }, [filters]);
+
+  const severityColors = {
+    info: 'bg-blue-100 text-blue-800',
+    warning: 'bg-amber-100 text-amber-800',
+    critical: 'bg-red-100 text-red-800'
+  };
+
+  const categoryIcons = {
+    authentication: Lock,
+    user_management: Users,
+    customer: Building2,
+    license: Key,
+    billing: CreditCard,
+    feature: Sliders,
+    system: Settings
+  };
+
+  if (loading) return <LoadingSpinner />;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-slate-900">Security Audit Log</h2>
+        <Button variant="secondary" onClick={loadData}>
+          <RefreshCw className="w-4 h-4 mr-1" /> Refresh
+        </Button>
+      </div>
+
+      {/* Stats */}
+      {stats && (
+        <div className="grid grid-cols-4 gap-4">
+          {(stats.bySeverity || []).map(s => (
+            <div
+              key={s.severity}
+              className={`rounded-lg p-4 ${severityColors[s.severity] || 'bg-slate-100 text-slate-700'}`}
+            >
+              <p className="text-sm capitalize">{s.severity}</p>
+              <p className="text-2xl font-bold">{s.count}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Filters */}
+      <div className="flex gap-3">
+        <select
+          value={filters.category}
+          onChange={e => setFilters({ ...filters, category: e.target.value })}
+          className="px-4 py-2 border border-slate-300 rounded-lg"
+        >
+          <option value="">All Categories</option>
+          <option value="authentication">Authentication</option>
+          <option value="user_management">User Management</option>
+          <option value="customer">Customer</option>
+          <option value="license">License</option>
+          <option value="billing">Billing</option>
+          <option value="feature">Feature</option>
+          <option value="system">System</option>
+        </select>
+        <select
+          value={filters.severity}
+          onChange={e => setFilters({ ...filters, severity: e.target.value })}
+          className="px-4 py-2 border border-slate-300 rounded-lg"
+        >
+          <option value="">All Severity</option>
+          <option value="info">Info</option>
+          <option value="warning">Warning</option>
+          <option value="critical">Critical</option>
+        </select>
+      </div>
+
+      {/* Audit Table */}
+      <Card>
+        <table className="w-full">
+          <thead className="bg-slate-50">
+            <tr>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Action</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">User</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Category</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Severity</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Status</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">IP</th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Time</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {audit.map((a, i) => {
+              const CategoryIcon = categoryIcons[a.category] || Activity;
+              return (
+                <tr key={i} className="hover:bg-slate-50">
+                  <td className="px-6 py-4">
+                    <p className="font-medium text-slate-900">{a.action}</p>
+                    {a.description && (
+                      <p className="text-sm text-slate-500 truncate max-w-xs">{a.description}</p>
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-slate-600">
+                    {a.user_name || a.user_email || 'System'}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className="inline-flex items-center gap-1 text-sm text-slate-600">
+                      <CategoryIcon className="w-4 h-4" />
+                      {a.category}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium ${severityColors[a.severity]}`}>
+                      {a.severity}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    {a.success ? (
+                      <CheckCircle className="w-5 h-5 text-green-500" />
+                    ) : (
+                      <XCircle className="w-5 h-5 text-red-500" />
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-slate-500">{a.ip_address || '-'}</td>
+                  <td className="px-6 py-4 text-sm text-slate-500">
+                    {new Date(a.created_at).toLocaleString()}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        {audit.length === 0 && (
+          <EmptyState icon={Shield} title="No audit entries" description="Security events will appear here" />
+        )}
+      </Card>
+    </div>
+  );
+}
+
+// ============================================================
+// Settings / My Account Page
+// ============================================================
+function SettingsPage() {
+  const { user, refreshUser } = useAuth();
+  const location = useLocation();
+  const [tab, setTab] = useState('profile');
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Check for forced password change
+  const searchParams = new URLSearchParams(location.search);
+  const forcePasswordChange = searchParams.get('changePassword') === 'true';
+
+  useEffect(() => {
+    if (forcePasswordChange) setTab('security');
+    loadSessions();
+  }, []);
+
+  const loadSessions = async () => {
+    try {
+      const data = await api('GET', '/users/sessions');
+      setSessions(data.sessions || []);
+    } catch {}
+  };
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-slate-900">My Account</h2>
+
+      {forcePasswordChange && (
+        <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-lg flex items-center gap-2">
+          <AlertCircle className="w-5 h-5" />
+          You must change your password before continuing.
+        </div>
+      )}
+
+      <div className="flex gap-2 border-b border-slate-200 pb-2">
+        {['profile', 'security', 'mfa', 'sessions'].map(t => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              tab === t ? 'bg-orange-100 text-orange-700' : 'text-slate-600 hover:bg-slate-100'
+            }`}
+          >
+            {t.charAt(0).toUpperCase() + t.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      <Card className="p-6">
+        {tab === 'profile' && <ProfileSettings user={user} onUpdate={refreshUser} />}
+        {tab === 'security' && <SecuritySettings user={user} required={forcePasswordChange} />}
+        {tab === 'mfa' && <MfaSettings user={user} onUpdate={refreshUser} />}
+        {tab === 'sessions' && <SessionsSettings sessions={sessions} onUpdate={loadSessions} />}
+      </Card>
+    </div>
+  );
+}
+
+function ProfileSettings({ user, onUpdate }) {
+  const [form, setForm] = useState({
+    firstName: user?.firstName || '',
+    lastName: user?.lastName || ''
+  });
+
+  return (
+    <div className="space-y-6 max-w-md">
+      <h3 className="font-semibold text-slate-900">Profile Information</h3>
+      <Input
+        label="Email"
+        value={user?.email || ''}
+        disabled
+        className="bg-slate-50"
+      />
+      <Input
+        label="First Name"
+        value={form.firstName}
+        onChange={e => setForm({ ...form, firstName: e.target.value })}
+      />
+      <Input
+        label="Last Name"
+        value={form.lastName}
+        onChange={e => setForm({ ...form, lastName: e.target.value })}
+      />
+      <div className="text-sm text-slate-500">
+        Role: <span className="font-medium text-slate-700">{user?.roleDisplayName || user?.role}</span>
+      </div>
+    </div>
+  );
+}
+
+function SecuritySettings({ user, required }) {
+  const [form, setForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (form.newPassword !== form.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      await api('POST', '/users/auth/change-password', {
+        currentPassword: form.currentPassword,
+        newPassword: form.newPassword
+      });
+      setSuccess(true);
+      setForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      if (required) {
+        setTimeout(() => navigate('/'), 1500);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-md">
+      <h3 className="font-semibold text-slate-900">Change Password</h3>
+
+      {error && (
+        <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm flex items-center gap-2">
+          <AlertCircle className="w-4 h-4" /> {error}
+        </div>
+      )}
+      {success && (
+        <div className="bg-green-50 text-green-600 p-3 rounded-lg text-sm flex items-center gap-2">
+          <CheckCircle className="w-4 h-4" /> Password changed successfully!
+        </div>
+      )}
+
+      <Input
+        label="Current Password"
+        type="password"
+        value={form.currentPassword}
+        onChange={e => setForm({ ...form, currentPassword: e.target.value })}
+        required
+      />
+      <Input
+        label="New Password"
+        type="password"
+        value={form.newPassword}
+        onChange={e => setForm({ ...form, newPassword: e.target.value })}
+        required
+      />
+      <Input
+        label="Confirm New Password"
+        type="password"
+        value={form.confirmPassword}
+        onChange={e => setForm({ ...form, confirmPassword: e.target.value })}
+        required
+      />
+
+      <div className="text-sm text-slate-500">
+        Password must be at least 12 characters with uppercase, lowercase, number, and special character.
+      </div>
+
+      <Button type="submit" disabled={loading}>
+        {loading ? 'Changing...' : 'Change Password'}
+      </Button>
+    </form>
+  );
+}
+
+function MfaSettings({ user, onUpdate }) {
+  const [step, setStep] = useState(user?.mfaEnabled ? 'enabled' : 'setup');
+  const [setupData, setSetupData] = useState(null);
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const startSetup = async () => {
+    setLoading(true);
+    try {
+      const data = await api('POST', '/users/mfa/setup');
+      setSetupData(data);
+      setStep('verify');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyMfa = async () => {
+    setLoading(true);
+    try {
+      await api('POST', '/users/mfa/verify', { code });
+      setStep('enabled');
+      onUpdate();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const disableMfa = async () => {
+    setLoading(true);
+    try {
+      await api('DELETE', '/users/mfa', { password });
+      setStep('setup');
+      setPassword('');
+      onUpdate();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6 max-w-md">
+      <h3 className="font-semibold text-slate-900">Two-Factor Authentication</h3>
+
+      {error && (
+        <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>
+      )}
+
+      {step === 'setup' && (
+        <div className="space-y-4">
+          <p className="text-slate-600">
+            Add an extra layer of security to your account by enabling two-factor authentication.
+          </p>
+          <Button onClick={startSetup} disabled={loading}>
+            <ShieldCheck className="w-4 h-4 mr-1" />
+            {loading ? 'Setting up...' : 'Enable MFA'}
+          </Button>
+        </div>
+      )}
+
+      {step === 'verify' && setupData && (
+        <div className="space-y-4">
+          <p className="text-slate-600">Scan this QR code with your authenticator app:</p>
+          <div className="flex justify-center">
+            <img src={setupData.qrCode} alt="QR Code" className="w-48 h-48" />
+          </div>
+          <p className="text-sm text-slate-500 text-center">
+            Or enter this code manually: <code className="bg-slate-100 px-2 py-1 rounded">{setupData.secret}</code>
+          </p>
+          <div className="bg-amber-50 p-3 rounded-lg">
+            <p className="text-sm font-medium text-amber-800 mb-2">Backup Codes (save these!):</p>
+            <div className="grid grid-cols-2 gap-1 text-sm font-mono">
+              {setupData.backupCodes?.map((c, i) => (
+                <span key={i} className="bg-white px-2 py-1 rounded">{c}</span>
+              ))}
+            </div>
+          </div>
+          <Input
+            label="Enter code from authenticator"
+            value={code}
+            onChange={e => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+            placeholder="000000"
+          />
+          <Button onClick={verifyMfa} disabled={loading || code.length !== 6}>
+            {loading ? 'Verifying...' : 'Verify & Enable'}
+          </Button>
+        </div>
+      )}
+
+      {step === 'enabled' && (
+        <div className="space-y-4">
+          <div className="bg-green-50 text-green-700 p-4 rounded-lg flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5" />
+            Two-factor authentication is enabled
+          </div>
+          <div className="border-t pt-4">
+            <p className="text-sm text-slate-600 mb-3">To disable MFA, enter your password:</p>
+            <Input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Your password"
+            />
+            <Button variant="danger" onClick={disableMfa} disabled={loading || !password} className="mt-3">
+              {loading ? 'Disabling...' : 'Disable MFA'}
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SessionsSettings({ sessions, onUpdate }) {
+  const [loading, setLoading] = useState(false);
+
+  const terminateSession = async (id) => {
+    setLoading(true);
+    try {
+      await api('DELETE', `/users/sessions/${id}`);
+      onUpdate();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const terminateAll = async () => {
+    if (!confirm('Terminate all other sessions?')) return;
+    setLoading(true);
+    try {
+      await api('DELETE', '/users/sessions');
+      onUpdate();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="font-semibold text-slate-900">Active Sessions</h3>
+        {sessions.length > 1 && (
+          <Button variant="danger" size="sm" onClick={terminateAll} disabled={loading}>
+            Terminate All Others
+          </Button>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        {sessions.map(s => (
+          <div key={s.id} className="flex items-center justify-between p-4 border rounded-lg">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                <Smartphone className="w-5 h-5 text-slate-500" />
+              </div>
+              <div>
+                <p className="font-medium text-slate-900">
+                  {s.browser} on {s.os}
+                  {s.id === sessions.currentSession && (
+                    <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700">Current</span>
+                  )}
+                </p>
+                <p className="text-sm text-slate-500">
+                  {s.ip_address} • Last active: {new Date(s.last_activity_at).toLocaleString()}
+                </p>
+              </div>
+            </div>
+            {s.id !== sessions.currentSession && (
+              <Button variant="ghost" size="sm" onClick={() => terminateSession(s.id)} disabled={loading}>
+                <X className="w-4 h-4" />
+              </Button>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
 // Protected Route
 // ============================================================
 function ProtectedRoute({ children }) {
@@ -2337,6 +3370,9 @@ export default function App() {
         <Route path="/features" element={<ProtectedRoute><FeaturesPage /></ProtectedRoute>} />
         <Route path="/billing" element={<ProtectedRoute><BillingPage /></ProtectedRoute>} />
         <Route path="/activity" element={<ProtectedRoute><ActivityPage /></ProtectedRoute>} />
+        <Route path="/users" element={<ProtectedRoute><UsersPage /></ProtectedRoute>} />
+        <Route path="/audit" element={<ProtectedRoute><AuditPage /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
       </Routes>
     </AuthProvider>
   );
