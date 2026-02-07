@@ -31,8 +31,6 @@ RUN addgroup -g 1001 -S nodejs && \
 COPY --from=deps --chown=uplift:nodejs /app/node_modules ./node_modules
 COPY --chown=uplift:nodejs package*.json ./
 COPY --chown=uplift:nodejs src ./src
-COPY --chown=uplift:nodejs database ./database
-COPY --chown=uplift:nodejs scripts ./scripts
 
 # Create temp directory for any runtime needs
 RUN mkdir -p /app/tmp && chown uplift:nodejs /app/tmp
