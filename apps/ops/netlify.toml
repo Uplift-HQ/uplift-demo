@@ -1,0 +1,15 @@
+# Netlify build configuration for Uplift OPS Portal
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  VITE_API_URL = "https://uplift-demo-production.up.railway.app/api"
+  VITE_DEMO_MODE = "true"
+
+# SPA routing - redirect all paths to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
