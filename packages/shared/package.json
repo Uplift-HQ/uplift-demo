@@ -1,0 +1,13 @@
+{
+  "name": "@uplift/shared",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared utilities and types for Uplift platform",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./constants": "./constants.js",
+    "./types": "./types.js"
+  }
+}

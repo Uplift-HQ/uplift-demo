@@ -1,0 +1,334 @@
+{
+  "country": "GB",
+  "taxYear": "2025-26",
+  "effectiveFrom": "2025-04-06",
+  "effectiveTo": "2026-04-05",
+  "currency": "GBP",
+
+  "paye": {
+    "personalAllowance": {
+      "standard": 12570,
+      "incomeLimit": 100000,
+      "taperRate": 0.5,
+      "description": "Personal allowance reduced by £1 for every £2 over £100,000"
+    },
+    "taxBands": [
+      {
+        "name": "Basic Rate",
+        "code": "BR",
+        "min": 0,
+        "max": 37700,
+        "rate": 0.20
+      },
+      {
+        "name": "Higher Rate",
+        "code": "HR",
+        "min": 37700,
+        "max": 125140,
+        "rate": 0.40
+      },
+      {
+        "name": "Additional Rate",
+        "code": "AR",
+        "min": 125140,
+        "max": null,
+        "rate": 0.45
+      }
+    ],
+    "scottishBands": [
+      {
+        "name": "Starter Rate",
+        "min": 0,
+        "max": 2306,
+        "rate": 0.19
+      },
+      {
+        "name": "Basic Rate",
+        "min": 2306,
+        "max": 13991,
+        "rate": 0.20
+      },
+      {
+        "name": "Intermediate Rate",
+        "min": 13991,
+        "max": 31092,
+        "rate": 0.21
+      },
+      {
+        "name": "Higher Rate",
+        "min": 31092,
+        "max": 62430,
+        "rate": 0.42
+      },
+      {
+        "name": "Advanced Rate",
+        "min": 62430,
+        "max": 125140,
+        "rate": 0.45
+      },
+      {
+        "name": "Top Rate",
+        "min": 125140,
+        "max": null,
+        "rate": 0.48
+      }
+    ],
+    "taxCodes": {
+      "default": "1257L",
+      "scottishDefault": "S1257L",
+      "emergency": "1257L M1",
+      "basicRateOnly": "BR",
+      "noAllowance": "0T"
+    }
+  },
+
+  "nationalInsurance": {
+    "categories": {
+      "A": {
+        "description": "Standard employee",
+        "employee": {
+          "primaryThreshold": {
+            "weekly": 242,
+            "monthly": 1048,
+            "annual": 12570
+          },
+          "upperEarningsLimit": {
+            "weekly": 967,
+            "monthly": 4189,
+            "annual": 50270
+          },
+          "rates": {
+            "betweenThresholds": 0.08,
+            "aboveUpperLimit": 0.02
+          }
+        },
+        "employer": {
+          "secondaryThreshold": {
+            "weekly": 175,
+            "monthly": 758,
+            "annual": 9100
+          },
+          "rates": {
+            "standard": 0.138,
+            "description": "13.8% on earnings above secondary threshold"
+          }
+        }
+      },
+      "B": {
+        "description": "Married women reduced rate",
+        "employee": {
+          "rates": {
+            "betweenThresholds": 0.0185,
+            "aboveUpperLimit": 0.02
+          }
+        }
+      },
+      "C": {
+        "description": "State pension age employee",
+        "employee": {
+          "rates": {
+            "betweenThresholds": 0,
+            "aboveUpperLimit": 0
+          }
+        }
+      },
+      "H": {
+        "description": "Apprentice under 25",
+        "employer": {
+          "secondaryThreshold": {
+            "annual": 50270
+          }
+        }
+      },
+      "M": {
+        "description": "Under 21",
+        "employer": {
+          "secondaryThreshold": {
+            "annual": 50270
+          }
+        }
+      }
+    },
+    "employmentAllowance": {
+      "amount": 10500,
+      "description": "Reduction in employer NI (eligible employers only)"
+    }
+  },
+
+  "pension": {
+    "autoEnrolment": {
+      "enabled": true,
+      "qualifyingEarnings": {
+        "lowerLimit": {
+          "annual": 6240,
+          "monthly": 520
+        },
+        "upperLimit": {
+          "annual": 50270,
+          "monthly": 4189
+        }
+      },
+      "minimumContributions": {
+        "employee": 0.05,
+        "employer": 0.03,
+        "total": 0.08
+      },
+      "ageQualification": {
+        "min": 22,
+        "max": 66
+      },
+      "earningsThreshold": {
+        "annual": 10000,
+        "monthly": 833
+      }
+    },
+    "salaryExchange": {
+      "enabled": true,
+      "description": "Pension contributions via salary sacrifice reduce NI liability"
+    },
+    "reliefAtSource": {
+      "basicRateRelief": 0.20,
+      "description": "Provider claims basic rate, higher/additional rate via self-assessment"
+    },
+    "annualAllowance": {
+      "standard": 60000,
+      "taperedThreshold": 260000,
+      "minimumAllowance": 10000,
+      "description": "Tapered by £1 for every £2 over threshold income"
+    },
+    "lifetimeAllowance": {
+      "abolished": true,
+      "effectiveFrom": "2024-04-06"
+    }
+  },
+
+  "studentLoans": {
+    "plan1": {
+      "threshold": {
+        "annual": 24990,
+        "monthly": 2082,
+        "weekly": 480
+      },
+      "rate": 0.09,
+      "description": "Pre-2012 England/Wales, all Scotland/NI loans"
+    },
+    "plan2": {
+      "threshold": {
+        "annual": 27295,
+        "monthly": 2274,
+        "weekly": 524
+      },
+      "rate": 0.09,
+      "description": "Post-2012 England/Wales loans"
+    },
+    "plan4": {
+      "threshold": {
+        "annual": 31395,
+        "monthly": 2616,
+        "weekly": 603
+      },
+      "rate": 0.09,
+      "description": "Scottish student loans (post-2021)"
+    },
+    "plan5": {
+      "threshold": {
+        "annual": 25000,
+        "monthly": 2083,
+        "weekly": 480
+      },
+      "rate": 0.09,
+      "description": "Plan 5 student loans (2023 onwards)"
+    },
+    "postgraduate": {
+      "threshold": {
+        "annual": 21000,
+        "monthly": 1750,
+        "weekly": 403
+      },
+      "rate": 0.06,
+      "description": "Postgraduate loan"
+    }
+  },
+
+  "statutoryPayments": {
+    "ssp": {
+      "weeklyRate": 116.75,
+      "waitingDays": 3,
+      "maxWeeks": 28,
+      "lowerEarningsLimit": {
+        "weekly": 123
+      }
+    },
+    "smp": {
+      "first6Weeks": 0.90,
+      "remaining33Weeks": {
+        "rate": 184.03,
+        "orPercentage": 0.90,
+        "whicheverIsLower": true
+      },
+      "qualifyingWeeks": 26
+    },
+    "spp": {
+      "weeklyRate": 184.03,
+      "orPercentage": 0.90,
+      "weeks": 2
+    },
+    "shpp": {
+      "weeklyRate": 184.03,
+      "orPercentage": 0.90,
+      "maxWeeks": 37
+    }
+  },
+
+  "payPeriods": {
+    "weekly": {
+      "periods": 52,
+      "divisor": 52
+    },
+    "fortnightly": {
+      "periods": 26,
+      "divisor": 26
+    },
+    "fourWeekly": {
+      "periods": 13,
+      "divisor": 13
+    },
+    "monthly": {
+      "periods": 12,
+      "divisor": 12
+    }
+  },
+
+  "benefits": {
+    "companyCarBIK": {
+      "co2Bands": [
+        { "maxCO2": 0, "electric": true, "rate": 0.02 },
+        { "maxCO2": 50, "electric": false, "rate": 0.02 },
+        { "maxCO2": 54, "rate": 0.05 },
+        { "maxCO2": 59, "rate": 0.08 },
+        { "maxCO2": 64, "rate": 0.11 },
+        { "maxCO2": 69, "rate": 0.14 },
+        { "maxCO2": 74, "rate": 0.17 },
+        { "maxCO2": 79, "rate": 0.20 },
+        { "maxCO2": 84, "rate": 0.23 },
+        { "maxCO2": 89, "rate": 0.26 },
+        { "maxCO2": 94, "rate": 0.29 },
+        { "maxCO2": 99, "rate": 0.32 },
+        { "maxCO2": 104, "rate": 0.35 },
+        { "maxCO2": 109, "rate": 0.37 },
+        { "maxCO2": null, "rate": 0.37 }
+      ]
+    },
+    "privateHealthInsurance": {
+      "taxable": true,
+      "class1ANI": true
+    }
+  },
+
+  "apprenticyLevy": {
+    "threshold": 3000000,
+    "rate": 0.005,
+    "allowance": 15000,
+    "description": "0.5% of pay bill over £3m, £15k annual allowance"
+  }
+}

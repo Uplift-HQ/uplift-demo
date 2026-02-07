@@ -1,0 +1,267 @@
+{
+  "country": "AE",
+  "taxYear": "2025",
+  "effectiveFrom": "2025-01-01",
+  "effectiveTo": "2025-12-31",
+  "currency": "AED",
+
+  "personalIncomeTax": {
+    "enabled": false,
+    "rate": 0,
+    "description": "No personal income tax in UAE for individuals"
+  },
+
+  "socialInsurance": {
+    "applicableTo": "UAENationalsOnly",
+    "expats": {
+      "required": false,
+      "description": "No mandatory social insurance for expatriate employees"
+    },
+    "uaeNationals": {
+      "gpssa": {
+        "name": "General Pension and Social Security Authority",
+        "employee": {
+          "rate": 0.05,
+          "description": "5% of gross salary"
+        },
+        "employer": {
+          "rate": 0.125,
+          "description": "12.5% of gross salary"
+        },
+        "government": {
+          "rate": 0.025,
+          "description": "2.5% government contribution"
+        },
+        "total": 0.20,
+        "contributionBasis": {
+          "min": 1000,
+          "max": 70000,
+          "description": "Contributions calculated on salary between 1,000 - 70,000 AED"
+        }
+      },
+      "abuDhabiPension": {
+        "name": "Abu Dhabi Pension Fund",
+        "employee": {
+          "rate": 0.05
+        },
+        "employer": {
+          "rate": 0.15
+        },
+        "total": 0.20,
+        "applicableTo": "AbuDhabiGovernmentEmployees"
+      }
+    }
+  },
+
+  "endOfServiceGratuity": {
+    "required": true,
+    "applicableTo": "allEmployees",
+    "calculation": {
+      "unlimitedContract": {
+        "first5Years": {
+          "daysPerYear": 21,
+          "description": "21 days basic salary per year for first 5 years"
+        },
+        "after5Years": {
+          "daysPerYear": 30,
+          "description": "30 days basic salary per year after 5 years"
+        },
+        "resignationReduction": {
+          "lessThan1Year": 0,
+          "1to3Years": 0.333,
+          "3to5Years": 0.667,
+          "over5Years": 1,
+          "description": "Prorated for resignation before 5 years"
+        }
+      },
+      "limitedContract": {
+        "daysPerYear": 21,
+        "first5Years": true,
+        "after5Years": {
+          "daysPerYear": 30
+        },
+        "earlyTermination": {
+          "byEmployee": "prorated",
+          "byEmployer": "full"
+        }
+      },
+      "maximum": {
+        "totalYears": 2,
+        "description": "Maximum gratuity capped at 2 years' salary"
+      },
+      "basis": {
+        "basicSalary": true,
+        "excludes": ["housing", "transport", "utilities", "otherAllowances"],
+        "description": "Calculated on basic salary only"
+      }
+    },
+    "newSavingsScheme": {
+      "enabled": true,
+      "effectiveFrom": "2025-01-01",
+      "voluntary": true,
+      "description": "Alternative savings scheme option for employers"
+    }
+  },
+
+  "wps": {
+    "name": "Wage Protection System",
+    "mandatory": true,
+    "description": "Mandatory electronic salary transfer system",
+    "requirements": {
+      "bankTransfer": true,
+      "deadline": "byLastDayOfMonth",
+      "reporting": "monthly"
+    }
+  },
+
+  "workPermit": {
+    "costs": {
+      "employerResponsibility": true,
+      "description": "All visa and work permit costs borne by employer"
+    }
+  },
+
+  "leaveEntitlements": {
+    "annual": {
+      "afterProbation": 2,
+      "after1Year": 30,
+      "description": "2 days/month after probation, 30 days after 1 year"
+    },
+    "sick": {
+      "first15Days": 1.0,
+      "next30Days": 0.5,
+      "after45Days": 0,
+      "maxDays": 90,
+      "description": "Paid sick leave entitlement"
+    },
+    "maternity": {
+      "days": 60,
+      "fullPay": 45,
+      "halfPay": 15,
+      "description": "60 days maternity leave"
+    },
+    "paternity": {
+      "days": 5,
+      "within6Months": true,
+      "description": "5 days paternity leave"
+    },
+    "bereavement": {
+      "spouse": 5,
+      "firstDegree": 3,
+      "description": "Compassionate leave days"
+    },
+    "hajj": {
+      "days": 30,
+      "unpaid": true,
+      "onceInCareer": true,
+      "description": "Hajj leave for Muslim employees"
+    }
+  },
+
+  "workingHours": {
+    "standard": {
+      "hoursPerDay": 8,
+      "hoursPerWeek": 48,
+      "maxHoursPerDay": 9
+    },
+    "ramadan": {
+      "reduction": 2,
+      "hoursPerDay": 6,
+      "description": "Reduced hours during Ramadan"
+    },
+    "overtime": {
+      "rate": 1.25,
+      "nightRate": 1.50,
+      "nightHours": {
+        "from": 21,
+        "to": 4
+      },
+      "maxOvertime": 2,
+      "description": "Max 2 hours overtime per day"
+    }
+  },
+
+  "publicHolidays": {
+    "2025": [
+      { "name": "New Year's Day", "date": "2025-01-01" },
+      { "name": "Eid Al Fitr", "date": "variable", "days": 4 },
+      { "name": "Arafat Day", "date": "variable", "days": 1 },
+      { "name": "Eid Al Adha", "date": "variable", "days": 3 },
+      { "name": "Islamic New Year", "date": "variable", "days": 1 },
+      { "name": "Prophet's Birthday", "date": "variable", "days": 1 },
+      { "name": "Commemoration Day", "date": "2025-12-01" },
+      { "name": "UAE National Day", "date": "2025-12-02", "days": 2 }
+    ],
+    "holidayOnRestDay": {
+      "substitution": true,
+      "description": "If holiday falls on rest day, substitute day off"
+    }
+  },
+
+  "corporateTax": {
+    "effectiveFrom": "2023-06-01",
+    "rates": {
+      "upTo375000": 0,
+      "above375000": 0.09
+    },
+    "qualifyingFreeZone": {
+      "rate": 0,
+      "conditions": ["maintainSubstance", "compliantTransactions"]
+    },
+    "description": "9% corporate tax on profits over AED 375,000"
+  },
+
+  "vat": {
+    "standardRate": 0.05,
+    "effectiveFrom": "2018-01-01"
+  },
+
+  "freeZones": {
+    "benefits": {
+      "corporateTaxExemption": true,
+      "importDutyExemption": true,
+      "fullRepatriation": true,
+      "noForexRestrictions": true
+    },
+    "employmentRules": {
+      "followUAELaborLaw": true,
+      "someVariations": true
+    }
+  },
+
+  "payPeriods": {
+    "monthly": {
+      "periods": 12,
+      "divisor": 12
+    }
+  },
+
+  "minimumWage": {
+    "exists": false,
+    "description": "No federal minimum wage in UAE"
+  },
+
+  "deductions": {
+    "allowedFromSalary": {
+      "courtOrders": true,
+      "loanRepayment": {
+        "maxPercent": 0.10,
+        "description": "Max 10% for employer loans"
+      },
+      "socialInsurance": {
+        "uaeNationalsOnly": true
+      },
+      "absences": {
+        "unauthorised": true
+      }
+    },
+    "maxTotalDeduction": {
+      "percent": 0.50,
+      "description": "Total deductions cannot exceed 50% of salary"
+    },
+    "prohibited": {
+      "items": ["uniform", "tools", "equipment"],
+      "description": "Employer cannot deduct for work essentials"
+    }
+  }
+}

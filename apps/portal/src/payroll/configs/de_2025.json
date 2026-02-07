@@ -1,0 +1,287 @@
+{
+  "country": "DE",
+  "taxYear": "2025",
+  "effectiveFrom": "2025-01-01",
+  "effectiveTo": "2025-12-31",
+  "currency": "EUR",
+
+  "lohnsteuer": {
+    "taxClasses": {
+      "I": {
+        "description": "Single, divorced, widowed",
+        "basicAllowance": 12096,
+        "childAllowance": 0
+      },
+      "II": {
+        "description": "Single parent",
+        "basicAllowance": 12096,
+        "singleParentRelief": 4260,
+        "additionalChildRelief": 240,
+        "childAllowance": 0
+      },
+      "III": {
+        "description": "Married (higher earner)",
+        "basicAllowance": 24192,
+        "childAllowance": 0
+      },
+      "IV": {
+        "description": "Married (equal split)",
+        "basicAllowance": 12096,
+        "childAllowance": 0
+      },
+      "V": {
+        "description": "Married (lower earner)",
+        "basicAllowance": 0,
+        "childAllowance": 0
+      },
+      "VI": {
+        "description": "Secondary employment",
+        "basicAllowance": 0,
+        "childAllowance": 0
+      }
+    },
+    "childAllowances": {
+      "perChild": 9540,
+      "childcareAllowance": 4656,
+      "description": "Combined child + childcare allowance per child"
+    },
+    "taxBrackets": [
+      {
+        "name": "Zone 0",
+        "min": 0,
+        "max": 12096,
+        "rate": 0,
+        "formula": "0"
+      },
+      {
+        "name": "Zone 1",
+        "min": 12097,
+        "max": 17005,
+        "rate": "progressive",
+        "formula": "(1020.13 * y + 1400) * y",
+        "yFormula": "(income - 12096) / 10000"
+      },
+      {
+        "name": "Zone 2",
+        "min": 17006,
+        "max": 66761,
+        "rate": "progressive",
+        "formula": "(206.43 * z + 2397) * z + 991.21",
+        "zFormula": "(income - 17005) / 10000"
+      },
+      {
+        "name": "Zone 3",
+        "min": 66762,
+        "max": 277826,
+        "rate": 0.42,
+        "fixedBase": 17671.20,
+        "description": "42% on income above €66,761"
+      },
+      {
+        "name": "Zone 4",
+        "min": 277827,
+        "max": null,
+        "rate": 0.45,
+        "fixedBase": 106319.52,
+        "description": "45% on income above €277,826 (Reichensteuer)"
+      }
+    ],
+    "werbungskostenpauschale": {
+      "amount": 1230,
+      "description": "Employee expense allowance"
+    },
+    "sonderausgabenpauschale": {
+      "amount": 36,
+      "description": "Special expenses allowance"
+    },
+    "vorsorgepauschale": {
+      "enabled": true,
+      "description": "Calculated based on social insurance contributions"
+    }
+  },
+
+  "solidaritaetszuschlag": {
+    "exemptionThreshold": 18130,
+    "jointExemptionThreshold": 36260,
+    "rate": 0.055,
+    "phaseInZone": {
+      "enabled": true,
+      "rateInZone": 0.119,
+      "description": "11.9% of excess over threshold up to full rate"
+    },
+    "description": "5.5% solidarity surcharge on income tax"
+  },
+
+  "kirchensteuer": {
+    "enabled": true,
+    "rates": {
+      "bavariaBadenWuerttemberg": 0.08,
+      "otherStates": 0.09
+    },
+    "cap": {
+      "enabled": true,
+      "percentage": 0.035,
+      "description": "Church tax capped at 3.5% of taxable income in some states"
+    }
+  },
+
+  "socialInsurance": {
+    "contributionCeilings": {
+      "pension": {
+        "west": {
+          "annual": 96600,
+          "monthly": 8050
+        },
+        "east": {
+          "annual": 96600,
+          "monthly": 8050
+        }
+      },
+      "unemployment": {
+        "west": {
+          "annual": 96600,
+          "monthly": 8050
+        },
+        "east": {
+          "annual": 96600,
+          "monthly": 8050
+        }
+      },
+      "health": {
+        "annual": 66150,
+        "monthly": 5512.50
+      },
+      "longTermCare": {
+        "annual": 66150,
+        "monthly": 5512.50
+      }
+    },
+    "rentenversicherung": {
+      "rate": 0.186,
+      "employeeShare": 0.093,
+      "employerShare": 0.093,
+      "description": "Pension insurance - 18.6% total (9.3% each)"
+    },
+    "arbeitslosenversicherung": {
+      "rate": 0.026,
+      "employeeShare": 0.013,
+      "employerShare": 0.013,
+      "description": "Unemployment insurance - 2.6% total (1.3% each)"
+    },
+    "krankenversicherung": {
+      "baseRate": 0.146,
+      "employeeBaseShare": 0.073,
+      "employerBaseShare": 0.073,
+      "averageAdditionalRate": 0.017,
+      "additionalRateSplit": "equal",
+      "description": "Health insurance - 14.6% base + ~1.7% additional",
+      "privateInsuranceOption": {
+        "incomeThreshold": {
+          "annual": 73800,
+          "monthly": 6150
+        },
+        "description": "Can opt for private insurance if income exceeds threshold"
+      }
+    },
+    "pflegeversicherung": {
+      "baseRate": 0.034,
+      "childlessSupplementAge": 23,
+      "childlessSupplement": 0.006,
+      "childReduction": {
+        "perChild": 0.0025,
+        "maxChildren": 5,
+        "maxReduction": 0.01
+      },
+      "saxonyException": {
+        "employeeShare": 0.024,
+        "employerShare": 0.01,
+        "description": "In Saxony, employer pays only 1%"
+      },
+      "standardSplit": {
+        "employeeShare": 0.017,
+        "employerShare": 0.017
+      },
+      "description": "Long-term care insurance - 3.4% base, +0.6% if childless over 23"
+    }
+  },
+
+  "minijob": {
+    "threshold": 556,
+    "taxRate": 0.02,
+    "pensionContribution": {
+      "employer": 0.15,
+      "employee": 0.036,
+      "optOut": true
+    },
+    "healthContribution": {
+      "employer": 0.13,
+      "employee": 0
+    },
+    "description": "Mini-job up to €556/month with flat-rate taxes"
+  },
+
+  "midijob": {
+    "lowerThreshold": 556.01,
+    "upperThreshold": 2000,
+    "reducedContributions": true,
+    "description": "Midijob zone with graduated social contributions"
+  },
+
+  "vermoegenswirksameLeistungen": {
+    "maxAmount": 40,
+    "employerSubsidy": {
+      "maxPercent": 0.20,
+      "incomeLimit": {
+        "single": 20000,
+        "married": 40000
+      }
+    },
+    "description": "Capital-forming benefits"
+  },
+
+  "payPeriods": {
+    "monthly": {
+      "periods": 12,
+      "divisor": 12
+    }
+  },
+
+  "specialPayments": {
+    "weihnachtsgeld": {
+      "description": "Christmas bonus - taxed as special payment",
+      "socialInsurance": "proRated"
+    },
+    "urlaubsgeld": {
+      "description": "Holiday bonus - taxed as special payment",
+      "socialInsurance": "proRated"
+    },
+    "annualBonusRule": {
+      "method": "fifthRule",
+      "description": "One-fifth rule for multi-year bonuses"
+    }
+  },
+
+  "taxFreeAllowances": {
+    "mealAllowance": {
+      "domestic": {
+        "fullDay": 28,
+        "arrivalDeparture": 14
+      },
+      "foreign": {
+        "varies": true,
+        "description": "Per diem varies by country"
+      }
+    },
+    "homeOfficeAllowance": {
+      "perDay": 6,
+      "maxDays": 210,
+      "maxAnnual": 1260
+    },
+    "commuterAllowance": {
+      "perKm": 0.30,
+      "from21stKm": 0.38,
+      "maxDistance": null,
+      "description": "Entfernungspauschale - one way only"
+    }
+  }
+}

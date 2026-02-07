@@ -1,0 +1,217 @@
+{
+  "country": "PL",
+  "taxYear": "2025",
+  "effectiveFrom": "2025-01-01",
+  "effectiveTo": "2025-12-31",
+  "currency": "PLN",
+
+  "pit": {
+    "taxFreeAmount": 30000,
+    "taxBands": [
+      {
+        "name": "First Bracket",
+        "min": 0,
+        "max": 120000,
+        "rate": 0.12,
+        "description": "12% on income up to 120,000 PLN"
+      },
+      {
+        "name": "Second Bracket",
+        "min": 120000,
+        "max": null,
+        "rate": 0.32,
+        "fixedAmount": 10800,
+        "description": "10,800 PLN + 32% on income over 120,000 PLN"
+      }
+    ],
+    "costOfIncome": {
+      "standard": {
+        "monthly": 250,
+        "annual": 3000
+      },
+      "commuting": {
+        "monthly": 300,
+        "annual": 3600
+      },
+      "creativeWork": {
+        "rate": 0.50,
+        "maxBasis": 120000,
+        "description": "50% cost deduction for creative/IP work, max 120,000 PLN basis"
+      }
+    },
+    "reliefForYoung": {
+      "enabled": true,
+      "maxAge": 26,
+      "maxIncome": 85528,
+      "description": "Tax exemption for under-26s up to 85,528 PLN"
+    },
+    "reliefForReturn": {
+      "enabled": true,
+      "maxIncome": 85528,
+      "years": 4,
+      "description": "Tax relief for returning emigrants"
+    },
+    "reliefForParents4Plus": {
+      "enabled": true,
+      "maxIncome": 85528,
+      "description": "Tax exemption for parents of 4+ children"
+    },
+    "reliefForSeniors": {
+      "enabled": true,
+      "maxIncome": 85528,
+      "workingPensioners": true,
+      "description": "Tax relief for working pensioners"
+    }
+  },
+
+  "zus": {
+    "contributionBasis": {
+      "maxAnnual": 234720,
+      "description": "30x average monthly salary limit for pension/disability"
+    },
+    "emerytalne": {
+      "rate": 0.1952,
+      "employeeShare": 0.0976,
+      "employerShare": 0.0976,
+      "description": "Pension insurance - 19.52% total"
+    },
+    "rentowe": {
+      "rate": 0.08,
+      "employeeShare": 0.015,
+      "employerShare": 0.065,
+      "description": "Disability insurance - 8% total (1.5% employee, 6.5% employer)"
+    },
+    "chorobowe": {
+      "rate": 0.0245,
+      "employeeShare": 0.0245,
+      "employerShare": 0,
+      "voluntary": false,
+      "description": "Sickness insurance - 2.45% (employee only)"
+    },
+    "wypadkowe": {
+      "minRate": 0.0067,
+      "maxRate": 0.0333,
+      "standardRate": 0.0167,
+      "employeeShare": 0,
+      "employerShare": "varies",
+      "description": "Accident insurance - 0.67-3.33% (employer only, based on risk)"
+    },
+    "fp": {
+      "rate": 0.0245,
+      "employeeShare": 0,
+      "employerShare": 0.0245,
+      "description": "Labor Fund - 2.45% (employer only)"
+    },
+    "fgsp": {
+      "rate": 0.001,
+      "employeeShare": 0,
+      "employerShare": 0.001,
+      "description": "Employee Guarantee Fund - 0.1% (employer only)"
+    }
+  },
+
+  "healthInsurance": {
+    "rate": 0.09,
+    "deductibleFromTax": 0,
+    "basis": "grossMinusZUS",
+    "description": "9% of gross minus ZUS contributions, not tax deductible"
+  },
+
+  "ppk": {
+    "enabled": true,
+    "autoEnrolment": {
+      "minAge": 18,
+      "maxAutoAge": 55,
+      "optionalAge": 70
+    },
+    "contributions": {
+      "employee": {
+        "basic": 0.02,
+        "voluntary": {
+          "max": 0.02,
+          "total": 0.04
+        }
+      },
+      "employer": {
+        "basic": 0.015,
+        "voluntary": {
+          "max": 0.025,
+          "total": 0.04
+        }
+      }
+    },
+    "stateWelcomeBonus": 250,
+    "annualSubsidy": 240,
+    "lowIncomeReduction": {
+      "threshold": 1.2,
+      "multiplierOfMinimumWage": true,
+      "minContribution": 0.005
+    }
+  },
+
+  "minimumWage": {
+    "monthly": 4666,
+    "hourly": 30.50,
+    "effectiveFrom": "2025-01-01"
+  },
+
+  "payPeriods": {
+    "monthly": {
+      "periods": 12,
+      "divisor": 12
+    }
+  },
+
+  "solidarityTax": {
+    "enabled": true,
+    "threshold": 1000000,
+    "rate": 0.04,
+    "description": "4% solidarity tax on income over 1,000,000 PLN"
+  },
+
+  "flatTax": {
+    "enabled": true,
+    "rate": 0.19,
+    "healthInsuranceDeductible": 11600,
+    "forBusinessIncome": true,
+    "description": "19% flat tax option for business income"
+  },
+
+  "civilContract": {
+    "umowaodzielo": {
+      "costOfIncome": 0.20,
+      "creativeWork": 0.50,
+      "noZUS": true,
+      "description": "Contract for specific work"
+    },
+    "umowazlecenia": {
+      "zusRequired": true,
+      "studentExemption": {
+        "maxAge": 26,
+        "description": "Students under 26 exempt from ZUS"
+      }
+    }
+  },
+
+  "taxFreeAllowances": {
+    "mealAllowance": {
+      "daily": 45,
+      "description": "Domestic travel allowance"
+    },
+    "socialFund": {
+      "giftLimit": 1000,
+      "holidayLimit": 2000,
+      "description": "Tax-free benefits from social fund"
+    },
+    "workFromHome": {
+      "monthlyLimit": 100,
+      "description": "Work from home equipment allowance"
+    }
+  },
+
+  "advancePayment": {
+    "method": "monthly",
+    "deadline": 20,
+    "description": "Advance PIT payment due by 20th of following month"
+  }
+}

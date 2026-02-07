@@ -1,0 +1,305 @@
+{
+  "country": "CN",
+  "taxYear": "2025",
+  "effectiveFrom": "2025-01-01",
+  "effectiveTo": "2025-12-31",
+  "currency": "CNY",
+
+  "iit": {
+    "method": "cumulativeWithholding",
+    "basicDeduction": {
+      "monthly": 5000,
+      "annual": 60000,
+      "description": "Basic monthly deduction of 5,000 CNY"
+    },
+    "taxBrackets": [
+      {
+        "level": 1,
+        "annualMin": 0,
+        "annualMax": 36000,
+        "rate": 0.03,
+        "quickDeduction": 0
+      },
+      {
+        "level": 2,
+        "annualMin": 36000,
+        "annualMax": 144000,
+        "rate": 0.10,
+        "quickDeduction": 2520
+      },
+      {
+        "level": 3,
+        "annualMin": 144000,
+        "annualMax": 300000,
+        "rate": 0.20,
+        "quickDeduction": 16920
+      },
+      {
+        "level": 4,
+        "annualMin": 300000,
+        "annualMax": 420000,
+        "rate": 0.25,
+        "quickDeduction": 31920
+      },
+      {
+        "level": 5,
+        "annualMin": 420000,
+        "annualMax": 660000,
+        "rate": 0.30,
+        "quickDeduction": 52920
+      },
+      {
+        "level": 6,
+        "annualMin": 660000,
+        "annualMax": 960000,
+        "rate": 0.35,
+        "quickDeduction": 85920
+      },
+      {
+        "level": 7,
+        "annualMin": 960000,
+        "annualMax": null,
+        "rate": 0.45,
+        "quickDeduction": 181920
+      }
+    ],
+    "cumulativeFormula": {
+      "description": "Tax = (Cumulative taxable income × Rate - Quick deduction) - Cumulative tax already withheld",
+      "taxableIncome": "Cumulative gross - Cumulative basic deduction - Cumulative special deductions - Cumulative additional deductions - Cumulative other deductions"
+    }
+  },
+
+  "specialDeductions": {
+    "socialInsurance": {
+      "deductible": true,
+      "description": "Employee portions of social insurance"
+    },
+    "housingFund": {
+      "deductible": true,
+      "description": "Employee portion of housing fund"
+    }
+  },
+
+  "additionalDeductions": {
+    "childrenEducation": {
+      "perChildMonthly": 2000,
+      "splitBetweenParents": true,
+      "options": ["100%oneParent", "50%each"],
+      "description": "Education expenses for children (age 3 to higher education)"
+    },
+    "continuingEducation": {
+      "degreeMonthly": 400,
+      "maxMonths": 48,
+      "professionalCertificate": 3600,
+      "yearOfCertificate": true,
+      "description": "Continuing education deduction"
+    },
+    "seriousIllness": {
+      "annualThreshold": 15000,
+      "maxDeduction": 80000,
+      "selfOrDependents": true,
+      "description": "Medical expenses over 15,000 CNY, max 80,000 CNY"
+    },
+    "housingLoanInterest": {
+      "monthly": 1000,
+      "maxMonths": 240,
+      "firstHomeOnly": true,
+      "description": "First home mortgage interest deduction"
+    },
+    "housingRent": {
+      "tier1Cities": 1500,
+      "tier2Cities": 1100,
+      "otherCities": 800,
+      "noOwnProperty": true,
+      "description": "Rent deduction based on city tier"
+    },
+    "elderlySupport": {
+      "onlyChildMonthly": 3000,
+      "sharedMonthly": 3000,
+      "maxPerPersonIfShared": 1500,
+      "over60ParentsOrGrandparents": true,
+      "description": "Support for elderly parents/grandparents over 60"
+    },
+    "childcare": {
+      "perChildMonthly": 2000,
+      "underAge3": true,
+      "description": "Childcare for children under 3"
+    }
+  },
+
+  "socialInsurance": {
+    "shanghai": {
+      "pensionInsurance": {
+        "employeeRate": 0.08,
+        "employerRate": 0.16,
+        "ceiling": {
+          "monthly": 36549,
+          "description": "Upper limit based on 3x average salary"
+        },
+        "floor": {
+          "monthly": 7310,
+          "description": "Lower limit based on 60% average salary"
+        }
+      },
+      "medicalInsurance": {
+        "employeeRate": 0.02,
+        "employerRate": 0.095,
+        "additionalEmployer": 0.005,
+        "ceiling": {
+          "monthly": 36549
+        },
+        "floor": {
+          "monthly": 7310
+        }
+      },
+      "unemploymentInsurance": {
+        "employeeRate": 0.005,
+        "employerRate": 0.005,
+        "ceiling": {
+          "monthly": 36549
+        },
+        "floor": {
+          "monthly": 7310
+        }
+      },
+      "workInjuryInsurance": {
+        "employeeRate": 0,
+        "employerRate": {
+          "min": 0.0016,
+          "max": 0.019,
+          "byIndustry": true
+        },
+        "ceiling": {
+          "monthly": 36549
+        },
+        "floor": {
+          "monthly": 7310
+        }
+      },
+      "maternityInsurance": {
+        "employeeRate": 0,
+        "employerRate": 0.01,
+        "ceiling": {
+          "monthly": 36549
+        },
+        "floor": {
+          "monthly": 7310
+        }
+      }
+    }
+  },
+
+  "housingFund": {
+    "shanghai": {
+      "minRate": 0.05,
+      "maxRate": 0.12,
+      "defaultRate": 0.07,
+      "employeeRate": "sameAsEmployer",
+      "ceiling": {
+        "monthly": 36549,
+        "contribution": 4386
+      },
+      "floor": {
+        "monthly": 2690,
+        "contribution": 269
+      },
+      "description": "Mandatory housing provident fund"
+    }
+  },
+
+  "annualBonus": {
+    "separateTaxationOption": {
+      "enabled": true,
+      "validUntil": "2027-12-31",
+      "method": {
+        "divide": 12,
+        "findBracket": true,
+        "applyToTotal": true
+      },
+      "description": "Annual bonus can be taxed separately (divide by 12 to find bracket)"
+    },
+    "bonusTaxTable": [
+      { "monthlyEquivalentMax": 3000, "rate": 0.03, "quickDeduction": 0 },
+      { "monthlyEquivalentMax": 12000, "rate": 0.10, "quickDeduction": 210 },
+      { "monthlyEquivalentMax": 25000, "rate": 0.20, "quickDeduction": 1410 },
+      { "monthlyEquivalentMax": 35000, "rate": 0.25, "quickDeduction": 2660 },
+      { "monthlyEquivalentMax": 55000, "rate": 0.30, "quickDeduction": 4410 },
+      { "monthlyEquivalentMax": 80000, "rate": 0.35, "quickDeduction": 7160 },
+      { "monthlyEquivalentMax": null, "rate": 0.45, "quickDeduction": 15160 }
+    ]
+  },
+
+  "foreignerRules": {
+    "residentStatus": {
+      "daysThreshold": 183,
+      "consecutiveYears": 6,
+      "description": "183+ days = tax resident; after 6 consecutive years, worldwide income taxable"
+    },
+    "nonResidentTax": {
+      "method": "monthlyCalculation",
+      "description": "Non-residents taxed monthly, no cumulative method"
+    },
+    "additionalDeductions": {
+      "eligible": true,
+      "alternativeAllowances": {
+        "housing": {
+          "actual": true,
+          "reasonable": true
+        },
+        "childrenEducation": {
+          "tuitionOnly": true
+        },
+        "languageTraining": true,
+        "homeLeave": {
+          "twoTripsPerYear": true
+        }
+      },
+      "transitionPeriod": {
+        "validUntil": "2027-12-31",
+        "chooseOneSystem": true
+      }
+    }
+  },
+
+  "payPeriods": {
+    "monthly": {
+      "periods": 12,
+      "divisor": 12
+    }
+  },
+
+  "reporting": {
+    "monthlyFiling": {
+      "deadline": 15,
+      "description": "Monthly IIT filing by 15th of following month"
+    },
+    "annualReconciliation": {
+      "period": "March 1 - June 30",
+      "description": "Annual IIT reconciliation for prior year"
+    }
+  },
+
+  "cityConfigs": {
+    "shanghai": {
+      "minimumWage": {
+        "monthly": 2690,
+        "hourly": 24
+      },
+      "rentDeductionTier": "tier1Cities"
+    },
+    "beijing": {
+      "minimumWage": {
+        "monthly": 2420,
+        "hourly": 26.4
+      },
+      "rentDeductionTier": "tier1Cities"
+    },
+    "shenzhen": {
+      "minimumWage": {
+        "monthly": 2520,
+        "hourly": 24.3
+      },
+      "rentDeductionTier": "tier1Cities"
+    }
+  }
+}
