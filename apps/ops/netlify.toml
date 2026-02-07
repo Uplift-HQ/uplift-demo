@@ -5,8 +5,8 @@
   publish = "dist"
 
 [build.environment]
-  VITE_API_URL = "https://uplift-demo-production.up.railway.app/api"
-  VITE_DEMO_MODE = "true"
+  VITE_API_URL = "https://api.uplifthq.co.uk"
+  VITE_DEMO_MODE = "false"
 
 # SPA routing - redirect all paths to index.html
 [[redirects]]
