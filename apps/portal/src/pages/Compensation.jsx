@@ -2,7 +2,7 @@
 // COMPENSATION PAGE
 // Payslips, compensation records, and salary review cycles
 // ============================================================
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
 import {
@@ -26,7 +26,10 @@ import {
   ArrowDownRight,
   Minus,
   Filter,
+  Award,
+  MapPin,
 } from 'lucide-react';
+import api from '../lib/api';
 
 // ---- Demo Data ----
 
@@ -145,6 +148,41 @@ export default function Compensation() {
   const [showCycleModal, setShowCycleModal] = useState(false);
   const [cycleForm, setCycleForm] = useState({ name: '', budget: '', effectiveDate: '', description: '' });
 
+  // Bonus state
+  const [bonusData, setBonusData] = useState(null);
+  const [bonusLoading, setBonusLoading] = useState(false);
+
+  // Fetch my bonus data
+  useEffect(() => {
+    const fetchBonusData = async () => {
+      if (activeTab !== 'bonus') return;
+      setBonusLoading(true);
+      try {
+        const response = await api.get('/payroll/my-bonus');
+        setBonusData(response.data);
+      } catch (error) {
+        console.error('Failed to fetch bonus data:', error);
+        // Set demo data as fallback
+        setBonusData({
+          employee: {
+            bonus_amount: 5000,
+            location_name: 'London Office'
+          },
+          payouts: [
+            { id: 1, period: '2025-Q4', score_percentage: 92.5, payout_amount: 4625, status: 'paid', paid_at: '2026-01-28' },
+            { id: 2, period: '2025-Q3', score_percentage: 88.0, payout_amount: 4400, status: 'paid', paid_at: '2025-10-28' },
+          ],
+          pendingPayouts: [],
+          totalPaid: 9025,
+          totalPending: 0
+        });
+      } finally {
+        setBonusLoading(false);
+      }
+    };
+    fetchBonusData();
+  }, [activeTab]);
+
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
@@ -152,6 +190,7 @@ export default function Compensation() {
 
   const allTabs = [
     { key: 'payslips', label: t(isManager ? 'compensation.payslips' : 'compensation.myPayslips', isManager ? 'Payslips' : 'My Payslips'), icon: Receipt },
+    { key: 'bonus', label: t('compensation.myBonus', 'My Bonus'), icon: Award },
     { key: 'records', label: t('compensation.compensationRecords', 'Compensation Records'), icon: TrendingUp, managerOnly: true },
     { key: 'cycles', label: t('compensation.compensationCycles', 'Compensation Cycles'), icon: Calendar, managerOnly: true },
   ];
@@ -382,6 +421,139 @@ export default function Compensation() {
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {/* ============ TAB: My Bonus ============ */}
+      {activeTab === 'bonus' && (
+        <div className="space-y-6">
+          {bonusLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-momentum-500" />
+            </div>
+          ) : bonusData ? (
+            <>
+              {/* Bonus Summary Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white rounded-lg p-6 shadow border">
+                  <div className="flex items-center gap-2 text-slate-600 mb-2">
+                    <Award className="h-5 w-5 text-momentum-500" />
+                    <span className="text-sm">{t('compensation.eligibleBonus', 'Eligible Bonus')}</span>
+                  </div>
+                  <p className="text-2xl font-bold text-slate-900">{formatCurrency(bonusData.employee?.bonus_amount || 0)}</p>
+                  <p className="text-xs text-slate-500 mt-1">{t('compensation.annualBonusAmount', 'Annual bonus amount')}</p>
+                </div>
+                <div className="bg-white rounded-lg p-6 shadow border">
+                  <div className="flex items-center gap-2 text-green-600 mb-2">
+                    <CheckCircle className="h-5 w-5" />
+                    <span className="text-sm">{t('compensation.totalPaid', 'Total Paid')}</span>
+                  </div>
+                  <p className="text-2xl font-bold text-green-700">{formatCurrency(bonusData.totalPaid || 0)}</p>
+                  <p className="text-xs text-slate-500 mt-1">{t('compensation.bonusesPaidOut', 'Bonuses paid out')}</p>
+                </div>
+                <div className="bg-white rounded-lg p-6 shadow border">
+                  <div className="flex items-center gap-2 text-amber-600 mb-2">
+                    <Clock className="h-5 w-5" />
+                    <span className="text-sm">{t('compensation.pendingBonus', 'Pending')}</span>
+                  </div>
+                  <p className="text-2xl font-bold text-amber-700">{formatCurrency(bonusData.totalPending || 0)}</p>
+                  <p className="text-xs text-slate-500 mt-1">{t('compensation.awaitingApproval', 'Awaiting approval')}</p>
+                </div>
+              </div>
+
+              {/* Location Info */}
+              {bonusData.employee?.location_name && (
+                <div className="bg-momentum-50 border border-momentum-200 rounded-lg p-4 flex items-center gap-3">
+                  <MapPin className="h-5 w-5 text-momentum-600" />
+                  <div>
+                    <p className="text-sm font-medium text-momentum-700">{t('compensation.yourLocation', 'Your Location')}</p>
+                    <p className="text-momentum-600">{bonusData.employee.location_name}</p>
+                  </div>
+                  <div className="ml-auto text-right">
+                    <p className="text-xs text-momentum-500">{t('compensation.bonusFormula', 'Performance Bonus Formula')}</p>
+                    <p className="text-sm text-momentum-700 font-medium">{t('compensation.bonusTimesScore', 'Bonus × Location Score %')}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Bonus History */}
+              <div className="bg-white rounded-lg shadow border">
+                <div className="p-4 border-b border-slate-200">
+                  <h3 className="font-semibold text-slate-900">{t('compensation.bonusHistory', 'Bonus History')}</h3>
+                </div>
+                {bonusData.payouts && bonusData.payouts.length > 0 ? (
+                  <div className="divide-y divide-slate-100">
+                    {bonusData.payouts.map((payout) => (
+                      <div key={payout.id} className="p-4 flex items-center justify-between hover:bg-slate-50">
+                        <div>
+                          <p className="font-medium text-slate-900">{payout.period}</p>
+                          <p className="text-sm text-slate-500">
+                            {t('compensation.siteScore', 'Site Score')}: {payout.score_percentage}%
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-green-700">{formatCurrency(payout.payout_amount)}</p>
+                          <span className={`text-xs px-2 py-0.5 rounded-full ${
+                            payout.status === 'paid' ? 'bg-green-100 text-green-800' :
+                            payout.status === 'approved' ? 'bg-blue-100 text-blue-800' :
+                            'bg-amber-100 text-amber-800'
+                          }`}>
+                            {payout.status === 'paid' ? t('compensation.paid', 'Paid') :
+                             payout.status === 'approved' ? t('compensation.approved', 'Approved') :
+                             t('compensation.pending', 'Pending')}
+                          </span>
+                          {payout.paid_at && (
+                            <p className="text-xs text-slate-400 mt-1">
+                              {new Date(payout.paid_at).toLocaleDateString()}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-8 text-center text-slate-500">
+                    <Award className="h-12 w-12 mx-auto text-slate-300 mb-3" />
+                    <p>{t('compensation.noBonusHistory', 'No bonus history yet')}</p>
+                    <p className="text-sm text-slate-400 mt-1">{t('compensation.bonusWillAppear', 'Your performance bonuses will appear here once calculated.')}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Pending Payouts */}
+              {bonusData.pendingPayouts && bonusData.pendingPayouts.length > 0 && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg">
+                  <div className="p-4 border-b border-amber-200">
+                    <h3 className="font-semibold text-amber-800">{t('compensation.pendingPayouts', 'Pending Payouts')}</h3>
+                  </div>
+                  <div className="divide-y divide-amber-100">
+                    {bonusData.pendingPayouts.map((payout) => (
+                      <div key={payout.id} className="p-4 flex items-center justify-between">
+                        <div>
+                          <p className="font-medium text-amber-900">{payout.period}</p>
+                          <p className="text-sm text-amber-700">
+                            {t('compensation.siteScore', 'Site Score')}: {payout.score_percentage}%
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-amber-800">{formatCurrency(payout.payout_amount)}</p>
+                          <span className="text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full">
+                            {t('compensation.awaitingPayment', 'Awaiting Payment')}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="bg-white rounded-lg shadow border p-8 text-center">
+              <Award className="h-12 w-12 mx-auto text-slate-300 mb-3" />
+              <p className="text-slate-600">{t('compensation.noBonusConfigured', 'No performance bonus configured')}</p>
+              <p className="text-sm text-slate-400 mt-1">{t('compensation.contactHr', 'Contact HR for more information about bonus eligibility.')}</p>
+            </div>
+          )}
         </div>
       )}
 

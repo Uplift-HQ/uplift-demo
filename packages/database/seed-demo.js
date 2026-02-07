@@ -818,6 +818,118 @@ async function seed() {
       `, [uuid(), orgId, template.name, deptIds[template.dept], template.start, template.end, template.breakMins]);
     }
 
+    // ----------------------------------------
+    // 14. Create Performance Bonuses
+    // ----------------------------------------
+    console.log('🎯 Creating performance bonus data...');
+
+    // Set bonus amounts for management and supervisory employees
+    const bonusAmounts = {
+      'General Manager': 8000,
+      'Assistant General Manager': 6000,
+      'Operations Manager': 5000,
+      'Front Office Manager': 4500,
+      'Executive Housekeeper': 4000,
+      'Restaurant Manager': 4000,
+      'Head Chef': 4500,
+      'Sous Chef': 3500,
+      'Chief Engineer': 4000,
+      'Spa Director': 4000,
+      'Events Manager': 3500,
+      'Security Manager': 3500,
+      'Front Office Supervisor': 2500,
+      'Night Manager': 2500,
+      'HR Manager': 4000,
+      'Finance Manager': 4500
+    };
+
+    // Update bonus amounts for employees with matching job titles
+    for (const [title, amount] of Object.entries(bonusAmounts)) {
+      await client.query(`
+        UPDATE employees SET bonus_amount = $1
+        WHERE organization_id = $2 AND job_title ILIKE $3
+      `, [amount, orgId, `%${title}%`]);
+    }
+
+    // Also give some bonus amount to the demo accounts
+    await client.query(`UPDATE employees SET bonus_amount = 8000 WHERE id = $1`, [adminEmployeeId]);
+    await client.query(`UPDATE employees SET bonus_amount = 2500 WHERE id = $1`, [managerEmployeeId]);
+    await client.query(`UPDATE employees SET bonus_amount = 1500 WHERE id = $1`, [workerEmployeeId]);
+
+    // Create performance scores for each location for Q3 and Q4 2025
+    const performanceScores = [
+      // Q3 2025 scores
+      { location: 'Grand Metropolitan Downtown', period: '2025-Q3', score: 92.5 },
+      { location: 'Metropolitan Airport Hotel', period: '2025-Q3', score: 88.0 },
+      { location: 'Metro Conference Centre', period: '2025-Q3', score: 95.2 },
+      { location: 'Harbourside Resort & Spa', period: '2025-Q3', score: 91.0 },
+      { location: 'Metropolitan Express Birmingham', period: '2025-Q3', score: 85.5 },
+      // Q4 2025 scores
+      { location: 'Grand Metropolitan Downtown', period: '2025-Q4', score: 94.0 },
+      { location: 'Metropolitan Airport Hotel', period: '2025-Q4', score: 89.5 },
+      { location: 'Metro Conference Centre', period: '2025-Q4', score: 93.8 },
+      { location: 'Harbourside Resort & Spa', period: '2025-Q4', score: 96.2 },
+      { location: 'Metropolitan Express Birmingham', period: '2025-Q4', score: 87.0 },
+    ];
+
+    const scoreIds = {};
+    for (const ps of performanceScores) {
+      const scoreId = uuid();
+      scoreIds[`${ps.location}-${ps.period}`] = scoreId;
+
+      await client.query(`
+        INSERT INTO performance_scores (id, organization_id, location_id, period, score_percentage, uploaded_by, source, notes)
+        VALUES ($1, $2, $3, $4, $5, $6, 'manual', $7)
+        ON CONFLICT (organization_id, location_id, period) DO UPDATE SET score_percentage = EXCLUDED.score_percentage
+      `, [scoreId, orgId, locationIds[ps.location], ps.period, ps.score, adminUserId, `${ps.period} performance score from guest satisfaction surveys`]);
+    }
+
+    // Create bonus payouts for employees with bonus_amount
+    // Q3 2025 - paid
+    // Q4 2025 - approved (awaiting payment)
+    let bonusPayoutCount = 0;
+
+    for (const empId of allEmployeeIds) {
+      // Get employee details
+      const empResult = await client.query(`
+        SELECT e.id, e.bonus_amount, e.location_id, l.name as location_name
+        FROM employees e
+        JOIN locations l ON l.id = e.location_id
+        WHERE e.id = $1 AND e.bonus_amount IS NOT NULL AND e.bonus_amount > 0
+      `, [empId]);
+
+      if (empResult.rows.length === 0) continue;
+
+      const emp = empResult.rows[0];
+      const locName = emp.location_name;
+
+      // Q3 2025 payout - PAID
+      const q3Score = performanceScores.find(s => s.location === locName && s.period === '2025-Q3');
+      if (q3Score) {
+        const q3Payout = (parseFloat(emp.bonus_amount) * q3Score.score / 100).toFixed(2);
+        await client.query(`
+          INSERT INTO bonus_payouts (id, organization_id, employee_id, location_id, performance_score_id, period, bonus_amount, score_percentage, payout_amount, status, approved_by, approved_at, paid_at)
+          VALUES ($1, $2, $3, $4, $5, '2025-Q3', $6, $7, $8, 'paid', $9, '2025-10-15', '2025-10-28')
+          ON CONFLICT (organization_id, employee_id, period) DO NOTHING
+        `, [uuid(), orgId, empId, emp.location_id, scoreIds[`${locName}-2025-Q3`], emp.bonus_amount, q3Score.score, q3Payout, adminUserId]);
+        bonusPayoutCount++;
+      }
+
+      // Q4 2025 payout - APPROVED (pending payment in next payroll)
+      const q4Score = performanceScores.find(s => s.location === locName && s.period === '2025-Q4');
+      if (q4Score) {
+        const q4Payout = (parseFloat(emp.bonus_amount) * q4Score.score / 100).toFixed(2);
+        await client.query(`
+          INSERT INTO bonus_payouts (id, organization_id, employee_id, location_id, performance_score_id, period, bonus_amount, score_percentage, payout_amount, status, approved_by, approved_at)
+          VALUES ($1, $2, $3, $4, $5, '2025-Q4', $6, $7, $8, 'approved', $9, '2026-01-15')
+          ON CONFLICT (organization_id, employee_id, period) DO NOTHING
+        `, [uuid(), orgId, empId, emp.location_id, scoreIds[`${locName}-2025-Q4`], emp.bonus_amount, q4Score.score, q4Payout, adminUserId]);
+        bonusPayoutCount++;
+      }
+    }
+
+    console.log(`   Created ${performanceScores.length} performance scores and ${bonusPayoutCount} bonus payouts`);
+
     await client.query('COMMIT');
 
     console.log('\n✅ Demo seed completed successfully!\n');
@@ -834,6 +946,7 @@ async function seed() {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log(`📊 Created: ${employeeCount} employees | ${shiftCount} shifts (6 weeks) | 5 locations`);
     console.log(`🎯 Skills: 48 | 📅 Time-off requests: ${timeOffCount} | 💼 Jobs: 6`);
+    console.log(`💰 Performance Bonus: ${performanceScores.length} location scores | ${bonusPayoutCount} bonus payouts`);
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
   } catch (error) {
