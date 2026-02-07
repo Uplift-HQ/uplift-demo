@@ -1,10 +1,19 @@
 // Shared API helper for ops portal
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
+// Track if we're already redirecting to prevent loops
+let isRedirecting = false;
+
 export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem('ops_token');
+
+  // Don't make authenticated API calls without a token
+  if (!token && !path.includes('/auth/login')) {
+    throw new Error('No authentication token');
+  }
+
   const headers = {
-    Authorization: `Bearer ${token}`,
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
 
@@ -18,9 +27,16 @@ export async function apiFetch(path, options = {}) {
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
 
+  // Handle rate limiting
+  if (res.status === 429) {
+    const retryAfter = res.headers.get('Retry-After') || '60';
+    throw new Error(`Rate limited. Please wait ${retryAfter} seconds.`);
+  }
+
   if (res.status === 401) {
     localStorage.removeItem('ops_token');
-    window.location.href = '/login';
+    // Don't use window.location.href - let React handle navigation
+    // This prevents infinite reload loops
     throw new Error('Session expired');
   }
 

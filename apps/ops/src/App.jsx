@@ -38,7 +38,11 @@ function CurrencyProvider({ children }) {
     localStorage.setItem('ops_currency', currency);
   }, [currency]);
 
+  // Only fetch fx-rates when authenticated
   useEffect(() => {
+    const token = localStorage.getItem('ops_token');
+    if (!token) return; // Don't fetch if not logged in
+
     apiFetch('/api/ops/fx-rates').then(data => setRates(data.rates || {})).catch(() => {});
   }, []);
 
