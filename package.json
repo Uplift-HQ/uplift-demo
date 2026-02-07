@@ -1,20 +1,27 @@
 {
-  "name": "uplift-demo-api",
+  "name": "uplift-demo",
   "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
+  "private": true,
+  "description": "Uplift Workforce Management Platform - Demo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "node --watch index.js"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "pg": "^8.11.3"
+    "dev:api": "cd apps/api && npm run dev",
+    "dev:portal": "cd apps/portal && npm run dev",
+    "dev:mobile": "cd apps/mobile && npm start",
+    "dev:ops": "cd apps/ops && npm run dev",
+    "build:portal": "cd apps/portal && npm run build",
+    "start:api": "node src/index.js"
   },
   "engines": {
-    "node": ">=18"
-  }
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dazeavedo/uplift-demo.git"
+  },
+  "author": "Uplift HQ",
+  "license": "UNLICENSED"
 }
