@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext, useCallback } from 'react';
 import { Routes, Route, Navigate, Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { LayoutDashboard, Building2, CreditCard, Activity, LogOut, AlertTriangle, CheckCircle, XCircle, Clock, Users, TrendingUp, DollarSign, Calendar, Search, Edit, Plus, RefreshCw, ExternalLink, Eye, Key, Copy, X, ChevronRight, Settings, Shield, Zap, Crown, ArrowLeft, MapPin, ToggleLeft } from 'lucide-react';
+import { LayoutDashboard, Building2, CreditCard, Activity, LogOut, AlertTriangle, CheckCircle, XCircle, Clock, Users, TrendingUp, DollarSign, Calendar, Search, Edit, Plus, RefreshCw, ExternalLink, Eye, Key, Copy, X, ChevronRight, Settings, Shield, Zap, Crown, ArrowLeft, MapPin, ToggleLeft, UserCog, Lock, Smartphone, FileText, ChevronDown, Trash2, RotateCcw, UserX, UserCheck, History } from 'lucide-react';
 import { apiFetch } from './api.js';
 
 // ==================== CURRENCY ====================
@@ -87,53 +87,431 @@ export function useAuth() { return useContext(AuthContext); }
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [forcePasswordChange, setForcePasswordChange] = useState(false);
+
+  const refreshUser = async () => {
+    try {
+      const data = await apiFetch('/api/ops/auth/me');
+      setUser(data.user);
+      setForcePasswordChange(data.user?.forcePasswordChange || false);
+    } catch {
+      localStorage.removeItem('ops_token');
+      setUser(null);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('ops_token');
     if (token) {
-      apiFetch('/api/ops/auth/me')
-        .then(data => setUser(data.user))
-        .catch(() => localStorage.removeItem('ops_token'))
-        .finally(() => setLoading(false));
+      refreshUser().finally(() => setLoading(false));
     } else {
       setLoading(false);
     }
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, mfaCode = null) => {
     const API_BASE = import.meta.env.VITE_API_URL || '';
+    const body = { email, password };
+    if (mfaCode) body.mfaCode = mfaCode;
+
     const res = await fetch(`${API_BASE}/api/ops/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(body),
     });
-    if (!res.ok) throw new Error('Invalid credentials');
+
     const data = await res.json();
+
+    if (!res.ok) {
+      // Check for specific error types
+      if (data.requiresMfa) {
+        return { requiresMfa: true };
+      }
+      throw new Error(data.error || 'Invalid credentials');
+    }
+
     localStorage.setItem('ops_token', data.token);
     setUser(data.user);
+    setForcePasswordChange(data.user?.forcePasswordChange || false);
+    return { success: true, forcePasswordChange: data.user?.forcePasswordChange };
   };
 
-  const logout = () => { localStorage.removeItem('ops_token'); setUser(null); };
+  const logout = async () => {
+    try {
+      await apiFetch('/api/ops/auth/logout', { method: 'POST' });
+    } catch { /* ignore */ }
+    localStorage.removeItem('ops_token');
+    setUser(null);
+  };
+
+  const hasPermission = (permission) => {
+    if (!user?.permissions) return false;
+    return user.permissions.includes(permission);
+  };
+
+  const hasRole = (roles) => {
+    if (!user?.role) return false;
+    if (typeof roles === 'string') return user.role === roles;
+    return roles.includes(user.role);
+  };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center text-slate-500">Loading...</div>;
 
-  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{
+      user,
+      login,
+      logout,
+      refreshUser,
+      hasPermission,
+      hasRole,
+      forcePasswordChange,
+      setForcePasswordChange
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+// ==================== MY ACCOUNT DROPDOWN ====================
+
+function MyAccountDropdown() {
+  const { user, logout, hasRole } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showMfaModal, setShowMfaModal] = useState(false);
+  const [showSessionsModal, setShowSessionsModal] = useState(false);
+  const dropdownRef = React.useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const roleColors = {
+    super_admin: 'bg-purple-600',
+    admin: 'bg-blue-600',
+    support: 'bg-green-600',
+    billing_viewer: 'bg-amber-600',
+    read_only: 'bg-slate-600'
+  };
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-slate-800 transition-colors">
+        <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white font-medium text-sm">
+          {user?.firstName?.[0]}{user?.lastName?.[0]}
+        </div>
+        <div className="text-left hidden sm:block">
+          <p className="text-sm text-white font-medium">{user?.name || `${user?.firstName} ${user?.lastName}`}</p>
+          <p className="text-xs text-slate-400">{user?.email}</p>
+        </div>
+        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50">
+          <div className="px-4 py-3 border-b border-slate-100">
+            <p className="font-medium text-slate-900">{user?.name || `${user?.firstName} ${user?.lastName}`}</p>
+            <p className="text-sm text-slate-500">{user?.email}</p>
+            <span className={`mt-2 inline-block px-2 py-0.5 rounded text-xs text-white ${roleColors[user?.role] || 'bg-slate-600'}`}>
+              {user?.role?.replace('_', ' ')}
+            </span>
+          </div>
+
+          <div className="py-1">
+            <button onClick={() => { setShowPasswordModal(true); setOpen(false); }}
+              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
+              <Lock className="w-4 h-4 text-slate-400" /> Change Password
+            </button>
+            <button onClick={() => { setShowMfaModal(true); setOpen(false); }}
+              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
+              <Smartphone className="w-4 h-4 text-slate-400" />
+              {user?.mfaEnabled ? 'Manage MFA' : 'Enable MFA'}
+            </button>
+            <button onClick={() => { setShowSessionsModal(true); setOpen(false); }}
+              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
+              <History className="w-4 h-4 text-slate-400" /> Active Sessions
+            </button>
+          </div>
+
+          <div className="border-t border-slate-100 pt-1">
+            <button onClick={logout}
+              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3">
+              <LogOut className="w-4 h-4" /> Sign Out
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showPasswordModal && <ChangePasswordModal onClose={() => setShowPasswordModal(false)} />}
+      {showMfaModal && <MfaModal onClose={() => setShowMfaModal(false)} />}
+      {showSessionsModal && <SessionsModal onClose={() => setShowSessionsModal(false)} />}
+    </div>
+  );
+}
+
+function ChangePasswordModal({ onClose }) {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const { setForcePasswordChange } = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      await apiFetch('/api/ops/auth/change-password', {
+        method: 'POST',
+        body: { currentPassword, newPassword }
+      });
+      setSuccess(true);
+      setForcePasswordChange(false);
+      setTimeout(onClose, 1500);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Modal title="Change Password" onClose={onClose}>
+      {success ? (
+        <div className="text-center py-4">
+          <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
+          <p className="text-green-700 font-medium">Password changed successfully!</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
+          <FormField label="Current Password">
+            <input type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)}
+              className={inputClass} required />
+          </FormField>
+          <FormField label="New Password">
+            <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
+              className={inputClass} required minLength={12} />
+            <p className="text-xs text-slate-500 mt-1">Min 12 chars with upper, lower, number, and special character</p>
+          </FormField>
+          <FormField label="Confirm New Password">
+            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
+              className={inputClass} required />
+          </FormField>
+          <div className="flex gap-3 pt-2">
+            <button type="submit" disabled={loading} className={btnPrimary}>
+              {loading ? 'Changing...' : 'Change Password'}
+            </button>
+            <button type="button" onClick={onClose} className={btnSecondary}>Cancel</button>
+          </div>
+        </form>
+      )}
+    </Modal>
+  );
+}
+
+function MfaModal({ onClose }) {
+  const { user, refreshUser } = useAuth();
+  const [step, setStep] = useState(user?.mfaEnabled ? 'manage' : 'setup');
+  const [qrCode, setQrCode] = useState('');
+  const [secret, setSecret] = useState('');
+  const [code, setCode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const setupMfa = async () => {
+    setLoading(true);
+    try {
+      const data = await apiFetch('/api/ops/auth/setup-mfa', { method: 'POST' });
+      setQrCode(data.qrCode);
+      setSecret(data.secret);
+      setStep('verify');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyMfa = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await apiFetch('/api/ops/auth/verify-mfa', { method: 'POST', body: { code } });
+      await refreshUser();
+      setStep('success');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const disableMfa = async () => {
+    if (!confirm('Are you sure you want to disable MFA? This will make your account less secure.')) return;
+    setLoading(true);
+    try {
+      await apiFetch('/api/ops/auth/disable-mfa', { method: 'POST' });
+      await refreshUser();
+      onClose();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Modal title="Multi-Factor Authentication" onClose={onClose}>
+      {step === 'manage' && (
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg">
+            <CheckCircle className="w-6 h-6 text-green-600" />
+            <div>
+              <p className="font-medium text-green-800">MFA is enabled</p>
+              <p className="text-sm text-green-600">Your account is protected with 2FA</p>
+            </div>
+          </div>
+          <button onClick={disableMfa} disabled={loading} className={btnDanger}>
+            {loading ? 'Disabling...' : 'Disable MFA'}
+          </button>
+        </div>
+      )}
+
+      {step === 'setup' && (
+        <div className="space-y-4">
+          <p className="text-slate-600">Secure your account with multi-factor authentication using an authenticator app.</p>
+          <button onClick={setupMfa} disabled={loading} className={btnPrimary}>
+            {loading ? 'Setting up...' : 'Set Up MFA'}
+          </button>
+        </div>
+      )}
+
+      {step === 'verify' && (
+        <form onSubmit={verifyMfa} className="space-y-4">
+          {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
+          <div className="text-center">
+            <p className="text-sm text-slate-600 mb-4">Scan this QR code with your authenticator app:</p>
+            {qrCode && <img src={qrCode} alt="MFA QR Code" className="mx-auto border rounded-lg" />}
+            <p className="text-xs text-slate-500 mt-2">Or enter manually: <code className="bg-slate-100 px-2 py-1 rounded">{secret}</code></p>
+          </div>
+          <FormField label="Enter Code from App">
+            <input type="text" value={code} onChange={e => setCode(e.target.value)}
+              className={inputClass} placeholder="000000" maxLength={6} required />
+          </FormField>
+          <button type="submit" disabled={loading} className={btnPrimary}>
+            {loading ? 'Verifying...' : 'Verify & Enable'}
+          </button>
+        </form>
+      )}
+
+      {step === 'success' && (
+        <div className="text-center py-4">
+          <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
+          <p className="text-green-700 font-medium">MFA enabled successfully!</p>
+          <button onClick={onClose} className={`${btnPrimary} mt-4`}>Done</button>
+        </div>
+      )}
+    </Modal>
+  );
+}
+
+function SessionsModal({ onClose }) {
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiFetch('/api/ops/sessions').then(data => setSessions(data.sessions || []))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const revokeSession = async (id) => {
+    try {
+      await apiFetch(`/api/ops/sessions/${id}`, { method: 'DELETE' });
+      setSessions(sessions.filter(s => s.id !== id));
+    } catch { /* ignore */ }
+  };
+
+  const revokeAll = async () => {
+    if (!confirm('Revoke all other sessions? You will remain logged in.')) return;
+    try {
+      await apiFetch('/api/ops/sessions', { method: 'DELETE' });
+      setSessions(sessions.filter(s => s.isCurrent));
+    } catch { /* ignore */ }
+  };
+
+  return (
+    <Modal title="Active Sessions" onClose={onClose} wide>
+      {loading ? (
+        <p className="text-slate-500">Loading sessions...</p>
+      ) : (
+        <div className="space-y-4">
+          <div className="flex justify-end">
+            <button onClick={revokeAll} className={btnSecondary}>Revoke All Others</button>
+          </div>
+          <div className="space-y-2">
+            {sessions.map(s => (
+              <div key={s.id} className={`p-4 rounded-lg border ${s.isCurrent ? 'border-orange-300 bg-orange-50' : 'border-slate-200'}`}>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium text-slate-900">
+                      {s.isCurrent && <span className="text-orange-600">(Current) </span>}
+                      {s.deviceInfo?.browser || 'Unknown browser'}
+                    </p>
+                    <p className="text-sm text-slate-500">{s.ipAddress} • {new Date(s.lastActiveAt).toLocaleString()}</p>
+                  </div>
+                  {!s.isCurrent && (
+                    <button onClick={() => revokeSession(s.id)} className="text-red-600 hover:text-red-800">
+                      <XCircle className="w-5 h-5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </Modal>
+  );
 }
 
 // ==================== LAYOUT ====================
 
 function Layout({ children }) {
-  const { user, logout } = useAuth();
+  const { user, logout, hasRole, hasPermission } = useAuth();
   const location = useLocation();
 
-  const navItems = [
+  const baseNavItems = [
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/onboard', label: 'Onboarding', icon: Plus },
-    { path: '/customers', label: 'Customers', icon: Building2 },
-    { path: '/licenses', label: 'Licenses', icon: Key },
-    { path: '/features', label: 'Features', icon: ToggleLeft },
-    { path: '/billing', label: 'Billing', icon: CreditCard },
-    { path: '/activity', label: 'Activity', icon: Activity },
+    { path: '/onboard', label: 'Onboarding', icon: Plus, permission: 'onboard' },
+    { path: '/customers', label: 'Customers', icon: Building2, permission: 'customers.view' },
+    { path: '/licenses', label: 'Licenses', icon: Key, permission: 'licenses.view' },
+    { path: '/features', label: 'Features', icon: ToggleLeft, permission: 'features.view' },
+    { path: '/billing', label: 'Billing', icon: CreditCard, permission: 'billing.view' },
+    { path: '/activity', label: 'Activity', icon: Activity, permission: 'activity.view' },
+  ];
+
+  // Role-based nav items
+  const adminNavItems = [
+    { path: '/users', label: 'Users', icon: UserCog, roles: ['super_admin'] },
+    { path: '/audit', label: 'Audit Log', icon: FileText, roles: ['super_admin', 'admin'] },
+  ];
+
+  const navItems = [
+    ...baseNavItems.filter(item => !item.permission || hasPermission(item.permission)),
+    ...adminNavItems.filter(item => hasRole(item.roles)),
   ];
 
   const isActive = (path) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
@@ -149,7 +527,7 @@ function Layout({ children }) {
                 const Icon = item.icon;
                 return (
                   <Link key={item.path} to={item.path}
-                    className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${isActive(item.path) ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-800'}`}>
+                    className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm ${isActive(item.path) ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-800'}`}>
                     <Icon className="w-4 h-4" />{item.label}
                   </Link>
                 );
@@ -158,11 +536,7 @@ function Layout({ children }) {
           </div>
           <div className="flex items-center gap-4">
             <CurrencySelector />
-            <span className="text-sm text-slate-400">{user?.firstName} {user?.lastName}</span>
-            <span className="text-xs px-2 py-0.5 rounded bg-slate-700 text-slate-300">{user?.role}</span>
-            <button onClick={logout} className="text-sm text-slate-400 hover:text-white flex items-center gap-1">
-              <LogOut className="w-3.5 h-3.5" /> Logout
-            </button>
+            <MyAccountDropdown />
           </div>
         </div>
       </header>
@@ -225,6 +599,8 @@ const btnDanger = "px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 f
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [mfaCode, setMfaCode] = useState('');
+  const [step, setStep] = useState('credentials'); // credentials, mfa
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -234,9 +610,27 @@ function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    try { await login(email, password); navigate('/'); }
-    catch { setError('Invalid credentials'); }
-    finally { setLoading(false); }
+
+    try {
+      const result = await login(email, password, step === 'mfa' ? mfaCode : null);
+
+      if (result.requiresMfa) {
+        setStep('mfa');
+        setLoading(false);
+        return;
+      }
+
+      // Navigate to password change if required, otherwise dashboard
+      if (result.forcePasswordChange) {
+        navigate('/change-password');
+      } else {
+        navigate('/');
+      }
+    } catch (err) {
+      setError(err.message || 'Invalid credentials');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -244,16 +638,106 @@ function LoginPage() {
       <div className="bg-white rounded-xl p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold text-slate-900 mb-2">Uplift Ops Portal</h1>
         <p className="text-slate-500 mb-6">Internal operations dashboard</p>
+
+        {step === 'credentials' ? (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
+            <FormField label="Email">
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} required />
+            </FormField>
+            <FormField label="Password">
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} className={inputClass} required />
+            </FormField>
+            <button type="submit" disabled={loading} className={`w-full ${btnPrimary}`}>
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
+            <div className="text-center mb-4">
+              <Smartphone className="w-12 h-12 text-orange-500 mx-auto mb-2" />
+              <p className="text-slate-600">Enter the code from your authenticator app</p>
+            </div>
+            <FormField label="MFA Code">
+              <input type="text" value={mfaCode} onChange={e => setMfaCode(e.target.value)}
+                className={inputClass} placeholder="000000" maxLength={6} required autoFocus />
+            </FormField>
+            <button type="submit" disabled={loading} className={`w-full ${btnPrimary}`}>
+              {loading ? 'Verifying...' : 'Verify'}
+            </button>
+            <button type="button" onClick={() => { setStep('credentials'); setError(''); }}
+              className="w-full text-sm text-slate-500 hover:text-slate-700">
+              Back to login
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ForcePasswordChangePage() {
+  const { user, logout, setForcePasswordChange } = useAuth();
+  const navigate = useNavigate();
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      await apiFetch('/api/ops/auth/change-password', {
+        method: 'POST',
+        body: { currentPassword, newPassword }
+      });
+      setForcePasswordChange(false);
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="bg-white rounded-xl p-8 w-full max-w-md">
+        <div className="text-center mb-6">
+          <Lock className="w-12 h-12 text-orange-500 mx-auto mb-2" />
+          <h1 className="text-2xl font-bold text-slate-900">Password Change Required</h1>
+          <p className="text-slate-500">Please set a new password to continue</p>
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-          <FormField label="Email">
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} required />
+          <FormField label="Current Password">
+            <input type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)}
+              className={inputClass} required />
           </FormField>
-          <FormField label="Password">
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} className={inputClass} required />
+          <FormField label="New Password">
+            <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
+              className={inputClass} required minLength={12} />
+            <p className="text-xs text-slate-500 mt-1">Min 12 chars with upper, lower, number, and special character</p>
+          </FormField>
+          <FormField label="Confirm New Password">
+            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
+              className={inputClass} required />
           </FormField>
           <button type="submit" disabled={loading} className={`w-full ${btnPrimary}`}>
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Changing...' : 'Set New Password'}
+          </button>
+          <button type="button" onClick={logout}
+            className="w-full text-sm text-slate-500 hover:text-slate-700">
+            Sign out
           </button>
         </form>
       </div>
@@ -2605,11 +3089,493 @@ function ActivityPage() {
   );
 }
 
+// ==================== USERS PAGE (SUPER ADMIN ONLY) ====================
+
+function UsersPage() {
+  const [users, setUsers] = useState([]);
+  const [roles, setRoles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
+  const { hasRole } = useAuth();
+
+  const loadData = () => {
+    Promise.all([
+      apiFetch('/api/ops/users'),
+      apiFetch('/api/ops/roles')
+    ]).then(([usersData, rolesData]) => {
+      setUsers(usersData.users || []);
+      setRoles(rolesData.roles || []);
+    }).finally(() => setLoading(false));
+  };
+
+  useEffect(() => { loadData(); }, []);
+
+  const resetPassword = async (userId) => {
+    if (!confirm('Reset this user\'s password? They will receive a temporary password.')) return;
+    try {
+      const data = await apiFetch(`/api/ops/users/${userId}/reset-password`, { method: 'POST' });
+      alert(`Temporary password: ${data.temporaryPassword}\n\nPlease share this securely with the user.`);
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
+  const toggleStatus = async (user) => {
+    const newStatus = user.status === 'active' ? 'suspended' : 'active';
+    if (!confirm(`${newStatus === 'suspended' ? 'Suspend' : 'Activate'} ${user.email}?`)) return;
+    try {
+      await apiFetch(`/api/ops/users/${user.id}`, {
+        method: 'PATCH',
+        body: { status: newStatus }
+      });
+      loadData();
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
+  const unlockUser = async (userId) => {
+    try {
+      await apiFetch(`/api/ops/users/${userId}/unlock`, { method: 'POST' });
+      loadData();
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
+  const deleteUser = async (user) => {
+    if (!confirm(`Delete ${user.email}? This cannot be undone.`)) return;
+    try {
+      await apiFetch(`/api/ops/users/${user.id}`, { method: 'DELETE' });
+      loadData();
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
+  if (!hasRole('super_admin')) {
+    return <div className="text-red-600">Access denied. Super admin only.</div>;
+  }
+
+  if (loading) return <div className="text-slate-500">Loading users...</div>;
+
+  const roleColors = {
+    super_admin: 'bg-purple-100 text-purple-800',
+    admin: 'bg-blue-100 text-blue-800',
+    support: 'bg-green-100 text-green-800',
+    billing_viewer: 'bg-amber-100 text-amber-800',
+    read_only: 'bg-slate-100 text-slate-800'
+  };
+
+  const statusColors = {
+    active: 'bg-green-100 text-green-800',
+    suspended: 'bg-amber-100 text-amber-800',
+    disabled: 'bg-red-100 text-red-800'
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-slate-900">Admin Users</h2>
+        <button onClick={() => setShowCreateModal(true)} className={btnPrimary}>
+          <Plus className="w-4 h-4 inline mr-1" /> Add User
+        </button>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-slate-50">
+            <tr>
+              <th className="text-left px-6 py-3 font-medium text-slate-600">User</th>
+              <th className="text-left px-6 py-3 font-medium text-slate-600">Role</th>
+              <th className="text-left px-6 py-3 font-medium text-slate-600">Status</th>
+              <th className="text-left px-6 py-3 font-medium text-slate-600">MFA</th>
+              <th className="text-left px-6 py-3 font-medium text-slate-600">Last Login</th>
+              <th className="text-right px-6 py-3 font-medium text-slate-600">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {users.map(user => (
+              <tr key={user.id} className="hover:bg-slate-50">
+                <td className="px-6 py-4">
+                  <div>
+                    <p className="font-medium text-slate-900">{user.name || `${user.firstName} ${user.lastName}`}</p>
+                    <p className="text-sm text-slate-500">{user.email}</p>
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${roleColors[user.role] || 'bg-slate-100'}`}>
+                    {user.role?.replace('_', ' ')}
+                  </span>
+                </td>
+                <td className="px-6 py-4">
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[user.status] || 'bg-slate-100'}`}>
+                    {user.status}
+                  </span>
+                  {user.lockedUntil && new Date(user.lockedUntil) > new Date() && (
+                    <span className="ml-2 text-xs text-red-600">(locked)</span>
+                  )}
+                </td>
+                <td className="px-6 py-4">
+                  {user.mfaEnabled ? (
+                    <span className="text-green-600 flex items-center gap-1"><Shield className="w-4 h-4" /> Enabled</span>
+                  ) : (
+                    <span className="text-slate-400">Disabled</span>
+                  )}
+                </td>
+                <td className="px-6 py-4 text-slate-500">
+                  {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : 'Never'}
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center justify-end gap-2">
+                    <button onClick={() => setEditingUser(user)} className="p-1 text-slate-400 hover:text-slate-600" title="Edit">
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button onClick={() => resetPassword(user.id)} className="p-1 text-slate-400 hover:text-orange-600" title="Reset Password">
+                      <RotateCcw className="w-4 h-4" />
+                    </button>
+                    {user.lockedUntil && new Date(user.lockedUntil) > new Date() && (
+                      <button onClick={() => unlockUser(user.id)} className="p-1 text-slate-400 hover:text-green-600" title="Unlock">
+                        <Lock className="w-4 h-4" />
+                      </button>
+                    )}
+                    <button onClick={() => toggleStatus(user)}
+                      className={`p-1 ${user.status === 'active' ? 'text-slate-400 hover:text-amber-600' : 'text-slate-400 hover:text-green-600'}`}
+                      title={user.status === 'active' ? 'Suspend' : 'Activate'}>
+                      {user.status === 'active' ? <UserX className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}
+                    </button>
+                    {!user.isSystem && (
+                      <button onClick={() => deleteUser(user)} className="p-1 text-slate-400 hover:text-red-600" title="Delete">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {showCreateModal && (
+        <CreateUserModal roles={roles} onClose={() => setShowCreateModal(false)} onSuccess={loadData} />
+      )}
+      {editingUser && (
+        <EditUserModal user={editingUser} roles={roles} onClose={() => setEditingUser(null)} onSuccess={loadData} />
+      )}
+    </div>
+  );
+}
+
+function CreateUserModal({ roles, onClose, onSuccess }) {
+  const [form, setForm] = useState({ email: '', name: '', roleId: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const data = await apiFetch('/api/ops/users', { method: 'POST', body: form });
+      setResult(data);
+      onSuccess();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (result) {
+    return (
+      <Modal title="User Created" onClose={onClose}>
+        <div className="space-y-4">
+          <div className="bg-green-50 p-4 rounded-lg">
+            <CheckCircle className="w-8 h-8 text-green-500 mb-2" />
+            <p className="font-medium text-green-800">User created successfully!</p>
+          </div>
+          <div className="bg-amber-50 p-4 rounded-lg">
+            <p className="font-medium text-amber-800 mb-2">Temporary Password:</p>
+            <code className="block bg-white px-3 py-2 rounded border text-lg">{result.temporaryPassword}</code>
+            <p className="text-sm text-amber-600 mt-2">Share this securely. User must change on first login.</p>
+          </div>
+          <button onClick={onClose} className={btnPrimary}>Done</button>
+        </div>
+      </Modal>
+    );
+  }
+
+  return (
+    <Modal title="Create Admin User" onClose={onClose}>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
+        <FormField label="Email">
+          <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
+            className={inputClass} required placeholder="user@uplifthq.co.uk" />
+        </FormField>
+        <FormField label="Full Name">
+          <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+            className={inputClass} required placeholder="John Smith" />
+        </FormField>
+        <FormField label="Role">
+          <select value={form.roleId} onChange={e => setForm({ ...form, roleId: e.target.value })}
+            className={inputClass} required>
+            <option value="">Select role...</option>
+            {roles.map(r => (
+              <option key={r.id} value={r.id}>{r.name.replace('_', ' ')} - {r.description}</option>
+            ))}
+          </select>
+        </FormField>
+        <div className="flex gap-3 pt-2">
+          <button type="submit" disabled={loading} className={btnPrimary}>
+            {loading ? 'Creating...' : 'Create User'}
+          </button>
+          <button type="button" onClick={onClose} className={btnSecondary}>Cancel</button>
+        </div>
+      </form>
+    </Modal>
+  );
+}
+
+function EditUserModal({ user, roles, onClose, onSuccess }) {
+  const [form, setForm] = useState({
+    name: user.name || `${user.firstName} ${user.lastName}`,
+    roleId: user.roleId || '',
+    status: user.status
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await apiFetch(`/api/ops/users/${user.id}`, { method: 'PATCH', body: form });
+      onSuccess();
+      onClose();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Modal title="Edit User" onClose={onClose}>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
+        <div className="bg-slate-50 p-3 rounded-lg">
+          <p className="text-sm text-slate-600">{user.email}</p>
+        </div>
+        <FormField label="Full Name">
+          <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+            className={inputClass} required />
+        </FormField>
+        <FormField label="Role">
+          <select value={form.roleId} onChange={e => setForm({ ...form, roleId: e.target.value })}
+            className={inputClass} required>
+            {roles.map(r => (
+              <option key={r.id} value={r.id}>{r.name.replace('_', ' ')}</option>
+            ))}
+          </select>
+        </FormField>
+        <FormField label="Status">
+          <select value={form.status} onChange={e => setForm({ ...form, status: e.target.value })} className={inputClass}>
+            <option value="active">Active</option>
+            <option value="suspended">Suspended</option>
+            <option value="disabled">Disabled</option>
+          </select>
+        </FormField>
+        <div className="flex gap-3 pt-2">
+          <button type="submit" disabled={loading} className={btnPrimary}>
+            {loading ? 'Saving...' : 'Save Changes'}
+          </button>
+          <button type="button" onClick={onClose} className={btnSecondary}>Cancel</button>
+        </div>
+      </form>
+    </Modal>
+  );
+}
+
+// ==================== AUDIT LOG PAGE ====================
+
+function AuditPage() {
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({ action: '', userId: '', targetType: '', days: '7' });
+  const [users, setUsers] = useState([]);
+  const { hasRole } = useAuth();
+
+  useEffect(() => {
+    if (hasRole(['super_admin', 'admin'])) {
+      apiFetch('/api/ops/users').then(d => setUsers(d.users || [])).catch(() => {});
+    }
+  }, []);
+
+  const loadLogs = () => {
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (filters.action) params.set('action', filters.action);
+    if (filters.userId) params.set('userId', filters.userId);
+    if (filters.targetType) params.set('targetType', filters.targetType);
+    if (filters.days) params.set('days', filters.days);
+
+    apiFetch(`/api/ops/audit?${params.toString()}`)
+      .then(d => setLogs(d.logs || []))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => { loadLogs(); }, [filters]);
+
+  const exportCsv = () => {
+    const headers = ['Time', 'User', 'Action', 'Target', 'IP', 'Success'];
+    const rows = logs.map(l => [
+      new Date(l.createdAt).toISOString(),
+      l.opsUserEmail,
+      l.action,
+      `${l.targetType || ''} ${l.targetName || ''}`.trim(),
+      l.ipAddress,
+      l.success ? 'Yes' : 'No'
+    ]);
+    const csv = [headers, ...rows].map(r => r.map(c => `"${c || ''}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `audit-log-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+  };
+
+  if (!hasRole(['super_admin', 'admin'])) {
+    return <div className="text-red-600">Access denied.</div>;
+  }
+
+  const actionTypes = [...new Set(logs.map(l => l.action))].sort();
+  const targetTypes = [...new Set(logs.map(l => l.targetType).filter(Boolean))].sort();
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-slate-900">Audit Log</h2>
+        <button onClick={exportCsv} className={btnSecondary}>
+          Export CSV
+        </button>
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm flex flex-wrap gap-4">
+        <div>
+          <label className="text-xs text-slate-500 block mb-1">Time Range</label>
+          <select value={filters.days} onChange={e => setFilters({ ...filters, days: e.target.value })}
+            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
+            <option value="1">Last 24 hours</option>
+            <option value="7">Last 7 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="90">Last 90 days</option>
+          </select>
+        </div>
+        <div>
+          <label className="text-xs text-slate-500 block mb-1">User</label>
+          <select value={filters.userId} onChange={e => setFilters({ ...filters, userId: e.target.value })}
+            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
+            <option value="">All users</option>
+            {users.map(u => (
+              <option key={u.id} value={u.id}>{u.email}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="text-xs text-slate-500 block mb-1">Action</label>
+          <select value={filters.action} onChange={e => setFilters({ ...filters, action: e.target.value })}
+            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
+            <option value="">All actions</option>
+            {actionTypes.map(a => (
+              <option key={a} value={a}>{a}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="text-xs text-slate-500 block mb-1">Target Type</label>
+          <select value={filters.targetType} onChange={e => setFilters({ ...filters, targetType: e.target.value })}
+            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
+            <option value="">All types</option>
+            {targetTypes.map(t => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        {loading ? (
+          <div className="p-8 text-center text-slate-500">Loading audit log...</div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead className="bg-slate-50">
+              <tr>
+                <th className="text-left px-6 py-3 font-medium text-slate-600">Time</th>
+                <th className="text-left px-6 py-3 font-medium text-slate-600">User</th>
+                <th className="text-left px-6 py-3 font-medium text-slate-600">Action</th>
+                <th className="text-left px-6 py-3 font-medium text-slate-600">Target</th>
+                <th className="text-left px-6 py-3 font-medium text-slate-600">IP</th>
+                <th className="text-left px-6 py-3 font-medium text-slate-600">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {logs.map(log => (
+                <tr key={log.id} className={`hover:bg-slate-50 ${!log.success ? 'bg-red-50' : ''}`}>
+                  <td className="px-6 py-3 text-slate-500 whitespace-nowrap">
+                    {new Date(log.createdAt).toLocaleString()}
+                  </td>
+                  <td className="px-6 py-3 text-slate-700">{log.opsUserEmail || 'System'}</td>
+                  <td className="px-6 py-3">
+                    <span className="font-medium text-slate-900">{log.action}</span>
+                  </td>
+                  <td className="px-6 py-3 text-slate-600">
+                    {log.targetType && (
+                      <span className="text-xs bg-slate-100 px-2 py-0.5 rounded mr-2">{log.targetType}</span>
+                    )}
+                    {log.targetName || (log.targetId ? log.targetId.slice(0, 8) + '...' : '-')}
+                  </td>
+                  <td className="px-6 py-3 text-slate-500 font-mono text-xs">{log.ipAddress || '-'}</td>
+                  <td className="px-6 py-3">
+                    {log.success ? (
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                    ) : (
+                      <span className="text-red-600 text-xs">{log.errorMessage || 'Failed'}</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+              {!logs.length && (
+                <tr><td colSpan="6" className="px-6 py-8 text-center text-slate-500">No audit logs found</td></tr>
+              )}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ==================== ROUTES ====================
 
-function ProtectedRoute({ children }) {
-  const { user } = useAuth();
+function ProtectedRoute({ children, requiredRole }) {
+  const { user, hasRole, forcePasswordChange } = useAuth();
+
   if (!user) return <Navigate to="/login" replace />;
+
+  // Force password change redirect
+  if (forcePasswordChange) return <Navigate to="/change-password" replace />;
+
+  // Role check
+  if (requiredRole && !hasRole(requiredRole)) {
+    return <Layout><div className="text-red-600">Access denied.</div></Layout>;
+  }
+
   return <Layout>{children}</Layout>;
 }
 
@@ -2619,6 +3585,7 @@ export default function App() {
     <CurrencyProvider>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/change-password" element={<ForcePasswordChangePage />} />
         <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         <Route path="/customers" element={<ProtectedRoute><CustomersPage /></ProtectedRoute>} />
         <Route path="/customers/:id" element={<ProtectedRoute><CustomerDetailPage /></ProtectedRoute>} />
@@ -2627,6 +3594,8 @@ export default function App() {
         <Route path="/features" element={<ProtectedRoute><FeaturesPage /></ProtectedRoute>} />
         <Route path="/billing" element={<ProtectedRoute><BillingPage /></ProtectedRoute>} />
         <Route path="/activity" element={<ProtectedRoute><ActivityPage /></ProtectedRoute>} />
+        <Route path="/users" element={<ProtectedRoute requiredRole="super_admin"><UsersPage /></ProtectedRoute>} />
+        <Route path="/audit" element={<ProtectedRoute requiredRole={['super_admin', 'admin']}><AuditPage /></ProtectedRoute>} />
       </Routes>
     </CurrencyProvider>
     </AuthProvider>
