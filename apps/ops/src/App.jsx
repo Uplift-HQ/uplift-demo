@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { Routes, Route, Navigate, Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   LayoutDashboard, Building2, CreditCard, Activity, LogOut, Key, Sliders,
@@ -44,12 +44,12 @@ export function useAuth() {
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const authChecked = React.useRef(false);
+  const initRef = useRef(false);
 
   useEffect(() => {
-    // Prevent React StrictMode double-execution
-    if (authChecked.current) return;
-    authChecked.current = true;
+    // Prevent double-execution in StrictMode
+    if (initRef.current) return;
+    initRef.current = true;
 
     const token = localStorage.getItem('ops_token');
     if (!token) {
@@ -57,22 +57,16 @@ function AuthProvider({ children }) {
       return;
     }
 
-    // Check auth - try new endpoint, fall back to legacy
-    const checkAuth = async () => {
-      try {
-        const data = await api('GET', '/users/auth/me');
-        setUser(data.user);
-      } catch {
-        try {
-          const data = await api('GET', '/auth/me');
-          setUser(data.user);
-        } catch {
-          localStorage.removeItem('ops_token');
-        }
-      }
-      setLoading(false);
-    };
-    checkAuth();
+    // Try new endpoint first, fall back to legacy
+    api('GET', '/users/auth/me')
+      .then(data => setUser(data.user))
+      .catch(() => {
+        // Try legacy endpoint
+        return api('GET', '/auth/me')
+          .then(data => setUser(data.user))
+          .catch(() => localStorage.removeItem('ops_token'));
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const login = async (email, password, mfaCode = null) => {
@@ -84,17 +78,20 @@ function AuthProvider({ children }) {
       }
       localStorage.setItem('ops_token', data.token);
       setUser(data.user);
-      return { success: true, forcePasswordChange: data.user?.forcePasswordChange };
-    } catch (newErr) {
-      // Fall back to legacy endpoint
-      try {
-        const data = await api('POST', '/auth/login', { email, password });
-        localStorage.setItem('ops_token', data.token);
-        setUser(data.user);
-        return { success: true };
-      } catch {
-        throw newErr;
+      return {
+        success: true,
+        forcePasswordChange: data.user?.forcePasswordChange || data.forcePasswordChange
+      };
+    } catch (err) {
+      // If new endpoint returns specific error, throw it
+      if (err.message !== 'Request failed') {
+        throw err;
       }
+      // Try legacy endpoint
+      const data = await api('POST', '/auth/login', { email, password });
+      localStorage.setItem('ops_token', data.token);
+      setUser(data.user);
+      return { success: true };
     }
   };
 
@@ -102,7 +99,7 @@ function AuthProvider({ children }) {
     try {
       await api('POST', '/users/auth/logout');
     } catch {
-      // Ignore - might be using legacy auth
+      // Ignore - might be using legacy auth without logout endpoint
     }
     localStorage.removeItem('ops_token');
     setUser(null);
@@ -113,8 +110,12 @@ function AuthProvider({ children }) {
       const data = await api('GET', '/users/auth/me');
       setUser(data.user);
     } catch {
-      const data = await api('GET', '/auth/me');
-      setUser(data.user);
+      try {
+        const data = await api('GET', '/auth/me');
+        setUser(data.user);
+      } catch {
+        // Both failed - token may be invalid
+      }
     }
   };
 
@@ -417,12 +418,12 @@ function LoginPage() {
     setError('');
     try {
       const result = await login(email, password, requiresMfa ? mfaCode : null);
-      if (result.requiresMfa) {
+      if (result?.requiresMfa) {
         setRequiresMfa(true);
         setLoading(false);
         return;
       }
-      if (result.forcePasswordChange) {
+      if (result?.forcePasswordChange) {
         navigate('/settings?changePassword=true');
       } else {
         navigate('/');
