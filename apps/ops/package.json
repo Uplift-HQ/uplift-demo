@@ -1,5 +1,5 @@
 {
-  "name": "uplift-ops-portal",
+  "name": "@uplift/ops",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
