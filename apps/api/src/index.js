@@ -386,6 +386,19 @@ app.post('/api/notifications/push-token', authMiddleware, async (req, res) => {
   res.json({ success: true });
 });
 
+app.get('/api/notifications/unread-count', authMiddleware, async (req, res) => {
+  const count = await notificationService.getUnreadCount(req.user.userId);
+  res.json({ count });
+});
+
+app.delete('/api/notifications/:id', authMiddleware, async (req, res) => {
+  await db.query(
+    'DELETE FROM notifications WHERE id = $1 AND user_id = $2',
+    [req.params.id, req.user.userId]
+  );
+  res.json({ success: true });
+});
+
 // -------------------- DASHBOARD / REPORTING --------------------
 
 app.get('/api/dashboard', authMiddleware, async (req, res) => {

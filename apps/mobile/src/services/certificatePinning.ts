@@ -8,34 +8,29 @@ import { Platform } from 'react-native';
 // API host configuration - canonical production URL
 const API_HOST = process.env.EXPO_PUBLIC_API_URL || 'https://api.uplifthq.co.uk';
 
-// Certificate pinning is DISABLED until real certificate hashes are obtained
+// Certificate pins for api.uplifthq.co.uk
+// Generated on 2026-02-08 using:
+//   openssl s_client -connect api.uplifthq.co.uk:443 -servername api.uplifthq.co.uk < /dev/null 2>/dev/null | \
+//     openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | \
+//     openssl dgst -sha256 -binary | openssl enc -base64
 //
-// To enable certificate pinning in production:
-// 1. Get the certificate hashes for api.uplifthq.co.uk:
-//    openssl s_client -connect api.uplifthq.co.uk:443 2>/dev/null | \
-//      openssl x509 -pubkey -noout | \
-//      openssl pkey -pubin -outform der | \
-//      openssl dgst -sha256 -binary | \
-//      openssl enc -base64
-// 2. Replace the empty array below with actual hashes
-// 3. Set PIN_CONFIG.enabled = true
-//
-// IMPORTANT: Having placeholder hashes is worse than no pinning (false security)
+// IMPORTANT: These pins should be updated when certificates are rotated.
+// The backup pin is the intermediate CA certificate to allow for leaf cert rotation.
 const CERTIFICATE_PINS: Record<string, string> = {
-  // Add real certificate hashes here when ready for production
-  // primary: 'sha256/REAL_HASH_HERE=',
-  // backup: 'sha256/BACKUP_HASH_HERE=',
+  // Primary: Leaf certificate for api.uplifthq.co.uk
+  primary: 'sha256/ro8o0J4+AbWrDLAfGZLBoPWtNsaNpxqJZ+RA3UvuZ0U=',
+  // Backup: Intermediate CA certificate (allows leaf cert rotation)
+  backup: 'sha256/AlSQhgtJirc8ahLyekmtX+Iw+v46yPYRLJt9Cq1GlB0=',
 };
 
 // Pin configuration
 const PIN_CONFIG = {
   // When pins were last verified
-  lastVerified: null as Date | null,
+  lastVerified: new Date('2026-02-08') as Date | null,
   // How often to re-verify (7 days)
   verifyIntervalMs: 7 * 24 * 60 * 60 * 1000,
-  // Certificate pinning is DISABLED until real hashes are configured
-  // Set to true only after adding real certificate hashes above
-  enabled: false,
+  // Certificate pinning is ENABLED with real hashes
+  enabled: true,
 };
 
 /**
