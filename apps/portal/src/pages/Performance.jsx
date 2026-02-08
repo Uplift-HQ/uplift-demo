@@ -419,9 +419,9 @@ function CycleDetailView({ cycle, onBack, getStatusBadge, t }) {
         </div>
 
         <div className="flex gap-6 text-sm text-slate-600 border-t border-slate-100 pt-4">
-          {cycle.self_assessment && <span>Self Assessment</span>}
-          {cycle.manager_review && <span>Manager Review</span>}
-          {cycle.peer_review && <span>Peer Review</span>}
+          {cycle.self_assessment && <span>{t('performance.selfAssessment', 'Self Assessment')}</span>}
+          {cycle.manager_review && <span>{t('performance.managerReview', 'Manager Review')}</span>}
+          {cycle.peer_review && <span>{t('performance.peerReview', 'Peer Review')}</span>}
         </div>
       </div>
 
@@ -445,24 +445,24 @@ function CycleDetailView({ cycle, onBack, getStatusBadge, t }) {
                   </div>
                   <div>
                     <p className="font-medium text-slate-900">{p.employee_name}</p>
-                    <p className="text-sm text-slate-500">{p.department_name || 'No department'}</p>
+                    <p className="text-sm text-slate-500">{p.department_name || t('performance.noDepartment', 'No department')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="flex gap-2">
                     {cycle.self_assessment && (
                       <span className={`px-2 py-1 rounded text-xs ${p.self_done ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
-                        Self
+                        {t('performance.selfBadge', 'Self')}
                       </span>
                     )}
                     {cycle.manager_review && (
                       <span className={`px-2 py-1 rounded text-xs ${p.manager_done ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
-                        Manager
+                        {t('performance.managerBadge', 'Manager')}
                       </span>
                     )}
                     {cycle.peer_review && (
                       <span className={`px-2 py-1 rounded text-xs ${p.peer_done ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
-                        Peer
+                        {t('performance.peerBadge', 'Peer')}
                       </span>
                     )}
                   </div>
@@ -549,10 +549,10 @@ function CreateCycleModal({ onClose, onCreated, t }) {
                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                 className="w-full px-3 py-2 border border-slate-300 rounded-lg"
               >
-                <option value="quarterly">Quarterly</option>
-                <option value="annual">Annual</option>
-                <option value="360">360-Degree</option>
-                <option value="probation">Probation</option>
+                <option value="quarterly">{t('performance.cycleTypes.quarterly', 'Quarterly')}</option>
+                <option value="annual">{t('performance.cycleTypes.annual', 'Annual')}</option>
+                <option value="360">{t('performance.cycleTypes.360', '360-Degree')}</option>
+                <option value="probation">{t('performance.cycleTypes.probation', 'Probation')}</option>
               </select>
             </div>
             <div>
@@ -599,15 +599,15 @@ function CreateCycleModal({ onClose, onCreated, t }) {
                 checked={formData.peer_review}
                 onChange={(e) => setFormData({ ...formData, peer_review: e.target.checked })}
               />
-              <span className="text-sm">Peer Review</span>
+              <span className="text-sm">{t('performance.peerReview', 'Peer Review')}</span>
             </label>
           </div>
           <div className="flex justify-end gap-3 pt-4">
             <button type="button" onClick={onClose} className="px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </button>
             <button type="submit" disabled={loading} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Create Cycle'}
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : t('performance.createCycleBtn', 'Create Cycle')}
             </button>
           </div>
         </form>
@@ -804,8 +804,8 @@ function GoalsTab({ t, isManager }) {
                             <div className="h-1.5 bg-blue-500 rounded-full" style={{ width: `${kr.progress || 0}%` }} />
                           </div>
                           <div className="flex justify-between mt-2 text-xs text-slate-500">
-                            <span>Current: {kr.current || '-'}</span>
-                            <span>Target: {kr.target}</span>
+                            <span>{t('performance.current', 'Current')}: {kr.current || '-'}</span>
+                            <span>{t('performance.target', 'Target')}: {kr.target}</span>
                           </div>
                         </div>
                       ))}
@@ -863,14 +863,14 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-4 border-b border-slate-200">
-          <h3 className="text-lg font-semibold">{isOkr ? 'Create OKR' : 'Create Goal'}</h3>
+          <h3 className="text-lg font-semibold">{isOkr ? t('performance.createOkrTitle', 'Create OKR') : t('performance.createGoalTitle', 'Create Goal')}</h3>
           <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Title</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.titleLabel', 'Title')}</label>
             <input
               type="text"
               value={formData.title}
@@ -883,16 +883,16 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
             <>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Level</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.level', 'Level')}</label>
                   <select
                     value={formData.level}
                     onChange={(e) => setFormData({ ...formData, level: e.target.value })}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg"
                   >
-                    <option value="company">Company</option>
-                    <option value="department">Department</option>
-                    <option value="team">Team</option>
-                    <option value="individual">Individual</option>
+                    <option value="company">{t('performance.levels.company', 'Company')}</option>
+                    <option value="department">{t('performance.levels.department', 'Department')}</option>
+                    <option value="team">{t('performance.levels.team', 'Team')}</option>
+                    <option value="individual">{t('performance.levels.individual', 'Individual')}</option>
                   </select>
                 </div>
                 <div>
@@ -902,7 +902,7 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
                     value={formData.period}
                     onChange={(e) => setFormData({ ...formData, period: e.target.value })}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg"
-                    placeholder="Q1 2026"
+                    placeholder={t('performance.periodPlaceholder', 'Q1 2026')}
                   />
                 </div>
               </div>
@@ -924,7 +924,7 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
                           newKrs[i].title = e.target.value;
                           setFormData({ ...formData, key_results: newKrs });
                         }}
-                        placeholder="Key result title"
+                        placeholder={t('performance.keyResultPlaceholder', 'Key result title')}
                         className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
                       />
                       <input
@@ -935,7 +935,7 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
                           newKrs[i].target = e.target.value;
                           setFormData({ ...formData, key_results: newKrs });
                         }}
-                        placeholder="Target"
+                        placeholder={t('performance.targetPlaceholder', 'Target')}
                         className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
                       />
                     </div>
@@ -956,27 +956,27 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Category</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.category', 'Category')}</label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg"
                   >
-                    <option value="performance">Performance</option>
-                    <option value="development">Development</option>
-                    <option value="stretch">Stretch</option>
+                    <option value="performance">{t('performance.categories.performance', 'Performance')}</option>
+                    <option value="development">{t('performance.categories.development', 'Development')}</option>
+                    <option value="stretch">{t('performance.categories.stretch', 'Stretch')}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Priority</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.priority', 'Priority')}</label>
                   <select
                     value={formData.priority}
                     onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg"
                   >
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="high">{t('common.priority.high', 'High')}</option>
+                    <option value="medium">{t('common.priority.medium', 'Medium')}</option>
+                    <option value="low">{t('common.priority.low', 'Low')}</option>
                   </select>
                 </div>
               </div>
@@ -993,10 +993,10 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
           )}
           <div className="flex justify-end gap-3 pt-4">
             <button type="button" onClick={onClose} className="px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </button>
             <button type="submit" disabled={loading} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Create'}
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : t('performance.createBtn', 'Create')}
             </button>
           </div>
         </form>
@@ -1225,26 +1225,26 @@ function MeetingDetailView({ meeting, onBack, t }) {
         )}
 
         <div className="mb-6">
-          <h3 className="font-semibold text-slate-900 mb-3">Notes</h3>
+          <h3 className="font-semibold text-slate-900 mb-3">{t('performance.notes', 'Notes')}</h3>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             rows={4}
-            placeholder="Add meeting notes..."
+            placeholder={t('performance.addMeetingNotesPlaceholder', 'Add meeting notes...')}
           />
           <button
             onClick={handleSaveNotes}
             disabled={saving}
             className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm"
           >
-            {saving ? 'Saving...' : 'Save Notes'}
+            {saving ? t('performance.saving', 'Saving...') : t('performance.saveNotes', 'Save Notes')}
           </button>
         </div>
 
         {actionItems.length > 0 && (
           <div>
-            <h3 className="font-semibold text-slate-900 mb-3">Action Items</h3>
+            <h3 className="font-semibold text-slate-900 mb-3">{t('performance.actionItems', 'Action Items')}</h3>
             <div className="space-y-2">
               {actionItems.map(item => (
                 <div key={item.id} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
@@ -1328,7 +1328,7 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
               className="w-full px-3 py-2 border border-slate-300 rounded-lg"
               required
             >
-              <option value="">Select employee...</option>
+              <option value="">{t('common.selectEmployee', 'Select employee...')}</option>
               {employees.map(emp => (
                 <option key={emp.user_id} value={emp.user_id}>{emp.name}</option>
               ))}
@@ -1362,18 +1362,18 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
               onChange={(e) => setFormData({ ...formData, recurring: e.target.value })}
               className="w-full px-3 py-2 border border-slate-300 rounded-lg"
             >
-              <option value="none">One-time</option>
-              <option value="weekly">Weekly</option>
-              <option value="biweekly">Bi-weekly</option>
-              <option value="monthly">Monthly</option>
+              <option value="none">{t('performance.oneTime', 'One-time')}</option>
+              <option value="weekly">{t('performance.weekly', 'Weekly')}</option>
+              <option value="biweekly">{t('performance.biweekly', 'Every 2 Weeks')}</option>
+              <option value="monthly">{t('performance.monthly', 'Monthly')}</option>
             </select>
           </div>
           <div className="flex justify-end gap-3 pt-4">
             <button type="button" onClick={onClose} className="px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </button>
             <button type="submit" disabled={loading} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Schedule'}
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : t('performance.scheduleBtn', 'Schedule')}
             </button>
           </div>
         </form>
@@ -1455,7 +1455,7 @@ function FeedbackTab({ t, isManager }) {
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm"
         >
           <Plus className="w-4 h-4" />
-          Give Feedback
+          {t('performance.giveFeedbackBtn', 'Give Feedback')}
         </button>
       </div>
 
@@ -1463,8 +1463,8 @@ function FeedbackTab({ t, isManager }) {
         myFeedback.length === 0 ? (
           <EmptyState
             icon={MessageSquare}
-            title="No feedback received"
-            description="You haven't received any feedback yet."
+            title={t('performance.noFeedbackReceived', 'No feedback received')}
+            description={t('performance.noFeedbackReceivedDesc', "You haven't received any feedback yet.")}
           />
         ) : (
           <div className="space-y-4">
@@ -1475,7 +1475,7 @@ function FeedbackTab({ t, isManager }) {
                   <div className="flex-1">
                     <p className="text-slate-700">{fb.feedback_text}</p>
                     <div className="flex items-center gap-3 mt-3 text-sm text-slate-500">
-                      <span>From: {fb.from_name}</span>
+                      <span>{t('common.from', 'From')}: {fb.from_name}</span>
                       <span>{new Date(fb.created_at).toLocaleDateString()}</span>
                     </div>
                   </div>
@@ -1488,8 +1488,8 @@ function FeedbackTab({ t, isManager }) {
         publicFeed.length === 0 ? (
           <EmptyState
             icon={Heart}
-            title="No public feedback"
-            description="Share positive feedback publicly to celebrate your team's achievements."
+            title={t('performance.noPublicFeedback', 'No public feedback')}
+            description={t('performance.noPublicFeedbackDesc', "Share positive feedback publicly to celebrate your team's achievements.")}
           />
         ) : (
           <div className="space-y-4">
@@ -1607,7 +1607,7 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
               className="w-full px-3 py-2 border border-slate-300 rounded-lg"
               required
             >
-              <option value="">Select person...</option>
+              <option value="">{t('common.selectPerson', 'Select person...')}</option>
               {employees.map(emp => (
                 <option key={emp.user_id} value={emp.user_id}>{emp.name}</option>
               ))}
@@ -1649,16 +1649,16 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
               onChange={(e) => setFormData({ ...formData, visibility: e.target.value })}
               className="w-full px-3 py-2 border border-slate-300 rounded-lg"
             >
-              <option value="private">Private (only recipient sees)</option>
-              <option value="shared_with_manager">Public (visible on feed)</option>
+              <option value="private">{t('performance.privateVisibility', 'Private (only recipient sees)')}</option>
+              <option value="shared_with_manager">{t('performance.publicVisibility', 'Public (visible on feed)')}</option>
             </select>
           </div>
           <div className="flex justify-end gap-3 pt-4">
             <button type="button" onClick={onClose} className="px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </button>
             <button type="submit" disabled={loading} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send Feedback'}
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : t('performance.sendFeedback', 'Send Feedback')}
             </button>
           </div>
         </form>
@@ -1905,7 +1905,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
                 className="w-full px-3 py-2 border border-slate-300 rounded-lg"
                 required
               >
-                <option value="">Select employee...</option>
+                <option value="">{t('common.selectEmployee', 'Select employee...')}</option>
                 {employees.map(emp => (
                   <option key={emp.id} value={emp.id}>{emp.name}</option>
                 ))}
@@ -1937,7 +1937,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-slate-700">Focus Areas</label>
               <button type="button" onClick={addFocusArea} className="text-sm text-blue-600 hover:text-blue-700">
-                + Add Focus Area
+                {t('performance.addFocusArea', '+ Add Focus Area')}
               </button>
             </div>
             {formData.focus_areas.map((area, areaIndex) => (
@@ -1950,7 +1950,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
                     newAreas[areaIndex].title = e.target.value;
                     setFormData({ ...formData, focus_areas: newAreas });
                   }}
-                  placeholder="Focus area title"
+                  placeholder={t('performance.focusAreaPlaceholder', 'Focus area title')}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg mb-3"
                 />
                 <div className="space-y-2">
@@ -1964,7 +1964,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
                           newAreas[areaIndex].actions[actionIndex].text = e.target.value;
                           setFormData({ ...formData, focus_areas: newAreas });
                         }}
-                        placeholder="Action item"
+                        placeholder={t('performance.actionItemPlaceholder', 'Action item')}
                         className="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm"
                       />
                       <select
@@ -1976,11 +1976,11 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
                         }}
                         className="px-2 py-2 border border-slate-300 rounded-lg text-sm"
                       >
-                        <option value="training">Training</option>
-                        <option value="stretch">Stretch</option>
-                        <option value="mentoring">Mentoring</option>
-                        <option value="reading">Reading</option>
-                        <option value="other">Other</option>
+                        <option value="training">{t('performance.training', 'Training')}</option>
+                        <option value="stretch">{t('performance.stretch', 'Stretch')}</option>
+                        <option value="mentoring">{t('performance.mentoring', 'Mentoring')}</option>
+                        <option value="reading">{t('performance.reading', 'Reading')}</option>
+                        <option value="other">{t('performance.otherAction', 'Other')}</option>
                       </select>
                     </div>
                   ))}
@@ -1989,7 +1989,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
                     onClick={() => addAction(areaIndex)}
                     className="text-sm text-blue-600 hover:text-blue-700"
                   >
-                    + Add Action
+                    {t('performance.addAction', '+ Add Action')}
                   </button>
                 </div>
               </div>
@@ -1998,10 +1998,10 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
 
           <div className="flex justify-end gap-3 pt-4">
             <button type="button" onClick={onClose} className="px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </button>
             <button type="submit" disabled={loading} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50">
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Create Plan'}
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : t('performance.createPlanBtn', 'Create Plan')}
             </button>
           </div>
         </form>

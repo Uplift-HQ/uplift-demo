@@ -284,7 +284,14 @@
     "exportComingSoon": "Export coming soon",
     "closeEsc": "Close (ESC)",
     "clickToViewDetails": "Click to view details",
-    "logoPreview": "Logo preview"
+    "logoPreview": "Logo preview",
+    "selectEmployee": "Select employee...",
+    "selectPerson": "Select person...",
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    }
   },
   "auth": {
     "login": "Log In",
@@ -2935,6 +2942,27 @@
     "typeAnnual": "Annual",
     "typeQuarterly": "Quarterly",
     "typeProbation": "Probation",
+    "cycleTypes": {
+      "quarterly": "Quarterly",
+      "annual": "Annual",
+      "360": "360-Degree",
+      "probation": "Probation"
+    },
+    "level": "Level",
+    "levels": {
+      "company": "Company",
+      "department": "Department",
+      "team": "Team",
+      "individual": "Individual"
+    },
+    "category": "Category",
+    "categories": {
+      "performance": "Performance",
+      "development": "Development",
+      "stretch": "Stretch"
+    },
+    "current": "Current",
+    "target": "Target",
     "createCycleBtn": "Create Cycle",
     "titleLabel": "Title",
     "goals": "Goals",
