@@ -772,4 +772,14 @@ export const notificationService = {
   },
 };
 
+// Export helper functions for direct import
+export async function notifyPayslipAvailable(employeeId, organizationId, period) {
+  return notificationService.sendPayslipAvailable({
+    employee_id: employeeId,
+    organization_id: organizationId,
+    pay_date: period.payPeriodEnd,
+    id: period.payslipId
+  });
+}
+
 export default notificationService;

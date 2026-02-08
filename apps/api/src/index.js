@@ -54,6 +54,7 @@ import rolesRoutes from './routes/roles.js';
 import learningRoutes from './routes/learning.js';
 import performanceRoutes from './routes/performance.js';
 import recognitionRoutes from './routes/recognition.js';
+import payrollRoutes from './routes/payroll.js';
 
 // Middleware
 import { 
@@ -325,6 +326,9 @@ app.use('/api/expenses', apiLimiter, csrfProtection, expensesRoutes);
 
 // Payslips routes (pay statements, YTD)
 app.use('/api/payslips', apiLimiter, csrfProtection, payslipsRoutes);
+
+// Payroll engine routes (runs, calculations, exports)
+app.use('/api/payroll', apiLimiter, csrfProtection, payrollRoutes);
 
 // Onboarding routes (setup wizard)
 app.use('/api/onboarding', apiLimiter, csrfProtection, onboardingRoutes);
