@@ -58,6 +58,7 @@ import recognitionRoutes from './routes/recognition.js';
 import payrollRoutes from './routes/payroll.js';
 import surveysRoutes from './routes/surveys.js';
 import reportsRoutes from './routes/reports.js';
+import migrationsRoutes from './routes/migrations.js';
 
 // Middleware
 import { 
@@ -270,6 +271,9 @@ app.use('/api/ops', apiLimiter, opsRoutes);
 
 // License key routes (under ops namespace)
 app.use('/api/ops/licenses', apiLimiter, licenseRoutes);
+
+// Migrations routes (key-based auth for database migrations)
+app.use('/api/migrations', apiLimiter, migrationsRoutes);
 
 // Core routes (employees, locations, departments, roles, skills)
 app.use('/api', apiLimiter, csrfProtection, coreRoutes);
