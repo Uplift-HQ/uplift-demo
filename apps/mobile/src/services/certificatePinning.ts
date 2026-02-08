@@ -5,56 +5,52 @@
 
 import { Platform } from 'react-native';
 
-// API host configuration
-const API_HOST = process.env.EXPO_PUBLIC_API_URL || 'https://api.uplift.hr';
+// API host configuration - canonical production URL
+const API_HOST = process.env.EXPO_PUBLIC_API_URL || 'https://api.uplifthq.co.uk';
 
-// Certificate pins - SHA256 hashes of the public key
-// These should be updated when certificates are rotated
-// Generate with: openssl s_client -connect api.uplift.hr:443 | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
-// PRODUCTION: Replace these placeholder hashes with real certificate hashes before launch
-const CERTIFICATE_PINS = {
-  // Primary certificate (current)
-  primary: 'sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-  // Backup certificate (next rotation)
-  backup: 'sha256/BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=',
-  // Root CA pin (fallback)
-  rootCA: 'sha256/CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=',
+// Certificate pinning is DISABLED until real certificate hashes are obtained
+//
+// To enable certificate pinning in production:
+// 1. Get the certificate hashes for api.uplifthq.co.uk:
+//    openssl s_client -connect api.uplifthq.co.uk:443 2>/dev/null | \
+//      openssl x509 -pubkey -noout | \
+//      openssl pkey -pubin -outform der | \
+//      openssl dgst -sha256 -binary | \
+//      openssl enc -base64
+// 2. Replace the empty array below with actual hashes
+// 3. Set PIN_CONFIG.enabled = true
+//
+// IMPORTANT: Having placeholder hashes is worse than no pinning (false security)
+const CERTIFICATE_PINS: Record<string, string> = {
+  // Add real certificate hashes here when ready for production
+  // primary: 'sha256/REAL_HASH_HERE=',
+  // backup: 'sha256/BACKUP_HASH_HERE=',
 };
 
-// Runtime check for placeholder certificate pins
-if (__DEV__) {
-  const pinValues = Object.values(CERTIFICATE_PINS);
-  const hasPlaceholder = pinValues.some(
-    (pin) => pin.includes('AAAA') || pin.includes('BBBB')
-  );
-  if (hasPlaceholder) {
-    if (__DEV__) console.warn(
-      '[CertificatePinning] WARNING: Placeholder certificate pins detected. ' +
-      'Replace with real certificate hashes before production deployment.'
-    );
-  }
-}
-
-// Pin expiration tracking
+// Pin configuration
 const PIN_CONFIG = {
   // When pins were last verified
   lastVerified: null as Date | null,
   // How often to re-verify (7 days)
   verifyIntervalMs: 7 * 24 * 60 * 60 * 1000,
-  // Whether pinning is enabled
-  enabled: process.env.NODE_ENV === 'production',
+  // Certificate pinning is DISABLED until real hashes are configured
+  // Set to true only after adding real certificate hashes above
+  enabled: false,
 };
 
 /**
  * Certificate pinning configuration for react-native-ssl-pinning
  * or similar libraries
+ * Returns empty config when pinning is disabled
  */
-export const SSL_PINNING_CONFIG = {
-  [API_HOST]: {
-    includeSubdomains: true,
-    publicKeyHashes: Object.values(CERTIFICATE_PINS),
-  },
-};
+export const SSL_PINNING_CONFIG = PIN_CONFIG.enabled && Object.keys(CERTIFICATE_PINS).length > 0
+  ? {
+      [API_HOST]: {
+        includeSubdomains: true,
+        publicKeyHashes: Object.values(CERTIFICATE_PINS),
+      },
+    }
+  : {};
 
 /**
  * Check if certificate pinning is available and enabled
@@ -83,7 +79,7 @@ export async function validateCertificate(hostname: string): Promise<boolean> {
   }
 
   // Only validate for our API
-  if (!hostname.includes('uplift.hr')) {
+  if (!hostname.includes('uplifthq.co.uk')) {
     return true;
   }
 
@@ -168,7 +164,7 @@ export async function reportPinningFailure(
   try {
     // Send to security monitoring endpoint
     // This uses a separate, unpinned connection to report failures
-    await fetch('https://security-reports.uplift.hr/pin-failure', {
+    await fetch('https://api.uplifthq.co.uk/security/pin-failure', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -189,32 +185,40 @@ export async function reportPinningFailure(
 /**
  * Configuration for native SSL pinning modules
  * Use with react-native-ssl-pinning or similar
+ * Returns empty config when pinning is disabled
  */
-export const getNativePinningConfig = () => ({
-  // iOS: Uses TrustKit or built-in URLSession pinning
-  ios: {
-    kTSKSwizzleNetworkDelegates: false,
-    kTSKPinnedDomains: {
-      'api.uplift.hr': {
-        kTSKIncludeSubdomains: true,
-        kTSKPublicKeyHashes: Object.values(CERTIFICATE_PINS),
-        kTSKEnforcePinning: PIN_CONFIG.enabled,
-        kTSKReportUris: ['https://security-reports.uplift.hr/pin-failure'],
+export const getNativePinningConfig = () => {
+  // Return empty config if pinning is disabled or no pins configured
+  if (!PIN_CONFIG.enabled || Object.keys(CERTIFICATE_PINS).length === 0) {
+    return { ios: { kTSKPinnedDomains: {} }, android: { certificates: [] } };
+  }
+
+  return {
+    // iOS: Uses TrustKit or built-in URLSession pinning
+    ios: {
+      kTSKSwizzleNetworkDelegates: false,
+      kTSKPinnedDomains: {
+        'api.uplifthq.co.uk': {
+          kTSKIncludeSubdomains: true,
+          kTSKPublicKeyHashes: Object.values(CERTIFICATE_PINS),
+          kTSKEnforcePinning: PIN_CONFIG.enabled,
+          kTSKReportUris: ['https://api.uplifthq.co.uk/security/pin-failure'],
+        },
       },
     },
-  },
 
-  // Android: Uses OkHttp CertificatePinner
-  android: {
-    certificates: [
-      {
-        hostname: 'api.uplift.hr',
-        includeSubdomains: true,
-        pins: Object.values(CERTIFICATE_PINS),
-      },
-    ],
-  },
-});
+    // Android: Uses OkHttp CertificatePinner
+    android: {
+      certificates: [
+        {
+          hostname: 'api.uplifthq.co.uk',
+          includeSubdomains: true,
+          pins: Object.values(CERTIFICATE_PINS),
+        },
+      ],
+    },
+  };
+};
 
 /**
  * Initialize certificate pinning for the app

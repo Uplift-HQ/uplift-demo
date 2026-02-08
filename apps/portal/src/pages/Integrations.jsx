@@ -356,7 +356,7 @@ export default function Integrations() {
               <div>
                 <h4 className="text-sm font-medium text-gray-700 mb-2">{t('integrations.baseUrl', 'Base URL')}</h4>
                 <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm">
-                  https://api.uplift.hr/v1
+                  https://api.uplifthq.co.uk/v1
                 </div>
               </div>
 
@@ -406,7 +406,7 @@ export default function Integrations() {
                 <h4 className="text-sm font-medium text-gray-700 mb-2">{t('integrations.exampleRequest', 'Example Request')}</h4>
                 <div className="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm overflow-x-auto">
                   <div className="text-gray-500"># {t('integrations.getAllEmployees', 'Get all employees')}</div>
-                  <div className="text-green-400">curl -X GET https://api.uplift.hr/v1/employees \</div>
+                  <div className="text-green-400">curl -X GET https://api.uplifthq.co.uk/v1/employees \</div>
                   <div className="text-green-400 pl-4">-H "Authorization: Bearer uplift_live_xxx" \</div>
                   <div className="text-green-400 pl-4">-H "Content-Type: application/json"</div>
                 </div>
@@ -453,7 +453,7 @@ export default function Integrations() {
 
               <div className="pt-4 border-t">
                 <a
-                  href="https://docs.uplift.hr/api"
+                  href="https://docs.uplifthq.co.uk/api"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium"

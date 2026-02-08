@@ -582,7 +582,7 @@ const RestApiKeys = () => {
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
               <h4 className="text-sm font-medium mb-2">{t('restApiKeys.docs.authentication', 'Authentication')}</h4>
               <pre className="text-xs bg-slate-900 text-slate-300 p-3 rounded overflow-x-auto">
-{`curl -X GET "https://api.uplift.hr/v1/employees" \\
+{`curl -X GET "https://api.uplifthq.co.uk/v1/employees" \\
   -H "Authorization: Bearer YOUR_API_KEY"`}
               </pre>
             </div>

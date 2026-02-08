@@ -32,7 +32,6 @@ import utilitiesRoutes from './routes/utilities.js';
 import billingRoutes from './routes/billing.js';
 import adminRoutes from './routes/admin.js';
 import opsRoutes from './routes/ops.js';
-import opsUsersRoutes from './routes/ops-users.js';
 import licenseRoutes from './routes/licenses.js';
 import aiRoutes from './routes/ai.js';
 import integrationsRoutes from './routes/integrations.js';
@@ -52,7 +51,9 @@ import brandingRoutes from './routes/branding.js';
 import mobileRoutes from './routes/mobile.js';
 import documentsRoutes from './routes/documents.js';
 import rolesRoutes from './routes/roles.js';
-import performanceBonusRoutes from './routes/performance-bonus.js';
+import learningRoutes from './routes/learning.js';
+import performanceRoutes from './routes/performance.js';
+import recognitionRoutes from './routes/recognition.js';
 
 // Middleware
 import { 
@@ -266,9 +267,6 @@ app.use('/api/ops', apiLimiter, opsRoutes);
 // License key routes (under ops namespace)
 app.use('/api/ops/licenses', apiLimiter, licenseRoutes);
 
-// Ops user management routes (under ops namespace)
-app.use('/api/ops/users', apiLimiter, opsUsersRoutes);
-
 // Core routes (employees, locations, departments, roles, skills)
 app.use('/api', apiLimiter, csrfProtection, coreRoutes);
 
@@ -310,6 +308,15 @@ app.use('/api/chat', apiLimiter, csrfProtection, chatRoutes);
 // Compliance routes (training, certifications)
 app.use('/api/compliance', apiLimiter, csrfProtection, complianceRoutes);
 
+// Learning routes (courses, lessons, enrollments, certifications)
+app.use('/api/learning', apiLimiter, csrfProtection, learningRoutes);
+
+// Performance routes (reviews, goals, feedback, competencies)
+app.use('/api/performance', apiLimiter, csrfProtection, performanceRoutes);
+
+// Recognition routes (kudos, badges, awards, leaderboard)
+app.use('/api/recognition', apiLimiter, csrfProtection, recognitionRoutes);
+
 // Documents routes (upload, download, e-signatures)
 app.use('/api/documents', apiLimiter, csrfProtection, documentsRoutes);
 
@@ -349,9 +356,6 @@ app.use('/api', apiLimiter, csrfProtection, mobileRoutes);
 
 // Roles routes (custom roles CRUD)
 app.use('/api/roles', apiLimiter, csrfProtection, rolesRoutes);
-
-// Performance bonus routes (external scores, bonus payouts)
-app.use('/api/payroll', apiLimiter, csrfProtection, performanceBonusRoutes);
 
 // -------------------- NOTIFICATION ROUTES --------------------
 
@@ -582,7 +586,3 @@ export default app;
 // CI deploy test
 // deploy test 1769464340
 // deploy 1769464435
-// trigger redeploy 1769469788
-// redeploy 1769470064
-// redeploy 1769506752
-// redeploy 1769516125

@@ -920,9 +920,9 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
                     <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">{t('apiFactory.editor.yourWebhookUrl', 'Your Webhook URL')}</p>
                     <div className="flex items-center gap-2">
                       <code className="flex-1 bg-white dark:bg-slate-900 px-3 py-2 rounded-lg text-sm border border-slate-200 dark:border-slate-700">
-                        https://api.uplift.hr/webhooks/custom/{formData.id || 'new'}
+                        https://api.uplifthq.co.uk/webhooks/custom/{formData.id || 'new'}
                       </code>
-                      <Button variant="ghost" size="sm" onClick={() => { navigator.clipboard.writeText(`https://api.uplift.hr/webhooks/custom/${formData.id || 'new'}`); }}>
+                      <Button variant="ghost" size="sm" onClick={() => { navigator.clipboard.writeText(`https://api.uplifthq.co.uk/webhooks/custom/${formData.id || 'new'}`); }}>
                         <Copy className="w-4 h-4" />
                       </Button>
                     </div>
