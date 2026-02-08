@@ -484,6 +484,46 @@ export const emailService = {
   },
 
   /**
+   * Send welcome email to new user
+   */
+  async sendWelcome(user) {
+    const lang = user.preferred_language || 'en';
+    const appUrl = process.env.APP_URL || 'https://app.uplifthq.co.uk';
+
+    // Use inline template since welcome template may not exist in all languages
+    const subject = 'Welcome to Uplift';
+    const htmlBody = `
+      <h2>Welcome to Uplift!</h2>
+      <p>Hi ${user.first_name},</p>
+      <p>Thank you for joining Uplift. Your account is now active and ready to use.</p>
+      <p><a href="${appUrl}/login" style="display:inline-block;padding:12px 24px;background:#F26522;color:white;text-decoration:none;border-radius:6px;">Login to Uplift</a></p>
+      <p>If you have any questions, please contact your administrator or our support team.</p>
+      <p>— The Uplift Team</p>
+    `;
+    const textBody = `Welcome to Uplift!\n\nHi ${user.first_name},\n\nThank you for joining Uplift. Your account is now active and ready to use.\n\nLogin at: ${appUrl}/login\n\n— The Uplift Team`;
+
+    try {
+      await db.query(
+        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text, language)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        [
+          user.email,
+          `${user.first_name} ${user.last_name}`,
+          'welcome',
+          JSON.stringify({ firstName: user.first_name }),
+          subject,
+          htmlBody,
+          textBody,
+          lang,
+        ]
+      );
+    } catch (error) {
+      // Don't fail registration if email queueing fails
+      console.error('Failed to queue welcome email:', error);
+    }
+  },
+
+  /**
    * Send password reset email
    */
   async sendPasswordReset(user, resetToken) {
@@ -524,6 +564,64 @@ export const emailService = {
       firstName: user.first_name,
       reason,
     }, lang);
+  },
+
+  /**
+   * Send low backup codes warning
+   */
+  async sendLowBackupCodes(user, remainingCount) {
+    const lang = user.preferred_language || 'en';
+    const appUrl = process.env.APP_URL || 'https://app.uplifthq.co.uk';
+
+    const subject = 'Low MFA Backup Codes Warning';
+    const htmlBody = `
+      <h2>Low Backup Codes Warning</h2>
+      <p>Hi ${user.first_name},</p>
+      <p>You only have <strong>${remainingCount}</strong> MFA backup code${remainingCount === 1 ? '' : 's'} remaining.</p>
+      <p>We recommend generating new backup codes to ensure you can always access your account.</p>
+      <p><a href="${appUrl}/settings/security" style="display:inline-block;padding:12px 24px;background:#F26522;color:white;text-decoration:none;border-radius:6px;">Manage Security Settings</a></p>
+      <p>— The Uplift Team</p>
+    `;
+    const textBody = `Low Backup Codes Warning\n\nHi ${user.first_name},\n\nYou only have ${remainingCount} MFA backup code${remainingCount === 1 ? '' : 's'} remaining.\n\nGenerate new codes at: ${appUrl}/settings/security\n\n— The Uplift Team`;
+
+    try {
+      await db.query(
+        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text, language)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        [user.email, `${user.first_name} ${user.last_name}`, 'low_backup_codes', JSON.stringify({ firstName: user.first_name, remainingCount }), subject, htmlBody, textBody, lang]
+      );
+    } catch (error) {
+      console.error('Failed to queue low backup codes email:', error);
+    }
+  },
+
+  /**
+   * Send MFA disabled notification
+   */
+  async sendMfaDisabled(user) {
+    const lang = user.preferred_language || 'en';
+    const appUrl = process.env.APP_URL || 'https://app.uplifthq.co.uk';
+
+    const subject = 'Two-Factor Authentication Disabled';
+    const htmlBody = `
+      <h2>Two-Factor Authentication Disabled</h2>
+      <p>Hi ${user.first_name},</p>
+      <p>Two-factor authentication has been disabled on your Uplift account.</p>
+      <p>If you did not make this change, please re-enable 2FA immediately and contact your administrator.</p>
+      <p><a href="${appUrl}/settings/security" style="display:inline-block;padding:12px 24px;background:#F26522;color:white;text-decoration:none;border-radius:6px;">Security Settings</a></p>
+      <p>— The Uplift Team</p>
+    `;
+    const textBody = `Two-Factor Authentication Disabled\n\nHi ${user.first_name},\n\nTwo-factor authentication has been disabled on your Uplift account.\n\nIf you did not make this change, please re-enable 2FA immediately.\n\nSecurity settings: ${appUrl}/settings/security\n\n— The Uplift Team`;
+
+    try {
+      await db.query(
+        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text, language)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        [user.email, `${user.first_name} ${user.last_name}`, 'mfa_disabled', JSON.stringify({ firstName: user.first_name }), subject, htmlBody, textBody, lang]
+      );
+    } catch (error) {
+      console.error('Failed to queue MFA disabled email:', error);
+    }
   },
 
   /**
