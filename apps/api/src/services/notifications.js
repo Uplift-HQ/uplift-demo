@@ -4,6 +4,7 @@
 // ============================================================
 
 import { db } from '../lib/database.js';
+import { emailService } from './email.js';
 
 export const notificationService = {
   // -------------------- CORE METHODS --------------------
@@ -118,19 +119,16 @@ export const notificationService = {
    * Send email notification
    */
   async sendEmail(email, subject, body, actionUrl) {
-    // In production, use SendGrid, SES, or similar
-    // For now, just log
-    console.log(`[EMAIL] To ${email}:`, { subject, body, actionUrl });
-
-    // Example SendGrid implementation:
-    // const msg = {
-    //   to: email,
-    //   from: 'notifications@uplift.hr',
-    //   subject,
-    //   text: body,
-    //   html: `<p>${body}</p><a href="${actionUrl}">View Details</a>`,
-    // };
-    // await sgMail.send(msg);
+    try {
+      // Use the email service for production-ready delivery
+      await emailService.sendNotification(email, {
+        title: subject,
+        body,
+        actionUrl,
+      });
+    } catch (error) {
+      console.error(`[EMAIL] Failed to queue email to ${email}:`, error);
+    }
   },
 
   /**

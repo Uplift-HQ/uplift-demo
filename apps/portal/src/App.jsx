@@ -47,7 +47,6 @@ import Payroll from './pages/Payroll';
 import PayrollRun from './pages/PayrollRun';
 import PayrollConfig from './pages/PayrollConfig';
 import MyPayslips from './pages/MyPayslips';
-import PerformanceBonuses from './pages/PerformanceBonuses';
 
 // Employee self-service pages
 import Momentum from './pages/Momentum';
@@ -133,7 +132,6 @@ export default function App() {
         <Route path="/payroll/runs" element={<RequireAdmin><Payroll /></RequireAdmin>} />
         <Route path="/payroll/runs/:id" element={<RequireAdmin><PayrollRun /></RequireAdmin>} />
         <Route path="/payroll/config" element={<RequireAdmin><PayrollConfig /></RequireAdmin>} />
-        <Route path="/payroll/bonuses" element={<RequireAdmin><PerformanceBonuses /></RequireAdmin>} />
       </Route>
 
       {/* Catch-all redirect */}

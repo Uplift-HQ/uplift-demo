@@ -201,7 +201,6 @@ const generateEmployeePayslips = () => {
         basicPay: Math.round(emp.annualSalary / 12),
         overtime: emp.hasOvertime ? emp.overtime : 0,
         commission: emp.hasCommission ? emp.commission : 0,
-        performanceBonus: emp.performanceBonus || 0,
         adjustments: emp.isLeaver && emp.finalPayAdjustment ? emp.finalPayAdjustment : 0,
       },
     };
@@ -763,12 +762,6 @@ function PayslipsTable({ payslips, expandedRow, onExpandRow, activeFilter, searc
                                 <div className="flex justify-between">
                                   <span className="text-slate-500">{t('payrollRun.breakdown.commission', 'Commission')}</span>
                                   <span className="font-medium text-slate-900">{formatCurrencyFull(payslip.breakdown.commission)}</span>
-                                </div>
-                              )}
-                              {payslip.breakdown.performanceBonus > 0 && (
-                                <div className="flex justify-between">
-                                  <span className="text-slate-500">{t('payrollRun.breakdown.performanceBonus', 'Performance Bonus')}</span>
-                                  <span className="font-medium text-green-600">{formatCurrencyFull(payslip.breakdown.performanceBonus)}</span>
                                 </div>
                               )}
                               {payslip.breakdown.adjustments !== 0 && (

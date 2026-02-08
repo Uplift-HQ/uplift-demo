@@ -116,7 +116,6 @@ const getAdminNav = (t) => [
     items: [
       { path: '/payroll', label: t('nav.payroll', 'Payroll Dashboard'), icon: Banknote },
       { path: '/payroll/runs', label: t('nav.payrollRuns', 'Payroll Runs'), icon: Calendar },
-      { path: '/payroll/bonuses', label: t('nav.performanceBonuses', 'Performance Bonuses'), icon: TrendingUp },
       { path: '/payroll/config', label: t('nav.payrollConfig', 'Configuration'), icon: Settings },
     ],
   },
@@ -316,7 +315,7 @@ export default function Layout() {
   // Sidebar header content changes based on view
   const sidebarTitle = isPersonalView && !isWorker
     ? `${user?.firstName}'s Portal`
-    : branding.brand_name || t('brand.yourOrganisation', 'Your Organisation');
+    : branding.brand_name || t('brand.grandMetropolitan', 'Grand Metropolitan');
 
   return (
     <div className="min-h-screen bg-slate-50">

@@ -1,0 +1,592 @@
+// ============================================================
+// EMAIL SERVICE
+// Email notifications for security and account events
+// ============================================================
+
+import { db } from '../lib/database.js';
+import postmark from 'postmark';
+
+// Configure Postmark if server token is available
+const postmarkClient = process.env.POSTMARK_SERVER_TOKEN
+  ? new postmark.ServerClient(process.env.POSTMARK_SERVER_TOKEN)
+  : null;
+
+if (postmarkClient) {
+  console.log('[email] Postmark configured');
+} else {
+  console.log('[email] No POSTMARK_SERVER_TOKEN — emails will log to console');
+}
+
+const EMAIL_FROM = process.env.EMAIL_FROM || 'noreply@uplift.app';
+const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO || 'support@uplift.app';
+
+// Email templates
+const templates = {
+  password_changed: {
+    subject: 'Your Uplift password was changed',
+    html: (data) => `
+      <h2>Password Changed</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>Your Uplift account password was changed on ${new Date().toLocaleString()}.</p>
+      <p><strong>Device:</strong> ${data.device || 'Unknown'}</p>
+      <p><strong>IP Address:</strong> ${data.ipAddress || 'Unknown'}</p>
+      <p>If you didn't make this change, please contact your administrator immediately and reset your password.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Password Changed
+
+Hi ${data.firstName},
+
+Your Uplift account password was changed on ${new Date().toLocaleString()}.
+
+Device: ${data.device || 'Unknown'}
+IP Address: ${data.ipAddress || 'Unknown'}
+
+If you didn't make this change, please contact your administrator immediately.
+
+— The Uplift Team
+    `,
+  },
+
+  new_device_login: {
+    subject: 'New device login to your Uplift account',
+    html: (data) => `
+      <h2>New Device Login</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>We noticed a new sign-in to your Uplift account:</p>
+      <ul>
+        <li><strong>Device:</strong> ${data.device || 'Unknown'}</li>
+        <li><strong>Browser:</strong> ${data.browser || 'Unknown'}</li>
+        <li><strong>Location:</strong> ${data.location || 'Unknown'}</li>
+        <li><strong>IP Address:</strong> ${data.ipAddress || 'Unknown'}</li>
+        <li><strong>Time:</strong> ${new Date().toLocaleString()}</li>
+      </ul>
+      <p>If this was you, you can ignore this email. If you don't recognize this activity, please change your password immediately and enable two-factor authentication.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+New Device Login
+
+Hi ${data.firstName},
+
+We noticed a new sign-in to your Uplift account:
+
+Device: ${data.device || 'Unknown'}
+Browser: ${data.browser || 'Unknown'}
+Location: ${data.location || 'Unknown'}
+IP Address: ${data.ipAddress || 'Unknown'}
+Time: ${new Date().toLocaleString()}
+
+If this was you, you can ignore this email. If you don't recognize this activity, please change your password immediately.
+
+— The Uplift Team
+    `,
+  },
+
+  account_locked: {
+    subject: 'Your Uplift account has been locked',
+    html: (data) => `
+      <h2>Account Locked</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>Your Uplift account has been temporarily locked due to multiple failed login attempts.</p>
+      <p>Your account will be automatically unlocked in <strong>30 minutes</strong>.</p>
+      <p>If you need immediate access, please contact your administrator to unlock your account.</p>
+      <p>If you didn't attempt to log in, someone may be trying to access your account. We recommend changing your password once your account is unlocked.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Account Locked
+
+Hi ${data.firstName},
+
+Your Uplift account has been temporarily locked due to multiple failed login attempts.
+
+Your account will be automatically unlocked in 30 minutes.
+
+If you need immediate access, please contact your administrator.
+
+— The Uplift Team
+    `,
+  },
+
+  account_unlocked: {
+    subject: 'Your Uplift account has been unlocked',
+    html: (data) => `
+      <h2>Account Unlocked</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>Your Uplift account has been unlocked by an administrator. You can now log in.</p>
+      <p>If you've forgotten your password, please use the "Forgot Password" link on the login page.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Account Unlocked
+
+Hi ${data.firstName},
+
+Your Uplift account has been unlocked. You can now log in.
+
+— The Uplift Team
+    `,
+  },
+
+  password_reset_required: {
+    subject: 'Password reset required for your Uplift account',
+    html: (data) => `
+      <h2>Password Reset Required</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>An administrator has required you to change your password on your next login.</p>
+      <p>Please log in to Uplift and set a new password.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Password Reset Required
+
+Hi ${data.firstName},
+
+An administrator has required you to change your password on your next login.
+
+Please log in to Uplift and set a new password.
+
+— The Uplift Team
+    `,
+  },
+
+  invitation: {
+    subject: 'You\'ve been invited to join Uplift',
+    html: (data) => `
+      <h2>You're Invited!</h2>
+      <p>Hi ${data.firstName},</p>
+      <p><strong>${data.invitedBy?.first_name} ${data.invitedBy?.last_name}</strong> has invited you to join their team on Uplift.</p>
+      <p>Click the button below to accept your invitation and set up your account:</p>
+      <p style="text-align: center; margin: 30px 0;">
+        <a href="${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/accept-invitation?token=${data.invitationToken}" 
+           style="background-color: #F26522; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+          Accept Invitation
+        </a>
+      </p>
+      <p>This invitation will expire in 7 days.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+You're Invited!
+
+Hi ${data.firstName},
+
+${data.invitedBy?.first_name} ${data.invitedBy?.last_name} has invited you to join their team on Uplift.
+
+Accept your invitation: ${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/accept-invitation?token=${data.invitationToken}
+
+This invitation will expire in 7 days.
+
+— The Uplift Team
+    `,
+  },
+
+  password_reset: {
+    subject: 'Reset your Uplift password',
+    html: (data) => `
+      <h2>Password Reset</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>We received a request to reset your password. Click the button below to set a new password:</p>
+      <p style="text-align: center; margin: 30px 0;">
+        <a href="${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/reset-password?token=${data.resetToken}" 
+           style="background-color: #F26522; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+          Reset Password
+        </a>
+      </p>
+      <p>This link will expire in 1 hour.</p>
+      <p>If you didn't request this, you can safely ignore this email.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Password Reset
+
+Hi ${data.firstName},
+
+We received a request to reset your password.
+
+Reset your password: ${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/reset-password?token=${data.resetToken}
+
+This link will expire in 1 hour.
+
+If you didn't request this, you can safely ignore this email.
+
+— The Uplift Team
+    `,
+  },
+
+  deletion_requested: {
+    subject: 'Account deletion request received',
+    html: (data) => `
+      <h2>Account Deletion Requested</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>We've received your request to delete your Uplift account.</p>
+      <p>Your account and all associated data will be permanently deleted in <strong>30 days</strong>.</p>
+      <p>If you change your mind, you can cancel this request by logging in to your account and going to Settings → My Account → Cancel Deletion.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Account Deletion Requested
+
+Hi ${data.firstName},
+
+We've received your request to delete your Uplift account.
+
+Your account will be permanently deleted in 30 days.
+
+If you change your mind, log in and go to Settings → My Account → Cancel Deletion.
+
+— The Uplift Team
+    `,
+  },
+
+  email_verification: {
+    subject: 'Verify your Uplift email address',
+    html: (data) => `
+      <h2>Verify Your Email</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>Please verify your email address by clicking the button below:</p>
+      <p style="text-align: center; margin: 30px 0;">
+        <a href="${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/verify-email?token=${data.verificationToken}" 
+           style="background-color: #F26522; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+          Verify Email
+        </a>
+      </p>
+      <p>This link will expire in 24 hours.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Verify Your Email
+
+Hi ${data.firstName},
+
+Please verify your email: ${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/verify-email?token=${data.verificationToken}
+
+This link will expire in 24 hours.
+
+— The Uplift Team
+    `,
+  },
+
+  account_deactivated: {
+    subject: 'Your Uplift account has been deactivated',
+    html: (data) => `
+      <h2>Account Deactivated</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>Your Uplift account has been deactivated by an administrator.</p>
+      ${data.reason ? `<p><strong>Reason:</strong> ${data.reason}</p>` : ''}
+      <p>If you believe this was done in error, please contact your organization's administrator.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Account Deactivated
+
+Hi ${data.firstName},
+
+Your Uplift account has been deactivated by an administrator.
+
+${data.reason ? `Reason: ${data.reason}` : ''}
+
+If you believe this was done in error, please contact your administrator.
+
+— The Uplift Team
+    `,
+  },
+
+  payment_failed: {
+    subject: 'Payment failed for your Uplift subscription',
+    html: (data) => `
+      <h2>Payment Failed</h2>
+      <p>Hi ${data.firstName},</p>
+      <p>We were unable to process your payment for your Uplift subscription.</p>
+      <p><strong>Amount:</strong> ${data.currency} ${(data.amount / 100).toFixed(2)}</p>
+      <p><strong>Invoice Number:</strong> ${data.invoiceNumber || 'N/A'}</p>
+      <p>Please update your payment method to avoid any interruption to your service.</p>
+      <p><a href="${data.billingPortalUrl}" style="background-color: #f97316; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">Update Payment Method</a></p>
+      <p>If you need assistance, please contact our support team.</p>
+      <p>— The Uplift Team</p>
+    `,
+    text: (data) => `
+Payment Failed
+
+Hi ${data.firstName},
+
+We were unable to process your payment for your Uplift subscription.
+
+Amount: ${data.currency} ${(data.amount / 100).toFixed(2)}
+Invoice Number: ${data.invoiceNumber || 'N/A'}
+
+Please update your payment method at: ${data.billingPortalUrl}
+
+— The Uplift Team
+    `,
+  },
+
+  // General notification template for in-app notifications sent via email
+  notification: {
+    subject: (data) => data.title,
+    html: (data) => `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background-color: #F26522; padding: 20px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px;">Uplift</h1>
+        </div>
+        <div style="padding: 30px; background-color: #ffffff;">
+          <h2 style="color: #1e293b; margin: 0 0 16px 0;">${data.title}</h2>
+          <p style="color: #475569; font-size: 16px; line-height: 1.6;">${data.body}</p>
+          ${data.actionUrl ? `
+          <p style="text-align: center; margin: 30px 0;">
+            <a href="${process.env.APP_URL || 'https://app.uplifthq.co.uk'}${data.actionUrl}"
+               style="background-color: #F26522; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
+              View Details
+            </a>
+          </p>
+          ` : ''}
+        </div>
+        <div style="padding: 20px; background-color: #f8fafc; text-align: center;">
+          <p style="color: #64748b; font-size: 12px; margin: 0;">
+            You're receiving this because you have email notifications enabled in your Uplift account.
+          </p>
+        </div>
+      </div>
+    `,
+    text: (data) => `
+${data.title}
+
+${data.body}
+
+${data.actionUrl ? `View details: ${process.env.APP_URL || 'https://app.uplifthq.co.uk'}${data.actionUrl}` : ''}
+
+— The Uplift Team
+    `,
+  },
+};
+
+export const emailService = {
+  /**
+   * Queue an email for sending
+   */
+  async queueEmail(template, toEmail, toName, data) {
+    const templateConfig = templates[template];
+    if (!templateConfig) {
+      console.error(`Unknown email template: ${template}`);
+      return;
+    }
+
+    try {
+      await db.query(
+        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        [
+          toEmail,
+          toName,
+          template,
+          JSON.stringify(data),
+          templateConfig.subject,
+          templateConfig.html(data),
+          templateConfig.text(data),
+        ]
+      );
+    } catch (error) {
+      console.error('Failed to queue email:', error);
+    }
+  },
+
+  /**
+   * Send password changed notification
+   */
+  async sendPasswordChanged(user, deviceInfo = {}) {
+    await this.queueEmail('password_changed', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+      device: deviceInfo.device,
+      ipAddress: deviceInfo.ip,
+    });
+  },
+
+  /**
+   * Send new device login alert
+   */
+  async sendNewDeviceLogin(user, deviceInfo = {}) {
+    await this.queueEmail('new_device_login', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+      device: deviceInfo.device,
+      browser: deviceInfo.browser,
+      location: deviceInfo.location,
+      ipAddress: deviceInfo.ip,
+    });
+  },
+
+  /**
+   * Send account locked notification
+   */
+  async sendAccountLocked(user) {
+    await this.queueEmail('account_locked', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+    });
+  },
+
+  /**
+   * Send account unlocked notification
+   */
+  async sendAccountUnlocked(user) {
+    await this.queueEmail('account_unlocked', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+    });
+  },
+
+  /**
+   * Send password reset required notification
+   */
+  async sendPasswordResetRequired(user) {
+    await this.queueEmail('password_reset_required', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+    });
+  },
+
+  /**
+   * Send invitation email
+   */
+  async sendInvitation(data) {
+    await this.queueEmail('invitation', data.email, `${data.first_name} ${data.last_name}`, {
+      firstName: data.first_name,
+      invitationToken: data.invitationToken,
+      invitedBy: data.invitedBy,
+    });
+  },
+
+  /**
+   * Send password reset email
+   */
+  async sendPasswordReset(user, resetToken) {
+    await this.queueEmail('password_reset', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+      resetToken,
+    });
+  },
+
+  /**
+   * Send deletion requested confirmation
+   */
+  async sendDeletionRequested(user) {
+    await this.queueEmail('deletion_requested', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+    });
+  },
+
+  /**
+   * Send email verification
+   */
+  async sendEmailVerification(user, verificationToken) {
+    await this.queueEmail('email_verification', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+      verificationToken,
+    });
+  },
+
+  /**
+   * Send account deactivated notification
+   */
+  async sendAccountDeactivated(user, reason) {
+    await this.queueEmail('account_deactivated', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+      reason,
+    });
+  },
+
+  /**
+   * Send payment failed notification
+   */
+  async sendPaymentFailed(user, paymentData) {
+    await this.queueEmail('payment_failed', user.email, `${user.first_name} ${user.last_name}`, {
+      firstName: user.first_name,
+      amount: paymentData.amount,
+      currency: paymentData.currency?.toUpperCase() || 'GBP',
+      invoiceNumber: paymentData.invoiceNumber,
+      billingPortalUrl: paymentData.billingPortalUrl || `${process.env.API_URL}/settings/billing`,
+    });
+  },
+
+  /**
+   * Send a generic notification email
+   */
+  async sendNotification(email, { title, body, actionUrl }) {
+    await this.queueNotificationEmail(email, { title, body, actionUrl });
+  },
+
+  /**
+   * Queue a notification email with dynamic subject
+   */
+  async queueNotificationEmail(toEmail, data) {
+    const templateConfig = templates.notification;
+    if (!templateConfig) {
+      console.error('Notification template not found');
+      return;
+    }
+
+    try {
+      const subject = typeof templateConfig.subject === 'function'
+        ? templateConfig.subject(data)
+        : templateConfig.subject;
+
+      await db.query(
+        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        [
+          toEmail,
+          null,
+          'notification',
+          JSON.stringify(data),
+          subject,
+          templateConfig.html(data),
+          templateConfig.text(data),
+        ]
+      );
+    } catch (error) {
+      console.error('Failed to queue notification email:', error);
+    }
+  },
+
+  /**
+   * Process email queue (call this from a background job)
+   */
+  async processQueue() {
+    const result = await db.query(
+      `SELECT * FROM email_queue
+       WHERE status = 'pending' AND attempts < 3
+       ORDER BY created_at ASC
+       LIMIT 10`
+    );
+
+    for (const email of result.rows) {
+      try {
+        if (postmarkClient) {
+          await postmarkClient.sendEmail({
+            From: EMAIL_FROM,
+            To: email.to_email,
+            ReplyTo: EMAIL_REPLY_TO,
+            Subject: email.subject,
+            HtmlBody: email.body_html,
+            TextBody: email.body_text,
+            MessageStream: 'outbound',
+          });
+        } else {
+          // Development: log instead of sending
+          console.log(`[email] ${email.template} -> ${email.to_email}: ${email.subject}`);
+        }
+
+        await db.query(
+          `UPDATE email_queue SET status = 'sent', sent_at = NOW() WHERE id = $1`,
+          [email.id]
+        );
+      } catch (error) {
+        console.error(`Failed to send email ${email.id}:`, error);
+        await db.query(
+          `UPDATE email_queue SET attempts = attempts + 1, last_attempt_at = NOW(), error = $2 WHERE id = $1`,
+          [email.id, error.message]
+        );
+      }
+    }
+  },
+};
+
+export default emailService;

@@ -28,9 +28,15 @@ CREATE TABLE IF NOT EXISTS billing_plans (
     stripe_core_price_id VARCHAR(255), -- price_xxx for core seats
     stripe_flex_price_id VARCHAR(255), -- price_xxx for flex seats
     
+    -- Pilot/setup fees and regular pricing (for non-founding partners)
+    pilot_setup_fee INTEGER DEFAULT 0,           -- One-time setup fee in pence
+    regular_core_price INTEGER DEFAULT 0,        -- Regular (non-founding) core price
+    regular_flex_price INTEGER DEFAULT 0,        -- Regular (non-founding) flex price
+    is_founding_partner_pricing BOOLEAN DEFAULT true, -- Whether current prices are founding partner rates
+
     is_active BOOLEAN NOT NULL DEFAULT true,
     display_order INTEGER NOT NULL DEFAULT 0,
-    
+
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -70,10 +76,14 @@ CREATE TABLE IF NOT EXISTS subscriptions (
     
     -- Metadata
     metadata JSONB DEFAULT '{}',
-    
+
+    -- Founding partner tracking
+    is_founding_partner BOOLEAN DEFAULT false,
+    founding_partner_locked_at TIMESTAMPTZ, -- When they locked in founding partner pricing
+
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    
+
     UNIQUE(organization_id) -- One subscription per org
 );
 
@@ -278,15 +288,221 @@ CREATE INDEX IF NOT EXISTS idx_customer_health_risk ON customer_health(risk_leve
 CREATE INDEX IF NOT EXISTS idx_employees_seat_type ON employees(seat_type);
 
 -- ============================================================
+-- FLEX SEAT ORDERS (Time-bound flexi-licensing)
+-- ============================================================
+
+-- Time-bound flex seat purchases for seasonal workers
+CREATE TABLE IF NOT EXISTS flex_seat_orders (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+
+    -- Order details
+    quantity INTEGER NOT NULL CHECK (quantity > 0),
+    price_per_seat INTEGER NOT NULL,  -- pence, at time of order
+    total_amount INTEGER NOT NULL,    -- quantity * price_per_seat
+
+    -- Validity period
+    valid_from DATE NOT NULL,
+    valid_to DATE NOT NULL,
+
+    -- Billing
+    stripe_invoice_id TEXT,
+    stripe_invoice_status TEXT, -- draft, open, paid, void
+
+    -- Status
+    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'expired', 'cancelled')),
+
+    -- Metadata
+    requested_by UUID REFERENCES users(id),
+    approved_by UUID,  -- ops user who approved (if manual)
+    notes TEXT,
+
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+    -- Ensure valid_to > valid_from
+    CONSTRAINT valid_date_range CHECK (valid_to > valid_from)
+);
+
+-- Index for finding active flex orders
+CREATE INDEX IF NOT EXISTS idx_flex_orders_org_dates
+ON flex_seat_orders(organization_id, valid_from, valid_to)
+WHERE status = 'active';
+
+-- Index for expiring orders
+CREATE INDEX IF NOT EXISTS idx_flex_orders_expiry
+ON flex_seat_orders(valid_to)
+WHERE status = 'active';
+
+-- ============================================================
+-- FUNCTIONS: Flex seat calculations
+-- ============================================================
+
+-- Function to get current active flex seats for an org
+CREATE OR REPLACE FUNCTION get_active_flex_seats(org_id UUID)
+RETURNS INTEGER AS $$
+    SELECT COALESCE(SUM(quantity), 0)::INTEGER
+    FROM flex_seat_orders
+    WHERE organization_id = org_id
+      AND status = 'active'
+      AND valid_from <= CURRENT_DATE
+      AND valid_to >= CURRENT_DATE;
+$$ LANGUAGE SQL STABLE;
+
+-- Function to get total allowed seats (core + permanent flex + active temporary flex)
+CREATE OR REPLACE FUNCTION get_total_seat_allowance(org_id UUID)
+RETURNS INTEGER AS $$
+    SELECT
+        COALESCE(s.core_seats, 0) +
+        COALESCE(s.flex_seats, 0) +
+        get_active_flex_seats(org_id)
+    FROM subscriptions s
+    WHERE s.organization_id = org_id
+      AND s.status IN ('active', 'trialing');
+$$ LANGUAGE SQL STABLE;
+
+-- ============================================================
+-- VIEW: Subscription summary for billing queries
+-- ============================================================
+
+CREATE OR REPLACE VIEW v_subscription_summary AS
+SELECT
+    o.id AS organization_id,
+    o.name AS organization_name,
+    s.id AS subscription_id,
+    bp.name AS plan_name,
+    bp.slug AS plan_slug,
+    s.core_seats,
+    s.flex_seats AS permanent_flex_seats,
+    get_active_flex_seats(o.id) AS temporary_flex_seats,
+    s.core_seats + s.flex_seats + get_active_flex_seats(o.id) AS total_seats,
+    s.is_founding_partner,
+    CASE
+        WHEN s.is_founding_partner THEN bp.core_seat_price_monthly
+        ELSE bp.regular_core_price
+    END AS effective_core_price,
+    CASE
+        WHEN s.is_founding_partner THEN bp.flex_seat_price_monthly
+        ELSE bp.regular_flex_price
+    END AS effective_flex_price,
+    s.status,
+    s.current_period_start,
+    s.current_period_end,
+    s.cancel_at_period_end
+FROM organizations o
+JOIN subscriptions s ON s.organization_id = o.id
+JOIN billing_plans bp ON bp.id = s.plan_id;
+
+-- ============================================================
 -- SEED DATA: Default plans
 -- ============================================================
 
-INSERT INTO billing_plans (name, slug, description, core_seat_price_monthly, flex_seat_price_monthly, min_core_seats, features, display_order)
-VALUES 
-    ('Growth', 'growth', 'For growing teams ready to modernize workforce management', 1000, 1000, 5, 
-     '{"shifts": true, "time_tracking": true, "skills": true, "basic_reporting": true, "mobile_app": true}', 1),
-    ('Scale', 'scale', 'For organizations that need advanced features and integrations', 800, 800, 50,
-     '{"shifts": true, "time_tracking": true, "skills": true, "advanced_reporting": true, "mobile_app": true, "api_access": true, "integrations": true, "sso": false}', 2),
-    ('Enterprise', 'enterprise', 'For large organizations with complex requirements', 0, 0, 200,
-     '{"shifts": true, "time_tracking": true, "skills": true, "advanced_reporting": true, "mobile_app": true, "api_access": true, "integrations": true, "sso": true, "custom_branding": true, "dedicated_support": true}', 3)
-ON CONFLICT (slug) DO NOTHING;
+-- Clear existing plans to update with correct pricing
+DELETE FROM billing_plans WHERE slug IN ('growth', 'scale', 'enterprise');
+
+-- Insert correct pricing (amounts in pence)
+INSERT INTO billing_plans (
+    name, slug, description,
+    core_seat_price_monthly, flex_seat_price_monthly, currency,
+    min_core_seats, max_core_seats, max_flex_seats,
+    features,
+    pilot_setup_fee, regular_core_price, regular_flex_price,
+    display_order
+) VALUES
+(
+    'Growth',
+    'growth',
+    'For growing teams of 50-250 workers',
+    1000,   -- £10/user/month (founding partner price)
+    1200,   -- £12/user/month (base + £2 flex premium)
+    'gbp',
+    50,     -- minimum 50 seats
+    250,    -- max 250 seats
+    125,    -- max flex = 50% of max core
+    '{
+        "mobile_app": true,
+        "scheduling": true,
+        "time_tracking": true,
+        "skills_matrix": true,
+        "career_pathing": true,
+        "gamification": true,
+        "basic_analytics": true,
+        "integrations": true,
+        "api_access": false,
+        "sso": false,
+        "custom_branding": false,
+        "dedicated_support": false
+    }',
+    250000,  -- £2,500 pilot setup fee
+    1500,    -- £15/user regular price
+    1700,    -- £17/user regular flex price
+    1
+),
+(
+    'Scale',
+    'scale',
+    'For established operations with 251-750 workers',
+    800,    -- £8/user/month (founding partner price)
+    1000,   -- £10/user/month (base + £2 flex premium)
+    'gbp',
+    251,    -- minimum 251 seats
+    750,    -- max 750 seats
+    375,    -- max flex = 50% of max core
+    '{
+        "mobile_app": true,
+        "scheduling": true,
+        "time_tracking": true,
+        "skills_matrix": true,
+        "career_pathing": true,
+        "gamification": true,
+        "basic_analytics": true,
+        "advanced_analytics": true,
+        "integrations": true,
+        "custom_integrations": true,
+        "api_access": true,
+        "sso": false,
+        "custom_branding": false,
+        "dedicated_support": true,
+        "quarterly_reviews": true
+    }',
+    500000,  -- £5,000 pilot setup fee
+    1200,    -- £12/user regular price
+    1400,    -- £14/user regular flex price
+    2
+),
+(
+    'Enterprise',
+    'enterprise',
+    'For large organisations with 750+ workers',
+    0,      -- POA - custom pricing
+    0,      -- POA - custom pricing
+    'gbp',
+    751,    -- minimum 751 seats
+    NULL,   -- unlimited
+    NULL,   -- unlimited flex
+    '{
+        "mobile_app": true,
+        "scheduling": true,
+        "time_tracking": true,
+        "skills_matrix": true,
+        "career_pathing": true,
+        "gamification": true,
+        "basic_analytics": true,
+        "advanced_analytics": true,
+        "integrations": true,
+        "custom_integrations": true,
+        "api_access": true,
+        "sso": true,
+        "custom_branding": true,
+        "dedicated_support": true,
+        "quarterly_reviews": true,
+        "sla_guarantees": true,
+        "on_premise": true,
+        "custom_development": true,
+        "white_label": true
+    }',
+    1000000, -- £10,000+ pilot setup fee (minimum)
+    0,       -- POA
+    0,       -- POA
+    3
+);

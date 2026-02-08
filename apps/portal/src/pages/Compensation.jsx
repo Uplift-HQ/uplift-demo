@@ -2,9 +2,10 @@
 // COMPENSATION PAGE
 // Payslips, compensation records, and salary review cycles
 // ============================================================
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import api, { DEMO_MODE } from '../lib/api';
 import {
   PoundSterling,
   Receipt,
@@ -26,10 +27,7 @@ import {
   ArrowDownRight,
   Minus,
   Filter,
-  Award,
-  MapPin,
 } from 'lucide-react';
-import api from '../lib/api';
 
 // ---- Demo Data ----
 
@@ -101,7 +99,7 @@ const COMPENSATION_HISTORY = {
   ],
 };
 
-const DEMO_CYCLES = [
+const compensationCycles = [
   {
     id: 1,
     name: 'Annual Salary Review 2026',
@@ -132,6 +130,13 @@ export default function Compensation() {
   const isManager = user?.role === 'admin' || user?.role === 'manager';
   const [activeTab, setActiveTab] = useState('payslips');
   const [toast, setToast] = useState(null);
+  const [isLoading, setIsLoading] = useState(!DEMO_MODE);
+
+  // Data state
+  const [payslips, setPayslips] = useState(DEMO_MODE ? DEMO_PAYSLIPS : []);
+  const [compensationRecords, setCompensationRecords] = useState(DEMO_MODE ? EMPLOYEES_DATA : []);
+  const [compensationCycles, setCompensationCycles] = useState(DEMO_MODE ? compensationCycles : []);
+  const [stats, setStats] = useState({ totalGross: 0, totalNet: 0, pendingCount: 0, employeeCount: 0 });
 
   // Payslips state
   const [employeeFilter, setEmployeeFilter] = useState('all');
@@ -141,6 +146,7 @@ export default function Compensation() {
 
   // Compensation Records state
   const [selectedRecord, setSelectedRecord] = useState(null);
+  const [selectedHistory, setSelectedHistory] = useState([]);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updateForm, setUpdateForm] = useState({ employeeId: '', newSalary: '', reason: '', effectiveDate: '' });
 
@@ -148,40 +154,96 @@ export default function Compensation() {
   const [showCycleModal, setShowCycleModal] = useState(false);
   const [cycleForm, setCycleForm] = useState({ name: '', budget: '', effectiveDate: '', description: '' });
 
-  // Bonus state
-  const [bonusData, setBonusData] = useState(null);
-  const [bonusLoading, setBonusLoading] = useState(false);
+  // Fetch data from API
+  const fetchData = useCallback(async () => {
+    if (DEMO_MODE) return;
 
-  // Fetch my bonus data
-  useEffect(() => {
-    const fetchBonusData = async () => {
-      if (activeTab !== 'bonus') return;
-      setBonusLoading(true);
-      try {
-        const response = await api.get('/payroll/my-bonus');
-        setBonusData(response.data);
-      } catch (error) {
-        console.error('Failed to fetch bonus data:', error);
-        // Set demo data as fallback
-        setBonusData({
-          employee: {
-            bonus_amount: 5000,
-            location_name: 'London Office'
-          },
-          payouts: [
-            { id: 1, period: '2025-Q4', score_percentage: 92.5, payout_amount: 4625, status: 'paid', paid_at: '2026-01-28' },
-            { id: 2, period: '2025-Q3', score_percentage: 88.0, payout_amount: 4400, status: 'paid', paid_at: '2025-10-28' },
-          ],
-          pendingPayouts: [],
-          totalPaid: 9025,
-          totalPending: 0
+    setIsLoading(true);
+    try {
+      // Fetch payslips (employees see their own, managers see all)
+      const payslipsRes = isManager
+        ? await api.get('/payslips').catch(() => ({ payslips: [] }))
+        : await api.get('/payslips/my-payslips').catch(() => ({ payslips: [] }));
+
+      // Map payslips to expected format
+      const mappedPayslips = (payslipsRes.payslips || []).map(p => ({
+        id: p.id,
+        employeeId: p.employee_id,
+        employee: p.first_name && p.last_name ? `${p.first_name} ${p.last_name}` : 'Employee',
+        payPeriod: p.pay_period_start ? `${new Date(p.pay_period_start).toLocaleDateString('en-GB', { month: '2-digit', year: 'numeric' })}` : '',
+        paymentDate: p.pay_date,
+        gross: p.gross_pay || 0,
+        net: p.net_pay || 0,
+        status: p.status === 'sent' || p.status === 'viewed' ? 'processed' : p.status,
+        breakdown: {
+          earnings: { basicSalary: p.gross_pay || 0, overtime: 0, holidayPay: 0, bonus: 0 },
+          deductions: { incomeTax: 0, nationalInsurance: 0, pension: 0, studentLoan: 0 },
+          totalGross: p.gross_pay || 0,
+          totalDeductions: (p.gross_pay || 0) - (p.net_pay || 0),
+          netPay: p.net_pay || 0,
+        },
+        items: p.items || [],
+      }));
+
+      setPayslips(mappedPayslips);
+
+      // Calculate stats from payslips
+      const processed = mappedPayslips.filter(p => p.status === 'processed' || p.status === 'sent' || p.status === 'viewed');
+      const totalGross = processed.reduce((sum, p) => sum + (p.gross || 0), 0);
+      const totalNet = processed.reduce((sum, p) => sum + (p.net || 0), 0);
+      const pendingCount = mappedPayslips.filter(p => p.status === 'pending' || p.status === 'draft').length;
+
+      if (isManager) {
+        // Fetch compensation records
+        const recordsRes = await api.get('/compensation/records').catch(() => ({ records: [] }));
+        setCompensationRecords(recordsRes.records || []);
+
+        // Fetch cycles
+        const cyclesRes = await api.get('/compensation/cycles').catch(() => ({ cycles: [] }));
+        setCompensationCycles(cyclesRes.cycles || []);
+
+        // Fetch stats
+        const statsRes = await api.get('/compensation/stats').catch(() => ({ payroll: {}, salary: {} }));
+        setStats({
+          totalGross: statsRes.payroll?.totalGross || totalGross,
+          totalNet: statsRes.payroll?.totalNet || totalNet,
+          pendingCount: statsRes.payroll?.pendingCount || pendingCount,
+          employeeCount: recordsRes.records?.length || statsRes.payroll?.employeeCount || 0,
         });
-      } finally {
-        setBonusLoading(false);
+      } else {
+        setStats({ totalGross, totalNet, pendingCount, employeeCount: 1 });
+      }
+    } catch (error) {
+      console.error('Failed to fetch compensation data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isManager]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  // Fetch history when a record is selected
+  useEffect(() => {
+    if (!selectedRecord || DEMO_MODE) {
+      if (DEMO_MODE && selectedRecord) {
+        setSelectedHistory(COMPENSATION_HISTORY[selectedRecord.id] || []);
+      }
+      return;
+    }
+
+    const fetchHistory = async () => {
+      try {
+        const res = await api.get(`/compensation/records/${selectedRecord.id}/history`);
+        setSelectedHistory(res.history || []);
+      } catch (error) {
+        console.error('Failed to fetch history:', error);
+        setSelectedHistory([]);
       }
     };
-    fetchBonusData();
-  }, [activeTab]);
+    fetchHistory();
+  }, [selectedRecord]);
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
@@ -190,7 +252,6 @@ export default function Compensation() {
 
   const allTabs = [
     { key: 'payslips', label: t(isManager ? 'compensation.payslips' : 'compensation.myPayslips', isManager ? 'Payslips' : 'My Payslips'), icon: Receipt },
-    { key: 'bonus', label: t('compensation.myBonus', 'My Bonus'), icon: Award },
     { key: 'records', label: t('compensation.compensationRecords', 'Compensation Records'), icon: TrendingUp, managerOnly: true },
     { key: 'cycles', label: t('compensation.compensationCycles', 'Compensation Cycles'), icon: Calendar, managerOnly: true },
   ];
@@ -207,33 +268,64 @@ export default function Compensation() {
   };
 
   // Filtered payslips
-  const filteredPayslips = DEMO_PAYSLIPS.filter((ps) => {
-    if (employeeFilter !== 'all' && ps.employeeId !== Number(employeeFilter)) return false;
+  const filteredPayslips = payslips.filter((ps) => {
+    if (employeeFilter !== 'all' && ps.employeeId !== employeeFilter && ps.employeeId !== Number(employeeFilter)) return false;
     if (periodFilter !== 'all' && ps.payPeriod !== periodFilter) return false;
     return true;
   });
 
-  // Payslip stats
-  const totalGrossPay = DEMO_PAYSLIPS.filter((p) => p.status === 'processed').reduce((s, p) => s + p.gross, 0);
-  const totalNetPay = DEMO_PAYSLIPS.filter((p) => p.status === 'processed').reduce((s, p) => s + p.net, 0);
-  const pendingCount = DEMO_PAYSLIPS.filter((p) => p.status === 'pending').length;
+  // Payslip stats (use state stats, fallback to calculated)
+  const totalGrossPay = stats.totalGross || payslips.filter((p) => p.status === 'processed').reduce((s, p) => s + p.gross, 0);
+  const totalNetPay = stats.totalNet || payslips.filter((p) => p.status === 'processed').reduce((s, p) => s + p.net, 0);
+  const pendingCount = stats.pendingCount || payslips.filter((p) => p.status === 'pending').length;
 
   // Handlers
-  const handleUploadPayslip = (e) => {
+  const handleUploadPayslip = async (e) => {
     e.preventDefault();
+    // Payslip upload would typically be done via the payroll run process
     setShowUploadModal(false);
     showToast(t('compensation.payslipUploaded', 'Payslip uploaded successfully'));
+    fetchData();
   };
 
-  const handleUpdateCompensation = (e) => {
+  const handleUpdateCompensation = async (e) => {
     e.preventDefault();
+    if (!DEMO_MODE) {
+      try {
+        await api.put(`/compensation/records/${updateForm.employeeId}`, {
+          newSalary: parseFloat(updateForm.newSalary),
+          reason: updateForm.reason,
+          effectiveDate: updateForm.effectiveDate,
+        });
+        fetchData();
+      } catch (error) {
+        console.error('Failed to update compensation:', error);
+        showToast(t('common.error', 'An error occurred'), 'error');
+        return;
+      }
+    }
     setShowUpdateModal(false);
     setUpdateForm({ employeeId: '', newSalary: '', reason: '', effectiveDate: '' });
     showToast(t('compensation.compensationUpdated', 'Compensation updated successfully'));
   };
 
-  const handleCreateCycle = (e) => {
+  const handleCreateCycle = async (e) => {
     e.preventDefault();
+    if (!DEMO_MODE) {
+      try {
+        await api.post('/compensation/cycles', {
+          name: cycleForm.name,
+          description: cycleForm.description,
+          budget: parseFloat(cycleForm.budget) || 0,
+          effectiveDate: cycleForm.effectiveDate,
+        });
+        fetchData();
+      } catch (error) {
+        console.error('Failed to create cycle:', error);
+        showToast(t('common.error', 'An error occurred'), 'error');
+        return;
+      }
+    }
     setShowCycleModal(false);
     setCycleForm({ name: '', budget: '', effectiveDate: '', description: '' });
     showToast(t('compensation.cycleCreated', 'Compensation cycle created successfully'));
@@ -255,6 +347,16 @@ export default function Compensation() {
           <p className="text-slate-600">{t('compensation.subtitle', 'Manage payslips, salary records, and compensation cycles')}</p>
         </div>
       </div>
+
+      {/* Loading State */}
+      {isLoading && (
+        <div className="flex items-center justify-center py-12">
+          <div className="flex items-center gap-3">
+            <div className="h-6 w-6 border-2 border-momentum-500 border-t-transparent rounded-full animate-spin" />
+            <span className="text-slate-600">{t('common.loading', 'Loading...')}</span>
+          </div>
+        </div>
+      )}
 
       {/* Summary Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -287,7 +389,7 @@ export default function Compensation() {
             <Users className="h-5 w-5" />
             <span className="text-sm">{t('compensation.employees', 'Employees')}</span>
           </div>
-          <p className="text-2xl font-bold text-slate-900 mt-1">{EMPLOYEES_DATA.length}</p>
+          <p className="text-2xl font-bold text-slate-900 mt-1">{compensationRecords.length || stats.employeeCount}</p>
           <p className="text-xs text-slate-400 mt-0.5">{t('compensation.onPayroll', 'On payroll')}</p>
         </div>
       </div>
@@ -323,7 +425,7 @@ export default function Compensation() {
                 className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500"
               >
                 <option value="all">{t('compensation.allEmployees', 'All Employees')}</option>
-                {EMPLOYEES_DATA.map((emp) => (
+                {compensationRecords.map((emp) => (
                   <option key={emp.id} value={emp.id}>{emp.name}</option>
                 ))}
               </select>
@@ -424,139 +526,6 @@ export default function Compensation() {
         </div>
       )}
 
-      {/* ============ TAB: My Bonus ============ */}
-      {activeTab === 'bonus' && (
-        <div className="space-y-6">
-          {bonusLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-momentum-500" />
-            </div>
-          ) : bonusData ? (
-            <>
-              {/* Bonus Summary Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white rounded-lg p-6 shadow border">
-                  <div className="flex items-center gap-2 text-slate-600 mb-2">
-                    <Award className="h-5 w-5 text-momentum-500" />
-                    <span className="text-sm">{t('compensation.eligibleBonus', 'Eligible Bonus')}</span>
-                  </div>
-                  <p className="text-2xl font-bold text-slate-900">{formatCurrency(bonusData.employee?.bonus_amount || 0)}</p>
-                  <p className="text-xs text-slate-500 mt-1">{t('compensation.annualBonusAmount', 'Annual bonus amount')}</p>
-                </div>
-                <div className="bg-white rounded-lg p-6 shadow border">
-                  <div className="flex items-center gap-2 text-green-600 mb-2">
-                    <CheckCircle className="h-5 w-5" />
-                    <span className="text-sm">{t('compensation.totalPaid', 'Total Paid')}</span>
-                  </div>
-                  <p className="text-2xl font-bold text-green-700">{formatCurrency(bonusData.totalPaid || 0)}</p>
-                  <p className="text-xs text-slate-500 mt-1">{t('compensation.bonusesPaidOut', 'Bonuses paid out')}</p>
-                </div>
-                <div className="bg-white rounded-lg p-6 shadow border">
-                  <div className="flex items-center gap-2 text-amber-600 mb-2">
-                    <Clock className="h-5 w-5" />
-                    <span className="text-sm">{t('compensation.pendingBonus', 'Pending')}</span>
-                  </div>
-                  <p className="text-2xl font-bold text-amber-700">{formatCurrency(bonusData.totalPending || 0)}</p>
-                  <p className="text-xs text-slate-500 mt-1">{t('compensation.awaitingApproval', 'Awaiting approval')}</p>
-                </div>
-              </div>
-
-              {/* Location Info */}
-              {bonusData.employee?.location_name && (
-                <div className="bg-momentum-50 border border-momentum-200 rounded-lg p-4 flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-momentum-600" />
-                  <div>
-                    <p className="text-sm font-medium text-momentum-700">{t('compensation.yourLocation', 'Your Location')}</p>
-                    <p className="text-momentum-600">{bonusData.employee.location_name}</p>
-                  </div>
-                  <div className="ml-auto text-right">
-                    <p className="text-xs text-momentum-500">{t('compensation.bonusFormula', 'Performance Bonus Formula')}</p>
-                    <p className="text-sm text-momentum-700 font-medium">{t('compensation.bonusTimesScore', 'Bonus × Location Score %')}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Bonus History */}
-              <div className="bg-white rounded-lg shadow border">
-                <div className="p-4 border-b border-slate-200">
-                  <h3 className="font-semibold text-slate-900">{t('compensation.bonusHistory', 'Bonus History')}</h3>
-                </div>
-                {bonusData.payouts && bonusData.payouts.length > 0 ? (
-                  <div className="divide-y divide-slate-100">
-                    {bonusData.payouts.map((payout) => (
-                      <div key={payout.id} className="p-4 flex items-center justify-between hover:bg-slate-50">
-                        <div>
-                          <p className="font-medium text-slate-900">{payout.period}</p>
-                          <p className="text-sm text-slate-500">
-                            {t('compensation.siteScore', 'Site Score')}: {payout.score_percentage}%
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-semibold text-green-700">{formatCurrency(payout.payout_amount)}</p>
-                          <span className={`text-xs px-2 py-0.5 rounded-full ${
-                            payout.status === 'paid' ? 'bg-green-100 text-green-800' :
-                            payout.status === 'approved' ? 'bg-blue-100 text-blue-800' :
-                            'bg-amber-100 text-amber-800'
-                          }`}>
-                            {payout.status === 'paid' ? t('compensation.paid', 'Paid') :
-                             payout.status === 'approved' ? t('compensation.approved', 'Approved') :
-                             t('compensation.pending', 'Pending')}
-                          </span>
-                          {payout.paid_at && (
-                            <p className="text-xs text-slate-400 mt-1">
-                              {new Date(payout.paid_at).toLocaleDateString()}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="p-8 text-center text-slate-500">
-                    <Award className="h-12 w-12 mx-auto text-slate-300 mb-3" />
-                    <p>{t('compensation.noBonusHistory', 'No bonus history yet')}</p>
-                    <p className="text-sm text-slate-400 mt-1">{t('compensation.bonusWillAppear', 'Your performance bonuses will appear here once calculated.')}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Pending Payouts */}
-              {bonusData.pendingPayouts && bonusData.pendingPayouts.length > 0 && (
-                <div className="bg-amber-50 border border-amber-200 rounded-lg">
-                  <div className="p-4 border-b border-amber-200">
-                    <h3 className="font-semibold text-amber-800">{t('compensation.pendingPayouts', 'Pending Payouts')}</h3>
-                  </div>
-                  <div className="divide-y divide-amber-100">
-                    {bonusData.pendingPayouts.map((payout) => (
-                      <div key={payout.id} className="p-4 flex items-center justify-between">
-                        <div>
-                          <p className="font-medium text-amber-900">{payout.period}</p>
-                          <p className="text-sm text-amber-700">
-                            {t('compensation.siteScore', 'Site Score')}: {payout.score_percentage}%
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-semibold text-amber-800">{formatCurrency(payout.payout_amount)}</p>
-                          <span className="text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full">
-                            {t('compensation.awaitingPayment', 'Awaiting Payment')}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="bg-white rounded-lg shadow border p-8 text-center">
-              <Award className="h-12 w-12 mx-auto text-slate-300 mb-3" />
-              <p className="text-slate-600">{t('compensation.noBonusConfigured', 'No performance bonus configured')}</p>
-              <p className="text-sm text-slate-400 mt-1">{t('compensation.contactHr', 'Contact HR for more information about bonus eligibility.')}</p>
-            </div>
-          )}
-        </div>
-      )}
-
       {/* ============ TAB 2: Compensation Records ============ */}
       {activeTab === 'records' && (
         <div className="space-y-4">
@@ -636,7 +605,7 @@ export default function Compensation() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-slate-100">
-                  {DEMO_CYCLES.map((cycle) => (
+                  {compensationCycles.map((cycle) => (
                     <tr key={cycle.id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="text-sm font-medium text-slate-900">{cycle.name}</div>
@@ -663,7 +632,7 @@ export default function Compensation() {
 
           {/* Budget vs Allocated Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {DEMO_CYCLES.map((cycle) => {
+            {compensationCycles.map((cycle) => {
               const pct = cycle.budget > 0 ? Math.round((cycle.allocated / cycle.budget) * 100) : 0;
               return (
                 <div key={cycle.id} className="bg-white rounded-lg shadow border border-slate-200 p-5">
@@ -825,13 +794,13 @@ export default function Compensation() {
               {/* Timeline */}
               <div>
                 <h3 className="text-sm font-semibold text-slate-700 mb-3">{t('compensation.salaryTimeline', 'Salary Timeline')}</h3>
-                {(COMPENSATION_HISTORY[selectedRecord.id] || []).length > 0 ? (
+                {selectedHistory.length > 0 ? (
                   <div className="space-y-0">
-                    {COMPENSATION_HISTORY[selectedRecord.id].map((entry, idx) => (
+                    {selectedHistory.map((entry, idx) => (
                       <div key={idx} className="flex gap-4">
                         <div className="flex flex-col items-center">
                           <div className={`w-3 h-3 rounded-full ${idx === 0 ? 'bg-momentum-500' : 'bg-slate-300'}`} />
-                          {idx < COMPENSATION_HISTORY[selectedRecord.id].length - 1 && (
+                          {idx < selectedHistory.length - 1 && (
                             <div className="w-0.5 h-12 bg-slate-200" />
                           )}
                         </div>

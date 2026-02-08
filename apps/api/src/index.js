@@ -40,6 +40,7 @@ import chatRoutes from './routes/chat.js';
 import complianceRoutes from './routes/compliance.js';
 import expensesRoutes from './routes/expenses.js';
 import payslipsRoutes from './routes/payslips.js';
+import compensationRoutes from './routes/compensation.js';
 import onboardingRoutes from './routes/onboarding.js';
 import legalRoutes from './routes/legal.js';
 import billingPortalRoutes from './routes/billing-portal.js';
@@ -55,6 +56,8 @@ import learningRoutes from './routes/learning.js';
 import performanceRoutes from './routes/performance.js';
 import recognitionRoutes from './routes/recognition.js';
 import payrollRoutes from './routes/payroll.js';
+import surveysRoutes from './routes/surveys.js';
+import reportsRoutes from './routes/reports.js';
 
 // Middleware
 import { 
@@ -327,8 +330,17 @@ app.use('/api/expenses', apiLimiter, csrfProtection, expensesRoutes);
 // Payslips routes (pay statements, YTD)
 app.use('/api/payslips', apiLimiter, csrfProtection, payslipsRoutes);
 
+// Compensation routes (salary records, cycles)
+app.use('/api/compensation', apiLimiter, csrfProtection, compensationRoutes);
+
 // Payroll engine routes (runs, calculations, exports)
 app.use('/api/payroll', apiLimiter, csrfProtection, payrollRoutes);
+
+// Surveys routes (engagement, pulse, eNPS, lifecycle)
+app.use('/api/surveys', apiLimiter, csrfProtection, surveysRoutes);
+
+// Reports routes (10 HR analytics reports)
+app.use('/api/reports', apiLimiter, csrfProtection, reportsRoutes);
 
 // Onboarding routes (setup wizard)
 app.use('/api/onboarding', apiLimiter, csrfProtection, onboardingRoutes);

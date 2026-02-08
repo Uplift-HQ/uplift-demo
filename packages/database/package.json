@@ -1,0 +1,16 @@
+{
+  "name": "@uplift/database",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Uplift database migrations and seed data",
+  "type": "module",
+  "scripts": {
+    "migrate": "node migrate.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.3",
+    "dotenv": "^16.3.1",
+    "bcryptjs": "^2.4.3"
+  }
+}

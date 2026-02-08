@@ -4,8 +4,9 @@
 // survey builder, results analytics, and template management
 // ============================================================
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import api, { DEMO_MODE } from '../lib/api';
 import {
   ClipboardList,
   Plus,
@@ -137,6 +138,59 @@ const TABS = [
 export default function Surveys() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('active');
+  const [loading, setLoading] = useState(!DEMO_MODE);
+  const [surveys, setSurveys] = useState(DEMO_MODE ? DEMO_SURVEYS : []);
+  const [templates, setTemplates] = useState(DEMO_MODE ? TEMPLATES : []);
+  const [stats, setStats] = useState(DEMO_MODE ? { active: 3, avgParticipation: 64, enps: 42, totalResponses: 243 } : { active: 0, avgParticipation: 0, enps: 0, totalResponses: 0 });
+  const [enpsDashboard, setEnpsDashboard] = useState(null);
+
+  const fetchData = useCallback(async () => {
+    if (DEMO_MODE) return;
+    try {
+      setLoading(true);
+      const [surveysRes, templatesRes, enpsRes] = await Promise.all([
+        api.get('/surveys'),
+        api.get('/surveys/templates'),
+        api.get('/surveys/enps/dashboard'),
+      ]);
+      setSurveys(surveysRes.data.surveys || []);
+      setTemplates((templatesRes.data.templates || []).map(tmpl => ({
+        ...tmpl,
+        icon: TEMPLATES.find(t => t.type.toLowerCase() === tmpl.type?.toLowerCase())?.icon || FileText,
+      })));
+      setStats(surveysRes.data.stats || { active: 0, avgParticipation: 0, enps: 0, totalResponses: 0 });
+      setEnpsDashboard(enpsRes.data);
+    } catch (err) {
+      console.error('Failed to fetch surveys:', err);
+      // Fallback to demo data on error
+      setSurveys(DEMO_SURVEYS);
+      setTemplates(TEMPLATES);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="h-8 w-64 bg-slate-200 rounded animate-pulse" />
+            <div className="h-4 w-96 bg-slate-100 rounded animate-pulse mt-2" />
+          </div>
+        </div>
+        <div className="h-12 bg-slate-100 rounded animate-pulse" />
+        <div className="grid grid-cols-4 gap-4">
+          {[...Array(4)].map((_, i) => <div key={i} className="h-24 bg-slate-100 rounded-xl animate-pulse" />)}
+        </div>
+        <div className="h-96 bg-slate-100 rounded-xl animate-pulse" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -169,12 +223,12 @@ export default function Surveys() {
       </div>
 
       {/* Tab Content */}
-      {activeTab === 'active' && <ActiveSurveys />}
-      {activeTab === 'builder' && <SurveyBuilder />}
-      {activeTab === 'results' && <ResultsAnalytics />}
-      {activeTab === 'enps' && <ENPSDashboard />}
-      {activeTab === 'lifecycle' && <LifecycleSurveys />}
-      {activeTab === 'templates' && <TemplatesTab />}
+      {activeTab === 'active' && <ActiveSurveys surveys={surveys} stats={stats} onRefresh={fetchData} />}
+      {activeTab === 'builder' && <SurveyBuilder templates={templates} onSurveyCreated={fetchData} />}
+      {activeTab === 'results' && <ResultsAnalytics surveys={surveys} />}
+      {activeTab === 'enps' && <ENPSDashboard dashboardData={enpsDashboard} />}
+      {activeTab === 'lifecycle' && <LifecycleSurveys surveys={surveys} />}
+      {activeTab === 'templates' && <TemplatesTab templates={templates} />}
     </div>
   );
 }
@@ -183,7 +237,7 @@ export default function Surveys() {
 // TAB 1: ACTIVE SURVEYS
 // ============================================================
 
-function ActiveSurveys() {
+function ActiveSurveys({ surveys = [], stats = {}, onRefresh }) {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -195,14 +249,14 @@ function ActiveSurveys() {
     closed: { label: t('surveys.status.closed', 'Closed'), color: 'bg-momentum-100 text-momentum-700' },
   };
 
-  const filtered = DEMO_SURVEYS.filter(s => {
+  const filtered = surveys.filter(s => {
     const matchSearch = s.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchStatus = statusFilter === 'all' || s.status === statusFilter;
     return matchSearch && matchStatus;
   });
 
   // Empty state for no surveys
-  if (DEMO_SURVEYS.length === 0) {
+  if (surveys.length === 0) {
     return (
       <div className="bg-white rounded-xl border border-slate-200">
         <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
@@ -233,28 +287,30 @@ function ActiveSurveys() {
             <ClipboardList className="w-4 h-4" />
             <span className="text-sm">{t('surveys.stats.totalActive', 'Active Surveys')}</span>
           </div>
-          <p className="text-2xl font-bold text-slate-900">3</p>
+          <p className="text-2xl font-bold text-slate-900">{stats.active || surveys.filter(s => s.status === 'active').length}</p>
         </div>
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <div className="flex items-center gap-2 text-slate-600 mb-1">
             <Users className="w-4 h-4" />
             <span className="text-sm">{t('surveys.stats.avgParticipation', 'Avg Participation')}</span>
           </div>
-          <p className="text-2xl font-bold text-slate-900">64%</p>
+          <p className="text-2xl font-bold text-slate-900">{stats.avgParticipation || 0}%</p>
         </div>
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <div className="flex items-center gap-2 text-slate-600 mb-1">
             <TrendingUp className="w-4 h-4" />
             <span className="text-sm">{t('surveys.stats.overallEnps', 'Overall eNPS')}</span>
           </div>
-          <p className="text-2xl font-bold text-green-600">+42</p>
+          <p className={`text-2xl font-bold ${(stats.enps || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            {(stats.enps || 0) > 0 ? '+' : ''}{stats.enps || 0}
+          </p>
         </div>
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <div className="flex items-center gap-2 text-slate-600 mb-1">
             <MessageSquare className="w-4 h-4" />
             <span className="text-sm">{t('surveys.stats.totalResponses', 'Total Responses')}</span>
           </div>
-          <p className="text-2xl font-bold text-slate-900">243</p>
+          <p className="text-2xl font-bold text-slate-900">{stats.totalResponses || surveys.reduce((sum, s) => sum + (s.responses || 0), 0)}</p>
         </div>
       </div>
 
@@ -387,7 +443,7 @@ function ActiveSurveys() {
 // TAB 2: SURVEY BUILDER
 // ============================================================
 
-function SurveyBuilder() {
+function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
@@ -496,8 +552,9 @@ function SurveyBuilder() {
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {TEMPLATES.map((tmpl) => {
-              const Icon = tmpl.icon;
+            {templates.map((tmpl) => {
+              const Icon = tmpl.icon || FileText;
+              const questionCount = typeof tmpl.questions === 'number' ? tmpl.questions : (Array.isArray(tmpl.questions) ? tmpl.questions.length : 0);
               return (
                 <button
                   key={tmpl.id}
@@ -511,7 +568,7 @@ function SurveyBuilder() {
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-1">{tmpl.name}</h3>
                   <p className="text-xs text-slate-500 mb-2">{tmpl.description}</p>
-                  <span className="text-xs font-medium text-momentum-600">{tmpl.questions} {t('surveys.questions', 'questions')}</span>
+                  <span className="text-xs font-medium text-momentum-600">{questionCount} {t('surveys.questions', 'questions')}</span>
                 </button>
               );
             })}
@@ -1001,9 +1058,10 @@ function SurveyBuilder() {
 // TAB 3: RESULTS & ANALYTICS
 // ============================================================
 
-function ResultsAnalytics() {
+function ResultsAnalytics({ surveys = [] }) {
   const { t } = useTranslation();
-  const [selectedSurvey] = useState(DEMO_SURVEYS[0]);
+  const activeSurveys = surveys.length > 0 ? surveys : DEMO_SURVEYS;
+  const [selectedSurvey] = useState(activeSurveys[0]);
 
   const highestScoring = [...QUESTION_RESULTS].sort((a, b) => b.avg - a.avg).slice(0, 3);
   const lowestScoring = [...QUESTION_RESULTS].sort((a, b) => a.avg - b.avg).slice(0, 3);
@@ -1189,12 +1247,15 @@ function ResultsAnalytics() {
 // TAB 4: eNPS DASHBOARD
 // ============================================================
 
-function ENPSDashboard() {
+function ENPSDashboard({ dashboardData }) {
   const { t } = useTranslation();
-  const enpsScore = 42;
-  const promoters = 52;
-  const passives = 38;
-  const detractors = 10;
+  const data = dashboardData || {};
+  const enpsScore = data.currentScore ?? 42;
+  const promoters = data.promotersPercent ?? 52;
+  const passives = data.passivesPercent ?? 38;
+  const detractors = data.detractorsPercent ?? 10;
+  const departmentScores = data.departmentScores || ENPS_BY_DEPT;
+  const trendData = data.trend || ENPS_TREND;
 
   // Arc calculation for gauge
   const gaugeAngle = ((enpsScore + 100) / 200) * 180; // -100 to +100 mapped to 0-180 degrees
@@ -1288,7 +1349,7 @@ function ENPSDashboard() {
       <div className="bg-white rounded-xl border border-slate-200 p-5">
         <h3 className="text-sm font-semibold text-slate-700 mb-4">{t('surveys.enps.byDepartment', 'eNPS by Department')}</h3>
         <div className="space-y-3">
-          {ENPS_BY_DEPT.map((d) => {
+          {departmentScores.map((d) => {
             const barWidth = Math.max(0, ((d.score + 100) / 200) * 100);
             return (
               <div key={d.dept} className="flex items-center gap-3">
@@ -1333,15 +1394,15 @@ function ENPSDashboard() {
               ))}
             </div>
             {/* Data points and lines */}
-            <svg viewBox={`0 0 ${ENPS_TREND.length * 60} 180`} className="absolute inset-0 bottom-6 ml-0" preserveAspectRatio="none">
+            <svg viewBox={`0 0 ${trendData.length * 60} 180`} className="absolute inset-0 bottom-6 ml-0" preserveAspectRatio="none">
               <polyline
-                points={ENPS_TREND.map((d, i) => `${i * 60 + 30},${180 - (d.score / 60) * 180}`).join(' ')}
+                points={trendData.map((d, i) => `${i * 60 + 30},${180 - (d.score / 60) * 180}`).join(' ')}
                 fill="none"
                 stroke="#f97316"
                 strokeWidth="3"
                 strokeLinejoin="round"
               />
-              {ENPS_TREND.map((d, i) => (
+              {trendData.map((d, i) => (
                 <circle
                   key={i}
                   cx={i * 60 + 30}
@@ -1355,7 +1416,7 @@ function ENPSDashboard() {
             </svg>
             {/* Month labels */}
             <div className="absolute bottom-0 left-0 right-0 flex justify-between">
-              {ENPS_TREND.map((d) => (
+              {trendData.map((d) => (
                 <span key={d.month} className="text-xs text-slate-400 w-[60px] text-center">{d.month}</span>
               ))}
             </div>
@@ -1370,7 +1431,7 @@ function ENPSDashboard() {
 // TAB 5: LIFECYCLE SURVEYS
 // ============================================================
 
-function LifecycleSurveys() {
+function LifecycleSurveys({ surveys = [] }) {
   const { t } = useTranslation();
 
   const onboardingData = {
@@ -1529,11 +1590,11 @@ function LifecycleSurveys() {
 // TAB 6: TEMPLATES
 // ============================================================
 
-function TemplatesTab() {
+function TemplatesTab({ templates = [] }) {
   const { t } = useTranslation();
   const [previewTemplate, setPreviewTemplate] = useState(null);
 
-  const allTemplates = [
+  const allTemplates = templates.length > 0 ? templates : [
     ...TEMPLATES,
     { id: 9, name: 'Custom: Remote Work Satisfaction', type: 'Custom', questions: 16, description: 'Evaluate remote work experience, tooling, and team collaboration', icon: LayoutGrid },
   ];
@@ -1565,7 +1626,8 @@ function TemplatesTab() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {allTemplates.map((tmpl) => {
-          const Icon = tmpl.icon;
+          const Icon = tmpl.icon || FileText;
+          const questionCount = typeof tmpl.questions === 'number' ? tmpl.questions : (Array.isArray(tmpl.questions) ? tmpl.questions.length : 0);
           return (
             <div key={tmpl.id} className="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between mb-3">
@@ -1577,7 +1639,7 @@ function TemplatesTab() {
               <h3 className="font-semibold text-slate-900 mb-1">{tmpl.name}</h3>
               <p className="text-xs text-slate-500 mb-3 line-clamp-2">{tmpl.description}</p>
               <div className="flex items-center justify-between pt-3 border-t border-slate-100">
-                <span className="text-xs text-slate-400">{tmpl.questions} {t('surveys.questions', 'questions')}</span>
+                <span className="text-xs text-slate-400">{questionCount} {t('surveys.questions', 'questions')}</span>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setPreviewTemplate(tmpl)}
@@ -1606,7 +1668,7 @@ function TemplatesTab() {
             <div className="flex items-center justify-between p-6 border-b border-slate-200">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">{previewTemplate.name}</h2>
-                <p className="text-sm text-slate-500">{previewTemplate.questions} {t('surveys.questions', 'questions')} - {previewTemplate.type}</p>
+                <p className="text-sm text-slate-500">{typeof previewTemplate.questions === 'number' ? previewTemplate.questions : (Array.isArray(previewTemplate.questions) ? previewTemplate.questions.length : 0)} {t('surveys.questions', 'questions')} - {previewTemplate.type}</p>
               </div>
               <button onClick={() => setPreviewTemplate(null)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
                 <X className="w-5 h-5 text-slate-500" />
@@ -1616,7 +1678,10 @@ function TemplatesTab() {
               <p className="text-sm text-slate-600 mb-4">{previewTemplate.description}</p>
               <h3 className="text-sm font-semibold text-slate-700 mb-3">{t('surveys.templates.sampleQuestions', 'Sample Questions')}</h3>
               <div className="space-y-2">
-                {(previewQuestions[previewTemplate.id] || []).map((q, i) => (
+                {(Array.isArray(previewTemplate.questions)
+                  ? previewTemplate.questions.map(q => q.text || q)
+                  : previewQuestions[previewTemplate.id] || []
+                ).slice(0, 5).map((q, i) => (
                   <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
                     <span className="w-6 h-6 bg-momentum-100 text-momentum-600 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0">
                       {i + 1}

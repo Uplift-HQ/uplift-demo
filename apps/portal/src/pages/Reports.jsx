@@ -8,6 +8,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import api, { DEMO_MODE } from '../lib/api';
 import {
   BarChart3, TrendingUp, TrendingDown, Users, Calendar, Filter,
   Download, FileText, PieChart, Activity, Award, Target,
@@ -1605,21 +1606,51 @@ export default function Reports() {
   const [showSchedule, setShowSchedule] = useState(false);
   const [loading, setLoading] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [hasEmployees, setHasEmployees] = useState(true); // For production: check via API
-
-  // Simulate loading
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 600);
-    return () => clearTimeout(timer);
-  }, [activeReport]);
+  const [hasEmployees, setHasEmployees] = useState(true);
+  const [fetchedReportData, setFetchedReportData] = useState({});
 
   // Determine data scope
   const isTeamScoped = isManagerOrAbove && !isAdmin;
+  const demoData = isTeamScoped ? MANAGER_DEMO : DEMO;
+
+  // Fetch report data from API
+  const fetchReportData = useCallback(async (reportId) => {
+    if (DEMO_MODE) {
+      setLoading(false);
+      return;
+    }
+    try {
+      setLoading(true);
+      const response = await api.get(`/reports/${reportId}`, {
+        params: {
+          datePreset,
+          locationId: filterLocation !== 'all' ? filterLocation : undefined,
+          departmentId: filterDepartment !== 'all' ? filterDepartment : undefined,
+        },
+      });
+      setFetchedReportData(prev => ({
+        ...prev,
+        [reportId]: response.data,
+      }));
+    } catch (err) {
+      console.error(`Failed to fetch ${reportId} report:`, err);
+      // Fallback to demo data on error
+    } finally {
+      setLoading(false);
+    }
+  }, [datePreset, filterLocation, filterDepartment]);
+
+  useEffect(() => {
+    fetchReportData(activeReport);
+  }, [activeReport, fetchReportData]);
+
+  // Use fetched data if available, otherwise demo data
   const reportData = useMemo(() => {
-    if (isTeamScoped) return MANAGER_DEMO;
-    return DEMO;
-  }, [isTeamScoped]);
+    if (DEMO_MODE) return demoData;
+    return Object.keys(fetchedReportData).length > 0
+      ? { ...demoData, ...fetchedReportData }
+      : demoData;
+  }, [demoData, fetchedReportData]);
 
   // Worker restriction
   if (isWorker) {

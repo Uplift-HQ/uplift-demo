@@ -282,8 +282,7 @@ router.post('/', requireRole(['admin']), async (req, res) => {
       overtimeHours,
       holidayHours,
       items,
-      notes,
-      includeApprovedBonuses = true
+      notes
     } = req.body;
 
     if (!employeeId || !payPeriodStart || !payPeriodEnd || !payDate || grossPay === undefined || netPay === undefined) {
@@ -296,25 +295,6 @@ router.post('/', requireRole(['admin']), async (req, res) => {
     try {
       await client.query('BEGIN');
 
-      // Check for approved bonus payouts for this employee and period
-      let bonusPayouts = [];
-      if (includeApprovedBonuses) {
-        const bonusResult = await client.query(`
-          SELECT bp.*, ps.period as score_period
-          FROM bonus_payouts bp
-          LEFT JOIN performance_scores ps ON ps.id = bp.performance_score_id
-          WHERE bp.employee_id = $1
-            AND bp.organization_id = $2
-            AND bp.status = 'approved'
-            AND bp.payroll_run_id IS NULL
-        `, [employeeId, organizationId]);
-        bonusPayouts = bonusResult.rows;
-      }
-
-      // Calculate total bonus amount to add to gross
-      const totalBonusAmount = bonusPayouts.reduce((sum, bp) => sum + parseFloat(bp.payout_amount), 0);
-      const adjustedGrossPay = parseFloat(grossPay) + totalBonusAmount;
-
       // Create payslip
       const payslip = await client.query(`
         INSERT INTO payslips (
@@ -325,10 +305,8 @@ router.post('/', requireRole(['admin']), async (req, res) => {
         RETURNING *
       `, [
         organizationId, employeeId, payPeriodStart, payPeriodEnd, payDate,
-        adjustedGrossPay, netPay, regularHours || 0, overtimeHours || 0, holidayHours || 0, notes
+        grossPay, netPay, regularHours || 0, overtimeHours || 0, holidayHours || 0, notes
       ]);
-
-      let sortOrder = 0;
 
       // Add line items
       if (items && items.length > 0) {
@@ -349,36 +327,14 @@ router.post('/', requireRole(['admin']), async (req, res) => {
             item.rate,
             item.isTaxable !== false,
             item.isPensionable !== false,
-            sortOrder++
+            i
           ]);
         }
       }
 
-      // Add performance bonus line items
-      for (const bonus of bonusPayouts) {
-        await client.query(`
-          INSERT INTO payslip_items (
-            payslip_id, item_type, category, description, amount, is_taxable, is_pensionable, sort_order
-          )
-          VALUES ($1, 'earning', 'performance_bonus', $2, $3, true, false, $4)
-        `, [
-          payslip.rows[0].id,
-          `Performance Bonus (${bonus.period}) - ${bonus.score_percentage}% score`,
-          bonus.payout_amount,
-          sortOrder++
-        ]);
-
-        // Mark bonus payout as paid and link to payroll
-        await client.query(`
-          UPDATE bonus_payouts
-          SET status = 'paid', paid_at = NOW(), payroll_run_id = $1, updated_at = NOW()
-          WHERE id = $2
-        `, [payslip.rows[0].id, bonus.id]);
-      }
-
       await client.query('COMMIT');
 
-      res.status(201).json({ payslip: payslip.rows[0], bonusesIncluded: bonusPayouts.length });
+      res.status(201).json({ payslip: payslip.rows[0] });
     } catch (err) {
       await client.query('ROLLBACK');
       throw err;
