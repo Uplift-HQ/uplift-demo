@@ -94,7 +94,13 @@
       "admin": "ADMINISTRACIJA",
       "talent": "TALENTI",
       "people": "LJUDI",
-      "engagement": "ANGAŽIRANOST"
+      "engagement": "ANGAŽIRANOST",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Platne liste i plaća",
     "performance": "Učinkovitost",
@@ -104,7 +110,12 @@
     "learning": "Učenje",
     "documents": "Dokumenti",
     "expenses": "Troškovi",
-    "sso": "SSO i sigurnost"
+    "sso": "SSO i sigurnost",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Ucitavanje...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Kalibriraj",
     "companyGoals": "Ciljevi tvrtke",
     "moodCheck": "Kako se osjećate?",
-    "inReview": "U procesu ocjenjivanja"
+    "inReview": "U procesu ocjenjivanja",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Predlošci",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Moje Platne Liste",
     "configuration": "Konfiguracija Plaća",
     "config": "Konfiguracija",
-
     "grossPay": "Bruto Plaća",
     "netPay": "Neto Plaća",
     "totalDeductions": "Ukupni Odbici",
     "employerContributions": "Doprinosi Poslodavca",
     "totalEmployerCost": "Ukupni Trošak Poslodavca",
-
     "incomeTax": "Porez na Dohodak",
     "nationalInsurance": "Nacionalno Osiguranje",
     "pension": "Mirovina",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Zdravstveno Osiguranje",
     "unemploymentInsurance": "Osiguranje za Nezaposlenost",
     "housingFund": "Stambeni Fond",
-
     "payPeriod": "Razdoblje Isplate",
     "payDate": "Datum Isplate",
     "taxYear": "Porezna Godina",
     "taxCode": "Porezna Šifra",
     "niCategory": "Kategorija NO",
     "employeeNumber": "Broj Zaposlenika",
-
     "yearToDate": "Od Početka Godine",
     "ytdGross": "Kumulativ Bruto",
     "ytdTax": "Kumulativ Poreza",
     "ytdNI": "Kumulativ NO",
     "ytdPension": "Kumulativ Mirovine",
     "ytdNet": "Kumulativ Neto",
-
     "basicSalary": "Osnovna Plaća",
     "overtime": "Prekovremeni Rad",
     "bonus": "Bonus",
     "allowances": "Dodaci",
     "commission": "Provizija",
-
     "totalMonthlyCoast": "Ukupni Mjesečni Trošak",
     "employeesOnPayroll": "Zaposlenici na Platnoj Listi",
     "nextPayDate": "Sljedeći Datum Isplate",
     "outstandingActions": "Akcije na Čekanju",
-
     "countryBreakdown": "Raščlamba po Državama",
     "monthlyGross": "Mjesečni Bruto",
     "monthlyEmployerCost": "Mjesečni Trošak Poslodavca",
     "currency": "Valuta",
     "nextRunDate": "Sljedeći Datum Obračuna",
-
     "upcomingDeadlines": "Nadolazeći Rokovi",
     "recentRuns": "Nedavni Obračuni Plaća",
     "preparedBy": "Pripremio",
     "reviewedBy": "Pregledao",
     "approvedBy": "Odobrio",
-
     "status": {
       "draft": "Nacrt",
       "calculating": "Izračunavanje",
@@ -3189,7 +3258,6 @@
       "failed": "Neuspješno",
       "paid": "Plaćeno"
     },
-
     "actions": {
       "createRun": "Kreiraj Obračun Plaća",
       "calculate": "Izračunaj",
@@ -3202,7 +3270,6 @@
       "editConfig": "Uredi Konfiguraciju",
       "addCountry": "Dodaj Državu"
     },
-
     "countries": {
       "uk": "Ujedinjeno Kraljevstvo",
       "de": "Njemačka",
@@ -3211,7 +3278,6 @@
       "cn": "Kina",
       "ae": "Ujedinjeni Arapski Emirati"
     },
-
     "calendar": {
       "taxFiling": "Podnošenje Porezne Prijave",
       "socialFiling": "Podnošenje Socijalnog Osiguranja",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Kraj Godine",
       "deadline": "Rok"
     },
-
     "variance": {
       "newStarter": "Novi Zaposlenik",
       "leaver": "Odlazak",
       "highVariance": "Veliko Odstupanje",
       "varianceFromLastMonth": "odstupanje od prošlog mjeseca"
     },
-
     "earnings": "Zarade",
     "deductions": "Odbici",
     "summary": "Sažetak",
@@ -3242,5 +3306,9 @@
     "feedImport": "Uvoz Podataka",
     "nativeCalculation": "Lokalni Izračun",
     "externalProvider": "Vanjski Pružatelj"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

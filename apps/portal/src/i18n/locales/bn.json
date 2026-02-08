@@ -99,7 +99,8 @@
       "myMoney": "আমার অর্থ",
       "myPeople": "আমার মানুষ",
       "myUplift": "আমার UPLIFT",
-      "myWork": "আমার কাজ"
+      "myWork": "আমার কাজ",
+      "payroll": "PAYROLL"
     },
     "payslips": "বেতন স্লিপ ও বেতন",
     "performance": "কর্মক্ষমতা",
@@ -120,7 +121,12 @@
     "myPerformance": "আমার কর্মক্ষমতা",
     "mySchedule": "আমার সময়সূচী",
     "mySkillsCareer": "আমার দক্ষতা ও ক্যারিয়ার",
-    "recognition": "স্বীকৃতি ওয়াল"
+    "recognition": "স্বীকৃতি ওয়াল",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "লোড হচ্ছে...",
@@ -3047,7 +3053,74 @@
     "moodCheck": "আপনি কেমন অনুভব করছেন?",
     "inReview": "পর্যালোচনায়",
     "mySubtitle": "আপনার মূল্যায়ন, লক্ষ্য এবং উন্নয়ন",
-    "myTitle": "আমার কর্মক্ষমতা"
+    "myTitle": "আমার কর্মক্ষমতা",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "টেমপ্লেট",
@@ -3246,13 +3319,11 @@
     "myPayslips": "আমার বেতন স্লিপসমূহ",
     "configuration": "পেরোল কনফিগারেশন",
     "config": "কনফিগারেশন",
-
     "grossPay": "মোট বেতন",
     "netPay": "নিট বেতন",
     "totalDeductions": "মোট কর্তন",
     "employerContributions": "নিয়োগকর্তার অবদান",
     "totalEmployerCost": "মোট নিয়োগকর্তা খরচ",
-
     "incomeTax": "আয়কর",
     "nationalInsurance": "জাতীয় বীমা",
     "pension": "পেনশন",
@@ -3263,44 +3334,37 @@
     "healthInsurance": "স্বাস্থ্য বীমা",
     "unemploymentInsurance": "বেকারত্ব বীমা",
     "housingFund": "আবাসন তহবিল",
-
     "payPeriod": "বেতন সময়কাল",
     "payDate": "বেতন তারিখ",
     "taxYear": "কর বছর",
     "taxCode": "কর কোড",
     "niCategory": "NI বিভাগ",
     "employeeNumber": "কর্মচারী নম্বর",
-
     "yearToDate": "বছর থেকে আজ পর্যন্ত",
     "ytdGross": "YTD মোট",
     "ytdTax": "YTD কর",
     "ytdNI": "YTD NI",
     "ytdPension": "YTD পেনশন",
     "ytdNet": "YTD নিট",
-
     "basicSalary": "মূল বেতন",
     "overtime": "ওভারটাইম",
     "bonus": "বোনাস",
     "allowances": "ভাতা",
     "commission": "কমিশন",
-
     "totalMonthlyCoast": "মোট মাসিক খরচ",
     "employeesOnPayroll": "পেরোলে কর্মচারী",
     "nextPayDate": "পরবর্তী বেতন তারিখ",
     "outstandingActions": "বকেয়া কার্যক্রম",
-
     "countryBreakdown": "দেশ অনুযায়ী বিভাজন",
     "monthlyGross": "মাসিক মোট",
     "monthlyEmployerCost": "মাসিক নিয়োগকর্তা খরচ",
     "currency": "মুদ্রা",
     "nextRunDate": "পরবর্তী রান তারিখ",
-
     "upcomingDeadlines": "আসন্ন সময়সীমা",
     "recentRuns": "সাম্প্রতিক পেরোল রানসমূহ",
     "preparedBy": "প্রস্তুতকারী",
     "reviewedBy": "পর্যালোচনাকারী",
     "approvedBy": "অনুমোদনকারী",
-
     "status": {
       "draft": "খসড়া",
       "calculating": "গণনা হচ্ছে",
@@ -3311,7 +3375,6 @@
       "failed": "ব্যর্থ",
       "paid": "পরিশোধিত"
     },
-
     "actions": {
       "createRun": "পেরোল রান তৈরি করুন",
       "calculate": "গণনা করুন",
@@ -3324,7 +3387,6 @@
       "editConfig": "কনফিগারেশন সম্পাদনা করুন",
       "addCountry": "দেশ যোগ করুন"
     },
-
     "countries": {
       "uk": "যুক্তরাজ্য",
       "de": "জার্মানি",
@@ -3333,7 +3395,6 @@
       "cn": "চীন",
       "ae": "সংযুক্ত আরব আমিরাত"
     },
-
     "calendar": {
       "taxFiling": "কর ফাইলিং",
       "socialFiling": "সামাজিক বীমা ফাইলিং",
@@ -3341,14 +3402,12 @@
       "yearEnd": "বছরের শেষ",
       "deadline": "সময়সীমা"
     },
-
     "variance": {
       "newStarter": "নতুন কর্মচারী",
       "leaver": "বিদায়ী",
       "highVariance": "উচ্চ বিচ্যুতি",
       "varianceFromLastMonth": "গত মাস থেকে বিচ্যুতি"
     },
-
     "earnings": "আয়",
     "deductions": "কর্তন",
     "summary": "সারসংক্ষেপ",
@@ -3364,5 +3423,9 @@
     "feedImport": "ফিড আমদানি",
     "nativeCalculation": "নেটিভ গণনা",
     "externalProvider": "বহিরাগত প্রদানকারী"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

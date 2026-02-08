@@ -94,7 +94,13 @@
       "admin": "انتظامیہ",
       "talent": "ہنر",
       "people": "افراد",
-      "engagement": "مصروفیت"
+      "engagement": "مصروفیت",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "تنخواہ سلپس اور تنخواہ",
     "performance": "کارکردگی",
@@ -104,7 +110,12 @@
     "learning": "تعلیم",
     "documents": "دستاویزات",
     "expenses": "اخراجات",
-    "sso": "SSO اور سیکیورٹی"
+    "sso": "SSO اور سیکیورٹی",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "لوڈ ہو رہا ہے...",
@@ -3019,7 +3030,74 @@
     "calibrate": "کیلیبریٹ",
     "companyGoals": "کمپنی کے اہداف",
     "moodCheck": "آپ کیسا محسوس کر رہے ہیں؟",
-    "inReview": "جائزے میں"
+    "inReview": "جائزے میں",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "ٹیمپلیٹس",
@@ -3124,13 +3202,11 @@
     "myPayslips": "میری تنخواہ پرچیاں",
     "configuration": "پے رول ترتیب",
     "config": "ترتیب",
-
     "grossPay": "مجموعی تنخواہ",
     "netPay": "خالص تنخواہ",
     "totalDeductions": "کل کٹوتیاں",
     "employerContributions": "آجر کی شراکت",
     "totalEmployerCost": "آجر کی کل لاگت",
-
     "incomeTax": "انکم ٹیکس",
     "nationalInsurance": "قومی انشورنس",
     "pension": "پنشن",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "صحت انشورنس",
     "unemploymentInsurance": "بے روزگاری انشورنس",
     "housingFund": "رہائش فنڈ",
-
     "payPeriod": "ادائیگی کی مدت",
     "payDate": "ادائیگی کی تاریخ",
     "taxYear": "ٹیکس سال",
     "taxCode": "ٹیکس کوڈ",
     "niCategory": "انشورنس زمرہ",
     "employeeNumber": "ملازم نمبر",
-
     "yearToDate": "سال کے آغاز سے",
     "ytdGross": "سالانہ مجموعی",
     "ytdTax": "سالانہ ٹیکس",
     "ytdNI": "سالانہ انشورنس",
     "ytdPension": "سالانہ پنشن",
     "ytdNet": "سالانہ خالص",
-
     "basicSalary": "بنیادی تنخواہ",
     "overtime": "اوور ٹائم",
     "bonus": "بونس",
     "allowances": "الاؤنسز",
     "commission": "کمیشن",
-
     "totalMonthlyCoast": "کل ماہانہ لاگت",
     "employeesOnPayroll": "پے رول پر ملازمین",
     "nextPayDate": "اگلی ادائیگی کی تاریخ",
     "outstandingActions": "زیر التواء اعمال",
-
     "countryBreakdown": "ملک کے لحاظ سے تقسیم",
     "monthlyGross": "ماہانہ مجموعی",
     "monthlyEmployerCost": "آجر کی ماہانہ لاگت",
     "currency": "کرنسی",
     "nextRunDate": "اگلے رن کی تاریخ",
-
     "upcomingDeadlines": "آنے والی ڈیڈ لائنز",
     "recentRuns": "حالیہ پے رول رنز",
     "preparedBy": "تیار کنندہ",
     "reviewedBy": "جائزہ لینے والا",
     "approvedBy": "منظوری دینے والا",
-
     "status": {
       "draft": "مسودہ",
       "calculating": "حساب ہو رہا ہے",
@@ -3189,7 +3258,6 @@
       "failed": "ناکام",
       "paid": "ادا شدہ"
     },
-
     "actions": {
       "createRun": "پے رول رن بنائیں",
       "calculate": "حساب کریں",
@@ -3202,7 +3270,6 @@
       "editConfig": "ترتیب میں ترمیم",
       "addCountry": "ملک شامل کریں"
     },
-
     "countries": {
       "uk": "برطانیہ",
       "de": "جرمنی",
@@ -3211,7 +3278,6 @@
       "cn": "چین",
       "ae": "متحدہ عرب امارات"
     },
-
     "calendar": {
       "taxFiling": "ٹیکس فائلنگ",
       "socialFiling": "سماجی انشورنس فائلنگ",
@@ -3219,14 +3285,12 @@
       "yearEnd": "سال کا اختتام",
       "deadline": "ڈیڈ لائن"
     },
-
     "variance": {
       "newStarter": "نیا آغاز کنندہ",
       "leaver": "چھوڑنے والا",
       "highVariance": "زیادہ تغیر",
       "varianceFromLastMonth": "پچھلے مہینے سے فرق"
     },
-
     "earnings": "کمائی",
     "deductions": "کٹوتیاں",
     "summary": "خلاصہ",
@@ -3242,5 +3306,9 @@
     "feedImport": "ڈیٹا درآمد",
     "nativeCalculation": "مقامی حساب",
     "externalProvider": "بیرونی فراہم کنندہ"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

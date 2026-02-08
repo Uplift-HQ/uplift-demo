@@ -94,7 +94,13 @@
       "admin": "SPRÁVA",
       "talent": "TALENT",
       "people": "ZAMĚSTNANCI",
-      "engagement": "ANGAŽOVANOST"
+      "engagement": "ANGAŽOVANOST",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Výplatní pásky a mzda",
     "performance": "Výkon",
@@ -104,7 +110,12 @@
     "learning": "Vzdělávání",
     "documents": "Dokumenty",
     "expenses": "Výdaje",
-    "sso": "SSO a zabezpečení"
+    "sso": "SSO a zabezpečení",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Načítání...",
@@ -3070,7 +3081,74 @@
     "calibrate": "Kalibrovat",
     "companyGoals": "Firemní cíle",
     "moodCheck": "Jak se cítíte?",
-    "inReview": "Probíhá hodnocení"
+    "inReview": "Probíhá hodnocení",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Šablony",
@@ -3503,13 +3581,11 @@
     "myPayslips": "Moje výplatní pásky",
     "configuration": "Konfigurace mezd",
     "config": "Konfigurace",
-
     "grossPay": "Hrubá mzda",
     "netPay": "Čistá mzda",
     "totalDeductions": "Celkové srážky",
     "employerContributions": "Příspěvky zaměstnavatele",
     "totalEmployerCost": "Celkové náklady zaměstnavatele",
-
     "incomeTax": "Daň z příjmu",
     "nationalInsurance": "Sociální pojištění",
     "pension": "Důchod",
@@ -3520,44 +3596,37 @@
     "healthInsurance": "Zdravotní pojištění",
     "unemploymentInsurance": "Pojištění v nezaměstnanosti",
     "housingFund": "Bytový fond",
-
     "payPeriod": "Mzdové období",
     "payDate": "Datum výplaty",
     "taxYear": "Daňový rok",
     "taxCode": "Daňový kód",
     "niCategory": "Kategorie pojištění",
     "employeeNumber": "Číslo zaměstnance",
-
     "yearToDate": "Od začátku roku",
     "ytdGross": "Hrubá mzda od začátku roku",
     "ytdTax": "Daň od začátku roku",
     "ytdNI": "Pojištění od začátku roku",
     "ytdPension": "Důchod od začátku roku",
     "ytdNet": "Čistá mzda od začátku roku",
-
     "basicSalary": "Základní mzda",
     "overtime": "Přesčasy",
     "bonus": "Bonus",
     "allowances": "Příplatky",
     "commission": "Provize",
-
     "totalMonthlyCoast": "Celkové měsíční náklady",
     "employeesOnPayroll": "Zaměstnanci na mzdové listině",
     "nextPayDate": "Další datum výplaty",
     "outstandingActions": "Nevyřízené akce",
-
     "countryBreakdown": "Rozdělení podle zemí",
     "monthlyGross": "Měsíční hrubá mzda",
     "monthlyEmployerCost": "Měsíční náklady zaměstnavatele",
     "currency": "Měna",
     "nextRunDate": "Datum dalšího zpracování",
-
     "upcomingDeadlines": "Blížící se termíny",
     "recentRuns": "Poslední zpracování mezd",
     "preparedBy": "Připravil",
     "reviewedBy": "Zkontroloval",
     "approvedBy": "Schválil",
-
     "status": {
       "draft": "Koncept",
       "calculating": "Probíhá výpočet",
@@ -3568,7 +3637,6 @@
       "failed": "Selhalo",
       "paid": "Vyplaceno"
     },
-
     "actions": {
       "createRun": "Vytvořit zpracování mezd",
       "calculate": "Vypočítat",
@@ -3581,7 +3649,6 @@
       "editConfig": "Upravit konfiguraci",
       "addCountry": "Přidat zemi"
     },
-
     "countries": {
       "uk": "Spojené království",
       "de": "Německo",
@@ -3590,7 +3657,6 @@
       "cn": "Čína",
       "ae": "Spojené arabské emiráty"
     },
-
     "calendar": {
       "taxFiling": "Daňové přiznání",
       "socialFiling": "Hlášení sociálního pojištění",
@@ -3598,14 +3664,12 @@
       "yearEnd": "Konec roku",
       "deadline": "Termín"
     },
-
     "variance": {
       "newStarter": "Nový zaměstnanec",
       "leaver": "Odcházející",
       "highVariance": "Vysoká odchylka",
       "varianceFromLastMonth": "odchylka od minulého měsíce"
     },
-
     "earnings": "Příjmy",
     "deductions": "Srážky",
     "summary": "Souhrn",
@@ -3621,5 +3685,9 @@
     "feedImport": "Import dat",
     "nativeCalculation": "Interní výpočet",
     "externalProvider": "Externí poskytovatel"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

@@ -94,7 +94,13 @@
       "admin": "АДМИНИСТРИРОВАНИЕ",
       "talent": "ТАЛАНТЫ",
       "people": "ПЕРСОНАЛ",
-      "engagement": "ВОВЛЕЧЁННОСТЬ"
+      "engagement": "ВОВЛЕЧЁННОСТЬ",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Зарплатные листки и оплата",
     "performance": "Эффективность",
@@ -104,7 +110,12 @@
     "learning": "Обучение",
     "documents": "Документы",
     "expenses": "Расходы",
-    "sso": "SSO и безопасность"
+    "sso": "SSO и безопасность",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Загрузка...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Калибровать",
     "companyGoals": "Цели компании",
     "moodCheck": "Как вы себя чувствуете?",
-    "inReview": "На рассмотрении"
+    "inReview": "На рассмотрении",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Шаблоны",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Мои расчётные листки",
     "configuration": "Настройка расчёта зарплаты",
     "config": "Настройка",
-
     "grossPay": "Начисления",
     "netPay": "К выплате",
     "totalDeductions": "Всего удержаний",
     "employerContributions": "Взносы работодателя",
     "totalEmployerCost": "Общие затраты работодателя",
-
     "incomeTax": "НДФЛ",
     "nationalInsurance": "Социальное страхование",
     "pension": "Пенсионные взносы",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Медицинское страхование",
     "unemploymentInsurance": "Страхование от безработицы",
     "housingFund": "Жилищный фонд",
-
     "payPeriod": "Расчётный период",
     "payDate": "Дата выплаты",
     "taxYear": "Налоговый год",
     "taxCode": "Налоговый код",
     "niCategory": "Категория СС",
     "employeeNumber": "Табельный номер",
-
     "yearToDate": "С начала года",
     "ytdGross": "Начисления с начала года",
     "ytdTax": "Налоги с начала года",
     "ytdNI": "СС с начала года",
     "ytdPension": "Пенсия с начала года",
     "ytdNet": "Выплачено с начала года",
-
     "basicSalary": "Базовый оклад",
     "overtime": "Сверхурочные",
     "bonus": "Премия",
     "allowances": "Надбавки",
     "commission": "Комиссионные",
-
     "totalMonthlyCoast": "Общие месячные затраты",
     "employeesOnPayroll": "Сотрудников в ведомости",
     "nextPayDate": "Следующая дата выплаты",
     "outstandingActions": "Ожидающие действия",
-
     "countryBreakdown": "Разбивка по странам",
     "monthlyGross": "Месячные начисления",
     "monthlyEmployerCost": "Месячные затраты работодателя",
     "currency": "Валюта",
     "nextRunDate": "Дата следующего расчёта",
-
     "upcomingDeadlines": "Предстоящие сроки",
     "recentRuns": "Последние расчётные периоды",
     "preparedBy": "Подготовил",
     "reviewedBy": "Проверил",
     "approvedBy": "Утвердил",
-
     "status": {
       "draft": "Черновик",
       "calculating": "Расчёт",
@@ -3189,7 +3258,6 @@
       "failed": "Ошибка",
       "paid": "Выплачено"
     },
-
     "actions": {
       "createRun": "Создать расчётный период",
       "calculate": "Рассчитать",
@@ -3202,7 +3270,6 @@
       "editConfig": "Редактировать настройки",
       "addCountry": "Добавить страну"
     },
-
     "countries": {
       "uk": "Великобритания",
       "de": "Германия",
@@ -3211,7 +3278,6 @@
       "cn": "Китай",
       "ae": "ОАЭ"
     },
-
     "calendar": {
       "taxFiling": "Налоговая отчётность",
       "socialFiling": "Отчётность по соцстрахованию",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Конец года",
       "deadline": "Крайний срок"
     },
-
     "variance": {
       "newStarter": "Новый сотрудник",
       "leaver": "Увольняющийся",
       "highVariance": "Значительное отклонение",
       "varianceFromLastMonth": "отклонение от прошлого месяца"
     },
-
     "earnings": "Начисления",
     "deductions": "Удержания",
     "summary": "Сводка",
@@ -3242,5 +3306,9 @@
     "feedImport": "Импорт из фида",
     "nativeCalculation": "Собственный расчёт",
     "externalProvider": "Внешний провайдер"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

@@ -94,7 +94,13 @@
       "admin": "管理",
       "talent": "タレント",
       "people": "人事",
-      "engagement": "エンゲージメント"
+      "engagement": "エンゲージメント",
+      "myUplift": "マイUPLIFT",
+      "myWork": "マイワーク",
+      "myGrowth": "マイグロース",
+      "myMoney": "マイマネー",
+      "myPeople": "マイピープル",
+      "payroll": "給与"
     },
     "payslips": "給与明細と給与",
     "performance": "人事評価",
@@ -115,7 +121,12 @@
     "myExpenses": "経費精算",
     "directory": "社員名簿",
     "recognition": "称賛の壁",
-    "myDocuments": "マイドキュメント"
+    "myDocuments": "マイドキュメント",
+    "payroll": "給与",
+    "payrollDashboard": "給与ダッシュボード",
+    "payrollRuns": "給与処理",
+    "payrollConfig": "給与設定",
+    "teamPayroll": "チーム給与"
   },
   "common": {
     "loading": "読み込み中...",
@@ -3038,7 +3049,74 @@
     "calibrate": "キャリブレーション",
     "companyGoals": "全社目標",
     "moodCheck": "今日の調子はいかがですか？",
-    "inReview": "評価中"
+    "inReview": "評価中",
+    "subtitle": "レビュー、目標、フィードバック、従業員育成",
+    "noDepartment": "部署なし",
+    "selfBadge": "自己",
+    "managerBadge": "マネージャー",
+    "peerBadge": "同僚",
+    "noReviewsYet": "パフォーマンスレビューなし",
+    "createCycleBtn": "サイクル作成",
+    "createOkrTitle": "OKRを作成",
+    "createGoalTitle": "目標を作成",
+    "titleLabel": "タイトル",
+    "createBtn": "作成",
+    "notes": "メモ",
+    "saving": "保存中...",
+    "saveNotes": "メモを保存",
+    "oneTime": "1回限り",
+    "scheduleBtn": "スケジュール",
+    "giveFeedbackBtn": "フィードバックする",
+    "noFeedbackReceived": "フィードバックを受け取っていません",
+    "noFeedbackReceivedDesc": "まだフィードバックを受け取っていません。",
+    "noPublicFeedback": "公開フィードバックなし",
+    "noPublicFeedbackDesc": "チームの成果を祝うために、ポジティブなフィードバックを公開で共有しましょう。",
+    "sendFeedback": "フィードバックを送信",
+    "createPlanBtn": "プランを作成",
+    "addFocusArea": "+ フォーカスエリアを追加",
+    "stretch": "ストレッチ",
+    "reading": "読書",
+    "otherAction": "その他",
+    "addAction": "+ アクションを追加",
+    "noReviewsDesc": "最初のレビューサイクルを作成して、従業員のパフォーマンス評価を開始しましょう。",
+    "createFirstReview": "最初のレビューサイクルを開始",
+    "upcomingMeetings": "今後の1on1",
+    "allCycles": "レビューサイクル",
+    "newCycle": "新規サイクル",
+    "participants": "参加者",
+    "noParticipants": "参加者が追加されていません",
+    "statusDraft": "下書き",
+    "statusActive": "アクティブ",
+    "statusInReview": "レビュー中",
+    "statusCalibration": "キャリブレーション",
+    "statusCompleted": "完了",
+    "typeAnnual": "年次",
+    "typeQuarterly": "四半期",
+    "typeProbation": "試用期間",
+    "goals": "目標",
+    "okrs": "OKR",
+    "newGoal": "新規目標",
+    "newOkr": "新規OKR",
+    "noGoalsDesc": "最初の目標を作成して進捗追跡を開始しましょう。",
+    "noOkrs": "OKRはまだありません",
+    "noOkrsDesc": "最初のOKRを作成してチーム目標を整合させましょう。",
+    "createOkr": "OKRを作成",
+    "periodPlaceholder": "2026年第1四半期",
+    "keyResultPlaceholder": "キーリザルトのタイトル",
+    "targetPlaceholder": "ターゲット",
+    "noMeetingsDesc": "最初の1on1ミーティングをスケジュールして有意義な対話を始めましょう。",
+    "scheduleMeeting": "ミーティングをスケジュール",
+    "addMeetingNotesPlaceholder": "メモを追加...",
+    "receivedFeedback": "受信済み",
+    "publicFeedback": "公開フィード",
+    "fromLabel": "送信者",
+    "toLabel": "宛先",
+    "privateVisibility": "プライベート（受信者のみ閲覧可）",
+    "publicVisibility": "公開（フィードに表示）",
+    "feedbackType": "フィードバックタイプ",
+    "noPlansDesc": "最初の育成計画を作成してキャリア成長を追跡しましょう。",
+    "focusAreaPlaceholder": "フォーカスエリアのタイトル",
+    "actionItemPlaceholder": "アクションアイテム"
   },
   "surveys": {
     "templates": "テンプレート",
@@ -3143,13 +3221,11 @@
     "myPayslips": "マイ給与明細",
     "configuration": "給与設定",
     "config": "設定",
-
     "grossPay": "総支給額",
     "netPay": "手取り額",
     "totalDeductions": "控除合計",
     "employerContributions": "事業主負担",
     "totalEmployerCost": "雇用主総コスト",
-
     "incomeTax": "所得税",
     "nationalInsurance": "社会保険",
     "pension": "年金",
@@ -3160,44 +3236,37 @@
     "healthInsurance": "健康保険",
     "unemploymentInsurance": "雇用保険",
     "housingFund": "住宅基金",
-
     "payPeriod": "給与期間",
     "payDate": "支給日",
     "taxYear": "課税年度",
     "taxCode": "税区分",
     "niCategory": "社会保険区分",
     "employeeNumber": "従業員番号",
-
     "yearToDate": "年度累計",
     "ytdGross": "年度累計総支給",
     "ytdTax": "年度累計税額",
     "ytdNI": "年度累計社会保険",
     "ytdPension": "年度累計年金",
     "ytdNet": "年度累計手取り",
-
     "basicSalary": "基本給",
     "overtime": "残業手当",
     "bonus": "賞与",
     "allowances": "諸手当",
     "commission": "歩合給",
-
     "totalMonthlyCoast": "月間総コスト",
     "employeesOnPayroll": "給与対象者数",
     "nextPayDate": "次回支給日",
     "outstandingActions": "未処理タスク",
-
     "countryBreakdown": "国別内訳",
     "monthlyGross": "月間総支給",
     "monthlyEmployerCost": "月間雇用主コスト",
     "currency": "通貨",
     "nextRunDate": "次回処理日",
-
     "upcomingDeadlines": "今後の期限",
     "recentRuns": "最近の給与計算処理",
     "preparedBy": "作成者",
     "reviewedBy": "確認者",
     "approvedBy": "承認者",
-
     "status": {
       "draft": "下書き",
       "calculating": "計算中",
@@ -3208,7 +3277,6 @@
       "failed": "失敗",
       "paid": "支払済み"
     },
-
     "actions": {
       "createRun": "給与計算を作成",
       "calculate": "計算",
@@ -3221,7 +3289,6 @@
       "editConfig": "設定を編集",
       "addCountry": "国を追加"
     },
-
     "countries": {
       "uk": "イギリス",
       "de": "ドイツ",
@@ -3230,7 +3297,6 @@
       "cn": "中国",
       "ae": "アラブ首長国連邦"
     },
-
     "calendar": {
       "taxFiling": "税務申告",
       "socialFiling": "社会保険届出",
@@ -3238,14 +3304,12 @@
       "yearEnd": "年末調整",
       "deadline": "締切"
     },
-
     "variance": {
       "newStarter": "新規入社",
       "leaver": "退職者",
       "highVariance": "大幅な差異",
       "varianceFromLastMonth": "先月との差異"
     },
-
     "earnings": "支給項目",
     "deductions": "控除項目",
     "summary": "サマリー",
@@ -3261,5 +3325,9 @@
     "feedImport": "データインポート",
     "nativeCalculation": "自社計算",
     "externalProvider": "外部プロバイダー"
+  },
+  "offline": {
+    "youAreOffline": "オフラインです。一部の機能が制限される場合があります。",
+    "backOnline": "オンラインに戻りました"
   }
 }

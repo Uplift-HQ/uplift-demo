@@ -94,7 +94,13 @@
       "admin": "HALLINTA",
       "talent": "OSAAMINEN",
       "people": "HENKILÖSTÖ",
-      "engagement": "SITOUTUMINEN"
+      "engagement": "SITOUTUMINEN",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Palkkakuitit & palkka",
     "performance": "Suorituskyky",
@@ -104,7 +110,12 @@
     "learning": "Oppiminen",
     "documents": "Asiakirjat",
     "expenses": "Kulut",
-    "sso": "SSO & turvallisuus"
+    "sso": "SSO & turvallisuus",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Ladataan...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Kalibroi",
     "companyGoals": "Yrityksen tavoitteet",
     "moodCheck": "Miltä sinusta tuntuu?",
-    "inReview": "Arvioinnissa"
+    "inReview": "Arvioinnissa",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Mallit",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Omat palkkalaskelmat",
     "configuration": "Palkanlaskennan asetukset",
     "config": "Asetukset",
-
     "grossPay": "Bruttopalkka",
     "netPay": "Nettopalkka",
     "totalDeductions": "Vähennykset yhteensä",
     "employerContributions": "Työnantajamaksut",
     "totalEmployerCost": "Työnantajakustannus yhteensä",
-
     "incomeTax": "Tulovero",
     "nationalInsurance": "Kansaneläkemaksu",
     "pension": "Eläke",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Sairausvakuutus",
     "unemploymentInsurance": "Työttömyysvakuutus",
     "housingFund": "Asuntorahasto",
-
     "payPeriod": "Palkkakausi",
     "payDate": "Palkanmaksupäivä",
     "taxYear": "Verovuosi",
     "taxCode": "Verokoodi",
     "niCategory": "Vakuutusluokka",
     "employeeNumber": "Työntekijänumero",
-
     "yearToDate": "Vuoden alusta",
     "ytdGross": "Brutto vuoden alusta",
     "ytdTax": "Vero vuoden alusta",
     "ytdNI": "Vakuutusmaksu vuoden alusta",
     "ytdPension": "Eläke vuoden alusta",
     "ytdNet": "Netto vuoden alusta",
-
     "basicSalary": "Peruspalkka",
     "overtime": "Ylityö",
     "bonus": "Bonus",
     "allowances": "Lisät",
     "commission": "Provisio",
-
     "totalMonthlyCoast": "Kuukausikustannus yhteensä",
     "employeesOnPayroll": "Työntekijöitä palkkalistalla",
     "nextPayDate": "Seuraava palkanmaksupäivä",
     "outstandingActions": "Odottavat toimenpiteet",
-
     "countryBreakdown": "Maakohtainen erittely",
     "monthlyGross": "Kuukausittainen bruttopalkka",
     "monthlyEmployerCost": "Kuukausittainen työnantajakustannus",
     "currency": "Valuutta",
     "nextRunDate": "Seuraava ajopäivä",
-
     "upcomingDeadlines": "Tulevat määräajat",
     "recentRuns": "Viimeisimmät palkka-ajot",
     "preparedBy": "Valmistellut",
     "reviewedBy": "Tarkastanut",
     "approvedBy": "Hyväksynyt",
-
     "status": {
       "draft": "Luonnos",
       "calculating": "Lasketaan",
@@ -3189,7 +3258,6 @@
       "failed": "Epäonnistui",
       "paid": "Maksettu"
     },
-
     "actions": {
       "createRun": "Luo palkka-ajo",
       "calculate": "Laske",
@@ -3202,7 +3270,6 @@
       "editConfig": "Muokkaa asetuksia",
       "addCountry": "Lisää maa"
     },
-
     "countries": {
       "uk": "Iso-Britannia",
       "de": "Saksa",
@@ -3211,7 +3278,6 @@
       "cn": "Kiina",
       "ae": "Arabiemiirikunnat"
     },
-
     "calendar": {
       "taxFiling": "Veroilmoitus",
       "socialFiling": "Sosiaalivakuutusilmoitus",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Vuodenvaihde",
       "deadline": "Määräaika"
     },
-
     "variance": {
       "newStarter": "Uusi työntekijä",
       "leaver": "Lähtevä",
       "highVariance": "Suuri poikkeama",
       "varianceFromLastMonth": "poikkeama edellisestä kuukaudesta"
     },
-
     "earnings": "Ansiot",
     "deductions": "Vähennykset",
     "summary": "Yhteenveto",
@@ -3242,5 +3306,9 @@
     "feedImport": "Tiedonsiirto",
     "nativeCalculation": "Sisäinen laskenta",
     "externalProvider": "Ulkoinen palveluntarjoaja"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

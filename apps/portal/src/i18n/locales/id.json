@@ -99,7 +99,8 @@
       "myMoney": "KEUANGAN SAYA",
       "myPeople": "ORANG SAYA",
       "myUplift": "UPLIFT SAYA",
-      "myWork": "PEKERJAAN SAYA"
+      "myWork": "PEKERJAAN SAYA",
+      "payroll": "PAYROLL"
     },
     "payslips": "Slip Gaji & Gaji",
     "performance": "Kinerja",
@@ -120,7 +121,12 @@
     "myPerformance": "Kinerja Saya",
     "mySchedule": "Jadwal Saya",
     "mySkillsCareer": "Keahlian & Karier Saya",
-    "recognition": "Dinding Penghargaan"
+    "recognition": "Dinding Penghargaan",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Memuat...",
@@ -3091,7 +3097,74 @@
     "moodCheck": "Bagaimana perasaan Anda?",
     "inReview": "Sedang Ditinjau",
     "mySubtitle": "Ulasan, tujuan, dan pengembangan Anda",
-    "myTitle": "Kinerja Saya"
+    "myTitle": "Kinerja Saya",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Template",
@@ -3356,13 +3429,11 @@
     "myPayslips": "Slip Gaji Saya",
     "configuration": "Konfigurasi Penggajian",
     "config": "Konfigurasi",
-
     "grossPay": "Gaji Kotor",
     "netPay": "Gaji Bersih",
     "totalDeductions": "Total Potongan",
     "employerContributions": "Kontribusi Pemberi Kerja",
     "totalEmployerCost": "Total Biaya Pemberi Kerja",
-
     "incomeTax": "Pajak Penghasilan",
     "nationalInsurance": "Asuransi Nasional",
     "pension": "Dana Pensiun",
@@ -3373,44 +3444,37 @@
     "healthInsurance": "Asuransi Kesehatan",
     "unemploymentInsurance": "Asuransi Pengangguran",
     "housingFund": "Dana Perumahan",
-
     "payPeriod": "Periode Gaji",
     "payDate": "Tanggal Gaji",
     "taxYear": "Tahun Pajak",
     "taxCode": "Kode Pajak",
     "niCategory": "Kategori Jaminan Sosial",
     "employeeNumber": "Nomor Karyawan",
-
     "yearToDate": "Sejak Awal Tahun",
     "ytdGross": "Gaji Kotor YTD",
     "ytdTax": "Pajak YTD",
     "ytdNI": "Jaminan Sosial YTD",
     "ytdPension": "Pensiun YTD",
     "ytdNet": "Gaji Bersih YTD",
-
     "basicSalary": "Gaji Pokok",
     "overtime": "Lembur",
     "bonus": "Bonus",
     "allowances": "Tunjangan",
     "commission": "Komisi",
-
     "totalMonthlyCoast": "Total Biaya Bulanan",
     "employeesOnPayroll": "Karyawan dalam Penggajian",
     "nextPayDate": "Tanggal Gaji Berikutnya",
     "outstandingActions": "Tindakan yang Tertunda",
-
     "countryBreakdown": "Rincian per Negara",
     "monthlyGross": "Gaji Kotor Bulanan",
     "monthlyEmployerCost": "Biaya Pemberi Kerja Bulanan",
     "currency": "Mata Uang",
     "nextRunDate": "Tanggal Siklus Berikutnya",
-
     "upcomingDeadlines": "Tenggat Waktu Mendatang",
     "recentRuns": "Siklus Penggajian Terbaru",
     "preparedBy": "Disiapkan Oleh",
     "reviewedBy": "Ditinjau Oleh",
     "approvedBy": "Disetujui Oleh",
-
     "status": {
       "draft": "Draf",
       "calculating": "Menghitung",
@@ -3421,7 +3485,6 @@
       "failed": "Gagal",
       "paid": "Dibayar"
     },
-
     "actions": {
       "createRun": "Buat Siklus Penggajian",
       "calculate": "Hitung",
@@ -3434,7 +3497,6 @@
       "editConfig": "Edit Konfigurasi",
       "addCountry": "Tambah Negara"
     },
-
     "countries": {
       "uk": "Inggris Raya",
       "de": "Jerman",
@@ -3443,7 +3505,6 @@
       "cn": "Tiongkok",
       "ae": "Uni Emirat Arab"
     },
-
     "calendar": {
       "taxFiling": "Pelaporan Pajak",
       "socialFiling": "Pelaporan Jaminan Sosial",
@@ -3451,14 +3512,12 @@
       "yearEnd": "Akhir Tahun",
       "deadline": "Tenggat Waktu"
     },
-
     "variance": {
       "newStarter": "Karyawan Baru",
       "leaver": "Karyawan Keluar",
       "highVariance": "Varians Tinggi",
       "varianceFromLastMonth": "varians dari bulan lalu"
     },
-
     "earnings": "Pendapatan",
     "deductions": "Potongan",
     "summary": "Ringkasan",
@@ -3474,5 +3533,9 @@
     "feedImport": "Impor Feed",
     "nativeCalculation": "Perhitungan Native",
     "externalProvider": "Penyedia Eksternal"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

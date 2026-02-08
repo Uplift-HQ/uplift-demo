@@ -94,7 +94,13 @@
       "admin": "ਪ੍ਰਸ਼ਾਸਨ",
       "talent": "ਪ੍ਰਤਿਭਾ",
       "people": "ਲੋਕ",
-      "engagement": "ਸ਼ਮੂਲੀਅਤ"
+      "engagement": "ਸ਼ਮੂਲੀਅਤ",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "ਤਨਖ਼ਾਹ ਪਰਚੀ ਅਤੇ ਤਨਖ਼ਾਹ",
     "performance": "ਕਾਰਗੁਜ਼ਾਰੀ",
@@ -104,7 +110,12 @@
     "learning": "ਸਿੱਖਿਆ",
     "documents": "ਦਸਤਾਵੇਜ਼",
     "expenses": "ਖ਼ਰਚੇ",
-    "sso": "SSO ਅਤੇ ਸੁਰੱਖਿਆ"
+    "sso": "SSO ਅਤੇ ਸੁਰੱਖਿਆ",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
@@ -3019,7 +3030,74 @@
     "calibrate": "ਕੈਲੀਬ੍ਰੇਟ ਕਰੋ",
     "companyGoals": "ਕੰਪਨੀ ਦੇ ਟੀਚੇ",
     "moodCheck": "ਤੁਸੀਂ ਕਿਵੇਂ ਮਹਿਸੂਸ ਕਰ ਰਹੇ ਹੋ?",
-    "inReview": "ਸਮੀਖਿਆ ਅਧੀਨ"
+    "inReview": "ਸਮੀਖਿਆ ਅਧੀਨ",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "ਟੈਂਪਲੇਟ",
@@ -3124,13 +3202,11 @@
     "myPayslips": "ਮੇਰੀਆਂ ਤਨਖਾਹ ਸਲਿੱਪਾਂ",
     "configuration": "ਪੇਰੋਲ ਸੰਰਚਨਾ",
     "config": "ਸੰਰਚਨਾ",
-
     "grossPay": "ਕੁੱਲ ਤਨਖਾਹ",
     "netPay": "ਸ਼ੁੱਧ ਤਨਖਾਹ",
     "totalDeductions": "ਕੁੱਲ ਕਟੌਤੀਆਂ",
     "employerContributions": "ਮਾਲਕ ਦਾ ਯੋਗਦਾਨ",
     "totalEmployerCost": "ਕੁੱਲ ਮਾਲਕ ਦੀ ਲਾਗਤ",
-
     "incomeTax": "ਆਮਦਨ ਟੈਕਸ",
     "nationalInsurance": "ਰਾਸ਼ਟਰੀ ਬੀਮਾ",
     "pension": "ਪੈਨਸ਼ਨ",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "ਸਿਹਤ ਬੀਮਾ",
     "unemploymentInsurance": "ਬੇਰੁਜ਼ਗਾਰੀ ਬੀਮਾ",
     "housingFund": "ਰਿਹਾਇਸ਼ ਫੰਡ",
-
     "payPeriod": "ਤਨਖਾਹ ਅਵਧੀ",
     "payDate": "ਤਨਖਾਹ ਮਿਤੀ",
     "taxYear": "ਟੈਕਸ ਸਾਲ",
     "taxCode": "ਟੈਕਸ ਕੋਡ",
     "niCategory": "NI ਸ਼੍ਰੇਣੀ",
     "employeeNumber": "ਕਰਮਚਾਰੀ ਨੰਬਰ",
-
     "yearToDate": "ਸਾਲ ਤੋਂ ਅੱਜ ਤੱਕ",
     "ytdGross": "YTD ਕੁੱਲ",
     "ytdTax": "YTD ਟੈਕਸ",
     "ytdNI": "YTD NI",
     "ytdPension": "YTD ਪੈਨਸ਼ਨ",
     "ytdNet": "YTD ਸ਼ੁੱਧ",
-
     "basicSalary": "ਮੁੱਢਲੀ ਤਨਖਾਹ",
     "overtime": "ਓਵਰਟਾਈਮ",
     "bonus": "ਬੋਨਸ",
     "allowances": "ਭੱਤੇ",
     "commission": "ਕਮਿਸ਼ਨ",
-
     "totalMonthlyCoast": "ਕੁੱਲ ਮਾਸਿਕ ਲਾਗਤ",
     "employeesOnPayroll": "ਪੇਰੋਲ 'ਤੇ ਕਰਮਚਾਰੀ",
     "nextPayDate": "ਅਗਲੀ ਤਨਖਾਹ ਮਿਤੀ",
     "outstandingActions": "ਬਕਾਇਆ ਕਾਰਵਾਈਆਂ",
-
     "countryBreakdown": "ਦੇਸ਼ ਅਨੁਸਾਰ ਵੰਡ",
     "monthlyGross": "ਮਾਸਿਕ ਕੁੱਲ",
     "monthlyEmployerCost": "ਮਾਸਿਕ ਮਾਲਕ ਦੀ ਲਾਗਤ",
     "currency": "ਮੁਦਰਾ",
     "nextRunDate": "ਅਗਲੀ ਰਨ ਮਿਤੀ",
-
     "upcomingDeadlines": "ਆਉਣ ਵਾਲੀਆਂ ਸਮਾਂ-ਸੀਮਾਵਾਂ",
     "recentRuns": "ਹਾਲੀਆ ਪੇਰੋਲ ਰਨਜ਼",
     "preparedBy": "ਦੁਆਰਾ ਤਿਆਰ",
     "reviewedBy": "ਦੁਆਰਾ ਸਮੀਖਿਆ",
     "approvedBy": "ਦੁਆਰਾ ਮਨਜ਼ੂਰ",
-
     "status": {
       "draft": "ਡਰਾਫਟ",
       "calculating": "ਗਣਨਾ ਹੋ ਰਹੀ ਹੈ",
@@ -3189,7 +3258,6 @@
       "failed": "ਅਸਫਲ",
       "paid": "ਭੁਗਤਾਨ ਕੀਤਾ ਗਿਆ"
     },
-
     "actions": {
       "createRun": "ਪੇਰੋਲ ਰਨ ਬਣਾਓ",
       "calculate": "ਗਣਨਾ ਕਰੋ",
@@ -3202,7 +3270,6 @@
       "editConfig": "ਸੰਰਚਨਾ ਸੰਪਾਦਿਤ ਕਰੋ",
       "addCountry": "ਦੇਸ਼ ਸ਼ਾਮਲ ਕਰੋ"
     },
-
     "countries": {
       "uk": "ਯੂਨਾਈਟਿਡ ਕਿੰਗਡਮ",
       "de": "ਜਰਮਨੀ",
@@ -3211,7 +3278,6 @@
       "cn": "ਚੀਨ",
       "ae": "ਸੰਯੁਕਤ ਅਰਬ ਅਮੀਰਾਤ"
     },
-
     "calendar": {
       "taxFiling": "ਟੈਕਸ ਫਾਈਲਿੰਗ",
       "socialFiling": "ਸਮਾਜਿਕ ਬੀਮਾ ਫਾਈਲਿੰਗ",
@@ -3219,14 +3285,12 @@
       "yearEnd": "ਸਾਲ ਦਾ ਅੰਤ",
       "deadline": "ਸਮਾਂ-ਸੀਮਾ"
     },
-
     "variance": {
       "newStarter": "ਨਵਾਂ ਕਰਮਚਾਰੀ",
       "leaver": "ਜਾਣ ਵਾਲਾ",
       "highVariance": "ਉੱਚ ਅੰਤਰ",
       "varianceFromLastMonth": "ਪਿਛਲੇ ਮਹੀਨੇ ਤੋਂ ਅੰਤਰ"
     },
-
     "earnings": "ਕਮਾਈ",
     "deductions": "ਕਟੌਤੀਆਂ",
     "summary": "ਸਾਰ",
@@ -3242,5 +3306,9 @@
     "feedImport": "ਫੀਡ ਆਯਾਤ",
     "nativeCalculation": "ਮੂਲ ਗਣਨਾ",
     "externalProvider": "ਬਾਹਰੀ ਪ੍ਰਦਾਤਾ"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

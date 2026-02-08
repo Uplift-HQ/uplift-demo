@@ -94,7 +94,13 @@
       "admin": "관리",
       "talent": "인재",
       "people": "인사",
-      "engagement": "참여도"
+      "engagement": "참여도",
+      "myUplift": "내 UPLIFT",
+      "myWork": "내 업무",
+      "myGrowth": "내 성장",
+      "myMoney": "내 급여",
+      "myPeople": "내 팀",
+      "payroll": "급여"
     },
     "payslips": "급여명세서 및 급여",
     "performance": "성과",
@@ -104,7 +110,12 @@
     "learning": "학습",
     "documents": "문서",
     "expenses": "경비",
-    "sso": "SSO 및 보안"
+    "sso": "SSO 및 보안",
+    "payroll": "급여",
+    "payrollDashboard": "급여 대시보드",
+    "payrollRuns": "급여 실행",
+    "payrollConfig": "급여 설정",
+    "teamPayroll": "팀 급여"
   },
   "common": {
     "loading": "로딩 중...",
@@ -3019,7 +3030,74 @@
     "calibrate": "조정",
     "companyGoals": "회사 목표",
     "moodCheck": "오늘 기분이 어떠신가요?",
-    "inReview": "평가 중"
+    "inReview": "평가 중",
+    "subtitle": "평가, 목표, 피드백 및 직원 개발",
+    "noDepartment": "부서 없음",
+    "selfBadge": "자기",
+    "managerBadge": "매니저",
+    "peerBadge": "동료",
+    "noReviewsYet": "성과 평가 없음",
+    "createCycleBtn": "주기 만들기",
+    "createOkrTitle": "OKR 만들기",
+    "createGoalTitle": "목표 만들기",
+    "titleLabel": "제목",
+    "createBtn": "만들기",
+    "notes": "메모",
+    "saving": "저장 중...",
+    "saveNotes": "메모 저장",
+    "oneTime": "일회성",
+    "scheduleBtn": "일정 잡기",
+    "giveFeedbackBtn": "피드백 제공",
+    "noFeedbackReceived": "받은 피드백 없음",
+    "noFeedbackReceivedDesc": "아직 받은 피드백이 없습니다.",
+    "noPublicFeedback": "공개 피드백 없음",
+    "noPublicFeedbackDesc": "팀의 성과를 축하하기 위해 긍정적인 피드백을 공개적으로 공유하세요.",
+    "sendFeedback": "피드백 보내기",
+    "createPlanBtn": "계획 만들기",
+    "addFocusArea": "+ 집중 영역 추가",
+    "stretch": "도전",
+    "reading": "독서",
+    "otherAction": "기타",
+    "addAction": "+ 액션 추가",
+    "noReviewsDesc": "첫 번째 평가 주기를 만들어 직원 성과 평가를 시작하세요.",
+    "createFirstReview": "첫 번째 평가 주기 시작",
+    "upcomingMeetings": "예정된 1:1 미팅",
+    "allCycles": "평가 주기",
+    "newCycle": "새 주기",
+    "participants": "참가자",
+    "noParticipants": "참가자가 추가되지 않았습니다",
+    "statusDraft": "초안",
+    "statusActive": "활성",
+    "statusInReview": "검토 중",
+    "statusCalibration": "보정",
+    "statusCompleted": "완료",
+    "typeAnnual": "연간",
+    "typeQuarterly": "분기별",
+    "typeProbation": "수습",
+    "goals": "목표",
+    "okrs": "OKR",
+    "newGoal": "새 목표",
+    "newOkr": "새 OKR",
+    "noGoalsDesc": "진행 상황 추적을 시작하려면 첫 번째 목표를 만드세요.",
+    "noOkrs": "아직 OKR 없음",
+    "noOkrsDesc": "팀 목표를 맞추려면 첫 번째 OKR을 만드세요.",
+    "createOkr": "OKR 만들기",
+    "periodPlaceholder": "2026년 1분기",
+    "keyResultPlaceholder": "핵심 결과 제목",
+    "targetPlaceholder": "목표",
+    "noMeetingsDesc": "첫 번째 1:1 미팅을 예약하여 의미 있는 대화를 시작하세요.",
+    "scheduleMeeting": "회의 예약",
+    "addMeetingNotesPlaceholder": "메모 추가...",
+    "receivedFeedback": "받음",
+    "publicFeedback": "공개 피드",
+    "fromLabel": "보낸 사람",
+    "toLabel": "받는 사람",
+    "privateVisibility": "비공개 (수신자만 볼 수 있음)",
+    "publicVisibility": "공개 (피드에 표시)",
+    "feedbackType": "피드백 유형",
+    "noPlansDesc": "경력 성장을 추적하기 위해 첫 번째 개발 계획을 만드세요.",
+    "focusAreaPlaceholder": "집중 영역 제목",
+    "actionItemPlaceholder": "액션 항목"
   },
   "surveys": {
     "templates": "템플릿",
@@ -3124,13 +3202,11 @@
     "myPayslips": "내 급여 명세서",
     "configuration": "급여 설정",
     "config": "설정",
-
     "grossPay": "총 지급액",
     "netPay": "실수령액",
     "totalDeductions": "공제 합계",
     "employerContributions": "사업주 부담금",
     "totalEmployerCost": "사업주 총 비용",
-
     "incomeTax": "소득세",
     "nationalInsurance": "국민보험",
     "pension": "연금",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "건강보험",
     "unemploymentInsurance": "고용보험",
     "housingFund": "주택기금",
-
     "payPeriod": "급여 기간",
     "payDate": "급여일",
     "taxYear": "과세 연도",
     "taxCode": "세금 코드",
     "niCategory": "보험 유형",
     "employeeNumber": "사원 번호",
-
     "yearToDate": "연간 누계",
     "ytdGross": "연간 누계 총액",
     "ytdTax": "연간 누계 세금",
     "ytdNI": "연간 누계 보험",
     "ytdPension": "연간 누계 연금",
     "ytdNet": "연간 누계 실수령",
-
     "basicSalary": "기본급",
     "overtime": "초과 근무 수당",
     "bonus": "상여금",
     "allowances": "수당",
     "commission": "성과급",
-
     "totalMonthlyCoast": "월별 총 비용",
     "employeesOnPayroll": "급여 대상 직원 수",
     "nextPayDate": "다음 급여일",
     "outstandingActions": "미처리 항목",
-
     "countryBreakdown": "국가별 내역",
     "monthlyGross": "월별 총 지급액",
     "monthlyEmployerCost": "월별 사업주 비용",
     "currency": "통화",
     "nextRunDate": "다음 정산일",
-
     "upcomingDeadlines": "다가오는 마감일",
     "recentRuns": "최근 급여 정산",
     "preparedBy": "작성자",
     "reviewedBy": "검토자",
     "approvedBy": "승인자",
-
     "status": {
       "draft": "초안",
       "calculating": "계산 중",
@@ -3189,7 +3258,6 @@
       "failed": "실패",
       "paid": "지급 완료"
     },
-
     "actions": {
       "createRun": "급여 정산 생성",
       "calculate": "계산",
@@ -3202,7 +3270,6 @@
       "editConfig": "설정 편집",
       "addCountry": "국가 추가"
     },
-
     "countries": {
       "uk": "영국",
       "de": "독일",
@@ -3211,7 +3278,6 @@
       "cn": "중국",
       "ae": "아랍에미리트"
     },
-
     "calendar": {
       "taxFiling": "세무 신고",
       "socialFiling": "사회보험 신고",
@@ -3219,14 +3285,12 @@
       "yearEnd": "연말 정산",
       "deadline": "마감일"
     },
-
     "variance": {
       "newStarter": "신규 입사자",
       "leaver": "퇴사자",
       "highVariance": "큰 변동",
       "varianceFromLastMonth": "전월 대비 변동"
     },
-
     "earnings": "지급 항목",
     "deductions": "공제 항목",
     "summary": "요약",
@@ -3242,5 +3306,9 @@
     "feedImport": "데이터 가져오기",
     "nativeCalculation": "자체 계산",
     "externalProvider": "외부 서비스"
+  },
+  "offline": {
+    "youAreOffline": "오프라인 상태입니다. 일부 기능이 제한될 수 있습니다.",
+    "backOnline": "다시 온라인"
   }
 }

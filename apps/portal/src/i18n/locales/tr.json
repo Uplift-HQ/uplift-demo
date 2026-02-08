@@ -94,7 +94,13 @@
       "admin": "YÖNETİM",
       "talent": "YETENEK",
       "people": "KİŞİLER",
-      "engagement": "BAĞLILIK"
+      "engagement": "BAĞLILIK",
+      "myUplift": "UPLIFT'IM",
+      "myWork": "İŞİM",
+      "myGrowth": "GELİŞİMİM",
+      "myMoney": "MAAŞIM",
+      "myPeople": "EKİBİM",
+      "payroll": "BORDRO"
     },
     "payslips": "Bordro ve Maaş",
     "performance": "Performans",
@@ -104,7 +110,12 @@
     "learning": "Öğrenme",
     "documents": "Belgeler",
     "expenses": "Masraflar",
-    "sso": "SSO ve Güvenlik"
+    "sso": "SSO ve Güvenlik",
+    "payroll": "Bordro",
+    "payrollDashboard": "Bordro paneli",
+    "payrollRuns": "Bordro işlemleri",
+    "payrollConfig": "Bordro ayarları",
+    "teamPayroll": "Takım bordrosu"
   },
   "common": {
     "loading": "Yükleniyor...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Kalibre Et",
     "companyGoals": "Şirket Hedefleri",
     "moodCheck": "Nasıl hissediyorsunuz?",
-    "inReview": "Değerlendirmede"
+    "inReview": "Değerlendirmede",
+    "subtitle": "Değerlendirmeler, hedefler, geri bildirim ve çalışan gelişimi",
+    "noDepartment": "Departman yok",
+    "selfBadge": "Kendi",
+    "managerBadge": "Yönetici",
+    "peerBadge": "Eş düzey",
+    "noReviewsYet": "Performans değerlendirmesi yok",
+    "createCycleBtn": "Döngü oluştur",
+    "createOkrTitle": "OKR oluştur",
+    "createGoalTitle": "Hedef oluştur",
+    "titleLabel": "Başlık",
+    "createBtn": "Oluştur",
+    "notes": "Notlar",
+    "saving": "Kaydediliyor...",
+    "saveNotes": "Notları kaydet",
+    "oneTime": "Tek seferlik",
+    "scheduleBtn": "Planla",
+    "giveFeedbackBtn": "Geri bildirim ver",
+    "noFeedbackReceived": "Alınan geri bildirim yok",
+    "noFeedbackReceivedDesc": "Henüz hiç geri bildirim almadınız.",
+    "noPublicFeedback": "Herkese açık geri bildirim yok",
+    "noPublicFeedbackDesc": "Ekibinizin başarılarını kutlamak için olumlu geri bildirimleri herkese açık olarak paylaşın.",
+    "sendFeedback": "Geri bildirim gönder",
+    "createPlanBtn": "Plan oluştur",
+    "addFocusArea": "+ Odak alanı ekle",
+    "stretch": "Zorlayıcı",
+    "reading": "Okuma",
+    "otherAction": "Diğer",
+    "addAction": "+ Eylem ekle",
+    "noReviewsDesc": "Çalışan performansını değerlendirmeye başlamak için ilk değerlendirme döngünüzü oluşturun.",
+    "createFirstReview": "İlk değerlendirme döngüsünü başlat",
+    "upcomingMeetings": "Yaklaşan 1:1'ler",
+    "allCycles": "Değerlendirme döngüleri",
+    "newCycle": "Yeni döngü",
+    "participants": "Katılımcılar",
+    "noParticipants": "Henüz katılımcı eklenmedi",
+    "statusDraft": "Taslak",
+    "statusActive": "Aktif",
+    "statusInReview": "İncelemede",
+    "statusCalibration": "Kalibrasyon",
+    "statusCompleted": "Tamamlandı",
+    "typeAnnual": "Yıllık",
+    "typeQuarterly": "Üç aylık",
+    "typeProbation": "Deneme",
+    "goals": "Hedefler",
+    "okrs": "OKR'ler",
+    "newGoal": "Yeni hedef",
+    "newOkr": "Yeni OKR",
+    "noGoalsDesc": "İlerlemeyi takip etmeye başlamak için ilk hedefinizi oluşturun.",
+    "noOkrs": "Henüz OKR yok",
+    "noOkrsDesc": "Ekip hedeflerini hizalamak için ilk OKR'nizi oluşturun.",
+    "createOkr": "OKR oluştur",
+    "periodPlaceholder": "Ç1 2026",
+    "keyResultPlaceholder": "Anahtar sonuç başlığı",
+    "targetPlaceholder": "Hedef",
+    "noMeetingsDesc": "Anlamlı konuşmalar başlatmak için ilk 1:1 toplantınızı planlayın.",
+    "scheduleMeeting": "Toplantı planla",
+    "addMeetingNotesPlaceholder": "Not ekle...",
+    "receivedFeedback": "Alınan",
+    "publicFeedback": "Herkese açık akış",
+    "fromLabel": "Gönderen",
+    "toLabel": "Alıcı",
+    "privateVisibility": "Özel (yalnızca alıcı görür)",
+    "publicVisibility": "Herkese açık (akışta görünür)",
+    "feedbackType": "Geri bildirim türü",
+    "noPlansDesc": "Kariyer gelişimini takip etmek için ilk gelişim planınızı oluşturun.",
+    "focusAreaPlaceholder": "Odak alanı başlığı",
+    "actionItemPlaceholder": "Eylem öğesi"
   },
   "surveys": {
     "templates": "Şablonlar",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Bordrolarım",
     "configuration": "Bordro Yapılandırması",
     "config": "Yapılandırma",
-
     "grossPay": "Brüt Ücret",
     "netPay": "Net Ücret",
     "totalDeductions": "Toplam Kesintiler",
     "employerContributions": "İşveren Katkıları",
     "totalEmployerCost": "Toplam İşveren Maliyeti",
-
     "incomeTax": "Gelir Vergisi",
     "nationalInsurance": "Ulusal Sigorta",
     "pension": "Emeklilik",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Sağlık Sigortası",
     "unemploymentInsurance": "İşsizlik Sigortası",
     "housingFund": "Konut Fonu",
-
     "payPeriod": "Ödeme Dönemi",
     "payDate": "Ödeme Tarihi",
     "taxYear": "Vergi Yılı",
     "taxCode": "Vergi Kodu",
     "niCategory": "Sigorta Kategorisi",
     "employeeNumber": "Çalışan Numarası",
-
     "yearToDate": "Yıl Başından Bugüne",
     "ytdGross": "YBB Brüt",
     "ytdTax": "YBB Vergi",
     "ytdNI": "YBB Sigorta",
     "ytdPension": "YBB Emeklilik",
     "ytdNet": "YBB Net",
-
     "basicSalary": "Temel Maaş",
     "overtime": "Fazla Mesai",
     "bonus": "Prim",
     "allowances": "Ödenekler",
     "commission": "Komisyon",
-
     "totalMonthlyCoast": "Toplam Aylık Maliyet",
     "employeesOnPayroll": "Bordroda Çalışanlar",
     "nextPayDate": "Sonraki Ödeme Tarihi",
     "outstandingActions": "Bekleyen İşlemler",
-
     "countryBreakdown": "Ülke Dağılımı",
     "monthlyGross": "Aylık Brüt",
     "monthlyEmployerCost": "Aylık İşveren Maliyeti",
     "currency": "Para Birimi",
     "nextRunDate": "Sonraki İşlem Tarihi",
-
     "upcomingDeadlines": "Yaklaşan Son Tarihler",
     "recentRuns": "Son Bordro İşlemleri",
     "preparedBy": "Hazırlayan",
     "reviewedBy": "İnceleyen",
     "approvedBy": "Onaylayan",
-
     "status": {
       "draft": "Taslak",
       "calculating": "Hesaplanıyor",
@@ -3189,7 +3258,6 @@
       "failed": "Başarısız",
       "paid": "Ödendi"
     },
-
     "actions": {
       "createRun": "Bordro İşlemi Oluştur",
       "calculate": "Hesapla",
@@ -3202,7 +3270,6 @@
       "editConfig": "Yapılandırmayı Düzenle",
       "addCountry": "Ülke Ekle"
     },
-
     "countries": {
       "uk": "Birleşik Krallık",
       "de": "Almanya",
@@ -3211,7 +3278,6 @@
       "cn": "Çin",
       "ae": "Birleşik Arap Emirlikleri"
     },
-
     "calendar": {
       "taxFiling": "Vergi Beyanı",
       "socialFiling": "Sosyal Sigorta Beyanı",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Yıl Sonu",
       "deadline": "Son Tarih"
     },
-
     "variance": {
       "newStarter": "Yeni Başlayan",
       "leaver": "Ayrılan",
       "highVariance": "Yüksek Sapma",
       "varianceFromLastMonth": "geçen aya göre sapma"
     },
-
     "earnings": "Kazançlar",
     "deductions": "Kesintiler",
     "summary": "Özet",
@@ -3242,5 +3306,9 @@
     "feedImport": "Veri İçe Aktarma",
     "nativeCalculation": "Yerel Hesaplama",
     "externalProvider": "Harici Sağlayıcı"
+  },
+  "offline": {
+    "youAreOffline": "Çevrimdışısınız. Bazı özellikler sınırlı olabilir.",
+    "backOnline": "Tekrar çevrimiçi"
   }
 }

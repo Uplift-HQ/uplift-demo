@@ -8,31 +8,30 @@ import { OfflineBanner } from './src/components/OfflineIndicators';
 import { AlertProvider } from './src/utils/alert';
 import { initializeLanguage } from './src/i18n';
 import { useAuthStore } from './src/store/authStore';
+import { initializeBackgroundSync } from './src/services/backgroundSync';
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const login = useAuthStore((s) => s.login);
+  const loginDemoUser = useAuthStore((s) => s.loginDemoUser);
 
   useEffect(() => {
     const init = async () => {
       try {
         await initializeLanguage();
 
-        // Web: auto-login when ?demo=true is in the URL
+        // Initialize background sync for offline queue (native platforms only)
+        if (Platform.OS !== 'web') {
+          await initializeBackgroundSync();
+        }
+
+        // Web: auto-login when ?demo=true is in the URL (for website demo only)
         if (Platform.OS === 'web' && typeof window !== 'undefined') {
           const params = new URLSearchParams(window.location.search);
           if (params.get('demo') === 'true') {
+            // Determine role from URL path
             const isManager = window.location.pathname.includes('/manager');
-            const email = isManager
-              ? 'demo-manager@uplifthq.co.uk'
-              : 'demo-worker@uplifthq.co.uk';
-            try {
-              await login(email, 'demo123');
-            } catch (e) {
-              if (__DEV__) {
-                console.warn('Demo auto-login failed:', e);
-              }
-            }
+            // Instant demo login - no API call, no credentials needed
+            loginDemoUser(isManager ? 'manager' : 'worker');
           }
         }
       } catch (error) {

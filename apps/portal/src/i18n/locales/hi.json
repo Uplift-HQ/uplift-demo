@@ -99,7 +99,8 @@
       "myMoney": "मेरा पैसा",
       "myPeople": "मेरे लोग",
       "myUplift": "मेरा UPLIFT",
-      "myWork": "मेरा काम"
+      "myWork": "मेरा काम",
+      "payroll": "वेतन"
     },
     "payslips": "वेतन पर्ची और वेतन",
     "performance": "प्रदर्शन",
@@ -120,7 +121,12 @@
     "myPerformance": "मेरा प्रदर्शन",
     "mySchedule": "मेरा शेड्यूल",
     "mySkillsCareer": "मेरे कौशल और करियर",
-    "recognition": "मान्यता वॉल"
+    "recognition": "मान्यता वॉल",
+    "payroll": "वेतन",
+    "payrollDashboard": "वेतन डैशबोर्ड",
+    "payrollRuns": "वेतन रन",
+    "payrollConfig": "वेतन कॉन्फ़िग",
+    "teamPayroll": "टीम वेतन"
   },
   "common": {
     "loading": "लोड हो रहा है...",
@@ -3091,7 +3097,74 @@
     "moodCheck": "आप कैसा महसूस कर रहे हैं?",
     "inReview": "समीक्षा में",
     "mySubtitle": "आपकी समीक्षाएं, लक्ष्य और विकास",
-    "myTitle": "मेरा प्रदर्शन"
+    "myTitle": "मेरा प्रदर्शन",
+    "subtitle": "समीक्षाएं, लक्ष्य, प्रतिक्रिया और कर्मचारी विकास",
+    "noDepartment": "कोई विभाग नहीं",
+    "selfBadge": "स्वयं",
+    "managerBadge": "प्रबंधक",
+    "peerBadge": "सहकर्मी",
+    "noReviewsYet": "कोई प्रदर्शन समीक्षा नहीं",
+    "createCycleBtn": "चक्र बनाएं",
+    "createOkrTitle": "OKR बनाएं",
+    "createGoalTitle": "लक्ष्य बनाएं",
+    "titleLabel": "शीर्षक",
+    "createBtn": "बनाएं",
+    "notes": "नोट्स",
+    "saving": "सहेज रहा है...",
+    "saveNotes": "नोट्स सहेजें",
+    "oneTime": "एक बार",
+    "scheduleBtn": "शेड्यूल करें",
+    "giveFeedbackBtn": "प्रतिक्रिया दें",
+    "noFeedbackReceived": "कोई प्रतिक्रिया प्राप्त नहीं हुई",
+    "noFeedbackReceivedDesc": "आपको अभी तक कोई प्रतिक्रिया नहीं मिली है।",
+    "noPublicFeedback": "कोई सार्वजनिक प्रतिक्रिया नहीं",
+    "noPublicFeedbackDesc": "अपनी टीम की उपलब्धियों का जश्न मनाने के लिए सकारात्मक प्रतिक्रिया सार्वजनिक रूप से साझा करें।",
+    "sendFeedback": "प्रतिक्रिया भेजें",
+    "createPlanBtn": "योजना बनाएं",
+    "addFocusArea": "+ फोकस क्षेत्र जोड़ें",
+    "stretch": "चुनौती",
+    "reading": "पढ़ना",
+    "otherAction": "अन्य",
+    "addAction": "+ कार्रवाई जोड़ें",
+    "noReviewsDesc": "कर्मचारी प्रदर्शन का मूल्यांकन शुरू करने के लिए अपना पहला समीक्षा चक्र बनाएं।",
+    "createFirstReview": "पहला समीक्षा चक्र शुरू करें",
+    "upcomingMeetings": "आगामी 1-ऑन-1",
+    "allCycles": "समीक्षा चक्र",
+    "newCycle": "नया चक्र",
+    "participants": "प्रतिभागी",
+    "noParticipants": "अभी तक कोई प्रतिभागी नहीं जोड़ा गया",
+    "statusDraft": "ड्राफ्ट",
+    "statusActive": "सक्रिय",
+    "statusInReview": "समीक्षाधीन",
+    "statusCalibration": "कैलिब्रेशन",
+    "statusCompleted": "पूर्ण",
+    "typeAnnual": "वार्षिक",
+    "typeQuarterly": "त्रैमासिक",
+    "typeProbation": "परिवीक्षा",
+    "goals": "लक्ष्य",
+    "okrs": "OKRs",
+    "newGoal": "नया लक्ष्य",
+    "newOkr": "नया OKR",
+    "noGoalsDesc": "प्रगति ट्रैकिंग शुरू करने के लिए अपना पहला लक्ष्य बनाएं।",
+    "noOkrs": "अभी तक कोई OKR नहीं",
+    "noOkrsDesc": "टीम उद्देश्यों को संरेखित करने के लिए अपना पहला OKR बनाएं।",
+    "createOkr": "OKR बनाएं",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "मुख्य परिणाम शीर्षक",
+    "targetPlaceholder": "लक्ष्य",
+    "noMeetingsDesc": "सार्थक बातचीत शुरू करने के लिए अपनी पहली 1-ऑन-1 मीटिंग शेड्यूल करें।",
+    "scheduleMeeting": "मीटिंग शेड्यूल करें",
+    "addMeetingNotesPlaceholder": "नोट्स जोड़ें...",
+    "receivedFeedback": "प्राप्त",
+    "publicFeedback": "सार्वजनिक फीड",
+    "fromLabel": "प्रेषक",
+    "toLabel": "प्राप्तकर्ता",
+    "privateVisibility": "निजी (केवल प्राप्तकर्ता देख सकता है)",
+    "publicVisibility": "सार्वजनिक (फीड में दिखाई देता है)",
+    "feedbackType": "प्रतिक्रिया प्रकार",
+    "noPlansDesc": "करियर विकास को ट्रैक करने के लिए अपनी पहली विकास योजना बनाएं।",
+    "focusAreaPlaceholder": "फोकस क्षेत्र शीर्षक",
+    "actionItemPlaceholder": "कार्रवाई आइटम"
   },
   "surveys": {
     "templates": "टेम्पलेट",
@@ -3356,13 +3429,11 @@
     "myPayslips": "मेरी वेतन पर्चियाँ",
     "configuration": "पेरोल कॉन्फ़िगरेशन",
     "config": "कॉन्फ़िगरेशन",
-
     "grossPay": "सकल वेतन",
     "netPay": "शुद्ध वेतन",
     "totalDeductions": "कुल कटौतियाँ",
     "employerContributions": "नियोक्ता योगदान",
     "totalEmployerCost": "कुल नियोक्ता लागत",
-
     "incomeTax": "आयकर",
     "nationalInsurance": "राष्ट्रीय बीमा",
     "pension": "पेंशन",
@@ -3373,44 +3444,37 @@
     "healthInsurance": "स्वास्थ्य बीमा",
     "unemploymentInsurance": "बेरोजगारी बीमा",
     "housingFund": "आवास कोष",
-
     "payPeriod": "वेतन अवधि",
     "payDate": "वेतन तिथि",
     "taxYear": "कर वर्ष",
     "taxCode": "कर कोड",
     "niCategory": "NI श्रेणी",
     "employeeNumber": "कर्मचारी संख्या",
-
     "yearToDate": "वर्ष आज तक",
     "ytdGross": "YTD सकल",
     "ytdTax": "YTD कर",
     "ytdNI": "YTD NI",
     "ytdPension": "YTD पेंशन",
     "ytdNet": "YTD शुद्ध",
-
     "basicSalary": "मूल वेतन",
     "overtime": "ओवरटाइम",
     "bonus": "बोनस",
     "allowances": "भत्ते",
     "commission": "कमीशन",
-
     "totalMonthlyCoast": "कुल मासिक लागत",
     "employeesOnPayroll": "पेरोल पर कर्मचारी",
     "nextPayDate": "अगली वेतन तिथि",
     "outstandingActions": "लंबित कार्रवाइयाँ",
-
     "countryBreakdown": "देश अनुसार विवरण",
     "monthlyGross": "मासिक सकल",
     "monthlyEmployerCost": "मासिक नियोक्ता लागत",
     "currency": "मुद्रा",
     "nextRunDate": "अगली रन तिथि",
-
     "upcomingDeadlines": "आगामी समय सीमाएँ",
     "recentRuns": "हाल के पेरोल रन्स",
     "preparedBy": "द्वारा तैयार",
     "reviewedBy": "द्वारा समीक्षित",
     "approvedBy": "द्वारा अनुमोदित",
-
     "status": {
       "draft": "ड्राफ्ट",
       "calculating": "गणना हो रही है",
@@ -3421,7 +3485,6 @@
       "failed": "विफल",
       "paid": "भुगतान किया गया"
     },
-
     "actions": {
       "createRun": "पेरोल रन बनाएँ",
       "calculate": "गणना करें",
@@ -3434,7 +3497,6 @@
       "editConfig": "कॉन्फ़िगरेशन संपादित करें",
       "addCountry": "देश जोड़ें"
     },
-
     "countries": {
       "uk": "यूनाइटेड किंगडम",
       "de": "जर्मनी",
@@ -3443,7 +3505,6 @@
       "cn": "चीन",
       "ae": "संयुक्त अरब अमीरात"
     },
-
     "calendar": {
       "taxFiling": "कर फाइलिंग",
       "socialFiling": "सामाजिक बीमा फाइलिंग",
@@ -3451,14 +3512,12 @@
       "yearEnd": "वर्ष समाप्ति",
       "deadline": "समय सीमा"
     },
-
     "variance": {
       "newStarter": "नया कर्मचारी",
       "leaver": "छोड़ने वाला",
       "highVariance": "उच्च विचलन",
       "varianceFromLastMonth": "पिछले महीने से विचलन"
     },
-
     "earnings": "आय",
     "deductions": "कटौतियाँ",
     "summary": "सारांश",
@@ -3474,5 +3533,9 @@
     "feedImport": "फीड आयात",
     "nativeCalculation": "मूल गणना",
     "externalProvider": "बाहरी प्रदाता"
+  },
+  "offline": {
+    "youAreOffline": "आप ऑफ़लाइन हैं। कुछ सुविधाएं सीमित हो सकती हैं।",
+    "backOnline": "वापस ऑनलाइन"
   }
 }

@@ -94,7 +94,13 @@
       "admin": "الإدارة",
       "talent": "المواهب",
       "people": "الأشخاص",
-      "engagement": "المشاركة"
+      "engagement": "المشاركة",
+      "myUplift": "UPLIFT الخاص بي",
+      "myWork": "عملي",
+      "myGrowth": "نموي",
+      "myMoney": "أموالي",
+      "myPeople": "فريقي",
+      "payroll": "الرواتب"
     },
     "payslips": "كشوف الرواتب والأجور",
     "performance": "تقييم الأداء",
@@ -115,7 +121,12 @@
     "myExpenses": "مصروفاتي",
     "directory": "دليل الموظفين",
     "recognition": "جدار التقدير",
-    "myDocuments": "مستنداتي"
+    "myDocuments": "مستنداتي",
+    "payroll": "كشف الرواتب",
+    "payrollDashboard": "لوحة الرواتب",
+    "payrollRuns": "دورات الرواتب",
+    "payrollConfig": "إعدادات الرواتب",
+    "teamPayroll": "رواتب الفريق"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -3038,7 +3049,74 @@
     "calibrate": "معايرة",
     "companyGoals": "أهداف الشركة",
     "moodCheck": "كيف تشعر؟",
-    "inReview": "قيد التقييم"
+    "inReview": "قيد التقييم",
+    "subtitle": "المراجعات والأهداف والتعليقات وتطوير الموظفين",
+    "noDepartment": "لا يوجد قسم",
+    "selfBadge": "ذاتي",
+    "managerBadge": "المدير",
+    "peerBadge": "زميل",
+    "noReviewsYet": "لا توجد مراجعات أداء",
+    "createCycleBtn": "إنشاء دورة",
+    "createOkrTitle": "إنشاء OKR",
+    "createGoalTitle": "إنشاء هدف",
+    "titleLabel": "العنوان",
+    "createBtn": "إنشاء",
+    "notes": "ملاحظات",
+    "saving": "جاري الحفظ...",
+    "saveNotes": "حفظ الملاحظات",
+    "oneTime": "مرة واحدة",
+    "scheduleBtn": "جدولة",
+    "giveFeedbackBtn": "إعطاء تعليق",
+    "noFeedbackReceived": "لم يتم تلقي أي تعليقات",
+    "noFeedbackReceivedDesc": "لم تتلق أي تعليقات بعد.",
+    "noPublicFeedback": "لا يوجد تعليق عام",
+    "noPublicFeedbackDesc": "شارك التعليقات الإيجابية علنًا للاحتفال بإنجازات فريقك.",
+    "sendFeedback": "إرسال تعليق",
+    "createPlanBtn": "إنشاء خطة",
+    "addFocusArea": "+ إضافة منطقة تركيز",
+    "stretch": "تحدي",
+    "reading": "قراءة",
+    "otherAction": "أخرى",
+    "addAction": "+ إضافة إجراء",
+    "noReviewsDesc": "أنشئ دورة المراجعة الأولى لبدء تقييم أداء الموظفين.",
+    "createFirstReview": "ابدأ دورة المراجعة الأولى",
+    "upcomingMeetings": "اجتماعات 1:1 القادمة",
+    "allCycles": "دورات المراجعة",
+    "newCycle": "دورة جديدة",
+    "participants": "المشاركون",
+    "noParticipants": "لم تتم إضافة مشاركين بعد",
+    "statusDraft": "مسودة",
+    "statusActive": "نشط",
+    "statusInReview": "قيد المراجعة",
+    "statusCalibration": "معايرة",
+    "statusCompleted": "مكتمل",
+    "typeAnnual": "سنوي",
+    "typeQuarterly": "ربع سنوي",
+    "typeProbation": "فترة اختبار",
+    "goals": "الأهداف",
+    "okrs": "OKRs",
+    "newGoal": "هدف جديد",
+    "newOkr": "OKR جديد",
+    "noGoalsDesc": "أنشئ هدفك الأول لبدء تتبع التقدم.",
+    "noOkrs": "لا يوجد OKR بعد",
+    "noOkrsDesc": "أنشئ أول OKR لمواءمة أهداف الفريق.",
+    "createOkr": "إنشاء OKR",
+    "periodPlaceholder": "الربع الأول 2026",
+    "keyResultPlaceholder": "عنوان النتيجة الرئيسية",
+    "targetPlaceholder": "الهدف",
+    "noMeetingsDesc": "جدول أول اجتماع 1:1 لبدء محادثات هادفة.",
+    "scheduleMeeting": "جدولة اجتماع",
+    "addMeetingNotesPlaceholder": "أضف ملاحظات...",
+    "receivedFeedback": "مُستلَم",
+    "publicFeedback": "الخلاصة العامة",
+    "fromLabel": "من",
+    "toLabel": "إلى",
+    "privateVisibility": "خاص (المستلم فقط يرى)",
+    "publicVisibility": "عام (مرئي في الخلاصة)",
+    "feedbackType": "نوع التعليق",
+    "noPlansDesc": "أنشئ خطة التطوير الأولى لتتبع النمو الوظيفي.",
+    "focusAreaPlaceholder": "عنوان منطقة التركيز",
+    "actionItemPlaceholder": "عنصر الإجراء"
   },
   "surveys": {
     "templates": "القوالب",
@@ -3143,13 +3221,11 @@
     "myPayslips": "قسائم راتبي",
     "configuration": "إعدادات الرواتب",
     "config": "الإعدادات",
-
     "grossPay": "الراتب الإجمالي",
     "netPay": "الراتب الصافي",
     "totalDeductions": "إجمالي الاستقطاعات",
     "employerContributions": "مساهمات صاحب العمل",
     "totalEmployerCost": "إجمالي تكلفة صاحب العمل",
-
     "incomeTax": "ضريبة الدخل",
     "nationalInsurance": "التأمين الوطني",
     "pension": "المعاش التقاعدي",
@@ -3160,44 +3236,37 @@
     "healthInsurance": "التأمين الصحي",
     "unemploymentInsurance": "تأمين البطالة",
     "housingFund": "صندوق الإسكان",
-
     "payPeriod": "فترة الراتب",
     "payDate": "تاريخ الصرف",
     "taxYear": "السنة الضريبية",
     "taxCode": "الرمز الضريبي",
     "niCategory": "فئة التأمين",
     "employeeNumber": "رقم الموظف",
-
     "yearToDate": "منذ بداية السنة",
     "ytdGross": "الإجمالي السنوي",
     "ytdTax": "الضريبة السنوية",
     "ytdNI": "التأمين السنوي",
     "ytdPension": "المعاش السنوي",
     "ytdNet": "الصافي السنوي",
-
     "basicSalary": "الراتب الأساسي",
     "overtime": "العمل الإضافي",
     "bonus": "المكافأة",
     "allowances": "البدلات",
     "commission": "العمولة",
-
     "totalMonthlyCoast": "إجمالي التكلفة الشهرية",
     "employeesOnPayroll": "الموظفون في كشف الرواتب",
     "nextPayDate": "تاريخ الصرف التالي",
     "outstandingActions": "الإجراءات المعلقة",
-
     "countryBreakdown": "التوزيع حسب الدولة",
     "monthlyGross": "الإجمالي الشهري",
     "monthlyEmployerCost": "تكلفة صاحب العمل الشهرية",
     "currency": "العملة",
     "nextRunDate": "تاريخ التشغيل التالي",
-
     "upcomingDeadlines": "المواعيد النهائية القادمة",
     "recentRuns": "عمليات الرواتب الأخيرة",
     "preparedBy": "أعده",
     "reviewedBy": "راجعه",
     "approvedBy": "وافق عليه",
-
     "status": {
       "draft": "مسودة",
       "calculating": "جاري الحساب",
@@ -3208,7 +3277,6 @@
       "failed": "فشل",
       "paid": "تم الدفع"
     },
-
     "actions": {
       "createRun": "إنشاء عملية رواتب",
       "calculate": "حساب",
@@ -3221,7 +3289,6 @@
       "editConfig": "تعديل الإعدادات",
       "addCountry": "إضافة دولة"
     },
-
     "countries": {
       "uk": "المملكة المتحدة",
       "de": "ألمانيا",
@@ -3230,7 +3297,6 @@
       "cn": "الصين",
       "ae": "الإمارات العربية المتحدة"
     },
-
     "calendar": {
       "taxFiling": "تقديم الضرائب",
       "socialFiling": "تقديم التأمين الاجتماعي",
@@ -3238,14 +3304,12 @@
       "yearEnd": "نهاية السنة",
       "deadline": "الموعد النهائي"
     },
-
     "variance": {
       "newStarter": "موظف جديد",
       "leaver": "مغادر",
       "highVariance": "تباين عالي",
       "varianceFromLastMonth": "التباين عن الشهر الماضي"
     },
-
     "earnings": "الأرباح",
     "deductions": "الاستقطاعات",
     "summary": "الملخص",
@@ -3261,5 +3325,9 @@
     "feedImport": "استيراد البيانات",
     "nativeCalculation": "الحساب المحلي",
     "externalProvider": "مزود خارجي"
+  },
+  "offline": {
+    "youAreOffline": "أنت غير متصل. قد تكون بعض الميزات محدودة.",
+    "backOnline": "عاد الاتصال"
   }
 }

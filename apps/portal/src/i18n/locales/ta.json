@@ -94,7 +94,13 @@
       "admin": "நிர்வாகம்",
       "talent": "திறமை",
       "people": "நபர்கள்",
-      "engagement": "ஈடுபாடு"
+      "engagement": "ஈடுபாடு",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "ஊதியச் சீட்டு & ஊதியம்",
     "performance": "செயல்திறன்",
@@ -104,7 +110,12 @@
     "learning": "கற்றல்",
     "documents": "ஆவணங்கள்",
     "expenses": "செலவுகள்",
-    "sso": "SSO & பாதுகாப்பு"
+    "sso": "SSO & பாதுகாப்பு",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "ஏற்றுகிறது...",
@@ -3019,7 +3030,74 @@
     "calibrate": "அளவுத்திருத்தம் செய்",
     "companyGoals": "நிறுவன இலக்குகள்",
     "moodCheck": "உங்கள் மனநிலை எப்படி உள்ளது?",
-    "inReview": "மதிப்பாய்வில்"
+    "inReview": "மதிப்பாய்வில்",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "வார்ப்புருக்கள்",
@@ -3124,13 +3202,11 @@
     "myPayslips": "எனது சம்பள சீட்டுகள்",
     "configuration": "சம்பளப் பட்டியல் உள்ளமைவு",
     "config": "உள்ளமைவு",
-
     "grossPay": "மொத்த சம்பளம்",
     "netPay": "நிகர சம்பளம்",
     "totalDeductions": "மொத்த பிடிப்புகள்",
     "employerContributions": "முதலாளி பங்களிப்புகள்",
     "totalEmployerCost": "மொத்த முதலாளி செலவு",
-
     "incomeTax": "வருமான வரி",
     "nationalInsurance": "தேசிய காப்பீடு",
     "pension": "ஓய்வூதியம்",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "உடல்நலக் காப்பீடு",
     "unemploymentInsurance": "வேலையின்மை காப்பீடு",
     "housingFund": "வீட்டு நிதி",
-
     "payPeriod": "சம்பள காலம்",
     "payDate": "சம்பள தேதி",
     "taxYear": "வரி ஆண்டு",
     "taxCode": "வரி குறியீடு",
     "niCategory": "NI வகை",
     "employeeNumber": "ஊழியர் எண்",
-
     "yearToDate": "ஆண்டு முதல் இன்று வரை",
     "ytdGross": "YTD மொத்தம்",
     "ytdTax": "YTD வரி",
     "ytdNI": "YTD NI",
     "ytdPension": "YTD ஓய்வூதியம்",
     "ytdNet": "YTD நிகரம்",
-
     "basicSalary": "அடிப்படை சம்பளம்",
     "overtime": "மிகை நேரம்",
     "bonus": "போனஸ்",
     "allowances": "படிகள்",
     "commission": "கமிஷன்",
-
     "totalMonthlyCoast": "மொத்த மாத செலவு",
     "employeesOnPayroll": "சம்பளப் பட்டியலில் உள்ள ஊழியர்கள்",
     "nextPayDate": "அடுத்த சம்பள தேதி",
     "outstandingActions": "நிலுவையில் உள்ள நடவடிக்கைகள்",
-
     "countryBreakdown": "நாடு வாரியான பிரிவு",
     "monthlyGross": "மாதாந்திர மொத்தம்",
     "monthlyEmployerCost": "மாதாந்திர முதலாளி செலவு",
     "currency": "நாணயம்",
     "nextRunDate": "அடுத்த ரன் தேதி",
-
     "upcomingDeadlines": "வரவிருக்கும் காலக்கெடுக்கள்",
     "recentRuns": "சமீபத்திய சம்பளப் பட்டியல் ரன்கள்",
     "preparedBy": "தயாரித்தவர்",
     "reviewedBy": "மதிப்பாய்வு செய்தவர்",
     "approvedBy": "அங்கீகரித்தவர்",
-
     "status": {
       "draft": "வரைவு",
       "calculating": "கணக்கிடுகிறது",
@@ -3189,7 +3258,6 @@
       "failed": "தோல்வியடைந்தது",
       "paid": "செலுத்தப்பட்டது"
     },
-
     "actions": {
       "createRun": "சம்பளப் பட்டியல் ரன் உருவாக்கு",
       "calculate": "கணக்கிடு",
@@ -3202,7 +3270,6 @@
       "editConfig": "உள்ளமைவை திருத்து",
       "addCountry": "நாடு சேர்"
     },
-
     "countries": {
       "uk": "ஐக்கிய இராச்சியம்",
       "de": "ஜெர்மனி",
@@ -3211,7 +3278,6 @@
       "cn": "சீனா",
       "ae": "ஐக்கிய அரபு எமிரேட்ஸ்"
     },
-
     "calendar": {
       "taxFiling": "வரி தாக்கல்",
       "socialFiling": "சமூக காப்பீடு தாக்கல்",
@@ -3219,14 +3285,12 @@
       "yearEnd": "ஆண்டு இறுதி",
       "deadline": "காலக்கெடு"
     },
-
     "variance": {
       "newStarter": "புதிய ஊழியர்",
       "leaver": "விடுபவர்",
       "highVariance": "அதிக மாறுபாடு",
       "varianceFromLastMonth": "கடந்த மாதத்திலிருந்து மாறுபாடு"
     },
-
     "earnings": "வருமானங்கள்",
     "deductions": "பிடிப்புகள்",
     "summary": "சுருக்கம்",
@@ -3242,5 +3306,9 @@
     "feedImport": "ஃபீட் இறக்குமதி",
     "nativeCalculation": "சொந்த கணக்கீடு",
     "externalProvider": "வெளி வழங்குநர்"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

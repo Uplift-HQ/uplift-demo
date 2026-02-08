@@ -94,7 +94,13 @@
       "admin": "ADMINISTRARE",
       "talent": "TALENT",
       "people": "PERSONAL",
-      "engagement": "IMPLICARE"
+      "engagement": "IMPLICARE",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Fluturași de salariu și plată",
     "performance": "Performanță",
@@ -104,7 +110,12 @@
     "learning": "Învățare",
     "documents": "Documente",
     "expenses": "Cheltuieli",
-    "sso": "SSO și securitate"
+    "sso": "SSO și securitate",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Se încarcă...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Calibrează",
     "companyGoals": "Obiective companie",
     "moodCheck": "Cum vă simțiți?",
-    "inReview": "În evaluare"
+    "inReview": "În evaluare",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Șabloane",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Fluturașii Mei",
     "configuration": "Configurare Salarizare",
     "config": "Configurare",
-
     "grossPay": "Salariu Brut",
     "netPay": "Salariu Net",
     "totalDeductions": "Total Rețineri",
     "employerContributions": "Contribuții Angajator",
     "totalEmployerCost": "Cost Total Angajator",
-
     "incomeTax": "Impozit pe Venit",
     "nationalInsurance": "Asigurări Sociale",
     "pension": "Pensie",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Asigurări de Sănătate",
     "unemploymentInsurance": "Asigurări de Șomaj",
     "housingFund": "Fond de Locuințe",
-
     "payPeriod": "Perioadă de Plată",
     "payDate": "Data Plății",
     "taxYear": "An Fiscal",
     "taxCode": "Cod Fiscal",
     "niCategory": "Categorie AS",
     "employeeNumber": "Număr Angajat",
-
     "yearToDate": "De la Începutul Anului",
     "ytdGross": "Brut Cumulat",
     "ytdTax": "Impozit Cumulat",
     "ytdNI": "AS Cumulat",
     "ytdPension": "Pensie Cumulată",
     "ytdNet": "Net Cumulat",
-
     "basicSalary": "Salariu de Bază",
     "overtime": "Ore Suplimentare",
     "bonus": "Bonus",
     "allowances": "Indemnizații",
     "commission": "Comision",
-
     "totalMonthlyCoast": "Cost Lunar Total",
     "employeesOnPayroll": "Angajați pe Statul de Plată",
     "nextPayDate": "Următoarea Dată de Plată",
     "outstandingActions": "Acțiuni în Așteptare",
-
     "countryBreakdown": "Defalcare pe Țări",
     "monthlyGross": "Brut Lunar",
     "monthlyEmployerCost": "Cost Lunar Angajator",
     "currency": "Monedă",
     "nextRunDate": "Următoarea Dată de Rulare",
-
     "upcomingDeadlines": "Termene Apropiate",
     "recentRuns": "Rulări Recente de Salarizare",
     "preparedBy": "Pregătit de",
     "reviewedBy": "Revizuit de",
     "approvedBy": "Aprobat de",
-
     "status": {
       "draft": "Ciornă",
       "calculating": "Se Calculează",
@@ -3189,7 +3258,6 @@
       "failed": "Eșuat",
       "paid": "Plătit"
     },
-
     "actions": {
       "createRun": "Creează Rulare Salarizare",
       "calculate": "Calculează",
@@ -3202,7 +3270,6 @@
       "editConfig": "Editează Configurarea",
       "addCountry": "Adaugă Țară"
     },
-
     "countries": {
       "uk": "Regatul Unit",
       "de": "Germania",
@@ -3211,7 +3278,6 @@
       "cn": "China",
       "ae": "Emiratele Arabe Unite"
     },
-
     "calendar": {
       "taxFiling": "Depunere Declarații Fiscale",
       "socialFiling": "Depunere Asigurări Sociale",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Sfârșit de An",
       "deadline": "Termen Limită"
     },
-
     "variance": {
       "newStarter": "Angajat Nou",
       "leaver": "Plecare",
       "highVariance": "Variație Mare",
       "varianceFromLastMonth": "variație față de luna trecută"
     },
-
     "earnings": "Câștiguri",
     "deductions": "Rețineri",
     "summary": "Sumar",
@@ -3242,5 +3306,9 @@
     "feedImport": "Import Date",
     "nativeCalculation": "Calcul Nativ",
     "externalProvider": "Furnizor Extern"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

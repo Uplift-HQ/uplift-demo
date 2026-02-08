@@ -16,6 +16,7 @@ import { useView } from '../lib/viewContext';
 import { useTranslation } from 'react-i18next';
 import { SUPPORTED_LANGUAGES, changeLanguage, getCurrentLanguage } from '../i18n';
 import RoleSwitcher from './RoleSwitcher';
+import OfflineBanner from './OfflineBanner';
 import {
   LayoutDashboard,
   Users,
@@ -318,7 +319,10 @@ export default function Layout() {
     : branding.brand_name || t('brand.grandMetropolitan', 'Grand Metropolitan');
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 flex flex-col">
+      {/* Offline banner */}
+      <OfflineBanner />
+
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div

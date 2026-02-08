@@ -1923,7 +1923,13 @@
       "admin": "管理",
       "talent": "人才",
       "people": "人员",
-      "engagement": "敬业度"
+      "engagement": "敬业度",
+      "myUplift": "我的UPLIFT",
+      "myWork": "我的工作",
+      "myGrowth": "我的成长",
+      "myMoney": "我的薪资",
+      "myPeople": "我的团队",
+      "payroll": "工资"
     },
     "payslips": "薪资与工资",
     "performance": "绩效评估",
@@ -1944,7 +1950,12 @@
     "myExpenses": "我的报销",
     "directory": "员工通讯录",
     "recognition": "表彰墙",
-    "myDocuments": "我的文档"
+    "myDocuments": "我的文档",
+    "payroll": "工资单",
+    "payrollDashboard": "工资仪表板",
+    "payrollRuns": "工资运行",
+    "payrollConfig": "工资配置",
+    "teamPayroll": "团队工资"
   },
   "activity": {
     "title": "活动审核",
@@ -3038,7 +3049,74 @@
     "calibrate": "校准",
     "companyGoals": "公司目标",
     "moodCheck": "你今天感觉如何？",
-    "inReview": "评审中"
+    "inReview": "评审中",
+    "subtitle": "评审、目标、反馈和员工发展",
+    "noDepartment": "无部门",
+    "selfBadge": "自评",
+    "managerBadge": "经理",
+    "peerBadge": "同事",
+    "noReviewsYet": "暂无绩效评估",
+    "createCycleBtn": "创建周期",
+    "createOkrTitle": "创建OKR",
+    "createGoalTitle": "创建目标",
+    "titleLabel": "标题",
+    "createBtn": "创建",
+    "notes": "备注",
+    "saving": "保存中...",
+    "saveNotes": "保存备注",
+    "oneTime": "一次性",
+    "scheduleBtn": "安排",
+    "giveFeedbackBtn": "给予反馈",
+    "noFeedbackReceived": "未收到反馈",
+    "noFeedbackReceivedDesc": "您还没有收到任何反馈。",
+    "noPublicFeedback": "暂无公开反馈",
+    "noPublicFeedbackDesc": "公开分享积极反馈，庆祝团队的成就。",
+    "sendFeedback": "发送反馈",
+    "createPlanBtn": "创建计划",
+    "addFocusArea": "+ 添加重点领域",
+    "stretch": "挑战",
+    "reading": "阅读",
+    "otherAction": "其他",
+    "addAction": "+ 添加行动",
+    "noReviewsDesc": "创建您的第一个评估周期，开始评估员工绩效。",
+    "createFirstReview": "开始第一个评估周期",
+    "upcomingMeetings": "即将进行的一对一会议",
+    "allCycles": "评估周期",
+    "newCycle": "新周期",
+    "participants": "参与者",
+    "noParticipants": "尚未添加参与者",
+    "statusDraft": "草稿",
+    "statusActive": "活动",
+    "statusInReview": "审核中",
+    "statusCalibration": "校准",
+    "statusCompleted": "已完成",
+    "typeAnnual": "年度",
+    "typeQuarterly": "季度",
+    "typeProbation": "试用期",
+    "goals": "目标",
+    "okrs": "OKR",
+    "newGoal": "新目标",
+    "newOkr": "新OKR",
+    "noGoalsDesc": "创建第一个目标以开始跟踪进度。",
+    "noOkrs": "暂无OKR",
+    "noOkrsDesc": "创建第一个OKR以协调团队目标。",
+    "createOkr": "创建OKR",
+    "periodPlaceholder": "2026年第1季度",
+    "keyResultPlaceholder": "关键结果标题",
+    "targetPlaceholder": "目标值",
+    "noMeetingsDesc": "安排第一次一对一会议，开始有意义的对话。",
+    "scheduleMeeting": "安排会议",
+    "addMeetingNotesPlaceholder": "添加会议备注...",
+    "receivedFeedback": "收到的",
+    "publicFeedback": "公开反馈",
+    "fromLabel": "来自",
+    "toLabel": "到",
+    "privateVisibility": "私密（仅收件人可见）",
+    "publicVisibility": "公开（在动态中可见）",
+    "feedbackType": "反馈类型",
+    "noPlansDesc": "创建第一个发展计划来跟踪职业成长。",
+    "focusAreaPlaceholder": "重点领域标题",
+    "actionItemPlaceholder": "行动项"
   },
   "surveys": {
     "templates": "模板",
@@ -3143,13 +3221,11 @@
     "myPayslips": "我的工资单",
     "configuration": "工资配置",
     "config": "配置",
-
     "grossPay": "应发工资",
     "netPay": "实发工资",
     "totalDeductions": "扣款合计",
     "employerContributions": "企业缴纳部分",
     "totalEmployerCost": "企业用工成本",
-
     "incomeTax": "个人所得税",
     "nationalInsurance": "社会保险",
     "pension": "养老保险",
@@ -3160,44 +3236,37 @@
     "healthInsurance": "医疗保险",
     "unemploymentInsurance": "失业保险",
     "housingFund": "住房公积金",
-
     "payPeriod": "工资周期",
     "payDate": "发薪日",
     "taxYear": "税务年度",
     "taxCode": "税码",
     "niCategory": "社保类别",
     "employeeNumber": "员工编号",
-
     "yearToDate": "年度累计",
     "ytdGross": "年度累计应发",
     "ytdTax": "年度累计税款",
     "ytdNI": "年度累计社保",
     "ytdPension": "年度累计养老",
     "ytdNet": "年度累计实发",
-
     "basicSalary": "基本工资",
     "overtime": "加班费",
     "bonus": "奖金",
     "allowances": "津贴",
     "commission": "佣金",
-
     "totalMonthlyCoast": "月度总成本",
     "employeesOnPayroll": "在册员工数",
     "nextPayDate": "下次发薪日",
     "outstandingActions": "待处理事项",
-
     "countryBreakdown": "国家明细",
     "monthlyGross": "月度应发",
     "monthlyEmployerCost": "月度企业成本",
     "currency": "币种",
     "nextRunDate": "下次核算日期",
-
     "upcomingDeadlines": "即将到期",
     "recentRuns": "最近核算记录",
     "preparedBy": "编制人",
     "reviewedBy": "复核人",
     "approvedBy": "审批人",
-
     "status": {
       "draft": "草稿",
       "calculating": "计算中",
@@ -3208,7 +3277,6 @@
       "failed": "失败",
       "paid": "已发放"
     },
-
     "actions": {
       "createRun": "创建工资核算",
       "calculate": "计算",
@@ -3221,7 +3289,6 @@
       "editConfig": "编辑配置",
       "addCountry": "添加国家"
     },
-
     "countries": {
       "uk": "英国",
       "de": "德国",
@@ -3230,7 +3297,6 @@
       "cn": "中国",
       "ae": "阿联酋"
     },
-
     "calendar": {
       "taxFiling": "税务申报",
       "socialFiling": "社保申报",
@@ -3238,14 +3304,12 @@
       "yearEnd": "年终结算",
       "deadline": "截止日期"
     },
-
     "variance": {
       "newStarter": "新入职",
       "leaver": "离职",
       "highVariance": "差异较大",
       "varianceFromLastMonth": "与上月差异"
     },
-
     "earnings": "收入",
     "deductions": "扣款",
     "summary": "汇总",
@@ -3261,5 +3325,9 @@
     "feedImport": "数据导入",
     "nativeCalculation": "本地计算",
     "externalProvider": "外部服务商"
+  },
+  "offline": {
+    "youAreOffline": "您处于离线状态。某些功能可能受限。",
+    "backOnline": "已恢复在线"
   }
 }

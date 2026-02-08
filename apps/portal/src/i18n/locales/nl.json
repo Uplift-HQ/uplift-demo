@@ -94,7 +94,13 @@
       "admin": "BEHEER",
       "talent": "TALENT",
       "people": "PERSONEEL",
-      "engagement": "BETROKKENHEID"
+      "engagement": "BETROKKENHEID",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Loonstroken & Beloning",
     "performance": "Prestaties",
@@ -104,7 +110,12 @@
     "learning": "Leren",
     "documents": "Documenten",
     "expenses": "Declaraties",
-    "sso": "SSO & Beveiliging"
+    "sso": "SSO & Beveiliging",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Laden...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Kalibreren",
     "companyGoals": "Bedrijfsdoelen",
     "moodCheck": "Hoe voelt u zich?",
-    "inReview": "In beoordeling"
+    "inReview": "In beoordeling",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Sjablonen",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Mijn loonstroken",
     "configuration": "Salarisconfiguratie",
     "config": "Configuratie",
-
     "grossPay": "Brutoloon",
     "netPay": "Nettoloon",
     "totalDeductions": "Totale inhoudingen",
     "employerContributions": "Werkgeversbijdragen",
     "totalEmployerCost": "Totale werkgeverskosten",
-
     "incomeTax": "Inkomstenbelasting",
     "nationalInsurance": "Nationale verzekering",
     "pension": "Pensioen",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Zorgverzekering",
     "unemploymentInsurance": "Werkloosheidsverzekering",
     "housingFund": "Woonfonds",
-
     "payPeriod": "Loonperiode",
     "payDate": "Betaaldatum",
     "taxYear": "Belastingjaar",
     "taxCode": "Belastingcode",
     "niCategory": "NV-categorie",
     "employeeNumber": "Personeelsnummer",
-
     "yearToDate": "Jaarlijks cumulatief",
     "ytdGross": "Cumulatief bruto",
     "ytdTax": "Cumulatieve belasting",
     "ytdNI": "Cumulatieve NV",
     "ytdPension": "Cumulatief pensioen",
     "ytdNet": "Cumulatief netto",
-
     "basicSalary": "Basissalaris",
     "overtime": "Overwerk",
     "bonus": "Bonus",
     "allowances": "Toeslagen",
     "commission": "Commissie",
-
     "totalMonthlyCoast": "Totale maandelijkse kosten",
     "employeesOnPayroll": "Medewerkers op de loonlijst",
     "nextPayDate": "Volgende betaaldatum",
     "outstandingActions": "Openstaande acties",
-
     "countryBreakdown": "Verdeling per land",
     "monthlyGross": "Maandelijks bruto",
     "monthlyEmployerCost": "Maandelijkse werkgeverskosten",
     "currency": "Valuta",
     "nextRunDate": "Volgende verwerkingsdatum",
-
     "upcomingDeadlines": "Komende deadlines",
     "recentRuns": "Recente verwerkingen",
     "preparedBy": "Opgesteld door",
     "reviewedBy": "Beoordeeld door",
     "approvedBy": "Goedgekeurd door",
-
     "status": {
       "draft": "Concept",
       "calculating": "Berekenen",
@@ -3189,7 +3258,6 @@
       "failed": "Mislukt",
       "paid": "Betaald"
     },
-
     "actions": {
       "createRun": "Verwerking aanmaken",
       "calculate": "Berekenen",
@@ -3202,7 +3270,6 @@
       "editConfig": "Configuratie bewerken",
       "addCountry": "Land toevoegen"
     },
-
     "countries": {
       "uk": "Verenigd Koninkrijk",
       "de": "Duitsland",
@@ -3211,7 +3278,6 @@
       "cn": "China",
       "ae": "Verenigde Arabische Emiraten"
     },
-
     "calendar": {
       "taxFiling": "Belastingaangifte",
       "socialFiling": "Sociale verzekering aangifte",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Jaareinde",
       "deadline": "Deadline"
     },
-
     "variance": {
       "newStarter": "Nieuwe medewerker",
       "leaver": "Vertrekker",
       "highVariance": "Hoge afwijking",
       "varianceFromLastMonth": "afwijking t.o.v. vorige maand"
     },
-
     "earnings": "Verdiensten",
     "deductions": "Inhoudingen",
     "summary": "Samenvatting",
@@ -3242,5 +3306,9 @@
     "feedImport": "Feed-import",
     "nativeCalculation": "Eigen berekening",
     "externalProvider": "Externe aanbieder"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

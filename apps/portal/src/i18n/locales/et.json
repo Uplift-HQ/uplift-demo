@@ -94,7 +94,13 @@
       "admin": "HALDUS",
       "talent": "TALENDID",
       "people": "INIMESED",
-      "engagement": "KAASATUS"
+      "engagement": "KAASATUS",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Palgalehed ja tasu",
     "performance": "Tulemuslikkus",
@@ -104,7 +110,12 @@
     "learning": "Õppimine",
     "documents": "Dokumendid",
     "expenses": "Kulud",
-    "sso": "SSO ja turvalisus"
+    "sso": "SSO ja turvalisus",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Laadimine...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Kalibreeri",
     "companyGoals": "Ettevõtte eesmärgid",
     "moodCheck": "Kuidas end tunnete?",
-    "inReview": "Hindamisel"
+    "inReview": "Hindamisel",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Mallid",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Minu Palgalehed",
     "configuration": "Palgaarvestuse Seadistus",
     "config": "Seadistus",
-
     "grossPay": "Brutopalk",
     "netPay": "Netopalk",
     "totalDeductions": "Kinnipidamised Kokku",
     "employerContributions": "Tööandja Maksed",
     "totalEmployerCost": "Tööandja Kogukulu",
-
     "incomeTax": "Tulumaks",
     "nationalInsurance": "Riiklik Kindlustus",
     "pension": "Pension",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Ravikindlustus",
     "unemploymentInsurance": "Töötuskindlustus",
     "housingFund": "Eluasemefond",
-
     "payPeriod": "Makseperiood",
     "payDate": "Maksekuupäev",
     "taxYear": "Maksuaasta",
     "taxCode": "Maksukood",
     "niCategory": "RK Kategooria",
     "employeeNumber": "Töötaja Number",
-
     "yearToDate": "Aasta Algusest",
     "ytdGross": "Kumulatiivne Bruto",
     "ytdTax": "Kumulatiivne Maks",
     "ytdNI": "Kumulatiivne RK",
     "ytdPension": "Kumulatiivne Pension",
     "ytdNet": "Kumulatiivne Neto",
-
     "basicSalary": "Põhipalk",
     "overtime": "Ületunnid",
     "bonus": "Boonus",
     "allowances": "Lisatasud",
     "commission": "Vahendustasu",
-
     "totalMonthlyCoast": "Igakuine Kogukulu",
     "employeesOnPayroll": "Töötajaid Palgaarvestuses",
     "nextPayDate": "Järgmine Maksekuupäev",
     "outstandingActions": "Ootel Toimingud",
-
     "countryBreakdown": "Jaotus Riikide Kaupa",
     "monthlyGross": "Igakuine Bruto",
     "monthlyEmployerCost": "Igakuine Tööandja Kulu",
     "currency": "Valuuta",
     "nextRunDate": "Järgmine Käivituskuupäev",
-
     "upcomingDeadlines": "Lähenevad Tähtajad",
     "recentRuns": "Hiljutised Palgaarvestuse Käivitused",
     "preparedBy": "Koostas",
     "reviewedBy": "Vaatas Üle",
     "approvedBy": "Kinnitas",
-
     "status": {
       "draft": "Mustand",
       "calculating": "Arvutamine",
@@ -3189,7 +3258,6 @@
       "failed": "Ebaõnnestunud",
       "paid": "Makstud"
     },
-
     "actions": {
       "createRun": "Loo Palgaarvestuse Käivitus",
       "calculate": "Arvuta",
@@ -3202,7 +3270,6 @@
       "editConfig": "Muuda Seadistust",
       "addCountry": "Lisa Riik"
     },
-
     "countries": {
       "uk": "Ühendkuningriik",
       "de": "Saksamaa",
@@ -3211,7 +3278,6 @@
       "cn": "Hiina",
       "ae": "Araabia Ühendemiraadid"
     },
-
     "calendar": {
       "taxFiling": "Maksudeklaratsiooni Esitamine",
       "socialFiling": "Sotsiaalkindlustuse Esitamine",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Aasta Lõpp",
       "deadline": "Tähtaeg"
     },
-
     "variance": {
       "newStarter": "Uus Töötaja",
       "leaver": "Lahkuja",
       "highVariance": "Suur Kõrvalekalle",
       "varianceFromLastMonth": "kõrvalekalle eelmisest kuust"
     },
-
     "earnings": "Teenistus",
     "deductions": "Kinnipidamised",
     "summary": "Kokkuvõte",
@@ -3242,5 +3306,9 @@
     "feedImport": "Andmete Import",
     "nativeCalculation": "Kohalik Arvutus",
     "externalProvider": "Väline Teenusepakkuja"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

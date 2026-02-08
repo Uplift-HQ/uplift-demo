@@ -94,7 +94,13 @@
       "admin": "ADMIN",
       "talent": "TALENTO",
       "people": "PESSOAS",
-      "engagement": "ENVOLVIMENTO"
+      "engagement": "ENVOLVIMENTO",
+      "myUplift": "MEU UPLIFT",
+      "myWork": "MEU TRABALHO",
+      "myGrowth": "MEU CRESCIMENTO",
+      "myMoney": "MEU DINHEIRO",
+      "myPeople": "MINHA EQUIPE",
+      "payroll": "FOLHA"
     },
     "payslips": "Recibos de Vencimento e Remuneração",
     "performance": "Avaliações",
@@ -115,7 +121,12 @@
     "myExpenses": "Minhas Despesas",
     "directory": "Diretório de Colaboradores",
     "recognition": "Mural de Reconhecimento",
-    "myDocuments": "Meus Documentos"
+    "myDocuments": "Meus Documentos",
+    "payroll": "Folha de pagamento",
+    "payrollDashboard": "Painel de folha",
+    "payrollRuns": "Execuções de folha",
+    "payrollConfig": "Config folha",
+    "teamPayroll": "Folha da equipe"
   },
   "common": {
     "loading": "Carregando...",
@@ -3038,7 +3049,74 @@
     "calibrate": "Calibrar",
     "companyGoals": "Objetivos da empresa",
     "moodCheck": "Como se sente?",
-    "inReview": "Em avaliação"
+    "inReview": "Em avaliação",
+    "subtitle": "Avaliações, metas, feedback e desenvolvimento de funcionários",
+    "noDepartment": "Sem departamento",
+    "selfBadge": "Auto",
+    "managerBadge": "Gerente",
+    "peerBadge": "Colega",
+    "noReviewsYet": "Sem avaliações de desempenho",
+    "createCycleBtn": "Criar ciclo",
+    "createOkrTitle": "Criar OKR",
+    "createGoalTitle": "Criar meta",
+    "titleLabel": "Título",
+    "createBtn": "Criar",
+    "notes": "Notas",
+    "saving": "Salvando...",
+    "saveNotes": "Salvar notas",
+    "oneTime": "Uma vez",
+    "scheduleBtn": "Agendar",
+    "giveFeedbackBtn": "Dar feedback",
+    "noFeedbackReceived": "Nenhum feedback recebido",
+    "noFeedbackReceivedDesc": "Você ainda não recebeu nenhum feedback.",
+    "noPublicFeedback": "Sem feedback público",
+    "noPublicFeedbackDesc": "Compartilhe feedback positivo publicamente para celebrar as conquistas da sua equipe.",
+    "sendFeedback": "Enviar feedback",
+    "createPlanBtn": "Criar plano",
+    "addFocusArea": "+ Adicionar área de foco",
+    "stretch": "Desafio",
+    "reading": "Leitura",
+    "otherAction": "Outro",
+    "addAction": "+ Adicionar ação",
+    "noReviewsDesc": "Crie seu primeiro ciclo de avaliação para começar a avaliar o desempenho.",
+    "createFirstReview": "Iniciar primeiro ciclo",
+    "upcomingMeetings": "1-a-1 agendados",
+    "allCycles": "Ciclos de avaliação",
+    "newCycle": "Novo ciclo",
+    "participants": "Participantes",
+    "noParticipants": "Nenhum participante adicionado",
+    "statusDraft": "Rascunho",
+    "statusActive": "Ativo",
+    "statusInReview": "Em revisão",
+    "statusCalibration": "Calibração",
+    "statusCompleted": "Concluído",
+    "typeAnnual": "Anual",
+    "typeQuarterly": "Trimestral",
+    "typeProbation": "Período de teste",
+    "goals": "Metas",
+    "okrs": "OKRs",
+    "newGoal": "Nova meta",
+    "newOkr": "Novo OKR",
+    "noGoalsDesc": "Crie sua primeira meta para acompanhar o progresso.",
+    "noOkrs": "Nenhum OKR ainda",
+    "noOkrsDesc": "Crie seu primeiro OKR para alinhar os objetivos.",
+    "createOkr": "Criar OKR",
+    "periodPlaceholder": "T1 2026",
+    "keyResultPlaceholder": "Título do resultado-chave",
+    "targetPlaceholder": "Meta",
+    "noMeetingsDesc": "Agende seu primeiro 1-a-1 para conversas significativas.",
+    "scheduleMeeting": "Agendar reunião",
+    "addMeetingNotesPlaceholder": "Adicionar notas...",
+    "receivedFeedback": "Recebido",
+    "publicFeedback": "Feed público",
+    "fromLabel": "De",
+    "toLabel": "Para",
+    "privateVisibility": "Privado (só o destinatário vê)",
+    "publicVisibility": "Público (visível no feed)",
+    "feedbackType": "Tipo de feedback",
+    "noPlansDesc": "Crie seu primeiro plano de desenvolvimento para acompanhar o crescimento.",
+    "focusAreaPlaceholder": "Título da área de foco",
+    "actionItemPlaceholder": "Item de ação"
   },
   "surveys": {
     "templates": "Modelos",
@@ -3143,13 +3221,11 @@
     "myPayslips": "Meus recibos de vencimento",
     "configuration": "Configuração da folha de pagamento",
     "config": "Configuração",
-
     "grossPay": "Salário bruto",
     "netPay": "Salário líquido",
     "totalDeductions": "Total de deduções",
     "employerContributions": "Contribuições patronais",
     "totalEmployerCost": "Custo total do empregador",
-
     "incomeTax": "Imposto de renda",
     "nationalInsurance": "Seguro nacional",
     "pension": "Pensão",
@@ -3160,44 +3236,37 @@
     "healthInsurance": "Seguro de saúde",
     "unemploymentInsurance": "Seguro-desemprego",
     "housingFund": "Fundo de habitação",
-
     "payPeriod": "Período de pagamento",
     "payDate": "Data de pagamento",
     "taxYear": "Ano fiscal",
     "taxCode": "Código fiscal",
     "niCategory": "Categoria SN",
     "employeeNumber": "Número do colaborador",
-
     "yearToDate": "Acumulado do ano",
     "ytdGross": "Bruto acumulado",
     "ytdTax": "Imposto acumulado",
     "ytdNI": "SN acumulado",
     "ytdPension": "Pensão acumulada",
     "ytdNet": "Líquido acumulado",
-
     "basicSalary": "Salário base",
     "overtime": "Horas extras",
     "bonus": "Bónus",
     "allowances": "Subsídios",
     "commission": "Comissão",
-
     "totalMonthlyCoast": "Custo mensal total",
     "employeesOnPayroll": "Colaboradores na folha",
     "nextPayDate": "Próxima data de pagamento",
     "outstandingActions": "Ações pendentes",
-
     "countryBreakdown": "Discriminação por país",
     "monthlyGross": "Bruto mensal",
     "monthlyEmployerCost": "Custo mensal do empregador",
     "currency": "Moeda",
     "nextRunDate": "Próxima data de processamento",
-
     "upcomingDeadlines": "Prazos próximos",
     "recentRuns": "Processamentos recentes",
     "preparedBy": "Preparado por",
     "reviewedBy": "Revisto por",
     "approvedBy": "Aprovado por",
-
     "status": {
       "draft": "Rascunho",
       "calculating": "A calcular",
@@ -3208,7 +3277,6 @@
       "failed": "Falhou",
       "paid": "Pago"
     },
-
     "actions": {
       "createRun": "Criar processamento",
       "calculate": "Calcular",
@@ -3221,7 +3289,6 @@
       "editConfig": "Editar configuração",
       "addCountry": "Adicionar país"
     },
-
     "countries": {
       "uk": "Reino Unido",
       "de": "Alemanha",
@@ -3230,7 +3297,6 @@
       "cn": "China",
       "ae": "Emirados Árabes Unidos"
     },
-
     "calendar": {
       "taxFiling": "Declaração fiscal",
       "socialFiling": "Declaração de seguro social",
@@ -3238,14 +3304,12 @@
       "yearEnd": "Fim de ano",
       "deadline": "Prazo"
     },
-
     "variance": {
       "newStarter": "Novo colaborador",
       "leaver": "Saída",
       "highVariance": "Alta variação",
       "varianceFromLastMonth": "variação em relação ao mês anterior"
     },
-
     "earnings": "Rendimentos",
     "deductions": "Deduções",
     "summary": "Resumo",
@@ -3261,5 +3325,9 @@
     "feedImport": "Importação de dados",
     "nativeCalculation": "Cálculo nativo",
     "externalProvider": "Fornecedor externo"
+  },
+  "offline": {
+    "youAreOffline": "Você está offline. Algumas funcionalidades podem estar limitadas.",
+    "backOnline": "De volta online"
   }
 }

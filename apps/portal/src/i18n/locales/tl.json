@@ -99,7 +99,8 @@
       "myMoney": "AKING PANANALAPI",
       "myPeople": "AKING MGA TAO",
       "myUplift": "AKING UPLIFT",
-      "myWork": "AKING TRABAHO"
+      "myWork": "AKING TRABAHO",
+      "payroll": "PAYROLL"
     },
     "payslips": "Payslip at Sahod",
     "performance": "Pagganap",
@@ -120,7 +121,12 @@
     "myPerformance": "Aking Performance",
     "mySchedule": "Aking Iskedyul",
     "mySkillsCareer": "Mga Kasanayan at Karera Ko",
-    "recognition": "Recognition Wall"
+    "recognition": "Recognition Wall",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Naglo-load...",
@@ -3091,7 +3097,74 @@
     "moodCheck": "Kumusta ang pakiramdam mo?",
     "inReview": "Sinusuri",
     "mySubtitle": "Mga review, layunin, at development mo",
-    "myTitle": "Aking Performance"
+    "myTitle": "Aking Performance",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Mga Template",
@@ -3356,13 +3429,11 @@
     "myPayslips": "Aking mga Payslip",
     "configuration": "Konfigurason ng Payroll",
     "config": "Konfigurason",
-
     "grossPay": "Gross na Sahod",
     "netPay": "Net na Sahod",
     "totalDeductions": "Kabuuang mga Bawas",
     "employerContributions": "Kontribusyon ng Employer",
     "totalEmployerCost": "Kabuuang Gastos ng Employer",
-
     "incomeTax": "Buwis sa Kita",
     "nationalInsurance": "Pambansang Seguro",
     "pension": "Pensyon",
@@ -3373,44 +3444,37 @@
     "healthInsurance": "Health Insurance",
     "unemploymentInsurance": "Unemployment Insurance",
     "housingFund": "Pondo sa Pabahay",
-
     "payPeriod": "Panahon ng Sahod",
     "payDate": "Petsa ng Sahod",
     "taxYear": "Taon ng Buwis",
     "taxCode": "Kodigo ng Buwis",
     "niCategory": "Kategorya ng Seguro",
     "employeeNumber": "Numero ng Empleyado",
-
     "yearToDate": "Mula Simula ng Taon",
     "ytdGross": "YTD Gross",
     "ytdTax": "YTD Buwis",
     "ytdNI": "YTD Seguro",
     "ytdPension": "YTD Pensyon",
     "ytdNet": "YTD Net",
-
     "basicSalary": "Batayang Sahod",
     "overtime": "Overtime",
     "bonus": "Bonus",
     "allowances": "Mga Allowance",
     "commission": "Komisyon",
-
     "totalMonthlyCoast": "Kabuuang Buwanang Gastos",
     "employeesOnPayroll": "Mga Empleyado sa Payroll",
     "nextPayDate": "Susunod na Petsa ng Sahod",
     "outstandingActions": "Mga Aksyong Pending",
-
     "countryBreakdown": "Breakdown ayon sa Bansa",
     "monthlyGross": "Buwanang Gross",
     "monthlyEmployerCost": "Buwanang Gastos ng Employer",
     "currency": "Pera",
     "nextRunDate": "Susunod na Petsa ng Run",
-
     "upcomingDeadlines": "Mga Paparating na Deadline",
     "recentRuns": "Mga Kamakailang Payroll Run",
     "preparedBy": "Inihanda ni",
     "reviewedBy": "Sinuri ni",
     "approvedBy": "Inaprubahan ni",
-
     "status": {
       "draft": "Draft",
       "calculating": "Kinakalkula",
@@ -3421,7 +3485,6 @@
       "failed": "Nabigo",
       "paid": "Bayad na"
     },
-
     "actions": {
       "createRun": "Gumawa ng Payroll Run",
       "calculate": "Kalkulahin",
@@ -3434,7 +3497,6 @@
       "editConfig": "I-edit ang Konfigurason",
       "addCountry": "Magdagdag ng Bansa"
     },
-
     "countries": {
       "uk": "United Kingdom",
       "de": "Germany",
@@ -3443,7 +3505,6 @@
       "cn": "Tsina",
       "ae": "United Arab Emirates"
     },
-
     "calendar": {
       "taxFiling": "Pag-file ng Buwis",
       "socialFiling": "Pag-file ng Social Insurance",
@@ -3451,14 +3512,12 @@
       "yearEnd": "Katapusan ng Taon",
       "deadline": "Deadline"
     },
-
     "variance": {
       "newStarter": "Bagong Empleyado",
       "leaver": "Umaalis na Empleyado",
       "highVariance": "Mataas na Variance",
       "varianceFromLastMonth": "variance mula noong nakaraang buwan"
     },
-
     "earnings": "Mga Kita",
     "deductions": "Mga Bawas",
     "summary": "Buod",
@@ -3474,5 +3533,9 @@
     "feedImport": "Feed Import",
     "nativeCalculation": "Native na Kalkulasyon",
     "externalProvider": "External na Provider"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

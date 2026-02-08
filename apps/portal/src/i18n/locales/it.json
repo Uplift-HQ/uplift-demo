@@ -94,7 +94,13 @@
       "admin": "AMMINISTRAZIONE",
       "talent": "TALENTO",
       "people": "PERSONE",
-      "engagement": "COINVOLGIMENTO"
+      "engagement": "COINVOLGIMENTO",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Buste paga e Retribuzione",
     "performance": "Prestazioni",
@@ -104,7 +110,12 @@
     "learning": "Formazione",
     "documents": "Documenti",
     "expenses": "Note spese",
-    "sso": "SSO e Sicurezza"
+    "sso": "SSO e Sicurezza",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Caricamento...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Calibra",
     "companyGoals": "Obiettivi aziendali",
     "moodCheck": "Come si sente?",
-    "inReview": "In revisione"
+    "inReview": "In revisione",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Modelli",
@@ -3124,13 +3202,11 @@
     "myPayslips": "I miei cedolini",
     "configuration": "Configurazione libro paga",
     "config": "Configurazione",
-
     "grossPay": "Retribuzione lorda",
     "netPay": "Retribuzione netta",
     "totalDeductions": "Totale trattenute",
     "employerContributions": "Contributi datore di lavoro",
     "totalEmployerCost": "Costo totale datore di lavoro",
-
     "incomeTax": "IRPEF",
     "nationalInsurance": "Assicurazione nazionale",
     "pension": "Pensione",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Assicurazione sanitaria",
     "unemploymentInsurance": "Assicurazione disoccupazione",
     "housingFund": "Fondo abitativo",
-
     "payPeriod": "Periodo di paga",
     "payDate": "Data di pagamento",
     "taxYear": "Anno fiscale",
     "taxCode": "Codice fiscale",
     "niCategory": "Categoria AN",
     "employeeNumber": "Numero dipendente",
-
     "yearToDate": "Progressivo annuo",
     "ytdGross": "Lordo progressivo",
     "ytdTax": "Imposta progressiva",
     "ytdNI": "AN progressiva",
     "ytdPension": "Pensione progressiva",
     "ytdNet": "Netto progressivo",
-
     "basicSalary": "Stipendio base",
     "overtime": "Straordinari",
     "bonus": "Bonus",
     "allowances": "Indennità",
     "commission": "Provvigione",
-
     "totalMonthlyCoast": "Costo mensile totale",
     "employeesOnPayroll": "Dipendenti in organico",
     "nextPayDate": "Prossima data di pagamento",
     "outstandingActions": "Azioni in sospeso",
-
     "countryBreakdown": "Ripartizione per paese",
     "monthlyGross": "Lordo mensile",
     "monthlyEmployerCost": "Costo mensile datore di lavoro",
     "currency": "Valuta",
     "nextRunDate": "Prossima data elaborazione",
-
     "upcomingDeadlines": "Scadenze imminenti",
     "recentRuns": "Elaborazioni recenti",
     "preparedBy": "Preparato da",
     "reviewedBy": "Revisionato da",
     "approvedBy": "Approvato da",
-
     "status": {
       "draft": "Bozza",
       "calculating": "In calcolo",
@@ -3189,7 +3258,6 @@
       "failed": "Non riuscito",
       "paid": "Pagato"
     },
-
     "actions": {
       "createRun": "Crea elaborazione",
       "calculate": "Calcola",
@@ -3202,7 +3270,6 @@
       "editConfig": "Modifica configurazione",
       "addCountry": "Aggiungi paese"
     },
-
     "countries": {
       "uk": "Regno Unito",
       "de": "Germania",
@@ -3211,7 +3278,6 @@
       "cn": "Cina",
       "ae": "Emirati Arabi Uniti"
     },
-
     "calendar": {
       "taxFiling": "Dichiarazione fiscale",
       "socialFiling": "Dichiarazione previdenziale",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Fine anno",
       "deadline": "Scadenza"
     },
-
     "variance": {
       "newStarter": "Nuova assunzione",
       "leaver": "Cessazione",
       "highVariance": "Alta variazione",
       "varianceFromLastMonth": "variazione rispetto al mese scorso"
     },
-
     "earnings": "Competenze",
     "deductions": "Trattenute",
     "summary": "Riepilogo",
@@ -3242,5 +3306,9 @@
     "feedImport": "Importazione feed",
     "nativeCalculation": "Calcolo nativo",
     "externalProvider": "Fornitore esterno"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

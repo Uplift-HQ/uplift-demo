@@ -1,10 +1,12 @@
 // ============================================================
 // EMAIL SERVICE
 // Email notifications for security and account events
+// Multi-language support: en, de, fr, es, pt, pl, zh, ar
 // ============================================================
 
 import { db } from '../lib/database.js';
 import postmark from 'postmark';
+import { getTemplate, isLanguageSupported, isRTL } from './emailTemplates/index.js';
 
 // Configure Postmark if server token is available
 const postmarkClient = process.env.POSTMARK_SERVER_TOKEN
@@ -20,7 +22,7 @@ if (postmarkClient) {
 const EMAIL_FROM = process.env.EMAIL_FROM || 'noreply@uplift.app';
 const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO || 'support@uplift.app';
 
-// Email templates
+// Legacy templates (fallback) - kept for backwards compatibility
 const templates = {
   password_changed: {
     subject: 'Your Uplift password was changed',
@@ -364,27 +366,44 @@ ${data.actionUrl ? `View details: ${process.env.APP_URL || 'https://app.uplifthq
 
 export const emailService = {
   /**
-   * Queue an email for sending
+   * Queue an email for sending (with multi-language support)
+   * @param {string} template - Template name (e.g., 'password_changed')
+   * @param {string} toEmail - Recipient email
+   * @param {string} toName - Recipient name
+   * @param {object} data - Template data
+   * @param {string} lang - Language code (default: 'en'). Supported: en, de, fr, es, pt, pl, zh, ar
    */
-  async queueEmail(template, toEmail, toName, data) {
-    const templateConfig = templates[template];
+  async queueEmail(template, toEmail, toName, data, lang = 'en') {
+    // Try to get localized template, fallback to English, then to legacy templates
+    let templateConfig = getTemplate(template, lang);
+
+    // If not found in new templates, try legacy templates
+    if (!templateConfig) {
+      templateConfig = templates[template];
+    }
+
     if (!templateConfig) {
       console.error(`Unknown email template: ${template}`);
       return;
     }
 
     try {
+      const subject = typeof templateConfig.subject === 'function'
+        ? templateConfig.subject(data)
+        : templateConfig.subject;
+
       await db.query(
-        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text, language)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
         [
           toEmail,
           toName,
           template,
           JSON.stringify(data),
-          templateConfig.subject,
+          subject,
           templateConfig.html(data),
           templateConfig.text(data),
+          lang,
         ]
       );
     } catch (error) {
@@ -394,130 +413,152 @@ export const emailService = {
 
   /**
    * Send password changed notification
+   * @param {object} user - User object with email, first_name, last_name, preferred_language
+   * @param {object} deviceInfo - Device info (device, ip)
    */
   async sendPasswordChanged(user, deviceInfo = {}) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('password_changed', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
       device: deviceInfo.device,
       ipAddress: deviceInfo.ip,
-    });
+      timestamp: new Date().toLocaleString(lang),
+    }, lang);
   },
 
   /**
    * Send new device login alert
    */
   async sendNewDeviceLogin(user, deviceInfo = {}) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('new_device_login', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
       device: deviceInfo.device,
       browser: deviceInfo.browser,
       location: deviceInfo.location,
       ipAddress: deviceInfo.ip,
-    });
+      timestamp: new Date().toLocaleString(lang),
+    }, lang);
   },
 
   /**
    * Send account locked notification
    */
   async sendAccountLocked(user) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('account_locked', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
-    });
+    }, lang);
   },
 
   /**
    * Send account unlocked notification
    */
   async sendAccountUnlocked(user) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('account_unlocked', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
-    });
+    }, lang);
   },
 
   /**
    * Send password reset required notification
    */
   async sendPasswordResetRequired(user) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('password_reset_required', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
-    });
+    }, lang);
   },
 
   /**
    * Send invitation email
    */
   async sendInvitation(data) {
+    const lang = data.preferred_language || 'en';
     await this.queueEmail('invitation', data.email, `${data.first_name} ${data.last_name}`, {
       firstName: data.first_name,
       invitationToken: data.invitationToken,
       invitedBy: data.invitedBy,
-    });
+    }, lang);
   },
 
   /**
    * Send password reset email
    */
   async sendPasswordReset(user, resetToken) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('password_reset', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
       resetToken,
-    });
+    }, lang);
   },
 
   /**
    * Send deletion requested confirmation
    */
   async sendDeletionRequested(user) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('deletion_requested', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
-    });
+    }, lang);
   },
 
   /**
    * Send email verification
    */
   async sendEmailVerification(user, verificationToken) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('email_verification', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
       verificationToken,
-    });
+    }, lang);
   },
 
   /**
    * Send account deactivated notification
    */
   async sendAccountDeactivated(user, reason) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('account_deactivated', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
       reason,
-    });
+    }, lang);
   },
 
   /**
    * Send payment failed notification
    */
   async sendPaymentFailed(user, paymentData) {
+    const lang = user.preferred_language || 'en';
     await this.queueEmail('payment_failed', user.email, `${user.first_name} ${user.last_name}`, {
       firstName: user.first_name,
       amount: paymentData.amount,
       currency: paymentData.currency?.toUpperCase() || 'GBP',
       invoiceNumber: paymentData.invoiceNumber,
       billingPortalUrl: paymentData.billingPortalUrl || `${process.env.API_URL}/settings/billing`,
-    });
+    }, lang);
   },
 
   /**
    * Send a generic notification email
+   * @param {string} email - Recipient email
+   * @param {object} options - Notification options
+   * @param {string} lang - Language code (default: 'en')
    */
-  async sendNotification(email, { title, body, actionUrl }) {
-    await this.queueNotificationEmail(email, { title, body, actionUrl });
+  async sendNotification(email, { title, body, actionUrl }, lang = 'en') {
+    await this.queueNotificationEmail(email, { title, body, actionUrl }, lang);
   },
 
   /**
-   * Queue a notification email with dynamic subject
+   * Queue a notification email with dynamic subject (multi-language)
    */
-  async queueNotificationEmail(toEmail, data) {
-    const templateConfig = templates.notification;
+  async queueNotificationEmail(toEmail, data, lang = 'en') {
+    let templateConfig = getTemplate('notification', lang);
+    if (!templateConfig) {
+      templateConfig = templates.notification;
+    }
+
     if (!templateConfig) {
       console.error('Notification template not found');
       return;
@@ -529,8 +570,8 @@ export const emailService = {
         : templateConfig.subject;
 
       await db.query(
-        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        `INSERT INTO email_queue (to_email, to_name, template, template_data, subject, body_html, body_text, language)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
         [
           toEmail,
           null,
@@ -539,6 +580,7 @@ export const emailService = {
           subject,
           templateConfig.html(data),
           templateConfig.text(data),
+          lang,
         ]
       );
     } catch (error) {

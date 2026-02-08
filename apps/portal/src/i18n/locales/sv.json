@@ -94,7 +94,13 @@
       "admin": "ADMINISTRATION",
       "talent": "TALANG",
       "people": "PERSONAL",
-      "engagement": "ENGAGEMANG"
+      "engagement": "ENGAGEMANG",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Lönespecifikationer & Lön",
     "performance": "Prestation",
@@ -104,7 +110,12 @@
     "learning": "Utbildning",
     "documents": "Dokument",
     "expenses": "Utlägg",
-    "sso": "SSO & Säkerhet"
+    "sso": "SSO & Säkerhet",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Laddar...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Kalibrera",
     "companyGoals": "Företagsmål",
     "moodCheck": "Hur mår du?",
-    "inReview": "Under utvärdering"
+    "inReview": "Under utvärdering",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Mallar",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Mina lönespecifikationer",
     "configuration": "Lönekonfiguration",
     "config": "Konfiguration",
-
     "grossPay": "Bruttolön",
     "netPay": "Nettolön",
     "totalDeductions": "Totala avdrag",
     "employerContributions": "Arbetsgivaravgifter",
     "totalEmployerCost": "Total arbetsgivarkostnad",
-
     "incomeTax": "Inkomstskatt",
     "nationalInsurance": "Socialförsäkring",
     "pension": "Pension",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Sjukförsäkring",
     "unemploymentInsurance": "Arbetslöshetsförsäkring",
     "housingFund": "Bostadsfond",
-
     "payPeriod": "Löneperiod",
     "payDate": "Löneutbetalningsdag",
     "taxYear": "Beskattningsår",
     "taxCode": "Skattekod",
     "niCategory": "Socialförsäkringskategori",
     "employeeNumber": "Anställningsnummer",
-
     "yearToDate": "Hittills i år",
     "ytdGross": "Brutto hittills i år",
     "ytdTax": "Skatt hittills i år",
     "ytdNI": "Socialförsäkring hittills i år",
     "ytdPension": "Pension hittills i år",
     "ytdNet": "Netto hittills i år",
-
     "basicSalary": "Grundlön",
     "overtime": "Övertid",
     "bonus": "Bonus",
     "allowances": "Tillägg",
     "commission": "Provision",
-
     "totalMonthlyCoast": "Total månadskostnad",
     "employeesOnPayroll": "Anställda på lönelista",
     "nextPayDate": "Nästa löneutbetalning",
     "outstandingActions": "Väntande åtgärder",
-
     "countryBreakdown": "Fördelning per land",
     "monthlyGross": "Månatlig bruttolön",
     "monthlyEmployerCost": "Månatlig arbetsgivarkostnad",
     "currency": "Valuta",
     "nextRunDate": "Nästa körningsdatum",
-
     "upcomingDeadlines": "Kommande deadlines",
     "recentRuns": "Senaste lönekörningar",
     "preparedBy": "Förberedd av",
     "reviewedBy": "Granskad av",
     "approvedBy": "Godkänd av",
-
     "status": {
       "draft": "Utkast",
       "calculating": "Beräknar",
@@ -3189,7 +3258,6 @@
       "failed": "Misslyckades",
       "paid": "Betald"
     },
-
     "actions": {
       "createRun": "Skapa lönekörning",
       "calculate": "Beräkna",
@@ -3202,7 +3270,6 @@
       "editConfig": "Redigera konfiguration",
       "addCountry": "Lägg till land"
     },
-
     "countries": {
       "uk": "Storbritannien",
       "de": "Tyskland",
@@ -3211,7 +3278,6 @@
       "cn": "Kina",
       "ae": "Förenade Arabemiraten"
     },
-
     "calendar": {
       "taxFiling": "Skattedeklaration",
       "socialFiling": "Socialförsäkringsrapport",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Årsskifte",
       "deadline": "Deadline"
     },
-
     "variance": {
       "newStarter": "Nyanställd",
       "leaver": "Avgående",
       "highVariance": "Stor avvikelse",
       "varianceFromLastMonth": "avvikelse från förra månaden"
     },
-
     "earnings": "Inkomster",
     "deductions": "Avdrag",
     "summary": "Sammanfattning",
@@ -3242,5 +3306,9 @@
     "feedImport": "Dataflödesimport",
     "nativeCalculation": "Inbyggd beräkning",
     "externalProvider": "Extern leverantör"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

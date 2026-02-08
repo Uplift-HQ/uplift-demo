@@ -50,7 +50,11 @@ class SimpleEventEmitter {
 // Types
 export interface QueuedAction {
   id: string;
-  type: 'clock_in' | 'clock_out' | 'break_start' | 'break_end' | 'shift_request' | 'time_off' | 'skill_update';
+  type:
+    | 'clock_in' | 'clock_out' | 'break_start' | 'break_end'
+    | 'shift_request' | 'time_off' | 'skill_update'
+    | 'time_off_request' | 'expense_claim' | 'recognition'
+    | 'lesson_complete' | 'survey_response' | 'feedback';
   endpoint: string;
   method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   data: any;
@@ -290,8 +294,20 @@ class OfflineManager extends SimpleEventEmitter {
     
     this.isSyncing = false;
     this.emit('syncComplete', result);
-    
-    
+
+    // Emit sync failure notification if any actions failed
+    if (result.failed > 0) {
+      this.emit('syncFailed', {
+        failedCount: result.failed,
+        message: `${result.failed} action${result.failed > 1 ? 's' : ''} couldn't be synced. Tap to retry.`,
+      });
+    }
+
+    // Emit conflict notification if any conflicts detected
+    if (result.conflicts.length > 0) {
+      this.emit('syncConflicts', result.conflicts);
+    }
+
     return result;
   }
 
@@ -594,8 +610,185 @@ export class OfflineApi {
       } catch (error) {
       }
     }
-    
+
     const cached = await this.cache.getNotifications();
+    return { data: cached || [], fromCache: true };
+  }
+
+  // -------------------- NEW OFFLINE ACTION TYPES --------------------
+
+  // Time Off Request with offline support
+  async submitTimeOffRequest(data: {
+    startDate: string;
+    endDate: string;
+    type: string;
+    notes?: string;
+  }): Promise<{ queued: boolean; id?: string }> {
+    if (!this.offline.getIsOnline()) {
+      const id = await this.offline.enqueue({
+        type: 'time_off_request',
+        endpoint: '/time-off/requests',
+        method: 'POST',
+        data: { ...data, offlineTimestamp: Date.now() },
+        maxRetries: 5,
+      });
+      return { queued: true, id };
+    }
+
+    const { apiClient } = await import('./api');
+    await apiClient.publicRequest('/time-off/requests', { method: 'POST', body: data });
+    return { queued: false };
+  }
+
+  // Expense Claim with offline support
+  async submitExpenseClaim(data: {
+    amount: number;
+    category: string;
+    description: string;
+    receiptBase64?: string;
+    date: string;
+  }): Promise<{ queued: boolean; id?: string }> {
+    if (!this.offline.getIsOnline()) {
+      const id = await this.offline.enqueue({
+        type: 'expense_claim',
+        endpoint: '/expenses/claims',
+        method: 'POST',
+        data: { ...data, offlineTimestamp: Date.now() },
+        maxRetries: 5,
+      });
+      return { queued: true, id };
+    }
+
+    const { apiClient } = await import('./api');
+    await apiClient.publicRequest('/expenses/claims', { method: 'POST', body: data });
+    return { queued: false };
+  }
+
+  // Recognition with offline support
+  async giveRecognition(data: {
+    toUserId: string;
+    value: string;
+    message: string;
+  }): Promise<{ queued: boolean; id?: string }> {
+    if (!this.offline.getIsOnline()) {
+      const id = await this.offline.enqueue({
+        type: 'recognition',
+        endpoint: '/recognition',
+        method: 'POST',
+        data: { ...data, offlineTimestamp: Date.now() },
+        maxRetries: 5,
+      });
+      return { queued: true, id };
+    }
+
+    const { apiClient } = await import('./api');
+    await apiClient.publicRequest('/recognition', { method: 'POST', body: data });
+    return { queued: false };
+  }
+
+  // Lesson Completion with offline support
+  async completelesson(data: {
+    courseId: string;
+    lessonId: string;
+    score?: number;
+  }): Promise<{ queued: boolean; id?: string }> {
+    if (!this.offline.getIsOnline()) {
+      const id = await this.offline.enqueue({
+        type: 'lesson_complete',
+        endpoint: `/learning/courses/${data.courseId}/lessons/${data.lessonId}/complete`,
+        method: 'POST',
+        data: { score: data.score, offlineTimestamp: Date.now() },
+        maxRetries: 5,
+      });
+      return { queued: true, id };
+    }
+
+    const { apiClient } = await import('./api');
+    await apiClient.publicRequest(`/learning/courses/${data.courseId}/lessons/${data.lessonId}/complete`, {
+      method: 'POST',
+      body: { score: data.score },
+    });
+    return { queued: false };
+  }
+
+  // Survey Response with offline support
+  async submitSurveyResponse(data: {
+    surveyId: string;
+    answers: Record<string, any>;
+  }): Promise<{ queued: boolean; id?: string }> {
+    if (!this.offline.getIsOnline()) {
+      const id = await this.offline.enqueue({
+        type: 'survey_response',
+        endpoint: `/surveys/${data.surveyId}/respond`,
+        method: 'POST',
+        data: { answers: data.answers, offlineTimestamp: Date.now() },
+        maxRetries: 5,
+      });
+      return { queued: true, id };
+    }
+
+    const { apiClient } = await import('./api');
+    await apiClient.publicRequest(`/surveys/${data.surveyId}/respond`, {
+      method: 'POST',
+      body: { answers: data.answers },
+    });
+    return { queued: false };
+  }
+
+  // Feedback with offline support
+  async giveFeedback(data: {
+    toUserId: string;
+    text: string;
+    type: 'praise' | 'constructive';
+    anonymous?: boolean;
+  }): Promise<{ queued: boolean; id?: string }> {
+    if (!this.offline.getIsOnline()) {
+      const id = await this.offline.enqueue({
+        type: 'feedback',
+        endpoint: '/performance/feedback',
+        method: 'POST',
+        data: { ...data, offlineTimestamp: Date.now() },
+        maxRetries: 5,
+      });
+      return { queued: true, id };
+    }
+
+    const { apiClient } = await import('./api');
+    await apiClient.publicRequest('/performance/feedback', { method: 'POST', body: data });
+    return { queued: false };
+  }
+
+  // Get payslips with cache fallback
+  async getPayslips(): Promise<{ data: any[]; fromCache: boolean }> {
+    if (this.offline.getIsOnline()) {
+      try {
+        const { apiClient } = await import('./api');
+        const data = await apiClient.publicRequest<{ payslips?: any[] }>('/payroll/payslips');
+        const payslips = data.payslips || (data as any[]);
+        await this.cache.set('payslips', payslips, 24 * 60 * 60 * 1000); // 24h TTL
+        return { data: payslips, fromCache: false };
+      } catch (error) {
+      }
+    }
+
+    const cached = await this.cache.get('payslips');
+    return { data: cached || [], fromCache: true };
+  }
+
+  // Get learning courses with cache fallback
+  async getLearningCourses(): Promise<{ data: any[]; fromCache: boolean }> {
+    if (this.offline.getIsOnline()) {
+      try {
+        const { apiClient } = await import('./api');
+        const data = await apiClient.publicRequest<{ courses?: any[] }>('/learning/courses');
+        const courses = data.courses || (data as any[]);
+        await this.cache.set('learningCourses', courses, 12 * 60 * 60 * 1000); // 12h TTL
+        return { data: courses, fromCache: false };
+      } catch (error) {
+      }
+    }
+
+    const cached = await this.cache.get('learningCourses');
     return { data: cached || [], fromCache: true };
   }
 }
@@ -628,12 +821,18 @@ export const subscribeToQueue = (callback: (length: number) => void) => {
 export const subscribeToSync = (callbacks: {
   onStart?: () => void;
   onComplete?: (result: SyncResult) => void;
+  onFailed?: (info: { failedCount: number; message: string }) => void;
+  onConflicts?: (conflicts: ConflictItem[]) => void;
 }) => {
   if (callbacks.onStart) offlineManager.on('syncStart', callbacks.onStart);
   if (callbacks.onComplete) offlineManager.on('syncComplete', callbacks.onComplete);
-  
+  if (callbacks.onFailed) offlineManager.on('syncFailed', callbacks.onFailed);
+  if (callbacks.onConflicts) offlineManager.on('syncConflicts', callbacks.onConflicts);
+
   return () => {
     if (callbacks.onStart) offlineManager.off('syncStart', callbacks.onStart);
     if (callbacks.onComplete) offlineManager.off('syncComplete', callbacks.onComplete);
+    if (callbacks.onFailed) offlineManager.off('syncFailed', callbacks.onFailed);
+    if (callbacks.onConflicts) offlineManager.off('syncConflicts', callbacks.onConflicts);
   };
 };

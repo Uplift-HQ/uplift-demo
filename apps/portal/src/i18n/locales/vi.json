@@ -94,7 +94,13 @@
       "admin": "QUẢN TRỊ",
       "talent": "NHÂN TÀI",
       "people": "NHÂN SỰ",
-      "engagement": "GẮN KẾT"
+      "engagement": "GẮN KẾT",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Phiếu lương & Lương",
     "performance": "Hiệu suất",
@@ -104,7 +110,12 @@
     "learning": "Học tập",
     "documents": "Tài liệu",
     "expenses": "Chi phí",
-    "sso": "SSO & Bảo mật"
+    "sso": "SSO & Bảo mật",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Đang tải...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Hiệu chuẩn",
     "companyGoals": "Mục tiêu công ty",
     "moodCheck": "Hôm nay bạn cảm thấy thế nào?",
-    "inReview": "Đang đánh giá"
+    "inReview": "Đang đánh giá",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Mẫu",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Phiếu lương của tôi",
     "configuration": "Cấu hình bảng lương",
     "config": "Cấu hình",
-
     "grossPay": "Lương gộp",
     "netPay": "Lương thực nhận",
     "totalDeductions": "Tổng các khoản khấu trừ",
     "employerContributions": "Đóng góp của người sử dụng lao động",
     "totalEmployerCost": "Tổng chi phí người sử dụng lao động",
-
     "incomeTax": "Thuế thu nhập",
     "nationalInsurance": "Bảo hiểm quốc gia",
     "pension": "Lương hưu",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Bảo hiểm y tế",
     "unemploymentInsurance": "Bảo hiểm thất nghiệp",
     "housingFund": "Quỹ nhà ở",
-
     "payPeriod": "Kỳ trả lương",
     "payDate": "Ngày trả lương",
     "taxYear": "Năm thuế",
     "taxCode": "Mã thuế",
     "niCategory": "Loại bảo hiểm",
     "employeeNumber": "Mã nhân viên",
-
     "yearToDate": "Lũy kế từ đầu năm",
     "ytdGross": "Lương gộp lũy kế",
     "ytdTax": "Thuế lũy kế",
     "ytdNI": "Bảo hiểm lũy kế",
     "ytdPension": "Lương hưu lũy kế",
     "ytdNet": "Lương thực nhận lũy kế",
-
     "basicSalary": "Lương cơ bản",
     "overtime": "Làm thêm giờ",
     "bonus": "Thưởng",
     "allowances": "Phụ cấp",
     "commission": "Hoa hồng",
-
     "totalMonthlyCoast": "Tổng chi phí hàng tháng",
     "employeesOnPayroll": "Nhân viên trong bảng lương",
     "nextPayDate": "Ngày trả lương tiếp theo",
     "outstandingActions": "Các mục cần xử lý",
-
     "countryBreakdown": "Phân tích theo quốc gia",
     "monthlyGross": "Lương gộp hàng tháng",
     "monthlyEmployerCost": "Chi phí người sử dụng lao động hàng tháng",
     "currency": "Tiền tệ",
     "nextRunDate": "Ngày chạy lương tiếp theo",
-
     "upcomingDeadlines": "Hạn chót sắp tới",
     "recentRuns": "Các kỳ lương gần đây",
     "preparedBy": "Chuẩn bị bởi",
     "reviewedBy": "Xem xét bởi",
     "approvedBy": "Phê duyệt bởi",
-
     "status": {
       "draft": "Bản nháp",
       "calculating": "Đang tính toán",
@@ -3189,7 +3258,6 @@
       "failed": "Thất bại",
       "paid": "Đã thanh toán"
     },
-
     "actions": {
       "createRun": "Tạo kỳ lương",
       "calculate": "Tính toán",
@@ -3202,7 +3270,6 @@
       "editConfig": "Chỉnh sửa cấu hình",
       "addCountry": "Thêm quốc gia"
     },
-
     "countries": {
       "uk": "Vương quốc Anh",
       "de": "Đức",
@@ -3211,7 +3278,6 @@
       "cn": "Trung Quốc",
       "ae": "Các Tiểu vương quốc Ả Rập Thống nhất"
     },
-
     "calendar": {
       "taxFiling": "Nộp thuế",
       "socialFiling": "Nộp bảo hiểm xã hội",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Cuối năm",
       "deadline": "Hạn chót"
     },
-
     "variance": {
       "newStarter": "Nhân viên mới",
       "leaver": "Nhân viên nghỉ việc",
       "highVariance": "Biến động lớn",
       "varianceFromLastMonth": "biến động so với tháng trước"
     },
-
     "earnings": "Thu nhập",
     "deductions": "Khấu trừ",
     "summary": "Tóm tắt",
@@ -3242,5 +3306,9 @@
     "feedImport": "Nhập từ nguồn dữ liệu",
     "nativeCalculation": "Tính toán nội bộ",
     "externalProvider": "Nhà cung cấp bên ngoài"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

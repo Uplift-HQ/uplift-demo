@@ -94,7 +94,13 @@
       "admin": "ನಿರ್ವಹಣೆ",
       "talent": "ಪ್ರತಿಭೆ",
       "people": "ಜನರು",
-      "engagement": "ತೊಡಗಿಕೊಳ್ಳುವಿಕೆ"
+      "engagement": "ತೊಡಗಿಕೊಳ್ಳುವಿಕೆ",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "ಸಂಬಳ ಚೀಟಿ ಮತ್ತು ವೇತನ",
     "performance": "ಕಾರ್ಯಕ್ಷಮತೆ",
@@ -104,7 +110,12 @@
     "learning": "ಕಲಿಕೆ",
     "documents": "ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳು",
     "expenses": "ಖರ್ಚುಗಳು",
-    "sso": "SSO ಮತ್ತು ಸುರಕ್ಷತೆ"
+    "sso": "SSO ಮತ್ತು ಸುರಕ್ಷತೆ",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
@@ -3019,7 +3030,74 @@
     "calibrate": "ಮಾಪನಾಂಕ ನಿರ್ಣಯಿಸಿ",
     "companyGoals": "ಕಂಪನಿ ಗುರಿಗಳು",
     "moodCheck": "ನೀವು ಹೇಗೆ ಅನುಭವಿಸುತ್ತಿದ್ದೀರಿ?",
-    "inReview": "ಸಮೀಕ್ಷೆಯಲ್ಲಿ"
+    "inReview": "ಸಮೀಕ್ಷೆಯಲ್ಲಿ",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "ಟೆಂಪ್ಲೇಟ್",
@@ -3124,13 +3202,11 @@
     "myPayslips": "ನನ್ನ ವೇತನ ಚೀಟಿಗಳು",
     "configuration": "ವೇತನ ಪಟ್ಟಿ ಸಂರಚನೆ",
     "config": "ಸಂರಚನೆ",
-
     "grossPay": "ಒಟ್ಟು ವೇತನ",
     "netPay": "ನಿವ್ವಳ ವೇತನ",
     "totalDeductions": "ಒಟ್ಟು ಕಡಿತಗಳು",
     "employerContributions": "ಉದ್ಯೋಗದಾತರ ಕೊಡುಗೆಗಳು",
     "totalEmployerCost": "ಒಟ್ಟು ಉದ್ಯೋಗದಾತರ ವೆಚ್ಚ",
-
     "incomeTax": "ಆದಾಯ ತೆರಿಗೆ",
     "nationalInsurance": "ರಾಷ್ಟ್ರೀಯ ವಿಮೆ",
     "pension": "ಪಿಂಚಣಿ",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "ಆರೋಗ್ಯ ವಿಮೆ",
     "unemploymentInsurance": "ನಿರುದ್ಯೋಗ ವಿಮೆ",
     "housingFund": "ವಸತಿ ನಿಧಿ",
-
     "payPeriod": "ವೇತನ ಅವಧಿ",
     "payDate": "ವೇತನ ದಿನಾಂಕ",
     "taxYear": "ತೆರಿಗೆ ವರ್ಷ",
     "taxCode": "ತೆರಿಗೆ ಕೋಡ್",
     "niCategory": "NI ವರ್ಗ",
     "employeeNumber": "ಉದ್ಯೋಗಿ ಸಂಖ್ಯೆ",
-
     "yearToDate": "ವರ್ಷದಿಂದ ಇಂದಿನವರೆಗೆ",
     "ytdGross": "YTD ಒಟ್ಟು",
     "ytdTax": "YTD ತೆರಿಗೆ",
     "ytdNI": "YTD NI",
     "ytdPension": "YTD ಪಿಂಚಣಿ",
     "ytdNet": "YTD ನಿವ್ವಳ",
-
     "basicSalary": "ಮೂಲ ವೇತನ",
     "overtime": "ಅಧಿಕ ಸಮಯ",
     "bonus": "ಬೋನಸ್",
     "allowances": "ಭತ್ಯೆಗಳು",
     "commission": "ಆಯೋಗ",
-
     "totalMonthlyCoast": "ಒಟ್ಟು ಮಾಸಿಕ ವೆಚ್ಚ",
     "employeesOnPayroll": "ವೇತನ ಪಟ್ಟಿಯಲ್ಲಿರುವ ಉದ್ಯೋಗಿಗಳು",
     "nextPayDate": "ಮುಂದಿನ ವೇತನ ದಿನಾಂಕ",
     "outstandingActions": "ಬಾಕಿ ಕ್ರಮಗಳು",
-
     "countryBreakdown": "ದೇಶ ವಿಭಜನೆ",
     "monthlyGross": "ಮಾಸಿಕ ಒಟ್ಟು",
     "monthlyEmployerCost": "ಮಾಸಿಕ ಉದ್ಯೋಗದಾತರ ವೆಚ್ಚ",
     "currency": "ಕರೆನ್ಸಿ",
     "nextRunDate": "ಮುಂದಿನ ರನ್ ದಿನಾಂಕ",
-
     "upcomingDeadlines": "ಮುಂಬರುವ ಗಡುವು",
     "recentRuns": "ಇತ್ತೀಚಿನ ವೇತನ ಪಟ್ಟಿ ರನ್‌ಗಳು",
     "preparedBy": "ಸಿದ್ಧಪಡಿಸಿದವರು",
     "reviewedBy": "ಪರಿಶೀಲಿಸಿದವರು",
     "approvedBy": "ಅನುಮೋದಿಸಿದವರು",
-
     "status": {
       "draft": "ಕರಡು",
       "calculating": "ಲೆಕ್ಕಾಚಾರ ಮಾಡಲಾಗುತ್ತಿದೆ",
@@ -3189,7 +3258,6 @@
       "failed": "ವಿಫಲವಾಗಿದೆ",
       "paid": "ಪಾವತಿಸಲಾಗಿದೆ"
     },
-
     "actions": {
       "createRun": "ವೇತನ ಪಟ್ಟಿ ರನ್ ರಚಿಸಿ",
       "calculate": "ಲೆಕ್ಕ ಹಾಕಿ",
@@ -3202,7 +3270,6 @@
       "editConfig": "ಸಂರಚನೆ ಸಂಪಾದಿಸಿ",
       "addCountry": "ದೇಶ ಸೇರಿಸಿ"
     },
-
     "countries": {
       "uk": "ಯುನೈಟೆಡ್ ಕಿಂಗ್‌ಡಮ್",
       "de": "ಜರ್ಮನಿ",
@@ -3211,7 +3278,6 @@
       "cn": "ಚೀನಾ",
       "ae": "ಯುನೈಟೆಡ್ ಅರಬ್ ಎಮಿರೇಟ್ಸ್"
     },
-
     "calendar": {
       "taxFiling": "ತೆರಿಗೆ ಫೈಲಿಂಗ್",
       "socialFiling": "ಸಾಮಾಜಿಕ ವಿಮೆ ಫೈಲಿಂಗ್",
@@ -3219,14 +3285,12 @@
       "yearEnd": "ವರ್ಷಾಂತ್ಯ",
       "deadline": "ಗಡುವು"
     },
-
     "variance": {
       "newStarter": "ಹೊಸ ಉದ್ಯೋಗಿ",
       "leaver": "ಬಿಡುಗಡೆಯಾಗುವವರು",
       "highVariance": "ಹೆಚ್ಚಿನ ವ್ಯತ್ಯಾಸ",
       "varianceFromLastMonth": "ಕಳೆದ ತಿಂಗಳಿನಿಂದ ವ್ಯತ್ಯಾಸ"
     },
-
     "earnings": "ಗಳಿಕೆಗಳು",
     "deductions": "ಕಡಿತಗಳು",
     "summary": "ಸಾರಾಂಶ",
@@ -3242,5 +3306,9 @@
     "feedImport": "ಫೀಡ್ ಆಮದು",
     "nativeCalculation": "ಸ್ಥಳೀಯ ಲೆಕ್ಕಾಚಾರ",
     "externalProvider": "ಬಾಹ್ಯ ಪೂರೈಕೆದಾರ"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }

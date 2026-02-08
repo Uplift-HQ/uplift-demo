@@ -94,7 +94,13 @@
       "admin": "ADMINISTRĒŠANA",
       "talent": "TALANTI",
       "people": "CILVĒKI",
-      "engagement": "IESAISTE"
+      "engagement": "IESAISTE",
+      "myUplift": "MY UPLIFT",
+      "myWork": "MY WORK",
+      "myGrowth": "MY GROWTH",
+      "myMoney": "MY MONEY",
+      "myPeople": "MY PEOPLE",
+      "payroll": "PAYROLL"
     },
     "payslips": "Algas lapas un atalgojums",
     "performance": "Veiktspēja",
@@ -104,7 +110,12 @@
     "learning": "Mācības",
     "documents": "Dokumenti",
     "expenses": "Izdevumi",
-    "sso": "SSO un drošība"
+    "sso": "SSO un drošība",
+    "payroll": "Payroll",
+    "payrollDashboard": "Payroll Dashboard",
+    "payrollRuns": "Payroll Runs",
+    "payrollConfig": "Payroll Config",
+    "teamPayroll": "Team Payroll"
   },
   "common": {
     "loading": "Ielādē...",
@@ -3019,7 +3030,74 @@
     "calibrate": "Kalibrēt",
     "companyGoals": "Uzņēmuma mērķi",
     "moodCheck": "Kā jūs jūtaties?",
-    "inReview": "Novērtēšanā"
+    "inReview": "Novērtēšanā",
+    "subtitle": "Reviews, goals, feedback, and employee development",
+    "noDepartment": "No department",
+    "selfBadge": "Self",
+    "managerBadge": "Manager",
+    "peerBadge": "Peer",
+    "noReviewsYet": "No performance reviews",
+    "createCycleBtn": "Create Cycle",
+    "createOkrTitle": "Create OKR",
+    "createGoalTitle": "Create Goal",
+    "titleLabel": "Title",
+    "createBtn": "Create",
+    "notes": "Notes",
+    "saving": "Saving...",
+    "saveNotes": "Save Notes",
+    "oneTime": "One-time",
+    "scheduleBtn": "Schedule",
+    "giveFeedbackBtn": "Give Feedback",
+    "noFeedbackReceived": "No feedback received",
+    "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
+    "noPublicFeedback": "No public feedback",
+    "noPublicFeedbackDesc": "Share positive feedback publicly to celebrate your team's achievements.",
+    "sendFeedback": "Send Feedback",
+    "createPlanBtn": "Create Plan",
+    "addFocusArea": "+ Add Focus Area",
+    "stretch": "Stretch",
+    "reading": "Reading",
+    "otherAction": "Other",
+    "addAction": "+ Add Action",
+    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
+    "createFirstReview": "Start First Review Cycle",
+    "upcomingMeetings": "Upcoming 1-on-1s",
+    "allCycles": "Review Cycles",
+    "newCycle": "New Cycle",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet",
+    "statusDraft": "Draft",
+    "statusActive": "Active",
+    "statusInReview": "In Review",
+    "statusCalibration": "Calibration",
+    "statusCompleted": "Completed",
+    "typeAnnual": "Annual",
+    "typeQuarterly": "Quarterly",
+    "typeProbation": "Probation",
+    "goals": "Goals",
+    "okrs": "OKRs",
+    "newGoal": "New Goal",
+    "newOkr": "New OKR",
+    "noGoalsDesc": "Create your first goal to start tracking progress.",
+    "noOkrs": "No OKRs yet",
+    "noOkrsDesc": "Create your first OKR to align team objectives.",
+    "createOkr": "Create OKR",
+    "periodPlaceholder": "Q1 2026",
+    "keyResultPlaceholder": "Key result title",
+    "targetPlaceholder": "Target",
+    "noMeetingsDesc": "Schedule your first 1-on-1 meeting to start meaningful conversations.",
+    "scheduleMeeting": "Schedule Meeting",
+    "addMeetingNotesPlaceholder": "Add meeting notes...",
+    "receivedFeedback": "Received",
+    "publicFeedback": "Public Feed",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "privateVisibility": "Private (only recipient sees)",
+    "publicVisibility": "Public (visible on feed)",
+    "feedbackType": "Feedback Type",
+    "noPlansDesc": "Create your first development plan to track career growth.",
+    "focusAreaPlaceholder": "Focus area title",
+    "actionItemPlaceholder": "Action item"
   },
   "surveys": {
     "templates": "Veidnes",
@@ -3124,13 +3202,11 @@
     "myPayslips": "Manas Algas Lapiņas",
     "configuration": "Algu Konfigurācija",
     "config": "Konfigurācija",
-
     "grossPay": "Bruto Alga",
     "netPay": "Neto Alga",
     "totalDeductions": "Kopējie Ieturējumi",
     "employerContributions": "Darba Devēja Iemaksas",
     "totalEmployerCost": "Kopējās Darba Devēja Izmaksas",
-
     "incomeTax": "Ienākuma Nodoklis",
     "nationalInsurance": "Valsts Apdrošināšana",
     "pension": "Pensija",
@@ -3141,44 +3217,37 @@
     "healthInsurance": "Veselības Apdrošināšana",
     "unemploymentInsurance": "Bezdarba Apdrošināšana",
     "housingFund": "Mājokļu Fonds",
-
     "payPeriod": "Izmaksas Periods",
     "payDate": "Izmaksas Datums",
     "taxYear": "Nodokļu Gads",
     "taxCode": "Nodokļu Kods",
     "niCategory": "VA Kategorija",
     "employeeNumber": "Darbinieka Numurs",
-
     "yearToDate": "No Gada Sākuma",
     "ytdGross": "Kumulatīvā Bruto",
     "ytdTax": "Kumulatīvais Nodoklis",
     "ytdNI": "Kumulatīvā VA",
     "ytdPension": "Kumulatīvā Pensija",
     "ytdNet": "Kumulatīvā Neto",
-
     "basicSalary": "Pamatalga",
     "overtime": "Virsstundas",
     "bonus": "Prēmija",
     "allowances": "Piemaksas",
     "commission": "Komisija",
-
     "totalMonthlyCoast": "Kopējās Mēneša Izmaksas",
     "employeesOnPayroll": "Darbinieki Algu Sarakstā",
     "nextPayDate": "Nākamais Izmaksas Datums",
     "outstandingActions": "Neizpildītas Darbības",
-
     "countryBreakdown": "Sadalījums pa Valstīm",
     "monthlyGross": "Mēneša Bruto",
     "monthlyEmployerCost": "Mēneša Darba Devēja Izmaksas",
     "currency": "Valūta",
     "nextRunDate": "Nākamais Aprēķina Datums",
-
     "upcomingDeadlines": "Tuvojošies Termiņi",
     "recentRuns": "Nesenie Algu Aprēķini",
     "preparedBy": "Sagatavoja",
     "reviewedBy": "Pārskatīja",
     "approvedBy": "Apstiprināja",
-
     "status": {
       "draft": "Melnraksts",
       "calculating": "Aprēķina",
@@ -3189,7 +3258,6 @@
       "failed": "Neizdevās",
       "paid": "Samaksāts"
     },
-
     "actions": {
       "createRun": "Izveidot Algu Aprēķinu",
       "calculate": "Aprēķināt",
@@ -3202,7 +3270,6 @@
       "editConfig": "Rediģēt Konfigurāciju",
       "addCountry": "Pievienot Valsti"
     },
-
     "countries": {
       "uk": "Apvienotā Karaliste",
       "de": "Vācija",
@@ -3211,7 +3278,6 @@
       "cn": "Ķīna",
       "ae": "Apvienotie Arābu Emirāti"
     },
-
     "calendar": {
       "taxFiling": "Nodokļu Deklarēšana",
       "socialFiling": "Sociālās Apdrošināšanas Deklarēšana",
@@ -3219,14 +3285,12 @@
       "yearEnd": "Gada Beigas",
       "deadline": "Termiņš"
     },
-
     "variance": {
       "newStarter": "Jauns Darbinieks",
       "leaver": "Aizejošais",
       "highVariance": "Liela Novirze",
       "varianceFromLastMonth": "novirze no iepriekšējā mēneša"
     },
-
     "earnings": "Ienākumi",
     "deductions": "Ieturējumi",
     "summary": "Kopsavilkums",
@@ -3242,5 +3306,9 @@
     "feedImport": "Datu Imports",
     "nativeCalculation": "Vietējais Aprēķins",
     "externalProvider": "Ārējais Pakalpojumu Sniedzējs"
+  },
+  "offline": {
+    "youAreOffline": "You're offline. Some features may be limited.",
+    "backOnline": "Back online"
   }
 }
