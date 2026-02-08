@@ -981,6 +981,229 @@ function getMigrationFiles() {
         -- Add seat_type if not exists
         ALTER TABLE employees ADD COLUMN IF NOT EXISTS seat_type VARCHAR(20) DEFAULT 'core';
       `
+    },
+    {
+      filename: '018_ops_super_admin.sql',
+      sql: `
+        -- Create ops_users table if not exists
+        CREATE TABLE IF NOT EXISTS ops_users (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          email VARCHAR(255) UNIQUE NOT NULL,
+          name VARCHAR(255),
+          first_name VARCHAR(100),
+          last_name VARCHAR(100),
+          password_hash VARCHAR(255) NOT NULL,
+          role VARCHAR(50) DEFAULT 'support',
+          role_id UUID,
+          status VARCHAR(20) DEFAULT 'active',
+          is_active BOOLEAN DEFAULT true,
+          mfa_enabled BOOLEAN DEFAULT false,
+          mfa_secret VARCHAR(255),
+          force_password_change BOOLEAN DEFAULT false,
+          last_login_at TIMESTAMPTZ,
+          created_by UUID,
+          created_at TIMESTAMPTZ DEFAULT NOW(),
+          updated_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        -- Create ops_roles table if not exists
+        CREATE TABLE IF NOT EXISTS ops_roles (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          name VARCHAR(100) NOT NULL,
+          permissions JSONB DEFAULT '[]',
+          created_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        -- Get or create super_admin role
+        INSERT INTO ops_roles (name, permissions)
+        SELECT 'super_admin', '["*"]'::jsonb
+        WHERE NOT EXISTS (SELECT 1 FROM ops_roles WHERE name = 'super_admin');
+
+        -- Insert default ops user (password: UpliftOps2026!)
+        -- Hash generated with bcrypt rounds=12
+        INSERT INTO ops_users (email, name, first_name, last_name, password_hash, role, role_id, status, is_active)
+        SELECT
+          'dazevedo@uplifthq.co.uk',
+          'Diogo Azevedo',
+          'Diogo',
+          'Azevedo',
+          '$2a$12$9Dgg3QP48.dYnVFKf8suDuOflNtgxvS897/z281PDkfWwxTTvmABK',
+          'super_admin',
+          (SELECT id FROM ops_roles WHERE name = 'super_admin' LIMIT 1),
+          'active',
+          true
+        WHERE NOT EXISTS (SELECT 1 FROM ops_users WHERE email = 'dazevedo@uplifthq.co.uk');
+
+        -- Update existing user to super_admin if exists
+        UPDATE ops_users SET
+          role = 'super_admin',
+          role_id = (SELECT id FROM ops_roles WHERE name = 'super_admin' LIMIT 1),
+          is_active = true
+        WHERE email = 'dazevedo@uplifthq.co.uk';
+      `
+    },
+    {
+      filename: '019_ops_super_admin_fix.sql',
+      sql: `
+        -- Insert default ops user (password: UpliftOps2026!)
+        INSERT INTO ops_users (email, name, first_name, last_name, password_hash, role, role_id, status, is_active)
+        SELECT
+          'dazevedo@uplifthq.co.uk',
+          'Diogo Azevedo',
+          'Diogo',
+          'Azevedo',
+          '$2a$12$9Dgg3QP48.dYnVFKf8suDuOflNtgxvS897/z281PDkfWwxTTvmABK',
+          'super_admin',
+          (SELECT id FROM ops_roles WHERE name = 'super_admin' LIMIT 1),
+          'active',
+          true
+        WHERE NOT EXISTS (SELECT 1 FROM ops_users WHERE email = 'dazevedo@uplifthq.co.uk');
+
+        -- Update existing user to super_admin if exists
+        UPDATE ops_users SET
+          role = 'super_admin',
+          role_id = (SELECT id FROM ops_roles WHERE name = 'super_admin' LIMIT 1),
+          is_active = true,
+          password_hash = '$2a$12$9Dgg3QP48.dYnVFKf8suDuOflNtgxvS897/z281PDkfWwxTTvmABK'
+        WHERE email = 'dazevedo@uplifthq.co.uk';
+      `
+    },
+    {
+      filename: '020_payroll_settings.sql',
+      sql: `
+        -- Employee payroll settings
+        CREATE TABLE IF NOT EXISTS employee_payroll_settings (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          employee_id UUID UNIQUE REFERENCES employees(id) ON DELETE CASCADE,
+          tax_code VARCHAR(20) DEFAULT '1257L',
+          ni_category VARCHAR(5) DEFAULT 'A',
+          student_loan_plan VARCHAR(10),
+          postgrad_loan BOOLEAN DEFAULT false,
+          pension_contribution NUMERIC(5,2) DEFAULT 5.00,
+          pension_type VARCHAR(20) DEFAULT 'percentage',
+          pension_provider VARCHAR(100),
+          pension_reference VARCHAR(100),
+          payment_method VARCHAR(50) DEFAULT 'bacs',
+          bank_name VARCHAR(100),
+          bank_sort_code VARCHAR(10),
+          bank_account_number VARCHAR(20),
+          bank_account_name VARCHAR(255),
+          created_at TIMESTAMPTZ DEFAULT NOW(),
+          updated_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        -- Payroll country configs
+        CREATE TABLE IF NOT EXISTS payroll_country_configs (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          country_code VARCHAR(3) NOT NULL,
+          tax_year VARCHAR(10),
+          personal_allowance NUMERIC(12,2),
+          basic_rate NUMERIC(5,4),
+          higher_rate NUMERIC(5,4),
+          additional_rate NUMERIC(5,4),
+          basic_threshold NUMERIC(12,2),
+          higher_threshold NUMERIC(12,2),
+          ni_primary_threshold NUMERIC(12,2),
+          ni_upper_limit NUMERIC(12,2),
+          ni_employee_rate NUMERIC(5,4),
+          ni_employer_rate NUMERIC(5,4),
+          config JSONB DEFAULT '{}',
+          is_active BOOLEAN DEFAULT true,
+          created_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        -- Payroll tax tables
+        CREATE TABLE IF NOT EXISTS payroll_tax_tables (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          country_code VARCHAR(3) NOT NULL,
+          tax_year VARCHAR(10) NOT NULL,
+          table_type VARCHAR(50) NOT NULL,
+          data JSONB NOT NULL,
+          created_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        -- Insert UK 2025/26 tax config
+        INSERT INTO payroll_country_configs (country_code, tax_year, personal_allowance, basic_rate, higher_rate, additional_rate, basic_threshold, higher_threshold, ni_primary_threshold, ni_upper_limit, ni_employee_rate, ni_employer_rate)
+        VALUES ('GBP', '2025/26', 12570, 0.20, 0.40, 0.45, 37700, 125140, 12570, 50270, 0.12, 0.138)
+        ON CONFLICT DO NOTHING;
+
+        CREATE INDEX IF NOT EXISTS idx_employee_payroll_settings ON employee_payroll_settings(employee_id);
+      `
+    },
+    {
+      filename: '021_time_entries_payroll_columns.sql',
+      sql: `
+        -- Add payroll-related columns to time_entries
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS regular_hours NUMERIC(8,2);
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS overtime_hours NUMERIC(8,2);
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS holiday_hours NUMERIC(8,2);
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS sick_hours NUMERIC(8,2);
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS approved_by UUID;
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS approved_at TIMESTAMPTZ;
+
+        -- Add salary to employees if missing
+        ALTER TABLE employees ADD COLUMN IF NOT EXISTS salary NUMERIC(12,2);
+        ALTER TABLE employees ADD COLUMN IF NOT EXISTS pay_frequency VARCHAR(20) DEFAULT 'monthly';
+      `
+    },
+    {
+      filename: '022_time_entries_work_date.sql',
+      sql: `
+        -- Add work_date column to time_entries
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS work_date DATE;
+
+        -- Update work_date from clock_in where null
+        UPDATE time_entries SET work_date = DATE(clock_in) WHERE work_date IS NULL AND clock_in IS NOT NULL;
+
+        -- Add organization_id to time_entries if missing
+        ALTER TABLE time_entries ADD COLUMN IF NOT EXISTS organization_id UUID;
+      `
+    },
+    {
+      filename: '023_bonus_payouts.sql',
+      sql: `
+        -- Bonus payouts table
+        CREATE TABLE IF NOT EXISTS bonus_payouts (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          employee_id UUID REFERENCES employees(id) ON DELETE CASCADE,
+          organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+          type VARCHAR(100) NOT NULL,
+          description TEXT,
+          amount NUMERIC(12,2) NOT NULL,
+          status VARCHAR(20) DEFAULT 'pending',
+          pay_period DATE,
+          approved_by UUID,
+          approved_at TIMESTAMPTZ,
+          paid_at TIMESTAMPTZ,
+          payroll_run_id UUID,
+          created_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_bonus_payouts_employee ON bonus_payouts(employee_id);
+        CREATE INDEX IF NOT EXISTS idx_bonus_payouts_status ON bonus_payouts(status);
+      `
+    },
+    {
+      filename: '024_performance_scores.sql',
+      sql: `
+        -- Performance scores table
+        CREATE TABLE IF NOT EXISTS performance_scores (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          employee_id UUID REFERENCES employees(id) ON DELETE CASCADE,
+          organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+          period VARCHAR(50),
+          score NUMERIC(5,2),
+          rating VARCHAR(50),
+          notes TEXT,
+          reviewer_id UUID,
+          created_at TIMESTAMPTZ DEFAULT NOW()
+        );
+
+        -- Add performance_score_id to bonus_payouts if missing
+        ALTER TABLE bonus_payouts ADD COLUMN IF NOT EXISTS performance_score_id UUID;
+
+        CREATE INDEX IF NOT EXISTS idx_performance_scores_employee ON performance_scores(employee_id);
+      `
     }
   ];
 }

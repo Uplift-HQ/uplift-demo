@@ -1659,11 +1659,27 @@ router.post('/onboard/organization', requirePermission('onboard'), async (req, r
     const { name, billingEmail, billingName, taxId } = req.body;
     if (!name || !billingEmail) return res.status(400).json({ error: 'Name and billing email required' });
 
+    // Generate slug from name
+    let baseSlug = name.toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+      .substring(0, 90);
+
+    // Check for uniqueness and add suffix if needed
+    let slug = baseSlug;
+    let attempt = 0;
+    while (true) {
+      const existing = await db.query('SELECT id FROM organizations WHERE slug = $1', [slug]);
+      if (existing.rows.length === 0) break;
+      attempt++;
+      slug = `${baseSlug}-${attempt}`;
+    }
+
     const result = await db.query(`
-      INSERT INTO organizations (name, billing_email, billing_name, tax_id, status)
-      VALUES ($1, $2, $3, $4, 'active')
+      INSERT INTO organizations (name, slug, billing_email, billing_name, tax_id, status)
+      VALUES ($1, $2, $3, $4, $5, 'active')
       RETURNING *
-    `, [name, billingEmail, billingName || null, taxId || null]);
+    `, [name, slug, billingEmail, billingName || null, taxId || null]);
 
     res.json({ organization: result.rows[0] });
   } catch (error) {

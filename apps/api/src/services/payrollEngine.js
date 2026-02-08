@@ -437,9 +437,7 @@ class PayrollEngine {
       SELECT
         COALESCE(SUM(
           CASE WHEN status = 'approved' THEN
-            EXTRACT(days FROM (
-              LEAST(end_date, $4::date) - GREATEST(start_date, $3::date) + 1
-            )) * 8
+            (LEAST(end_date, $4::date) - GREATEST(start_date, $3::date) + 1) * 8
           ELSE 0 END
         ), 0) as time_off_hours
       FROM time_off_requests

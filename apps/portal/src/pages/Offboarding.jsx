@@ -10,6 +10,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { employeesApi, locationsApi } from '../lib/api';
 import {
   UserMinus, ClipboardList, FileText, BarChart3, Plus, X, Eye,
   CheckCircle, XCircle, Clock, AlertTriangle, ChevronRight, ChevronDown,
@@ -588,11 +589,25 @@ export default function Offboarding() {
   const [filterStatus, setFilterStatus] = useState('');
   const [equipmentFilter, setEquipmentFilter] = useState('all');
   const [expandedCategories, setExpandedCategories] = useState({});
+  const [employees, setEmployees] = useState([]);
+  const [locations, setLocations] = useState([]);
 
-  // Simulate loading
+  // Fetch employees and locations for offboarding form
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 600);
-    return () => clearTimeout(timer);
+    const fetchData = async () => {
+      try {
+        const [empRes, locRes] = await Promise.all([
+          employeesApi.list({ status: 'active' }),
+          locationsApi.list()
+        ]);
+        setEmployees(empRes.employees || []);
+        setLocations(locRes.locations || []);
+      } catch (err) {
+        console.error('Failed to fetch employees/locations:', err);
+      }
+      setLoading(false);
+    };
+    fetchData();
   }, []);
 
   // Set default tab based on role
@@ -898,17 +913,18 @@ export default function Offboarding() {
             <label className="block text-sm font-medium text-slate-700 mb-1">{t('offboarding.new.employee', 'Employee')}</label>
             <select className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500">
               <option value="">{t('offboarding.new.selectEmployee', 'Select employee...')}</option>
-              <option value="anna">Anna Richardson - Front Desk Agent, London Mayfair</option>
-              <option value="ben">Ben Larsson - Chef de Partie, Paris Champs-Elysees</option>
-              <option value="fatima">Fatima Al-Rashid - Room Attendant, Dubai Marina</option>
-              <option value="david">David Park - Barista, New York Central Park</option>
+              {employees.map(emp => (
+                <option key={emp.id} value={emp.id}>
+                  {emp.first_name} {emp.last_name} - {emp.job_title || t('offboarding.new.noTitle', 'No Title')}{emp.location_name ? `, ${emp.location_name}` : ''}
+                </option>
+              ))}
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">{t('offboarding.new.location', 'Location')}</label>
             <select className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500">
-              {LOCATIONS.map(loc => (
-                <option key={loc} value={loc}>{loc}</option>
+              {(locations.length > 0 ? locations : LOCATIONS.map(l => ({ name: l }))).map(loc => (
+                <option key={loc.id || loc.name} value={loc.id || loc.name}>{loc.name}</option>
               ))}
             </select>
           </div>
