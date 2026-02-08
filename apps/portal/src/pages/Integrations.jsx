@@ -257,7 +257,6 @@ export default function Integrations() {
                 <Code className="w-4 h-4" />
                 {t('integrations.apiFactory', 'API Factory')}
               </button>
-              {/* TODO: Implement Add Integration wizard */}
             </div>
           </div>
 

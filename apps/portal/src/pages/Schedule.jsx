@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { shiftsApi, employeesApi, locationsApi, timeOffApi } from '../lib/api';
+import { shiftsApi, employeesApi, locationsApi, timeOffApi, departmentsApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { useToast } from '../components/ToastProvider';
 import {
@@ -38,6 +38,7 @@ export default function Schedule() {
   const [shifts, setShifts] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -114,15 +115,17 @@ export default function Schedule() {
     setLoading(true);
     setError(null);
     try {
-      const [shiftsResult, empResult, locResult] = await Promise.all([
+      const [shiftsResult, empResult, locResult, deptResult] = await Promise.all([
         shiftsApi.list({ start: weekStartStr, end: format(dateRange.end, 'yyyy-MM-dd'), location: selectedLocation || undefined }),
         employeesApi.list({ status: 'active', limit: 100 }),
         locationsApi.list(),
+        departmentsApi.list(),
       ]);
 
       setShifts(shiftsResult.shifts || []);
       setEmployees(empResult.employees || []);
       setLocations(locResult.locations || []);
+      setDepartments(deptResult.departments || []);
 
       // Load swaps
       const swapsResult = await shiftsApi.getSwaps({ status: 'pending' }).catch(() => ({ swaps: [] }));
@@ -781,7 +784,9 @@ export default function Schedule() {
                   className="w-full px-3 py-2 border rounded-lg"
                 >
                   <option value="">{t('schedule.allDepartments')}</option>
-                  {/* TODO: Fetch departments from departmentsApi */}
+                  {departments.map(dept => (
+                    <option key={dept.id} value={dept.id}>{dept.name}</option>
+                  ))}
                 </select>
               </div>
               <div>

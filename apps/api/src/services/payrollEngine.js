@@ -285,7 +285,7 @@ class PayrollEngine {
 
     // Get employee
     const empResult = await db.query(
-      'SELECT * FROM employees WHERE id = $1 AND organization_id = $2',
+      'SELECT *, salary AS annual_salary FROM employees WHERE id = $1 AND organization_id = $2',
       [employeeId, organizationId]
     );
 
@@ -369,7 +369,7 @@ class PayrollEngine {
    */
   async getEligibleEmployees(organizationId, employeeIds = null) {
     let query = `
-      SELECT e.*, eps.*
+      SELECT e.*, e.salary AS annual_salary, eps.*
       FROM employees e
       LEFT JOIN employee_payroll_settings eps ON eps.employee_id = e.id
       WHERE e.organization_id = $1
