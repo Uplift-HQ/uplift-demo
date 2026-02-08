@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { integrationsApi } from '../lib/api';
 import { useTranslation } from 'react-i18next';
+import { useToast } from './ToastProvider';
 
 // -------------------- TYPES & CONSTANTS --------------------
 
@@ -1115,6 +1116,7 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
 
 const ApiFactory = () => {
   const { t } = useTranslation();
+  const toast = useToast();
   const [customApis, setCustomApis] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -1348,7 +1350,7 @@ const ApiFactory = () => {
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
             <h3 className="font-semibold">{t('apiFactory.logs.executionLogs', 'Execution Logs')}</h3>
-            <Button variant="ghost" size="sm" onClick={() => alert(t('common.exportComingSoon', 'Export coming soon'))}>
+            <Button variant="ghost" size="sm" onClick={() => toast.info(t('common.exportComingSoon', 'Export coming soon'))}>
               <Download className="w-4 h-4" /> {t('apiFactory.logs.export', 'Export')}
             </Button>
           </div>

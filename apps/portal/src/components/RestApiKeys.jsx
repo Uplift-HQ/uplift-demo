@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { api } from '../lib/api';
 import { useTranslation } from 'react-i18next';
+import { useToast } from './ToastProvider';
 
 // -------------------- CONSTANTS --------------------
 
@@ -476,6 +477,7 @@ const CreateKeyModal = ({ open, onClose, onCreate }) => {
 
 const RestApiKeys = () => {
   const { t } = useTranslation();
+  const toast = useToast();
   const [apiKeys, setApiKeys] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -527,15 +529,15 @@ const RestApiKeys = () => {
 
     try {
       const result = await api.post(`/integrations/api-keys/${key.keyId}/regenerate`);
-      alert(t('restApiKeys.regenerateSuccess', "New secret key: {{secret}}\n\nSave this now - you won't see it again!", { secret: result.secretKey }));
+      toast.success(t('restApiKeys.regenerateSuccess', "New secret key: {{secret}} — Save this now, you won't see it again!", { secret: result.secretKey }));
     } catch (error) {
       if (import.meta.env.DEV) console.error('Failed to regenerate:', error);
-      alert(t('restApiKeys.regenerateError', 'Failed to regenerate secret: {{message}}', { message: error.message || 'Please try again.' }));
+      toast.error(t('restApiKeys.regenerateError', 'Failed to regenerate secret: {{message}}', { message: error.message || 'Please try again.' }));
     }
   };
 
   const handleViewUsage = (key) => {
-    alert(t('restApiKeys.usageStats', 'Usage stats for {{name}}:\n\nTotal requests: {{requests}}\nLast used: {{lastUsed}}', {
+    toast.info(t('restApiKeys.usageStats', 'Usage stats for {{name}}: Total requests: {{requests}}, Last used: {{lastUsed}}', {
       name: key.name,
       requests: key.requestCount?.toLocaleString(),
       lastUsed: key.lastUsedAt ? new Date(key.lastUsedAt).toLocaleString() : t('restApiKeys.card.never', 'Never'),

@@ -63,9 +63,9 @@ export default function ShiftTemplates() {
     try {
       await shiftsApi.generateFromTemplate(templateId, { startDate, endDate });
       setShowApplyModal(false);
-      alert(t('shiftTemplates.shiftsGenerated', 'Shifts generated successfully!'));
+      toast.success(t('shiftTemplates.shiftsGenerated', 'Shifts generated successfully!'));
     } catch (err) {
-      alert(err.message || t('shiftTemplates.generateError', 'Failed to generate shifts'));
+      toast.error(err.message || t('shiftTemplates.generateError', 'Failed to generate shifts'));
     }
   };
 

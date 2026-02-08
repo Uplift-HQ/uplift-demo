@@ -6,20 +6,27 @@
 import Constants from 'expo-constants';
 import { secureStorage } from './secureStorage';
 
-// Configuration - uses environment variable or falls back to relative path
+// Demo API URL - this is the demo backend
+const DEMO_API_URL = 'https://uplift-demo-production.up.railway.app/api';
+
+// Configuration - uses environment variable or falls back to demo URL
 const getApiUrl = () => {
   // Check for Expo config extra first (set in app.json/app.config.js)
   const configUrl = Constants.expoConfig?.extra?.apiUrl;
   if (configUrl) return configUrl;
-  
-  // For development
+
+  // Environment variable override
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL;
+  }
+
+  // For development, connect to local server
   if (__DEV__) {
     return 'http://localhost:3000/api';
   }
-  
-  // Production - will be set via EAS environment variables
-  // Falls back to relative path if not set (works when app is served from same domain)
-  return process.env.EXPO_PUBLIC_API_URL || '/api';
+
+  // Demo builds use the demo API
+  return DEMO_API_URL;
 };
 
 const CONFIG = {

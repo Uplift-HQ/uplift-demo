@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import ApiFactory from './ApiFactory';
 import RestApiKeys from './RestApiKeys';
+import { useToast } from './ToastProvider';
 import { integrationsApi } from '../lib/api';
 
 // -------------------- TYPES --------------------
@@ -265,6 +266,7 @@ const WEBHOOK_EVENTS = [
 
 const WebhooksTab = ({ provider, webhooks: initialWebhooks, connectionId }) => {
   const { t } = useTranslation();
+  const toast = useToast();
   const [webhooks, setWebhooks] = useState(initialWebhooks || []);
   const [showAddModal, setShowAddModal] = useState(false);
   const [testing, setTesting] = useState(null);
@@ -276,7 +278,7 @@ const WebhooksTab = ({ provider, webhooks: initialWebhooks, connectionId }) => {
 
   const handleAddWebhook = async () => {
     if (!newWebhook.url || !newWebhook.events.length) {
-      alert(t('integrationHub.webhooks.validationError', 'Please enter a URL and select at least one event'));
+      toast.error(t('integrationHub.webhooks.validationError', 'Please enter a URL and select at least one event'));
       return;
     }
 
@@ -294,7 +296,7 @@ const WebhooksTab = ({ provider, webhooks: initialWebhooks, connectionId }) => {
     setWebhooks([...webhooks, webhook]);
     setShowAddModal(false);
     setNewWebhook({ url: '', events: [], enabled: true });
-    alert(t('integrationHub.webhooks.createdSuccess', 'Webhook created successfully!'));
+    toast.success(t('integrationHub.webhooks.createdSuccess', 'Webhook created successfully!'));
   };
 
   const handleTestWebhook = async (webhook) => {
@@ -303,7 +305,7 @@ const WebhooksTab = ({ provider, webhooks: initialWebhooks, connectionId }) => {
     // Simulate test
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    alert(`${t('integrationHub.webhooks.testSent', 'Test payload sent to')} ${webhook.url}\n${t('integrationHub.webhooks.testStatus', 'Status')}: 200 OK`);
+    toast.success(`${t('integrationHub.webhooks.testSent', 'Test payload sent to')} ${webhook.url} — ${t('integrationHub.webhooks.testStatus', 'Status')}: 200 OK`);
     setTesting(null);
   };
 
