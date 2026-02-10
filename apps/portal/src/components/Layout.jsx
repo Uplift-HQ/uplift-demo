@@ -115,7 +115,6 @@ const getAdminNav = (t) => [
   {
     section: t('nav.section.payroll', 'PAYROLL'),
     items: [
-      { path: '/payroll', label: t('nav.payroll', 'Payroll Dashboard'), icon: Banknote },
       { path: '/payroll/runs', label: t('nav.payrollRuns', 'Payroll Runs'), icon: Calendar },
       { path: '/payroll/config', label: t('nav.payrollConfig', 'Configuration'), icon: Settings },
     ],
