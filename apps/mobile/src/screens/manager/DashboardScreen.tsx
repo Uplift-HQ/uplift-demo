@@ -3,7 +3,10 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, ActivityIn
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../store/authStore';
 import { useBranding } from '../../contexts/BrandingContext';
+import { useViewMode } from '../../contexts/ViewContext';
 import { useManagerDashboard, useEmployees, usePendingApprovals } from '../../hooks/useData';
+import { ViewToggle } from '../../components/ViewToggle';
+import { HomeScreen } from '../HomeScreen';
 import {
   BarChartIcon, UsersIcon, TrendingUpIcon, AlertCircleIcon, TargetIcon,
   StarIcon, ZapIcon, ClockIcon, CheckCircleIcon, XCircleIcon, CalendarIcon,
@@ -15,6 +18,7 @@ export const ManagerDashboardScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
   const { branding } = useBranding();
+  const { isPersonalView } = useViewMode();
 
   // Wire to real API hooks with hardcoded fallbacks
   const { data: dashboardData, loading: dashboardLoading } = useManagerDashboard();
@@ -46,11 +50,27 @@ export const ManagerDashboardScreen = ({ navigation }: any) => {
     navigation.navigate('AIInsights');
   };
 
+  // Personal view: show worker HomeScreen content
+  if (isPersonalView) {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={styles.viewToggleContainer}>
+          <ViewToggle />
+        </View>
+        <HomeScreen navigation={navigation} />
+      </View>
+    );
+  }
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {isLoading && (
         <ActivityIndicator size="small" color={colors.momentum} style={{ position: 'absolute', top: 70, right: 20, zIndex: 10 }} />
       )}
+      {/* View Toggle */}
+      <View style={styles.viewToggleContainer}>
+        <ViewToggle />
+      </View>
       {/* Header with Company Branding */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
@@ -408,6 +428,9 @@ export const ManagerDashboardScreen = ({ navigation }: any) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.surface },
+
+  // View Toggle
+  viewToggleContainer: { paddingTop: 60, paddingBottom: spacing.md, alignItems: 'center', backgroundColor: colors.background },
 
   // Header with Company Branding
   header: { backgroundColor: colors.background, paddingTop: 60, paddingBottom: spacing.lg, ...shadows.sm },

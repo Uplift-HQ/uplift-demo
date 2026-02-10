@@ -32,6 +32,9 @@ const DEMO_USERS: Record<'worker' | 'manager', User> = {
     organizationId: 'demo-org',
     employeeId: 'EMP-001',
     momentumScore: 847,
+    companyName: 'Grand Metro Hotels',
+    locationName: 'Main Restaurant',
+    unreadMessages: 7,
   },
   manager: {
     id: 'demo-manager-001',
@@ -43,6 +46,9 @@ const DEMO_USERS: Record<'worker' | 'manager', User> = {
     organizationId: 'demo-org',
     employeeId: 'EMP-002',
     momentumScore: 912,
+    companyName: 'Grand Metro Hotels',
+    locationName: 'Edinburgh City Centre',
+    unreadMessages: 3,
   },
 };
 

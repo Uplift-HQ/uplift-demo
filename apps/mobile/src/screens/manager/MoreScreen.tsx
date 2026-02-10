@@ -6,7 +6,8 @@ import {
   HeartIcon, UserIcon, HelpCircleIcon, LogOutIcon,
   ChevronRightIcon, MessageCircleIcon, BellIcon, FileTextIcon,
   ShieldIcon, LinkIcon, CreditCardIcon, CalendarIcon, CheckSquareIcon,
-  TargetIcon, GiftIcon, BarChartIcon, BriefcaseIcon, ClockIcon, ClipboardCheckIcon
+  TargetIcon, GiftIcon, BarChartIcon, BriefcaseIcon, ClockIcon, ClipboardCheckIcon,
+  BookOpenIcon, DollarSignIcon, TrendingUpIcon, AwardIcon
 } from '../../components/Icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { showAlert } from '../../utils/alert';
@@ -73,6 +74,22 @@ export const ManagerMoreScreen = ({ navigation }: any) => {
           icon: GiftIcon,
           color: colors.warning,
           onPress: () => navigation.navigate('MyRewards'),
+        },
+        {
+          id: 'my-learning',
+          label: 'My Learning',
+          subtitle: 'Training & courses',
+          icon: BookOpenIcon,
+          color: colors.info,
+          onPress: () => navigation.navigate('Profile', { screen: 'Learning' }),
+        },
+        {
+          id: 'my-performance',
+          label: 'My Performance',
+          subtitle: 'Reviews & goals',
+          icon: TrendingUpIcon,
+          color: colors.success,
+          onPress: () => navigation.navigate('Profile', { screen: 'MyPerformance' }),
         },
       ]
     },
@@ -146,6 +163,51 @@ export const ManagerMoreScreen = ({ navigation }: any) => {
           icon: UserIcon,
           color: colors.error,
           onPress: () => navigation.navigate('Offboarding'),
+        },
+      ]
+    },
+    {
+      title: 'My Records',
+      items: [
+        {
+          id: 'my-payslips',
+          label: 'My Payslips',
+          subtitle: 'Pay history & statements',
+          icon: DollarSignIcon,
+          color: colors.success,
+          onPress: () => navigation.navigate('Profile', { screen: 'Payslips' }),
+        },
+        {
+          id: 'my-expenses',
+          label: 'My Expenses',
+          subtitle: 'Submit & track claims',
+          icon: CreditCardIcon,
+          color: colors.info,
+          onPress: () => navigation.navigate('Profile', { screen: 'Expenses' }),
+        },
+        {
+          id: 'my-compliance',
+          label: 'My Compliance',
+          subtitle: 'Certifications & training',
+          icon: ShieldIcon,
+          color: colors.warning,
+          onPress: () => navigation.navigate('Profile', { screen: 'Compliance' }),
+        },
+        {
+          id: 'my-documents',
+          label: 'My Documents',
+          subtitle: 'Contracts & policies',
+          icon: FileTextIcon,
+          color: colors.slate600,
+          onPress: () => navigation.navigate('Profile', { screen: 'Documents' }),
+        },
+        {
+          id: 'my-surveys',
+          label: 'My Surveys',
+          subtitle: 'Feedback & engagement',
+          icon: ClipboardCheckIcon,
+          color: colors.momentum,
+          onPress: () => navigation.navigate('Profile', { screen: 'MySurveys' }),
         },
       ]
     },

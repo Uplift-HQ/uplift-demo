@@ -10,6 +10,7 @@ import {
 } from '../components/Icons';
 import { colors } from '../theme';
 import { BrandingProvider } from '../contexts/BrandingContext';
+import { ViewProvider } from '../contexts/ViewContext';
 
 // Onboarding Screens
 import { OnboardingWelcomeScreen } from '../screens/onboarding/OnboardingWelcomeScreen';
@@ -307,6 +308,7 @@ export const AppNavigation = () => {
 
   return (
     <BrandingProvider>
+    <ViewProvider>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!isAuthenticated && !onboardingComplete ? (
@@ -349,6 +351,7 @@ export const AppNavigation = () => {
         )}
       </Stack.Navigator>
     </NavigationContainer>
+    </ViewProvider>
     </BrandingProvider>
   );
 };
