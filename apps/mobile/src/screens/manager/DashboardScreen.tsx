@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../store/authStore';
+import { useBranding } from '../../contexts/BrandingContext';
 import { useManagerDashboard, useEmployees, usePendingApprovals } from '../../hooks/useData';
 import {
   BarChartIcon, UsersIcon, TrendingUpIcon, AlertCircleIcon, TargetIcon,
@@ -13,6 +14,7 @@ import { colors, typography, spacing, borderRadius, shadows } from '../../theme'
 export const ManagerDashboardScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
+  const { branding } = useBranding();
 
   // Wire to real API hooks with hardcoded fallbacks
   const { data: dashboardData, loading: dashboardLoading } = useManagerDashboard();
@@ -66,7 +68,7 @@ export const ManagerDashboardScreen = ({ navigation }: any) => {
             </View>
             <View style={styles.greetingContainer}>
               <Text style={styles.greetingText}>{t('screens.managerDashboard.team_dashboard')}</Text>
-              <Text style={styles.userName}>{(user as any)?.companyName || 'Grand Metro Hotels'}</Text>
+              <Text style={styles.userName}>{(user as any)?.companyName || branding.brandName || 'Your Company'}</Text>
               <Text style={styles.locationText}>{(user as any)?.locationName || 'Edinburgh City Centre'}</Text>
             </View>
           </View>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { CheckCircleIcon, ChevronRightIcon, StarIcon } from '../../components/Icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
@@ -62,7 +63,7 @@ export const OnboardingSkillsScreen = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.progressBar}>
@@ -140,14 +141,14 @@ export const OnboardingSkillsScreen = ({ navigation }: any) => {
           <Text style={styles.skipButtonText}>{t('onboarding.skip')}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   
-  header: { paddingHorizontal: spacing.xl, paddingTop: 60, marginBottom: spacing.lg },
+  header: { paddingHorizontal: spacing.xl, paddingTop: spacing.md, marginBottom: spacing.lg },
   progressBar: { height: 6, backgroundColor: colors.slate200, borderRadius: 3, overflow: 'hidden', marginBottom: spacing.sm },
   progressFill: { height: '100%', backgroundColor: colors.momentum, borderRadius: 3 },
   stepText: { ...typography.caption, color: colors.slate600, textAlign: 'center' },

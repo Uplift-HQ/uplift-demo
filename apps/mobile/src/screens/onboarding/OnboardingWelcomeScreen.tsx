@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { ChevronRightIcon, TrendingUpIcon, StarIcon, BriefcaseIcon } from '../../components/Icons';
 import { UpliftLogo } from '../../components/Logo';
@@ -8,7 +9,7 @@ import { colors, typography, spacing, borderRadius, shadows } from '../../theme'
 export const OnboardingWelcomeScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       {/* Logo Section */}
       <View style={styles.logoSection}>
         <UpliftLogo size={80} />
@@ -73,14 +74,14 @@ export const OnboardingWelcomeScreen = ({ navigation }: any) => {
           <Text style={styles.secondaryButtonText}>{t('auth.login')}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background, padding: spacing.xl },
   
-  logoSection: { alignItems: 'center', paddingTop: 60, marginBottom: spacing.xl },
+  logoSection: { alignItems: 'center', paddingTop: spacing.lg, marginBottom: spacing.xl },
   tagline: { ...typography.body, color: colors.slate600, marginTop: spacing.md },
   
   heroSection: { alignItems: 'center', marginBottom: spacing.xxl },

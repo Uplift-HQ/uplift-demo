@@ -345,10 +345,9 @@ export const ComplianceScreen = ({ navigation }: any) => {
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <TouchableOpacity
-            style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Text style={styles.backButtonText}>←</Text>
+            <Text style={styles.backButton}>← Back</Text>
           </TouchableOpacity>
           <View>
             <Text style={styles.title}>Compliance</Text>
@@ -431,18 +430,10 @@ export const ComplianceScreen = ({ navigation }: any) => {
               </Text>
               <Text style={styles.alertText}>
                 {expiredItems.length > 0 &&
-                  t(
-                    'compliance.expiredAlert',
-                    '{{count}} certification(s) have expired.',
-                    { count: expiredItems.length }
-                  )}
+                  `${expiredItems.length} ${t('compliance.certificationsExpired', 'certification(s) have expired.')}`}
                 {expiredItems.length > 0 && expiringItems.length > 0 && ' '}
                 {expiringItems.length > 0 &&
-                  t(
-                    'compliance.expiringAlert',
-                    '{{count}} certification(s) expiring within 30 days.',
-                    { count: expiringItems.length }
-                  )}
+                  `${expiringItems.length} ${t('compliance.certificationsExpiring', 'certification(s) expiring within 30 days.')}`}
               </Text>
             </View>
           </View>
@@ -532,14 +523,9 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.slate100,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...typography.bodyBold,
+    color: colors.momentum,
   },
-  backButtonText: { fontSize: 20, color: colors.slate700 },
   title: {
     ...typography.h2,
     color: colors.slate900,

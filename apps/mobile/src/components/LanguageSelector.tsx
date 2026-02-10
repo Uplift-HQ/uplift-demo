@@ -12,9 +12,9 @@ import {
   FlatList,
   StyleSheet,
   I18nManager,
-  Alert,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { showAlert } from '../utils/alert';
 import { Ionicons } from '@expo/vector-icons';
 import { LANGUAGES, changeLanguage, getCurrentLanguage, onLanguageChange } from '../i18n';
 import { useTheme } from '../hooks/useTheme';
@@ -72,7 +72,7 @@ export function LanguageSelector({ style }: LanguageSelectorProps) {
       // Handle RTL layout change - requires restart
       if (previousRTL !== newRTL) {
         I18nManager.forceRTL(newRTL);
-        Alert.alert(
+        showAlert(
           t('settings.languageChanged', 'Language Changed'),
           t('settings.restartForRTL', 'Please restart the app for the layout to update properly.'),
           [{ text: t('common.ok', 'OK') }]
@@ -80,7 +80,7 @@ export function LanguageSelector({ style }: LanguageSelectorProps) {
       }
 
     } catch (error) {
-      Alert.alert(
+      showAlert(
         t('common.error', 'Error'),
         t('settings.languageChangeFailed', 'Failed to change language. Please try again.')
       );

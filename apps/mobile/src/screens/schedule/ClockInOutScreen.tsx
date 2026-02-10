@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   ScrollView,
   ActivityIndicator,
   Animated,
@@ -371,6 +370,12 @@ export const ClockInOutScreen = ({ navigation, route }: any) => {
             <Text style={styles.offlineBadgeText}>{t('screens.clockInOut.queued_offline_will_sync_automatically')}</Text>
           </View>
         )}
+        <TouchableOpacity
+          style={styles.successDoneButton}
+          onPress={() => { setClockStep('location'); setSelfieUri(null); }}
+        >
+          <Text style={styles.successDoneText}>{t('common.done')}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -780,6 +785,8 @@ const styles = StyleSheet.create({
   successLocation: { ...typography.body, color: colors.background, opacity: 0.8 },
   offlineBadgeSuccess: { marginTop: spacing.lg, backgroundColor: colors.background + '25', paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, borderRadius: borderRadius.full },
   offlineBadgeText: { ...typography.small, color: colors.background, fontWeight: '600' },
+  successDoneButton: { marginTop: spacing.xl, backgroundColor: colors.background, paddingHorizontal: spacing.xxl, paddingVertical: spacing.md, borderRadius: borderRadius.lg },
+  successDoneText: { ...typography.bodyBold, color: colors.momentum },
   selfieContent: { flex: 1, padding: spacing.lg },
   selfieInstructions: { alignItems: 'center', marginBottom: spacing.xl },
   selfieTitle: { ...typography.h2, color: colors.slate900, marginTop: spacing.md, marginBottom: spacing.sm },

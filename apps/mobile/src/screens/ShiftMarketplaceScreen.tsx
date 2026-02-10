@@ -5,7 +5,6 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
   Modal,
   Animated,
@@ -35,6 +34,7 @@ import {
   ShieldIcon,
   TargetIcon,
 } from '../components/Icons';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { colors, typography, spacing, borderRadius, shadows } from '../theme';
 import { useOpenShifts } from '../hooks/useData';
 import { api } from '../services/api';
@@ -354,15 +354,10 @@ export const ShiftMarketplaceScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerContent}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.title}>{t('schedule.availableShifts')}</Text>
-            <Text style={styles.subtitle}>
-              {shifts.length} shifts matching your profile
-            </Text>
-          </View>
+      <ScreenHeader
+        title={t('schedule.availableShifts')}
+        onBack={() => navigation.goBack()}
+        rightAction={
           <TouchableOpacity
             style={styles.filterButton}
             onPress={() => setShowFilters(!showFilters)}
@@ -370,7 +365,14 @@ export const ShiftMarketplaceScreen = ({ navigation }: any) => {
             <FilterIcon size={22} color={colors.slate700} />
             {filter !== 'all' && <View style={styles.filterDot} />}
           </TouchableOpacity>
-        </View>
+        }
+      />
+
+      {/* Subheader with stats */}
+      <View style={styles.subheader}>
+        <Text style={styles.subtitle}>
+          {shifts.length} shifts matching your profile
+        </Text>
 
         {/* Summary Stats */}
         <View style={styles.statsContainer}>
@@ -863,26 +865,15 @@ const styles = StyleSheet.create({
   },
 
   // Header
-  header: {
+  subheader: {
     backgroundColor: colors.background,
-    paddingTop: 60,
     paddingHorizontal: spacing.lg,
     paddingBottom: spacing.md,
-    ...shadows.sm,
-  },
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: spacing.md,
-  },
-  title: {
-    ...typography.h2,
-    color: colors.slate900,
   },
   subtitle: {
     ...typography.body,
     color: colors.slate600,
-    marginTop: spacing.xs,
+    marginBottom: spacing.sm,
   },
   filterButton: {
     width: 44,

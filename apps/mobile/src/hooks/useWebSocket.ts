@@ -12,9 +12,9 @@ const io = SocketIO;
 type SocketType = ReturnType<typeof io>;
 
 // WebSocket configuration
-const WS_URL = __DEV__ 
-  ? 'ws://localhost:3000' 
-  : 'wss://api.uplift.hr';
+const WS_URL = __DEV__
+  ? 'ws://localhost:3000'
+  : 'wss://api.uplifthq.co.uk';
 
 // Reconnection settings
 const RECONNECT_ATTEMPTS = 5;

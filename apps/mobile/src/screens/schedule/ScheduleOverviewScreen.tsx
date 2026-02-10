@@ -253,7 +253,7 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
     },
   ];
 
-  const totalHours = shifts.reduce((acc, shift) => acc + parseInt(shift.duration), 0);
+  const totalHours = shifts.reduce((acc, shift) => acc + (parseInt(shift.duration) || 0), 0);
   const upcomingShiftsCount = shifts.filter(s => s.status !== 'completed').length;
   const confirmedCount = shifts.filter(s => s.status === 'confirmed').length;
   const pendingCount = shifts.filter(s => s.status === 'pending').length;

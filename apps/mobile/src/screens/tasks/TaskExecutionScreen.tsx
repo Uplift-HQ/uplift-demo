@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Modal } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { CameraIcon, CheckSquareIcon, ClockIcon, FileTextIcon, UploadIcon, CheckCircleIcon, XCircleIcon } from '../../components/Icons';
+import { CameraIcon, CheckSquareIcon, ClockIcon, FileTextIcon, UploadIcon, CheckCircleIcon, XCircleIcon, XIcon } from '../../components/Icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 import { showAlert } from '../../utils/alert';
 
@@ -15,6 +15,8 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
   const [signature, setSignature] = useState('');
   const [timer, setTimer] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
+  const [showSignatureModal, setShowSignatureModal] = useState(false);
+  const [signatureInput, setSignatureInput] = useState('');
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -80,16 +82,16 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
   };
 
   const handleAddSignature = () => {
-    Alert.prompt(
-      'Add Signature',
-      'Type your full name to sign',
-      (text) => {
-        if (text && text.trim()) {
-          setSignature(text.trim());
-          showAlert(t('common.success'), 'Signature added');
-        }
-      }
-    );
+    setSignatureInput('');
+    setShowSignatureModal(true);
+  };
+
+  const confirmSignature = () => {
+    if (signatureInput.trim()) {
+      setSignature(signatureInput.trim());
+      setShowSignatureModal(false);
+      showAlert(t('common.success'), 'Signature added');
+    }
   };
 
   const handleSubmit = () => {
@@ -313,6 +315,48 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
           <Text style={styles.submitButtonText}>{t('screens.taskExecution.submit_for_review')}</Text>
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Signature Modal */}
+      <Modal visible={showSignatureModal} animationType="fade" transparent={true}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Add Signature</Text>
+              <TouchableOpacity onPress={() => setShowSignatureModal(false)}>
+                <XIcon size={24} color={colors.slate700} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.modalBody}>
+              <Text style={styles.modalLabel}>Type your full name to sign</Text>
+              <TextInput
+                style={styles.modalInput}
+                value={signatureInput}
+                onChangeText={setSignatureInput}
+                placeholder="Enter your full name"
+                placeholderTextColor={colors.slate400}
+                autoFocus
+              />
+
+              <View style={styles.modalActions}>
+                <TouchableOpacity
+                  style={styles.modalCancelButton}
+                  onPress={() => setShowSignatureModal(false)}
+                >
+                  <Text style={styles.modalCancelText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.modalConfirmButton, !signatureInput.trim() && styles.modalButtonDisabled]}
+                  onPress={confirmSignature}
+                  disabled={!signatureInput.trim()}
+                >
+                  <Text style={styles.modalConfirmText}>Sign</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -362,4 +406,19 @@ const styles = StyleSheet.create({
   submitButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: spacing.md, backgroundColor: colors.momentum, marginHorizontal: spacing.lg, marginBottom: spacing.xl, paddingVertical: spacing.lg, borderRadius: borderRadius.lg, ...shadows.lg },
   submitButtonDisabled: { backgroundColor: colors.slate300 },
   submitButtonText: { ...typography.h3, color: colors.background },
+
+  // Modal styles
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', padding: spacing.lg },
+  modalContent: { backgroundColor: colors.background, borderRadius: borderRadius.xl, width: '100%', maxWidth: 400 },
+  modalHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: spacing.lg, borderBottomWidth: 1, borderBottomColor: colors.slate100 },
+  modalTitle: { ...typography.h2, color: colors.slate900, fontSize: 18 },
+  modalBody: { padding: spacing.lg },
+  modalLabel: { ...typography.body, color: colors.slate600, marginBottom: spacing.md },
+  modalInput: { ...typography.body, color: colors.slate900, backgroundColor: colors.slate50, padding: spacing.md, borderRadius: borderRadius.md, borderWidth: 1, borderColor: colors.slate200 },
+  modalActions: { flexDirection: 'row', gap: spacing.md, marginTop: spacing.xl },
+  modalCancelButton: { flex: 1, paddingVertical: spacing.md, borderRadius: borderRadius.lg, backgroundColor: colors.slate200, alignItems: 'center' },
+  modalCancelText: { ...typography.bodyBold, color: colors.slate700 },
+  modalConfirmButton: { flex: 1, paddingVertical: spacing.md, borderRadius: borderRadius.lg, backgroundColor: colors.momentum, alignItems: 'center' },
+  modalConfirmText: { ...typography.bodyBold, color: colors.background },
+  modalButtonDisabled: { backgroundColor: colors.slate300 },
 });

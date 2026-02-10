@@ -90,8 +90,7 @@
       ]
     ],
     "extra": {
-      "apiUrl": "https://uplift-demo-production.up.railway.app/api",
-      "demoMode": true,
+      "apiUrl": "",
       "eas": {
         "projectId": "72b56cf4-c5b0-40fb-b426-b75e38d37136"
       }

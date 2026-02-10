@@ -21,6 +21,7 @@ import {
   UserIcon,
   ThumbsUpIcon,
 } from '../components/Icons';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { colors, typography, spacing, borderRadius, shadows } from '../theme';
 
 // --- Active Review Data ---
@@ -123,19 +124,15 @@ const getStepIcon = (status: ReviewStep['status']) => {
   }
 };
 
-export const PerformanceScreen = () => {
+export const PerformanceScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.title}>
-            {t('performance.myPerformance', 'My Performance')}
-          </Text>
-        </View>
-      </View>
+      <ScreenHeader
+        title={t('performance.myPerformance', 'My Performance')}
+        onBack={() => navigation.goBack()}
+      />
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Stats Bar */}
@@ -281,7 +278,7 @@ export const PerformanceScreen = () => {
                 </View>
                 <View style={styles.meetingContent}>
                   <Text style={styles.meetingPerson}>
-                    {t('performance.withPerson', 'With {{name}}', { name: meeting.withPerson })}
+                    {t('performance.with', 'With')} {meeting.withPerson}
                   </Text>
                   <Text style={styles.meetingDate}>{meeting.date}</Text>
                 </View>
@@ -368,17 +365,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.surface,
-  },
-  header: {
-    paddingHorizontal: spacing.lg,
-    paddingTop: 60,
-    paddingBottom: spacing.lg,
-    backgroundColor: colors.background,
-    ...shadows.sm,
-  },
-  title: {
-    ...typography.h2,
-    color: colors.slate900,
   },
   content: {
     flex: 1,

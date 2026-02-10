@@ -384,9 +384,9 @@ export const ScheduleBuilderScreen = ({ navigation }: any) => {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Text style={styles.backButtonText}>← {t('common.back')}</Text>
         </TouchableOpacity>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.title}>{t('manager.scheduleBuilder')}</Text>
-          <Text style={styles.subtitle}>
+        <View style={{ flex: 1, minWidth: 0 }}>
+          <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>{t('manager.scheduleBuilder')}</Text>
+          <Text style={styles.subtitle} numberOfLines={1}>
             {viewMode === 'week' ? formatWeekRange() : viewMode === 'day' ? today.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }) : today.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
           </Text>
         </View>

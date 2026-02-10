@@ -18,6 +18,7 @@ import {
   TrendingUpIcon,
   TargetIcon,
 } from '../components/Icons';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { colors, typography, spacing, borderRadius, shadows } from '../theme';
 
 // --- Types ---
@@ -83,19 +84,15 @@ const impactItems: ImpactItem[] = [
   { id: 'i3', text: 'New mentorship program launched from feedback insights' },
 ];
 
-export const SurveysScreen = () => {
+export const SurveysScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.title}>
-            {t('surveys.title', 'Surveys')}
-          </Text>
-        </View>
-      </View>
+      <ScreenHeader
+        title={t('surveys.title', 'Surveys')}
+        onBack={() => navigation.goBack()}
+      />
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Active Surveys Section */}
@@ -120,15 +117,11 @@ export const SurveysScreen = () => {
                     <Text style={styles.surveyTitle}>{survey.title}</Text>
                     <View style={styles.surveyMeta}>
                       <Text style={styles.surveyMetaText}>
-                        {t('surveys.questionCount', '{{count}} questions', {
-                          count: survey.questionCount,
-                        })}
+                        {survey.questionCount} {t('surveys.questions', 'questions')}
                       </Text>
                       <View style={styles.metaDot} />
                       <Text style={styles.surveyMetaText}>
-                        {t('surveys.estimatedTime', '~{{min}} min', {
-                          min: survey.estimatedMinutes,
-                        })}
+                        ~{survey.estimatedMinutes} min
                       </Text>
                     </View>
                   </View>
@@ -138,7 +131,7 @@ export const SurveysScreen = () => {
                 <View style={styles.dueDateRow}>
                   <ClockIcon size={14} color={colors.warning} />
                   <Text style={styles.dueDateText}>
-                    {t('surveys.dueBy', 'Due by {{date}}', { date: survey.dueDate })}
+{t('surveys.dueBy', 'Due by')} {survey.dueDate}
                   </Text>
                 </View>
 
@@ -155,10 +148,7 @@ export const SurveysScreen = () => {
                         />
                       </View>
                       <Text style={styles.progressText}>
-                        {t('surveys.answeredOf', '{{answered}}/{{total}}', {
-                          answered: survey.answeredCount,
-                          total: survey.questionCount,
-                        })}
+                        {survey.answeredCount}/{survey.questionCount}
                       </Text>
                     </View>
                     <Text style={styles.progressHint}>
@@ -208,9 +198,7 @@ export const SurveysScreen = () => {
                 <View style={styles.completedContent}>
                   <Text style={styles.completedTitle}>{survey.title}</Text>
                   <Text style={styles.completedDate}>
-                    {t('surveys.completedOn', 'Completed {{date}}', {
-                      date: survey.completedDate,
-                    })}
+                    {t('surveys.completed', 'Completed')} {survey.completedDate}
                   </Text>
                 </View>
               </View>
@@ -259,17 +247,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.surface,
-  },
-  header: {
-    paddingHorizontal: spacing.lg,
-    paddingTop: 60,
-    paddingBottom: spacing.lg,
-    backgroundColor: colors.background,
-    ...shadows.sm,
-  },
-  title: {
-    ...typography.h2,
-    color: colors.slate900,
   },
   content: {
     flex: 1,

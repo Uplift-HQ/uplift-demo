@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
-import { CheckCircleIcon, StarIcon, TrendingUpIcon, TargetIcon } from '../../components/Icons';
+import { CheckCircleIcon, StarIcon, TrendingUpIcon, TargetIcon, ChevronLeftIcon } from '../../components/Icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';
 
 export const TaskCompletionScreen = ({ navigation, route }: any) => {
   const { t } = useTranslation();
   const { task, timeSpent, photos, files } = route?.params || {};
-  
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     return `${mins} min`;
@@ -22,8 +23,17 @@ export const TaskCompletionScreen = ({ navigation, route }: any) => {
     navigation.navigate('Feed');
   };
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
+      {/* Back Button */}
+      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+        <ChevronLeftIcon size={24} color={colors.slate700} />
+        <Text style={styles.backButtonText}>{t('common.back')}</Text>
+      </TouchableOpacity>
       {/* Success Icon */}
       <View style={styles.successIcon}>
         <View style={styles.successCircle}>
@@ -110,7 +120,7 @@ export const TaskCompletionScreen = ({ navigation, route }: any) => {
       >
         <Text style={styles.doneButtonText}>{t('common.done')}</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -118,7 +128,9 @@ export const TaskCompletionScreen = ({ navigation, route }: any) => {
 import { ClockIcon } from '../../components/Icons';
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.surface, padding: spacing.xl, justifyContent: 'center' },
+  container: { flex: 1, backgroundColor: colors.surface, padding: spacing.xl },
+  backButton: { flexDirection: 'row', alignItems: 'center', marginBottom: spacing.lg },
+  backButtonText: { ...typography.bodyBold, color: colors.slate700, marginLeft: spacing.xs },
   successIcon: { alignItems: 'center', marginBottom: spacing.xl },
   successCircle: { width: 120, height: 120, backgroundColor: colors.success + '20', borderRadius: 60, alignItems: 'center', justifyContent: 'center' },
   

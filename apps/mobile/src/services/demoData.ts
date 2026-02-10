@@ -567,3 +567,260 @@ export const DEMO_REPORTS = {
     { name: 'F&B', hours: 640, staff: 6, utilization: 91 },
   ],
 };
+
+// ============================================================
+// ADDITIONAL DEMO DATA FOR COMPLETE FEATURE COVERAGE
+// ============================================================
+
+// Expenses Data
+export const DEMO_EXPENSES = {
+  expenses: [
+    { id: 'exp-1', description: 'Uniform dry cleaning', amount: 45.00, currency: 'GBP', status: 'approved', submittedAt: addDays(-5), category: 'Uniform' },
+    { id: 'exp-2', description: 'Training course materials', amount: 120.00, currency: 'GBP', status: 'pending', submittedAt: addDays(-2), category: 'Training' },
+    { id: 'exp-3', description: 'Travel to off-site event', amount: 32.50, currency: 'GBP', status: 'approved', submittedAt: addDays(-10), category: 'Travel' },
+    { id: 'exp-4', description: 'Team lunch contribution', amount: 25.00, currency: 'GBP', status: 'pending', submittedAt: addDays(-1), category: 'Meals' },
+  ],
+  totalPending: 145.00,
+  totalApproved: 77.50,
+};
+
+// Payslips Data
+export const DEMO_PAYSLIPS = {
+  payslips: [
+    { id: 'pay-1', period: 'January 2026', grossPay: 2450.00, netPay: 1994.30, tax: 290.50, ni: 116.20, pension: 49.00, hoursWorked: 160, paidAt: '2026-01-31' },
+    { id: 'pay-2', period: 'December 2025', grossPay: 2680.00, netPay: 2156.42, tax: 336.08, ni: 138.50, pension: 49.00, hoursWorked: 172, paidAt: '2025-12-31' },
+    { id: 'pay-3', period: 'November 2025', grossPay: 2320.00, netPay: 1892.10, tax: 264.20, ni: 114.70, pension: 49.00, hoursWorked: 152, paidAt: '2025-11-30' },
+    { id: 'pay-4', period: 'October 2025', grossPay: 2500.00, netPay: 2034.00, tax: 300.50, ni: 116.50, pension: 49.00, hoursWorked: 164, paidAt: '2025-10-31' },
+  ],
+  ytdEarnings: 28450.00,
+  ytdTax: 3420.00,
+  taxCode: '1257L',
+  niCategory: 'A',
+};
+
+// Compliance/Certifications Data
+export const DEMO_COMPLIANCE = {
+  certifications: [
+    { id: 'cert-1', name: 'Food Safety Level 2', issuer: 'Highfield Qualifications', status: 'valid', issuedAt: '2025-03-15', expiresAt: addDays(365), mandatory: true },
+    { id: 'cert-2', name: 'Allergen Awareness', issuer: 'CIEH', status: 'expiring_soon', issuedAt: '2024-02-20', expiresAt: addDays(45), mandatory: true },
+    { id: 'cert-3', name: 'First Aid at Work', issuer: 'St John Ambulance', status: 'valid', issuedAt: '2025-06-10', expiresAt: addDays(545), mandatory: false },
+    { id: 'cert-4', name: 'Fire Marshal Training', issuer: 'British Safety Council', status: 'valid', issuedAt: '2025-01-05', expiresAt: addDays(730), mandatory: false },
+    { id: 'cert-5', name: 'Personal License Holder', issuer: 'Local Authority', status: 'pending', issuedAt: null, expiresAt: null, mandatory: false },
+  ],
+  totalValid: 3,
+  totalExpiring: 1,
+  totalPending: 1,
+};
+
+// Documents Data
+export const DEMO_DOCUMENTS = {
+  documents: [
+    { id: 'doc-1', name: 'Employment Contract', type: 'contract', uploadedAt: '2024-03-01', category: 'Employment' },
+    { id: 'doc-2', name: 'Staff Handbook 2025', type: 'pdf', uploadedAt: '2025-01-15', category: 'Policies' },
+    { id: 'doc-3', name: 'Health & Safety Policy', type: 'pdf', uploadedAt: '2025-01-15', category: 'Policies' },
+    { id: 'doc-4', name: 'Food Safety Certificate', type: 'certificate', uploadedAt: '2025-03-15', category: 'Certifications' },
+    { id: 'doc-5', name: 'Payslip - Jan 2026', type: 'payslip', uploadedAt: '2026-01-31', category: 'Payroll' },
+    { id: 'doc-6', name: 'P60 Tax Summary 2024/25', type: 'tax', uploadedAt: '2025-05-01', category: 'Tax' },
+  ],
+  totalDocuments: 6,
+};
+
+// Learning Data
+export const DEMO_LEARNING = {
+  courses: [
+    { id: 'course-1', name: 'Customer Service Excellence', status: 'completed', progress: 100, duration: '2 hours', xpReward: 100, completedAt: addDays(-14) },
+    { id: 'course-2', name: 'Food Safety Level 3', status: 'in_progress', progress: 75, duration: '4 hours', xpReward: 200, nextModule: 'HACCP Principles' },
+    { id: 'course-3', name: 'Wine & Beverage Service', status: 'not_started', progress: 0, duration: '3 hours', xpReward: 150 },
+    { id: 'course-4', name: 'Team Leadership Fundamentals', status: 'not_started', progress: 0, duration: '2.5 hours', xpReward: 120 },
+    { id: 'course-5', name: 'Upselling Techniques', status: 'completed', progress: 100, duration: '1 hour', xpReward: 50, completedAt: addDays(-30) },
+  ],
+  totalCompleted: 2,
+  totalXpEarned: 150,
+  requiredCourses: 1,
+  recommendedCourses: 2,
+};
+
+// Performance Data
+export const DEMO_PERFORMANCE = {
+  currentReview: {
+    period: 'Q4 2025',
+    status: 'completed',
+    overallRating: 4.2,
+    managerName: 'James Wilson',
+    completedAt: addDays(-15),
+  },
+  metrics: [
+    { name: 'Attendance', score: 98, target: 95, trend: 'up' },
+    { name: 'Task Completion', score: 94, target: 90, trend: 'up' },
+    { name: 'Customer Satisfaction', score: 4.8, target: 4.5, trend: 'stable' },
+    { name: 'Upselling', score: 85, target: 80, trend: 'up' },
+    { name: 'Teamwork', score: 92, target: 85, trend: 'stable' },
+  ],
+  reviews: [
+    { period: 'Q4 2025', rating: 4.2, status: 'completed', date: addDays(-15) },
+    { period: 'Q3 2025', rating: 4.0, status: 'completed', date: addDays(-105) },
+    { period: 'Q2 2025', rating: 3.8, status: 'completed', date: addDays(-195) },
+  ],
+  goals: [
+    { id: 'goal-1', title: 'Complete Food Safety L3', status: 'in_progress', progress: 75, dueDate: addDays(30) },
+    { id: 'goal-2', title: 'Mentor 2 new team members', status: 'completed', progress: 100, completedAt: addDays(-10) },
+    { id: 'goal-3', title: 'Achieve 95% customer satisfaction', status: 'in_progress', progress: 96, dueDate: addDays(60) },
+  ],
+};
+
+// Surveys Data
+export const DEMO_SURVEYS = {
+  surveys: [
+    { id: 'survey-1', title: 'Employee Engagement Q1 2026', status: 'pending', deadline: addDays(7), estimatedTime: '5 mins', xpReward: 50, anonymous: true },
+    { id: 'survey-2', title: 'Training Feedback', status: 'pending', deadline: addDays(14), estimatedTime: '3 mins', xpReward: 25, anonymous: false },
+    { id: 'survey-3', title: 'Workplace Safety Assessment', status: 'completed', completedAt: addDays(-5), xpReward: 30, anonymous: true },
+    { id: 'survey-4', title: 'Manager Effectiveness', status: 'completed', completedAt: addDays(-20), xpReward: 40, anonymous: true },
+  ],
+  pendingCount: 2,
+  completedCount: 2,
+};
+
+// Reward Catalog Data
+export const DEMO_REWARD_CATALOG = {
+  rewards: [
+    { id: 'rc-1', name: 'Costa Coffee Voucher', description: 'Any hot drink free', pointsCost: 150, category: 'Food & Drink', brand: 'Costa', discount: 'FREE', available: true },
+    { id: 'rc-2', name: 'Odeon Cinema Ticket', description: '2-for-1 standard screening', pointsCost: 400, category: 'Entertainment', brand: 'Odeon', discount: '50% OFF', available: true },
+    { id: 'rc-3', name: 'Nando\'s Quarter Chicken', description: 'Any quarter chicken meal', pointsCost: 500, category: 'Food & Drink', brand: 'Nando\'s', discount: 'FREE', available: true },
+    { id: 'rc-4', name: 'Spotify Premium Month', description: '1 month subscription', pointsCost: 800, category: 'Entertainment', brand: 'Spotify', discount: 'FREE', available: true },
+    { id: 'rc-5', name: 'Pure Gym Day Pass', description: 'Full day gym access', pointsCost: 300, category: 'Wellness', brand: 'Pure Gym', discount: 'FREE', available: true },
+    { id: 'rc-6', name: 'Amazon Gift Card £10', description: 'Spend on anything', pointsCost: 1000, category: 'Shopping', brand: 'Amazon', discount: '£10', available: true },
+    { id: 'rc-7', name: 'Boots Points Boost', description: '500 Advantage Card points', pointsCost: 200, category: 'Shopping', brand: 'Boots', discount: '500 pts', available: true },
+    { id: 'rc-8', name: 'Deliveroo £5 Off', description: '£5 off your next order', pointsCost: 400, category: 'Food & Drink', brand: 'Deliveroo', discount: '£5 OFF', available: true },
+  ],
+  categories: ['Food & Drink', 'Entertainment', 'Wellness', 'Shopping'],
+  totalAvailable: 8,
+};
+
+// Affiliate Offers Data
+export const DEMO_AFFILIATE_OFFERS = {
+  offers: [
+    { id: 'aff-1', brand: 'Starbucks', discount: '20% OFF', description: 'All hot drinks', category: 'Food & Drink', pointsCost: 0, featured: true },
+    { id: 'aff-2', brand: 'Vue Cinema', discount: '2-for-1', description: 'Standard tickets', category: 'Entertainment', pointsCost: 0, featured: true },
+    { id: 'aff-3', brand: 'Tesco', discount: '7% OFF', description: 'Grocery shopping', category: 'Shopping', pointsCost: 0, featured: false },
+    { id: 'aff-4', brand: 'Pizza Express', discount: '25% OFF', description: 'Main courses', category: 'Food & Drink', pointsCost: 0, featured: false },
+    { id: 'aff-5', brand: 'Fitness First', discount: '30% OFF', description: 'Monthly membership', category: 'Wellness', pointsCost: 0, featured: false },
+  ],
+  totalOffers: 5,
+};
+
+// AI Insights Data (for managers)
+export const DEMO_AI_INSIGHTS = {
+  insights: [
+    { id: 'ai-1', type: 'staffing', title: 'Peak Demand Friday', description: 'AI predicts 35% higher traffic. Consider +2 staff for lunch service.', priority: 'high', actionable: true },
+    { id: 'ai-2', type: 'retention', title: 'Flight Risk Alert', description: 'Chen Wei shows signs of disengagement. Schedule 1:1 check-in.', priority: 'medium', actionable: true },
+    { id: 'ai-3', type: 'training', title: 'Skill Gap', description: '2 team members need Food Safety L3 for supervisor coverage.', priority: 'medium', actionable: true },
+    { id: 'ai-4', type: 'performance', title: 'Top Performer', description: 'Sophie Bernard exceeds targets by 15%. Consider recognition.', priority: 'low', actionable: true },
+    { id: 'ai-5', type: 'scheduling', title: 'Overtime Alert', description: 'James Kimani approaching 48hr weekly limit. Redistribute shifts.', priority: 'high', actionable: true },
+  ],
+  demandForecast: [
+    { day: 'Mon', predicted: 65, actual: 62 },
+    { day: 'Tue', predicted: 70, actual: 68 },
+    { day: 'Wed', predicted: 75, actual: 78 },
+    { day: 'Thu', predicted: 80, actual: null },
+    { day: 'Fri', predicted: 95, actual: null },
+    { day: 'Sat', predicted: 90, actual: null },
+    { day: 'Sun', predicted: 70, actual: null },
+  ],
+  laborEfficiency: 94.2,
+  scheduleOptimization: 87,
+};
+
+// Team Performance Data (for managers)
+export const DEMO_TEAM_PERFORMANCE = {
+  overview: {
+    avgMomentumScore: 87,
+    avgAttendance: 96,
+    avgTaskCompletion: 92,
+    avgCustomerRating: 4.6,
+    totalHoursThisWeek: 280,
+    laborCost: 4200,
+  },
+  performers: DEMO_TEAM.members.map(m => ({
+    ...m,
+    metrics: {
+      attendance: 90 + Math.floor(Math.random() * 10),
+      taskCompletion: 85 + Math.floor(Math.random() * 15),
+      customerRating: (4 + Math.random()).toFixed(1),
+      shiftsCompleted: 10 + Math.floor(Math.random() * 10),
+    },
+  })),
+  trends: {
+    momentum: [82, 84, 85, 86, 87, 87],
+    attendance: [94, 95, 95, 96, 96, 96],
+    efficiency: [88, 89, 90, 91, 92, 94],
+  },
+};
+
+// Offboarding Data (for managers)
+export const DEMO_OFFBOARDING = {
+  activeOffboardings: [
+    {
+      id: 'off-1',
+      employee: { name: 'Tom Parker', avatar: null, role: 'Server', department: 'Front of House' },
+      lastDay: addDays(14),
+      reason: 'Resignation - New opportunity',
+      status: 'in_progress',
+      checklistProgress: 60,
+      tasks: [
+        { name: 'Equipment return', completed: true },
+        { name: 'Knowledge transfer', completed: true },
+        { name: 'Exit interview', completed: false },
+        { name: 'Final pay processed', completed: false },
+        { name: 'Access revoked', completed: false },
+      ],
+    },
+  ],
+  recentOffboardings: [
+    { name: 'Alice Green', role: 'Host', exitDate: addDays(-30), reason: 'Relocation' },
+    { name: 'Mike Johnson', role: 'Bartender', exitDate: addDays(-60), reason: 'Career change' },
+  ],
+  turnoverRate: 8.5,
+  avgTenure: 18, // months
+};
+
+// Job Postings Data (for managers)
+export const DEMO_JOB_POSTINGS = {
+  jobs: [
+    { id: 'job-1', title: 'Server', location: 'Main Restaurant', type: 'Full-time', applications: 12, status: 'open', postedAt: addDays(-7), salary: '£11.50/hr' },
+    { id: 'job-2', title: 'Bartender', location: 'Bar & Lounge', type: 'Part-time', applications: 8, status: 'open', postedAt: addDays(-14), salary: '£12.00/hr' },
+    { id: 'job-3', title: 'Events Server', location: 'Events/Banqueting', type: 'Seasonal', applications: 5, status: 'open', postedAt: addDays(-3), salary: '£11.00/hr' },
+    { id: 'job-4', title: 'Host', location: 'Main Restaurant', type: 'Full-time', applications: 15, status: 'closed', postedAt: addDays(-30), salary: '£11.00/hr', filled: true },
+  ],
+  totalApplications: 40,
+  averageTimeToFill: 21, // days
+};
+
+// Expense Approvals Data (for managers)
+export const DEMO_EXPENSE_APPROVALS = {
+  pending: [
+    { id: 'ea-1', employee: 'Sarah Mitchell', amount: 45.00, description: 'Uniform dry cleaning', category: 'Uniform', submittedAt: addDays(-2), receipts: 1 },
+    { id: 'ea-2', employee: 'Emma Thompson', amount: 120.00, description: 'Training materials', category: 'Training', submittedAt: addDays(-1), receipts: 2 },
+    { id: 'ea-3', employee: 'Ahmed Rahman', amount: 32.50, description: 'Travel to meeting', category: 'Travel', submittedAt: addDays(-3), receipts: 1 },
+  ],
+  approved: [
+    { id: 'ea-4', employee: 'James Kimani', amount: 28.00, description: 'Supplies', category: 'Supplies', approvedAt: addDays(-5) },
+    { id: 'ea-5', employee: 'Maria Lopez', amount: 55.00, description: 'Team lunch', category: 'Meals', approvedAt: addDays(-7) },
+  ],
+  totalPending: 197.50,
+  totalApprovedThisMonth: 423.00,
+};
+
+// Skills Verification Data (for managers)
+export const DEMO_SKILL_VERIFICATION = {
+  pending: [
+    { id: 'sv-1', employee: 'Chen Wei', skill: 'Food Safety Level 2', evidence: 'Certificate uploaded', submittedAt: addDays(-2), priority: 'high' },
+    { id: 'sv-2', employee: 'Oluwaseun Adebayo', skill: 'Personal License', evidence: 'License photo', submittedAt: addDays(-5), priority: 'medium' },
+    { id: 'sv-3', employee: 'Emma Thompson', skill: 'First Aid', evidence: 'Training completion', submittedAt: addDays(-1), priority: 'low' },
+  ],
+  recentlyVerified: [
+    { employee: 'Sarah Mitchell', skill: 'Wine Service WSET L2', verifiedAt: addDays(-3), verifiedBy: 'James Wilson' },
+    { employee: 'Sophie Bernard', skill: 'HACCP Training', verifiedAt: addDays(-7), verifiedBy: 'James Wilson' },
+  ],
+  totalPending: 3,
+  totalVerifiedThisMonth: 8,
+};

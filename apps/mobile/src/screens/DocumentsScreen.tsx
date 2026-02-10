@@ -11,6 +11,7 @@ import {
   EyeIcon,
   EditIcon,
 } from '../components/Icons';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { colors, typography, spacing, borderRadius, shadows } from '../theme';
 
 type DocumentStatus = 'signed' | 'viewed' | 'new' | 'pending';
@@ -90,7 +91,7 @@ const getTypeColor = (type: ActionDocument['type']) => {
   }
 };
 
-export const DocumentsScreen = () => {
+export const DocumentsScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   const [expandedPolicy, setExpandedPolicy] = useState<string | null>(null);
 
@@ -184,10 +185,10 @@ export const DocumentsScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>{t('documents.title', 'Documents')}</Text>
-      </View>
+      <ScreenHeader
+        title={t('documents.title', 'Documents')}
+        onBack={() => navigation.goBack()}
+      />
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Action Required */}
@@ -246,20 +247,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.surface,
-  },
-
-  // Header
-  header: {
-    backgroundColor: colors.background,
-    paddingTop: 60,
-    paddingBottom: spacing.lg,
-    paddingHorizontal: spacing.lg,
-    ...shadows.sm,
-  },
-  title: {
-    ...typography.h1,
-    color: colors.slate900,
-    fontSize: 28,
   },
 
   // Content

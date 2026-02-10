@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { useAuthStore } from '../../store/authStore';
+import { useBranding } from '../../contexts/BrandingContext';
 import {
   HeartIcon, UserIcon, HelpCircleIcon, LogOutIcon,
   ChevronRightIcon, MessageCircleIcon, BellIcon, FileTextIcon,
@@ -14,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 export const ManagerMoreScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   const { user, logout } = useAuthStore();
+  const { branding } = useBranding();
   const unreadMessages = (user as any)?.unreadMessages ?? 7;
 
   const handleLogout = () => {
@@ -190,7 +192,7 @@ export const ManagerMoreScreen = ({ navigation }: any) => {
           </View>
           <View style={styles.userInfo}>
             <Text style={styles.userName}>{user?.firstName} {user?.lastName}</Text>
-            <Text style={styles.userRole}>Manager • {(user as any)?.companyName || 'Grand Metro Hotels'}</Text>
+            <Text style={styles.userRole}>Manager • {(user as any)?.companyName || branding.brandName || 'Your Company'}</Text>
           </View>
           <ChevronRightIcon size={20} color={colors.slate400} />
         </TouchableOpacity>

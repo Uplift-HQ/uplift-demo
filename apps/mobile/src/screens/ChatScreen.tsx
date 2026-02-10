@@ -14,7 +14,6 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  Alert,
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -75,13 +74,8 @@ export const ChatScreen = ({ navigation }: any) => {
         }
       } catch (e) {
         if (__DEV__) console.error('[ChatScreen] Failed to fetch channels:', e);
-        if (mounted) {
-          Alert.alert(
-            'Error',
-            'Failed to load chat. Please try again.',
-            [{ text: 'OK' }]
-          );
-        }
+        // Non-blocking error - user sees empty state
+        console.warn('[ChatScreen] Failed to load channels');
       } finally {
         if (mounted) setLoadingChannels(false);
       }
@@ -113,11 +107,7 @@ export const ChatScreen = ({ navigation }: any) => {
         if (__DEV__) console.error('[ChatScreen] Failed to fetch messages:', e);
         if (mounted) {
           setChannelMessages([]);
-          Alert.alert(
-            'Error',
-            'Failed to load chat. Please try again.',
-            [{ text: 'OK' }]
-          );
+          // Non-blocking error - user sees empty state
         }
       } finally {
         if (mounted) setLoadingMessages(false);

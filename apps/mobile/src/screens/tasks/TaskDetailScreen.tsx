@@ -121,7 +121,7 @@ export const TaskDetailScreen = ({ navigation, route }: any) => {
               <UserIcon size={18} color={colors.slate500} />
               <View>
                 <Text style={styles.infoLabel}>{t('tasks.assignedBy')}</Text>
-                <Text style={styles.infoValue}>{task.assignedBy?.name}</Text>
+                <Text style={styles.infoValue}>{task.assignedBy?.name || t('common.notAvailable', 'N/A')}</Text>
               </View>
             </View>
           </View>

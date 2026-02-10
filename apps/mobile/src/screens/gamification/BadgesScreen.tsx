@@ -74,7 +74,7 @@ export const BadgesScreen = ({ navigation }: any) => {
       <View style={styles.statsCard}>
         <View style={styles.statItem}>
           <Text style={styles.statValue}>{earnedBadges.length}</Text>
-          <Text style={styles.statLabel}>{t('gamification.badgesEarned', { count: earnedBadges.length }).split(' ')[1]}</Text>
+          <Text style={styles.statLabel}>{t('rewards.redeemed')}</Text>
         </View>
         <View style={styles.statDivider} />
         <View style={styles.statItem}>

@@ -29,15 +29,13 @@ export const useAlert = () => useContext(AlertContext);
 let globalShowAlert: ((title: string, message?: string, buttons?: AlertButton[]) => void) | null = null;
 
 export function showAlert(title: string, message?: string, buttons?: AlertButton[]) {
-  if (Platform.OS !== 'web') {
-    Alert.alert(title, message, buttons);
-    return;
-  }
+  // Always use custom non-blocking modal on all platforms
+  // Native Alert.alert is blocking on iOS which causes App Store rejections
   if (globalShowAlert) {
     globalShowAlert(title, message, buttons);
   } else {
-    // Fallback if provider not mounted yet
-    window.alert(message ? `${title}\n\n${message}` : title);
+    // Fallback if provider not mounted yet - just log it
+    console.warn(`[Alert] ${title}: ${message || ''}`);
   }
 }
 

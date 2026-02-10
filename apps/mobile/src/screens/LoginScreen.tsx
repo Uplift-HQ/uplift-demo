@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
@@ -27,8 +28,34 @@ export const LoginScreen = () => {
   const [companyError, setCompanyError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const { login, isLoading } = useAuthStore();
+  const { login, loginDemoUser, isLoading } = useAuthStore();
   const { branding, loading: brandingLoading, fetchBranding } = useBranding();
+
+  // Hidden demo mode: tap logo 5 times
+  const logoTapCount = useRef(0);
+  const logoTapTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const handleLogoTap = () => {
+    logoTapCount.current += 1;
+
+    // Reset tap count after 2 seconds of no taps
+    if (logoTapTimer.current) {
+      clearTimeout(logoTapTimer.current);
+    }
+    logoTapTimer.current = setTimeout(() => {
+      logoTapCount.current = 0;
+    }, 2000);
+
+    // 5 taps triggers demo mode
+    if (logoTapCount.current >= 5) {
+      logoTapCount.current = 0;
+      handleDemoLogin('worker');
+    }
+  };
+
+  const handleDemoLogin = (role: 'worker' | 'manager') => {
+    loginDemoUser(role);
+  };
 
   // Load last used org slug
   useEffect(() => {
@@ -73,9 +100,17 @@ export const LoginScreen = () => {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <View style={styles.content}>
-        {/* Logo */}
-        <View style={styles.logoContainer}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Logo - tap 5 times for hidden demo mode */}
+        <TouchableOpacity
+          style={styles.logoContainer}
+          onPress={handleLogoTap}
+          activeOpacity={1}
+        >
           {branding.logoUrl ? (
             <Image
               source={{ uri: branding.logoUrl }}
@@ -85,7 +120,7 @@ export const LoginScreen = () => {
             <UpliftLogo size={80} color={primaryColor} />
           )}
           <Text style={styles.tagline}>{t('auth.tagline')}</Text>
-        </View>
+        </TouchableOpacity>
 
         {/* Form */}
         <View style={styles.form}>
@@ -160,7 +195,27 @@ export const LoginScreen = () => {
           </TouchableOpacity>
         </View>
 
-      </View>
+        {/* Demo Mode - for App Store review and testing */}
+        <View style={styles.demoSection}>
+          <Text style={styles.demoTitle}>Try the Demo</Text>
+          <Text style={styles.demoSubtitle}>No account needed - explore the app</Text>
+          <View style={styles.demoButtons}>
+            <TouchableOpacity
+              style={[styles.demoButton, { borderColor: primaryColor }]}
+              onPress={() => handleDemoLogin('worker')}
+            >
+              <Text style={[styles.demoButtonText, { color: primaryColor }]}>Worker View</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.demoButton, { borderColor: primaryColor }]}
+              onPress={() => handleDemoLogin('manager')}
+            >
+              <Text style={[styles.demoButtonText, { color: primaryColor }]}>Manager View</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -170,8 +225,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  content: {
-    flex: 1,
+  scrollContent: {
+    flexGrow: 1,
     padding: spacing.xl,
     justifyContent: 'center',
   },
@@ -232,5 +287,35 @@ const styles = StyleSheet.create({
   link: {
     ...typography.bodyBold,
     color: colors.momentum,
+  },
+  demoSection: {
+    marginTop: spacing.xxl,
+    paddingTop: spacing.lg,
+    borderTopWidth: 1,
+    borderTopColor: colors.slate200,
+    alignItems: 'center',
+  },
+  demoTitle: {
+    ...typography.h3,
+    color: colors.slate900,
+    marginBottom: spacing.xs,
+  },
+  demoSubtitle: {
+    ...typography.small,
+    color: colors.slate500,
+    marginBottom: spacing.md,
+  },
+  demoButtons: {
+    flexDirection: 'row',
+    gap: spacing.md,
+  },
+  demoButton: {
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    borderRadius: borderRadius.lg,
+    borderWidth: 2,
+  },
+  demoButtonText: {
+    ...typography.bodyBold,
   },
 });

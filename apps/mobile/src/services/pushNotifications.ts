@@ -5,7 +5,7 @@
 
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from './api';
 
@@ -85,12 +85,8 @@ export async function registerForPushNotifications(): Promise<string | null> {
 
     return token;
   } catch (error) {
-    if (__DEV__) console.error('[PushNotifications] Failed to register for push notifications:', error);
-    Alert.alert(
-      'Push Notifications',
-      'Failed to enable push notifications. You may miss important updates.',
-      [{ text: 'OK' }]
-    );
+    // Non-blocking - push notification failure shouldn't block user
+    console.warn('[PushNotifications] Failed to register for push notifications:', error);
     return null;
   }
 }
@@ -109,12 +105,8 @@ async function registerTokenWithBackend(token: string): Promise<void> {
       },
     });
   } catch (error) {
-    if (__DEV__) console.error('[PushNotifications] Failed to register token with backend:', error);
-    Alert.alert(
-      'Push Notifications',
-      'Failed to register for push notifications with server. You may miss important updates.',
-      [{ text: 'OK' }]
-    );
+    // Non-blocking - backend registration failure shouldn't block user
+    console.warn('[PushNotifications] Failed to register token with backend:', error);
   }
 }
 
@@ -132,12 +124,8 @@ export async function unregisterPushToken(): Promise<void> {
       await AsyncStorage.removeItem(PUSH_TOKEN_KEY);
     }
   } catch (error) {
-    if (__DEV__) console.error('[PushNotifications] Failed to unregister push token:', error);
-    Alert.alert(
-      'Push Notifications',
-      'Failed to unregister push notifications. You may continue to receive notifications.',
-      [{ text: 'OK' }]
-    );
+    // Non-blocking - unregister failure shouldn't block user
+    console.warn('[PushNotifications] Failed to unregister push token:', error);
   }
 }
 

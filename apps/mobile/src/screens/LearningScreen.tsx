@@ -13,6 +13,7 @@ import {
   ZapIcon,
   ChevronRightIcon,
 } from '../components/Icons';
+import { ScreenHeader } from '../components/ScreenHeader';
 import { colors, typography, spacing, borderRadius, shadows } from '../theme';
 
 type Tab = 'courses' | 'catalogue' | 'certificates';
@@ -79,7 +80,7 @@ const getDifficultyColor = (difficulty: RecommendedCourse['difficulty']) => {
   }
 };
 
-export const LearningScreen = () => {
+export const LearningScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<Tab>('courses');
   const [searchQuery, setSearchQuery] = useState('');
@@ -235,9 +236,13 @@ export const LearningScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>{t('learning.title', 'Learning')}</Text>
+      <ScreenHeader
+        title={t('learning.title', 'Learning')}
+        onBack={() => navigation.goBack()}
+      />
+
+      {/* Search */}
+      <View style={styles.searchWrapper}>
         <View style={styles.searchContainer}>
           <SearchIcon size={18} color={colors.slate400} />
           <TextInput
@@ -282,19 +287,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
 
-  // Header
-  header: {
+  // Search
+  searchWrapper: {
     backgroundColor: colors.background,
-    paddingTop: 60,
-    paddingBottom: spacing.md,
     paddingHorizontal: spacing.lg,
-    ...shadows.sm,
-  },
-  title: {
-    ...typography.h1,
-    color: colors.slate900,
-    fontSize: 28,
-    marginBottom: spacing.md,
+    paddingBottom: spacing.md,
   },
   searchContainer: {
     flexDirection: 'row',

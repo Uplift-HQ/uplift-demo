@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { api, Shift, Skill, JobPosting, TimeEntry, Notification, DashboardData } from '../services/api';
+import { useAuthStore } from '../store/authStore';
 import {
   DEMO_DASHBOARD,
   DEMO_SHIFTS,
@@ -21,20 +22,46 @@ import {
   DEMO_TEAM,
   DEMO_APPROVALS,
   DEMO_REPORTS,
+  DEMO_LOCATIONS,
+  DEMO_EXPENSES,
+  DEMO_PAYSLIPS,
+  DEMO_COMPLIANCE,
+  DEMO_DOCUMENTS,
+  DEMO_LEARNING,
+  DEMO_PERFORMANCE,
+  DEMO_SURVEYS,
+  DEMO_REWARD_CATALOG,
+  DEMO_AFFILIATE_OFFERS,
+  DEMO_AI_INSIGHTS,
+  DEMO_TEAM_PERFORMANCE,
+  DEMO_OFFBOARDING,
+  DEMO_JOB_POSTINGS,
+  DEMO_EXPENSE_APPROVALS,
+  DEMO_SKILL_VERIFICATION,
 } from '../services/demoData';
 
 // Generic hook for data fetching with loading/error states
-// Falls back to demoData when API is unavailable (e.g. Apple Review, offline)
+// In demo mode: uses demo data directly
+// In production: calls API, falls back to demo data only on network failure
 function useApiCall<T>(
   fetcher: () => Promise<T>,
   demoData: T | null,
   dependencies: any[] = []
 ): { data: T | null; loading: boolean; error: string | null; refetch: () => void } {
+  const isDemoMode = useAuthStore((state) => state.isDemoMode);
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetch = useCallback(async () => {
+    // In demo mode, skip API and use demo data directly
+    if (isDemoMode && demoData) {
+      setData(demoData);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     try {
       setLoading(true);
       setError(null);
@@ -42,6 +69,7 @@ function useApiCall<T>(
       setData(result);
     } catch (e: any) {
       // Graceful fallback: use demo data so screens never crash
+      // This handles network failures and Apple Review scenarios
       if (demoData) {
         setData(demoData);
         setError(null);
@@ -51,7 +79,7 @@ function useApiCall<T>(
     } finally {
       setLoading(false);
     }
-  }, dependencies);
+  }, [isDemoMode, ...dependencies]);
 
   useEffect(() => {
     fetch();
@@ -170,9 +198,9 @@ export function useMySkills() {
 // ==================== SKILL VERIFICATION (MANAGER) ====================
 
 export function useSkillVerificationRequests() {
-  return useApiCall<{ requests: any[] }>(
+  return useApiCall<{ pending: any[]; recentlyVerified: any[]; totalPending: number; totalVerifiedThisMonth: number }>(
     () => api.getSkillVerificationRequests(),
-    { requests: [] },
+    DEMO_SKILL_VERIFICATION,
     []
   );
 }
@@ -293,17 +321,17 @@ export function useRewards() {
 }
 
 export function useRewardCatalog() {
-  return useApiCall<{ rewards: any[] }>(
+  return useApiCall<{ rewards: any[]; categories: string[]; totalAvailable: number }>(
     () => api.getRewardCatalog(),
-    { rewards: [] },
+    DEMO_REWARD_CATALOG,
     []
   );
 }
 
 export function useAffiliateOffers() {
-  return useApiCall<{ offers: any[] }>(
+  return useApiCall<{ offers: any[]; totalOffers: number }>(
     () => api.getAffiliateOffers(),
-    { offers: [] },
+    DEMO_AFFILIATE_OFFERS,
     []
   );
 }
@@ -345,9 +373,9 @@ export function useFeed() {
 // ==================== EXPENSES ====================
 
 export function useExpenses(status?: string) {
-  return useApiCall<{ expenses: any[] }>(
+  return useApiCall<{ expenses: any[]; totalPending: number; totalApproved: number }>(
     () => api.getExpenses({ status }),
-    { expenses: [] },
+    DEMO_EXPENSES,
     [status]
   );
 }
@@ -425,9 +453,9 @@ export function useReports() {
 // ==================== COMPLIANCE ====================
 
 export function useCompliance() {
-  return useApiCall<{ certifications: any[] }>(
+  return useApiCall<{ certifications: any[]; totalValid: number; totalExpiring: number; totalPending: number }>(
     () => api.getCompliance(),
-    { certifications: [] },
+    DEMO_COMPLIANCE,
     []
   );
 }
@@ -447,7 +475,151 @@ export function useIntegrations() {
 export function useLocations() {
   return useApiCall<{ locations: any[] }>(
     () => api.getLocations(),
-    { locations: [] }, // Locations loaded from API
+    { locations: DEMO_LOCATIONS },
+    []
+  );
+}
+
+// ==================== PAYROLL ====================
+
+export function usePayslips() {
+  return useApiCall<{
+    payslips: any[];
+    ytdEarnings: number;
+    ytdTax: number;
+    taxCode: string;
+    niCategory: string;
+  }>(
+    () => api.getPayslips?.() || Promise.reject('Not implemented'),
+    DEMO_PAYSLIPS,
+    []
+  );
+}
+
+// ==================== DOCUMENTS ====================
+
+export function useDocuments(category?: string) {
+  return useApiCall<{ documents: any[]; totalDocuments: number }>(
+    () => api.getDocuments?.({ category }) || Promise.reject('Not implemented'),
+    DEMO_DOCUMENTS,
+    [category]
+  );
+}
+
+// ==================== LEARNING ====================
+
+export function useLearning() {
+  return useApiCall<{
+    courses: any[];
+    totalCompleted: number;
+    totalXpEarned: number;
+    requiredCourses: number;
+    recommendedCourses: number;
+  }>(
+    () => api.getLearning?.() || Promise.reject('Not implemented'),
+    DEMO_LEARNING,
+    []
+  );
+}
+
+// ==================== PERFORMANCE ====================
+
+export function usePerformance() {
+  return useApiCall<{
+    currentReview: any;
+    metrics: any[];
+    reviews: any[];
+    goals: any[];
+  }>(
+    () => api.getPerformance?.() || Promise.reject('Not implemented'),
+    DEMO_PERFORMANCE,
+    []
+  );
+}
+
+// ==================== SURVEYS ====================
+
+export function useSurveys() {
+  return useApiCall<{
+    surveys: any[];
+    pendingCount: number;
+    completedCount: number;
+  }>(
+    () => api.getSurveys?.() || Promise.reject('Not implemented'),
+    DEMO_SURVEYS,
+    []
+  );
+}
+
+// ==================== MANAGER: AI INSIGHTS ====================
+
+export function useAIInsights() {
+  return useApiCall<{
+    insights: any[];
+    demandForecast: any[];
+    laborEfficiency: number;
+    scheduleOptimization: number;
+  }>(
+    () => api.getAIInsights?.() || Promise.reject('Not implemented'),
+    DEMO_AI_INSIGHTS,
+    []
+  );
+}
+
+// ==================== MANAGER: TEAM PERFORMANCE ====================
+
+export function useTeamPerformance() {
+  return useApiCall<{
+    overview: any;
+    performers: any[];
+    trends: any;
+  }>(
+    () => api.getTeamPerformance?.() || Promise.reject('Not implemented'),
+    DEMO_TEAM_PERFORMANCE,
+    []
+  );
+}
+
+// ==================== MANAGER: OFFBOARDING ====================
+
+export function useOffboarding() {
+  return useApiCall<{
+    activeOffboardings: any[];
+    recentOffboardings: any[];
+    turnoverRate: number;
+    avgTenure: number;
+  }>(
+    () => api.getOffboarding?.() || Promise.reject('Not implemented'),
+    DEMO_OFFBOARDING,
+    []
+  );
+}
+
+// ==================== MANAGER: JOB POSTINGS ====================
+
+export function useJobPostingsManager() {
+  return useApiCall<{
+    jobs: any[];
+    totalApplications: number;
+    averageTimeToFill: number;
+  }>(
+    () => api.getJobPostingsManager?.() || Promise.reject('Not implemented'),
+    DEMO_JOB_POSTINGS,
+    []
+  );
+}
+
+// ==================== MANAGER: EXPENSE APPROVALS ====================
+
+export function useExpenseApprovals() {
+  return useApiCall<{
+    pending: any[];
+    approved: any[];
+    totalPending: number;
+    totalApprovedThisMonth: number;
+  }>(
+    () => api.getExpenseApprovals?.() || Promise.reject('Not implemented'),
+    DEMO_EXPENSE_APPROVALS,
     []
   );
 }

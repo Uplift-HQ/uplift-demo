@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Alert,
   ActivityIndicator,
   RefreshControl,
   Modal,
@@ -65,6 +64,11 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
     pointsCost: '',
     quantityAvailable: '',
   });
+
+  // Reject modal state
+  const [showRejectModal, setShowRejectModal] = useState(false);
+  const [rejectingRedemption, setRejectingRedemption] = useState<Redemption | null>(null);
+  const [rejectReason, setRejectReason] = useState('');
 
   // Fetch data
   const fetchRewards = useCallback(async () => {
@@ -252,32 +256,25 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
   };
 
   const handleRejectRedemption = (redemption: Redemption) => {
-    Alert.prompt(
-      'Reject Redemption',
-      `Provide a reason for rejecting ${redemption.employeeName}'s request:`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Reject',
-          style: 'destructive',
-          onPress: async (reason) => {
-            try {
-              setIsSubmitting(true);
-              await api.rejectRedemption(redemption.id, reason || 'No reason provided');
-              showAlert('Success', 'Redemption rejected');
-              fetchRedemptions();
-            } catch (error) {
-              showAlert('Error', 'Failed to reject redemption');
-            } finally {
-              setIsSubmitting(false);
-            }
-          },
-        },
-      ],
-      'plain-text',
-      '',
-      'default'
-    );
+    setRejectingRedemption(redemption);
+    setRejectReason('');
+    setShowRejectModal(true);
+  };
+
+  const confirmRejectRedemption = async () => {
+    if (!rejectingRedemption) return;
+    try {
+      setIsSubmitting(true);
+      await api.rejectRedemption(rejectingRedemption.id, rejectReason || 'No reason provided');
+      showAlert('Success', 'Redemption rejected');
+      setShowRejectModal(false);
+      setRejectingRedemption(null);
+      fetchRedemptions();
+    } catch (error) {
+      showAlert('Error', 'Failed to reject redemption');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getCategoryLabel = (category: Reward['category']) => {
@@ -604,6 +601,56 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                 </TouchableOpacity>
               </View>
             </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Reject Redemption Modal */}
+      <Modal visible={showRejectModal} animationType="fade" transparent={true}>
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContent, { maxHeight: '50%' }]}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Reject Redemption</Text>
+              <TouchableOpacity onPress={() => setShowRejectModal(false)}>
+                <XIcon size={24} color={colors.slate700} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.formScroll}>
+              <Text style={styles.fieldLabel}>
+                Provide a reason for rejecting {rejectingRedemption?.employeeName}'s request:
+              </Text>
+              <TextInput
+                style={[styles.input, styles.textArea]}
+                value={rejectReason}
+                onChangeText={setRejectReason}
+                placeholder="Enter rejection reason..."
+                placeholderTextColor={colors.slate400}
+                multiline
+                numberOfLines={3}
+                autoFocus
+              />
+
+              <View style={styles.formActions}>
+                <TouchableOpacity
+                  style={styles.cancelButton}
+                  onPress={() => setShowRejectModal(false)}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.saveButton, { backgroundColor: colors.error }]}
+                  onPress={confirmRejectRedemption}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <ActivityIndicator size="small" color={colors.background} />
+                  ) : (
+                    <Text style={styles.saveButtonText}>Reject</Text>
+                  )}
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </View>
       </Modal>

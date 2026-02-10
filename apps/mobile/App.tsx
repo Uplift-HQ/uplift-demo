@@ -24,15 +24,16 @@ export default function App() {
           await initializeBackgroundSync();
         }
 
-        // Web: auto-login when ?demo=true is in the URL (for website demo only)
+        // Web: auto-login when ?demo=true is in the URL (for website demo)
         if (Platform.OS === 'web' && typeof window !== 'undefined') {
           const params = new URLSearchParams(window.location.search);
           if (params.get('demo') === 'true') {
-            // Determine role from URL path
             const isManager = window.location.pathname.includes('/manager');
-            // Instant demo login - no API call, no credentials needed
             loginDemoUser(isManager ? 'manager' : 'worker');
           }
+        } else if (__DEV__) {
+          // Auto demo login for testing - remove before production
+          loginDemoUser('worker');
         }
       } catch (error) {
         if (__DEV__) {

@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../store/authStore';
+import { useBranding } from '../../contexts/BrandingContext';
 import { useGamificationStats, useAffiliateOffers, useRewardCatalog, useMyRedemptions } from '../../hooks/useData';
 import { api } from '../../services/api';
 import {
@@ -142,6 +143,7 @@ const CATEGORIES = [
 export const RewardsScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
+  const { branding } = useBranding();
   const [activeTab, setActiveTab] = useState<'perks' | 'redeem'>('perks');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -161,7 +163,7 @@ export const RewardsScreen = ({ navigation }: any) => {
   const nextLevelXP = stats?.nextLevelXP ?? 500;
   const pointsToNextLevel = nextLevelXP - currentXP;
   const levelProgress = nextLevelXP > 0 ? Math.round((currentXP / nextLevelXP) * 100) : 0;
-  const companyName = (user as any)?.companyName || 'Grand Metro Hotels';
+  const companyName = (user as any)?.companyName || branding.brandName || 'Your Company';
 
   // Map affiliate offers to Perk format from API
   const affiliatePerks: Perk[] = (offersData?.offers || []).map((o: any) => ({

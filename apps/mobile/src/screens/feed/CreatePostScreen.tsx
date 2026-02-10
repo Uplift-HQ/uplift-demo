@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { StarIcon, CheckCircleIcon, UserIcon, CameraIcon } from '../../components/Icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../../theme';

@@ -147,10 +147,7 @@ export const OffboardingScreen = ({ navigation }: any) => {
 
               <View style={styles.taskProgressRow}>
                 <Text style={styles.taskProgressLabel}>
-                  {t('manager.offboarding.tasksProgress', '{{done}}/{{total}} tasks done', {
-                    done: emp.tasksComplete,
-                    total: emp.tasksTotal,
-                  })}
+                  {emp.tasksComplete}/{emp.tasksTotal} {t('manager.offboarding.tasksDone', 'tasks done')}
                 </Text>
                 <Text style={styles.taskProgressPercent}>
                   {Math.round(emp.progress * 100)}%
