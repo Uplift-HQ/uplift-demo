@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { payrollApi, employeesApi } from '../lib/api';
+import { employeesApi } from '../lib/api';
 import EmptyState from '../components/EmptyState';
 import {
   Globe,
