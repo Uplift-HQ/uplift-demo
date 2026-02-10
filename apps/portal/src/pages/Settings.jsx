@@ -2129,7 +2129,8 @@ function EmployeeVisibilitySettings({ showMsg }) {
   const toggleVisibility = async (empId, feature) => {
     const emp = employees.find(e => e.id === empId);
     if (!emp) return;
-    const newVisibility = { ...emp.visibility, [feature]: !emp.visibility[feature] };
+    const currentVisibility = emp.visibility || {};
+    const newVisibility = { ...currentVisibility, [feature]: !currentVisibility[feature] };
     try {
       // NOTE: Replace with employeesApi.updateVisibility() when available
       await api.put(`/employees/${empId}/visibility`, newVisibility);
@@ -2155,10 +2156,12 @@ function EmployeeVisibilitySettings({ showMsg }) {
     }
   };
 
-  const filteredEmployees = employees.filter(emp =>
-    emp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    emp.role.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredEmployees = employees.filter(emp => {
+    const name = emp.name || `${emp.first_name || ''} ${emp.last_name || ''}`.trim();
+    const role = emp.role_name || emp.role || '';
+    return name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           role.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   const getStatusBadge = (status) => {
     switch (status) {
@@ -2214,14 +2217,14 @@ function EmployeeVisibilitySettings({ showMsg }) {
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium">
-                  {emp.name.split(' ').map(n => n[0]).join('')}
+                  {(emp.name || `${emp.first_name || ''} ${emp.last_name || ''}`).trim().split(' ').map(n => n?.[0] || '').join('').slice(0, 2)}
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-medium text-slate-900">{emp.name}</p>
+                    <p className="font-medium text-slate-900">{emp.name || `${emp.first_name || ''} ${emp.last_name || ''}`.trim()}</p>
                     {getStatusBadge(emp.status)}
                   </div>
-                  <p className="text-sm text-slate-500">{emp.role}</p>
+                  <p className="text-sm text-slate-500">{emp.role_name || emp.role || '-'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -2230,9 +2233,9 @@ function EmployeeVisibilitySettings({ showMsg }) {
                     <div
                       key={feature.id}
                       className={`w-2 h-2 rounded-full ${
-                        emp.visibility[feature.id] ? 'bg-green-500' : 'bg-slate-200'
+                        emp.visibility?.[feature.id] ? 'bg-green-500' : 'bg-slate-200'
                       }`}
-                      title={`${feature.name}: ${emp.visibility[feature.id] ? 'Enabled' : 'Disabled'}`}
+                      title={`${feature.name}: ${emp.visibility?.[feature.id] ? 'Enabled' : 'Disabled'}`}
                     />
                   ))}
                 </div>
@@ -2269,7 +2272,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
                     <div
                       key={feature.id}
                       className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${
-                        emp.visibility[feature.id]
+                        emp.visibility?.[feature.id]
                           ? 'border-green-200 bg-green-50'
                           : 'border-slate-200 bg-white'
                       }`}
@@ -2281,12 +2284,12 @@ function EmployeeVisibilitySettings({ showMsg }) {
                       <button
                         onClick={() => toggleVisibility(emp.id, feature.id)}
                         className={`relative w-11 h-6 rounded-full transition-colors ${
-                          emp.visibility[feature.id] ? 'bg-green-500' : 'bg-slate-300'
+                          emp.visibility?.[feature.id] ? 'bg-green-500' : 'bg-slate-300'
                         }`}
                       >
                         <div
                           className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform shadow ${
-                            emp.visibility[feature.id] ? 'translate-x-6' : 'translate-x-1'
+                            emp.visibility?.[feature.id] ? 'translate-x-6' : 'translate-x-1'
                           }`}
                         />
                       </button>

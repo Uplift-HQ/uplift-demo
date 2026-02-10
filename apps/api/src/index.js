@@ -458,6 +458,7 @@ app.get('/api/dashboard', authMiddleware, async (req, res) => {
       openShifts,
       activeEmployees,
       weekMetrics,
+      recentActivity,
     ] = await Promise.all([
       db.query(
         `SELECT COUNT(*) as total,
@@ -466,14 +467,14 @@ app.get('/api/dashboard', authMiddleware, async (req, res) => {
         [organizationId, today]
       ),
       db.query(
-        `SELECT 
+        `SELECT
            (SELECT COUNT(*) FROM time_entries WHERE organization_id = $1 AND status = 'pending') as timesheets,
            (SELECT COUNT(*) FROM time_off_requests WHERE organization_id = $1 AND status = 'pending') as time_off,
            (SELECT COUNT(*) FROM shift_swaps WHERE organization_id = $1 AND status = 'pending') as swaps`,
         [organizationId]
       ),
       db.query(
-        `SELECT COUNT(*) FROM shifts 
+        `SELECT COUNT(*) FROM shifts
          WHERE organization_id = $1 AND is_open = TRUE AND date >= $2`,
         [organizationId, today]
       ),
@@ -482,17 +483,63 @@ app.get('/api/dashboard', authMiddleware, async (req, res) => {
         [organizationId]
       ),
       db.query(
-        `SELECT 
+        `SELECT
            COALESCE(SUM(hours_scheduled), 0) as scheduled,
            COALESCE(SUM(hours_worked), 0) as worked,
            COALESCE(SUM(labor_cost_scheduled), 0) as cost_scheduled,
            COALESCE(SUM(labor_cost_actual), 0) as cost_actual
-         FROM daily_metrics 
-         WHERE organization_id = $1 
+         FROM daily_metrics
+         WHERE organization_id = $1
            AND date >= CURRENT_DATE - INTERVAL '7 days'`,
         [organizationId]
       ),
+      // Recent activity from audit_log
+      db.query(
+        `SELECT
+           a.id,
+           a.action,
+           a.entity_type,
+           a.created_at,
+           COALESCE(u.first_name || ' ' || u.last_name, 'System') as user_name
+         FROM audit_log a
+         LEFT JOIN users u ON u.id = a.user_id
+         WHERE a.organization_id = $1
+         ORDER BY a.created_at DESC LIMIT 10`,
+        [organizationId]
+      ),
     ]);
+
+    // Transform activity for frontend
+    const activityFeed = recentActivity.rows.map(row => {
+      const actionTypeMap = {
+        'clock_in': 'clock_in',
+        'clock_out': 'clock_out',
+        'shift.created': 'shift_swap',
+        'shift.updated': 'shift_swap',
+        'time_off.requested': 'time_off',
+        'time_off.approved': 'time_off',
+        'time_entry.approved': 'clock_in',
+        'employee.created': 'recognition',
+        'employee.updated': 'recognition',
+      };
+      const now = new Date();
+      const created = new Date(row.created_at);
+      const diffMs = now - created;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMs / 3600000);
+      const diffDays = Math.floor(diffMs / 86400000);
+      let time;
+      if (diffMins < 60) time = `${diffMins} minutes ago`;
+      else if (diffHours < 24) time = `${diffHours} hours ago`;
+      else time = `${diffDays} days ago`;
+      return {
+        id: row.id,
+        type: actionTypeMap[row.action] || 'recognition',
+        user: row.user_name,
+        action: row.action.replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+        time,
+      };
+    });
 
     res.json({
       today: {
@@ -503,6 +550,7 @@ app.get('/api/dashboard', authMiddleware, async (req, res) => {
       openShifts: parseInt(openShifts.rows[0].count),
       activeEmployees: parseInt(activeEmployees.rows[0].count),
       weekMetrics: weekMetrics.rows[0],
+      activityFeed,
     });
   }
 });

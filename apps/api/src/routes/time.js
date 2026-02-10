@@ -486,53 +486,58 @@ router.get('/time-off/balances', async (req, res) => {
 
 // Get time off requests
 router.get('/time-off/requests', async (req, res) => {
-  const { organizationId, role, employeeId: userEmployeeId } = req.user;
-  const { status, employeeId, startDate, endDate } = req.query;
+  try {
+    const { organizationId, role, employeeId: userEmployeeId } = req.user;
+    const { status, employeeId, startDate, endDate } = req.query;
 
-  let query = `
-    SELECT tor.*, 
-           e.first_name, e.last_name, e.avatar_url,
-           top.name as policy_name, top.color,
-           u.first_name || ' ' || u.last_name as reviewed_by_name
-    FROM time_off_requests tor
-    JOIN employees e ON e.id = tor.employee_id
-    JOIN time_off_policies top ON top.id = tor.policy_id
-    LEFT JOIN users u ON u.id = tor.reviewed_by
-    WHERE tor.organization_id = $1
-  `;
+    let query = `
+      SELECT tor.*,
+             e.first_name, e.last_name, e.avatar_url,
+             top.name as policy_name, top.color,
+             u.first_name || ' ' || u.last_name as reviewed_by_name
+      FROM time_off_requests tor
+      JOIN employees e ON e.id = tor.employee_id
+      JOIN time_off_policies top ON top.id = tor.policy_id
+      LEFT JOIN users u ON u.id = tor.reviewed_by
+      WHERE tor.organization_id = $1
+    `;
 
-  const params = [organizationId];
-  let paramIndex = 2;
+    const params = [organizationId];
+    let paramIndex = 2;
 
-  // Workers only see their own
-  if (role === 'worker') {
-    query += ` AND tor.employee_id = $${paramIndex++}`;
-    params.push(userEmployeeId);
-  } else if (employeeId) {
-    query += ` AND tor.employee_id = $${paramIndex++}`;
-    params.push(employeeId);
+    // Workers only see their own
+    if (role === 'worker') {
+      query += ` AND tor.employee_id = $${paramIndex++}`;
+      params.push(userEmployeeId);
+    } else if (employeeId) {
+      query += ` AND tor.employee_id = $${paramIndex++}`;
+      params.push(employeeId);
+    }
+
+    if (status) {
+      query += ` AND tor.status = $${paramIndex++}`;
+      params.push(status);
+    }
+
+    if (startDate) {
+      query += ` AND tor.end_date >= $${paramIndex++}`;
+      params.push(startDate);
+    }
+
+    if (endDate) {
+      query += ` AND tor.start_date <= $${paramIndex++}`;
+      params.push(endDate);
+    }
+
+    query += ` ORDER BY tor.start_date DESC`;
+
+    const result = await db.query(query, params);
+
+    res.json({ requests: result.rows });
+  } catch (error) {
+    console.error('Get time off requests error:', error);
+    res.status(500).json({ error: 'Failed to get time off requests' });
   }
-
-  if (status) {
-    query += ` AND tor.status = $${paramIndex++}`;
-    params.push(status);
-  }
-
-  if (startDate) {
-    query += ` AND tor.end_date >= $${paramIndex++}`;
-    params.push(startDate);
-  }
-
-  if (endDate) {
-    query += ` AND tor.start_date <= $${paramIndex++}`;
-    params.push(endDate);
-  }
-
-  query += ` ORDER BY tor.start_date DESC`;
-
-  const result = await db.query(query, params);
-
-  res.json({ requests: result.rows });
 });
 
 // Create time off request

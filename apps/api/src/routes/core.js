@@ -533,8 +533,9 @@ router.get('/skills', async (req, res) => {
   const { organizationId } = req.user;
 
   const result = await db.query(
-    `SELECT s.*, 
-            (SELECT COUNT(*) FROM employee_skills es WHERE es.skill_id = s.id) as employee_count
+    `SELECT s.*,
+            (SELECT COUNT(*) FROM employee_skills es WHERE es.skill_id = s.id) as employee_count,
+            (SELECT COUNT(*) FROM employee_skills es WHERE es.skill_id = s.id AND es.verified = true) as verified_count
      FROM skills s
      WHERE s.organization_id = $1
      ORDER BY s.category, s.name`,

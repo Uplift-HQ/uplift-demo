@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
 import {
   ArrowLeft,
   Clock,
@@ -897,6 +898,12 @@ function EmployeeView({ t, user }) {
 export default function Momentum() {
   const { t } = useTranslation();
   const { user, isAdmin, isManagerOrAbove } = useAuth();
+  const { isPersonalView } = useView();
+
+  // In personal/My View mode, show individual score breakdown
+  if (isPersonalView) {
+    return <EmployeeView t={t} user={user} />;
+  }
 
   // Admins get the org-level overview
   if (isAdmin) {

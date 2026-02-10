@@ -78,39 +78,44 @@ router.get('/shifts', async (req, res) => {
   res.json({ shifts: result.rows });
 });
 
-// Get single shift
-router.get('/shifts/:id', async (req, res) => {
-  const { organizationId } = req.user;
-  const { id } = req.params;
+// Get single shift (UUID validation to avoid matching named routes like /shifts/swaps)
+router.get('/shifts/:id([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})', async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { id } = req.params;
 
-  const result = await db.query(
-    `SELECT s.*, 
-            e.first_name, e.last_name, e.email, e.phone, e.avatar_url,
-            l.name as location_name, l.address_line1 as location_address,
-            r.name as role_name
-     FROM shifts s
-     LEFT JOIN employees e ON e.id = s.employee_id
-     LEFT JOIN locations l ON l.id = s.location_id
-     LEFT JOIN roles r ON r.id = s.role_id
-     WHERE s.id = $1 AND s.organization_id = $2`,
-    [id, organizationId]
-  );
-
-  if (!result.rows[0]) {
-    return res.status(404).json({ error: 'Shift not found' });
-  }
-
-  // Get applicants if open shift
-  const shift = result.rows[0];
-  if (shift.is_open && shift.applicants?.length > 0) {
-    const applicants = await db.query(
-      `SELECT id, first_name, last_name, avatar_url FROM employees WHERE id = ANY($1)`,
-      [shift.applicants]
+    const result = await db.query(
+      `SELECT s.*,
+              e.first_name, e.last_name, e.email, e.phone, e.avatar_url,
+              l.name as location_name, l.address_line1 as location_address,
+              r.name as role_name
+       FROM shifts s
+       LEFT JOIN employees e ON e.id = s.employee_id
+       LEFT JOIN locations l ON l.id = s.location_id
+       LEFT JOIN roles r ON r.id = s.role_id
+       WHERE s.id = $1 AND s.organization_id = $2`,
+      [id, organizationId]
     );
-    shift.applicantDetails = applicants.rows;
-  }
 
-  res.json({ shift });
+    if (!result.rows[0]) {
+      return res.status(404).json({ error: 'Shift not found' });
+    }
+
+    // Get applicants if open shift
+    const shift = result.rows[0];
+    if (shift.is_open && shift.applicants?.length > 0) {
+      const applicants = await db.query(
+        `SELECT id, first_name, last_name, avatar_url FROM employees WHERE id = ANY($1)`,
+        [shift.applicants]
+      );
+      shift.applicantDetails = applicants.rows;
+    }
+
+    res.json({ shift });
+  } catch (error) {
+    console.error('Get shift error:', error);
+    res.status(500).json({ error: 'Failed to get shift' });
+  }
 });
 
 // Create shift
@@ -409,36 +414,41 @@ router.post('/shifts/:id/assign', requireRole(['admin', 'manager']), async (req,
 
 // Get swap requests
 router.get('/shifts/swaps', async (req, res) => {
-  const { organizationId, role, employeeId } = req.user;
-  const { status = 'pending' } = req.query;
+  try {
+    const { organizationId, role, employeeId } = req.user;
+    const { status = 'pending' } = req.query;
 
-  let query = `
-    SELECT sw.*,
-           fs.date as from_shift_date, fs.start_time as from_shift_start, fs.end_time as from_shift_end,
-           fe.first_name as from_first_name, fe.last_name as from_last_name,
-           ts.date as to_shift_date, ts.start_time as to_shift_start, ts.end_time as to_shift_end,
-           te.first_name as to_first_name, te.last_name as to_last_name
-    FROM shift_swaps sw
-    JOIN shifts fs ON fs.id = sw.from_shift_id
-    JOIN employees fe ON fe.id = sw.from_employee_id
-    LEFT JOIN shifts ts ON ts.id = sw.to_shift_id
-    LEFT JOIN employees te ON te.id = sw.to_employee_id
-    WHERE sw.organization_id = $1 AND sw.status = $2
-  `;
-  
-  const params = [organizationId, status];
+    let query = `
+      SELECT sw.*,
+             fs.date as from_shift_date, fs.start_time as from_shift_start, fs.end_time as from_shift_end,
+             fe.first_name as from_first_name, fe.last_name as from_last_name,
+             ts.date as to_shift_date, ts.start_time as to_shift_start, ts.end_time as to_shift_end,
+             te.first_name as to_first_name, te.last_name as to_last_name
+      FROM shift_swaps sw
+      JOIN shifts fs ON fs.id = sw.from_shift_id
+      JOIN employees fe ON fe.id = sw.from_employee_id
+      LEFT JOIN shifts ts ON ts.id = sw.to_shift_id
+      LEFT JOIN employees te ON te.id = sw.to_employee_id
+      WHERE sw.organization_id = $1 AND sw.status = $2
+    `;
 
-  // Workers only see swaps they're involved in
-  if (role === 'worker') {
-    query += ` AND (sw.from_employee_id = $3 OR sw.to_employee_id = $3)`;
-    params.push(employeeId);
+    const params = [organizationId, status];
+
+    // Workers only see swaps they're involved in
+    if (role === 'worker') {
+      query += ` AND (sw.from_employee_id = $3 OR sw.to_employee_id = $3)`;
+      params.push(employeeId);
+    }
+
+    query += ` ORDER BY sw.created_at DESC`;
+
+    const result = await db.query(query, params);
+
+    res.json({ swaps: result.rows });
+  } catch (error) {
+    console.error('Get shift swaps error:', error);
+    res.status(500).json({ error: 'Failed to get shift swaps' });
   }
-
-  query += ` ORDER BY sw.created_at DESC`;
-
-  const result = await db.query(query, params);
-
-  res.json({ swaps: result.rows });
 });
 
 // Create swap request
