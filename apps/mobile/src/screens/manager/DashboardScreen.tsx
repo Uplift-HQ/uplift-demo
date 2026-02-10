@@ -54,7 +54,7 @@ export const ManagerDashboardScreen = ({ navigation }: any) => {
   if (isPersonalView) {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.viewToggleContainer}>
+        <View style={styles.viewToggleContainerCompact}>
           <ViewToggle />
         </View>
         <HomeScreen navigation={navigation} />
@@ -431,6 +431,7 @@ const styles = StyleSheet.create({
 
   // View Toggle
   viewToggleContainer: { paddingTop: 60, paddingBottom: spacing.md, alignItems: 'center', backgroundColor: colors.background },
+  viewToggleContainerCompact: { paddingTop: 60, paddingBottom: 0, alignItems: 'center', backgroundColor: colors.background },
 
   // Header with Company Branding
   header: { backgroundColor: colors.background, paddingTop: 60, paddingBottom: spacing.lg, ...shadows.sm },
