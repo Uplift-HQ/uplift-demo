@@ -4,7 +4,6 @@
 // ============================================================
 
 import * as Notifications from 'expo-notifications';
-import * as Device from 'expo-device';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from './api';
@@ -45,10 +44,8 @@ export interface NotificationResponse {
  * Register for push notifications and get Expo push token
  */
 export async function registerForPushNotifications(): Promise<string | null> {
-  // Only works on physical devices
-  if (!Device.isDevice) {
-    return null;
-  }
+  // Note: Push notifications only work on physical devices, but we don't block
+  // the flow here - the token fetch will fail gracefully on simulators
 
   try {
     // Check existing permissions
@@ -101,7 +98,7 @@ async function registerTokenWithBackend(token: string): Promise<void> {
       body: {
         token,
         platform: Platform.OS,
-        deviceName: Device.deviceName || 'Unknown',
+        deviceName: Platform.OS === 'ios' ? 'iPhone' : 'Android Device',
       },
     });
   } catch (error) {
