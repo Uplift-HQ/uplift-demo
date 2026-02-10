@@ -19,7 +19,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { LANGUAGES, changeLanguage, getCurrentLanguage, onLanguageChange } from '../i18n';
 import { useTheme } from '../hooks/useTheme';
 import { api } from '../services/api';
-import * as Updates from 'expo-updates';
 
 interface LanguageSelectorProps {
   style?: object;
