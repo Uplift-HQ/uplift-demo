@@ -22,7 +22,12 @@ const useRealtimeTeam = () => {
   return data;
 };
 
-export const HomeScreen = ({ navigation }: any) => {
+interface HomeScreenProps {
+  navigation: any;
+  embedded?: boolean;  // When true, skip top padding (used when embedded in ManagerDashboard)
+}
+
+export const HomeScreen = ({ navigation, embedded = false }: HomeScreenProps) => {
   const { t } = useTranslation();
   const { user } = useAuthStore();
   const realtimeTeam = useRealtimeTeam();
@@ -91,7 +96,7 @@ export const HomeScreen = ({ navigation }: any) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header with Company Branding */}
-      <View style={styles.header}>
+      <View style={[styles.header, embedded && styles.headerEmbedded]}>
         <View style={styles.headerTop}>
           <View style={styles.companyBranding}>
             <View style={styles.companyLogoContainer}>
@@ -477,6 +482,7 @@ const styles = StyleSheet.create({
 
   // Header
   header: { backgroundColor: colors.background, paddingTop: 60, paddingBottom: spacing.lg, ...shadows.sm },
+  headerEmbedded: { paddingTop: 8 },  // Reduced padding when embedded in ManagerDashboard
   headerTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingHorizontal: spacing.lg, marginBottom: spacing.lg },
   companyBranding: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, flex: 1 },
   companyLogoContainer: { width: 52, height: 52, borderRadius: borderRadius.lg, overflow: 'hidden', backgroundColor: colors.slate100 },

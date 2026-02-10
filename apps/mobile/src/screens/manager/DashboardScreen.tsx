@@ -57,7 +57,7 @@ export const ManagerDashboardScreen = ({ navigation }: any) => {
         <View style={styles.viewToggleContainerCompact}>
           <ViewToggle />
         </View>
-        <HomeScreen navigation={navigation} />
+        <HomeScreen navigation={navigation} embedded={true} />
       </View>
     );
   }
