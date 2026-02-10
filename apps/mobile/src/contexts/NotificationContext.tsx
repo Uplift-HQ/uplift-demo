@@ -4,8 +4,7 @@
 // ============================================================
 
 import React, { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
-import { Platform, AppState } from 'react-native';
-import * as Notifications from 'expo-notifications';
+import { AppState } from 'react-native';
 import {
   registerForPushNotifications,
   setupNotificationListeners,
@@ -19,7 +18,7 @@ import {
 
 interface NotificationContextValue {
   expoPushToken: string | null;
-  notification: Notifications.Notification | null;
+  notification: any | null;
   permissionStatus: string | null;
   registerForNotifications: () => Promise<void>;
   unregister: () => Promise<void>;
@@ -46,7 +45,7 @@ interface NotificationProviderProps {
 
 export function NotificationProvider({ children, onNotificationTapped }: NotificationProviderProps) {
   const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
-  const [notification, setNotification] = useState<Notifications.Notification | null>(null);
+  const [notification, setNotification] = useState<any | null>(null);
   const [permissionStatus, setPermissionStatus] = useState<string | null>(null);
   const appState = useRef(AppState.currentState);
   const cleanupRef = useRef<(() => void) | null>(null);
@@ -76,7 +75,7 @@ export function NotificationProvider({ children, onNotificationTapped }: Notific
   }, []);
 
   // Handle notification received in foreground
-  const handleNotificationReceived = useCallback((notification: Notifications.Notification) => {
+  const handleNotificationReceived = useCallback((notification: any) => {
     setNotification(notification);
   }, []);
 

@@ -43,10 +43,6 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "notification": {
-      "icon": "./assets/notification-icon.png",
-      "color": "#FF6B35"
-    },
     "locales": {
       "fr": "./src/i18n/ios/fr.json",
       "de": "./src/i18n/ios/de.json",
