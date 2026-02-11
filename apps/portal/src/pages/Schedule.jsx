@@ -748,70 +748,78 @@ export default function Schedule() {
             </button>
           </div>
 
-          {/* View mode toggle */}
-          <div className="flex bg-white border rounded-lg p-1">
-            {Object.entries(VIEW_MODES).map(([key, { labelKey }]) => (
-              <button
-                key={key}
-                onClick={() => setViewMode(key)}
-                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
-                  viewMode === key
-                    ? 'bg-blue-600 text-white'
-                    : 'text-slate-600 hover:bg-slate-100'
-                }`}
-              >
-                {t(labelKey)}
-              </button>
-            ))}
-          </div>
+          {/* View mode toggle - only in management view */}
+          {showManagementFeatures && (
+            <div className="flex bg-white border rounded-lg p-1">
+              {Object.entries(VIEW_MODES).map(([key, { labelKey }]) => (
+                <button
+                  key={key}
+                  onClick={() => setViewMode(key)}
+                  className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
+                    viewMode === key
+                      ? 'bg-blue-600 text-white'
+                      : 'text-slate-600 hover:bg-slate-100'
+                  }`}
+                >
+                  {t(labelKey)}
+                </button>
+              ))}
+            </div>
+          )}
 
-          {/* Location filter */}
-          <select
-            value={selectedLocation}
-            onChange={(e) => setSelectedLocation(e.target.value)}
-            className="px-3 py-2 bg-white border rounded-lg text-sm"
-          >
-            <option value="">{t('schedule.allLocations')}</option>
-            {locations.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
-          </select>
+          {/* Location filter - only in management view */}
+          {showManagementFeatures && (
+            <select
+              value={selectedLocation}
+              onChange={(e) => setSelectedLocation(e.target.value)}
+              className="px-3 py-2 bg-white border rounded-lg text-sm"
+            >
+              <option value="">{t('schedule.allLocations')}</option>
+              {locations.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
+            </select>
+          )}
 
-          {/* Advanced filters toggle */}
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
-              showFilters || activeFiltersCount > 0
-                ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                : 'bg-white border text-slate-600 hover:bg-slate-50'
-            }`}
-          >
-            <Filter className="w-4 h-4" />
-            {t('schedule.filters', 'Filters')}
-            {activeFiltersCount > 0 && (
-              <span className="px-1.5 py-0.5 text-xs bg-blue-600 text-white rounded-full">{activeFiltersCount}</span>
-            )}
-          </button>
+          {/* Advanced filters toggle - only in management view */}
+          {showManagementFeatures && (
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                showFilters || activeFiltersCount > 0
+                  ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                  : 'bg-white border text-slate-600 hover:bg-slate-50'
+              }`}
+            >
+              <Filter className="w-4 h-4" />
+              {t('schedule.filters', 'Filters')}
+              {activeFiltersCount > 0 && (
+                <span className="px-1.5 py-0.5 text-xs bg-blue-600 text-white rounded-full">{activeFiltersCount}</span>
+              )}
+            </button>
+          )}
 
           <div className="flex-1" />
 
-          {/* Legend */}
-          <div className="flex items-center gap-4 text-sm">
-            <span className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded bg-green-500" />
-              {t('schedule.published', 'Published')}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded bg-amber-500" />
-              {t('schedule.draft', 'Draft')}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded bg-slate-300" />
-              {t('schedule.open', 'Open')}
-            </span>
-          </div>
+          {/* Legend - only in management view */}
+          {showManagementFeatures && (
+            <div className="flex items-center gap-4 text-sm">
+              <span className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded bg-green-500" />
+                {t('schedule.published', 'Published')}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded bg-amber-500" />
+                {t('schedule.draft', 'Draft')}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded bg-slate-300" />
+                {t('schedule.open', 'Open')}
+              </span>
+            </div>
+          )}
         </div>
 
-        {/* Advanced filters panel */}
-        {showFilters && (
+        {/* Advanced filters panel - only in management view */}
+        {showManagementFeatures && showFilters && (
           <div className="p-4 bg-white border-b space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -845,11 +853,112 @@ export default function Schedule() {
           </div>
         )}
 
-        {/* Schedule grid */}
+        {/* Schedule content */}
         <div className="flex-1 overflow-auto bg-white">
           {loading ? (
             <ScheduleSkeleton />
+          ) : !showManagementFeatures ? (
+            /* ============================================================
+               PERSONAL/WORKER VIEW - Beautiful shift cards
+               ============================================================ */
+            <div className="p-6 max-w-3xl mx-auto">
+              {shifts.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+                    <Calendar className="w-10 h-10 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">
+                    {t('schedule.noShiftsTitle', 'No shifts this week')}
+                  </h3>
+                  <p className="text-slate-500">
+                    {t('schedule.noShiftsMessage', 'Enjoy your time off! Your upcoming shifts will appear here.')}
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {dateRange.days.map((day) => {
+                    const dateStr = format(day, 'yyyy-MM-dd');
+                    const dayShifts = shifts.filter(s => s.date === dateStr || s.start_time?.startsWith(dateStr));
+                    const isToday = isSameDay(day, new Date());
+
+                    if (dayShifts.length === 0) return null;
+
+                    return dayShifts.map((shift) => {
+                      const isPublished = shift.status === 'published' || shift.status === 'confirmed';
+                      const startTime = shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--';
+                      const endTime = shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--';
+
+                      // Calculate duration
+                      let duration = '';
+                      if (shift.start_time && shift.end_time) {
+                        const start = parseISO(shift.start_time);
+                        const end = parseISO(shift.end_time);
+                        const hours = Math.floor((end - start) / (1000 * 60 * 60));
+                        const mins = Math.floor(((end - start) % (1000 * 60 * 60)) / (1000 * 60));
+                        duration = `${hours}h ${mins > 0 ? `${mins}m` : ''}`;
+                      }
+
+                      return (
+                        <div
+                          key={shift.id}
+                          className={`bg-white rounded-xl border-l-4 ${
+                            isPublished ? 'border-l-green-500' : 'border-l-amber-500'
+                          } shadow-sm border border-slate-200 p-4 ${
+                            isToday ? 'ring-2 ring-blue-100 bg-blue-50/30' : ''
+                          }`}
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              {/* Date */}
+                              <p className={`text-sm font-semibold ${isToday ? 'text-blue-600' : 'text-slate-900'}`}>
+                                {isToday && <span className="mr-2 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">{t('schedule.today', 'Today')}</span>}
+                                {format(day, 'EEEE, d MMM')}
+                              </p>
+
+                              {/* Time - large and prominent */}
+                              <p className="text-2xl font-bold text-slate-900 mt-1">
+                                {startTime} - {endTime}
+                              </p>
+
+                              {/* Location */}
+                              <div className="flex items-center gap-2 mt-2 text-slate-600">
+                                <MapPin className="w-4 h-4" />
+                                <span>{shift.location_name || shift.location || t('schedule.noLocation', 'Location TBC')}</span>
+                              </div>
+
+                              {/* Role/Position if available */}
+                              {(shift.role || shift.position || shift.job_title) && (
+                                <div className="flex items-center gap-2 mt-1 text-slate-500 text-sm">
+                                  <Briefcase className="w-4 h-4" />
+                                  <span>{shift.role || shift.position || shift.job_title}</span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Right side - duration and status */}
+                            <div className="text-right">
+                              <p className="text-lg font-semibold text-slate-700">{duration}</p>
+                              <div className={`inline-flex items-center gap-1 mt-1 px-2 py-1 rounded-full text-xs font-medium ${
+                                isPublished
+                                  ? 'bg-green-100 text-green-700'
+                                  : 'bg-amber-100 text-amber-700'
+                              }`}>
+                                <div className={`w-2 h-2 rounded-full ${isPublished ? 'bg-green-500' : 'bg-amber-500'}`} />
+                                {isPublished ? t('schedule.confirmed', 'Confirmed') : t('schedule.draft', 'Draft')}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    });
+                  })}
+                </div>
+              )}
+            </div>
           ) : (
+            /* ============================================================
+               MANAGEMENT VIEW - Full grid with all features
+               ============================================================ */
             <div>
               {/* Header row */}
               <div className={`grid border-b border-slate-200 sticky top-0 bg-white z-10`} style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}>
@@ -872,6 +981,7 @@ export default function Schedule() {
                       <p className={`text-lg font-semibold ${isToday ? 'text-blue-600' : 'text-slate-900'}`}>
                         {format(day, 'd')}
                       </p>
+                      {/* Coverage numbers */}
                       {metrics && (
                         <div className={`text-xs mt-1 px-2 py-0.5 rounded-full inline-block ${
                           metrics.coverage >= 90 ? 'bg-green-100 text-green-700' :
@@ -886,13 +996,10 @@ export default function Schedule() {
                 })}
               </div>
 
-              {/* Employee rows - in personal view only show current user, never fallback to all */}
+              {/* Employee rows */}
               {filteredEmployees.length === 0 ? (
                 <div className="text-center py-12 text-slate-500">
-                  {isPersonalView
-                    ? t('schedule.noScheduleFound', 'No schedule found for your account')
-                    : t('schedule.noEmployeesAvailable', 'No employees available')
-                  }
+                  {t('schedule.noEmployeesAvailable', 'No employees available')}
                 </div>
               ) : (
                 filteredEmployees.slice(0, isPersonalView ? 1 : 15).map((employee) => (
@@ -909,7 +1016,7 @@ export default function Schedule() {
                         <p className="text-sm font-medium text-slate-900 truncate">
                           {employee.first_name} {employee.last_name}
                         </p>
-                        <p className="text-xs text-slate-500 truncate">{t(`common.roles.${employee.role?.toLowerCase().replace(/\s+/g, '')}`, employee.role)}</p>
+                        <p className="text-xs text-slate-500 truncate">{employee.role || employee.job_title || ''}</p>
                       </div>
                     </div>
 
@@ -955,62 +1062,66 @@ export default function Schedule() {
                 ))
               )}
 
-              {/* Open shifts row */}
-              <div
-                className="grid border-t-2 border-slate-200 bg-slate-50/50"
-                style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
-              >
-                <div className="p-3 border-r border-slate-200 flex items-center gap-2">
-                  <div className="w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center">
-                    <Users className="w-4 h-4" />
-                  </div>
-                  <span className="text-sm font-medium text-slate-700">{t('schedule.openShifts', 'Open Shifts')}</span>
-                </div>
-                {dateRange.days.map((day) => {
-                  const dayOpenShifts = getShiftsForDay(day).filter(s => s.is_open && !s.employee_id);
-
-                  return (
-                    <div key={day.toISOString()} className="p-1 border-r border-slate-200 last:border-r-0 min-h-[70px] overflow-hidden">
-                      {dayOpenShifts.map((shift) => (
-                        <div
-                          key={shift.id}
-                          className="p-1.5 rounded text-xs bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 mb-1 w-full box-border"
-                        >
-                          <p className="font-medium">{shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--'} - {shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--'}</p>
-                          <p className="truncate opacity-75">{shift.location_name}</p>
-                        </div>
-                      ))}
+              {/* Open shifts row - only in management view */}
+              {showManagementFeatures && (
+                <div
+                  className="grid border-t-2 border-slate-200 bg-slate-50/50"
+                  style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
+                >
+                  <div className="p-3 border-r border-slate-200 flex items-center gap-2">
+                    <div className="w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center">
+                      <Users className="w-4 h-4" />
                     </div>
-                  );
-                })}
-              </div>
-
-              {/* Labour cost row */}
-              <div
-                className="grid border-t border-slate-200 bg-green-50/30"
-                style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
-              >
-                <div className="p-3 border-r border-slate-200 flex items-center gap-2">
-                  <div className="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                    <DollarSign className="w-4 h-4" />
+                    <span className="text-sm font-medium text-slate-700">{t('schedule.openShifts', 'Open Shifts')}</span>
                   </div>
-                  <span className="text-sm font-medium text-slate-700">{t('schedule.labourCost', 'Labour Cost')}</span>
-                </div>
-                {dateRange.days.map((day) => {
-                  const dateStr = format(day, 'yyyy-MM-dd');
-                  const cost = labourCosts[dateStr];
+                  {dateRange.days.map((day) => {
+                    const dayOpenShifts = getShiftsForDay(day).filter(s => s.is_open && !s.employee_id);
 
-                  return (
-                    <div key={day.toISOString()} className="p-2 border-r border-slate-200 last:border-r-0 text-center">
-                      {cost && (
-                        <p className="text-lg font-bold text-slate-700">
-                          £{cost.actual.toLocaleString()}
-                        </p>
-                      )}
+                    return (
+                      <div key={day.toISOString()} className="p-1 border-r border-slate-200 last:border-r-0 min-h-[70px] overflow-hidden">
+                        {dayOpenShifts.map((shift) => (
+                          <div
+                            key={shift.id}
+                            className="p-1.5 rounded text-xs bg-amber-100 text-amber-800 border border-amber-200 cursor-pointer hover:bg-amber-200 mb-1 w-full box-border"
+                          >
+                            <p className="font-medium">{shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--'} - {shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--'}</p>
+                            <p className="truncate opacity-75">{shift.location_name}</p>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Labour cost row - only in management view */}
+              {showManagementFeatures && (
+                <div
+                  className="grid border-t border-slate-200 bg-green-50/30"
+                  style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
+                >
+                  <div className="p-3 border-r border-slate-200 flex items-center gap-2">
+                    <div className="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                      <DollarSign className="w-4 h-4" />
                     </div>
-                  );
-                })}
-              </div>
+                    <span className="text-sm font-medium text-slate-700">{t('schedule.labourCost', 'Labour Cost')}</span>
+                  </div>
+                  {dateRange.days.map((day) => {
+                    const dateStr = format(day, 'yyyy-MM-dd');
+                    const cost = labourCosts[dateStr];
+
+                    return (
+                      <div key={day.toISOString()} className="p-2 border-r border-slate-200 last:border-r-0 text-center">
+                        {cost && (
+                          <p className="text-lg font-bold text-slate-700">
+                            £{cost.actual.toLocaleString()}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
         </div>
