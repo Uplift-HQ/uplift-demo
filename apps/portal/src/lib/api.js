@@ -745,14 +745,18 @@ export const timeApi = {
     const query = new URLSearchParams(params).toString();
     return api.get(`/time/pending${query ? `?${query}` : ''}`);
   },
+  // Get current clock-in status
+  getStatus: () => api.get('/time/status'),
   approve: (id) => api.post(`/time/entries/${id}/approve`),
   reject: (id, reason) => api.post(`/time/entries/${id}/reject`, { reason }),
   bulkApprove: (entryIds) => api.post('/time/entries/bulk-approve', { entryIds }),
   adjust: (id, data) => api.patch(`/time/entries/${id}`, data),
+  // Clock in/out - backend finds open entry automatically
   clockIn: (data) => api.post('/time/clock-in', data),
-  clockOut: (entryId) => api.post(`/time/entries/${entryId}/clock-out`),
-  startBreak: (entryId) => api.post(`/time/entries/${entryId}/break/start`),
-  endBreak: (entryId) => api.post(`/time/entries/${entryId}/break/end`),
+  clockOut: (data = {}) => api.post('/time/clock-out', data),
+  // Breaks - backend finds open entry automatically
+  startBreak: () => api.post('/time/break/start'),
+  endBreak: () => api.post('/time/break/end'),
 };
 
 export const timeOffApi = {
@@ -1259,7 +1263,27 @@ export const cardTransactionsApi = {
   bulkUpdate: (transactionIds, data) => api.patch('/card-transactions/bulk', { transactionIds, ...data }),
 };
 
-// Expense Claims API
+// Expenses API (for Expenses page - general expense management)
+export const expensesApi = {
+  // Get all expenses (admin/manager) - /api/expenses/all
+  list: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/expenses/all${query ? `?${query}` : ''}`);
+  },
+  // Get my expenses only (for personal view) - /api/expenses/my-expenses
+  getMyExpenses: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/expenses/my-expenses${query ? `?${query}` : ''}`);
+  },
+  get: (id) => api.get(`/expenses/my-expenses/${id}`),
+  create: (data) => api.post('/expenses/claims', data),
+  update: (id, data) => api.patch(`/expenses/claims/${id}`, data),
+  submit: (id) => api.post(`/expenses/claims/${id}/submit`),
+  // Get categories
+  getCategories: () => api.get('/expenses/categories'),
+};
+
+// Expense Claims API (for Corporate Cards / TrueLayer)
 export const expenseClaimsApi = {
   list: (params = {}) => {
     const query = new URLSearchParams(params).toString();

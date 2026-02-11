@@ -4,9 +4,11 @@
 // Fully internationalized - all strings use t() for translation
 // ============================================================
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
+import { expensesApi } from '../lib/api';
 import {
   Receipt, CreditCard, CheckCircle, XCircle, Clock, AlertTriangle,
   Filter, Search, Plus, X, Eye, Download, Upload, Edit2, Save,
@@ -107,10 +109,18 @@ const TABS = [
 
 export default function Expenses() {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, isManagerOrAbove } = useAuth();
+  const { isPersonalView } = useView();
   const isManager = user?.role === 'admin' || user?.role === 'manager';
+
+  // Show management features only when NOT in personal view AND user is manager+
+  const showManagementFeatures = !isPersonalView && isManagerOrAbove;
+
   const [activeTab, setActiveTab] = useState('all');
-  const [expenses, setExpenses] = useState(DEMO_EXPENSES);
+  const [expenses, setExpenses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [totals, setTotals] = useState({});
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [selectedReport, setSelectedReport] = useState(null);
   const [showNewExpense, setShowNewExpense] = useState(false);
@@ -124,30 +134,79 @@ export default function Expenses() {
   const [dateTo, setDateTo] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Stats
-  const totalSpend = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const pendingCount = expenses.filter(e => e.status === 'submitted').length;
-  const violations = expenses.filter(e => e.policyViolation).length;
+  // Fetch expenses from API
+  const loadExpenses = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const params = {};
+      if (statusFilter !== 'all') params.status = statusFilter;
+      if (categoryFilter !== 'all') params.category = categoryFilter;
+      if (dateFrom) params.startDate = dateFrom;
+      if (dateTo) params.endDate = dateTo;
 
-  // Filtered expenses
+      // In personal view or for non-managers, fetch only user's expenses
+      let result;
+      if (isPersonalView || !isManagerOrAbove) {
+        result = await expensesApi.getMyExpenses(params);
+      } else {
+        result = await expensesApi.list(params);
+      }
+
+      setExpenses(result.expenses || []);
+      setTotals(result.totals || {});
+    } catch (err) {
+      console.error('Failed to load expenses:', err);
+      setError(err.message || 'Failed to load expenses');
+      // Fall back to demo data if API fails
+      setExpenses(DEMO_EXPENSES);
+    } finally {
+      setLoading(false);
+    }
+  }, [statusFilter, categoryFilter, dateFrom, dateTo, isPersonalView, isManagerOrAbove]);
+
+  useEffect(() => {
+    loadExpenses();
+  }, [loadExpenses]);
+
+  // Stats from API totals or calculated from local data
+  const totalSpend = totals.pending_total || totals.approved_total || totals.paid_total
+    ? (parseFloat(totals.pending_total || 0) + parseFloat(totals.approved_total || 0) + parseFloat(totals.paid_total || 0))
+    : expenses.reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
+  const pendingCount = totals.pending_count || totals.submitted_count || expenses.filter(e => e.status === 'submitted' || e.status === 'pending').length;
+  const violations = expenses.filter(e => e.policyViolation || e.policy_violation).length;
+
+  // Filtered expenses (client-side search filter on top of server-side filters)
   const filteredExpenses = expenses.filter(e => {
-    if (statusFilter !== 'all' && e.status !== statusFilter) return false;
-    if (categoryFilter !== 'all' && e.category !== categoryFilter) return false;
-    if (employeeFilter && !e.employee.toLowerCase().includes(employeeFilter.toLowerCase())) return false;
-    if (dateFrom && e.date < dateFrom) return false;
-    if (dateTo && e.date > dateTo) return false;
-    if (searchQuery && !e.title.toLowerCase().includes(searchQuery.toLowerCase()) && !e.employee.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+    // Employee filter (only in management view)
+    const employeeName = e.employee_name || e.employee || '';
+    if (employeeFilter && !employeeName.toLowerCase().includes(employeeFilter.toLowerCase())) return false;
+    // Search filter
+    const title = e.description || e.title || '';
+    if (searchQuery && !title.toLowerCase().includes(searchQuery.toLowerCase()) && !employeeName.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
   });
 
-  const handleApprove = (id) => {
-    setExpenses(prev => prev.map(e => e.id === id ? { ...e, status: 'approved' } : e));
-    setSelectedExpense(null);
+  const handleApprove = async (id) => {
+    try {
+      // For now, update local state optimistically
+      // TODO: Call API to approve expense
+      setExpenses(prev => prev.map(e => e.id === id ? { ...e, status: 'approved' } : e));
+      setSelectedExpense(null);
+    } catch (err) {
+      console.error('Failed to approve expense:', err);
+    }
   };
 
-  const handleReject = (id) => {
-    setExpenses(prev => prev.map(e => e.id === id ? { ...e, status: 'rejected' } : e));
-    setSelectedExpense(null);
+  const handleReject = async (id) => {
+    try {
+      // For now, update local state optimistically
+      // TODO: Call API to reject expense
+      setExpenses(prev => prev.map(e => e.id === id ? { ...e, status: 'rejected' } : e));
+      setSelectedExpense(null);
+    } catch (err) {
+      console.error('Failed to reject expense:', err);
+    }
   };
 
   // ============================================================
@@ -328,40 +387,47 @@ export default function Expenses() {
                 </tr>
               )}
               {filteredExpenses.map((expense) => {
-                const CategoryIcon = CATEGORY_ICONS[expense.category] || FileText;
+                const categoryKey = expense.category_name?.toLowerCase() || expense.category || 'other';
+                const CategoryIcon = CATEGORY_ICONS[categoryKey] || FileText;
                 return (
                   <tr
                     key={expense.id}
                     onClick={() => setSelectedExpense(expense)}
                     className="hover:bg-slate-50 cursor-pointer transition-colors"
                   >
-                    <td className="px-4 py-3 text-sm font-medium text-slate-900">{expense.employee}</td>
+                    <td className="px-4 py-3 text-sm font-medium text-slate-900">
+                      {expense.employee_name || expense.employee}
+                    </td>
                     <td className="px-4 py-3 text-sm text-slate-700">
                       <div className="flex items-center gap-2">
                         <CategoryIcon className="w-4 h-4 text-slate-400" />
-                        {expense.title}
-                        {expense.policyViolation && (
+                        {expense.description || expense.title}
+                        {(expense.policyViolation || expense.policy_violation) && (
                           <AlertTriangle className="w-4 h-4 text-red-500" />
                         )}
                       </div>
                     </td>
                     <td className="px-4 py-3">
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 capitalize">
-                        {t(`expenses.category.${expense.category}`, expense.category)}
+                        {expense.category_name || t(`expenses.category.${expense.category}`, expense.category || 'Other')}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm text-slate-600">{expense.merchant}</td>
-                    <td className="px-4 py-3 text-sm font-semibold text-slate-900 text-right">
-                      {t('expenses.currency', '£')}{expense.amount.toFixed(2)}
+                    <td className="px-4 py-3 text-sm text-slate-600">
+                      {expense.merchant || expense.merchant_name || '-'}
                     </td>
-                    <td className="px-4 py-3 text-sm text-slate-600">{expense.date}</td>
+                    <td className="px-4 py-3 text-sm font-semibold text-slate-900 text-right">
+                      {t('expenses.currency', '£')}{parseFloat(expense.amount || 0).toFixed(2)}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-slate-600">
+                      {expense.expense_date || expense.date}
+                    </td>
                     <td className="px-4 py-3">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[expense.status]}`}>
                         {t(`expenses.status.${expense.status}`, expense.status)}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-center">
-                      {expense.hasReceipt ? (
+                      {(expense.hasReceipt || expense.receipt_url) ? (
                         <Receipt className="w-4 h-4 text-green-500 mx-auto" />
                       ) : (
                         <span className="text-xs text-slate-400">{t('expenses.noReceipt', 'None')}</span>
@@ -400,8 +466,10 @@ export default function Expenses() {
               {/* Header info */}
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="text-xl font-bold text-slate-900">{selectedExpense.title}</h4>
-                  <p className="text-sm text-slate-500 mt-1">{selectedExpense.employee} - {selectedExpense.date}</p>
+                  <h4 className="text-xl font-bold text-slate-900">{selectedExpense.description || selectedExpense.title}</h4>
+                  <p className="text-sm text-slate-500 mt-1">
+                    {selectedExpense.employee_name || selectedExpense.employee} - {selectedExpense.expense_date || selectedExpense.date}
+                  </p>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${STATUS_STYLES[selectedExpense.status]}`}>
                   {t(`expenses.status.${selectedExpense.status}`, selectedExpense.status)}
@@ -413,19 +481,21 @@ export default function Expenses() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-slate-500">{t('expenses.detail.amount', 'Amount')}</p>
-                    <p className="text-2xl font-bold text-slate-900">£{selectedExpense.amount.toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-slate-900">£{parseFloat(selectedExpense.amount || 0).toFixed(2)}</p>
                   </div>
                   <div>
                     <p className="text-sm text-slate-500">{t('expenses.detail.category', 'Category')}</p>
-                    <p className="text-lg font-medium text-slate-700 capitalize">{t(`expenses.category.${selectedExpense.category}`, selectedExpense.category)}</p>
+                    <p className="text-lg font-medium text-slate-700 capitalize">
+                      {selectedExpense.category_name || t(`expenses.category.${selectedExpense.category}`, selectedExpense.category || 'Other')}
+                    </p>
                   </div>
                   <div>
                     <p className="text-sm text-slate-500">{t('expenses.detail.merchant', 'Merchant')}</p>
-                    <p className="text-sm font-medium text-slate-700">{selectedExpense.merchant}</p>
+                    <p className="text-sm font-medium text-slate-700">{selectedExpense.merchant || selectedExpense.merchant_name || '-'}</p>
                   </div>
                   <div>
                     <p className="text-sm text-slate-500">{t('expenses.detail.report', 'Expense Report')}</p>
-                    <p className="text-sm font-medium text-slate-700">{selectedExpense.report || t('expenses.detail.noReport', 'Not assigned')}</p>
+                    <p className="text-sm font-medium text-slate-700">{selectedExpense.report || selectedExpense.claim_number || t('expenses.detail.noReport', 'Not assigned')}</p>
                   </div>
                 </div>
               </div>
@@ -438,16 +508,43 @@ export default function Expenses() {
                 </div>
               )}
 
-              {/* Receipt viewer placeholder */}
+              {/* Receipt viewer */}
               <div>
                 <p className="text-sm font-medium text-slate-700 mb-2">{t('expenses.detail.receipt', 'Receipt')}</p>
-                {selectedExpense.hasReceipt ? (
+                {(selectedExpense.hasReceipt || selectedExpense.receipt_url) ? (
                   <div className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center">
-                    <Receipt className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-                    <p className="text-sm text-slate-500">{t('expenses.detail.receiptAttached', 'Receipt image attached')}</p>
-                    <button className="mt-2 text-sm text-momentum-500 hover:text-momentum-600 font-medium">
-                      {t('expenses.detail.viewReceipt', 'View Full Receipt')}
-                    </button>
+                    {selectedExpense.receipt_url ? (
+                      <>
+                        {/* Show image preview if it's an image URL */}
+                        {selectedExpense.receipt_url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
+                          <img
+                            src={selectedExpense.receipt_url}
+                            alt="Receipt"
+                            className="max-w-full max-h-64 mx-auto mb-4 rounded-lg shadow-md"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextElementSibling.style.display = 'block';
+                            }}
+                          />
+                        ) : (
+                          <Receipt className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+                        )}
+                        <p className="text-sm text-slate-500">{t('expenses.detail.receiptAttached', 'Receipt image attached')}</p>
+                        <a
+                          href={selectedExpense.receipt_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 inline-block text-sm text-momentum-500 hover:text-momentum-600 font-medium"
+                        >
+                          {t('expenses.detail.viewReceipt', 'View Full Receipt')} →
+                        </a>
+                      </>
+                    ) : (
+                      <>
+                        <Receipt className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+                        <p className="text-sm text-slate-500">{t('expenses.detail.receiptAttached', 'Receipt attached (URL not available)')}</p>
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div className="border-2 border-dashed border-red-200 rounded-xl p-8 text-center bg-red-50">

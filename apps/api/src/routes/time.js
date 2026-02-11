@@ -140,10 +140,10 @@ router.post('/time/clock-in', idempotencyMiddleware, async (req, res) => {
   const result = await db.query(
     `INSERT INTO time_entries (
       organization_id, employee_id, shift_id, location_id,
-      clock_in, clock_in_location, clock_in_photo_url
-    ) VALUES ($1, $2, $3, $4, NOW(), $5, $6)
+      clock_in, clock_in_location
+    ) VALUES ($1, $2, $3, $4, NOW(), $5)
     RETURNING *`,
-    [organizationId, employeeId, shiftId, actualLocationId, JSON.stringify(location), photo]
+    [organizationId, employeeId, shiftId, actualLocationId, JSON.stringify(location)]
   );
 
   // Update shift status if linked
@@ -180,14 +180,13 @@ router.post('/time/clock-out', idempotencyMiddleware, async (req, res) => {
   }
 
   const result = await db.query(
-    `UPDATE time_entries SET 
+    `UPDATE time_entries SET
        clock_out = NOW(),
        clock_out_location = $2,
-       clock_out_photo_url = $3,
-       total_break_minutes = COALESCE($4, total_break_minutes)
+       total_break_minutes = COALESCE($3, total_break_minutes)
      WHERE id = $1
      RETURNING *`,
-    [entry.rows[0].id, JSON.stringify(location), photo, breakMinutes]
+    [entry.rows[0].id, JSON.stringify(location), breakMinutes]
   );
 
   // Update shift status if linked

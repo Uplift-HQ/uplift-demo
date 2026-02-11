@@ -90,6 +90,91 @@ router.patch('/categories/:id', requireRole(['admin']), async (req, res) => {
 
 // ==================== EMPLOYEE CLAIMS ====================
 
+// Get all expenses (admin/manager view) - mounted at /api/expenses/all
+router.get('/all', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { status, employeeId, startDate, endDate, category, limit = 50, offset = 0 } = req.query;
+
+    let query = `
+      SELECT ec.*,
+             cat.name as category_name,
+             e.first_name || ' ' || e.last_name as employee_name,
+             e.employee_number,
+             ru.first_name || ' ' || ru.last_name as reviewed_by_name
+      FROM expense_claims ec
+      LEFT JOIN expense_categories cat ON cat.id = ec.category_id
+      LEFT JOIN employees e ON e.id = ec.employee_id
+      LEFT JOIN users ru ON ru.id = ec.reviewed_by
+      WHERE ec.organization_id = $1
+    `;
+    const params = [organizationId];
+
+    if (status && status !== 'all') {
+      query += ` AND ec.status = $${params.length + 1}`;
+      params.push(status);
+    }
+
+    if (employeeId) {
+      query += ` AND ec.employee_id = $${params.length + 1}`;
+      params.push(employeeId);
+    }
+
+    if (category && category !== 'all') {
+      query += ` AND cat.name ILIKE $${params.length + 1}`;
+      params.push(`%${category}%`);
+    }
+
+    if (startDate) {
+      query += ` AND ec.expense_date >= $${params.length + 1}`;
+      params.push(startDate);
+    }
+
+    if (endDate) {
+      query += ` AND ec.expense_date <= $${params.length + 1}`;
+      params.push(endDate);
+    }
+
+    // Count total
+    const countQuery = query.replace(/SELECT[\s\S]*?FROM/, 'SELECT COUNT(*) FROM');
+    const countResult = await db.query(countQuery, params);
+    const total = parseInt(countResult.rows[0].count);
+
+    query += ` ORDER BY ec.created_at DESC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+    params.push(parseInt(limit), parseInt(offset));
+
+    const expenses = await db.query(query, params);
+
+    // Calculate totals
+    const totals = await db.query(`
+      SELECT
+        COALESCE(SUM(amount) FILTER (WHERE status = 'pending'), 0) as pending_total,
+        COALESCE(SUM(amount) FILTER (WHERE status = 'submitted'), 0) as submitted_total,
+        COALESCE(SUM(amount) FILTER (WHERE status = 'approved'), 0) as approved_total,
+        COALESCE(SUM(amount) FILTER (WHERE status = 'paid'), 0) as paid_total,
+        COUNT(*) FILTER (WHERE status = 'pending') as pending_count,
+        COUNT(*) FILTER (WHERE status = 'submitted') as submitted_count,
+        COUNT(*) FILTER (WHERE status = 'approved') as approved_count
+      FROM expense_claims
+      WHERE organization_id = $1
+    `, [organizationId]);
+
+    res.json({
+      expenses: expenses.rows,
+      totals: totals.rows[0],
+      pagination: {
+        total,
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+        pages: Math.ceil(total / parseInt(limit))
+      }
+    });
+  } catch (error) {
+    console.error('Failed to get expenses:', error);
+    res.status(500).json({ error: 'Failed to get expenses' });
+  }
+});
+
 // Get my expenses
 router.get('/my-expenses', async (req, res) => {
   try {

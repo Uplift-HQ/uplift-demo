@@ -1,11 +1,13 @@
 // ============================================================
 // TIME TRACKING PAGE - REAL API
+// Supports both Management View (all entries) and Personal View (my entries only)
 // ============================================================
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { timeApi, locationsApi, reportsApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
 import { Clock, Check, X, Filter, Download, AlertCircle, CheckCircle, XCircle, MapPin, Navigation, Wifi, WifiOff, Play, Square, Coffee, Timer, User } from 'lucide-react';
 import { format, parseISO, differenceInMinutes } from 'date-fns';
 
@@ -27,13 +29,15 @@ const safeNum = (val) => {
 
 export default function TimeTracking() {
   const { user, isManagerOrAbove } = useAuth();
+  const { isPersonalView } = useView();
   const { t } = useTranslation();
   const [entries, setEntries] = useState([]);
   const [pendingEntries, setPendingEntries] = useState([]);
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [tab, setTab] = useState(isManagerOrAbove ? 'pending' : 'clock');
+  // In personal view, always default to clock tab; in management view, default to pending if manager
+  const [tab, setTab] = useState(isPersonalView ? 'clock' : (isManagerOrAbove ? 'pending' : 'clock'));
   const [selectedEntries, setSelectedEntries] = useState([]);
   const [toast, setToast] = useState(null);
   const [filters, setFilters] = useState({ locationId: '', startDate: format(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd'), endDate: format(new Date(), 'yyyy-MM-dd') });
@@ -42,18 +46,36 @@ export default function TimeTracking() {
   const [isOnBreak, setIsOnBreak] = useState(false);
   const [clockingLoading, setClockingLoading] = useState(false); // NM-14: Double-click protection
 
-  useEffect(() => { loadData(); const interval = setInterval(() => setClockTime(new Date()), 1000); return () => clearInterval(interval); }, []);
+  // Show management features only if in management view and user is manager+
+  const showManagementFeatures = !isPersonalView && isManagerOrAbove;
+
+  useEffect(() => { loadData(); const interval = setInterval(() => setClockTime(new Date()), 1000); return () => clearInterval(interval); }, [isPersonalView]);
 
   const loadData = async () => {
     setError(null);
     try {
-      const [entriesRes, locationsRes] = await Promise.all([
-        timeApi.getEntries(filters),
-        locationsApi.list()
+      // In personal view, filter entries to current user only
+      const entryFilters = isPersonalView && user?.employeeId
+        ? { ...filters, employeeId: user.employeeId }
+        : filters;
+      const [entriesRes, locationsRes, statusRes] = await Promise.all([
+        timeApi.getEntries(entryFilters),
+        locationsApi.list(),
+        timeApi.getStatus().catch(() => ({ clockedIn: false, entry: null })),
       ]);
       setEntries(entriesRes.entries || []);
       setLocations(locationsRes.locations || []);
-      if (isManagerOrAbove) {
+      // Set current clock-in status from API
+      if (statusRes.clockedIn && statusRes.entry) {
+        setCurrentEntry(statusRes.entry);
+        // Check if currently on break (break_start set but break_end not set)
+        setIsOnBreak(statusRes.entry.break_start && !statusRes.entry.break_end);
+      } else {
+        setCurrentEntry(null);
+        setIsOnBreak(false);
+      }
+      // Only load pending entries in management view
+      if (showManagementFeatures) {
         const pendingRes = await timeApi.getPending();
         setPendingEntries(pendingRes.entries || []);
       }
@@ -105,10 +127,11 @@ export default function TimeTracking() {
     if (!currentEntry || clockingLoading) return; // NM-14: Prevent double-click
     setClockingLoading(true);
     try {
-      await timeApi.clockOut(currentEntry.id);
+      await timeApi.clockOut();
       setCurrentEntry(null);
       setIsOnBreak(false);
       setToast({ type: 'success', message: t('timeTracking.clockedOut', 'Clocked out successfully') });
+      loadData(); // Refresh entries list
     } catch (err) {
       setToast({ type: 'error', message: t('timeTracking.clockOutError', 'Failed to clock out. Please try again.') });
     } finally {
@@ -121,11 +144,11 @@ export default function TimeTracking() {
     setClockingLoading(true);
     try {
       if (isOnBreak) {
-        await timeApi.endBreak(currentEntry.id);
+        await timeApi.endBreak();
         setIsOnBreak(false);
         setToast({ type: 'info', message: t('timeTracking.breakEnded', 'Break ended') });
       } else {
-        await timeApi.startBreak(currentEntry.id);
+        await timeApi.startBreak();
         setIsOnBreak(true);
         setToast({ type: 'info', message: t('timeTracking.breakStarted', 'Break started') });
       }
@@ -164,10 +187,16 @@ export default function TimeTracking() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t('timeTracking.title', 'Time Tracking')}</h1>
-          <p className="text-gray-600">{isManagerOrAbove ? t('timeTracking.managerSubtitle', 'Review and approve timesheets') : t('timeTracking.employeeSubtitle', 'Track your working hours')}</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            {isPersonalView ? t('myTimeTracking.title', 'My Time Tracking') : t('timeTracking.title', 'Time Tracking')}
+          </h1>
+          <p className="text-gray-600">
+            {showManagementFeatures
+              ? t('timeTracking.managerSubtitle', 'Review and approve timesheets')
+              : t('timeTracking.employeeSubtitle', 'Track your working hours')}
+          </p>
         </div>
-        {isManagerOrAbove && (
+        {showManagementFeatures && (
           <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50">
             <Download className="h-4 w-4" />
             {t('settings.dataExport', 'Export')}
@@ -177,8 +206,10 @@ export default function TimeTracking() {
 
       {/* Tabs */}
       <div className="flex gap-1 border-b">
-        {!isManagerOrAbove && <button onClick={() => setTab('clock')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'clock' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.clockIn', 'Clock In/Out')}</button>}
-        {isManagerOrAbove && <button onClick={() => setTab('pending')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'pending' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('common.pending', 'Pending')} ({pendingEntries.length})</button>}
+        {/* Clock In/Out tab shown in personal view or for non-managers */}
+        {(isPersonalView || !isManagerOrAbove) && <button onClick={() => setTab('clock')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'clock' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.clockIn', 'Clock In/Out')}</button>}
+        {/* Pending tab only in management view for managers */}
+        {showManagementFeatures && <button onClick={() => setTab('pending')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'pending' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('common.pending', 'Pending')} ({pendingEntries.length})</button>}
         <button onClick={() => setTab('history')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'history' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.history', 'History')}</button>
       </div>
 
@@ -203,8 +234,8 @@ export default function TimeTracking() {
         </div>
       )}
 
-      {/* Pending Approvals Tab */}
-      {tab === 'pending' && isManagerOrAbove && (
+      {/* Pending Approvals Tab - only in management view */}
+      {tab === 'pending' && showManagementFeatures && (
         <div className="space-y-4">
           {selectedEntries.length > 0 && (
             <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
