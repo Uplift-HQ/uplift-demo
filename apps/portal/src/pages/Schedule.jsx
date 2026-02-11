@@ -859,102 +859,16 @@ export default function Schedule() {
             <ScheduleSkeleton />
           ) : !showManagementFeatures ? (
             /* ============================================================
-               PERSONAL/WORKER VIEW - Beautiful shift cards
+               PERSONAL/WORKER VIEW - Weekly Timeline Design
                ============================================================ */
-            <div className="p-6 max-w-3xl mx-auto">
-              {shifts.length === 0 ? (
-                <div className="text-center py-16">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
-                    <Calendar className="w-10 h-10 text-green-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                    {t('schedule.noShiftsTitle', 'No shifts this week')}
-                  </h3>
-                  <p className="text-slate-500">
-                    {t('schedule.noShiftsMessage', 'Enjoy your time off! Your upcoming shifts will appear here.')}
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {dateRange.days.map((day) => {
-                    const dateStr = format(day, 'yyyy-MM-dd');
-                    const dayShifts = shifts.filter(s => s.date === dateStr || s.start_time?.startsWith(dateStr));
-                    const isToday = isSameDay(day, new Date());
-
-                    if (dayShifts.length === 0) return null;
-
-                    return dayShifts.map((shift) => {
-                      const isPublished = shift.status === 'published' || shift.status === 'confirmed';
-                      const startTime = shift.start_time ? format(parseISO(shift.start_time), 'HH:mm') : '--:--';
-                      const endTime = shift.end_time ? format(parseISO(shift.end_time), 'HH:mm') : '--:--';
-
-                      // Calculate duration
-                      let duration = '';
-                      if (shift.start_time && shift.end_time) {
-                        const start = parseISO(shift.start_time);
-                        const end = parseISO(shift.end_time);
-                        const hours = Math.floor((end - start) / (1000 * 60 * 60));
-                        const mins = Math.floor(((end - start) % (1000 * 60 * 60)) / (1000 * 60));
-                        duration = `${hours}h ${mins > 0 ? `${mins}m` : ''}`;
-                      }
-
-                      return (
-                        <div
-                          key={shift.id}
-                          className={`bg-white rounded-xl border-l-4 ${
-                            isPublished ? 'border-l-green-500' : 'border-l-amber-500'
-                          } shadow-sm border border-slate-200 p-4 ${
-                            isToday ? 'ring-2 ring-blue-100 bg-blue-50/30' : ''
-                          }`}
-                        >
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              {/* Date */}
-                              <p className={`text-sm font-semibold ${isToday ? 'text-blue-600' : 'text-slate-900'}`}>
-                                {isToday && <span className="mr-2 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">{t('schedule.today', 'Today')}</span>}
-                                {format(day, 'EEEE, d MMM')}
-                              </p>
-
-                              {/* Time - large and prominent */}
-                              <p className="text-2xl font-bold text-slate-900 mt-1">
-                                {startTime} - {endTime}
-                              </p>
-
-                              {/* Location */}
-                              <div className="flex items-center gap-2 mt-2 text-slate-600">
-                                <MapPin className="w-4 h-4" />
-                                <span>{shift.location_name || shift.location || t('schedule.noLocation', 'Location TBC')}</span>
-                              </div>
-
-                              {/* Role/Position if available */}
-                              {(shift.role || shift.position || shift.job_title) && (
-                                <div className="flex items-center gap-2 mt-1 text-slate-500 text-sm">
-                                  <Briefcase className="w-4 h-4" />
-                                  <span>{shift.role || shift.position || shift.job_title}</span>
-                                </div>
-                              )}
-                            </div>
-
-                            {/* Right side - duration and status */}
-                            <div className="text-right">
-                              <p className="text-lg font-semibold text-slate-700">{duration}</p>
-                              <div className={`inline-flex items-center gap-1 mt-1 px-2 py-1 rounded-full text-xs font-medium ${
-                                isPublished
-                                  ? 'bg-green-100 text-green-700'
-                                  : 'bg-amber-100 text-amber-700'
-                              }`}>
-                                <div className={`w-2 h-2 rounded-full ${isPublished ? 'bg-green-500' : 'bg-amber-500'}`} />
-                                {isPublished ? t('schedule.confirmed', 'Confirmed') : t('schedule.draft', 'Draft')}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    });
-                  })}
-                </div>
-              )}
-            </div>
+            <PersonalScheduleView
+              shifts={shifts}
+              dateRange={dateRange}
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
+              navigateDate={navigateDate}
+              t={t}
+            />
           ) : (
             /* ============================================================
                MANAGEMENT VIEW - Full grid with all features
@@ -1331,6 +1245,276 @@ export default function Schedule() {
           toast={toast}
         />
       )}
+    </div>
+  );
+}
+
+// ============================================================
+// PERSONAL SCHEDULE VIEW - Weekly Timeline Design
+// ============================================================
+function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, navigateDate, t }) {
+  const [selectedDayIndex, setSelectedDayIndex] = useState(() => {
+    // Default to today if it's in the current week, otherwise first day with a shift
+    const todayIndex = dateRange.days.findIndex(day => isSameDay(day, new Date()));
+    if (todayIndex >= 0) return todayIndex;
+
+    // Find first day with a shift
+    const firstShiftIndex = dateRange.days.findIndex(day => {
+      const dateStr = format(day, 'yyyy-MM-dd');
+      return shifts.some(s => s.date === dateStr || s.start_time?.startsWith(dateStr));
+    });
+    return firstShiftIndex >= 0 ? firstShiftIndex : 0;
+  });
+
+  // Get shifts for selected day
+  const selectedDay = dateRange.days[selectedDayIndex];
+  const selectedDateStr = selectedDay ? format(selectedDay, 'yyyy-MM-dd') : '';
+  const selectedDayShifts = shifts.filter(s => s.date === selectedDateStr || s.start_time?.startsWith(selectedDateStr));
+  const selectedShift = selectedDayShifts[0];
+
+  // Calculate week summary
+  const weekStats = useMemo(() => {
+    let totalMinutes = 0;
+    let shiftCount = 0;
+    let pendingCount = 0;
+
+    shifts.forEach(shift => {
+      shiftCount++;
+      if (shift.status === 'draft' || shift.status === 'pending') pendingCount++;
+      if (shift.start_time && shift.end_time) {
+        const start = parseISO(shift.start_time);
+        const end = parseISO(shift.end_time);
+        totalMinutes += (end - start) / (1000 * 60);
+      }
+    });
+
+    const totalHours = Math.floor(totalMinutes / 60);
+    const remainingMins = Math.round(totalMinutes % 60);
+
+    return { totalHours, remainingMins, shiftCount, pendingCount };
+  }, [shifts]);
+
+  // Get shift for a specific day
+  const getShiftForDay = (day) => {
+    const dateStr = format(day, 'yyyy-MM-dd');
+    return shifts.find(s => s.date === dateStr || s.start_time?.startsWith(dateStr));
+  };
+
+  // Format short time (e.g., "6-14")
+  const formatShortTime = (shift) => {
+    if (!shift?.start_time || !shift?.end_time) return '';
+    const start = format(parseISO(shift.start_time), 'H');
+    const end = format(parseISO(shift.end_time), 'H');
+    return `${start}-${end}`;
+  };
+
+  // Calculate duration string
+  const getDuration = (shift) => {
+    if (!shift?.start_time || !shift?.end_time) return '';
+    const start = parseISO(shift.start_time);
+    const end = parseISO(shift.end_time);
+    const hours = Math.floor((end - start) / (1000 * 60 * 60));
+    const mins = Math.floor(((end - start) % (1000 * 60 * 60)) / (1000 * 60));
+    return `${hours}h ${mins > 0 ? `${String(mins).padStart(2, '0')}m` : '00m'}`;
+  };
+
+  return (
+    <div className="p-6 max-w-2xl mx-auto">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">{t('schedule.mySchedule', 'My Schedule')}</h1>
+          <p className="text-slate-500">{format(dateRange.start, 'd MMM')} - {format(dateRange.end, 'd MMM yyyy')}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => navigateDate(-1)}
+            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5 text-slate-600" />
+          </button>
+          <button
+            onClick={() => setCurrentDate(new Date())}
+            className="px-3 py-1.5 text-sm font-medium bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+          >
+            {t('schedule.today', 'Today')}
+          </button>
+          <button
+            onClick={() => navigateDate(1)}
+            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+          >
+            <ChevronRight className="w-5 h-5 text-slate-600" />
+          </button>
+        </div>
+      </div>
+
+      {/* Week Strip */}
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-6">
+        <div className="grid grid-cols-7 gap-2">
+          {dateRange.days.slice(0, 7).map((day, index) => {
+            const dayShift = getShiftForDay(day);
+            const isToday = isSameDay(day, new Date());
+            const isSelected = selectedDayIndex === index;
+            const hasShift = !!dayShift;
+            const isPublished = dayShift?.status === 'published' || dayShift?.status === 'confirmed';
+
+            return (
+              <button
+                key={day.toISOString()}
+                onClick={() => setSelectedDayIndex(index)}
+                className={`flex flex-col items-center p-3 rounded-xl transition-all ${
+                  isSelected
+                    ? 'bg-blue-600 text-white shadow-lg scale-105'
+                    : isToday
+                    ? 'bg-blue-50 text-blue-700 ring-2 ring-blue-200'
+                    : hasShift
+                    ? 'bg-slate-50 hover:bg-slate-100 text-slate-900'
+                    : 'bg-slate-50/50 text-slate-400 hover:bg-slate-100'
+                }`}
+              >
+                <span className={`text-xs font-medium ${isSelected ? 'text-blue-100' : ''}`}>
+                  {format(day, 'EEE')}
+                </span>
+                <span className={`text-xl font-bold mt-0.5 ${isSelected ? 'text-white' : ''}`}>
+                  {format(day, 'd')}
+                </span>
+                {hasShift ? (
+                  <>
+                    <div className={`w-2 h-2 rounded-full mt-1 ${
+                      isSelected ? 'bg-white' : isPublished ? 'bg-green-500' : 'bg-amber-500'
+                    }`} />
+                    <span className={`text-xs mt-1 font-medium ${isSelected ? 'text-blue-100' : 'text-slate-600'}`}>
+                      {formatShortTime(dayShift)}
+                    </span>
+                  </>
+                ) : (
+                  <span className={`text-xs mt-2 ${isSelected ? 'text-blue-200' : 'text-slate-400'}`}>
+                    OFF
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Selected Day Detail */}
+      <div className="mb-6">
+        <h2 className="text-sm font-medium text-slate-500 mb-3">
+          {selectedDay && isSameDay(selectedDay, new Date())
+            ? t('schedule.todayLabel', 'Today')
+            : format(selectedDay || new Date(), 'EEEE')} — {format(selectedDay || new Date(), 'd MMMM')}
+        </h2>
+
+        {selectedShift ? (
+          <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            {/* Status bar */}
+            <div className={`h-1.5 ${
+              selectedShift.status === 'published' || selectedShift.status === 'confirmed'
+                ? 'bg-green-500'
+                : 'bg-amber-500'
+            }`} />
+
+            <div className="p-5">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  {/* Time - large and prominent */}
+                  <p className="text-3xl font-bold text-slate-900">
+                    {selectedShift.start_time ? format(parseISO(selectedShift.start_time), 'HH:mm') : '--:--'}
+                    <span className="text-slate-400 mx-2">—</span>
+                    {selectedShift.end_time ? format(parseISO(selectedShift.end_time), 'HH:mm') : '--:--'}
+                  </p>
+
+                  {/* Location */}
+                  <div className="flex items-center gap-2 mt-4 text-slate-700">
+                    <MapPin className="w-5 h-5 text-slate-400" />
+                    <span className="font-medium">{selectedShift.location_name || selectedShift.location || t('schedule.noLocation', 'Location TBC')}</span>
+                  </div>
+
+                  {/* Role/Position if available */}
+                  {(selectedShift.role || selectedShift.position || selectedShift.job_title) && (
+                    <div className="flex items-center gap-2 mt-2 text-slate-600">
+                      <Briefcase className="w-5 h-5 text-slate-400" />
+                      <span>{selectedShift.role || selectedShift.position || selectedShift.job_title}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right side - duration and status */}
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-slate-700">{getDuration(selectedShift)}</p>
+                  <div className={`inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full text-sm font-medium ${
+                    selectedShift.status === 'published' || selectedShift.status === 'confirmed'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-amber-100 text-amber-700'
+                  }`}>
+                    <div className={`w-2 h-2 rounded-full ${
+                      selectedShift.status === 'published' || selectedShift.status === 'confirmed'
+                        ? 'bg-green-500'
+                        : 'bg-amber-500'
+                    }`} />
+                    {selectedShift.status === 'published' || selectedShift.status === 'confirmed'
+                      ? t('schedule.confirmed', 'Confirmed')
+                      : t('schedule.draft', 'Draft')}
+                  </div>
+                </div>
+              </div>
+
+              {/* Clock In Button - show only for today's shift */}
+              {selectedDay && isSameDay(selectedDay, new Date()) && (
+                <Link
+                  to="/time"
+                  className="mt-5 w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
+                >
+                  <Clock className="w-5 h-5" />
+                  {t('schedule.clockIn', 'Clock In')}
+                </Link>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="bg-slate-50 rounded-xl border border-slate-200 p-8 text-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-slate-200 rounded-full flex items-center justify-center">
+              <Calendar className="w-8 h-8 text-slate-400" />
+            </div>
+            <p className="text-lg font-medium text-slate-700">{t('schedule.dayOff', 'Day Off')}</p>
+            <p className="text-slate-500 mt-1">{t('schedule.enjoyYourRest', 'Enjoy your rest!')}</p>
+          </div>
+        )}
+      </div>
+
+      {/* Week Summary */}
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-6">
+        <h3 className="text-sm font-medium text-slate-500 mb-3">{t('schedule.thisWeekSummary', 'This Week')}</h3>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="text-center p-3 bg-slate-50 rounded-lg">
+            <p className="text-2xl font-bold text-slate-900">{weekStats.totalHours}h</p>
+            <p className="text-xs text-slate-500">{t('schedule.totalHours', 'Total Hours')}</p>
+          </div>
+          <div className="text-center p-3 bg-slate-50 rounded-lg">
+            <p className="text-2xl font-bold text-slate-900">{weekStats.shiftCount}</p>
+            <p className="text-xs text-slate-500">{t('schedule.shifts', 'Shifts')}</p>
+          </div>
+          <div className="text-center p-3 bg-slate-50 rounded-lg">
+            <p className={`text-2xl font-bold ${weekStats.pendingCount > 0 ? 'text-amber-600' : 'text-slate-900'}`}>
+              {weekStats.pendingCount}
+            </p>
+            <p className="text-xs text-slate-500">{t('schedule.pending', 'Pending')}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Navigation */}
+      <button
+        onClick={() => navigateDate(1)}
+        className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 transition-colors"
+      >
+        <div>
+          <p className="text-sm font-medium text-slate-700">{t('schedule.nextWeek', 'Next Week')}</p>
+          <p className="text-xs text-slate-500">{format(addWeeks(dateRange.start, 1), 'd MMM')} - {format(addWeeks(dateRange.end, 1), 'd MMM')}</p>
+        </div>
+        <ChevronRight className="w-5 h-5 text-slate-400" />
+      </button>
     </div>
   );
 }
