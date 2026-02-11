@@ -139,6 +139,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   checkOnboarding: async () => {
+    // Skip if already in demo mode (demo login sets onboardingComplete: true)
+    if (get().isDemoMode || get().isAuthenticated) {
+      return;
+    }
     const complete = await appStorage.isOnboardingComplete();
     set({ onboardingComplete: complete });
   },
