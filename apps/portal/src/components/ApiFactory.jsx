@@ -493,12 +493,13 @@ const ApiEditor = ({ api, onSave, onCancel, onTest }) => {
 
     try {
       if (formData.id) {
-        const result = await integrationsApi.test(formData.id);
+        // Test existing endpoint via backend (makes real HTTP request)
+        const result = await integrationsApi.testCustomEndpoint(formData.id);
         setTestResult({
-          success: result?.success ?? true,
-          statusCode: result?.statusCode ?? 200,
-          duration: result?.duration ?? 0,
-          response: result?.response ?? result,
+          success: result?.status === 'success',
+          statusCode: result?.statusCode || result?.response_status || 0,
+          duration: result?.durationMs || result?.duration_ms || 0,
+          response: result?.body ? (typeof result.body === 'string' ? JSON.parse(result.body) : result.body) : result,
         });
       } else {
         // No saved ID yet, cannot test against backend
@@ -1123,16 +1124,34 @@ const ApiFactory = () => {
   const [editorOpen, setEditorOpen] = useState(false);
   const [editingApi, setEditingApi] = useState(null);
   const [viewMode, setViewMode] = useState('list'); // 'list' | 'logs'
+  const [syncLogs, setSyncLogs] = useState([]);
+  const [logsLoading, setLogsLoading] = useState(false);
 
-  // Load custom APIs from backend on mount
+  // Load custom endpoints from backend on mount
   useEffect(() => {
     const loadApis = async () => {
       try {
         setLoading(true);
-        const data = await integrationsApi.getApiKeys();
-        setCustomApis(Array.isArray(data) ? data : data?.apiKeys || data?.data || []);
+        const data = await integrationsApi.getCustomEndpoints();
+        // Map backend fields to frontend format
+        const endpoints = (data?.endpoints || []).map(ep => ({
+          ...ep,
+          authType: ep.auth_type,
+          triggerType: ep.trigger_type,
+          triggerConfig: ep.trigger_config,
+          triggerEvents: ep.trigger_config?.events || [],
+          schedule: ep.trigger_config?.schedule,
+          fieldMappings: ep.field_mappings || [],
+          requestBody: ep.body_template ? JSON.stringify(ep.body_template, null, 2) : '{\n  \n}',
+          enabled: ep.is_active,
+          lastRun: ep.updated_at,
+          lastStatus: null,
+          runCount: 0,
+          errorCount: 0,
+        }));
+        setCustomApis(endpoints);
       } catch (error) {
-        if (import.meta.env.DEV) console.error('Failed to load custom APIs:', error);
+        if (import.meta.env.DEV) console.error('Failed to load custom endpoints:', error);
         setCustomApis([]);
       } finally {
         setLoading(false);
@@ -1140,6 +1159,25 @@ const ApiFactory = () => {
     };
     loadApis();
   }, []);
+
+  // Load sync logs when switching to logs view
+  useEffect(() => {
+    if (viewMode === 'logs') {
+      const loadLogs = async () => {
+        try {
+          setLogsLoading(true);
+          const data = await integrationsApi.getSyncLogs({ limit: 50 });
+          setSyncLogs(data?.logs || []);
+        } catch (error) {
+          if (import.meta.env.DEV) console.error('Failed to load sync logs:', error);
+          setSyncLogs([]);
+        } finally {
+          setLogsLoading(false);
+        }
+      };
+      loadLogs();
+    }
+  }, [viewMode]);
 
   const filteredApis = customApis.filter(api =>
     (api.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -1158,39 +1196,81 @@ const ApiFactory = () => {
 
   const handleSave = async (apiData) => {
     try {
+      // Transform frontend format to backend format
+      const backendData = {
+        name: apiData.name,
+        description: apiData.description,
+        method: apiData.method,
+        url: apiData.url,
+        headers: apiData.headers?.filter(h => h.key).reduce((acc, h) => ({ ...acc, [h.key]: h.value }), {}) || {},
+        body_template: apiData.requestBody ? JSON.parse(apiData.requestBody) : null,
+        auth_type: apiData.authType || 'none',
+        auth_config: apiData.authConfig || {},
+        trigger_type: apiData.triggerType || 'manual',
+        trigger_config: {
+          events: apiData.triggerEvents || [],
+          schedule: apiData.schedule,
+          cron: apiData.customCron,
+        },
+        field_mappings: apiData.fieldMappings || [],
+        is_active: apiData.enabled !== false,
+      };
+
       if (editingApi) {
-        const updated = await integrationsApi.update(editingApi.id, apiData);
+        const result = await integrationsApi.updateCustomEndpoint(editingApi.id, backendData);
+        const updated = result?.endpoint || result;
         setCustomApis(prev => prev.map(api =>
-          api.id === editingApi.id ? { ...api, ...apiData, ...updated } : api
+          api.id === editingApi.id ? {
+            ...api,
+            ...apiData,
+            ...updated,
+            authType: updated.auth_type,
+            triggerType: updated.trigger_type,
+            enabled: updated.is_active,
+          } : api
         ));
+        toast.success(t('apiFactory.saved', 'Integration saved successfully'));
       } else {
-        const created = await integrationsApi.createApiKey(apiData);
+        const result = await integrationsApi.createCustomEndpoint(backendData);
+        const created = result?.endpoint || result;
         setCustomApis(prev => [...prev, {
           ...apiData,
           id: created?.id || `api-${Date.now()}`,
+          ...created,
+          authType: created.auth_type,
+          triggerType: created.trigger_type,
+          enabled: created.is_active,
           lastRun: null,
           lastStatus: null,
           runCount: 0,
           errorCount: 0,
-          ...created,
         }]);
+        toast.success(t('apiFactory.created', 'Integration created successfully'));
       }
     } catch (error) {
-      if (import.meta.env.DEV) console.error('Failed to save API integration:', error);
+      if (import.meta.env.DEV) console.error('Failed to save custom endpoint:', error);
+      toast.error(t('apiFactory.saveFailed', 'Failed to save integration: ') + (error.message || 'Unknown error'));
     }
     setEditorOpen(false);
     setEditingApi(null);
   };
 
   const handleToggle = (apiId) => {
-    setCustomApis(prev => prev.map(api =>
-      api.id === apiId ? { ...api, enabled: !api.enabled } : api
-    ));
-    // Fire and forget the update
     const api = customApis.find(a => a.id === apiId);
+    const newEnabled = !api?.enabled;
+
+    setCustomApis(prev => prev.map(a =>
+      a.id === apiId ? { ...a, enabled: newEnabled } : a
+    ));
+
+    // Fire and forget the update
     if (api) {
-      integrationsApi.update(apiId, { enabled: !api.enabled }).catch(error => {
-        if (import.meta.env.DEV) console.error('Failed to toggle API:', error);
+      integrationsApi.updateCustomEndpoint(apiId, { is_active: newEnabled }).catch(error => {
+        if (import.meta.env.DEV) console.error('Failed to toggle endpoint:', error);
+        // Rollback on error
+        setCustomApis(prev => prev.map(a =>
+          a.id === apiId ? { ...a, enabled: !newEnabled } : a
+        ));
       });
     }
   };
@@ -1202,9 +1282,11 @@ const ApiFactory = () => {
     setCustomApis(prev => prev.filter(api => api.id !== apiId));
 
     try {
-      await integrationsApi.revokeApiKey(apiId);
+      await integrationsApi.deleteCustomEndpoint(apiId);
+      toast.success(t('apiFactory.deleted', 'Integration deleted'));
     } catch (error) {
-      if (import.meta.env.DEV) console.error('Failed to delete API integration:', error);
+      if (import.meta.env.DEV) console.error('Failed to delete custom endpoint:', error);
+      toast.error(t('apiFactory.deleteFailed', 'Failed to delete integration'));
       // Rollback
       if (backup) setCustomApis(prev => [...prev, backup]);
     }
@@ -1355,26 +1437,45 @@ const ApiFactory = () => {
             </Button>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-700">
-            {customApis.length === 0 ? (
+            {logsLoading ? (
+              <div className="px-4 py-8 text-center text-slate-500 text-sm">
+                <RefreshCw className="w-5 h-5 mx-auto mb-2 animate-spin" />
+                {t('apiFactory.logs.loading', 'Loading logs...')}
+              </div>
+            ) : syncLogs.length === 0 ? (
               <div className="px-4 py-8 text-center text-slate-500 text-sm">
                 {t('apiFactory.logs.noData', 'No data yet. Execution logs will appear here once integrations run.')}
               </div>
             ) : (
-              customApis.filter(a => a.lastRun).map((api) => (
-                <div key={api.id} className="px-4 py-3 flex items-center gap-4 text-sm">
+              syncLogs.map((log) => (
+                <div key={log.id} className="px-4 py-3 flex items-center gap-4 text-sm">
                   <div className={cn(
                     'w-2 h-2 rounded-full',
-                    api.lastStatus === 'success' ? 'bg-emerald-500' : 'bg-red-500'
+                    log.status === 'success' ? 'bg-emerald-500' :
+                    log.status === 'error' ? 'bg-red-500' :
+                    log.status === 'warning' ? 'bg-amber-500' : 'bg-blue-500'
                   )} />
                   <span className="font-medium text-slate-900 dark:text-white w-48 truncate">
-                    {api.name || t('apiFactory.logs.unknown', 'Unknown')}
+                    {log.action || t('apiFactory.logs.unknown', 'Unknown')}
                   </span>
-                  <Badge variant={api.lastStatus === 'success' ? 'success' : 'error'} size="xs">
-                    {api.lastStatus === 'success' ? '200 OK' : t('apiFactory.logs.error', 'Error')}
+                  <Badge
+                    variant={log.status === 'success' ? 'success' : log.status === 'error' ? 'error' : 'info'}
+                    size="xs"
+                  >
+                    {log.status}
                   </Badge>
-                  <span className="text-slate-500">{t('apiFactory.list.runsCount', '{{count}} runs', { count: api.runCount || 0 })}</span>
+                  {log.records_processed > 0 && (
+                    <span className="text-slate-500">
+                      {t('apiFactory.logs.recordsProcessed', '{{count}} processed', { count: log.records_processed })}
+                    </span>
+                  )}
+                  {log.records_failed > 0 && (
+                    <span className="text-red-500">
+                      {t('apiFactory.logs.recordsFailed', '{{count}} failed', { count: log.records_failed })}
+                    </span>
+                  )}
                   <span className="text-slate-400 ml-auto">
-                    {api.lastRun ? formatDate(api.lastRun) : '-'}
+                    {log.created_at ? formatDate(log.created_at) : '-'}
                   </span>
                 </div>
               ))

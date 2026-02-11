@@ -111,7 +111,7 @@ const INITIAL_CONNECTIONS = [
     connectedAt: '2025-10-01T11:00:00Z',
     lastSyncAt: '2026-01-09T12:00:00Z',
     syncFrequency: 'realtime',
-    config: { ssoEnabled: true, scimEnabled: true, domain: 'grandmetropolitan.uplift.work' },
+    config: { ssoEnabled: true, scimEnabled: true, domain: 'company.uplift.work' },
     stats: { ssoLogins: 1247, usersProvisioned: 8 },
   },
 ];
@@ -131,7 +131,7 @@ const WEBHOOKS = [
 const ACTIVITY_LOG = [
   { id: 'log-1', type: 'sync', integration: 'ADP', message: 'Sync completed: 8 records processed', timestamp: '2026-01-09T06:00:45Z', level: 'info' },
   { id: 'log-2', type: 'webhook', integration: 'Slack', message: 'Shift reminder sent to #shifts', timestamp: '2026-01-09T08:00:00Z', level: 'info' },
-  { id: 'log-3', type: 'auth', integration: 'Google Workspace', message: 'SSO login: sarah.chen@grandmetropolitan.uplift.work', timestamp: '2026-01-09T08:45:00Z', level: 'info' },
+  { id: 'log-3', type: 'auth', integration: 'Google Workspace', message: 'SSO login: user@company.uplift.work', timestamp: '2026-01-09T08:45:00Z', level: 'info' },
   { id: 'log-4', type: 'error', integration: 'ADP', message: 'Rate limit warning: 80% of quota used', timestamp: '2026-01-09T05:45:00Z', level: 'warn' },
 ];
 
@@ -1080,6 +1080,10 @@ export const IntegrationHub = ({ showToast, addAudit }) => {
   const [connectModal, setConnectModal] = useState({ open: false, provider: null });
   const [configureModal, setConfigureModal] = useState({ open: false, connection: null });
 
+  // Activity log state
+  const [activityLogs, setActivityLogs] = useState([]);
+  const [activityLoading, setActivityLoading] = useState(false);
+
   // Load connections from API on mount
   useEffect(() => {
     const loadConnections = async () => {
@@ -1097,6 +1101,36 @@ export const IntegrationHub = ({ showToast, addAudit }) => {
     };
     loadConnections();
   }, []);
+
+  // Load activity logs when switching to activity view
+  useEffect(() => {
+    if (viewMode === 'activity') {
+      const loadActivityLogs = async () => {
+        try {
+          setActivityLoading(true);
+          const data = await integrationsApi.getSyncLogs({ limit: 50 });
+          // Transform logs to match expected format
+          const logs = (data?.logs || []).map(log => ({
+            id: log.id,
+            type: log.action?.includes('sync') ? 'sync' :
+                  log.action?.includes('webhook') ? 'webhook' :
+                  log.action?.includes('auth') ? 'auth' : 'sync',
+            integration: log.details?.name || log.action?.split('.')[0] || 'System',
+            message: log.details?.message || `${log.action}: ${log.status}`,
+            timestamp: log.created_at,
+            level: log.status === 'error' ? 'error' : log.status === 'warning' ? 'warn' : 'info',
+          }));
+          setActivityLogs(logs);
+        } catch (error) {
+          if (import.meta.env.DEV) console.error('Failed to load activity logs:', error);
+          setActivityLogs([]);
+        } finally {
+          setActivityLoading(false);
+        }
+      };
+      loadActivityLogs();
+    }
+  }, [viewMode]);
 
   // Derived data
   const connectedProviderIds = connections.map(c => c.providerId);
@@ -1388,7 +1422,8 @@ export const IntegrationHub = ({ showToast, addAudit }) => {
             <p className="text-sm text-slate-500">{t('integrationHub.activity.recentActivity', 'Recent integration activity')}</p>
             <button
               onClick={() => {
-                const csv = ACTIVITY_LOG.map(l => `${l.timestamp},${l.integration},${l.type},${l.level},"${l.message}"`).join('\n');
+                const logs = activityLogs.length > 0 ? activityLogs : [];
+                const csv = logs.map(l => `${l.timestamp},${l.integration},${l.type},${l.level},"${l.message}"`).join('\n');
                 const blob = new Blob([`Timestamp,Integration,Type,Level,Message\n${csv}`], { type: 'text/csv' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -1403,31 +1438,44 @@ export const IntegrationHub = ({ showToast, addAudit }) => {
           </div>
 
           <div className="space-y-2">
-            {ACTIVITY_LOG.map(log => (
-              <div key={log.id} className="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-                <div className={cn(
-                  'w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0',
-                  log.level === 'error' ? 'bg-red-100 text-red-500' :
-                  log.level === 'warn' ? 'bg-amber-100 text-amber-500' :
-                  'bg-slate-100 text-slate-500'
-                )}>
-                  {log.type === 'sync' && <RefreshCw className="w-4 h-4" />}
-                  {log.type === 'webhook' && <Webhook className="w-4 h-4" />}
-                  {log.type === 'auth' && <Shield className="w-4 h-4" />}
-                  {log.type === 'error' && <AlertCircle className="w-4 h-4" />}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-medium text-sm">{log.integration}</span>
-                    <Badge variant={log.level === 'error' ? 'error' : log.level === 'warn' ? 'warning' : 'default'}>
-                      {log.type}
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{log.message}</p>
-                </div>
-                <span className="text-xs text-slate-400 flex-shrink-0">{formatDate(log.timestamp)}</span>
+            {activityLoading ? (
+              <div className="text-center py-8 text-slate-500">
+                <RefreshCw className="w-6 h-6 mx-auto mb-2 animate-spin" />
+                {t('integrationHub.activity.loading', 'Loading activity...')}
               </div>
-            ))}
+            ) : activityLogs.length === 0 ? (
+              <div className="text-center py-8 text-slate-500">
+                <Activity className="w-8 h-8 mx-auto mb-2 text-slate-300" />
+                <p>{t('integrationHub.activity.noActivity', 'No activity yet')}</p>
+                <p className="text-sm text-slate-400">{t('integrationHub.activity.noActivityDesc', 'Activity will appear here as integrations run')}</p>
+              </div>
+            ) : (
+              activityLogs.map(log => (
+                <div key={log.id} className="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <div className={cn(
+                    'w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0',
+                    log.level === 'error' ? 'bg-red-100 text-red-500' :
+                    log.level === 'warn' ? 'bg-amber-100 text-amber-500' :
+                    'bg-slate-100 text-slate-500'
+                  )}>
+                    {log.type === 'sync' && <RefreshCw className="w-4 h-4" />}
+                    {log.type === 'webhook' && <Webhook className="w-4 h-4" />}
+                    {log.type === 'auth' && <Shield className="w-4 h-4" />}
+                    {log.type === 'error' && <AlertCircle className="w-4 h-4" />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-medium text-sm">{log.integration}</span>
+                      <Badge variant={log.level === 'error' ? 'error' : log.level === 'warn' ? 'warning' : 'default'}>
+                        {log.type}
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">{log.message}</p>
+                  </div>
+                  <span className="text-xs text-slate-400 flex-shrink-0">{formatDate(log.timestamp)}</span>
+                </div>
+              ))
+            )}
           </div>
         </div>
       )}

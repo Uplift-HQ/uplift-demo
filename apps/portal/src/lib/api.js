@@ -60,8 +60,8 @@ const DEMO_BRANDING = { primaryColor: '#6366f1', companyName: settings.organizat
 const DEMO_NAVIGATION = { employees: true, schedule: true, templates: true, timeTracking: true, timeOff: true, locations: true, skills: true, jobs: true, career: true, bulkImport: true, reports: true, integrations: true, activity: true };
 const DEMO_EMPLOYEE_VISIBILITY = { email: { managers: true, employees: false }, phone: { managers: true, employees: false }, address: { managers: true, employees: false }, salary: { managers: false, employees: false }, emergencyContact: { managers: true, employees: false }, performanceScore: { managers: true, employees: true }, skills: { managers: true, employees: true } };
 const DEMO_OPPORTUNITIES = [
-  { id: 'opp-001', title: 'Front of House Supervisor', location: 'Manchester Central', location_id: 'l1', department: 'Front of House', salary_min: 28000, salary_max: 32000, salary_display: '£28,000 - £32,000', type: 'Promotion', employment_type: 'Full-time', deadline: '2026-02-15', posted: '2026-01-10', status: 'open', description: 'Lead our main restaurant team.', requirements: ['2+ years FOH experience', 'Food Safety Level 3'], applications: 3 },
-  { id: 'opp-002', title: 'Bar Team Lead', location: 'London Victoria', location_id: 'l2', department: 'Bar', salary_min: 25000, salary_max: 28000, salary_display: '£25,000 - £28,000', type: 'Promotion', employment_type: 'Full-time', deadline: '2026-02-20', posted: '2026-01-12', status: 'open', description: 'Lead the bar team.', requirements: ['Personal License Holder', 'Cocktail expertise'], applications: 4 },
+  { id: 'opp-001', title: 'Team Supervisor', location: 'Main Office', location_id: 'l1', department: 'Operations', salary_min: 28000, salary_max: 32000, salary_display: '£28,000 - £32,000', type: 'Promotion', employment_type: 'Full-time', deadline: '2026-02-15', posted: '2026-01-10', status: 'open', description: 'Lead our operations team.', requirements: ['2+ years experience', 'Leadership skills'], applications: 3 },
+  { id: 'opp-002', title: 'Senior Associate', location: 'Branch Office', location_id: 'l2', department: 'Operations', salary_min: 25000, salary_max: 28000, salary_display: '£25,000 - £28,000', type: 'Promotion', employment_type: 'Full-time', deadline: '2026-02-20', posted: '2026-01-12', status: 'open', description: 'Senior role in operations.', requirements: ['Relevant experience', 'Strong communication'], applications: 4 },
 ];
 const DEMO_CAREER = { paths: [], insights: employees.slice(0, 5).map(e => ({ employeeId: e.id, employeeName: e.name, currentRole: e.role, nextRole: 'Supervisor', readiness: 75, gapCount: 2 })) };
 const DEMO_IMPORT_TEMPLATES = [
@@ -77,11 +77,11 @@ const DEMO_API_KEYS = [
 ];
 const DEMO_CUSTOM_INTEGRATIONS = [];
 const DEMO_NOTIFICATIONS = [
-  { id: 'notif-1', type: 'shift_swap', title: 'Shift swap request', message: 'Thomas Cane requested to swap shifts', read: false, created_at: new Date().toISOString() },
-  { id: 'notif-2', type: 'time_off', title: 'Time off request', message: 'Marc Hunt submitted a time off request', read: false, created_at: new Date(Date.now() - 3600000).toISOString() },
+  { id: 'notif-1', type: 'shift_swap', title: 'Shift swap request', message: 'An employee requested to swap shifts', read: false, created_at: new Date().toISOString() },
+  { id: 'notif-2', type: 'time_off', title: 'Time off request', message: 'An employee submitted a time off request', read: false, created_at: new Date(Date.now() - 3600000).toISOString() },
 ];
 const DEMO_SHIFT_SWAPS = [
-  { id: 'swap-1', from_employee: 'Thomas Cane', to_employee: 'Marc Hunt', shift_date: '2026-02-05', status: 'pending', reason: 'Personal appointment' },
+  { id: 'swap-1', from_employee: 'Employee A', to_employee: 'Employee B', shift_date: '2026-02-05', status: 'pending', reason: 'Personal appointment' },
 ];
 const DEMO_SCHEDULE_PERIODS = [
   { id: 'period-1', name: 'Week 5 2026', start_date: '2026-01-27', end_date: '2026-02-02', status: 'published' },
@@ -927,14 +927,54 @@ export const integrationsApi = {
     }
     return api.get('/integrations/api-keys');
   },
-  getCustomIntegrations: async () => {
-    if (DEMO_MODE) {
-      return { customIntegrations: DEMO_CUSTOM_INTEGRATIONS };
-    }
-    return api.get('/integrations/custom');
-  },
   createApiKey: (data) => api.post('/integrations/api-keys', data),
   revokeApiKey: (id) => api.delete(`/integrations/api-keys/${id}`),
+
+  // Custom Endpoints (API Factory)
+  getCustomEndpoints: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { endpoints: DEMO_CUSTOM_INTEGRATIONS, pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } };
+    }
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/integrations/custom-endpoints${query ? `?${query}` : ''}`);
+  },
+  getCustomEndpoint: async (id) => {
+    if (DEMO_MODE) {
+      const endpoint = DEMO_CUSTOM_INTEGRATIONS.find(e => e.id === id);
+      return endpoint ? { endpoint } : { endpoint: null };
+    }
+    return api.get(`/integrations/custom-endpoints/${id}`);
+  },
+  createCustomEndpoint: (data) => api.post('/integrations/custom-endpoints', data),
+  updateCustomEndpoint: (id, data) => api.put(`/integrations/custom-endpoints/${id}`, data),
+  deleteCustomEndpoint: (id) => api.delete(`/integrations/custom-endpoints/${id}`),
+  testCustomEndpoint: (id, overrides = {}) => api.post(`/integrations/custom-endpoints/${id}/test`, overrides),
+  executeCustomEndpoint: (id, payload = {}) => api.post(`/integrations/custom-endpoints/${id}/execute`, { payload }),
+  getCustomEndpointLogs: async (id, params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/integrations/custom-endpoints/${id}/logs${query ? `?${query}` : ''}`);
+  },
+  getExecution: (id) => api.get(`/integrations/executions/${id}`),
+
+  // Field Mappings
+  getFieldMappings: async (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/integrations/field-mappings${query ? `?${query}` : ''}`);
+  },
+  saveFieldMappings: (data) => api.post('/integrations/field-mappings', data),
+  deleteFieldMappings: async (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.delete(`/integrations/field-mappings${query ? `?${query}` : ''}`);
+  },
+
+  // Sync Logs (Activity Log)
+  getSyncLogs: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { logs: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+    }
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/integrations/sync-logs${query ? `?${query}` : ''}`);
+  },
 };
 
 // Settings API (for Settings page)
@@ -1129,6 +1169,22 @@ export const performanceApi = {
   // Employees & Dashboard
   getEmployees: () => api.get('/performance/employees'),
   getDashboard: () => api.get('/performance/dashboard'),
+};
+
+// Payslips API
+export const payslipsApi = {
+  getMyPayslips: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/payslips/my-payslips${query ? `?${query}` : ''}`);
+  },
+  getPayslip: (id) => api.get(`/payslips/my-payslips/${id}`),
+  getMyYtd: (taxYear) => api.get(`/payslips/my-ytd${taxYear ? `?taxYear=${taxYear}` : ''}`),
+  getMyYears: () => api.get('/payslips/my-years'),
+  // Admin endpoints
+  getAll: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/payslips${query ? `?${query}` : ''}`);
+  },
 };
 
 export default api;

@@ -7,6 +7,7 @@ import express from 'express';
 import crypto from 'crypto';
 import { authMiddleware, requireRole } from '../middleware/index.js';
 import apiKeys from '../services/apiKeys.js';
+import customEndpoints from '../services/customEndpoints.js';
 import { db } from '../lib/database.js';
 import integrations, { getConnector, testConnection, runSync, listConnectors } from '../services/integrations/index.js';
 
@@ -800,6 +801,280 @@ router.get('/slack/channels', authMiddleware, requireRole('admin'), async (req, 
   } catch (error) {
     console.error('Slack channels error:', error);
     res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// ==================== CUSTOM ENDPOINTS (API FACTORY) ====================
+
+/**
+ * List custom endpoints
+ */
+router.get('/custom-endpoints', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const { page, limit, search } = req.query;
+    const result = await customEndpoints.list(req.user.organizationId, {
+      page: parseInt(page) || 1,
+      limit: parseInt(limit) || 20,
+      search: search || '',
+    });
+    res.json(result);
+  } catch (error) {
+    console.error('List custom endpoints error:', error);
+    res.status(500).json({ error: 'Failed to list custom endpoints' });
+  }
+});
+
+/**
+ * Create custom endpoint
+ */
+router.post('/custom-endpoints', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const endpoint = await customEndpoints.create(
+      req.user.organizationId,
+      req.user.userId,
+      req.body
+    );
+    res.status(201).json({ endpoint });
+  } catch (error) {
+    console.error('Create custom endpoint error:', error);
+    if (error.message.includes('required') || error.message.includes('Invalid')) {
+      return res.status(400).json({ error: error.message });
+    }
+    res.status(500).json({ error: 'Failed to create custom endpoint' });
+  }
+});
+
+/**
+ * Get custom endpoint by ID
+ */
+router.get('/custom-endpoints/:id', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const endpoint = await customEndpoints.getById(
+      req.user.organizationId,
+      req.params.id
+    );
+
+    if (!endpoint) {
+      return res.status(404).json({ error: 'Endpoint not found' });
+    }
+
+    res.json({ endpoint });
+  } catch (error) {
+    console.error('Get custom endpoint error:', error);
+    res.status(500).json({ error: 'Failed to get custom endpoint' });
+  }
+});
+
+/**
+ * Update custom endpoint
+ */
+router.put('/custom-endpoints/:id', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const endpoint = await customEndpoints.update(
+      req.user.organizationId,
+      req.params.id,
+      req.body
+    );
+
+    if (!endpoint) {
+      return res.status(404).json({ error: 'Endpoint not found' });
+    }
+
+    res.json({ endpoint });
+  } catch (error) {
+    console.error('Update custom endpoint error:', error);
+    if (error.message.includes('Invalid')) {
+      return res.status(400).json({ error: error.message });
+    }
+    res.status(500).json({ error: 'Failed to update custom endpoint' });
+  }
+});
+
+/**
+ * Delete custom endpoint (soft delete)
+ */
+router.delete('/custom-endpoints/:id', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const deleted = await customEndpoints.remove(
+      req.user.organizationId,
+      req.params.id
+    );
+
+    if (!deleted) {
+      return res.status(404).json({ error: 'Endpoint not found' });
+    }
+
+    res.json({ success: true, message: 'Endpoint deleted' });
+  } catch (error) {
+    console.error('Delete custom endpoint error:', error);
+    res.status(500).json({ error: 'Failed to delete custom endpoint' });
+  }
+});
+
+/**
+ * Test custom endpoint (makes real HTTP request)
+ */
+router.post('/custom-endpoints/:id/test', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const result = await customEndpoints.test(
+      req.user.organizationId,
+      req.params.id,
+      req.body // Optional overrides
+    );
+    res.json(result);
+  } catch (error) {
+    console.error('Test custom endpoint error:', error);
+    if (error.message === 'Endpoint not found') {
+      return res.status(404).json({ error: error.message });
+    }
+    res.status(500).json({ error: 'Failed to test endpoint: ' + error.message });
+  }
+});
+
+/**
+ * Execute custom endpoint (manual trigger)
+ */
+router.post('/custom-endpoints/:id/execute', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const { payload = {} } = req.body;
+    const result = await customEndpoints.execute(
+      req.user.organizationId,
+      req.params.id,
+      'manual',
+      payload
+    );
+    res.json(result);
+  } catch (error) {
+    console.error('Execute custom endpoint error:', error);
+    if (error.message === 'Endpoint not found') {
+      return res.status(404).json({ error: error.message });
+    }
+    res.status(500).json({ error: 'Failed to execute endpoint: ' + error.message });
+  }
+});
+
+/**
+ * Get execution logs for an endpoint
+ */
+router.get('/custom-endpoints/:id/logs', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const { page, limit } = req.query;
+    const result = await customEndpoints.getLogs(
+      req.user.organizationId,
+      req.params.id,
+      {
+        page: parseInt(page) || 1,
+        limit: parseInt(limit) || 20,
+      }
+    );
+    res.json(result);
+  } catch (error) {
+    console.error('Get endpoint logs error:', error);
+    res.status(500).json({ error: 'Failed to get execution logs' });
+  }
+});
+
+/**
+ * Get a single execution by ID
+ */
+router.get('/executions/:id', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const execution = await customEndpoints.getExecution(
+      req.user.organizationId,
+      req.params.id
+    );
+
+    if (!execution) {
+      return res.status(404).json({ error: 'Execution not found' });
+    }
+
+    res.json({ execution });
+  } catch (error) {
+    console.error('Get execution error:', error);
+    res.status(500).json({ error: 'Failed to get execution' });
+  }
+});
+
+// ==================== FIELD MAPPINGS ====================
+
+/**
+ * Get field mappings
+ */
+router.get('/field-mappings', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const { integrationId, endpointId } = req.query;
+    const mappings = await customEndpoints.getFieldMappings(
+      req.user.organizationId,
+      integrationId || null,
+      endpointId || null
+    );
+    res.json({ mappings });
+  } catch (error) {
+    console.error('Get field mappings error:', error);
+    res.status(500).json({ error: 'Failed to get field mappings' });
+  }
+});
+
+/**
+ * Save field mappings
+ */
+router.post('/field-mappings', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const { integrationId, endpointId, mappings } = req.body;
+
+    if (!mappings || !Array.isArray(mappings)) {
+      return res.status(400).json({ error: 'Mappings array is required' });
+    }
+
+    const result = await customEndpoints.saveFieldMappings(
+      req.user.organizationId,
+      integrationId || null,
+      endpointId || null,
+      mappings
+    );
+    res.json({ mappings: result });
+  } catch (error) {
+    console.error('Save field mappings error:', error);
+    res.status(500).json({ error: 'Failed to save field mappings' });
+  }
+});
+
+/**
+ * Delete field mappings
+ */
+router.delete('/field-mappings', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const { integrationId, endpointId } = req.query;
+    await customEndpoints.deleteFieldMappings(
+      req.user.organizationId,
+      integrationId || null,
+      endpointId || null
+    );
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Delete field mappings error:', error);
+    res.status(500).json({ error: 'Failed to delete field mappings' });
+  }
+});
+
+// ==================== SYNC LOGS ====================
+
+/**
+ * Get sync logs (activity log)
+ */
+router.get('/sync-logs', authMiddleware, requireRole('admin'), async (req, res) => {
+  try {
+    const { integrationId, endpointId, page, limit } = req.query;
+    const result = await customEndpoints.getSyncLogs(req.user.organizationId, {
+      integrationId: integrationId || null,
+      endpointId: endpointId || null,
+      page: parseInt(page) || 1,
+      limit: parseInt(limit) || 50,
+    });
+    res.json(result);
+  } catch (error) {
+    console.error('Get sync logs error:', error);
+    res.status(500).json({ error: 'Failed to get sync logs' });
   }
 });
 
