@@ -455,10 +455,10 @@ export default function Layout() {
                     onClick={() => setEntityMenuOpen(!entityMenuOpen)}
                     className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 rounded-lg border border-slate-200"
                   >
-                    <LocationDot color={selectedLocation.color} size={10} />
+                    <LocationDot color={selectedLocation?.color || '#6366f1'} size={10} />
                     <span className="hidden md:block font-medium truncate max-w-[180px]">
-                      {selectedLocation.name}
-                      {selectedLocation.code !== 'ALL' && (
+                      {selectedLocation?.name || 'Location'}
+                      {selectedLocation?.code && selectedLocation.code !== 'ALL' && (
                         <span className="text-slate-400 ml-1">[{selectedLocation.code}]</span>
                       )}
                     </span>
@@ -479,49 +479,49 @@ export default function Layout() {
                         </div>
                         {locations.map((location) => (
                           <button
-                            key={location.id}
+                            key={location?.id || Math.random()}
                             onClick={() => {
-                              setSelectedLocation(location.id);
+                              setSelectedLocation(location?.id);
                               setEntityMenuOpen(false);
                             }}
                             className={`w-full px-3 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-slate-50 ${
-                              selectedLocation.id === location.id ? 'bg-momentum-50' : ''
+                              selectedLocation?.id === location?.id ? 'bg-momentum-50' : ''
                             }`}
                           >
-                            <LocationDot color={location.color} size={12} />
+                            <LocationDot color={location?.color || '#6366f1'} size={12} />
                             <div className="flex-1 min-w-0">
                               <p
                                 className={`font-medium truncate ${
-                                  selectedLocation.id === location.id
+                                  selectedLocation?.id === location?.id
                                     ? 'text-momentum-600'
                                     : 'text-slate-700'
                                 }`}
                               >
-                                {location.name}
-                                {location.code !== 'ALL' && (
+                                {location?.name || 'Location'}
+                                {location?.code && location.code !== 'ALL' && (
                                   <span className="text-slate-400 font-normal ml-1">
                                     ({location.code})
                                   </span>
                                 )}
                               </p>
                               <p className="text-xs text-slate-500">
-                                {location.tag && (
+                                {location?.tag && (
                                   <span className="inline-block mr-1.5 px-1.5 py-0 bg-momentum-100 text-momentum-600 rounded text-[10px] font-semibold uppercase">
                                     {location.tag}
                                   </span>
                                 )}
-                                {location.country
+                                {location?.country
                                   ? t(
                                       'entity.locationCountry',
                                       '{{country}} — {{count}} employees',
-                                      { country: location.country, count: location.employees }
+                                      { country: location.country, count: location?.employees || 0 }
                                     )
                                   : t('entity.employeeCount', '{{count}} employees', {
-                                      count: location.employees,
+                                      count: location?.employees || 0,
                                     })}
                               </p>
                             </div>
-                            {selectedLocation.id === location.id && (
+                            {selectedLocation?.id === location?.id && (
                               <Check className="w-4 h-4 text-momentum-500 flex-shrink-0" />
                             )}
                           </button>
@@ -545,9 +545,9 @@ export default function Layout() {
               ) : (
                 /* Manager / Worker: static location label (no dropdown) */
                 <div className="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-700 rounded-lg border border-slate-100 bg-slate-50">
-                  <LocationDot color={userLocation.color} size={10} />
+                  <LocationDot color={userLocation?.color || '#6366f1'} size={10} />
                   <span className="hidden md:block font-medium truncate max-w-[180px]">
-                    {userLocation.name}
+                    {userLocation?.name || 'Location'}
                   </span>
                 </div>
               )}
