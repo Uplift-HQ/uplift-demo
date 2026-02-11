@@ -5,7 +5,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { api, authApi } from './api';
+import { api, authApi, DEMO_MODE } from './api';
 
 const AuthContext = createContext(null);
 
@@ -33,6 +33,7 @@ export function AuthProvider({ children }) {
     }
 
     const token = localStorage.getItem('uplift_token');
+    const storedUser = localStorage.getItem('uplift_user');
 
     // No token stored - user needs to log in
     if (!token) {
@@ -40,6 +41,22 @@ export function AuthProvider({ children }) {
       localStorage.removeItem('uplift_token');
       setLoading(false);
       return;
+    }
+
+    // DEMO_MODE: Trust localStorage directly - no API verification needed
+    // This ensures session survives page refresh without backend dependency
+    if (DEMO_MODE && storedUser) {
+      try {
+        const userData = JSON.parse(storedUser);
+        api.setToken(token);
+        setUser(userData);
+        setLoading(false);
+        return;
+      } catch {
+        // Invalid JSON in storage - clear and fall through to normal flow
+        localStorage.removeItem('uplift_user');
+        localStorage.removeItem('uplift_token');
+      }
     }
 
     try {
