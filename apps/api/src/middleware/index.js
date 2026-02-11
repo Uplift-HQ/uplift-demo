@@ -276,7 +276,7 @@ export const validateQuery = (schema) => {
  */
 export const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // 100 requests per window
+  max: process.env.NODE_ENV === 'production' ? 100 : 10000, // Higher limit for dev/test
   standardHeaders: true,
   legacyHeaders: false,
   message: {
