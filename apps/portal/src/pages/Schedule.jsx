@@ -1,6 +1,7 @@
 // ============================================================
 // SCHEDULE PAGE - DEPUTY-LEVEL IMPLEMENTATION
 // All data from API — no demo data fallbacks
+// Supports both Management View (all employees) and Personal View (my schedule only)
 // ============================================================
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
@@ -148,13 +149,17 @@ export default function Schedule() {
       setLocations(locResult.locations || []);
       setDepartments(deptResult.departments || []);
 
-      // Load swaps
-      const swapsResult = await shiftsApi.getSwaps({ status: 'pending' }).catch(() => ({ swaps: [] }));
-      setSwaps(swapsResult.swaps || []);
+      // Only load swaps and pending time-off in management view
+      if (showManagementFeatures) {
+        const swapsResult = await shiftsApi.getSwaps({ status: 'pending' }).catch(() => ({ swaps: [] }));
+        setSwaps(swapsResult.swaps || []);
 
-      // Load pending time-off requests
-      const timeOffResult = await timeOffApi.getRequests({ status: 'pending' }).catch(() => ({ requests: [] }));
-      setPendingTimeOff(timeOffResult.requests || []);
+        const timeOffResult = await timeOffApi.getRequests({ status: 'pending' }).catch(() => ({ requests: [] }));
+        setPendingTimeOff(timeOffResult.requests || []);
+      } else {
+        setSwaps([]);
+        setPendingTimeOff([]);
+      }
 
     } catch (err) {
       setError(err.message || t('schedule.loadError', 'Failed to load schedule data'));
@@ -209,7 +214,7 @@ export default function Schedule() {
     e.preventDefault();
     setDropTarget(null);
 
-    if (!draggedShift || !isManagerOrAbove) return;
+    if (!draggedShift || !showManagementFeatures) return;
 
     const dateStr = format(day, 'yyyy-MM-dd');
     const updatedShift = {
@@ -649,14 +654,19 @@ export default function Schedule() {
     );
   }
 
+  // In personal view, hide sidebar
+  const effectiveShowSidebar = showSidebar && !isPersonalView;
+
   return (
     <div className="flex h-[calc(100vh-8rem)]">
       {/* Main content */}
-      <div className={`flex-1 flex flex-col min-w-0 ${showSidebar ? 'mr-80' : ''}`}>
+      <div className={`flex-1 flex flex-col min-w-0 ${effectiveShowSidebar ? 'mr-80' : ''}`}>
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b bg-white shrink-0">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">{t('schedule.title', 'Schedule')}</h1>
+            <h1 className="text-2xl font-bold text-slate-900">
+              {isPersonalView ? t('mySchedule.title', 'My Schedule') : t('schedule.title', 'Schedule')}
+            </h1>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-slate-600">
                 {viewMode === 'month'
@@ -664,7 +674,7 @@ export default function Schedule() {
                   : `${format(dateRange.start, 'MMM d')} - ${format(dateRange.end, 'MMM d, yyyy')}`
                 }
               </span>
-              {draftShiftsCount > 0 && (
+              {!isPersonalView && draftShiftsCount > 0 && (
                 <span className="px-2 py-0.5 text-xs bg-amber-100 text-amber-700 rounded-full">
                   {draftShiftsCount} {t('schedule.draft', 'Draft')}
                 </span>
@@ -673,7 +683,8 @@ export default function Schedule() {
           </div>
 
           <div className="flex items-center gap-3">
-            {isManagerOrAbove && (
+            {/* Only show management buttons when NOT in personal view */}
+            {showManagementFeatures && (
               <>
                 <button
                   onClick={() => setShowAiModal(true)}
@@ -703,13 +714,16 @@ export default function Schedule() {
                 </button>
               </>
             )}
-            <button
-              onClick={() => setShowSidebar(!showSidebar)}
-              className={`p-2 rounded-lg transition-colors ${showSidebar ? 'bg-slate-200 text-slate-700' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
-              title={showSidebar ? t('schedule.hideSidebar', 'Hide sidebar') : t('schedule.showSidebar', 'Show sidebar')}
-            >
-              {showSidebar ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-            </button>
+            {/* Only show sidebar toggle in management view */}
+            {!isPersonalView && (
+              <button
+                onClick={() => setShowSidebar(!showSidebar)}
+                className={`p-2 rounded-lg transition-colors ${showSidebar ? 'bg-slate-200 text-slate-700' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
+                title={showSidebar ? t('schedule.hideSidebar', 'Hide sidebar') : t('schedule.showSidebar', 'Show sidebar')}
+              >
+                {showSidebar ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            )}
           </div>
         </div>
 
@@ -869,13 +883,16 @@ export default function Schedule() {
                 })}
               </div>
 
-              {/* Employee rows */}
-              {(filteredEmployees.length > 0 ? filteredEmployees : employees).length === 0 ? (
+              {/* Employee rows - in personal view only show current user, never fallback to all */}
+              {filteredEmployees.length === 0 ? (
                 <div className="text-center py-12 text-slate-500">
-                  {t('schedule.noEmployeesAvailable', 'No employees available')}
+                  {isPersonalView
+                    ? t('schedule.noScheduleFound', 'No schedule found for your account')
+                    : t('schedule.noEmployeesAvailable', 'No employees available')
+                  }
                 </div>
               ) : (
-                (filteredEmployees.length > 0 ? filteredEmployees : employees).slice(0, 15).map((employee) => (
+                filteredEmployees.slice(0, isPersonalView ? 1 : 15).map((employee) => (
                   <div
                     key={employee.id}
                     className="grid border-b border-slate-100 last:border-b-0"
@@ -905,13 +922,13 @@ export default function Schedule() {
                           className={`p-1 border-r border-slate-100 last:border-r-0 min-h-[70px] overflow-hidden transition-colors ${
                             isToday ? 'bg-blue-50/30' : ''
                           } ${isDropZone ? 'bg-blue-100 ring-2 ring-blue-400 ring-inset' : ''} ${
-                            isManagerOrAbove ? 'cursor-pointer hover:bg-slate-50' : ''
+                            showManagementFeatures ? 'cursor-pointer hover:bg-slate-50' : ''
                           }`}
-                          onDragOver={(e) => isManagerOrAbove && handleDragOver(e, employee.id, day)}
+                          onDragOver={(e) => showManagementFeatures && handleDragOver(e, employee.id, day)}
                           onDragLeave={handleDragLeave}
-                          onDrop={(e) => isManagerOrAbove && handleDrop(e, employee.id, day)}
+                          onDrop={(e) => showManagementFeatures && handleDrop(e, employee.id, day)}
                           onClick={() => {
-                            if (isManagerOrAbove && dayShifts.length === 0) {
+                            if (showManagementFeatures && dayShifts.length === 0) {
                               setSelectedSlot({ date: day, employeeId: employee.id });
                               setShowAddModal(true);
                             }
@@ -922,7 +939,7 @@ export default function Schedule() {
                               key={shift.id}
                               shift={shift}
                               employee={employee}
-                              onDragStart={isManagerOrAbove ? handleDragStart : null}
+                              onDragStart={showManagementFeatures ? handleDragStart : null}
                               calculateSkillsMatch={calculateSkillsMatch}
                               onSelect={() => setSelectedShift({ ...shift, employee_name: `${employee.first_name} ${employee.last_name}`, employee_role: employee.role })}
                               t={t}
@@ -996,8 +1013,8 @@ export default function Schedule() {
         </div>
       </div>
 
-      {/* Right sidebar */}
-      {showSidebar && (
+      {/* Right sidebar - hidden in personal view */}
+      {effectiveShowSidebar && (
         <div className="w-80 border-l bg-slate-50 flex flex-col fixed right-0 top-16 bottom-0 overflow-hidden">
           <div className="p-4 border-b bg-white">
             <h3 className="font-semibold text-slate-900">{t('schedule.scheduleOverview', 'Schedule Overview')}</h3>
@@ -1050,7 +1067,7 @@ export default function Schedule() {
                       <p className="text-sm font-medium text-slate-900">{request.employee_name}</p>
                       <p className="text-xs text-slate-500">{request.start_date} - {request.end_date}</p>
                       <p className="text-xs text-slate-500">{t(`timeOff.types.${request.type?.toLowerCase().replace(/\s+/g, '')}`, request.type)}</p>
-                      {isManagerOrAbove && (
+                      {showManagementFeatures && (
                         <div className="flex gap-2 mt-2">
                           <button
                             onClick={() => handleTimeOffAction(request.id, 'approve')}
@@ -1091,7 +1108,7 @@ export default function Schedule() {
                         {swap.requester_name} → {swap.target_name}
                       </p>
                       <p className="text-xs text-slate-500">{swap.shift_date} - {swap.shift_time}</p>
-                      {isManagerOrAbove && (
+                      {showManagementFeatures && (
                         <div className="flex gap-2 mt-2">
                           <button
                             onClick={() => handleSwapAction(swap.id, 'approve')}

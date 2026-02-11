@@ -86,6 +86,43 @@ const CATEGORY_ICONS = {
   other: FileText,
 };
 
+// ============================================================
+// FORMATTING HELPERS
+// ============================================================
+
+function formatCurrency(amount, currency = 'GBP') {
+  const num = parseFloat(amount) || 0;
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(num);
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '-';
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  } catch {
+    return dateStr;
+  }
+}
+
+function getEmployeeName(expense) {
+  return expense.employee_name || expense.employeeName || expense.employee || expense.submitted_by_name || '-';
+}
+
+function hasReceipt(expense) {
+  return expense.hasReceipt || expense.has_receipt || expense.receipt_url || expense.receiptUrl || false;
+}
+
 const STATUS_STYLES = {
   draft: 'bg-slate-100 text-slate-700',
   submitted: 'bg-blue-100 text-blue-700',
@@ -321,13 +358,16 @@ export default function Expenses() {
             className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-momentum-500"
             placeholder={t('expenses.filter.to', 'To')}
           />
-          <input
-            type="text"
-            value={employeeFilter}
-            onChange={(e) => setEmployeeFilter(e.target.value)}
-            placeholder={t('expenses.filter.employee', 'Employee name...')}
-            className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-momentum-500 min-w-[150px]"
-          />
+          {/* Only show employee filter in management view for managers+ */}
+          {showManagementFeatures && (
+            <input
+              type="text"
+              value={employeeFilter}
+              onChange={(e) => setEmployeeFilter(e.target.value)}
+              placeholder={t('expenses.filter.employee', 'Employee name...')}
+              className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-momentum-500 min-w-[150px]"
+            />
+          )}
           <button
             onClick={() => setShowNewExpense(true)}
             className="flex items-center gap-2 px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600 text-sm font-medium"
@@ -396,7 +436,7 @@ export default function Expenses() {
                     className="hover:bg-slate-50 cursor-pointer transition-colors"
                   >
                     <td className="px-4 py-3 text-sm font-medium text-slate-900">
-                      {expense.employee_name || expense.employee}
+                      {getEmployeeName(expense)}
                     </td>
                     <td className="px-4 py-3 text-sm text-slate-700">
                       <div className="flex items-center gap-2">
@@ -416,10 +456,10 @@ export default function Expenses() {
                       {expense.merchant || expense.merchant_name || '-'}
                     </td>
                     <td className="px-4 py-3 text-sm font-semibold text-slate-900 text-right">
-                      {t('expenses.currency', '£')}{parseFloat(expense.amount || 0).toFixed(2)}
+                      {formatCurrency(expense.amount)}
                     </td>
                     <td className="px-4 py-3 text-sm text-slate-600">
-                      {expense.expense_date || expense.date}
+                      {formatDate(expense.expense_date || expense.date)}
                     </td>
                     <td className="px-4 py-3">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[expense.status]}`}>
@@ -427,7 +467,7 @@ export default function Expenses() {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-center">
-                      {(expense.hasReceipt || expense.receipt_url) ? (
+                      {hasReceipt(expense) ? (
                         <Receipt className="w-4 h-4 text-green-500 mx-auto" />
                       ) : (
                         <span className="text-xs text-slate-400">{t('expenses.noReceipt', 'None')}</span>
@@ -468,7 +508,7 @@ export default function Expenses() {
                 <div>
                   <h4 className="text-xl font-bold text-slate-900">{selectedExpense.description || selectedExpense.title}</h4>
                   <p className="text-sm text-slate-500 mt-1">
-                    {selectedExpense.employee_name || selectedExpense.employee} - {selectedExpense.expense_date || selectedExpense.date}
+                    {getEmployeeName(selectedExpense)} - {formatDate(selectedExpense.expense_date || selectedExpense.date)}
                   </p>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${STATUS_STYLES[selectedExpense.status]}`}>
@@ -481,7 +521,7 @@ export default function Expenses() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-slate-500">{t('expenses.detail.amount', 'Amount')}</p>
-                    <p className="text-2xl font-bold text-slate-900">£{parseFloat(selectedExpense.amount || 0).toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-slate-900">{formatCurrency(selectedExpense.amount)}</p>
                   </div>
                   <div>
                     <p className="text-sm text-slate-500">{t('expenses.detail.category', 'Category')}</p>
@@ -511,7 +551,7 @@ export default function Expenses() {
               {/* Receipt viewer */}
               <div>
                 <p className="text-sm font-medium text-slate-700 mb-2">{t('expenses.detail.receipt', 'Receipt')}</p>
-                {(selectedExpense.hasReceipt || selectedExpense.receipt_url) ? (
+                {hasReceipt(selectedExpense) ? (
                   <div className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center">
                     {selectedExpense.receipt_url ? (
                       <>
