@@ -10,9 +10,30 @@ import { initializeLanguage } from './src/i18n';
 import { useAuthStore } from './src/store/authStore';
 import { initializeBackgroundSync } from './src/services/backgroundSync';
 
+// CRITICAL: Check demo params SYNCHRONOUSLY before any React render
+// This prevents the race condition where onboarding shows before demo login completes
+// Fixes: Windows browsers showing OnboardingWelcome instead of demo app
+function initDemoModeSync() {
+  if (Platform.OS === 'web' && typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const demoRole = params.get('demo');
+    if (demoRole === 'worker' || demoRole === 'manager') {
+      useAuthStore.getState().loginDemoUser(demoRole);
+      return true;
+    } else if (demoRole === 'true') {
+      const isManager = window.location.pathname.includes('/manager');
+      useAuthStore.getState().loginDemoUser(isManager ? 'manager' : 'worker');
+      return true;
+    }
+  }
+  return false;
+}
+
+// Run BEFORE component mounts - sets auth state synchronously
+const isDemoMode = initDemoModeSync();
+
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const loginDemoUser = useAuthStore((s) => s.loginDemoUser);
 
   useEffect(() => {
     const init = async () => {
@@ -23,19 +44,7 @@ export default function App() {
         if (Platform.OS !== 'web') {
           await initializeBackgroundSync();
         }
-
-        // Web: auto-login when ?demo=worker or ?demo=manager is in the URL (for website demo)
-        if (Platform.OS === 'web' && typeof window !== 'undefined') {
-          const params = new URLSearchParams(window.location.search);
-          const demoRole = params.get('demo');
-          if (demoRole === 'worker' || demoRole === 'manager') {
-            loginDemoUser(demoRole);
-          } else if (demoRole === 'true') {
-            // Legacy support: ?demo=true checks pathname
-            const isManager = window.location.pathname.includes('/manager');
-            loginDemoUser(isManager ? 'manager' : 'worker');
-          }
-        }
+        // Demo mode already initialized synchronously above (initDemoModeSync)
       } catch (error) {
         if (__DEV__) {
           console.error('Failed to initialize:', error);
