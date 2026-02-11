@@ -10,7 +10,7 @@ import {
 } from '../components/Icons';
 import { colors } from '../theme';
 import { BrandingProvider } from '../contexts/BrandingContext';
-import { ViewProvider } from '../contexts/ViewContext';
+import { ViewProvider, useViewMode } from '../contexts/ViewContext';
 
 // Onboarding Screens
 import { OnboardingWelcomeScreen } from '../screens/onboarding/OnboardingWelcomeScreen';
@@ -70,6 +70,13 @@ import { OffboardingScreen } from '../screens/manager/OffboardingScreen';
 import { ManagerScheduleScreen } from '../screens/manager/ManagerScheduleScreen';
 import { ManagerTasksScreen } from '../screens/manager/ManagerTasksScreen';
 import { ManagerTeamScreen } from '../screens/manager/ManagerTeamScreen';
+
+// Manager Personal View Screens (My View mode)
+import { PersonalHomeScreen } from '../screens/manager/PersonalHomeScreen';
+import { PersonalScheduleScreen } from '../screens/manager/PersonalScheduleScreen';
+import { PersonalTasksScreen } from '../screens/manager/PersonalTasksScreen';
+import { PersonalCareerScreen } from '../screens/manager/PersonalCareerScreen';
+import { PersonalMoreScreen } from '../screens/manager/PersonalMoreScreen';
 
 // Navigators
 const Tab = createBottomTabNavigator();
@@ -242,10 +249,69 @@ const WorkerTabs = () => {
   );
 };
 
-// ========== MANAGER TABS (5 tabs) ==========
+// ========== DYNAMIC MANAGER TABS (switches based on view mode) ==========
 
-const ManagerTabs = () => {
+const DynamicManagerTabs = () => {
   const { t } = useTranslation();
+  const { viewMode } = useViewMode();
+
+  // When in personal mode, show worker-style tabs with Personal* wrappers
+  if (viewMode === 'personal') {
+    return (
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: colors.momentum,
+          tabBarInactiveTintColor: colors.slate400,
+          tabBarStyle,
+          tabBarLabelStyle,
+          headerShown: false,
+        }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={PersonalHomeScreen}
+          options={{
+            tabBarLabel: t('navigation.home', 'Home'),
+            tabBarIcon: ({ color }) => <HomeIcon size={26} color={color} />,
+          }}
+        />
+        <Tab.Screen
+          name="Schedule"
+          component={PersonalScheduleScreen}
+          options={{
+            tabBarLabel: t('navigation.schedule', 'Schedule'),
+            tabBarIcon: ({ color }) => <CalendarIcon size={26} color={color} />,
+          }}
+        />
+        <Tab.Screen
+          name="Tasks"
+          component={PersonalTasksScreen}
+          options={{
+            tabBarLabel: t('navigation.tasks', 'Tasks'),
+            tabBarIcon: ({ color }) => <CheckSquareIcon size={26} color={color} />,
+          }}
+        />
+        <Tab.Screen
+          name="Career"
+          component={PersonalCareerScreen}
+          options={{
+            tabBarLabel: t('navigation.career', 'Career'),
+            tabBarIcon: ({ color }) => <TargetIcon size={26} color={color} />,
+          }}
+        />
+        <Tab.Screen
+          name="More"
+          component={PersonalMoreScreen}
+          options={{
+            tabBarLabel: t('navigation.more', 'More'),
+            tabBarIcon: ({ color }) => <MenuIcon size={26} color={color} />,
+          }}
+        />
+      </Tab.Navigator>
+    );
+  }
+
+  // Default: Team view with manager tabs
   return (
     <Tab.Navigator
       screenOptions={{
@@ -325,7 +391,7 @@ export const AppNavigation = () => {
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : user?.role === 'manager' || user?.role === 'admin' ? (
           <Stack.Group>
-            <Stack.Screen name="ManagerApp" component={ManagerTabs} />
+            <Stack.Screen name="ManagerApp" component={DynamicManagerTabs} />
             <Stack.Screen name="Chat" component={ChatScreen} options={{ presentation: 'modal' }} />
             <Stack.Screen name="Feed" component={FeedNavigator} />
             <Stack.Screen name="MyFeed" component={FeedNavigator} />

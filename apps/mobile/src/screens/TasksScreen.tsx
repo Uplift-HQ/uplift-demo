@@ -91,7 +91,7 @@ const PRIORITY_CONFIG: Record<TaskPriority, { label: string; color: string; bgCo
   low: { label: 'Low', color: colors.slate500, bgColor: colors.slate100 },
 };
 
-export const TasksScreen = ({ navigation }: any) => {
+export const TasksScreen = ({ navigation, hideHeader }: { navigation: any; hideHeader?: boolean }) => {
   const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<TaskCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -209,8 +209,8 @@ export const TasksScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        {navigation.canGoBack() && (
+      <View style={[styles.header, hideHeader && { paddingTop: spacing.md }]}>
+        {!hideHeader && navigation.canGoBack() && (
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}

@@ -117,7 +117,7 @@ const DEMO_ACHIEVEMENTS: Achievement[] = [
 
 const LEVEL_NAMES = ['None', 'Basic', 'Intermediate', 'Advanced', 'Expert'];
 
-export const CareerPathScreen = ({ navigation }: any) => {
+export const CareerPathScreen = ({ navigation, hideHeader }: { navigation: any; hideHeader?: boolean }) => {
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<'path' | 'skills' | 'training'>('path');
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
@@ -293,13 +293,15 @@ export const CareerPathScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backButtonText}>← {t('common.back')}</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>{t('career.careerPath')}</Text>
-        <Text style={styles.subtitle}>{t('career.yourCareerPath')}</Text>
-      </View>
+      {!hideHeader && (
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Text style={styles.backButtonText}>← {t('common.back')}</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>{t('career.careerPath')}</Text>
+          <Text style={styles.subtitle}>{t('career.yourCareerPath')}</Text>
+        </View>
+      )}
 
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>

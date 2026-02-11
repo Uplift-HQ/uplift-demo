@@ -11,7 +11,7 @@ import {
 } from '../components/Icons';
 import { colors, typography, spacing, borderRadius, shadows } from '../theme';
 
-export const MoreScreen = ({ navigation }: any) => {
+export const MoreScreen = ({ navigation, hideHeader }: { navigation: any; hideHeader?: boolean }) => {
   const { user, logout } = useAuthStore();
   const { t } = useTranslation();
   const [showLanguagePicker, setShowLanguagePicker] = useState(false);
@@ -173,9 +173,11 @@ export const MoreScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>{t('more.title')}</Text>
-      </View>
+      {!hideHeader && (
+        <View style={styles.header}>
+          <Text style={styles.title}>{t('more.title')}</Text>
+        </View>
+      )}
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* User Card */}
