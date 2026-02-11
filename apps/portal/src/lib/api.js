@@ -395,6 +395,29 @@ class ApiClient {
       return { user: stored ? JSON.parse(stored) : DEMO_USER };
     }
 
+    // TrueLayer / Corporate Cards (Demo data)
+    if (path.startsWith('/truelayer/connect')) {
+      return { authUrl: 'https://auth.truelayer-sandbox.com/demo' };
+    }
+    if (path === '/truelayer/connections') {
+      return { connections: [] };
+    }
+    if (path === '/corporate-cards' || path.startsWith('/corporate-cards?')) {
+      return { cards: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } };
+    }
+    if (path.startsWith('/card-transactions')) {
+      return { transactions: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+    }
+    if (path.startsWith('/expense-claims')) {
+      return { claims: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } };
+    }
+    if (path.startsWith('/expense-categories')) {
+      return { categories: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+    }
+    if (path.startsWith('/payroll/expenses')) {
+      return { claims: [], exports: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+    }
+
     // Default empty response
     return {};
   }
@@ -1185,6 +1208,110 @@ export const payslipsApi = {
     const query = new URLSearchParams(params).toString();
     return api.get(`/payslips${query ? `?${query}` : ''}`);
   },
+};
+
+// ============================================================
+// CORPORATE CARDS & EXPENSES API
+// HSBC Integration via TrueLayer Open Banking
+// ============================================================
+
+// TrueLayer Connections API (extends integrationsApi)
+export const trueLayerApi = {
+  // Get TrueLayer OAuth connect URL
+  getConnectUrl: (redirectUri) => {
+    const params = redirectUri ? `?redirect_uri=${encodeURIComponent(redirectUri)}` : '';
+    return api.get(`/integrations/truelayer/connect${params}`);
+  },
+  // List active TrueLayer connections
+  getConnections: () => api.get('/integrations/truelayer/connections'),
+  // Sync transactions from TrueLayer
+  syncTransactions: (connectionId) => api.post('/integrations/truelayer/sync', { connectionId }),
+  // Disconnect TrueLayer connection
+  disconnect: (connectionId) => api.delete(`/integrations/truelayer/connections/${connectionId}`),
+};
+
+// Corporate Cards API
+export const corporateCardsApi = {
+  list: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/corporate-cards${query ? `?${query}` : ''}`);
+  },
+  get: (id) => api.get(`/corporate-cards/${id}`),
+  create: (data) => api.post('/corporate-cards', data),
+  update: (id, data) => api.patch(`/corporate-cards/${id}`, data),
+  delete: (id) => api.delete(`/corporate-cards/${id}`),
+  getTransactions: (cardId, params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/corporate-cards/${cardId}/transactions${query ? `?${query}` : ''}`);
+  },
+};
+
+// Card Transactions API
+export const cardTransactionsApi = {
+  list: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/card-transactions${query ? `?${query}` : ''}`);
+  },
+  get: (id) => api.get(`/card-transactions/${id}`),
+  update: (id, data) => api.patch(`/card-transactions/${id}`, data),
+  uploadReceipt: (id, formData) => api.upload(`/card-transactions/${id}/receipt`, formData),
+  // Bulk operations
+  bulkUpdate: (transactionIds, data) => api.patch('/card-transactions/bulk', { transactionIds, ...data }),
+};
+
+// Expense Claims API
+export const expenseClaimsApi = {
+  list: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/expense-claims${query ? `?${query}` : ''}`);
+  },
+  get: (id) => api.get(`/expense-claims/${id}`),
+  create: (data) => api.post('/expense-claims', data),
+  // Submit claim with selected transactions
+  submit: (data) => api.post('/expense-claims', data),
+  // Review claim (approve/reject)
+  review: (id, data) => api.post(`/expense-claims/${id}/review`, data),
+  // Get claims ready for payroll export
+  getForPayroll: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/payroll/expenses${query ? `?${query}` : ''}`);
+  },
+};
+
+// Payroll Expenses API (for finance team)
+export const payrollExpensesApi = {
+  // Get approved claims ready for payroll
+  list: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/payroll/expenses${query ? `?${query}` : ''}`);
+  },
+  // Export claims to payroll (marks as paid)
+  export: (data) => api.post('/payroll/expenses/export', data),
+  // Get export history
+  getExports: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/payroll/expenses/exports${query ? `?${query}` : ''}`);
+  },
+  // Get specific export details
+  getExport: (id) => api.get(`/payroll/expenses/exports/${id}`),
+  // Download export file
+  downloadExport: (id) => `${API_URL}/payroll/expenses/exports/${id}/download`,
+};
+
+// Expense Categories API
+export const expenseCategoriesApi = {
+  list: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return api.get(`/expense-categories${query ? `?${query}` : ''}`);
+  },
+  get: (id) => api.get(`/expense-categories/${id}`),
+  create: (data) => api.post('/expense-categories', data),
+  update: (id, data) => api.patch(`/expense-categories/${id}`, data),
+  delete: (id) => api.delete(`/expense-categories/${id}`),
+  // Category mappings (for auto-categorization)
+  getMappings: (categoryId) => api.get(`/expense-categories/${categoryId}/mappings`),
+  createMapping: (categoryId, data) => api.post(`/expense-categories/${categoryId}/mappings`, data),
+  deleteMapping: (categoryId, mappingId) => api.delete(`/expense-categories/${categoryId}/mappings/${mappingId}`),
 };
 
 export default api;

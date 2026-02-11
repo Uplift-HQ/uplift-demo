@@ -41,6 +41,7 @@ import Learning from './pages/Learning';
 import Surveys from './pages/Surveys';
 import Expenses from './pages/Expenses';
 import Offboarding from './pages/Offboarding';
+import CorporateCards from './pages/CorporateCards';
 
 // Payroll module
 import Payroll from './pages/Payroll';
@@ -101,6 +102,7 @@ export default function App() {
         <Route path="/learning" element={<Learning />} />
         <Route path="/compensation" element={<Compensation />} />
         <Route path="/expenses" element={<Expenses />} />
+        <Route path="/corporate-cards" element={<CorporateCards />} />
         <Route path="/documents" element={<Documents />} />
         <Route path="/momentum" element={<Momentum />} />
         <Route path="/recognition" element={<Recognition />} />

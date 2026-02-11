@@ -56,6 +56,7 @@ import {
   User,
   Gauge,
   Banknote,
+  CreditCard,
 } from 'lucide-react';
 
 // Small coloured dot for location indicators
@@ -108,6 +109,7 @@ const getAdminNav = (t) => [
       { path: '/time-tracking', label: t('nav.timeTracking', 'Time Tracking'), icon: Clock },
       { path: '/time-off', label: t('nav.timeOff', 'Time Off'), icon: Palmtree },
       { path: '/expenses', label: t('nav.expenses', 'Expenses'), icon: Receipt },
+      { path: '/corporate-cards', label: t('nav.corporateCards', 'Corporate Cards'), icon: CreditCard },
       { path: '/documents', label: t('nav.documents', 'Documents'), icon: FileText },
       { path: '/compensation', label: t('nav.compensation', 'Compensation'), icon: DollarSign },
     ],
@@ -156,6 +158,7 @@ const getManagerNav = (t) => [
       { path: '/time-tracking', label: t('nav.timeApprovals', 'Time Approvals'), icon: Clock },
       { path: '/time-off', label: t('nav.leaveApprovals', 'Leave Approvals'), icon: Palmtree },
       { path: '/expenses', label: t('nav.expenseApprovals', 'Expense Approvals'), icon: Receipt },
+      { path: '/corporate-cards', label: t('nav.corporateCards', 'Corporate Cards'), icon: CreditCard },
     ],
   },
   {
@@ -209,6 +212,7 @@ const getWorkerNav = (t) => [
     items: [
       { path: '/payroll/my-payslips', label: t('nav.myPayslips', 'My Payslips'), icon: FileText },
       { path: '/expenses', label: t('nav.myExpenses', 'My Expenses'), icon: Receipt },
+      { path: '/corporate-cards', label: t('nav.myCards', 'My Cards'), icon: CreditCard },
     ],
   },
   {
@@ -249,6 +253,7 @@ const getPersonalNav = (t) => [
     items: [
       { path: '/payroll/my-payslips', label: t('nav.myPayslips', 'My Payslips'), icon: FileText },
       { path: '/expenses', label: t('nav.myExpenses', 'My Expenses'), icon: Receipt },
+      { path: '/corporate-cards', label: t('nav.myCards', 'My Cards'), icon: CreditCard },
     ],
   },
   {
@@ -315,7 +320,7 @@ export default function Layout() {
   // Sidebar header content changes based on view
   const sidebarTitle = isPersonalView && !isWorker
     ? `${user?.firstName}'s Portal`
-    : branding.brand_name || t('brand.grandMetropolitan', 'Grand Metropolitan');
+    : branding.brand_name || t('brand.defaultName', 'Your Company');
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">

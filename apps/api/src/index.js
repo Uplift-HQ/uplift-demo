@@ -59,6 +59,7 @@ import payrollRoutes from './routes/payroll.js';
 import surveysRoutes from './routes/surveys.js';
 import reportsRoutes from './routes/reports.js';
 import migrationsRoutes from './routes/migrations.js';
+import corporateCardsRoutes from './routes/corporateCards.js';
 
 // Middleware
 import { 
@@ -182,7 +183,7 @@ app.get('/health', async (req, res) => {
 
 // Simple health check
 app.get('/api/health', async (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString(), version: '2026-01-28-v4' });
+  res.json({ status: 'ok', timestamp: new Date().toISOString(), version: '2026-02-08-v1' });
 });
 
 // Readiness probe - checks all dependencies
@@ -273,6 +274,7 @@ app.use('/api/ops', apiLimiter, opsRoutes);
 app.use('/api/ops/licenses', apiLimiter, licenseRoutes);
 
 // Migrations routes (key-based auth for database migrations)
+// Must be before /api catch-all routes
 app.use('/api/migrations', apiLimiter, migrationsRoutes);
 
 // Core routes (employees, locations, departments, roles, skills)
@@ -330,6 +332,9 @@ app.use('/api/documents', apiLimiter, csrfProtection, documentsRoutes);
 
 // Expenses routes (claims, reimbursements)
 app.use('/api/expenses', apiLimiter, csrfProtection, expensesRoutes);
+
+// Corporate Cards routes (HSBC via TrueLayer, card transactions, expense claims, payroll)
+app.use('/api', apiLimiter, csrfProtection, corporateCardsRoutes);
 
 // Payslips routes (pay statements, YTD)
 app.use('/api/payslips', apiLimiter, csrfProtection, payslipsRoutes);
