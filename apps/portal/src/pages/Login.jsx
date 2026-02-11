@@ -43,6 +43,8 @@ export default function Login() {
     const demoRole = searchParams.get('demo');
     if (demoRole && DEMO_CREDENTIALS[demoRole] && !isAuthenticated && !autoLoggingIn) {
       setAutoLoggingIn(true);
+      // Skip org-onboarding wizard for demo users
+      sessionStorage.setItem('org_onboarding_shown', '1');
       const creds = DEMO_CREDENTIALS[demoRole];
       login(creds.email, creds.password).catch((err) => {
         setError(err.message);
