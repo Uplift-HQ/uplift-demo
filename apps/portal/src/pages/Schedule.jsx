@@ -127,11 +127,14 @@ export default function Schedule() {
     setError(null);
     try {
       // In personal view or for workers, filter shifts to current user only
+      // API requires startDate and endDate parameters
       const shiftParams = {
-        start: weekStartStr,
-        end: format(dateRange.end, 'yyyy-MM-dd'),
-        location: selectedLocation || undefined,
+        startDate: weekStartStr,
+        endDate: format(dateRange.end, 'yyyy-MM-dd'),
       };
+      if (selectedLocation) {
+        shiftParams.location = selectedLocation;
+      }
       // Workers always see only their own shifts, regardless of view mode
       if ((isPersonalView || user?.role === 'worker') && user?.employeeId) {
         shiftParams.employee_id = user.employeeId;

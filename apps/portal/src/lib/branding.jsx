@@ -36,7 +36,19 @@ export function BrandingProvider({ children }) {
     try {
       const result = await brandingApi.get();
       if (result?.branding) {
-        const merged = { ...DEFAULT_BRANDING, ...result.branding };
+        const apiBranding = result.branding;
+        // Map API field names to our expected field names (handle both snake_case and camelCase)
+        const merged = {
+          ...DEFAULT_BRANDING,
+          brand_name: apiBranding.brand_name || apiBranding.brandName || apiBranding.companyName || DEFAULT_BRANDING.brand_name,
+          primary_color: apiBranding.primary_color || apiBranding.primaryColor || DEFAULT_BRANDING.primary_color,
+          secondary_color: apiBranding.secondary_color || apiBranding.secondaryColor || DEFAULT_BRANDING.secondary_color,
+          // For logo_url: only override if API returns a non-null value
+          logo_url: apiBranding.logo_url || apiBranding.logoUrl || apiBranding.logo || DEFAULT_BRANDING.logo_url,
+          dark_logo_url: apiBranding.dark_logo_url || apiBranding.darkLogoUrl || DEFAULT_BRANDING.dark_logo_url,
+          favicon_url: apiBranding.favicon_url || apiBranding.faviconUrl || apiBranding.favicon || DEFAULT_BRANDING.favicon_url,
+          login_bg_url: apiBranding.login_bg_url || apiBranding.loginBgUrl || DEFAULT_BRANDING.login_bg_url,
+        };
         setBranding(merged);
         applyCSSProperties(merged);
       }
