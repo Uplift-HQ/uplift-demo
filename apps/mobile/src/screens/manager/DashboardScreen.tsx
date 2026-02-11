@@ -430,11 +430,11 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.surface },
 
   // View Toggle
-  viewToggleContainer: { paddingTop: 60, paddingBottom: spacing.md, alignItems: 'center', backgroundColor: colors.background },
+  viewToggleContainer: { paddingTop: 60, paddingBottom: 8, alignItems: 'center', backgroundColor: colors.background },
   viewToggleContainerCompact: { paddingTop: 60, paddingBottom: 0, alignItems: 'center', backgroundColor: colors.background },
 
   // Header with Company Branding
-  header: { backgroundColor: colors.background, paddingTop: 60, paddingBottom: spacing.lg, ...shadows.sm },
+  header: { backgroundColor: colors.background, paddingTop: 0, paddingBottom: spacing.lg, ...shadows.sm },
   headerTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingHorizontal: spacing.lg, marginBottom: spacing.md },
   companyBranding: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, flex: 1 },
   companyLogoContainer: { width: 52, height: 52, borderRadius: borderRadius.lg, overflow: 'hidden', backgroundColor: colors.slate100 },

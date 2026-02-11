@@ -24,16 +24,17 @@ export default function App() {
           await initializeBackgroundSync();
         }
 
-        // Web: auto-login when ?demo=true is in the URL (for website demo)
+        // Web: auto-login when ?demo=worker or ?demo=manager is in the URL (for website demo)
         if (Platform.OS === 'web' && typeof window !== 'undefined') {
           const params = new URLSearchParams(window.location.search);
-          if (params.get('demo') === 'true') {
+          const demoRole = params.get('demo');
+          if (demoRole === 'worker' || demoRole === 'manager') {
+            loginDemoUser(demoRole);
+          } else if (demoRole === 'true') {
+            // Legacy support: ?demo=true checks pathname
             const isManager = window.location.pathname.includes('/manager');
             loginDemoUser(isManager ? 'manager' : 'worker');
           }
-        } else if (__DEV__) {
-          // Auto demo login for testing - remove before production
-          loginDemoUser('worker');
         }
       } catch (error) {
         if (__DEV__) {

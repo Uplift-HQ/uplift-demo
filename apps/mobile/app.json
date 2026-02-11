@@ -41,7 +41,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "bundler": "metro"
+      "bundler": "metro",
+      "output": "single"
+    },
+    "experiments": {
+      "baseUrl": "/demo"
     },
     "locales": {
       "fr": "./src/i18n/ios/fr.json",
