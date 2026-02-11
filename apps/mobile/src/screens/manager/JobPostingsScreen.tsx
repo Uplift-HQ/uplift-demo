@@ -7,7 +7,7 @@ import { showAlert } from '../../utils/alert';
 import { useJobPostings } from '../../hooks/useData';
 import { api } from '../../services/api';
 
-export const JobPostingsScreen = ({ navigation }: any) => {
+export const JobPostingsScreen = ({ navigation, hideHeader }: { navigation: any; hideHeader?: boolean }) => {
   const { t } = useTranslation();
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -179,16 +179,18 @@ export const JobPostingsScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.title}>{t('manager.jobPostings')}</Text>
-          <Text style={styles.subtitle}>{jobs.filter((j: any) => j.status === 'open' || j.status === 'active').length} active positions</Text>
+      {!hideHeader && (
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.title}>{t('manager.jobPostings')}</Text>
+            <Text style={styles.subtitle}>{jobs.filter((j: any) => j.status === 'open' || j.status === 'active').length} active positions</Text>
+          </View>
+          <TouchableOpacity style={styles.createButton} onPress={() => setShowCreateForm(true)}>
+            <PlusIcon size={20} color={colors.background} />
+            <Text style={styles.createButtonText}>{t('screens.jobPostings.new_job')}</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.createButton} onPress={() => setShowCreateForm(true)}>
-          <PlusIcon size={20} color={colors.background} />
-          <Text style={styles.createButtonText}>{t('screens.jobPostings.new_job')}</Text>
-        </TouchableOpacity>
-      </View>
+      )}
 
       <ScrollView style={styles.content}>
         {loading ? (

@@ -93,7 +93,7 @@ const generateDemoShifts = (): Shift[] => [
   { id: 's12', day: 5, startTime: '10:00', endTime: '18:00', role: 'Weekend Crew', department: 'Weekend', assignedTo: { name: 'Mike Chen', skillMatch: 88, momentum: 85 }, required: 4, filled: 3, location: 'Events Hall', status: 'published' },
   { id: 's13', day: 6, startTime: '10:00', endTime: '18:00', role: 'Weekend Crew', department: 'Weekend', required: 4, filled: 2, location: 'Events Hall', status: 'draft' },
 ];
-export const ScheduleBuilderScreen = ({ navigation }: any) => {
+export const ScheduleBuilderScreen = ({ navigation, hideHeader }: { navigation: any; hideHeader?: boolean }) => {
   const { t } = useTranslation();
   const [viewMode, setViewMode] = useState<ViewMode>('week');
   const [selectedWeekOffset, setSelectedWeekOffset] = useState(0);
@@ -380,10 +380,12 @@ export const ScheduleBuilderScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backButtonText}>← {t('common.back')}</Text>
-        </TouchableOpacity>
+      <View style={[styles.header, hideHeader && { paddingTop: spacing.md }]}>
+        {!hideHeader && (
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Text style={styles.backButtonText}>← {t('common.back')}</Text>
+          </TouchableOpacity>
+        )}
         <View style={{ flex: 1, minWidth: 0 }}>
           <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>{t('manager.scheduleBuilder')}</Text>
           <Text style={styles.subtitle} numberOfLines={1}>

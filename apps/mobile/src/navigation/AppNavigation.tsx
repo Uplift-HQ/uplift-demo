@@ -67,6 +67,9 @@ import { AIInsightsScreen } from '../screens/manager/AIInsightsScreen';
 import { RewardCatalogScreen } from '../screens/manager/RewardCatalogScreen';
 import { TeamPerformanceScreen } from '../screens/manager/TeamPerformanceScreen';
 import { OffboardingScreen } from '../screens/manager/OffboardingScreen';
+import { ManagerScheduleScreen } from '../screens/manager/ManagerScheduleScreen';
+import { ManagerTasksScreen } from '../screens/manager/ManagerTasksScreen';
+import { ManagerTeamScreen } from '../screens/manager/ManagerTeamScreen';
 
 // Navigators
 const Tab = createBottomTabNavigator();
@@ -263,7 +266,7 @@ const ManagerTabs = () => {
       />
       <Tab.Screen
         name="Schedule"
-        component={ManagerScheduleNavigator}
+        component={ManagerScheduleScreen}
         options={{
           tabBarLabel: t('navigation.schedule', 'Schedule'),
           tabBarIcon: ({ color }) => <CalendarIcon size={26} color={color} />,
@@ -271,7 +274,7 @@ const ManagerTabs = () => {
       />
       <Tab.Screen
         name="Tasks"
-        component={TasksNavigator}
+        component={ManagerTasksScreen}
         options={{
           tabBarLabel: t('navigation.tasks', 'Tasks'),
           tabBarIcon: ({ color }) => <CheckSquareIcon size={26} color={color} />,
@@ -279,7 +282,7 @@ const ManagerTabs = () => {
       />
       <Tab.Screen
         name="Team"
-        component={JobPostingsScreen}
+        component={ManagerTeamScreen}
         options={{
           tabBarLabel: t('navigation.team', 'Team'),
           tabBarIcon: ({ color }) => <UsersIcon size={26} color={color} />,

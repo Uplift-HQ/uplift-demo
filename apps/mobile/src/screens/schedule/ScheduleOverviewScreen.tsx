@@ -79,7 +79,7 @@ const getRoleColor = (department: string): string => {
   return ROLE_COLORS[department] || ROLE_COLORS.default;
 };
 
-export const ScheduleOverviewScreen = ({ navigation }: any) => {
+export const ScheduleOverviewScreen = ({ navigation, hideHeader }: { navigation: any; hideHeader?: boolean }) => {
   const { t, i18n } = useTranslation();
   const { user } = useAuthStore();
   const isManager = user?.role === 'manager' || user?.role === 'admin';
@@ -324,9 +324,9 @@ export const ScheduleOverviewScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
+      <View style={[styles.header, hideHeader && { paddingTop: spacing.md }]}>
         <View>
-          <Text style={styles.title}>{t('schedule.title')}</Text>
+          <Text style={styles.title}>{hideHeader ? t('schedule.mySchedule', 'My Schedule') : t('schedule.title')}</Text>
           <Text style={styles.subtitle}>
             {viewMode === 'week'
               ? formatWeekRange()
