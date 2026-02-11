@@ -664,61 +664,55 @@ export default function Schedule() {
     <div className="flex h-[calc(100vh-8rem)]">
       {/* Main content */}
       <div className={`flex-1 flex flex-col min-w-0 ${effectiveShowSidebar ? 'mr-80' : ''}`}>
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b bg-white shrink-0">
-          <div>
-            <h1 className="text-2xl font-bold text-slate-900">
-              {isPersonalView ? t('mySchedule.title', 'My Schedule') : t('schedule.title', 'Schedule')}
-            </h1>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-slate-600">
-                {viewMode === 'month'
-                  ? format(currentDate, 'MMMM yyyy')
-                  : `${format(dateRange.start, 'MMM d')} - ${format(dateRange.end, 'MMM d, yyyy')}`
-                }
-              </span>
-              {!isPersonalView && draftShiftsCount > 0 && (
-                <span className="px-2 py-0.5 text-xs bg-amber-100 text-amber-700 rounded-full">
-                  {draftShiftsCount} {t('schedule.draft', 'Draft')}
+        {/* Header - only show in management view (personal view has its own header) */}
+        {showManagementFeatures && (
+          <div className="flex items-center justify-between p-4 border-b bg-white shrink-0">
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900">
+                {t('schedule.title', 'Schedule')}
+              </h1>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-slate-600">
+                  {viewMode === 'month'
+                    ? format(currentDate, 'MMMM yyyy')
+                    : `${format(dateRange.start, 'MMM d')} - ${format(dateRange.end, 'MMM d, yyyy')}`
+                  }
                 </span>
-              )}
+                {draftShiftsCount > 0 && (
+                  <span className="px-2 py-0.5 text-xs bg-amber-100 text-amber-700 rounded-full">
+                    {draftShiftsCount} {t('schedule.draft', 'Draft')}
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className="flex items-center gap-3">
-            {/* Only show management buttons when NOT in personal view */}
-            {showManagementFeatures && (
-              <>
-                <button
-                  onClick={() => setShowAiModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-                >
-                  <Wand2 className="w-4 h-4" />
-                  {t('schedule.smartSchedule', 'Smart Schedule')}
-                </button>
-                <button
-                  onClick={() => setShowPublishModal(true)}
-                  disabled={draftShiftsCount === 0}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                    draftShiftsCount > 0
-                      ? 'bg-green-600 text-white hover:bg-green-700'
-                      : 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                  }`}
-                >
-                  <Send className="w-4 h-4" />
-                  {t('schedule.publishButton', 'Publish')}
-                </button>
-                <button
-                  onClick={() => setShowAddModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  <Plus className="w-4 h-4" />
-                  {t('schedule.addShift', 'Add Shift')}
-                </button>
-              </>
-            )}
-            {/* Only show sidebar toggle in management view */}
-            {!isPersonalView && (
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setShowAiModal(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                <Wand2 className="w-4 h-4" />
+                {t('schedule.smartSchedule', 'Smart Schedule')}
+              </button>
+              <button
+                onClick={() => setShowPublishModal(true)}
+                disabled={draftShiftsCount === 0}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                  draftShiftsCount > 0
+                    ? 'bg-green-600 text-white hover:bg-green-700'
+                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                }`}
+              >
+                <Send className="w-4 h-4" />
+                {t('schedule.publishButton', 'Publish')}
+              </button>
+              <button
+                onClick={() => setShowAddModal(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+                {t('schedule.addShift', 'Add Shift')}
+              </button>
               <button
                 onClick={() => setShowSidebar(!showSidebar)}
                 className={`p-2 rounded-lg transition-colors ${showSidebar ? 'bg-slate-200 text-slate-700' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
@@ -726,97 +720,91 @@ export default function Schedule() {
               >
                 {showSidebar ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
-            )}
-          </div>
-        </div>
-
-        {/* Controls bar */}
-        <div className="flex items-center gap-4 p-4 bg-slate-50 border-b shrink-0 flex-wrap">
-          {/* Navigation */}
-          <div className="flex items-center gap-2">
-            <button onClick={() => navigateDate(-1)} className="p-2 hover:bg-white rounded-lg transition-colors">
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => setCurrentDate(new Date())}
-              className="px-3 py-1.5 text-sm font-medium bg-white border rounded-lg hover:bg-slate-50"
-            >
-              {t('schedule.today', 'Today')}
-            </button>
-            <button onClick={() => navigateDate(1)} className="p-2 hover:bg-white rounded-lg transition-colors">
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* View mode toggle - only in management view */}
-          {showManagementFeatures && (
-            <div className="flex bg-white border rounded-lg p-1">
-              {Object.entries(VIEW_MODES).map(([key, { labelKey }]) => (
-                <button
-                  key={key}
-                  onClick={() => setViewMode(key)}
-                  className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
-                    viewMode === key
-                      ? 'bg-blue-600 text-white'
-                      : 'text-slate-600 hover:bg-slate-100'
-                  }`}
-                >
-                  {t(labelKey)}
-                </button>
-              ))}
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Location filter - only in management view */}
-          {showManagementFeatures && (
-            <select
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              className="px-3 py-2 bg-white border rounded-lg text-sm"
-            >
-              <option value="">{t('schedule.allLocations')}</option>
-              {locations.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
-            </select>
-          )}
+        {/* Controls bar - only show in management view */}
+        {showManagementFeatures && (
+          <div className="flex items-center gap-4 p-4 bg-slate-50 border-b shrink-0 flex-wrap">
+            {/* Navigation */}
+            <div className="flex items-center gap-2">
+              <button onClick={() => navigateDate(-1)} className="p-2 hover:bg-white rounded-lg transition-colors">
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => setCurrentDate(new Date())}
+                className="px-3 py-1.5 text-sm font-medium bg-white border rounded-lg hover:bg-slate-50"
+              >
+                {t('schedule.today', 'Today')}
+              </button>
+              <button onClick={() => navigateDate(1)} className="p-2 hover:bg-white rounded-lg transition-colors">
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
 
-          {/* Advanced filters toggle - only in management view */}
-          {showManagementFeatures && (
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
-                showFilters || activeFiltersCount > 0
-                  ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                  : 'bg-white border text-slate-600 hover:bg-slate-50'
-              }`}
-            >
-              <Filter className="w-4 h-4" />
-              {t('schedule.filters', 'Filters')}
-              {activeFiltersCount > 0 && (
-                <span className="px-1.5 py-0.5 text-xs bg-blue-600 text-white rounded-full">{activeFiltersCount}</span>
-              )}
-            </button>
-          )}
+          {/* View mode toggle */}
+          <div className="flex bg-white border rounded-lg p-1">
+            {Object.entries(VIEW_MODES).map(([key, { labelKey }]) => (
+              <button
+                key={key}
+                onClick={() => setViewMode(key)}
+                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
+                  viewMode === key
+                    ? 'bg-blue-600 text-white'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
+                {t(labelKey)}
+              </button>
+            ))}
+          </div>
+
+          {/* Location filter */}
+          <select
+            value={selectedLocation}
+            onChange={(e) => setSelectedLocation(e.target.value)}
+            className="px-3 py-2 bg-white border rounded-lg text-sm"
+          >
+            <option value="">{t('schedule.allLocations')}</option>
+            {locations.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
+          </select>
+
+          {/* Advanced filters toggle */}
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+              showFilters || activeFiltersCount > 0
+                ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                : 'bg-white border text-slate-600 hover:bg-slate-50'
+            }`}
+          >
+            <Filter className="w-4 h-4" />
+            {t('schedule.filters', 'Filters')}
+            {activeFiltersCount > 0 && (
+              <span className="px-1.5 py-0.5 text-xs bg-blue-600 text-white rounded-full">{activeFiltersCount}</span>
+            )}
+          </button>
 
           <div className="flex-1" />
 
-          {/* Legend - only in management view */}
-          {showManagementFeatures && (
-            <div className="flex items-center gap-4 text-sm">
-              <span className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded bg-green-500" />
-                {t('schedule.published', 'Published')}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded bg-amber-500" />
-                {t('schedule.draft', 'Draft')}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded bg-slate-300" />
-                {t('schedule.open', 'Open')}
-              </span>
-            </div>
-          )}
+          {/* Legend */}
+          <div className="flex items-center gap-4 text-sm">
+            <span className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-green-500" />
+              {t('schedule.published', 'Published')}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-amber-500" />
+              {t('schedule.draft', 'Draft')}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-slate-300" />
+              {t('schedule.open', 'Open')}
+            </span>
+          </div>
         </div>
+        )}
 
         {/* Advanced filters panel - only in management view */}
         {showManagementFeatures && showFilters && (
@@ -1250,55 +1238,75 @@ export default function Schedule() {
 }
 
 // ============================================================
-// PERSONAL SCHEDULE VIEW - Weekly Timeline Design
+// PERSONAL SCHEDULE VIEW - Weekly/Bi-Weekly/Monthly Timeline Design
 // ============================================================
 function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, navigateDate, t }) {
-  const [selectedDayIndex, setSelectedDayIndex] = useState(() => {
-    // Default to today if it's in the current week, otherwise first day with a shift
-    const todayIndex = dateRange.days.findIndex(day => isSameDay(day, new Date()));
-    if (todayIndex >= 0) return todayIndex;
+  const [personalViewMode, setPersonalViewMode] = useState('week'); // week, twoWeek, month
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-    // Find first day with a shift
-    const firstShiftIndex = dateRange.days.findIndex(day => {
-      const dateStr = format(day, 'yyyy-MM-dd');
-      return shifts.some(s => s.date === dateStr || s.start_time?.startsWith(dateStr));
-    });
-    return firstShiftIndex >= 0 ? firstShiftIndex : 0;
-  });
+  // Calculate the appropriate date range based on view mode
+  const viewDateRange = useMemo(() => {
+    if (personalViewMode === 'week') {
+      const start = startOfWeek(currentDate, { weekStartsOn: 1 });
+      const end = endOfWeek(currentDate, { weekStartsOn: 1 });
+      return { start, end, days: eachDayOfInterval({ start, end }) };
+    } else if (personalViewMode === 'twoWeek') {
+      const start = startOfWeek(currentDate, { weekStartsOn: 1 });
+      const end = addDays(start, 13);
+      return { start, end, days: eachDayOfInterval({ start, end }) };
+    } else {
+      const start = startOfMonth(currentDate);
+      const end = endOfMonth(currentDate);
+      // For month view, we need to pad to full weeks
+      const calStart = startOfWeek(start, { weekStartsOn: 1 });
+      const calEnd = endOfWeek(end, { weekStartsOn: 1 });
+      return { start, end, days: eachDayOfInterval({ start: calStart, end: calEnd }) };
+    }
+  }, [currentDate, personalViewMode]);
 
-  // Get shifts for selected day
-  const selectedDay = dateRange.days[selectedDayIndex];
-  const selectedDateStr = selectedDay ? format(selectedDay, 'yyyy-MM-dd') : '';
-  const selectedDayShifts = shifts.filter(s => s.date === selectedDateStr || s.start_time?.startsWith(selectedDateStr));
-  const selectedShift = selectedDayShifts[0];
-
-  // Calculate week summary
-  const weekStats = useMemo(() => {
-    let totalMinutes = 0;
-    let shiftCount = 0;
-    let pendingCount = 0;
-
-    shifts.forEach(shift => {
-      shiftCount++;
-      if (shift.status === 'draft' || shift.status === 'pending') pendingCount++;
-      if (shift.start_time && shift.end_time) {
-        const start = parseISO(shift.start_time);
-        const end = parseISO(shift.end_time);
-        totalMinutes += (end - start) / (1000 * 60);
-      }
-    });
-
-    const totalHours = Math.floor(totalMinutes / 60);
-    const remainingMins = Math.round(totalMinutes % 60);
-
-    return { totalHours, remainingMins, shiftCount, pendingCount };
-  }, [shifts]);
+  // Navigation step based on view
+  const handleNavigate = (direction) => {
+    if (personalViewMode === 'week') {
+      setCurrentDate(direction > 0 ? addWeeks(currentDate, 1) : subWeeks(currentDate, 1));
+    } else if (personalViewMode === 'twoWeek') {
+      setCurrentDate(direction > 0 ? addWeeks(currentDate, 2) : subWeeks(currentDate, 2));
+    } else {
+      setCurrentDate(direction > 0 ? addMonths(currentDate, 1) : subMonths(currentDate, 1));
+    }
+  };
 
   // Get shift for a specific day
   const getShiftForDay = (day) => {
     const dateStr = format(day, 'yyyy-MM-dd');
     return shifts.find(s => s.date === dateStr || s.start_time?.startsWith(dateStr));
   };
+
+  // Get selected day's shift
+  const selectedShift = getShiftForDay(selectedDate);
+
+  // Calculate stats for current view
+  const viewStats = useMemo(() => {
+    let totalMinutes = 0;
+    let shiftCount = 0;
+    let pendingCount = 0;
+    const viewStart = viewDateRange.start;
+    const viewEnd = viewDateRange.end;
+
+    shifts.forEach(shift => {
+      const shiftDate = shift.date ? parseISO(shift.date) : (shift.start_time ? parseISO(shift.start_time) : null);
+      if (shiftDate && shiftDate >= viewStart && shiftDate <= viewEnd) {
+        shiftCount++;
+        if (shift.status === 'draft' || shift.status === 'pending') pendingCount++;
+        if (shift.start_time && shift.end_time) {
+          const start = parseISO(shift.start_time);
+          const end = parseISO(shift.end_time);
+          totalMinutes += (end - start) / (1000 * 60);
+        }
+      }
+    });
+
+    return { totalHours: Math.floor(totalMinutes / 60), shiftCount, pendingCount };
+  }, [shifts, viewDateRange]);
 
   // Format short time (e.g., "6-14")
   const formatShortTime = (shift) => {
@@ -1318,120 +1326,189 @@ function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, 
     return `${hours}h ${mins > 0 ? `${String(mins).padStart(2, '0')}m` : '00m'}`;
   };
 
+  // Day cell component used in all views
+  const DayCell = ({ day, compact = false }) => {
+    const dayShift = getShiftForDay(day);
+    const isToday = isSameDay(day, new Date());
+    const isSelected = isSameDay(day, selectedDate);
+    const hasShift = !!dayShift;
+    const isPublished = dayShift?.status === 'published' || dayShift?.status === 'confirmed';
+    const isCurrentMonth = personalViewMode !== 'month' || day.getMonth() === currentDate.getMonth();
+
+    return (
+      <button
+        onClick={() => setSelectedDate(day)}
+        className={`flex flex-col items-center p-2 rounded-lg transition-all ${
+          isSelected
+            ? 'bg-blue-600 text-white shadow-md'
+            : isToday
+            ? 'bg-blue-50 text-blue-700 ring-2 ring-blue-200'
+            : hasShift && isCurrentMonth
+            ? 'bg-slate-50 hover:bg-slate-100 text-slate-900'
+            : isCurrentMonth
+            ? 'bg-slate-50/50 text-slate-400 hover:bg-slate-100'
+            : 'text-slate-300'
+        } ${compact ? 'p-1.5' : 'p-2 md:p-3'}`}
+      >
+        {!compact && (
+          <span className={`text-xs font-medium ${isSelected ? 'text-blue-100' : ''}`}>
+            {format(day, 'EEE')}
+          </span>
+        )}
+        <span className={`${compact ? 'text-sm' : 'text-lg'} font-bold ${isSelected ? 'text-white' : ''}`}>
+          {format(day, 'd')}
+        </span>
+        {hasShift && isCurrentMonth ? (
+          <>
+            <div className={`w-1.5 h-1.5 rounded-full mt-0.5 ${
+              isSelected ? 'bg-white' : isPublished ? 'bg-green-500' : 'bg-amber-500'
+            }`} />
+            {!compact && (
+              <span className={`text-xs mt-0.5 font-medium ${isSelected ? 'text-blue-100' : 'text-slate-600'}`}>
+                {formatShortTime(dayShift)}
+              </span>
+            )}
+          </>
+        ) : isCurrentMonth ? (
+          <span className={`text-xs mt-0.5 ${isSelected ? 'text-blue-200' : 'text-slate-400'}`}>
+            {compact ? '—' : 'OFF'}
+          </span>
+        ) : null}
+      </button>
+    );
+  };
+
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-4 md:p-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">{t('schedule.mySchedule', 'My Schedule')}</h1>
-          <p className="text-slate-500">{format(dateRange.start, 'd MMM')} - {format(dateRange.end, 'd MMM yyyy')}</p>
+          <p className="text-slate-500">
+            {personalViewMode === 'month'
+              ? format(currentDate, 'MMMM yyyy')
+              : `${format(viewDateRange.start, 'd MMM')} - ${format(viewDateRange.end, 'd MMM yyyy')}`}
+          </p>
         </div>
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => navigateDate(-1)}
-            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-          >
+          <button onClick={() => handleNavigate(-1)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
             <ChevronLeft className="w-5 h-5 text-slate-600" />
           </button>
           <button
-            onClick={() => setCurrentDate(new Date())}
+            onClick={() => { setCurrentDate(new Date()); setSelectedDate(new Date()); }}
             className="px-3 py-1.5 text-sm font-medium bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
           >
             {t('schedule.today', 'Today')}
           </button>
-          <button
-            onClick={() => navigateDate(1)}
-            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-          >
+          <button onClick={() => handleNavigate(1)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
             <ChevronRight className="w-5 h-5 text-slate-600" />
           </button>
         </div>
       </div>
 
-      {/* Week Strip */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-6">
-        <div className="grid grid-cols-7 gap-2">
-          {dateRange.days.slice(0, 7).map((day, index) => {
-            const dayShift = getShiftForDay(day);
-            const isToday = isSameDay(day, new Date());
-            const isSelected = selectedDayIndex === index;
-            const hasShift = !!dayShift;
-            const isPublished = dayShift?.status === 'published' || dayShift?.status === 'confirmed';
-
-            return (
-              <button
-                key={day.toISOString()}
-                onClick={() => setSelectedDayIndex(index)}
-                className={`flex flex-col items-center p-3 rounded-xl transition-all ${
-                  isSelected
-                    ? 'bg-blue-600 text-white shadow-lg scale-105'
-                    : isToday
-                    ? 'bg-blue-50 text-blue-700 ring-2 ring-blue-200'
-                    : hasShift
-                    ? 'bg-slate-50 hover:bg-slate-100 text-slate-900'
-                    : 'bg-slate-50/50 text-slate-400 hover:bg-slate-100'
-                }`}
-              >
-                <span className={`text-xs font-medium ${isSelected ? 'text-blue-100' : ''}`}>
-                  {format(day, 'EEE')}
-                </span>
-                <span className={`text-xl font-bold mt-0.5 ${isSelected ? 'text-white' : ''}`}>
-                  {format(day, 'd')}
-                </span>
-                {hasShift ? (
-                  <>
-                    <div className={`w-2 h-2 rounded-full mt-1 ${
-                      isSelected ? 'bg-white' : isPublished ? 'bg-green-500' : 'bg-amber-500'
-                    }`} />
-                    <span className={`text-xs mt-1 font-medium ${isSelected ? 'text-blue-100' : 'text-slate-600'}`}>
-                      {formatShortTime(dayShift)}
-                    </span>
-                  </>
-                ) : (
-                  <span className={`text-xs mt-2 ${isSelected ? 'text-blue-200' : 'text-slate-400'}`}>
-                    OFF
-                  </span>
-                )}
-              </button>
-            );
-          })}
+      {/* View Toggle - hidden on mobile */}
+      <div className="hidden md:flex justify-center mb-6">
+        <div className="inline-flex bg-slate-100 rounded-lg p-1">
+          {[
+            { key: 'week', label: t('schedule.week', 'Week') },
+            { key: 'twoWeek', label: t('schedule.twoWeeks', '2 Weeks') },
+            { key: 'month', label: t('schedule.month', 'Month') },
+          ].map(({ key, label }) => (
+            <button
+              key={key}
+              onClick={() => setPersonalViewMode(key)}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                personalViewMode === key
+                  ? 'bg-white text-slate-900 shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
+      </div>
+
+      {/* Calendar Grid */}
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-6">
+        {personalViewMode === 'week' && (
+          <div className="grid grid-cols-7 gap-2">
+            {viewDateRange.days.map((day) => (
+              <DayCell key={day.toISOString()} day={day} />
+            ))}
+          </div>
+        )}
+
+        {personalViewMode === 'twoWeek' && (
+          <div className="space-y-4">
+            <div>
+              <p className="text-xs font-medium text-slate-500 mb-2">
+                {format(viewDateRange.start, 'd MMM')} - {format(addDays(viewDateRange.start, 6), 'd MMM')}
+              </p>
+              <div className="grid grid-cols-7 gap-1">
+                {viewDateRange.days.slice(0, 7).map((day) => (
+                  <DayCell key={day.toISOString()} day={day} compact />
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-xs font-medium text-slate-500 mb-2">
+                {format(addDays(viewDateRange.start, 7), 'd MMM')} - {format(viewDateRange.end, 'd MMM')}
+              </p>
+              <div className="grid grid-cols-7 gap-1">
+                {viewDateRange.days.slice(7, 14).map((day) => (
+                  <DayCell key={day.toISOString()} day={day} compact />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {personalViewMode === 'month' && (
+          <div>
+            {/* Day headers */}
+            <div className="grid grid-cols-7 gap-1 mb-2">
+              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
+                <div key={d} className="text-center text-xs font-medium text-slate-500 py-1">{d}</div>
+              ))}
+            </div>
+            {/* Calendar grid */}
+            <div className="grid grid-cols-7 gap-1">
+              {viewDateRange.days.map((day) => (
+                <DayCell key={day.toISOString()} day={day} compact />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Selected Day Detail */}
       <div className="mb-6">
         <h2 className="text-sm font-medium text-slate-500 mb-3">
-          {selectedDay && isSameDay(selectedDay, new Date())
+          {isSameDay(selectedDate, new Date())
             ? t('schedule.todayLabel', 'Today')
-            : format(selectedDay || new Date(), 'EEEE')} — {format(selectedDay || new Date(), 'd MMMM')}
+            : format(selectedDate, 'EEEE')} — {format(selectedDate, 'd MMMM')}
         </h2>
 
         {selectedShift ? (
           <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-            {/* Status bar */}
             <div className={`h-1.5 ${
               selectedShift.status === 'published' || selectedShift.status === 'confirmed'
                 ? 'bg-green-500'
                 : 'bg-amber-500'
             }`} />
-
             <div className="p-5">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  {/* Time - large and prominent */}
                   <p className="text-3xl font-bold text-slate-900">
                     {selectedShift.start_time ? format(parseISO(selectedShift.start_time), 'HH:mm') : '--:--'}
                     <span className="text-slate-400 mx-2">—</span>
                     {selectedShift.end_time ? format(parseISO(selectedShift.end_time), 'HH:mm') : '--:--'}
                   </p>
-
-                  {/* Location */}
                   <div className="flex items-center gap-2 mt-4 text-slate-700">
                     <MapPin className="w-5 h-5 text-slate-400" />
                     <span className="font-medium">{selectedShift.location_name || selectedShift.location || t('schedule.noLocation', 'Location TBC')}</span>
                   </div>
-
-                  {/* Role/Position if available */}
                   {(selectedShift.role || selectedShift.position || selectedShift.job_title) && (
                     <div className="flex items-center gap-2 mt-2 text-slate-600">
                       <Briefcase className="w-5 h-5 text-slate-400" />
@@ -1439,8 +1516,6 @@ function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, 
                     </div>
                   )}
                 </div>
-
-                {/* Right side - duration and status */}
                 <div className="text-right">
                   <p className="text-2xl font-bold text-slate-700">{getDuration(selectedShift)}</p>
                   <div className={`inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full text-sm font-medium ${
@@ -1449,9 +1524,7 @@ function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, 
                       : 'bg-amber-100 text-amber-700'
                   }`}>
                     <div className={`w-2 h-2 rounded-full ${
-                      selectedShift.status === 'published' || selectedShift.status === 'confirmed'
-                        ? 'bg-green-500'
-                        : 'bg-amber-500'
+                      selectedShift.status === 'published' || selectedShift.status === 'confirmed' ? 'bg-green-500' : 'bg-amber-500'
                     }`} />
                     {selectedShift.status === 'published' || selectedShift.status === 'confirmed'
                       ? t('schedule.confirmed', 'Confirmed')
@@ -1459,9 +1532,7 @@ function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, 
                   </div>
                 </div>
               </div>
-
-              {/* Clock In Button - show only for today's shift */}
-              {selectedDay && isSameDay(selectedDay, new Date()) && (
+              {isSameDay(selectedDate, new Date()) && (
                 <Link
                   to="/time"
                   className="mt-5 w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
@@ -1483,38 +1554,30 @@ function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, 
         )}
       </div>
 
-      {/* Week Summary */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-6">
-        <h3 className="text-sm font-medium text-slate-500 mb-3">{t('schedule.thisWeekSummary', 'This Week')}</h3>
+      {/* Summary */}
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
+        <h3 className="text-sm font-medium text-slate-500 mb-3">
+          {personalViewMode === 'week' ? t('schedule.thisWeekSummary', 'This Week') :
+           personalViewMode === 'twoWeek' ? t('schedule.twoWeekSummary', '2 Week Summary') :
+           t('schedule.monthSummary', 'This Month')}
+        </h3>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center p-3 bg-slate-50 rounded-lg">
-            <p className="text-2xl font-bold text-slate-900">{weekStats.totalHours}h</p>
+            <p className="text-2xl font-bold text-slate-900">{viewStats.totalHours}h</p>
             <p className="text-xs text-slate-500">{t('schedule.totalHours', 'Total Hours')}</p>
           </div>
           <div className="text-center p-3 bg-slate-50 rounded-lg">
-            <p className="text-2xl font-bold text-slate-900">{weekStats.shiftCount}</p>
+            <p className="text-2xl font-bold text-slate-900">{viewStats.shiftCount}</p>
             <p className="text-xs text-slate-500">{t('schedule.shifts', 'Shifts')}</p>
           </div>
           <div className="text-center p-3 bg-slate-50 rounded-lg">
-            <p className={`text-2xl font-bold ${weekStats.pendingCount > 0 ? 'text-amber-600' : 'text-slate-900'}`}>
-              {weekStats.pendingCount}
+            <p className={`text-2xl font-bold ${viewStats.pendingCount > 0 ? 'text-amber-600' : 'text-slate-900'}`}>
+              {viewStats.pendingCount}
             </p>
             <p className="text-xs text-slate-500">{t('schedule.pending', 'Pending')}</p>
           </div>
         </div>
       </div>
-
-      {/* Quick Navigation */}
-      <button
-        onClick={() => navigateDate(1)}
-        className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 transition-colors"
-      >
-        <div>
-          <p className="text-sm font-medium text-slate-700">{t('schedule.nextWeek', 'Next Week')}</p>
-          <p className="text-xs text-slate-500">{format(addWeeks(dateRange.start, 1), 'd MMM')} - {format(addWeeks(dateRange.end, 1), 'd MMM')}</p>
-        </div>
-        <ChevronRight className="w-5 h-5 text-slate-400" />
-      </button>
     </div>
   );
 }
