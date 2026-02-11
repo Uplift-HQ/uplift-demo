@@ -70,5 +70,9 @@ export function useBranding() {
   if (!ctx) {
     return { branding: DEFAULT_BRANDING, loading: false, updateBranding: () => {}, refetch: () => {} };
   }
-  return ctx;
+  // Guarantee branding is never null/undefined - always merge with defaults
+  return {
+    ...ctx,
+    branding: { ...DEFAULT_BRANDING, ...(ctx.branding || {}) },
+  };
 }

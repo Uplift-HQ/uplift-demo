@@ -452,20 +452,22 @@ export const corsOptions = {
 
     // Production origins from environment, plus common patterns
     const envOrigins = process.env.CORS_ORIGINS?.split(',').filter(Boolean) || [];
-    
+
     const allowedOrigins = [
       ...envOrigins,
-      // Only allow localhost in development
-      ...(process.env.NODE_ENV !== 'production' ? [
-        'http://localhost:3000',
-        'http://localhost:5173',
-        'http://localhost:8100',
-      ] : []),
+      // Railway production URLs
+      'https://uplift-portal-production.up.railway.app',
+      'https://uplift-platform-production.up.railway.app',
+      // Localhost for development (always allow for demo convenience)
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'http://localhost:8100',
       // Production patterns
       /\.uplift\.(hr|io)$/,
       /\.getuplift\.io$/,
       /\.uplifthq\.co\.uk$/,
       /uplifthq\.co\.uk$/,
+      /\.up\.railway\.app$/,
     ];
 
     const isAllowed = allowedOrigins.some(allowed => {

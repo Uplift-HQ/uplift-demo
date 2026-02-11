@@ -7,6 +7,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { shiftsApi, employeesApi, locationsApi, timeOffApi, departmentsApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
 import { useToast } from '../components/ToastProvider';
 import {
   ChevronLeft, ChevronRight, Plus, Calendar, Users, MapPin, Clock, X, Check,
@@ -29,8 +30,12 @@ const VIEW_MODES = {
 
 export default function Schedule() {
   const { user, isManagerOrAbove } = useAuth();
+  const { isPersonalView } = useView();
   const { t } = useTranslation();
   const toast = useToast();
+
+  // Show management features only when NOT in personal view AND user is manager+
+  const showManagementFeatures = !isPersonalView && isManagerOrAbove;
 
   // Core state
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -94,10 +99,15 @@ export default function Schedule() {
 
   const weekStartStr = format(dateRange.start, 'yyyy-MM-dd');
 
-  useEffect(() => { loadData(); }, [weekStartStr, selectedLocation]);
+  useEffect(() => { loadData(); }, [weekStartStr, selectedLocation, isPersonalView]);
 
   // Filter employees based on department and skills
+  // In personal view, only show the current user
   const filteredEmployees = useMemo(() => {
+    // In personal view, only show the current user
+    if (isPersonalView && user?.employeeId) {
+      return employees.filter(emp => emp.id === user.employeeId);
+    }
     return employees.filter(emp => {
       if (selectedDepartment && emp.department_id !== selectedDepartment) return false;
       if (selectedSkills.length > 0) {
@@ -107,7 +117,7 @@ export default function Schedule() {
       }
       return true;
     });
-  }, [employees, selectedDepartment, selectedSkills]);
+  }, [employees, selectedDepartment, selectedSkills, isPersonalView, user?.employeeId]);
 
   const activeFiltersCount = (selectedLocation ? 1 : 0) + (selectedDepartment ? 1 : 0) + selectedSkills.length;
 
@@ -115,8 +125,19 @@ export default function Schedule() {
     setLoading(true);
     setError(null);
     try {
+      // In personal view or for workers, filter shifts to current user only
+      const shiftParams = {
+        start: weekStartStr,
+        end: format(dateRange.end, 'yyyy-MM-dd'),
+        location: selectedLocation || undefined,
+      };
+      // Workers always see only their own shifts, regardless of view mode
+      if ((isPersonalView || user?.role === 'worker') && user?.employeeId) {
+        shiftParams.employee_id = user.employeeId;
+      }
+
       const [shiftsResult, empResult, locResult, deptResult] = await Promise.all([
-        shiftsApi.list({ start: weekStartStr, end: format(dateRange.end, 'yyyy-MM-dd'), location: selectedLocation || undefined }),
+        shiftsApi.list(shiftParams),
         employeesApi.list({ status: 'active', limit: 100 }),
         locationsApi.list(),
         departmentsApi.list(),

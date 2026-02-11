@@ -275,7 +275,7 @@ const getPersonalNav = (t) => [
 
 export default function Layout() {
   const { user, logout } = useAuth();
-  const { branding } = useBranding();
+  const { branding = {} } = useBranding() || {};
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -320,7 +320,7 @@ export default function Layout() {
   // Sidebar header content changes based on view
   const sidebarTitle = isPersonalView && !isWorker
     ? `${user?.firstName}'s Portal`
-    : branding.brand_name || t('brand.defaultName', 'Your Company');
+    : branding?.brand_name || t('brand.defaultName', 'Your Company');
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -358,10 +358,10 @@ export default function Layout() {
             ) : (
               // Management view: show company branding
               <>
-                {branding.logo_url ? (
+                {branding?.logo_url ? (
                   <img
                     src={branding.logo_url}
-                    alt={branding.brand_name || 'Logo'}
+                    alt={branding?.brand_name || 'Logo'}
                     className="h-8 w-auto max-w-[140px] object-contain"
                   />
                 ) : (
