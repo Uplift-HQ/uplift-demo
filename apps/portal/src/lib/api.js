@@ -660,7 +660,14 @@ class ApiClient {
       return { expenses: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
     }
     if (path === '/expenses/my-expenses' || path.startsWith('/expenses/my-expenses?') || path.match(/^\/expenses\/my-expenses\/[^/]+$/)) {
-      return { expenses: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
+      // Filter to only show current user's expenses in personal view
+      const stored = localStorage.getItem('uplift_user');
+      const user = stored ? JSON.parse(stored) : null;
+      const userName = user ? `${user.firstName} ${user.lastName}` : 'Sarah Mitchell';
+      const myExpenses = DEMO_EXPENSES.filter(e => e.employee_name === userName);
+      // If no matching expenses found, return first user's expenses as fallback
+      const expenses = myExpenses.length > 0 ? myExpenses : DEMO_EXPENSES.filter(e => e.employee_name === 'Sarah Mitchell');
+      return { expenses, pagination: { page: 1, limit: 20, total: expenses.length, totalPages: 1 } };
     }
     if (path === '/expenses/categories') {
       return { categories: DEMO_EXPENSE_CATEGORIES };
