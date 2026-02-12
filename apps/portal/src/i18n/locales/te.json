@@ -269,7 +269,12 @@
     "exportComingSoon": "ఎక్స్‌పోర్ట్ త్వరలో వస్తుంది",
     "clickToViewDetails": "వివరాలు చూడడానికి క్లిక్ చేయండి",
     "closeEsc": "మూసివేయండి (ESC)",
-    "logoPreview": "లోగో ప్రివ్యూ"
+    "logoPreview": "లోగో ప్రివ్యూ",
+    "priority": {
+      "high": "అధిక",
+      "medium": "మధ్యస్థ",
+      "low": "తక్కువ"
+    }
   },
   "auth": {
     "login": "లాగిన్",
@@ -543,7 +548,9 @@
     "startBreak": "విరామం ప్రారంభించు",
     "endBreak": "విరామం ముగించు",
     "totalHours": "మొత్తం గంటలు",
-    "loadError": "సమయ ట్రాకింగ్ డేటా లోడ్ చేయడం విఫలమైంది. దయచేసి మళ్ళీ ప్రయత్నించండి."
+    "loadError": "సమయ ట్రాకింగ్ డేటా లోడ్ చేయడం విఫలమైంది. దయచేసి మళ్ళీ ప్రయత్నించండి.",
+    "clockInOutTab": "క్లాక్ ఇన్/ఔట్",
+    "entriesWillAppear": "ఉద్యోగులు క్లాక్ ఇన్ చేసినప్పుడు సమయ ఎంట్రీలు ఇక్కడ కనిపిస్తాయి."
   },
   "timeOff": {
     "title": "సెలవు",
@@ -596,7 +603,14 @@
       "sickleave": "అనారోగ్య సెలవు",
       "annualleave": "వార్షిక సెలవు",
       "sickleaveshort": "అనారోగ్య సెలవు"
-    }
+    },
+    "noPendingRequests": "పెండింగ్ సెలవు అభ్యర్థనలు లేవు",
+    "requestsWillAppear": "ఉద్యోగులు సమర్పించినప్పుడు సెలవు అభ్యర్థనలు ఇక్కడ కనిపిస్తాయి",
+    "requestTimeOff": "సెలవు అభ్యర్థించండి",
+    "approvedFor": "{{name}} కి సెలవు ఆమోదించబడింది",
+    "approveError": "అభ్యర్థనను ఆమోదించడంలో విఫలమైంది. మళ్ళీ ప్రయత్నించండి.",
+    "rejectedFor": "{{name}} కి సెలవు తిరస్కరించబడింది",
+    "rejectError": "అభ్యర్థనను తిరస్కరించడంలో విఫలమైంది. మళ్ళీ ప్రయత్నించండి."
   },
   "feed": {
     "title": "ఫీడ్",
@@ -3310,5 +3324,218 @@
   "offline": {
     "youAreOffline": "You're offline. Some features may be limited.",
     "backOnline": "Back online"
+  },
+  "myLearning": {
+    "title": "నా అభ్యాసం",
+    "subtitle": "మీ కోర్సులు, పురోగతి మరియు సర్టిఫికేషన్లు"
+  },
+  "myTimeTracking": {
+    "title": "నా సమయ ట్రాకింగ్"
+  },
+  "myTimeOff": {
+    "title": "నా సెలవు",
+    "subtitle": "మీ సెలవు అభ్యర్థనలు మరియు బ్యాలెన్స్ చూడండి"
+  },
+  "recognition": {
+    "title": "గుర్తింపు గోడ",
+    "subtitle": "మీ సహోద్యోగుల విజయాలను జరుపుకోండి",
+    "giveRecognition": "గుర్తింపు ఇవ్వండి",
+    "recipient": "గ్రహీత",
+    "selectRecipient": "సహోద్యోగిని ఎంచుకోండి...",
+    "category": "వర్గం",
+    "message": "సందేశం",
+    "messagePlaceholder": "వారి సహకారాన్ని గుర్తించే ఆలోచనాత్మక సందేశం వ్రాయండి...",
+    "charLimit": "అక్షర పరిమితి చేరుకుంది",
+    "sendRecognition": "గుర్తింపు పంపండి",
+    "successMessage": "గుర్తింపు విజయవంతంగా పంపబడింది!",
+    "filters": {
+      "all": "అన్నీ",
+      "received": "అందుకున్నవి",
+      "sent": "పంపినవి",
+      "myTeam": "నా బృందం"
+    },
+    "noRecognitions": "ఈ ఫిల్టర్‌కు చూపించడానికి గుర్తింపులు లేవు.",
+    "mostRecognised": "ఈ నెలలో అత్యంత గుర్తింపు పొందినవారు",
+    "mostGenerous": "అత్యంత ఉదారంగా (ఇచ్చినవారు)",
+    "categories": {
+      "greatWork": "గొప్ప పని",
+      "teamPlayer": "టీమ్ ప్లేయర్",
+      "goalCrusher": "లక్ష్య సాధకుడు",
+      "problemSolver": "సమస్య పరిష్కర్త",
+      "aboveAndBeyond": "అంతకు మించి",
+      "innovation": "ఆవిష్కరణ"
+    },
+    "time": {
+      "justNow": "ఇప్పుడే",
+      "yesterday": "నిన్న",
+      "oneWeekAgo": "1 వారం క్రితం"
+    },
+    "searchColleague": "పేరు, పాత్ర లేదా విభాగం ద్వారా శోధించండి...",
+    "noResults": "సహోద్యోగులు కనుగొనబడలేదు"
+  },
+  "directory": {
+    "title": "కంపెనీ డైరెక్టరీ",
+    "subtitle": "సంస్థ అంతటా సహోద్యోగులను కనుగొని కనెక్ట్ అవ్వండి",
+    "searchPlaceholder": "పేరు, పాత్ర, విభాగం లేదా స్థానం ద్వారా శోధించండి...",
+    "gridView": "గ్రిడ్ వ్యూ",
+    "grid": "గ్రిడ్",
+    "listView": "జాబితా వ్యూ",
+    "list": "జాబితా",
+    "orgChartView": "ఆర్గ్ చార్ట్ వ్యూ",
+    "orgChart": "ఆర్గ్ చార్ట్",
+    "allDepartments": "అన్ని విభాగాలు",
+    "allLocations": "అన్ని స్థానాలు",
+    "showingResults": "{{count}} సహోద్యోగులను చూపిస్తోంది",
+    "sendRecognition": "గుర్తింపు పంపండి",
+    "viewProfile": "ప్రొఫైల్ చూడండి",
+    "noResults": "సహోద్యోగులు కనుగొనబడలేదు",
+    "noResultsHint": "మీ శోధన లేదా ఫిల్టర్‌లను సర్దుబాటు చేయండి",
+    "name": "పేరు",
+    "role": "పాత్ర",
+    "department": "విభాగం",
+    "location": "స్థానం",
+    "email": "ఇమెయిల్",
+    "directors": "డైరెక్టర్లు",
+    "managers": "మేనేజర్లు",
+    "unknown": "తెలియదు",
+    "statusActive": "యాక్టివ్",
+    "statusOnLeave": "సెలవులో",
+    "statusInactive": "నిష్క్రియ",
+    "close": "మూసివేయి",
+    "contact": "సంప్రదించండి",
+    "reportsTo": "రిపోర్ట్ చేస్తారు",
+    "directReports": "డైరెక్ట్ రిపోర్ట్‌లు",
+    "skills": "నైపుణ్యాలు",
+    "startDate": "ప్రారంభ తేదీ",
+    "tenure": "పదవీకాలం",
+    "collapse": "కుదించు",
+    "expand": "విస్తరించు",
+    "loading": "డైరెక్టరీ లోడ్ అవుతోంది...",
+    "loadError": "డైరెక్టరీ లోడ్ చేయడంలో విఫలమైంది"
+  },
+  "momentum": {
+    "pageTitle": "నా మొమెంటమ్ స్కోర్",
+    "employee": "ఉద్యోగి",
+    "momentum": "మొమెంటమ్",
+    "trendUp": "↑గత నెల నుండి 3",
+    "basedOn": "హాజరు, నైపుణ్యాలు, శిక్షణ మరియు ఫీడ్‌బ్యాక్ ఆధారంగా",
+    "scoreBreakdown": "స్కోర్ విశ్లేషణ",
+    "attendance": "హాజరు",
+    "onTimeRate": "సకాలంలో రేటు: 97%",
+    "shiftCoverage": "షిఫ్ట్ కవరేజ్: 100%",
+    "streak": "10 రోజుల స్ట్రీక్ 🔥",
+    "skillsTraining": "నైపుణ్యాలు మరియు శిక్షణ",
+    "mandatoryComplete": "4/5 తప్పనిసరి పూర్తయింది",
+    "totalSkills": "మొత్తం 12 నైపుణ్యాలు",
+    "verified": "3 ధృవీకరించబడింది",
+    "performanceFeedback": "పనితీరు మరియు ఫీడ్‌బ్యాక్",
+    "lastReview": "చివరి సమీక్ష: 4.2/5",
+    "kudos": "ఈ నెలలో 3 సానుకూల ప్రశంసలు",
+    "goals": "లక్ష్యాలు: 2/3 ట్రాక్‌లో",
+    "engagement": "ఎంగేజ్‌మెంట్",
+    "surveyCompleted": "సర్వే పూర్తయింది: అవును",
+    "recognitionGiven": "ఈ నెలలో ఇచ్చిన గుర్తింపు: 5",
+    "tenure": "పదవీకాలం: 2.3 సంవత్సరాలు",
+    "weight": "బరువు: {{pct}}%",
+    "scoreHistory": "స్కోర్ చరిత్ర",
+    "howToImprove": "ఎలా మెరుగుపరచాలి",
+    "tipFireSafety": "అగ్ని భద్రతా శిక్షణ పూర్తి చేయండి",
+    "tipFireSafetyImpact": "నైపుణ్యాలు +5",
+    "tipRecognitions": "2 మరిన్ని గుర్తింపులు ఇవ్వండి",
+    "tipRecognitionsImpact": "ఎంగేజ్‌మెంట్ +3",
+    "tipAttendance": "హాజరు స్ట్రీక్ కొనసాగించండి",
+    "tipAttendanceImpact": "హాజరు +2",
+    "backToDashboard": "డాష్‌బోర్డ్‌కు తిరిగి వెళ్ళండి"
+  },
+  "corporateCards": {
+    "title": "కార్పొరేట్ కార్డులు",
+    "subtitle": "కార్పొరేట్ కార్డ్ లావాదేవీలు మరియు ఖర్చు క్లెయిమ్‌లను నిర్వహించండి",
+    "confirmDisconnect": "ఈ బ్యాంక్ కనెక్షన్‌ను డిస్‌కనెక్ట్ చేయాలనుకుంటున్నారా?",
+    "stats": {
+      "totalTransactions": "మొత్తం లావాదేవీలు",
+      "pendingReview": "సమీక్ష పెండింగ్",
+      "totalAmount": "మొత్తం మొత్తం",
+      "selected": "ఎంపిక చేయబడింది"
+    },
+    "searchTransactions": "లావాదేవీలు శోధించండి...",
+    "filter": {
+      "allStatuses": "అన్ని స్టేటస్‌లు",
+      "uncategorized": "వర్గీకరించబడలేదు",
+      "categorized": "వర్గీకరించబడింది",
+      "submitted": "సమర్పించబడింది"
+    },
+    "sync": "సింక్",
+    "submitClaim": "క్లెయిమ్ సమర్పించండి",
+    "table": {
+      "date": "తేదీ",
+      "description": "వివరణ",
+      "merchant": "వ్యాపారి",
+      "category": "వర్గం",
+      "amount": "మొత్తం",
+      "status": "స్టేటస్",
+      "receipt": "రసీదు"
+    },
+    "loading": "లావాదేవీలు లోడ్ అవుతున్నాయి...",
+    "noConnection": "బ్యాంక్ కనెక్ట్ కాలేదు",
+    "noTransactions": "లావాదేవీలు కనుగొనబడలేదు",
+    "connectBankHint": "లావాదేవీలు చూడటానికి TrueLayer ద్వారా కార్పొరేట్ కార్డ్ కనెక్ట్ చేయండి",
+    "syncHint": "సింక్ చేయండి లేదా ఫిల్టర్లు సర్దుబాటు చేయండి",
+    "connectBank": "బ్యాంక్ కనెక్ట్ చేయండి",
+    "selectCategory": "వర్గం ఎంచుకోండి",
+    "submitClaimTitle": "ఖర్చు క్లెయిమ్ సమర్పించండి",
+    "totalAmount": "మొత్తం మొత్తం",
+    "submit": "క్లెయిమ్ సమర్పించండి",
+    "approve": "ఆమోదించండి",
+    "reject": "తిరస్కరించండి",
+    "claims": {
+      "number": "క్లెయిమ్ #",
+      "employee": "ఉద్యోగి",
+      "date": "తేదీ",
+      "items": "అంశాలు",
+      "amount": "మొత్తం",
+      "status": "స్టేటస్",
+      "actions": "చర్యలు",
+      "totalAmount": "మొత్తం మొత్తం",
+      "description": "వివరణ"
+    },
+    "noClaims": "ఖర్చు క్లెయిమ్‌లు లేవు",
+    "noClaimsHint": "లావాదేవీలు సమర్పించినప్పుడు క్లెయిమ్‌లు ఇక్కడ కనిపిస్తాయి",
+    "payroll": {
+      "approved": "ఆమోదించిన క్లెయిమ్‌లు",
+      "approvedDesc": "పేరోల్ ఎక్స్‌పోర్ట్‌కు సిద్ధంగా ఉన్న క్లెయిమ్‌లు",
+      "export": "పేరోల్‌కు ఎక్స్‌పోర్ట్ చేయండి",
+      "noPending": "ఎక్స్‌పోర్ట్‌కు క్లెయిమ్‌లు లేవు",
+      "noPendingDesc": "ఆమోదించిన క్లెయిమ్‌లు ఇక్కడ కనిపిస్తాయి",
+      "history": "ఎక్స్‌పోర్ట్ చరిత్ర",
+      "exportDate": "ఎక్స్‌పోర్ట్ తేదీ",
+      "claims": "క్లెయిమ్‌లు",
+      "total": "మొత్తం",
+      "exportedBy": "ఎక్స్‌పోర్ట్ చేసినవారు",
+      "download": "డౌన్‌లోడ్",
+      "noExports": "ఇంకా ఎక్స్‌పోర్ట్‌లు లేవు",
+      "csv": "CSV",
+      "exportTitle": "పేరోల్‌కు ఎక్స్‌పోర్ట్",
+      "exportWarning": "క్లెయిమ్‌లు చెల్లించినట్లు మార్క్ చేయబడతాయి, మార్చలేరు.",
+      "confirmExport": "ఎక్స్‌పోర్ట్"
+    },
+    "cards": {
+      "connections": "బ్యాంక్ కనెక్షన్లు",
+      "connectionsDesc": "TrueLayer ద్వారా కార్పొరేట్ కార్డ్ ఖాతాలను కనెక్ట్ చేయండి",
+      "connect": "బ్యాంక్ కనెక్ట్ చేయండి",
+      "noConnections": "బ్యాంక్ కనెక్షన్లు లేవు",
+      "noConnectionsDesc": "TrueLayer ద్వారా HSBC లేదా ఇతర మద్దతు ఉన్న బ్యాంకులను కనెక్ట్ చేయండి",
+      "connected": "కనెక్ట్ అయింది",
+      "active": "యాక్టివ్",
+      "expired": "గడువు ముగిసింది",
+      "disconnect": "డిస్‌కనెక్ట్",
+      "list": "కార్పొరేట్ కార్డులు",
+      "cardNumber": "కార్డ్",
+      "holder": "కార్డ్ హోల్డర్",
+      "type": "రకం",
+      "status": "స్టేటస్",
+      "lastSync": "చివరి సింక్",
+      "noCards": "కార్డులు కనుగొనబడలేదు. కార్డులను సింక్ చేయడానికి బ్యాంక్ కనెక్ట్ చేయండి.",
+      "inactive": "నిష్క్రియ"
+    }
   }
 }

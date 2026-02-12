@@ -269,7 +269,12 @@
     "new": "പുതിയത്",
     "clickToViewDetails": "വിശദാംശങ്ങൾ കാണാൻ ക്ലിക്ക് ചെയ്യുക",
     "closeEsc": "അടയ്ക്കുക (ESC)",
-    "logoPreview": "ലോഗോ പ്രിവ്യൂ"
+    "logoPreview": "ലോഗോ പ്രിവ്യൂ",
+    "priority": {
+      "high": "ഉയർന്ന",
+      "medium": "ഇടത്തരം",
+      "low": "താഴ്ന്ന"
+    }
   },
   "auth": {
     "login": "ലോഗിൻ",
@@ -543,7 +548,9 @@
     "startBreak": "ബ്രേക്ക് ആരംഭിക്കുക",
     "endBreak": "ബ്രേക്ക് അവസാനിപ്പിക്കുക",
     "totalHours": "ആകെ മണിക്കൂറുകൾ",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "Failed to load time tracking data. Please try again.",
+    "clockInOutTab": "ക്ലോക്ക് ഇൻ/ഔട്ട്",
+    "entriesWillAppear": "ജീവനക്കാർ ക്ലോക്ക് ഇൻ ചെയ്യുമ്പോൾ സമയ എൻട്രികൾ ഇവിടെ കാണാം."
   },
   "timeOff": {
     "title": "അവധി",
@@ -596,7 +603,14 @@
       "sickleave": "രോഗാവധി",
       "annualleave": "വാർഷിക അവധി",
       "sickleaveshort": "രോഗാവധി"
-    }
+    },
+    "noPendingRequests": "തീർപ്പാക്കാത്ത അവധി അഭ്യർത്ഥനകളില്ല",
+    "requestsWillAppear": "ജീവനക്കാർ സമർപ്പിക്കുമ്പോൾ അവധി അഭ്യർത്ഥനകൾ ഇവിടെ കാണാം",
+    "requestTimeOff": "അവധി അഭ്യർത്ഥിക്കുക",
+    "approvedFor": "{{name}} എന്നയാൾക്ക് അവധി അനുവദിച്ചു",
+    "approveError": "അഭ്യർത്ഥന അംഗീകരിക്കുന്നതിൽ പരാജയപ്പെട്ടു. വീണ്ടും ശ്രമിക്കുക.",
+    "rejectedFor": "{{name}} എന്നയാൾക്ക് അവധി നിരസിച്ചു",
+    "rejectError": "അഭ്യർത്ഥന നിരസിക്കുന്നതിൽ പരാജയപ്പെട്ടു. വീണ്ടും ശ്രമിക്കുക."
   },
   "feed": {
     "title": "ഫീഡ്",
@@ -3310,5 +3324,218 @@
   "offline": {
     "youAreOffline": "You're offline. Some features may be limited.",
     "backOnline": "Back online"
+  },
+  "myLearning": {
+    "title": "എന്റെ പഠനം",
+    "subtitle": "നിങ്ങളുടെ കോഴ്‌സുകൾ, പുരോഗതി, സർട്ടിഫിക്കേഷനുകൾ"
+  },
+  "myTimeTracking": {
+    "title": "എന്റെ സമയ ട്രാക്കിംഗ്"
+  },
+  "myTimeOff": {
+    "title": "എന്റെ അവധി",
+    "subtitle": "നിങ്ങളുടെ അവധി അഭ്യർത്ഥനകളും ബാലൻസും കാണുക"
+  },
+  "recognition": {
+    "title": "അംഗീകാര ചുമർ",
+    "subtitle": "നിങ്ങളുടെ സഹപ്രവർത്തകരുടെ നേട്ടങ്ങൾ ആഘോഷിക്കുക",
+    "giveRecognition": "അംഗീകാരം നൽകുക",
+    "recipient": "സ്വീകർത്താവ്",
+    "selectRecipient": "ഒരു സഹപ്രവർത്തകനെ തിരഞ്ഞെടുക്കുക...",
+    "category": "വിഭാഗം",
+    "message": "സന്ദേശം",
+    "messagePlaceholder": "അവരുടെ സംഭാവനയെ അംഗീകരിക്കുന്ന ചിന്താപൂർണ്ണമായ സന്ദേശം എഴുതുക...",
+    "charLimit": "അക്ഷര പരിധി എത്തി",
+    "sendRecognition": "അംഗീകാരം അയയ്ക്കുക",
+    "successMessage": "അംഗീകാരം വിജയകരമായി അയച്ചു!",
+    "filters": {
+      "all": "എല്ലാം",
+      "received": "ലഭിച്ചത്",
+      "sent": "അയച്ചത്",
+      "myTeam": "എന്റെ ടീം"
+    },
+    "noRecognitions": "ഈ ഫിൽട്ടറിന് കാണിക്കാൻ അംഗീകാരങ്ങളൊന്നുമില്ല.",
+    "mostRecognised": "ഈ മാസം ഏറ്റവും അംഗീകരിക്കപ്പെട്ടത്",
+    "mostGenerous": "ഏറ്റവും ഉദാരമായ (നൽകിയത്)",
+    "categories": {
+      "greatWork": "മികച്ച ജോലി",
+      "teamPlayer": "ടീം പ്ലേയർ",
+      "goalCrusher": "ലക്ഷ്യ സാധകൻ",
+      "problemSolver": "പ്രശ്ന പരിഹാരകൻ",
+      "aboveAndBeyond": "അതിനുമപ്പുറം",
+      "innovation": "നവീകരണം"
+    },
+    "time": {
+      "justNow": "ഇപ്പോൾ",
+      "yesterday": "ഇന്നലെ",
+      "oneWeekAgo": "1 ആഴ്ച മുമ്പ്"
+    },
+    "searchColleague": "പേര്, റോൾ അല്ലെങ്കിൽ വിഭാഗം ഉപയോഗിച്ച് തിരയുക...",
+    "noResults": "സഹപ്രവർത്തകരെ കണ്ടെത്തിയില്ല"
+  },
+  "directory": {
+    "title": "കമ്പനി ഡയറക്ടറി",
+    "subtitle": "ഓർഗനൈസേഷൻ മുഴുവൻ സഹപ്രവർത്തകരെ കണ്ടെത്തി ബന്ധിപ്പിക്കുക",
+    "searchPlaceholder": "പേര്, റോൾ, വിഭാഗം അല്ലെങ്കിൽ സ്ഥലം ഉപയോഗിച്ച് തിരയുക...",
+    "gridView": "ഗ്രിഡ് വ്യൂ",
+    "grid": "ഗ്രിഡ്",
+    "listView": "ലിസ്റ്റ് വ്യൂ",
+    "list": "ലിസ്റ്റ്",
+    "orgChartView": "ഓർഗ് ചാർട്ട് വ്യൂ",
+    "orgChart": "ഓർഗ് ചാർട്ട്",
+    "allDepartments": "എല്ലാ വിഭാഗങ്ങളും",
+    "allLocations": "എല്ലാ സ്ഥലങ്ങളും",
+    "showingResults": "{{count}} സഹപ്രവർത്തകരെ കാണിക്കുന്നു",
+    "sendRecognition": "അംഗീകാരം അയയ്ക്കുക",
+    "viewProfile": "പ്രൊഫൈൽ കാണുക",
+    "noResults": "സഹപ്രവർത്തകരെ കണ്ടെത്തിയില്ല",
+    "noResultsHint": "നിങ്ങളുടെ തിരയൽ അല്ലെങ്കിൽ ഫിൽട്ടറുകൾ ക്രമീകരിക്കുക",
+    "name": "പേര്",
+    "role": "റോൾ",
+    "department": "വിഭാഗം",
+    "location": "സ്ഥലം",
+    "email": "ഇമെയിൽ",
+    "directors": "ഡയറക്ടർമാർ",
+    "managers": "മാനേജർമാർ",
+    "unknown": "അജ്ഞാതം",
+    "statusActive": "സജീവം",
+    "statusOnLeave": "അവധിയിൽ",
+    "statusInactive": "നിഷ്ക്രിയം",
+    "close": "അടയ്ക്കുക",
+    "contact": "കോൺടാക്റ്റ്",
+    "reportsTo": "റിപ്പോർട്ട് ചെയ്യുന്നു",
+    "directReports": "നേരിട്ടുള്ള റിപ്പോർട്ടുകൾ",
+    "skills": "കഴിവുകൾ",
+    "startDate": "ആരംഭ തീയതി",
+    "tenure": "കാലാവധി",
+    "collapse": "ചുരുക്കുക",
+    "expand": "വിപുലീകരിക്കുക",
+    "loading": "ഡയറക്ടറി ലോഡ് ചെയ്യുന്നു...",
+    "loadError": "ഡയറക്ടറി ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
+  },
+  "momentum": {
+    "pageTitle": "എന്റെ മൊമെന്റം സ്കോർ",
+    "employee": "ജീവനക്കാരൻ",
+    "momentum": "മൊമെന്റം",
+    "trendUp": "↑കഴിഞ്ഞ മാസത്തിൽ നിന്ന് 3",
+    "basedOn": "ഹാജർ, കഴിവുകൾ, പരിശീലനം, ഫീഡ്‌ബാക്ക് എന്നിവയെ അടിസ്ഥാനമാക്കി",
+    "scoreBreakdown": "സ്കോർ വിശകലനം",
+    "attendance": "ഹാജർ",
+    "onTimeRate": "സമയനിഷ്ഠ: 97%",
+    "shiftCoverage": "ഷിഫ്റ്റ് കവറേജ്: 100%",
+    "streak": "10 ദിവസത്തെ സ്ട്രീക്ക് 🔥",
+    "skillsTraining": "കഴിവുകളും പരിശീലനവും",
+    "mandatoryComplete": "4/5 നിർബന്ധിത പൂർത്തിയായി",
+    "totalSkills": "ആകെ 12 കഴിവുകൾ",
+    "verified": "3 പരിശോധിച്ചു",
+    "performanceFeedback": "പ്രകടനവും ഫീഡ്‌ബാക്കും",
+    "lastReview": "അവസാന അവലോകനം: 4.2/5",
+    "kudos": "ഈ മാസം 3 പോസിറ്റീവ് പ്രശംസ",
+    "goals": "ലക്ഷ്യങ്ങൾ: 2/3 ട്രാക്കിൽ",
+    "engagement": "ഇടപെടൽ",
+    "surveyCompleted": "സർവേ പൂർത്തിയായി: അതെ",
+    "recognitionGiven": "ഈ മാസം നൽകിയ അംഗീകാരം: 5",
+    "tenure": "കാലാവധി: 2.3 വർഷം",
+    "weight": "ഭാരം: {{pct}}%",
+    "scoreHistory": "സ്കോർ ചരിത്രം",
+    "howToImprove": "എങ്ങനെ മെച്ചപ്പെടുത്താം",
+    "tipFireSafety": "അഗ്നി സുരക്ഷാ പരിശീലനം പൂർത്തിയാക്കുക",
+    "tipFireSafetyImpact": "കഴിവുകൾ +5",
+    "tipRecognitions": "2 കൂടുതൽ അംഗീകാരം നൽകുക",
+    "tipRecognitionsImpact": "ഇടപെടൽ +3",
+    "tipAttendance": "ഹാജർ സ്ട്രീക്ക് നിലനിർത്തുക",
+    "tipAttendanceImpact": "ഹാജർ +2",
+    "backToDashboard": "ഡാഷ്‌ബോർഡിലേക്ക് മടങ്ങുക"
+  },
+  "corporateCards": {
+    "title": "കോർപ്പറേറ്റ് കാർഡുകൾ",
+    "subtitle": "കോർപ്പറേറ്റ് കാർഡ് ഇടപാടുകളും ചെലവ് ക്ലെയിമുകളും നിയന്ത്രിക്കുക",
+    "confirmDisconnect": "ഈ ബാങ്ക് കണക്ഷൻ വിച്ഛേദിക്കണമെന്ന് തീർച്ചയാണോ?",
+    "stats": {
+      "totalTransactions": "ആകെ ഇടപാടുകൾ",
+      "pendingReview": "അവലോകനം തീർപ്പാക്കാനുണ്ട്",
+      "totalAmount": "ആകെ തുക",
+      "selected": "തിരഞ്ഞെടുത്തു"
+    },
+    "searchTransactions": "ഇടപാടുകൾ തിരയുക...",
+    "filter": {
+      "allStatuses": "എല്ലാ സ്റ്റാറ്റസുകളും",
+      "uncategorized": "വർഗ്ഗീകരിച്ചിട്ടില്ല",
+      "categorized": "വർഗ്ഗീകരിച്ചു",
+      "submitted": "സമർപ്പിച്ചു"
+    },
+    "sync": "സിങ്ക്",
+    "submitClaim": "ക്ലെയിം സമർപ്പിക്കുക",
+    "table": {
+      "date": "തീയതി",
+      "description": "വിവരണം",
+      "merchant": "വ്യാപാരി",
+      "category": "വിഭാഗം",
+      "amount": "തുക",
+      "status": "സ്റ്റാറ്റസ്",
+      "receipt": "രസീത്"
+    },
+    "loading": "ഇടപാടുകൾ ലോഡ് ചെയ്യുന്നു...",
+    "noConnection": "ബാങ്ക് കണക്റ്റ് ചെയ്തിട്ടില്ല",
+    "noTransactions": "ഇടപാടുകൾ കണ്ടെത്തിയില്ല",
+    "connectBankHint": "ഇടപാടുകൾ കാണാൻ TrueLayer വഴി കോർപ്പറേറ്റ് കാർഡ് കണക്റ്റ് ചെയ്യുക",
+    "syncHint": "സിങ്ക് ചെയ്യുക അല്ലെങ്കിൽ ഫിൽട്ടറുകൾ ക്രമീകരിക്കുക",
+    "connectBank": "ബാങ്ക് കണക്റ്റ് ചെയ്യുക",
+    "selectCategory": "വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    "submitClaimTitle": "ചെലവ് ക്ലെയിം സമർപ്പിക്കുക",
+    "totalAmount": "ആകെ തുക",
+    "submit": "ക്ലെയിം സമർപ്പിക്കുക",
+    "approve": "അംഗീകരിക്കുക",
+    "reject": "നിരസിക്കുക",
+    "claims": {
+      "number": "ക്ലെയിം #",
+      "employee": "ജീവനക്കാരൻ",
+      "date": "തീയതി",
+      "items": "ഇനങ്ങൾ",
+      "amount": "തുക",
+      "status": "സ്റ്റാറ്റസ്",
+      "actions": "പ്രവർത്തനങ്ങൾ",
+      "totalAmount": "ആകെ തുക",
+      "description": "വിവരണം"
+    },
+    "noClaims": "ചെലവ് ക്ലെയിമുകളില്ല",
+    "noClaimsHint": "ഇടപാടുകൾ സമർപ്പിക്കുമ്പോൾ ക്ലെയിമുകൾ ഇവിടെ കാണാം",
+    "payroll": {
+      "approved": "അംഗീകൃത ക്ലെയിമുകൾ",
+      "approvedDesc": "പേറോൾ എക്സ്പോർട്ടിന് തയ്യാറായ ക്ലെയിമുകൾ",
+      "export": "പേറോളിലേക്ക് എക്സ്പോർട്ട് ചെയ്യുക",
+      "noPending": "എക്സ്പോർട്ടിന് ക്ലെയിമുകളില്ല",
+      "noPendingDesc": "അംഗീകൃത ക്ലെയിമുകൾ ഇവിടെ കാണാം",
+      "history": "എക്സ്പോർട്ട് ചരിത്രം",
+      "exportDate": "എക്സ്പോർട്ട് തീയതി",
+      "claims": "ക്ലെയിമുകൾ",
+      "total": "ആകെ",
+      "exportedBy": "എക്സ്പോർട്ട് ചെയ്തത്",
+      "download": "ഡൗൺലോഡ്",
+      "noExports": "ഇതുവരെ എക്സ്പോർട്ടുകളില്ല",
+      "csv": "CSV",
+      "exportTitle": "പേറോളിലേക്ക് എക്സ്പോർട്ട്",
+      "exportWarning": "ക്ലെയിമുകൾ പെയ്ഡ് ആയി അടയാളപ്പെടുത്തും, മാറ്റാൻ കഴിയില്ല.",
+      "confirmExport": "എക്സ്പോർട്ട്"
+    },
+    "cards": {
+      "connections": "ബാങ്ക് കണക്ഷനുകൾ",
+      "connectionsDesc": "TrueLayer വഴി കോർപ്പറേറ്റ് കാർഡ് അക്കൗണ്ടുകൾ കണക്റ്റ് ചെയ്യുക",
+      "connect": "ബാങ്ക് കണക്റ്റ് ചെയ്യുക",
+      "noConnections": "ബാങ്ക് കണക്ഷനുകളില്ല",
+      "noConnectionsDesc": "TrueLayer വഴി HSBC അല്ലെങ്കിൽ മറ്റ് പിന്തുണയുള്ള ബാങ്കുകൾ കണക്റ്റ് ചെയ്യുക",
+      "connected": "കണക്റ്റ് ചെയ്തു",
+      "active": "സജീവം",
+      "expired": "കാലഹരണപ്പെട്ടു",
+      "disconnect": "വിച്ഛേദിക്കുക",
+      "list": "കോർപ്പറേറ്റ് കാർഡുകൾ",
+      "cardNumber": "കാർഡ്",
+      "holder": "കാർഡ് ഉടമ",
+      "type": "തരം",
+      "status": "സ്റ്റാറ്റസ്",
+      "lastSync": "അവസാന സിങ്ക്",
+      "noCards": "കാർഡുകൾ കണ്ടെത്തിയില്ല. കാർഡുകൾ സിങ്ക് ചെയ്യാൻ ബാങ്ക് കണക്റ്റ് ചെയ്യുക.",
+      "inactive": "നിഷ്ക്രിയം"
+    }
   }
 }

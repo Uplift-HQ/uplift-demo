@@ -543,7 +543,10 @@
     "startBreak": "شروع استراحت",
     "endBreak": "پایان استراحت",
     "totalHours": "کل ساعات",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "بارگذاری داده‌های پیگیری زمان ناموفق بود. لطفاً دوباره امتحان کنید."
+  },
+  "myTimeTracking": {
+    "title": "پیگیری زمان من"
   },
   "timeOff": {
     "title": "مرخصی",
@@ -584,19 +587,30 @@
     "requestDetails": "جزئیات درخواست مرخصی",
     "noReason": "دلیلی ارائه نشده",
     "submitted": "ارسال شده",
-    "loadError": "Failed to load time-off requests. Please try again.",
+    "loadError": "بارگذاری درخواست‌های مرخصی ناموفق بود. لطفاً دوباره امتحان کنید.",
     "types": {
-      "annualLeave": "Annual Leave",
-      "sickLeave": "Sick Leave",
-      "personal": "Personal",
-      "bereavement": "Bereavement",
-      "maternity": "Maternity",
-      "paternity": "Paternity",
-      "unpaid": "Unpaid Leave",
+      "annualLeave": "مرخصی سالانه",
+      "sickLeave": "مرخصی استعلاجی",
+      "personal": "شخصی",
+      "bereavement": "عزاداری",
+      "maternity": "مرخصی زایمان",
+      "paternity": "مرخصی پدری",
+      "unpaid": "مرخصی بدون حقوق",
       "sickleave": "مرخصی استعلاجی",
       "annualleave": "مرخصی سالانه",
       "sickleaveshort": "مرخصی استعلاجی"
-    }
+    },
+    "approvedFor": "مرخصی برای {{name}} تأیید شد",
+    "approveError": "تأیید درخواست ناموفق بود. لطفاً دوباره امتحان کنید.",
+    "rejectedFor": "مرخصی برای {{name}} رد شد",
+    "rejectError": "رد درخواست ناموفق بود. لطفاً دوباره امتحان کنید.",
+    "noPendingRequests": "درخواست مرخصی در انتظار وجود ندارد",
+    "requestsWillAppear": "درخواست‌های مرخصی پس از ارسال توسط کارمندان در اینجا نمایش داده می‌شوند",
+    "requestTimeOff": "درخواست مرخصی"
+  },
+  "myTimeOff": {
+    "title": "مرخصی من",
+    "subtitle": "مشاهده درخواست‌های مرخصی و مانده‌ها"
   },
   "feed": {
     "title": "فید",
@@ -3307,8 +3321,99 @@
     "nativeCalculation": "محاسبه محلی",
     "externalProvider": "ارائه‌دهنده خارجی"
   },
+  "corporateCards": {
+    "title": "کارت‌های شرکتی",
+    "subtitle": "مدیریت تراکنش‌های کارت شرکتی و درخواست‌های هزینه",
+    "confirmDisconnect": "آیا مطمئن هستید که می‌خواهید این اتصال بانکی را قطع کنید؟",
+    "stats": {
+      "totalTransactions": "کل تراکنش‌ها",
+      "pendingReview": "در انتظار بررسی",
+      "totalAmount": "مبلغ کل",
+      "selected": "انتخاب شده"
+    },
+    "searchTransactions": "جستجوی تراکنش‌ها...",
+    "filter": {
+      "allStatuses": "همه وضعیت‌ها",
+      "uncategorized": "دسته‌بندی نشده",
+      "categorized": "دسته‌بندی شده",
+      "submitted": "ارسال شده"
+    },
+    "sync": "همگام‌سازی",
+    "submitClaim": "ارسال درخواست",
+    "table": {
+      "date": "تاریخ",
+      "description": "توضیحات",
+      "merchant": "فروشنده",
+      "category": "دسته‌بندی",
+      "amount": "مبلغ",
+      "status": "وضعیت",
+      "receipt": "رسید"
+    },
+    "loading": "در حال بارگذاری تراکنش‌ها...",
+    "noConnection": "بانکی متصل نیست",
+    "noTransactions": "تراکنشی یافت نشد",
+    "connectBankHint": "کارت شرکتی خود را از طریق TrueLayer متصل کنید تا تراکنش‌ها را مشاهده کنید",
+    "syncHint": "همگام‌سازی کنید یا فیلترهای خود را تنظیم کنید",
+    "connectBank": "اتصال بانک",
+    "selectCategory": "انتخاب دسته‌بندی",
+    "submitClaimTitle": "ارسال درخواست هزینه",
+    "totalAmount": "مبلغ کل",
+    "submit": "ارسال درخواست",
+    "approve": "تأیید",
+    "reject": "رد",
+    "claims": {
+      "number": "شماره درخواست",
+      "employee": "کارمند",
+      "date": "تاریخ",
+      "items": "موارد",
+      "amount": "مبلغ",
+      "status": "وضعیت",
+      "actions": "اقدامات",
+      "totalAmount": "مبلغ کل",
+      "description": "توضیحات"
+    },
+    "noClaims": "درخواست هزینه‌ای وجود ندارد",
+    "noClaimsHint": "پس از ارسال تراکنش‌ها، درخواست‌ها در اینجا نمایش داده می‌شوند",
+    "payroll": {
+      "approved": "درخواست‌های تأیید شده",
+      "approvedDesc": "درخواست‌هایی که آماده صدور به حقوق و دستمزد هستند",
+      "export": "صدور به حقوق و دستمزد",
+      "noPending": "درخواستی در انتظار صدور نیست",
+      "noPendingDesc": "درخواست‌های تأیید شده در اینجا نمایش داده می‌شوند",
+      "history": "تاریخچه صدور",
+      "exportDate": "تاریخ صدور",
+      "claims": "درخواست‌ها",
+      "total": "مجموع",
+      "exportedBy": "صادر شده توسط",
+      "download": "دانلود",
+      "noExports": "هنوز صدوری انجام نشده",
+      "csv": "CSV",
+      "exportTitle": "صدور به حقوق و دستمزد",
+      "exportWarning": "درخواست‌ها به عنوان پرداخت شده علامت‌گذاری می‌شوند و پس از صدور قابل ویرایش نیستند.",
+      "confirmExport": "صدور"
+    },
+    "cards": {
+      "connections": "اتصالات بانکی",
+      "connectionsDesc": "حساب‌های کارت شرکتی خود را از طریق TrueLayer متصل کنید",
+      "connect": "اتصال بانک",
+      "noConnections": "اتصال بانکی وجود ندارد",
+      "noConnectionsDesc": "HSBC یا سایر بانک‌های پشتیبانی شده را از طریق TrueLayer متصل کنید",
+      "connected": "متصل",
+      "active": "فعال",
+      "expired": "منقضی شده",
+      "disconnect": "قطع اتصال",
+      "list": "کارت‌های شرکتی",
+      "cardNumber": "کارت",
+      "holder": "دارنده کارت",
+      "type": "نوع",
+      "status": "وضعیت",
+      "lastSync": "آخرین همگام‌سازی",
+      "noCards": "کارتی یافت نشد. بانک را متصل کنید تا کارت‌های شرکتی همگام‌سازی شوند.",
+      "inactive": "غیرفعال"
+    }
+  },
   "offline": {
-    "youAreOffline": "You're offline. Some features may be limited.",
-    "backOnline": "Back online"
+    "youAreOffline": "شما آفلاین هستید. برخی امکانات ممکن است محدود باشند.",
+    "backOnline": "آنلاین شدید"
   }
 }

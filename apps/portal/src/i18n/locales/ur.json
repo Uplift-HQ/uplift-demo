@@ -269,7 +269,12 @@
     "exportComingSoon": "ایکسپورٹ جلد آ رہا ہے",
     "clickToViewDetails": "تفصیلات دیکھنے کے لیے کلک کریں",
     "closeEsc": "بند کریں (ESC)",
-    "logoPreview": "لوگو پیش نظر"
+    "logoPreview": "لوگو پیش نظر",
+    "priority": {
+      "high": "اعلیٰ",
+      "medium": "درمیانی",
+      "low": "کم"
+    }
   },
   "auth": {
     "login": "لاگ ان",
@@ -543,7 +548,9 @@
     "startBreak": "وقفہ شروع کریں",
     "endBreak": "وقفہ ختم کریں",
     "totalHours": "کل گھنٹے",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "Failed to load time tracking data. Please try again.",
+    "clockInOutTab": "کلاک ان/آؤٹ",
+    "entriesWillAppear": "جب ملازمین کلاک ان کریں گے تو وقت کی اندراجات یہاں ظاہر ہوں گی۔"
   },
   "timeOff": {
     "title": "چھٹی",
@@ -596,7 +603,14 @@
       "sickleave": "بیماری کی چھٹی",
       "annualleave": "سالانہ چھٹی",
       "sickleaveshort": "بیماری کی چھٹی"
-    }
+    },
+    "noPendingRequests": "کوئی زیر التواء چھٹی کی درخواست نہیں",
+    "requestsWillAppear": "جب ملازمین جمع کرائیں گے تو چھٹی کی درخواستیں یہاں ظاہر ہوں گی",
+    "requestTimeOff": "چھٹی کی درخواست کریں",
+    "approvedFor": "{{name}} کے لیے چھٹی منظور",
+    "approveError": "درخواست منظور کرنے میں ناکام۔ دوبارہ کوشش کریں۔",
+    "rejectedFor": "{{name}} کے لیے چھٹی مسترد",
+    "rejectError": "درخواست مسترد کرنے میں ناکام۔ دوبارہ کوشش کریں۔"
   },
   "feed": {
     "title": "فیڈ",
@@ -3310,5 +3324,218 @@
   "offline": {
     "youAreOffline": "You're offline. Some features may be limited.",
     "backOnline": "Back online"
+  },
+  "myLearning": {
+    "title": "میری تعلیم",
+    "subtitle": "آپ کے کورسز، پیش رفت اور سرٹیفیکیشن"
+  },
+  "myTimeTracking": {
+    "title": "میرا وقت ٹریکنگ"
+  },
+  "myTimeOff": {
+    "title": "میری چھٹی",
+    "subtitle": "اپنی چھٹی کی درخواستیں اور بیلنس دیکھیں"
+  },
+  "recognition": {
+    "title": "شناخت کی دیوار",
+    "subtitle": "اپنے ساتھیوں کی کامیابیوں کا جشن منائیں",
+    "giveRecognition": "شناخت دیں",
+    "recipient": "وصول کنندہ",
+    "selectRecipient": "ساتھی منتخب کریں...",
+    "category": "زمرہ",
+    "message": "پیغام",
+    "messagePlaceholder": "ان کے تعاون کو تسلیم کرتے ہوئے ایک سوچا سمجھا پیغام لکھیں...",
+    "charLimit": "حروف کی حد تک پہنچ گئی",
+    "sendRecognition": "شناخت بھیجیں",
+    "successMessage": "شناخت کامیابی سے بھیج دی گئی!",
+    "filters": {
+      "all": "سب",
+      "received": "موصول شدہ",
+      "sent": "بھیجی گئی",
+      "myTeam": "میری ٹیم"
+    },
+    "noRecognitions": "اس فلٹر کے لیے دکھانے کے لیے کوئی شناخت نہیں۔",
+    "mostRecognised": "اس مہینے سب سے زیادہ شناخت",
+    "mostGenerous": "سب سے زیادہ فیاض (دی گئی)",
+    "categories": {
+      "greatWork": "بہترین کام",
+      "teamPlayer": "ٹیم پلیئر",
+      "goalCrusher": "ہدف حاصل کرنے والا",
+      "problemSolver": "مسئلہ حل کرنے والا",
+      "aboveAndBeyond": "اس سے آگے",
+      "innovation": "جدت"
+    },
+    "time": {
+      "justNow": "ابھی",
+      "yesterday": "کل",
+      "oneWeekAgo": "1 ہفتہ پہلے"
+    },
+    "searchColleague": "نام، کردار یا شعبے سے تلاش کریں...",
+    "noResults": "کوئی ساتھی نہیں ملے"
+  },
+  "directory": {
+    "title": "کمپنی ڈائریکٹری",
+    "subtitle": "تنظیم بھر میں ساتھیوں کو تلاش کریں اور جڑیں",
+    "searchPlaceholder": "نام، کردار، شعبے یا مقام سے تلاش کریں...",
+    "gridView": "گرڈ ویو",
+    "grid": "گرڈ",
+    "listView": "فہرست ویو",
+    "list": "فہرست",
+    "orgChartView": "آرگ چارٹ ویو",
+    "orgChart": "آرگ چارٹ",
+    "allDepartments": "تمام شعبے",
+    "allLocations": "تمام مقامات",
+    "showingResults": "{{count}} ساتھی دکھا رہے ہیں",
+    "sendRecognition": "شناخت بھیجیں",
+    "viewProfile": "پروفائل دیکھیں",
+    "noResults": "کوئی ساتھی نہیں ملے",
+    "noResultsHint": "اپنی تلاش یا فلٹرز کو ایڈجسٹ کریں",
+    "name": "نام",
+    "role": "کردار",
+    "department": "شعبہ",
+    "location": "مقام",
+    "email": "ای میل",
+    "directors": "ڈائریکٹرز",
+    "managers": "مینیجرز",
+    "unknown": "نامعلوم",
+    "statusActive": "فعال",
+    "statusOnLeave": "چھٹی پر",
+    "statusInactive": "غیر فعال",
+    "close": "بند کریں",
+    "contact": "رابطہ",
+    "reportsTo": "رپورٹ کرتا ہے",
+    "directReports": "براہ راست رپورٹس",
+    "skills": "مہارتیں",
+    "startDate": "شروع کی تاریخ",
+    "tenure": "مدت ملازمت",
+    "collapse": "سمیٹیں",
+    "expand": "پھیلائیں",
+    "loading": "ڈائریکٹری لوڈ ہو رہی ہے...",
+    "loadError": "ڈائریکٹری لوڈ کرنے میں ناکام"
+  },
+  "momentum": {
+    "pageTitle": "میرا مومینٹم سکور",
+    "employee": "ملازم",
+    "momentum": "مومینٹم",
+    "trendUp": "↑پچھلے مہینے سے 3",
+    "basedOn": "حاضری، مہارتوں، تربیت اور فیڈبیک پر مبنی",
+    "scoreBreakdown": "سکور تجزیہ",
+    "attendance": "حاضری",
+    "onTimeRate": "وقت پر شرح: 97%",
+    "shiftCoverage": "شفٹ کوریج: 100%",
+    "streak": "10 دن کا سلسلہ 🔥",
+    "skillsTraining": "مہارتیں اور تربیت",
+    "mandatoryComplete": "4/5 لازمی مکمل",
+    "totalSkills": "کل 12 مہارتیں",
+    "verified": "3 تصدیق شدہ",
+    "performanceFeedback": "کارکردگی اور فیڈبیک",
+    "lastReview": "آخری جائزہ: 4.2/5",
+    "kudos": "اس مہینے 3 مثبت تعریفیں",
+    "goals": "اہداف: 2/3 ٹریک پر",
+    "engagement": "مصروفیت",
+    "surveyCompleted": "سروے مکمل: ہاں",
+    "recognitionGiven": "اس مہینے دی گئی شناخت: 5",
+    "tenure": "مدت ملازمت: 2.3 سال",
+    "weight": "وزن: {{pct}}%",
+    "scoreHistory": "سکور تاریخ",
+    "howToImprove": "کیسے بہتر کریں",
+    "tipFireSafety": "آگ کی حفاظت کی تربیت مکمل کریں",
+    "tipFireSafetyImpact": "مہارتیں +5",
+    "tipRecognitions": "2 مزید شناختیں دیں",
+    "tipRecognitionsImpact": "مصروفیت +3",
+    "tipAttendance": "حاضری کا سلسلہ برقرار رکھیں",
+    "tipAttendanceImpact": "حاضری +2",
+    "backToDashboard": "ڈیش بورڈ پر واپس جائیں"
+  },
+  "corporateCards": {
+    "title": "کارپوریٹ کارڈز",
+    "subtitle": "کارپوریٹ کارڈ ٹرانزیکشنز اور اخراجات کے دعوے منظم کریں",
+    "confirmDisconnect": "کیا آپ اس بینک کنکشن کو منقطع کرنا چاہتے ہیں؟",
+    "stats": {
+      "totalTransactions": "کل ٹرانزیکشنز",
+      "pendingReview": "جائزہ زیر التواء",
+      "totalAmount": "کل رقم",
+      "selected": "منتخب"
+    },
+    "searchTransactions": "ٹرانزیکشنز تلاش کریں...",
+    "filter": {
+      "allStatuses": "تمام سٹیٹس",
+      "uncategorized": "غیر زمرہ بند",
+      "categorized": "زمرہ بند",
+      "submitted": "جمع کرایا"
+    },
+    "sync": "سنک",
+    "submitClaim": "دعویٰ جمع کرائیں",
+    "table": {
+      "date": "تاریخ",
+      "description": "تفصیل",
+      "merchant": "تاجر",
+      "category": "زمرہ",
+      "amount": "رقم",
+      "status": "سٹیٹس",
+      "receipt": "رسید"
+    },
+    "loading": "ٹرانزیکشنز لوڈ ہو رہی ہیں...",
+    "noConnection": "کوئی بینک منسلک نہیں",
+    "noTransactions": "کوئی ٹرانزیکشن نہیں ملی",
+    "connectBankHint": "ٹرانزیکشنز دیکھنے کے لیے TrueLayer کے ذریعے کارپوریٹ کارڈ منسلک کریں",
+    "syncHint": "سنک کریں یا فلٹرز ایڈجسٹ کریں",
+    "connectBank": "بینک منسلک کریں",
+    "selectCategory": "زمرہ منتخب کریں",
+    "submitClaimTitle": "اخراجات کا دعویٰ جمع کرائیں",
+    "totalAmount": "کل رقم",
+    "submit": "دعویٰ جمع کرائیں",
+    "approve": "منظور کریں",
+    "reject": "مسترد کریں",
+    "claims": {
+      "number": "دعویٰ #",
+      "employee": "ملازم",
+      "date": "تاریخ",
+      "items": "اشیاء",
+      "amount": "رقم",
+      "status": "سٹیٹس",
+      "actions": "کارروائیاں",
+      "totalAmount": "کل رقم",
+      "description": "تفصیل"
+    },
+    "noClaims": "کوئی اخراجات کے دعوے نہیں",
+    "noClaimsHint": "ٹرانزیکشنز جمع کرانے پر دعوے یہاں ظاہر ہوں گے",
+    "payroll": {
+      "approved": "منظور شدہ دعوے",
+      "approvedDesc": "پے رول ایکسپورٹ کے لیے تیار دعوے",
+      "export": "پے رول میں ایکسپورٹ کریں",
+      "noPending": "ایکسپورٹ کے لیے کوئی دعوے نہیں",
+      "noPendingDesc": "منظور شدہ دعوے یہاں ظاہر ہوں گے",
+      "history": "ایکسپورٹ تاریخ",
+      "exportDate": "ایکسپورٹ تاریخ",
+      "claims": "دعوے",
+      "total": "کل",
+      "exportedBy": "ایکسپورٹ کنندہ",
+      "download": "ڈاؤن لوڈ",
+      "noExports": "ابھی تک کوئی ایکسپورٹ نہیں",
+      "csv": "CSV",
+      "exportTitle": "پے رول میں ایکسپورٹ",
+      "exportWarning": "دعوے ادا شدہ کے طور پر نشان زد ہوں گے اور تبدیل نہیں کیے جا سکتے۔",
+      "confirmExport": "ایکسپورٹ"
+    },
+    "cards": {
+      "connections": "بینک کنکشنز",
+      "connectionsDesc": "TrueLayer کے ذریعے کارپوریٹ کارڈ اکاؤنٹس منسلک کریں",
+      "connect": "بینک منسلک کریں",
+      "noConnections": "کوئی بینک کنکشن نہیں",
+      "noConnectionsDesc": "TrueLayer کے ذریعے HSBC یا دیگر معاون بینک منسلک کریں",
+      "connected": "منسلک",
+      "active": "فعال",
+      "expired": "میعاد ختم",
+      "disconnect": "منقطع کریں",
+      "list": "کارپوریٹ کارڈز",
+      "cardNumber": "کارڈ",
+      "holder": "کارڈ ہولڈر",
+      "type": "قسم",
+      "status": "سٹیٹس",
+      "lastSync": "آخری سنک",
+      "noCards": "کوئی کارڈ نہیں ملے۔ کارڈ سنک کرنے کے لیے بینک منسلک کریں۔",
+      "inactive": "غیر فعال"
+    }
   }
 }

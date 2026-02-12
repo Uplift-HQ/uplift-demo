@@ -3647,5 +3647,107 @@
     "typeYourName": "Wpisz swoje pełne imię i nazwisko",
     "drawAboveLine": "Narysuj swój podpis nad linią",
     "captured": "Podpis przechwycony"
+  },
+  "myTimeTracking": {
+    "title": "Mój rejestr czasu"
+  },
+  "myTimeOff": {
+    "title": "Moje urlopy",
+    "subtitle": "Przeglądaj wnioski urlopowe i salda"
+  },
+  "myLearning": {
+    "title": "Moja nauka",
+    "subtitle": "Twoje kursy, postępy i certyfikaty"
+  },
+  "corporateCards": {
+    "title": "Karty firmowe",
+    "subtitle": "Zarządzaj transakcjami kart firmowych i wnioskami o zwrot kosztów",
+    "confirmDisconnect": "Czy na pewno chcesz odłączyć to połączenie bankowe?",
+    "stats": {
+      "totalTransactions": "Łączna liczba transakcji",
+      "pendingReview": "Oczekujące na przegląd",
+      "totalAmount": "Łączna kwota",
+      "selected": "Wybrano"
+    },
+    "searchTransactions": "Szukaj transakcji...",
+    "filter": {
+      "allStatuses": "Wszystkie statusy",
+      "uncategorized": "Bez kategorii",
+      "categorized": "Z kategorią",
+      "submitted": "Wysłane"
+    },
+    "sync": "Synchronizuj",
+    "submitClaim": "Wyślij wniosek",
+    "table": {
+      "date": "Data",
+      "description": "Opis",
+      "merchant": "Sprzedawca",
+      "category": "Kategoria",
+      "amount": "Kwota",
+      "status": "Status",
+      "receipt": "Paragon"
+    },
+    "loading": "Ładowanie transakcji...",
+    "noConnection": "Bank nie podłączony",
+    "noTransactions": "Nie znaleziono transakcji",
+    "connectBankHint": "Połącz kartę firmową przez TrueLayer aby zobaczyć transakcje",
+    "syncHint": "Spróbuj zsynchronizować lub dostosować filtry",
+    "connectBank": "Połącz bank",
+    "selectCategory": "Wybierz kategorię",
+    "submitClaimTitle": "Wyślij wniosek o zwrot kosztów",
+    "totalAmount": "Łączna kwota",
+    "submit": "Wyślij wniosek",
+    "approve": "Zatwierdź",
+    "reject": "Odrzuć",
+    "claims": {
+      "number": "Wniosek #",
+      "employee": "Pracownik",
+      "date": "Data",
+      "items": "Pozycje",
+      "amount": "Kwota",
+      "status": "Status",
+      "actions": "Akcje",
+      "totalAmount": "Łączna kwota",
+      "description": "Opis"
+    },
+    "noClaims": "Brak wniosków o zwrot kosztów",
+    "noClaimsHint": "Wnioski pojawią się tutaj po wysłaniu transakcji",
+    "payroll": {
+      "approved": "Zatwierdzone wnioski",
+      "approvedDesc": "Wnioski gotowe do eksportu do listy płac",
+      "export": "Eksportuj do listy płac",
+      "noPending": "Brak wniosków oczekujących na eksport",
+      "noPendingDesc": "Zatwierdzone wnioski pojawią się tutaj",
+      "history": "Historia eksportu",
+      "exportDate": "Data eksportu",
+      "claims": "Wnioski",
+      "total": "Łącznie",
+      "exportedBy": "Wyeksportowane przez",
+      "download": "Pobierz",
+      "noExports": "Brak eksportów",
+      "csv": "CSV",
+      "exportTitle": "Eksportuj do listy płac",
+      "exportWarning": "Wnioski zostaną oznaczone jako opłacone i nie będą mogły być modyfikowane po eksporcie.",
+      "confirmExport": "Eksportuj"
+    },
+    "cards": {
+      "connections": "Połączenia bankowe",
+      "connectionsDesc": "Połącz konta kart firmowych przez TrueLayer",
+      "connect": "Połącz bank",
+      "noConnections": "Brak połączeń bankowych",
+      "noConnectionsDesc": "Połącz HSBC lub inne obsługiwane banki przez TrueLayer",
+      "connected": "Połączono",
+      "active": "Aktywna",
+      "expired": "Wygasła",
+      "disconnect": "Odłącz",
+      "list": "Karty firmowe",
+      "cardNumber": "Karta",
+      "holder": "Posiadacz karty",
+      "type": "Typ",
+      "status": "Status",
+      "lastSync": "Ostatnia synchronizacja",
+      "noCards": "Nie znaleziono kart. Połącz bank aby zsynchronizować karty firmowe.",
+      "inactive": "Nieaktywna"
+    }
   }
 }

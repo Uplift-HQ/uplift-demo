@@ -554,7 +554,10 @@
     "startBreak": "Ibda Pawża",
     "endBreak": "Temm Pawża",
     "totalHours": "Sigħat Totali",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "Ma rnexxiex jitgħabbew id-data tat-traċċar tal-ħin. Jekk jogħġbok erġa' pprova."
+  },
+  "myTimeTracking": {
+    "title": "It-Traċċar tal-Ħin Tiegħi"
   },
   "timeOff": {
     "title": "Leave",
@@ -595,19 +598,30 @@
     "requestDetails": "Dettalji tat-Talba għal-Leave",
     "noReason": "L-ebda raġuni mogħtija",
     "submitted": "Sottomessa",
-    "loadError": "Failed to load time-off requests. Please try again.",
+    "loadError": "Ma rnexxiex jitgħabbew it-talbiet tal-leave. Jekk jogħġbok erġa' pprova.",
     "types": {
-      "annualLeave": "Annual Leave",
-      "sickLeave": "Sick Leave",
-      "personal": "Personal",
-      "bereavement": "Bereavement",
-      "maternity": "Maternity",
-      "paternity": "Paternity",
-      "unpaid": "Unpaid Leave",
+      "annualLeave": "Leave Annwali",
+      "sickLeave": "Leave tal-Mard",
+      "personal": "Personali",
+      "bereavement": "Luttu",
+      "maternity": "Maternità",
+      "paternity": "Paternità",
+      "unpaid": "Leave Mhux Imħallas",
       "sickleave": "Leave tal-mard",
       "annualleave": "Leave annwali",
       "sickleaveshort": "Leave tal-mard"
-    }
+    },
+    "approvedFor": "Leave approvat għal {{name}}",
+    "approveError": "Ma rnexxiex tapprova t-talba. Jekk jogħġbok erġa' pprova.",
+    "rejectedFor": "Leave miċħud għal {{name}}",
+    "rejectError": "Ma rnexxiex tiċħad it-talba. Jekk jogħġbok erġa' pprova.",
+    "noPendingRequests": "L-ebda talbiet ta' leave pendenti",
+    "requestsWillAppear": "It-talbiet ta' leave jidhru hawn meta l-impjegati jissottomettuhom",
+    "requestTimeOff": "Itlob Leave"
+  },
+  "myTimeOff": {
+    "title": "Il-Leave Tiegħi",
+    "subtitle": "Ara t-talbiet ta' leave u l-bilanċi tiegħek"
   },
   "feed": {
     "title": "Feed",
@@ -3318,8 +3332,99 @@
     "nativeCalculation": "Kalkolu Nattiv",
     "externalProvider": "Fornitur Estern"
   },
+  "corporateCards": {
+    "title": "Karti Korporattivi",
+    "subtitle": "Immaniġġja t-tranżazzjonijiet tal-karti korporattivi u t-talbiet ta' spejjeż",
+    "confirmDisconnect": "Ċert li trid tiddiskonettja din il-konnessjoni tal-bank?",
+    "stats": {
+      "totalTransactions": "Tranżazzjonijiet Totali",
+      "pendingReview": "Jistennew Reviżjoni",
+      "totalAmount": "Ammont Totali",
+      "selected": "Magħżul"
+    },
+    "searchTransactions": "Fittex tranżazzjonijiet...",
+    "filter": {
+      "allStatuses": "L-Istati Kollha",
+      "uncategorized": "Mhux Kategorizzat",
+      "categorized": "Kategorizzat",
+      "submitted": "Sottomess"
+    },
+    "sync": "Issinkronizza",
+    "submitClaim": "Issottometti Talba",
+    "table": {
+      "date": "Data",
+      "description": "Deskrizzjoni",
+      "merchant": "Negozjant",
+      "category": "Kategorija",
+      "amount": "Ammont",
+      "status": "Stat",
+      "receipt": "Riċevuta"
+    },
+    "loading": "Qed jitgħabbew it-tranżazzjonijiet...",
+    "noConnection": "L-ebda bank konness",
+    "noTransactions": "L-ebda tranżazzjonijiet misjuba",
+    "connectBankHint": "Qabbad il-karta korporattiva tiegħek permezz ta' TrueLayer biex tara t-tranżazzjonijiet",
+    "syncHint": "Ipprova issinkronizza jew aġġusta l-filtri tiegħek",
+    "connectBank": "Qabbad Bank",
+    "selectCategory": "Agħżel kategorija",
+    "submitClaimTitle": "Issottometti Talba ta' Spejjeż",
+    "totalAmount": "Ammont Totali",
+    "submit": "Issottometti Talba",
+    "approve": "Approva",
+    "reject": "Iċħad",
+    "claims": {
+      "number": "Talba #",
+      "employee": "Impjegat",
+      "date": "Data",
+      "items": "Oġġetti",
+      "amount": "Ammont",
+      "status": "Stat",
+      "actions": "Azzjonijiet",
+      "totalAmount": "Ammont Totali",
+      "description": "Deskrizzjoni"
+    },
+    "noClaims": "L-ebda talbiet ta' spejjeż",
+    "noClaimsHint": "It-talbiet jidhru hawn ladarba tissottometti t-tranżazzjonijiet",
+    "payroll": {
+      "approved": "Talbiet Approvati",
+      "approvedDesc": "Talbiet lesti biex jiġu esportati għall-payroll",
+      "export": "Esporta għall-Payroll",
+      "noPending": "L-ebda talbiet jistennew l-esportazzjoni",
+      "noPendingDesc": "It-talbiet approvati jidhru hawn",
+      "history": "Storja tal-Esportazzjoni",
+      "exportDate": "Data tal-Esportazzjoni",
+      "claims": "Talbiet",
+      "total": "Total",
+      "exportedBy": "Esportat Minn",
+      "download": "Niżżel",
+      "noExports": "L-ebda esportazzjonijiet s'issa",
+      "csv": "CSV",
+      "exportTitle": "Esporta għall-Payroll",
+      "exportWarning": "It-talbiet se jiġu mmarkati bħala mħallsa u ma jistgħux jiġu mmodifikati wara l-esportazzjoni.",
+      "confirmExport": "Esporta"
+    },
+    "cards": {
+      "connections": "Konnessjonijiet tal-Bank",
+      "connectionsDesc": "Qabbad il-kontijiet tal-karti korporattivi tiegħek permezz ta' TrueLayer",
+      "connect": "Qabbad Bank",
+      "noConnections": "L-ebda konnessjonijiet tal-bank",
+      "noConnectionsDesc": "Qabbad HSBC jew banek oħra appoġġjati permezz ta' TrueLayer",
+      "connected": "Konness",
+      "active": "Attiv",
+      "expired": "Skadut",
+      "disconnect": "Iddiżkonettja",
+      "list": "Karti Korporattivi",
+      "cardNumber": "Karta",
+      "holder": "Detentur tal-Karta",
+      "type": "Tip",
+      "status": "Stat",
+      "lastSync": "L-Aħħar Sinkronizzazzjoni",
+      "noCards": "L-ebda karti misjuba. Qabbad bank biex tissinkronizza l-karti korporattivi.",
+      "inactive": "Mhux Attiv"
+    }
+  },
   "offline": {
-    "youAreOffline": "You're offline. Some features may be limited.",
-    "backOnline": "Back online"
+    "youAreOffline": "Inti offline. Xi karatteristiċi jistgħu jkunu limitati.",
+    "backOnline": "Lura online"
   }
 }

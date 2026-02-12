@@ -269,7 +269,12 @@
     "new": "ਨਵਾਂ",
     "clickToViewDetails": "ਵੇਰਵੇ ਦੇਖਣ ਲਈ ਕਲਿੱਕ ਕਰੋ",
     "closeEsc": "ਬੰਦ ਕਰੋ (ESC)",
-    "logoPreview": "ਲੋਗੋ ਪ੍ਰੀਵਿਊ"
+    "logoPreview": "ਲੋਗੋ ਪ੍ਰੀਵਿਊ",
+    "priority": {
+      "high": "ਉੱਚ",
+      "medium": "ਮੱਧਮ",
+      "low": "ਘੱਟ"
+    }
   },
   "auth": {
     "login": "ਲਾਗਇਨ",
@@ -543,7 +548,9 @@
     "startBreak": "ਬ੍ਰੇਕ ਸ਼ੁਰੂ ਕਰੋ",
     "endBreak": "ਬ੍ਰੇਕ ਖਤਮ ਕਰੋ",
     "totalHours": "ਕੁੱਲ ਘੰਟੇ",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "Failed to load time tracking data. Please try again.",
+    "clockInOutTab": "ਕਲਾਕ ਇਨ/ਆਊਟ",
+    "entriesWillAppear": "ਜਦੋਂ ਕਰਮਚਾਰੀ ਕਲਾਕ ਇਨ ਕਰਨਗੇ ਤਾਂ ਸਮਾਂ ਐਂਟਰੀਆਂ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੀਆਂ।"
   },
   "timeOff": {
     "title": "ਛੁੱਟੀ",
@@ -596,7 +603,14 @@
       "sickleave": "ਬਿਮਾਰੀ ਦੀ ਛੁੱਟੀ",
       "annualleave": "ਸਾਲਾਨਾ ਛੁੱਟੀ",
       "sickleaveshort": "ਬਿਮਾਰੀ ਦੀ ਛੁੱਟੀ"
-    }
+    },
+    "noPendingRequests": "ਕੋਈ ਬਕਾਇਆ ਛੁੱਟੀ ਬੇਨਤੀਆਂ ਨਹੀਂ",
+    "requestsWillAppear": "ਜਦੋਂ ਕਰਮਚਾਰੀ ਜਮ੍ਹਾਂ ਕਰਨਗੇ ਤਾਂ ਛੁੱਟੀ ਬੇਨਤੀਆਂ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੀਆਂ",
+    "requestTimeOff": "ਛੁੱਟੀ ਦੀ ਬੇਨਤੀ ਕਰੋ",
+    "approvedFor": "{{name}} ਲਈ ਛੁੱਟੀ ਮਨਜ਼ੂਰ",
+    "approveError": "ਬੇਨਤੀ ਮਨਜ਼ੂਰ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "rejectedFor": "{{name}} ਲਈ ਛੁੱਟੀ ਰੱਦ",
+    "rejectError": "ਬੇਨਤੀ ਰੱਦ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
   },
   "feed": {
     "title": "ਫੀਡ",
@@ -3310,5 +3324,218 @@
   "offline": {
     "youAreOffline": "You're offline. Some features may be limited.",
     "backOnline": "Back online"
+  },
+  "myLearning": {
+    "title": "ਮੇਰੀ ਸਿੱਖਿਆ",
+    "subtitle": "ਤੁਹਾਡੇ ਕੋਰਸ, ਤਰੱਕੀ ਅਤੇ ਸਰਟੀਫਿਕੇਟ"
+  },
+  "myTimeTracking": {
+    "title": "ਮੇਰੀ ਸਮਾਂ ਟ੍ਰੈਕਿੰਗ"
+  },
+  "myTimeOff": {
+    "title": "ਮੇਰੀ ਛੁੱਟੀ",
+    "subtitle": "ਆਪਣੀਆਂ ਛੁੱਟੀ ਬੇਨਤੀਆਂ ਅਤੇ ਬੈਲੈਂਸ ਵੇਖੋ"
+  },
+  "recognition": {
+    "title": "ਮਾਨਤਾ ਦੀਵਾਰ",
+    "subtitle": "ਆਪਣੇ ਸਾਥੀਆਂ ਦੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਦਾ ਜਸ਼ਨ ਮਨਾਓ",
+    "giveRecognition": "ਮਾਨਤਾ ਦਿਓ",
+    "recipient": "ਪ੍ਰਾਪਤਕਰਤਾ",
+    "selectRecipient": "ਸਾਥੀ ਚੁਣੋ...",
+    "category": "ਸ਼੍ਰੇਣੀ",
+    "message": "ਸੁਨੇਹਾ",
+    "messagePlaceholder": "ਉਨ੍ਹਾਂ ਦੇ ਯੋਗਦਾਨ ਨੂੰ ਮਾਨਤਾ ਦਿੰਦਾ ਸੋਚ-ਸਮਝ ਕੇ ਸੁਨੇਹਾ ਲਿਖੋ...",
+    "charLimit": "ਅੱਖਰ ਸੀਮਾ ਪਹੁੰਚ ਗਈ",
+    "sendRecognition": "ਮਾਨਤਾ ਭੇਜੋ",
+    "successMessage": "ਮਾਨਤਾ ਸਫਲਤਾਪੂਰਵਕ ਭੇਜੀ ਗਈ!",
+    "filters": {
+      "all": "ਸਭ",
+      "received": "ਪ੍ਰਾਪਤ",
+      "sent": "ਭੇਜੀ",
+      "myTeam": "ਮੇਰੀ ਟੀਮ"
+    },
+    "noRecognitions": "ਇਸ ਫਿਲਟਰ ਲਈ ਕੋਈ ਮਾਨਤਾ ਦਿਖਾਉਣ ਲਈ ਨਹੀਂ।",
+    "mostRecognised": "ਇਸ ਮਹੀਨੇ ਸਭ ਤੋਂ ਵੱਧ ਮਾਨਤਾ ਪ੍ਰਾਪਤ",
+    "mostGenerous": "ਸਭ ਤੋਂ ਵੱਧ ਦਾਨੀ (ਦਿੱਤੀ)",
+    "categories": {
+      "greatWork": "ਵਧੀਆ ਕੰਮ",
+      "teamPlayer": "ਟੀਮ ਖਿਡਾਰੀ",
+      "goalCrusher": "ਟੀਚਾ ਪੂਰਾ ਕਰਨ ਵਾਲਾ",
+      "problemSolver": "ਸਮੱਸਿਆ ਹੱਲ ਕਰਨ ਵਾਲਾ",
+      "aboveAndBeyond": "ਉੱਪਰ ਅਤੇ ਪਰੇ",
+      "innovation": "ਨਵੀਨਤਾ"
+    },
+    "time": {
+      "justNow": "ਹੁਣੇ",
+      "yesterday": "ਕੱਲ੍ਹ",
+      "oneWeekAgo": "1 ਹਫ਼ਤਾ ਪਹਿਲਾਂ"
+    },
+    "searchColleague": "ਨਾਮ, ਭੂਮਿਕਾ ਜਾਂ ਵਿਭਾਗ ਦੁਆਰਾ ਖੋਜੋ...",
+    "noResults": "ਕੋਈ ਸਾਥੀ ਨਹੀਂ ਮਿਲੇ"
+  },
+  "directory": {
+    "title": "ਕੰਪਨੀ ਡਾਇਰੈਕਟਰੀ",
+    "subtitle": "ਸੰਸਥਾ ਵਿੱਚ ਸਾਥੀਆਂ ਨੂੰ ਲੱਭੋ ਅਤੇ ਜੁੜੋ",
+    "searchPlaceholder": "ਨਾਮ, ਭੂਮਿਕਾ, ਵਿਭਾਗ ਜਾਂ ਸਥਾਨ ਦੁਆਰਾ ਖੋਜੋ...",
+    "gridView": "ਗ੍ਰਿੱਡ ਵਿਊ",
+    "grid": "ਗ੍ਰਿੱਡ",
+    "listView": "ਸੂਚੀ ਵਿਊ",
+    "list": "ਸੂਚੀ",
+    "orgChartView": "ਔਰਗ ਚਾਰਟ ਵਿਊ",
+    "orgChart": "ਔਰਗ ਚਾਰਟ",
+    "allDepartments": "ਸਾਰੇ ਵਿਭਾਗ",
+    "allLocations": "ਸਾਰੇ ਸਥਾਨ",
+    "showingResults": "{{count}} ਸਾਥੀ ਦਿਖਾ ਰਿਹਾ ਹੈ",
+    "sendRecognition": "ਮਾਨਤਾ ਭੇਜੋ",
+    "viewProfile": "ਪ੍ਰੋਫਾਈਲ ਵੇਖੋ",
+    "noResults": "ਕੋਈ ਸਾਥੀ ਨਹੀਂ ਮਿਲੇ",
+    "noResultsHint": "ਆਪਣੀ ਖੋਜ ਜਾਂ ਫਿਲਟਰ ਬਦਲੋ",
+    "name": "ਨਾਮ",
+    "role": "ਭੂਮਿਕਾ",
+    "department": "ਵਿਭਾਗ",
+    "location": "ਸਥਾਨ",
+    "email": "ਈਮੇਲ",
+    "directors": "ਡਾਇਰੈਕਟਰ",
+    "managers": "ਮੈਨੇਜਰ",
+    "unknown": "ਅਣਜਾਣ",
+    "statusActive": "ਸਰਗਰਮ",
+    "statusOnLeave": "ਛੁੱਟੀ 'ਤੇ",
+    "statusInactive": "ਅਕਿਰਿਆਸ਼ੀਲ",
+    "close": "ਬੰਦ ਕਰੋ",
+    "contact": "ਸੰਪਰਕ",
+    "reportsTo": "ਰਿਪੋਰਟ ਕਰਦਾ ਹੈ",
+    "directReports": "ਸਿੱਧੀਆਂ ਰਿਪੋਰਟਾਂ",
+    "skills": "ਹੁਨਰ",
+    "startDate": "ਸ਼ੁਰੂਆਤੀ ਤਾਰੀਖ",
+    "tenure": "ਕਾਰਜਕਾਲ",
+    "collapse": "ਸੰਖੇਪ ਕਰੋ",
+    "expand": "ਵਿਸਤਾਰ ਕਰੋ",
+    "loading": "ਡਾਇਰੈਕਟਰੀ ਲੋਡ ਹੋ ਰਹੀ ਹੈ...",
+    "loadError": "ਡਾਇਰੈਕਟਰੀ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ"
+  },
+  "momentum": {
+    "pageTitle": "ਮੇਰਾ ਮੋਮੈਂਟਮ ਸਕੋਰ",
+    "employee": "ਕਰਮਚਾਰੀ",
+    "momentum": "ਮੋਮੈਂਟਮ",
+    "trendUp": "↑ਪਿਛਲੇ ਮਹੀਨੇ ਤੋਂ 3",
+    "basedOn": "ਹਾਜ਼ਰੀ, ਹੁਨਰ, ਸਿਖਲਾਈ ਅਤੇ ਫੀਡਬੈਕ 'ਤੇ ਆਧਾਰਿਤ",
+    "scoreBreakdown": "ਸਕੋਰ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "attendance": "ਹਾਜ਼ਰੀ",
+    "onTimeRate": "ਸਮੇਂ ਸਿਰ ਦਰ: 97%",
+    "shiftCoverage": "ਸ਼ਿਫਟ ਕਵਰੇਜ: 100%",
+    "streak": "10-ਦਿਨ ਦੀ ਲੜੀ 🔥",
+    "skillsTraining": "ਹੁਨਰ ਅਤੇ ਸਿਖਲਾਈ",
+    "mandatoryComplete": "4/5 ਲਾਜ਼ਮੀ ਮੁਕੰਮਲ",
+    "totalSkills": "ਕੁੱਲ 12 ਹੁਨਰ",
+    "verified": "3 ਤਸਦੀਕਸ਼ੁਦਾ",
+    "performanceFeedback": "ਪ੍ਰਦਰਸ਼ਨ ਅਤੇ ਫੀਡਬੈਕ",
+    "lastReview": "ਆਖਰੀ ਸਮੀਖਿਆ: 4.2/5",
+    "kudos": "ਇਸ ਮਹੀਨੇ 3 ਸਕਾਰਾਤਮਕ ਪ੍ਰਸ਼ੰਸਾ",
+    "goals": "ਟੀਚੇ: 2/3 ਟ੍ਰੈਕ 'ਤੇ",
+    "engagement": "ਸ਼ਮੂਲੀਅਤ",
+    "surveyCompleted": "ਸਰਵੇਖਣ ਪੂਰਾ: ਹਾਂ",
+    "recognitionGiven": "ਇਸ ਮਹੀਨੇ ਦਿੱਤੀ ਮਾਨਤਾ: 5",
+    "tenure": "ਕਾਰਜਕਾਲ: 2.3 ਸਾਲ",
+    "weight": "ਭਾਰ: {{pct}}%",
+    "scoreHistory": "ਸਕੋਰ ਇਤਿਹਾਸ",
+    "howToImprove": "ਕਿਵੇਂ ਸੁਧਾਰੀਏ",
+    "tipFireSafety": "ਅੱਗ ਸੁਰੱਖਿਆ ਸਿਖਲਾਈ ਪੂਰੀ ਕਰੋ",
+    "tipFireSafetyImpact": "ਹੁਨਰ +5",
+    "tipRecognitions": "2 ਹੋਰ ਮਾਨਤਾ ਦਿਓ",
+    "tipRecognitionsImpact": "ਸ਼ਮੂਲੀਅਤ +3",
+    "tipAttendance": "ਹਾਜ਼ਰੀ ਲੜੀ ਬਣਾਈ ਰੱਖੋ",
+    "tipAttendanceImpact": "ਹਾਜ਼ਰੀ +2",
+    "backToDashboard": "ਡੈਸ਼ਬੋਰਡ 'ਤੇ ਵਾਪਸ ਜਾਓ"
+  },
+  "corporateCards": {
+    "title": "ਕਾਰਪੋਰੇਟ ਕਾਰਡ",
+    "subtitle": "ਕਾਰਪੋਰੇਟ ਕਾਰਡ ਲੈਣ-ਦੇਣ ਅਤੇ ਖਰਚੇ ਦੇ ਦਾਅਵੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ",
+    "confirmDisconnect": "ਕੀ ਤੁਸੀਂ ਇਸ ਬੈਂਕ ਕੁਨੈਕਸ਼ਨ ਨੂੰ ਡਿਸਕਨੈਕਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?",
+    "stats": {
+      "totalTransactions": "ਕੁੱਲ ਲੈਣ-ਦੇਣ",
+      "pendingReview": "ਸਮੀਖਿਆ ਬਕਾਇਆ",
+      "totalAmount": "ਕੁੱਲ ਰਕਮ",
+      "selected": "ਚੁਣਿਆ ਗਿਆ"
+    },
+    "searchTransactions": "ਲੈਣ-ਦੇਣ ਖੋਜੋ...",
+    "filter": {
+      "allStatuses": "ਸਾਰੇ ਸਟੇਟਸ",
+      "uncategorized": "ਸ਼੍ਰੇਣੀਬੱਧ ਨਹੀਂ",
+      "categorized": "ਸ਼੍ਰੇਣੀਬੱਧ",
+      "submitted": "ਜਮ੍ਹਾਂ ਕੀਤਾ"
+    },
+    "sync": "ਸਿੰਕ",
+    "submitClaim": "ਦਾਅਵਾ ਜਮ੍ਹਾਂ ਕਰੋ",
+    "table": {
+      "date": "ਤਾਰੀਖ",
+      "description": "ਵੇਰਵਾ",
+      "merchant": "ਵਪਾਰੀ",
+      "category": "ਸ਼੍ਰੇਣੀ",
+      "amount": "ਰਕਮ",
+      "status": "ਸਟੇਟਸ",
+      "receipt": "ਰਸੀਦ"
+    },
+    "loading": "ਲੈਣ-ਦੇਣ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
+    "noConnection": "ਕੋਈ ਬੈਂਕ ਕੁਨੈਕਟ ਨਹੀਂ",
+    "noTransactions": "ਕੋਈ ਲੈਣ-ਦੇਣ ਨਹੀਂ ਮਿਲੇ",
+    "connectBankHint": "ਲੈਣ-ਦੇਣ ਦੇਖਣ ਲਈ TrueLayer ਰਾਹੀਂ ਕਾਰਪੋਰੇਟ ਕਾਰਡ ਕੁਨੈਕਟ ਕਰੋ",
+    "syncHint": "ਸਿੰਕ ਕਰੋ ਜਾਂ ਫਿਲਟਰ ਬਦਲੋ",
+    "connectBank": "ਬੈਂਕ ਕੁਨੈਕਟ ਕਰੋ",
+    "selectCategory": "ਸ਼੍ਰੇਣੀ ਚੁਣੋ",
+    "submitClaimTitle": "ਖਰਚਾ ਦਾਅਵਾ ਜਮ੍ਹਾਂ ਕਰੋ",
+    "totalAmount": "ਕੁੱਲ ਰਕਮ",
+    "submit": "ਦਾਅਵਾ ਜਮ੍ਹਾਂ ਕਰੋ",
+    "approve": "ਮਨਜ਼ੂਰ ਕਰੋ",
+    "reject": "ਰੱਦ ਕਰੋ",
+    "claims": {
+      "number": "ਦਾਅਵਾ #",
+      "employee": "ਕਰਮਚਾਰੀ",
+      "date": "ਤਾਰੀਖ",
+      "items": "ਆਈਟਮਾਂ",
+      "amount": "ਰਕਮ",
+      "status": "ਸਟੇਟਸ",
+      "actions": "ਕਾਰਵਾਈਆਂ",
+      "totalAmount": "ਕੁੱਲ ਰਕਮ",
+      "description": "ਵੇਰਵਾ"
+    },
+    "noClaims": "ਕੋਈ ਖਰਚਾ ਦਾਅਵੇ ਨਹੀਂ",
+    "noClaimsHint": "ਲੈਣ-ਦੇਣ ਜਮ੍ਹਾਂ ਕਰਨ 'ਤੇ ਦਾਅਵੇ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ",
+    "payroll": {
+      "approved": "ਮਨਜ਼ੂਰ ਦਾਅਵੇ",
+      "approvedDesc": "ਪੇਰੋਲ ਐਕਸਪੋਰਟ ਲਈ ਤਿਆਰ ਦਾਅਵੇ",
+      "export": "ਪੇਰੋਲ ਵਿੱਚ ਐਕਸਪੋਰਟ ਕਰੋ",
+      "noPending": "ਐਕਸਪੋਰਟ ਲਈ ਕੋਈ ਦਾਅਵੇ ਨਹੀਂ",
+      "noPendingDesc": "ਮਨਜ਼ੂਰ ਦਾਅਵੇ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ",
+      "history": "ਐਕਸਪੋਰਟ ਇਤਿਹਾਸ",
+      "exportDate": "ਐਕਸਪੋਰਟ ਤਾਰੀਖ",
+      "claims": "ਦਾਅਵੇ",
+      "total": "ਕੁੱਲ",
+      "exportedBy": "ਐਕਸਪੋਰਟ ਕਰਨ ਵਾਲਾ",
+      "download": "ਡਾਊਨਲੋਡ",
+      "noExports": "ਅਜੇ ਤੱਕ ਕੋਈ ਐਕਸਪੋਰਟ ਨਹੀਂ",
+      "csv": "CSV",
+      "exportTitle": "ਪੇਰੋਲ ਵਿੱਚ ਐਕਸਪੋਰਟ",
+      "exportWarning": "ਦਾਅਵੇ ਭੁਗਤਾਨ ਕੀਤੇ ਵਜੋਂ ਮਾਰਕ ਹੋਣਗੇ ਅਤੇ ਬਦਲੇ ਨਹੀਂ ਜਾ ਸਕਦੇ।",
+      "confirmExport": "ਐਕਸਪੋਰਟ"
+    },
+    "cards": {
+      "connections": "ਬੈਂਕ ਕੁਨੈਕਸ਼ਨ",
+      "connectionsDesc": "TrueLayer ਰਾਹੀਂ ਕਾਰਪੋਰੇਟ ਕਾਰਡ ਖਾਤੇ ਕੁਨੈਕਟ ਕਰੋ",
+      "connect": "ਬੈਂਕ ਕੁਨੈਕਟ ਕਰੋ",
+      "noConnections": "ਕੋਈ ਬੈਂਕ ਕੁਨੈਕਸ਼ਨ ਨਹੀਂ",
+      "noConnectionsDesc": "TrueLayer ਰਾਹੀਂ HSBC ਜਾਂ ਹੋਰ ਸਮਰਥਿਤ ਬੈਂਕ ਕੁਨੈਕਟ ਕਰੋ",
+      "connected": "ਕੁਨੈਕਟ",
+      "active": "ਸਰਗਰਮ",
+      "expired": "ਮਿਆਦ ਪੁੱਗ ਗਈ",
+      "disconnect": "ਡਿਸਕਨੈਕਟ",
+      "list": "ਕਾਰਪੋਰੇਟ ਕਾਰਡ",
+      "cardNumber": "ਕਾਰਡ",
+      "holder": "ਕਾਰਡ ਧਾਰਕ",
+      "type": "ਕਿਸਮ",
+      "status": "ਸਟੇਟਸ",
+      "lastSync": "ਆਖਰੀ ਸਿੰਕ",
+      "noCards": "ਕੋਈ ਕਾਰਡ ਨਹੀਂ ਮਿਲੇ। ਕਾਰਡ ਸਿੰਕ ਕਰਨ ਲਈ ਬੈਂਕ ਕੁਨੈਕਟ ਕਰੋ।",
+      "inactive": "ਅਕਿਰਿਆਸ਼ੀਲ"
+    }
   }
 }

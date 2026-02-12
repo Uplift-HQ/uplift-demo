@@ -269,7 +269,12 @@
     "exportComingSoon": "ರಫ್ತು ಶೀಘ್ರದಲ್ಲೇ",
     "clickToViewDetails": "ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
     "closeEsc": "ಮುಚ್ಚಿರಿ (ESC)",
-    "logoPreview": "ಲೋಗೋ ಪೂರ್ವವೀಕ್ಷಣೆ"
+    "logoPreview": "ಲೋಗೋ ಪೂರ್ವವೀಕ್ಷಣೆ",
+    "priority": {
+      "high": "ಅಧಿಕ",
+      "medium": "ಮಧ್ಯಮ",
+      "low": "ಕಡಿಮೆ"
+    }
   },
   "auth": {
     "login": "ಲಾಗಿನ್",
@@ -543,7 +548,9 @@
     "startBreak": "ವಿರಾಮ ಪ್ರಾರಂಭಿಸಿ",
     "endBreak": "ವಿರಾಮ ಮುಗಿಸಿ",
     "totalHours": "ಒಟ್ಟು ಗಂಟೆಗಳು",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "Failed to load time tracking data. Please try again.",
+    "clockInOutTab": "ಕ್ಲಾಕ್ ಇನ್/ಔಟ್",
+    "entriesWillAppear": "ಉದ್ಯೋಗಿಗಳು ಕ್ಲಾಕ್ ಇನ್ ಮಾಡಿದಾಗ ಸಮಯ ನಮೂದುಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ."
   },
   "timeOff": {
     "title": "ರಜೆ",
@@ -596,7 +603,14 @@
       "sickleave": "ಅನಾರೋಗ್ಯ ರಜೆ",
       "annualleave": "ವಾರ್ಷಿಕ ರಜೆ",
       "sickleaveshort": "ಅನಾರೋಗ್ಯ ರಜೆ"
-    }
+    },
+    "noPendingRequests": "ಯಾವುದೇ ಬಾಕಿ ರಜೆ ವಿನಂತಿಗಳಿಲ್ಲ",
+    "requestsWillAppear": "ಉದ್ಯೋಗಿಗಳು ಸಲ್ಲಿಸಿದಾಗ ರಜೆ ವಿನಂತಿಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ",
+    "requestTimeOff": "ರಜೆ ವಿನಂತಿಸಿ",
+    "approvedFor": "{{name}} ಗೆ ರಜೆ ಅನುಮೋದಿಸಲಾಗಿದೆ",
+    "approveError": "ವಿನಂತಿಯನ್ನು ಅನುಮೋದಿಸಲು ವಿಫಲವಾಗಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    "rejectedFor": "{{name}} ಗೆ ರಜೆ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ",
+    "rejectError": "ವಿನಂತಿಯನ್ನು ತಿರಸ್ಕರಿಸಲು ವಿಫಲವಾಗಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
   },
   "feed": {
     "title": "ಫೀಡ್",
@@ -3310,5 +3324,218 @@
   "offline": {
     "youAreOffline": "You're offline. Some features may be limited.",
     "backOnline": "Back online"
+  },
+  "myLearning": {
+    "title": "ನನ್ನ ಕಲಿಕೆ",
+    "subtitle": "ನಿಮ್ಮ ಕೋರ್ಸ್‌ಗಳು, ಪ್ರಗತಿ ಮತ್ತು ಪ್ರಮಾಣಪತ್ರಗಳು"
+  },
+  "myTimeTracking": {
+    "title": "ನನ್ನ ಸಮಯ ಟ್ರ್ಯಾಕಿಂಗ್"
+  },
+  "myTimeOff": {
+    "title": "ನನ್ನ ರಜೆ",
+    "subtitle": "ನಿಮ್ಮ ರಜೆ ವಿನಂತಿಗಳು ಮತ್ತು ಬ್ಯಾಲೆನ್ಸ್ ವೀಕ್ಷಿಸಿ"
+  },
+  "recognition": {
+    "title": "ಗುರುತಿಸುವಿಕೆ ಗೋಡೆ",
+    "subtitle": "ನಿಮ್ಮ ಸಹೋದ್ಯೋಗಿಗಳ ಸಾಧನೆಗಳನ್ನು ಆಚರಿಸಿ",
+    "giveRecognition": "ಗುರುತಿಸುವಿಕೆ ನೀಡಿ",
+    "recipient": "ಸ್ವೀಕೃತದಾರ",
+    "selectRecipient": "ಸಹೋದ್ಯೋಗಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ...",
+    "category": "ವರ್ಗ",
+    "message": "ಸಂದೇಶ",
+    "messagePlaceholder": "ಅವರ ಕೊಡುಗೆಯನ್ನು ಗುರುತಿಸುವ ಯೋಚನಾಶೀಲ ಸಂದೇಶ ಬರೆಯಿರಿ...",
+    "charLimit": "ಅಕ್ಷರ ಮಿತಿ ತಲುಪಿದೆ",
+    "sendRecognition": "ಗುರುತಿಸುವಿಕೆ ಕಳುಹಿಸಿ",
+    "successMessage": "ಗುರುತಿಸುವಿಕೆ ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ!",
+    "filters": {
+      "all": "ಎಲ್ಲಾ",
+      "received": "ಸ್ವೀಕರಿಸಿದ",
+      "sent": "ಕಳುಹಿಸಿದ",
+      "myTeam": "ನನ್ನ ತಂಡ"
+    },
+    "noRecognitions": "ಈ ಫಿಲ್ಟರ್‌ಗೆ ತೋರಿಸಲು ಯಾವುದೇ ಗುರುತಿಸುವಿಕೆಗಳಿಲ್ಲ.",
+    "mostRecognised": "ಈ ತಿಂಗಳು ಅತ್ಯಂತ ಗುರುತಿಸಲ್ಪಟ್ಟ",
+    "mostGenerous": "ಅತ್ಯಂತ ಉದಾರ (ನೀಡಿದ)",
+    "categories": {
+      "greatWork": "ಅದ್ಭುತ ಕೆಲಸ",
+      "teamPlayer": "ತಂಡದ ಆಟಗಾರ",
+      "goalCrusher": "ಗುರಿ ಸಾಧಕ",
+      "problemSolver": "ಸಮಸ್ಯೆ ಪರಿಹಾರಕ",
+      "aboveAndBeyond": "ಮೇಲೆ ಮತ್ತು ಮೀರಿ",
+      "innovation": "ನಾವೀನ್ಯತೆ"
+    },
+    "time": {
+      "justNow": "ಈಗಷ್ಟೇ",
+      "yesterday": "ನಿನ್ನೆ",
+      "oneWeekAgo": "1 ವಾರದ ಹಿಂದೆ"
+    },
+    "searchColleague": "ಹೆಸರು, ಪಾತ್ರ ಅಥವಾ ವಿಭಾಗದ ಮೂಲಕ ಹುಡುಕಿ...",
+    "noResults": "ಯಾವುದೇ ಸಹೋದ್ಯೋಗಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ"
+  },
+  "directory": {
+    "title": "ಕಂಪನಿ ಡೈರೆಕ್ಟರಿ",
+    "subtitle": "ಸಂಸ್ಥೆಯಾದ್ಯಂತ ಸಹೋದ್ಯೋಗಿಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಸಂಪರ್ಕಿಸಿ",
+    "searchPlaceholder": "ಹೆಸರು, ಪಾತ್ರ, ವಿಭಾಗ ಅಥವಾ ಸ್ಥಳದಿಂದ ಹುಡುಕಿ...",
+    "gridView": "ಗ್ರಿಡ್ ವೀಕ್ಷಣೆ",
+    "grid": "ಗ್ರಿಡ್",
+    "listView": "ಪಟ್ಟಿ ವೀಕ್ಷಣೆ",
+    "list": "ಪಟ್ಟಿ",
+    "orgChartView": "ಆರ್ಗ್ ಚಾರ್ಟ್ ವೀಕ್ಷಣೆ",
+    "orgChart": "ಆರ್ಗ್ ಚಾರ್ಟ್",
+    "allDepartments": "ಎಲ್ಲಾ ವಿಭಾಗಗಳು",
+    "allLocations": "ಎಲ್ಲಾ ಸ್ಥಳಗಳು",
+    "showingResults": "{{count}} ಸಹೋದ್ಯೋಗಿಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ",
+    "sendRecognition": "ಗುರುತಿಸುವಿಕೆ ಕಳುಹಿಸಿ",
+    "viewProfile": "ಪ್ರೊಫೈಲ್ ವೀಕ್ಷಿಸಿ",
+    "noResults": "ಯಾವುದೇ ಸಹೋದ್ಯೋಗಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    "noResultsHint": "ನಿಮ್ಮ ಹುಡುಕಾಟ ಅಥವಾ ಫಿಲ್ಟರ್‌ಗಳನ್ನು ಸರಿಹೊಂದಿಸಿ",
+    "name": "ಹೆಸರು",
+    "role": "ಪಾತ್ರ",
+    "department": "ವಿಭಾಗ",
+    "location": "ಸ್ಥಳ",
+    "email": "ಇಮೇಲ್",
+    "directors": "ನಿರ್ದೇಶಕರು",
+    "managers": "ವ್ಯವಸ್ಥಾಪಕರು",
+    "unknown": "ಅಜ್ಞಾತ",
+    "statusActive": "ಸಕ್ರಿಯ",
+    "statusOnLeave": "ರಜೆಯಲ್ಲಿ",
+    "statusInactive": "ನಿಷ್ಕ್ರಿಯ",
+    "close": "ಮುಚ್ಚಿ",
+    "contact": "ಸಂಪರ್ಕ",
+    "reportsTo": "ವರದಿ ಮಾಡುತ್ತಾರೆ",
+    "directReports": "ನೇರ ವರದಿಗಳು",
+    "skills": "ಕೌಶಲ್ಯಗಳು",
+    "startDate": "ಪ್ರಾರಂಭ ದಿನಾಂಕ",
+    "tenure": "ಅವಧಿ",
+    "collapse": "ಕುಗ್ಗಿಸಿ",
+    "expand": "ವಿಸ್ತರಿಸಿ",
+    "loading": "ಡೈರೆಕ್ಟರಿ ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+    "loadError": "ಡೈರೆಕ್ಟರಿ ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ"
+  },
+  "momentum": {
+    "pageTitle": "ನನ್ನ ಮೊಮೆಂಟಮ್ ಸ್ಕೋರ್",
+    "employee": "ಉದ್ಯೋಗಿ",
+    "momentum": "ಮೊಮೆಂಟಮ್",
+    "trendUp": "↑ಕಳೆದ ತಿಂಗಳಿನಿಂದ 3",
+    "basedOn": "ಹಾಜರಾತಿ, ಕೌಶಲ್ಯಗಳು, ತರಬೇತಿ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆಯ ಆಧಾರದ ಮೇಲೆ",
+    "scoreBreakdown": "ಸ್ಕೋರ್ ವಿಭಜನೆ",
+    "attendance": "ಹಾಜರಾತಿ",
+    "onTimeRate": "ಸಮಯಕ್ಕೆ ದರ: 97%",
+    "shiftCoverage": "ಶಿಫ್ಟ್ ಕವರೇಜ್: 100%",
+    "streak": "10-ದಿನದ ಸ್ಟ್ರೀಕ್ 🔥",
+    "skillsTraining": "ಕೌಶಲ್ಯಗಳು ಮತ್ತು ತರಬೇತಿ",
+    "mandatoryComplete": "4/5 ಕಡ್ಡಾಯ ಪೂರ್ಣ",
+    "totalSkills": "ಒಟ್ಟು 12 ಕೌಶಲ್ಯಗಳು",
+    "verified": "3 ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+    "performanceFeedback": "ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆ",
+    "lastReview": "ಕೊನೆಯ ವಿಮರ್ಶೆ: 4.2/5",
+    "kudos": "ಈ ತಿಂಗಳು 3 ಧನಾತ್ಮಕ ಪ್ರಶಂಸೆ",
+    "goals": "ಗುರಿಗಳು: 2/3 ಟ್ರ್ಯಾಕ್‌ನಲ್ಲಿ",
+    "engagement": "ತೊಡಗಿಸಿಕೊಳ್ಳುವಿಕೆ",
+    "surveyCompleted": "ಸಮೀಕ್ಷೆ ಪೂರ್ಣ: ಹೌದು",
+    "recognitionGiven": "ಈ ತಿಂಗಳು ನೀಡಿದ ಗುರುತಿಸುವಿಕೆ: 5",
+    "tenure": "ಅವಧಿ: 2.3 ವರ್ಷ",
+    "weight": "ತೂಕ: {{pct}}%",
+    "scoreHistory": "ಸ್ಕೋರ್ ಇತಿಹಾಸ",
+    "howToImprove": "ಹೇಗೆ ಸುಧಾರಿಸುವುದು",
+    "tipFireSafety": "ಅಗ್ನಿ ಸುರಕ್ಷತೆ ತರಬೇತಿ ಪೂರ್ಣಗೊಳಿಸಿ",
+    "tipFireSafetyImpact": "ಕೌಶಲ್ಯಗಳು +5",
+    "tipRecognitions": "2 ಹೆಚ್ಚು ಗುರುತಿಸುವಿಕೆ ನೀಡಿ",
+    "tipRecognitionsImpact": "ತೊಡಗಿಸಿಕೊಳ್ಳುವಿಕೆ +3",
+    "tipAttendance": "ಹಾಜರಾತಿ ಸ್ಟ್ರೀಕ್ ಕಾಪಾಡಿಕೊಳ್ಳಿ",
+    "tipAttendanceImpact": "ಹಾಜರಾತಿ +2",
+    "backToDashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗೆ ಹಿಂತಿರುಗಿ"
+  },
+  "corporateCards": {
+    "title": "ಕಾರ್ಪೊರೇಟ್ ಕಾರ್ಡ್‌ಗಳು",
+    "subtitle": "ಕಾರ್ಪೊರೇಟ್ ಕಾರ್ಡ್ ವಹಿವಾಟುಗಳು ಮತ್ತು ವೆಚ್ಚ ಕ್ಲೇಮ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+    "confirmDisconnect": "ಈ ಬ್ಯಾಂಕ್ ಸಂಪರ್ಕವನ್ನು ಕಡಿತಗೊಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+    "stats": {
+      "totalTransactions": "ಒಟ್ಟು ವಹಿವಾಟುಗಳು",
+      "pendingReview": "ಪರಿಶೀಲನೆ ಬಾಕಿ",
+      "totalAmount": "ಒಟ್ಟು ಮೊತ್ತ",
+      "selected": "ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ"
+    },
+    "searchTransactions": "ವಹಿವಾಟುಗಳನ್ನು ಹುಡುಕಿ...",
+    "filter": {
+      "allStatuses": "ಎಲ್ಲಾ ಸ್ಥಿತಿಗಳು",
+      "uncategorized": "ವರ್ಗೀಕರಿಸಲಾಗಿಲ್ಲ",
+      "categorized": "ವರ್ಗೀಕರಿಸಲಾಗಿದೆ",
+      "submitted": "ಸಲ್ಲಿಸಲಾಗಿದೆ"
+    },
+    "sync": "ಸಿಂಕ್",
+    "submitClaim": "ಕ್ಲೇಮ್ ಸಲ್ಲಿಸಿ",
+    "table": {
+      "date": "ದಿನಾಂಕ",
+      "description": "ವಿವರಣೆ",
+      "merchant": "ವ್ಯಾಪಾರಿ",
+      "category": "ವರ್ಗ",
+      "amount": "ಮೊತ್ತ",
+      "status": "ಸ್ಥಿತಿ",
+      "receipt": "ರಶೀದಿ"
+    },
+    "loading": "ವಹಿವಾಟುಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...",
+    "noConnection": "ಬ್ಯಾಂಕ್ ಸಂಪರ್ಕವಿಲ್ಲ",
+    "noTransactions": "ವಹಿವಾಟುಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    "connectBankHint": "ವಹಿವಾಟುಗಳನ್ನು ನೋಡಲು TrueLayer ಮೂಲಕ ಕಾರ್ಪೊರೇಟ್ ಕಾರ್ಡ್ ಸಂಪರ್ಕಿಸಿ",
+    "syncHint": "ಸಿಂಕ್ ಮಾಡಿ ಅಥವಾ ಫಿಲ್ಟರ್‌ಗಳನ್ನು ಸರಿಹೊಂದಿಸಿ",
+    "connectBank": "ಬ್ಯಾಂಕ್ ಸಂಪರ್ಕಿಸಿ",
+    "selectCategory": "ವರ್ಗ ಆಯ್ಕೆಮಾಡಿ",
+    "submitClaimTitle": "ವೆಚ್ಚ ಕ್ಲೇಮ್ ಸಲ್ಲಿಸಿ",
+    "totalAmount": "ಒಟ್ಟು ಮೊತ್ತ",
+    "submit": "ಕ್ಲೇಮ್ ಸಲ್ಲಿಸಿ",
+    "approve": "ಅನುಮೋದಿಸಿ",
+    "reject": "ತಿರಸ್ಕರಿಸಿ",
+    "claims": {
+      "number": "ಕ್ಲೇಮ್ #",
+      "employee": "ಉದ್ಯೋಗಿ",
+      "date": "ದಿನಾಂಕ",
+      "items": "ಐಟಂಗಳು",
+      "amount": "ಮೊತ್ತ",
+      "status": "ಸ್ಥಿತಿ",
+      "actions": "ಕ್ರಿಯೆಗಳು",
+      "totalAmount": "ಒಟ್ಟು ಮೊತ್ತ",
+      "description": "ವಿವರಣೆ"
+    },
+    "noClaims": "ವೆಚ್ಚ ಕ್ಲೇಮ್‌ಗಳಿಲ್ಲ",
+    "noClaimsHint": "ವಹಿವಾಟುಗಳನ್ನು ಸಲ್ಲಿಸಿದಾಗ ಕ್ಲೇಮ್‌ಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ",
+    "payroll": {
+      "approved": "ಅನುಮೋದಿತ ಕ್ಲೇಮ್‌ಗಳು",
+      "approvedDesc": "ಪೇರೋಲ್ ಎಕ್ಸ್‌ಪೋರ್ಟ್‌ಗೆ ಸಿದ್ಧ ಕ್ಲೇಮ್‌ಗಳು",
+      "export": "ಪೇರೋಲ್‌ಗೆ ಎಕ್ಸ್‌ಪೋರ್ಟ್ ಮಾಡಿ",
+      "noPending": "ಎಕ್ಸ್‌ಪೋರ್ಟ್‌ಗೆ ಕ್ಲೇಮ್‌ಗಳಿಲ್ಲ",
+      "noPendingDesc": "ಅನುಮೋದಿತ ಕ್ಲೇಮ್‌ಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ",
+      "history": "ಎಕ್ಸ್‌ಪೋರ್ಟ್ ಇತಿಹಾಸ",
+      "exportDate": "ಎಕ್ಸ್‌ಪೋರ್ಟ್ ದಿನಾಂಕ",
+      "claims": "ಕ್ಲೇಮ್‌ಗಳು",
+      "total": "ಒಟ್ಟು",
+      "exportedBy": "ಎಕ್ಸ್‌ಪೋರ್ಟ್ ಮಾಡಿದವರು",
+      "download": "ಡೌನ್‌ಲೋಡ್",
+      "noExports": "ಇನ್ನೂ ಯಾವುದೇ ಎಕ್ಸ್‌ಪೋರ್ಟ್‌ಗಳಿಲ್ಲ",
+      "csv": "CSV",
+      "exportTitle": "ಪೇರೋಲ್‌ಗೆ ಎಕ್ಸ್‌ಪೋರ್ಟ್",
+      "exportWarning": "ಕ್ಲೇಮ್‌ಗಳನ್ನು ಪಾವತಿ ಎಂದು ಗುರುತಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಮಾರ್ಪಡಿಸಲಾಗುವುದಿಲ್ಲ.",
+      "confirmExport": "ಎಕ್ಸ್‌ಪೋರ್ಟ್"
+    },
+    "cards": {
+      "connections": "ಬ್ಯಾಂಕ್ ಸಂಪರ್ಕಗಳು",
+      "connectionsDesc": "TrueLayer ಮೂಲಕ ಕಾರ್ಪೊರೇಟ್ ಕಾರ್ಡ್ ಖಾತೆಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ",
+      "connect": "ಬ್ಯಾಂಕ್ ಸಂಪರ್ಕಿಸಿ",
+      "noConnections": "ಬ್ಯಾಂಕ್ ಸಂಪರ್ಕಗಳಿಲ್ಲ",
+      "noConnectionsDesc": "TrueLayer ಮೂಲಕ HSBC ಅಥವಾ ಇತರ ಬೆಂಬಲಿತ ಬ್ಯಾಂಕ್‌ಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ",
+      "connected": "ಸಂಪರ್ಕಿತ",
+      "active": "ಸಕ್ರಿಯ",
+      "expired": "ಮುಕ್ತಾಯ",
+      "disconnect": "ಸಂಪರ್ಕ ಕಡಿತ",
+      "list": "ಕಾರ್ಪೊರೇಟ್ ಕಾರ್ಡ್‌ಗಳು",
+      "cardNumber": "ಕಾರ್ಡ್",
+      "holder": "ಕಾರ್ಡ್ ಹೊಂದಿರುವವರು",
+      "type": "ಪ್ರಕಾರ",
+      "status": "ಸ್ಥಿತಿ",
+      "lastSync": "ಕೊನೆಯ ಸಿಂಕ್",
+      "noCards": "ಕಾರ್ಡ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ. ಕಾರ್ಡ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಲು ಬ್ಯಾಂಕ್ ಸಂಪರ್ಕಿಸಿ.",
+      "inactive": "ನಿಷ್ಕ್ರಿಯ"
+    }
   }
 }

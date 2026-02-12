@@ -280,7 +280,12 @@
     "exportComingSoon": "এক্সপোর্ট শীঘ্রই আসছে",
     "clickToViewDetails": "বিস্তারিত দেখতে ক্লিক করুন",
     "closeEsc": "বন্ধ করুন (ESC)",
-    "logoPreview": "লোগো প্রিভিউ"
+    "logoPreview": "লোগো প্রিভিউ",
+    "priority": {
+      "high": "উচ্চ",
+      "medium": "মধ্যম",
+      "low": "নিম্ন"
+    }
   },
   "auth": {
     "login": "লগইন",
@@ -562,7 +567,9 @@
     "startBreak": "বিরতি শুরু করুন",
     "endBreak": "বিরতি শেষ করুন",
     "totalHours": "মোট ঘন্টা",
-    "loadError": "সময় ট্র্যাকিং ডেটা লোড করতে ব্যর্থ। অনুগ্রহ করে আবার চেষ্টা করুন।"
+    "loadError": "সময় ট্র্যাকিং ডেটা লোড করতে ব্যর্থ। অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "clockInOutTab": "ক্লক ইন/আউট",
+    "entriesWillAppear": "কর্মচারীরা ক্লক ইন করলে সময় এন্ট্রি এখানে দেখা যাবে।"
   },
   "timeOff": {
     "title": "ছুটি",
@@ -615,7 +622,14 @@
       "sickleave": "অসুস্থতার ছুটি",
       "annualleave": "বার্ষিক ছুটি",
       "sickleaveshort": "অসুস্থতার ছুটি"
-    }
+    },
+    "noPendingRequests": "কোনো অপেক্ষমাণ ছুটির অনুরোধ নেই",
+    "requestsWillAppear": "কর্মচারীরা জমা দিলে ছুটির অনুরোধ এখানে দেখা যাবে",
+    "requestTimeOff": "ছুটির অনুরোধ করুন",
+    "approvedFor": "{{name}} এর জন্য ছুটি অনুমোদিত",
+    "approveError": "অনুরোধ অনুমোদন করতে ব্যর্থ। আবার চেষ্টা করুন।",
+    "rejectedFor": "{{name}} এর জন্য ছুটি প্রত্যাখ্যাত",
+    "rejectError": "অনুরোধ প্রত্যাখ্যান করতে ব্যর্থ। আবার চেষ্টা করুন।"
   },
   "feed": {
     "title": "ফিড",
@@ -3242,7 +3256,22 @@
       "manager": "ব্যবস্থাপক"
     },
     "title": "কোম্পানি ডিরেক্টরি",
-    "viewProfile": "প্রোফাইল দেখুন"
+    "viewProfile": "প্রোফাইল দেখুন",
+    "unknown": "অজানা",
+    "statusActive": "সক্রিয়",
+    "statusOnLeave": "ছুটিতে",
+    "statusInactive": "নিষ্ক্রিয়",
+    "close": "বন্ধ",
+    "contact": "যোগাযোগ",
+    "reportsTo": "রিপোর্ট করে",
+    "directReports": "সরাসরি রিপোর্ট",
+    "skills": "দক্ষতা",
+    "startDate": "শুরুর তারিখ",
+    "tenure": "কার্যকাল",
+    "collapse": "সংকুচিত",
+    "expand": "প্রসারিত",
+    "loading": "ডিরেক্টরি লোড হচ্ছে...",
+    "loadError": "ডিরেক্টরি লোড করতে ব্যর্থ"
   },
   "momentum": {
     "attendance": "উপস্থিতি",
@@ -3306,7 +3335,14 @@
     "sendRecognition": "স্বীকৃতি পাঠান",
     "subtitle": "আপনার সহকর্মীদের অর্জন উদযাপন করুন",
     "successMessage": "স্বীকৃতি সফলভাবে পাঠানো হয়েছে!",
-    "title": "স্বীকৃতি ওয়াল"
+    "title": "স্বীকৃতি ওয়াল",
+    "time": {
+      "justNow": "এইমাত্র",
+      "yesterday": "গতকাল",
+      "oneWeekAgo": "১ সপ্তাহ আগে"
+    },
+    "searchColleague": "নাম, ভূমিকা বা বিভাগ দ্বারা খুঁজুন...",
+    "noResults": "কোনো সহকর্মী পাওয়া যায়নি"
   },
   "payroll": {
     "title": "বেতন",
@@ -3427,5 +3463,107 @@
   "offline": {
     "youAreOffline": "You're offline. Some features may be limited.",
     "backOnline": "Back online"
+  },
+  "myLearning": {
+    "title": "আমার শিক্ষা",
+    "subtitle": "আপনার কোর্স, অগ্রগতি এবং সার্টিফিকেশন"
+  },
+  "myTimeTracking": {
+    "title": "আমার সময় ট্র্যাকিং"
+  },
+  "myTimeOff": {
+    "title": "আমার ছুটি",
+    "subtitle": "আপনার ছুটির অনুরোধ এবং ব্যালেন্স দেখুন"
+  },
+  "corporateCards": {
+    "title": "কর্পোরেট কার্ড",
+    "subtitle": "কর্পোরেট কার্ড লেনদেন এবং খরচ দাবি পরিচালনা করুন",
+    "confirmDisconnect": "আপনি কি এই ব্যাংক সংযোগ বিচ্ছিন্ন করতে চান?",
+    "stats": {
+      "totalTransactions": "মোট লেনদেন",
+      "pendingReview": "পর্যালোচনার অপেক্ষায়",
+      "totalAmount": "মোট পরিমাণ",
+      "selected": "নির্বাচিত"
+    },
+    "searchTransactions": "লেনদেন খুঁজুন...",
+    "filter": {
+      "allStatuses": "সব স্ট্যাটাস",
+      "uncategorized": "শ্রেণীবদ্ধ নয়",
+      "categorized": "শ্রেণীবদ্ধ",
+      "submitted": "জমা দেওয়া"
+    },
+    "sync": "সিঙ্ক",
+    "submitClaim": "দাবি জমা দিন",
+    "table": {
+      "date": "তারিখ",
+      "description": "বিবরণ",
+      "merchant": "বণিক",
+      "category": "বিভাগ",
+      "amount": "পরিমাণ",
+      "status": "স্ট্যাটাস",
+      "receipt": "রসিদ"
+    },
+    "loading": "লেনদেন লোড হচ্ছে...",
+    "noConnection": "ব্যাংক সংযুক্ত নেই",
+    "noTransactions": "কোনো লেনদেন পাওয়া যায়নি",
+    "connectBankHint": "লেনদেন দেখতে TrueLayer এর মাধ্যমে আপনার কর্পোরেট কার্ড সংযুক্ত করুন",
+    "syncHint": "সিঙ্ক করুন বা ফিল্টার সামঞ্জস্য করুন",
+    "connectBank": "ব্যাংক সংযুক্ত করুন",
+    "selectCategory": "বিভাগ নির্বাচন করুন",
+    "submitClaimTitle": "খরচ দাবি জমা দিন",
+    "totalAmount": "মোট পরিমাণ",
+    "submit": "দাবি জমা দিন",
+    "approve": "অনুমোদন",
+    "reject": "প্রত্যাখ্যান",
+    "claims": {
+      "number": "দাবি #",
+      "employee": "কর্মচারী",
+      "date": "তারিখ",
+      "items": "আইটেম",
+      "amount": "পরিমাণ",
+      "status": "স্ট্যাটাস",
+      "actions": "অ্যাকশন",
+      "totalAmount": "মোট পরিমাণ",
+      "description": "বিবরণ"
+    },
+    "noClaims": "কোনো খরচ দাবি নেই",
+    "noClaimsHint": "আপনি লেনদেন জমা দিলে দাবি এখানে দেখা যাবে",
+    "payroll": {
+      "approved": "অনুমোদিত দাবি",
+      "approvedDesc": "পেরোলে রপ্তানির জন্য প্রস্তুত দাবি",
+      "export": "পেরোলে রপ্তানি করুন",
+      "noPending": "রপ্তানির জন্য কোনো দাবি নেই",
+      "noPendingDesc": "অনুমোদিত দাবি এখানে দেখা যাবে",
+      "history": "রপ্তানি ইতিহাস",
+      "exportDate": "রপ্তানির তারিখ",
+      "claims": "দাবি",
+      "total": "মোট",
+      "exportedBy": "রপ্তানিকারী",
+      "download": "ডাউনলোড",
+      "noExports": "এখনো কোনো রপ্তানি নেই",
+      "csv": "CSV",
+      "exportTitle": "পেরোলে রপ্তানি",
+      "exportWarning": "দাবি পেইড হিসাবে চিহ্নিত হবে এবং পরিবর্তন করা যাবে না।",
+      "confirmExport": "রপ্তানি"
+    },
+    "cards": {
+      "connections": "ব্যাংক সংযোগ",
+      "connectionsDesc": "TrueLayer এর মাধ্যমে কর্পোরেট কার্ড অ্যাকাউন্ট সংযুক্ত করুন",
+      "connect": "ব্যাংক সংযুক্ত করুন",
+      "noConnections": "কোনো ব্যাংক সংযোগ নেই",
+      "noConnectionsDesc": "TrueLayer এর মাধ্যমে HSBC বা অন্যান্য সমর্থিত ব্যাংক সংযুক্ত করুন",
+      "connected": "সংযুক্ত",
+      "active": "সক্রিয়",
+      "expired": "মেয়াদোত্তীর্ণ",
+      "disconnect": "সংযোগ বিচ্ছিন্ন",
+      "list": "কর্পোরেট কার্ড",
+      "cardNumber": "কার্ড",
+      "holder": "কার্ড ধারক",
+      "type": "ধরন",
+      "status": "স্ট্যাটাস",
+      "lastSync": "শেষ সিঙ্ক",
+      "noCards": "কোনো কার্ড পাওয়া যায়নি। কার্ড সিঙ্ক করতে ব্যাংক সংযুক্ত করুন।",
+      "inactive": "নিষ্ক্রিয়"
+    }
   }
 }

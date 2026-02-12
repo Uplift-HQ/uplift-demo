@@ -269,7 +269,12 @@
     "exportComingSoon": "எக்ஸ்போர்ட் விரைவில் வரும்",
     "clickToViewDetails": "விரிவுகளைப் பார்க்க கிளிக் செய்யவும்",
     "closeEsc": "மூடு (ESC)",
-    "logoPreview": "லோகோ முன்னோட்டம்"
+    "logoPreview": "லோகோ முன்னோட்டம்",
+    "priority": {
+      "high": "உயர்",
+      "medium": "நடுத்தர",
+      "low": "குறைந்த"
+    }
   },
   "auth": {
     "login": "உள்நுழை",
@@ -543,7 +548,9 @@
     "startBreak": "இடைவேளை தொடங்கு",
     "endBreak": "இடைவேளை முடி",
     "totalHours": "மொத்த மணிநேரம்",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "Failed to load time tracking data. Please try again.",
+    "clockInOutTab": "க்ளாக் இன்/அவுட்",
+    "entriesWillAppear": "ஊழியர்கள் க்ளாக் இன் செய்யும்போது நேர உள்ளீடுகள் இங்கே தோன்றும்."
   },
   "timeOff": {
     "title": "விடுப்பு",
@@ -596,7 +603,14 @@
       "sickleave": "நோய் விடுப்பு",
       "annualleave": "வருடாந்திர விடுப்பு",
       "sickleaveshort": "நோய் விடுப்பு"
-    }
+    },
+    "noPendingRequests": "நிலுவையில் உள்ள விடுப்பு கோரிக்கைகள் இல்லை",
+    "requestsWillAppear": "ஊழியர்கள் சமர்ப்பிக்கும்போது விடுப்பு கோரிக்கைகள் இங்கே தோன்றும்",
+    "requestTimeOff": "விடுப்பு கோரிக்கை",
+    "approvedFor": "{{name}} க்கு விடுப்பு அங்கீகரிக்கப்பட்டது",
+    "approveError": "கோரிக்கையை அங்கீகரிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+    "rejectedFor": "{{name}} க்கு விடுப்பு நிராகரிக்கப்பட்டது",
+    "rejectError": "கோரிக்கையை நிராகரிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்."
   },
   "feed": {
     "title": "ஊட்டம்",
@@ -3310,5 +3324,218 @@
   "offline": {
     "youAreOffline": "You're offline. Some features may be limited.",
     "backOnline": "Back online"
+  },
+  "myLearning": {
+    "title": "என் கற்றல்",
+    "subtitle": "உங்கள் படிப்புகள், முன்னேற்றம் மற்றும் சான்றிதழ்கள்"
+  },
+  "myTimeTracking": {
+    "title": "என் நேர கண்காணிப்பு"
+  },
+  "myTimeOff": {
+    "title": "என் விடுப்பு",
+    "subtitle": "உங்கள் விடுப்பு கோரிக்கைகள் மற்றும் இருப்பைக் காண்க"
+  },
+  "recognition": {
+    "title": "அங்கீகார சுவர்",
+    "subtitle": "உங்கள் சகாக்களின் சாதனைகளைக் கொண்டாடுங்கள்",
+    "giveRecognition": "அங்கீகாரம் வழங்கு",
+    "recipient": "பெறுநர்",
+    "selectRecipient": "சகாவைத் தேர்ந்தெடுக்கவும்...",
+    "category": "வகை",
+    "message": "செய்தி",
+    "messagePlaceholder": "அவர்களின் பங்களிப்பை அங்கீகரிக்கும் சிந்தனையுள்ள செய்தி எழுதுங்கள்...",
+    "charLimit": "எழுத்து வரம்பு எட்டியது",
+    "sendRecognition": "அங்கீகாரம் அனுப்பு",
+    "successMessage": "அங்கீகாரம் வெற்றிகரமாக அனுப்பப்பட்டது!",
+    "filters": {
+      "all": "அனைத்தும்",
+      "received": "பெறப்பட்டவை",
+      "sent": "அனுப்பப்பட்டவை",
+      "myTeam": "என் குழு"
+    },
+    "noRecognitions": "இந்த வடிகட்டியில் காட்ட அங்கீகாரங்கள் இல்லை.",
+    "mostRecognised": "இந்த மாதம் அதிகம் அங்கீகரிக்கப்பட்டவர்",
+    "mostGenerous": "அதிக தாராளமானவர் (வழங்கியவர்)",
+    "categories": {
+      "greatWork": "சிறந்த வேலை",
+      "teamPlayer": "குழு விளையாட்டாளர்",
+      "goalCrusher": "இலக்கு அடைபவர்",
+      "problemSolver": "சிக்கல் தீர்ப்பவர்",
+      "aboveAndBeyond": "மேலும் அப்பால்",
+      "innovation": "புத்தாக்கம்"
+    },
+    "time": {
+      "justNow": "இப்போதே",
+      "yesterday": "நேற்று",
+      "oneWeekAgo": "1 வாரத்திற்கு முன்"
+    },
+    "searchColleague": "பெயர், பதவி அல்லது துறை மூலம் தேடுங்கள்...",
+    "noResults": "சகாக்கள் கிடைக்கவில்லை"
+  },
+  "directory": {
+    "title": "நிறுவன அடைவு",
+    "subtitle": "நிறுவனம் முழுவதும் சகாக்களைக் கண்டுபிடித்து இணையுங்கள்",
+    "searchPlaceholder": "பெயர், பதவி, துறை அல்லது இடம் மூலம் தேடுங்கள்...",
+    "gridView": "கட்டம் காட்சி",
+    "grid": "கட்டம்",
+    "listView": "பட்டியல் காட்சி",
+    "list": "பட்டியல்",
+    "orgChartView": "அமைப்பு வரைபடம் காட்சி",
+    "orgChart": "அமைப்பு வரைபடம்",
+    "allDepartments": "அனைத்து துறைகள்",
+    "allLocations": "அனைத்து இடங்கள்",
+    "showingResults": "{{count}} சகாக்கள் காண்பிக்கப்படுகிறது",
+    "sendRecognition": "அங்கீகாரம் அனுப்பு",
+    "viewProfile": "சுயவிவரம் பார்",
+    "noResults": "சகாக்கள் கிடைக்கவில்லை",
+    "noResultsHint": "உங்கள் தேடல் அல்லது வடிப்பான்களை சரிசெய்யவும்",
+    "name": "பெயர்",
+    "role": "பதவி",
+    "department": "துறை",
+    "location": "இடம்",
+    "email": "மின்னஞ்சல்",
+    "directors": "இயக்குநர்கள்",
+    "managers": "மேலாளர்கள்",
+    "unknown": "அறியப்படாதது",
+    "statusActive": "செயலில்",
+    "statusOnLeave": "விடுப்பில்",
+    "statusInactive": "செயலிழந்தது",
+    "close": "மூடு",
+    "contact": "தொடர்பு",
+    "reportsTo": "அறிக்கை செய்யும்",
+    "directReports": "நேரடி அறிக்கைகள்",
+    "skills": "திறன்கள்",
+    "startDate": "தொடக்க தேதி",
+    "tenure": "பணிக்காலம்",
+    "collapse": "சுருக்கு",
+    "expand": "விரிவாக்கு",
+    "loading": "அடைவு ஏற்றப்படுகிறது...",
+    "loadError": "அடைவை ஏற்ற முடியவில்லை"
+  },
+  "momentum": {
+    "pageTitle": "என் வேகமதிப்பெண்",
+    "employee": "ஊழியர்",
+    "momentum": "வேகம்",
+    "trendUp": "↑கடந்த மாதத்தில் இருந்து 3",
+    "basedOn": "வருகை, திறன்கள், பயிற்சி மற்றும் கருத்துகளின் அடிப்படையில்",
+    "scoreBreakdown": "மதிப்பெண் பிரிவு",
+    "attendance": "வருகை",
+    "onTimeRate": "நேரத்திற்கு விகிதம்: 97%",
+    "shiftCoverage": "ஷிப்ட் கவரேஜ்: 100%",
+    "streak": "10 நாள் தொடர் 🔥",
+    "skillsTraining": "திறன்கள் மற்றும் பயிற்சி",
+    "mandatoryComplete": "4/5 கட்டாயம் முடிந்தது",
+    "totalSkills": "மொத்தம் 12 திறன்கள்",
+    "verified": "3 சரிபார்க்கப்பட்டது",
+    "performanceFeedback": "செயல்திறன் மற்றும் கருத்து",
+    "lastReview": "கடைசி மதிப்பாய்வு: 4.2/5",
+    "kudos": "இந்த மாதம் 3 நேர்மறை பாராட்டு",
+    "goals": "இலக்குகள்: 2/3 பாதையில்",
+    "engagement": "ஈடுபாடு",
+    "surveyCompleted": "ஆய்வு முடிந்தது: ஆம்",
+    "recognitionGiven": "இந்த மாதம் வழங்கிய அங்கீகாரம்: 5",
+    "tenure": "பணிக்காலம்: 2.3 ஆண்டுகள்",
+    "weight": "எடை: {{pct}}%",
+    "scoreHistory": "மதிப்பெண் வரலாறு",
+    "howToImprove": "எப்படி மேம்படுத்துவது",
+    "tipFireSafety": "தீ பாதுகாப்பு பயிற்சி முடிக்கவும்",
+    "tipFireSafetyImpact": "திறன்கள் +5",
+    "tipRecognitions": "2 மேலும் அங்கீகாரம் வழங்கவும்",
+    "tipRecognitionsImpact": "ஈடுபாடு +3",
+    "tipAttendance": "வருகை தொடர் பராமரிக்கவும்",
+    "tipAttendanceImpact": "வருகை +2",
+    "backToDashboard": "டாஷ்போர்டுக்கு திரும்பு"
+  },
+  "corporateCards": {
+    "title": "கார்ப்பரேட் கார்டுகள்",
+    "subtitle": "கார்ப்பரேட் கார்டு பரிவர்த்தனைகள் மற்றும் செலவு கோரிக்கைகளை நிர்வகிக்கவும்",
+    "confirmDisconnect": "இந்த வங்கி இணைப்பை துண்டிக்க விரும்புகிறீர்களா?",
+    "stats": {
+      "totalTransactions": "மொத்த பரிவர்த்தனைகள்",
+      "pendingReview": "மதிப்பாய்வு நிலுவையில்",
+      "totalAmount": "மொத்த தொகை",
+      "selected": "தேர்ந்தெடுக்கப்பட்டது"
+    },
+    "searchTransactions": "பரிவர்த்தனைகளைத் தேடுங்கள்...",
+    "filter": {
+      "allStatuses": "அனைத்து நிலைகள்",
+      "uncategorized": "வகைப்படுத்தப்படவில்லை",
+      "categorized": "வகைப்படுத்தப்பட்டது",
+      "submitted": "சமர்ப்பிக்கப்பட்டது"
+    },
+    "sync": "ஒத்திசை",
+    "submitClaim": "கோரிக்கை சமர்ப்பி",
+    "table": {
+      "date": "தேதி",
+      "description": "விளக்கம்",
+      "merchant": "வணிகர்",
+      "category": "வகை",
+      "amount": "தொகை",
+      "status": "நிலை",
+      "receipt": "ரசீது"
+    },
+    "loading": "பரிவர்த்தனைகள் ஏற்றப்படுகின்றன...",
+    "noConnection": "வங்கி இணைக்கப்படவில்லை",
+    "noTransactions": "பரிவர்த்தனைகள் இல்லை",
+    "connectBankHint": "பரிவர்த்தனைகளைக் காண TrueLayer வழியாக கார்ப்பரேட் கார்டை இணைக்கவும்",
+    "syncHint": "ஒத்திசைக்கவும் அல்லது வடிப்பான்களை சரிசெய்யவும்",
+    "connectBank": "வங்கியை இணை",
+    "selectCategory": "வகையைத் தேர்ந்தெடு",
+    "submitClaimTitle": "செலவு கோரிக்கை சமர்ப்பி",
+    "totalAmount": "மொத்த தொகை",
+    "submit": "கோரிக்கை சமர்ப்பி",
+    "approve": "அங்கீகரி",
+    "reject": "நிராகரி",
+    "claims": {
+      "number": "கோரிக்கை #",
+      "employee": "ஊழியர்",
+      "date": "தேதி",
+      "items": "உருப்படிகள்",
+      "amount": "தொகை",
+      "status": "நிலை",
+      "actions": "செயல்கள்",
+      "totalAmount": "மொத்த தொகை",
+      "description": "விளக்கம்"
+    },
+    "noClaims": "செலவு கோரிக்கைகள் இல்லை",
+    "noClaimsHint": "பரிவர்த்தனைகளை சமர்ப்பிக்கும்போது கோரிக்கைகள் இங்கே தோன்றும்",
+    "payroll": {
+      "approved": "அங்கீகரிக்கப்பட்ட கோரிக்கைகள்",
+      "approvedDesc": "சம்பளப்பட்டியல் ஏற்றுமதிக்கு தயாராக உள்ள கோரிக்கைகள்",
+      "export": "சம்பளப்பட்டியலுக்கு ஏற்றுமதி",
+      "noPending": "ஏற்றுமதிக்கு கோரிக்கைகள் இல்லை",
+      "noPendingDesc": "அங்கீகரிக்கப்பட்ட கோரிக்கைகள் இங்கே தோன்றும்",
+      "history": "ஏற்றுமதி வரலாறு",
+      "exportDate": "ஏற்றுமதி தேதி",
+      "claims": "கோரிக்கைகள்",
+      "total": "மொத்தம்",
+      "exportedBy": "ஏற்றுமதி செய்தவர்",
+      "download": "பதிவிறக்கு",
+      "noExports": "இதுவரை ஏற்றுமதிகள் இல்லை",
+      "csv": "CSV",
+      "exportTitle": "சம்பளப்பட்டியலுக்கு ஏற்றுமதி",
+      "exportWarning": "கோரிக்கைகள் பணம் செலுத்தப்பட்டதாக குறிக்கப்படும், மாற்ற முடியாது.",
+      "confirmExport": "ஏற்றுமதி"
+    },
+    "cards": {
+      "connections": "வங்கி இணைப்புகள்",
+      "connectionsDesc": "TrueLayer வழியாக கார்ப்பரேட் கார்டு கணக்குகளை இணைக்கவும்",
+      "connect": "வங்கியை இணை",
+      "noConnections": "வங்கி இணைப்புகள் இல்லை",
+      "noConnectionsDesc": "TrueLayer வழியாக HSBC அல்லது பிற ஆதரிக்கப்படும் வங்கிகளை இணைக்கவும்",
+      "connected": "இணைக்கப்பட்டது",
+      "active": "செயலில்",
+      "expired": "காலாவதி",
+      "disconnect": "துண்டி",
+      "list": "கார்ப்பரேட் கார்டுகள்",
+      "cardNumber": "கார்டு",
+      "holder": "கார்டு வைத்திருப்பவர்",
+      "type": "வகை",
+      "status": "நிலை",
+      "lastSync": "கடைசி ஒத்திசைவு",
+      "noCards": "கார்டுகள் இல்லை. கார்டுகளை ஒத்திசைக்க வங்கியை இணைக்கவும்.",
+      "inactive": "செயலற்றது"
+    }
   }
 }

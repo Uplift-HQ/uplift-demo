@@ -572,6 +572,9 @@
     "totalHours": "總時數",
     "loadError": "無法載入時間追蹤資料，請重試。"
   },
+  "myTimeTracking": {
+    "title": "我的出勤追蹤"
+  },
   "timeOff": {
     "title": "請假",
     "request": "申請請假",
@@ -623,7 +626,18 @@
       "sickleave": "病假",
       "annualleave": "年假",
       "sickleaveshort": "病假"
-    }
+    },
+    "approvedFor": "已核准 {{name}} 的請假",
+    "approveError": "核准請求失敗，請重試。",
+    "rejectedFor": "已拒絕 {{name}} 的請假",
+    "rejectError": "拒絕請求失敗，請重試。",
+    "noPendingRequests": "沒有待處理的請假申請",
+    "requestsWillAppear": "員工提交請假申請後將會顯示在此處",
+    "requestTimeOff": "申請請假"
+  },
+  "myTimeOff": {
+    "title": "我的請假",
+    "subtitle": "查看您的請假申請和餘額"
   },
   "feed": {
     "title": "動態",
@@ -3333,6 +3347,97 @@
     "feedImport": "資料匯入",
     "nativeCalculation": "本地計算",
     "externalProvider": "外部服務商"
+  },
+  "corporateCards": {
+    "title": "公司卡",
+    "subtitle": "管理公司卡交易及費用報銷",
+    "confirmDisconnect": "確定要中斷此銀行連線嗎？",
+    "stats": {
+      "totalTransactions": "總交易數",
+      "pendingReview": "待審核",
+      "totalAmount": "總金額",
+      "selected": "已選擇"
+    },
+    "searchTransactions": "搜尋交易...",
+    "filter": {
+      "allStatuses": "全部狀態",
+      "uncategorized": "未分類",
+      "categorized": "已分類",
+      "submitted": "已提交"
+    },
+    "sync": "同步",
+    "submitClaim": "提交報銷",
+    "table": {
+      "date": "日期",
+      "description": "說明",
+      "merchant": "商戶",
+      "category": "類別",
+      "amount": "金額",
+      "status": "狀態",
+      "receipt": "收據"
+    },
+    "loading": "正在載入交易...",
+    "noConnection": "尚未連接銀行",
+    "noTransactions": "未找到交易",
+    "connectBankHint": "透過 TrueLayer 連接您的公司卡以查看交易",
+    "syncHint": "請嘗試同步或調整篩選條件",
+    "connectBank": "連接銀行",
+    "selectCategory": "選擇類別",
+    "submitClaimTitle": "提交費用報銷",
+    "totalAmount": "總金額",
+    "submit": "提交報銷",
+    "approve": "核准",
+    "reject": "拒絕",
+    "claims": {
+      "number": "報銷單號",
+      "employee": "員工",
+      "date": "日期",
+      "items": "項目",
+      "amount": "金額",
+      "status": "狀態",
+      "actions": "操作",
+      "totalAmount": "總金額",
+      "description": "說明"
+    },
+    "noClaims": "沒有費用報銷",
+    "noClaimsHint": "提交交易後，報銷單將顯示在此處",
+    "payroll": {
+      "approved": "已核准報銷",
+      "approvedDesc": "準備匯出至薪資系統的報銷單",
+      "export": "匯出至薪資系統",
+      "noPending": "沒有待匯出的報銷單",
+      "noPendingDesc": "已核准的報銷單將顯示在此處",
+      "history": "匯出紀錄",
+      "exportDate": "匯出日期",
+      "claims": "報銷單",
+      "total": "總計",
+      "exportedBy": "匯出者",
+      "download": "下載",
+      "noExports": "尚無匯出紀錄",
+      "csv": "CSV",
+      "exportTitle": "匯出至薪資系統",
+      "exportWarning": "報銷單將標記為已支付，匯出後無法修改。",
+      "confirmExport": "匯出"
+    },
+    "cards": {
+      "connections": "銀行連線",
+      "connectionsDesc": "透過 TrueLayer 連接您的公司卡帳戶",
+      "connect": "連接銀行",
+      "noConnections": "沒有銀行連線",
+      "noConnectionsDesc": "透過 TrueLayer 連接匯豐或其他支援的銀行",
+      "connected": "已連接",
+      "active": "啟用中",
+      "expired": "已過期",
+      "disconnect": "中斷連線",
+      "list": "公司卡",
+      "cardNumber": "卡片",
+      "holder": "持卡人",
+      "type": "類型",
+      "status": "狀態",
+      "lastSync": "最後同步",
+      "noCards": "未找到卡片。請連接銀行以同步公司卡。",
+      "inactive": "停用"
+    }
   },
   "offline": {
     "youAreOffline": "您目前處於離線狀態。某些功能可能受限。",

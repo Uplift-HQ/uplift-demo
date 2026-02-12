@@ -3615,6 +3615,104 @@
     "title": "动力值",
     "score": "分数"
   },
+  "myTimeTracking": {
+    "title": "我的考勤"
+  },
+  "myTimeOff": {
+    "title": "我的休假",
+    "subtitle": "查看您的休假申请和余额"
+  },
+  "corporateCards": {
+    "title": "企业卡",
+    "subtitle": "管理企业卡交易和费用报销",
+    "confirmDisconnect": "确定要断开此银行连接吗？",
+    "stats": {
+      "totalTransactions": "总交易数",
+      "pendingReview": "待审核",
+      "totalAmount": "总金额",
+      "selected": "已选择"
+    },
+    "searchTransactions": "搜索交易...",
+    "filter": {
+      "allStatuses": "全部状态",
+      "uncategorized": "未分类",
+      "categorized": "已分类",
+      "submitted": "已提交"
+    },
+    "sync": "同步",
+    "submitClaim": "提交报销",
+    "table": {
+      "date": "日期",
+      "description": "描述",
+      "merchant": "商户",
+      "category": "类别",
+      "amount": "金额",
+      "status": "状态",
+      "receipt": "收据"
+    },
+    "loading": "加载交易中...",
+    "noConnection": "未连接银行",
+    "noTransactions": "未找到交易",
+    "connectBankHint": "通过 TrueLayer 连接您的企业卡以查看交易",
+    "syncHint": "尝试同步或调整筛选条件",
+    "connectBank": "连接银行",
+    "selectCategory": "选择类别",
+    "submitClaimTitle": "提交费用报销",
+    "totalAmount": "总金额",
+    "submit": "提交报销",
+    "approve": "批准",
+    "reject": "拒绝",
+    "claims": {
+      "number": "报销单号",
+      "employee": "员工",
+      "date": "日期",
+      "items": "项目",
+      "amount": "金额",
+      "status": "状态",
+      "actions": "操作",
+      "totalAmount": "总金额",
+      "description": "描述"
+    },
+    "noClaims": "暂无费用报销",
+    "noClaimsHint": "提交交易后报销单将显示在此处",
+    "payroll": {
+      "approved": "已批准的报销",
+      "approvedDesc": "准备导出到工资单的报销",
+      "export": "导出到工资单",
+      "noPending": "无待导出的报销",
+      "noPendingDesc": "已批准的报销将显示在此处",
+      "history": "导出历史",
+      "exportDate": "导出日期",
+      "claims": "报销单",
+      "total": "合计",
+      "exportedBy": "导出人",
+      "download": "下载",
+      "noExports": "暂无导出记录",
+      "csv": "CSV",
+      "exportTitle": "导出到工资单",
+      "exportWarning": "报销将被标记为已支付，导出后无法修改。",
+      "confirmExport": "导出"
+    },
+    "cards": {
+      "connections": "银行连接",
+      "connectionsDesc": "通过 TrueLayer 连接您的企业卡账户",
+      "connect": "连接银行",
+      "noConnections": "无银行连接",
+      "noConnectionsDesc": "通过 TrueLayer 连接汇丰或其他支持的银行",
+      "connected": "已连接",
+      "active": "有效",
+      "expired": "已过期",
+      "disconnect": "断开连接",
+      "list": "企业卡",
+      "cardNumber": "卡号",
+      "holder": "持卡人",
+      "type": "类型",
+      "status": "状态",
+      "lastSync": "最后同步",
+      "noCards": "未找到卡片。连接银行以同步企业卡。",
+      "inactive": "无效"
+    }
+  },
   "signature": {
     "draw": "绘制",
     "type": "输入",

@@ -269,7 +269,12 @@
     "exportComingSoon": "નિકાસ ટૂંક સમયમાં",
     "clickToViewDetails": "વિગતો જોવા માટે ક્લિક કરો",
     "closeEsc": "બંધ કરો (ESC)",
-    "logoPreview": "લોગો પૂર્વાવલોકન"
+    "logoPreview": "લોગો પૂર્વાવલોકન",
+    "priority": {
+      "high": "ઉચ્ચ",
+      "medium": "મધ્યમ",
+      "low": "નીચું"
+    }
   },
   "auth": {
     "login": "લોગિન",
@@ -551,7 +556,9 @@
     "startBreak": "બ્રેક શરૂ",
     "endBreak": "બ્રેક સમાપ્ત",
     "totalHours": "કુલ કલાકો",
-    "loadError": "Failed to load time tracking data. Please try again."
+    "loadError": "Failed to load time tracking data. Please try again.",
+    "clockInOutTab": "ક્લોક ઇન/આઉટ",
+    "entriesWillAppear": "કર્મચારીઓ ક્લોક ઇન કરે ત્યારે સમય એન્ટ્રીઓ અહીં દેખાશે."
   },
   "timeOff": {
     "title": "રજા",
@@ -604,7 +611,14 @@
       "sickleave": "બીમારીની રજા",
       "annualleave": "વાર્ષિક રજા",
       "sickleaveshort": "બીમારીની રજા"
-    }
+    },
+    "noPendingRequests": "કોઈ બાકી રજા વિનંતીઓ નથી",
+    "requestsWillAppear": "કર્મચારીઓ સબમિટ કરે ત્યારે રજા વિનંતીઓ અહીં દેખાશે",
+    "requestTimeOff": "રજાની વિનંતી કરો",
+    "approvedFor": "{{name}} માટે રજા મંજૂર",
+    "approveError": "વિનંતી મંજૂર કરવામાં નિષ્ફળ. ફરી પ્રયાસ કરો.",
+    "rejectedFor": "{{name}} માટે રજા નકારી",
+    "rejectError": "વિનંતી નકારવામાં નિષ્ફળ. ફરી પ્રયાસ કરો."
   },
   "feed": {
     "title": "ફીડ",
@@ -3318,5 +3332,218 @@
   "offline": {
     "youAreOffline": "તમે ઑફલાઇન છો. કેટલીક સુવિધાઓ મર્યાદિત હોઈ શકે છે.",
     "backOnline": "પાછા ઑનલાઇન"
+  },
+  "myLearning": {
+    "title": "મારું શિક્ષણ",
+    "subtitle": "તમારા કોર્સ, પ્રગતિ અને પ્રમાણપત્રો"
+  },
+  "myTimeTracking": {
+    "title": "મારું સમય ટ્રેકિંગ"
+  },
+  "myTimeOff": {
+    "title": "મારી રજા",
+    "subtitle": "તમારી રજાની વિનંતીઓ અને બેલેન્સ જુઓ"
+  },
+  "recognition": {
+    "title": "માન્યતા દીવાલ",
+    "subtitle": "તમારા સાથીદારોની સિદ્ધિઓની ઉજવણી કરો",
+    "giveRecognition": "માન્યતા આપો",
+    "recipient": "પ્રાપ્તકર્તા",
+    "selectRecipient": "સાથીદાર પસંદ કરો...",
+    "category": "શ્રેણી",
+    "message": "સંદેશ",
+    "messagePlaceholder": "તેમના યોગદાનને માન્યતા આપતો વિચારશીલ સંદેશ લખો...",
+    "charLimit": "અક્ષર મર્યાદા પહોંચી",
+    "sendRecognition": "માન્યતા મોકલો",
+    "successMessage": "માન્યતા સફળતાપૂર્વક મોકલાઈ!",
+    "filters": {
+      "all": "બધા",
+      "received": "પ્રાપ્ત",
+      "sent": "મોકલેલ",
+      "myTeam": "મારી ટીમ"
+    },
+    "noRecognitions": "આ ફિલ્ટર માટે કોઈ માન્યતા બતાવવા નથી.",
+    "mostRecognised": "આ મહિને સૌથી વધુ માન્યતા પ્રાપ્ત",
+    "mostGenerous": "સૌથી ઉદાર (આપેલ)",
+    "categories": {
+      "greatWork": "ઉત્તમ કાર્ય",
+      "teamPlayer": "ટીમ પ્લેયર",
+      "goalCrusher": "ગોલ ક્રશર",
+      "problemSolver": "સમસ્યા ઉકેલનાર",
+      "aboveAndBeyond": "ઉપર અને આગળ",
+      "innovation": "નવીનતા"
+    },
+    "time": {
+      "justNow": "હમણાં જ",
+      "yesterday": "ગઈકાલે",
+      "oneWeekAgo": "1 અઠવાડિયા પહેલાં"
+    },
+    "searchColleague": "નામ, ભૂમિકા અથવા વિભાગ દ્વારા શોધો...",
+    "noResults": "કોઈ સાથીદાર મળ્યા નહીં"
+  },
+  "directory": {
+    "title": "કંપની ડિરેક્ટરી",
+    "subtitle": "સંસ્થા ભરમાં સાથીદારો શોધો અને જોડાઓ",
+    "searchPlaceholder": "નામ, ભૂમિકા, વિભાગ અથવા સ્થાન દ્વારા શોધો...",
+    "gridView": "ગ્રિડ વ્યૂ",
+    "grid": "ગ્રિડ",
+    "listView": "સૂચિ વ્યૂ",
+    "list": "સૂચિ",
+    "orgChartView": "ઓર્ગ ચાર્ટ વ્યૂ",
+    "orgChart": "ઓર્ગ ચાર્ટ",
+    "allDepartments": "બધા વિભાગો",
+    "allLocations": "બધા સ્થાનો",
+    "showingResults": "{{count}} સાથીદારો બતાવી રહ્યા છીએ",
+    "sendRecognition": "માન્યતા મોકલો",
+    "viewProfile": "પ્રોફાઇલ જુઓ",
+    "noResults": "કોઈ સાથીદારો મળ્યા નથી",
+    "noResultsHint": "તમારી શોધ અથવા ફિલ્ટર્સ સમાયોજિત કરો",
+    "name": "નામ",
+    "role": "ભૂમિકા",
+    "department": "વિભાગ",
+    "location": "સ્થાન",
+    "email": "ઇમેઇલ",
+    "directors": "ડાયરેક્ટર્સ",
+    "managers": "મેનેજર્સ",
+    "unknown": "અજ્ઞાત",
+    "statusActive": "સક્રિય",
+    "statusOnLeave": "રજા પર",
+    "statusInactive": "નિષ્ક્રિય",
+    "close": "બંધ કરો",
+    "contact": "સંપર્ક",
+    "reportsTo": "રિપોર્ટ કરે છે",
+    "directReports": "સીધા રિપોર્ટ્સ",
+    "skills": "કૌશલ્યો",
+    "startDate": "શરૂઆતની તારીખ",
+    "tenure": "કાર્યકાળ",
+    "collapse": "સંકોચો",
+    "expand": "વિસ્તૃત કરો",
+    "loading": "ડિરેક્ટરી લોડ થઈ રહી છે...",
+    "loadError": "ડિરેક્ટરી લોડ કરવામાં નિષ્ફળ"
+  },
+  "momentum": {
+    "pageTitle": "મારો મોમેન્ટમ સ્કોર",
+    "employee": "કર્મચારી",
+    "momentum": "મોમેન્ટમ",
+    "trendUp": "↑ગયા મહિનાથી 3",
+    "basedOn": "હાજરી, કૌશલ્યો, તાલીમ અને પ્રતિસાદ પર આધારિત",
+    "scoreBreakdown": "સ્કોર વિશ્લેષણ",
+    "attendance": "હાજરી",
+    "onTimeRate": "સમયસર દર: 97%",
+    "shiftCoverage": "શિફ્ટ કવરેજ: 100%",
+    "streak": "10-દિવસની સ્ટ્રીક 🔥",
+    "skillsTraining": "કૌશલ્યો અને તાલીમ",
+    "mandatoryComplete": "4/5 ફરજિયાત પૂર્ણ",
+    "totalSkills": "કુલ 12 કૌશલ્યો",
+    "verified": "3 ચકાસાયેલ",
+    "performanceFeedback": "કામગીરી અને પ્રતિસાદ",
+    "lastReview": "છેલ્લી સમીક્ષા: 4.2/5",
+    "kudos": "આ મહિને 3 સકારાત્મક પ્રશંસા",
+    "goals": "ધ્યેયો: 2/3 ટ્રેક પર",
+    "engagement": "જોડાણ",
+    "surveyCompleted": "સર્વે પૂર્ણ: હા",
+    "recognitionGiven": "આ મહિને આપેલી માન્યતા: 5",
+    "tenure": "કાર્યકાળ: 2.3 વર્ષ",
+    "weight": "વજન: {{pct}}%",
+    "scoreHistory": "સ્કોર ઇતિહાસ",
+    "howToImprove": "કેવી રીતે સુધારવું",
+    "tipFireSafety": "અગ્નિ સુરક્ષા તાલીમ પૂર્ણ કરો",
+    "tipFireSafetyImpact": "કૌશલ્યો +5",
+    "tipRecognitions": "2 વધુ માન્યતા આપો",
+    "tipRecognitionsImpact": "જોડાણ +3",
+    "tipAttendance": "હાજરી સ્ટ્રીક જાળવો",
+    "tipAttendanceImpact": "હાજરી +2",
+    "backToDashboard": "ડેશબોર્ડ પર પાછા જાઓ"
+  },
+  "corporateCards": {
+    "title": "કોર્પોરેટ કાર્ડ્સ",
+    "subtitle": "કોર્પોરેટ કાર્ડ ટ્રાન્ઝેક્શન અને ખર્ચ દાવા સંચાલિત કરો",
+    "confirmDisconnect": "શું તમે આ બેંક કનેક્શન ડિસ્કનેક્ટ કરવા માંગો છો?",
+    "stats": {
+      "totalTransactions": "કુલ ટ્રાન્ઝેક્શન",
+      "pendingReview": "સમીક્ષા બાકી",
+      "totalAmount": "કુલ રકમ",
+      "selected": "પસંદ કરેલ"
+    },
+    "searchTransactions": "ટ્રાન્ઝેક્શન શોધો...",
+    "filter": {
+      "allStatuses": "બધી સ્થિતિ",
+      "uncategorized": "વર્ગીકૃત નથી",
+      "categorized": "વર્ગીકૃત",
+      "submitted": "સબમિટ કરેલ"
+    },
+    "sync": "સિંક",
+    "submitClaim": "દાવો સબમિટ કરો",
+    "table": {
+      "date": "તારીખ",
+      "description": "વર્ણન",
+      "merchant": "વેપારી",
+      "category": "શ્રેણી",
+      "amount": "રકમ",
+      "status": "સ્થિતિ",
+      "receipt": "રસીદ"
+    },
+    "loading": "ટ્રાન્ઝેક્શન લોડ થઈ રહ્યું છે...",
+    "noConnection": "કોઈ બેંક કનેક્ટ નથી",
+    "noTransactions": "કોઈ ટ્રાન્ઝેક્શન મળ્યું નથી",
+    "connectBankHint": "ટ્રાન્ઝેક્શન જોવા TrueLayer દ્વારા કોર્પોરેટ કાર્ડ કનેક્ટ કરો",
+    "syncHint": "સિંક કરો અથવા ફિલ્ટર સમાયોજિત કરો",
+    "connectBank": "બેંક કનેક્ટ કરો",
+    "selectCategory": "શ્રેણી પસંદ કરો",
+    "submitClaimTitle": "ખર્ચ દાવો સબમિટ કરો",
+    "totalAmount": "કુલ રકમ",
+    "submit": "દાવો સબમિટ કરો",
+    "approve": "મંજૂર કરો",
+    "reject": "નકારો",
+    "claims": {
+      "number": "દાવો #",
+      "employee": "કર્મચારી",
+      "date": "તારીખ",
+      "items": "આઇટમ્સ",
+      "amount": "રકમ",
+      "status": "સ્થિતિ",
+      "actions": "ક્રિયાઓ",
+      "totalAmount": "કુલ રકમ",
+      "description": "વર્ણન"
+    },
+    "noClaims": "કોઈ ખર્ચ દાવા નથી",
+    "noClaimsHint": "ટ્રાન્ઝેક્શન સબમિટ કરો ત્યારે દાવા અહીં દેખાશે",
+    "payroll": {
+      "approved": "મંજૂર દાવા",
+      "approvedDesc": "પેરોલ એક્સપોર્ટ માટે તૈયાર દાવા",
+      "export": "પેરોલમાં એક્સપોર્ટ કરો",
+      "noPending": "એક્સપોર્ટ માટે કોઈ દાવા નથી",
+      "noPendingDesc": "મંજૂર દાવા અહીં દેખાશે",
+      "history": "એક્સપોર્ટ ઇતિહાસ",
+      "exportDate": "એક્સપોર્ટ તારીખ",
+      "claims": "દાવા",
+      "total": "કુલ",
+      "exportedBy": "એક્સપોર્ટ કરનાર",
+      "download": "ડાઉનલોડ",
+      "noExports": "હજુ સુધી કોઈ એક્સપોર્ટ નથી",
+      "csv": "CSV",
+      "exportTitle": "પેરોલમાં એક્સપોર્ટ",
+      "exportWarning": "દાવા ચૂકવેલ તરીકે ચિહ્નિત થશે અને સુધારી શકાશે નહીં.",
+      "confirmExport": "એક્સપોર્ટ"
+    },
+    "cards": {
+      "connections": "બેંક કનેક્શન",
+      "connectionsDesc": "TrueLayer દ્વારા કોર્પોરેટ કાર્ડ એકાઉન્ટ કનેક્ટ કરો",
+      "connect": "બેંક કનેક્ટ કરો",
+      "noConnections": "કોઈ બેંક કનેક્શન નથી",
+      "noConnectionsDesc": "TrueLayer દ્વારા HSBC અથવા અન્ય સમર્થિત બેંક કનેક્ટ કરો",
+      "connected": "કનેક્ટ",
+      "active": "સક્રિય",
+      "expired": "સમાપ્ત",
+      "disconnect": "ડિસ્કનેક્ટ",
+      "list": "કોર્પોરેટ કાર્ડ્સ",
+      "cardNumber": "કાર્ડ",
+      "holder": "કાર્ડ ધારક",
+      "type": "પ્રકાર",
+      "status": "સ્થિતિ",
+      "lastSync": "છેલ્લું સિંક",
+      "noCards": "કોઈ કાર્ડ મળ્યા નથી. કાર્ડ સિંક કરવા બેંક કનેક્ટ કરો.",
+      "inactive": "નિષ્ક્રિય"
+    }
   }
 }
