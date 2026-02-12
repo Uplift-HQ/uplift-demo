@@ -149,6 +149,7 @@
     "sort": "Sort",
     "refresh": "Refresh",
     "retry": "Retry",
+    "tryAgain": "Try Again",
     "yes": "Yes",
     "no": "No",
     "ok": "OK",
@@ -1657,7 +1658,15 @@
     "tryAgain": "Try Again",
     "somethingWentWrong": "Something went wrong",
     "goHome": "Go Home",
-    "technicalDetails": "Technical Details"
+    "technicalDetails": "Technical Details",
+    "unexpectedError": "We encountered an unexpected error. This has been logged and we'll look into it."
+  },
+  "signature": {
+    "draw": "Draw",
+    "type": "Type",
+    "typeYourName": "Type your full name",
+    "drawAboveLine": "Draw your signature above the line",
+    "captured": "Signature captured"
   },
   "activity": {
     "title": "Activity Review",

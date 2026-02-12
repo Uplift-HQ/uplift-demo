@@ -230,6 +230,48 @@ class ApiClient {
     if (path === '/employees' || path.startsWith('/employees?')) {
       return { employees: DEMO_EMPLOYEES };
     }
+    // Employee's own record - return first employee or the logged-in persona's employee
+    if (path === '/employees/me') {
+      const stored = localStorage.getItem('uplift_user');
+      const user = stored ? JSON.parse(stored) : null;
+      // Find employee matching logged-in user, or default to first
+      const emp = user ? DEMO_EMPLOYEES.find(e =>
+        e.email?.toLowerCase().includes(user.firstName?.toLowerCase()) ||
+        e.first_name?.toLowerCase() === user.firstName?.toLowerCase()
+      ) : null;
+      return { employee: emp || DEMO_EMPLOYEES[0] };
+    }
+    // Employee skills
+    if (path.match(/^\/employees\/[^/]+\/skills$/)) {
+      // Return demo skills for the employee
+      const demoEmployeeSkills = DEMO_SKILLS.slice(0, 5).map((skill, idx) => ({
+        id: `es-${idx}`,
+        skill_id: skill.id,
+        employee_id: path.split('/')[2],
+        name: skill.name,
+        category: skill.category,
+        level: Math.floor(Math.random() * 3) + 2,
+        verified: idx < 3,
+        verified_at: idx < 3 ? new Date(Date.now() - idx * 30 * 24 * 60 * 60 * 1000).toISOString() : null,
+        verified_by_name: idx < 3 ? 'Sarah' : null,
+        verified_by_last: idx < 3 ? 'Chen' : null,
+        expires_at: skill.category === 'Compliance' ? new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString() : null,
+      }));
+      return { skills: demoEmployeeSkills };
+    }
+    // Employee career paths
+    if (path.match(/^\/employees\/[^/]+\/career-paths$/)) {
+      const demoCareerPaths = DEMO_OPPORTUNITIES.map(opp => ({
+        ...opp,
+        match_percentage: Math.floor(Math.random() * 40) + 60,
+      }));
+      const skillsGap = DEMO_SKILLS.slice(5, 8).map(s => ({
+        id: s.id,
+        name: s.name,
+        category: s.category,
+      }));
+      return { careerPaths: demoCareerPaths, skillsGap };
+    }
     if (path.match(/^\/employees\/[^/]+$/)) {
       const id = path.split('/')[2];
       const emp = DEMO_EMPLOYEES.find(e => e.id === id);

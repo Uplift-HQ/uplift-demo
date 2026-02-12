@@ -84,7 +84,7 @@ export default function Career() {
           <Sparkles className="w-5 h-5" />
           <span className="text-sm font-medium">{t('career.yourCareerJourney', 'Your Career Journey')}</span>
         </div>
-        <h1 className="text-3xl font-bold mb-2">{t('home.welcomeBack', 'Hi')}, {user?.firstName}!</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('home.welcomeBack', 'Hi')} {user?.firstName}!</h1>
         <p className="text-momentum-100">
           {t('career.trackSkillsDesc', 'Track your skills, discover opportunities, and plan your next career move.')}
         </p>

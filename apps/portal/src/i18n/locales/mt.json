@@ -53,20 +53,20 @@
     "trackSkillsDesc": "Issegwi l-ħiliet tiegħek u skopri opportunitajiet interni",
     "viewMyCareer": "Ara l-Karriera Tiegħi",
     "timeOffBalance": "Bilanċ tal-Leave",
-    "loadError": "Failed to load dashboard",
-    "live": "LIVE",
-    "clickToSeeWho": "Click to see who",
-    "affected": "affected",
-    "expiresIn": "Expires in",
-    "overdueBy": "Overdue by",
-    "manageAll": "Manage All",
-    "noRecentActivity": "No recent activity",
-    "noRecentRecognitions": "No recent recognitions",
-    "available": "Available",
+    "loadError": "Ma rnexxiex jitgħabba d-dashboard",
+    "live": "DIRETT",
+    "clickToSeeWho": "Ikklikkja biex tara min",
+    "affected": "affettwat",
+    "expiresIn": "Jiskadi fi",
+    "overdueBy": "Tard bi",
+    "manageAll": "Immaniġġja Kollox",
+    "noRecentActivity": "L-ebda attività riċenti",
+    "noRecentRecognitions": "L-ebda rikonoxximenti riċenti",
+    "available": "Disponibbli",
     "alerts": {
-      "expiring": "Certifications expiring within 30 days",
-      "training": "Training in progress or pending",
-      "document": "Probation reviews due"
+      "expiring": "Ċertifikazzjonijiet li jiskadu fi żmien 30 jum",
+      "training": "Taħriġ għaddej jew pendenti",
+      "document": "Reviżjonijiet ta' prova dovuti"
     }
   },
   "nav": {
@@ -95,12 +95,12 @@
       "talent": "TALENT",
       "people": "NIES",
       "engagement": "INVOLVIMENT",
-      "myUplift": "MY UPLIFT",
-      "myWork": "MY WORK",
-      "myGrowth": "MY GROWTH",
-      "myMoney": "MY MONEY",
-      "myPeople": "MY PEOPLE",
-      "payroll": "PAYROLL"
+      "myUplift": "L-UPLIFT TIEGĦI",
+      "myWork": "IX-XOGĦOL TIEGĦI",
+      "myGrowth": "IT-TKABBIR TIEGĦI",
+      "myMoney": "IL-FLUS TIEGĦI",
+      "myPeople": "IN-NIES TIEGĦI",
+      "payroll": "PAGI"
     },
     "payslips": "Pagi u Ħlas",
     "performance": "Prestazzjoni",
@@ -111,11 +111,22 @@
     "documents": "Dokumenti",
     "expenses": "Spejjeż",
     "sso": "SSO u Sigurtà",
-    "payroll": "Payroll",
-    "payrollDashboard": "Payroll Dashboard",
-    "payrollRuns": "Payroll Runs",
-    "payrollConfig": "Payroll Config",
-    "teamPayroll": "Team Payroll"
+    "payroll": "Pagi",
+    "payrollDashboard": "Dashboard tal-Pagi",
+    "payrollRuns": "Proċessi tal-Pagi",
+    "payrollConfig": "Konfigurazzjoni tal-Pagi",
+    "teamPayroll": "Pagi tat-Tim",
+    "home": "Dar",
+    "myMomentum": "Il-Momentum Tiegħi",
+    "mySchedule": "L-Iskeda Tiegħi",
+    "myPerformance": "Il-Prestazzjoni Tiegħi",
+    "myLearning": "It-Tagħlim Tiegħi",
+    "mySkillsCareer": "Il-Ħiliet u Karriera Tiegħi",
+    "myPayslips": "Il-Pagi Tiegħi",
+    "myExpenses": "L-Ispejjeż Tiegħi",
+    "directory": "Direttorju tal-Kumpanija",
+    "recognition": "Ħajt tar-Rikonoxximent",
+    "myDocuments": "Id-Dokumenti Tiegħi"
   },
   "common": {
     "loading": "Qed jitgħabba...",
@@ -2014,14 +2025,14 @@
       "skillsDesc": "Importa ħiliet"
     },
     "types": {
-      "employees": "Employees",
-      "employeesDesc": "Import employee profiles",
-      "shifts": "Shifts",
-      "shiftsDesc": "Import shift schedules",
-      "locations": "Locations",
-      "locationsDesc": "Import locations",
-      "skills": "Skills",
-      "skillsDesc": "Import skills"
+      "employees": "Impjegati",
+      "employeesDesc": "Importa profili tal-impjegati",
+      "shifts": "Xiftijiet",
+      "shiftsDesc": "Importa skedi tax-xiftijiet",
+      "locations": "Postijiet",
+      "locationsDesc": "Importa postijiet",
+      "skills": "Ħiliet",
+      "skillsDesc": "Importa ħiliet"
     }
   },
   "jobs": {

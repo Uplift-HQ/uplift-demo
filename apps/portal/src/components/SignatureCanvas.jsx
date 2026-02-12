@@ -4,6 +4,7 @@
 // ============================================================
 
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RotateCcw, Check, Edit3, Type } from 'lucide-react';
 
 export default function SignatureCanvas({
@@ -14,6 +15,7 @@ export default function SignatureCanvas({
   disabled = false,
   initialValue = null
 }) {
+  const { t } = useTranslation();
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
@@ -228,7 +230,7 @@ export default function SignatureCanvas({
           }`}
         >
           <Edit3 className="w-4 h-4" />
-          Draw
+          {t('signature.draw', 'Draw')}
         </button>
         <button
           type="button"
@@ -240,7 +242,7 @@ export default function SignatureCanvas({
           }`}
         >
           <Type className="w-4 h-4" />
-          Type
+          {t('signature.type', 'Type')}
         </button>
       </div>
 
@@ -251,7 +253,7 @@ export default function SignatureCanvas({
             type="text"
             value={typedName}
             onChange={(e) => setTypedName(e.target.value)}
-            placeholder="Type your full name"
+            placeholder={t('signature.typeYourName', 'Type your full name')}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg text-lg font-serif italic focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             disabled={disabled}
           />
@@ -277,7 +279,7 @@ export default function SignatureCanvas({
         {/* Instructions Overlay */}
         {isEmpty && mode === 'draw' && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <p className="text-slate-400 text-sm">Draw your signature above the line</p>
+            <p className="text-slate-400 text-sm">{t('signature.drawAboveLine', 'Draw your signature above the line')}</p>
           </div>
         )}
 
@@ -294,13 +296,13 @@ export default function SignatureCanvas({
           className="flex items-center gap-1 text-sm text-slate-600 hover:text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <RotateCcw className="w-4 h-4" />
-          Clear
+          {t('common.clear', 'Clear')}
         </button>
 
         {!isEmpty && (
           <div className="flex items-center gap-1 text-sm text-green-600">
             <Check className="w-4 h-4" />
-            Signature captured
+            {t('signature.captured', 'Signature captured')}
           </div>
         )}
       </div>

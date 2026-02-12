@@ -51,7 +51,7 @@ export class ErrorBoundary extends React.Component {
             </h1>
             
             <p className="text-slate-600 mb-6">
-              We encountered an unexpected error. This has been logged and we'll look into it.
+              {this.props.t('errors.unexpectedError', "We encountered an unexpected error. This has been logged and we'll look into it.")}
             </p>
 
             <div className="flex gap-3 justify-center">

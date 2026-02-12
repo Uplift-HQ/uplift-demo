@@ -2,11 +2,13 @@
 // PERFORMANCE MANAGEMENT PAGE
 // Review cycles, goals & OKRs, 1-on-1 meetings,
 // continuous feedback, and development plans
+// Supports both Management View (team) and Personal View (my performance)
 // ============================================================
 
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
 import { performanceApi } from '../lib/api';
 import {
   ClipboardCheck, Target, Users, MessageSquare, BookOpen,
@@ -87,20 +89,21 @@ function EmptyState({ icon: Icon, title, description, action, actionLabel }) {
 }
 
 function ErrorState({ error, onRetry }) {
+  const { t } = useTranslation();
   return (
     <div className="bg-white rounded-xl border border-slate-200">
       <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
         <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-4">
           <AlertCircle className="w-8 h-8 text-red-500" />
         </div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-2">Something went wrong</h3>
+        <h3 className="text-lg font-semibold text-slate-900 mb-2">{t('errors.somethingWentWrong', 'Something went wrong')}</h3>
         <p className="text-slate-500 max-w-md mb-6">{error}</p>
         <button
           onClick={onRetry}
           className="flex items-center gap-2 px-6 py-3 bg-slate-600 text-white rounded-lg hover:bg-slate-700 font-medium transition-colors"
         >
           <RefreshCw className="h-5 w-5" />
-          Try Again
+          {t('common.tryAgain', 'Try Again')}
         </button>
       </div>
     </div>
@@ -114,8 +117,14 @@ function ErrorState({ error, onRetry }) {
 export default function Performance() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const isManager = user?.role === 'admin' || user?.role === 'manager';
-  const visibleTabs = isManager ? TABS : TABS.filter(tab => ['reviews', 'goals', 'feedback', 'development'].includes(tab.id));
+  const { isPersonalView } = useView();
+
+  // In personal view, always show the personal experience, even for managers
+  // In management view, show team management features for managers
+  const isManagerRole = user?.role === 'admin' || user?.role === 'manager';
+  const showManagementFeatures = isManagerRole && !isPersonalView;
+
+  const visibleTabs = showManagementFeatures ? TABS : TABS.filter(tab => ['reviews', 'goals', 'feedback', 'development'].includes(tab.id));
   const [activeTab, setActiveTab] = useState('reviews');
 
   return (
@@ -123,10 +132,10 @@ export default function Performance() {
       {/* Page Header */}
       <div>
         <h1 className="text-2xl font-bold text-slate-900">
-          {isManager ? t('performance.title', 'Performance Management') : t('performance.myTitle', 'My Performance')}
+          {showManagementFeatures ? t('performance.title', 'Performance Management') : t('performance.myTitle', 'My Performance')}
         </h1>
         <p className="text-slate-500 mt-1">
-          {isManager ? t('performance.subtitle', 'Reviews, goals, feedback, and employee development') : t('performance.mySubtitle', 'Your reviews, goals, and development')}
+          {showManagementFeatures ? t('performance.subtitle', 'Reviews, goals, feedback, and employee development') : t('performance.mySubtitle', 'Your reviews, goals, and development')}
         </p>
       </div>
 
@@ -155,11 +164,11 @@ export default function Performance() {
       </div>
 
       {/* Tab Content */}
-      {activeTab === 'reviews' && <ReviewCyclesTab t={t} isManager={isManager} />}
-      {activeTab === 'goals' && <GoalsTab t={t} isManager={isManager} />}
-      {activeTab === 'oneOnOnes' && <OneOnOnesTab t={t} isManager={isManager} />}
-      {activeTab === 'feedback' && <FeedbackTab t={t} isManager={isManager} />}
-      {activeTab === 'development' && <DevelopmentPlansTab t={t} isManager={isManager} />}
+      {activeTab === 'reviews' && <ReviewCyclesTab t={t} isManager={showManagementFeatures} />}
+      {activeTab === 'goals' && <GoalsTab t={t} isManager={showManagementFeatures} />}
+      {activeTab === 'oneOnOnes' && <OneOnOnesTab t={t} isManager={showManagementFeatures} />}
+      {activeTab === 'feedback' && <FeedbackTab t={t} isManager={showManagementFeatures} />}
+      {activeTab === 'development' && <DevelopmentPlansTab t={t} isManager={showManagementFeatures} />}
     </div>
   );
 }
