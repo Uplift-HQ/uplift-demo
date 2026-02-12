@@ -189,6 +189,7 @@ export default function Dashboard() {
         t={t}
         user={user}
         data={data}
+        departments={departments}
         entityMultiplier={entityMultiplier}
         selectedAlert={selectedAlert}
         setSelectedAlert={setSelectedAlert}
@@ -215,7 +216,7 @@ export default function Dashboard() {
 // ADMIN DASHBOARD
 // ============================================================
 
-function AdminDashboard({ t, user, data, entityMultiplier, selectedAlert, setSelectedAlert }) {
+function AdminDashboard({ t, user, data, departments, entityMultiplier, selectedAlert, setSelectedAlert }) {
   const realtimeData = scaleNumericValues(data?.realtime || {}, entityMultiplier);
   const activeEmployees = Math.round((data?.activeEmployees || 0) * entityMultiplier);
   const openShifts = Math.round((data?.openShifts || 0) * entityMultiplier);
