@@ -1,14 +1,19 @@
 // ============================================================
 // TIME OFF PAGE - REAL API
+// Supports both Management View (all requests) and Personal View (my requests only)
 // ============================================================
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { timeOffApi } from '../lib/api';
+import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
 import { format, parseISO, differenceInDays } from 'date-fns';
-import { Calendar, Clock, CheckCircle, XCircle, Eye, X, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, XCircle, Eye, X, AlertCircle, Plus } from 'lucide-react';
 
 export default function TimeOff() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const { isPersonalView } = useView();
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,12 +23,15 @@ export default function TimeOff() {
 
   useEffect(() => {
     loadRequests();
-  }, []);
+  }, [isPersonalView]);
 
   const loadRequests = async () => {
     setError(null);
+    setLoading(true);
     try {
-      const data = await timeOffApi.getRequests();
+      // In personal view, filter to current user's requests only
+      const params = isPersonalView && user?.employeeId ? { employee_id: user.employeeId } : {};
+      const data = await timeOffApi.getRequests(params);
       const enriched = (data.requests || []).map(r => ({
         ...r,
         employee_name: r.employee_name || (r.employee ? `${r.employee.first_name} ${r.employee.last_name}` : t('common.unknownEmployee', 'Unknown Employee'))
@@ -50,11 +58,11 @@ export default function TimeOff() {
     setSelectedRequest(null);
     try {
       await timeOffApi.approve(id);
-      showToast(`Time off approved for ${request?.employee_name || 'employee'}`, 'success');
+      showToast(t('timeOff.approvedFor', { name: request?.employee_name || t('common.employee', 'employee'), defaultValue: 'Time off approved for {{name}}' }), 'success');
     } catch (err) {
       // Revert optimistic update
       setRequests(previousRequests);
-      showToast('Failed to approve request. Please try again.', 'error');
+      showToast(t('timeOff.approveError', 'Failed to approve request. Please try again.'), 'error');
     }
   };
 
@@ -66,11 +74,11 @@ export default function TimeOff() {
     setSelectedRequest(null);
     try {
       await timeOffApi.reject(id);
-      showToast(`Time off rejected for ${request?.employee_name || 'employee'}`, 'success');
+      showToast(t('timeOff.rejectedFor', { name: request?.employee_name || t('common.employee', 'employee'), defaultValue: 'Time off rejected for {{name}}' }), 'success');
     } catch (err) {
       // Revert optimistic update
       setRequests(previousRequests);
-      showToast('Failed to reject request. Please try again.', 'error');
+      showToast(t('timeOff.rejectError', 'Failed to reject request. Please try again.'), 'error');
     }
   };
 
@@ -116,12 +124,12 @@ export default function TimeOff() {
 
   const formatDateSafe = (dateStr) => {
     try {
-      if (!dateStr) return 'N/A';
+      if (!dateStr) return t('common.notAvailable', 'N/A');
       const date = typeof dateStr === 'string' ? parseISO(dateStr) : new Date(dateStr);
-      if (isNaN(date.getTime())) return 'N/A';
+      if (isNaN(date.getTime())) return t('common.notAvailable', 'N/A');
       return format(date, 'dd MMM yyyy');
     } catch {
-      return 'N/A';
+      return t('common.notAvailable', 'N/A');
     }
   };
 
@@ -175,9 +183,21 @@ export default function TimeOff() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t('manager.timeOffRequests', 'Time Off Requests')}</h1>
-          <p className="text-gray-600">{t('timeOff.title', 'Manage employee leave requests')}</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            {isPersonalView ? t('myTimeOff.title', 'My Time Off') : t('manager.timeOffRequests', 'Time Off Requests')}
+          </h1>
+          <p className="text-gray-600">
+            {isPersonalView
+              ? t('myTimeOff.subtitle', 'View your time off requests and balances')
+              : t('timeOff.title', 'Manage employee leave requests')}
+          </p>
         </div>
+        {isPersonalView && (
+          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            <Plus className="h-4 w-4" />
+            {t('timeOff.requestTimeOff', 'Request Time Off')}
+          </button>
+        )}
       </div>
 
       {/* Stats */}
@@ -260,7 +280,9 @@ export default function TimeOff() {
                 </td>
                 <td className="px-6 py-4">
                   <span className={`px-2 py-1 text-xs font-medium rounded-full capitalize ${getStatusBadge(request.status)}`}>
-                    {request.status}
+                    {request.status === 'pending' ? t('common.pending', 'Pending') :
+                     request.status === 'approved' ? t('common.approved', 'Approved') :
+                     t('common.rejected', 'Rejected')}
                   </span>
                 </td>
                 <td className="px-6 py-4">
@@ -272,7 +294,8 @@ export default function TimeOff() {
                     >
                       <Eye className="h-5 w-5" />
                     </button>
-                    {request.status === 'pending' && (
+                    {/* Only show approve/reject in management view */}
+                    {!isPersonalView && request.status === 'pending' && (
                       <>
                         <button
                           onClick={() => handleApprove(request.id)}
@@ -370,7 +393,8 @@ export default function TimeOff() {
                 <p className="font-medium">{formatDateSafe(selectedRequest.submitted_at)}</p>
               </div>
             </div>
-            {selectedRequest.status === 'pending' && (
+            {/* Only show approve/reject in management view */}
+            {!isPersonalView && selectedRequest.status === 'pending' && (
               <div className="flex gap-3 px-6 py-4 border-t bg-gray-50">
                 <button
                   onClick={() => handleApprove(selectedRequest.id)}
@@ -386,7 +410,7 @@ export default function TimeOff() {
                 </button>
               </div>
             )}
-            {selectedRequest.status !== 'pending' && (
+            {(isPersonalView || selectedRequest.status !== 'pending') && (
               <div className="px-6 py-4 border-t bg-gray-50">
                 <button
                   onClick={() => setSelectedRequest(null)}

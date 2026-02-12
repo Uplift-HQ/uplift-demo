@@ -351,7 +351,7 @@ function OrganizationSettings({ organization, onSave }) {
 function BrandingSettings({ organization, showMsg }) {
   const { t } = useTranslation();
   const { updateBranding, refetch } = useBranding();
-  const hasFeature = organization?.features?.includes('white_label') || organization?.plan === 'enterprise';
+  const hasFeature = (Array.isArray(organization?.features) && organization.features.includes('white_label')) || organization?.plan === 'enterprise';
 
   const [form, setForm] = useState({
     brand_name: '',

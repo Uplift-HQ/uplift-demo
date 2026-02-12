@@ -207,7 +207,7 @@ export default function TimeTracking() {
       {/* Tabs */}
       <div className="flex gap-1 border-b">
         {/* Clock In/Out tab shown in personal view or for non-managers */}
-        {(isPersonalView || !isManagerOrAbove) && <button onClick={() => setTab('clock')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'clock' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.clockIn', 'Clock In/Out')}</button>}
+        {(isPersonalView || !isManagerOrAbove) && <button onClick={() => setTab('clock')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'clock' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.clockInOutTab', 'Clock In/Out')}</button>}
         {/* Pending tab only in management view for managers */}
         {showManagementFeatures && <button onClick={() => setTab('pending')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'pending' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('common.pending', 'Pending')} ({pendingEntries.length})</button>}
         <button onClick={() => setTab('history')} className={`px-4 py-2 font-medium border-b-2 transition-colors ${tab === 'history' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('timeTracking.history', 'History')}</button>

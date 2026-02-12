@@ -126,7 +126,7 @@ const calculateEmployerNI = (monthlyGross) => {
 // DEMO DATA - UK February 2025 Payroll Run
 // ============================================================
 
-// JSP Safety Employees - UK Safety Services Company
+// Demo Employees - UK Company
 const generateEmployeePayslips = () => {
   const employees = [
     { id: 1, name: 'John Peterson', role: 'Managing Director', annualSalary: 95000, isNewStarter: false, isLeaver: false, lastMonthGross: 7917 },
@@ -210,8 +210,8 @@ const generateEmployeePayslips = () => {
 const DEMO_PAYSLIPS = generateEmployeePayslips();
 
 const DEMO_RUN = {
-  id: 'PR-2025-02-JSP',
-  title: 'JSP Safety - UK Payroll February 2025',
+  id: 'PR-2025-02-001',
+  title: 'UK Payroll - February 2025',
   country: 'GB',
   countryName: 'United Kingdom',
   status: 'review',

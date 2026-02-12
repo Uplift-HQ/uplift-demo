@@ -97,9 +97,9 @@ export default function CorporateCards() {
       setTransactions(result.transactions || []);
     } catch (err) {
       console.error('Failed to fetch transactions:', err);
-      setError(err.message);
+      setError(t('corporateCards.errors.fetchTransactionsFailed', 'Failed to fetch transactions: {{message}}', { message: err.message }));
     }
-  }, [statusFilter, dateFrom, dateTo]);
+  }, [statusFilter, dateFrom, dateTo, t]);
 
   const fetchClaims = useCallback(async () => {
     try {
@@ -175,7 +175,7 @@ export default function CorporateCards() {
       await trueLayerApi.syncTransactions(connectionId);
       await fetchTransactions();
     } catch (err) {
-      setError('Failed to sync transactions: ' + err.message);
+      setError(t('corporateCards.errors.syncFailed', 'Failed to sync transactions: {{message}}', { message: err.message }));
     } finally {
       setSyncing(false);
     }
@@ -186,7 +186,7 @@ export default function CorporateCards() {
       const result = await trueLayerApi.getConnectUrl(window.location.origin + '/integrations/truelayer/callback');
       window.location.href = result.authUrl;
     } catch (err) {
-      setError('Failed to initiate bank connection: ' + err.message);
+      setError(t('corporateCards.errors.connectionFailed', 'Failed to initiate bank connection: {{message}}', { message: err.message }));
     }
   };
 
@@ -196,7 +196,7 @@ export default function CorporateCards() {
       await trueLayerApi.disconnect(connectionId);
       await fetchCards();
     } catch (err) {
-      setError('Failed to disconnect: ' + err.message);
+      setError(t('corporateCards.errors.disconnectFailed', 'Failed to disconnect: {{message}}', { message: err.message }));
     }
   };
 
@@ -208,7 +208,7 @@ export default function CorporateCards() {
       setShowSubmitClaim(false);
       await Promise.all([fetchTransactions(), fetchClaims()]);
     } catch (err) {
-      setError('Failed to submit claim: ' + err.message);
+      setError(t('corporateCards.errors.submitClaimFailed', 'Failed to submit claim: {{message}}', { message: err.message }));
     }
   };
 
@@ -218,7 +218,7 @@ export default function CorporateCards() {
       await Promise.all([fetchClaims(), fetchPayrollData()]);
       setShowClaimDetail(false);
     } catch (err) {
-      setError('Failed to review claim: ' + err.message);
+      setError(t('corporateCards.errors.reviewClaimFailed', 'Failed to review claim: {{message}}', { message: err.message }));
     }
   };
 
@@ -228,7 +228,7 @@ export default function CorporateCards() {
       await fetchPayrollData();
       setShowExportModal(false);
     } catch (err) {
-      setError('Failed to export to payroll: ' + err.message);
+      setError(t('corporateCards.errors.exportFailed', 'Failed to export to payroll: {{message}}', { message: err.message }));
     }
   };
 
@@ -237,7 +237,7 @@ export default function CorporateCards() {
       await cardTransactionsApi.update(id, data);
       await fetchTransactions();
     } catch (err) {
-      setError('Failed to update transaction: ' + err.message);
+      setError(t('corporateCards.errors.updateFailed', 'Failed to update transaction: {{message}}', { message: err.message }));
     }
   };
 
@@ -755,7 +755,7 @@ export default function CorporateCards() {
                       className="inline-flex items-center gap-1 text-sm text-momentum-500 hover:text-momentum-600"
                     >
                       <Download className="w-4 h-4" />
-                      CSV
+                      {t('corporateCards.payroll.csv', 'CSV')}
                     </a>
                   </td>
                 </tr>

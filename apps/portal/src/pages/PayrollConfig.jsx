@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 
 // ============================================================
-// DEMO DATA - JSP Safety 6-country setup
+// DEMO DATA - Multi-country setup
 // ============================================================
 
 const COUNTRY_FLAGS = {
@@ -324,7 +324,7 @@ export default function PayrollConfig() {
             {t('payrollConfig.title', 'Payroll Configuration')}
           </h1>
           <p className="text-slate-600">
-            {t('payrollConfig.subtitle', 'Configure global payroll settings for JSP Safety')}
+            {t('payrollConfig.subtitle', 'Configure global payroll settings')}
           </p>
         </div>
         <button

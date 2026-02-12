@@ -495,6 +495,34 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
     yesno: CircleDot,
   };
 
+  // Translation helper for departments
+  const translateDepartment = (dept) => {
+    const deptKeys = {
+      'Engineering': t('surveys.departments.engineering', 'Engineering'),
+      'Sales': t('surveys.departments.sales', 'Sales'),
+      'Marketing': t('surveys.departments.marketing', 'Marketing'),
+      'HR': t('surveys.departments.hr', 'HR'),
+      'Finance': t('surveys.departments.finance', 'Finance'),
+      'Operations': t('surveys.departments.operations', 'Operations'),
+      'Product': t('surveys.departments.product', 'Product'),
+      'Support': t('surveys.departments.support', 'Support'),
+    };
+    return deptKeys[dept] || dept;
+  };
+
+  // Translation helper for categories
+  const translateCategory = (cat) => {
+    const categoryKeys = {
+      'Engagement': t('surveys.categories.engagement', 'Engagement'),
+      'Growth': t('surveys.categories.growth', 'Growth'),
+      'Leadership': t('surveys.categories.leadership', 'Leadership'),
+      'Culture': t('surveys.categories.culture', 'Culture'),
+      'Compensation': t('surveys.categories.compensation', 'Compensation'),
+      'Work-Life Balance': t('surveys.categories.workLifeBalance', 'Work-Life Balance'),
+    };
+    return categoryKeys[cat] || cat;
+  };
+
   const addQuestion = () => {
     if (!newQuestion.text.trim()) return;
     setQuestions([...questions, { ...newQuestion, id: Date.now() }]);
@@ -719,7 +747,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                   className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                 >
                   {CATEGORIES.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
+                    <option key={cat} value={cat}>{translateCategory(cat)}</option>
                   ))}
                 </select>
                 <div className="flex items-center gap-3">
@@ -806,7 +834,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {dept}
+                    {translateDepartment(dept)}
                   </button>
                 ))}
               </div>
@@ -817,22 +845,29 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
             <div className="pt-4 border-t border-slate-200">
               <label className="block text-sm font-medium text-slate-700 mb-2">{t('surveys.builder.selectLocations', 'Select Locations')}</label>
               <div className="flex flex-wrap gap-2">
-                {['New York', 'San Francisco', 'London', 'Berlin', 'Singapore', 'Remote'].map(loc => (
+                {[
+                  { key: 'newYork', label: t('surveys.builder.locations.newYork', 'New York') },
+                  { key: 'sanFrancisco', label: t('surveys.builder.locations.sanFrancisco', 'San Francisco') },
+                  { key: 'london', label: t('surveys.builder.locations.london', 'London') },
+                  { key: 'berlin', label: t('surveys.builder.locations.berlin', 'Berlin') },
+                  { key: 'singapore', label: t('surveys.builder.locations.singapore', 'Singapore') },
+                  { key: 'remote', label: t('surveys.builder.locations.remote', 'Remote') },
+                ].map(loc => (
                   <button
-                    key={loc}
+                    key={loc.key}
                     onClick={() => {
-                      const locs = audience.locations.includes(loc)
-                        ? audience.locations.filter(l => l !== loc)
-                        : [...audience.locations, loc];
+                      const locs = audience.locations.includes(loc.key)
+                        ? audience.locations.filter(l => l !== loc.key)
+                        : [...audience.locations, loc.key];
                       setAudience({ ...audience, locations: locs });
                     }}
                     className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                      audience.locations.includes(loc)
+                      audience.locations.includes(loc.key)
                         ? 'bg-momentum-500 text-white'
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {loc}
+                    {loc.label}
                   </button>
                 ))}
               </div>
@@ -843,22 +878,28 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
             <div className="pt-4 border-t border-slate-200">
               <label className="block text-sm font-medium text-slate-700 mb-2">{t('surveys.builder.selectTenure', 'Select Tenure Ranges')}</label>
               <div className="flex flex-wrap gap-2">
-                {['0-6 months', '6-12 months', '1-2 years', '2-5 years', '5+ years'].map(t => (
+                {[
+                  { key: '0-6months', label: t('surveys.builder.tenure.0to6months', '0-6 months') },
+                  { key: '6-12months', label: t('surveys.builder.tenure.6to12months', '6-12 months') },
+                  { key: '1-2years', label: t('surveys.builder.tenure.1to2years', '1-2 years') },
+                  { key: '2-5years', label: t('surveys.builder.tenure.2to5years', '2-5 years') },
+                  { key: '5+years', label: t('surveys.builder.tenure.5plusYears', '5+ years') },
+                ].map(tenure => (
                   <button
-                    key={t}
+                    key={tenure.key}
                     onClick={() => {
-                      const tenures = audience.tenures.includes(t)
-                        ? audience.tenures.filter(x => x !== t)
-                        : [...audience.tenures, t];
+                      const tenures = audience.tenures.includes(tenure.key)
+                        ? audience.tenures.filter(x => x !== tenure.key)
+                        : [...audience.tenures, tenure.key];
                       setAudience({ ...audience, tenures });
                     }}
                     className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                      audience.tenures.includes(t)
+                      audience.tenures.includes(tenure.key)
                         ? 'bg-momentum-500 text-white'
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {t}
+                    {tenure.label}
                   </button>
                 ))}
               </div>
@@ -869,22 +910,28 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
             <div className="pt-4 border-t border-slate-200">
               <label className="block text-sm font-medium text-slate-700 mb-2">{t('surveys.builder.selectRoles', 'Select Role Types')}</label>
               <div className="flex flex-wrap gap-2">
-                {['Individual Contributor', 'Manager', 'Director', 'VP', 'Executive'].map(r => (
+                {[
+                  { key: 'ic', label: t('surveys.builder.roles.individualContributor', 'Individual Contributor') },
+                  { key: 'manager', label: t('surveys.builder.roles.manager', 'Manager') },
+                  { key: 'director', label: t('surveys.builder.roles.director', 'Director') },
+                  { key: 'vp', label: t('surveys.builder.roles.vp', 'VP') },
+                  { key: 'executive', label: t('surveys.builder.roles.executive', 'Executive') },
+                ].map(role => (
                   <button
-                    key={r}
+                    key={role.key}
                     onClick={() => {
-                      const roles = audience.roleTypes.includes(r)
-                        ? audience.roleTypes.filter(x => x !== r)
-                        : [...audience.roleTypes, r];
+                      const roles = audience.roleTypes.includes(role.key)
+                        ? audience.roleTypes.filter(x => x !== role.key)
+                        : [...audience.roleTypes, role.key];
                       setAudience({ ...audience, roleTypes: roles });
                     }}
                     className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                      audience.roleTypes.includes(r)
+                      audience.roleTypes.includes(role.key)
                         ? 'bg-momentum-500 text-white'
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {r}
+                    {role.label}
                   </button>
                 ))}
               </div>
@@ -1066,6 +1113,33 @@ function ResultsAnalytics({ surveys = [] }) {
   const highestScoring = [...QUESTION_RESULTS].sort((a, b) => b.avg - a.avg).slice(0, 3);
   const lowestScoring = [...QUESTION_RESULTS].sort((a, b) => a.avg - b.avg).slice(0, 3);
 
+  // Translation helpers for categories and departments
+  const translateCategory = (cat) => {
+    const categoryKeys = {
+      'Engagement': t('surveys.categories.engagement', 'Engagement'),
+      'Growth': t('surveys.categories.growth', 'Growth'),
+      'Leadership': t('surveys.categories.leadership', 'Leadership'),
+      'Culture': t('surveys.categories.culture', 'Culture'),
+      'Compensation': t('surveys.categories.compensation', 'Compensation'),
+      'Work-Life Balance': t('surveys.categories.workLifeBalance', 'Work-Life Balance'),
+    };
+    return categoryKeys[cat] || cat;
+  };
+
+  const translateDepartment = (dept) => {
+    const deptKeys = {
+      'Engineering': t('surveys.departments.engineering', 'Engineering'),
+      'Sales': t('surveys.departments.sales', 'Sales'),
+      'Marketing': t('surveys.departments.marketing', 'Marketing'),
+      'HR': t('surveys.departments.hr', 'HR'),
+      'Finance': t('surveys.departments.finance', 'Finance'),
+      'Operations': t('surveys.departments.operations', 'Operations'),
+      'Product': t('surveys.departments.product', 'Product'),
+      'Support': t('surveys.departments.support', 'Support'),
+    };
+    return deptKeys[dept] || dept;
+  };
+
   return (
     <div className="space-y-6">
       {/* Survey Selector */}
@@ -1169,14 +1243,14 @@ function ResultsAnalytics({ surveys = [] }) {
               <tr>
                 <th className="text-left p-2 text-xs font-semibold text-slate-500">{t('surveys.results.department', 'Department')}</th>
                 {CATEGORIES.map(cat => (
-                  <th key={cat} className="text-center p-2 text-xs font-semibold text-slate-500 whitespace-nowrap">{cat}</th>
+                  <th key={cat} className="text-center p-2 text-xs font-semibold text-slate-500 whitespace-nowrap">{translateCategory(cat)}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {HEATMAP_DATA.map((row) => (
                 <tr key={row.department}>
-                  <td className="p-2 font-medium text-slate-700">{row.department}</td>
+                  <td className="p-2 font-medium text-slate-700">{translateDepartment(row.department)}</td>
                   {CATEGORIES.map(cat => {
                     const score = row.scores[cat];
                     const bg = score >= 75 ? 'bg-green-100 text-green-800' : score >= 55 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800';
@@ -1259,6 +1333,21 @@ function ENPSDashboard({ dashboardData }) {
 
   // Arc calculation for gauge
   const gaugeAngle = ((enpsScore + 100) / 200) * 180; // -100 to +100 mapped to 0-180 degrees
+
+  // Translation helper for departments
+  const translateDepartment = (dept) => {
+    const deptKeys = {
+      'Engineering': t('surveys.departments.engineering', 'Engineering'),
+      'Sales': t('surveys.departments.sales', 'Sales'),
+      'Marketing': t('surveys.departments.marketing', 'Marketing'),
+      'HR': t('surveys.departments.hr', 'HR'),
+      'Finance': t('surveys.departments.finance', 'Finance'),
+      'Operations': t('surveys.departments.operations', 'Operations'),
+      'Product': t('surveys.departments.product', 'Product'),
+      'Support': t('surveys.departments.support', 'Support'),
+    };
+    return deptKeys[dept] || dept;
+  };
 
   return (
     <div className="space-y-6">
@@ -1353,7 +1442,7 @@ function ENPSDashboard({ dashboardData }) {
             const barWidth = Math.max(0, ((d.score + 100) / 200) * 100);
             return (
               <div key={d.dept} className="flex items-center gap-3">
-                <span className="text-sm text-slate-600 w-28 shrink-0">{d.dept}</span>
+                <span className="text-sm text-slate-600 w-28 shrink-0">{translateDepartment(d.dept)}</span>
                 <div className="flex-1 h-7 bg-slate-100 rounded-lg overflow-hidden relative">
                   {/* Center line at 0 */}
                   <div className="absolute left-1/2 top-0 bottom-0 w-px bg-slate-300 z-10" />
@@ -1435,7 +1524,11 @@ function LifecycleSurveys({ surveys = [] }) {
   const { t } = useTranslation();
 
   const onboardingData = {
-    triggers: ['30 days', '60 days', '90 days'],
+    triggers: [
+      t('surveys.lifecycle.onboarding.30days', '30 days'),
+      t('surveys.lifecycle.onboarding.60days', '60 days'),
+      t('surveys.lifecycle.onboarding.90days', '90 days'),
+    ],
     avgSatisfaction: [4.1, 4.3, 4.5],
     responseCounts: [12, 10, 8],
     totalSent: [15, 14, 12],
@@ -1454,7 +1547,11 @@ function LifecycleSurveys({ surveys = [] }) {
   };
 
   const anniversaryData = {
-    milestones: ['1 Year', '3 Years', '5 Years'],
+    milestones: [
+      t('surveys.lifecycle.anniversary.1year', '1 Year'),
+      t('surveys.lifecycle.anniversary.3years', '3 Years'),
+      t('surveys.lifecycle.anniversary.5years', '5 Years'),
+    ],
     avgScores: [4.0, 4.2, 4.6],
     upcoming: 5,
   };

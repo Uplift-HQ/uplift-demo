@@ -2,11 +2,13 @@
 // LEARNING & DEVELOPMENT PAGE
 // Course catalogue, learning paths, enrollments, compliance,
 // personal learning, and analytics dashboard
+// Supports both Management View (team learning) and Personal View (my learning)
 // ============================================================
 
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
 import { learningApi } from '../lib/api';
 import EmptyState from '../components/EmptyState';
 import {
@@ -111,10 +113,23 @@ function LoadingSkeleton({ count = 3, type = 'card' }) {
 export default function Learning() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const isManager = user?.role === 'admin' || user?.role === 'manager';
-  const [activeTab, setActiveTab] = useState(isManager ? 'catalogue' : 'my_learning');
+  const { isPersonalView } = useView();
+
+  // In personal view, always show personal learning even for managers
+  const isManagerRole = user?.role === 'admin' || user?.role === 'manager';
+  const showManagementFeatures = isManagerRole && !isPersonalView;
+
+  // In personal view, default to 'my_learning' tab
+  const [activeTab, setActiveTab] = useState(isPersonalView ? 'my_learning' : (showManagementFeatures ? 'catalogue' : 'my_learning'));
   const [showCreateCourse, setShowCreateCourse] = useState(false);
   const [showBulkEnroll, setShowBulkEnroll] = useState(false);
+
+  // Update activeTab when view mode changes
+  useEffect(() => {
+    if (isPersonalView) {
+      setActiveTab('my_learning');
+    }
+  }, [isPersonalView]);
 
   return (
     <div className="space-y-6">
@@ -122,10 +137,12 @@ export default function Learning() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">
-            {t('learning.title', 'Learning & Development')}
+            {isPersonalView ? t('myLearning.title', 'My Learning') : t('learning.title', 'Learning & Development')}
           </h1>
           <p className="text-slate-500 mt-1">
-            {t('learning.subtitle', 'Manage training courses, compliance, and employee development')}
+            {isPersonalView
+              ? t('myLearning.subtitle', 'Your courses, progress, and certifications')
+              : t('learning.subtitle', 'Manage training courses, compliance, and employee development')}
           </p>
         </div>
       </div>
@@ -133,7 +150,7 @@ export default function Learning() {
       {/* Tab Navigation */}
       <div className="border-b border-slate-200">
         <nav className="flex gap-1 -mb-px overflow-x-auto">
-          {(isManager ? TABS : TABS.filter(t => ['catalogue', 'paths', 'my_learning'].includes(t.id))).map((tab) => {
+          {(showManagementFeatures ? TABS : TABS.filter(t => ['catalogue', 'paths', 'my_learning'].includes(t.id))).map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (
@@ -650,7 +667,7 @@ function PathsTab({ t }) {
                       );
                     })}
                     {courses.length > 5 && (
-                      <p className="text-xs text-slate-500 text-center py-2">+{courses.length - 5} more courses</p>
+                      <p className="text-xs text-slate-500 text-center py-2">{t('learning.moreCourses', '+{{count}} more courses', { count: courses.length - 5 })}</p>
                     )}
                   </div>
                 </div>
@@ -1311,7 +1328,7 @@ function MyLearningTab({ t, onBrowseCatalogue }) {
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="font-medium text-slate-900 text-sm">{cert.certification_name || cert.course_title}</p>
-                      <p className="text-xs text-slate-500 mt-1">{cert.issuing_body || 'Uplift Learning'}</p>
+                      <p className="text-xs text-slate-500 mt-1">{cert.issuing_body || t('learning.defaultIssuer', 'Uplift Learning')}</p>
                       <div className="flex items-center gap-3 mt-2 text-xs text-slate-500">
                         <span>{t('learning.issued', 'Issued')}: {new Date(cert.issue_date).toLocaleDateString()}</span>
                         {cert.expiry_date && (
@@ -1466,7 +1483,7 @@ function DashboardTab({ t }) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-slate-900 text-sm truncate">{course.title}</p>
-                      <p className="text-xs text-slate-500">{course.completion_rate}% completion</p>
+                      <p className="text-xs text-slate-500">{t('learning.completionPercent', '{{rate}}% completion', { rate: course.completion_rate })}</p>
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p className="text-sm font-semibold text-slate-900">{course.enrolled_count}</p>

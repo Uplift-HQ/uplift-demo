@@ -7,7 +7,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { dashboardApi } from '../lib/api';
+import { dashboardApi, departmentsApi, employeesApi, shiftsApi, timeOffApi, locationsApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { useEntity } from '../lib/entityContext';
 import { useView } from '../lib/viewContext';
@@ -101,6 +101,7 @@ export default function Dashboard() {
   const entityMultiplier = ENTITY_MULTIPLIERS[currentEntity?.id] || 1;
 
   const [data, setData] = useState(null);
+  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const orgOnboardingChecked = useRef(false);
@@ -116,8 +117,12 @@ export default function Dashboard() {
   const loadDashboard = async () => {
     try {
       setError(null);
-      const result = await dashboardApi.get();
-      setData(result);
+      const [dashboardResult, deptResult] = await Promise.all([
+        dashboardApi.get(),
+        departmentsApi.list(),
+      ]);
+      setData(dashboardResult);
+      setDepartments(deptResult.departments || []);
     } catch (err) {
       setError(err.message || t('dashboard.loadError', 'Failed to load dashboard'));
     } finally {
@@ -509,23 +514,22 @@ function AdminDashboard({ t, user, data, entityMultiplier, selectedAlert, setSel
             </div>
           </div>
           <div className="card-body space-y-4">
-            {[
-              { name: t('dashboard.dept.frontOfHouse', 'Front of House'), count: 32, color: 'bg-momentum-500' },
-              { name: t('dashboard.dept.foodBeverage', 'Food & Beverage'), count: 28, color: 'bg-blue-500' },
-              { name: t('dashboard.dept.housekeeping', 'Housekeeping'), count: 22, color: 'bg-green-500' },
-              { name: t('dashboard.dept.maintenance', 'Maintenance'), count: 14, color: 'bg-amber-500' },
-              { name: t('dashboard.dept.admin', 'Administration'), count: 12, color: 'bg-purple-500' },
-            ].map((dept) => (
-              <div key={dept.name}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm text-slate-700">{dept.name}</span>
-                  <span className="text-sm font-semibold text-slate-900">{dept.count}</span>
+            {(() => {
+              const DEPT_COLORS = ['bg-momentum-500', 'bg-blue-500', 'bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-rose-500', 'bg-cyan-500', 'bg-indigo-500', 'bg-orange-500'];
+              const sortedDepts = [...departments].sort((a, b) => (b.employee_count || 0) - (a.employee_count || 0)).slice(0, 5);
+              const maxCount = Math.max(...sortedDepts.map(d => d.employee_count || 0), 1);
+              return sortedDepts.map((dept, idx) => (
+                <div key={dept.id || dept.name}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm text-slate-700">{dept.name}</span>
+                    <span className="text-sm font-semibold text-slate-900">{dept.employee_count || 0}</span>
+                  </div>
+                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div className={`h-full rounded-full ${DEPT_COLORS[idx % DEPT_COLORS.length]}`} style={{ width: `${((dept.employee_count || 0) / maxCount) * 100}%` }} />
+                  </div>
                 </div>
-                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <div className={`h-full rounded-full ${dept.color}`} style={{ width: `${(dept.count / 32) * 100}%` }} />
-                </div>
-              </div>
-            ))}
+              ));
+            })()}
           </div>
         </div>
       </div>
@@ -606,55 +610,89 @@ function AdminDashboard({ t, user, data, entityMultiplier, selectedAlert, setSel
 // ============================================================
 // MANAGER DASHBOARD — THE OPERATIONS COCKPIT
 // Real-time status, action queue, today's schedule
-// This is NOT a stripped-down admin view — it's a scheduling command center
+// Fetches live data from API
 // ============================================================
 
 function ManagerDashboard({ t, user }) {
-  // Team roster with real-time status
-  const teamMembers = [
-    { id: 1, name: 'Maria Santos', role: 'Front Desk', shift: '07:00-15:00', status: 'on-shift', clockedIn: '06:58', momentum: 82 },
-    { id: 2, name: 'Pierre Dubois', role: 'Concierge', shift: '07:00-15:00', status: 'on-shift', clockedIn: '07:02', momentum: 79 },
-    { id: 3, name: 'Elena Rossi', role: 'Barista', shift: '06:00-14:00', status: 'on-break', clockedIn: '05:55', momentum: 85 },
-    { id: 4, name: 'Aiko Yamamoto', role: 'Restaurant Host', shift: '11:00-19:00', status: 'scheduled', momentum: 91 },
-    { id: 5, name: 'Thomas Cane', role: 'Waiter', shift: '11:00-19:00', status: 'scheduled', momentum: 74 },
-    { id: 6, name: 'Sophie Martin', role: 'Bartender', shift: '15:00-23:00', status: 'scheduled', momentum: 88 },
-    { id: 7, name: 'Raj Patel', role: 'Night Auditor', shift: '23:00-07:00', status: 'off-today', momentum: 68 },
-    { id: 8, name: 'Kenji Tanaka', role: 'Room Service', shift: '15:00-23:00', status: 'scheduled', momentum: 76 },
-  ];
+  const [loading, setLoading] = useState(true);
+  const [employees, setEmployees] = useState([]);
+  const [todayShifts, setTodayShifts] = useState([]);
+  const [pendingTimeOff, setPendingTimeOff] = useState([]);
+  const [locationName, setLocationName] = useState('');
+  const [departmentName, setDepartmentName] = useState('');
 
-  // Action items that need manager decision NOW
-  const actionQueue = [
-    { id: 1, type: 'time-off', urgency: 'high', employee: 'Maria Santos', detail: 'Thursday 6 Feb — full day', impact: '1 short on PM shift', href: '/time-off' },
-    { id: 2, type: 'expense', urgency: 'medium', employee: 'Pierre Dubois', detail: '£85 — Guest gift replacement', impact: 'Within policy', href: '/expenses' },
-    { id: 3, type: 'expense', urgency: 'medium', employee: 'Elena Rossi', detail: '£60 — Taxi (late night event)', impact: 'Within policy', href: '/expenses' },
-    { id: 4, type: 'shift-swap', urgency: 'low', employee: 'Thomas Cane', detail: 'Swap Wed ↔ Thu with Aiko', impact: 'No coverage issue', href: '/schedule' },
-    { id: 5, type: 'training', urgency: 'high', employee: 'Raj Patel', detail: 'Fire Safety — 3 days overdue', impact: 'Compliance risk', href: '/learning' },
-  ];
+  useEffect(() => {
+    const loadManagerData = async () => {
+      try {
+        const today = new Date().toISOString().split('T')[0];
+        const [empResult, shiftsResult, timeOffResult, locResult, deptResult] = await Promise.all([
+          employeesApi.list({ status: 'active', limit: 50 }),
+          shiftsApi.list({ start: today, end: today }),
+          timeOffApi.getRequests({ status: 'pending' }).catch(() => ({ requests: [] })),
+          locationsApi.list(),
+          departmentsApi.list(),
+        ]);
+        setEmployees(empResult.employees || []);
+        setTodayShifts(shiftsResult.shifts || []);
+        setPendingTimeOff(timeOffResult.requests || []);
+        // Set location/department from first available
+        if (locResult.locations?.length > 0) {
+          setLocationName(locResult.locations[0].name);
+        }
+        if (deptResult.departments?.length > 0) {
+          setDepartmentName(deptResult.departments[0].name);
+        }
+      } catch (err) {
+        console.error('Failed to load manager dashboard:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadManagerData();
+  }, []);
 
-  // Compliance status
-  const compliance = [
-    { name: 'Fire Safety', completed: 7, total: 8, status: 'warning' },
-    { name: 'Food Hygiene', completed: 8, total: 8, status: 'ok' },
-    { name: 'Manual Handling', completed: 6, total: 8, status: 'warning' },
-    { name: 'First Aid', completed: 5, total: 8, status: 'alert' },
-  ];
+  // Build team members from today's shifts
+  const teamMembers = todayShifts.map(shift => {
+    const emp = employees.find(e => e.id === shift.employee_id);
+    const empName = emp ? `${emp.first_name || ''} ${emp.last_name || ''}`.trim() : shift.employee_name || 'Unassigned';
+    const startHour = shift.start_time ? parseInt(shift.start_time.split(':')[0]) : 0;
+    const endHour = shift.end_time ? parseInt(shift.end_time.split(':')[0]) : 0;
+    const shiftTime = shift.start_time && shift.end_time
+      ? `${shift.start_time.slice(0, 5)}-${shift.end_time.slice(0, 5)}`
+      : '-';
+    return {
+      id: shift.id,
+      name: empName,
+      role: emp?.role_name || shift.role_name || emp?.role || '-',
+      shift: shiftTime,
+      status: shift.status === 'published' ? 'scheduled' : shift.status || 'scheduled',
+      clockedIn: null,
+      momentum: emp?.momentum_score || 75,
+    };
+  });
 
-  // Weekly schedule coverage
-  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const weekCoverage = [
-    { day: 'Mon', filled: 8, required: 8, status: 'ok' },
-    { day: 'Tue', filled: 7, required: 8, status: 'warning' },
-    { day: 'Wed', filled: 8, required: 8, status: 'ok' },
-    { day: 'Thu', filled: 6, required: 8, status: 'alert' },
-    { day: 'Fri', filled: 8, required: 8, status: 'ok' },
-    { day: 'Sat', filled: 8, required: 10, status: 'warning' },
-    { day: 'Sun', filled: 7, required: 8, status: 'warning' },
-  ];
+  // Action queue from pending time-off requests
+  const actionQueue = pendingTimeOff.slice(0, 5).map((req, idx) => ({
+    id: req.id || idx,
+    type: 'time-off',
+    urgency: 'medium',
+    employee: req.employee_name || 'Employee',
+    detail: `${req.start_date || ''} - ${req.end_date || ''} (${req.type || 'Leave'})`,
+    impact: req.reason || '',
+    href: '/time-off',
+  }));
+
+  // Compliance - show empty state (would need learning/compliance API)
+  const compliance = [];
+
+  // Weekly coverage - would need shift analysis API
+  const weekCoverage = [];
 
   const onShiftNow = teamMembers.filter(m => m.status === 'on-shift' || m.status === 'on-break').length;
-  const absentToday = 1; // One call-out
-  const openShifts = 2;
-  const avgMomentum = Math.round(teamMembers.reduce((sum, m) => sum + m.momentum, 0) / teamMembers.length);
+  const openShifts = todayShifts.filter(s => !s.employee_id).length;
+  const avgMomentum = teamMembers.length > 0
+    ? Math.round(teamMembers.reduce((sum, m) => sum + (m.momentum || 75), 0) / teamMembers.length)
+    : 0;
 
   const statusStyles = {
     'on-shift': 'bg-green-500',
@@ -669,6 +707,14 @@ function ManagerDashboard({ t, user }) {
     low: { bg: 'bg-slate-50 border-slate-200', icon: 'text-slate-400', badge: 'bg-slate-100 text-slate-600' },
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-momentum-500" />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* HEADER — Operations cockpit style */}
@@ -677,7 +723,7 @@ function ManagerDashboard({ t, user }) {
           <div>
             <h1 className="text-2xl font-bold">{t('manager.opsCockpit', 'Operations Cockpit')}</h1>
             <p className="text-slate-300 mt-1">
-              {t('manager.location', 'London Mayfair')} — {t('manager.fAndB', 'Food & Beverage')} — {teamMembers.length} {t('manager.teamMembers', 'team members')}
+              {locationName || t('manager.location', 'Your Location')} — {departmentName || t('manager.dept', 'Your Team')} — {teamMembers.length} {t('manager.teamMembers', 'team members')}
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -695,7 +741,7 @@ function ManagerDashboard({ t, user }) {
             <div className="text-xs text-slate-300 mt-1">{t('manager.onShiftNow', 'On Shift Now')}</div>
           </div>
           <div className="bg-white/10 rounded-lg p-3 text-center">
-            <div className="text-3xl font-bold text-red-400">{absentToday}</div>
+            <div className="text-3xl font-bold text-red-400">0</div>
             <div className="text-xs text-slate-300 mt-1">{t('manager.absentToday', 'Absent Today')}</div>
           </div>
           <div className="bg-white/10 rounded-lg p-3 text-center">
@@ -720,10 +766,16 @@ function ManagerDashboard({ t, user }) {
           <h2 className="font-bold text-slate-900">{t('manager.needsYourAction', 'NEEDS YOUR ACTION')} ({actionQueue.length})</h2>
         </div>
         <div className="divide-y divide-amber-100">
-          {actionQueue.map((item) => (
-            <div key={item.id} className={`p-4 flex items-center justify-between ${urgencyConfig[item.urgency].bg} border-l-4 ${item.urgency === 'high' ? 'border-l-red-500' : item.urgency === 'medium' ? 'border-l-amber-500' : 'border-l-slate-300'}`}>
+          {actionQueue.length === 0 ? (
+            <div className="p-6 text-center">
+              <CheckCircle className="w-10 h-10 text-green-400 mx-auto mb-2" />
+              <p className="text-slate-600 font-medium">{t('manager.allCaughtUp', 'All caught up!')}</p>
+              <p className="text-sm text-slate-500">{t('manager.noPendingActions', 'No pending actions require your attention')}</p>
+            </div>
+          ) : actionQueue.map((item) => (
+            <div key={item.id} className={`p-4 flex items-center justify-between ${urgencyConfig[item.urgency]?.bg || 'bg-slate-50'} border-l-4 ${item.urgency === 'high' ? 'border-l-red-500' : item.urgency === 'medium' ? 'border-l-amber-500' : 'border-l-slate-300'}`}>
               <div className="flex items-center gap-4">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${urgencyConfig[item.urgency].badge}`}>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${urgencyConfig[item.urgency]?.badge || 'bg-slate-100 text-slate-600'}`}>
                   {item.type === 'time-off' && <Coffee className="w-5 h-5" />}
                   {item.type === 'expense' && <Receipt className="w-5 h-5" />}
                   {item.type === 'shift-swap' && <Calendar className="w-5 h-5" />}
@@ -765,41 +817,52 @@ function ManagerDashboard({ t, user }) {
             </Link>
           </div>
           <div className="card-body">
-            {/* Shift periods */}
-            {['AM (06:00-14:00)', 'PM (14:00-22:00)', 'Night (22:00-06:00)'].map((period, idx) => (
-              <div key={period} className={idx > 0 ? 'mt-4 pt-4 border-t border-slate-100' : ''}>
-                <p className="text-xs font-semibold text-slate-500 uppercase mb-2">{period}</p>
-                <div className="space-y-2">
-                  {teamMembers
-                    .filter(m => {
-                      const hour = parseInt(m.shift.split(':')[0]);
-                      if (idx === 0) return hour >= 5 && hour < 12;
-                      if (idx === 1) return hour >= 11 && hour < 20;
-                      return hour >= 20 || hour < 6;
-                    })
-                    .map(member => (
-                      <div key={member.id} className="flex items-center justify-between p-2 bg-slate-50 rounded-lg">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full ${statusStyles[member.status]}`} />
-                          <div className="w-8 h-8 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs">
-                            {member.name.split(' ').map(n => n[0]).join('')}
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-slate-900">{member.name}</p>
-                            <p className="text-xs text-slate-500">{member.role}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm text-slate-700">{member.shift}</p>
-                          {member.clockedIn && (
-                            <p className="text-xs text-green-600">{t('manager.clockedIn', 'In')}: {member.clockedIn}</p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                </div>
+            {teamMembers.length === 0 ? (
+              <div className="text-center py-8">
+                <Calendar className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+                <p className="text-slate-500">{t('manager.noShiftsToday', 'No shifts scheduled for today')}</p>
+                <Link to="/schedule" className="text-sm text-momentum-500 hover:text-momentum-600 mt-2 inline-block">
+                  {t('manager.viewSchedule', 'View full schedule')}
+                </Link>
               </div>
-            ))}
+            ) : (
+              ['AM (06:00-14:00)', 'PM (14:00-22:00)', 'Night (22:00-06:00)'].map((period, idx) => {
+                const periodMembers = teamMembers.filter(m => {
+                  const hour = parseInt(m.shift?.split(':')[0] || '0');
+                  if (idx === 0) return hour >= 5 && hour < 12;
+                  if (idx === 1) return hour >= 11 && hour < 20;
+                  return hour >= 20 || hour < 6;
+                });
+                if (periodMembers.length === 0) return null;
+                return (
+                  <div key={period} className={idx > 0 ? 'mt-4 pt-4 border-t border-slate-100' : ''}>
+                    <p className="text-xs font-semibold text-slate-500 uppercase mb-2">{period}</p>
+                    <div className="space-y-2">
+                      {periodMembers.map(member => (
+                        <div key={member.id} className="flex items-center justify-between p-2 bg-slate-50 rounded-lg">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-2 h-2 rounded-full ${statusStyles[member.status] || 'bg-slate-300'}`} />
+                            <div className="w-8 h-8 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs">
+                              {member.name?.split(' ').map(n => n?.[0] || '').join('') || '??'}
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-slate-900">{member.name || 'Unknown'}</p>
+                              <p className="text-xs text-slate-500">{member.role || '-'}</p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-sm text-slate-700">{member.shift || '-'}</p>
+                            {member.clockedIn && (
+                              <p className="text-xs text-green-600">{t('manager.clockedIn', 'In')}: {member.clockedIn}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
 
@@ -812,7 +875,7 @@ function ManagerDashboard({ t, user }) {
               <h2 className="font-semibold text-slate-900">{t('manager.teamCompliance', 'Team Compliance')}</h2>
             </div>
             <div className="card-body space-y-3">
-              {compliance.map((item) => (
+              {compliance.length > 0 ? compliance.map((item) => (
                 <div key={item.name} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     {item.status === 'ok' && <CheckCircle className="w-4 h-4 text-green-500" />}
@@ -824,7 +887,9 @@ function ManagerDashboard({ t, user }) {
                     {item.completed}/{item.total}
                   </span>
                 </div>
-              ))}
+              )) : (
+                <p className="text-sm text-slate-500 text-center py-4">{t('manager.noComplianceData', 'No compliance data available')}</p>
+              )}
             </div>
           </div>
 
@@ -835,17 +900,21 @@ function ManagerDashboard({ t, user }) {
               <h2 className="font-semibold text-slate-900">{t('manager.weekCoverage', "This Week's Coverage")}</h2>
             </div>
             <div className="card-body">
-              <div className="grid grid-cols-7 gap-2">
-                {weekCoverage.map((day) => (
-                  <div key={day.day} className={`text-center p-2 rounded-lg ${day.status === 'ok' ? 'bg-green-50' : day.status === 'warning' ? 'bg-amber-50' : 'bg-red-50'}`}>
-                    <p className="text-xs font-medium text-slate-500">{day.day}</p>
-                    <p className={`text-lg font-bold ${day.status === 'ok' ? 'text-green-600' : day.status === 'warning' ? 'text-amber-600' : 'text-red-600'}`}>
-                      {day.filled}
-                    </p>
-                    <p className="text-xs text-slate-400">/{day.required}</p>
-                  </div>
-                ))}
-              </div>
+              {weekCoverage.length > 0 ? (
+                <div className="grid grid-cols-7 gap-2">
+                  {weekCoverage.map((day) => (
+                    <div key={day.day} className={`text-center p-2 rounded-lg ${day.status === 'ok' ? 'bg-green-50' : day.status === 'warning' ? 'bg-amber-50' : 'bg-red-50'}`}>
+                      <p className="text-xs font-medium text-slate-500">{day.day}</p>
+                      <p className={`text-lg font-bold ${day.status === 'ok' ? 'text-green-600' : day.status === 'warning' ? 'text-amber-600' : 'text-red-600'}`}>
+                        {day.filled}
+                      </p>
+                      <p className="text-xs text-slate-400">/{day.required}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-slate-500 text-center py-4">{t('manager.noCoverageData', 'View full schedule for coverage details')}</p>
+              )}
             </div>
           </div>
 
@@ -869,22 +938,24 @@ function ManagerDashboard({ t, user }) {
                 </div>
               </div>
               <div className="space-y-2">
-                {teamMembers.slice(0, 4).map(member => (
+                {teamMembers.length > 0 ? teamMembers.slice(0, 4).map(member => (
                   <div key={member.id} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-medium text-xs">
-                      {member.name.split(' ')[0][0]}
+                      {member.name?.split(' ')[0]?.[0] || '?'}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-slate-600">{member.name.split(' ')[0]}</span>
-                        <span className="text-xs font-medium text-slate-900">{member.momentum}</span>
+                        <span className="text-xs text-slate-600">{member.name?.split(' ')[0] || 'Employee'}</span>
+                        <span className="text-xs font-medium text-slate-900">{member.momentum || 0}</span>
                       </div>
                       <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden mt-1">
-                        <div className="h-full bg-momentum-500 rounded-full" style={{ width: `${member.momentum}%` }} />
+                        <div className="h-full bg-momentum-500 rounded-full" style={{ width: `${member.momentum || 0}%` }} />
                       </div>
                     </div>
                   </div>
-                ))}
+                )) : (
+                  <p className="text-sm text-slate-500 text-center">{t('manager.noTeamData', 'No team members to display')}</p>
+                )}
               </div>
             </div>
           </div>

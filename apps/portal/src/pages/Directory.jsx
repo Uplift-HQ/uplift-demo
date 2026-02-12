@@ -2,11 +2,12 @@
 // COMPANY DIRECTORY PAGE
 // Route: /directory -- Visible to ALL roles
 // Grid, List, and Org Chart views with search, filters, detail modal
-// 34 employees across 5 locations + Corporate HQ
+// Fetches real employee data from API
 // ============================================================
-import { useState, useMemo, useCallback, Fragment } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { employeesApi, departmentsApi, locationsApi } from '../lib/api';
 import {
   Search,
   LayoutGrid,
@@ -20,94 +21,40 @@ import {
   ChevronRight,
   ChevronUp,
   X,
-  Users,
   Calendar,
   Tag,
   Briefcase,
   ArrowUpDown,
   Circle,
-  User,
   Clock,
+  Loader2,
+  AlertCircle,
 } from 'lucide-react';
-
-// ============================================================
-// DEMO DATA -- 34 employees, 5 locations + Corporate HQ
-// ============================================================
-const EMPLOYEES = [
-  // --- Corporate HQ ---
-  { id: 1, firstName: 'Victoria', lastName: 'Sterling', title: 'CEO / Group Director', department: 'Executive', location: 'Corporate HQ', email: 'victoria.sterling@grandmetropolitan.com', phone: '+44 20 7946 0001', managerId: null, status: 'active', startDate: '2015-03-01', employmentType: 'full-time', skills: ['Strategic Leadership', 'Hospitality Management', 'Board Relations', 'P&L Oversight'] },
-  { id: 2, firstName: 'Richard', lastName: 'Thompson', title: 'CFO', department: 'Finance', location: 'Corporate HQ', email: 'richard.thompson@grandmetropolitan.com', phone: '+44 20 7946 0002', managerId: 1, status: 'active', startDate: '2016-09-15', employmentType: 'full-time', skills: ['Financial Planning', 'Audit', 'Compliance', 'Budgeting'] },
-
-  // --- London Mayfair ---
-  { id: 3, firstName: 'Sarah', lastName: 'Chen', title: 'HR Administrator', department: 'Administration', location: 'London Mayfair', email: 'sarah.chen@grandmetropolitan.com', phone: '+44 20 7946 0100', managerId: 1, status: 'active', startDate: '2018-01-10', employmentType: 'full-time', skills: ['Recruitment', 'Employee Relations', 'HRIS', 'Payroll'] },
-  { id: 4, firstName: 'James', lastName: 'Williams', title: 'F&B Manager', department: 'Food & Beverage', location: 'London Mayfair', email: 'james.williams@grandmetropolitan.com', phone: '+44 20 7946 0101', managerId: 1, status: 'active', startDate: '2017-06-20', employmentType: 'full-time', skills: ['Restaurant Operations', 'Menu Planning', 'Cost Control', 'Team Leadership'] },
-  { id: 5, firstName: 'Maria', lastName: 'Santos', title: 'Front Desk Associate', department: 'Front Office', location: 'London Mayfair', email: 'maria.santos@grandmetropolitan.com', phone: '+44 20 7946 0102', managerId: 4, status: 'active', startDate: '2021-03-15', employmentType: 'full-time', skills: ['Guest Services', 'PMS Systems', 'Check-in/Check-out', 'Multilingual'] },
-  { id: 6, firstName: 'Oliver', lastName: 'Barnes', title: 'Head Concierge', department: 'Front Office', location: 'London Mayfair', email: 'oliver.barnes@grandmetropolitan.com', phone: '+44 20 7946 0103', managerId: 4, status: 'active', startDate: '2019-08-01', employmentType: 'full-time', skills: ['Concierge Services', 'Local Knowledge', 'VIP Handling', 'Reservations'] },
-  { id: 7, firstName: 'Emily', lastName: 'Watson', title: 'Spa Director', department: 'Spa & Wellness', location: 'London Mayfair', email: 'emily.watson@grandmetropolitan.com', phone: '+44 20 7946 0104', managerId: 1, status: 'on_leave', startDate: '2019-11-01', employmentType: 'full-time', skills: ['Spa Management', 'Wellness Programs', 'Product Selection', 'Staff Training'] },
-  { id: 8, firstName: 'Tom', lastName: 'Hughes', title: 'Night Auditor', department: 'Front Office', location: 'London Mayfair', email: 'tom.hughes@grandmetropolitan.com', phone: '+44 20 7946 0105', managerId: 4, status: 'active', startDate: '2022-01-10', employmentType: 'full-time', skills: ['Night Audit', 'Accounting', 'Security Procedures', 'PMS'] },
-  { id: 9, firstName: 'Priya', lastName: 'Sharma', title: 'Revenue Analyst', department: 'Finance', location: 'London Mayfair', email: 'priya.sharma@grandmetropolitan.com', phone: '+44 20 7946 0106', managerId: 3, status: 'active', startDate: '2022-06-01', employmentType: 'full-time', skills: ['Revenue Management', 'Data Analysis', 'Forecasting', 'Excel'] },
-  { id: 10, firstName: 'David', lastName: 'Mitchell', title: 'IT Systems Admin', department: 'Information Technology', location: 'London Mayfair', email: 'david.mitchell@grandmetropolitan.com', phone: '+44 20 7946 0107', managerId: 3, status: 'active', startDate: '2020-09-15', employmentType: 'full-time', skills: ['Network Admin', 'PMS Support', 'Cybersecurity', 'Cloud Infrastructure'] },
-
-  // --- Paris Champs-Elysees ---
-  { id: 11, firstName: 'Isabelle', lastName: 'Laurent', title: 'General Manager', department: 'Management', location: 'Paris Champs-Elysees', email: 'isabelle.laurent@grandmetropolitan.com', phone: '+33 1 42 68 0001', managerId: 1, status: 'active', startDate: '2016-04-01', employmentType: 'full-time', skills: ['Hotel Management', 'French Hospitality', 'Revenue Strategy', 'Staff Development'] },
-  { id: 12, firstName: 'Pierre', lastName: 'Dubois', title: 'Head Chef', department: 'Food & Beverage', location: 'Paris Champs-Elysees', email: 'pierre.dubois@grandmetropolitan.com', phone: '+33 1 42 68 0002', managerId: 11, status: 'active', startDate: '2017-09-01', employmentType: 'full-time', skills: ['French Cuisine', 'Menu Development', 'Kitchen Management', 'Food Safety'] },
-  { id: 13, firstName: 'Claire', lastName: 'Dupont', title: 'Housekeeping Supervisor', department: 'Housekeeping', location: 'Paris Champs-Elysees', email: 'claire.dupont@grandmetropolitan.com', phone: '+33 1 42 68 0003', managerId: 11, status: 'active', startDate: '2020-02-15', employmentType: 'full-time', skills: ['Housekeeping Standards', 'Inventory Management', 'Staff Scheduling', 'Quality Control'] },
-  { id: 14, firstName: 'Sophie', lastName: 'Martin', title: 'Front Office Manager', department: 'Front Office', location: 'Paris Champs-Elysees', email: 'sophie.martin@grandmetropolitan.com', phone: '+33 1 42 68 0004', managerId: 11, status: 'active', startDate: '2019-05-10', employmentType: 'full-time', skills: ['Front Desk Operations', 'Guest Relations', 'PMS', 'Upselling'] },
-  { id: 15, firstName: 'Jean-Pierre', lastName: 'Moreau', title: 'Sommelier', department: 'Food & Beverage', location: 'Paris Champs-Elysees', email: 'jean-pierre.moreau@grandmetropolitan.com', phone: '+33 1 42 68 0005', managerId: 12, status: 'active', startDate: '2021-07-01', employmentType: 'full-time', skills: ['Wine Selection', 'Tasting Notes', 'Cellar Management', 'Pairing'] },
-  { id: 16, firstName: 'Camille', lastName: 'Rousseau', title: 'L&D Coordinator', department: 'Human Resources', location: 'Paris Champs-Elysees', email: 'camille.rousseau@grandmetropolitan.com', phone: '+33 1 42 68 0006', managerId: 11, status: 'active', startDate: '2022-03-01', employmentType: 'full-time', skills: ['Training Design', 'Onboarding', 'E-Learning', 'Compliance Training'] },
-
-  // --- Dubai Marina ---
-  { id: 17, firstName: 'Khalid', lastName: 'Al-Rashid', title: 'General Manager', department: 'Management', location: 'Dubai Marina', email: 'khalid.al-rashid@grandmetropolitan.com', phone: '+971 4 399 0001', managerId: 1, status: 'active', startDate: '2017-01-15', employmentType: 'full-time', skills: ['Hotel Operations', 'Gulf Hospitality', 'Revenue Growth', 'VIP Management'] },
-  { id: 18, firstName: 'Ahmed', lastName: 'Hassan', title: 'Executive Chef', department: 'Food & Beverage', location: 'Dubai Marina', email: 'ahmed.hassan@grandmetropolitan.com', phone: '+971 4 399 0002', managerId: 17, status: 'active', startDate: '2018-06-01', employmentType: 'full-time', skills: ['Middle Eastern Cuisine', 'International Menu', 'Kitchen Management', 'Halal Standards'] },
-  { id: 19, firstName: 'Fatima', lastName: 'Al-Zahra', title: 'Guest Relations Manager', department: 'Front Office', location: 'Dubai Marina', email: 'fatima.al-zahra@grandmetropolitan.com', phone: '+971 4 399 0003', managerId: 17, status: 'active', startDate: '2019-09-01', employmentType: 'full-time', skills: ['Guest Experience', 'Complaint Resolution', 'VIP Services', 'Multilingual'] },
-  { id: 20, firstName: 'Omar', lastName: 'Mahmoud', title: 'Porter', department: 'Front Office', location: 'Dubai Marina', email: 'omar.mahmoud@grandmetropolitan.com', phone: '+971 4 399 0004', managerId: 19, status: 'active', startDate: '2023-01-15', employmentType: 'full-time', skills: ['Luggage Handling', 'Guest Assistance', 'Local Knowledge', 'Driving'] },
-  { id: 21, firstName: 'Layla', lastName: 'Ibrahim', title: 'Finance Director', department: 'Finance', location: 'Dubai Marina', email: 'layla.ibrahim@grandmetropolitan.com', phone: '+971 4 399 0005', managerId: 17, status: 'active', startDate: '2018-11-01', employmentType: 'full-time', skills: ['Financial Reporting', 'Tax Compliance', 'Budgeting', 'ERP Systems'] },
-  { id: 22, firstName: 'Noor', lastName: 'Bakri', title: 'Marketing Manager', department: 'Marketing', location: 'Dubai Marina', email: 'noor.bakri@grandmetropolitan.com', phone: '+971 4 399 0006', managerId: 17, status: 'on_leave', startDate: '2020-04-01', employmentType: 'full-time', skills: ['Digital Marketing', 'Brand Strategy', 'Social Media', 'Campaign Management'] },
-
-  // --- New York Central Park ---
-  { id: 23, firstName: 'Michael', lastName: 'Torres', title: 'General Manager', department: 'Management', location: 'New York Central Park', email: 'michael.torres@grandmetropolitan.com', phone: '+1 212 555 0001', managerId: 1, status: 'active', startDate: '2016-11-01', employmentType: 'full-time', skills: ['Hotel Management', 'US Hospitality', 'P&L Management', 'Union Relations'] },
-  { id: 24, firstName: 'Jessica', lastName: 'Thompson', title: 'Front Desk Manager', department: 'Front Office', location: 'New York Central Park', email: 'jessica.thompson@grandmetropolitan.com', phone: '+1 212 555 0002', managerId: 23, status: 'active', startDate: '2019-02-01', employmentType: 'full-time', skills: ['Front Desk Operations', 'Shift Management', 'PMS', 'Guest Recovery'] },
-  { id: 25, firstName: 'Marcus', lastName: 'Johnson', title: 'Bartender', department: 'Food & Beverage', location: 'New York Central Park', email: 'marcus.johnson@grandmetropolitan.com', phone: '+1 212 555 0003', managerId: 24, status: 'active', startDate: '2021-09-15', employmentType: 'full-time', skills: ['Mixology', 'Customer Service', 'Inventory', 'POS Systems'] },
-  { id: 26, firstName: 'Ashley', lastName: 'Williams', title: 'HR Business Partner', department: 'Human Resources', location: 'New York Central Park', email: 'ashley.williams@grandmetropolitan.com', phone: '+1 212 555 0004', managerId: 23, status: 'active', startDate: '2020-06-01', employmentType: 'full-time', skills: ['Employee Relations', 'Performance Management', 'Recruitment', 'Labour Law'] },
-  { id: 27, firstName: 'Carlos', lastName: 'Rodriguez', title: 'Head Housekeeper', department: 'Housekeeping', location: 'New York Central Park', email: 'carlos.rodriguez@grandmetropolitan.com', phone: '+1 212 555 0005', managerId: 23, status: 'active', startDate: '2018-08-01', employmentType: 'full-time', skills: ['Housekeeping Operations', 'Quality Assurance', 'Laundry', 'Sustainability'] },
-  { id: 28, firstName: 'Samantha', lastName: 'Lee', title: 'Events Coordinator', department: 'Events', location: 'New York Central Park', email: 'samantha.lee@grandmetropolitan.com', phone: '+1 212 555 0006', managerId: 23, status: 'active', startDate: '2022-02-01', employmentType: 'contract', skills: ['Event Planning', 'Vendor Management', 'Catering Coordination', 'AV Setup'] },
-
-  // --- Tokyo Ginza ---
-  { id: 29, firstName: 'Haruki', lastName: 'Nakamura', title: 'General Manager', department: 'Management', location: 'Tokyo Ginza', email: 'haruki.nakamura@grandmetropolitan.com', phone: '+81 3 6274 0001', managerId: 1, status: 'active', startDate: '2017-04-01', employmentType: 'full-time', skills: ['Hotel Operations', 'Japanese Hospitality', 'Omotenashi', 'Revenue Strategy'] },
-  { id: 30, firstName: 'Yuki', lastName: 'Tanaka', title: 'Restaurant Manager', department: 'Food & Beverage', location: 'Tokyo Ginza', email: 'yuki.tanaka@grandmetropolitan.com', phone: '+81 3 6274 0002', managerId: 29, status: 'active', startDate: '2019-06-01', employmentType: 'full-time', skills: ['Restaurant Operations', 'Japanese Cuisine', 'Staff Management', 'Customer Experience'] },
-  { id: 31, firstName: 'Aiko', lastName: 'Yamamoto', title: 'Concierge', department: 'Front Office', location: 'Tokyo Ginza', email: 'aiko.yamamoto@grandmetropolitan.com', phone: '+81 3 6274 0003', managerId: 30, status: 'active', startDate: '2021-04-01', employmentType: 'full-time', skills: ['Concierge Services', 'Tokyo Guide', 'Multilingual', 'Reservations'] },
-  { id: 32, firstName: 'Wei', lastName: 'Zhang', title: 'Sous Chef', department: 'Food & Beverage', location: 'Tokyo Ginza', email: 'wei.zhang@grandmetropolitan.com', phone: '+81 3 6274 0004', managerId: 30, status: 'active', startDate: '2020-10-01', employmentType: 'full-time', skills: ['Asian Fusion', 'Sushi Preparation', 'Kitchen Operations', 'Food Safety'] },
-  { id: 33, firstName: 'Kenji', lastName: 'Sato', title: 'Front Desk Associate', department: 'Front Office', location: 'Tokyo Ginza', email: 'kenji.sato@grandmetropolitan.com', phone: '+81 3 6274 0005', managerId: 29, status: 'on_leave', startDate: '2022-08-01', employmentType: 'part-time', skills: ['Guest Services', 'PMS', 'Multilingual', 'Check-in/Check-out'] },
-  { id: 34, firstName: 'Mei', lastName: 'Lin', title: 'Spa Therapist', department: 'Spa & Wellness', location: 'Tokyo Ginza', email: 'mei.lin@grandmetropolitan.com', phone: '+81 3 6274 0006', managerId: 29, status: 'active', startDate: '2023-03-01', employmentType: 'full-time', skills: ['Massage Therapy', 'Aromatherapy', 'Skincare', 'Japanese Wellness'] },
-];
-
-// ============================================================
-// LOCATION METADATA -- country codes & colours (no emoji flags)
-// ============================================================
-const LOCATION_META = {
-  'Corporate HQ':          { code: 'UK', colors: ['#012169', '#C8102E', '#FFFFFF'] },
-  'London Mayfair':        { code: 'UK', colors: ['#012169', '#C8102E', '#FFFFFF'] },
-  'Paris Champs-Elysees':  { code: 'FR', colors: ['#002395', '#FFFFFF', '#ED2939'] },
-  'Dubai Marina':          { code: 'AE', colors: ['#00732F', '#FFFFFF', '#FF0000'] },
-  'New York Central Park': { code: 'US', colors: ['#3C3B6E', '#FFFFFF', '#B22234'] },
-  'Tokyo Ginza':           { code: 'JP', colors: ['#FFFFFF', '#BC002D', '#FFFFFF'] },
-};
 
 // ============================================================
 // HELPER UTILITIES
 // ============================================================
 
-/** Build a lookup map: employee id -> employee object */
-const EMPLOYEE_MAP = Object.fromEntries(EMPLOYEES.map(e => [e.id, e]));
-
 /** Full display name */
-function fullName(emp) {
-  return `${emp.firstName} ${emp.lastName}`;
+function fullName(emp, t) {
+  const first = emp.first_name || emp.firstName || '';
+  const last = emp.last_name || emp.lastName || '';
+  const unknownFallback = t ? t('directory.unknown', 'Unknown') : 'Unknown';
+  return `${first} ${last}`.trim() || emp.name || unknownFallback;
 }
 
 /** Initials from first + last */
 function getInitials(emp) {
-  return `${emp.firstName[0]}${emp.lastName[0]}`.toUpperCase();
+  const first = emp.first_name || emp.firstName || '';
+  const last = emp.last_name || emp.lastName || '';
+  if (first && last) {
+    return `${first[0]}${last[0]}`.toUpperCase();
+  }
+  if (emp.name) {
+    const parts = emp.name.split(' ');
+    return parts.map(p => p[0]).join('').slice(0, 2).toUpperCase();
+  }
+  return '??';
 }
 
 /** Deterministic avatar colour based on employee id */
@@ -117,51 +64,23 @@ const AVATAR_PALETTE = [
   'bg-orange-600',  'bg-cyan-600',   'bg-fuchsia-600', 'bg-lime-600',
 ];
 function avatarColor(id) {
-  return AVATAR_PALETTE[id % AVATAR_PALETTE.length];
+  const numId = typeof id === 'string' ? parseInt(id, 10) || id.charCodeAt(0) : id;
+  return AVATAR_PALETTE[numId % AVATAR_PALETTE.length];
 }
 
 /** Tenure string from startDate */
 function tenure(startDate) {
+  if (!startDate) return '-';
   const start = new Date(startDate);
   const now = new Date();
   const years = now.getFullYear() - start.getFullYear();
   const months = now.getMonth() - start.getMonth();
   const totalMonths = years * 12 + months;
+  if (totalMonths < 0) return '-';
   if (totalMonths < 12) return `${totalMonths}mo`;
   const y = Math.floor(totalMonths / 12);
   const m = totalMonths % 12;
   return m > 0 ? `${y}y ${m}mo` : `${y}y`;
-}
-
-/** Direct reports for a given employee */
-function directReports(empId) {
-  return EMPLOYEES.filter(e => e.managerId === empId);
-}
-
-/** All unique values for a field */
-function uniqueValues(field) {
-  return [...new Set(EMPLOYEES.map(e => e[field]))].sort();
-}
-
-// ============================================================
-// SMALL SVG FLAG COMPONENT (no emojis)
-// ============================================================
-function LocationFlag({ location, className = '' }) {
-  const meta = LOCATION_META[location];
-  if (!meta) return null;
-  const [c1, c2, c3] = meta.colors;
-  return (
-    <svg
-      viewBox="0 0 18 12"
-      className={`inline-block rounded-sm border border-slate-200 ${className}`}
-      style={{ width: 18, height: 12 }}
-      aria-label={meta.code}
-    >
-      <rect x="0" y="0" width="6" height="12" fill={c1} />
-      <rect x="6" y="0" width="6" height="12" fill={c2} />
-      <rect x="12" y="0" width="6" height="12" fill={c3} />
-    </svg>
-  );
 }
 
 // ============================================================
@@ -171,15 +90,17 @@ function StatusBadge({ status, t }) {
   const styles = {
     active: 'bg-emerald-50 text-emerald-700 border-emerald-200',
     on_leave: 'bg-amber-50 text-amber-700 border-amber-200',
+    inactive: 'bg-slate-50 text-slate-500 border-slate-200',
   };
   const labels = {
     active: t('directory.statusActive', 'Active'),
     on_leave: t('directory.statusOnLeave', 'On Leave'),
+    inactive: t('directory.statusInactive', 'Inactive'),
   };
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${styles[status] || styles.active}`}>
       <Circle className="w-2 h-2 fill-current" />
-      {labels[status] || status}
+      {labels[status] || status || 'Active'}
     </span>
   );
 }
@@ -187,11 +108,12 @@ function StatusBadge({ status, t }) {
 // ============================================================
 // EMPLOYEE DETAIL MODAL
 // ============================================================
-function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
+function EmployeeDetailModal({ employee, employees, onClose, onNavigate, t }) {
   if (!employee) return null;
 
-  const manager = employee.managerId ? EMPLOYEE_MAP[employee.managerId] : null;
-  const reports = directReports(employee.id);
+  const manager = employee.manager_id ? employees.find(e => e.id === employee.manager_id) : null;
+  const reports = employees.filter(e => e.manager_id === employee.id);
+  const skills = employee.skills || [];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -216,11 +138,13 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
               {getInitials(employee)}
             </div>
             <div className="min-w-0">
-              <h2 className="text-xl font-bold text-slate-900">{fullName(employee)}</h2>
-              <p className="text-sm text-slate-600 mt-0.5">{employee.title}</p>
+              <h2 className="text-xl font-bold text-slate-900">{fullName(employee, t)}</h2>
+              <p className="text-sm text-slate-600 mt-0.5">{employee.role_name || employee.role || employee.title || '-'}</p>
               <div className="flex items-center gap-2 mt-2">
                 <StatusBadge status={employee.status} t={t} />
-                <span className="text-xs text-slate-400 capitalize">{employee.employmentType.replace('-', ' ')}</span>
+                {employee.employment_type && (
+                  <span className="text-xs text-slate-400 capitalize">{employee.employment_type.replace('-', ' ').replace('_', ' ')}</span>
+                )}
               </div>
             </div>
           </div>
@@ -236,7 +160,7 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
               </p>
               <div className="flex items-center gap-1.5 text-sm text-slate-700">
                 <Building2 className="w-4 h-4 text-slate-400" />
-                {employee.department}
+                {employee.department_name || employee.department || '-'}
               </div>
             </div>
             <div>
@@ -244,9 +168,8 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
                 {t('directory.location', 'Location')}
               </p>
               <div className="flex items-center gap-1.5 text-sm text-slate-700">
-                <LocationFlag location={employee.location} className="mr-0.5" />
                 <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                {employee.location}
+                {employee.location_name || employee.location || '-'}
               </div>
             </div>
           </div>
@@ -257,16 +180,20 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
               {t('directory.contact', 'Contact')}
             </p>
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm text-slate-700">
-                <Mail className="w-4 h-4 text-slate-400 shrink-0" />
-                <a href={`mailto:${employee.email}`} className="text-momentum-600 hover:underline truncate">
-                  {employee.email}
-                </a>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-700">
-                <Phone className="w-4 h-4 text-slate-400 shrink-0" />
-                {employee.phone}
-              </div>
+              {employee.email && (
+                <div className="flex items-center gap-2 text-sm text-slate-700">
+                  <Mail className="w-4 h-4 text-slate-400 shrink-0" />
+                  <a href={`mailto:${employee.email}`} className="text-momentum-600 hover:underline truncate">
+                    {employee.email}
+                  </a>
+                </div>
+              )}
+              {employee.phone && (
+                <div className="flex items-center gap-2 text-sm text-slate-700">
+                  <Phone className="w-4 h-4 text-slate-400 shrink-0" />
+                  {employee.phone}
+                </div>
+              )}
             </div>
           </div>
 
@@ -285,9 +212,9 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
                 </div>
                 <div className="text-left">
                   <p className="text-sm font-medium text-slate-900 group-hover:text-momentum-600 transition-colors">
-                    {fullName(manager)}
+                    {fullName(manager, t)}
                   </p>
-                  <p className="text-xs text-slate-500">{manager.title}</p>
+                  <p className="text-xs text-slate-500">{manager.role_name || manager.role || manager.title || '-'}</p>
                 </div>
               </button>
             </div>
@@ -311,9 +238,9 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
                     </div>
                     <div className="text-left min-w-0">
                       <p className="text-sm text-slate-700 group-hover:text-momentum-600 transition-colors truncate">
-                        {fullName(r)}
+                        {fullName(r, t)}
                       </p>
-                      <p className="text-xs text-slate-400 truncate">{r.title}</p>
+                      <p className="text-xs text-slate-400 truncate">{r.role_name || r.role || r.title || '-'}</p>
                     </div>
                   </button>
                 ))}
@@ -322,19 +249,19 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
           )}
 
           {/* Skills */}
-          {employee.skills && employee.skills.length > 0 && (
+          {skills.length > 0 && (
             <div>
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">
                 {t('directory.skills', 'Skills')}
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {employee.skills.map(skill => (
+                {skills.map((skill, idx) => (
                   <span
-                    key={skill}
+                    key={skill.id || skill.name || idx}
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200"
                   >
                     <Tag className="w-3 h-3" />
-                    {skill}
+                    {skill.name || skill}
                   </span>
                 ))}
               </div>
@@ -349,7 +276,9 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
               </p>
               <div className="flex items-center gap-1.5 text-sm text-slate-700">
                 <Calendar className="w-4 h-4 text-slate-400" />
-                {new Date(employee.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                {employee.start_date || employee.hire_date ?
+                  new Date(employee.start_date || employee.hire_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+                  : '-'}
               </div>
             </div>
             <div>
@@ -358,7 +287,7 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
               </p>
               <div className="flex items-center gap-1.5 text-sm text-slate-700">
                 <Clock className="w-4 h-4 text-slate-400" />
-                {tenure(employee.startDate)}
+                {tenure(employee.start_date || employee.hire_date)}
               </div>
             </div>
           </div>
@@ -371,8 +300,8 @@ function EmployeeDetailModal({ employee, onClose, onNavigate, t }) {
 // ============================================================
 // ORG CHART NODE
 // ============================================================
-function OrgChartNode({ employee, depth, expandedNodes, toggleNode, onSelect, t }) {
-  const reports = directReports(employee.id);
+function OrgChartNode({ employee, employees, depth, expandedNodes, toggleNode, onSelect, t }) {
+  const reports = employees.filter(e => e.manager_id === employee.id);
   const hasReports = reports.length > 0;
   const isExpanded = expandedNodes[employee.id];
 
@@ -411,11 +340,10 @@ function OrgChartNode({ employee, depth, expandedNodes, toggleNode, onSelect, t 
             {getInitials(employee)}
           </div>
           <div className="text-left min-w-0">
-            <p className="font-semibold text-slate-900 text-sm">{fullName(employee)}</p>
-            <p className="text-xs text-slate-500 truncate">{employee.title}</p>
+            <p className="font-semibold text-slate-900 text-sm">{fullName(employee, t)}</p>
+            <p className="text-xs text-slate-500 truncate">{employee.role_name || employee.role || employee.title || '-'}</p>
             <div className="flex items-center gap-1 mt-0.5">
-              <LocationFlag location={employee.location} className="mr-0.5" />
-              <span className="text-[10px] text-slate-400">{employee.location}</span>
+              <span className="text-[10px] text-slate-400">{employee.location_name || employee.location || '-'}</span>
             </div>
           </div>
           {hasReports && (
@@ -433,6 +361,7 @@ function OrgChartNode({ employee, depth, expandedNodes, toggleNode, onSelect, t 
             <OrgChartNode
               key={r.id}
               employee={r}
+              employees={employees}
               depth={depth + 1}
               expandedNodes={expandedNodes}
               toggleNode={toggleNode}
@@ -459,14 +388,32 @@ function sortEmployees(list, sortKey) {
   const sorted = [...list];
   switch (sortKey) {
     case 'department':
-      sorted.sort((a, b) => a.department.localeCompare(b.department) || a.lastName.localeCompare(b.lastName));
+      sorted.sort((a, b) => {
+        const aDept = a.department_name || a.department || '';
+        const bDept = b.department_name || b.department || '';
+        const aLast = a.last_name || a.lastName || '';
+        const bLast = b.last_name || b.lastName || '';
+        return aDept.localeCompare(bDept) || aLast.localeCompare(bLast);
+      });
       break;
     case 'location':
-      sorted.sort((a, b) => a.location.localeCompare(b.location) || a.lastName.localeCompare(b.lastName));
+      sorted.sort((a, b) => {
+        const aLoc = a.location_name || a.location || '';
+        const bLoc = b.location_name || b.location || '';
+        const aLast = a.last_name || a.lastName || '';
+        const bLast = b.last_name || b.lastName || '';
+        return aLoc.localeCompare(bLoc) || aLast.localeCompare(bLast);
+      });
       break;
     case 'alpha':
     default:
-      sorted.sort((a, b) => a.lastName.localeCompare(b.lastName) || a.firstName.localeCompare(b.firstName));
+      sorted.sort((a, b) => {
+        const aLast = a.last_name || a.lastName || '';
+        const bLast = b.last_name || b.lastName || '';
+        const aFirst = a.first_name || a.firstName || '';
+        const bFirst = b.first_name || b.firstName || '';
+        return aLast.localeCompare(bLast) || aFirst.localeCompare(bFirst);
+      });
       break;
   }
   return sorted;
@@ -479,7 +426,14 @@ export default function Directory() {
   const { t } = useTranslation();
   const { role } = useAuth();
 
-  // --- State ---
+  // --- Data State ---
+  const [employees, setEmployees] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // --- UI State ---
   const [viewMode, setViewMode] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('all');
@@ -492,42 +446,88 @@ export default function Directory() {
   const [listSortCol, setListSortCol] = useState('lastName');
   const [listSortDir, setListSortDir] = useState('asc');
 
-  // Org chart expanded nodes -- default expand top 2 levels
-  const [expandedNodes, setExpandedNodes] = useState(() => {
-    const initial = {};
-    EMPLOYEES.forEach(e => {
-      // Expand CEO and direct reports of CEO (GMs etc.)
-      if (!e.managerId || e.managerId === 1) {
-        initial[e.id] = true;
+  // Org chart expanded nodes
+  const [expandedNodes, setExpandedNodes] = useState({});
+
+  // --- Fetch Data ---
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const [empResult, deptResult, locResult] = await Promise.all([
+          employeesApi.list(),
+          departmentsApi.list(),
+          locationsApi.list(),
+        ]);
+
+        const empList = empResult.employees || [];
+        setEmployees(empList);
+        setDepartments(deptResult.departments || []);
+        setLocations(locResult.locations || []);
+
+        // Expand top managers in org chart by default
+        const initialExpanded = {};
+        empList.forEach(e => {
+          // Expand employees with no manager (top level) and their direct reports
+          if (!e.manager_id) {
+            initialExpanded[e.id] = true;
+          }
+        });
+        // Also expand direct reports of top level
+        empList.forEach(e => {
+          if (e.manager_id && initialExpanded[e.manager_id]) {
+            initialExpanded[e.id] = true;
+          }
+        });
+        setExpandedNodes(initialExpanded);
+      } catch (err) {
+        console.error('Failed to load directory data:', err);
+        setError(err.message || 'Failed to load directory');
+      } finally {
+        setLoading(false);
       }
-    });
-    return initial;
-  });
+    };
+    loadData();
+  }, []);
 
   // --- Derived Data ---
-  const departments = useMemo(() => uniqueValues('department'), []);
-  const locations = useMemo(() => uniqueValues('location'), []);
+  const uniqueDepartments = useMemo(() => {
+    const names = new Set(employees.map(e => e.department_name || e.department).filter(Boolean));
+    return [...names].sort();
+  }, [employees]);
+
+  const uniqueLocations = useMemo(() => {
+    const names = new Set(employees.map(e => e.location_name || e.location).filter(Boolean));
+    return [...names].sort();
+  }, [employees]);
 
   const filteredEmployees = useMemo(() => {
-    let list = EMPLOYEES.filter(emp => {
-      if (departmentFilter !== 'all' && emp.department !== departmentFilter) return false;
-      if (locationFilter !== 'all' && emp.location !== locationFilter) return false;
-      if (employmentTypeFilter !== 'all' && emp.employmentType !== employmentTypeFilter) return false;
+    let list = employees.filter(emp => {
+      const empDept = emp.department_name || emp.department || '';
+      const empLoc = emp.location_name || emp.location || '';
+      const empType = emp.employment_type || '';
+
+      if (departmentFilter !== 'all' && empDept !== departmentFilter) return false;
+      if (locationFilter !== 'all' && empLoc !== locationFilter) return false;
+      if (employmentTypeFilter !== 'all' && empType !== employmentTypeFilter) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
-        const name = fullName(emp).toLowerCase();
-        const skills = (emp.skills || []).join(' ').toLowerCase();
+        const name = fullName(emp, t).toLowerCase();
+        const skills = (emp.skills || []).map(s => s.name || s).join(' ').toLowerCase();
+        const role = (emp.role_name || emp.role || emp.title || '').toLowerCase();
+        const dept = empDept.toLowerCase();
         return (
           name.includes(q) ||
-          emp.title.toLowerCase().includes(q) ||
-          emp.department.toLowerCase().includes(q) ||
+          role.includes(q) ||
+          dept.includes(q) ||
           skills.includes(q)
         );
       }
       return true;
     });
     return sortEmployees(list, sortKey);
-  }, [searchQuery, departmentFilter, locationFilter, employmentTypeFilter, sortKey]);
+  }, [employees, searchQuery, departmentFilter, locationFilter, employmentTypeFilter, sortKey, t]);
 
   // List-view sorting (overrides default sort)
   const listSortedEmployees = useMemo(() => {
@@ -535,13 +535,33 @@ export default function Directory() {
     sorted.sort((a, b) => {
       let valA, valB;
       switch (listSortCol) {
-        case 'firstName': valA = a.firstName; valB = b.firstName; break;
-        case 'lastName': valA = a.lastName; valB = b.lastName; break;
-        case 'title': valA = a.title; valB = b.title; break;
-        case 'department': valA = a.department; valB = b.department; break;
-        case 'location': valA = a.location; valB = b.location; break;
-        case 'status': valA = a.status; valB = b.status; break;
-        default: valA = a.lastName; valB = b.lastName;
+        case 'firstName':
+          valA = a.first_name || a.firstName || '';
+          valB = b.first_name || b.firstName || '';
+          break;
+        case 'lastName':
+          valA = a.last_name || a.lastName || '';
+          valB = b.last_name || b.lastName || '';
+          break;
+        case 'title':
+          valA = a.role_name || a.role || a.title || '';
+          valB = b.role_name || b.role || b.title || '';
+          break;
+        case 'department':
+          valA = a.department_name || a.department || '';
+          valB = b.department_name || b.department || '';
+          break;
+        case 'location':
+          valA = a.location_name || a.location || '';
+          valB = b.location_name || b.location || '';
+          break;
+        case 'status':
+          valA = a.status || '';
+          valB = b.status || '';
+          break;
+        default:
+          valA = a.last_name || a.lastName || '';
+          valB = b.last_name || b.lastName || '';
       }
       const cmp = String(valA).localeCompare(String(valB));
       return listSortDir === 'asc' ? cmp : -cmp;
@@ -592,6 +612,32 @@ export default function Directory() {
       </th>
     );
   };
+
+  // --- Loading State ---
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-momentum-500 mx-auto mb-3" />
+          <p className="text-slate-500">{t('directory.loading', 'Loading directory...')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // --- Error State ---
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 text-center">
+        <AlertCircle className="w-10 h-10 text-red-400 mb-3" />
+        <p className="text-slate-700 font-medium mb-1">{t('directory.loadError', 'Failed to load directory')}</p>
+        <p className="text-slate-500 text-sm mb-4">{error}</p>
+        <button onClick={() => window.location.reload()} className="btn btn-primary">
+          {t('common.retry', 'Retry')}
+        </button>
+      </div>
+    );
+  }
 
   // ============================================================
   // RENDER
@@ -655,7 +701,7 @@ export default function Directory() {
               className="pl-9 pr-8 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 bg-white appearance-none cursor-pointer"
             >
               <option value="all">{t('directory.allDepartments', 'All Departments')}</option>
-              {departments.map(d => (
+              {uniqueDepartments.map(d => (
                 <option key={d} value={d}>{d}</option>
               ))}
             </select>
@@ -671,7 +717,7 @@ export default function Directory() {
               className="pl-9 pr-8 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500 bg-white appearance-none cursor-pointer"
             >
               <option value="all">{t('directory.allLocations', 'All Locations')}</option>
-              {locations.map(l => (
+              {uniqueLocations.map(l => (
                 <option key={l} value={l}>{l}</option>
               ))}
             </select>
@@ -688,7 +734,9 @@ export default function Directory() {
             >
               <option value="all">{t('directory.allTypes', 'All Types')}</option>
               <option value="full-time">{t('directory.fullTime', 'Full-time')}</option>
+              <option value="full_time">{t('directory.fullTime', 'Full-time')}</option>
               <option value="part-time">{t('directory.partTime', 'Part-time')}</option>
+              <option value="part_time">{t('directory.partTime', 'Part-time')}</option>
               <option value="contract">{t('directory.contract', 'Contract')}</option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
@@ -734,28 +782,31 @@ export default function Directory() {
                 <div className={`w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold text-white mb-3 ${avatarColor(emp.id)}`}>
                   {getInitials(emp)}
                 </div>
-                <h3 className="font-semibold text-slate-900 text-sm">{fullName(emp)}</h3>
-                <p className="text-xs text-slate-600 mt-0.5">{emp.title}</p>
-                <p className="text-xs text-slate-400 mt-0.5">{emp.department}</p>
+                <h3 className="font-semibold text-slate-900 text-sm">{fullName(emp, t)}</h3>
+                <p className="text-xs text-slate-600 mt-0.5">{emp.role_name || emp.role || emp.title || '-'}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{emp.department_name || emp.department || '-'}</p>
               </div>
 
               {/* Location */}
               <div className="flex items-center justify-center gap-1.5 mt-3 text-xs text-slate-500">
-                <LocationFlag location={emp.location} />
                 <MapPin className="w-3 h-3 text-slate-400" />
-                <span>{emp.location}</span>
+                <span>{emp.location_name || emp.location || '-'}</span>
               </div>
 
               {/* Contact */}
               <div className="mt-3 space-y-1">
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                  <Mail className="w-3 h-3 shrink-0" />
-                  <span className="truncate">{emp.email}</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                  <Phone className="w-3 h-3 shrink-0" />
-                  <span>{emp.phone}</span>
-                </div>
+                {emp.email && (
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                    <Mail className="w-3 h-3 shrink-0" />
+                    <span className="truncate">{emp.email}</span>
+                  </div>
+                )}
+                {emp.phone && (
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                    <Phone className="w-3 h-3 shrink-0" />
+                    <span>{emp.phone}</span>
+                  </div>
+                )}
               </div>
 
               {/* Status badge */}
@@ -822,19 +873,16 @@ export default function Directory() {
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0 ${avatarColor(emp.id)}`}>
                           {getInitials(emp)}
                         </div>
-                        <span className="font-medium text-slate-900 text-sm">{fullName(emp)}</span>
+                        <span className="font-medium text-slate-900 text-sm">{fullName(emp, t)}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-slate-700">{emp.title}</td>
-                    <td className="px-4 py-3 text-sm text-slate-700">{emp.department}</td>
+                    <td className="px-4 py-3 text-sm text-slate-700">{emp.role_name || emp.role || emp.title || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-slate-700">{emp.department_name || emp.department || '-'}</td>
                     <td className="px-4 py-3 text-sm text-slate-700">
-                      <span className="inline-flex items-center gap-1.5">
-                        <LocationFlag location={emp.location} />
-                        {emp.location}
-                      </span>
+                      {emp.location_name || emp.location || '-'}
                     </td>
-                    <td className="px-4 py-3 text-sm text-slate-500 truncate max-w-[200px]">{emp.email}</td>
-                    <td className="px-4 py-3 text-sm text-slate-500 whitespace-nowrap">{emp.phone}</td>
+                    <td className="px-4 py-3 text-sm text-slate-500 truncate max-w-[200px]">{emp.email || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-slate-500 whitespace-nowrap">{emp.phone || '-'}</td>
                     <td className="px-4 py-3">
                       <StatusBadge status={emp.status} t={t} />
                     </td>
@@ -864,20 +912,28 @@ export default function Directory() {
             <span>{t('directory.orgChartHint', 'Click nodes to view details. Expand or collapse reporting lines.')}</span>
           </div>
 
-          {/* Start from CEO (Victoria Sterling, id=1) */}
+          {/* Start from employees with no manager (top level) */}
           {(() => {
-            const ceo = EMPLOYEE_MAP[1];
-            if (!ceo) return null;
-            return (
+            const topLevel = employees.filter(e => !e.manager_id);
+            if (topLevel.length === 0) {
+              return (
+                <div className="text-center py-8 text-slate-500">
+                  <p>{t('directory.noOrgData', 'No organizational structure available')}</p>
+                </div>
+              );
+            }
+            return topLevel.map(emp => (
               <OrgChartNode
-                employee={ceo}
+                key={emp.id}
+                employee={emp}
+                employees={employees}
                 depth={0}
                 expandedNodes={expandedNodes}
                 toggleNode={toggleNode}
                 onSelect={handleSelectEmployee}
                 t={t}
               />
-            );
+            ));
           })()}
         </div>
       )}
@@ -888,6 +944,7 @@ export default function Directory() {
       {selectedEmployee && (
         <EmployeeDetailModal
           employee={selectedEmployee}
+          employees={employees}
           onClose={() => setSelectedEmployee(null)}
           onNavigate={handleModalNavigate}
           t={t}

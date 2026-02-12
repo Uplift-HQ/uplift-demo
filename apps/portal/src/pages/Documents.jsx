@@ -5,6 +5,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
 import { api, DEMO_MODE } from '../lib/api';
 import SignatureCanvas from '../components/SignatureCanvas';
 import {
@@ -97,7 +98,10 @@ const DOCUMENT_CHECKLIST_ITEMS = [
 export default function Documents() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const isManager = user?.role === 'admin' || user?.role === 'manager';
+  const { isPersonalView } = useView();
+  const isManagerRole = user?.role === 'admin' || user?.role === 'manager';
+  // Show management features only for managers NOT in personal view
+  const showManagementFeatures = isManagerRole && !isPersonalView;
   const fileInputRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState('all');
@@ -166,9 +170,9 @@ export default function Documents() {
         // Fetch documents, pending signatures, templates, and employees in parallel
         const [docsRes, pendingRes, templatesRes, employeesRes] = await Promise.all([
           api.get('/documents').catch(() => ({ documents: [] })),
-          isManager ? api.get('/documents/signatures/pending').catch(() => ({ pendingSignatures: [] })) : Promise.resolve({ pendingSignatures: [] }),
-          isManager ? api.get('/documents/templates').catch(() => ({ templates: [] })) : Promise.resolve({ templates: [] }),
-          isManager ? api.get('/employees').catch(() => ({ employees: [] })) : Promise.resolve({ employees: [] }),
+          isManagerRole ? api.get('/documents/signatures/pending').catch(() => ({ pendingSignatures: [] })) : Promise.resolve({ pendingSignatures: [] }),
+          isManagerRole ? api.get('/documents/templates').catch(() => ({ templates: [] })) : Promise.resolve({ templates: [] }),
+          isManagerRole ? api.get('/employees').catch(() => ({ employees: [] })) : Promise.resolve({ employees: [] }),
         ]);
 
         // Map API response to component expected format
@@ -216,7 +220,7 @@ export default function Documents() {
     };
 
     fetchData();
-  }, [isManager]);
+  }, [isManagerRole]);
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
@@ -224,12 +228,12 @@ export default function Documents() {
   };
 
   const allTabs = [
-    { key: 'all', label: t(isManager ? 'documents.allDocuments' : 'documents.myDocuments', isManager ? 'All Documents' : 'My Documents'), icon: FileText },
+    { key: 'all', label: t(showManagementFeatures ? 'documents.allDocuments' : 'documents.myDocuments', showManagementFeatures ? 'All Documents' : 'My Documents'), icon: FileText },
     { key: 'employee', label: t('documents.employeeDocuments', 'Employee Documents'), icon: Users, managerOnly: true },
     { key: 'templates', label: t('documents.templates', 'Templates'), icon: FolderOpen, managerOnly: true },
     { key: 'signatures', label: t('documents.pendingSignatures', 'Pending Signatures'), icon: FileSignature },
   ];
-  const tabs = isManager ? allTabs : allTabs.filter(tab => !tab.managerOnly);
+  const tabs = showManagementFeatures ? allTabs : allTabs.filter(tab => !tab.managerOnly);
 
   // ---- Helpers ----
 
@@ -256,7 +260,7 @@ export default function Documents() {
       style: 'bg-green-100 text-green-800',
       label: t('documents.signed', 'Signed'),
       icon: CheckCircle,
-      clickable: isManager && !!doc?.signedAt
+      clickable: showManagementFeatures && !!doc?.signedAt
     };
     if (status === 'pending') return {
       style: 'bg-amber-100 text-amber-800',
@@ -281,8 +285,10 @@ export default function Documents() {
     return ext;
   };
 
-  // Filtered documents
+  // Filtered documents - in personal view, only show current user's documents
   const filteredDocuments = documents.filter((doc) => {
+    // In personal view, only show documents belonging to the current user
+    if (isPersonalView && user?.employeeId && doc.employeeId !== user.employeeId) return false;
     if (categoryFilter !== 'all' && doc.category !== categoryFilter) return false;
     if (employeeFilter !== 'all' && doc.employeeId !== Number(employeeFilter)) return false;
     if (signatureFilter !== 'all' && doc.signatureStatus !== signatureFilter) return false;
@@ -514,9 +520,9 @@ export default function Documents() {
     }
   };
 
-  // Show signature details (for admins)
+  // Show signature details (for admins/managers, not in personal view)
   const handleShowSignatureDetails = (doc) => {
-    if (doc.signatureStatus === 'signed' && isManager) {
+    if (doc.signatureStatus === 'signed' && showManagementFeatures) {
       setSelectedDocument(doc);
       setShowSignatureDetailsModal(true);
     }
@@ -578,8 +584,8 @@ export default function Documents() {
     templates: templates.length,
   };
 
-  // Get documents pending current user's signature
-  const myPendingSignatures = !isManager
+  // Get documents pending current user's signature (for employees OR managers in personal view)
+  const myPendingSignatures = !showManagementFeatures
     ? documents.filter(d => d.signatureStatus === 'pending' && d.employeeId === user?.employeeId)
     : [];
 
@@ -607,13 +613,19 @@ export default function Documents() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">{t('documents.title', 'Documents')}</h1>
-          <p className="text-slate-600">{t('documents.subtitle', 'Manage employee documents, templates, and signatures')}</p>
+          <h1 className="text-2xl font-bold text-slate-900">
+            {isPersonalView ? t('documents.myDocumentsTitle', 'My Documents') : t('documents.title', 'Documents')}
+          </h1>
+          <p className="text-slate-600">
+            {isPersonalView
+              ? t('documents.mySubtitle', 'View and manage your personal documents')
+              : t('documents.subtitle', 'Manage employee documents, templates, and signatures')}
+          </p>
         </div>
       </div>
 
-      {/* Pending signatures alert for employees */}
-      {!isManager && myPendingSignatures.length > 0 && (
+      {/* Pending signatures alert for employees or managers in personal view */}
+      {!showManagementFeatures && myPendingSignatures.length > 0 && (
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
           <AlertCircle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
           <div>
@@ -715,7 +727,7 @@ export default function Documents() {
               <option value="id_document">{t('documents.categories.idDocument', 'ID Document')}</option>
               <option value="letter">{t('documents.categories.letter', 'Letter')}</option>
             </select>
-            {isManager && (
+            {showManagementFeatures && (
               <select
                 value={employeeFilter}
                 onChange={(e) => setEmployeeFilter(e.target.value)}
@@ -737,7 +749,7 @@ export default function Documents() {
               <option value="pending">{t('documents.pending', 'Pending')}</option>
               <option value="none">{t('documents.noSignature', 'No Signature')}</option>
             </select>
-            {isManager && (
+            {showManagementFeatures && (
               <button
                 onClick={() => setShowUploadModal(true)}
                 className="flex items-center gap-2 bg-momentum-500 text-white px-4 py-2 rounded-lg hover:bg-momentum-600 text-sm font-medium"
@@ -755,7 +767,7 @@ export default function Documents() {
                 <thead className="bg-slate-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{t('documents.columns.title', 'Title')}</th>
-                    {isManager && <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{t('documents.columns.employee', 'Employee')}</th>}
+                    {showManagementFeatures && <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{t('documents.columns.employee', 'Employee')}</th>}
                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{t('documents.columns.category', 'Category')}</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{t('documents.columns.uploadDate', 'Upload Date')}</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">{t('documents.columns.signature', 'Signature')}</th>
@@ -767,7 +779,8 @@ export default function Documents() {
                   {filteredDocuments.map((doc) => {
                     const catBadge = getCategoryBadge(doc.category);
                     const sigBadge = getSignatureBadge(doc.signatureStatus, doc);
-                    const canSign = !isManager && doc.signatureStatus === 'pending';
+                    // Can sign if in personal view (or employee) and document is pending their signature
+                    const canSign = !showManagementFeatures && doc.signatureStatus === 'pending' && doc.employeeId === user?.employeeId;
 
                     return (
                       <tr key={doc.id} className="hover:bg-slate-50 transition-colors">
@@ -777,7 +790,7 @@ export default function Documents() {
                             <span className="text-sm font-medium text-slate-900">{doc.title}</span>
                           </div>
                         </td>
-                        {isManager && <td className="px-6 py-4 text-sm text-slate-700">{doc.employee}</td>}
+                        {showManagementFeatures && <td className="px-6 py-4 text-sm text-slate-700">{doc.employee}</td>}
                         <td className="px-6 py-4">
                           <span className={`px-2 py-1 text-xs font-medium rounded-full ${catBadge.style}`}>{catBadge.label}</span>
                         </td>
@@ -819,7 +832,7 @@ export default function Documents() {
                                 <PenTool className="h-4 w-4" />
                               </button>
                             )}
-                            {isManager && (
+                            {showManagementFeatures && (
                               <button
                                 onClick={() => handleDelete(doc.id)}
                                 className="p-1.5 text-slate-400 hover:text-red-600 rounded"
@@ -1063,8 +1076,8 @@ export default function Documents() {
       {/* ============ TAB 4: Pending Signatures ============ */}
       {activeTab === 'signatures' && (
         <div className="space-y-4">
-          {/* Employee view: Documents they need to sign */}
-          {!isManager && (
+          {/* Employee view (or managers in personal view): Documents they need to sign */}
+          {!showManagementFeatures && (
             <div className="bg-white rounded-lg shadow overflow-hidden border border-slate-200">
               <div className="px-6 py-4 border-b border-slate-200">
                 <h3 className="font-semibold text-slate-900">{t('documents.documentsToSign', 'Documents Requiring Your Signature')}</h3>
@@ -1099,8 +1112,8 @@ export default function Documents() {
             </div>
           )}
 
-          {/* Manager view: All pending signatures */}
-          {isManager && (
+          {/* Manager view: All pending signatures (not in personal view) */}
+          {showManagementFeatures && (
             <div className="bg-white rounded-lg shadow overflow-hidden border border-slate-200">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-slate-200">

@@ -37,34 +37,40 @@ import {
 // ============================================================
 
 const CATEGORIES = [
-  { key: 'greatWork', label: 'Great Work', Icon: Star, color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-200', activeBg: 'bg-amber-100' },
-  { key: 'teamPlayer', label: 'Team Player', Icon: HeartHandshake, color: 'text-blue-500', bg: 'bg-blue-50', border: 'border-blue-200', activeBg: 'bg-blue-100' },
-  { key: 'goalCrusher', label: 'Goal Crusher', Icon: Target, color: 'text-green-500', bg: 'bg-green-50', border: 'border-green-200', activeBg: 'bg-green-100' },
-  { key: 'innovation', label: 'Innovation', Icon: Lightbulb, color: 'text-purple-500', bg: 'bg-purple-50', border: 'border-purple-200', activeBg: 'bg-purple-100' },
-  { key: 'aboveBeyond', label: 'Above & Beyond', Icon: Heart, color: 'text-red-500', bg: 'bg-red-50', border: 'border-red-200', activeBg: 'bg-red-100' },
-  { key: 'mentor', label: 'Mentor', Icon: GraduationCap, color: 'text-teal-500', bg: 'bg-teal-50', border: 'border-teal-200', activeBg: 'bg-teal-100' },
+  { key: 'greatWork', labelKey: 'recognition.category.greatWork', labelFallback: 'Great Work', Icon: Star, color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-200', activeBg: 'bg-amber-100' },
+  { key: 'teamPlayer', labelKey: 'recognition.category.teamPlayer', labelFallback: 'Team Player', Icon: HeartHandshake, color: 'text-blue-500', bg: 'bg-blue-50', border: 'border-blue-200', activeBg: 'bg-blue-100' },
+  { key: 'goalCrusher', labelKey: 'recognition.category.goalCrusher', labelFallback: 'Goal Crusher', Icon: Target, color: 'text-green-500', bg: 'bg-green-50', border: 'border-green-200', activeBg: 'bg-green-100' },
+  { key: 'innovation', labelKey: 'recognition.category.innovation', labelFallback: 'Innovation', Icon: Lightbulb, color: 'text-purple-500', bg: 'bg-purple-50', border: 'border-purple-200', activeBg: 'bg-purple-100' },
+  { key: 'aboveBeyond', labelKey: 'recognition.category.aboveBeyond', labelFallback: 'Above & Beyond', Icon: Heart, color: 'text-red-500', bg: 'bg-red-50', border: 'border-red-200', activeBg: 'bg-red-100' },
+  { key: 'mentor', labelKey: 'recognition.category.mentor', labelFallback: 'Mentor', Icon: GraduationCap, color: 'text-teal-500', bg: 'bg-teal-50', border: 'border-teal-200', activeBg: 'bg-teal-100' },
 ];
 
 const COMPANY_VALUES = [
-  { key: 'excellence', label: 'Excellence' },
-  { key: 'teamwork', label: 'Teamwork' },
-  { key: 'guestFirst', label: 'Guest First' },
-  { key: 'innovation', label: 'Innovation' },
-  { key: 'integrity', label: 'Integrity' },
+  { key: 'excellence', labelKey: 'recognition.value.excellence', labelFallback: 'Excellence' },
+  { key: 'teamwork', labelKey: 'recognition.value.teamwork', labelFallback: 'Teamwork' },
+  { key: 'guestFirst', labelKey: 'recognition.value.guestFirst', labelFallback: 'Guest First' },
+  { key: 'innovation', labelKey: 'recognition.value.innovation', labelFallback: 'Innovation' },
+  { key: 'integrity', labelKey: 'recognition.value.integrity', labelFallback: 'Integrity' },
 ];
 
 const DEPARTMENTS = [
-  'Front Office',
-  'Housekeeping',
-  'Food & Beverage',
-  'Kitchen',
-  'Spa & Wellness',
-  'Concierge',
-  'Events',
-  'Management',
+  { key: 'frontOffice', labelFallback: 'Front Office' },
+  { key: 'housekeeping', labelFallback: 'Housekeeping' },
+  { key: 'foodBeverage', labelFallback: 'Food & Beverage' },
+  { key: 'kitchen', labelFallback: 'Kitchen' },
+  { key: 'spaWellness', labelFallback: 'Spa & Wellness' },
+  { key: 'concierge', labelFallback: 'Concierge' },
+  { key: 'events', labelFallback: 'Events' },
+  { key: 'management', labelFallback: 'Management' },
 ];
 
-const LOCATIONS = ['London', 'Paris', 'Tokyo', 'Dubai', 'New York'];
+const LOCATIONS = [
+  { key: 'london', labelFallback: 'London' },
+  { key: 'paris', labelFallback: 'Paris' },
+  { key: 'tokyo', labelFallback: 'Tokyo' },
+  { key: 'dubai', labelFallback: 'Dubai' },
+  { key: 'newYork', labelFallback: 'New York' },
+];
 
 // ============================================================
 // EMPLOYEES
@@ -250,22 +256,22 @@ function getCategoryByKey(key) {
 
 function getValueLabel(key) {
   const v = COMPANY_VALUES.find((cv) => cv.key === key);
-  return v ? v.label : '';
+  return v ? v.labelFallback : '';
 }
 
-function formatRelativeTime(ts) {
+function formatRelativeTime(ts, t) {
   const diff = Date.now() - ts;
   const minutes = Math.floor(diff / 60000);
   const hours = Math.floor(diff / HOUR);
   const days = Math.floor(diff / DAY);
 
-  if (minutes < 1) return 'Just now';
-  if (minutes < 60) return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
-  if (hours < 24) return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
-  if (days === 1) return 'Yesterday';
-  if (days < 7) return `${days} days ago`;
-  if (days < 14) return '1 week ago';
-  return `${Math.floor(days / 7)} weeks ago`;
+  if (minutes < 1) return t('recognition.time.justNow', 'Just now');
+  if (minutes < 60) return t('recognition.time.minutesAgo', '{{count}} minute(s) ago', { count: minutes });
+  if (hours < 24) return t('recognition.time.hoursAgo', '{{count}} hour(s) ago', { count: hours });
+  if (days === 1) return t('recognition.time.yesterday', 'Yesterday');
+  if (days < 7) return t('recognition.time.daysAgo', '{{count}} days ago', { count: days });
+  if (days < 14) return t('recognition.time.oneWeekAgo', '1 week ago');
+  return t('recognition.time.weeksAgo', '{{count}} weeks ago', { count: Math.floor(days / 7) });
 }
 
 // Build leaderboard data from recognitions
@@ -425,7 +431,7 @@ function RecognitionCard({ recognition, onLike, t }) {
             <span className="text-sm font-semibold text-slate-900">{to.name}</span>
           </div>
           <span className="text-xs text-slate-400 whitespace-nowrap flex-shrink-0 pt-1">
-            {formatRelativeTime(timestamp)}
+            {formatRelativeTime(timestamp, t)}
           </span>
         </div>
 
@@ -433,7 +439,7 @@ function RecognitionCard({ recognition, onLike, t }) {
         <div className="flex items-center gap-2 mb-3 ml-11">
           <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${category.bg} ${category.border} border`}>
             <CategoryIcon className={`w-3.5 h-3.5 ${category.color}`} />
-            {t(`recognition.categories.${categoryKey}`, category.label)}
+            {t(`recognition.categories.${categoryKey}`, category.labelFallback)}
           </span>
           {value && (
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">
@@ -635,11 +641,11 @@ function AdminAnalyticsPanel({ recognitions, t }) {
 
   // Per-location counts
   const locationCounts = {};
-  LOCATIONS.forEach((loc) => { locationCounts[loc] = 0; });
+  LOCATIONS.forEach((loc) => { locationCounts[loc.labelFallback] = { key: loc.key, count: 0 }; });
   recognitions.forEach((r) => {
     const receiver = getEmployeeById(r.toId);
     if (receiver && locationCounts[receiver.location] !== undefined) {
-      locationCounts[receiver.location] += 1;
+      locationCounts[receiver.location].count += 1;
     }
   });
 
@@ -690,9 +696,9 @@ function AdminAnalyticsPanel({ recognitions, t }) {
             {t('recognition.byLocation', 'By Location')}
           </p>
           <div className="space-y-2">
-            {Object.entries(locationCounts).map(([loc, count]) => (
+            {Object.entries(locationCounts).map(([loc, { key, count }]) => (
               <div key={loc} className="flex items-center justify-between">
-                <span className="text-sm text-slate-600">{loc}</span>
+                <span className="text-sm text-slate-600">{t(`recognition.locations.${key}`, loc)}</span>
                 <div className="flex items-center gap-2">
                   <div className="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
                     <div
@@ -720,7 +726,7 @@ function AdminAnalyticsPanel({ recognitions, t }) {
                 <div key={cat.key} className="flex items-center justify-between">
                   <span className="text-sm text-slate-600 flex items-center gap-1.5">
                     <CatIcon className={`w-3.5 h-3.5 ${cat.color}`} />
-                    {t(`recognition.categories.${cat.key}`, cat.label)}
+                    {t(`recognition.categories.${cat.key}`, cat.labelFallback)}
                   </span>
                   <span className="text-xs font-semibold text-slate-600">{categoryCounts[cat.key]}</span>
                 </div>
@@ -736,12 +742,17 @@ function AdminAnalyticsPanel({ recognitions, t }) {
             {t('recognition.topDepartments', 'Top Departments')}
           </p>
           <div className="space-y-2">
-            {topDepts.map(({ dept, count }) => (
-              <div key={dept} className="flex items-center justify-between">
-                <span className="text-sm text-slate-600">{dept}</span>
-                <span className="text-xs font-semibold text-slate-600">{count}</span>
-              </div>
-            ))}
+            {topDepts.map(({ dept, count }) => {
+              const deptData = DEPARTMENTS.find(d => d.labelFallback === dept);
+              return (
+                <div key={dept} className="flex items-center justify-between">
+                  <span className="text-sm text-slate-600">
+                    {deptData ? t(`recognition.departments.${deptData.key}`, dept) : dept}
+                  </span>
+                  <span className="text-xs font-semibold text-slate-600">{count}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -960,7 +971,7 @@ export default function Recognition() {
                     style={isActive ? { '--tw-ring-color': 'currentColor' } : {}}
                   >
                     <CatIcon className={`w-4 h-4 ${isActive ? cat.color : 'text-slate-400'}`} />
-                    {t(`recognition.categories.${cat.key}`, cat.label)}
+                    {t(`recognition.categories.${cat.key}`, cat.labelFallback)}
                   </button>
                 );
               })}
@@ -1027,7 +1038,7 @@ export default function Recognition() {
                         : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
-                    {t(`recognition.values.${val.key}`, val.label)}
+                    {t(`recognition.values.${val.key}`, val.labelFallback)}
                   </button>
                 );
               })}
@@ -1111,7 +1122,7 @@ export default function Recognition() {
                 >
                   <option value="">{t('recognition.allDepartments', 'All Departments')}</option>
                   {DEPARTMENTS.map((d) => (
-                    <option key={d} value={d}>{d}</option>
+                    <option key={d.key} value={d.labelFallback}>{t(`recognition.departments.${d.key}`, d.labelFallback)}</option>
                   ))}
                 </select>
               </div>
@@ -1129,7 +1140,7 @@ export default function Recognition() {
                   <option value="">{t('recognition.allCategories', 'All Categories')}</option>
                   {CATEGORIES.map((c) => (
                     <option key={c.key} value={c.key}>
-                      {t(`recognition.categories.${c.key}`, c.label)}
+                      {t(`recognition.categories.${c.key}`, c.labelFallback)}
                     </option>
                   ))}
                 </select>

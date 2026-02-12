@@ -8,6 +8,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { useBranding } from '../lib/branding';
 import api, { DEMO_MODE } from '../lib/api';
 import {
   BarChart3, TrendingUp, TrendingDown, Users, Calendar, Filter,
@@ -1596,6 +1597,7 @@ function EngagementReport({ data, t }) {
 export default function Reports() {
   const { t } = useTranslation();
   const { user, isAdmin, isManagerOrAbove, isWorker } = useAuth();
+  const { branding } = useBranding();
 
   const [activeReport, setActiveReport] = useState('headcount');
   const [datePreset, setDatePreset] = useState('this-month');
@@ -1808,7 +1810,7 @@ export default function Reports() {
                 <p className="text-sm text-slate-500">
                   {isTeamScoped
                     ? t('reports.teamScopeDesc', 'Showing data for your team only')
-                    : t('reports.orgWideDesc', 'Grand Metropolitan Hotel Group — All locations')
+                    : t('reports.orgWideDesc', `${branding.brand_name || 'Organization'} — All locations`)
                   }
                 </p>
               </div>

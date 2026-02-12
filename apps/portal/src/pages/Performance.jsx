@@ -541,7 +541,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
         </div>
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Cycle Name</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.cycleName', 'Cycle Name')}</label>
             <input
               type="text"
               value={formData.name}
@@ -552,7 +552,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.type', 'Type')}</label>
               <select
                 value={formData.type}
                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
@@ -565,7 +565,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.startDate', 'Start Date')}</label>
               <input
                 type="date"
                 value={formData.start_date}
@@ -576,7 +576,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">End Date</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.endDate', 'End Date')}</label>
             <input
               type="date"
               value={formData.end_date}
@@ -592,7 +592,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
                 checked={formData.self_assessment}
                 onChange={(e) => setFormData({ ...formData, self_assessment: e.target.checked })}
               />
-              <span className="text-sm">Self Assessment</span>
+              <span className="text-sm">{t('performance.selfAssessment', 'Self Assessment')}</span>
             </label>
             <label className="flex items-center gap-2">
               <input
@@ -600,7 +600,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
                 checked={formData.manager_review}
                 onChange={(e) => setFormData({ ...formData, manager_review: e.target.checked })}
               />
-              <span className="text-sm">Manager Review</span>
+              <span className="text-sm">{t('performance.managerReview', 'Manager Review')}</span>
             </label>
             <label className="flex items-center gap-2">
               <input
@@ -905,7 +905,7 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Period</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.period', 'Period')}</label>
                   <input
                     type="text"
                     value={formData.period}
@@ -917,9 +917,9 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
               </div>
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-medium text-slate-700">Key Results</label>
+                  <label className="block text-sm font-medium text-slate-700">{t('performance.keyResults', 'Key Results')}</label>
                   <button type="button" onClick={addKeyResult} className="text-sm text-blue-600 hover:text-blue-700">
-                    + Add Key Result
+                    {t('performance.addKeyResult', '+ Add Key Result')}
                   </button>
                 </div>
                 <div className="space-y-3">
@@ -955,7 +955,7 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
           ) : (
             <>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.description', 'Description')}</label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -990,7 +990,7 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Target Date</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.targetDate', 'Target Date')}</label>
                 <input
                   type="date"
                   value={formData.target_date}
@@ -1093,7 +1093,7 @@ function OneOnOnesTab({ t, isManager }) {
 
       {upcoming.length > 0 && (
         <div>
-          <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-3">Upcoming</h3>
+          <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-3">{t('performance.upcoming', 'Upcoming')}</h3>
           <div className="space-y-3">
             {upcoming.map(meeting => (
               <div
@@ -1134,7 +1134,7 @@ function OneOnOnesTab({ t, isManager }) {
 
       {past.length > 0 && (
         <div>
-          <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-3">Past Meetings</h3>
+          <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-3">{t('performance.pastMeetings', 'Past Meetings')}</h3>
           <div className="space-y-3">
             {past.slice(0, 5).map(meeting => (
               <div
@@ -1221,7 +1221,7 @@ function MeetingDetailView({ meeting, onBack, t }) {
 
         {agenda.length > 0 && (
           <div className="mb-6">
-            <h3 className="font-semibold text-slate-900 mb-3">Agenda</h3>
+            <h3 className="font-semibold text-slate-900 mb-3">{t('performance.agenda', 'Agenda')}</h3>
             <ul className="space-y-2">
               {agenda.map((item, i) => (
                 <li key={i} className="flex items-start gap-2">
@@ -1330,7 +1330,7 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
         </div>
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Employee</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.employee', 'Employee')}</label>
             <select
               value={formData.employee_id}
               onChange={(e) => setFormData({ ...formData, employee_id: e.target.value })}
@@ -1345,7 +1345,7 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Date</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.date', 'Date')}</label>
               <input
                 type="date"
                 value={formData.scheduled_date}
@@ -1355,7 +1355,7 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Time</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.time', 'Time')}</label>
               <input
                 type="time"
                 value={formData.scheduled_time}
@@ -1365,7 +1365,7 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Recurring</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.recurring', 'Recurring')}</label>
             <select
               value={formData.recurring}
               onChange={(e) => setFormData({ ...formData, recurring: e.target.value })}
@@ -1602,14 +1602,14 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
         <div className="flex items-center justify-between p-4 border-b border-slate-200">
-          <h3 className="text-lg font-semibold">Give Feedback</h3>
+          <h3 className="text-lg font-semibold">{t('performance.giveFeedback', 'Give Feedback')}</h3>
           <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">To</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.to', 'To')}</label>
             <select
               value={formData.to_user_id}
               onChange={(e) => setFormData({ ...formData, to_user_id: e.target.value })}
@@ -1623,7 +1623,7 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Type</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.feedbackType', 'Type')}</label>
             <div className="flex gap-2">
               {['praise', 'constructive', 'general'].map(type => (
                 <button
@@ -1642,7 +1642,7 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Feedback</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.feedback', 'Feedback')}</label>
             <textarea
               value={formData.feedback_text}
               onChange={(e) => setFormData({ ...formData, feedback_text: e.target.value })}
@@ -1652,7 +1652,7 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Visibility</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.visibility', 'Visibility')}</label>
             <select
               value={formData.visibility}
               onChange={(e) => setFormData({ ...formData, visibility: e.target.value })}
@@ -1899,7 +1899,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-4 border-b border-slate-200">
-          <h3 className="text-lg font-semibold">Create Development Plan</h3>
+          <h3 className="text-lg font-semibold">{t('performance.createDevelopmentPlan', 'Create Development Plan')}</h3>
           <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg">
             <X className="w-5 h-5" />
           </button>
@@ -1907,7 +1907,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Employee</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.employee', 'Employee')}</label>
               <select
                 value={formData.employee_id}
                 onChange={(e) => setFormData({ ...formData, employee_id: e.target.value })}
@@ -1921,7 +1921,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Review Date</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.reviewDate', 'Review Date')}</label>
               <input
                 type="date"
                 value={formData.review_date}
@@ -1931,7 +1931,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Plan Title</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{t('performance.planTitle', 'Plan Title')}</label>
             <input
               type="text"
               value={formData.title}
@@ -1944,7 +1944,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-slate-700">Focus Areas</label>
+              <label className="text-sm font-medium text-slate-700">{t('performance.focusAreas', 'Focus Areas')}</label>
               <button type="button" onClick={addFocusArea} className="text-sm text-blue-600 hover:text-blue-700">
                 {t('performance.addFocusArea', '+ Add Focus Area')}
               </button>

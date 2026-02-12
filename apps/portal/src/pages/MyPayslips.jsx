@@ -2,8 +2,10 @@
 // MY PAYSLIPS PAGE
 // Employee's personal payslip view with YTD summary and detail modal
 // ============================================================
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../lib/auth';
+import { payslipsApi, DEMO_MODE } from '../lib/api';
 import {
   Receipt,
   PoundSterling,
@@ -23,13 +25,13 @@ import {
   Briefcase,
 } from 'lucide-react';
 
-// ---- Demo Employee Data (Sarah Chen - the demo admin user) ----
+// ---- Demo Employee Data (current user placeholder) ----
 
 const EMPLOYEE_INFO = {
-  name: 'Sarah Chen',
+  name: 'Current User',
   employeeNumber: 'EMP-001',
-  department: 'Engineering',
-  jobTitle: 'Senior Software Engineer',
+  department: 'Operations',
+  jobTitle: 'Team Member',
   taxCode: '1257L',
   niCategory: 'A',
 };
@@ -145,8 +147,71 @@ const YTD_SUMMARY = {
 
 export default function MyPayslips() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [selectedTaxYear, setSelectedTaxYear] = useState('2024-25');
   const [selectedPayslip, setSelectedPayslip] = useState(null);
+  const [payslips, setPayslips] = useState(DEMO_MODE ? DEMO_PAYSLIPS : []);
+  const [ytdData, setYtdData] = useState(null);
+  const [availableYears, setAvailableYears] = useState(['2024-25', '2025-26']);
+  const [isLoading, setIsLoading] = useState(!DEMO_MODE);
+  const [error, setError] = useState(null);
+
+  // Fetch payslips from API
+  useEffect(() => {
+    if (DEMO_MODE) return;
+
+    const fetchPayslips = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const [payslipsRes, ytdRes, yearsRes] = await Promise.all([
+          payslipsApi.getMyPayslips({ taxYear: selectedTaxYear }),
+          payslipsApi.getMyYtd(selectedTaxYear),
+          payslipsApi.getMyYears(),
+        ]);
+
+        // Map API response to component format
+        const mappedPayslips = (payslipsRes.payslips || []).map(ps => ({
+          id: ps.id,
+          payDate: ps.pay_date,
+          period: ps.period,
+          periodLabel: ps.period_label,
+          taxYear: ps.tax_year,
+          status: ps.status,
+          earnings: {
+            basicSalary: ps.basic_salary || 0,
+            overtime: ps.overtime || 0,
+            bonus: ps.bonus || 0,
+            totalGross: ps.gross_pay || 0,
+          },
+          deductions: {
+            incomeTax: ps.income_tax || 0,
+            nationalInsurance: ps.national_insurance || 0,
+            pensionEmployee: ps.pension_employee || 0,
+            studentLoan: ps.student_loan || 0,
+            totalDeductions: ps.total_deductions || 0,
+          },
+          employerContributions: {
+            employerNI: ps.employer_ni || 0,
+            pensionEmployer: ps.pension_employer || 0,
+          },
+          netPay: ps.net_pay || 0,
+          ytd: ps.ytd || {},
+        }));
+
+        setPayslips(mappedPayslips);
+        setYtdData(ytdRes.ytd || null);
+        setAvailableYears(yearsRes.years || ['2024-25', '2025-26']);
+      } catch (err) {
+        console.error('Failed to fetch payslips:', err);
+        setError(t('myPayslips.fetchError', 'Failed to load payslips'));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPayslips();
+  }, [selectedTaxYear, t]);
 
   // ---- Helpers ----
 
@@ -168,20 +233,31 @@ export default function MyPayslips() {
     }).format(date);
   };
 
-  // Filter payslips by tax year
-  const filteredPayslips = DEMO_PAYSLIPS.filter((ps) => {
-    if (selectedTaxYear === '2024-25') {
-      return ps.taxYear === '2024-25';
-    } else if (selectedTaxYear === '2025-26') {
-      return ps.taxYear === '2025-26';
-    }
-    return true;
-  });
+  // Filter payslips by tax year (API already filters, but keep for demo mode)
+  const filteredPayslips = DEMO_MODE
+    ? payslips.filter((ps) => {
+        if (selectedTaxYear === '2024-25') {
+          return ps.taxYear === '2024-25';
+        } else if (selectedTaxYear === '2025-26') {
+          return ps.taxYear === '2025-26';
+        }
+        return true;
+      })
+    : payslips;
 
   // Get YTD based on selected tax year
   const getYTDSummary = () => {
+    // If we have API data, use it
+    if (ytdData) {
+      return {
+        gross: ytdData.gross || 0,
+        tax: ytdData.tax || 0,
+        ni: ytdData.ni || 0,
+        net: ytdData.net || 0,
+      };
+    }
+    // Fallback for demo mode
     if (selectedTaxYear === '2025-26') {
-      // Only January 2025 is in 2025-26 tax year based on our data
       return {
         gross: 3500.00,
         tax: 450.00,
@@ -193,6 +269,16 @@ export default function MyPayslips() {
   };
 
   const ytdSummary = getYTDSummary();
+
+  // Get employee info from user or fallback to demo
+  const employeeInfo = user ? {
+    name: `${user.firstName || ''} ${user.lastName || ''}`.trim() || EMPLOYEE_INFO.name,
+    employeeNumber: user.employeeNumber || EMPLOYEE_INFO.employeeNumber,
+    department: user.department || EMPLOYEE_INFO.department,
+    jobTitle: user.jobTitle || EMPLOYEE_INFO.jobTitle,
+    taxCode: EMPLOYEE_INFO.taxCode, // Would come from payroll system
+    niCategory: EMPLOYEE_INFO.niCategory, // Would come from payroll system
+  } : EMPLOYEE_INFO;
 
   const handleDownloadPDF = (payslip) => {
     // Demo - would trigger PDF download
@@ -213,14 +299,43 @@ export default function MyPayslips() {
             value={selectedTaxYear}
             onChange={(e) => setSelectedTaxYear(e.target.value)}
             className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+            disabled={isLoading}
           >
-            <option value="2025-26">{t('myPayslips.taxYear', 'Tax Year')} 2025-26</option>
-            <option value="2024-25">{t('myPayslips.taxYear', 'Tax Year')} 2024-25</option>
+            {availableYears.map((year) => (
+              <option key={year} value={year}>
+                {t('myPayslips.taxYear', 'Tax Year')} {year}
+              </option>
+            ))}
           </select>
         </div>
       </div>
 
+      {/* Loading State */}
+      {isLoading && (
+        <div className="flex items-center justify-center py-12">
+          <div className="flex items-center gap-3">
+            <div className="h-6 w-6 border-2 border-momentum-500 border-t-transparent rounded-full animate-spin" />
+            <span className="text-slate-600">{t('common.loading', 'Loading...')}</span>
+          </div>
+        </div>
+      )}
+
+      {/* Error State */}
+      {error && !isLoading && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+          <p className="text-red-700">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-2 text-sm text-red-600 underline hover:text-red-800"
+          >
+            {t('common.retry', 'Retry')}
+          </button>
+        </div>
+      )}
+
       {/* YTD Summary Cards */}
+      {!isLoading && !error && (
+      <>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg p-4 shadow border">
           <div className="flex items-center gap-2 text-slate-600">
@@ -356,6 +471,8 @@ export default function MyPayslips() {
           </div>
         )}
       </div>
+      </>
+      )}
 
       {/* ============ Payslip Detail Modal ============ */}
       {selectedPayslip && (
@@ -386,21 +503,21 @@ export default function MyPayslips() {
                   <User className="h-4 w-4 text-slate-400 mt-0.5" />
                   <div>
                     <p className="text-xs text-slate-500">{t('myPayslips.employeeName', 'Employee Name')}</p>
-                    <p className="text-sm font-medium text-slate-900">{EMPLOYEE_INFO.name}</p>
+                    <p className="text-sm font-medium text-slate-900">{employeeInfo.name}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <Briefcase className="h-4 w-4 text-slate-400 mt-0.5" />
                   <div>
                     <p className="text-xs text-slate-500">{t('myPayslips.employeeNumber', 'Employee Number')}</p>
-                    <p className="text-sm font-medium text-slate-900">{EMPLOYEE_INFO.employeeNumber}</p>
+                    <p className="text-sm font-medium text-slate-900">{employeeInfo.employeeNumber}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <Building2 className="h-4 w-4 text-slate-400 mt-0.5" />
                   <div>
                     <p className="text-xs text-slate-500">{t('myPayslips.department', 'Department')}</p>
-                    <p className="text-sm font-medium text-slate-900">{EMPLOYEE_INFO.department}</p>
+                    <p className="text-sm font-medium text-slate-900">{employeeInfo.department}</p>
                   </div>
                 </div>
                 <div>
@@ -413,11 +530,11 @@ export default function MyPayslips() {
                 </div>
                 <div>
                   <p className="text-xs text-slate-500">{t('myPayslips.taxCode', 'Tax Code')}</p>
-                  <p className="text-sm font-medium text-slate-900">{EMPLOYEE_INFO.taxCode}</p>
+                  <p className="text-sm font-medium text-slate-900">{employeeInfo.taxCode}</p>
                 </div>
                 <div>
                   <p className="text-xs text-slate-500">{t('myPayslips.niCategory', 'NI Category')}</p>
-                  <p className="text-sm font-medium text-slate-900">{EMPLOYEE_INFO.niCategory}</p>
+                  <p className="text-sm font-medium text-slate-900">{employeeInfo.niCategory}</p>
                 </div>
               </div>
 
