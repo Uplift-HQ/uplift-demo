@@ -99,7 +99,7 @@ const COMPENSATION_HISTORY = {
   ],
 };
 
-const compensationCycles = [
+const DEMO_COMPENSATION_CYCLES = [
   {
     id: 1,
     name: 'Annual Salary Review 2026',
@@ -135,7 +135,7 @@ export default function Compensation() {
   // Data state
   const [payslips, setPayslips] = useState(DEMO_MODE ? DEMO_PAYSLIPS : []);
   const [compensationRecords, setCompensationRecords] = useState(DEMO_MODE ? EMPLOYEES_DATA : []);
-  const [compensationCycles, setCompensationCycles] = useState(DEMO_MODE ? compensationCycles : []);
+  const [compensationCycles, setCompensationCycles] = useState(DEMO_MODE ? DEMO_COMPENSATION_CYCLES : []);
   const [stats, setStats] = useState({ totalGross: 0, totalNet: 0, pendingCount: 0, employeeCount: 0 });
 
   // Payslips state

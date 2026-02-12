@@ -150,26 +150,36 @@ const DEMO_EXPENSE_CATEGORIES = [
   { id: 'cat-5', name: 'Office Supplies', code: 'OFFICE', description: 'Office supplies and stationery' },
 ];
 const DEMO_EXPENSES = [
-  { id: 'exp-1', employee_id: 'emp-1', employee_name: 'Current User', description: 'Uber to Manchester site visit', category: 'Travel', merchant: 'Uber', amount: 3450, currency: 'GBP', expense_date: '2026-02-03', status: 'approved', receipt_url: '/receipts/uber.pdf' },
-  { id: 'exp-2', employee_id: 'emp-1', employee_name: 'Current User', description: 'Team lunch - Pret A Manger', category: 'Meals & Entertainment', merchant: 'Pret A Manger', amount: 2860, currency: 'GBP', expense_date: '2026-02-05', status: 'approved', receipt_url: '/receipts/pret.pdf' },
-  { id: 'exp-3', employee_id: 'emp-1', employee_name: 'Current User', description: 'Premier Inn - overnight', category: 'Accommodation', merchant: 'Premier Inn', amount: 8900, currency: 'GBP', expense_date: '2026-02-01', status: 'pending', receipt_url: '/receipts/hotel.pdf' },
-  { id: 'exp-4', employee_id: 'emp-1', employee_name: 'Current User', description: 'Costa Coffee - client meeting', category: 'Meals & Entertainment', merchant: 'Costa Coffee', amount: 850, currency: 'GBP', expense_date: '2026-02-07', status: 'pending', receipt_url: null },
-  { id: 'exp-5', employee_id: 'emp-1', employee_name: 'Current User', description: 'Safety boots', category: 'Equipment', merchant: 'Amazon', amount: 24500, currency: 'GBP', expense_date: '2026-01-28', status: 'approved', receipt_url: '/receipts/amazon.pdf' },
-  { id: 'exp-6', employee_id: 'emp-1', employee_name: 'Current User', description: 'Office supplies', category: 'Office Supplies', merchant: 'Ryman', amount: 1590, currency: 'GBP', expense_date: '2026-02-04', status: 'approved', receipt_url: '/receipts/ryman.pdf' },
-  { id: 'exp-7', employee_id: 'emp-1', employee_name: 'Current User', description: 'Train to London', category: 'Travel', merchant: 'Trainline', amount: 6780, currency: 'GBP', expense_date: '2026-02-06', status: 'approved', receipt_url: '/receipts/train.pdf' },
-  { id: 'exp-8', employee_id: 'emp-1', employee_name: 'Current User', description: 'Parking', category: 'Travel', merchant: 'NCP', amount: 1200, currency: 'GBP', expense_date: '2026-02-08', status: 'draft', receipt_url: null },
+  { id: 'exp-1', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', description: 'Uber to Manchester site visit', category: 'Travel', merchant: 'Uber', amount: 34.50, currency: 'GBP', expense_date: '2026-02-03', status: 'approved', receipt_url: '/receipts/uber.pdf' },
+  { id: 'exp-2', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', description: 'Team lunch - Pret A Manger', category: 'Meals & Entertainment', merchant: 'Pret A Manger', amount: 28.60, currency: 'GBP', expense_date: '2026-02-05', status: 'approved', receipt_url: '/receipts/pret.pdf' },
+  { id: 'exp-3', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', description: 'Premier Inn - overnight', category: 'Accommodation', merchant: 'Premier Inn', amount: 89.00, currency: 'GBP', expense_date: '2026-02-01', status: 'submitted', receipt_url: '/receipts/hotel.pdf' },
+  { id: 'exp-4', employee_id: 'emp-2', employee_name: 'James Williams', description: 'Costa Coffee - client meeting', category: 'Meals & Entertainment', merchant: 'Costa Coffee', amount: 8.50, currency: 'GBP', expense_date: '2026-02-07', status: 'submitted', receipt_url: null },
+  { id: 'exp-5', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', description: 'Safety boots', category: 'Equipment', merchant: 'Amazon', amount: 45.00, currency: 'GBP', expense_date: '2026-01-28', status: 'approved', receipt_url: '/receipts/amazon.pdf' },
+  { id: 'exp-6', employee_id: 'emp-3', employee_name: 'Maria Santos', description: 'Office supplies', category: 'Office Supplies', merchant: 'Ryman', amount: 15.90, currency: 'GBP', expense_date: '2026-02-04', status: 'approved', receipt_url: '/receipts/ryman.pdf' },
+  { id: 'exp-7', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', description: 'Train to London', category: 'Travel', merchant: 'Trainline', amount: 67.80, currency: 'GBP', expense_date: '2026-02-06', status: 'paid', receipt_url: '/receipts/train.pdf' },
+  { id: 'exp-8', employee_id: 'emp-2', employee_name: 'James Williams', description: 'Parking at client site', category: 'Travel', merchant: 'NCP', amount: 12.00, currency: 'GBP', expense_date: '2026-02-08', status: 'draft', receipt_url: null },
+  { id: 'exp-9', employee_id: 'emp-3', employee_name: 'Maria Santos', description: 'Client dinner - Dishoom', category: 'Meals & Entertainment', merchant: 'Dishoom', amount: 156.40, currency: 'GBP', expense_date: '2026-02-02', status: 'submitted', receipt_url: '/receipts/dishoom.pdf' },
+  { id: 'exp-10', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', description: 'Hilton Manchester 2 nights', category: 'Accommodation', merchant: 'Hilton Hotels', amount: 245.00, currency: 'GBP', expense_date: '2026-01-25', status: 'paid', receipt_url: '/receipts/hilton.pdf' },
 ];
 
 // Demo Corporate Card Data
 const DEMO_CORPORATE_CARDS = [
-  { id: 'card-1', employee_id: 'emp-1', employee_name: 'Current User', card_type: 'HSBC Visa', last_four: '4821', status: 'active', limit: 500000, balance: 34594, currency: 'GBP' },
+  { id: 'card-1', employee_id: 'emp-1', employee_name: 'Current User', card_type: 'HSBC Visa', last_four: '4821', cardholder_name: 'Sarah Mitchell', is_active: true, status: 'active', limit: 500000, balance: 34594, currency: 'GBP', last_synced_at: '2026-02-11T09:30:00Z' },
 ];
 const DEMO_CARD_TRANSACTIONS = [
-  { id: 'txn-1', card_id: 'card-1', merchant: 'Tesco Express', amount: 845, currency: 'GBP', date: '2026-02-10', category: 'Meals', status: 'settled' },
-  { id: 'txn-2', card_id: 'card-1', merchant: 'Shell Petrol', amount: 6500, currency: 'GBP', date: '2026-02-09', category: 'Travel', status: 'settled' },
-  { id: 'txn-3', card_id: 'card-1', merchant: 'Amazon', amount: 3499, currency: 'GBP', date: '2026-02-08', category: 'Office Supplies', status: 'settled' },
-  { id: 'txn-4', card_id: 'card-1', merchant: 'Costa Coffee', amount: 450, currency: 'GBP', date: '2026-02-07', category: 'Meals', status: 'settled' },
-  { id: 'txn-5', card_id: 'card-1', merchant: 'Trainline', amount: 4560, currency: 'GBP', date: '2026-02-06', category: 'Travel', status: 'settled' },
+  { id: 'txn-1', card_id: 'card-1', description: 'Groceries for office kitchen', merchant_name: 'Tesco Express', amount: 8.45, currency: 'GBP', transaction_date: '2026-02-10', category_id: 'cat-2', status: 'pending', receipt_url: null },
+  { id: 'txn-2', card_id: 'card-1', description: 'Fuel for site visit', merchant_name: 'Shell Petrol', amount: 65.00, currency: 'GBP', transaction_date: '2026-02-09', category_id: 'cat-1', status: 'categorized', receipt_url: '/receipts/shell.pdf' },
+  { id: 'txn-3', card_id: 'card-1', description: 'Office supplies order', merchant_name: 'Amazon', amount: 34.99, currency: 'GBP', transaction_date: '2026-02-08', category_id: 'cat-5', status: 'categorized', receipt_url: '/receipts/amazon.pdf' },
+  { id: 'txn-4', card_id: 'card-1', description: 'Client meeting refreshments', merchant_name: 'Costa Coffee', amount: 4.50, currency: 'GBP', transaction_date: '2026-02-07', category_id: 'cat-2', status: 'uncategorized', receipt_url: null },
+  { id: 'txn-5', card_id: 'card-1', description: 'Train to London office', merchant_name: 'Trainline', amount: 45.60, currency: 'GBP', transaction_date: '2026-02-06', category_id: 'cat-1', status: 'submitted', receipt_url: '/receipts/train.pdf' },
+  { id: 'txn-6', card_id: 'card-1', description: 'Team lunch', merchant_name: 'Pret A Manger', amount: 28.60, currency: 'GBP', transaction_date: '2026-02-05', category_id: 'cat-2', status: 'categorized', receipt_url: '/receipts/pret.pdf' },
+  { id: 'txn-7', card_id: 'card-1', description: 'Parking at client site', merchant_name: 'NCP', amount: 12.00, currency: 'GBP', transaction_date: '2026-02-04', category_id: 'cat-1', status: 'categorized', receipt_url: null },
+];
+const DEMO_CARD_CLAIMS = [
+  { id: 'claim-1', claim_number: 'EXP-2026-001', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', expense_date: '2026-02-05', transaction_count: 3, total_amount: 108.44, status: 'pending', description: 'February week 1 expenses' },
+  { id: 'claim-2', claim_number: 'EXP-2026-002', employee_id: 'emp-2', employee_name: 'James Williams', expense_date: '2026-02-03', transaction_count: 2, total_amount: 89.50, status: 'submitted', description: 'Client visit expenses' },
+  { id: 'claim-3', claim_number: 'EXP-2026-003', employee_id: 'emp-3', employee_name: 'Maria Santos', expense_date: '2026-01-28', transaction_count: 5, total_amount: 245.20, status: 'approved', description: 'January training expenses' },
+  { id: 'claim-4', claim_number: 'EXP-2025-098', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', expense_date: '2025-12-15', transaction_count: 4, total_amount: 156.80, status: 'paid', description: 'December team event' },
 ];
 
 // Demo Compliance Data
@@ -635,13 +645,25 @@ class ApiClient {
       return { transactions: DEMO_CARD_TRANSACTIONS, pagination: { page: 1, limit: 50, total: DEMO_CARD_TRANSACTIONS.length, totalPages: 1 } };
     }
     if (path.startsWith('/expense-claims')) {
-      return { claims: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
+      return { claims: DEMO_CARD_CLAIMS, pagination: { page: 1, limit: 20, total: DEMO_CARD_CLAIMS.length, totalPages: 1 } };
     }
     if (path.startsWith('/expense-categories')) {
       return { categories: DEMO_EXPENSE_CATEGORIES, pagination: { page: 1, limit: 50, total: DEMO_EXPENSE_CATEGORIES.length, totalPages: 1 } };
     }
     if (path.startsWith('/payroll/expenses')) {
-      return { claims: DEMO_EXPENSES, exports: [], pagination: { page: 1, limit: 50, total: DEMO_EXPENSES.length, totalPages: 1 } };
+      const approvedClaims = DEMO_CARD_CLAIMS.filter(c => c.status === 'approved');
+      return { claims: approvedClaims, exports: [], pagination: { page: 1, limit: 50, total: approvedClaims.length, totalPages: 1 } };
+    }
+
+    // Expenses page endpoints (general expense management)
+    if (path === '/expenses/all' || path.startsWith('/expenses/all?')) {
+      return { expenses: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
+    }
+    if (path === '/expenses/my-expenses' || path.startsWith('/expenses/my-expenses?') || path.match(/^\/expenses\/my-expenses\/[^/]+$/)) {
+      return { expenses: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
+    }
+    if (path === '/expenses/categories') {
+      return { categories: DEMO_EXPENSE_CATEGORIES };
     }
 
     // Default empty response
