@@ -89,6 +89,106 @@ const DEMO_SCHEDULE_PERIODS = [
 ];
 const generateDemoShifts = generateShifts;
 
+// Demo Performance Data
+const DEMO_PERFORMANCE_REVIEWS = [
+  { id: 'rev-1', employee_id: 'emp-1', employee_name: 'Current User', reviewer_name: 'Sarah Chen', review_period: 'Q4 2025', type: 'quarterly', status: 'complete', overall_rating: 4, strengths: 'Excellent attention to detail in quality checks. Consistently meets deadlines.', development_areas: 'Could take on more leadership responsibilities.', manager_assessment_text: 'Strong performer, ready for senior role discussion.', completed_at: '2025-12-20' },
+  { id: 'rev-2', employee_id: 'emp-1', employee_name: 'Current User', reviewer_name: 'Sarah Chen', review_period: 'Q1 2026', type: 'quarterly', status: 'self_review', overall_rating: null, self_assessment_text: 'Made good progress on key objectives.', manager_assessment_text: null, completed_at: null },
+];
+const DEMO_GOALS = [
+  { id: 'goal-1', employee_id: 'emp-1', title: 'Complete Six Sigma Green Belt certification', description: 'Obtain certification to improve process quality skills', category: 'development', status: 'in_progress', priority: 'high', target_date: '2026-06-30', progress_percentage: 40 },
+  { id: 'goal-2', employee_id: 'emp-1', title: 'Reduce defect rate on production line by 10%', description: 'Implement quality improvements to reduce defects', category: 'performance', status: 'in_progress', priority: 'high', target_date: '2026-03-31', progress_percentage: 75 },
+  { id: 'goal-3', employee_id: 'emp-1', title: 'Complete team leader training programme', description: 'Develop leadership skills for future promotion', category: 'development', status: 'in_progress', priority: 'medium', target_date: '2026-09-30', progress_percentage: 15 },
+  { id: 'goal-4', employee_id: 'emp-1', title: 'Achieve zero safety incidents in Q1', description: 'Maintain perfect safety record', category: 'performance', status: 'completed', priority: 'high', target_date: '2026-03-31', progress_percentage: 100, completed_date: '2026-02-01' },
+];
+const DEMO_OKRS = [
+  { id: 'okr-1', title: 'Improve operational efficiency', type: 'team', status: 'on_track', progress: 65, key_results: [{ id: 'kr-1', description: 'Reduce processing time by 15%', progress: 70 }, { id: 'kr-2', description: 'Achieve 99% on-time delivery', progress: 60 }] },
+];
+const DEMO_ONE_ON_ONES = [
+  { id: 'meeting-1', employee_id: 'emp-1', employee_name: 'Current User', manager_name: 'Sarah Chen', scheduled_date: '2026-02-15T10:00:00', status: 'scheduled', notes: '', action_items: [] },
+  { id: 'meeting-2', employee_id: 'emp-1', employee_name: 'Current User', manager_name: 'Sarah Chen', scheduled_date: '2026-01-15T10:00:00', status: 'completed', notes: 'Discussed career progression and training opportunities.', action_items: [{ id: 'action-1', description: 'Research Six Sigma courses', is_completed: true }] },
+];
+const DEMO_FEEDBACK = [
+  { id: 'fb-1', from_name: 'Sarah Chen', to_employee_id: 'emp-1', message: 'Great job handling the client presentation!', type: 'praise', visibility: 'public', created_at: '2026-02-05', reactions: { thumbsUp: 3, heart: 1 } },
+  { id: 'fb-2', from_name: 'James Mitchell', to_employee_id: 'emp-1', message: 'Thanks for helping with the project deadline.', type: 'thanks', visibility: 'public', created_at: '2026-02-01', reactions: { thumbsUp: 2 } },
+];
+const DEMO_REVIEW_CYCLES = [
+  { id: 'cycle-1', name: 'Q1 2026 Performance Review', status: 'active', start_date: '2026-01-01', end_date: '2026-03-31', type: 'quarterly', participants_count: 45, completed_count: 12 },
+  { id: 'cycle-2', name: 'Q4 2025 Annual Review', status: 'completed', start_date: '2025-10-01', end_date: '2025-12-31', type: 'annual', participants_count: 42, completed_count: 42 },
+];
+
+// Demo Learning Data
+const DEMO_COURSES = [
+  { id: 'course-1', title: 'Health & Safety Essentials', description: 'Core workplace safety training', category: 'health_safety', difficulty: 'beginner', duration_minutes: 120, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 8 },
+  { id: 'course-2', title: 'Fire Safety Awareness', description: 'Fire prevention and emergency procedures', category: 'health_safety', difficulty: 'beginner', duration_minutes: 60, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 5 },
+  { id: 'course-3', title: 'Manual Handling Best Practices', description: 'Safe lifting and handling techniques', category: 'health_safety', difficulty: 'beginner', duration_minutes: 90, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 6 },
+  { id: 'course-4', title: 'GDPR Data Protection', description: 'Understanding data protection regulations', category: 'compliance', difficulty: 'intermediate', duration_minutes: 60, is_mandatory: true, status: 'published', passing_score: 85, lessons_count: 4 },
+  { id: 'course-5', title: 'Introduction to Lean Manufacturing', description: 'Fundamentals of lean principles', category: 'skills', difficulty: 'intermediate', duration_minutes: 240, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 12 },
+  { id: 'course-6', title: 'Six Sigma Green Belt', description: 'Quality management methodology', category: 'skills', difficulty: 'advanced', duration_minutes: 2400, is_mandatory: false, status: 'published', passing_score: 75, lessons_count: 24 },
+  { id: 'course-7', title: 'Leadership Fundamentals', description: 'Core leadership skills for managers', category: 'leadership', difficulty: 'intermediate', duration_minutes: 360, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 10 },
+  { id: 'course-8', title: 'First Aid at Work', description: 'Essential first aid training', category: 'health_safety', difficulty: 'intermediate', duration_minutes: 480, is_mandatory: true, status: 'published', passing_score: 85, lessons_count: 15 },
+];
+const DEMO_ENROLLMENTS = [
+  { id: 'enroll-1', course_id: 'course-1', course_title: 'Health & Safety Essentials', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 92, enrolled_at: '2025-11-01', completed_at: '2025-11-15' },
+  { id: 'enroll-2', course_id: 'course-2', course_title: 'Fire Safety Awareness', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 88, enrolled_at: '2025-11-20', completed_at: '2025-12-01' },
+  { id: 'enroll-3', course_id: 'course-3', course_title: 'Manual Handling Best Practices', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 95, enrolled_at: '2025-10-01', completed_at: '2025-10-20' },
+  { id: 'enroll-4', course_id: 'course-4', course_title: 'GDPR Data Protection', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 100, enrolled_at: '2026-01-05', completed_at: '2026-01-10' },
+  { id: 'enroll-5', course_id: 'course-5', course_title: 'Introduction to Lean Manufacturing', employee_id: 'emp-1', employee_name: 'Current User', status: 'in_progress', progress: 65, score: null, enrolled_at: '2026-01-15', completed_at: null },
+  { id: 'enroll-6', course_id: 'course-6', course_title: 'Six Sigma Green Belt', employee_id: 'emp-1', employee_name: 'Current User', status: 'in_progress', progress: 40, score: null, enrolled_at: '2025-12-01', completed_at: null },
+];
+const DEMO_CERTIFICATIONS = [
+  { id: 'cert-1', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-1', course_title: 'Health & Safety Essentials', issued_at: '2025-11-15', expires_at: '2026-11-15', status: 'active' },
+  { id: 'cert-2', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-2', course_title: 'Fire Safety Awareness', issued_at: '2025-12-01', expires_at: '2026-12-01', status: 'active' },
+  { id: 'cert-3', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-4', course_title: 'GDPR Data Protection', issued_at: '2026-01-10', expires_at: '2027-01-10', status: 'active' },
+];
+
+// Demo Expense Data
+const DEMO_EXPENSE_CATEGORIES = [
+  { id: 'cat-1', name: 'Travel', code: 'TRAVEL', description: 'Transportation costs' },
+  { id: 'cat-2', name: 'Meals & Entertainment', code: 'MEALS', description: 'Food and client entertainment' },
+  { id: 'cat-3', name: 'Accommodation', code: 'HOTEL', description: 'Hotel and lodging' },
+  { id: 'cat-4', name: 'Equipment', code: 'EQUIP', description: 'Work equipment purchases' },
+  { id: 'cat-5', name: 'Office Supplies', code: 'OFFICE', description: 'Office supplies and stationery' },
+];
+const DEMO_EXPENSES = [
+  { id: 'exp-1', employee_id: 'emp-1', employee_name: 'Current User', description: 'Uber to Manchester site visit', category: 'Travel', merchant: 'Uber', amount: 3450, currency: 'GBP', expense_date: '2026-02-03', status: 'approved', receipt_url: '/receipts/uber.pdf' },
+  { id: 'exp-2', employee_id: 'emp-1', employee_name: 'Current User', description: 'Team lunch - Pret A Manger', category: 'Meals & Entertainment', merchant: 'Pret A Manger', amount: 2860, currency: 'GBP', expense_date: '2026-02-05', status: 'approved', receipt_url: '/receipts/pret.pdf' },
+  { id: 'exp-3', employee_id: 'emp-1', employee_name: 'Current User', description: 'Premier Inn - overnight', category: 'Accommodation', merchant: 'Premier Inn', amount: 8900, currency: 'GBP', expense_date: '2026-02-01', status: 'pending', receipt_url: '/receipts/hotel.pdf' },
+  { id: 'exp-4', employee_id: 'emp-1', employee_name: 'Current User', description: 'Costa Coffee - client meeting', category: 'Meals & Entertainment', merchant: 'Costa Coffee', amount: 850, currency: 'GBP', expense_date: '2026-02-07', status: 'pending', receipt_url: null },
+  { id: 'exp-5', employee_id: 'emp-1', employee_name: 'Current User', description: 'Safety boots', category: 'Equipment', merchant: 'Amazon', amount: 24500, currency: 'GBP', expense_date: '2026-01-28', status: 'approved', receipt_url: '/receipts/amazon.pdf' },
+  { id: 'exp-6', employee_id: 'emp-1', employee_name: 'Current User', description: 'Office supplies', category: 'Office Supplies', merchant: 'Ryman', amount: 1590, currency: 'GBP', expense_date: '2026-02-04', status: 'approved', receipt_url: '/receipts/ryman.pdf' },
+  { id: 'exp-7', employee_id: 'emp-1', employee_name: 'Current User', description: 'Train to London', category: 'Travel', merchant: 'Trainline', amount: 6780, currency: 'GBP', expense_date: '2026-02-06', status: 'approved', receipt_url: '/receipts/train.pdf' },
+  { id: 'exp-8', employee_id: 'emp-1', employee_name: 'Current User', description: 'Parking', category: 'Travel', merchant: 'NCP', amount: 1200, currency: 'GBP', expense_date: '2026-02-08', status: 'draft', receipt_url: null },
+];
+
+// Demo Corporate Card Data
+const DEMO_CORPORATE_CARDS = [
+  { id: 'card-1', employee_id: 'emp-1', employee_name: 'Current User', card_type: 'HSBC Visa', last_four: '4821', status: 'active', limit: 500000, balance: 34594, currency: 'GBP' },
+];
+const DEMO_CARD_TRANSACTIONS = [
+  { id: 'txn-1', card_id: 'card-1', merchant: 'Tesco Express', amount: 845, currency: 'GBP', date: '2026-02-10', category: 'Meals', status: 'settled' },
+  { id: 'txn-2', card_id: 'card-1', merchant: 'Shell Petrol', amount: 6500, currency: 'GBP', date: '2026-02-09', category: 'Travel', status: 'settled' },
+  { id: 'txn-3', card_id: 'card-1', merchant: 'Amazon', amount: 3499, currency: 'GBP', date: '2026-02-08', category: 'Office Supplies', status: 'settled' },
+  { id: 'txn-4', card_id: 'card-1', merchant: 'Costa Coffee', amount: 450, currency: 'GBP', date: '2026-02-07', category: 'Meals', status: 'settled' },
+  { id: 'txn-5', card_id: 'card-1', merchant: 'Trainline', amount: 4560, currency: 'GBP', date: '2026-02-06', category: 'Travel', status: 'settled' },
+];
+
+// Demo Compliance Data
+const DEMO_COMPLIANCE_ITEMS = [
+  { id: 'comp-1', name: 'Health & Safety Induction', category: 'Safety', frequency: 'annual', is_mandatory: true },
+  { id: 'comp-2', name: 'Fire Safety Training', category: 'Safety', frequency: 'annual', is_mandatory: true },
+  { id: 'comp-3', name: 'First Aid Certificate', category: 'Safety', frequency: '3_years', is_mandatory: true },
+  { id: 'comp-4', name: 'GDPR Training', category: 'Compliance', frequency: 'annual', is_mandatory: true },
+  { id: 'comp-5', name: 'Manual Handling', category: 'Safety', frequency: '2_years', is_mandatory: true },
+  { id: 'comp-6', name: 'Forklift Licence', category: 'Operations', frequency: '3_years', is_mandatory: false },
+];
+const DEMO_EMPLOYEE_COMPLIANCE = [
+  { id: 'ec-1', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-1', compliance_item_name: 'Health & Safety Induction', status: 'compliant', completed_at: '2025-11-15', expires_at: '2026-11-15' },
+  { id: 'ec-2', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-2', compliance_item_name: 'Fire Safety Training', status: 'compliant', completed_at: '2025-12-01', expires_at: '2026-12-01' },
+  { id: 'ec-3', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-3', compliance_item_name: 'First Aid Certificate', status: 'compliant', completed_at: '2024-06-15', expires_at: '2027-06-15' },
+  { id: 'ec-4', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-4', compliance_item_name: 'GDPR Training', status: 'compliant', completed_at: '2026-01-10', expires_at: '2027-01-10' },
+  { id: 'ec-5', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-5', compliance_item_name: 'Manual Handling', status: 'expiring_soon', completed_at: '2024-10-20', expires_at: '2026-10-20' },
+];
+
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 // Demo mode - controlled via environment variable
@@ -437,27 +537,111 @@ class ApiClient {
       return { user: stored ? JSON.parse(stored) : DEMO_USER };
     }
 
+    // Performance endpoints
+    if (path === '/performance/my-reviews' || path.startsWith('/performance/my-reviews?')) {
+      return { reviews: DEMO_PERFORMANCE_REVIEWS };
+    }
+    if (path === '/performance/goals' || path.startsWith('/performance/goals?')) {
+      return { goals: DEMO_GOALS };
+    }
+    if (path === '/performance/team-goals' || path.startsWith('/performance/team-goals?')) {
+      return { goals: DEMO_GOALS };
+    }
+    if (path === '/performance/okrs' || path.startsWith('/performance/okrs?')) {
+      return { okrs: DEMO_OKRS };
+    }
+    if (path === '/performance/one-on-ones' || path.startsWith('/performance/one-on-ones?')) {
+      return { meetings: DEMO_ONE_ON_ONES };
+    }
+    if (path === '/performance/my-feedback' || path.startsWith('/performance/my-feedback?')) {
+      return { feedback: DEMO_FEEDBACK };
+    }
+    if (path === '/performance/public-feedback' || path.startsWith('/performance/public-feedback?')) {
+      return { feedback: DEMO_FEEDBACK };
+    }
+    if (path === '/performance/cycles' || path.startsWith('/performance/cycles?')) {
+      return { cycles: DEMO_REVIEW_CYCLES };
+    }
+    if (path === '/performance/dashboard') {
+      return { reviews_pending: 5, goals_on_track: 8, feedback_given: 12, one_on_ones_scheduled: 3 };
+    }
+    if (path === '/performance/team-reviews' || path.startsWith('/performance/team-reviews?')) {
+      return { reviews: DEMO_PERFORMANCE_REVIEWS };
+    }
+    if (path === '/performance/development-plans' || path.startsWith('/performance/development-plans?')) {
+      return { plans: [] };
+    }
+    if (path === '/performance/employees' || path.startsWith('/performance/employees?')) {
+      return { employees: DEMO_EMPLOYEES };
+    }
+    if (path.startsWith('/performance/')) {
+      return { success: true };
+    }
+
+    // Learning endpoints
+    if (path === '/learning/courses' || path.startsWith('/learning/courses?')) {
+      return { courses: DEMO_COURSES, pagination: { page: 1, limit: 20, total: DEMO_COURSES.length, totalPages: 1 } };
+    }
+    if (path === '/learning/my-courses') {
+      return { enrollments: DEMO_ENROLLMENTS };
+    }
+    if (path === '/learning/enrollments' || path.startsWith('/learning/enrollments?')) {
+      return { enrollments: DEMO_ENROLLMENTS, pagination: { page: 1, limit: 20, total: DEMO_ENROLLMENTS.length, totalPages: 1 } };
+    }
+    if (path === '/learning/certifications' || path.startsWith('/learning/certifications?')) {
+      return { certifications: DEMO_CERTIFICATIONS };
+    }
+    if (path === '/learning/paths' || path.startsWith('/learning/paths?')) {
+      return { paths: [] };
+    }
+    if (path === '/learning/team-compliance') {
+      return { compliance: DEMO_EMPLOYEE_COMPLIANCE, items: DEMO_COMPLIANCE_ITEMS };
+    }
+    if (path === '/learning/dashboard') {
+      return { courses_in_progress: 2, courses_completed: 4, certifications_active: 3, certifications_expiring: 1 };
+    }
+    if (path === '/learning/employees' || path.startsWith('/learning/employees?')) {
+      return { employees: DEMO_EMPLOYEES };
+    }
+    if (path.startsWith('/learning/')) {
+      return { success: true };
+    }
+
+    // Compliance endpoints
+    if (path === '/compliance' || path.startsWith('/compliance?')) {
+      return { items: DEMO_COMPLIANCE_ITEMS, employee_compliance: DEMO_EMPLOYEE_COMPLIANCE };
+    }
+    if (path === '/compliance/items' || path.startsWith('/compliance/items?')) {
+      return { items: DEMO_COMPLIANCE_ITEMS };
+    }
+    if (path === '/compliance/employee' || path.startsWith('/compliance/employee?')) {
+      return { compliance: DEMO_EMPLOYEE_COMPLIANCE };
+    }
+    if (path.startsWith('/compliance/')) {
+      return { success: true };
+    }
+
     // TrueLayer / Corporate Cards (Demo data)
     if (path.startsWith('/truelayer/connect')) {
       return { authUrl: 'https://auth.truelayer-sandbox.com/demo' };
     }
     if (path === '/truelayer/connections') {
-      return { connections: [] };
+      return { connections: [{ id: 'conn-1', provider: 'HSBC', status: 'active', connected_at: '2026-01-15' }] };
     }
     if (path === '/corporate-cards' || path.startsWith('/corporate-cards?')) {
-      return { cards: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } };
+      return { cards: DEMO_CORPORATE_CARDS, pagination: { page: 1, limit: 20, total: DEMO_CORPORATE_CARDS.length, totalPages: 1 } };
     }
     if (path.startsWith('/card-transactions')) {
-      return { transactions: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+      return { transactions: DEMO_CARD_TRANSACTIONS, pagination: { page: 1, limit: 50, total: DEMO_CARD_TRANSACTIONS.length, totalPages: 1 } };
     }
     if (path.startsWith('/expense-claims')) {
-      return { claims: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } };
+      return { claims: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
     }
     if (path.startsWith('/expense-categories')) {
-      return { categories: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+      return { categories: DEMO_EXPENSE_CATEGORIES, pagination: { page: 1, limit: 50, total: DEMO_EXPENSE_CATEGORIES.length, totalPages: 1 } };
     }
     if (path.startsWith('/payroll/expenses')) {
-      return { claims: [], exports: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+      return { claims: DEMO_EXPENSES, exports: [], pagination: { page: 1, limit: 50, total: DEMO_EXPENSES.length, totalPages: 1 } };
     }
 
     // Default empty response
