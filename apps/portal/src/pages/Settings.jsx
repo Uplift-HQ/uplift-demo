@@ -26,22 +26,21 @@ import { useToast } from '../components/ToastProvider';
 
 // Tab configuration - names will be translated in the component
 const TABS = [
-  { id: 'organization', nameKey: 'settings.organization', icon: Building, adminOnly: true },
-  { id: 'portal-config', nameKey: 'settings.portalConfig', icon: LayoutIcon, adminOnly: true },
-  { id: 'branding', nameKey: 'settings.brandingLabel', icon: Crown, adminOnly: true },
-  { id: 'feature-flags', nameKey: 'settings.featureFlags', icon: Flag, adminOnly: true },
-  { id: 'notifications-config', nameKey: 'settings.notificationsConfig', icon: BellRing, adminOnly: true },
-  { id: 'navigation', nameKey: 'settings.navigation', icon: Globe, adminOnly: true },
-  { id: 'employee-visibility', nameKey: 'settings.employeeVisibility', icon: Eye, adminOnly: true },
-  { id: 'roles', nameKey: 'settings.rolesPermissions', icon: UserCog, adminOnly: true },
-  { id: 'users', nameKey: 'settings.teamMembers', icon: Users, adminOnly: true },
-  { id: 'appearance', nameKey: 'settings.appearance', icon: Palette, adminOnly: false },
-  { id: 'webhooks', nameKey: 'settings.webhooksTitle', icon: Webhook, adminOnly: true },
-  { id: 'sso', nameKey: 'settings.sso.title', icon: KeyRound, adminOnly: true },
-  { id: 'account', nameKey: 'settings.myAccount', icon: User, adminOnly: false },
-  { id: 'security', nameKey: 'settings.security', icon: Shield, adminOnly: false },
-  { id: 'sessions', nameKey: 'settings.sessions', icon: Monitor, adminOnly: false },
-  { id: 'privacy', nameKey: 'settings.privacyData', icon: Eye, adminOnly: false },
+  { id: 'organization', nameKey: 'settings.organization', label: 'Organization', icon: Building, adminOnly: true },
+  { id: 'branding', nameKey: 'settings.brandingLabel', label: 'Branding', icon: Crown, adminOnly: true },
+  { id: 'feature-flags', nameKey: 'settings.featureFlagsLabel', label: 'Feature Flags', icon: Flag, adminOnly: true },
+  { id: 'notifications-config', nameKey: 'settings.notificationsLabel', label: 'Notifications', icon: BellRing, adminOnly: true },
+  { id: 'navigation', nameKey: 'settings.navigation', label: 'Navigation', icon: Globe, adminOnly: true },
+  { id: 'employee-visibility', nameKey: 'settings.employeeVisibility', label: 'Employee Visibility', icon: Eye, adminOnly: true },
+  { id: 'roles', nameKey: 'settings.rolesPermissions', label: 'Roles & Permissions', icon: UserCog, adminOnly: true },
+  { id: 'users', nameKey: 'settings.teamMembers', label: 'Team Members', icon: Users, adminOnly: true },
+  { id: 'appearance', nameKey: 'settings.appearance', label: 'Appearance', icon: Palette, adminOnly: false },
+  { id: 'webhooks', nameKey: 'settings.webhooksTitle', label: 'Webhooks', icon: Webhook, adminOnly: true },
+  { id: 'sso', nameKey: 'settings.ssoLabel', label: 'Single Sign-On', icon: KeyRound, adminOnly: true },
+  { id: 'account', nameKey: 'settings.myAccount', label: 'My Account', icon: User, adminOnly: false },
+  { id: 'security', nameKey: 'settings.security', label: 'Security', icon: Shield, adminOnly: false },
+  { id: 'sessions', nameKey: 'settings.sessions', label: 'Sessions', icon: Monitor, adminOnly: false },
+  { id: 'privacy', nameKey: 'settings.privacyData', label: 'Privacy & Data', icon: Eye, adminOnly: false },
 ];
 
 export default function Settings() {
@@ -129,7 +128,7 @@ export default function Settings() {
                 }`}
               >
                 <tab.icon className="w-5 h-5" />
-                {t(tab.nameKey)}
+                {t(tab.nameKey, tab.label)}
               </button>
             ))}
           </nav>
