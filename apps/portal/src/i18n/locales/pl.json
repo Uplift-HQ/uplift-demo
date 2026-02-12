@@ -3332,30 +3332,6 @@
     "selector": "Organizacja",
     "hq": "Centrala"
   },
-  "help": {
-    "categories": {},
-    "faq": {
-      "career": {},
-      "gettingStarted": {},
-      "rewards": {},
-      "schedule": {},
-      "tasks": {},
-      "timeTracking": {}
-    }
-  },
-  "screens": {
-    "careerPath": {},
-    "clockInOut": {},
-    "help": {},
-    "managerDashboard": {},
-    "profile": {},
-    "scheduleBuilder": {},
-    "scheduleOverview": {},
-    "shiftDetail": {},
-    "shiftMarketplace": {},
-    "shiftSwapConfirm": {},
-    "tasks": {}
-  },
   "payroll": {
     "title": "Lista płac",
     "globalPayroll": "Globalna lista płac",

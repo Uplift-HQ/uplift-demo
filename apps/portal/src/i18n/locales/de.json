@@ -3521,7 +3521,15 @@
     "createPlan": "Plan erstellen"
   },
   "surveys": {
-    "templates": "Vorlagen",
+    "templates": {
+      "title": "Umfragevorlagen",
+      "subtitle": "Vorgefertigte Vorlage wählen oder eigene erstellen",
+      "createCustom": "Benutzerdefinierte Vorlage erstellen",
+      "preview": "Vorschau",
+      "clone": "Duplizieren & Anpassen",
+      "sampleQuestions": "Beispielfragen",
+      "useTemplate": "Diese Vorlage verwenden"
+    },
     "rating1to10": "Bewertung (1–10)",
     "multipleChoice": "Mehrfachauswahl",
     "questionType": "Fragetyp",
@@ -3822,15 +3830,6 @@
       },
       "enabled": "Aktiviert",
       "responded": "haben geantwortet"
-    },
-    "templates": {
-      "title": "Umfragevorlagen",
-      "subtitle": "Vorgefertigte Vorlage wählen oder eigene erstellen",
-      "createCustom": "Benutzerdefinierte Vorlage erstellen",
-      "preview": "Vorschau",
-      "clone": "Duplizieren & Anpassen",
-      "sampleQuestions": "Beispielfragen",
-      "useTemplate": "Diese Vorlage verwenden"
     }
   },
   "entity": {
@@ -4414,5 +4413,12 @@
       "noCards": "Keine Karten gefunden. Verbinden Sie eine Bank, um Firmenkarten zu synchronisieren.",
       "inactive": "Inaktiv"
     }
+  },
+  "myTimeTracking": {
+    "title": "Meine Zeiterfassung"
+  },
+  "myTimeOff": {
+    "title": "Mein Urlaub",
+    "subtitle": "Ihre Urlaubsanträge und Kontingente anzeigen"
   }
 }

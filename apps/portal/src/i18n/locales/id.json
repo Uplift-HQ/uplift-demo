@@ -4095,5 +4095,12 @@
       "noCards": "Tidak ada kartu ditemukan. Hubungkan bank untuk menyinkronkan kartu kredit.",
       "inactive": "Tidak Aktif"
     }
+  },
+  "signature": {
+    "draw": "Draw",
+    "type": "Type",
+    "typeYourName": "Type your full name",
+    "drawAboveLine": "Draw your signature above the line",
+    "captured": "Signature captured"
   }
 }

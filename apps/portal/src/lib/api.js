@@ -202,9 +202,14 @@ const DEMO_EMPLOYEE_COMPLIANCE = [
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 // Demo mode - controlled via environment variable
-// Set VITE_DEMO_MODE=true for demo/showcase deployments
-// Production always has this false (not set)
+// Set VITE_DEMO_MODE=true for demo/showcase deployments ONLY
+// Production MUST have this false (enforced by .env.production)
 export const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
+
+// Production safety check - warn if DEMO_MODE is enabled in production
+if (DEMO_MODE && import.meta.env.MODE === 'production') {
+  console.error('⚠️ CRITICAL: DEMO_MODE is enabled in production build! This should never happen.');
+}
 
 class ApiClient {
   constructor() {

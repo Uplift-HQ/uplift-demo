@@ -3719,5 +3719,9 @@
     "typeYourName": "输入您的全名",
     "drawAboveLine": "在线条上方绘制您的签名",
     "captured": "签名已捕获"
+  },
+  "myLearning": {
+    "title": "My Learning",
+    "subtitle": "Your courses, progress, and certifications"
   }
 }

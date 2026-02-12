@@ -712,9 +712,11 @@ export const authService = {
   async configureSso(organizationId, provider, config) {
     const { clientId, clientSecret, tenantId, entryPoint, certificate, domain } = config;
 
-    const validProviders = ['google', 'microsoft', 'saml', 'okta'];
+    // Note: SAML support is OAuth-based only (no passport-saml dependency for security)
+    // Full SAML 2.0 with passport-saml can be re-added when a customer requires it
+    const validProviders = ['google', 'microsoft', 'okta'];
     if (!validProviders.includes(provider)) {
-      throw new AuthError('Invalid SSO provider', 'INVALID_PROVIDER');
+      throw new AuthError('Invalid SSO provider. Supported: google, microsoft, okta', 'INVALID_PROVIDER');
     }
 
     await db.query(
@@ -863,10 +865,6 @@ export const authService = {
           `&response_type=code` +
           `&scope=openid%20email%20profile` +
           `&state=${state}`;
-        break;
-        
-      case 'saml':
-        redirectUrl = config.entry_point;
         break;
     }
 

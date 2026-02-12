@@ -3660,5 +3660,12 @@
       "noCards": "Карты не найдены. Подключите банк для синхронизации корпоративных карт.",
       "inactive": "Неактивно"
     }
+  },
+  "signature": {
+    "draw": "Draw",
+    "type": "Type",
+    "typeYourName": "Type your full name",
+    "drawAboveLine": "Draw your signature above the line",
+    "captured": "Signature captured"
   }
 }

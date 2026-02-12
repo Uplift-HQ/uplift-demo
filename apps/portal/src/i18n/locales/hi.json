@@ -4095,5 +4095,12 @@
   "myTimeOff": {
     "title": "मेरा अवकाश",
     "subtitle": "अपने अवकाश अनुरोध और शेष देखें"
+  },
+  "signature": {
+    "draw": "Draw",
+    "type": "Type",
+    "typeYourName": "Type your full name",
+    "drawAboveLine": "Draw your signature above the line",
+    "captured": "Signature captured"
   }
 }

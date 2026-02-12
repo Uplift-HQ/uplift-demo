@@ -4095,5 +4095,12 @@
       "noCards": "Walang nahanap na card. Ikonekta ang isang bangko upang mag-sync ng mga corporate card.",
       "inactive": "Hindi Aktibo"
     }
+  },
+  "signature": {
+    "draw": "Draw",
+    "type": "Type",
+    "typeYourName": "Type your full name",
+    "drawAboveLine": "Draw your signature above the line",
+    "captured": "Signature captured"
   }
 }
