@@ -213,7 +213,7 @@ export default function Documents() {
         setTemplates(templatesRes.templates || []);
         setEmployees(mappedEmployees);
       } catch (error) {
-        console.error('Failed to fetch documents:', error);
+        if (import.meta.env.DEV) console.error('Failed to fetch documents:', error);
       } finally {
         setIsLoading(false);
       }
@@ -407,7 +407,7 @@ export default function Documents() {
       if (fileInputRef.current) fileInputRef.current.value = '';
       showToast(t('documents.uploadSuccess', 'Document uploaded successfully'));
     } catch (error) {
-      console.error('Upload failed:', error);
+      if (import.meta.env.DEV) console.error('Upload failed:', error);
       showToast(t('documents.uploadFailed', 'Failed to upload document'), 'error');
     } finally {
       setIsUploading(false);
@@ -425,7 +425,7 @@ export default function Documents() {
       try {
         window.open(`/api/documents/${doc.id}/download`, '_blank');
       } catch (error) {
-        console.error('Failed to view document:', error);
+        if (import.meta.env.DEV) console.error('Failed to view document:', error);
         showToast(t('documents.viewFailed', 'Failed to open document'), 'error');
       }
     }
@@ -447,7 +447,7 @@ export default function Documents() {
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      console.error('Download failed:', error);
+      if (import.meta.env.DEV) console.error('Download failed:', error);
       showToast(t('documents.downloadFailed', 'Failed to download document'), 'error');
     }
   };
@@ -513,7 +513,7 @@ export default function Documents() {
       setSelectedDocument(null);
       showToast(t('documents.signedSuccess', 'Document signed successfully'));
     } catch (error) {
-      console.error('Signing failed:', error);
+      if (import.meta.env.DEV) console.error('Signing failed:', error);
       showToast(t('documents.signFailed', 'Failed to sign document'), 'error');
     } finally {
       setIsSigning(false);
@@ -549,7 +549,7 @@ export default function Documents() {
         setPendingSignatures((prev) => prev.filter((p) => p.documentId !== id));
         showToast(t('documents.deleteSuccess', 'Document deleted'));
       } catch (error) {
-        console.error('Delete failed:', error);
+        if (import.meta.env.DEV) console.error('Delete failed:', error);
         showToast(t('documents.deleteFailed', 'Failed to delete document'), 'error');
       }
     }
@@ -570,7 +570,7 @@ export default function Documents() {
         ));
         showToast(t('documents.reminderSent', 'Reminder sent successfully'));
       } catch (error) {
-        console.error('Failed to send reminder:', error);
+        if (import.meta.env.DEV) console.error('Failed to send reminder:', error);
         showToast(t('documents.reminderFailed', 'Failed to send reminder'), 'error');
       }
     }

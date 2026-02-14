@@ -7,11 +7,9 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   onboardingComplete: boolean;
-  isDemoMode: boolean;
 
   // Actions
   login: (email: string, password: string) => Promise<void>;
-  loginDemoUser: (role: 'worker' | 'manager') => void;
   register: (data: any) => Promise<void>;
   logout: () => void;
   loadUser: () => Promise<void>;
@@ -20,44 +18,11 @@ interface AuthState {
   completeOnboarding: () => Promise<void>;
 }
 
-// Demo user data for website demo mode (no backend required)
-const DEMO_USERS: Record<'worker' | 'manager', User> = {
-  worker: {
-    id: 'demo-worker-001',
-    email: 'sarah.mitchell@demo.uplifthq.co.uk',
-    firstName: 'Sarah',
-    lastName: 'Mitchell',
-    role: 'worker',
-    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face',
-    organizationId: 'demo-org',
-    employeeId: 'EMP-001',
-    momentumScore: 847,
-    companyName: 'Grand Metro Hotels',
-    locationName: 'Main Restaurant',
-    unreadMessages: 7,
-  },
-  manager: {
-    id: 'demo-manager-001',
-    email: 'james.wilson@demo.uplifthq.co.uk',
-    firstName: 'James',
-    lastName: 'Wilson',
-    role: 'manager',
-    avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-    organizationId: 'demo-org',
-    employeeId: 'EMP-002',
-    momentumScore: 912,
-    companyName: 'Grand Metro Hotels',
-    locationName: 'Edinburgh City Centre',
-    unreadMessages: 3,
-  },
-};
-
 export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   isAuthenticated: false,
   isLoading: false,
   onboardingComplete: false,
-  isDemoMode: false,
 
   login: async (email: string, password: string) => {
     set({ isLoading: true });
@@ -73,18 +38,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ isLoading: false });
       throw error;
     }
-  },
-
-  // Demo mode login - sets user directly without API call (for website demo only)
-  loginDemoUser: (role: 'worker' | 'manager') => {
-    const demoUser = DEMO_USERS[role];
-    set({
-      user: demoUser,
-      isAuthenticated: true,
-      isLoading: false,
-      isDemoMode: true,
-      onboardingComplete: true,
-    });
   },
 
   register: async (data: any) => {
@@ -139,10 +92,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   checkOnboarding: async () => {
-    // Skip if already in demo mode (demo login sets onboardingComplete: true)
-    if (get().isDemoMode || get().isAuthenticated) {
-      return;
-    }
     const complete = await appStorage.isOnboardingComplete();
     set({ onboardingComplete: complete });
   },

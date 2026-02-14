@@ -203,7 +203,7 @@ export default function MyPayslips() {
         setYtdData(ytdRes.ytd || null);
         setAvailableYears(yearsRes.years || ['2024-25', '2025-26']);
       } catch (err) {
-        console.error('Failed to fetch payslips:', err);
+        if (import.meta.env.DEV) console.error('Failed to fetch payslips:', err);
         setError(t('myPayslips.fetchError', 'Failed to load payslips'));
       } finally {
         setIsLoading(false);
@@ -280,9 +280,19 @@ export default function MyPayslips() {
     niCategory: EMPLOYEE_INFO.niCategory, // Would come from payroll system
   } : EMPLOYEE_INFO;
 
-  const handleDownloadPDF = (payslip) => {
-    // Demo - would trigger PDF download
-    console.log('Downloading PDF for payslip:', payslip.period);
+  const handleDownloadPDF = async (payslip) => {
+    try {
+      const response = await api.get(`/payslips/${payslip.id}/pdf`, { responseType: 'blob' });
+      const blob = new Blob([response], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `payslip-${payslip.period}.pdf`;
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      if (import.meta.env.DEV) console.error('Failed to download payslip:', err);
+    }
   };
 
   return (

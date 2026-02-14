@@ -7,11 +7,12 @@ import { colors, typography, spacing, borderRadius, shadows } from '../../theme'
 import { showAlert } from '../../utils/alert';
 import { api } from '../../services/api';
 
-const REPORTS = [
+// Report data - using translation keys for titles/descriptions
+const getReports = (t: any) => [
   {
     id: 'team-performance',
-    title: 'Team Performance',
-    description: 'Weekly momentum trends and individual metrics',
+    title: t('screens.reports.team_performance'),
+    description: t('screens.reports.team_performance_desc'),
     icon: 'bar',
     color: colors.momentum,
     updatedAt: '2 hours ago',
@@ -27,8 +28,8 @@ const REPORTS = [
   },
   {
     id: 'retention',
-    title: 'Retention Analysis',
-    description: 'AI-powered retention predictions and risk factors',
+    title: t('screens.reports.retention_analysis'),
+    description: t('screens.reports.retention_analysis_desc'),
     icon: 'trending',
     color: colors.success,
     updatedAt: '1 day ago',
@@ -44,8 +45,8 @@ const REPORTS = [
   },
   {
     id: 'skills-gap',
-    title: 'Skills Gap Analysis',
-    description: 'Identify training needs and growth opportunities',
+    title: t('screens.reports.skills_gap'),
+    description: t('screens.reports.skills_gap_desc'),
     icon: 'target',
     color: colors.info,
     updatedAt: '3 days ago',
@@ -61,8 +62,8 @@ const REPORTS = [
   },
   {
     id: 'schedule-efficiency',
-    title: 'Schedule Efficiency',
-    description: 'Shift coverage and optimization recommendations',
+    title: t('screens.reports.schedule_efficiency'),
+    description: t('screens.reports.schedule_efficiency_desc'),
     icon: 'bar',
     color: colors.warning,
     updatedAt: 'today',
@@ -80,6 +81,7 @@ const REPORTS = [
 
 export const ReportsScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
+  const REPORTS = getReports(t);
   const [selectedReport, setSelectedReport] = useState<typeof REPORTS[0] | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -100,7 +102,7 @@ export const ReportsScreen = ({ navigation }: any) => {
     const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
     const url = api.getExportUrl(reportType, format, { startDate: thirtyDaysAgo, endDate: today });
     Linking.openURL(url).catch(() => {
-      showAlert('Export Error', 'Unable to open export link. Please try again.');
+      showAlert(t('screens.reports.export_error'), t('screens.reports.export_error_message'));
     });
     setModalVisible(false);
   };
@@ -119,17 +121,17 @@ export const ReportsScreen = ({ navigation }: any) => {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Text style={styles.backButtonText}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Reports & Analytics</Text>
-        <TouchableOpacity 
+        <Text style={styles.title}>{t('screens.reports.title')}</Text>
+        <TouchableOpacity
           style={styles.exportButton}
-          onPress={() => showAlert('Export All Reports', 'Choose export format', [
-            { text: 'Cancel', style: 'cancel' },
-            { text: 'PDF', onPress: () => {
+          onPress={() => showAlert(t('screens.reports.export_all_reports'), t('screens.reports.choose_format'), [
+            { text: t('common.cancel'), style: 'cancel' },
+            { text: t('screens.reports.pdf'), onPress: () => {
               const today = new Date().toISOString().split('T')[0];
               const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
               Linking.openURL(api.getExportUrl('timesheets', 'pdf', { startDate: thirtyDaysAgo, endDate: today }));
             }},
-            { text: 'CSV', onPress: () => {
+            { text: t('screens.reports.csv'), onPress: () => {
               const today = new Date().toISOString().split('T')[0];
               const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
               Linking.openURL(api.getExportUrl('timesheets', 'csv', { startDate: thirtyDaysAgo, endDate: today }));
@@ -137,28 +139,28 @@ export const ReportsScreen = ({ navigation }: any) => {
           ])}
         >
           <DownloadIcon size={20} color={colors.momentum} />
-          <Text style={styles.exportText}>Export All</Text>
+          <Text style={styles.exportText}>{t('screens.reports.export_all')}</Text>
         </TouchableOpacity>
       </View>
       
       <ScrollView style={styles.content}>
         {/* Quick Stats */}
         <View style={styles.statsRow}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.statCard}
             onPress={() => handleViewReport(REPORTS[0])}
           >
             <TrendingUpIcon size={24} color={colors.success} />
             <Text style={styles.statValue}>+12%</Text>
-            <Text style={styles.statLabel}>Productivity</Text>
+            <Text style={styles.statLabel}>{t('screens.reports.productivity')}</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.statCard}
             onPress={() => handleViewReport(REPORTS[1])}
           >
             <TargetIcon size={24} color={colors.info} />
             <Text style={styles.statValue}>89%</Text>
-            <Text style={styles.statLabel}>Retention</Text>
+            <Text style={styles.statLabel}>{t('screens.reports.retention')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -175,8 +177,8 @@ export const ReportsScreen = ({ navigation }: any) => {
             </View>
             <Text style={styles.reportDesc}>{report.description}</Text>
             <View style={styles.reportMeta}>
-              <Text style={styles.reportDate}>Updated {report.updatedAt}</Text>
-              <Text style={styles.viewReportText}>View Report</Text>
+              <Text style={styles.reportDate}>{t('screens.reports.updated', { time: report.updatedAt })}</Text>
+              <Text style={styles.viewReportText}>{t('screens.reports.view_report')}</Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -204,7 +206,7 @@ export const ReportsScreen = ({ navigation }: any) => {
             </View>
 
             {/* Metrics Grid */}
-            <Text style={styles.sectionTitle}>Key Metrics</Text>
+            <Text style={styles.sectionTitle}>{t('screens.reports.key_metrics')}</Text>
             <View style={styles.metricsGrid}>
               {selectedReport?.data.metrics.map((metric, index) => (
                 <View key={index} style={styles.metricCard}>
@@ -215,28 +217,28 @@ export const ReportsScreen = ({ navigation }: any) => {
             </View>
 
             {/* Chart Placeholder */}
-            <Text style={styles.sectionTitle}>Trend (Last 30 Days)</Text>
+            <Text style={styles.sectionTitle}>{t('screens.reports.trend_30_days')}</Text>
             <View style={styles.chartPlaceholder}>
               <BarChartIcon size={48} color={colors.slate300} />
-              <Text style={styles.chartText}>Interactive chart available in full report</Text>
+              <Text style={styles.chartText}>{t('screens.reports.chart_hint')}</Text>
             </View>
 
             {/* Export Options */}
-            <Text style={styles.sectionTitle}>Export Report</Text>
+            <Text style={styles.sectionTitle}>{t('screens.reports.export_report')}</Text>
             <View style={styles.exportOptions}>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.exportOption}
                 onPress={() => handleExport('pdf')}
               >
                 <DownloadIcon size={20} color={colors.momentum} />
-                <Text style={styles.exportOptionText}>Download PDF</Text>
+                <Text style={styles.exportOptionText}>{t('screens.reports.download_pdf')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.exportOption}
                 onPress={() => handleExport('csv')}
               >
                 <DownloadIcon size={20} color={colors.success} />
-                <Text style={styles.exportOptionText}>Download Excel</Text>
+                <Text style={styles.exportOptionText}>{t('screens.reports.download_excel')}</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>

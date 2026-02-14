@@ -22,6 +22,36 @@ if (postmarkClient) {
 const EMAIL_FROM = process.env.EMAIL_FROM || 'noreply@uplift.app';
 const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO || 'support@uplift.app';
 
+// Default branding values (can be overridden by organization settings)
+const DEFAULT_PRIMARY_COLOR = '#F26522';
+const DEFAULT_TEAM_NAME = process.env.EMAIL_TEAM_NAME || 'The Uplift Team';
+
+/**
+ * Get organization branding for emails
+ * @param {string} organizationId - Organization ID
+ * @returns {object} Branding object with primaryColor and teamName
+ */
+async function getOrgBranding(organizationId) {
+  if (!organizationId) {
+    return { primaryColor: DEFAULT_PRIMARY_COLOR, teamName: DEFAULT_TEAM_NAME };
+  }
+  try {
+    const result = await db.query(
+      `SELECT name, primary_color FROM organizations WHERE id = $1`,
+      [organizationId]
+    );
+    if (result.rows[0]) {
+      return {
+        primaryColor: result.rows[0].primary_color || DEFAULT_PRIMARY_COLOR,
+        teamName: result.rows[0].name ? `The ${result.rows[0].name} Team` : DEFAULT_TEAM_NAME,
+      };
+    }
+  } catch (error) {
+    console.warn('Failed to get org branding for email:', error.message);
+  }
+  return { primaryColor: DEFAULT_PRIMARY_COLOR, teamName: DEFAULT_TEAM_NAME };
+}
+
 // Legacy templates (fallback) - kept for backwards compatibility
 const templates = {
   password_changed: {
@@ -489,6 +519,7 @@ export const emailService = {
   async sendWelcome(user) {
     const lang = user.preferred_language || 'en';
     const appUrl = process.env.APP_URL || 'https://app.uplifthq.co.uk';
+    const branding = await getOrgBranding(user.organization_id);
 
     // Use inline template since welcome template may not exist in all languages
     const subject = 'Welcome to Uplift';
@@ -496,11 +527,11 @@ export const emailService = {
       <h2>Welcome to Uplift!</h2>
       <p>Hi ${user.first_name},</p>
       <p>Thank you for joining Uplift. Your account is now active and ready to use.</p>
-      <p><a href="${appUrl}/login" style="display:inline-block;padding:12px 24px;background:#F26522;color:white;text-decoration:none;border-radius:6px;">Login to Uplift</a></p>
+      <p><a href="${appUrl}/login" style="display:inline-block;padding:12px 24px;background:${branding.primaryColor};color:white;text-decoration:none;border-radius:6px;">Login to Uplift</a></p>
       <p>If you have any questions, please contact your administrator or our support team.</p>
-      <p>— The Uplift Team</p>
+      <p>— ${branding.teamName}</p>
     `;
-    const textBody = `Welcome to Uplift!\n\nHi ${user.first_name},\n\nThank you for joining Uplift. Your account is now active and ready to use.\n\nLogin at: ${appUrl}/login\n\n— The Uplift Team`;
+    const textBody = `Welcome to Uplift!\n\nHi ${user.first_name},\n\nThank you for joining Uplift. Your account is now active and ready to use.\n\nLogin at: ${appUrl}/login\n\n— ${branding.teamName}`;
 
     try {
       await db.query(
@@ -572,6 +603,7 @@ export const emailService = {
   async sendLowBackupCodes(user, remainingCount) {
     const lang = user.preferred_language || 'en';
     const appUrl = process.env.APP_URL || 'https://app.uplifthq.co.uk';
+    const branding = await getOrgBranding(user.organization_id);
 
     const subject = 'Low MFA Backup Codes Warning';
     const htmlBody = `
@@ -579,10 +611,10 @@ export const emailService = {
       <p>Hi ${user.first_name},</p>
       <p>You only have <strong>${remainingCount}</strong> MFA backup code${remainingCount === 1 ? '' : 's'} remaining.</p>
       <p>We recommend generating new backup codes to ensure you can always access your account.</p>
-      <p><a href="${appUrl}/settings/security" style="display:inline-block;padding:12px 24px;background:#F26522;color:white;text-decoration:none;border-radius:6px;">Manage Security Settings</a></p>
-      <p>— The Uplift Team</p>
+      <p><a href="${appUrl}/settings/security" style="display:inline-block;padding:12px 24px;background:${branding.primaryColor};color:white;text-decoration:none;border-radius:6px;">Manage Security Settings</a></p>
+      <p>— ${branding.teamName}</p>
     `;
-    const textBody = `Low Backup Codes Warning\n\nHi ${user.first_name},\n\nYou only have ${remainingCount} MFA backup code${remainingCount === 1 ? '' : 's'} remaining.\n\nGenerate new codes at: ${appUrl}/settings/security\n\n— The Uplift Team`;
+    const textBody = `Low Backup Codes Warning\n\nHi ${user.first_name},\n\nYou only have ${remainingCount} MFA backup code${remainingCount === 1 ? '' : 's'} remaining.\n\nGenerate new codes at: ${appUrl}/settings/security\n\n— ${branding.teamName}`;
 
     try {
       await db.query(
@@ -601,6 +633,7 @@ export const emailService = {
   async sendMfaDisabled(user) {
     const lang = user.preferred_language || 'en';
     const appUrl = process.env.APP_URL || 'https://app.uplifthq.co.uk';
+    const branding = await getOrgBranding(user.organization_id);
 
     const subject = 'Two-Factor Authentication Disabled';
     const htmlBody = `
@@ -608,10 +641,10 @@ export const emailService = {
       <p>Hi ${user.first_name},</p>
       <p>Two-factor authentication has been disabled on your Uplift account.</p>
       <p>If you did not make this change, please re-enable 2FA immediately and contact your administrator.</p>
-      <p><a href="${appUrl}/settings/security" style="display:inline-block;padding:12px 24px;background:#F26522;color:white;text-decoration:none;border-radius:6px;">Security Settings</a></p>
-      <p>— The Uplift Team</p>
+      <p><a href="${appUrl}/settings/security" style="display:inline-block;padding:12px 24px;background:${branding.primaryColor};color:white;text-decoration:none;border-radius:6px;">Security Settings</a></p>
+      <p>— ${branding.teamName}</p>
     `;
-    const textBody = `Two-Factor Authentication Disabled\n\nHi ${user.first_name},\n\nTwo-factor authentication has been disabled on your Uplift account.\n\nIf you did not make this change, please re-enable 2FA immediately.\n\nSecurity settings: ${appUrl}/settings/security\n\n— The Uplift Team`;
+    const textBody = `Two-Factor Authentication Disabled\n\nHi ${user.first_name},\n\nTwo-factor authentication has been disabled on your Uplift account.\n\nIf you did not make this change, please re-enable 2FA immediately.\n\nSecurity settings: ${appUrl}/settings/security\n\n— ${branding.teamName}`;
 
     try {
       await db.query(

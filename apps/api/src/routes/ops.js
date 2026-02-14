@@ -1684,7 +1684,7 @@ router.post('/onboard/organization', requirePermission('onboard'), async (req, r
     res.json({ organization: result.rows[0] });
   } catch (error) {
     console.error('Create org error:', error);
-    res.status(500).json({ error: 'Failed to create organization' });
+    res.status(500).json({ error: 'Failed to create organization', details: error.message });
   }
 });
 

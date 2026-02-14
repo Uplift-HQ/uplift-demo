@@ -106,7 +106,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
         status: r.status || 'pending',
       })));
     } catch (error) {
-      showAlert('Error', 'Failed to load pending redemptions');
+      showAlert(t('screens.rewardCatalog.error'), t('screens.rewardCatalog.failed_load'));
     } finally {
       setLoading(false);
     }
@@ -157,7 +157,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
 
   const handleSaveReward = async () => {
     if (!formData.name || !formData.pointsCost || !formData.quantityAvailable) {
-      showAlert('Validation Error', 'Please fill in all required fields');
+      showAlert(t('screens.rewardCatalog.validation_error'), t('screens.rewardCatalog.fill_required'));
       return;
     }
 
@@ -173,18 +173,17 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
       };
 
       if (editingReward) {
-        // Placeholder - replace with actual API call
         await api.updateReward(editingReward.id, rewardData);
-        showAlert('Success', 'Reward updated successfully');
+        showAlert(t('screens.rewardCatalog.success'), t('screens.rewardCatalog.reward_updated'));
       } else {
         await api.createReward(rewardData);
-        showAlert('Success', 'Reward created successfully');
+        showAlert(t('screens.rewardCatalog.success'), t('screens.rewardCatalog.reward_created'));
       }
 
       setShowForm(false);
       fetchRewards();
     } catch (error) {
-      showAlert('Error', 'Failed to save reward');
+      showAlert(t('screens.rewardCatalog.error'), t('screens.rewardCatalog.failed_save'));
     } finally {
       setIsSubmitting(false);
     }
@@ -192,21 +191,21 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
 
   const handleDeleteReward = (reward: Reward) => {
     showAlert(
-      'Delete Reward',
-      `Are you sure you want to delete "${reward.name}"?`,
+      t('screens.rewardCatalog.delete_reward'),
+      t('screens.rewardCatalog.delete_confirm', { name: reward.name }),
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'Delete',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: async () => {
             try {
               setIsSubmitting(true);
               await api.deleteReward(reward.id);
-              showAlert('Success', 'Reward deleted successfully');
+              showAlert(t('screens.rewardCatalog.success'), t('screens.rewardCatalog.reward_deleted'));
               fetchRewards();
             } catch (error) {
-              showAlert('Error', 'Failed to delete reward');
+              showAlert(t('screens.rewardCatalog.error'), t('screens.rewardCatalog.failed_delete'));
             } finally {
               setIsSubmitting(false);
             }
@@ -220,10 +219,10 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
     try {
       setIsSubmitting(true);
       await api.updateReward(reward.id, { isActive: !reward.isActive });
-      showAlert('Success', `Reward ${!reward.isActive ? 'activated' : 'deactivated'}`);
+      showAlert(t('screens.rewardCatalog.success'), !reward.isActive ? t('screens.rewardCatalog.reward_activated') : t('screens.rewardCatalog.reward_deactivated'));
       fetchRewards();
     } catch (error) {
-      showAlert('Error', 'Failed to update reward');
+      showAlert(t('screens.rewardCatalog.error'), t('screens.rewardCatalog.failed_update'));
     } finally {
       setIsSubmitting(false);
     }
@@ -232,20 +231,20 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
   // Redemption handlers
   const handleApproveRedemption = async (redemption: Redemption) => {
     showAlert(
-      'Approve Redemption',
-      `Approve ${redemption.employeeName}'s redemption for "${redemption.rewardName}"?`,
+      t('screens.rewardCatalog.approve_redemption'),
+      t('screens.rewardCatalog.approve_confirm', { employee: redemption.employeeName, reward: redemption.rewardName }),
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'Approve',
+          text: t('common.approve'),
           onPress: async () => {
             try {
               setIsSubmitting(true);
               await api.approveRedemption(redemption.id);
-              showAlert('Success', 'Redemption approved');
+              showAlert(t('screens.rewardCatalog.success'), t('screens.rewardCatalog.redemption_approved'));
               fetchRedemptions();
             } catch (error) {
-              showAlert('Error', 'Failed to approve redemption');
+              showAlert(t('screens.rewardCatalog.error'), t('screens.rewardCatalog.failed_approve'));
             } finally {
               setIsSubmitting(false);
             }
@@ -265,13 +264,13 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
     if (!rejectingRedemption) return;
     try {
       setIsSubmitting(true);
-      await api.rejectRedemption(rejectingRedemption.id, rejectReason || 'No reason provided');
-      showAlert('Success', 'Redemption rejected');
+      await api.rejectRedemption(rejectingRedemption.id, rejectReason || t('common.noReasonProvided') || 'No reason provided');
+      showAlert(t('screens.rewardCatalog.success'), t('screens.rewardCatalog.redemption_rejected'));
       setShowRejectModal(false);
       setRejectingRedemption(null);
       fetchRedemptions();
     } catch (error) {
-      showAlert('Error', 'Failed to reject redemption');
+      showAlert(t('screens.rewardCatalog.error'), t('screens.rewardCatalog.failed_reject'));
     } finally {
       setIsSubmitting(false);
     }
@@ -280,15 +279,15 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
   const getCategoryLabel = (category: Reward['category']) => {
     switch (category) {
       case 'extra_pto':
-        return 'Extra PTO';
+        return t('screens.rewardCatalog.category_extra_pto');
       case 'preferred_shift':
-        return 'Preferred Shift';
+        return t('screens.rewardCatalog.category_preferred_shift');
       case 'gift_card':
-        return 'Gift Card';
+        return t('screens.rewardCatalog.category_gift_card');
       case 'recognition':
-        return 'Recognition';
+        return t('screens.rewardCatalog.category_recognition');
       case 'other':
-        return 'Other';
+        return t('screens.rewardCatalog.category_other');
     }
   };
 
@@ -332,7 +331,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
           onPress={() => setActiveTab('catalog')}
         >
           <Text style={[styles.tabText, activeTab === 'catalog' && styles.tabTextActive]}>
-            Catalog
+            {t('screens.rewardCatalog.catalog')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -340,7 +339,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
           onPress={() => setActiveTab('approvals')}
         >
           <Text style={[styles.tabText, activeTab === 'approvals' && styles.tabTextActive]}>
-            Pending Approvals
+            {t('screens.rewardCatalog.pending_approvals')}
           </Text>
           {redemptions.length > 0 && (
             <View style={styles.tabBadge}>
@@ -405,7 +404,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
 
                   <View style={styles.rewardFooter}>
                     <Text style={styles.quantityText}>
-                      {reward.quantityAvailable} available
+                      {t('screens.rewardCatalog.available', { count: reward.quantityAvailable })}
                     </Text>
                     <View style={styles.rewardActions}>
                       <TouchableOpacity
@@ -423,7 +422,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                               : styles.toggleButtonTextInactive,
                           ]}
                         >
-                          {reward.isActive ? 'Active' : 'Inactive'}
+                          {reward.isActive ? t('screens.rewardCatalog.active') : t('screens.rewardCatalog.inactive')}
                         </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
@@ -458,7 +457,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                       <Text style={styles.employeeName}>{redemption.employeeName}</Text>
                       <Text style={styles.rewardName}>{redemption.rewardName}</Text>
                       <Text style={styles.redemptionDate}>
-                        Requested {formatDate(redemption.requestedAt)}
+                        {t('screens.rewardCatalog.requested', { date: formatDate(redemption.requestedAt) })}
                       </Text>
                     </View>
                     <View style={styles.pointsBadge}>
@@ -472,14 +471,14 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                       onPress={() => handleRejectRedemption(redemption)}
                     >
                       <XIcon size={18} color={colors.error} />
-                      <Text style={styles.rejectButtonText}>Reject</Text>
+                      <Text style={styles.rejectButtonText}>{t('screens.rewardCatalog.reject')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                       style={styles.approveButton}
                       onPress={() => handleApproveRedemption(redemption)}
                     >
                       <CheckIcon size={18} color={colors.background} />
-                      <Text style={styles.approveButtonText}>Approve</Text>
+                      <Text style={styles.approveButtonText}>{t('screens.rewardCatalog.approve')}</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -504,7 +503,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>
-                {editingReward ? 'Edit Reward' : 'Add Reward'}
+                {editingReward ? t('screens.rewardCatalog.edit_reward') : t('screens.rewardCatalog.add_reward')}
               </Text>
               <TouchableOpacity onPress={() => setShowForm(false)}>
                 <XIcon size={24} color={colors.slate700} />
@@ -512,27 +511,27 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
             </View>
 
             <ScrollView style={styles.formScroll} showsVerticalScrollIndicator={false}>
-              <Text style={styles.fieldLabel}>Name *</Text>
+              <Text style={styles.fieldLabel}>{t('screens.rewardCatalog.name_label')}</Text>
               <TextInput
                 style={styles.input}
                 value={formData.name}
                 onChangeText={(text) => setFormData({ ...formData, name: text })}
-                placeholder="e.g., £50 Amazon Gift Card"
+                placeholder={t('screens.rewardCatalog.name_placeholder')}
                 placeholderTextColor={colors.slate400}
               />
 
-              <Text style={styles.fieldLabel}>Description</Text>
+              <Text style={styles.fieldLabel}>{t('screens.rewardCatalog.description_label')}</Text>
               <TextInput
                 style={[styles.input, styles.textArea]}
                 value={formData.description}
                 onChangeText={(text) => setFormData({ ...formData, description: text })}
-                placeholder="Brief description of the reward"
+                placeholder={t('screens.rewardCatalog.description_placeholder')}
                 placeholderTextColor={colors.slate400}
                 multiline
                 numberOfLines={3}
               />
 
-              <Text style={styles.fieldLabel}>Category *</Text>
+              <Text style={styles.fieldLabel}>{t('screens.rewardCatalog.category_label')}</Text>
               <View style={styles.categoryGrid}>
                 {(['extra_pto', 'preferred_shift', 'gift_card', 'recognition', 'other'] as const).map(
                   (cat) => (
@@ -559,24 +558,24 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                 )}
               </View>
 
-              <Text style={styles.fieldLabel}>Points Cost *</Text>
+              <Text style={styles.fieldLabel}>{t('screens.rewardCatalog.points_cost_label')}</Text>
               <TextInput
                 style={styles.input}
                 value={formData.pointsCost}
                 onChangeText={(text) => setFormData({ ...formData, pointsCost: text.replace(/[^0-9]/g, '') })}
-                placeholder="e.g., 300"
+                placeholder={t('screens.rewardCatalog.points_cost_placeholder')}
                 placeholderTextColor={colors.slate400}
                 keyboardType="numeric"
               />
 
-              <Text style={styles.fieldLabel}>Quantity Available *</Text>
+              <Text style={styles.fieldLabel}>{t('screens.rewardCatalog.quantity_label')}</Text>
               <TextInput
                 style={styles.input}
                 value={formData.quantityAvailable}
                 onChangeText={(text) =>
                   setFormData({ ...formData, quantityAvailable: text.replace(/[^0-9]/g, '') })
                 }
-                placeholder="e.g., 25"
+                placeholder={t('screens.rewardCatalog.quantity_placeholder')}
                 placeholderTextColor={colors.slate400}
                 keyboardType="numeric"
               />
@@ -586,7 +585,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                   style={styles.cancelButton}
                   onPress={() => setShowForm(false)}
                 >
-                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                  <Text style={styles.cancelButtonText}>{t('common.cancel')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.saveButton}
@@ -596,7 +595,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                   {isSubmitting ? (
                     <ActivityIndicator size="small" color={colors.background} />
                   ) : (
-                    <Text style={styles.saveButtonText}>Save</Text>
+                    <Text style={styles.saveButtonText}>{t('screens.rewardCatalog.save')}</Text>
                   )}
                 </TouchableOpacity>
               </View>
@@ -610,7 +609,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { maxHeight: '50%' }]}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Reject Redemption</Text>
+              <Text style={styles.modalTitle}>{t('screens.rewardCatalog.reject_redemption')}</Text>
               <TouchableOpacity onPress={() => setShowRejectModal(false)}>
                 <XIcon size={24} color={colors.slate700} />
               </TouchableOpacity>
@@ -618,13 +617,13 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
 
             <View style={styles.formScroll}>
               <Text style={styles.fieldLabel}>
-                Provide a reason for rejecting {rejectingRedemption?.employeeName}'s request:
+                {t('screens.rewardCatalog.reject_reason_prompt', { employee: rejectingRedemption?.employeeName })}
               </Text>
               <TextInput
                 style={[styles.input, styles.textArea]}
                 value={rejectReason}
                 onChangeText={setRejectReason}
-                placeholder="Enter rejection reason..."
+                placeholder={t('screens.rewardCatalog.reject_reason_placeholder')}
                 placeholderTextColor={colors.slate400}
                 multiline
                 numberOfLines={3}
@@ -636,7 +635,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                   style={styles.cancelButton}
                   onPress={() => setShowRejectModal(false)}
                 >
-                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                  <Text style={styles.cancelButtonText}>{t('common.cancel')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[styles.saveButton, { backgroundColor: colors.error }]}
@@ -646,7 +645,7 @@ export const RewardCatalogScreen = ({ navigation }: any) => {
                   {isSubmitting ? (
                     <ActivityIndicator size="small" color={colors.background} />
                   ) : (
-                    <Text style={styles.saveButtonText}>Reject</Text>
+                    <Text style={styles.saveButtonText}>{t('screens.rewardCatalog.reject')}</Text>
                   )}
                 </TouchableOpacity>
               </View>

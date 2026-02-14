@@ -482,7 +482,7 @@ export default function Directory() {
         });
         setExpandedNodes(initialExpanded);
       } catch (err) {
-        console.error('Failed to load directory data:', err);
+        if (import.meta.env.DEV) console.error('Failed to load directory data:', err);
         setError(err.message || 'Failed to load directory');
       } finally {
         setLoading(false);

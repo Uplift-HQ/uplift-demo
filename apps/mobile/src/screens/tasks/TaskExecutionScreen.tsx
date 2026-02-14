@@ -44,40 +44,40 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
 
   const handleTakePhoto = () => {
     showAlert(
-      'Capture Photo',
-      'Choose photo source',
+      t('screens.taskExecution.capture_photo'),
+      t('screens.taskExecution.choose_photo_source'),
       [
         {
-          text: 'Camera',
+          text: t('screens.taskExecution.camera'),
           onPress: () => {
             // Simulate photo capture
             setPhotos([...photos, `photo_${Date.now()}.jpg`]);
-            showAlert(t('common.success'), 'Photo captured');
+            showAlert(t('common.success'), t('screens.taskExecution.photo_captured'));
           }
         },
         {
-          text: 'Gallery',
+          text: t('screens.taskExecution.gallery'),
           onPress: () => {
             // Simulate photo selection
             setPhotos([...photos, `gallery_${Date.now()}.jpg`]);
-            showAlert(t('common.success'), 'Photo selected');
+            showAlert(t('common.success'), t('screens.taskExecution.photo_captured'));
           }
         },
-        { text: 'Cancel', style: 'cancel' }
+        { text: t('common.cancel'), style: 'cancel' }
       ]
     );
   };
 
   const handleAttachFile = () => {
-    showAlert('Attach File', 'File picker would open here', [
+    showAlert(t('screens.taskExecution.attach_file'), t('screens.taskExecution.file_picker_hint'), [
       {
-        text: 'Select File',
+        text: t('screens.taskExecution.select_file'),
         onPress: () => {
           setFiles([...files, `document_${Date.now()}.pdf`]);
-          showAlert(t('common.success'), 'File attached');
+          showAlert(t('common.success'), t('screens.taskExecution.file_attached'));
         }
       },
-      { text: 'Cancel', style: 'cancel' }
+      { text: t('common.cancel'), style: 'cancel' }
     ]);
   };
 
@@ -90,35 +90,35 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
     if (signatureInput.trim()) {
       setSignature(signatureInput.trim());
       setShowSignatureModal(false);
-      showAlert(t('common.success'), 'Signature added');
+      showAlert(t('common.success'), t('screens.taskExecution.signature_added'));
     }
   };
 
   const handleSubmit = () => {
-    const allSubtasksComplete = task.subtasks?.every((st: any) => 
+    const allSubtasksComplete = task.subtasks?.every((st: any) =>
       completedSubtasks.includes(st.id)
     ) ?? true;
 
     if (!allSubtasksComplete) {
-      showAlert('Incomplete', 'Please complete all task steps before submitting.');
+      showAlert(t('screens.taskExecution.incomplete'), t('screens.taskExecution.complete_all_steps'));
       return;
     }
 
     if (task.requiresProof && photos.length === 0 && files.length === 0) {
-      showAlert('Proof Required', 'Please attach at least one photo or file as proof of completion.');
+      showAlert(t('screens.taskExecution.proof_required'), t('screens.taskExecution.attach_proof_message'));
       return;
     }
 
     showAlert(
-      'Submit Task',
-      'Submit task for manager review?',
+      t('screens.taskExecution.submit_task'),
+      t('screens.taskExecution.submit_for_review_confirm'),
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'Submit',
+          text: t('common.submit'),
           onPress: () => {
             setIsRunning(false);
-            navigation.navigate('TaskCompletion', { 
+            navigation.navigate('TaskCompletion', {
               task,
               timeSpent: timer,
               photos: photos.length,
@@ -138,15 +138,15 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => {
           showAlert(
-            'Exit Task',
-            'Your progress will be saved. Continue?',
+            t('screens.taskExecution.exit_task'),
+            t('screens.taskExecution.progress_saved'),
             [
-              { text: 'Cancel', style: 'cancel' },
-              { text: 'Exit', onPress: () => navigation.goBack() }
+              { text: t('common.cancel'), style: 'cancel' },
+              { text: t('screens.taskExecution.exit'), onPress: () => navigation.goBack() }
             ]
           );
         }}>
-          <Text style={styles.backButton}>← Exit</Text>
+          <Text style={styles.backButton}>{t('screens.taskExecution.back_exit')}</Text>
         </TouchableOpacity>
         <View style={styles.timerBadge}>
           <ClockIcon size={16} color={colors.momentum} />
@@ -162,7 +162,7 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
             <View style={[styles.progressFill, { width: `${progress}%` }]} />
           </View>
           <Text style={styles.progressText}>
-            {completedSubtasks.length} of {task.subtasks?.length || 0} steps completed
+            {t('screens.taskExecution.steps_completed', { done: completedSubtasks.length, total: task.subtasks?.length || 0 })}
           </Text>
         </View>
 
@@ -210,7 +210,7 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
             <CameraIcon size={20} color={colors.slate700} />
             <Text style={styles.cardTitle}>{t('screens.taskExecution.photo_evidence')}</Text>
             {task.requiresProof && (
-              <Text style={styles.requiredBadge}>Required</Text>
+              <Text style={styles.requiredBadge}>{t('common.required')}</Text>
             )}
           </View>
 
@@ -265,11 +265,11 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
         <View style={styles.card}>
           <View style={styles.cardHeader}>
             <FileTextIcon size={20} color={colors.slate700} />
-            <Text style={styles.cardTitle}>Notes</Text>
+            <Text style={styles.cardTitle}>{t('screens.taskExecution.notes')}</Text>
           </View>
           <TextInput
             style={styles.notesInput}
-            placeholder="Add any additional notes or comments..."
+            placeholder={t('screens.taskExecution.notes_placeholder')}
             placeholderTextColor={colors.slate400}
             multiline
             numberOfLines={4}
@@ -282,17 +282,17 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
         <View style={styles.card}>
           <View style={styles.cardHeader}>
             <FileTextIcon size={20} color={colors.slate700} />
-            <Text style={styles.cardTitle}>Signature</Text>
+            <Text style={styles.cardTitle}>{t('screens.taskExecution.signature')}</Text>
           </View>
 
           {signature ? (
             <View style={styles.signatureBox}>
               <Text style={styles.signatureText}>{signature}</Text>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.clearSignatureButton}
                 onPress={() => setSignature('')}
               >
-                <Text style={styles.clearSignatureText}>Clear</Text>
+                <Text style={styles.clearSignatureText}>{t('common.clear')}</Text>
               </TouchableOpacity>
             </View>
           ) : (
@@ -321,19 +321,19 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Add Signature</Text>
+              <Text style={styles.modalTitle}>{t('screens.taskExecution.add_signature')}</Text>
               <TouchableOpacity onPress={() => setShowSignatureModal(false)}>
                 <XIcon size={24} color={colors.slate700} />
               </TouchableOpacity>
             </View>
 
             <View style={styles.modalBody}>
-              <Text style={styles.modalLabel}>Type your full name to sign</Text>
+              <Text style={styles.modalLabel}>{t('screens.taskExecution.type_name_to_sign')}</Text>
               <TextInput
                 style={styles.modalInput}
                 value={signatureInput}
                 onChangeText={setSignatureInput}
-                placeholder="Enter your full name"
+                placeholder={t('screens.taskExecution.enter_full_name')}
                 placeholderTextColor={colors.slate400}
                 autoFocus
               />
@@ -343,14 +343,14 @@ export const TaskExecutionScreen = ({ navigation, route }: any) => {
                   style={styles.modalCancelButton}
                   onPress={() => setShowSignatureModal(false)}
                 >
-                  <Text style={styles.modalCancelText}>Cancel</Text>
+                  <Text style={styles.modalCancelText}>{t('common.cancel')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[styles.modalConfirmButton, !signatureInput.trim() && styles.modalButtonDisabled]}
                   onPress={confirmSignature}
                   disabled={!signatureInput.trim()}
                 >
-                  <Text style={styles.modalConfirmText}>Sign</Text>
+                  <Text style={styles.modalConfirmText}>{t('screens.taskExecution.sign')}</Text>
                 </TouchableOpacity>
               </View>
             </View>

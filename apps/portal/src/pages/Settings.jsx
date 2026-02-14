@@ -388,7 +388,7 @@ function BrandingSettings({ organization, showMsg }) {
         });
       }
     } catch (error) {
-      console.debug('Failed to load branding');
+      // Silently fail - branding is optional
     } finally {
       setLoading(false);
     }

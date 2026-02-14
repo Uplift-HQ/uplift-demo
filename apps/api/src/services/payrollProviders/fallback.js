@@ -7,7 +7,7 @@
 import db from '../../lib/database.js';
 
 /**
- * Pre-built tax tables for countries JSP operates in
+ * Pre-built tax tables for supported countries
  * Tax Year 2025/26
  */
 const TAX_TABLES = {

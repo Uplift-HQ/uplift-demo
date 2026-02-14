@@ -54,7 +54,6 @@ export function BrandingProvider({ children }) {
       }
     } catch (error) {
       // Silently fail — use defaults
-      console.debug('Branding not available, using defaults');
     } finally {
       setLoading(false);
     }

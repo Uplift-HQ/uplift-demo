@@ -333,13 +333,29 @@ router.put('/payment-method', authMiddleware, async (req, res) => {
       return res.status(403).json({ error: 'Only admins can update payment methods' });
     }
 
-    // In production, this would create a Stripe setup intent
-    // const setupIntent = await stripe.setupIntents.create({ customer: customerId });
+    // In production, STRIPE_SECRET_KEY is required for payment method updates
+    if (process.env.NODE_ENV === 'production' && !process.env.STRIPE_SECRET_KEY) {
+      return res.status(503).json({
+        error: 'Payment method updates are not available. Please contact support.',
+        code: 'STRIPE_NOT_CONFIGURED'
+      });
+    }
 
-    res.json({
-      clientSecret: 'mock_client_secret',
-      message: 'In production, use this client secret with Stripe.js to collect payment method'
-    });
+    // In development/staging without Stripe configured, return mock response
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return res.json({
+        clientSecret: 'mock_client_secret_dev_only',
+        message: 'Development mode: Stripe not configured. In production, use this client secret with Stripe.js to collect payment method',
+        isDevelopment: true
+      });
+    }
+
+    // Production path: Use actual Stripe
+    // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+    // const setupIntent = await stripe.setupIntents.create({ customer: customerId });
+    // res.json({ clientSecret: setupIntent.client_secret });
+
+    res.status(501).json({ error: 'Stripe integration pending configuration' });
   } catch (error) {
     console.error('Update payment method error:', error);
     res.status(500).json({ error: 'Failed to update payment method' });

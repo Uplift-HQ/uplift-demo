@@ -96,7 +96,7 @@ export default function CorporateCards() {
       const result = await cardTransactionsApi.list(params);
       setTransactions(result.transactions || []);
     } catch (err) {
-      console.error('Failed to fetch transactions:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch transactions:', err);
       setError(t('corporateCards.errors.fetchTransactionsFailed', 'Failed to fetch transactions: {{message}}', { message: err.message }));
     }
   }, [statusFilter, dateFrom, dateTo, t]);
@@ -106,7 +106,7 @@ export default function CorporateCards() {
       const result = await expenseClaimsApi.list();
       setClaims(result.claims || []);
     } catch (err) {
-      console.error('Failed to fetch claims:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch claims:', err);
     }
   }, []);
 
@@ -119,7 +119,7 @@ export default function CorporateCards() {
       setPayrollClaims(claimsResult.claims || []);
       setPayrollExports(exportsResult.exports || []);
     } catch (err) {
-      console.error('Failed to fetch payroll data:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch payroll data:', err);
     }
   }, []);
 
@@ -132,7 +132,7 @@ export default function CorporateCards() {
       setCards(cardsResult.cards || []);
       setConnections(connectionsResult.connections || []);
     } catch (err) {
-      console.error('Failed to fetch cards:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch cards:', err);
     }
   }, []);
 
@@ -141,7 +141,7 @@ export default function CorporateCards() {
       const result = await expenseCategoriesApi.list();
       setCategories(result.categories || []);
     } catch (err) {
-      console.error('Failed to fetch categories:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch categories:', err);
     }
   }, []);
 
@@ -486,7 +486,8 @@ export default function CorporateCards() {
                       ) : (
                         <button
                           className="text-xs text-momentum-500 hover:text-momentum-600"
-                          onClick={() => {/* TODO: Upload receipt */}}
+                          onClick={() => setSelectedTransaction(tx)}
+                          title={t('corporateCards.uploadReceipt', 'Upload receipt')}
                         >
                           <Upload className="w-4 h-4 mx-auto" />
                         </button>

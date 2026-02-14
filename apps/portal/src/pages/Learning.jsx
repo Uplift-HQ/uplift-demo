@@ -221,7 +221,7 @@ function CatalogueTab({ t, onCreateCourse }) {
       const response = await learningApi.getCourses(params);
       setCourses(response.courses || []);
     } catch (err) {
-      console.error('Failed to fetch courses:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch courses:', err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -548,7 +548,7 @@ function PathsTab({ t }) {
       const response = await learningApi.getPaths();
       setPaths(response.paths || []);
     } catch (err) {
-      console.error('Failed to fetch paths:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch paths:', err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -713,7 +713,7 @@ function EnrollmentsTab({ t, onBulkEnroll }) {
       setEnrollments(enrollmentsRes.enrollments || []);
       setCourses(coursesRes.courses || []);
     } catch (err) {
-      console.error('Failed to fetch enrollments:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch enrollments:', err);
     } finally {
       setLoading(false);
     }
@@ -753,7 +753,7 @@ function EnrollmentsTab({ t, onBulkEnroll }) {
       await learningApi.sendReminder(enrollmentId);
       // Could add toast notification here
     } catch (err) {
-      console.error('Failed to send reminder:', err);
+      if (import.meta.env.DEV) console.error('Failed to send reminder:', err);
     } finally {
       setSendingReminder(null);
     }
@@ -949,7 +949,7 @@ function ComplianceTab({ t }) {
       const response = await learningApi.getTeamCompliance();
       setCompliance(response);
     } catch (err) {
-      console.error('Failed to fetch compliance:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch compliance:', err);
     } finally {
       setLoading(false);
     }
@@ -964,7 +964,7 @@ function ComplianceTab({ t }) {
       setSendingReminders(true);
       await learningApi.sendRemindersBulk();
     } catch (err) {
-      console.error('Failed to send reminders:', err);
+      if (import.meta.env.DEV) console.error('Failed to send reminders:', err);
     } finally {
       setSendingReminders(false);
     }
@@ -1120,7 +1120,7 @@ function MyLearningTab({ t, onBrowseCatalogue }) {
       setMyCourses(coursesRes.enrollments || []);
       setCertifications(certsRes.certifications || []);
     } catch (err) {
-      console.error('Failed to fetch my learning:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch my learning:', err);
     } finally {
       setLoading(false);
     }
@@ -1136,11 +1136,12 @@ function MyLearningTab({ t, onBrowseCatalogue }) {
       // Navigate to course detail or open course player
       // For now, we'll fetch course details
       const response = await learningApi.getCourse(enrollment.course_id);
-      // In production, this would open a course player modal or navigate to course page
-      console.log('Course details:', response.course);
-      // Could open modal with course content here
+      // Open course in new tab if external URL, otherwise show course content
+      if (response.course?.external_url) {
+        window.open(response.course.external_url, '_blank');
+      }
     } catch (err) {
-      console.error('Failed to launch course:', err);
+      if (import.meta.env.DEV) console.error('Failed to launch course:', err);
     } finally {
       setLaunchingCourse(null);
     }
@@ -1368,7 +1369,7 @@ function DashboardTab({ t }) {
       const response = await learningApi.getDashboard();
       setDashboard(response);
     } catch (err) {
-      console.error('Failed to fetch dashboard:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch dashboard:', err);
     } finally {
       setLoading(false);
     }
@@ -1671,7 +1672,7 @@ function CreatePathModal({ t, onClose, onCreated }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    learningApi.getCourses().then(res => setCourses(res.courses || [])).catch(console.error);
+    learningApi.getCourses().then(res => setCourses(res.courses || [])).catch(() => {});
   }, []);
 
   const update = (field, value) => setFormData({ ...formData, [field]: value });
@@ -1798,7 +1799,7 @@ function BulkEnrollModal({ t, onClose }) {
     ]).then(([coursesRes, employeesRes]) => {
       setCourses(coursesRes.courses || []);
       setEmployees(employeesRes.employees || []);
-    }).catch(console.error);
+    }).catch(() => {});
   }, []);
 
   const departments = [...new Set(employees.map(e => e.department).filter(Boolean))];

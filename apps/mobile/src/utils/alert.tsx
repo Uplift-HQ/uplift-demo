@@ -35,7 +35,7 @@ export function showAlert(title: string, message?: string, buttons?: AlertButton
     globalShowAlert(title, message, buttons);
   } else {
     // Fallback if provider not mounted yet - just log it
-    console.warn(`[Alert] ${title}: ${message || ''}`);
+    if (__DEV__) console.warn(`[Alert] ${title}: ${message || ''}`);
   }
 }
 

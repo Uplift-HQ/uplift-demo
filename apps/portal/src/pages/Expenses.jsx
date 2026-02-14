@@ -193,7 +193,7 @@ export default function Expenses() {
       setExpenses(result.expenses || []);
       setTotals(result.totals || {});
     } catch (err) {
-      console.error('Failed to load expenses:', err);
+      if (import.meta.env.DEV) console.error('Failed to load expenses:', err);
       setError(err.message || 'Failed to load expenses');
       // Fall back to demo data if API fails
       setExpenses(DEMO_EXPENSES);
@@ -226,23 +226,21 @@ export default function Expenses() {
 
   const handleApprove = async (id) => {
     try {
-      // For now, update local state optimistically
-      // TODO: Call API to approve expense
+      await api.put(`/expenses/${id}/approve`);
       setExpenses(prev => prev.map(e => e.id === id ? { ...e, status: 'approved' } : e));
       setSelectedExpense(null);
     } catch (err) {
-      console.error('Failed to approve expense:', err);
+      if (import.meta.env.DEV) console.error('Failed to approve expense:', err);
     }
   };
 
   const handleReject = async (id) => {
     try {
-      // For now, update local state optimistically
-      // TODO: Call API to reject expense
+      await api.put(`/expenses/${id}/reject`);
       setExpenses(prev => prev.map(e => e.id === id ? { ...e, status: 'rejected' } : e));
       setSelectedExpense(null);
     } catch (err) {
-      console.error('Failed to reject expense:', err);
+      if (import.meta.env.DEV) console.error('Failed to reject expense:', err);
     }
   };
 

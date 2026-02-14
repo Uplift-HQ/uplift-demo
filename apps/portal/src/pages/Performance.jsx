@@ -399,7 +399,7 @@ function CycleDetailView({ cycle, onBack, getStatusBadge, t }) {
         const res = await performanceApi.getCycle(cycle.id);
         setParticipants(res.participants || []);
       } catch (err) {
-        console.error('Failed to load cycle details:', err);
+        if (import.meta.env.DEV) console.error('Failed to load cycle details:', err);
       } finally {
         setLoading(false);
       }
@@ -511,7 +511,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
         const res = await performanceApi.getEmployees();
         setEmployees(res.employees || []);
       } catch (err) {
-        console.error('Failed to load employees:', err);
+        if (import.meta.env.DEV) console.error('Failed to load employees:', err);
       }
     }
     loadEmployees();
@@ -524,7 +524,7 @@ function CreateCycleModal({ onClose, onCreated, t }) {
       await performanceApi.createCycle(formData);
       onCreated();
     } catch (err) {
-      console.error('Failed to create cycle:', err);
+      if (import.meta.env.DEV) console.error('Failed to create cycle:', err);
     } finally {
       setLoading(false);
     }
@@ -862,7 +862,7 @@ function CreateGoalModal({ isOkr, onClose, onCreated, t }) {
       }
       onCreated();
     } catch (err) {
-      console.error('Failed to create:', err);
+      if (import.meta.env.DEV) console.error('Failed to create:', err);
     } finally {
       setLoading(false);
     }
@@ -1191,7 +1191,7 @@ function MeetingDetailView({ meeting, onBack, t }) {
     try {
       await performanceApi.updateOneOnOne(meeting.id, { notes });
     } catch (err) {
-      console.error('Failed to save notes:', err);
+      if (import.meta.env.DEV) console.error('Failed to save notes:', err);
     } finally {
       setSaving(false);
     }
@@ -1264,7 +1264,7 @@ function MeetingDetailView({ meeting, onBack, t }) {
                       try {
                         await performanceApi.updateOneOnOneAction(meeting.id, item.id, { is_completed: !item.is_completed });
                       } catch (err) {
-                        console.error('Failed to update action:', err);
+                        if (import.meta.env.DEV) console.error('Failed to update action:', err);
                       }
                     }}
                     className="w-5 h-5 rounded border-slate-300"
@@ -1297,7 +1297,7 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
         const res = await performanceApi.getEmployees();
         setEmployees(res.employees || []);
       } catch (err) {
-        console.error('Failed to load employees:', err);
+        if (import.meta.env.DEV) console.error('Failed to load employees:', err);
       }
     }
     loadEmployees();
@@ -1313,7 +1313,7 @@ function CreateMeetingModal({ onClose, onCreated, t }) {
       });
       onCreated();
     } catch (err) {
-      console.error('Failed to create meeting:', err);
+      if (import.meta.env.DEV) console.error('Failed to create meeting:', err);
     } finally {
       setLoading(false);
     }
@@ -1429,7 +1429,7 @@ function FeedbackTab({ t, isManager }) {
       await performanceApi.reactToFeedback(feedbackId, reaction);
       fetchFeedback();
     } catch (err) {
-      console.error('Failed to react:', err);
+      if (import.meta.env.DEV) console.error('Failed to react:', err);
     }
   };
 
@@ -1579,7 +1579,7 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
         const res = await performanceApi.getEmployees();
         setEmployees(res.employees || []);
       } catch (err) {
-        console.error('Failed to load employees:', err);
+        if (import.meta.env.DEV) console.error('Failed to load employees:', err);
       }
     }
     loadEmployees();
@@ -1592,7 +1592,7 @@ function GiveFeedbackModal({ onClose, onGiven, t }) {
       await performanceApi.giveFeedback(formData);
       onGiven();
     } catch (err) {
-      console.error('Failed to give feedback:', err);
+      if (import.meta.env.DEV) console.error('Failed to give feedback:', err);
     } finally {
       setLoading(false);
     }
@@ -1709,7 +1709,7 @@ function DevelopmentPlansTab({ t, isManager }) {
       await performanceApi.updateDevelopmentAction(planId, actionId, { status });
       fetchPlans();
     } catch (err) {
-      console.error('Failed to update action:', err);
+      if (import.meta.env.DEV) console.error('Failed to update action:', err);
     }
   };
 
@@ -1863,7 +1863,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
         const res = await performanceApi.getEmployees();
         setEmployees(res.employees || []);
       } catch (err) {
-        console.error('Failed to load employees:', err);
+        if (import.meta.env.DEV) console.error('Failed to load employees:', err);
       }
     }
     loadEmployees();
@@ -1889,7 +1889,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
       await performanceApi.createDevelopmentPlan(formData);
       onCreated();
     } catch (err) {
-      console.error('Failed to create plan:', err);
+      if (import.meta.env.DEV) console.error('Failed to create plan:', err);
     } finally {
       setLoading(false);
     }

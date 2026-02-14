@@ -1,750 +1,412 @@
 import React, { useState, useEffect, createContext, useContext, useCallback } from 'react';
 import { Routes, Route, Navigate, Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { LayoutDashboard, Building2, CreditCard, Activity, LogOut, AlertTriangle, CheckCircle, XCircle, Clock, Users, TrendingUp, DollarSign, Calendar, Search, Edit, Plus, RefreshCw, ExternalLink, Eye, Key, Copy, X, ChevronRight, Settings, Shield, Zap, Crown, ArrowLeft, MapPin, ToggleLeft, UserCog, Lock, Smartphone, FileText, ChevronDown, Trash2, RotateCcw, UserX, UserCheck, History } from 'lucide-react';
+import {
+  LayoutDashboard, Building2, CreditCard, Activity, LogOut, Users, Key,
+  Settings, Shield, FileText, ChevronDown, Menu, X, Loader2, AlertTriangle,
+  TrendingUp, Calendar, Plus, Search, Edit, Copy, ExternalLink, ArrowLeft,
+  CheckCircle, XCircle, Info, RefreshCw, Download, Filter, Trash2
+} from 'lucide-react';
 import { apiFetch } from './api.js';
 
-// ==================== CURRENCY ====================
+// ==================== TOAST CONTEXT ====================
 
-const CURRENCIES = {
-  GBP: { symbol: '£', code: 'GBP', locale: 'en-GB' },
-  USD: { symbol: '$', code: 'USD', locale: 'en-US' },
-  EUR: { symbol: '€', code: 'EUR', locale: 'de-DE' },
-  CAD: { symbol: 'CA$', code: 'CAD', locale: 'en-CA' },
-  AUD: { symbol: 'A$', code: 'AUD', locale: 'en-AU' },
-  JPY: { symbol: '¥', code: 'JPY', locale: 'ja-JP', decimals: 0 },
-  CHF: { symbol: 'CHF', code: 'CHF', locale: 'de-CH' },
-  SEK: { symbol: 'kr', code: 'SEK', locale: 'sv-SE' },
-  NOK: { symbol: 'kr', code: 'NOK', locale: 'nb-NO' },
-  DKK: { symbol: 'kr', code: 'DKK', locale: 'da-DK' },
-  SGD: { symbol: 'S$', code: 'SGD', locale: 'en-SG' },
-  NZD: { symbol: 'NZ$', code: 'NZD', locale: 'en-NZ' },
-  BRL: { symbol: 'R$', code: 'BRL', locale: 'pt-BR' },
-  INR: { symbol: '₹', code: 'INR', locale: 'en-IN' },
-  ZAR: { symbol: 'R', code: 'ZAR', locale: 'en-ZA' },
-  MXN: { symbol: 'MX$', code: 'MXN', locale: 'es-MX' },
-  AED: { symbol: 'د.إ', code: 'AED', locale: 'ar-AE' },
-  PLN: { symbol: 'zł', code: 'PLN', locale: 'pl-PL' },
-  RON: { symbol: 'lei', code: 'RON', locale: 'ro-RO' },
-};
+const ToastContext = createContext(null);
 
-const CurrencyContext = createContext({ currency: 'GBP', rates: {}, setCurrency: () => {} });
-function useCurrency() { return useContext(CurrencyContext); }
+export function useToast() {
+  return useContext(ToastContext);
+}
 
-function CurrencyProvider({ children }) {
-  const [currency, setCurrency] = useState(() => localStorage.getItem('ops_currency') || 'GBP');
-  const [rates, setRates] = useState({});
+function ToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
 
-  useEffect(() => {
-    localStorage.setItem('ops_currency', currency);
-  }, [currency]);
-
-  // Only fetch fx-rates when authenticated
-  useEffect(() => {
-    const token = localStorage.getItem('ops_token');
-    if (!token) return; // Don't fetch if not logged in
-
-    apiFetch('/api/ops/fx-rates').then(data => setRates(data.rates || {})).catch(() => {});
+  const addToast = useCallback((message, type = 'info', duration = 4000) => {
+    const id = Date.now();
+    setToasts(prev => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, duration);
   }, []);
 
-  return <CurrencyContext.Provider value={{ currency, setCurrency, rates }}>{children}</CurrencyContext.Provider>;
-}
+  const toast = {
+    success: (msg) => addToast(msg, 'success'),
+    error: (msg) => addToast(msg, 'error'),
+    info: (msg) => addToast(msg, 'info'),
+    warning: (msg) => addToast(msg, 'warning'),
+  };
 
-/** Format amount in minor units (pence/cents) to display currency. sourceCurrency defaults to GBP (backend stores in pence). */
-function formatMoney(amountMinor, { currency = 'GBP', rates = {}, sourceCurrency = 'GBP', decimals } = {}) {
-  const cur = CURRENCIES[currency] || CURRENCIES.GBP;
-  const dec = decimals ?? cur.decimals ?? 2;
-  let amount = (amountMinor || 0) / (cur.decimals === 0 ? 1 : 100);
-
-  // Convert if display currency differs from source
-  if (currency !== sourceCurrency && rates[currency] && rates[sourceCurrency]) {
-    amount = amount * (rates[currency] / rates[sourceCurrency]);
-  } else if (currency !== sourceCurrency && rates[currency]) {
-    // rates keyed relative to GBP
-    amount = amount * rates[currency];
-  }
-
-  return new Intl.NumberFormat(cur.locale, {
-    style: 'currency',
-    currency: cur.code,
-    minimumFractionDigits: dec,
-    maximumFractionDigits: dec,
-  }).format(amount);
-}
-
-function CurrencySelector() {
-  const { currency, setCurrency } = useCurrency();
   return (
-    <select value={currency} onChange={e => setCurrency(e.target.value)}
-      className="bg-slate-800 text-slate-300 border border-slate-700 rounded px-2 py-1 text-sm focus:ring-orange-500">
-      {Object.keys(CURRENCIES).map(c => (
-        <option key={c} value={c}>{CURRENCIES[c].symbol} {c}</option>
-      ))}
-    </select>
+    <ToastContext.Provider value={toast}>
+      {children}
+      <ToastContainer toasts={toasts} onDismiss={(id) => setToasts(prev => prev.filter(t => t.id !== id))} />
+    </ToastContext.Provider>
   );
 }
 
-// ==================== AUTH ====================
+function ToastContainer({ toasts, onDismiss }) {
+  if (toasts.length === 0) return null;
+
+  const icons = {
+    success: <CheckCircle className="w-5 h-5 text-green-400" />,
+    error: <XCircle className="w-5 h-5 text-red-400" />,
+    warning: <AlertTriangle className="w-5 h-5 text-amber-400" />,
+    info: <Info className="w-5 h-5 text-blue-400" />,
+  };
+
+  const styles = {
+    success: 'border-green-500/50 bg-green-500/10',
+    error: 'border-red-500/50 bg-red-500/10',
+    warning: 'border-amber-500/50 bg-amber-500/10',
+    info: 'border-blue-500/50 bg-blue-500/10',
+  };
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50 space-y-2 max-w-sm">
+      {toasts.map(toast => (
+        <div
+          key={toast.id}
+          className={`flex items-center gap-3 px-4 py-3 rounded-lg border shadow-lg backdrop-blur-sm ${styles[toast.type] || styles.info}`}
+        >
+          {icons[toast.type] || icons.info}
+          <span className="text-white text-sm flex-1">{toast.message}</span>
+          <button onClick={() => onDismiss(toast.id)} className="text-slate-400 hover:text-white">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ==================== AUTH CONTEXT ====================
 
 const AuthContext = createContext(null);
-export function useAuth() { return useContext(AuthContext); }
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [forcePasswordChange, setForcePasswordChange] = useState(false);
-
-  const refreshUser = async () => {
-    try {
-      const data = await apiFetch('/api/ops/auth/me');
-      setUser(data.user);
-      setForcePasswordChange(data.user?.forcePasswordChange || false);
-    } catch {
-      localStorage.removeItem('ops_token');
-      setUser(null);
-    }
-  };
 
   useEffect(() => {
     const token = localStorage.getItem('ops_token');
-    if (token) {
-      refreshUser().finally(() => setLoading(false));
-    } else {
+    if (!token) {
       setLoading(false);
+      return;
     }
+
+    apiFetch('/api/ops/auth/me')
+      .then(data => {
+        setUser(data.user);
+        setLoading(false);
+      })
+      .catch(() => {
+        localStorage.removeItem('ops_token');
+        setLoading(false);
+      });
   }, []);
 
-  const login = async (email, password, mfaCode = null) => {
-    const API_BASE = import.meta.env.VITE_API_URL || '';
-    const body = { email, password };
-    if (mfaCode) body.mfaCode = mfaCode;
-
-    const res = await fetch(`${API_BASE}/api/ops/auth/login`, {
+  const login = async (email, password, mfaToken) => {
+    const data = await apiFetch('/api/ops/auth/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: { email, password, mfaToken },
     });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      // Check for specific error types
-      if (data.requiresMfa) {
-        return { requiresMfa: true };
-      }
-      throw new Error(data.error || 'Invalid credentials');
+    if (data.requireMfa) {
+      return { requireMfa: true };
     }
 
     localStorage.setItem('ops_token', data.token);
     setUser(data.user);
-    setForcePasswordChange(data.user?.forcePasswordChange || false);
-    return { success: true, forcePasswordChange: data.user?.forcePasswordChange };
+    return { success: true, user: data.user };
   };
 
   const logout = async () => {
     try {
       await apiFetch('/api/ops/auth/logout', { method: 'POST' });
-    } catch { /* ignore */ }
+    } catch (e) {
+      // Ignore logout errors
+    }
     localStorage.removeItem('ops_token');
     setUser(null);
   };
 
   const hasPermission = (permission) => {
-    if (!user?.permissions) return false;
-    return user.permissions.includes(permission);
+    if (!user) return false;
+    if (user.role === 'super_admin') return true;
+    return user.permissions?.includes(permission);
   };
-
-  const hasRole = (roles) => {
-    if (!user?.role) return false;
-    if (typeof roles === 'string') return user.role === roles;
-    return roles.includes(user.role);
-  };
-
-  if (loading) return <div className="min-h-screen flex items-center justify-center text-slate-500">Loading...</div>;
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      login,
-      logout,
-      refreshUser,
-      hasPermission,
-      hasRole,
-      forcePasswordChange,
-      setForcePasswordChange
-    }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, hasPermission }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// ==================== MY ACCOUNT DROPDOWN ====================
-
-function MyAccountDropdown() {
-  const { user, logout, hasRole } = useAuth();
-  const [open, setOpen] = useState(false);
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [showMfaModal, setShowMfaModal] = useState(false);
-  const [showSessionsModal, setShowSessionsModal] = useState(false);
-  const dropdownRef = React.useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const roleColors = {
-    super_admin: 'bg-purple-600',
-    admin: 'bg-blue-600',
-    support: 'bg-green-600',
-    billing_viewer: 'bg-amber-600',
-    read_only: 'bg-slate-600'
-  };
-
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-slate-800 transition-colors">
-        <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white font-medium text-sm">
-          {user?.firstName?.[0]}{user?.lastName?.[0]}
-        </div>
-        <div className="text-left hidden sm:block">
-          <p className="text-sm text-white font-medium">{user?.name || `${user?.firstName} ${user?.lastName}`}</p>
-          <p className="text-xs text-slate-400">{user?.email}</p>
-        </div>
-        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
-
-      {open && (
-        <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50">
-          <div className="px-4 py-3 border-b border-slate-100">
-            <p className="font-medium text-slate-900">{user?.name || `${user?.firstName} ${user?.lastName}`}</p>
-            <p className="text-sm text-slate-500">{user?.email}</p>
-            <span className={`mt-2 inline-block px-2 py-0.5 rounded text-xs text-white ${roleColors[user?.role] || 'bg-slate-600'}`}>
-              {user?.role?.replace('_', ' ')}
-            </span>
-          </div>
-
-          <div className="py-1">
-            <button onClick={() => { setShowPasswordModal(true); setOpen(false); }}
-              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
-              <Lock className="w-4 h-4 text-slate-400" /> Change Password
-            </button>
-            <button onClick={() => { setShowMfaModal(true); setOpen(false); }}
-              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
-              <Smartphone className="w-4 h-4 text-slate-400" />
-              {user?.mfaEnabled ? 'Manage MFA' : 'Enable MFA'}
-            </button>
-            <button onClick={() => { setShowSessionsModal(true); setOpen(false); }}
-              className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
-              <History className="w-4 h-4 text-slate-400" /> Active Sessions
-            </button>
-          </div>
-
-          <div className="border-t border-slate-100 pt-1">
-            <button onClick={logout}
-              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3">
-              <LogOut className="w-4 h-4" /> Sign Out
-            </button>
-          </div>
-        </div>
-      )}
-
-      {showPasswordModal && <ChangePasswordModal onClose={() => setShowPasswordModal(false)} />}
-      {showMfaModal && <MfaModal onClose={() => setShowMfaModal(false)} />}
-      {showSessionsModal && <SessionsModal onClose={() => setShowSessionsModal(false)} />}
-    </div>
-  );
-}
-
-function ChangePasswordModal({ onClose }) {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
-  const { setForcePasswordChange } = useAuth();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    setLoading(true);
-    setError('');
-    try {
-      await apiFetch('/api/ops/auth/change-password', {
-        method: 'POST',
-        body: { currentPassword, newPassword }
-      });
-      setSuccess(true);
-      setForcePasswordChange(false);
-      setTimeout(onClose, 1500);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <Modal title="Change Password" onClose={onClose}>
-      {success ? (
-        <div className="text-center py-4">
-          <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
-          <p className="text-green-700 font-medium">Password changed successfully!</p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-          <FormField label="Current Password">
-            <input type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)}
-              className={inputClass} required />
-          </FormField>
-          <FormField label="New Password">
-            <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
-              className={inputClass} required minLength={12} />
-            <p className="text-xs text-slate-500 mt-1">Min 12 chars with upper, lower, number, and special character</p>
-          </FormField>
-          <FormField label="Confirm New Password">
-            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
-              className={inputClass} required />
-          </FormField>
-          <div className="flex gap-3 pt-2">
-            <button type="submit" disabled={loading} className={btnPrimary}>
-              {loading ? 'Changing...' : 'Change Password'}
-            </button>
-            <button type="button" onClick={onClose} className={btnSecondary}>Cancel</button>
-          </div>
-        </form>
-      )}
-    </Modal>
-  );
-}
-
-function MfaModal({ onClose }) {
-  const { user, refreshUser } = useAuth();
-  const [step, setStep] = useState(user?.mfaEnabled ? 'manage' : 'setup');
-  const [qrCode, setQrCode] = useState('');
-  const [secret, setSecret] = useState('');
-  const [code, setCode] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const setupMfa = async () => {
-    setLoading(true);
-    try {
-      const data = await apiFetch('/api/ops/auth/setup-mfa', { method: 'POST' });
-      setQrCode(data.qrCode);
-      setSecret(data.secret);
-      setStep('verify');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const verifyMfa = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    try {
-      await apiFetch('/api/ops/auth/verify-mfa', { method: 'POST', body: { code } });
-      await refreshUser();
-      setStep('success');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const disableMfa = async () => {
-    if (!confirm('Are you sure you want to disable MFA? This will make your account less secure.')) return;
-    setLoading(true);
-    try {
-      await apiFetch('/api/ops/auth/disable-mfa', { method: 'POST' });
-      await refreshUser();
-      onClose();
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <Modal title="Multi-Factor Authentication" onClose={onClose}>
-      {step === 'manage' && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg">
-            <CheckCircle className="w-6 h-6 text-green-600" />
-            <div>
-              <p className="font-medium text-green-800">MFA is enabled</p>
-              <p className="text-sm text-green-600">Your account is protected with 2FA</p>
-            </div>
-          </div>
-          <button onClick={disableMfa} disabled={loading} className={btnDanger}>
-            {loading ? 'Disabling...' : 'Disable MFA'}
-          </button>
-        </div>
-      )}
-
-      {step === 'setup' && (
-        <div className="space-y-4">
-          <p className="text-slate-600">Secure your account with multi-factor authentication using an authenticator app.</p>
-          <button onClick={setupMfa} disabled={loading} className={btnPrimary}>
-            {loading ? 'Setting up...' : 'Set Up MFA'}
-          </button>
-        </div>
-      )}
-
-      {step === 'verify' && (
-        <form onSubmit={verifyMfa} className="space-y-4">
-          {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-          <div className="text-center">
-            <p className="text-sm text-slate-600 mb-4">Scan this QR code with your authenticator app:</p>
-            {qrCode && <img src={qrCode} alt="MFA QR Code" className="mx-auto border rounded-lg" />}
-            <p className="text-xs text-slate-500 mt-2">Or enter manually: <code className="bg-slate-100 px-2 py-1 rounded">{secret}</code></p>
-          </div>
-          <FormField label="Enter Code from App">
-            <input type="text" value={code} onChange={e => setCode(e.target.value)}
-              className={inputClass} placeholder="000000" maxLength={6} required />
-          </FormField>
-          <button type="submit" disabled={loading} className={btnPrimary}>
-            {loading ? 'Verifying...' : 'Verify & Enable'}
-          </button>
-        </form>
-      )}
-
-      {step === 'success' && (
-        <div className="text-center py-4">
-          <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
-          <p className="text-green-700 font-medium">MFA enabled successfully!</p>
-          <button onClick={onClose} className={`${btnPrimary} mt-4`}>Done</button>
-        </div>
-      )}
-    </Modal>
-  );
-}
-
-function SessionsModal({ onClose }) {
-  const [sessions, setSessions] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    apiFetch('/api/ops/sessions').then(data => setSessions(data.sessions || []))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const revokeSession = async (id) => {
-    try {
-      await apiFetch(`/api/ops/sessions/${id}`, { method: 'DELETE' });
-      setSessions(sessions.filter(s => s.id !== id));
-    } catch { /* ignore */ }
-  };
-
-  const revokeAll = async () => {
-    if (!confirm('Revoke all other sessions? You will remain logged in.')) return;
-    try {
-      await apiFetch('/api/ops/sessions', { method: 'DELETE' });
-      setSessions(sessions.filter(s => s.isCurrent));
-    } catch { /* ignore */ }
-  };
-
-  return (
-    <Modal title="Active Sessions" onClose={onClose} wide>
-      {loading ? (
-        <p className="text-slate-500">Loading sessions...</p>
-      ) : (
-        <div className="space-y-4">
-          <div className="flex justify-end">
-            <button onClick={revokeAll} className={btnSecondary}>Revoke All Others</button>
-          </div>
-          <div className="space-y-2">
-            {sessions.map(s => (
-              <div key={s.id} className={`p-4 rounded-lg border ${s.isCurrent ? 'border-orange-300 bg-orange-50' : 'border-slate-200'}`}>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-medium text-slate-900">
-                      {s.isCurrent && <span className="text-orange-600">(Current) </span>}
-                      {s.deviceInfo?.browser || 'Unknown browser'}
-                    </p>
-                    <p className="text-sm text-slate-500">{s.ipAddress} • {new Date(s.lastActiveAt).toLocaleString()}</p>
-                  </div>
-                  {!s.isCurrent && (
-                    <button onClick={() => revokeSession(s.id)} className="text-red-600 hover:text-red-800">
-                      <XCircle className="w-5 h-5" />
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </Modal>
-  );
-}
-
-// ==================== LAYOUT ====================
-
-function Layout({ children }) {
-  const { user, logout, hasRole, hasPermission } = useAuth();
-  const location = useLocation();
-
-  const baseNavItems = [
-    { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/onboard', label: 'Onboarding', icon: Plus, permission: 'onboard' },
-    { path: '/customers', label: 'Customers', icon: Building2, permission: 'customers.view' },
-    { path: '/licenses', label: 'Licenses', icon: Key, permission: 'licenses.view' },
-    { path: '/features', label: 'Features', icon: ToggleLeft, permission: 'features.view' },
-    { path: '/billing', label: 'Billing', icon: CreditCard, permission: 'billing.view' },
-    { path: '/activity', label: 'Activity', icon: Activity, permission: 'activity.view' },
-  ];
-
-  // Role-based nav items
-  const adminNavItems = [
-    { path: '/users', label: 'Users', icon: UserCog, roles: ['super_admin'] },
-    { path: '/audit', label: 'Audit Log', icon: FileText, roles: ['super_admin', 'admin'] },
-  ];
-
-  const navItems = [
-    ...baseNavItems.filter(item => !item.permission || hasPermission(item.permission)),
-    ...adminNavItems.filter(item => hasRole(item.roles)),
-  ];
-
-  const isActive = (path) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
-
-  return (
-    <div className="min-h-screen bg-slate-100">
-      <header className="bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <h1 className="text-xl font-bold text-orange-500">Uplift Ops</h1>
-            <nav className="flex gap-1">
-              {navItems.map(item => {
-                const Icon = item.icon;
-                return (
-                  <Link key={item.path} to={item.path}
-                    className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm ${isActive(item.path) ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-800'}`}>
-                    <Icon className="w-4 h-4" />{item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
-          <div className="flex items-center gap-4">
-            <CurrencySelector />
-            <MyAccountDropdown />
-          </div>
-        </div>
-      </header>
-      <main className="max-w-7xl mx-auto px-4 py-8">{children}</main>
-    </div>
-  );
-}
-
-// ==================== SHARED COMPONENTS ====================
-
-function MetricCard({ label, value, color, icon: Icon }) {
-  const colors = { green: 'bg-emerald-50 text-emerald-700', blue: 'bg-blue-50 text-blue-700', purple: 'bg-purple-50 text-purple-700', orange: 'bg-orange-50 text-orange-700', red: 'bg-red-50 text-red-700' };
-  return (
-    <div className={`rounded-xl p-6 ${colors[color]}`}>
-      <div className="flex items-center justify-between">
-        <p className="text-sm opacity-80">{label}</p>
-        {Icon && <Icon className="w-5 h-5 opacity-60" />}
-      </div>
-      <p className="text-3xl font-bold mt-1">{value}</p>
-    </div>
-  );
-}
-
-function StatusBadge({ status }) {
-  const styles = { active: 'bg-green-100 text-green-800', trialing: 'bg-blue-100 text-blue-800', past_due: 'bg-red-100 text-red-800', canceled: 'bg-slate-100 text-slate-600', paid: 'bg-green-100 text-green-800', open: 'bg-amber-100 text-amber-800', void: 'bg-slate-100 text-slate-500', expired: 'bg-red-100 text-red-800', suspended: 'bg-amber-100 text-amber-800', revoked: 'bg-red-100 text-red-800' };
-  return <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${styles[status] || 'bg-slate-100 text-slate-600'}`}>{status || 'none'}</span>;
-}
-
-function HealthBadge({ score, risk }) {
-  if (!score) return <span className="text-slate-400">-</span>;
-  const colors = { low: 'text-green-600', medium: 'text-amber-600', high: 'text-red-600' };
-  return <span className={colors[risk] || 'text-slate-600'}>{score}/100</span>;
-}
-
-function Modal({ title, onClose, children, wide }) {
-  return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className={`bg-white rounded-xl shadow-xl ${wide ? 'max-w-2xl' : 'max-w-md'} w-full max-h-[90vh] overflow-auto`} onClick={e => e.stopPropagation()}>
-        <div className="flex items-center justify-between p-6 border-b border-slate-100">
-          <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600"><X className="w-5 h-5" /></button>
-        </div>
-        <div className="p-6">{children}</div>
-      </div>
-    </div>
-  );
-}
-
-function FormField({ label, children }) {
-  return <div><label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>{children}</div>;
-}
-
-const inputClass = "w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm";
-const btnPrimary = "px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 font-medium text-sm disabled:opacity-50";
-const btnSecondary = "px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 font-medium text-sm";
-const btnDanger = "px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium text-sm disabled:opacity-50";
-
-// ==================== LOGIN ====================
+// ==================== LOGIN PAGE ====================
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [mfaCode, setMfaCode] = useState('');
-  const [step, setStep] = useState('credentials'); // credentials, mfa
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [mfaToken, setMfaToken] = useState('');
+  const [showMfa, setShowMfa] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
+    setLoading(true);
 
     try {
-      const result = await login(email, password, step === 'mfa' ? mfaCode : null);
+      const result = await login(email, password, showMfa ? mfaToken : undefined);
 
-      if (result.requiresMfa) {
-        setStep('mfa');
+      if (result.requireMfa) {
+        setShowMfa(true);
         setLoading(false);
         return;
       }
 
-      // Navigate to password change if required, otherwise dashboard
-      if (result.forcePasswordChange) {
+      if (result.user?.forcePasswordChange) {
         navigate('/change-password');
       } else {
         navigate('/');
       }
     } catch (err) {
-      setError(err.message || 'Invalid credentials');
-    } finally {
+      setError(err.message || 'Login failed');
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-      <div className="bg-white rounded-xl p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">Uplift Ops Portal</h1>
-        <p className="text-slate-500 mb-6">Internal operations dashboard</p>
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <div className="bg-slate-800 rounded-lg shadow-xl p-8">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold text-white">Uplift Ops</h1>
+            <p className="text-slate-400 mt-2">Internal Admin Portal</p>
+          </div>
 
-        {step === 'credentials' ? (
           <form onSubmit={handleSubmit} className="space-y-4">
-            {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-            <FormField label="Email">
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} required />
-            </FormField>
-            <FormField label="Password">
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} className={inputClass} required />
-            </FormField>
-            <button type="submit" disabled={loading} className={`w-full ${btnPrimary}`}>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="you@uplifthq.co.uk"
+                required
+                disabled={loading}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter your password"
+                required
+                disabled={loading}
+              />
+            </div>
+
+            {showMfa && (
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">MFA Code</label>
+                <input
+                  type="text"
+                  value={mfaToken}
+                  onChange={(e) => setMfaToken(e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  placeholder="Enter 6-digit code"
+                  maxLength={6}
+                  disabled={loading}
+                />
+              </div>
+            )}
+
+            {error && (
+              <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-orange-600 hover:bg-orange-700 disabled:bg-orange-600/50 text-white font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-            <div className="text-center mb-4">
-              <Smartphone className="w-12 h-12 text-orange-500 mx-auto mb-2" />
-              <p className="text-slate-600">Enter the code from your authenticator app</p>
-            </div>
-            <FormField label="MFA Code">
-              <input type="text" value={mfaCode} onChange={e => setMfaCode(e.target.value)}
-                className={inputClass} placeholder="000000" maxLength={6} required autoFocus />
-            </FormField>
-            <button type="submit" disabled={loading} className={`w-full ${btnPrimary}`}>
-              {loading ? 'Verifying...' : 'Verify'}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ==================== SIDEBAR ====================
+
+const NAV_ITEMS = [
+  { path: '/', label: 'Dashboard', icon: LayoutDashboard, permission: null },
+  { path: '/onboarding', label: 'Onboarding', icon: Settings, permission: 'onboard' },
+  { path: '/customers', label: 'Customers', icon: Building2, permission: 'customers.view' },
+  { path: '/licenses', label: 'Licenses', icon: Key, permission: 'licenses.view' },
+  { path: '/features', label: 'Features', icon: Shield, permission: 'features.view' },
+  { path: '/billing', label: 'Billing', icon: CreditCard, permission: 'billing.view' },
+  { path: '/activity', label: 'Activity', icon: Activity, permission: 'activity.view' },
+  { path: '/audit', label: 'Audit', icon: FileText, permission: 'audit.view', roles: ['super_admin', 'admin'] },
+  { path: '/users', label: 'Users', icon: Users, permission: 'users.view', roles: ['super_admin'] },
+];
+
+function Sidebar({ collapsed, onToggle }) {
+  const location = useLocation();
+  const { user, logout, hasPermission } = useAuth();
+  const navigate = useNavigate();
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
+  const visibleItems = NAV_ITEMS.filter(item => {
+    if (item.roles && !item.roles.includes(user?.role)) return false;
+    if (item.permission && !hasPermission(item.permission)) return false;
+    return true;
+  });
+
+  return (
+    <div className={`bg-slate-800 border-r border-slate-700 flex flex-col h-screen ${collapsed ? 'w-16' : 'w-64'} transition-all duration-200`}>
+      {/* Header */}
+      <div className="p-4 border-b border-slate-700 flex items-center justify-between">
+        {!collapsed && <span className="text-xl font-bold text-white">Uplift Ops</span>}
+        <button onClick={onToggle} className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-700">
+          {collapsed ? <Menu className="w-5 h-5" /> : <X className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
+        {visibleItems.map(item => {
+          const isActive = location.pathname === item.path ||
+            (item.path !== '/' && location.pathname.startsWith(item.path));
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                isActive
+                  ? 'bg-orange-600 text-white'
+                  : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+              }`}
+            >
+              <item.icon className="w-5 h-5 flex-shrink-0" />
+              {!collapsed && <span>{item.label}</span>}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* User Menu */}
+      <div className="p-2 border-t border-slate-700 relative">
+        <button
+          onClick={() => setShowUserMenu(!showUserMenu)}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+        >
+          <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-medium">
+            {user?.firstName?.[0] || user?.email?.[0]?.toUpperCase() || 'U'}
+          </div>
+          {!collapsed && (
+            <>
+              <div className="flex-1 text-left">
+                <div className="text-sm font-medium text-white truncate">
+                  {user?.name || user?.email}
+                </div>
+                <div className="text-xs text-slate-400 capitalize">{user?.role?.replace('_', ' ')}</div>
+              </div>
+              <ChevronDown className="w-4 h-4" />
+            </>
+          )}
+        </button>
+
+        {showUserMenu && (
+          <div className="absolute bottom-full left-2 right-2 mb-1 bg-slate-700 rounded-lg shadow-lg border border-slate-600 py-1">
+            <Link
+              to="/account"
+              onClick={() => setShowUserMenu(false)}
+              className="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-600 hover:text-white"
+            >
+              My Account
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-slate-600 flex items-center gap-2"
+            >
+              <LogOut className="w-4 h-4" />
+              Logout
             </button>
-            <button type="button" onClick={() => { setStep('credentials'); setError(''); }}
-              className="w-full text-sm text-slate-500 hover:text-slate-700">
-              Back to login
-            </button>
-          </form>
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-function ForcePasswordChangePage() {
-  const { user, logout, setForcePasswordChange } = useAuth();
-  const navigate = useNavigate();
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+// ==================== LAYOUT ====================
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    setLoading(true);
-    setError('');
-    try {
-      await apiFetch('/api/ops/auth/change-password', {
-        method: 'POST',
-        body: { currentPassword, newPassword }
-      });
-      setForcePasswordChange(false);
-      navigate('/');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+function AppLayout({ children }) {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-      <div className="bg-white rounded-xl p-8 w-full max-w-md">
-        <div className="text-center mb-6">
-          <Lock className="w-12 h-12 text-orange-500 mx-auto mb-2" />
-          <h1 className="text-2xl font-bold text-slate-900">Password Change Required</h1>
-          <p className="text-slate-500">Please set a new password to continue</p>
-        </div>
+    <div className="flex h-screen bg-slate-900">
+      <Sidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
+      <main className="flex-1 overflow-auto">
+        {children}
+      </main>
+    </div>
+  );
+}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-          <FormField label="Current Password">
-            <input type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)}
-              className={inputClass} required />
-          </FormField>
-          <FormField label="New Password">
-            <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
-              className={inputClass} required minLength={12} />
-            <p className="text-xs text-slate-500 mt-1">Min 12 chars with upper, lower, number, and special character</p>
-          </FormField>
-          <FormField label="Confirm New Password">
-            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
-              className={inputClass} required />
-          </FormField>
-          <button type="submit" disabled={loading} className={`w-full ${btnPrimary}`}>
-            {loading ? 'Changing...' : 'Set New Password'}
-          </button>
-          <button type="button" onClick={logout}
-            className="w-full text-sm text-slate-500 hover:text-slate-700">
-            Sign out
-          </button>
-        </form>
+// ==================== PAGE COMPONENTS ====================
+
+function PageHeader({ title, subtitle, children }) {
+  return (
+    <div className="bg-slate-800 border-b border-slate-700 px-6 py-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">{title}</h1>
+          {subtitle && <p className="text-slate-400 mt-1">{subtitle}</p>}
+        </div>
+        {children}
       </div>
+    </div>
+  );
+}
+
+function LoadingSpinner() {
+  return (
+    <div className="flex items-center justify-center p-8">
+      <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
+    </div>
+  );
+}
+
+function EmptyState({ icon: Icon, title, description }) {
+  return (
+    <div className="text-center py-12">
+      {Icon && <Icon className="w-12 h-12 text-slate-500 mx-auto mb-4" />}
+      <h3 className="text-lg font-medium text-slate-300">{title}</h3>
+      {description && <p className="text-slate-500 mt-1">{description}</p>}
     </div>
   );
 }
@@ -753,2855 +415,3175 @@ function ForcePasswordChangePage() {
 
 function DashboardPage() {
   const [data, setData] = useState(null);
+  const [billingData, setBillingData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { currency, rates } = useCurrency();
-  const fmt = (v) => formatMoney(v, { currency, rates });
-
-  useEffect(() => {
-    apiFetch('/api/ops/dashboard').then(setData).finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <div className="text-slate-500">Loading dashboard...</div>;
-
-  const m = data?.metrics || {};
-
-  return (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-bold text-slate-900">Dashboard</h2>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <MetricCard label="Monthly Recurring Revenue" value={fmt(m.mrr)} color="green" icon={DollarSign} />
-        <MetricCard label="Active Customers" value={m.active_subscriptions || 0} color="blue" icon={Building2} />
-        <MetricCard label="Total Seats" value={m.total_seats || 0} color="purple" icon={Users} />
-        <MetricCard label="Trials" value={m.trials || 0} color="orange" icon={Clock} />
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900 mb-4">Attention Needed</h3>
-          <div className="space-y-3">
-            {m.past_due > 0 && (
-              <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
-                <span className="text-red-700 flex items-center gap-2"><AlertTriangle className="w-4 h-4" /> Past Due</span>
-                <span className="font-bold text-red-700">{m.past_due}</span>
-              </div>
-            )}
-            {m.pending_cancellations > 0 && (
-              <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg">
-                <span className="text-amber-700 flex items-center gap-2"><Clock className="w-4 h-4" /> Pending Cancellations</span>
-                <span className="font-bold text-amber-700">{m.pending_cancellations}</span>
-              </div>
-            )}
-            {!m.past_due && !m.pending_cancellations && <p className="text-slate-500">All clear!</p>}
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900 mb-4">Failed Payments</h3>
-          <div className="space-y-2">
-            {(data?.failedPayments || []).map((p, i) => (
-              <div key={i} className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
-                <span className="text-slate-700">{p.org_name}</span>
-                <span className="font-medium text-red-600">{fmt(p.total)}</span>
-              </div>
-            ))}
-            {(!data?.failedPayments?.length) && <p className="text-slate-500">No failed payments</p>}
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-xl p-6 shadow-sm">
-        <h3 className="font-semibold text-slate-900 mb-4">Recent Activity</h3>
-        <div className="space-y-2">
-          {(data?.recentActivity || []).map((a, i) => (
-            <div key={i} className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
-              <div>
-                <span className="text-slate-700">{a.org_name}</span>
-                <span className="text-slate-400 ml-2 text-sm">{a.type}</span>
-              </div>
-              <span className="text-sm text-slate-500">{new Date(a.created_at).toLocaleDateString()}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ==================== CUSTOMERS ====================
-
-function CustomersPage() {
-  const [customers, setCustomers] = useState([]);
-  const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setLoading(true);
-    const params = new URLSearchParams({ search, limit: '50' });
-    apiFetch(`/api/ops/customers?${params}`).then(data => setCustomers(data.customers || [])).finally(() => setLoading(false));
-  }, [search]);
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">Customers</h2>
-        <div className="flex gap-3">
-          <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-            <input type="search" placeholder="Search customers..." value={search} onChange={e => setSearch(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-slate-300 rounded-lg w-64 text-sm" />
-          </div>
-          <Link to="/onboard" className={btnPrimary + " flex items-center gap-2"}>
-            <Plus className="w-4 h-4" /> New Customer
-          </Link>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Customer</th>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Plan</th>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Seats</th>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Status</th>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Health</th>
-              <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {loading ? (
-              <tr><td colSpan="6" className="px-6 py-8 text-center text-slate-500">Loading...</td></tr>
-            ) : customers.length === 0 ? (
-              <tr><td colSpan="6" className="px-6 py-8 text-center text-slate-500">No customers found</td></tr>
-            ) : customers.map(c => (
-              <tr key={c.id} className="hover:bg-slate-50 cursor-pointer" onClick={() => navigate(`/customers/${c.id}`)}>
-                <td className="px-6 py-4">
-                  <p className="font-medium text-slate-900">{c.name}</p>
-                  <p className="text-sm text-slate-500">{c.slug}</p>
-                </td>
-                <td className="px-6 py-4">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                    {c.plan_name || 'No plan'}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-slate-700 text-sm">{c.core_seats || 0} core / {c.flex_seats || 0} flex</td>
-                <td className="px-6 py-4"><StatusBadge status={c.subscription_status} /></td>
-                <td className="px-6 py-4"><HealthBadge score={c.health_score} risk={c.risk_level} /></td>
-                <td className="px-6 py-4 text-right">
-                  <button className="text-orange-600 hover:text-orange-700 font-medium text-sm">View →</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-// ==================== CUSTOMER DETAIL ====================
-
-function CustomerDetailPage() {
-  const { id } = useParams();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(null);
-  const { currency, rates } = useCurrency();
-  const fmt = (v) => formatMoney(v, { currency, rates });
-  const [noteText, setNoteText] = useState('');
-  const [noteType, setNoteType] = useState('general');
-  const [savingNote, setSavingNote] = useState(false);
-  const navigate = useNavigate();
-
-  const loadData = useCallback(() => {
-    apiFetch(`/api/ops/customers/${id}`).then(setData).finally(() => setLoading(false));
-  }, [id]);
-
-  useEffect(() => { loadData(); }, [loadData]);
-
-  const handleImpersonate = async () => {
-    try {
-      const result = await apiFetch(`/api/ops/impersonate/${id}`, { method: 'POST' });
-      if (result.portalUrl) window.open(result.portalUrl, '_blank');
-      else alert('Impersonation token generated. Portal URL not configured.');
-    } catch (err) { alert(`Impersonation failed: ${err.message}`); }
-  };
-
-  const handleAddNote = async () => {
-    if (!noteText.trim()) return;
-    setSavingNote(true);
-    try {
-      const result = await apiFetch(`/api/ops/customers/${id}/notes`, { method: 'POST', body: { note: noteText, noteType } });
-      setData(prev => ({ ...prev, notes: [{ ...result.note, author_first_name: 'You', author_last_name: '' }, ...(prev.notes || [])] }));
-      setNoteText('');
-    } catch (err) { alert(err.message); }
-    finally { setSavingNote(false); }
-  };
-
-  if (loading) return <div className="text-slate-500">Loading...</div>;
-  if (!data?.customer) return <div className="text-slate-500">Customer not found</div>;
-
-  const { customer: c, usage, admins, invoices, notes, health } = data;
-
-  return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <Link to="/customers" className="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Customers
-          </Link>
-          <h2 className="text-2xl font-bold text-slate-900 mt-2">{c.name}</h2>
-          <p className="text-slate-500">{c.slug} • {c.billing_email}</p>
-        </div>
-        <div className="flex gap-2">
-          <button className={btnSecondary} onClick={handleImpersonate}>
-            <ExternalLink className="w-4 h-4 inline mr-1" /> Impersonate
-          </button>
-          <button className={btnPrimary} onClick={() => setModal('edit')}>
-            <Edit className="w-4 h-4 inline mr-1" /> Edit
-          </button>
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-2 flex-wrap">
-        <button className={btnSecondary} onClick={() => setModal('seats')}>Adjust Seats</button>
-        <button className={btnSecondary} onClick={() => setModal('changePlan')}>Change Plan</button>
-        {c.status === 'trialing' && <button className={btnSecondary} onClick={() => setModal('extendTrial')}>Extend Trial</button>}
-        <button className={btnSecondary} onClick={() => setModal('credit')}>Apply Credit</button>
-        <button className={btnSecondary} onClick={() => setModal('features')}>Feature Flags</button>
-        {c.status !== 'canceled' && <button className={btnDanger} onClick={() => setModal('cancel')}>Cancel</button>}
-      </div>
-
-      {/* Info Grid */}
-      <div className="grid md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900 mb-4">Subscription</h3>
-          <div className="space-y-3 text-sm">
-            <div className="flex justify-between"><span className="text-slate-500">Plan</span><span className="font-medium">{c.plan_name || 'None'}</span></div>
-            <div className="flex justify-between"><span className="text-slate-500">Status</span><StatusBadge status={c.status} /></div>
-            <div className="flex justify-between"><span className="text-slate-500">Core Seats</span><span>{c.core_seats || 0} ({usage?.core || 0} used)</span></div>
-            <div className="flex justify-between"><span className="text-slate-500">Flex Seats</span><span>{c.flex_seats || 0} ({usage?.flex || 0} used)</span></div>
-            <div className="flex justify-between"><span className="text-slate-500">Period End</span><span>{c.current_period_end ? new Date(c.current_period_end).toLocaleDateString() : '-'}</span></div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900 mb-4">Health Score</h3>
-          {health ? (
-            <div className="space-y-3">
-              <div className="text-center"><span className="text-4xl font-bold text-slate-900">{health.overall_score}</span><span className="text-slate-500">/100</span></div>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-slate-500">Engagement</span><span>{health.engagement_score || '-'}</span></div>
-                <div className="flex justify-between"><span className="text-slate-500">Adoption</span><span>{health.adoption_score || '-'}</span></div>
-                <div className="flex justify-between"><span className="text-slate-500">Growth</span><span>{health.growth_score || '-'}</span></div>
-              </div>
-            </div>
-          ) : <p className="text-slate-400">No health data</p>}
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900 mb-4">Admins</h3>
-          <div className="space-y-3">
-            {admins?.map(a => (
-              <div key={a.id}>
-                <p className="font-medium text-slate-700 text-sm">{a.first_name} {a.last_name}</p>
-                <p className="text-xs text-slate-500">{a.email}</p>
-              </div>
-            ))}
-            {(!admins?.length) && <p className="text-slate-400 text-sm">No admins</p>}
-          </div>
-        </div>
-      </div>
-
-      {/* Invoices & Notes */}
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900 mb-4">Recent Invoices</h3>
-          <div className="space-y-2">
-            {invoices?.map(inv => (
-              <div key={inv.id} className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
-                <div>
-                  <p className="text-slate-700 text-sm">{inv.stripe_invoice_number}</p>
-                  <p className="text-xs text-slate-500">{new Date(inv.created_at).toLocaleDateString()}</p>
-                </div>
-                <div className="text-right">
-                  <p className="font-medium text-sm">{fmt(inv.total)}</p>
-                  <StatusBadge status={inv.status} />
-                </div>
-              </div>
-            ))}
-            {(!invoices?.length) && <p className="text-slate-400 text-sm">No invoices</p>}
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900 mb-4">Notes</h3>
-          <div className="space-y-3 mb-4">
-            <textarea value={noteText} onChange={e => setNoteText(e.target.value)} placeholder="Add a note..."
-              className={inputClass + " h-20 resize-none"} />
-            <div className="flex gap-2">
-              <select value={noteType} onChange={e => setNoteType(e.target.value)} className={inputClass + " w-auto"}>
-                <option value="general">General</option>
-                <option value="support">Support</option>
-                <option value="sales">Sales</option>
-                <option value="billing">Billing</option>
-              </select>
-              <button onClick={handleAddNote} disabled={savingNote || !noteText.trim()} className={btnPrimary}>
-                {savingNote ? 'Saving...' : 'Add Note'}
-              </button>
-            </div>
-          </div>
-          <div className="space-y-3 max-h-80 overflow-auto">
-            {notes?.map(n => (
-              <div key={n.id} className="p-3 bg-slate-50 rounded-lg">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">{n.note_type}</span>
-                </div>
-                <p className="text-sm text-slate-700">{n.note}</p>
-                <p className="text-xs text-slate-500 mt-2">{n.author_first_name} {n.author_last_name} • {new Date(n.created_at).toLocaleString()}</p>
-              </div>
-            ))}
-            {(!notes?.length) && <p className="text-slate-400 text-sm">No notes yet</p>}
-          </div>
-        </div>
-      </div>
-
-      {/* License Keys Section */}
-      <LicenseKeysSection orgId={id} />
-
-      {/* Modals */}
-      {modal === 'edit' && <EditCustomerModal customer={c} onClose={() => setModal(null)} onSaved={loadData} />}
-      {modal === 'seats' && <AdjustSeatsModal orgId={id} current={{ core: c.core_seats, flex: c.flex_seats }} onClose={() => setModal(null)} onSaved={loadData} />}
-      {modal === 'changePlan' && <ChangePlanModal orgId={id} currentPlan={c.plan_slug} coreSeats={c.core_seats || 50} onClose={() => setModal(null)} onSaved={loadData} />}
-      {modal === 'extendTrial' && <ExtendTrialModal orgId={id} trialEnd={c.trial_end} onClose={() => setModal(null)} onSaved={loadData} />}
-      {modal === 'credit' && <ApplyCreditModal orgId={id} onClose={() => setModal(null)} onSaved={loadData} />}
-      {modal === 'cancel' && <CancelSubscriptionModal orgId={id} name={c.name} periodEnd={c.current_period_end} onClose={() => setModal(null)} onSaved={() => { loadData(); setModal(null); }} />}
-      {modal === 'features' && <FeatureFlagsModal orgId={id} onClose={() => setModal(null)} />}
-    </div>
-  );
-}
-
-// ==================== LICENSE KEYS SECTION ====================
-
-function LicenseKeysSection({ orgId }) {
-  const [licenses, setLicenses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showGenerate, setShowGenerate] = useState(false);
-
-  const load = useCallback(() => {
-    apiFetch(`/api/ops/licenses/${orgId}`).then(d => setLicenses(d.licenses || [])).catch(() => {}).finally(() => setLoading(false));
-  }, [orgId]);
-
-  useEffect(() => { load(); }, [load]);
-
-  const copyKey = (key) => { navigator.clipboard.writeText(key); };
-
-  const handleRevoke = async (licId) => {
-    if (!confirm('Revoke this license key?')) return;
-    try { await apiFetch(`/api/ops/licenses/${licId}`, { method: 'DELETE' }); load(); }
-    catch (err) { alert(err.message); }
-  };
-
-  return (
-    <div className="bg-white rounded-xl p-6 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold text-slate-900">License Keys</h3>
-        <button onClick={() => setShowGenerate(true)} className={btnPrimary + " flex items-center gap-1"}>
-          <Plus className="w-4 h-4" /> Generate Key
-        </button>
-      </div>
-
-      {loading ? <p className="text-slate-500 text-sm">Loading...</p> : licenses.length === 0 ? (
-        <p className="text-slate-400 text-sm">No license keys generated</p>
-      ) : (
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left px-4 py-2 font-medium text-slate-600">Key</th>
-              <th className="text-left px-4 py-2 font-medium text-slate-600">Type</th>
-              <th className="text-left px-4 py-2 font-medium text-slate-600">Status</th>
-              <th className="text-left px-4 py-2 font-medium text-slate-600">Seats</th>
-              <th className="text-left px-4 py-2 font-medium text-slate-600">Expires</th>
-              <th className="text-right px-4 py-2 font-medium text-slate-600">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {licenses.map(l => (
-              <tr key={l.id}>
-                <td className="px-4 py-3">
-                  <code className="text-xs bg-slate-100 px-2 py-1 rounded">{l.license_key}</code>
-                  <button onClick={() => copyKey(l.license_key)} className="ml-2 text-slate-400 hover:text-slate-600">
-                    <Copy className="w-3.5 h-3.5 inline" />
-                  </button>
-                </td>
-                <td className="px-4 py-3"><StatusBadge status={l.key_type} /></td>
-                <td className="px-4 py-3"><StatusBadge status={l.status} /></td>
-                <td className="px-4 py-3">{l.activated_seats}/{l.max_seats}</td>
-                <td className="px-4 py-3">{l.valid_until ? new Date(l.valid_until).toLocaleDateString() : 'Never'}</td>
-                <td className="px-4 py-3 text-right">
-                  {l.status === 'active' && (
-                    <button onClick={() => handleRevoke(l.id)} className="text-red-600 hover:text-red-700 text-xs font-medium">Revoke</button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      {showGenerate && <GenerateLicenseModal orgId={orgId} onClose={() => setShowGenerate(false)} onGenerated={load} />}
-    </div>
-  );
-}
-
-// ==================== MODALS ====================
-
-function EditCustomerModal({ customer, onClose, onSaved }) {
-  const [name, setName] = useState(customer.name || '');
-  const [tradingName, setTradingName] = useState(customer.trading_name || '');
-  const [billingEmail, setBillingEmail] = useState(customer.billing_email || '');
-  const [taxId, setTaxId] = useState(customer.tax_id || '');
-  const [industry, setIndustry] = useState(customer.industry || 'Retail');
-  const [contactName, setContactName] = useState(customer.primary_contact_name || '');
-  const [contactPhone, setContactPhone] = useState(customer.primary_contact_phone || '');
-  const [addressLine1, setAddressLine1] = useState(customer.address_line1 || '');
-  const [city, setCity] = useState(customer.city || '');
-  const [postcode, setPostcode] = useState(customer.postcode || '');
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSave = async () => {
-    setSaving(true); setError('');
-    try {
-      await apiFetch(`/api/ops/manage/organizations/${customer.id}`, {
-        method: 'PATCH',
-        body: { name, tradingName, billingEmail, taxId, industry, primaryContactName: contactName, primaryContactPhone: contactPhone, addressLine1, city, postcode }
-      });
-      onSaved(); onClose();
-    } catch (err) { setError(err.message); }
-    finally { setSaving(false); }
-  };
-
-  return (
-    <Modal title="Edit Customer" onClose={onClose} wide>
-      <div className="space-y-4">
-        {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-        <div className="grid grid-cols-2 gap-4">
-          <FormField label="Company Name"><input value={name} onChange={e => setName(e.target.value)} className={inputClass} /></FormField>
-          <FormField label="Trading Name"><input value={tradingName} onChange={e => setTradingName(e.target.value)} className={inputClass} /></FormField>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <FormField label="Industry">
-            <select value={industry} onChange={e => setIndustry(e.target.value)} className={inputClass}>
-              <option value="Manufacturing">Manufacturing</option>
-              <option value="Retail">Retail</option>
-              <option value="Hospitality">Hospitality</option>
-              <option value="Healthcare">Healthcare</option>
-              <option value="Logistics">Logistics</option>
-              <option value="Construction">Construction</option>
-              <option value="Other">Other</option>
-            </select>
-          </FormField>
-          <FormField label="Tax ID (VAT)"><input value={taxId} onChange={e => setTaxId(e.target.value)} className={inputClass} placeholder="GB123456789" /></FormField>
-        </div>
-        <h4 className="font-medium text-slate-700 pt-2">Primary Contact</h4>
-        <div className="grid grid-cols-3 gap-4">
-          <FormField label="Name"><input value={contactName} onChange={e => setContactName(e.target.value)} className={inputClass} /></FormField>
-          <FormField label="Email"><input type="email" value={billingEmail} onChange={e => setBillingEmail(e.target.value)} className={inputClass} /></FormField>
-          <FormField label="Phone"><input value={contactPhone} onChange={e => setContactPhone(e.target.value)} className={inputClass} /></FormField>
-        </div>
-        <h4 className="font-medium text-slate-700 pt-2">Address</h4>
-        <FormField label="Address Line 1"><input value={addressLine1} onChange={e => setAddressLine1(e.target.value)} className={inputClass} /></FormField>
-        <div className="grid grid-cols-2 gap-4">
-          <FormField label="City"><input value={city} onChange={e => setCity(e.target.value)} className={inputClass} /></FormField>
-          <FormField label="Postcode"><input value={postcode} onChange={e => setPostcode(e.target.value)} className={inputClass} /></FormField>
-        </div>
-        <div className="flex gap-3 justify-end pt-4">
-          <button onClick={onClose} className={btnSecondary}>Cancel</button>
-          <button onClick={handleSave} disabled={saving} className={btnPrimary}>{saving ? 'Saving...' : 'Save Changes'}</button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-function AdjustSeatsModal({ orgId, current, onClose, onSaved }) {
-  const [core, setCore] = useState(current.core || 0);
-  const [flex, setFlex] = useState(current.flex || 0);
-  const [reason, setReason] = useState('');
-  const [saving, setSaving] = useState(false);
-  const { currency, rates } = useCurrency();
-  const fmt = (v) => formatMoney(v, { currency, rates });
-
-  const coreDiff = core - (current.core || 0);
-  const flexDiff = flex - (current.flex || 0);
-  // Estimate price impact (assuming £10/core, £12/flex)
-  const priceImpact = (coreDiff * 1000) + (flexDiff * 1200);
-
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      await apiFetch(`/api/ops/customers/${orgId}/seats`, { method: 'POST', body: { coreSeats: core, flexSeats: flex, reason } });
-      onSaved(); onClose();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  return (
-    <Modal title="Adjust Seats" onClose={onClose}>
-      <div className="space-y-4">
-        {/* Before/After Comparison */}
-        <div className="bg-slate-50 rounded-lg p-4">
-          <div className="grid grid-cols-3 gap-4 text-center text-sm">
-            <div><p className="text-slate-500 text-xs mb-1">Before</p></div>
-            <div><p className="text-slate-500 text-xs mb-1">Change</p></div>
-            <div><p className="text-slate-500 text-xs mb-1">After</p></div>
-          </div>
-          <div className="grid grid-cols-3 gap-4 text-center border-t border-slate-200 pt-2 mt-2">
-            <div><p className="font-medium">{current.core || 0} core</p><p className="text-xs text-slate-500">{current.flex || 0} flex</p></div>
-            <div>
-              <p className={`font-medium ${coreDiff > 0 ? 'text-green-600' : coreDiff < 0 ? 'text-red-600' : 'text-slate-400'}`}>
-                {coreDiff > 0 ? '+' : ''}{coreDiff} core
-              </p>
-              <p className={`text-xs ${flexDiff > 0 ? 'text-green-600' : flexDiff < 0 ? 'text-red-600' : 'text-slate-400'}`}>
-                {flexDiff > 0 ? '+' : ''}{flexDiff} flex
-              </p>
-            </div>
-            <div><p className="font-medium">{core} core</p><p className="text-xs text-slate-500">{flex} flex</p></div>
-          </div>
-          {priceImpact !== 0 && (
-            <div className="border-t border-slate-200 mt-2 pt-2 text-center">
-              <p className={`text-sm ${priceImpact > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                Est. MRR impact: {priceImpact > 0 ? '+' : ''}{fmt(priceImpact)}/mo
-              </p>
-            </div>
-          )}
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <FormField label="Core Seats"><input type="number" min="0" value={core} onChange={e => setCore(parseInt(e.target.value) || 0)} className={inputClass} /></FormField>
-          <FormField label="Flex Seats"><input type="number" min="0" value={flex} onChange={e => setFlex(parseInt(e.target.value) || 0)} className={inputClass} /></FormField>
-        </div>
-        <FormField label="Reason"><input value={reason} onChange={e => setReason(e.target.value)} className={inputClass} placeholder="e.g. Customer expansion" /></FormField>
-        <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className={btnSecondary}>Cancel</button>
-          <button onClick={handleSave} disabled={saving || (coreDiff === 0 && flexDiff === 0)} className={btnPrimary}>
-            {saving ? 'Saving...' : 'Update Seats'}
-          </button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-function ChangePlanModal({ orgId, currentPlan, coreSeats = 50, onClose, onSaved }) {
-  const [plans, setPlans] = useState([]);
-  const [selected, setSelected] = useState(currentPlan || '');
-  const [effectiveDate, setEffectiveDate] = useState('immediate');
-  const [saving, setSaving] = useState(false);
-  const { currency, rates } = useCurrency();
-  const fmt = (v) => formatMoney(v, { currency, rates });
-
-  useEffect(() => {
-    apiFetch('/api/ops/plans').then(d => setPlans(d.plans || [])).catch(() => {});
-  }, []);
-
-  const currentPlanData = plans.find(p => p.slug === currentPlan);
-  const selectedPlanData = plans.find(p => p.slug === selected);
-
-  const currentMRR = currentPlanData ? (currentPlanData.core_price_per_seat || 0) * coreSeats * 100 : 0;
-  const newMRR = selectedPlanData ? (selectedPlanData.core_price_per_seat || 0) * coreSeats * 100 : 0;
-  const mrrDiff = newMRR - currentMRR;
-
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      await apiFetch(`/api/ops/manage/organizations/${orgId}/subscription`, { method: 'POST', body: { planSlug: selected, effectiveDate } });
-      onSaved(); onClose();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  return (
-    <Modal title="Change Plan" onClose={onClose}>
-      <div className="space-y-4">
-        {/* Current Plan */}
-        {currentPlanData && (
-          <div className="bg-slate-50 rounded-lg p-3">
-            <p className="text-xs text-slate-500 mb-1">Current Plan</p>
-            <div className="flex justify-between items-center">
-              <span className="font-medium">{currentPlanData.name}</span>
-              <span className="text-sm text-slate-600">{fmt(currentMRR)}/mo</span>
-            </div>
-          </div>
-        )}
-
-        <div className="space-y-2">
-          {plans.map(p => (
-            <label key={p.id} className={`block p-4 border rounded-lg cursor-pointer transition ${selected === p.slug ? 'border-orange-500 bg-orange-50' : p.slug === currentPlan ? 'border-slate-300 bg-slate-50' : 'border-slate-200 hover:border-slate-300'}`}>
-              <input type="radio" name="plan" value={p.slug} checked={selected === p.slug} onChange={() => setSelected(p.slug)} className="sr-only" />
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  <div>
-                    <p className="font-medium text-slate-900">{p.name}</p>
-                    <p className="text-sm text-slate-500">{p.description}</p>
-                  </div>
-                  {p.slug === currentPlan && <span className="text-xs px-2 py-0.5 bg-slate-200 text-slate-600 rounded">Current</span>}
-                </div>
-                <div className="text-right">
-                  <p className="font-medium">{p.slug === 'enterprise' ? 'POA' : `${fmt((p.core_price_per_seat || 0) * 100)}/seat`}</p>
-                </div>
-              </div>
-            </label>
-          ))}
-        </div>
-
-        {/* Price Impact */}
-        {selected && selected !== currentPlan && mrrDiff !== 0 && (
-          <div className={`rounded-lg p-3 ${mrrDiff > 0 ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
-            <p className="text-sm font-medium">
-              {mrrDiff > 0 ? 'Upgrade' : 'Downgrade'}: {mrrDiff > 0 ? '+' : ''}{fmt(mrrDiff)}/mo
-            </p>
-            <p className="text-xs text-slate-500">Based on {coreSeats} seats</p>
-          </div>
-        )}
-
-        <FormField label="Effective Date">
-          <select value={effectiveDate} onChange={e => setEffectiveDate(e.target.value)} className={inputClass}>
-            <option value="immediate">Immediately</option>
-            <option value="period_end">At current period end</option>
-          </select>
-        </FormField>
-
-        <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className={btnSecondary}>Cancel</button>
-          <button onClick={handleSave} disabled={saving || selected === currentPlan} className={btnPrimary}>
-            {saving ? 'Changing...' : mrrDiff > 0 ? 'Upgrade Plan' : mrrDiff < 0 ? 'Downgrade Plan' : 'Change Plan'}
-          </button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-function ExtendTrialModal({ orgId, trialEnd, onClose, onSaved }) {
-  const [mode, setMode] = useState('days'); // 'days' or 'date'
-  const [days, setDays] = useState(14);
-  const [endDate, setEndDate] = useState(() => {
-    const d = new Date();
-    d.setDate(d.getDate() + 14);
-    return d.toISOString().split('T')[0];
-  });
-  const [reason, setReason] = useState('');
-  const [saving, setSaving] = useState(false);
-
-  const currentEnd = trialEnd ? new Date(trialEnd) : new Date();
-  const newEnd = mode === 'days'
-    ? new Date(currentEnd.getTime() + days * 24 * 60 * 60 * 1000)
-    : new Date(endDate);
-
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      if (mode === 'days') {
-        await apiFetch(`/api/ops/customers/${orgId}/extend-trial`, { method: 'POST', body: { days, reason } });
-      } else {
-        const diffDays = Math.ceil((newEnd.getTime() - currentEnd.getTime()) / (24 * 60 * 60 * 1000));
-        await apiFetch(`/api/ops/customers/${orgId}/extend-trial`, { method: 'POST', body: { days: diffDays, reason } });
-      }
-      onSaved(); onClose();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  return (
-    <Modal title="Extend Trial" onClose={onClose}>
-      <div className="space-y-4">
-        <div className="bg-slate-50 rounded-lg p-3 text-sm">
-          <div className="flex justify-between">
-            <span className="text-slate-500">Current trial end:</span>
-            <span className="font-medium">{currentEnd.toLocaleDateString()}</span>
-          </div>
-          <div className="flex justify-between mt-1">
-            <span className="text-slate-500">New trial end:</span>
-            <span className="font-medium text-orange-600">{newEnd.toLocaleDateString()}</span>
-          </div>
-        </div>
-
-        <div className="flex gap-2">
-          <button onClick={() => setMode('days')} className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition ${mode === 'days' ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}>
-            Add Days
-          </button>
-          <button onClick={() => setMode('date')} className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition ${mode === 'date' ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}>
-            Pick Date
-          </button>
-        </div>
-
-        {mode === 'days' ? (
-          <FormField label="Additional Days">
-            <input type="number" min="1" max="90" value={days} onChange={e => setDays(parseInt(e.target.value) || 14)} className={inputClass} />
-          </FormField>
-        ) : (
-          <FormField label="New End Date">
-            <input type="date" value={endDate} min={new Date().toISOString().split('T')[0]} onChange={e => setEndDate(e.target.value)} className={inputClass} />
-          </FormField>
-        )}
-
-        <FormField label="Reason">
-          <select value={reason} onChange={e => setReason(e.target.value)} className={inputClass}>
-            <option value="">Select a reason...</option>
-            <option value="Needs more evaluation time">Needs more evaluation time</option>
-            <option value="Waiting for stakeholder approval">Waiting for stakeholder approval</option>
-            <option value="Technical integration delayed">Technical integration delayed</option>
-            <option value="Sales negotiation ongoing">Sales negotiation ongoing</option>
-            <option value="Other">Other</option>
-          </select>
-        </FormField>
-
-        <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className={btnSecondary}>Cancel</button>
-          <button onClick={handleSave} disabled={saving || !reason} className={btnPrimary}>
-            {saving ? 'Extending...' : `Extend to ${newEnd.toLocaleDateString()}`}
-          </button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-function ApplyCreditModal({ orgId, onClose, onSaved }) {
-  const [amount, setAmount] = useState('');
-  const [reason, setReason] = useState('');
-  const [saving, setSaving] = useState(false);
-  const { currency } = useCurrency();
-  const sym = (CURRENCIES[currency] || CURRENCIES.GBP).symbol;
-
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const amountPence = Math.round(parseFloat(amount) * 100);
-      await apiFetch(`/api/ops/customers/${orgId}/credit`, { method: 'POST', body: { amount: amountPence, reason } });
-      onSaved(); onClose();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  return (
-    <Modal title="Apply Credit" onClose={onClose}>
-      <div className="space-y-4">
-        <FormField label={`Amount (${sym})`}><input type="number" min="0" step="0.01" value={amount} onChange={e => setAmount(e.target.value)} className={inputClass} placeholder="e.g. 50.00" /></FormField>
-        <FormField label="Reason"><input value={reason} onChange={e => setReason(e.target.value)} className={inputClass} placeholder="e.g. Service disruption compensation" /></FormField>
-        <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className={btnSecondary}>Cancel</button>
-          <button onClick={handleSave} disabled={saving || !amount} className={btnPrimary}>{saving ? 'Applying...' : `Apply ${sym}${amount || '0'} Credit`}</button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-function CancelSubscriptionModal({ orgId, name, periodEnd, onClose, onSaved }) {
-  const [immediate, setImmediate] = useState(false);
-  const [reasonCategory, setReasonCategory] = useState('');
-  const [reasonDetail, setReasonDetail] = useState('');
-  const [saving, setSaving] = useState(false);
-  const [confirm, setConfirm] = useState('');
-
-  const CANCEL_REASONS = [
-    { value: 'too_expensive', label: 'Too expensive' },
-    { value: 'not_using', label: 'Not using the product' },
-    { value: 'missing_features', label: 'Missing features' },
-    { value: 'switching_competitor', label: 'Switching to competitor' },
-    { value: 'business_closing', label: 'Business closing down' },
-    { value: 'seasonal', label: 'Seasonal / temporary pause' },
-    { value: 'customer_request', label: 'Customer requested' },
-    { value: 'other', label: 'Other' },
-  ];
-
-  const handleCancel = async () => {
-    setSaving(true);
-    try {
-      const reason = reasonDetail ? `${reasonCategory}: ${reasonDetail}` : reasonCategory;
-      await apiFetch(`/api/ops/manage/organizations/${orgId}/subscription/cancel`, { method: 'POST', body: { immediate, reason } });
-      onSaved();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  return (
-    <Modal title="Cancel Subscription" onClose={onClose}>
-      <div className="space-y-4">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-800 font-medium">This will cancel the subscription for {name}.</p>
-          <p className="text-red-600 text-sm mt-1">This action cannot be easily undone.</p>
-        </div>
-
-        <FormField label="Reason for cancellation">
-          <select value={reasonCategory} onChange={e => setReasonCategory(e.target.value)} className={inputClass}>
-            <option value="">Select a reason...</option>
-            {CANCEL_REASONS.map(r => <option key={r.value} value={r.value}>{r.label}</option>)}
-          </select>
-        </FormField>
-
-        {reasonCategory && (
-          <FormField label="Additional details (optional)">
-            <textarea value={reasonDetail} onChange={e => setReasonDetail(e.target.value)} className={inputClass + " h-20 resize-none"} placeholder="Any additional context..." />
-          </FormField>
-        )}
-
-        <div className="border border-slate-200 rounded-lg p-3 space-y-3">
-          <p className="text-sm font-medium text-slate-700">When should the cancellation take effect?</p>
-          <label className="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer">
-            <input type="radio" name="timing" checked={!immediate} onChange={() => setImmediate(false)} className="mt-0.5" />
-            <div>
-              <p className="font-medium text-sm">At period end</p>
-              <p className="text-xs text-slate-500">Customer keeps access until {periodEnd ? new Date(periodEnd).toLocaleDateString() : 'billing period ends'}</p>
-            </div>
-          </label>
-          <label className="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer">
-            <input type="radio" name="timing" checked={immediate} onChange={() => setImmediate(true)} className="mt-0.5" />
-            <div>
-              <p className="font-medium text-sm text-red-600">Immediately</p>
-              <p className="text-xs text-slate-500">Customer loses access right away (may require refund)</p>
-            </div>
-          </label>
-        </div>
-
-        <FormField label={`Type "${name}" to confirm`}>
-          <input value={confirm} onChange={e => setConfirm(e.target.value)} className={inputClass} placeholder={name} />
-        </FormField>
-
-        <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className={btnSecondary}>Keep Subscription</button>
-          <button onClick={handleCancel} disabled={saving || confirm !== name || !reasonCategory} className={btnDanger}>
-            {saving ? 'Cancelling...' : immediate ? 'Cancel Now' : 'Cancel at Period End'}
-          </button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-function FeatureFlagsModal({ orgId, onClose }) {
-  const [features, setFeatures] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState('');
-
-  const knownFeatures = [
-    { key: 'ai_scheduling', label: 'AI Scheduling', icon: Zap },
-    { key: 'shift_marketplace', label: 'Shift Marketplace', icon: Users },
-    { key: 'payroll_export', label: 'Payroll Export', icon: DollarSign },
-    { key: 'api_access', label: 'API Access', icon: Settings },
-    { key: 'sso', label: 'Single Sign-On', icon: Shield },
-    { key: 'custom_branding', label: 'Custom Branding', icon: Crown },
-    { key: 'advanced_analytics', label: 'Advanced Analytics', icon: TrendingUp },
-    { key: 'compliance_module', label: 'Compliance Module', icon: CheckCircle },
-  ];
-
-  useEffect(() => {
-    apiFetch(`/api/ops/features/${orgId}`).then(d => setFeatures(d.features || [])).catch(() => {}).finally(() => setLoading(false));
-  }, [orgId]);
-
-  const isEnabled = (key) => features.find(f => f.feature_key === key)?.enabled ?? false;
-
-  const toggle = async (key, enabled) => {
-    setSaving(key);
-    try {
-      await apiFetch(`/api/ops/features/${orgId}`, { method: 'POST', body: { featureKey: key, enabled, reason: 'Toggled via ops portal' } });
-      setFeatures(prev => {
-        const existing = prev.find(f => f.feature_key === key);
-        if (existing) return prev.map(f => f.feature_key === key ? { ...f, enabled } : f);
-        return [...prev, { feature_key: key, enabled }];
-      });
-    } catch (err) { alert(err.message); }
-    finally { setSaving(''); }
-  };
-
-  return (
-    <Modal title="Feature Flags" onClose={onClose} wide>
-      {loading ? <p className="text-slate-500">Loading...</p> : (
-        <div className="space-y-2">
-          {knownFeatures.map(f => {
-            const Icon = f.icon;
-            const enabled = isEnabled(f.key);
-            return (
-              <div key={f.key} className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50">
-                <div className="flex items-center gap-3">
-                  <Icon className="w-5 h-5 text-slate-400" />
-                  <span className="text-sm font-medium text-slate-700">{f.label}</span>
-                </div>
-                <button
-                  onClick={() => toggle(f.key, !enabled)}
-                  disabled={saving === f.key}
-                  className={`relative w-11 h-6 rounded-full transition ${enabled ? 'bg-orange-500' : 'bg-slate-300'}`}
-                >
-                  <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${enabled ? 'translate-x-5' : ''}`} />
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </Modal>
-  );
-}
-
-function GenerateLicenseModal({ orgId, onClose, onGenerated }) {
-  const [keyType, setKeyType] = useState('annual');
-  const [maxSeats, setMaxSeats] = useState(10);
-  const [validUntil, setValidUntil] = useState('');
-  const [saving, setSaving] = useState(false);
-  const [generatedKey, setGeneratedKey] = useState('');
-
-  const handleGenerate = async () => {
-    setSaving(true);
-    try {
-      const result = await apiFetch('/api/ops/licenses', { method: 'POST', body: { organizationId: orgId, keyType, maxSeats, validUntil: validUntil || null } });
-      setGeneratedKey(result.license.license_key);
-      onGenerated();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  if (generatedKey) {
-    return (
-      <Modal title="License Key Generated" onClose={onClose}>
-        <div className="space-y-4">
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <p className="text-green-800 font-medium mb-2">License key created successfully</p>
-            <div className="flex items-center gap-2">
-              <code className="bg-white px-3 py-2 rounded border text-sm font-mono flex-1">{generatedKey}</code>
-              <button onClick={() => navigator.clipboard.writeText(generatedKey)} className={btnSecondary + " flex items-center gap-1"}>
-                <Copy className="w-4 h-4" /> Copy
-              </button>
-            </div>
-          </div>
-          <button onClick={onClose} className={btnPrimary + " w-full"}>Done</button>
-        </div>
-      </Modal>
-    );
-  }
-
-  return (
-    <Modal title="Generate License Key" onClose={onClose}>
-      <div className="space-y-4">
-        <FormField label="License Type">
-          <select value={keyType} onChange={e => setKeyType(e.target.value)} className={inputClass}>
-            <option value="annual">Annual</option>
-            <option value="flex">Flex</option>
-            <option value="trial">Trial</option>
-            <option value="enterprise">Enterprise</option>
-          </select>
-        </FormField>
-        <FormField label="Max Seats"><input type="number" min="1" value={maxSeats} onChange={e => setMaxSeats(parseInt(e.target.value) || 1)} className={inputClass} /></FormField>
-        <FormField label="Valid Until (optional)"><input type="date" value={validUntil} onChange={e => setValidUntil(e.target.value)} className={inputClass} /></FormField>
-        <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className={btnSecondary}>Cancel</button>
-          <button onClick={handleGenerate} disabled={saving} className={btnPrimary}>{saving ? 'Generating...' : 'Generate Key'}</button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-// ==================== ONBOARDING WIZARD (6 Steps) ====================
-
-const INDUSTRIES = ['Manufacturing', 'Retail', 'Hospitality', 'Healthcare', 'Logistics', 'Construction', 'Other'];
-const CONTRACT_DURATIONS = [{ months: 12, label: '12 months' }, { months: 24, label: '24 months' }, { months: 36, label: '36 months' }, { months: 60, label: '60 months' }];
-const SETUP_FEES = { growth: 250000, scale: 500000, enterprise: 1000000 }; // in pence
-
-function OnboardPage() {
-  const [step, setStep] = useState(1);
-  const { currency, rates } = useCurrency();
-  const fmt = (v) => formatMoney(v, { currency, rates });
-  const [plans, setPlans] = useState([]);
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  // Step 1: Company data
-  const [companyData, setCompanyData] = useState({
-    name: '', tradingName: '', companyNumber: '', industry: 'Retail',
-    primaryContactName: '', primaryContactEmail: '', primaryContactPhone: '',
-    addressLine1: '', addressLine2: '', city: '', postcode: '', country: 'GB'
-  });
-
-  // Step 2: Subscription data
-  const [subData, setSubData] = useState({
-    planSlug: 'growth', coreSeats: 50, flexEnabled: true, flexLimit: 25,
-    contractMonths: 12, startDate: new Date().toISOString().split('T')[0],
-    isTrial: false, trialDays: 14, setupFee: 250000, setupFeeCredited: false
-  });
-
-  // Step 3: Locations
-  const [locations, setLocations] = useState([{ name: '', addressLine1: '', city: '', country: 'GB', timezone: 'Europe/London', headcount: 0 }]);
-
-  // Step 4: Admin user
-  const [userData, setUserData] = useState({ email: '', firstName: '', lastName: '', password: '', sendWelcomeEmail: true });
-
-  // Step 5: License key (generated)
-  const [licenseKey, setLicenseKey] = useState('');
-
-  // Step 6: Final result
-  const [createdOrg, setCreatedOrg] = useState(null);
-  const [createdUser, setCreatedUser] = useState(null);
-
-  useEffect(() => {
-    apiFetch('/api/ops/plans').then(d => setPlans(d.plans || [])).catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    if (!userData.password) setUserData(prev => ({ ...prev, password: generatePassword() }));
-  }, []);
-
-  // Update setup fee when plan changes
-  useEffect(() => {
-    setSubData(prev => ({ ...prev, setupFee: SETUP_FEES[prev.planSlug] || 250000 }));
-  }, [subData.planSlug]);
-
-  // Update flex limit when seats change
-  useEffect(() => {
-    if (subData.flexEnabled) {
-      setSubData(prev => ({ ...prev, flexLimit: Math.floor(prev.coreSeats * 0.5) }));
-    }
-  }, [subData.coreSeats, subData.flexEnabled]);
-
-  function generatePassword() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
-    let pw = '';
-    for (let i = 0; i < 12; i++) pw += chars[Math.floor(Math.random() * chars.length)];
-    return pw;
-  }
-
-  function generateLicenseKey(planType) {
-    const typeMap = { growth: 'GRO', scale: 'SCA', enterprise: 'ENT' };
-    const prefix = typeMap[planType] || 'STD';
-    const random = Array.from({ length: 16 }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 36)]).join('');
-    const check = random.slice(0, 4);
-    return `UPL-${prefix}-${random}-${check}`;
-  }
-
-  const addLocation = () => setLocations([...locations, { name: '', addressLine1: '', city: '', country: 'GB', timezone: 'Europe/London', headcount: 0 }]);
-  const removeLocation = (i) => setLocations(locations.filter((_, idx) => idx !== i));
-  const updateLocation = (i, field, value) => setLocations(locations.map((l, idx) => idx === i ? { ...l, [field]: value } : l));
-
-  // Navigate steps
-  const nextStep = () => setStep(s => s + 1);
-  const prevStep = () => setStep(s => s - 1);
-
-  // Step 5: Generate license key
-  const generateLicense = () => {
-    const key = generateLicenseKey(subData.planSlug);
-    setLicenseKey(key);
-    nextStep();
-  };
-
-  // Step 6: Create everything
-  const createCustomer = async () => {
-    setSaving(true); setError('');
-    try {
-      // 1. Create organization
-      const orgResult = await apiFetch('/api/ops/onboard/organization', {
-        method: 'POST',
-        body: {
-          name: companyData.name,
-          tradingName: companyData.tradingName,
-          companyNumber: companyData.companyNumber,
-          industry: companyData.industry,
-          billingEmail: companyData.primaryContactEmail,
-          billingName: companyData.name,
-          primaryContactName: companyData.primaryContactName,
-          primaryContactEmail: companyData.primaryContactEmail,
-          primaryContactPhone: companyData.primaryContactPhone,
-          addressLine1: companyData.addressLine1,
-          addressLine2: companyData.addressLine2,
-          city: companyData.city,
-          postcode: companyData.postcode,
-          country: companyData.country,
-        }
-      });
-      const org = orgResult.organization;
-      setCreatedOrg(org);
-
-      // 2. Create subscription
-      await apiFetch('/api/ops/onboard/subscription', {
-        method: 'POST',
-        body: {
-          organizationId: org.id,
-          planSlug: subData.planSlug,
-          coreSeats: subData.coreSeats,
-          flexSeats: subData.flexEnabled ? subData.flexLimit : 0,
-          trialDays: subData.isTrial ? subData.trialDays : 0,
-          contractMonths: subData.contractMonths,
-          setupFee: subData.setupFee,
-          setupFeeCredited: subData.setupFeeCredited,
-          startDate: subData.startDate,
-        }
-      });
-
-      // 3. Create locations
-      for (const loc of locations.filter(l => l.name)) {
-        await apiFetch('/api/ops/onboard/location', {
-          method: 'POST',
-          body: { organizationId: org.id, ...loc }
-        }).catch(() => {}); // Don't fail if locations API not ready
-      }
-
-      // 4. Create admin user
-      const userResult = await apiFetch('/api/ops/onboard/user', {
-        method: 'POST',
-        body: {
-          organizationId: org.id,
-          email: userData.email,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          password: userData.password,
-          sendWelcomeEmail: userData.sendWelcomeEmail,
-        }
-      });
-      setCreatedUser(userResult.user);
-
-      // 5. Create license key
-      await apiFetch('/api/ops/licenses', {
-        method: 'POST',
-        body: {
-          organizationId: org.id,
-          keyType: subData.planSlug,
-          maxSeats: subData.coreSeats + (subData.flexEnabled ? subData.flexLimit : 0),
-          validUntil: null, // License linked to subscription
-        }
-      }).catch(() => {}); // Don't fail if license created differently
-
-      nextStep(); // Go to success
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const stepLabels = ['Company', 'Subscription', 'Locations', 'Admin', 'License', 'Review', 'Done'];
-
-  return (
-    <div className="max-w-3xl mx-auto">
-      <Link to="/customers" className="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1 mb-4">
-        <ArrowLeft className="w-3.5 h-3.5" /> Back to Customers
-      </Link>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">Onboard New Customer</h2>
-
-      {/* Steps indicator */}
-      <div className="flex items-center gap-1 mb-8 overflow-x-auto pb-2">
-        {stepLabels.slice(0, -1).map((label, i) => (
-          <React.Fragment key={i}>
-            {i > 0 && <div className={`flex-1 h-0.5 min-w-4 ${step > i ? 'bg-orange-500' : 'bg-slate-200'}`} />}
-            <div className={`flex items-center gap-1 shrink-0 ${step > i + 1 ? 'text-orange-600' : step === i + 1 ? 'text-slate-900' : 'text-slate-400'}`}>
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${step > i + 1 ? 'bg-orange-500 text-white' : step === i + 1 ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-500'}`}>
-                {step > i + 1 ? <CheckCircle className="w-3.5 h-3.5" /> : i + 1}
-              </div>
-              <span className="text-xs font-medium hidden md:inline">{label}</span>
-            </div>
-          </React.Fragment>
-        ))}
-      </div>
-
-      {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-4">{error}</div>}
-
-      <div className="bg-white rounded-xl p-6 shadow-sm">
-        {/* Step 1: Company */}
-        {step === 1 && (
-          <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900">Company Details</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <FormField label="Company Name *"><input value={companyData.name} onChange={e => setCompanyData(d => ({ ...d, name: e.target.value }))} className={inputClass} /></FormField>
-              <FormField label="Trading Name"><input value={companyData.tradingName} onChange={e => setCompanyData(d => ({ ...d, tradingName: e.target.value }))} className={inputClass} placeholder="If different" /></FormField>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <FormField label="Company Number"><input value={companyData.companyNumber} onChange={e => setCompanyData(d => ({ ...d, companyNumber: e.target.value }))} className={inputClass} placeholder="e.g. 12345678" /></FormField>
-              <FormField label="Industry">
-                <select value={companyData.industry} onChange={e => setCompanyData(d => ({ ...d, industry: e.target.value }))} className={inputClass}>
-                  {INDUSTRIES.map(i => <option key={i} value={i}>{i}</option>)}
-                </select>
-              </FormField>
-            </div>
-            <h4 className="font-medium text-slate-700 pt-2">Primary Contact</h4>
-            <div className="grid grid-cols-3 gap-4">
-              <FormField label="Name *"><input value={companyData.primaryContactName} onChange={e => setCompanyData(d => ({ ...d, primaryContactName: e.target.value }))} className={inputClass} /></FormField>
-              <FormField label="Email *"><input type="email" value={companyData.primaryContactEmail} onChange={e => setCompanyData(d => ({ ...d, primaryContactEmail: e.target.value }))} className={inputClass} /></FormField>
-              <FormField label="Phone"><input value={companyData.primaryContactPhone} onChange={e => setCompanyData(d => ({ ...d, primaryContactPhone: e.target.value }))} className={inputClass} /></FormField>
-            </div>
-            <h4 className="font-medium text-slate-700 pt-2">Registered Address</h4>
-            <FormField label="Address Line 1"><input value={companyData.addressLine1} onChange={e => setCompanyData(d => ({ ...d, addressLine1: e.target.value }))} className={inputClass} /></FormField>
-            <div className="grid grid-cols-3 gap-4">
-              <FormField label="City"><input value={companyData.city} onChange={e => setCompanyData(d => ({ ...d, city: e.target.value }))} className={inputClass} /></FormField>
-              <FormField label="Postcode"><input value={companyData.postcode} onChange={e => setCompanyData(d => ({ ...d, postcode: e.target.value }))} className={inputClass} /></FormField>
-              <FormField label="Country">
-                <select value={companyData.country} onChange={e => setCompanyData(d => ({ ...d, country: e.target.value }))} className={inputClass}>
-                  <option value="GB">United Kingdom</option>
-                  <option value="IE">Ireland</option>
-                  <option value="US">United States</option>
-                  <option value="DE">Germany</option>
-                  <option value="FR">France</option>
-                </select>
-              </FormField>
-            </div>
-            <div className="flex justify-end pt-4">
-              <button onClick={nextStep} disabled={!companyData.name || !companyData.primaryContactName || !companyData.primaryContactEmail} className={btnPrimary}>
-                Continue to Subscription →
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 2: Subscription */}
-        {step === 2 && (
-          <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900">Subscription Details</h3>
-            <div className="space-y-2">
-              {plans.map(p => (
-                <label key={p.id} className={`block p-4 border rounded-lg cursor-pointer transition ${subData.planSlug === p.slug ? 'border-orange-500 bg-orange-50' : 'border-slate-200 hover:border-slate-300'}`}>
-                  <input type="radio" name="plan" value={p.slug} checked={subData.planSlug === p.slug} onChange={() => setSubData(d => ({ ...d, planSlug: p.slug }))} className="sr-only" />
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="font-medium text-slate-900">{p.name}</p>
-                      <p className="text-sm text-slate-500">{p.description}</p>
-                    </div>
-                    <p className="font-medium">{p.slug === 'enterprise' ? 'POA' : `${fmt(p.core_price_per_seat * 100)}/seat`}</p>
-                  </div>
-                </label>
-              ))}
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <FormField label="Contracted Seats *"><input type="number" min="1" value={subData.coreSeats} onChange={e => setSubData(d => ({ ...d, coreSeats: parseInt(e.target.value) || 50 }))} className={inputClass} /></FormField>
-              <FormField label="Contract Duration">
-                <select value={subData.contractMonths} onChange={e => setSubData(d => ({ ...d, contractMonths: parseInt(e.target.value) }))} className={inputClass}>
-                  {CONTRACT_DURATIONS.map(c => <option key={c.months} value={c.months}>{c.label}</option>)}
-                </select>
-              </FormField>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <FormField label="Start Date"><input type="date" value={subData.startDate} onChange={e => setSubData(d => ({ ...d, startDate: e.target.value }))} className={inputClass} /></FormField>
-              <FormField label={`Setup Fee (${fmt(subData.setupFee)})`}>
-                <div className="flex items-center gap-2">
-                  <input type="number" min="0" value={subData.setupFee / 100} onChange={e => setSubData(d => ({ ...d, setupFee: Math.round(parseFloat(e.target.value) * 100) || 0 }))} className={inputClass} />
-                  <label className="flex items-center gap-1 text-sm whitespace-nowrap">
-                    <input type="checkbox" checked={subData.setupFeeCredited} onChange={e => setSubData(d => ({ ...d, setupFeeCredited: e.target.checked }))} className="rounded" />
-                    Credit to contract
-                  </label>
-                </div>
-              </FormField>
-            </div>
-            <div className="border-t border-slate-100 pt-4 mt-4">
-              <div className="flex items-center gap-4 mb-3">
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" checked={subData.flexEnabled} onChange={e => setSubData(d => ({ ...d, flexEnabled: e.target.checked }))} className="rounded" />
-                  <span className="text-sm font-medium">Enable Flex Seats</span>
-                </label>
-                {subData.flexEnabled && (
-                  <FormField label="Flex Limit">
-                    <input type="number" min="0" value={subData.flexLimit} onChange={e => setSubData(d => ({ ...d, flexLimit: parseInt(e.target.value) || 0 }))} className={inputClass + " w-24"} />
-                  </FormField>
-                )}
-              </div>
-              <div className="flex items-center gap-4">
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" checked={subData.isTrial} onChange={e => setSubData(d => ({ ...d, isTrial: e.target.checked }))} className="rounded" />
-                  <span className="text-sm font-medium">Start as Trial</span>
-                </label>
-                {subData.isTrial && (
-                  <FormField label="Trial Days">
-                    <input type="number" min="1" max="90" value={subData.trialDays} onChange={e => setSubData(d => ({ ...d, trialDays: parseInt(e.target.value) || 14 }))} className={inputClass + " w-24"} />
-                  </FormField>
-                )}
-              </div>
-            </div>
-            <div className="flex justify-between pt-4">
-              <button onClick={prevStep} className={btnSecondary}>← Back</button>
-              <button onClick={nextStep} className={btnPrimary}>Continue to Locations →</button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: Locations */}
-        {step === 3 && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-slate-900">Locations</h3>
-              <button onClick={addLocation} className={btnSecondary + " flex items-center gap-1"}>
-                <Plus className="w-4 h-4" /> Add Location
-              </button>
-            </div>
-            <p className="text-sm text-slate-500">Add at least one location where employees will work.</p>
-            {locations.map((loc, i) => (
-              <div key={i} className="border border-slate-200 rounded-lg p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-sm text-slate-700">Location {i + 1}</span>
-                  {locations.length > 1 && (
-                    <button onClick={() => removeLocation(i)} className="text-red-500 hover:text-red-600 text-sm">Remove</button>
-                  )}
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  <FormField label="Location Name *"><input value={loc.name} onChange={e => updateLocation(i, 'name', e.target.value)} className={inputClass} placeholder="e.g. Head Office" /></FormField>
-                  <FormField label="Headcount"><input type="number" min="0" value={loc.headcount} onChange={e => updateLocation(i, 'headcount', parseInt(e.target.value) || 0)} className={inputClass} /></FormField>
-                </div>
-                <FormField label="Address"><input value={loc.addressLine1} onChange={e => updateLocation(i, 'addressLine1', e.target.value)} className={inputClass} /></FormField>
-                <div className="grid grid-cols-3 gap-3">
-                  <FormField label="City"><input value={loc.city} onChange={e => updateLocation(i, 'city', e.target.value)} className={inputClass} /></FormField>
-                  <FormField label="Country">
-                    <select value={loc.country} onChange={e => updateLocation(i, 'country', e.target.value)} className={inputClass}>
-                      <option value="GB">United Kingdom</option>
-                      <option value="IE">Ireland</option>
-                      <option value="US">United States</option>
-                      <option value="DE">Germany</option>
-                    </select>
-                  </FormField>
-                  <FormField label="Timezone">
-                    <select value={loc.timezone} onChange={e => updateLocation(i, 'timezone', e.target.value)} className={inputClass}>
-                      <option value="Europe/London">Europe/London</option>
-                      <option value="Europe/Dublin">Europe/Dublin</option>
-                      <option value="America/New_York">America/New_York</option>
-                      <option value="America/Los_Angeles">America/Los_Angeles</option>
-                      <option value="Europe/Berlin">Europe/Berlin</option>
-                    </select>
-                  </FormField>
-                </div>
-              </div>
-            ))}
-            <div className="flex justify-between pt-4">
-              <button onClick={prevStep} className={btnSecondary}>← Back</button>
-              <button onClick={nextStep} disabled={!locations.some(l => l.name)} className={btnPrimary}>Continue to Admin User →</button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 4: Admin User */}
-        {step === 4 && (
-          <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900">Admin User</h3>
-            <p className="text-sm text-slate-500">Create the first administrator account for this customer.</p>
-            <FormField label="Email *"><input type="email" value={userData.email} onChange={e => setUserData(d => ({ ...d, email: e.target.value }))} className={inputClass} placeholder="admin@company.com" /></FormField>
-            <div className="grid grid-cols-2 gap-4">
-              <FormField label="First Name *"><input value={userData.firstName} onChange={e => setUserData(d => ({ ...d, firstName: e.target.value }))} className={inputClass} /></FormField>
-              <FormField label="Last Name *"><input value={userData.lastName} onChange={e => setUserData(d => ({ ...d, lastName: e.target.value }))} className={inputClass} /></FormField>
-            </div>
-            <FormField label="Temporary Password">
-              <div className="flex gap-2">
-                <input value={userData.password} onChange={e => setUserData(d => ({ ...d, password: e.target.value }))} className={inputClass + " font-mono"} />
-                <button onClick={() => setUserData(d => ({ ...d, password: generatePassword() }))} className={btnSecondary} title="Generate new password">
-                  <RefreshCw className="w-4 h-4" />
-                </button>
-                <button onClick={() => navigator.clipboard.writeText(userData.password)} className={btnSecondary} title="Copy password">
-                  <Copy className="w-4 h-4" />
-                </button>
-              </div>
-            </FormField>
-            <div className="bg-slate-50 rounded-lg p-3">
-              <p className="text-sm text-slate-600"><strong>Role:</strong> HR Administrator</p>
-            </div>
-            <label className="flex items-center gap-2">
-              <input type="checkbox" checked={userData.sendWelcomeEmail} onChange={e => setUserData(d => ({ ...d, sendWelcomeEmail: e.target.checked }))} className="rounded" />
-              <span className="text-sm">Send welcome email with login instructions</span>
-            </label>
-            <div className="flex justify-between pt-4">
-              <button onClick={prevStep} className={btnSecondary}>← Back</button>
-              <button onClick={generateLicense} disabled={!userData.email || !userData.firstName || !userData.lastName} className={btnPrimary}>
-                Continue to License Key →
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 5: License Key */}
-        {step === 5 && (
-          <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900">License Key Generated</h3>
-            <p className="text-sm text-slate-500">A unique license key has been generated for this customer.</p>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <div className="flex items-center gap-2">
-                <code className="bg-white px-4 py-3 rounded border text-lg font-mono flex-1 text-center">{licenseKey}</code>
-                <button onClick={() => navigator.clipboard.writeText(licenseKey)} className={btnSecondary + " flex items-center gap-1"}>
-                  <Copy className="w-4 h-4" /> Copy
-                </button>
-              </div>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-4 text-sm space-y-2">
-              <div className="flex justify-between"><span className="text-slate-500">Plan Type</span><span className="font-medium capitalize">{subData.planSlug}</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Max Seats</span><span className="font-medium">{subData.coreSeats + (subData.flexEnabled ? subData.flexLimit : 0)}</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Flex Enabled</span><span className="font-medium">{subData.flexEnabled ? 'Yes' : 'No'}</span></div>
-            </div>
-            <div className="flex justify-between pt-4">
-              <button onClick={prevStep} className={btnSecondary}>← Back</button>
-              <button onClick={nextStep} className={btnPrimary}>Review & Confirm →</button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 6: Review & Confirm */}
-        {step === 6 && (
-          <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900">Review & Confirm</h3>
-            <p className="text-sm text-slate-500">Please review all details before creating the customer.</p>
-
-            <div className="border border-slate-200 rounded-lg divide-y divide-slate-200">
-              <div className="p-4">
-                <h4 className="font-medium text-slate-700 mb-2">Company</h4>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div><span className="text-slate-500">Name:</span> {companyData.name}</div>
-                  <div><span className="text-slate-500">Industry:</span> {companyData.industry}</div>
-                  <div><span className="text-slate-500">Contact:</span> {companyData.primaryContactName}</div>
-                  <div><span className="text-slate-500">Email:</span> {companyData.primaryContactEmail}</div>
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-medium text-slate-700 mb-2">Subscription</h4>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div><span className="text-slate-500">Plan:</span> <span className="capitalize">{subData.planSlug}</span></div>
-                  <div><span className="text-slate-500">Seats:</span> {subData.coreSeats} core{subData.flexEnabled ? ` + ${subData.flexLimit} flex` : ''}</div>
-                  <div><span className="text-slate-500">Contract:</span> {subData.contractMonths} months</div>
-                  <div><span className="text-slate-500">Setup Fee:</span> {fmt(subData.setupFee)}{subData.setupFeeCredited ? ' (credited)' : ''}</div>
-                  {subData.isTrial && <div><span className="text-slate-500">Trial:</span> {subData.trialDays} days</div>}
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-medium text-slate-700 mb-2">Locations ({locations.filter(l => l.name).length})</h4>
-                <div className="text-sm space-y-1">
-                  {locations.filter(l => l.name).map((l, i) => (
-                    <div key={i}>{l.name}{l.headcount > 0 ? ` (${l.headcount} employees)` : ''}</div>
-                  ))}
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-medium text-slate-700 mb-2">Admin User</h4>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div><span className="text-slate-500">Name:</span> {userData.firstName} {userData.lastName}</div>
-                  <div><span className="text-slate-500">Email:</span> {userData.email}</div>
-                  <div><span className="text-slate-500">Role:</span> HR Administrator</div>
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="font-medium text-slate-700 mb-2">License Key</h4>
-                <code className="text-sm bg-slate-100 px-2 py-1 rounded">{licenseKey}</code>
-              </div>
-            </div>
-
-            <div className="flex justify-between pt-4">
-              <button onClick={prevStep} className={btnSecondary}>← Back</button>
-              <button onClick={createCustomer} disabled={saving} className={btnPrimary + " flex items-center gap-2"}>
-                {saving ? 'Creating...' : 'Create Customer'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 7: Success */}
-        {step === 7 && (
-          <div className="space-y-6 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle className="w-8 h-8 text-green-600" />
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-slate-900">Customer Onboarded!</h3>
-              <p className="text-slate-500 mt-1">{companyData.name} is ready to go.</p>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-4 text-left text-sm space-y-2">
-              <div className="flex justify-between"><span className="text-slate-500">Organisation</span><span className="font-medium">{companyData.name}</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Plan</span><span className="font-medium capitalize">{subData.planSlug}</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Admin Email</span><span className="font-medium">{userData.email}</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Temp Password</span>
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs bg-white px-2 py-0.5 rounded border">{userData.password}</span>
-                  <button onClick={() => navigator.clipboard.writeText(userData.password)} className="text-slate-400 hover:text-slate-600"><Copy className="w-3.5 h-3.5" /></button>
-                </div>
-              </div>
-              <div className="flex justify-between"><span className="text-slate-500">License Key</span>
-                <div className="flex items-center gap-2">
-                  <code className="font-mono text-xs bg-white px-2 py-0.5 rounded border">{licenseKey}</code>
-                  <button onClick={() => navigator.clipboard.writeText(licenseKey)} className="text-slate-400 hover:text-slate-600"><Copy className="w-3.5 h-3.5" /></button>
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-3 justify-center">
-              <button onClick={() => navigate(createdOrg ? `/customers/${createdOrg.id}` : '/customers')} className={btnPrimary}>View Customer</button>
-              <button onClick={() => { setStep(1); setCompanyData({ name: '', tradingName: '', companyNumber: '', industry: 'Retail', primaryContactName: '', primaryContactEmail: '', primaryContactPhone: '', addressLine1: '', addressLine2: '', city: '', postcode: '', country: 'GB' }); setSubData({ planSlug: 'growth', coreSeats: 50, flexEnabled: true, flexLimit: 25, contractMonths: 12, startDate: new Date().toISOString().split('T')[0], isTrial: false, trialDays: 14, setupFee: 250000, setupFeeCredited: false }); setLocations([{ name: '', addressLine1: '', city: '', country: 'GB', timezone: 'Europe/London', headcount: 0 }]); setUserData({ email: '', firstName: '', lastName: '', password: generatePassword(), sendWelcomeEmail: true }); setLicenseKey(''); setCreatedOrg(null); setCreatedUser(null); }} className={btnSecondary}>
-                Onboard Another
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ==================== LICENSES PAGE ====================
-
-function LicensesPage() {
-  const [licenses, setLicenses] = useState([]);
-  const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [selectedLicense, setSelectedLicense] = useState(null);
-  const [showGenerate, setShowGenerate] = useState(false);
-  const navigate = useNavigate();
-
-  const loadLicenses = useCallback(() => {
-    setLoading(true);
-    const params = new URLSearchParams();
-    if (search) params.set('search', search);
-    if (statusFilter) params.set('status', statusFilter);
-    params.set('limit', '100');
-    apiFetch(`/api/ops/licenses?${params}`).then(d => setLicenses(d.licenses || [])).catch(() => {}).finally(() => setLoading(false));
-  }, [search, statusFilter]);
-
-  useEffect(() => { loadLicenses(); }, [loadLicenses]);
-
-  const handleAction = async (id, action) => {
-    const actionMap = {
-      suspend: { status: 'suspended', confirm: 'Suspend this license key?' },
-      reactivate: { status: 'active', confirm: 'Reactivate this license key?' },
-      revoke: { status: 'revoked', confirm: 'Revoke this license key? This cannot be undone.' },
-    };
-    const config = actionMap[action];
-    if (!config || !confirm(config.confirm)) return;
-    try {
-      await apiFetch(`/api/ops/licenses/${id}`, { method: action === 'revoke' ? 'DELETE' : 'PATCH', body: { status: config.status } });
-      setLicenses(prev => prev.map(l => l.id === id ? { ...l, status: config.status } : l));
-      if (selectedLicense?.id === id) setSelectedLicense(prev => ({ ...prev, status: config.status }));
-    } catch (err) { alert(err.message); }
-  };
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">License Keys</h2>
-        <div className="flex gap-3">
-          <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className={inputClass + " w-auto"}>
-            <option value="">All Statuses</option>
-            <option value="active">Active</option>
-            <option value="suspended">Suspended</option>
-            <option value="expired">Expired</option>
-            <option value="revoked">Revoked</option>
-          </select>
-          <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-            <input type="search" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-slate-300 rounded-lg w-64 text-sm" />
-          </div>
-          <button onClick={() => setShowGenerate(true)} className={btnPrimary + " flex items-center gap-1"}>
-            <Plus className="w-4 h-4" /> Generate Key
-          </button>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">License Key</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Organisation</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Plan</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Status</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Seats</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Flex Limit</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Expires</th>
-              <th className="text-right px-6 py-3 font-medium text-slate-600">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {loading ? (
-              <tr><td colSpan="8" className="px-6 py-8 text-center text-slate-500">Loading...</td></tr>
-            ) : licenses.length === 0 ? (
-              <tr><td colSpan="8" className="px-6 py-8 text-center text-slate-500">No license keys found</td></tr>
-            ) : licenses.map(l => (
-              <tr key={l.id} className="hover:bg-slate-50 cursor-pointer" onClick={() => setSelectedLicense(l)}>
-                <td className="px-6 py-4">
-                  <code className="text-xs bg-slate-100 px-2 py-1 rounded">{l.license_key}</code>
-                  <button onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(l.license_key); }} className="ml-2 text-slate-400 hover:text-slate-600">
-                    <Copy className="w-3.5 h-3.5 inline" />
-                  </button>
-                </td>
-                <td className="px-6 py-4">
-                  <button onClick={(e) => { e.stopPropagation(); navigate(`/customers/${l.organization_id}`); }} className="text-orange-600 hover:text-orange-700">
-                    {l.organization_name || 'Unknown'}
-                  </button>
-                </td>
-                <td className="px-6 py-4"><span className="capitalize">{l.plan_type || l.key_type}</span></td>
-                <td className="px-6 py-4"><StatusBadge status={l.status} /></td>
-                <td className="px-6 py-4">{l.activated_seats || 0}/{l.max_seats || 0}</td>
-                <td className="px-6 py-4">{l.flex_seats_limit != null ? l.flex_seats_limit : Math.floor((l.max_seats || 0) * 0.5)}</td>
-                <td className="px-6 py-4">{l.valid_until ? new Date(l.valid_until).toLocaleDateString() : 'Never'}</td>
-                <td className="px-6 py-4 text-right" onClick={e => e.stopPropagation()}>
-                  <div className="flex gap-2 justify-end">
-                    {l.status === 'active' && (
-                      <button onClick={() => handleAction(l.id, 'suspend')} className="text-amber-600 hover:text-amber-700 text-xs font-medium">Suspend</button>
-                    )}
-                    {l.status === 'suspended' && (
-                      <button onClick={() => handleAction(l.id, 'reactivate')} className="text-green-600 hover:text-green-700 text-xs font-medium">Reactivate</button>
-                    )}
-                    {l.status !== 'revoked' && (
-                      <button onClick={() => handleAction(l.id, 'revoke')} className="text-red-600 hover:text-red-700 text-xs font-medium">Revoke</button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* License Detail Modal */}
-      {selectedLicense && (
-        <LicenseDetailModal license={selectedLicense} onClose={() => setSelectedLicense(null)} onUpdated={loadLicenses} />
-      )}
-
-      {/* Generate License Modal */}
-      {showGenerate && (
-        <GenerateLicenseGlobalModal onClose={() => setShowGenerate(false)} onGenerated={loadLicenses} />
-      )}
-    </div>
-  );
-}
-
-function LicenseDetailModal({ license, onClose, onUpdated }) {
-  const [editing, setEditing] = useState(false);
-  const [maxSeats, setMaxSeats] = useState(license.max_seats || 0);
-  const [flexLimit, setFlexLimit] = useState(license.flex_seats_limit ?? Math.floor((license.max_seats || 0) * 0.5));
-  const [validUntil, setValidUntil] = useState(license.valid_until ? license.valid_until.split('T')[0] : '');
-  const [saving, setSaving] = useState(false);
-
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      await apiFetch(`/api/ops/licenses/${license.id}`, {
-        method: 'PATCH',
-        body: { maxSeats, flexSeatsLimit: flexLimit, validUntil: validUntil || null }
-      });
-      onUpdated();
-      onClose();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  const handleAction = async (action) => {
-    const actionMap = {
-      suspend: { status: 'suspended', confirm: 'Suspend this license?' },
-      reactivate: { status: 'active', confirm: 'Reactivate this license?' },
-      revoke: { status: 'revoked', confirm: 'Revoke this license? This cannot be undone.' },
-    };
-    const config = actionMap[action];
-    if (!config || !confirm(config.confirm)) return;
-    setSaving(true);
-    try {
-      await apiFetch(`/api/ops/licenses/${license.id}`, { method: action === 'revoke' ? 'DELETE' : 'PATCH', body: { status: config.status } });
-      onUpdated();
-      onClose();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  return (
-    <Modal title="License Details" onClose={onClose} wide>
-      <div className="space-y-6">
-        {/* License Key */}
-        <div className="bg-slate-50 rounded-lg p-4">
-          <p className="text-sm text-slate-500 mb-1">License Key</p>
-          <div className="flex items-center gap-2">
-            <code className="text-lg font-mono bg-white px-3 py-2 rounded border flex-1">{license.license_key}</code>
-            <button onClick={() => navigator.clipboard.writeText(license.license_key)} className={btnSecondary}>
-              <Copy className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Details Grid */}
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div className="p-3 bg-slate-50 rounded-lg">
-            <p className="text-slate-500">Organisation</p>
-            <p className="font-medium">{license.organization_name || 'Unknown'}</p>
-          </div>
-          <div className="p-3 bg-slate-50 rounded-lg">
-            <p className="text-slate-500">Plan Type</p>
-            <p className="font-medium capitalize">{license.plan_type || license.key_type}</p>
-          </div>
-          <div className="p-3 bg-slate-50 rounded-lg">
-            <p className="text-slate-500">Status</p>
-            <StatusBadge status={license.status} />
-          </div>
-          <div className="p-3 bg-slate-50 rounded-lg">
-            <p className="text-slate-500">Created</p>
-            <p className="font-medium">{new Date(license.created_at).toLocaleDateString()}</p>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="border border-slate-200 rounded-lg p-4">
-          <h4 className="font-medium text-slate-900 mb-3">Seat Usage</h4>
-          <div className="flex items-center gap-4">
-            <div className="flex-1">
-              <div className="flex justify-between text-sm mb-1">
-                <span className="text-slate-500">Activated Seats</span>
-                <span className="font-medium">{license.activated_seats || 0} / {license.max_seats || 0}</span>
-              </div>
-              <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
-                <div className="h-full bg-orange-500 rounded-full" style={{ width: `${((license.activated_seats || 0) / (license.max_seats || 1)) * 100}%` }} />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Edit Section */}
-        {editing ? (
-          <div className="border border-orange-200 bg-orange-50 rounded-lg p-4 space-y-4">
-            <h4 className="font-medium text-slate-900">Modify License</h4>
-            <div className="grid grid-cols-3 gap-4">
-              <FormField label="Max Seats">
-                <input type="number" min="1" value={maxSeats} onChange={e => setMaxSeats(parseInt(e.target.value) || 0)} className={inputClass} />
-              </FormField>
-              <FormField label="Flex Limit">
-                <input type="number" min="0" value={flexLimit} onChange={e => setFlexLimit(parseInt(e.target.value) || 0)} className={inputClass} />
-              </FormField>
-              <FormField label="Valid Until">
-                <input type="date" value={validUntil} onChange={e => setValidUntil(e.target.value)} className={inputClass} />
-              </FormField>
-            </div>
-            <div className="flex gap-2 justify-end">
-              <button onClick={() => setEditing(false)} className={btnSecondary}>Cancel</button>
-              <button onClick={handleSave} disabled={saving} className={btnPrimary}>{saving ? 'Saving...' : 'Save Changes'}</button>
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-wrap gap-2">
-            <button onClick={() => setEditing(true)} className={btnSecondary}>
-              <Edit className="w-4 h-4 inline mr-1" /> Modify Seats/Expiry
-            </button>
-            {license.status === 'active' && (
-              <button onClick={() => handleAction('suspend')} className={btnSecondary}>Suspend</button>
-            )}
-            {license.status === 'suspended' && (
-              <button onClick={() => handleAction('reactivate')} className={btnPrimary}>Reactivate</button>
-            )}
-            {license.status !== 'revoked' && (
-              <button onClick={() => handleAction('revoke')} className={btnDanger}>Revoke</button>
-            )}
-          </div>
-        )}
-      </div>
-    </Modal>
-  );
-}
-
-function GenerateLicenseGlobalModal({ onClose, onGenerated }) {
-  const [orgs, setOrgs] = useState([]);
-  const [selectedOrg, setSelectedOrg] = useState('');
-  const [planType, setPlanType] = useState('growth');
-  const [maxSeats, setMaxSeats] = useState(50);
-  const [flexLimit, setFlexLimit] = useState(25);
-  const [validUntil, setValidUntil] = useState('');
-  const [saving, setSaving] = useState(false);
-  const [generatedKey, setGeneratedKey] = useState('');
-
-  useEffect(() => {
-    apiFetch('/api/ops/customers?limit=200').then(d => setOrgs(d.customers || [])).catch(() => {});
-  }, []);
-
-  const handleGenerate = async () => {
-    if (!selectedOrg) return alert('Please select an organisation');
-    setSaving(true);
-    try {
-      const result = await apiFetch('/api/ops/licenses', {
-        method: 'POST',
-        body: { organizationId: selectedOrg, keyType: planType, planType, maxSeats, flexSeatsLimit: flexLimit, validUntil: validUntil || null }
-      });
-      setGeneratedKey(result.license?.license_key || 'Generated');
-      onGenerated();
-    } catch (err) { alert(err.message); }
-    finally { setSaving(false); }
-  };
-
-  if (generatedKey) {
-    return (
-      <Modal title="License Generated" onClose={onClose}>
-        <div className="space-y-4 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-            <CheckCircle className="w-8 h-8 text-green-600" />
-          </div>
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <p className="text-green-800 font-medium mb-2">License key generated</p>
-            <div className="flex items-center gap-2">
-              <code className="bg-white px-3 py-2 rounded border text-sm font-mono flex-1">{generatedKey}</code>
-              <button onClick={() => navigator.clipboard.writeText(generatedKey)} className={btnSecondary}>
-                <Copy className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-          <button onClick={onClose} className={btnPrimary + " w-full"}>Done</button>
-        </div>
-      </Modal>
-    );
-  }
-
-  return (
-    <Modal title="Generate License Key" onClose={onClose}>
-      <div className="space-y-4">
-        <FormField label="Organisation *">
-          <select value={selectedOrg} onChange={e => setSelectedOrg(e.target.value)} className={inputClass}>
-            <option value="">Select organisation...</option>
-            {orgs.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
-          </select>
-        </FormField>
-        <FormField label="Plan Type">
-          <select value={planType} onChange={e => setPlanType(e.target.value)} className={inputClass}>
-            <option value="growth">Growth</option>
-            <option value="scale">Scale</option>
-            <option value="enterprise">Enterprise</option>
-          </select>
-        </FormField>
-        <div className="grid grid-cols-2 gap-4">
-          <FormField label="Max Seats">
-            <input type="number" min="1" value={maxSeats} onChange={e => setMaxSeats(parseInt(e.target.value) || 50)} className={inputClass} />
-          </FormField>
-          <FormField label="Flex Limit">
-            <input type="number" min="0" value={flexLimit} onChange={e => setFlexLimit(parseInt(e.target.value) || 0)} className={inputClass} />
-          </FormField>
-        </div>
-        <FormField label="Valid Until (optional)">
-          <input type="date" value={validUntil} onChange={e => setValidUntil(e.target.value)} className={inputClass} />
-        </FormField>
-        <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className={btnSecondary}>Cancel</button>
-          <button onClick={handleGenerate} disabled={saving || !selectedOrg} className={btnPrimary}>
-            {saving ? 'Generating...' : 'Generate Key'}
-          </button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-// ==================== BILLING PAGE ====================
-
-function BillingPage() {
-  const [data, setData] = useState(null);
-  const [invoices, setInvoices] = useState([]);
-  const [flexUsage, setFlexUsage] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [retrying, setRetrying] = useState('');
-  const [activeTab, setActiveTab] = useState('overview');
-  const { currency, rates } = useCurrency();
-  const fmt = (v) => formatMoney(v, { currency, rates });
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     Promise.all([
-      apiFetch('/api/ops/billing/overview').then(setData).catch(() => null),
-      apiFetch('/api/ops/invoices?limit=50').then(d => setInvoices(d.invoices || [])).catch(() => []),
-      apiFetch('/api/ops/billing/flex-usage').then(d => setFlexUsage(d.usage || [])).catch(() => []),
-    ]).finally(() => setLoading(false));
+      apiFetch('/api/ops/dashboard'),
+      apiFetch('/api/ops/billing/overview').catch(() => null)
+    ])
+      .then(([dashData, billData]) => {
+        setData(dashData);
+        setBillingData(billData);
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
-  const retryPayment = async (invoiceId) => {
-    setRetrying(invoiceId);
-    try {
-      await apiFetch('/api/ops/billing/retry-payment', { method: 'POST', body: { invoiceId } });
-      setData(prev => prev ? { ...prev, failedPayments: prev.failedPayments.filter(p => p.id !== invoiceId) } : prev);
-    } catch (err) { alert(`Retry failed: ${err.message}`); }
-    finally { setRetrying(''); }
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div className="p-6 text-red-400">Error: {error}</div>;
+
+  const metrics = data?.metrics || {};
+
+  const formatMoney = (amount, inPence = true) => {
+    const value = inPence ? (amount || 0) / 100 : (amount || 0);
+    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(value);
   };
 
-  // Calculate totals
-  const totalMRR = (data?.mrrByPlan || []).reduce((sum, p) => sum + parseFloat(p.mrr || 0), 0);
-  const totalCoreSeats = (data?.mrrByPlan || []).reduce((sum, p) => sum + parseInt(p.total_core_seats || 0), 0);
-  const totalFlexSeats = (data?.mrrByPlan || []).reduce((sum, p) => sum + parseInt(p.total_flex_seats || 0), 0);
-  const totalCustomers = (data?.mrrByPlan || []).reduce((sum, p) => sum + parseInt(p.customer_count || 0), 0);
-  // Estimate flex revenue (assume £2 premium per flex seat)
-  const flexRevenue = totalFlexSeats * 200; // in pence
-  const baseRevenue = totalMRR * 100 - flexRevenue;
-  const arr = totalMRR * 12 * 100; // in pence
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat('en-GB').format(num || 0);
+  };
 
-  if (loading) return <div className="text-slate-500">Loading billing...</div>;
+  const failedPaymentsCount = data?.failedPayments?.length || 0;
+  const failedPaymentsTotal = data?.failedPayments?.reduce((sum, p) => sum + (p.total || 0), 0) || 0;
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">Billing</h2>
-        <div className="flex gap-1 bg-slate-100 rounded-lg p-1">
-          {['overview', 'invoices', 'flex'].map(tab => (
-            <button key={tab} onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition ${activeTab === tab ? 'bg-white shadow text-slate-900' : 'text-slate-600 hover:text-slate-900'}`}>
-              {tab === 'overview' ? 'Overview' : tab === 'invoices' ? 'Invoices' : 'Flex Tracking'}
-            </button>
-          ))}
+    <div>
+      <PageHeader title="Dashboard" subtitle="Overview of your operations" />
+      <div className="p-6 space-y-6">
+        {/* TOP ROW - 4 Metric Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <MetricCard
+            title="Total MRR"
+            value={formatMoney(metrics.mrr, false)}
+            icon={CreditCard}
+            color="text-green-500"
+          />
+          <MetricCard
+            title="Active Subscriptions"
+            value={formatNumber(metrics.active_subscriptions)}
+            icon={Building2}
+            color="text-blue-500"
+          />
+          <MetricCard
+            title="Total Seats"
+            value={formatNumber(metrics.total_seats)}
+            subtitle="core + flex"
+            icon={Users}
+            color="text-purple-500"
+          />
+          <MetricCard
+            title="Active Trials"
+            value={formatNumber(metrics.trials)}
+            icon={Calendar}
+            color="text-amber-500"
+          />
+        </div>
+
+        {/* SECOND ROW - Failed Payments Alert + Revenue by Plan */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Failed Payments Alert */}
+          <div className={`rounded-lg border p-4 ${failedPaymentsCount > 0 ? 'bg-red-500/10 border-red-500/50' : 'bg-slate-800 border-slate-700'}`}>
+            <div className="flex items-center gap-3">
+              <AlertTriangle className={`w-6 h-6 ${failedPaymentsCount > 0 ? 'text-red-500' : 'text-slate-500'}`} />
+              <div>
+                <h3 className={`font-medium ${failedPaymentsCount > 0 ? 'text-red-400' : 'text-slate-300'}`}>
+                  Failed Payments
+                </h3>
+                {failedPaymentsCount > 0 ? (
+                  <p className="text-sm text-red-300">
+                    {failedPaymentsCount} payment{failedPaymentsCount !== 1 ? 's' : ''} failed totalling {formatMoney(failedPaymentsTotal)}
+                  </p>
+                ) : (
+                  <p className="text-sm text-slate-500">No failed payments</p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Revenue by Plan */}
+          <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+            <h3 className="font-medium text-white mb-3">Revenue by Plan</h3>
+            {billingData?.mrrByPlan?.length > 0 ? (
+              <div className="space-y-2">
+                {billingData.mrrByPlan.map((plan, i) => (
+                  <div key={i} className="flex items-center justify-between text-sm">
+                    <span className="text-slate-300">{plan.plan_name}</span>
+                    <span className="text-white font-medium">{formatMoney(plan.mrr, false)}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-slate-500 text-sm">No subscription revenue yet</p>
+            )}
+          </div>
+        </div>
+
+        {/* THIRD ROW - Recent Activity */}
+        <div className="bg-slate-800 rounded-lg border border-slate-700">
+          <div className="px-4 py-3 border-b border-slate-700">
+            <h3 className="font-medium text-white">Recent Activity</h3>
+          </div>
+          <div className="p-4">
+            {data?.recentActivity?.length > 0 ? (
+              <div className="space-y-3">
+                {data.recentActivity.slice(0, 10).map((item, i) => (
+                  <div key={i} className="flex items-center justify-between text-sm py-2 border-b border-slate-700/50 last:border-0">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                      <span className="text-slate-300">{item.org_name}</span>
+                      <span className="text-slate-500 text-xs">{item.type?.replace('_', ' ')}</span>
+                    </div>
+                    <span className="text-slate-500 text-xs">
+                      {new Date(item.created_at).toLocaleDateString('en-GB', {
+                        day: 'numeric', month: 'short', year: 'numeric'
+                      })}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState title="No recent activity" description="Activity will appear here as customers are onboarded" />
+            )}
+          </div>
         </div>
       </div>
-
-      {activeTab === 'overview' && (
-        <>
-          {/* Revenue Summary Cards */}
-          <div className="grid grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Total MRR</p>
-              <p className="text-2xl font-bold text-green-600">{fmt(totalMRR * 100)}</p>
-              <div className="mt-2 text-xs text-slate-500 space-y-1">
-                <div className="flex justify-between"><span>Base:</span><span>{fmt(baseRevenue)}</span></div>
-                <div className="flex justify-between"><span>Flex:</span><span>{fmt(flexRevenue)}</span></div>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="text-sm text-slate-500">ARR</p>
-              <p className="text-2xl font-bold text-slate-900">{fmt(arr)}</p>
-              <p className="text-xs text-slate-500 mt-2">MRR x 12 months</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Total Seats</p>
-              <p className="text-2xl font-bold text-slate-900">{totalCoreSeats + totalFlexSeats}</p>
-              <div className="mt-2 text-xs text-slate-500 space-y-1">
-                <div className="flex justify-between"><span>Core:</span><span>{totalCoreSeats}</span></div>
-                <div className="flex justify-between"><span>Flex:</span><span>{totalFlexSeats}</span></div>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Customers</p>
-              <p className="text-2xl font-bold text-slate-900">{totalCustomers}</p>
-              <p className="text-xs text-slate-500 mt-2">Active subscriptions</p>
-            </div>
-          </div>
-
-          {/* MRR by Plan */}
-          <div className="bg-white rounded-xl p-6 shadow-sm">
-            <h3 className="font-semibold text-slate-900 mb-4">Revenue by Plan</h3>
-            <table className="w-full text-sm">
-              <thead className="bg-slate-50">
-                <tr>
-                  <th className="text-left px-4 py-2 font-medium text-slate-600">Plan</th>
-                  <th className="text-right px-4 py-2 font-medium text-slate-600">Customers</th>
-                  <th className="text-right px-4 py-2 font-medium text-slate-600">Core Seats</th>
-                  <th className="text-right px-4 py-2 font-medium text-slate-600">Flex Seats</th>
-                  <th className="text-right px-4 py-2 font-medium text-slate-600">Base MRR</th>
-                  <th className="text-right px-4 py-2 font-medium text-slate-600">Flex MRR</th>
-                  <th className="text-right px-4 py-2 font-medium text-slate-600">Total MRR</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {(data?.mrrByPlan || []).map(p => {
-                  const flexMrr = (p.total_flex_seats || 0) * 200;
-                  const baseMrr = (p.mrr || 0) * 100 - flexMrr;
-                  return (
-                    <tr key={p.plan_slug}>
-                      <td className="px-4 py-3 font-medium">{p.plan_name}</td>
-                      <td className="px-4 py-3 text-right">{p.customer_count}</td>
-                      <td className="px-4 py-3 text-right">{p.total_core_seats}</td>
-                      <td className="px-4 py-3 text-right">{p.total_flex_seats}</td>
-                      <td className="px-4 py-3 text-right">{fmt(baseMrr)}</td>
-                      <td className="px-4 py-3 text-right text-orange-600">{fmt(flexMrr)}</td>
-                      <td className="px-4 py-3 text-right font-medium text-green-600">{fmt(p.mrr * 100)}</td>
-                    </tr>
-                  );
-                })}
-                {(!data?.mrrByPlan?.length) && <tr><td colSpan="7" className="px-4 py-8 text-center text-slate-500">No active plans</td></tr>}
-              </tbody>
-              <tfoot className="bg-slate-50 font-medium">
-                <tr>
-                  <td className="px-4 py-3">Total</td>
-                  <td className="px-4 py-3 text-right">{totalCustomers}</td>
-                  <td className="px-4 py-3 text-right">{totalCoreSeats}</td>
-                  <td className="px-4 py-3 text-right">{totalFlexSeats}</td>
-                  <td className="px-4 py-3 text-right">{fmt(baseRevenue)}</td>
-                  <td className="px-4 py-3 text-right text-orange-600">{fmt(flexRevenue)}</td>
-                  <td className="px-4 py-3 text-right text-green-600">{fmt(totalMRR * 100)}</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-
-          {/* Failed Payments & Renewals */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-slate-900">Overdue Invoices</h3>
-                <span className="text-xs px-2 py-1 rounded-full bg-red-100 text-red-700">{(data?.failedPayments || []).length}</span>
-              </div>
-              <div className="space-y-3 max-h-64 overflow-y-auto">
-                {(data?.failedPayments || []).map(p => (
-                  <div key={p.org_id} className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
-                    <div>
-                      <p className="font-medium text-slate-900 text-sm">{p.org_name}</p>
-                      <p className="text-xs text-slate-500">Due: {p.due_date ? new Date(p.due_date).toLocaleDateString() : '-'}</p>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-bold text-red-600">{fmt(p.total)}</span>
-                      <button onClick={() => retryPayment(p.id)} disabled={retrying === p.id}
-                        className="text-xs px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50">
-                        {retrying === p.id ? '...' : 'Retry'}
-                      </button>
-                    </div>
-                  </div>
-                ))}
-                {(!data?.failedPayments?.length) && <p className="text-slate-500 text-sm">No overdue invoices</p>}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold text-slate-900 mb-4">Upcoming Renewals (7 days)</h3>
-              <div className="space-y-3 max-h-64 overflow-y-auto">
-                {(data?.upcomingRenewals || []).map((r, i) => (
-                  <div key={i} className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
-                    <div>
-                      <p className="font-medium text-slate-900 text-sm">{r.org_name}</p>
-                      <p className="text-xs text-slate-500">{r.plan_name} • {r.core_seats} seats</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-medium text-sm">{fmt(r.amount)}</p>
-                      <p className="text-xs text-slate-500">{new Date(r.current_period_end).toLocaleDateString()}</p>
-                    </div>
-                  </div>
-                ))}
-                {(!data?.upcomingRenewals?.length) && <p className="text-slate-500 text-sm">No renewals in the next 7 days</p>}
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
-      {activeTab === 'invoices' && (
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          <div className="p-4 border-b border-slate-100 flex justify-between items-center">
-            <h3 className="font-semibold text-slate-900">Invoice History</h3>
-          </div>
-          <table className="w-full text-sm">
-            <thead className="bg-slate-50">
-              <tr>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">Invoice #</th>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">Customer</th>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">Date</th>
-                <th className="text-right px-6 py-3 font-medium text-slate-600">Base</th>
-                <th className="text-right px-6 py-3 font-medium text-slate-600">Flex</th>
-                <th className="text-right px-6 py-3 font-medium text-slate-600">Total</th>
-                <th className="text-center px-6 py-3 font-medium text-slate-600">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {invoices.map(inv => (
-                <tr key={inv.id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 font-mono text-sm">{inv.stripe_invoice_number || inv.number || '-'}</td>
-                  <td className="px-6 py-4">{inv.org_name || '-'}</td>
-                  <td className="px-6 py-4">{new Date(inv.created_at || inv.invoice_date).toLocaleDateString()}</td>
-                  <td className="px-6 py-4 text-right">{fmt(inv.base_amount || inv.subtotal || 0)}</td>
-                  <td className="px-6 py-4 text-right text-orange-600">{fmt(inv.flex_amount || 0)}</td>
-                  <td className="px-6 py-4 text-right font-medium">{fmt(inv.total || 0)}</td>
-                  <td className="px-6 py-4 text-center"><StatusBadge status={inv.status} /></td>
-                </tr>
-              ))}
-              {!invoices.length && (
-                <tr><td colSpan="7" className="px-6 py-8 text-center text-slate-500">No invoices found</td></tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {activeTab === 'flex' && (
-        <div className="space-y-6">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Orgs Using Flex</p>
-              <p className="text-2xl font-bold text-slate-900">{flexUsage.length || totalFlexSeats > 0 ? '?' : 0}</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Total Flex Seats</p>
-              <p className="text-2xl font-bold text-orange-600">{totalFlexSeats}</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Flex Revenue (Est.)</p>
-              <p className="text-2xl font-bold text-green-600">{fmt(flexRevenue)}</p>
-              <p className="text-xs text-slate-500 mt-1">£2 premium/seat</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-            <div className="p-4 border-b border-slate-100">
-              <h3 className="font-semibold text-slate-900">Flex Seat Usage by Customer</h3>
-              <p className="text-sm text-slate-500">Customers with flex seats enabled</p>
-            </div>
-            <table className="w-full text-sm">
-              <thead className="bg-slate-50">
-                <tr>
-                  <th className="text-left px-6 py-3 font-medium text-slate-600">Customer</th>
-                  <th className="text-right px-6 py-3 font-medium text-slate-600">Core Seats</th>
-                  <th className="text-right px-6 py-3 font-medium text-slate-600">Flex Seats</th>
-                  <th className="text-right px-6 py-3 font-medium text-slate-600">Flex Limit</th>
-                  <th className="text-right px-6 py-3 font-medium text-slate-600">Flex Revenue</th>
-                  <th className="text-right px-6 py-3 font-medium text-slate-600">% of Total</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {flexUsage.length > 0 ? flexUsage.map((u, i) => (
-                  <tr key={i} className="hover:bg-slate-50">
-                    <td className="px-6 py-4 font-medium">{u.org_name}</td>
-                    <td className="px-6 py-4 text-right">{u.core_seats}</td>
-                    <td className="px-6 py-4 text-right text-orange-600">{u.flex_seats}</td>
-                    <td className="px-6 py-4 text-right">{u.flex_limit || '-'}</td>
-                    <td className="px-6 py-4 text-right">{fmt((u.flex_seats || 0) * 200)}</td>
-                    <td className="px-6 py-4 text-right">{((u.flex_seats || 0) / Math.max(totalFlexSeats, 1) * 100).toFixed(1)}%</td>
-                  </tr>
-                )) : (
-                  <tr><td colSpan="6" className="px-6 py-8 text-center text-slate-500">
-                    Flex usage data coming soon. Currently showing {totalFlexSeats} flex seats across all plans.
-                  </td></tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
 
-// ==================== FEATURES PAGE ====================
+function MetricCard({ title, value, subtitle, icon: Icon, color = 'text-orange-500' }) {
+  return (
+    <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm text-slate-400">{title}</p>
+          <p className="text-2xl font-bold text-white mt-1">{value}</p>
+          {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+        </div>
+        {Icon && <Icon className={`w-8 h-8 ${color}`} />}
+      </div>
+    </div>
+  );
+}
 
-const FEATURE_LIST = [
-  { key: 'ai_scheduling', label: 'AI Scheduling', description: 'Automatic shift optimization', icon: Zap },
-  { key: 'shift_marketplace', label: 'Shift Marketplace', description: 'Open shift bidding', icon: Users },
-  { key: 'payroll_export', label: 'Payroll Export', description: 'Export to payroll systems', icon: DollarSign },
-  { key: 'api_access', label: 'API Access', description: 'REST API integration', icon: Settings },
-  { key: 'sso', label: 'Single Sign-On', description: 'SAML/OIDC authentication', icon: Shield },
-  { key: 'custom_branding', label: 'Custom Branding', description: 'White-label portal', icon: Crown },
-  { key: 'advanced_analytics', label: 'Advanced Analytics', description: 'Deep workforce insights', icon: TrendingUp },
-  { key: 'compliance_module', label: 'Compliance Module', description: 'Right to work, certifications', icon: CheckCircle },
-];
+// ==================== CUSTOMERS PAGE ====================
 
-function FeaturesPage() {
-  const [defaults, setDefaults] = useState({});
-  const [overrides, setOverrides] = useState([]);
-  const [orgs, setOrgs] = useState([]);
-  const [selectedOrg, setSelectedOrg] = useState('');
+function CustomersPage() {
+  const [customers, setCustomers] = useState([]);
+  const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState('');
+  const [error, setError] = useState(null);
+  const [search, setSearch] = useState('');
+  const [planFilter, setPlanFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Load plan defaults
-    apiFetch('/api/ops/feature-defaults').then(d => {
-      const grouped = {};
-      (d.defaults || []).forEach(f => {
-        if (!grouped[f.plan_slug]) grouped[f.plan_slug] = {};
-        grouped[f.plan_slug][f.feature_key] = f.enabled;
-      });
-      setDefaults(grouped);
-    }).catch(() => {
-      // Fallback defaults
-      setDefaults({
-        growth: { ai_scheduling: false, shift_marketplace: true, payroll_export: true, api_access: false, sso: false, custom_branding: false, advanced_analytics: false, compliance_module: true },
-        scale: { ai_scheduling: true, shift_marketplace: true, payroll_export: true, api_access: true, sso: false, custom_branding: false, advanced_analytics: true, compliance_module: true },
-        enterprise: { ai_scheduling: true, shift_marketplace: true, payroll_export: true, api_access: true, sso: true, custom_branding: true, advanced_analytics: true, compliance_module: true },
-      });
-    });
+    Promise.all([
+      apiFetch('/api/ops/customers'),
+      apiFetch('/api/ops/plans').catch(() => ({ plans: [] }))
+    ])
+      .then(([custData, planData]) => {
+        setCustomers(custData.customers || []);
+        setPlans(planData.plans || []);
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
-    // Load orgs for override selector
-    apiFetch('/api/ops/customers?limit=100').then(d => setOrgs(d.customers || [])).catch(() => {});
+  const filteredCustomers = customers.filter(c => {
+    const matchesSearch = !search || c.name?.toLowerCase().includes(search.toLowerCase());
+    const matchesPlan = !planFilter || c.plan_name === planFilter;
+    const matchesStatus = !statusFilter || c.subscription_status === statusFilter;
+    return matchesSearch && matchesPlan && matchesStatus;
+  });
 
+  return (
+    <div>
+      <PageHeader title="Customers" subtitle={`${customers.length} total customers`}>
+        <Link to="/onboarding" className="flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors">
+          <Plus className="w-4 h-4" />
+          Onboard Customer
+        </Link>
+      </PageHeader>
+      <div className="p-6">
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            />
+          </div>
+          <select
+            value={planFilter}
+            onChange={(e) => setPlanFilter(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+          >
+            <option value="">All Plans</option>
+            {plans.map(p => (
+              <option key={p.id} value={p.name}>{p.name}</option>
+            ))}
+          </select>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+          >
+            <option value="">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="trialing">Trialing</option>
+            <option value="past_due">Past Due</option>
+            <option value="canceled">Canceled</option>
+          </select>
+        </div>
+
+        {loading ? <LoadingSpinner /> : error ? (
+          <div className="text-red-400">Error: {error}</div>
+        ) : filteredCustomers.length === 0 ? (
+          <EmptyState icon={Building2} title="No customers found" description={search || planFilter || statusFilter ? "Try adjusting your filters" : "Onboard your first customer to get started"} />
+        ) : (
+          <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-slate-700/50">
+                <tr>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Name</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Plan</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Status</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Seats</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Created</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-700">
+                {filteredCustomers.map(customer => (
+                  <tr
+                    key={customer.id}
+                    onClick={() => navigate(`/customers/${customer.id}`)}
+                    className="hover:bg-slate-700/50 cursor-pointer transition-colors"
+                  >
+                    <td className="px-4 py-3">
+                      <span className="text-white font-medium">{customer.name}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      {customer.plan_name ? (
+                        <span className="px-2 py-1 rounded text-xs font-medium bg-blue-500/20 text-blue-400">
+                          {customer.plan_name}
+                        </span>
+                      ) : (
+                        <span className="text-slate-500">-</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      <StatusBadge status={customer.subscription_status} />
+                    </td>
+                    <td className="px-4 py-3 text-slate-300">
+                      {customer.core_seats || 0}
+                    </td>
+                    <td className="px-4 py-3 text-slate-400 text-sm">
+                      {new Date(customer.created_at).toLocaleDateString('en-GB', {
+                        day: 'numeric', month: 'short', year: 'numeric'
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StatusBadge({ status }) {
+  const styles = {
+    active: 'bg-green-500/20 text-green-400',
+    trialing: 'bg-amber-500/20 text-amber-400',
+    past_due: 'bg-red-500/20 text-red-400',
+    canceled: 'bg-slate-500/20 text-slate-400',
+  };
+  return (
+    <span className={`px-2 py-1 rounded text-xs font-medium ${styles[status] || styles.canceled}`}>
+      {status || 'none'}
+    </span>
+  );
+}
+
+// ==================== PLACEHOLDER PAGES ====================
+
+function OnboardingPage() {
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [plans, setPlans] = useState([]);
+  const [formData, setFormData] = useState({
+    // Step 1: Company
+    name: '',
+    billingEmail: '',
+    billingName: '',
+    taxId: '',
+    // Step 2: Plan
+    planSlug: 'growth',
+    // Step 3: Seats
+    coreSeats: 10,
+    flexSeats: 0,
+    trialDays: 14,
+    // Step 4: Admin
+    adminEmail: '',
+    adminFirstName: '',
+    adminLastName: '',
+    adminPassword: '',
+  });
+  const [createdOrg, setCreatedOrg] = useState(null);
+
+  useEffect(() => {
+    apiFetch('/api/ops/plans')
+      .then(data => setPlans(data.plans || []))
+      .catch(() => {});
+  }, []);
+
+  const updateField = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const generatePassword = () => {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%^&*';
+    let pw = '';
+    for (let i = 0; i < 16; i++) pw += chars[Math.floor(Math.random() * chars.length)];
+    updateField('adminPassword', pw);
+  };
+
+  const handleNext = async () => {
+    setError('');
+
+    if (step === 1) {
+      if (!formData.name || !formData.billingEmail) {
+        setError('Company name and billing email are required');
+        return;
+      }
+      setStep(2);
+    } else if (step === 2) {
+      if (!formData.planSlug) {
+        setError('Please select a plan');
+        return;
+      }
+      setStep(3);
+    } else if (step === 3) {
+      if (formData.coreSeats < 1) {
+        setError('At least 1 core seat is required');
+        return;
+      }
+      setStep(4);
+    } else if (step === 4) {
+      if (!formData.adminEmail || !formData.adminPassword) {
+        setError('Admin email and password are required');
+        return;
+      }
+      if (formData.adminPassword.length < 12) {
+        setError('Password must be at least 12 characters');
+        return;
+      }
+      setStep(5);
+    }
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError('');
+
+    try {
+      // Step 1: Create organization
+      const orgResult = await apiFetch('/api/ops/onboard/organization', {
+        method: 'POST',
+        body: {
+          name: formData.name,
+          billingEmail: formData.billingEmail,
+          billingName: formData.billingName || formData.name,
+          taxId: formData.taxId || null,
+        },
+      });
+
+      const orgId = orgResult.organization.id;
+      setCreatedOrg(orgResult.organization);
+
+      // Step 2: Create subscription
+      await apiFetch('/api/ops/onboard/subscription', {
+        method: 'POST',
+        body: {
+          organizationId: orgId,
+          planSlug: formData.planSlug,
+          coreSeats: formData.coreSeats,
+          flexSeats: formData.flexSeats,
+          trialDays: formData.trialDays,
+        },
+      });
+
+      // Step 3: Create admin user
+      await apiFetch('/api/ops/onboard/user', {
+        method: 'POST',
+        body: {
+          organizationId: orgId,
+          email: formData.adminEmail,
+          firstName: formData.adminFirstName,
+          lastName: formData.adminLastName,
+          password: formData.adminPassword,
+        },
+      });
+
+      setStep(6); // Success step
+    } catch (err) {
+      setError(err.message || 'Failed to complete onboarding');
+    }
     setLoading(false);
+  };
+
+  const selectedPlan = plans.find(p => p.slug === formData.planSlug);
+
+  return (
+    <div>
+      <PageHeader title="Customer Onboarding" subtitle={`Step ${Math.min(step, 5)} of 5`} />
+      <div className="p-6 max-w-2xl mx-auto">
+        {/* Progress Bar */}
+        <div className="flex items-center mb-8">
+          {[1, 2, 3, 4, 5].map((s) => (
+            <React.Fragment key={s}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                step >= s ? 'bg-orange-600 text-white' : 'bg-slate-700 text-slate-400'
+              }`}>
+                {step > s ? '✓' : s}
+              </div>
+              {s < 5 && <div className={`flex-1 h-1 mx-2 ${step > s ? 'bg-orange-600' : 'bg-slate-700'}`} />}
+            </React.Fragment>
+          ))}
+        </div>
+
+        <div className="bg-slate-800 rounded-lg border border-slate-700 p-6">
+          {/* Step 1: Company Details */}
+          {step === 1 && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-white mb-4">Company Details</h2>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Company Name *</label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => updateField('name', e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  placeholder="Acme Ltd"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Billing Email *</label>
+                <input
+                  type="email"
+                  value={formData.billingEmail}
+                  onChange={(e) => updateField('billingEmail', e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  placeholder="billing@acme.com"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Billing Contact Name</label>
+                <input
+                  type="text"
+                  value={formData.billingName}
+                  onChange={(e) => updateField('billingName', e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  placeholder="Jane Smith"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">VAT/Tax ID</label>
+                <input
+                  type="text"
+                  value={formData.taxId}
+                  onChange={(e) => updateField('taxId', e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  placeholder="GB123456789"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Step 2: Plan Selection */}
+          {step === 2 && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-white mb-4">Select Plan</h2>
+              <div className="grid gap-3">
+                {plans.map((plan) => (
+                  <button
+                    key={plan.id}
+                    onClick={() => updateField('planSlug', plan.slug)}
+                    className={`p-4 rounded-lg border text-left transition-colors ${
+                      formData.planSlug === plan.slug
+                        ? 'bg-orange-600/20 border-orange-500'
+                        : 'bg-slate-700 border-slate-600 hover:border-slate-500'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-medium text-white">{plan.name}</h3>
+                        <p className="text-sm text-slate-400 mt-1">{plan.description}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-bold text-white">
+                          £{(plan.core_price_per_seat / 100).toFixed(2)}
+                        </p>
+                        <p className="text-xs text-slate-400">per seat/month</p>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: Seat Configuration */}
+          {step === 3 && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-white mb-4">Configure Seats</h2>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Core Seats *</label>
+                <input
+                  type="number"
+                  min="1"
+                  value={formData.coreSeats}
+                  onChange={(e) => updateField('coreSeats', parseInt(e.target.value) || 1)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                />
+                <p className="text-xs text-slate-500 mt-1">Guaranteed seats with fixed monthly cost</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Flex Seats Limit</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={formData.flexSeats}
+                  onChange={(e) => updateField('flexSeats', parseInt(e.target.value) || 0)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                />
+                <p className="text-xs text-slate-500 mt-1">Pay-as-you-go seats above core allocation</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Trial Days</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="90"
+                  value={formData.trialDays}
+                  onChange={(e) => updateField('trialDays', parseInt(e.target.value) || 0)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                />
+                <p className="text-xs text-slate-500 mt-1">Set to 0 for no trial</p>
+              </div>
+              {selectedPlan && (
+                <div className="mt-4 p-4 bg-slate-700/50 rounded-lg">
+                  <p className="text-sm text-slate-400">Estimated Monthly Cost:</p>
+                  <p className="text-2xl font-bold text-white">
+                    £{((formData.coreSeats * (selectedPlan.core_price_per_seat || 0)) / 100).toFixed(2)}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Step 4: Admin User */}
+          {step === 4 && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-white mb-4">Create Admin User</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-1">First Name</label>
+                  <input
+                    type="text"
+                    value={formData.adminFirstName}
+                    onChange={(e) => updateField('adminFirstName', e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-1">Last Name</label>
+                  <input
+                    type="text"
+                    value={formData.adminLastName}
+                    onChange={(e) => updateField('adminLastName', e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Email *</label>
+                <input
+                  type="email"
+                  value={formData.adminEmail}
+                  onChange={(e) => updateField('adminEmail', e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  placeholder="admin@acme.com"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Password *</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={formData.adminPassword}
+                    onChange={(e) => updateField('adminPassword', e.target.value)}
+                    className="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white font-mono"
+                    placeholder="Min 12 characters"
+                  />
+                  <button
+                    type="button"
+                    onClick={generatePassword}
+                    className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg"
+                  >
+                    Generate
+                  </button>
+                </div>
+                <p className="text-xs text-slate-500 mt-1">Must be 12+ chars with uppercase, lowercase, number, special char</p>
+              </div>
+            </div>
+          )}
+
+          {/* Step 5: Review */}
+          {step === 5 && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-white mb-4">Review & Confirm</h2>
+              <div className="space-y-3">
+                <ReviewRow label="Company" value={formData.name} />
+                <ReviewRow label="Billing Email" value={formData.billingEmail} />
+                <ReviewRow label="Plan" value={selectedPlan?.name || formData.planSlug} />
+                <ReviewRow label="Core Seats" value={formData.coreSeats} />
+                <ReviewRow label="Flex Seats" value={formData.flexSeats} />
+                <ReviewRow label="Trial Days" value={formData.trialDays} />
+                <ReviewRow label="Admin Email" value={formData.adminEmail} />
+                <ReviewRow label="Admin Password" value={formData.adminPassword} mono />
+              </div>
+              <div className="mt-4 p-4 bg-amber-500/10 border border-amber-500/50 rounded-lg">
+                <p className="text-amber-400 text-sm">
+                  Please double-check the password above. You will need to share it with the customer.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Step 6: Success */}
+          {step === 6 && (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">✓</span>
+              </div>
+              <h2 className="text-xl font-bold text-white mb-2">Customer Created!</h2>
+              <p className="text-slate-400 mb-6">
+                {formData.name} has been successfully onboarded.
+              </p>
+              <div className="bg-slate-700/50 rounded-lg p-4 text-left max-w-sm mx-auto mb-6">
+                <p className="text-sm text-slate-400">Login Credentials:</p>
+                <p className="text-white font-medium">{formData.adminEmail}</p>
+                <p className="text-white font-mono text-sm">{formData.adminPassword}</p>
+              </div>
+              <div className="flex gap-3 justify-center">
+                <button
+                  onClick={() => navigate(`/customers/${createdOrg?.id}`)}
+                  className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg"
+                >
+                  View Customer
+                </button>
+                <button
+                  onClick={() => {
+                    setStep(1);
+                    setFormData({
+                      name: '', billingEmail: '', billingName: '', taxId: '',
+                      planSlug: 'growth', coreSeats: 10, flexSeats: 0, trialDays: 14,
+                      adminEmail: '', adminFirstName: '', adminLastName: '', adminPassword: '',
+                    });
+                    setCreatedOrg(null);
+                  }}
+                  className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg"
+                >
+                  Onboard Another
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Error */}
+          {error && (
+            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Navigation */}
+          {step < 6 && (
+            <div className="flex justify-between mt-6 pt-4 border-t border-slate-700">
+              <button
+                onClick={() => setStep(Math.max(1, step - 1))}
+                disabled={step === 1}
+                className="px-4 py-2 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 text-white rounded-lg"
+              >
+                Back
+              </button>
+              {step < 5 ? (
+                <button
+                  onClick={handleNext}
+                  className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg"
+                >
+                  Next
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-green-600/50 text-white rounded-lg flex items-center gap-2"
+                >
+                  {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {loading ? 'Creating...' : 'Create Customer'}
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReviewRow({ label, value, mono }) {
+  return (
+    <div className="flex justify-between py-2 border-b border-slate-700/50">
+      <span className="text-slate-400">{label}</span>
+      <span className={`text-white ${mono ? 'font-mono text-sm' : ''}`}>{value}</span>
+    </div>
+  );
+}
+
+function LicensesPage() {
+  const toast = useToast();
+  const [licenses, setLicenses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [selectedLicense, setSelectedLicense] = useState(null);
+  const navigate = useNavigate();
+
+  const loadLicenses = () => {
+    apiFetch('/api/ops/licenses')
+      .then(data => setLicenses(data.licenses || []))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => { loadLicenses(); }, []);
+
+  const filtered = licenses.filter(l => {
+    const matchesSearch = !search ||
+      l.license_key?.toLowerCase().includes(search.toLowerCase()) ||
+      l.org_name?.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = !statusFilter || l.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
+  const copyKey = (key) => {
+    navigator.clipboard.writeText(key);
+  };
+
+  return (
+    <div>
+      <PageHeader title="Licenses" subtitle={`${licenses.length} license keys`} />
+      <div className="p-6">
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search by key or organization..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            />
+          </div>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          >
+            <option value="">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="expired">Expired</option>
+            <option value="revoked">Revoked</option>
+          </select>
+        </div>
+
+        {loading ? <LoadingSpinner /> : filtered.length === 0 ? (
+          <EmptyState icon={Key} title="No licenses found" description={search || statusFilter ? "Try adjusting your filters" : "License keys will appear here once customers are onboarded"} />
+        ) : (
+          <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-slate-700/50">
+                <tr>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">License Key</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Organization</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Plan</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Seats</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Status</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Valid Until</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-700">
+                {filtered.map(license => (
+                  <tr key={license.id} className="hover:bg-slate-700/30">
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <code className="text-xs bg-slate-700 px-2 py-1 rounded text-green-400">
+                          {license.license_key}
+                        </code>
+                        <button onClick={() => copyKey(license.license_key)} className="text-slate-400 hover:text-white">
+                          <Copy className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => navigate(`/customers/${license.organization_id}`)}
+                        className="text-white hover:text-orange-400"
+                      >
+                        {license.org_name || 'Unknown'}
+                      </button>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="px-2 py-1 rounded text-xs font-medium bg-blue-500/20 text-blue-400">
+                        {license.plan_type || 'growth'}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-slate-300">
+                      {license.activated_seats || 0} / {license.max_seats || 0}
+                    </td>
+                    <td className="px-4 py-3">
+                      <StatusBadge status={license.status} />
+                    </td>
+                    <td className="px-4 py-3 text-slate-400 text-sm">
+                      {license.valid_until
+                        ? new Date(license.valid_until).toLocaleDateString('en-GB')
+                        : 'N/A'}
+                    </td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => setSelectedLicense(license)}
+                        className="text-slate-400 hover:text-white text-sm"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Edit License Modal */}
+        {selectedLicense && (
+          <EditLicenseModal
+            license={selectedLicense}
+            onClose={() => setSelectedLicense(null)}
+            onSave={async (data) => {
+              try {
+                await apiFetch(`/api/ops/licenses/${selectedLicense.id}`, { method: 'PATCH', body: data });
+                setSelectedLicense(null);
+                loadLicenses();
+                toast.success('License updated');
+              } catch (err) {
+                toast.error('Failed to update license: ' + err.message);
+              }
+            }}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function EditLicenseModal({ license, onClose, onSave }) {
+  const [formData, setFormData] = useState({
+    max_seats: license.max_seats || 0,
+    flex_limit: license.flex_limit || 0,
+    valid_until: license.valid_until ? license.valid_until.split('T')[0] : '',
+    status: license.status || 'active',
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    await onSave(formData);
+    setLoading(false);
+  };
+
+  return (
+    <Modal title="Edit License" onClose={onClose}>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">License Key</label>
+          <code className="block w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-green-400">
+            {license.license_key}
+          </code>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Organization</label>
+          <p className="text-white">{license.org_name}</p>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Max Seats</label>
+            <input
+              type="number"
+              value={formData.max_seats}
+              onChange={(e) => setFormData({ ...formData, max_seats: parseInt(e.target.value) || 0 })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+              min="0"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Flex Limit</label>
+            <input
+              type="number"
+              value={formData.flex_limit}
+              onChange={(e) => setFormData({ ...formData, flex_limit: parseInt(e.target.value) || 0 })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+              min="0"
+            />
+            <p className="text-xs text-slate-500 mt-1">Extra seats allowed above max</p>
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Valid Until</label>
+          <input
+            type="date"
+            value={formData.valid_until}
+            onChange={(e) => setFormData({ ...formData, valid_until: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Status</label>
+          <select
+            value={formData.status}
+            onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          >
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="expired">Expired</option>
+            <option value="revoked">Revoked</option>
+          </select>
+        </div>
+        <div className="flex gap-2 justify-end pt-2">
+          <button onClick={onClose} className="px-4 py-2 bg-slate-700 text-white rounded-lg">Cancel</button>
+          <button onClick={handleSubmit} disabled={loading} className="px-4 py-2 bg-orange-600 text-white rounded-lg">
+            {loading ? 'Saving...' : 'Save Changes'}
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+function FeaturesPage() {
+  const toast = useToast();
+  const [customers, setCustomers] = useState([]);
+  const [selectedOrg, setSelectedOrg] = useState('');
+  const [features, setFeatures] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState('');
+
+  // Available feature flags
+  const availableFeatures = [
+    { key: 'ai_summaries', label: 'AI Summaries', description: 'AI-powered shift and performance summaries' },
+    { key: 'advanced_scheduling', label: 'Advanced Scheduling', description: 'Multi-location and complex scheduling' },
+    { key: 'custom_reports', label: 'Custom Reports', description: 'Build and export custom reports' },
+    { key: 'api_access', label: 'API Access', description: 'REST API access for integrations' },
+    { key: 'sso', label: 'SSO/SAML', description: 'Single sign-on integration' },
+    { key: 'white_label', label: 'White Label', description: 'Custom branding and domain' },
+    { key: 'multi_location', label: 'Multi-Location', description: 'Manage multiple locations' },
+    { key: 'payroll_integration', label: 'Payroll Integration', description: 'Connect to payroll providers' },
+  ];
+
+  useEffect(() => {
+    apiFetch('/api/ops/customers?limit=200')
+      .then(data => setCustomers(data.customers || []))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
     if (selectedOrg) {
-      apiFetch(`/api/ops/features/${selectedOrg}`).then(d => setOverrides(d.features || [])).catch(() => setOverrides([]));
-    } else {
-      setOverrides([]);
+      setLoading(true);
+      apiFetch(`/api/ops/features/${selectedOrg}`)
+        .then(data => setFeatures(data.features || []))
+        .catch(() => setFeatures([]))
+        .finally(() => setLoading(false));
     }
   }, [selectedOrg]);
 
-  const isEnabled = (key, planSlug) => defaults[planSlug]?.[key] ?? false;
-  const hasOverride = (key) => overrides.find(o => o.feature_key === key);
-  const overrideValue = (key) => overrides.find(o => o.feature_key === key)?.enabled;
-
-  const toggleOverride = async (key, enabled) => {
-    if (!selectedOrg) return;
-    setSaving(key);
+  const toggleFeature = async (featureKey, currentlyEnabled) => {
     try {
       await apiFetch(`/api/ops/features/${selectedOrg}`, {
         method: 'POST',
-        body: { featureKey: key, enabled, reason: 'Toggled via Features page' }
+        body: {
+          featureKey,
+          enabled: !currentlyEnabled,
+          reason: 'Manual toggle from ops portal',
+        },
       });
-      setOverrides(prev => {
-        const existing = prev.find(o => o.feature_key === key);
-        if (existing) return prev.map(o => o.feature_key === key ? { ...o, enabled } : o);
-        return [...prev, { feature_key: key, enabled }];
-      });
-    } catch (err) { alert(err.message); }
-    finally { setSaving(''); }
+      // Reload features
+      const data = await apiFetch(`/api/ops/features/${selectedOrg}`);
+      setFeatures(data.features || []);
+      toast.success('Feature flag updated');
+    } catch (err) {
+      toast.error('Failed to toggle feature: ' + err.message);
+    }
   };
 
-  const resetOverride = async (key) => {
-    if (!selectedOrg) return;
-    setSaving(key);
-    try {
-      await apiFetch(`/api/ops/features/${selectedOrg}/${key}`, { method: 'DELETE' });
-      setOverrides(prev => prev.filter(o => o.feature_key !== key));
-    } catch (err) { /* ignore - might not have delete endpoint */ }
-    finally { setSaving(''); }
-  };
+  const isEnabled = (key) => features.find(f => f.feature_key === key)?.enabled ?? false;
 
-  if (loading) return <div className="text-slate-500">Loading features...</div>;
+  const filteredCustomers = customers.filter(c =>
+    !search || c.name?.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-slate-900">Feature Flags</h2>
+    <div>
+      <PageHeader title="Feature Flags" subtitle="Enable or disable features per organization" />
+      <div className="p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Organization Selector */}
+          <div className="lg:col-span-1">
+            <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+              <h3 className="font-medium text-white mb-3">Select Organization</h3>
+              <div className="relative mb-3">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 text-sm"
+                />
+              </div>
+              <div className="max-h-96 overflow-y-auto space-y-1">
+                {filteredCustomers.map(c => (
+                  <button
+                    key={c.id}
+                    onClick={() => setSelectedOrg(c.id)}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                      selectedOrg === c.id
+                        ? 'bg-orange-600 text-white'
+                        : 'text-slate-300 hover:bg-slate-700'
+                    }`}
+                  >
+                    {c.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
 
-      {/* Plan Defaults Matrix */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-slate-100">
-          <h3 className="font-semibold text-slate-900">Plan Defaults</h3>
-          <p className="text-sm text-slate-500">Default feature availability per plan</p>
-        </div>
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Feature</th>
-              <th className="text-center px-4 py-3 font-medium text-slate-600">Growth</th>
-              <th className="text-center px-4 py-3 font-medium text-slate-600">Scale</th>
-              <th className="text-center px-4 py-3 font-medium text-slate-600">Enterprise</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {FEATURE_LIST.map(f => {
-              const Icon = f.icon;
-              return (
-                <tr key={f.key} className="hover:bg-slate-50">
-                  <td className="px-6 py-3">
-                    <div className="flex items-center gap-3">
-                      <Icon className="w-4 h-4 text-slate-400" />
-                      <div>
-                        <p className="font-medium text-slate-900">{f.label}</p>
-                        <p className="text-xs text-slate-500">{f.description}</p>
-                      </div>
-                    </div>
-                  </td>
-                  {['growth', 'scale', 'enterprise'].map(plan => (
-                    <td key={plan} className="px-4 py-3 text-center">
-                      {isEnabled(f.key, plan) ? (
-                        <CheckCircle className="w-5 h-5 text-green-500 mx-auto" />
-                      ) : (
-                        <XCircle className="w-5 h-5 text-slate-300 mx-auto" />
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Per-Org Overrides */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-slate-100">
-          <h3 className="font-semibold text-slate-900">Per-Organisation Overrides</h3>
-          <p className="text-sm text-slate-500 mb-3">Override feature flags for specific customers</p>
-          <select value={selectedOrg} onChange={e => setSelectedOrg(e.target.value)} className={inputClass + " max-w-md"}>
-            <option value="">Select an organisation...</option>
-            {orgs.map(o => (
-              <option key={o.id} value={o.id}>{o.name} ({o.plan_slug || 'no plan'})</option>
-            ))}
-          </select>
-        </div>
-
-        {selectedOrg && (
-          <div className="p-4 space-y-2">
-            {FEATURE_LIST.map(f => {
-              const Icon = f.icon;
-              const override = hasOverride(f.key);
-              const enabled = override ? overrideValue(f.key) : false;
-              return (
-                <div key={f.key} className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50">
-                  <div className="flex items-center gap-3">
-                    <Icon className="w-5 h-5 text-slate-400" />
-                    <div>
-                      <span className="font-medium text-slate-700">{f.label}</span>
-                      {override && <span className="ml-2 text-xs px-1.5 py-0.5 rounded bg-orange-100 text-orange-700">Override</span>}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {override && (
-                      <button onClick={() => resetOverride(f.key)} className="text-xs text-slate-500 hover:text-slate-700">Reset</button>
-                    )}
-                    <button
-                      onClick={() => toggleOverride(f.key, !enabled)}
-                      disabled={saving === f.key}
-                      className={`relative w-11 h-6 rounded-full transition ${enabled ? 'bg-orange-500' : 'bg-slate-300'}`}
-                    >
-                      <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${enabled ? 'translate-x-5' : ''}`} />
-                    </button>
-                  </div>
+          {/* Feature Toggles */}
+          <div className="lg:col-span-2">
+            {!selectedOrg ? (
+              <EmptyState icon={Shield} title="Select an Organization" description="Choose an organization from the list to manage its features" />
+            ) : loading ? (
+              <LoadingSpinner />
+            ) : (
+              <div className="bg-slate-800 rounded-lg border border-slate-700">
+                <div className="px-4 py-3 border-b border-slate-700">
+                  <h3 className="font-medium text-white">
+                    Features for {customers.find(c => c.id === selectedOrg)?.name}
+                  </h3>
                 </div>
-              );
-            })}
+                <div className="divide-y divide-slate-700">
+                  {availableFeatures.map(feature => {
+                    const enabled = isEnabled(feature.key);
+                    const override = features.find(f => f.feature_key === feature.key);
+                    return (
+                      <div key={feature.key} className="p-4 flex items-center justify-between">
+                        <div>
+                          <h4 className="text-white font-medium">{feature.label}</h4>
+                          <p className="text-sm text-slate-400">{feature.description}</p>
+                          {override?.expires_at && (
+                            <p className="text-xs text-amber-400 mt-1">
+                              Expires: {new Date(override.expires_at).toLocaleDateString('en-GB')}
+                            </p>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => toggleFeature(feature.key, enabled)}
+                          className={`relative w-12 h-6 rounded-full transition-colors ${
+                            enabled ? 'bg-green-500' : 'bg-slate-600'
+                          }`}
+                        >
+                          <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${
+                            enabled ? 'left-7' : 'left-1'
+                          }`} />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
-        )}
-
-        {!selectedOrg && (
-          <div className="p-8 text-center text-slate-500">
-            Select an organisation to manage feature overrides
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
 }
 
-// ==================== ACTIVITY PAGE ====================
+function BillingPage() {
+  const [data, setData] = useState(null);
+  const [invoices, setInvoices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState('overview');
+  const navigate = useNavigate();
+
+  const formatMoney = (amount) => new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format((amount || 0) / 100);
+
+  useEffect(() => {
+    Promise.all([
+      apiFetch('/api/ops/billing/overview'),
+      apiFetch('/api/ops/invoices?limit=50')
+    ])
+      .then(([billing, inv]) => {
+        setData(billing);
+        setInvoices(inv.invoices || []);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  const totalMRR = data?.mrrByPlan?.reduce((sum, p) => sum + (p.mrr || 0), 0) || 0;
+
+  return (
+    <div>
+      <PageHeader title="Billing" subtitle="Revenue and payment management" />
+      <div className="p-6 space-y-6">
+        {loading ? <LoadingSpinner /> : (
+          <>
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <MetricCard
+                title="Total MRR"
+                value={formatMoney(totalMRR * 100)}
+                icon={CreditCard}
+                color="text-green-500"
+              />
+              <MetricCard
+                title="Failed Payments"
+                value={data?.failedPayments?.length || 0}
+                icon={AlertTriangle}
+                color={data?.failedPayments?.length > 0 ? 'text-red-500' : 'text-slate-500'}
+              />
+              <MetricCard
+                title="Upcoming Renewals"
+                value={data?.upcomingRenewals?.length || 0}
+                subtitle="Next 7 days"
+                icon={Calendar}
+                color="text-amber-500"
+              />
+            </div>
+
+            {/* Tabs */}
+            <div className="flex gap-4 border-b border-slate-700">
+              {['overview', 'invoices', 'failed', 'renewals'].map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTab(t)}
+                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    tab === t ? 'border-orange-500 text-white' : 'border-transparent text-slate-400 hover:text-white'
+                  }`}
+                >
+                  {t.charAt(0).toUpperCase() + t.slice(1)}
+                </button>
+              ))}
+            </div>
+
+            {/* Tab Content */}
+            {tab === 'overview' && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* MRR by Plan */}
+                <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+                  <h3 className="font-medium text-white mb-4">MRR by Plan</h3>
+                  {data?.mrrByPlan?.length > 0 ? (
+                    <div className="space-y-3">
+                      {data.mrrByPlan.map((p, i) => (
+                        <div key={i} className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="px-2 py-1 rounded text-xs font-medium bg-blue-500/20 text-blue-400">
+                              {p.plan_name}
+                            </span>
+                            <span className="text-slate-400 text-sm">{p.customer_count} customers</span>
+                          </div>
+                          <span className="text-white font-medium">{formatMoney((p.mrr || 0) * 100)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-slate-500">No subscription data</p>
+                  )}
+                </div>
+
+                {/* Recent Changes */}
+                <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+                  <h3 className="font-medium text-white mb-4">Recent Seat Changes</h3>
+                  {data?.recentChanges?.length > 0 ? (
+                    <div className="space-y-3">
+                      {data.recentChanges.slice(0, 8).map((c, i) => (
+                        <div key={i} className="flex items-center justify-between text-sm">
+                          <span className="text-slate-300">{c.org_name}</span>
+                          <span className="text-slate-400">
+                            {c.previous_core_seats} → {c.new_core_seats} seats
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-slate-500">No recent changes</p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {tab === 'invoices' && (
+              <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-slate-700/50">
+                    <tr>
+                      <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Invoice</th>
+                      <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Organization</th>
+                      <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Amount</th>
+                      <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Status</th>
+                      <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-700">
+                    {invoices.map(inv => (
+                      <tr key={inv.id} className="hover:bg-slate-700/30">
+                        <td className="px-4 py-3 text-white font-mono text-sm">
+                          {inv.stripe_invoice_number || inv.id.slice(0, 8)}
+                        </td>
+                        <td className="px-4 py-3">
+                          <button
+                            onClick={() => navigate(`/customers/${inv.organization_id}`)}
+                            className="text-white hover:text-orange-400"
+                          >
+                            {inv.org_name}
+                          </button>
+                        </td>
+                        <td className="px-4 py-3 text-white">{formatMoney(inv.total)}</td>
+                        <td className="px-4 py-3">
+                          <StatusBadge status={inv.status === 'paid' ? 'active' : inv.status === 'open' ? 'past_due' : inv.status} />
+                        </td>
+                        <td className="px-4 py-3 text-slate-400 text-sm">
+                          {new Date(inv.created_at).toLocaleDateString('en-GB')}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {tab === 'failed' && (
+              <div className="bg-slate-800 rounded-lg border border-slate-700">
+                {data?.failedPayments?.length > 0 ? (
+                  <div className="divide-y divide-slate-700">
+                    {data.failedPayments.map((fp, i) => (
+                      <div key={i} className="p-4 flex items-center justify-between">
+                        <div>
+                          <p className="text-white font-medium">{fp.org_name}</p>
+                          <p className="text-slate-400 text-sm">
+                            {formatMoney(fp.total)} - Due: {new Date(fp.due_date).toLocaleDateString('en-GB')}
+                          </p>
+                        </div>
+                        <div className="flex gap-2">
+                          {fp.stripe_hosted_invoice_url && (
+                            <a
+                              href={fp.stripe_hosted_invoice_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm flex items-center gap-1"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                              View
+                            </a>
+                          )}
+                          <button
+                            onClick={() => navigate(`/customers/${fp.org_id}`)}
+                            className="px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm"
+                          >
+                            Manage
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-8 text-center">
+                    <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-2xl">✓</span>
+                    </div>
+                    <p className="text-green-400">All payments successful!</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {tab === 'renewals' && (
+              <div className="bg-slate-800 rounded-lg border border-slate-700">
+                {data?.upcomingRenewals?.length > 0 ? (
+                  <div className="divide-y divide-slate-700">
+                    {data.upcomingRenewals.map((r, i) => (
+                      <div key={i} className="p-4 flex items-center justify-between">
+                        <div>
+                          <p className="text-white font-medium">{r.org_name}</p>
+                          <p className="text-slate-400 text-sm">
+                            {r.plan_name} - {r.core_seats} seats
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-white font-medium">{formatMoney((r.amount || 0) * 100)}</p>
+                          <p className="text-slate-500 text-sm">
+                            {new Date(r.current_period_end).toLocaleDateString('en-GB')}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <EmptyState icon={Calendar} title="No upcoming renewals" description="No subscriptions renewing in the next 7 days" />
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
 
 function ActivityPage() {
   const [activity, setActivity] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [actionFilter, setActionFilter] = useState('');
+  const [userFilter, setUserFilter] = useState('');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
 
   useEffect(() => {
-    apiFetch('/api/ops/activity').then(d => setActivity(d.activity || [])).finally(() => setLoading(false));
+    apiFetch('/api/ops/activity')
+      .then(data => setActivity(data.activity || []))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="text-slate-500">Loading activity...</div>;
+  // Get unique action types and users for filter dropdowns
+  const actionTypes = [...new Set(activity.map(a => a.action).filter(Boolean))];
+  const users = [...new Set(activity.map(a => a.user_name || a.user_email).filter(Boolean))];
+
+  // Filter activity
+  const filtered = activity.filter(item => {
+    const matchesSearch = !search ||
+      item.action?.toLowerCase().includes(search.toLowerCase()) ||
+      item.entity_type?.toLowerCase().includes(search.toLowerCase()) ||
+      item.user_name?.toLowerCase().includes(search.toLowerCase());
+    const matchesAction = !actionFilter || item.action === actionFilter;
+    const matchesUser = !userFilter || item.user_name === userFilter || item.user_email === userFilter;
+    const itemDate = new Date(item.created_at);
+    const matchesDateFrom = !dateFrom || itemDate >= new Date(dateFrom);
+    const matchesDateTo = !dateTo || itemDate <= new Date(dateTo + 'T23:59:59');
+    return matchesSearch && matchesAction && matchesUser && matchesDateFrom && matchesDateTo;
+  });
+
+  const clearFilters = () => {
+    setSearch('');
+    setActionFilter('');
+    setUserFilter('');
+    setDateFrom('');
+    setDateTo('');
+  };
+
+  const hasFilters = search || actionFilter || userFilter || dateFrom || dateTo;
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-slate-900">Activity Log</h2>
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Action</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">User</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Entity</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Time</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {activity.map((a, i) => (
-              <tr key={i} className="hover:bg-slate-50">
-                <td className="px-6 py-4 font-medium text-slate-900">{a.action}</td>
-                <td className="px-6 py-4 text-slate-600">{a.first_name} {a.last_name}</td>
-                <td className="px-6 py-4 text-slate-500">{a.entity_type} / {a.entity_id?.slice(0, 8)}...</td>
-                <td className="px-6 py-4 text-slate-500">{new Date(a.created_at).toLocaleString()}</td>
-              </tr>
+    <div>
+      <PageHeader title="Activity" subtitle="Ops team activity log" />
+      <div className="p-6">
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search activity..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            />
+          </div>
+          <select
+            value={actionFilter}
+            onChange={(e) => setActionFilter(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          >
+            <option value="">All Actions</option>
+            {actionTypes.map(action => (
+              <option key={action} value={action}>{action}</option>
             ))}
-            {!activity.length && (
-              <tr><td colSpan="4" className="px-6 py-8 text-center text-slate-500">No activity recorded</td></tr>
-            )}
-          </tbody>
-        </table>
+          </select>
+          {users.length > 0 && (
+            <select
+              value={userFilter}
+              onChange={(e) => setUserFilter(e.target.value)}
+              className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            >
+              <option value="">All Users</option>
+              {users.map(user => (
+                <option key={user} value={user}>{user}</option>
+              ))}
+            </select>
+          )}
+          <input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            title="From date"
+          />
+          <input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            title="To date"
+          />
+          {hasFilters && (
+            <button
+              onClick={clearFilters}
+              className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg flex items-center gap-2"
+            >
+              <X className="w-4 h-4" /> Clear
+            </button>
+          )}
+        </div>
+
+        {loading ? <LoadingSpinner /> : filtered.length === 0 ? (
+          <EmptyState icon={Activity} title="No activity found" description={hasFilters ? "Try adjusting your filters" : "Actions will be logged here"} />
+        ) : (
+          <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+            <div className="px-4 py-2 bg-slate-700/30 text-sm text-slate-400">
+              Showing {filtered.length} of {activity.length} entries
+            </div>
+            <table className="w-full">
+              <thead className="bg-slate-700/50">
+                <tr>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Action</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Entity</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">User</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Time</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-700">
+                {filtered.map(item => (
+                  <tr key={item.id} className="hover:bg-slate-700/30">
+                    <td className="px-4 py-3">
+                      <span className="px-2 py-1 rounded text-xs font-medium bg-blue-500/20 text-blue-400">
+                        {item.action}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-slate-400">{item.entity_type}</td>
+                    <td className="px-4 py-3 text-slate-300">{item.user_name || item.user_email || '-'}</td>
+                    <td className="px-4 py-3 text-slate-500 text-sm">
+                      {new Date(item.created_at).toLocaleString('en-GB')}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-// ==================== USERS PAGE (SUPER ADMIN ONLY) ====================
+function AuditPage() {
+  const toast = useToast();
+  const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [actionFilter, setActionFilter] = useState('');
+  const [userFilter, setUserFilter] = useState('');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
+
+  useEffect(() => {
+    apiFetch('/api/ops/audit')
+      .then(data => setEntries(data.entries || []))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Get unique action types and users for filter dropdowns
+  const actionTypes = [...new Set(entries.map(e => e.action).filter(Boolean))];
+  const users = [...new Set(entries.map(e => e.user_name || e.ops_user_email).filter(Boolean))];
+
+  // Filter entries
+  const filtered = entries.filter(entry => {
+    const matchesSearch = !search ||
+      entry.action?.toLowerCase().includes(search.toLowerCase()) ||
+      entry.target_name?.toLowerCase().includes(search.toLowerCase()) ||
+      entry.user_name?.toLowerCase().includes(search.toLowerCase()) ||
+      entry.ip_address?.includes(search);
+    const matchesAction = !actionFilter || entry.action === actionFilter;
+    const matchesUser = !userFilter || entry.user_name === userFilter || entry.ops_user_email === userFilter;
+    const entryDate = new Date(entry.created_at);
+    const matchesDateFrom = !dateFrom || entryDate >= new Date(dateFrom);
+    const matchesDateTo = !dateTo || entryDate <= new Date(dateTo + 'T23:59:59');
+    return matchesSearch && matchesAction && matchesUser && matchesDateFrom && matchesDateTo;
+  });
+
+  const clearFilters = () => {
+    setSearch('');
+    setActionFilter('');
+    setUserFilter('');
+    setDateFrom('');
+    setDateTo('');
+  };
+
+  const hasFilters = search || actionFilter || userFilter || dateFrom || dateTo;
+
+  const exportCSV = () => {
+    const headers = ['User', 'Action', 'Target', 'IP Address', 'Timestamp'];
+    const rows = filtered.map(entry => [
+      entry.user_name || entry.ops_user_email || '',
+      entry.action || '',
+      entry.target_name || '',
+      entry.ip_address || '',
+      new Date(entry.created_at).toISOString(),
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `audit-log-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    toast.success('Audit log exported');
+  };
+
+  return (
+    <div>
+      <PageHeader title="Audit Log" subtitle="Security and access audit trail">
+        <button
+          onClick={exportCSV}
+          disabled={filtered.length === 0}
+          className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors disabled:opacity-50"
+        >
+          <Download className="w-4 h-4" />
+          Export CSV
+        </button>
+      </PageHeader>
+      <div className="p-6">
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search audit log..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            />
+          </div>
+          <select
+            value={actionFilter}
+            onChange={(e) => setActionFilter(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          >
+            <option value="">All Actions</option>
+            {actionTypes.map(action => (
+              <option key={action} value={action}>{action}</option>
+            ))}
+          </select>
+          {users.length > 0 && (
+            <select
+              value={userFilter}
+              onChange={(e) => setUserFilter(e.target.value)}
+              className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            >
+              <option value="">All Users</option>
+              {users.map(user => (
+                <option key={user} value={user}>{user}</option>
+              ))}
+            </select>
+          )}
+          <input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            title="From date"
+          />
+          <input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+            className="px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            title="To date"
+          />
+          {hasFilters && (
+            <button
+              onClick={clearFilters}
+              className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg flex items-center gap-2"
+            >
+              <X className="w-4 h-4" /> Clear
+            </button>
+          )}
+        </div>
+
+        {loading ? <LoadingSpinner /> : filtered.length === 0 ? (
+          <EmptyState icon={FileText} title="No audit entries found" description={hasFilters ? "Try adjusting your filters" : "Audit events will be logged here"} />
+        ) : (
+          <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+            <div className="px-4 py-2 bg-slate-700/30 text-sm text-slate-400">
+              Showing {filtered.length} of {entries.length} entries
+            </div>
+            <table className="w-full">
+              <thead className="bg-slate-700/50">
+                <tr>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">User</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Action</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Target</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">IP</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Time</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-700">
+                {filtered.map(entry => (
+                  <tr key={entry.id} className="hover:bg-slate-700/30">
+                    <td className="px-4 py-3 text-slate-300">{entry.user_name || entry.ops_user_email}</td>
+                    <td className="px-4 py-3">
+                      <span className="px-2 py-1 rounded text-xs font-medium bg-purple-500/20 text-purple-400">
+                        {entry.action}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-slate-400">{entry.target_name || '-'}</td>
+                    <td className="px-4 py-3 text-slate-500 text-sm font-mono">{entry.ip_address}</td>
+                    <td className="px-4 py-3 text-slate-500 text-sm">
+                      {new Date(entry.created_at).toLocaleString('en-GB')}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 function UsersPage() {
+  const { user: currentUser } = useAuth();
+  const toast = useToast();
   const [users, setUsers] = useState([]);
   const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [editingUser, setEditingUser] = useState(null);
-  const { hasRole } = useAuth();
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [createdCreds, setCreatedCreds] = useState(null);
+  const [confirmAction, setConfirmAction] = useState(null);
 
   const loadData = () => {
+    setLoading(true);
     Promise.all([
       apiFetch('/api/ops/users'),
-      apiFetch('/api/ops/roles')
-    ]).then(([usersData, rolesData]) => {
-      setUsers(usersData.users || []);
-      setRoles(rolesData.roles || []);
-    }).finally(() => setLoading(false));
+      apiFetch('/api/ops/roles').catch(() => ({ roles: [] }))
+    ])
+      .then(([userData, roleData]) => {
+        setUsers(userData.users || []);
+        setRoles(roleData.roles || []);
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => { loadData(); }, []);
 
-  const resetPassword = async (userId) => {
-    if (!confirm('Reset this user\'s password? They will receive a temporary password.')) return;
+  const handleCreate = async (formData) => {
     try {
-      const data = await apiFetch(`/api/ops/users/${userId}/reset-password`, { method: 'POST' });
-      alert(`Temporary password: ${data.temporaryPassword}\n\nPlease share this securely with the user.`);
-    } catch (err) {
-      alert('Error: ' + err.message);
-    }
-  };
-
-  const toggleStatus = async (user) => {
-    const newStatus = user.status === 'active' ? 'suspended' : 'active';
-    if (!confirm(`${newStatus === 'suspended' ? 'Suspend' : 'Activate'} ${user.email}?`)) return;
-    try {
-      await apiFetch(`/api/ops/users/${user.id}`, {
-        method: 'PATCH',
-        body: { status: newStatus }
+      const result = await apiFetch('/api/ops/users', {
+        method: 'POST',
+        body: formData,
       });
+      setCreatedCreds({ email: formData.email, password: result.tempPassword });
+      setShowCreateModal(false);
       loadData();
     } catch (err) {
-      alert('Error: ' + err.message);
+      throw err;
     }
   };
 
-  const unlockUser = async (userId) => {
+  const handleResetPassword = async (userId) => {
+    setConfirmAction({
+      title: 'Reset Password',
+      message: 'Are you sure you want to reset this user\'s password?',
+      onConfirm: async () => {
+        try {
+          const result = await apiFetch(`/api/ops/users/${userId}/reset-password`, { method: 'POST' });
+          setCreatedCreds({ tempPassword: result.tempPassword });
+          toast.success('Password reset successfully');
+        } catch (err) {
+          toast.error('Failed to reset password: ' + err.message);
+        }
+        setConfirmAction(null);
+      }
+    });
+  };
+
+  const handleUnlock = async (userId) => {
     try {
       await apiFetch(`/api/ops/users/${userId}/unlock`, { method: 'POST' });
       loadData();
+      toast.success('User unlocked');
     } catch (err) {
-      alert('Error: ' + err.message);
+      toast.error('Failed to unlock: ' + err.message);
     }
   };
 
-  const deleteUser = async (user) => {
-    if (!confirm(`Delete ${user.email}? This cannot be undone.`)) return;
-    try {
-      await apiFetch(`/api/ops/users/${user.id}`, { method: 'DELETE' });
-      loadData();
-    } catch (err) {
-      alert('Error: ' + err.message);
-    }
-  };
-
-  if (!hasRole('super_admin')) {
-    return <div className="text-red-600">Access denied. Super admin only.</div>;
-  }
-
-  if (loading) return <div className="text-slate-500">Loading users...</div>;
-
-  const roleColors = {
-    super_admin: 'bg-purple-100 text-purple-800',
-    admin: 'bg-blue-100 text-blue-800',
-    support: 'bg-green-100 text-green-800',
-    billing_viewer: 'bg-amber-100 text-amber-800',
-    read_only: 'bg-slate-100 text-slate-800'
-  };
-
-  const statusColors = {
-    active: 'bg-green-100 text-green-800',
-    suspended: 'bg-amber-100 text-amber-800',
-    disabled: 'bg-red-100 text-red-800'
+  const handleDelete = async (userId) => {
+    setConfirmAction({
+      title: 'Delete User',
+      message: 'Delete this user? This action cannot be undone.',
+      destructive: true,
+      onConfirm: async () => {
+        try {
+          await apiFetch(`/api/ops/users/${userId}`, { method: 'DELETE' });
+          loadData();
+          toast.success('User deleted');
+        } catch (err) {
+          toast.error('Failed to delete: ' + err.message);
+        }
+        setConfirmAction(null);
+      }
+    });
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">Admin Users</h2>
-        <button onClick={() => setShowCreateModal(true)} className={btnPrimary}>
-          <Plus className="w-4 h-4 inline mr-1" /> Add User
+    <div>
+      <PageHeader title="Users" subtitle={`${users.length} ops users`}>
+        <button
+          onClick={() => setShowCreateModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors"
+        >
+          <Plus className="w-4 h-4" />
+          Add User
         </button>
-      </div>
+      </PageHeader>
+      <div className="p-6">
+        {loading ? <LoadingSpinner /> : error ? (
+          <div className="text-red-400">Error: {error}</div>
+        ) : users.length === 0 ? (
+          <EmptyState icon={Users} title="No users" description="Create the first ops user" />
+        ) : (
+          <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-slate-700/50">
+                <tr>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">User</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Role</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Status</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Sessions</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Last Login</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-slate-300">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-700">
+                {users.map(user => (
+                  <tr key={user.id} className="hover:bg-slate-700/30">
+                    <td className="px-4 py-3">
+                      <div>
+                        <p className="text-white font-medium">{user.name}</p>
+                        <p className="text-slate-400 text-sm">{user.email}</p>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        user.role === 'super_admin' ? 'bg-purple-500/20 text-purple-400' :
+                        user.role === 'admin' ? 'bg-orange-500/20 text-orange-400' :
+                        'bg-slate-500/20 text-slate-400'
+                      }`}>
+                        {(user.role || user.role_name)?.replace('_', ' ')}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <StatusBadge status={user.status} />
+                        {user.locked_until && new Date(user.locked_until) > new Date() && (
+                          <span className="text-red-400 text-xs">Locked</span>
+                        )}
+                        {user.mfa_enabled && (
+                          <span className="text-green-400 text-xs">MFA</span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-slate-300">
+                      {user.active_sessions || 0}
+                    </td>
+                    <td className="px-4 py-3 text-slate-500 text-sm">
+                      {user.last_login_at ? new Date(user.last_login_at).toLocaleString('en-GB') : 'Never'}
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setSelectedUser(user)}
+                          className="text-slate-400 hover:text-white text-sm"
+                          title="Edit"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleResetPassword(user.id)}
+                          className="text-slate-400 hover:text-amber-400 text-sm"
+                          title="Reset Password"
+                        >
+                          <Key className="w-4 h-4" />
+                        </button>
+                        {user.locked_until && (
+                          <button
+                            onClick={() => handleUnlock(user.id)}
+                            className="text-amber-400 hover:text-amber-300 text-sm"
+                            title="Unlock"
+                          >
+                            Unlock
+                          </button>
+                        )}
+                        {user.id !== currentUser?.id && (
+                          <button
+                            onClick={() => handleDelete(user.id)}
+                            className="text-red-400 hover:text-red-300 text-sm"
+                            title="Delete"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">User</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Role</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Status</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">MFA</th>
-              <th className="text-left px-6 py-3 font-medium text-slate-600">Last Login</th>
-              <th className="text-right px-6 py-3 font-medium text-slate-600">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {users.map(user => (
-              <tr key={user.id} className="hover:bg-slate-50">
-                <td className="px-6 py-4">
-                  <div>
-                    <p className="font-medium text-slate-900">{user.name || `${user.firstName} ${user.lastName}`}</p>
-                    <p className="text-sm text-slate-500">{user.email}</p>
-                  </div>
-                </td>
-                <td className="px-6 py-4">
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${roleColors[user.role] || 'bg-slate-100'}`}>
-                    {user.role?.replace('_', ' ')}
-                  </span>
-                </td>
-                <td className="px-6 py-4">
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[user.status] || 'bg-slate-100'}`}>
-                    {user.status}
-                  </span>
-                  {user.lockedUntil && new Date(user.lockedUntil) > new Date() && (
-                    <span className="ml-2 text-xs text-red-600">(locked)</span>
-                  )}
-                </td>
-                <td className="px-6 py-4">
-                  {user.mfaEnabled ? (
-                    <span className="text-green-600 flex items-center gap-1"><Shield className="w-4 h-4" /> Enabled</span>
-                  ) : (
-                    <span className="text-slate-400">Disabled</span>
-                  )}
-                </td>
-                <td className="px-6 py-4 text-slate-500">
-                  {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : 'Never'}
-                </td>
-                <td className="px-6 py-4">
-                  <div className="flex items-center justify-end gap-2">
-                    <button onClick={() => setEditingUser(user)} className="p-1 text-slate-400 hover:text-slate-600" title="Edit">
-                      <Edit className="w-4 h-4" />
-                    </button>
-                    <button onClick={() => resetPassword(user.id)} className="p-1 text-slate-400 hover:text-orange-600" title="Reset Password">
-                      <RotateCcw className="w-4 h-4" />
-                    </button>
-                    {user.lockedUntil && new Date(user.lockedUntil) > new Date() && (
-                      <button onClick={() => unlockUser(user.id)} className="p-1 text-slate-400 hover:text-green-600" title="Unlock">
-                        <Lock className="w-4 h-4" />
-                      </button>
-                    )}
-                    <button onClick={() => toggleStatus(user)}
-                      className={`p-1 ${user.status === 'active' ? 'text-slate-400 hover:text-amber-600' : 'text-slate-400 hover:text-green-600'}`}
-                      title={user.status === 'active' ? 'Suspend' : 'Activate'}>
-                      {user.status === 'active' ? <UserX className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}
-                    </button>
-                    {!user.isSystem && (
-                      <button onClick={() => deleteUser(user)} className="p-1 text-slate-400 hover:text-red-600" title="Delete">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        {/* Created Credentials Modal */}
+        {createdCreds && (
+          <Modal title="User Created" onClose={() => setCreatedCreds(null)}>
+            <div className="space-y-4">
+              <p className="text-slate-300">Share these credentials with the new user:</p>
+              <div className="bg-slate-700/50 rounded-lg p-4">
+                <p className="text-sm text-slate-400">Email</p>
+                <p className="text-white font-medium">{createdCreds.email}</p>
+                <p className="text-sm text-slate-400 mt-2">Temporary Password</p>
+                <p className="text-white font-mono">{createdCreds.password}</p>
+              </div>
+              <p className="text-xs text-amber-400">User will be required to change password on first login.</p>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(`Email: ${createdCreds.email}\nPassword: ${createdCreds.password}`);
+                  setCreatedCreds(null);
+                }}
+                className="w-full px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg"
+              >
+                Copy & Close
+              </button>
+            </div>
+          </Modal>
+        )}
 
-      {showCreateModal && (
-        <CreateUserModal roles={roles} onClose={() => setShowCreateModal(false)} onSuccess={loadData} />
-      )}
-      {editingUser && (
-        <EditUserModal user={editingUser} roles={roles} onClose={() => setEditingUser(null)} onSuccess={loadData} />
-      )}
+        {/* Create User Modal */}
+        {showCreateModal && (
+          <CreateUserModal
+            roles={roles}
+            onClose={() => setShowCreateModal(false)}
+            onCreate={handleCreate}
+          />
+        )}
+
+        {/* Edit User Modal */}
+        {selectedUser && (
+          <EditUserModal
+            user={selectedUser}
+            roles={roles}
+            onClose={() => setSelectedUser(null)}
+            onSave={async (data) => {
+              await apiFetch(`/api/ops/users/${selectedUser.id}`, { method: 'PATCH', body: data });
+              setSelectedUser(null);
+              loadData();
+              toast.success('User updated');
+            }}
+          />
+        )}
+
+        {/* Confirmation Modal */}
+        {confirmAction && (
+          <Modal title={confirmAction.title} onClose={() => setConfirmAction(null)}>
+            <p className="text-slate-300 mb-6">{confirmAction.message}</p>
+            <div className="flex gap-2 justify-end">
+              <button onClick={() => setConfirmAction(null)} className="px-4 py-2 bg-slate-700 text-white rounded-lg">
+                Cancel
+              </button>
+              <button
+                onClick={confirmAction.onConfirm}
+                className={`px-4 py-2 rounded-lg text-white ${confirmAction.destructive ? 'bg-red-600 hover:bg-red-700' : 'bg-orange-600 hover:bg-orange-700'}`}
+              >
+                Confirm
+              </button>
+            </div>
+          </Modal>
+        )}
+      </div>
     </div>
   );
 }
 
-function CreateUserModal({ roles, onClose, onSuccess }) {
-  const [form, setForm] = useState({ email: '', name: '', roleId: '' });
+function CreateUserModal({ roles, onClose, onCreate }) {
+  const [formData, setFormData] = useState({ email: '', name: '', roleId: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [result, setResult] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    if (!formData.email || !formData.name || !formData.roleId) {
+      setError('All fields are required');
+      return;
+    }
     setLoading(true);
-    setError('');
     try {
-      const data = await apiFetch('/api/ops/users', { method: 'POST', body: form });
-      setResult(data);
-      onSuccess();
+      await onCreate(formData);
     } catch (err) {
       setError(err.message);
-    } finally {
       setLoading(false);
     }
   };
 
-  if (result) {
-    return (
-      <Modal title="User Created" onClose={onClose}>
-        <div className="space-y-4">
-          <div className="bg-green-50 p-4 rounded-lg">
-            <CheckCircle className="w-8 h-8 text-green-500 mb-2" />
-            <p className="font-medium text-green-800">User created successfully!</p>
-          </div>
-          <div className="bg-amber-50 p-4 rounded-lg">
-            <p className="font-medium text-amber-800 mb-2">Temporary Password:</p>
-            <code className="block bg-white px-3 py-2 rounded border text-lg">{result.temporaryPassword}</code>
-            <p className="text-sm text-amber-600 mt-2">Share this securely. User must change on first login.</p>
-          </div>
-          <button onClick={onClose} className={btnPrimary}>Done</button>
-        </div>
-      </Modal>
-    );
-  }
-
   return (
-    <Modal title="Create Admin User" onClose={onClose}>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-        <FormField label="Email">
-          <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
-            className={inputClass} required placeholder="user@uplifthq.co.uk" />
-        </FormField>
-        <FormField label="Full Name">
-          <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-            className={inputClass} required placeholder="John Smith" />
-        </FormField>
-        <FormField label="Role">
-          <select value={form.roleId} onChange={e => setForm({ ...form, roleId: e.target.value })}
-            className={inputClass} required>
+    <Modal title="Create User" onClose={onClose}>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            placeholder="Jane Smith"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Email</label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+            placeholder="jane@uplifthq.co.uk"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Role</label>
+          <select
+            value={formData.roleId}
+            onChange={(e) => setFormData({ ...formData, roleId: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          >
             <option value="">Select role...</option>
             {roles.map(r => (
-              <option key={r.id} value={r.id}>{r.name.replace('_', ' ')} - {r.description}</option>
+              <option key={r.id} value={r.id}>{r.name.replace('_', ' ')}</option>
             ))}
           </select>
-        </FormField>
-        <div className="flex gap-3 pt-2">
-          <button type="submit" disabled={loading} className={btnPrimary}>
+        </div>
+        {error && <p className="text-red-400 text-sm">{error}</p>}
+        <div className="flex gap-2 justify-end pt-2">
+          <button onClick={onClose} className="px-4 py-2 bg-slate-700 text-white rounded-lg">Cancel</button>
+          <button onClick={handleSubmit} disabled={loading} className="px-4 py-2 bg-orange-600 text-white rounded-lg">
             {loading ? 'Creating...' : 'Create User'}
           </button>
-          <button type="button" onClick={onClose} className={btnSecondary}>Cancel</button>
         </div>
-      </form>
+      </div>
     </Modal>
   );
 }
 
-function EditUserModal({ user, roles, onClose, onSuccess }) {
-  const [form, setForm] = useState({
-    name: user.name || `${user.firstName} ${user.lastName}`,
-    roleId: user.roleId || '',
-    status: user.status
+function EditUserModal({ user, roles, onClose, onSave }) {
+  const toast = useToast();
+  const [formData, setFormData] = useState({
+    name: user.name || '',
+    roleId: user.role_id || '',
+    status: user.status || 'active',
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setLoading(true);
-    setError('');
     try {
-      await apiFetch(`/api/ops/users/${user.id}`, { method: 'PATCH', body: form });
-      onSuccess();
-      onClose();
+      await onSave(formData);
     } catch (err) {
-      setError(err.message);
-    } finally {
+      toast.error('Failed to update: ' + err.message);
       setLoading(false);
     }
   };
 
   return (
     <Modal title="Edit User" onClose={onClose}>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-        <div className="bg-slate-50 p-3 rounded-lg">
-          <p className="text-sm text-slate-600">{user.email}</p>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          />
         </div>
-        <FormField label="Full Name">
-          <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-            className={inputClass} required />
-        </FormField>
-        <FormField label="Role">
-          <select value={form.roleId} onChange={e => setForm({ ...form, roleId: e.target.value })}
-            className={inputClass} required>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Role</label>
+          <select
+            value={formData.roleId}
+            onChange={(e) => setFormData({ ...formData, roleId: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          >
             {roles.map(r => (
               <option key={r.id} value={r.id}>{r.name.replace('_', ' ')}</option>
             ))}
           </select>
-        </FormField>
-        <FormField label="Status">
-          <select value={form.status} onChange={e => setForm({ ...form, status: e.target.value })} className={inputClass}>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">Status</label>
+          <select
+            value={formData.status}
+            onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          >
             <option value="active">Active</option>
             <option value="suspended">Suspended</option>
             <option value="disabled">Disabled</option>
           </select>
-        </FormField>
-        <div className="flex gap-3 pt-2">
-          <button type="submit" disabled={loading} className={btnPrimary}>
+        </div>
+        <div className="flex gap-2 justify-end pt-2">
+          <button onClick={onClose} className="px-4 py-2 bg-slate-700 text-white rounded-lg">Cancel</button>
+          <button onClick={handleSubmit} disabled={loading} className="px-4 py-2 bg-orange-600 text-white rounded-lg">
             {loading ? 'Saving...' : 'Save Changes'}
           </button>
-          <button type="button" onClick={onClose} className={btnSecondary}>Cancel</button>
         </div>
-      </form>
+      </div>
     </Modal>
   );
 }
 
-// ==================== AUDIT LOG PAGE ====================
+function AccountPage() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const [tab, setTab] = useState('profile');
+  const [sessions, setSessions] = useState([]);
+  const [auditLog, setAuditLog] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [confirmAction, setConfirmAction] = useState(null);
 
-function AuditPage() {
-  const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({ action: '', userId: '', targetType: '', days: '7' });
-  const [users, setUsers] = useState([]);
-  const { hasRole } = useAuth();
+  // Password change state
+  const [pwForm, setPwForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [pwError, setPwError] = useState('');
+  const [pwSuccess, setPwSuccess] = useState(false);
+
+  // MFA state
+  const [mfaSetup, setMfaSetup] = useState(null);
+  const [mfaToken, setMfaToken] = useState('');
 
   useEffect(() => {
-    if (hasRole(['super_admin', 'admin'])) {
-      apiFetch('/api/ops/users').then(d => setUsers(d.users || [])).catch(() => {});
+    if (tab === 'sessions') {
+      apiFetch('/api/ops/sessions')
+        .then(data => setSessions(data.sessions || []))
+        .catch(() => {});
+    } else if (tab === 'activity') {
+      apiFetch('/api/ops/audit/my')
+        .then(data => setAuditLog(data.entries || []))
+        .catch(() => {});
     }
-  }, []);
+  }, [tab]);
 
-  const loadLogs = () => {
+  const handlePasswordChange = async () => {
+    setPwError('');
+    setPwSuccess(false);
+
+    if (pwForm.newPassword !== pwForm.confirmPassword) {
+      setPwError('Passwords do not match');
+      return;
+    }
+    if (pwForm.newPassword.length < 12) {
+      setPwError('Password must be at least 12 characters');
+      return;
+    }
+
     setLoading(true);
-    const params = new URLSearchParams();
-    if (filters.action) params.set('action', filters.action);
-    if (filters.userId) params.set('userId', filters.userId);
-    if (filters.targetType) params.set('targetType', filters.targetType);
-    if (filters.days) params.set('days', filters.days);
-
-    apiFetch(`/api/ops/audit?${params.toString()}`)
-      .then(d => setLogs(d.logs || []))
-      .finally(() => setLoading(false));
+    try {
+      await apiFetch('/api/ops/auth/change-password', {
+        method: 'POST',
+        body: { currentPassword: pwForm.currentPassword, newPassword: pwForm.newPassword },
+      });
+      setPwSuccess(true);
+      setPwForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    } catch (err) {
+      setPwError(err.message);
+    }
+    setLoading(false);
   };
 
-  useEffect(() => { loadLogs(); }, [filters]);
-
-  const exportCsv = () => {
-    const headers = ['Time', 'User', 'Action', 'Target', 'IP', 'Success'];
-    const rows = logs.map(l => [
-      new Date(l.createdAt).toISOString(),
-      l.opsUserEmail,
-      l.action,
-      `${l.targetType || ''} ${l.targetName || ''}`.trim(),
-      l.ipAddress,
-      l.success ? 'Yes' : 'No'
-    ]);
-    const csv = [headers, ...rows].map(r => r.map(c => `"${c || ''}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `audit-log-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
+  const handleSetupMfa = async () => {
+    try {
+      const result = await apiFetch('/api/ops/auth/setup-mfa', { method: 'POST' });
+      setMfaSetup(result);
+    } catch (err) {
+      toast.error('Failed to setup MFA: ' + err.message);
+    }
   };
 
-  if (!hasRole(['super_admin', 'admin'])) {
-    return <div className="text-red-600">Access denied.</div>;
-  }
+  const handleVerifyMfa = async () => {
+    try {
+      await apiFetch('/api/ops/auth/verify-mfa', { method: 'POST', body: { token: mfaToken } });
+      setMfaSetup(null);
+      setMfaToken('');
+      toast.success('MFA enabled successfully!');
+    } catch (err) {
+      toast.error('Failed to verify: ' + err.message);
+    }
+  };
 
-  const actionTypes = [...new Set(logs.map(l => l.action))].sort();
-  const targetTypes = [...new Set(logs.map(l => l.targetType).filter(Boolean))].sort();
+  const handleDisableMfa = async () => {
+    setConfirmAction({
+      title: 'Disable MFA',
+      message: 'Enter your password to disable MFA',
+      hasPasswordInput: true,
+      onConfirm: async (password) => {
+        if (!password) {
+          toast.error('Password is required');
+          return;
+        }
+        try {
+          await apiFetch('/api/ops/auth/disable-mfa', { method: 'POST', body: { password } });
+          toast.success('MFA disabled');
+        } catch (err) {
+          toast.error('Failed: ' + err.message);
+        }
+        setConfirmAction(null);
+      }
+    });
+  };
+
+  const handleRevokeSession = async (sessionId) => {
+    try {
+      await apiFetch(`/api/ops/sessions/${sessionId}`, { method: 'DELETE' });
+      setSessions(sessions.filter(s => s.id !== sessionId));
+      toast.success('Session revoked');
+    } catch (err) {
+      toast.error('Failed to revoke session');
+    }
+  };
+
+  const handleRevokeAllSessions = async () => {
+    setConfirmAction({
+      title: 'Revoke All Sessions',
+      message: 'This will log you out of all other devices. Continue?',
+      destructive: true,
+      onConfirm: async () => {
+        try {
+          await apiFetch('/api/ops/sessions', { method: 'DELETE' });
+          setSessions(sessions.filter(s => s.isCurrent));
+          toast.success('All other sessions revoked');
+        } catch (err) {
+          toast.error('Failed to revoke sessions');
+        }
+        setConfirmAction(null);
+      }
+    });
+  };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">Audit Log</h2>
-        <button onClick={exportCsv} className={btnSecondary}>
-          Export CSV
-        </button>
-      </div>
+    <div>
+      <PageHeader title="My Account" subtitle="Manage your account and security settings" />
+      <div className="p-6">
+        {/* Tabs */}
+        <div className="flex gap-4 mb-6 border-b border-slate-700">
+          {['profile', 'security', 'sessions', 'activity'].map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                tab === t ? 'border-orange-500 text-white' : 'border-transparent text-slate-400 hover:text-white'
+              }`}
+            >
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </button>
+          ))}
+        </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-sm flex flex-wrap gap-4">
-        <div>
-          <label className="text-xs text-slate-500 block mb-1">Time Range</label>
-          <select value={filters.days} onChange={e => setFilters({ ...filters, days: e.target.value })}
-            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
-            <option value="1">Last 24 hours</option>
-            <option value="7">Last 7 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="90">Last 90 days</option>
-          </select>
-        </div>
-        <div>
-          <label className="text-xs text-slate-500 block mb-1">User</label>
-          <select value={filters.userId} onChange={e => setFilters({ ...filters, userId: e.target.value })}
-            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
-            <option value="">All users</option>
-            {users.map(u => (
-              <option key={u.id} value={u.id}>{u.email}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="text-xs text-slate-500 block mb-1">Action</label>
-          <select value={filters.action} onChange={e => setFilters({ ...filters, action: e.target.value })}
-            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
-            <option value="">All actions</option>
-            {actionTypes.map(a => (
-              <option key={a} value={a}>{a}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="text-xs text-slate-500 block mb-1">Target Type</label>
-          <select value={filters.targetType} onChange={e => setFilters({ ...filters, targetType: e.target.value })}
-            className="border border-slate-300 rounded px-3 py-1.5 text-sm">
-            <option value="">All types</option>
-            {targetTypes.map(t => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-        </div>
-      </div>
+        {/* Profile Tab */}
+        {tab === 'profile' && (
+          <div className="bg-slate-800 rounded-lg border border-slate-700 p-6 max-w-2xl">
+            <h3 className="text-lg font-medium text-white mb-4">Profile Information</h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  {user?.name?.[0] || user?.email?.[0]?.toUpperCase()}
+                </div>
+                <div>
+                  <p className="text-white text-lg font-medium">{user?.name}</p>
+                  <p className="text-slate-400">{user?.email}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-700">
+                <div>
+                  <label className="block text-sm font-medium text-slate-400">Role</label>
+                  <p className="text-white mt-1 capitalize">{user?.role?.replace('_', ' ')}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-400">MFA Status</label>
+                  <p className={`mt-1 ${user?.mfaEnabled ? 'text-green-400' : 'text-amber-400'}`}>
+                    {user?.mfaEnabled ? 'Enabled' : 'Not Enabled'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        {loading ? (
-          <div className="p-8 text-center text-slate-500">Loading audit log...</div>
-        ) : (
-          <table className="w-full text-sm">
-            <thead className="bg-slate-50">
-              <tr>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">Time</th>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">User</th>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">Action</th>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">Target</th>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">IP</th>
-                <th className="text-left px-6 py-3 font-medium text-slate-600">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {logs.map(log => (
-                <tr key={log.id} className={`hover:bg-slate-50 ${!log.success ? 'bg-red-50' : ''}`}>
-                  <td className="px-6 py-3 text-slate-500 whitespace-nowrap">
-                    {new Date(log.createdAt).toLocaleString()}
-                  </td>
-                  <td className="px-6 py-3 text-slate-700">{log.opsUserEmail || 'System'}</td>
-                  <td className="px-6 py-3">
-                    <span className="font-medium text-slate-900">{log.action}</span>
-                  </td>
-                  <td className="px-6 py-3 text-slate-600">
-                    {log.targetType && (
-                      <span className="text-xs bg-slate-100 px-2 py-0.5 rounded mr-2">{log.targetType}</span>
-                    )}
-                    {log.targetName || (log.targetId ? log.targetId.slice(0, 8) + '...' : '-')}
-                  </td>
-                  <td className="px-6 py-3 text-slate-500 font-mono text-xs">{log.ipAddress || '-'}</td>
-                  <td className="px-6 py-3">
-                    {log.success ? (
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                    ) : (
-                      <span className="text-red-600 text-xs">{log.errorMessage || 'Failed'}</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-              {!logs.length && (
-                <tr><td colSpan="6" className="px-6 py-8 text-center text-slate-500">No audit logs found</td></tr>
+        {/* Security Tab */}
+        {tab === 'security' && (
+          <div className="max-w-2xl space-y-6">
+            {/* Change Password */}
+            <div className="bg-slate-800 rounded-lg border border-slate-700 p-6">
+              <h3 className="text-lg font-medium text-white mb-4">Change Password</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-1">Current Password</label>
+                  <input
+                    type="password"
+                    value={pwForm.currentPassword}
+                    onChange={(e) => setPwForm({ ...pwForm, currentPassword: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-1">New Password</label>
+                  <input
+                    type="password"
+                    value={pwForm.newPassword}
+                    onChange={(e) => setPwForm({ ...pwForm, newPassword: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-1">Confirm New Password</label>
+                  <input
+                    type="password"
+                    value={pwForm.confirmPassword}
+                    onChange={(e) => setPwForm({ ...pwForm, confirmPassword: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                  />
+                </div>
+                {pwError && <p className="text-red-400 text-sm">{pwError}</p>}
+                {pwSuccess && <p className="text-green-400 text-sm">Password changed successfully!</p>}
+                <button
+                  onClick={handlePasswordChange}
+                  disabled={loading}
+                  className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg"
+                >
+                  {loading ? 'Changing...' : 'Change Password'}
+                </button>
+              </div>
+            </div>
+
+            {/* MFA Settings */}
+            <div className="bg-slate-800 rounded-lg border border-slate-700 p-6">
+              <h3 className="text-lg font-medium text-white mb-4">Two-Factor Authentication</h3>
+              {user?.mfaEnabled ? (
+                <div>
+                  <p className="text-green-400 mb-4">MFA is currently enabled on your account.</p>
+                  <button
+                    onClick={handleDisableMfa}
+                    className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg"
+                  >
+                    Disable MFA
+                  </button>
+                </div>
+              ) : mfaSetup ? (
+                <div className="space-y-4">
+                  <p className="text-slate-300">Scan this QR code with your authenticator app:</p>
+                  <img src={mfaSetup.qrCodeUrl} alt="MFA QR Code" className="w-48 h-48 bg-white rounded-lg" />
+                  <p className="text-slate-400 text-sm">Or enter this secret manually: <code className="bg-slate-700 px-2 py-1 rounded">{mfaSetup.secret}</code></p>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-1">Enter 6-digit code to verify</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={mfaToken}
+                        onChange={(e) => setMfaToken(e.target.value)}
+                        maxLength={6}
+                        className="w-32 px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-center tracking-widest"
+                        placeholder="000000"
+                      />
+                      <button onClick={handleVerifyMfa} className="px-4 py-2 bg-green-600 text-white rounded-lg">
+                        Verify & Enable
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-slate-400 mb-4">Add an extra layer of security to your account.</p>
+                  <button
+                    onClick={handleSetupMfa}
+                    className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg"
+                  >
+                    Setup MFA
+                  </button>
+                </div>
               )}
-            </tbody>
-          </table>
+            </div>
+          </div>
+        )}
+
+        {/* Sessions Tab */}
+        {tab === 'sessions' && (
+          <div className="max-w-2xl">
+            <div className="bg-slate-800 rounded-lg border border-slate-700">
+              <div className="px-4 py-3 border-b border-slate-700 flex items-center justify-between">
+                <h3 className="font-medium text-white">Active Sessions</h3>
+                <button
+                  onClick={handleRevokeAllSessions}
+                  className="text-sm text-red-400 hover:text-red-300"
+                >
+                  Revoke All Other Sessions
+                </button>
+              </div>
+              {sessions.length > 0 ? (
+                <div className="divide-y divide-slate-700">
+                  {sessions.map(session => (
+                    <div key={session.id} className="p-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-white text-sm">{session.ip_address}</p>
+                        <p className="text-slate-500 text-xs truncate max-w-xs">{session.user_agent}</p>
+                        <p className="text-slate-500 text-xs">
+                          Last active: {new Date(session.last_active_at).toLocaleString('en-GB')}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => handleRevokeSession(session.id)}
+                        className="text-red-400 hover:text-red-300 text-sm"
+                      >
+                        Revoke
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-8 text-center text-slate-500">No active sessions found</div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Activity Tab */}
+        {tab === 'activity' && (
+          <div className="max-w-4xl">
+            <div className="bg-slate-800 rounded-lg border border-slate-700">
+              <div className="px-4 py-3 border-b border-slate-700">
+                <h3 className="font-medium text-white">Your Activity Log</h3>
+              </div>
+              {auditLog.length > 0 ? (
+                <div className="divide-y divide-slate-700">
+                  {auditLog.map((entry, i) => (
+                    <div key={i} className="p-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-white text-sm">{entry.action}</p>
+                        {entry.target_name && (
+                          <p className="text-slate-400 text-xs">{entry.target_type}: {entry.target_name}</p>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <p className="text-slate-500 text-xs">{entry.ip_address}</p>
+                        <p className="text-slate-500 text-xs">
+                          {new Date(entry.created_at).toLocaleString('en-GB')}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-8 text-center text-slate-500">No activity recorded</div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Confirmation Modal */}
+        {confirmAction && (
+          <ConfirmationModal
+            title={confirmAction.title}
+            message={confirmAction.message}
+            destructive={confirmAction.destructive}
+            hasPasswordInput={confirmAction.hasPasswordInput}
+            onConfirm={confirmAction.onConfirm}
+            onClose={() => setConfirmAction(null)}
+          />
         )}
       </div>
     </div>
   );
 }
 
-// ==================== ROUTES ====================
+function CustomerDetailPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeModal, setActiveModal] = useState(null);
+  const [notes, setNotes] = useState([]);
+  const [newNote, setNewNote] = useState('');
+  const [saving, setSaving] = useState(false);
 
-function ProtectedRoute({ children, requiredRole }) {
-  const { user, hasRole, forcePasswordChange } = useAuth();
+  const loadData = () => {
+    setLoading(true);
+    apiFetch(`/api/ops/customers/${id}`)
+      .then(d => {
+        setData(d);
+        setNotes(d.notes || []);
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  };
 
-  if (!user) return <Navigate to="/login" replace />;
+  useEffect(() => { loadData(); }, [id]);
 
-  // Force password change redirect
-  if (forcePasswordChange) return <Navigate to="/change-password" replace />;
+  const handleAddNote = async () => {
+    if (!newNote.trim()) return;
+    setSaving(true);
+    try {
+      await apiFetch(`/api/ops/customers/${id}/notes`, {
+        method: 'POST',
+        body: { note: newNote }
+      });
+      setNewNote('');
+      loadData();
+      toast.success('Note added successfully');
+    } catch (e) {
+      toast.error('Failed to add note: ' + e.message);
+    }
+    setSaving(false);
+  };
 
-  // Role check
-  if (requiredRole && !hasRole(requiredRole)) {
-    return <Layout><div className="text-red-600">Access denied.</div></Layout>;
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div className="p-6 text-red-400">Error: {error}</div>;
+  if (!data?.customer) return <div className="p-6 text-red-400">Customer not found</div>;
+
+  const customer = data.customer;
+  const formatMoney = (amount) => new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format((amount || 0) / 100);
+
+  return (
+    <div>
+      {/* Header with back button */}
+      <div className="bg-slate-800 border-b border-slate-700 px-6 py-4">
+        <div className="flex items-center gap-4 mb-2">
+          <button onClick={() => navigate('/customers')} className="text-slate-400 hover:text-white">
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="flex-1">
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-white">{customer.name}</h1>
+              {customer.plan_name && (
+                <span className="px-2 py-1 rounded text-xs font-medium bg-blue-500/20 text-blue-400">
+                  {customer.plan_name}
+                </span>
+              )}
+              <StatusBadge status={customer.subscription_status || customer.status} />
+            </div>
+            <p className="text-slate-400 mt-1">Customer since {new Date(customer.created_at).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</p>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-2 mt-4">
+          <ActionButton label="Modify Seats" onClick={() => setActiveModal('seats')} />
+          <ActionButton label="Extend Trial" onClick={() => setActiveModal('trial')} />
+          <ActionButton label="Apply Credit" onClick={() => setActiveModal('credit')} />
+          <ActionButton label="Change Plan" onClick={() => setActiveModal('plan')} />
+          <ActionButton label="Cancel" onClick={() => setActiveModal('cancel')} variant="danger" />
+          <ActionButton label="Impersonate" onClick={() => setActiveModal('impersonate')} icon={ExternalLink} />
+          <ActionButton label="Edit" onClick={() => setActiveModal('edit')} icon={Edit} />
+        </div>
+      </div>
+
+      <div className="p-6 space-y-6">
+        {/* Info Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Subscription Details */}
+          <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+            <h3 className="font-medium text-white mb-4">Subscription</h3>
+            <div className="space-y-3 text-sm">
+              <InfoRow label="Plan" value={customer.plan_name || '-'} />
+              <InfoRow label="Core Seats" value={customer.core_seats || 0} />
+              <InfoRow label="Flex Seats" value={customer.flex_seats || 0} />
+              <InfoRow label="Status" value={<StatusBadge status={customer.subscription_status} />} />
+            </div>
+          </div>
+
+          {/* Usage */}
+          <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+            <h3 className="font-medium text-white mb-4">Usage</h3>
+            <div className="space-y-3 text-sm">
+              <InfoRow label="Core Used" value={`${data.usage?.core || 0} / ${customer.core_seats || 0}`} />
+              <InfoRow label="Flex Used" value={`${data.usage?.flex || 0}`} />
+              <InfoRow label="Total Employees" value={data.usage?.total || 0} />
+            </div>
+          </div>
+
+          {/* License */}
+          <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+            <h3 className="font-medium text-white mb-4">License Key</h3>
+            {data.license ? (
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <code className="text-xs bg-slate-700 px-2 py-1 rounded text-green-400 flex-1 truncate">
+                    {data.license.license_key}
+                  </code>
+                  <button
+                    onClick={() => navigator.clipboard.writeText(data.license.license_key)}
+                    className="p-1 text-slate-400 hover:text-white"
+                  >
+                    <Copy className="w-4 h-4" />
+                  </button>
+                </div>
+                <p className="text-xs text-slate-500">Status: {data.license.status}</p>
+              </div>
+            ) : (
+              <p className="text-slate-500 text-sm">No license key assigned</p>
+            )}
+          </div>
+        </div>
+
+        {/* Notes Section */}
+        <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+          <h3 className="font-medium text-white mb-4">Notes</h3>
+          <div className="flex gap-2 mb-4">
+            <input
+              type="text"
+              value={newNote}
+              onChange={(e) => setNewNote(e.target.value)}
+              placeholder="Add a note..."
+              className="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              onKeyPress={(e) => e.key === 'Enter' && handleAddNote()}
+            />
+            <button
+              onClick={handleAddNote}
+              disabled={saving || !newNote.trim()}
+              className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-600 text-white rounded-lg transition-colors"
+            >
+              {saving ? 'Adding...' : 'Add'}
+            </button>
+          </div>
+          {notes.length > 0 ? (
+            <div className="space-y-3">
+              {notes.map((note, i) => (
+                <div key={note.id || i} className="p-3 bg-slate-700/50 rounded-lg">
+                  <p className="text-slate-300 text-sm">{note.note}</p>
+                  <p className="text-slate-500 text-xs mt-1">
+                    {new Date(note.created_at).toLocaleString('en-GB')}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-slate-500 text-sm">No notes yet</p>
+          )}
+        </div>
+      </div>
+
+      {/* Modals */}
+      {activeModal && (
+        <Modal title={getModalTitle(activeModal)} onClose={() => setActiveModal(null)}>
+          <ModalContent
+            type={activeModal}
+            customer={customer}
+            onClose={() => setActiveModal(null)}
+            onSuccess={() => { setActiveModal(null); loadData(); }}
+          />
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+function InfoRow({ label, value }) {
+  return (
+    <div className="flex justify-between items-center">
+      <span className="text-slate-400">{label}</span>
+      <span className="text-white">{value}</span>
+    </div>
+  );
+}
+
+function ActionButton({ label, onClick, variant = 'default', icon: Icon }) {
+  const styles = {
+    default: 'bg-slate-700 hover:bg-slate-600 text-white',
+    danger: 'bg-red-500/20 hover:bg-red-500/30 text-red-400',
+  };
+  return (
+    <button onClick={onClick} className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors ${styles[variant]}`}>
+      {Icon && <Icon className="w-3.5 h-3.5" />}
+      {label}
+    </button>
+  );
+}
+
+function getModalTitle(type) {
+  const titles = {
+    seats: 'Modify Seats',
+    trial: 'Extend Trial',
+    credit: 'Apply Credit',
+    plan: 'Change Plan',
+    cancel: 'Cancel Subscription',
+    impersonate: 'Impersonate Customer',
+    edit: 'Edit Customer',
+  };
+  return titles[type] || 'Action';
+}
+
+function Modal({ title, onClose, children }) {
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-slate-800 rounded-lg border border-slate-700 w-full max-w-md">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-700">
+          <h3 className="font-medium text-white">{title}</h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-white">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="p-4">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function ConfirmationModal({ title, message, destructive, hasPasswordInput, onConfirm, onClose }) {
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleConfirm = async () => {
+    setLoading(true);
+    try {
+      await onConfirm(hasPasswordInput ? password : undefined);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Modal title={title} onClose={onClose}>
+      <p className="text-slate-300 mb-4">{message}</p>
+      {hasPasswordInput && (
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter your password"
+          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white mb-4"
+        />
+      )}
+      <div className="flex gap-2 justify-end">
+        <button onClick={onClose} className="px-4 py-2 bg-slate-700 text-white rounded-lg">
+          Cancel
+        </button>
+        <button
+          onClick={handleConfirm}
+          disabled={loading || (hasPasswordInput && !password)}
+          className={`px-4 py-2 rounded-lg text-white disabled:opacity-50 ${destructive ? 'bg-red-600 hover:bg-red-700' : 'bg-orange-600 hover:bg-orange-700'}`}
+        >
+          {loading ? 'Processing...' : 'Confirm'}
+        </button>
+      </div>
+    </Modal>
+  );
+}
+
+function ModalContent({ type, customer, onClose, onSuccess }) {
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [confirmed, setConfirmed] = useState(false);
+
+  // Initialize form data based on modal type
+  useEffect(() => {
+    if (type === 'edit') {
+      setFormData({
+        name: customer.name || '',
+        billingEmail: customer.billing_email || '',
+        taxId: customer.tax_id || '',
+      });
+    } else if (type === 'trial') {
+      const trialEnd = customer.trial_end ? new Date(customer.trial_end) : new Date();
+      trialEnd.setDate(trialEnd.getDate() + 14);
+      setFormData({
+        trialEndDate: trialEnd.toISOString().split('T')[0],
+        reason: '',
+      });
+    } else if (type === 'plan') {
+      setFormData({
+        planSlug: customer.plan_slug || 'growth',
+      });
+    }
+  }, [type, customer]);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      let endpoint = `/api/ops/customers/${customer.id}`;
+      let method = 'POST';
+      let body = formData;
+
+      switch (type) {
+        case 'seats':
+          endpoint += '/seats';
+          break;
+        case 'trial':
+          endpoint += '/extend-trial';
+          body = { days: Math.ceil((new Date(formData.trialEndDate) - new Date()) / (1000 * 60 * 60 * 24)), reason: formData.reason };
+          break;
+        case 'credit':
+          endpoint += '/credit';
+          break;
+        case 'plan':
+          endpoint = `/api/ops/manage/organizations/${customer.id}/subscription`;
+          body = { planSlug: formData.planSlug };
+          break;
+        case 'cancel':
+          endpoint = `/api/ops/manage/organizations/${customer.id}/subscription/cancel`;
+          body = { immediate: formData.immediate || false, reason: formData.reason, details: formData.details };
+          break;
+        case 'impersonate':
+          endpoint += '/impersonate';
+          break;
+        case 'edit':
+          endpoint = `/api/ops/manage/organizations/${customer.id}`;
+          method = 'PATCH';
+          break;
+      }
+
+      const result = await apiFetch(endpoint, { method, body });
+
+      if (type === 'impersonate' && result.url) {
+        window.open(result.url, '_blank');
+        toast.success('Opening customer portal...');
+      } else {
+        toast.success(`${getModalTitle(type)} completed successfully`);
+      }
+
+      onSuccess();
+    } catch (e) {
+      toast.error('Action failed: ' + e.message);
+    }
+    setLoading(false);
+  };
+
+  const planPrices = { growth: 8, scale: 12, enterprise: 18 };
+  const currentMRR = (customer.core_seats || 0) * (planPrices[customer.plan_slug] || 8);
+  const newMRR = type === 'plan' ? (customer.core_seats || 0) * (planPrices[formData.planSlug] || 8) : currentMRR;
+
+  switch (type) {
+    case 'seats':
+      return (
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">New Core Seats</label>
+            <input
+              type="number"
+              min="1"
+              value={formData.coreSeats ?? customer.core_seats ?? 0}
+              onChange={(e) => setFormData({ ...formData, coreSeats: parseInt(e.target.value) || 0 })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Flex Seats</label>
+            <input
+              type="number"
+              min="0"
+              value={formData.flexSeats ?? customer.flex_seats ?? 0}
+              onChange={(e) => setFormData({ ...formData, flexSeats: parseInt(e.target.value) || 0 })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Reason for change</label>
+            <input
+              type="text"
+              value={formData.reason || ''}
+              onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+              placeholder="Optional"
+            />
+          </div>
+          <div className="flex gap-2 justify-end pt-2">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Cancel</button>
+            <button onClick={handleSubmit} disabled={loading} className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-600 text-white rounded-lg transition-colors">
+              {loading ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </div>
+      );
+
+    case 'trial':
+      return (
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">New Trial End Date</label>
+            <input
+              type="date"
+              value={formData.trialEndDate || ''}
+              onChange={(e) => setFormData({ ...formData, trialEndDate: e.target.value })}
+              min={new Date().toISOString().split('T')[0]}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Reason for extension</label>
+            <textarea
+              value={formData.reason || ''}
+              onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+              rows="2"
+              placeholder="Enter reason for trial extension..."
+            />
+          </div>
+          <div className="flex gap-2 justify-end pt-2">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Cancel</button>
+            <button onClick={handleSubmit} disabled={loading || !formData.trialEndDate} className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-600 text-white rounded-lg transition-colors">
+              {loading ? 'Extending...' : 'Extend Trial'}
+            </button>
+          </div>
+        </div>
+      );
+
+    case 'credit':
+      return (
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Amount (£)</label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">£</span>
+              <input
+                type="number"
+                step="0.01"
+                min="0.01"
+                value={formData.amount || ''}
+                onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) || 0 })}
+                className="w-full pl-7 pr-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                placeholder="100.00"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Reason</label>
+            <textarea
+              value={formData.reason || ''}
+              onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+              rows="2"
+              placeholder="Describe reason for credit..."
+            />
+          </div>
+          <div className="flex gap-2 justify-end pt-2">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Cancel</button>
+            <button onClick={handleSubmit} disabled={loading || !formData.amount || formData.amount <= 0} className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-600 text-white rounded-lg transition-colors">
+              {loading ? 'Applying...' : 'Apply Credit'}
+            </button>
+          </div>
+        </div>
+      );
+
+    case 'plan':
+      return (
+        <div className="space-y-4">
+          <div className="p-3 bg-slate-700/50 rounded-lg">
+            <p className="text-sm text-slate-400">Current Plan</p>
+            <p className="text-white font-medium">{customer.plan_name || 'Growth'}</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">New Plan</label>
+            <select
+              value={formData.planSlug || 'growth'}
+              onChange={(e) => setFormData({ ...formData, planSlug: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            >
+              <option value="growth">Growth (£8/seat/month)</option>
+              <option value="scale">Scale (£12/seat/month)</option>
+              <option value="enterprise">Enterprise (£18/seat/month)</option>
+            </select>
+          </div>
+          <div className="p-3 bg-slate-700/50 rounded-lg">
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-400">Current MRR</span>
+              <span className="text-white">£{currentMRR.toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between text-sm mt-1">
+              <span className="text-slate-400">New MRR</span>
+              <span className={newMRR > currentMRR ? 'text-green-400' : newMRR < currentMRR ? 'text-red-400' : 'text-white'}>
+                £{newMRR.toLocaleString()}
+              </span>
+            </div>
+            {newMRR !== currentMRR && (
+              <div className="flex justify-between text-sm mt-1 pt-1 border-t border-slate-600">
+                <span className="text-slate-400">Change</span>
+                <span className={newMRR > currentMRR ? 'text-green-400' : 'text-red-400'}>
+                  {newMRR > currentMRR ? '+' : ''}£{(newMRR - currentMRR).toLocaleString()}/mo
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="flex gap-2 justify-end pt-2">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Cancel</button>
+            <button onClick={handleSubmit} disabled={loading || formData.planSlug === customer.plan_slug} className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-600 text-white rounded-lg transition-colors">
+              {loading ? 'Changing...' : 'Change Plan'}
+            </button>
+          </div>
+        </div>
+      );
+
+    case 'cancel':
+      return (
+        <div className="space-y-4">
+          <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+            <div className="flex items-center gap-2 text-red-400">
+              <AlertTriangle className="w-5 h-5" />
+              <span className="font-medium">This will cancel the customer's subscription</span>
+            </div>
+            <p className="text-sm text-red-400/80 mt-1">Access will be revoked and billing will stop.</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Reason</label>
+            <select
+              value={formData.reason || ''}
+              onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            >
+              <option value="">Select reason...</option>
+              <option value="budget">Budget constraints</option>
+              <option value="competitor">Switched to competitor</option>
+              <option value="not_using">Not using the product</option>
+              <option value="poor_fit">Poor product fit</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Additional Details</label>
+            <textarea
+              value={formData.details || ''}
+              onChange={(e) => setFormData({ ...formData, details: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+              rows="2"
+              placeholder="Any additional context..."
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Effective</label>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="immediate"
+                  checked={!formData.immediate}
+                  onChange={() => setFormData({ ...formData, immediate: false })}
+                  className="text-orange-500"
+                />
+                <span className="text-slate-300 text-sm">End of billing period</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="immediate"
+                  checked={formData.immediate}
+                  onChange={() => setFormData({ ...formData, immediate: true })}
+                  className="text-orange-500"
+                />
+                <span className="text-slate-300 text-sm">Immediate</span>
+              </label>
+            </div>
+          </div>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={confirmed}
+              onChange={(e) => setConfirmed(e.target.checked)}
+              className="rounded bg-slate-700 border-slate-600 text-orange-500 focus:ring-orange-500"
+            />
+            <span className="text-slate-300 text-sm">I understand this will revoke customer access</span>
+          </label>
+          <div className="flex gap-2 justify-end pt-2">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Keep Subscription</button>
+            <button onClick={handleSubmit} disabled={loading || !formData.reason || !confirmed} className="px-4 py-2 bg-red-600 hover:bg-red-700 disabled:bg-slate-600 text-white rounded-lg transition-colors">
+              {loading ? 'Canceling...' : 'Cancel Subscription'}
+            </button>
+          </div>
+        </div>
+      );
+
+    case 'impersonate':
+      return (
+        <div className="space-y-4">
+          <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+            <div className="flex items-center gap-2 text-amber-400">
+              <Shield className="w-5 h-5" />
+              <span className="font-medium">Impersonate Customer</span>
+            </div>
+            <p className="text-sm text-amber-400/80 mt-1">You will be logged in as an admin for "{customer.name}". All actions will be audited.</p>
+          </div>
+          <div className="text-sm text-slate-400">
+            <p>This will open the customer portal in a new tab where you can:</p>
+            <ul className="list-disc ml-4 mt-2 space-y-1">
+              <li>View their dashboard and data</li>
+              <li>Make changes on their behalf</li>
+              <li>Troubleshoot issues</li>
+            </ul>
+          </div>
+          <div className="flex gap-2 justify-end pt-2">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Cancel</button>
+            <button onClick={handleSubmit} disabled={loading} className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-600 text-white rounded-lg transition-colors flex items-center gap-2">
+              {loading ? 'Opening...' : <><ExternalLink className="w-4 h-4" /> Open Portal</>}
+            </button>
+          </div>
+        </div>
+      );
+
+    case 'edit':
+      return (
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Organization Name</label>
+            <input
+              type="text"
+              value={formData.name || ''}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Billing Email</label>
+            <input
+              type="email"
+              value={formData.billingEmail || ''}
+              onChange={(e) => setFormData({ ...formData, billingEmail: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Tax ID (VAT)</label>
+            <input
+              type="text"
+              value={formData.taxId || ''}
+              onChange={(e) => setFormData({ ...formData, taxId: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+              placeholder="GB123456789"
+            />
+          </div>
+          <div className="flex gap-2 justify-end pt-2">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Cancel</button>
+            <button onClick={handleSubmit} disabled={loading || !formData.name} className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-600 text-white rounded-lg transition-colors">
+              {loading ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </div>
+      );
+
+    default:
+      return (
+        <div className="space-y-4">
+          <p className="text-slate-400 text-sm">This action is not yet implemented.</p>
+          <div className="flex gap-2 justify-end">
+            <button onClick={onClose} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors">Close</button>
+          </div>
+        </div>
+      );
+  }
+}
+
+// ==================== PROTECTED ROUTE ====================
+
+function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
+      </div>
+    );
   }
 
-  return <Layout>{children}</Layout>;
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <AppLayout>{children}</AppLayout>;
 }
+
+// ==================== APP ====================
 
 export default function App() {
   return (
-    <AuthProvider>
-    <CurrencyProvider>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/change-password" element={<ForcePasswordChangePage />} />
-        <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-        <Route path="/customers" element={<ProtectedRoute><CustomersPage /></ProtectedRoute>} />
-        <Route path="/customers/:id" element={<ProtectedRoute><CustomerDetailPage /></ProtectedRoute>} />
-        <Route path="/onboard" element={<ProtectedRoute><OnboardPage /></ProtectedRoute>} />
-        <Route path="/licenses" element={<ProtectedRoute><LicensesPage /></ProtectedRoute>} />
-        <Route path="/features" element={<ProtectedRoute><FeaturesPage /></ProtectedRoute>} />
-        <Route path="/billing" element={<ProtectedRoute><BillingPage /></ProtectedRoute>} />
-        <Route path="/activity" element={<ProtectedRoute><ActivityPage /></ProtectedRoute>} />
-        <Route path="/users" element={<ProtectedRoute requiredRole="super_admin"><UsersPage /></ProtectedRoute>} />
-        <Route path="/audit" element={<ProtectedRoute requiredRole={['super_admin', 'admin']}><AuditPage /></ProtectedRoute>} />
-      </Routes>
-    </CurrencyProvider>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+          <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
+          <Route path="/customers" element={<ProtectedRoute><CustomersPage /></ProtectedRoute>} />
+          <Route path="/customers/:id" element={<ProtectedRoute><CustomerDetailPage /></ProtectedRoute>} />
+          <Route path="/licenses" element={<ProtectedRoute><LicensesPage /></ProtectedRoute>} />
+          <Route path="/features" element={<ProtectedRoute><FeaturesPage /></ProtectedRoute>} />
+          <Route path="/billing" element={<ProtectedRoute><BillingPage /></ProtectedRoute>} />
+          <Route path="/activity" element={<ProtectedRoute><ActivityPage /></ProtectedRoute>} />
+          <Route path="/audit" element={<ProtectedRoute><AuditPage /></ProtectedRoute>} />
+          <Route path="/users" element={<ProtectedRoute><UsersPage /></ProtectedRoute>} />
+          <Route path="/account" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AuthProvider>
+    </ToastProvider>
   );
 }

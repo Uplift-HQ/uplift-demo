@@ -595,4 +595,50 @@ router.post('/employees/:employeeId/skills/:skillId/verify', requireRole(['admin
   res.json({ employeeSkill: result.rows[0] });
 });
 
+// ============================================================
+// FEATURE FLAGS
+// ============================================================
+
+// Get organization's feature flags (combines plan features + overrides)
+router.get('/features', async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+
+    // Get plan features from subscription
+    const planResult = await db.query(`
+      SELECT p.features, p.slug as plan_slug
+      FROM subscriptions s
+      JOIN plans p ON p.slug = s.plan_slug
+      WHERE s.organization_id = $1 AND s.status IN ('active', 'trialing')
+    `, [organizationId]);
+
+    const planFeatures = planResult.rows[0]?.features || [];
+
+    // Get feature overrides (enabled/disabled by ops team)
+    const overrideResult = await db.query(`
+      SELECT feature_key, enabled
+      FROM feature_overrides
+      WHERE organization_id = $1
+        AND (expires_at IS NULL OR expires_at > NOW())
+    `, [organizationId]);
+
+    // Build final feature map
+    const features = {};
+
+    // Start with plan features (all enabled)
+    for (const feature of planFeatures) {
+      features[feature] = true;
+    }
+
+    // Apply overrides
+    for (const override of overrideResult.rows) {
+      features[override.feature_key] = override.enabled;
+    }
+
+    res.json({ features });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to load features' });
+  }
+});
+
 export default router;

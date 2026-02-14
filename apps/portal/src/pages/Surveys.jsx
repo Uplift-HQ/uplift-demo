@@ -161,7 +161,7 @@ export default function Surveys() {
       setStats(surveysRes.data.stats || { active: 0, avgParticipation: 0, enps: 0, totalResponses: 0 });
       setEnpsDashboard(enpsRes.data);
     } catch (err) {
-      console.error('Failed to fetch surveys:', err);
+      if (import.meta.env.DEV) console.error('Failed to fetch surveys:', err);
       // Fallback to demo data on error
       setSurveys(DEMO_SURVEYS);
       setTemplates(TEMPLATES);

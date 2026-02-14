@@ -75,7 +75,7 @@ export const ChatScreen = ({ navigation }: any) => {
       } catch (e) {
         if (__DEV__) console.error('[ChatScreen] Failed to fetch channels:', e);
         // Non-blocking error - user sees empty state
-        console.warn('[ChatScreen] Failed to load channels');
+        if (__DEV__) console.warn('[ChatScreen] Failed to load channels');
       } finally {
         if (mounted) setLoadingChannels(false);
       }

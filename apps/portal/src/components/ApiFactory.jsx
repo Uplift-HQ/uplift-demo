@@ -1127,6 +1127,36 @@ const ApiFactory = () => {
   const [syncLogs, setSyncLogs] = useState([]);
   const [logsLoading, setLogsLoading] = useState(false);
 
+  // Export logs to CSV
+  const handleExportLogs = () => {
+    if (syncLogs.length === 0) {
+      toast.info(t('apiFactory.logs.noDataToExport', 'No logs to export'));
+      return;
+    }
+
+    const headers = ['Timestamp', 'Action', 'Status', 'Duration', 'Details'];
+    const csvRows = [
+      headers.join(','),
+      ...syncLogs.map(log => [
+        new Date(log.timestamp || log.created_at).toISOString(),
+        `"${(log.action || '').replace(/"/g, '""')}"`,
+        log.status,
+        log.duration ? `${log.duration}ms` : '',
+        `"${(log.details || log.message || '').replace(/"/g, '""')}"`
+      ].join(','))
+    ];
+
+    const csvContent = csvRows.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `api-factory-logs-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success(t('apiFactory.logs.exportSuccess', 'Logs exported successfully'));
+  };
+
   // Load custom endpoints from backend on mount
   useEffect(() => {
     const loadApis = async () => {
@@ -1432,7 +1462,7 @@ const ApiFactory = () => {
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
             <h3 className="font-semibold">{t('apiFactory.logs.executionLogs', 'Execution Logs')}</h3>
-            <Button variant="ghost" size="sm" onClick={() => toast.info(t('common.exportComingSoon', 'Export coming soon'))}>
+            <Button variant="ghost" size="sm" onClick={handleExportLogs}>
               <Download className="w-4 h-4" /> {t('apiFactory.logs.export', 'Export')}
             </Button>
           </div>

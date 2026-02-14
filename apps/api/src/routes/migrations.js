@@ -70,6 +70,20 @@ router.get('/status', requireMigrationKey, async (req, res) => {
 });
 
 /**
+ * POST /api/migrations/sql - Run raw SQL (for debugging)
+ */
+router.post('/sql', requireMigrationKey, async (req, res) => {
+  try {
+    const { sql } = req.body;
+    if (!sql) return res.status(400).json({ error: 'SQL required' });
+    const result = await db.query(sql);
+    res.json({ rows: result.rows, rowCount: result.rowCount });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
  * POST /api/migrations/run - Run pending migrations
  */
 router.post('/run', requireMigrationKey, async (req, res) => {

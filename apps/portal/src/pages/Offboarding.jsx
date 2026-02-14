@@ -603,7 +603,7 @@ export default function Offboarding() {
         setEmployees(empRes.employees || []);
         setLocations(locRes.locations || []);
       } catch (err) {
-        console.error('Failed to fetch employees/locations:', err);
+        if (import.meta.env.DEV) console.error('Failed to fetch employees/locations:', err);
       }
       setLoading(false);
     };

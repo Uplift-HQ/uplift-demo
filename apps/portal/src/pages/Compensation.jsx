@@ -214,7 +214,7 @@ export default function Compensation() {
         setStats({ totalGross, totalNet, pendingCount, employeeCount: 1 });
       }
     } catch (error) {
-      console.error('Failed to fetch compensation data:', error);
+      if (import.meta.env.DEV) console.error('Failed to fetch compensation data:', error);
     } finally {
       setIsLoading(false);
     }
@@ -238,7 +238,7 @@ export default function Compensation() {
         const res = await api.get(`/compensation/records/${selectedRecord.id}/history`);
         setSelectedHistory(res.history || []);
       } catch (error) {
-        console.error('Failed to fetch history:', error);
+        if (import.meta.env.DEV) console.error('Failed to fetch history:', error);
         setSelectedHistory([]);
       }
     };
@@ -299,7 +299,7 @@ export default function Compensation() {
         });
         fetchData();
       } catch (error) {
-        console.error('Failed to update compensation:', error);
+        if (import.meta.env.DEV) console.error('Failed to update compensation:', error);
         showToast(t('common.error', 'An error occurred'), 'error');
         return;
       }
@@ -321,7 +321,7 @@ export default function Compensation() {
         });
         fetchData();
       } catch (error) {
-        console.error('Failed to create cycle:', error);
+        if (import.meta.env.DEV) console.error('Failed to create cycle:', error);
         showToast(t('common.error', 'An error occurred'), 'error');
         return;
       }

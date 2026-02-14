@@ -644,7 +644,7 @@ function ManagerDashboard({ t, user }) {
           setDepartmentName(deptResult.departments[0].name);
         }
       } catch (err) {
-        console.error('Failed to load manager dashboard:', err);
+        if (import.meta.env.DEV) console.error('Failed to load manager dashboard:', err);
       } finally {
         setLoading(false);
       }

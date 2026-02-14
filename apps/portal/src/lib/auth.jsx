@@ -5,7 +5,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { api, authApi, DEMO_MODE } from './api';
+import { api, authApi, featuresApi, DEMO_MODE } from './api';
 
 const AuthContext = createContext(null);
 
@@ -14,9 +14,26 @@ const PUBLIC_PATHS = ['/login', '/terms', '/privacy', '/register', '/forgot-pass
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [features, setFeatures] = useState({});
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Load feature flags after successful authentication
+  const loadFeatures = async () => {
+    if (DEMO_MODE) {
+      // Demo mode: enable all features
+      setFeatures({ payroll: true, learning: true, performance: true, expenses: true, documents: true });
+      return;
+    }
+    try {
+      const result = await featuresApi.getFeatures();
+      setFeatures(result.features || {});
+    } catch {
+      // Silently fail - use empty features (all disabled)
+      setFeatures({});
+    }
+  };
 
   // Check if current path is public
   const isPublicPath = PUBLIC_PATHS.some(path => location.pathname.startsWith(path));
@@ -50,6 +67,7 @@ export function AuthProvider({ children }) {
         const userData = JSON.parse(storedUser);
         api.setToken(token);
         setUser(userData);
+        await loadFeatures();
         setLoading(false);
         return;
       } catch {
@@ -66,6 +84,7 @@ export function AuthProvider({ children }) {
       const userData = result.user || result;
       setUser(userData);
       localStorage.setItem('uplift_user', JSON.stringify(userData));
+      await loadFeatures();
     } catch {
       // Backend verification failed - clear credentials
       localStorage.removeItem('uplift_user');
@@ -88,6 +107,7 @@ export function AuthProvider({ children }) {
       const userData = result.user || result;
       setUser(userData);
       localStorage.setItem('uplift_user', JSON.stringify(userData));
+      await loadFeatures();
 
       const from = location.state?.from?.pathname || '/';
       navigate(from, { replace: true });
@@ -112,6 +132,9 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // Helper to check if a feature is enabled
+  const hasFeature = (featureKey) => features[featureKey] === true;
+
   const value = {
     user,
     loading,
@@ -123,6 +146,8 @@ export function AuthProvider({ children }) {
     isManagerOrAbove: user?.role === 'manager' || user?.role === 'admin' || user?.role === 'superadmin',
     isWorker: user?.role === 'worker',
     role: user?.role,
+    features,
+    hasFeature,
   };
 
   return (

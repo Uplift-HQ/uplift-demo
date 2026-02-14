@@ -1635,7 +1635,7 @@ export default function Reports() {
         [reportId]: response.data,
       }));
     } catch (err) {
-      console.error(`Failed to fetch ${reportId} report:`, err);
+      if (import.meta.env.DEV) console.error(`Failed to fetch ${reportId} report:`, err);
       // Fallback to demo data on error
     } finally {
       setLoading(false);

@@ -5,81 +5,28 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { api, Shift, Skill, JobPosting, TimeEntry, Notification, DashboardData } from '../services/api';
-import { useAuthStore } from '../store/authStore';
-import {
-  DEMO_DASHBOARD,
-  DEMO_SHIFTS,
-  DEMO_OPEN_SHIFTS,
-  DEMO_TASKS,
-  DEMO_SKILLS,
-  DEMO_JOBS,
-  DEMO_LEADERBOARD,
-  DEMO_BADGES,
-  DEMO_NOTIFICATIONS,
-  DEMO_REWARDS,
-  DEMO_FEED,
-  DEMO_MANAGER_DASHBOARD,
-  DEMO_TEAM,
-  DEMO_APPROVALS,
-  DEMO_REPORTS,
-  DEMO_LOCATIONS,
-  DEMO_EXPENSES,
-  DEMO_PAYSLIPS,
-  DEMO_COMPLIANCE,
-  DEMO_DOCUMENTS,
-  DEMO_LEARNING,
-  DEMO_PERFORMANCE,
-  DEMO_SURVEYS,
-  DEMO_REWARD_CATALOG,
-  DEMO_AFFILIATE_OFFERS,
-  DEMO_AI_INSIGHTS,
-  DEMO_TEAM_PERFORMANCE,
-  DEMO_OFFBOARDING,
-  DEMO_JOB_POSTINGS,
-  DEMO_EXPENSE_APPROVALS,
-  DEMO_SKILL_VERIFICATION,
-} from '../services/demoData';
 
 // Generic hook for data fetching with loading/error states
-// In demo mode: uses demo data directly
-// In production: calls API, falls back to demo data only on network failure
 function useApiCall<T>(
   fetcher: () => Promise<T>,
-  demoData: T | null,
   dependencies: any[] = []
 ): { data: T | null; loading: boolean; error: string | null; refetch: () => void } {
-  const isDemoMode = useAuthStore((state) => state.isDemoMode);
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetch = useCallback(async () => {
-    // In demo mode, skip API and use demo data directly
-    if (isDemoMode && demoData) {
-      setData(demoData);
-      setLoading(false);
-      setError(null);
-      return;
-    }
-
     try {
       setLoading(true);
       setError(null);
       const result = await fetcher();
       setData(result);
     } catch (e: any) {
-      // Graceful fallback: use demo data so screens never crash
-      // This handles network failures and Apple Review scenarios
-      if (demoData) {
-        setData(demoData);
-        setError(null);
-      } else {
-        setError(e.message || 'Something went wrong');
-      }
+      setError(e.message || 'Something went wrong');
     } finally {
       setLoading(false);
     }
-  }, [isDemoMode, ...dependencies]);
+  }, [...dependencies]);
 
   useEffect(() => {
     fetch();
@@ -93,7 +40,6 @@ function useApiCall<T>(
 export function useDashboard(locationId?: string) {
   return useApiCall<DashboardData>(
     () => api.getDashboard({ locationId }),
-    DEMO_DASHBOARD as any,
     [locationId]
   );
 }
@@ -103,7 +49,6 @@ export function useDashboard(locationId?: string) {
 export function useMyShifts(startDate?: string, endDate?: string) {
   return useApiCall<{ shifts: Shift[] }>(
     () => api.getMyShifts({ startDate, endDate }),
-    DEMO_SHIFTS as any,
     [startDate, endDate]
   );
 }
@@ -111,16 +56,13 @@ export function useMyShifts(startDate?: string, endDate?: string) {
 export function useOpenShifts(locationId?: string) {
   return useApiCall<{ shifts: Shift[] }>(
     () => api.getOpenShifts({ locationId }),
-    DEMO_OPEN_SHIFTS as any,
     [locationId]
   );
 }
 
 export function useShiftDetail(shiftId: string) {
-  const demoShift = DEMO_SHIFTS.shifts.find(s => s.id === shiftId) || DEMO_SHIFTS.shifts[0];
   return useApiCall<{ shift: Shift }>(
     () => api.getShiftDetail(shiftId),
-    { shift: demoShift } as any,
     [shiftId]
   );
 }
@@ -128,7 +70,6 @@ export function useShiftDetail(shiftId: string) {
 export function useShiftSwaps(status?: string) {
   return useApiCall<{ swaps: any[] }>(
     () => api.getShiftSwaps({ status }),
-    { swaps: [] },
     [status]
   );
 }
@@ -138,7 +79,6 @@ export function useShiftSwaps(status?: string) {
 export function useClockStatus() {
   return useApiCall<{ isClocked: boolean; entry?: TimeEntry }>(
     () => api.getCurrentClockStatus(),
-    { isClocked: false },
     []
   );
 }
@@ -146,7 +86,6 @@ export function useClockStatus() {
 export function useTimeEntries(startDate?: string, endDate?: string, status?: string) {
   return useApiCall<{ entries: TimeEntry[] }>(
     () => api.getTimeEntries({ startDate, endDate, status }),
-    { entries: [] },
     [startDate, endDate, status]
   );
 }
@@ -156,7 +95,6 @@ export function useTimeEntries(startDate?: string, endDate?: string, status?: st
 export function useTimeOffPolicies() {
   return useApiCall<{ policies: any[] }>(
     () => api.getTimeOffPolicies(),
-    { policies: [] },
     []
   );
 }
@@ -164,7 +102,6 @@ export function useTimeOffPolicies() {
 export function useTimeOffBalances() {
   return useApiCall<{ balances: any[] }>(
     () => api.getTimeOffBalances(),
-    { balances: [{ type: 'Annual Leave', balance: 18, used: 5 }, { type: 'Sick Leave', balance: 10, used: 2 }] },
     []
   );
 }
@@ -172,7 +109,6 @@ export function useTimeOffBalances() {
 export function useMyTimeOffRequests() {
   return useApiCall<{ requests: any[] }>(
     () => api.getMyTimeOffRequests(),
-    { requests: [] },
     []
   );
 }
@@ -182,7 +118,6 @@ export function useMyTimeOffRequests() {
 export function useSkills() {
   return useApiCall<{ skills: Skill[] }>(
     () => api.getSkills(),
-    DEMO_SKILLS as any,
     []
   );
 }
@@ -190,7 +125,6 @@ export function useSkills() {
 export function useMySkills() {
   return useApiCall<{ skills: Skill[] }>(
     () => api.getMySkills(),
-    DEMO_SKILLS as any,
     []
   );
 }
@@ -198,9 +132,8 @@ export function useMySkills() {
 // ==================== SKILL VERIFICATION (MANAGER) ====================
 
 export function useSkillVerificationRequests() {
-  return useApiCall<{ pending: any[]; recentlyVerified: any[]; totalPending: number; totalVerifiedThisMonth: number }>(
+  return useApiCall<{ requests: any[] }>(
     () => api.getSkillVerificationRequests(),
-    DEMO_SKILL_VERIFICATION,
     []
   );
 }
@@ -210,16 +143,13 @@ export function useSkillVerificationRequests() {
 export function useJobPostings(status?: string) {
   return useApiCall<{ jobs: JobPosting[] }>(
     () => api.getJobPostings({ status: status || 'open' }),
-    DEMO_JOBS as any,
     [status]
   );
 }
 
 export function useJobDetail(jobId: string) {
-  const demoJob = DEMO_JOBS.jobs.find(j => j.id === jobId) || DEMO_JOBS.jobs[0];
   return useApiCall<{ job: JobPosting }>(
     () => api.getJobDetail(jobId),
-    { job: demoJob } as any,
     [jobId]
   );
 }
@@ -227,7 +157,6 @@ export function useJobDetail(jobId: string) {
 export function useCareerOpportunities() {
   return useApiCall<{ opportunities: JobPosting[] }>(
     () => api.getCareerOpportunities(),
-    { opportunities: DEMO_JOBS.jobs } as any,
     []
   );
 }
@@ -235,7 +164,6 @@ export function useCareerOpportunities() {
 export function useMyApplications() {
   return useApiCall<{ applications: any[] }>(
     () => api.getMyApplications(),
-    { applications: [] },
     []
   );
 }
@@ -245,7 +173,6 @@ export function useMyApplications() {
 export function useNotifications(unreadOnly?: boolean) {
   return useApiCall<{ notifications: Notification[] }>(
     () => api.getNotifications({ unreadOnly }),
-    DEMO_NOTIFICATIONS as any,
     [unreadOnly]
   );
 }
@@ -253,7 +180,6 @@ export function useNotifications(unreadOnly?: boolean) {
 export function useUnreadCount() {
   return useApiCall<{ count: number }>(
     () => api.getUnreadCount(),
-    { count: DEMO_NOTIFICATIONS.unreadCount },
     []
   );
 }
@@ -271,15 +197,6 @@ export function useGamificationStats() {
     totalPoints: number;
   }>(
     () => api.getGamificationStats(),
-    {
-      level: DEMO_DASHBOARD.stats.level,
-      currentXP: DEMO_DASHBOARD.stats.xp,
-      nextLevelXP: DEMO_DASHBOARD.stats.nextLevelXp,
-      streak: DEMO_DASHBOARD.stats.streak,
-      badges: DEMO_BADGES.badges,
-      rank: DEMO_DASHBOARD.stats.rank,
-      totalPoints: DEMO_DASHBOARD.stats.xp,
-    },
     []
   );
 }
@@ -287,7 +204,6 @@ export function useGamificationStats() {
 export function useLeaderboard(period?: 'week' | 'month' | 'all') {
   return useApiCall<{ leaderboard: any[] }>(
     () => api.getLeaderboard(period),
-    { leaderboard: DEMO_LEADERBOARD.entries },
     [period]
   );
 }
@@ -295,7 +211,6 @@ export function useLeaderboard(period?: 'week' | 'month' | 'all') {
 export function useBadges() {
   return useApiCall<{ badges: any[]; earned: any[] }>(
     () => api.getBadges(),
-    { badges: DEMO_BADGES.badges, earned: DEMO_BADGES.badges.filter(b => b.earned) },
     []
   );
 }
@@ -305,7 +220,6 @@ export function useBadges() {
 export function useTasks(date?: string, status?: string) {
   return useApiCall<{ tasks: any[] }>(
     () => api.getTasks({ date, status }),
-    DEMO_TASKS,
     [date, status]
   );
 }
@@ -315,23 +229,20 @@ export function useTasks(date?: string, status?: string) {
 export function useRewards() {
   return useApiCall<{ rewards: any[]; userPoints: number }>(
     () => api.getRewards(),
-    DEMO_REWARDS,
     []
   );
 }
 
 export function useRewardCatalog() {
-  return useApiCall<{ rewards: any[]; categories: string[]; totalAvailable: number }>(
+  return useApiCall<{ rewards: any[] }>(
     () => api.getRewardCatalog(),
-    DEMO_REWARD_CATALOG,
     []
   );
 }
 
 export function useAffiliateOffers() {
-  return useApiCall<{ offers: any[]; totalOffers: number }>(
+  return useApiCall<{ offers: any[] }>(
     () => api.getAffiliateOffers(),
-    DEMO_AFFILIATE_OFFERS,
     []
   );
 }
@@ -339,7 +250,6 @@ export function useAffiliateOffers() {
 export function useMyRedemptions() {
   return useApiCall<{ redemptions: any[] }>(
     () => api.getMyRedemptions(),
-    { redemptions: [] },
     []
   );
 }
@@ -347,7 +257,6 @@ export function useMyRedemptions() {
 export function usePointsHistory(limit?: number, offset?: number) {
   return useApiCall<{ history: any[]; total: number }>(
     () => api.getPointsHistory(limit, offset),
-    { history: [], total: 0 },
     [limit, offset]
   );
 }
@@ -355,7 +264,6 @@ export function usePointsHistory(limit?: number, offset?: number) {
 export function usePendingRedemptions() {
   return useApiCall<{ redemptions: any[] }>(
     () => api.getPendingRedemptions(),
-    { redemptions: [] },
     []
   );
 }
@@ -365,7 +273,6 @@ export function usePendingRedemptions() {
 export function useFeed() {
   return useApiCall<{ posts: any[] }>(
     () => api.getFeed(),
-    DEMO_FEED,
     []
   );
 }
@@ -373,9 +280,8 @@ export function useFeed() {
 // ==================== EXPENSES ====================
 
 export function useExpenses(status?: string) {
-  return useApiCall<{ expenses: any[]; totalPending: number; totalApproved: number }>(
+  return useApiCall<{ expenses: any[] }>(
     () => api.getExpenses({ status }),
-    DEMO_EXPENSES,
     [status]
   );
 }
@@ -385,7 +291,6 @@ export function useExpenses(status?: string) {
 export function useManagerDashboard() {
   return useApiCall<any>(
     () => api.getManagerDashboard(),
-    DEMO_MANAGER_DASHBOARD,
     []
   );
 }
@@ -400,16 +305,13 @@ export function useEmployees(params?: {
 }) {
   return useApiCall<{ employees: any[] }>(
     () => api.getEmployees(params),
-    { employees: DEMO_TEAM.members },
     [params?.status, params?.locationId, params?.departmentId, params?.search]
   );
 }
 
 export function useEmployeeDetail(employeeId: string) {
-  const demoEmployee = DEMO_TEAM.members.find(m => m.id === employeeId) || DEMO_TEAM.members[0];
   return useApiCall<{ employee: any }>(
     () => api.getEmployeeDetail(employeeId),
-    { employee: demoEmployee },
     [employeeId]
   );
 }
@@ -417,7 +319,6 @@ export function useEmployeeDetail(employeeId: string) {
 export function useEmployeeSkills(employeeId: string) {
   return useApiCall<{ skills: Skill[] }>(
     () => api.getEmployeeSkills(employeeId),
-    DEMO_SKILLS as any,
     [employeeId]
   );
 }
@@ -431,11 +332,6 @@ export function usePendingApprovals() {
     timeEntries: any[];
   }>(
     () => api.getPendingApprovals(),
-    {
-      timeOff: DEMO_APPROVALS.items.filter(a => a.type === 'Time Off'),
-      swaps: DEMO_APPROVALS.items.filter(a => a.type === 'Shift Swap'),
-      timeEntries: DEMO_APPROVALS.items.filter(a => a.type === 'Expense'),
-    },
     []
   );
 }
@@ -445,7 +341,6 @@ export function usePendingApprovals() {
 export function useReports() {
   return useApiCall<any>(
     () => api.getReports(),
-    DEMO_REPORTS,
     []
   );
 }
@@ -453,9 +348,8 @@ export function useReports() {
 // ==================== COMPLIANCE ====================
 
 export function useCompliance() {
-  return useApiCall<{ certifications: any[]; totalValid: number; totalExpiring: number; totalPending: number }>(
+  return useApiCall<{ certifications: any[] }>(
     () => api.getCompliance(),
-    DEMO_COMPLIANCE,
     []
   );
 }
@@ -465,7 +359,6 @@ export function useCompliance() {
 export function useIntegrations() {
   return useApiCall<{ integrations: any[] }>(
     () => api.getIntegrations(),
-    { integrations: [] },
     []
   );
 }
@@ -475,151 +368,6 @@ export function useIntegrations() {
 export function useLocations() {
   return useApiCall<{ locations: any[] }>(
     () => api.getLocations(),
-    { locations: DEMO_LOCATIONS },
-    []
-  );
-}
-
-// ==================== PAYROLL ====================
-
-export function usePayslips() {
-  return useApiCall<{
-    payslips: any[];
-    ytdEarnings: number;
-    ytdTax: number;
-    taxCode: string;
-    niCategory: string;
-  }>(
-    () => api.getPayslips?.() || Promise.reject('Not implemented'),
-    DEMO_PAYSLIPS,
-    []
-  );
-}
-
-// ==================== DOCUMENTS ====================
-
-export function useDocuments(category?: string) {
-  return useApiCall<{ documents: any[]; totalDocuments: number }>(
-    () => api.getDocuments?.({ category }) || Promise.reject('Not implemented'),
-    DEMO_DOCUMENTS,
-    [category]
-  );
-}
-
-// ==================== LEARNING ====================
-
-export function useLearning() {
-  return useApiCall<{
-    courses: any[];
-    totalCompleted: number;
-    totalXpEarned: number;
-    requiredCourses: number;
-    recommendedCourses: number;
-  }>(
-    () => api.getLearning?.() || Promise.reject('Not implemented'),
-    DEMO_LEARNING,
-    []
-  );
-}
-
-// ==================== PERFORMANCE ====================
-
-export function usePerformance() {
-  return useApiCall<{
-    currentReview: any;
-    metrics: any[];
-    reviews: any[];
-    goals: any[];
-  }>(
-    () => api.getPerformance?.() || Promise.reject('Not implemented'),
-    DEMO_PERFORMANCE,
-    []
-  );
-}
-
-// ==================== SURVEYS ====================
-
-export function useSurveys() {
-  return useApiCall<{
-    surveys: any[];
-    pendingCount: number;
-    completedCount: number;
-  }>(
-    () => api.getSurveys?.() || Promise.reject('Not implemented'),
-    DEMO_SURVEYS,
-    []
-  );
-}
-
-// ==================== MANAGER: AI INSIGHTS ====================
-
-export function useAIInsights() {
-  return useApiCall<{
-    insights: any[];
-    demandForecast: any[];
-    laborEfficiency: number;
-    scheduleOptimization: number;
-  }>(
-    () => api.getAIInsights?.() || Promise.reject('Not implemented'),
-    DEMO_AI_INSIGHTS,
-    []
-  );
-}
-
-// ==================== MANAGER: TEAM PERFORMANCE ====================
-
-export function useTeamPerformance() {
-  return useApiCall<{
-    overview: any;
-    performers: any[];
-    trends: any;
-  }>(
-    () => api.getTeamPerformance?.() || Promise.reject('Not implemented'),
-    DEMO_TEAM_PERFORMANCE,
-    []
-  );
-}
-
-// ==================== MANAGER: OFFBOARDING ====================
-
-export function useOffboarding() {
-  return useApiCall<{
-    activeOffboardings: any[];
-    recentOffboardings: any[];
-    turnoverRate: number;
-    avgTenure: number;
-  }>(
-    () => api.getOffboarding?.() || Promise.reject('Not implemented'),
-    DEMO_OFFBOARDING,
-    []
-  );
-}
-
-// ==================== MANAGER: JOB POSTINGS ====================
-
-export function useJobPostingsManager() {
-  return useApiCall<{
-    jobs: any[];
-    totalApplications: number;
-    averageTimeToFill: number;
-  }>(
-    () => api.getJobPostingsManager?.() || Promise.reject('Not implemented'),
-    DEMO_JOB_POSTINGS,
-    []
-  );
-}
-
-// ==================== MANAGER: EXPENSE APPROVALS ====================
-
-export function useExpenseApprovals() {
-  return useApiCall<{
-    pending: any[];
-    approved: any[];
-    totalPending: number;
-    totalApprovedThisMonth: number;
-  }>(
-    () => api.getExpenseApprovals?.() || Promise.reject('Not implemented'),
-    DEMO_EXPENSE_APPROVALS,
     []
   );
 }

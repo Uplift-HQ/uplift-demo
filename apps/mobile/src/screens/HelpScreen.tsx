@@ -347,13 +347,9 @@ export const HelpScreen = ({ navigation }: any) => {
     Linking.openURL(`mailto:${SUPPORT_EMAIL}?subject=Feature Request - Uplift App`);
   };
 
-  // Handle chat support (coming soon)
+  // Handle chat support - redirect to email
   const handleChatSupport = () => {
-    showAlert(
-      t('help.comingSoon') || 'Coming Soon',
-      t('help.chatComingSoonMessage') || 'Live chat support will be available in a future update. In the meantime, please contact us via email or phone.',
-      [{ text: t('common.ok') || 'OK' }]
-    );
+    Linking.openURL(`mailto:${SUPPORT_EMAIL}?subject=Support Request - Uplift App`);
   };
 
   return (

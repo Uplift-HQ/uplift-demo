@@ -716,19 +716,27 @@ function sanitizeHeaders(headers) {
   return sanitized;
 }
 
+// Encryption key from environment (32 bytes for AES-256)
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY
+  ? Buffer.from(process.env.ENCRYPTION_KEY, 'hex')
+  : crypto.scryptSync('default-dev-key-change-in-production', 'salt', 32);
+
 /**
- * Encrypt auth config for storage
- * In production, use proper encryption (e.g., AWS KMS, Vault)
+ * Encrypt auth config for storage using AES-256-GCM
+ * Set ENCRYPTION_KEY env var (64 hex chars) for production
  */
 function encryptAuthConfig(config) {
-  // For now, just base64 encode - in production use proper encryption
-  // TODO: Implement proper encryption with environment-based key
   if (!config || Object.keys(config).length === 0) return {};
 
   const encrypted = {};
   for (const [key, value] of Object.entries(config)) {
     if (value && typeof value === 'string') {
-      encrypted[key] = Buffer.from(value).toString('base64');
+      const iv = crypto.randomBytes(12);
+      const cipher = crypto.createCipheriv('aes-256-gcm', ENCRYPTION_KEY, iv);
+      let encryptedValue = cipher.update(value, 'utf8', 'hex');
+      encryptedValue += cipher.final('hex');
+      const authTag = cipher.getAuthTag();
+      encrypted[key] = iv.toString('hex') + ':' + authTag.toString('hex') + ':' + encryptedValue;
     } else {
       encrypted[key] = value;
     }
@@ -738,7 +746,7 @@ function encryptAuthConfig(config) {
 }
 
 /**
- * Decrypt auth config for use
+ * Decrypt auth config for use using AES-256-GCM
  */
 function decryptAuthConfig(config) {
   if (!config || !config._encrypted) return config || {};
@@ -746,11 +754,23 @@ function decryptAuthConfig(config) {
   const decrypted = {};
   for (const [key, value] of Object.entries(config)) {
     if (key === '_encrypted') continue;
-    if (value && typeof value === 'string') {
+    if (value && typeof value === 'string' && value.includes(':')) {
       try {
-        decrypted[key] = Buffer.from(value, 'base64').toString('utf8');
+        const [ivHex, authTagHex, encryptedHex] = value.split(':');
+        const iv = Buffer.from(ivHex, 'hex');
+        const authTag = Buffer.from(authTagHex, 'hex');
+        const decipher = crypto.createDecipheriv('aes-256-gcm', ENCRYPTION_KEY, iv);
+        decipher.setAuthTag(authTag);
+        let decryptedValue = decipher.update(encryptedHex, 'hex', 'utf8');
+        decryptedValue += decipher.final('utf8');
+        decrypted[key] = decryptedValue;
       } catch {
-        decrypted[key] = value;
+        // Fallback for legacy base64 encoded values
+        try {
+          decrypted[key] = Buffer.from(value, 'base64').toString('utf8');
+        } catch {
+          decrypted[key] = value;
+        }
       }
     } else {
       decrypted[key] = value;
