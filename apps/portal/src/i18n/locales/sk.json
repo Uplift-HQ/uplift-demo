@@ -111,7 +111,7 @@
     "documents": "Dokumenty",
     "expenses": "Výdavky",
     "sso": "SSO a bezpečnosť",
-    "payroll": "Payroll",
+    "payroll": "Mzdy",
     "payrollDashboard": "Payroll Dashboard",
     "payrollRuns": "Payroll Runs",
     "payrollConfig": "Payroll Config",
@@ -250,19 +250,19 @@
     "roles": {
       "server": "Čašník",
       "bartender": "Barman",
-      "linecook": "Líniový kuchár",
+      "linecook": "Linkový kuchár",
       "hostess": "Hosteska",
       "host": "Hostiteľ",
       "manager": "Manažér",
       "chef": "Šéfkuchár",
       "cashier": "Pokladník",
       "waiter": "Čašník",
-      "waitress": "Čašníčka",
+      "waitress": "Servírka",
       "busser": "Pomocný čašník",
-      "dishwasher": "Umývačka riadu",
+      "dishwasher": "Umývač riadu",
       "cook": "Kuchár",
       "barback": "Pomocník barmana",
-      "sous": "Sous Chef",
+      "sous": "Sous šéf",
       "expeditor": "Expedítor"
     },
     "new": "NOVÉ",
@@ -274,9 +274,9 @@
     "selectEmployee": "Vyberte zamestnanca...",
     "selectPerson": "Vyberte osobu...",
     "priority": {
-      "high": "Vysoka",
-      "medium": "Stredna",
-      "low": "Nizka"
+      "high": "Vysoká",
+      "medium": "Stredná",
+      "low": "Nízka"
     }
   },
   "auth": {
@@ -345,11 +345,11 @@
     "badges": "Odznaky"
   },
   "home": {
-    "welcome": "Vitajte späť, {{name}}!",
+    "welcome": "Vitajte, {{name}}!",
     "welcomeBack": "Vitajte späť,",
-    "todayShift": "Dnešná smena",
-    "noShiftToday": "Dnes nemáte naplánovanú smenu",
-    "upcomingShifts": "Nadchádzajúce smeny",
+    "todayShift": "Dnešná zmena",
+    "noShiftToday": "Dnes žiadna naplánovaná zmena",
+    "upcomingShifts": "Nadchádzajúce zmeny",
     "quickActions": "Rýchle akcie",
     "clockIn": "Príchod",
     "clockOut": "Odchod",
@@ -3037,7 +3037,8 @@
     "generateDocument": "Vygenerovať dokument",
     "policy": "Predpis",
     "idDocument": "Doklad totožnosti",
-    "hasRightToWork": "Má povolenie na prácu"
+    "hasRightToWork": "Má povolenie na prácu",
+    "myDocuments": "Moje dokumenty"
   },
   "performance": {
     "atRisk": "Ohrozený",
@@ -3134,12 +3135,12 @@
     "companyGoals": "Firemné ciele",
     "moodCheck": "Ako sa cítite?",
     "inReview": "V hodnotení",
-    "subtitle": "Reviews, goals, feedback, and employee development",
-    "noDepartment": "No department",
-    "selfBadge": "Self",
-    "managerBadge": "Manager",
-    "peerBadge": "Peer",
-    "noReviewsYet": "No performance reviews",
+    "subtitle": "Hodnotenia, ciele, spätná väzba a rozvoj zamestnancov",
+    "noDepartment": "Bez oddelenia",
+    "selfBadge": "Sebahodnotenie",
+    "managerBadge": "Manažér",
+    "peerBadge": "Kolega",
+    "noReviewsYet": "Žiadne hodnotenia výkonu",
     "createCycleBtn": "Create Cycle",
     "createOkrTitle": "Create OKR",
     "createGoalTitle": "Create Goal",
@@ -3162,8 +3163,8 @@
     "reading": "Reading",
     "otherAction": "Other",
     "addAction": "+ Add Action",
-    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
-    "createFirstReview": "Start First Review Cycle",
+    "noReviewsDesc": "Vytvorte svoj prvý hodnotiaci cyklus na hodnotenie výkonu zamestnancov.",
+    "createFirstReview": "Začať prvý hodnotiaci cyklus",
     "upcomingMeetings": "Upcoming 1-on-1s",
     "allCycles": "Review Cycles",
     "newCycle": "New Cycle",
@@ -3670,8 +3671,8 @@
     "externalProvider": "Externý poskytovateľ"
   },
   "offline": {
-    "youAreOffline": "You're offline. Some features may be limited.",
-    "backOnline": "Back online"
+    "youAreOffline": "Ste offline. Niektoré funkcie môžu byť obmedzené.",
+    "backOnline": "Späť online"
   },
   "recognition": {
     "title": "Stena uznani",
@@ -3939,7 +3940,8 @@
     "month": "Mesiac",
     "skills": "Zrucnosti",
     "performance": "Vykon",
-    "total": "Celkom"
+    "total": "Celkom",
+    "title": "Momentum skóre"
   },
   "myLearning": {
     "title": "Moje vzdelavanie",

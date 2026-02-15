@@ -334,35 +334,35 @@
     "cancelExpense": "Harcamayı İptal Et",
     "expenseCancelled": "Harcama talebi iptal edildi.",
     "status": {
-      "rejected": "Rejected",
-      "approved": "Approved",
-      "pending": "Pending"
+      "approved": "Onaylandı",
+      "rejected": "Reddedildi",
+      "pending": "Beklemede"
     },
     "categories": {
-      "training": "Training",
-      "travel": "Travel",
-      "other": "Other",
-      "meals": "Meals",
-      "uniform": "Uniform",
-      "supplies": "Supplies"
+      "uniform": "Üniforma",
+      "training": "Eğitim",
+      "supplies": "Malzemeler",
+      "other": "Diğer",
+      "travel": "Seyahat",
+      "meals": "Yemek"
     },
-    "submitExpenseTitle": "Submit Expense",
-    "submittedMessage": "Your expense has been submitted for approval. You'll be notified when it's reviewed.",
+    "submitExpenseTitle": "Harcama Gönder",
+    "submittedMessage": "Harcamanız onay için gönderildi. İncelendiğinde bilgilendirileceksiniz.",
     "limits": {
-      "meals": "£15/day",
-      "uniform": "£100/year",
-      "training": "Pre-approved",
-      "travel": "£100/month",
-      "other": "Manager approval",
-      "supplies": "£50/month"
+      "travel": "£100/ay",
+      "meals": "£15/gün",
+      "other": "Yönetici onayı",
+      "supplies": "£50/ay",
+      "uniform": "£100/yıl",
+      "training": "Ön onaylı"
     },
-    "reason": "Reason",
+    "reason": "Sebep",
     "detailMessage": "{{description}}\n\nAmount: £{{amount}}\nDate: {{date}}\nStatus: {{status}}{{reason}}",
-    "chooseOption": "Choose an option",
-    "submitFailed": "Failed to submit expense. Please try again.",
-    "submitted": "Submitted",
-    "cancelledMessage": "Expense request cancelled.",
-    "cancelled": "Cancelled"
+    "chooseOption": "Bir seçenek belirleyin",
+    "submitFailed": "Harcama gönderilemedi. Lütfen tekrar deneyin.",
+    "submitted": "Gönderildi",
+    "cancelledMessage": "Harcama talebi iptal edildi.",
+    "cancelled": "İptal Edildi"
   },
   "feed": {
     "title": "Akış",
@@ -448,14 +448,14 @@
   },
   "help": {
     "categories": {
-      "timeTracking": "Time Tracking",
-      "schedule": "Schedule",
-      "career": "Career",
-      "rewards": "Rewards",
-      "gettingStarted": "Getting Started",
-      "tasks": "Tasks"
+      "timeTracking": "Zaman Takibi",
+      "schedule": "Program",
+      "career": "Kariyer",
+      "rewards": "Ödüller",
+      "gettingStarted": "Başlarken",
+      "tasks": "Görevler"
     },
-    "searchPlaceholder": "Search help articles...",
+    "searchPlaceholder": "Yardım makalelerinde ara...",
     "faq": {
       "tasks": {
         "q3": "Can I add my own tasks?",

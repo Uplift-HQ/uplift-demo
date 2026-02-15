@@ -2648,7 +2648,7 @@
       "finance": "Finance",
       "government": "Government",
       "nonprofit": "Non-profit",
-      "other": "Other"
+      "other": "अन्य"
     }
   },
   "locations": {
@@ -2704,7 +2704,7 @@
       "posDesc": "POS & retail systems",
       "scheduling": "Migration",
       "schedulingDesc": "Import from other tools",
-      "learning": "Learning",
+      "learning": "सीखना",
       "learningDesc": "Training & certifications",
       "analytics": "Analytics",
       "analyticsDesc": "BI & reporting tools",
@@ -2753,7 +2753,7 @@
       "authOAuth2": "OAuth 2.0",
       "triggerManual": "Manual",
       "triggerManualDesc": "Run on demand",
-      "triggerScheduled": "Scheduled",
+      "triggerScheduled": "निर्धारित",
       "triggerScheduledDesc": "Run on a schedule",
       "triggerEvent": "Event-based",
       "triggerEventDesc": "Triggered by Uplift events",
@@ -2781,10 +2781,10 @@
       "jobApplication": "Job Application",
       "categoryEmployees": "Employees",
       "categoryScheduling": "Scheduling",
-      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeTracking": "समय ट्रैकिंग",
       "categoryTimeOff": "Time Off",
       "categorySkills": "Skills",
-      "categoryCareer": "Career"
+      "categoryCareer": "करियर"
     },
     "noIntegrationsFound": "No integrations found",
     "noIntegrationsAvailable": "No integrations are available yet.",
@@ -4097,10 +4097,10 @@
     "subtitle": "अपने अवकाश अनुरोध और शेष देखें"
   },
   "signature": {
-    "draw": "Draw",
-    "type": "Type",
-    "typeYourName": "Type your full name",
-    "drawAboveLine": "Draw your signature above the line",
-    "captured": "Signature captured"
+    "draw": "ड्रॉ करें",
+    "type": "टाइप करें",
+    "typeYourName": "अपना पूरा नाम टाइप करें",
+    "drawAboveLine": "लाइन के ऊपर अपना हस्ताक्षर बनाएं",
+    "captured": "हस्ताक्षर कैप्चर किया गया"
   }
 }

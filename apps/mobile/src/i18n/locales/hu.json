@@ -595,18 +595,18 @@
   },
   "learning": {
     "instructor": "Instructor",
-    "myCourses": "My Courses",
+    "myCourses": "Kurzusaim",
     "mandatory": "Mandatory",
     "enroll": "Enroll",
     "beginner": "Beginner",
-    "title": "Learning",
+    "title": "Tanulás",
     "earned": "Earned {{date}}",
-    "certificates": "Certificates",
+    "certificates": "Tanúsítványok",
     "intermediate": "Intermediate",
-    "catalogue": "Catalogue",
+    "catalogue": "Katalógus",
     "recommended": "Recommended For You",
     "noCertificates": "No certificates yet",
-    "search": "Search courses...",
+    "search": "Kurzusok keresése...",
     "noCourses": "No courses found",
     "browseCatalogue": "Browse Catalogue",
     "optional": "Optional",
@@ -885,7 +885,7 @@
     "completed": "Completed",
     "atRisk": "At Risk",
     "activeReviews": "Active Reviews",
-    "myPerformance": "My Performance",
+    "myPerformance": "Teljesítményem",
     "managerReview": "Manager review",
     "startSelfAssessment": "Start Self-Assessment",
     "constructive": "Constructive",
@@ -1020,7 +1020,7 @@
     "weekView": "Hét",
     "monthView": "Hónap",
     "listView": "Lista",
-    "myShifts": "Műszakjaim",
+    "myShifts": "Műszakaim",
     "openShifts": "Nyitott műszakok",
     "openShift": "Nyitott műszak",
     "teamSchedule": "Csapat beosztás",
@@ -1834,14 +1834,16 @@
     "yourImpact": "Your Impact",
     "continue": "Continue",
     "questions": "{{count}} questions",
-    "title": "Surveys",
+    "title": "Felmérések",
     "noSurveys": "No active surveys",
     "completedSurveys": "Completed",
     "activeSurveys": "Active Surveys",
     "checkBackLater": "Check back later for new surveys",
     "dueDate": "Due {{date}}",
     "answeredOf": "{{answered}}/{{total}} answered",
-    "startSurvey": "Start Survey"
+    "startSurvey": "Start Survey",
+    "active": "Aktív",
+    "completed": "Befejezett"
   },
   "tasks": {
     "title": "Feladatok",
@@ -2058,5 +2060,8 @@
   "workerHome.teamSubtitle": "Felszolgáló Csapat • Grand Hotel, London",
   "workerHome.trainingCompliance": "Képzési Megfelelés",
   "workerHome.trainingProgress": "{{complete}} / {{total}} kötelező elvégezve",
-  "workerHome.viewDetails": "Részletek megtekintése"
+  "workerHome.viewDetails": "Részletek megtekintése",
+  "momentum": {
+    "momentum": "Momentum"
+  }
 }

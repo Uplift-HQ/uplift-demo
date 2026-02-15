@@ -148,10 +148,10 @@
     "yes": "Sí",
     "no": "No",
     "ok": "OK",
-    "error": "Error",
+    "error": "Erro",
     "success": "Éxito",
     "warning": "Advertencia",
-    "info": "Info",
+    "info": "Información",
     "noResults": "Sin resultados",
     "seeAll": "Ver todo",
     "viewMore": "Ver más",
@@ -1175,7 +1175,7 @@
       "cannotEditBuiltIn": "Los roles integrados no se pueden modificar",
       "deleteUsersWarning": "Este rol está asignado a {{count}} usuarios. Volverán a los permisos predeterminados.",
       "saveError": "Error al guardar rol",
-      "permAdmin": "Admin",
+      "permAdmin": "Administrador",
       "addRole": "Añadir rol personalizado",
       "module": "Módulo",
       "custom": "Personalizado",
@@ -1241,7 +1241,7 @@
       "enforceSSO": "Forzar SSO para todos los usuarios",
       "connected": "Conectado",
       "ipWhitelistDesc": "Dejar vacío para permitir todas las IP",
-      "ssoUrlPlaceholder": "https://your-idp.com/sso/saml",
+      "ssoUrlPlaceholder": "https://tu-idp.com/sso/saml",
       "certificate": "Certificado X.509",
       "copied": "¡Copiado!",
       "scimDesc": "Sincronice usuarios automáticamente desde su proveedor de identidad",
@@ -1256,7 +1256,7 @@
       "ssoUrl": "URL de inicio de sesión SSO",
       "sessionPolicyDesc": "Controle la duración de las sesiones y los requisitos de seguridad",
       "provider": "Proveedor SSO",
-      "entityIdPlaceholder": "https://your-idp.com/entity-id",
+      "entityIdPlaceholder": "https://tu-idp.com/entity-id",
       "forceReauth": "Forzar reautenticación en acciones sensibles",
       "email": "Correo electrónico",
       "idleTimeout": "Tiempo de inactividad",
@@ -1292,7 +1292,7 @@
       "testNoUrl": "Ingrese una URL de SSO o URL de metadatos para probar",
       "detectedProvider": "Proveedor",
       "testSuccess": "Conexión exitosa - metadatos del IdP recibidos",
-      "detectedEntityId": "Entity ID",
+      "detectedEntityId": "ID de entidad",
       "testing": "Probando...",
       "detectedSsoUrl": "URL de SSO",
       "testInvalidUrl": "Ingrese una URL válida"
@@ -2057,7 +2057,7 @@
     "notSelected": "No seleccionado",
     "loading": "Cargando",
     "loaded": "Cargado",
-    "error": "Error",
+    "error": "Erro",
     "required": "Obligatorio",
     "optional": "Opcional"
   },
@@ -2189,9 +2189,9 @@
       "reception": "Recepción"
     },
     "locations": {
-      "edinburgh": "Grand Metro Edinburgh",
+      "edinburgh": "Grand Metro Edimburgo",
       "glasgow": "Grand Metro Glasgow",
-      "manchester": "Grand Metro Manchester"
+      "manchester": "Grand Metro Mánchester"
     }
   },
   "employees": {
@@ -2249,7 +2249,7 @@
     },
     "tabs": {
       "connected": "Conectadas",
-      "marketplace": "Marketplace",
+      "marketplace": "Catálogo",
       "restApi": "API REST",
       "apiFactory": "Fábrica de API",
       "activityLog": "Registro de actividad",
@@ -2501,7 +2501,7 @@
       "export": "Exportar",
       "noData": "Aún no hay datos. Los registros de ejecución aparecerán aquí una vez que se ejecuten las integraciones.",
       "unknown": "Desconocido",
-      "error": "Error"
+      "error": "Erro"
     },
     "helpBanner": {
       "title": "¿Necesitas ayuda para crear una integración?",
@@ -2739,7 +2739,7 @@
     "loadError": "Error al cargar integraciones",
     "apiKeyPlaceholder": "ej., Clave API de producción",
     "categories": {
-      "hris": "HRIS",
+      "hris": "SIRH",
       "hrisDesc": "Sistemas de información de recursos humanos",
       "payroll": "Nómina",
       "payrollDesc": "Nómina y compensación",
@@ -2910,7 +2910,7 @@
     "paymentDate": "Fecha de pago",
     "grossPay": "Salario bruto",
     "updateCompensation": "Actualizar retribución",
-    "bonus": "Bonus",
+    "bonus": "Bonificación",
     "downloadPdf": "Descargar PDF",
     "netPay": "Salario neto",
     "budget": "Presupuesto",
@@ -3083,7 +3083,7 @@
     "continue": "Continuar",
     "start": "Iniciar",
     "noCertificates": "Aún no has obtenido certificados",
-    "defaultIssuer": "Uplift Learning",
+    "defaultIssuer": "Formación Uplift",
     "issued": "Emitido",
     "expires": "Expira",
     "downloadCert": "Descargar certificado",
@@ -3218,7 +3218,7 @@
     "period": "Periodo",
     "endDate": "Fecha de fin",
     "schedule1on1": "Programar reunión individual",
-    "feedback": "Feedback",
+    "feedback": "Retroalimentación",
     "offTrack": "Fuera de curso",
     "giveFeedback": "Dar feedback",
     "calibration": "Calibración",
@@ -3361,7 +3361,15 @@
     "target": "Objetivo"
   },
   "surveys": {
-    "templates": "Plantillas",
+    "templates": {
+      "title": "Plantillas de encuestas",
+      "subtitle": "Elige una plantilla predefinida o crea la tuya propia",
+      "createCustom": "Crear plantilla personalizada",
+      "preview": "Vista previa",
+      "clone": "Clonar y personalizar",
+      "sampleQuestions": "Preguntas de ejemplo",
+      "useTemplate": "Usar esta plantilla"
+    },
     "rating1to10": "Valoración (1-10)",
     "multipleChoice": "Opción múltiple",
     "questionType": "Tipo de pregunta",
@@ -3543,7 +3551,7 @@
         "individualContributor": "Colaborador individual",
         "manager": "Gerente",
         "director": "Director",
-        "vp": "VP",
+        "vp": "Vicepresidente",
         "executive": "Ejecutivo"
       },
       "schedule": "Programación y recordatorios",
@@ -3662,15 +3670,6 @@
       },
       "enabled": "Habilitada",
       "responded": "respondieron"
-    },
-    "templates": {
-      "title": "Plantillas de encuestas",
-      "subtitle": "Elige una plantilla predefinida o crea la tuya propia",
-      "createCustom": "Crear plantilla personalizada",
-      "preview": "Vista previa",
-      "clone": "Clonar y personalizar",
-      "sampleQuestions": "Preguntas de ejemplo",
-      "useTemplate": "Usar esta plantilla"
     }
   },
   "entity": {
@@ -4075,7 +4074,8 @@
     "dateFrom": "Desde fecha",
     "dateTo": "Hasta fecha",
     "tryDifferentFilters": "Intenta ajustar tus filtros.",
-    "beFirst": "¡Sé el primero en reconocer a un compañero!"
+    "beFirst": "¡Sé el primero en reconocer a un compañero!",
+    "clearFilters": "Limpiar filtros"
   },
   "momentum": {
     "streak": "Racha de 10 días 🔥",

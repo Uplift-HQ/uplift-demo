@@ -1,16 +1,16 @@
 {
   "accessibility": {
-    "menu": "Menu",
-    "closeMenu": "Close menu",
-    "openMenu": "Open menu",
-    "goBack": "Go back",
-    "selected": "Selected",
-    "notSelected": "Not selected",
-    "loading": "Loading",
-    "loaded": "Loaded",
-    "error": "Error",
-    "required": "Required",
-    "optional": "Optional"
+    "menu": "ಮೆನು",
+    "closeMenu": "ಮೆನು ಮುಚ್ಚಿ",
+    "openMenu": "ಮೆನು ತೆರೆಯಿರಿ",
+    "goBack": "ಹಿಂತಿರುಗಿ",
+    "selected": "ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ",
+    "notSelected": "ಆಯ್ಕೆಮಾಡಿಲ್ಲ",
+    "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ",
+    "loaded": "ಲೋಡ್ ಆಗಿದೆ",
+    "error": "ದೋಷ",
+    "required": "ಅಗತ್ಯವಿದೆ",
+    "optional": "ಐಚ್ಛಿಕ"
   },
   "auth": {
     "login": "ಲಾಗಿನ್",

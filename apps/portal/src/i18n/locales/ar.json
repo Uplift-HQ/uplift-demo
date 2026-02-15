@@ -338,12 +338,12 @@
     "demoWorker": "موظف",
     "demoWorkerDesc": "الخدمة الذاتية — عرض نقاط Momentum، حجز الإجازات، إكمال التدريب، منح التقدير",
     "placeholder": {
-      "email": "Email address",
+      "email": "عنوان البريد الإلكتروني",
       "password": "كلمة المرور",
       "confirmPassword": "تأكيد كلمة المرور",
       "firstName": "الاسم الأول",
       "lastName": "اسم العائلة",
-      "mfaCode": "Enter 6-digit code"
+      "mfaCode": "أدخل الرمز المكون من 6 أرقام"
     }
   },
   "navigation": {
@@ -448,12 +448,12 @@
     "friday": "جم",
     "saturday": "سب",
     "allDepartments": "جميع الأقسام",
-    "leaveOpen": "Leave Open",
-    "shiftPublished": "Shift published successfully",
-    "shiftUpdated": "Shift updated successfully",
+    "leaveOpen": "اترك متاحة",
+    "shiftPublished": "تم نشر الوردية بنجاح",
+    "shiftUpdated": "تم تحديث الوردية بنجاح",
     "placeholder": {
-      "searchEmployees": "Search employees...",
-      "addNotes": "Add notes..."
+      "searchEmployees": "البحث عن موظفين...",
+      "addNotes": "أضف ملاحظات..."
     },
     "ai": {
       "skillsMatch": "تطابق المهارات",
@@ -478,12 +478,12 @@
       "month": "شهر"
     },
     "loadError": "فشل تحميل بيانات الجدول",
-    "hideSidebar": "Hide sidebar",
-    "showSidebar": "Show sidebar",
+    "hideSidebar": "إخفاء الشريط الجانبي",
+    "showSidebar": "إظهار الشريط الجانبي",
     "publish": {
-      "notification1": "Employees receive push notifications",
-      "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications",
+      "notification1": "سيتلقى الموظفون إشعارات فورية",
+      "notification2": "ستظهر الورديات في تطبيقات الموظفين",
+      "notification3": "ستُرسل إشعارات جديدة عند التغييرات بعد النشر",
       "whatHappens": "ما يحدث عند النشر:"
     },
     "today": "اليوم",
@@ -497,7 +497,7 @@
     "noPendingRequests": "لا توجد طلبات معلقة",
     "shiftSwaps": "تبديل الورديات",
     "noPendingSwaps": "لا توجد تبديلات معلقة",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "aiSchedulingComingSoon": "الجدولة الذكية قريباً. ستُحلل هذه الميزة مهارات الموظفين وتوفرهم وتفضيلاتهم لإنشاء جداول مثالية.",
     "aiSchedule": "جدول الذكاء الاصطناعي",
     "addShift": "إضافة وردية",
     "requiredSkills": "المهارات المطلوبة",
@@ -570,7 +570,7 @@
     "startBreak": "بدء الاستراحة",
     "endBreak": "إنهاء الاستراحة",
     "totalHours": "إجمالي الساعات",
-    "loadError": "Failed to load time tracking data. Please try again.",
+    "loadError": "فشل تحميل بيانات تتبع الوقت. يرجى المحاولة مرة أخرى.",
     "clockInOutTab": "تسجيل الدخول/الخروج",
     "entriesWillAppear": "ستظهر سجلات الوقت هنا بمجرد تسجيل الموظفين."
   },
@@ -618,10 +618,10 @@
       "annualLeave": "إجازة سنوية",
       "sickLeave": "إجازة مرضية",
       "personal": "شخصي",
-      "bereavement": "Bereavement",
+      "bereavement": "إجازة وفاة",
       "maternity": "إجازة أمومة",
       "paternity": "إجازة أبوة",
-      "unpaid": "Unpaid Leave",
+      "unpaid": "إجازة غير مدفوعة",
       "sickleave": "إجازة مرضية",
       "annualleave": "إجازة سنوية",
       "sickleaveshort": "إجازة مرضية"
@@ -742,7 +742,7 @@
     "searchSkills": "البحث عن المهارات...",
     "skillAdded": "تمت إضافة المهارة بنجاح",
     "verificationRequested": "تم طلب التحقق",
-    "loadError": "Failed to load skills. Please try again.",
+    "loadError": "فشل تحميل المهارات. يرجى المحاولة مرة أخرى.",
     "employeeListingComingSoon": "قائمة الموظفين لهذه المهارة ستكون متاحة قريبًا."
   },
   "career": {
@@ -818,7 +818,7 @@
     "expiringSoon": "تنتهي قريباً",
     "expired": "منتهية الصلاحية",
     "expires": "تنتهي {{date}}",
-    "loadError": "Failed to load career data"
+    "loadError": "فشل تحميل بيانات المسار المهني"
   },
   "gamification": {
     "level": "المستوى {{level}}",
@@ -1178,7 +1178,7 @@
     "webhookName": "الاسم",
     "webhookSecret": "المفتاح السري",
     "webhookSecretDesc": "يُستخدم لتوقيع حمولات Webhook للتحقق",
-    "webhooksTitle": "Webhooks",
+    "webhooksTitle": "الويب هوك",
     "sso": {
       "azureAd": "Azure Active Directory",
       "mfa": "المصادقة متعددة العوامل",
@@ -1217,7 +1217,7 @@
       "regenerateToken": "إعادة إنشاء الرمز",
       "scimEndpoint": "رابط نقطة نهاية SCIM",
       "okta": "Okta",
-      "sms": "SMS",
+      "sms": "رسالة نصية",
       "scimToken": "رمز Bearer",
       "saveConfig": "حفظ الإعدادات",
       "scim": "توفير SCIM",
@@ -1293,7 +1293,7 @@
       "widgetLeaveBalance": "رصيد الإجازات",
       "colWorkersPortal": "الموظفون (البوابة)"
     },
-    "rolesPermissions": "Roles & Permissions",
+    "rolesPermissions": "الأدوار والصلاحيات",
     "save": "حفظ",
     "saved": "تم الحفظ"
   },
@@ -1700,10 +1700,10 @@
     "approve": "موافقة",
     "reject": "رفض",
     "placeholder": {
-      "search": "Search activity..."
+      "search": "البحث في النشاط..."
     },
-    "loadError": "Failed to load activity data",
-    "rejectionReasonPlaceholder": "Enter reason for rejection..."
+    "loadError": "فشل تحميل بيانات النشاط",
+    "rejectionReasonPlaceholder": "أدخل سبب الرفض..."
   },
   "notificationSettings": {
     "title": "تفضيلات الإشعارات",
@@ -1760,10 +1760,10 @@
     "proficiencyLevel": "مستوى الإتقان",
     "basic": "أساسي",
     "adding": "جارٍ الإضافة...",
-    "loadError": "Failed to load employee",
-    "verifySkill": "Verify skill",
-    "removeSkill": "Remove skill",
-    "confirmRemoveSkill": "Remove this skill from the employee?"
+    "loadError": "فشل تحميل بيانات الموظف",
+    "verifySkill": "توثيق المهارة",
+    "removeSkill": "إزالة المهارة",
+    "confirmRemoveSkill": "هل تريد إزالة هذه المهارة من الموظف؟"
   },
   "reports": {
     "title": "التقارير",
@@ -2136,14 +2136,14 @@
       "skillsDesc": "استيراد المهارات"
     },
     "types": {
-      "employees": "Employees",
-      "employeesDesc": "Import employee profiles",
-      "shifts": "Shifts",
-      "shiftsDesc": "Import shift schedules",
-      "locations": "Locations",
-      "locationsDesc": "Import locations",
-      "skills": "Skills",
-      "skillsDesc": "Import skills"
+      "employees": "الموظفون",
+      "employeesDesc": "استيراد ملفات الموظفين",
+      "shifts": "الورديات",
+      "shiftsDesc": "استيراد جداول الورديات",
+      "locations": "المواقع",
+      "locationsDesc": "استيراد المواقع",
+      "skills": "المهارات",
+      "skillsDesc": "استيراد المهارات"
     }
   },
   "jobs": {
@@ -2174,7 +2174,7 @@
     "postJob": "نشر الوظيفة",
     "skillMatch": "تطابق المهارات",
     "noApplicants": "لا يوجد متقدمون بعد",
-    "loadError": "Failed to load job postings. Please try again.",
+    "loadError": "فشل تحميل إعلانات الوظائف. يرجى المحاولة مرة أخرى.",
     "departments": {
       "frontOfHouse": "الصالة",
       "kitchen": "المطبخ",
@@ -2182,9 +2182,9 @@
       "reception": "الاستقبال"
     },
     "locations": {
-      "edinburgh": "Grand Metro Edinburgh",
-      "glasgow": "Grand Metro Glasgow",
-      "manchester": "Grand Metro Manchester"
+      "edinburgh": "جراند مترو إدنبرة",
+      "glasgow": "جراند مترو غلاسكو",
+      "manchester": "جراند مترو مانشستر"
     }
   },
   "employees": {
@@ -2197,12 +2197,12 @@
     "leaveDetails": "تفاصيل الإجازة",
     "until": "حتى",
     "terminationDetails": "تفاصيل إنهاء الخدمة",
-    "allDepartments": "All Departments",
-    "allLocations": "All Locations",
+    "allDepartments": "جميع الأقسام",
+    "allLocations": "جميع المواقع",
     "placeholder": {
-      "searchEmployees": "Search employees..."
+      "searchEmployees": "البحث عن موظفين..."
     },
-    "loadError": "Failed to load employees",
+    "loadError": "فشل تحميل الموظفين",
     "failedAddSkill": "فشل في إضافة المهارة",
     "failedVerifySkill": "فشل في التحقق",
     "failedUpdateSkillLevel": "فشل في تحديث المستوى",
@@ -2243,7 +2243,7 @@
     "tabs": {
       "connected": "متصل",
       "marketplace": "السوق",
-      "restApi": "REST API",
+      "restApi": "واجهة برمجة التطبيقات REST",
       "apiFactory": "مصنع API",
       "activityLog": "سجل النشاط",
       "settings": "الإعدادات",
@@ -2363,7 +2363,7 @@
       "testSent": "تم إرسال الحمولة التجريبية إلى",
       "testStatus": "الحالة",
       "deleteConfirm": "حذف هذا الويب هوك؟",
-      "skillExpired": "Skill Expired"
+      "skillExpired": "انتهت صلاحية المهارة"
     },
     "marketplace": {
       "searchPlaceholder": "البحث عن التكاملات...",
@@ -2380,7 +2380,7 @@
       "exportLog": "تصدير السجل"
     },
     "placeholder": {
-      "search": "Search integrations..."
+      "search": "البحث في التكاملات..."
     }
   },
   "apiFactory": {
@@ -2501,9 +2501,9 @@
       "description": "تحقق من وثائق API للأمثلة، أو اتصل بالدعم لحالات الاستخدام المعقدة."
     },
     "placeholder": {
-      "apiName": "API name",
-      "baseUrl": "Base URL",
-      "apiKey": "API key"
+      "apiName": "اسم الـ API",
+      "baseUrl": "عنوان URL الأساسي",
+      "apiKey": "مفتاح الـ API"
     }
   },
   "restApiKeys": {
@@ -2919,7 +2919,7 @@
     "currentSalary": "الراتب الحالي",
     "lastReview": "آخر مراجعة",
     "overtime": "العمل الإضافي",
-    "myPayslips": "My Payslips"
+    "myPayslips": "كشوف راتبي"
   },
   "learning": {
     "score": "الدرجة",
@@ -3076,7 +3076,7 @@
     "continue": "متابعة",
     "start": "بدء",
     "noCertificates": "لا توجد شهادات مكتسبة بعد",
-    "defaultIssuer": "Uplift Learning",
+    "defaultIssuer": "منصة تعلم Uplift",
     "issued": "صدرت",
     "expires": "تنتهي",
     "downloadCert": "تحميل الشهادة",
@@ -3230,7 +3230,7 @@
     "exceedsExpectations": "يفوق التوقعات",
     "needsImprovement": "يحتاج تحسين",
     "createGoal": "إنشاء هدف",
-    "threeSixty": "360°",
+    "threeSixty": "تقييم ٣٦٠ درجة",
     "keyResults": "النتائج الرئيسية",
     "description": "الوصف",
     "recurring": "متكرر",
@@ -3286,7 +3286,7 @@
     "typeQuarterly": "ربع سنوي",
     "typeProbation": "فترة اختبار",
     "goals": "الأهداف",
-    "okrs": "OKRs",
+    "okrs": "أهداف ونتائج رئيسية",
     "newGoal": "هدف جديد",
     "newOkr": "OKR جديد",
     "noGoalsDesc": "أنشئ هدفك الأول لبدء تتبع التقدم.",
@@ -3309,7 +3309,7 @@
     "noPlansDesc": "أنشئ خطة التطوير الأولى لتتبع النمو الوظيفي.",
     "focusAreaPlaceholder": "عنوان منطقة التركيز",
     "actionItemPlaceholder": "عنصر الإجراء",
-    "mySubtitle": "Your reviews, goals, and development",
+    "mySubtitle": "تقييماتك وأهدافك وتطويرك",
     "myTitle": "أدائي",
     "cycleTypes": {
       "360": "360°",
@@ -3430,7 +3430,7 @@
     "fromScratch": "البدء من الصفر",
     "promoters": "المروّجون",
     "surveyBuilder": "منشئ الاستبيانات",
-    "enpsQuestion": "eNPS (0-10)",
+    "enpsQuestion": "مقياس eNPS (٠-١٠)",
     "title": "الاستبيانات",
     "saveDraftAndResume": "حفظ والمتابعة لاحقاً",
     "draft": "مسودة",
@@ -3464,7 +3464,7 @@
       "status": "الحالة",
       "responses": "الردود",
       "participation": "المشاركة",
-      "enps": "eNPS",
+      "enps": "مقياس eNPS",
       "closesOn": "ينتهي في",
       "actions": "الإجراءات"
     },
@@ -3486,7 +3486,7 @@
       "step6": "المراجعة",
       "rating5": "تقييم 1-5",
       "rating10": "تقييم 1-10",
-      "enps": "eNPS (0-10)",
+      "enps": "مقياس eNPS (٠-١٠)",
       "freeText": "نص حر",
       "multipleChoice": "اختيار متعدد",
       "yesNo": "نعم / لا",
@@ -3605,7 +3605,7 @@
       "outOf5": "من 5.0",
       "participation": "المشاركة",
       "responded": "أجاب",
-      "enps": "eNPS",
+      "enps": "مقياس eNPS",
       "promoters": "م",
       "passives": "ح",
       "detractors": "س",
@@ -4114,7 +4114,7 @@
       "exportedBy": "صدرها",
       "download": "تحميل",
       "noExports": "لا توجد عمليات تصدير بعد",
-      "csv": "CSV",
+      "csv": "ملف CSV",
       "exportTitle": "تصدير للرواتب",
       "exportWarning": "سيتم تحديد المطالبات كمدفوعة ولا يمكن تعديلها بعد التصدير.",
       "confirmExport": "تصدير"

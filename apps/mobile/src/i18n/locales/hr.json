@@ -35,7 +35,8 @@
     "requestAccess": "Zatraži pristup",
     "requestAccessMsg": "Za pristup Upliftu, molimo kontaktirajte svog voditelja ili HR odjel. Oni će vam poslati pozivnicu.",
     "enterEmailPassword": "Molimo unesite e-poštu i lozinku",
-    "loginFailed": "Prijava neuspješna"
+    "loginFailed": "Prijava neuspješna",
+    "demoAdmin": "HR Administrator"
   },
   "auth.demoAccess": "Brzi Demo Pristup",
   "auth.demoAdmin": "HR Administrator",
@@ -599,7 +600,7 @@
     "mandatory": "Obavezno",
     "enroll": "Upiši se",
     "beginner": "Početnik",
-    "title": "Edukacija",
+    "title": "Učenje",
     "earned": "Stečeno {{date}}",
     "certificates": "Certifikati",
     "intermediate": "Srednje",
@@ -885,7 +886,7 @@
     "completed": "Završeno",
     "atRisk": "U riziku",
     "activeReviews": "Aktivne ocjene",
-    "myPerformance": "Moj učinak",
+    "myPerformance": "Moja izvedba",
     "managerReview": "Ocjena voditelja",
     "startSelfAssessment": "Započni samoocjenjivanje",
     "constructive": "Konstruktivno",
@@ -1841,7 +1842,9 @@
     "checkBackLater": "Provjerite kasnije za nove ankete",
     "dueDate": "Rok: {{date}}",
     "answeredOf": "{{answered}}/{{total}} odgovoreno",
-    "startSurvey": "Započni anketu"
+    "startSurvey": "Započni anketu",
+    "active": "Aktivne",
+    "completed": "Završene"
   },
   "tasks": {
     "title": "Zadaci",
@@ -1897,7 +1900,7 @@
     "inventory": "Inventura"
   },
   "timeOff": {
-    "title": "Slobodno vrijeme",
+    "title": "Odmor",
     "request": "Zatraži slobodno",
     "timeOffRequest": "Zahtjev za slobodno",
     "balance": "Stanje slobodnih dana",
@@ -2058,5 +2061,8 @@
   "workerHome.teamSubtitle": "Tim Usluge u Sali • Grand Hotel, London",
   "workerHome.trainingCompliance": "Usklađenost Edukacija",
   "workerHome.trainingProgress": "{{complete}} od {{total}} obaveznih završeno",
-  "workerHome.viewDetails": "Pregledaj detalje"
+  "workerHome.viewDetails": "Pregledaj detalje",
+  "momentum": {
+    "momentum": "Momentum"
+  }
 }

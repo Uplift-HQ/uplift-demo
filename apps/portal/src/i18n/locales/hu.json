@@ -249,11 +249,11 @@
     "department": "Osztály",
     "roles": {
       "server": "Felszolgáló",
-      "bartender": "Bármixer",
+      "bartender": "Csapos",
       "linecook": "Vonalszakács",
       "hostess": "Hostess",
       "host": "Házigazda",
-      "manager": "Menedzser",
+      "manager": "Vezető",
       "chef": "Séf",
       "cashier": "Pénztáros",
       "waiter": "Pincér",
@@ -261,8 +261,8 @@
       "busser": "Segédpincér",
       "dishwasher": "Mosogató",
       "cook": "Szakács",
-      "barback": "Bársegéd",
-      "sous": "Sous Chef",
+      "barback": "Csapos segéd",
+      "sous": "Sous séf",
       "expeditor": "Expeditor"
     },
     "new": "ÚJ",
@@ -348,11 +348,11 @@
     "welcome": "Üdvözöljük, {{name}}!",
     "welcomeBack": "Üdvözöljük újra,",
     "todayShift": "Mai műszak",
-    "noShiftToday": "Ma nincs beosztott műszak",
+    "noShiftToday": "Nincs beütemezett műszak ma",
     "upcomingShifts": "Közelgő műszakok",
     "quickActions": "Gyors műveletek",
-    "clockIn": "Bejelentkezés",
-    "clockOut": "Kijelentkezés",
+    "clockIn": "Belépés",
+    "clockOut": "Kilépés",
     "startBreak": "Szünet kezdése",
     "endBreak": "Szünet befejezése",
     "viewSchedule": "Beosztás megtekintése",
@@ -3037,7 +3037,8 @@
     "generateDocument": "Dokumentum generálása",
     "policy": "Szabályzat",
     "idDocument": "Személyazonosító",
-    "hasRightToWork": "Van munkavállalási engedélye"
+    "hasRightToWork": "Van munkavállalási engedélye",
+    "myDocuments": "Dokumentumaim"
   },
   "performance": {
     "atRisk": "Veszélyben",
@@ -3134,12 +3135,12 @@
     "companyGoals": "Vállalati célok",
     "moodCheck": "Hogy érzi magát?",
     "inReview": "Értékelés alatt",
-    "subtitle": "Reviews, goals, feedback, and employee development",
-    "noDepartment": "No department",
-    "selfBadge": "Self",
-    "managerBadge": "Manager",
-    "peerBadge": "Peer",
-    "noReviewsYet": "No performance reviews",
+    "subtitle": "Értékelések, célok, visszajelzések és munkavállalói fejlesztés",
+    "noDepartment": "Nincs osztály",
+    "selfBadge": "Önértékelés",
+    "managerBadge": "Vezető",
+    "peerBadge": "Kolléga",
+    "noReviewsYet": "Nincsenek teljesítményértékelések",
     "createCycleBtn": "Create Cycle",
     "createOkrTitle": "Create OKR",
     "createGoalTitle": "Create Goal",
@@ -3162,8 +3163,8 @@
     "reading": "Reading",
     "otherAction": "Other",
     "addAction": "+ Add Action",
-    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
-    "createFirstReview": "Start First Review Cycle",
+    "noReviewsDesc": "Hozd létre az első értékelési ciklust a munkatársak teljesítményének értékeléséhez.",
+    "createFirstReview": "Első értékelési ciklus indítása",
     "upcomingMeetings": "Upcoming 1-on-1s",
     "allCycles": "Review Cycles",
     "newCycle": "New Cycle",
@@ -3315,7 +3316,7 @@
     "promoters": "Támogatók",
     "surveyBuilder": "Kérdőív készítő",
     "enpsQuestion": "eNPS (0–10)",
-    "title": "Kérdőívek",
+    "title": "Felmérések",
     "saveDraftAndResume": "Mentés és folytatás később",
     "draft": "Piszkozat",
     "onboardingSurvey": "Betanulás",
@@ -3670,8 +3671,8 @@
     "externalProvider": "Külső szolgáltató"
   },
   "offline": {
-    "youAreOffline": "You're offline. Some features may be limited.",
-    "backOnline": "Back online"
+    "youAreOffline": "Offline vagy. Egyes funkciók korlátozottak lehetnek.",
+    "backOnline": "Újra online"
   },
   "recognition": {
     "title": "Elismeresek fala",
@@ -3939,7 +3940,8 @@
     "month": "Honap",
     "skills": "Keszsegek",
     "performance": "Teljesitmeny",
-    "total": "Összesen"
+    "total": "Összesen",
+    "title": "Momentum pontszám"
   },
   "myLearning": {
     "title": "Tanulsom",

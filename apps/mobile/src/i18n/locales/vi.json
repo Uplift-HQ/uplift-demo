@@ -334,35 +334,35 @@
     "cancelExpense": "Hủy chi phí",
     "expenseCancelled": "Đã hủy yêu cầu chi phí.",
     "status": {
-      "rejected": "Rejected",
-      "approved": "Approved",
-      "pending": "Pending"
+      "rejected": "Đã từ chối",
+      "approved": "Đã duyệt",
+      "pending": "Đang chờ"
     },
     "categories": {
-      "training": "Training",
-      "travel": "Travel",
-      "other": "Other",
-      "meals": "Meals",
-      "uniform": "Uniform",
-      "supplies": "Supplies"
+      "training": "Đào tạo",
+      "travel": "Đi lại",
+      "other": "Khác",
+      "meals": "Ăn uống",
+      "uniform": "Đồng phục",
+      "supplies": "Vật tư"
     },
-    "submitExpenseTitle": "Submit Expense",
-    "submittedMessage": "Your expense has been submitted for approval. You'll be notified when it's reviewed.",
+    "submitExpenseTitle": "Nộp chi phí",
+    "submittedMessage": "Chi phí của bạn đã được gửi để duyệt. Bạn sẽ được thông báo khi được xem xét.",
     "limits": {
-      "meals": "£15/day",
-      "uniform": "£100/year",
-      "training": "Pre-approved",
-      "travel": "£100/month",
-      "other": "Manager approval",
-      "supplies": "£50/month"
+      "meals": "£15/ngày",
+      "uniform": "£100/năm",
+      "training": "Đã duyệt trước",
+      "travel": "£100/tháng",
+      "other": "Duyệt của quản lý",
+      "supplies": "£50/tháng"
     },
-    "reason": "Reason",
-    "detailMessage": "{{description}}\n\nAmount: £{{amount}}\nDate: {{date}}\nStatus: {{status}}{{reason}}",
-    "chooseOption": "Choose an option",
-    "submitFailed": "Failed to submit expense. Please try again.",
-    "submitted": "Submitted",
-    "cancelledMessage": "Expense request cancelled.",
-    "cancelled": "Cancelled"
+    "reason": "Lý do",
+    "detailMessage": "{{description}}\n\nSố tiền: £{{amount}}\nNgày: {{date}}\nTrạng thái: {{status}}{{reason}}",
+    "chooseOption": "Chọn một tùy chọn",
+    "submitFailed": "Không thể gửi chi phí. Vui lòng thử lại.",
+    "submitted": "Đã gửi",
+    "cancelledMessage": "Đã hủy yêu cầu chi phí.",
+    "cancelled": "Đã hủy"
   },
   "feed": {
     "title": "Bảng tin",
@@ -448,82 +448,82 @@
   },
   "help": {
     "categories": {
-      "timeTracking": "Time Tracking",
-      "schedule": "Schedule",
-      "career": "Career",
-      "rewards": "Rewards",
-      "gettingStarted": "Getting Started",
-      "tasks": "Tasks"
+      "timeTracking": "Theo dõi thời gian",
+      "schedule": "Lịch làm việc",
+      "career": "Sự nghiệp",
+      "rewards": "Phần thưởng",
+      "gettingStarted": "Bắt đầu",
+      "tasks": "Công việc"
     },
-    "searchPlaceholder": "Search help articles...",
+    "searchPlaceholder": "Tìm kiếm bài viết trợ giúp...",
     "faq": {
       "tasks": {
-        "q3": "Can I add my own tasks?",
-        "a2": "Tap on a task to view its details and requirements. Once completed, tap \"Mark Complete\" and add any required photos or notes for verification.",
-        "q2": "How do I complete a task?",
-        "q1": "How do I view my assigned tasks?",
-        "a3": "Yes! Tap the \"+\" button in the Tasks tab to create a personal task. You can set reminders, priority levels, and due dates for your own to-do items.",
-        "a1": "Open the Tasks tab to see all your pending, in-progress, and completed tasks. Tasks are sorted by priority and due date."
+        "q3": "Tôi có thể thêm công việc riêng không?",
+        "a2": "Chạm vào công việc để xem chi tiết và yêu cầu. Khi hoàn thành, chạm \"Đánh dấu hoàn thành\" và thêm ảnh hoặc ghi chú cần thiết để xác minh.",
+        "q2": "Làm thế nào để hoàn thành công việc?",
+        "q1": "Làm thế nào để xem công việc được giao?",
+        "a3": "Có! Chạm nút \"+\" trong tab Công việc để tạo công việc cá nhân. Bạn có thể đặt nhắc nhở, mức độ ưu tiên và hạn chót cho công việc của mình.",
+        "a1": "Mở tab Công việc để xem tất cả công việc đang chờ, đang tiến hành và đã hoàn thành. Công việc được sắp xếp theo ưu tiên và hạn chót."
       },
       "gettingStarted": {
-        "a3": "Go to Profile > Settings > Notifications to customize which alerts you receive. We recommend enabling shift reminders and schedule change notifications.",
-        "q2": "How do I navigate the app?",
-        "q1": "How do I set up my profile?",
-        "q3": "How do I enable notifications?",
-        "a2": "Use the bottom navigation bar to switch between Home, Schedule, Tasks, and Profile. The Home screen shows your daily overview, upcoming shifts, and quick actions.",
-        "a1": "Go to the Profile tab and tap on any field to edit your information. You can add your photo, update contact details, and set your availability preferences."
+        "a3": "Vào Hồ sơ > Cài đặt > Thông báo để tùy chỉnh thông báo bạn nhận. Chúng tôi khuyến nghị bật nhắc ca làm và thông báo thay đổi lịch.",
+        "q2": "Làm thế nào để điều hướng ứng dụng?",
+        "q1": "Làm thế nào để thiết lập hồ sơ?",
+        "q3": "Làm thế nào để bật thông báo?",
+        "a2": "Sử dụng thanh điều hướng phía dưới để chuyển giữa Trang chủ, Lịch, Công việc và Hồ sơ. Màn hình Trang chủ hiển thị tổng quan hàng ngày, ca sắp tới và thao tác nhanh.",
+        "a1": "Vào tab Hồ sơ và chạm vào bất kỳ trường nào để sửa thông tin. Bạn có thể thêm ảnh, cập nhật chi tiết liên hệ và đặt tùy chọn khả dụng."
       },
       "career": {
-        "q2": "How do I earn certifications?",
-        "a1": "Go to Career from the Home screen to see your current role, skills progress, and available advancement paths. Complete training modules to unlock new opportunities.",
-        "a2": "Certifications are earned by completing specific training modules and skill assessments. Check the Skills tab to see available certifications and your progress.",
-        "a3": "Open job postings from the Career section. If you meet the requirements, tap \"Apply\" and submit your application. Your manager will be notified.",
-        "q3": "How do I apply for internal positions?",
-        "q1": "How do I track my career progress?"
+        "q2": "Làm thế nào để đạt chứng chỉ?",
+        "a1": "Vào Sự nghiệp từ màn hình Trang chủ để xem vai trò hiện tại, tiến độ kỹ năng và các con đường thăng tiến. Hoàn thành các mô-đun đào tạo để mở khóa cơ hội mới.",
+        "a2": "Chứng chỉ đạt được bằng cách hoàn thành các mô-đun đào tạo và đánh giá kỹ năng cụ thể. Kiểm tra tab Kỹ năng để xem các chứng chỉ có sẵn và tiến độ của bạn.",
+        "a3": "Mở tin tuyển dụng từ phần Sự nghiệp. Nếu bạn đáp ứng yêu cầu, chạm \"Ứng tuyển\" và gửi đơn. Quản lý của bạn sẽ được thông báo.",
+        "q3": "Làm thế nào để ứng tuyển vị trí nội bộ?",
+        "q1": "Làm thế nào để theo dõi tiến độ sự nghiệp?"
       },
       "timeTracking": {
-        "q1": "How do I clock in and out?",
-        "q2": "What if I forget to clock out?",
-        "a2": "Contact your manager as soon as possible. They can manually adjust your time records. You can also add a note explaining the missed clock-out in the Schedule tab.",
-        "q3": "How are my hours calculated?",
-        "a3": "Your hours are calculated from clock-in to clock-out, minus any scheduled breaks. Overtime is automatically tracked based on your contract and local labor laws.",
-        "a1": "On your shift day, the Clock In button appears on the Home screen. Tap it when you arrive at work. The button changes to Clock Out when your shift is active."
+        "q1": "Làm thế nào để chấm công vào và ra?",
+        "q2": "Nếu tôi quên chấm công ra thì sao?",
+        "a2": "Liên hệ quản lý của bạn ngay khi có thể. Họ có thể điều chỉnh thủ công hồ sơ thời gian của bạn. Bạn cũng có thể thêm ghi chú giải thích việc quên chấm công trong tab Lịch.",
+        "q3": "Số giờ của tôi được tính như thế nào?",
+        "a3": "Số giờ của bạn được tính từ lúc vào đến lúc ra, trừ thời gian nghỉ đã lên lịch. Làm thêm giờ được tự động theo dõi dựa trên hợp đồng và luật lao động địa phương.",
+        "a1": "Vào ngày ca làm, nút Chấm công vào xuất hiện trên màn hình Trang chủ. Chạm khi bạn đến nơi làm việc. Nút sẽ đổi thành Chấm công ra khi ca của bạn đang hoạt động."
       },
       "schedule": {
-        "a3": "From the Schedule tab, tap the \"+\" button and select \"Request Time Off\". Choose your dates, add a reason, and submit. Your manager will review and approve or deny the request.",
-        "q1": "How do I view my upcoming shifts?",
-        "a1": "Open the Schedule tab to see your weekly schedule. Tap on any shift to view details including location, role, and any special instructions.",
-        "a2": "Tap on the shift you want to swap, then select \"Request Swap\". Choose an available colleague and submit the request. You'll be notified when they respond.",
-        "q3": "How do I request time off?",
-        "q2": "How do I request a shift swap?"
+        "a3": "Từ tab Lịch, chạm nút \"+\" và chọn \"Yêu cầu nghỉ phép\". Chọn ngày, thêm lý do và gửi. Quản lý sẽ xem xét và duyệt hoặc từ chối yêu cầu.",
+        "q1": "Làm thế nào để xem ca sắp tới?",
+        "a1": "Mở tab Lịch để xem lịch tuần. Chạm vào bất kỳ ca nào để xem chi tiết bao gồm địa điểm, vai trò và hướng dẫn đặc biệt.",
+        "a2": "Chạm vào ca bạn muốn đổi, sau đó chọn \"Yêu cầu đổi ca\". Chọn đồng nghiệp có sẵn và gửi yêu cầu. Bạn sẽ được thông báo khi họ phản hồi.",
+        "q3": "Làm thế nào để yêu cầu nghỉ phép?",
+        "q2": "Làm thế nào để yêu cầu đổi ca?"
       },
       "rewards": {
-        "q2": "How do I redeem my rewards?",
-        "a1": "Earn points by completing tasks on time, maintaining good attendance, receiving recognition, and achieving performance goals. Points are awarded automatically.",
-        "q3": "Do my points expire?",
-        "q1": "How do I earn momentum points?",
-        "a3": "Points remain valid for 12 months from the date earned. Check your Rewards history to see when points were earned and their expiration dates.",
-        "a2": "Go to the Rewards section to browse available rewards. Tap on any item to see the point cost, then tap \"Redeem\" if you have enough points."
+        "q2": "Làm thế nào để đổi phần thưởng?",
+        "a1": "Kiếm điểm bằng cách hoàn thành công việc đúng hạn, duy trì chuyên cần tốt, nhận ghi nhận và đạt mục tiêu hiệu suất. Điểm được trao tự động.",
+        "q3": "Điểm của tôi có hết hạn không?",
+        "q1": "Làm thế nào để kiếm điểm momentum?",
+        "a3": "Điểm có hiệu lực trong 12 tháng kể từ ngày kiếm được. Kiểm tra lịch sử Phần thưởng để xem khi nào điểm được kiếm và ngày hết hạn.",
+        "a2": "Vào phần Phần thưởng để duyệt phần thưởng có sẵn. Chạm vào bất kỳ mục nào để xem số điểm cần, sau đó chạm \"Đổi\" nếu bạn có đủ điểm."
       }
     },
-    "quickLinks": "Quick Links",
-    "noResults": "No results found",
-    "reportBugDesc": "Let us know about issues",
-    "featureRequest": "Feature Request",
-    "chatWithSupport": "Chat with Support",
-    "sendEmail": "Send Email",
-    "comingSoon": "Coming Soon",
-    "noResultsHint": "Try a different search term or browse categories below",
-    "copyright": "2024 Uplift. All rights reserved.",
-    "chatComingSoonMessage": "Live chat support will be available in a future update. In the meantime, please contact us via email or phone.",
-    "reportBug": "Report a Bug",
-    "callUs": "Call Us",
-    "faqTitle": "Frequently Asked Questions",
-    "contactSupportDesc": "Get help via email or phone",
-    "phone": "Phone",
-    "contactSupport": "Contact Support",
-    "featureRequestDesc": "Suggest new features",
-    "appVersion": "App Version",
+    "quickLinks": "Liên kết nhanh",
+    "noResults": "Không tìm thấy kết quả",
+    "reportBugDesc": "Cho chúng tôi biết về sự cố",
+    "featureRequest": "Yêu cầu tính năng",
+    "chatWithSupport": "Chat với hỗ trợ",
+    "sendEmail": "Gửi email",
+    "comingSoon": "Sắp ra mắt",
+    "noResultsHint": "Thử từ khóa tìm kiếm khác hoặc duyệt danh mục bên dưới",
+    "copyright": "2024 Uplift. Bảo lưu mọi quyền.",
+    "chatComingSoonMessage": "Hỗ trợ chat trực tiếp sẽ có trong bản cập nhật tương lai. Trong khi đó, vui lòng liên hệ qua email hoặc điện thoại.",
+    "reportBug": "Báo cáo lỗi",
+    "callUs": "Gọi cho chúng tôi",
+    "faqTitle": "Câu hỏi thường gặp",
+    "contactSupportDesc": "Nhận trợ giúp qua email hoặc điện thoại",
+    "phone": "Điện thoại",
+    "contactSupport": "Liên hệ hỗ trợ",
+    "featureRequestDesc": "Đề xuất tính năng mới",
+    "appVersion": "Phiên bản ứng dụng",
     "email": "Email"
   },
   "home": {

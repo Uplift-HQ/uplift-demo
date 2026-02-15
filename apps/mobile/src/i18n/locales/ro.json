@@ -248,7 +248,7 @@
     "viewed": "Vizualizat",
     "contract": "Contract",
     "companyPolicies": "Politici Companie",
-    "myDocuments": "Documentele Mele",
+    "myDocuments": "Documentele mele",
     "allCaughtUp": "Ești la zi cu documentele tale",
     "actionRequired": "Acțiune Necesară",
     "signNow": "Semnează Acum",
@@ -595,18 +595,18 @@
   },
   "learning": {
     "instructor": "Instructor",
-    "myCourses": "My Courses",
+    "myCourses": "Cursurile mele",
     "mandatory": "Mandatory",
     "enroll": "Enroll",
     "beginner": "Beginner",
-    "title": "Learning",
+    "title": "Învățare",
     "earned": "Earned {{date}}",
-    "certificates": "Certificates",
+    "certificates": "Certificate",
     "intermediate": "Intermediate",
-    "catalogue": "Catalogue",
+    "catalogue": "Catalog",
     "recommended": "Recommended For You",
     "noCertificates": "No certificates yet",
-    "search": "Search courses...",
+    "search": "Caută cursuri...",
     "noCourses": "No courses found",
     "browseCatalogue": "Browse Catalogue",
     "optional": "Optional",
@@ -885,7 +885,7 @@
     "completed": "Completed",
     "atRisk": "At Risk",
     "activeReviews": "Active Reviews",
-    "myPerformance": "My Performance",
+    "myPerformance": "Performanța mea",
     "managerReview": "Manager review",
     "startSelfAssessment": "Start Self-Assessment",
     "constructive": "Constructive",
@@ -1021,7 +1021,7 @@
     "monthView": "Lună",
     "listView": "Listă",
     "myShifts": "Turele mele",
-    "openShifts": "Ture deschise",
+    "openShifts": "Ture disponibile",
     "openShift": "Tură deschisă",
     "teamSchedule": "Program echipă",
     "noShifts": "Nicio tură programată",
@@ -1834,14 +1834,16 @@
     "yourImpact": "Your Impact",
     "continue": "Continue",
     "questions": "{{count}} questions",
-    "title": "Surveys",
+    "title": "Sondaje",
     "noSurveys": "No active surveys",
     "completedSurveys": "Completed",
     "activeSurveys": "Active Surveys",
     "checkBackLater": "Check back later for new surveys",
     "dueDate": "Due {{date}}",
     "answeredOf": "{{answered}}/{{total}} answered",
-    "startSurvey": "Start Survey"
+    "startSurvey": "Start Survey",
+    "active": "Active",
+    "completed": "Finalizate"
   },
   "tasks": {
     "title": "Sarcini",
@@ -1897,7 +1899,7 @@
     "inventory": "Inventar"
   },
   "timeOff": {
-    "title": "Concedii",
+    "title": "Concediu",
     "request": "Solicită concediu",
     "timeOffRequest": "Cerere de concediu",
     "balance": "Sold concediu",
@@ -1944,7 +1946,7 @@
     "yourPendingRequests": "Cererile tale în așteptare"
   },
   "timeTracking": {
-    "title": "Pontaj",
+    "title": "Urmărire timp",
     "timeClock": "Ceas de pontaj",
     "clockedIn": "Pontat intrare",
     "clockedInMessage": "Tura ta a început. O zi bună!",
@@ -2058,5 +2060,8 @@
   "workerHome.teamSubtitle": "Echipa Serviciu Sală • Grand Hotel, Londra",
   "workerHome.trainingCompliance": "Conformitate Training",
   "workerHome.trainingProgress": "{{complete}} din {{total}} obligatorii finalizate",
-  "workerHome.viewDetails": "Vezi detalii"
+  "workerHome.viewDetails": "Vezi detalii",
+  "momentum": {
+    "momentum": "Momentum"
+  }
 }

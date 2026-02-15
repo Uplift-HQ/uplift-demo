@@ -259,7 +259,7 @@
       "waiter": "Официант",
       "waitress": "Официантка",
       "busser": "Помощник официанта",
-      "dishwasher": "Мойщик посуды",
+      "dishwasher": "Посудомойщик",
       "cook": "Повар",
       "barback": "Помощник бармена",
       "sous": "Су-шеф",
@@ -269,7 +269,12 @@
     "exportComingSoon": "Экспорт скоро будет доступен",
     "clickToViewDetails": "Нажмите, чтобы посмотреть подробности",
     "closeEsc": "Закрыть (ESC)",
-    "logoPreview": "Предпросмотр логотипа"
+    "logoPreview": "Предпросмотр логотипа",
+    "priority": {
+      "high": "Высокий",
+      "medium": "Средний",
+      "low": "Низкий"
+    }
   },
   "auth": {
     "login": "Войти",
@@ -340,11 +345,11 @@
     "welcome": "Добро пожаловать, {{name}}!",
     "welcomeBack": "С возвращением,",
     "todayShift": "Смена сегодня",
-    "noShiftToday": "Сегодня нет смен",
-    "upcomingShifts": "Ближайшие смены",
+    "noShiftToday": "Сегодня нет запланированной смены",
+    "upcomingShifts": "Предстоящие смены",
     "quickActions": "Быстрые действия",
-    "clockIn": "Начать смену",
-    "clockOut": "Завершить смену",
+    "clockIn": "Приход",
+    "clockOut": "Уход",
     "startBreak": "Начать перерыв",
     "endBreak": "Закончить перерыв",
     "viewSchedule": "Посмотреть расписание",
@@ -2934,7 +2939,8 @@
     "generateDocument": "Сгенерировать документ",
     "policy": "Политика",
     "idDocument": "Удостоверение личности",
-    "hasRightToWork": "Разрешение на работу есть"
+    "hasRightToWork": "Разрешение на работу есть",
+    "myDocuments": "Мои документы"
   },
   "performance": {
     "atRisk": "Под угрозой",
@@ -3031,12 +3037,12 @@
     "companyGoals": "Цели компании",
     "moodCheck": "Как вы себя чувствуете?",
     "inReview": "На рассмотрении",
-    "subtitle": "Reviews, goals, feedback, and employee development",
-    "noDepartment": "No department",
-    "selfBadge": "Self",
-    "managerBadge": "Manager",
-    "peerBadge": "Peer",
-    "noReviewsYet": "No performance reviews",
+    "subtitle": "Обзоры, цели, обратная связь и развитие сотрудников",
+    "noDepartment": "Без отдела",
+    "selfBadge": "Самооценка",
+    "managerBadge": "Руководитель",
+    "peerBadge": "Коллега",
+    "noReviewsYet": "Нет оценок производительности",
     "createCycleBtn": "Create Cycle",
     "createOkrTitle": "Create OKR",
     "createGoalTitle": "Create Goal",
@@ -3059,8 +3065,8 @@
     "reading": "Reading",
     "otherAction": "Other",
     "addAction": "+ Add Action",
-    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
-    "createFirstReview": "Start First Review Cycle",
+    "noReviewsDesc": "Создайте свой первый цикл оценки для оценки производительности сотрудников.",
+    "createFirstReview": "Начать первый цикл оценки",
     "upcomingMeetings": "Upcoming 1-on-1s",
     "allCycles": "Review Cycles",
     "newCycle": "New Cycle",
@@ -3451,7 +3457,8 @@
     "month": "Месяц",
     "skills": "Навыки",
     "performance": "Производительность",
-    "total": "Итого"
+    "total": "Итого",
+    "title": "Показатель Momentum"
   },
   "recognition": {
     "title": "Стена признания",

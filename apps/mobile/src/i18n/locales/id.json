@@ -334,35 +334,35 @@
     "cancelExpense": "Batalkan Pengeluaran",
     "expenseCancelled": "Permintaan pengeluaran dibatalkan.",
     "status": {
-      "rejected": "Rejected",
-      "approved": "Approved",
-      "pending": "Pending"
+      "rejected": "Ditolak",
+      "approved": "Disetujui",
+      "pending": "Menunggu"
     },
     "categories": {
-      "training": "Training",
-      "travel": "Travel",
-      "other": "Other",
-      "meals": "Meals",
-      "uniform": "Uniform",
-      "supplies": "Supplies"
+      "training": "Pelatihan",
+      "travel": "Perjalanan",
+      "other": "Lainnya",
+      "meals": "Makan",
+      "uniform": "Seragam",
+      "supplies": "Perlengkapan"
     },
-    "submitExpenseTitle": "Submit Expense",
-    "submittedMessage": "Your expense has been submitted for approval. You'll be notified when it's reviewed.",
+    "submitExpenseTitle": "Ajukan Pengeluaran",
+    "submittedMessage": "Pengeluaran Anda telah diajukan untuk persetujuan. Anda akan diberitahu saat ditinjau.",
     "limits": {
-      "meals": "£15/day",
-      "uniform": "£100/year",
-      "training": "Pre-approved",
-      "travel": "£100/month",
-      "other": "Manager approval",
-      "supplies": "£50/month"
+      "meals": "£15/hari",
+      "uniform": "£100/tahun",
+      "training": "Pra-disetujui",
+      "travel": "£100/bulan",
+      "other": "Persetujuan manajer",
+      "supplies": "£50/bulan"
     },
-    "reason": "Reason",
-    "detailMessage": "{{description}}\n\nAmount: £{{amount}}\nDate: {{date}}\nStatus: {{status}}{{reason}}",
-    "chooseOption": "Choose an option",
-    "submitFailed": "Failed to submit expense. Please try again.",
-    "submitted": "Submitted",
-    "cancelledMessage": "Expense request cancelled.",
-    "cancelled": "Cancelled"
+    "reason": "Alasan",
+    "detailMessage": "{{description}}\n\nJumlah: £{{amount}}\nTanggal: {{date}}\nStatus: {{status}}{{reason}}",
+    "chooseOption": "Pilih opsi",
+    "submitFailed": "Gagal mengajukan pengeluaran. Silakan coba lagi.",
+    "submitted": "Diajukan",
+    "cancelledMessage": "Permintaan pengeluaran dibatalkan.",
+    "cancelled": "Dibatalkan"
   },
   "feed": {
     "title": "Feed",
@@ -448,82 +448,82 @@
   },
   "help": {
     "categories": {
-      "timeTracking": "Time Tracking",
-      "schedule": "Schedule",
-      "career": "Career",
-      "rewards": "Rewards",
-      "gettingStarted": "Getting Started",
-      "tasks": "Tasks"
+      "timeTracking": "Pelacakan Waktu",
+      "schedule": "Jadwal",
+      "career": "Karier",
+      "rewards": "Hadiah",
+      "gettingStarted": "Memulai",
+      "tasks": "Tugas"
     },
-    "searchPlaceholder": "Search help articles...",
+    "searchPlaceholder": "Cari artikel bantuan...",
     "faq": {
       "tasks": {
-        "q3": "Can I add my own tasks?",
-        "a2": "Tap on a task to view its details and requirements. Once completed, tap \"Mark Complete\" and add any required photos or notes for verification.",
-        "q2": "How do I complete a task?",
-        "q1": "How do I view my assigned tasks?",
-        "a3": "Yes! Tap the \"+\" button in the Tasks tab to create a personal task. You can set reminders, priority levels, and due dates for your own to-do items.",
-        "a1": "Open the Tasks tab to see all your pending, in-progress, and completed tasks. Tasks are sorted by priority and due date."
+        "q3": "Bisakah saya menambahkan tugas sendiri?",
+        "a2": "Ketuk tugas untuk melihat detail dan persyaratannya. Setelah selesai, ketuk \"Tandai Selesai\" dan tambahkan foto atau catatan yang diperlukan untuk verifikasi.",
+        "q2": "Bagaimana cara menyelesaikan tugas?",
+        "q1": "Bagaimana cara melihat tugas yang ditugaskan?",
+        "a3": "Ya! Ketuk tombol \"+\" di tab Tugas untuk membuat tugas pribadi. Anda dapat mengatur pengingat, tingkat prioritas, dan tanggal jatuh tempo untuk item to-do Anda sendiri.",
+        "a1": "Buka tab Tugas untuk melihat semua tugas yang tertunda, sedang dikerjakan, dan selesai. Tugas diurutkan berdasarkan prioritas dan tanggal jatuh tempo."
       },
       "gettingStarted": {
-        "a3": "Go to Profile > Settings > Notifications to customize which alerts you receive. We recommend enabling shift reminders and schedule change notifications.",
-        "q2": "How do I navigate the app?",
-        "q1": "How do I set up my profile?",
-        "q3": "How do I enable notifications?",
-        "a2": "Use the bottom navigation bar to switch between Home, Schedule, Tasks, and Profile. The Home screen shows your daily overview, upcoming shifts, and quick actions.",
-        "a1": "Go to the Profile tab and tap on any field to edit your information. You can add your photo, update contact details, and set your availability preferences."
+        "a3": "Buka Profil > Pengaturan > Notifikasi untuk menyesuaikan pemberitahuan yang Anda terima. Kami merekomendasikan mengaktifkan pengingat shift dan notifikasi perubahan jadwal.",
+        "q2": "Bagaimana cara menavigasi aplikasi?",
+        "q1": "Bagaimana cara mengatur profil saya?",
+        "q3": "Bagaimana cara mengaktifkan notifikasi?",
+        "a2": "Gunakan bilah navigasi bawah untuk beralih antara Beranda, Jadwal, Tugas, dan Profil. Layar Beranda menampilkan ringkasan harian, shift mendatang, dan aksi cepat.",
+        "a1": "Buka tab Profil dan ketuk kolom mana pun untuk mengedit informasi Anda. Anda dapat menambahkan foto, memperbarui detail kontak, dan mengatur preferensi ketersediaan."
       },
       "career": {
-        "q2": "How do I earn certifications?",
-        "a1": "Go to Career from the Home screen to see your current role, skills progress, and available advancement paths. Complete training modules to unlock new opportunities.",
-        "a2": "Certifications are earned by completing specific training modules and skill assessments. Check the Skills tab to see available certifications and your progress.",
-        "a3": "Open job postings from the Career section. If you meet the requirements, tap \"Apply\" and submit your application. Your manager will be notified.",
-        "q3": "How do I apply for internal positions?",
-        "q1": "How do I track my career progress?"
+        "q2": "Bagaimana cara mendapatkan sertifikasi?",
+        "a1": "Buka Karier dari layar Beranda untuk melihat peran Anda saat ini, kemajuan keahlian, dan jalur kemajuan yang tersedia. Selesaikan modul pelatihan untuk membuka peluang baru.",
+        "a2": "Sertifikasi diperoleh dengan menyelesaikan modul pelatihan dan penilaian keahlian tertentu. Periksa tab Keahlian untuk melihat sertifikasi yang tersedia dan kemajuan Anda.",
+        "a3": "Buka lowongan kerja dari bagian Karier. Jika Anda memenuhi persyaratan, ketuk \"Lamar\" dan kirim lamaran Anda. Manajer Anda akan diberitahu.",
+        "q3": "Bagaimana cara melamar posisi internal?",
+        "q1": "Bagaimana cara melacak kemajuan karier saya?"
       },
       "timeTracking": {
-        "q1": "How do I clock in and out?",
-        "q2": "What if I forget to clock out?",
-        "a2": "Contact your manager as soon as possible. They can manually adjust your time records. You can also add a note explaining the missed clock-out in the Schedule tab.",
-        "q3": "How are my hours calculated?",
-        "a3": "Your hours are calculated from clock-in to clock-out, minus any scheduled breaks. Overtime is automatically tracked based on your contract and local labor laws.",
-        "a1": "On your shift day, the Clock In button appears on the Home screen. Tap it when you arrive at work. The button changes to Clock Out when your shift is active."
+        "q1": "Bagaimana cara absen masuk dan keluar?",
+        "q2": "Bagaimana jika saya lupa absen keluar?",
+        "a2": "Hubungi manajer Anda sesegera mungkin. Mereka dapat menyesuaikan catatan waktu Anda secara manual. Anda juga dapat menambahkan catatan yang menjelaskan absen keluar yang terlewat di tab Jadwal.",
+        "q3": "Bagaimana jam kerja saya dihitung?",
+        "a3": "Jam kerja Anda dihitung dari absen masuk hingga absen keluar, dikurangi istirahat terjadwal. Lembur dilacak secara otomatis berdasarkan kontrak dan undang-undang ketenagakerjaan lokal.",
+        "a1": "Pada hari shift Anda, tombol Absen Masuk muncul di layar Beranda. Ketuk saat Anda tiba di tempat kerja. Tombol berubah menjadi Absen Keluar saat shift Anda aktif."
       },
       "schedule": {
-        "a3": "From the Schedule tab, tap the \"+\" button and select \"Request Time Off\". Choose your dates, add a reason, and submit. Your manager will review and approve or deny the request.",
-        "q1": "How do I view my upcoming shifts?",
-        "a1": "Open the Schedule tab to see your weekly schedule. Tap on any shift to view details including location, role, and any special instructions.",
-        "a2": "Tap on the shift you want to swap, then select \"Request Swap\". Choose an available colleague and submit the request. You'll be notified when they respond.",
-        "q3": "How do I request time off?",
-        "q2": "How do I request a shift swap?"
+        "a3": "Dari tab Jadwal, ketuk tombol \"+\" dan pilih \"Ajukan Cuti\". Pilih tanggal, tambahkan alasan, dan kirim. Manajer Anda akan meninjau dan menyetujui atau menolak permintaan.",
+        "q1": "Bagaimana cara melihat shift mendatang?",
+        "a1": "Buka tab Jadwal untuk melihat jadwal mingguan Anda. Ketuk shift mana pun untuk melihat detail termasuk lokasi, peran, dan instruksi khusus.",
+        "a2": "Ketuk shift yang ingin Anda tukar, lalu pilih \"Minta Tukar\". Pilih rekan kerja yang tersedia dan kirim permintaan. Anda akan diberitahu saat mereka merespons.",
+        "q3": "Bagaimana cara mengajukan cuti?",
+        "q2": "Bagaimana cara meminta tukar shift?"
       },
       "rewards": {
-        "q2": "How do I redeem my rewards?",
-        "a1": "Earn points by completing tasks on time, maintaining good attendance, receiving recognition, and achieving performance goals. Points are awarded automatically.",
-        "q3": "Do my points expire?",
-        "q1": "How do I earn momentum points?",
-        "a3": "Points remain valid for 12 months from the date earned. Check your Rewards history to see when points were earned and their expiration dates.",
-        "a2": "Go to the Rewards section to browse available rewards. Tap on any item to see the point cost, then tap \"Redeem\" if you have enough points."
+        "q2": "Bagaimana cara menukarkan hadiah saya?",
+        "a1": "Dapatkan poin dengan menyelesaikan tugas tepat waktu, menjaga kehadiran yang baik, menerima penghargaan, dan mencapai tujuan kinerja. Poin diberikan secara otomatis.",
+        "q3": "Apakah poin saya kedaluwarsa?",
+        "q1": "Bagaimana cara mendapatkan poin momentum?",
+        "a3": "Poin berlaku selama 12 bulan sejak tanggal diperoleh. Periksa riwayat Hadiah untuk melihat kapan poin diperoleh dan tanggal kedaluwarsanya.",
+        "a2": "Buka bagian Hadiah untuk menelusuri hadiah yang tersedia. Ketuk item mana pun untuk melihat biaya poin, lalu ketuk \"Tukarkan\" jika Anda memiliki cukup poin."
       }
     },
-    "quickLinks": "Quick Links",
-    "noResults": "No results found",
-    "reportBugDesc": "Let us know about issues",
-    "featureRequest": "Feature Request",
-    "chatWithSupport": "Chat with Support",
-    "sendEmail": "Send Email",
-    "comingSoon": "Coming Soon",
-    "noResultsHint": "Try a different search term or browse categories below",
-    "copyright": "2024 Uplift. All rights reserved.",
-    "chatComingSoonMessage": "Live chat support will be available in a future update. In the meantime, please contact us via email or phone.",
-    "reportBug": "Report a Bug",
-    "callUs": "Call Us",
-    "faqTitle": "Frequently Asked Questions",
-    "contactSupportDesc": "Get help via email or phone",
-    "phone": "Phone",
-    "contactSupport": "Contact Support",
-    "featureRequestDesc": "Suggest new features",
-    "appVersion": "App Version",
+    "quickLinks": "Tautan Cepat",
+    "noResults": "Tidak ada hasil ditemukan",
+    "reportBugDesc": "Beri tahu kami tentang masalah",
+    "featureRequest": "Permintaan Fitur",
+    "chatWithSupport": "Chat dengan Dukungan",
+    "sendEmail": "Kirim Email",
+    "comingSoon": "Segera Hadir",
+    "noResultsHint": "Coba istilah pencarian yang berbeda atau telusuri kategori di bawah",
+    "copyright": "2024 Uplift. Hak cipta dilindungi.",
+    "chatComingSoonMessage": "Dukungan chat langsung akan tersedia di pembaruan mendatang. Sementara itu, silakan hubungi kami melalui email atau telepon.",
+    "reportBug": "Laporkan Bug",
+    "callUs": "Hubungi Kami",
+    "faqTitle": "Pertanyaan yang Sering Diajukan",
+    "contactSupportDesc": "Dapatkan bantuan melalui email atau telepon",
+    "phone": "Telepon",
+    "contactSupport": "Hubungi Dukungan",
+    "featureRequestDesc": "Sarankan fitur baru",
+    "appVersion": "Versi Aplikasi",
     "email": "Email"
   },
   "home": {

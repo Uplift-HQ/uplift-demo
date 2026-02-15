@@ -334,26 +334,26 @@
     "cancelExpense": "경비 취소",
     "expenseCancelled": "경비 요청이 취소되었습니다.",
     "status": {
-      "rejected": "Rejected",
-      "approved": "Approved",
-      "pending": "Pending"
+      "rejected": "거부됨",
+      "approved": "승인됨",
+      "pending": "대기 중"
     },
     "categories": {
-      "training": "Training",
-      "travel": "Travel",
-      "other": "Other",
-      "meals": "Meals",
-      "uniform": "Uniform",
-      "supplies": "Supplies"
+      "training": "교육",
+      "travel": "출장",
+      "other": "기타",
+      "meals": "식사",
+      "uniform": "유니폼",
+      "supplies": "용품"
     },
     "submitExpenseTitle": "Submit Expense",
     "submittedMessage": "Your expense has been submitted for approval. You'll be notified when it's reviewed.",
     "limits": {
       "meals": "£15/day",
       "uniform": "£100/year",
-      "training": "Pre-approved",
+      "training": "사전 승인",
       "travel": "£100/month",
-      "other": "Manager approval",
+      "other": "관리자 승인",
       "supplies": "£50/month"
     },
     "reason": "Reason",
@@ -362,7 +362,7 @@
     "submitFailed": "Failed to submit expense. Please try again.",
     "submitted": "Submitted",
     "cancelledMessage": "Expense request cancelled.",
-    "cancelled": "Cancelled"
+    "cancelled": "취소됨"
   },
   "feed": {
     "title": "피드",
@@ -594,12 +594,12 @@
     }
   },
   "learning": {
-    "instructor": "Instructor",
+    "instructor": "강사",
     "myCourses": "My Courses",
     "mandatory": "Mandatory",
     "enroll": "Enroll",
     "beginner": "Beginner",
-    "title": "Learning",
+    "title": "학습",
     "earned": "Earned {{date}}",
     "certificates": "Certificates",
     "intermediate": "Intermediate",
@@ -609,7 +609,7 @@
     "search": "Search courses...",
     "noCourses": "No courses found",
     "browseCatalogue": "Browse Catalogue",
-    "optional": "Optional",
+    "optional": "선택 사항",
     "new": "New",
     "advanced": "Advanced",
     "exploreCatalogue": "Explore our course catalogue to start learning",
@@ -661,11 +661,11 @@
       "pendingActions": "Pending Actions"
     },
     "offboarding": {
-      "pendingInterview": "Pending",
+      "pendingInterview": "대기 중",
       "resignation": "Resignation",
       "pendingExitInterviews": "Pending exit interviews",
       "leaversThisQuarter": "Leavers this quarter",
-      "title": "Offboarding",
+      "title": "퇴사 처리",
       "tasksDone": "{{done}}/{{total}} tasks",
       "quickStats": "Quick Stats",
       "viewTasks": "View Tasks",
@@ -765,7 +765,7 @@
     "documents": "Documents",
     "coursesProgress": "Courses & progress",
     "myPerformance": "My Performance",
-    "learning": "Learning",
+    "learning": "학습",
     "surveys": "Surveys",
     "shareFeedback": "Share feedback",
     "viewSign": "View & sign"
@@ -889,7 +889,7 @@
     "managerReview": "Manager review",
     "startSelfAssessment": "Start Self-Assessment",
     "constructive": "Constructive",
-    "pending": "Pending",
+    "pending": "대기 중",
     "goalsOnTrack": "Goals On Track",
     "prepareNotes": "Prepare notes",
     "nextReview": "Next Review",
@@ -1112,7 +1112,7 @@
       "this_helps_verify_your_attendance_make_s": "This helps verify your attendance. Make sure your face is clearly visible.",
       "you_are_offline_clockin_will_be_queued_a": "You are offline. Clock-in will be queued and synced when connectivity returns.",
       "time_clock": "Time Clock",
-      "live": "LIVE",
+      "live": "실시간",
       "outside_work_location": "Outside Work Location",
       "location_unavailable": "Location Unavailable",
       "distance_to_work": "Distance to work:",
@@ -1280,7 +1280,7 @@
       "bonus": "Bonus",
       "partialMatch": "Partial Match",
       "viewTrainingCourses": "View available training courses to learn new skills.",
-      "travel": "Travel",
+      "travel": "출장",
       "team": "Team",
       "weather": "Weather",
       "earnings": "Earnings",
@@ -1371,7 +1371,7 @@
       "courses": "Courses",
       "since": "Since {{date}}",
       "totalSkills": "Total Skills",
-      "training": "Training",
+      "training": "교육",
       "viewAllAchievements": "View all achievements in your profile.",
       "moreRequirements": "+{{count}} more requirements",
       "courseContentDemo": "Course content would load here in production.",
@@ -1435,7 +1435,7 @@
       "moreNeeded": "{{count}} more needed",
       "skills_match_desc": "Best skill fit for roles",
       "gaps": "gaps",
-      "status_legend": "Status",
+      "status_legend": "상태",
       "labourBudget": "Labour Budget",
       "createShiftFor": "Create shift for {{day}}?",
       "skillsMatchDesc": "Best skill fit for roles",
@@ -1463,7 +1463,7 @@
       "add_reward": "Add Reward",
       "name_label": "Name *",
       "name_placeholder": "e.g., £50 Amazon Gift Card",
-      "description_label": "Description",
+      "description_label": "설명",
       "description_placeholder": "Brief description of the reward",
       "category_label": "Category *",
       "points_cost_label": "Points Cost *",
@@ -1479,7 +1479,7 @@
       "reject_reason_prompt": "Provide a reason for rejecting {{employee}}'s request:",
       "reject_reason_placeholder": "Enter rejection reason...",
       "success": "Success",
-      "error": "Error",
+      "error": "오류",
       "reward_created": "Reward created successfully",
       "reward_updated": "Reward updated successfully",
       "reward_deleted": "Reward deleted successfully",
@@ -1499,7 +1499,7 @@
       "category_preferred_shift": "Preferred Shift",
       "category_gift_card": "Gift Card",
       "category_recognition": "Recognition",
-      "category_other": "Other"
+      "category_other": "기타"
     },
     "rewards": {
       "new": "NEW",

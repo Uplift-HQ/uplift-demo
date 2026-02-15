@@ -95,11 +95,11 @@
       "talent": "ТАЛАНТИ",
       "people": "ПЕРСОНАЛ",
       "engagement": "ЗАЛУЧЕНІСТЬ",
-      "myUplift": "MY UPLIFT",
-      "myWork": "MY WORK",
-      "myGrowth": "MY GROWTH",
-      "myMoney": "MY MONEY",
-      "myPeople": "MY PEOPLE",
+      "myUplift": "МІЙ UPLIFT",
+      "myWork": "МОЯ РОБОТА",
+      "myGrowth": "МОЄ ЗРОСТАННЯ",
+      "myMoney": "МОЇ ГРОШІ",
+      "myPeople": "МОЇ ЛЮДИ",
       "payroll": "PAYROLL"
     },
     "payslips": "Зарплатні листки та оплата",
@@ -259,7 +259,7 @@
       "waiter": "Офіціант",
       "waitress": "Офіціантка",
       "busser": "Помічник офіціанта",
-      "dishwasher": "Мийник посуду",
+      "dishwasher": "Посудомийник",
       "cook": "Кухар",
       "barback": "Помічник бармена",
       "sous": "Су-шеф",
@@ -315,7 +315,7 @@
     "sendResetLink": "Надіслати посилання для скидання",
     "adminPortal": "Портал адміністратора",
     "invalidCode": "Невірний код",
-    "allRightsReserved": "Усі права захищено",
+    "allRightsReserved": "Усі права захищені",
     "termsOfService": "Умови використання",
     "privacyPolicy": "Політика конфіденційності",
     "placeholder": {
@@ -345,14 +345,14 @@
     "badges": "Значки"
   },
   "home": {
-    "welcome": "З поверненням, {{name}}!",
+    "welcome": "Ласкаво просимо, {{name}}!",
     "welcomeBack": "З поверненням,",
-    "todayShift": "Сьогоднішня зміна",
-    "noShiftToday": "Сьогодні зміни не заплановано",
-    "upcomingShifts": "Найближчі зміни",
+    "todayShift": "Зміна сьогодні",
+    "noShiftToday": "Сьогодні немає запланованої зміни",
+    "upcomingShifts": "Наступні зміни",
     "quickActions": "Швидкі дії",
-    "clockIn": "Відмітити прихід",
-    "clockOut": "Відмітити вихід",
+    "clockIn": "Прихід",
+    "clockOut": "Вихід",
     "startBreak": "Почати перерву",
     "endBreak": "Завершити перерву",
     "viewSchedule": "Переглянути розклад",
@@ -3037,7 +3037,8 @@
     "generateDocument": "Згенерувати документ",
     "policy": "Політика",
     "idDocument": "Посвідчення особи",
-    "hasRightToWork": "Дозвіл на роботу є"
+    "hasRightToWork": "Дозвіл на роботу є",
+    "myDocuments": "Мої документи"
   },
   "performance": {
     "atRisk": "Під загрозою",
@@ -3134,12 +3135,12 @@
     "companyGoals": "Цілі компанії",
     "moodCheck": "Як ви себе почуваєте?",
     "inReview": "На розгляді",
-    "subtitle": "Reviews, goals, feedback, and employee development",
-    "noDepartment": "No department",
-    "selfBadge": "Self",
-    "managerBadge": "Manager",
-    "peerBadge": "Peer",
-    "noReviewsYet": "No performance reviews",
+    "subtitle": "Огляди, цілі, зворотній зв'язок та розвиток працівників",
+    "noDepartment": "Без відділу",
+    "selfBadge": "Самооцінка",
+    "managerBadge": "Керівник",
+    "peerBadge": "Колега",
+    "noReviewsYet": "Немає оцінок продуктивності",
     "createCycleBtn": "Створити цикл",
     "createOkrTitle": "Створити OKR",
     "createGoalTitle": "Створити ціль",
@@ -3162,8 +3163,8 @@
     "reading": "Читання",
     "otherAction": "Інше",
     "addAction": "+ Додати дію",
-    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
-    "createFirstReview": "Start First Review Cycle",
+    "noReviewsDesc": "Створіть свій перший цикл оцінки для оцінки продуктивності працівників.",
+    "createFirstReview": "Почати перший цикл оцінки",
     "upcomingMeetings": "Upcoming 1-on-1s",
     "allCycles": "Review Cycles",
     "newCycle": "New Cycle",
@@ -3678,8 +3679,8 @@
     "externalProvider": "Зовнішній провайдер"
   },
   "offline": {
-    "youAreOffline": "You're offline. Some features may be limited.",
-    "backOnline": "Back online"
+    "youAreOffline": "Ви офлайн. Деякі функції можуть бути обмежені.",
+    "backOnline": "Знову онлайн"
   },
   "myLearning": {
     "title": "Моє навчання",
@@ -3872,7 +3873,8 @@
     "month": "Місяць",
     "skills": "Навички",
     "performance": "Ефективність",
-    "total": "Всього"
+    "total": "Всього",
+    "title": "Показник Momentum"
   },
   "corporateCards": {
     "title": "Корпоративні кредитні картки",

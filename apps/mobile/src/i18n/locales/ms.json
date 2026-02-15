@@ -334,35 +334,35 @@
     "cancelExpense": "Batal Perbelanjaan",
     "expenseCancelled": "Permintaan perbelanjaan dibatalkan.",
     "status": {
-      "rejected": "Rejected",
-      "approved": "Approved",
-      "pending": "Pending"
+      "rejected": "Ditolak",
+      "approved": "Diluluskan",
+      "pending": "Tertunda"
     },
     "categories": {
-      "training": "Training",
-      "travel": "Travel",
-      "other": "Other",
-      "meals": "Meals",
-      "uniform": "Uniform",
-      "supplies": "Supplies"
+      "training": "Latihan",
+      "travel": "Perjalanan",
+      "other": "Lain-lain",
+      "meals": "Makanan",
+      "uniform": "Pakaian Seragam",
+      "supplies": "Bekalan"
     },
-    "submitExpenseTitle": "Submit Expense",
-    "submittedMessage": "Your expense has been submitted for approval. You'll be notified when it's reviewed.",
+    "submitExpenseTitle": "Hantar Perbelanjaan",
+    "submittedMessage": "Perbelanjaan anda telah dihantar untuk kelulusan. Anda akan dimaklumkan apabila ia disemak.",
     "limits": {
-      "meals": "£15/day",
-      "uniform": "£100/year",
-      "training": "Pre-approved",
-      "travel": "£100/month",
-      "other": "Manager approval",
-      "supplies": "£50/month"
+      "meals": "£15/hari",
+      "uniform": "£100/tahun",
+      "training": "Pra-diluluskan",
+      "travel": "£100/bulan",
+      "other": "Kelulusan pengurus",
+      "supplies": "£50/bulan"
     },
-    "reason": "Reason",
-    "detailMessage": "{{description}}\n\nAmount: £{{amount}}\nDate: {{date}}\nStatus: {{status}}{{reason}}",
-    "chooseOption": "Choose an option",
-    "submitFailed": "Failed to submit expense. Please try again.",
-    "submitted": "Submitted",
-    "cancelledMessage": "Expense request cancelled.",
-    "cancelled": "Cancelled"
+    "reason": "Sebab",
+    "detailMessage": "{{description}}\n\nJumlah: £{{amount}}\nTarikh: {{date}}\nStatus: {{status}}{{reason}}",
+    "chooseOption": "Pilih satu pilihan",
+    "submitFailed": "Gagal menghantar perbelanjaan. Sila cuba lagi.",
+    "submitted": "Dihantar",
+    "cancelledMessage": "Permintaan perbelanjaan dibatalkan.",
+    "cancelled": "Dibatalkan"
   },
   "feed": {
     "title": "Suapan",

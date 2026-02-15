@@ -311,7 +311,7 @@
     "meals": "Posiłki",
     "supplies": "Materiały",
     "equipment": "Sprzęt",
-    "uniform": "Uniform",
+    "uniform": "Mundur",
     "training": "Szkolenia",
     "other": "Inne",
     "totalPending": "Łącznie oczekujące",
@@ -339,7 +339,7 @@
       "pending": "Oczekujące"
     },
     "categories": {
-      "uniform": "Uniform",
+      "uniform": "Mundur",
       "training": "Szkolenia",
       "supplies": "Materiały",
       "other": "Inne",
@@ -599,7 +599,7 @@
     "mandatory": "Obowiązkowe",
     "enroll": "Zapisz się",
     "beginner": "Początkujący",
-    "title": "Szkolenia",
+    "title": "Nauka",
     "earned": "Zdobyto {{date}}",
     "certificates": "Certyfikaty",
     "intermediate": "Średniozaawansowany",
@@ -1016,7 +1016,7 @@
     "earnSkillVerifications": "Zdobywaj weryfikacje umiejętności"
   },
   "schedule": {
-    "title": "Mój Grafik",
+    "title": "Mój grafik",
     "weekView": "Tydzień",
     "monthView": "Miesiąc",
     "listView": "Lista",
@@ -1463,7 +1463,7 @@
       "add_reward": "Add Reward",
       "name_label": "Name *",
       "name_placeholder": "e.g., £50 Amazon Gift Card",
-      "description_label": "Description",
+      "description_label": "Opis",
       "description_placeholder": "Brief description of the reward",
       "category_label": "Category *",
       "points_cost_label": "Points Cost *",
@@ -1479,7 +1479,7 @@
       "reject_reason_prompt": "Provide a reason for rejecting {{employee}}'s request:",
       "reject_reason_placeholder": "Enter rejection reason...",
       "success": "Success",
-      "error": "Error",
+      "error": "Błąd",
       "reward_created": "Reward created successfully",
       "reward_updated": "Reward updated successfully",
       "reward_deleted": "Reward deleted successfully",
@@ -1499,7 +1499,7 @@
       "category_preferred_shift": "Preferred Shift",
       "category_gift_card": "Gift Card",
       "category_recognition": "Recognition",
-      "category_other": "Other"
+      "category_other": "Inne"
     },
     "rewards": {
       "new": "NOWE",
@@ -1760,7 +1760,7 @@
   "settings.portalConfig.module.learning": "Szkolenia",
   "settings.portalConfig.module.momentum": "Wynik Momentum",
   "settings.portalConfig.module.offboarding": "Offboarding",
-  "settings.portalConfig.module.onboarding": "Onboarding",
+  "settings.portalConfig.module.onboarding": "Wdrożenie",
   "settings.portalConfig.module.performance": "Wydajność",
   "settings.portalConfig.module.recognition": "Tablica Uznania",
   "settings.portalConfig.module.reports": "Raporty",
@@ -1841,7 +1841,9 @@
     "checkBackLater": "Sprawdź później w poszukiwaniu nowych ankiet",
     "dueDate": "Termin: {{date}}",
     "answeredOf": "{{answered}}/{{total}} odpowiedzi",
-    "startSurvey": "Rozpocznij ankietę"
+    "startSurvey": "Rozpocznij ankietę",
+    "active": "Aktywne",
+    "completed": "Ukończone"
   },
   "tasks": {
     "title": "Zadania",
@@ -1897,7 +1899,7 @@
     "inventory": "Inwentaryzacja"
   },
   "timeOff": {
-    "title": "Urlopy",
+    "title": "Urlop",
     "request": "Złóż wniosek",
     "timeOffRequest": "Wniosek urlopowy",
     "balance": "Saldo urlopu",
@@ -1944,7 +1946,7 @@
     "yourPendingRequests": "Twoje oczekujące wnioski"
   },
   "timeTracking": {
-    "title": "Rejestracja Czasu",
+    "title": "Śledzenie czasu",
     "timeClock": "Zegar czasu pracy",
     "clockedIn": "Wejście zarejestrowane",
     "clockedInMessage": "Twoja zmiana się rozpoczęła. Miłego dnia!",
@@ -2058,5 +2060,8 @@
   "workerHome.teamSubtitle": "Zespół Obsługi Sali • Grand Hotel, Londyn",
   "workerHome.trainingCompliance": "Zgodność Szkoleń",
   "workerHome.trainingProgress": "{{complete}} z {{total}} obowiązkowych ukończonych",
-  "workerHome.viewDetails": "Zobacz szczegóły"
+  "workerHome.viewDetails": "Zobacz szczegóły",
+  "momentum": {
+    "momentum": "Momentum"
+  }
 }

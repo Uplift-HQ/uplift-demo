@@ -248,7 +248,7 @@
     "viewed": "Просмотрено",
     "contract": "Контракт",
     "companyPolicies": "Политики Компании",
-    "myDocuments": "Мои Документы",
+    "myDocuments": "Мои документы",
     "allCaughtUp": "Все ваши документы в порядке",
     "actionRequired": "Требуется действие",
     "signNow": "Подписать",
@@ -885,7 +885,7 @@
     "completed": "Завершено",
     "atRisk": "Под угрозой",
     "activeReviews": "Активные оценки",
-    "myPerformance": "Мои результаты",
+    "myPerformance": "Моя производительность",
     "managerReview": "Оценка руководителя",
     "startSelfAssessment": "Начать самооценку",
     "constructive": "Конструктивный",
@@ -1016,7 +1016,7 @@
     "earnSkillVerifications": "Подтверждайте навыки"
   },
   "schedule": {
-    "title": "Моё расписание",
+    "title": "Мое расписание",
     "weekView": "Неделя",
     "monthView": "Месяц",
     "listView": "Список",
@@ -1834,14 +1834,16 @@
     "yourImpact": "Your Impact",
     "continue": "Continue",
     "questions": "{{count}} questions",
-    "title": "Surveys",
+    "title": "Опросы",
     "noSurveys": "No active surveys",
     "completedSurveys": "Completed",
     "activeSurveys": "Active Surveys",
     "checkBackLater": "Check back later for new surveys",
     "dueDate": "Due {{date}}",
     "answeredOf": "{{answered}}/{{total}} answered",
-    "startSurvey": "Start Survey"
+    "startSurvey": "Start Survey",
+    "active": "Активные",
+    "completed": "Завершённые"
   },
   "tasks": {
     "title": "Задачи",
@@ -1944,7 +1946,7 @@
     "yourPendingRequests": "Ваши ожидающие заявки"
   },
   "timeTracking": {
-    "title": "Учёт времени",
+    "title": "Учет времени",
     "timeClock": "Табельные часы",
     "clockedIn": "Приход отмечен",
     "clockedInMessage": "Ваша смена началась. Хорошего дня!",
@@ -2058,5 +2060,8 @@
   "workerHome.teamSubtitle": "Команда Обслуживания Зала • Гранд Отель, Лондон",
   "workerHome.trainingCompliance": "Соответствие Обучению",
   "workerHome.trainingProgress": "{{complete}} из {{total}} обязательных завершено",
-  "workerHome.viewDetails": "Посмотреть детали"
+  "workerHome.viewDetails": "Посмотреть детали",
+  "momentum": {
+    "momentum": "Momentum"
+  }
 }

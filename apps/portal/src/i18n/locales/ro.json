@@ -106,7 +106,7 @@
     "performance": "Performanță",
     "onboarding": "Integrare",
     "surveys": "Sondaje",
-    "offboarding": "Offboarding",
+    "offboarding": "Plecare",
     "learning": "Învățare",
     "documents": "Documente",
     "expenses": "Cheltuieli",
@@ -248,7 +248,7 @@
     "location": "Locație",
     "department": "Departament",
     "roles": {
-      "server": "Chelner",
+      "server": "Ospătar",
       "bartender": "Barman",
       "linecook": "Bucătar de linie",
       "hostess": "Hostess",
@@ -256,13 +256,13 @@
       "manager": "Manager",
       "chef": "Bucătar șef",
       "cashier": "Casier",
-      "waiter": "Chelner",
-      "waitress": "Chelneriță",
-      "busser": "Ajutor de chelner",
+      "waiter": "Ospătar",
+      "waitress": "Ospătăriță",
+      "busser": "Ajutor ospătar",
       "dishwasher": "Spălător de vase",
       "cook": "Bucătar",
-      "barback": "Ajutor de barman",
-      "sous": "Sous Chef",
+      "barback": "Ajutor barman",
+      "sous": "Sous bucătar",
       "expeditor": "Expeditor"
     },
     "new": "NOU",
@@ -274,9 +274,9 @@
     "selectEmployee": "Selecteaza angajat...",
     "selectPerson": "Selecteaza persoana...",
     "priority": {
-      "high": "Inalta",
-      "medium": "Medie",
-      "low": "Scazuta"
+      "high": "Înalt",
+      "medium": "Mediu",
+      "low": "Scăzut"
     }
   },
   "auth": {
@@ -304,7 +304,7 @@
     "requestAccessMsg": "Pentru a obține acces la Uplift, te rugăm să contactezi managerul sau departamentul HR. Aceștia îți vor trimite un link de invitație.",
     "enterEmailPassword": "Te rugăm să introduci email-ul și parola",
     "loginFailed": "Autentificare eșuată",
-    "twoFactorAuth": "Autentificare în doi pași",
+    "twoFactorAuth": "Autentificare cu doi factori",
     "enterMfaCode": "Introdu codul din aplicația de autentificare",
     "verificationCode": "Cod de verificare",
     "verify": "Verifică",
@@ -345,14 +345,14 @@
     "badges": "Insigne"
   },
   "home": {
-    "welcome": "Bine ai revenit, {{name}}!",
+    "welcome": "Bine ai venit, {{name}}!",
     "welcomeBack": "Bine ai revenit,",
-    "todayShift": "Tura de astăzi",
-    "noShiftToday": "Nicio tură programată astăzi",
+    "todayShift": "Tura de azi",
+    "noShiftToday": "Nicio tură programată azi",
     "upcomingShifts": "Ture viitoare",
     "quickActions": "Acțiuni rapide",
-    "clockIn": "Pontează intrarea",
-    "clockOut": "Pontează ieșirea",
+    "clockIn": "Sosire",
+    "clockOut": "Plecare",
     "startBreak": "Începe pauza",
     "endBreak": "Termină pauza",
     "viewSchedule": "Vezi programul",
@@ -3037,7 +3037,8 @@
     "generateDocument": "Generează document",
     "policy": "Politică",
     "idDocument": "Document de identitate",
-    "hasRightToWork": "Are drept de muncă"
+    "hasRightToWork": "Are drept de muncă",
+    "myDocuments": "Documentele mele"
   },
   "performance": {
     "atRisk": "În pericol",
@@ -3134,12 +3135,12 @@
     "companyGoals": "Obiective companie",
     "moodCheck": "Cum vă simțiți?",
     "inReview": "În evaluare",
-    "subtitle": "Reviews, goals, feedback, and employee development",
-    "noDepartment": "No department",
-    "selfBadge": "Self",
+    "subtitle": "Evaluări, obiective, feedback și dezvoltarea angajaților",
+    "noDepartment": "Fără departament",
+    "selfBadge": "Auto-evaluare",
     "managerBadge": "Manager",
-    "peerBadge": "Peer",
-    "noReviewsYet": "No performance reviews",
+    "peerBadge": "Coleg",
+    "noReviewsYet": "Nicio evaluare a performanței",
     "createCycleBtn": "Create Cycle",
     "createOkrTitle": "Create OKR",
     "createGoalTitle": "Create Goal",
@@ -3162,8 +3163,8 @@
     "reading": "Reading",
     "otherAction": "Other",
     "addAction": "+ Add Action",
-    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
-    "createFirstReview": "Start First Review Cycle",
+    "noReviewsDesc": "Creează primul tău ciclu de evaluare pentru a începe evaluarea performanței angajaților.",
+    "createFirstReview": "Începe primul ciclu de evaluare",
     "upcomingMeetings": "Upcoming 1-on-1s",
     "allCycles": "Review Cycles",
     "newCycle": "New Cycle",
@@ -3670,8 +3671,8 @@
     "externalProvider": "Furnizor Extern"
   },
   "offline": {
-    "youAreOffline": "You're offline. Some features may be limited.",
-    "backOnline": "Back online"
+    "youAreOffline": "Ești offline. Unele funcții pot fi limitate.",
+    "backOnline": "Din nou online"
   },
   "recognition": {
     "title": "Peretele recunoasterii",
@@ -3939,7 +3940,8 @@
     "month": "Luna",
     "skills": "Competente",
     "performance": "Performanta",
-    "total": "Total"
+    "total": "Total",
+    "title": "Scor Momentum"
   },
   "myLearning": {
     "title": "Invatarea mea",

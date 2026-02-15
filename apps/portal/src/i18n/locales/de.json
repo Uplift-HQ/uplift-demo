@@ -441,7 +441,9 @@
     "startBreak": "Pause starten",
     "endBreak": "Pause beenden",
     "totalHours": "Gesamtstunden",
-    "loadError": "Fehler beim Laden der Zeiterfassungsdaten. Bitte erneut versuchen."
+    "loadError": "Fehler beim Laden der Zeiterfassungsdaten. Bitte erneut versuchen.",
+    "clockInOutTab": "Ein-/Ausstempeln",
+    "entriesWillAppear": "Zeiteinträge erscheinen hier, sobald Mitarbeiter einstempeln."
   },
   "timeOff": {
     "title": "Urlaub",
@@ -483,6 +485,13 @@
     "noReason": "Kein Grund angegeben",
     "submitted": "Eingereicht",
     "loadError": "Fehler beim Laden der Urlaubsanträge. Bitte erneut versuchen.",
+    "approvedFor": "Urlaub genehmigt für {{name}}",
+    "approveError": "Anfrage konnte nicht genehmigt werden. Bitte erneut versuchen.",
+    "rejectedFor": "Urlaub abgelehnt für {{name}}",
+    "rejectError": "Anfrage konnte nicht abgelehnt werden. Bitte erneut versuchen.",
+    "noPendingRequests": "Keine ausstehenden Urlaubsanträge",
+    "requestsWillAppear": "Urlaubsanträge erscheinen hier, wenn Mitarbeiter sie einreichen",
+    "requestTimeOff": "Urlaub beantragen",
     "types": {
       "annualLeave": "Jahresurlaub",
       "sickLeave": "Krankenstand",
@@ -1544,7 +1553,7 @@
       "dueOn": "Fällig am {{date}}"
     },
     "pageSubtitle": "Verwalten Sie Einarbeitungsabläufe, Vorlagen und Analysen",
-    "title": "Onboarding",
+    "title": "Einarbeitung",
     "subtitle": "Verwalten Sie den Einarbeitungsprozess für neue Mitarbeiter",
     "createChecklist": "Checkliste erstellen",
     "activeOnboardings": "Aktive Einarbeitungen",
@@ -2724,9 +2733,50 @@
       "uploadLogo": "Logo hochladen",
       "uploadLogoDesc": "PNG oder SVG, empfohlen 200×200px"
     },
-    "locations": "Standorte",
-    "departments": "Abteilungen",
-    "roles": "Rollen",
+    "locations": {
+      "title": "Standorte",
+      "subtitle": "Fügen Sie Ihre Büros, Standorte oder Filialen hinzu",
+      "addLocation": "Standort hinzufügen",
+      "name": "Standortname",
+      "namePlaceholder": "z.B. Hauptsitz",
+      "address": "Adresse",
+      "addressPlaceholder": "Vollständige Adresse",
+      "timezone": "Zeitzone",
+      "noLocations": "Noch keine Standorte hinzugefügt",
+      "addFirst": "Fügen Sie Ihren ersten Standort hinzu, um loszulegen"
+    },
+    "departments": {
+      "title": "Abteilungen",
+      "subtitle": "Richten Sie Ihre Abteilungsstruktur ein",
+      "addDepartment": "Abteilung hinzufügen",
+      "name": "Abteilungsname",
+      "namePlaceholder": "z.B. Technik",
+      "parentDepartment": "Übergeordnete Abteilung (optional)",
+      "none": "Keine (oberste Ebene)",
+      "manager": "Abteilungsleiter",
+      "selectManager": "Manager auswählen",
+      "noDepartments": "Noch keine Abteilungen hinzugefügt",
+      "addFirst": "Fügen Sie Ihre erste Abteilung hinzu"
+    },
+    "roles": {
+      "title": "Rollen & Berechtigungen",
+      "subtitle": "Konfigurieren Sie Zugriffsebenen für Ihr Team",
+      "addRole": "Benutzerdefinierte Rolle hinzufügen",
+      "builtIn": "Integriert",
+      "custom": "Benutzerdefiniert",
+      "name": "Rollenname",
+      "namePlaceholder": "z.B. Schichtleiter",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Was kann diese Rolle tun?",
+      "permissions": "Berechtigungen",
+      "permissionGroups": {
+        "scheduling": "Dienstplanung",
+        "timeTracking": "Zeiterfassung",
+        "employees": "Mitarbeiter",
+        "reports": "Berichte",
+        "settings": "Einstellungen"
+      }
+    },
     "review": {
       "title": "Überprüfung und Start",
       "subtitle": "Überprüfen Sie alles, bevor Sie live gehen",
@@ -3191,6 +3241,7 @@
     "dashboard": "Übersicht",
     "video": "Video",
     "category": "Kategorie",
+    "type": "Typ",
     "minutes": "Minuten",
     "required": "Erforderlich",
     "subtitle": "Schulungskurse, Compliance und Mitarbeiterentwicklung verwalten",
@@ -3897,7 +3948,16 @@
     "preparedBy": "Erstellt von",
     "reviewedBy": "Geprüft von",
     "approvedBy": "Genehmigt von",
-    "status": "Status",
+    "status": {
+      "draft": "Entwurf",
+      "calculating": "Wird berechnet",
+      "review": "In Prüfung",
+      "approved": "Genehmigt",
+      "processing": "Wird verarbeitet",
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "paid": "Bezahlt"
+    },
     "actions": {
       "createRun": "Abrechnungslauf erstellen",
       "calculate": "Berechnen",
@@ -4196,7 +4256,7 @@
     "configureCategories": "Kategorien konfigurieren",
     "messageTooShort": "Nachricht muss mindestens 10 Zeichen haben",
     "attachValue": "Mit Unternehmenswert verknüpfen",
-    "optional": "optional",
+    "optional": "optional (freiwillig)",
     "characters": "Zeichen",
     "more": "weitere benötigt",
     "searchByName": "Nach Name suchen...",

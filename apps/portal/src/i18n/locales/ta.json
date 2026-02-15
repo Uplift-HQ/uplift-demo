@@ -2028,14 +2028,14 @@
       "skillsDesc": "திறன்களை இறக்குமதி செய்"
     },
     "types": {
-      "employees": "Employees",
-      "employeesDesc": "Import employee profiles",
-      "shifts": "Shifts",
-      "shiftsDesc": "Import shift schedules",
-      "locations": "Locations",
-      "locationsDesc": "Import locations",
-      "skills": "Skills",
-      "skillsDesc": "Import skills"
+      "employees": "ஊழியர்கள்",
+      "employeesDesc": "ஊழியர் சுயவிவரங்களை இறக்குமதி செய்",
+      "shifts": "பணிகள்",
+      "shiftsDesc": "பணி அட்டவணைகளை இறக்குமதி செய்",
+      "locations": "இடங்கள்",
+      "locationsDesc": "இடங்களை இறக்குமதி செய்",
+      "skills": "திறன்கள்",
+      "skillsDesc": "திறன்களை இறக்குமதி செய்"
     }
   },
   "jobs": {
@@ -2066,7 +2066,7 @@
     "postJob": "வேலை இடு",
     "skillMatch": "திறன் பொருத்தம்",
     "noApplicants": "இன்னும் விண்ணப்பதாரர்கள் இல்லை",
-    "loadError": "Failed to load job postings. Please try again.",
+    "loadError": "வேலை விளம்பரங்களை ஏற்ற முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
     "departments": {
       "frontOfHouse": "முன்னரங்கப் பகுதி",
       "kitchen": "சமையலறை",
@@ -2089,12 +2089,12 @@
     "leaveDetails": "விடுப்பு விவரங்கள்",
     "until": "வரை",
     "terminationDetails": "நிறுத்தல் விவரங்கள்",
-    "allDepartments": "All Departments",
-    "allLocations": "All Locations",
+    "allDepartments": "அனைத்து துறைகள்",
+    "allLocations": "அனைத்து இடங்கள்",
     "placeholder": {
-      "searchEmployees": "Search employees..."
+      "searchEmployees": "ஊழியர்களைத் தேடு..."
     },
-    "loadError": "Failed to load employees",
+    "loadError": "ஊழியர்களை ஏற்ற முடியவில்லை",
     "failedAddSkill": "திறனை சேர்க்க முடியவில்லை",
     "failedVerifySkill": "திறனை சரிபார்க்க முடியவில்லை",
     "failedUpdateSkillLevel": "திறன் நிலையை புதுப்பிக்க முடியவில்லை",
@@ -2272,7 +2272,7 @@
       "exportLog": "பதிவை ஏற்றுமதி செய்"
     },
     "placeholder": {
-      "search": "Search integrations..."
+      "search": "ஒருங்கிணைப்புகளைத் தேடு..."
     }
   },
   "apiFactory": {
@@ -2393,9 +2393,9 @@
       "description": "எடுத்துக்காட்டுகளுக்கு எங்கள் API ஆவணத்தைப் பாருங்கள்."
     },
     "placeholder": {
-      "apiName": "API name",
-      "baseUrl": "Base URL",
-      "apiKey": "API key"
+      "apiName": "API பெயர்",
+      "baseUrl": "அடிப்படை URL",
+      "apiKey": "API விசை"
     }
   },
   "restApiKeys": {
@@ -2481,11 +2481,11 @@
       "departments": "துறைகள்",
       "roles": "பாத்திரங்கள் மற்றும் அனுமதிகள்",
       "review": "மதிப்பாய்வு மற்றும் தொடங்கு",
-      "companyInfo": "Company Info",
-      "branding": "Branding & Timezone",
-      "inviteAdmin": "Invite Admin",
-      "addEmployees": "Add Employees",
-      "done": "Done"
+      "companyInfo": "நிறுவன தகவல்",
+      "branding": "பிராண்டிங் & நேர வலயம்",
+      "inviteAdmin": "நிர்வாகியை அழை",
+      "addEmployees": "ஊழியர்களைச் சேர்",
+      "done": "முடிந்தது"
     },
     "orgDetails": {
       "companyName": "நிறுவனப் பெயர்",
@@ -2564,25 +2564,25 @@
       "skip": "இப்போது தவிர்",
       "finish": "அமைப்பை முடி"
     },
-    "selectIndustry": "Select industry...",
-    "selectTimezone": "Select timezone...",
-    "selectSize": "Select company size...",
-    "selectCountry": "Select country...",
-    "selectCurrency": "Select currency...",
+    "selectIndustry": "தொழிலைத் தேர்வுசெய்...",
+    "selectTimezone": "நேர வலயத்தைத் தேர்வுசெய்...",
+    "selectSize": "நிறுவன அளவைத் தேர்வுசெய்...",
+    "selectCountry": "நாட்டைத் தேர்வுசெய்...",
+    "selectCurrency": "நாணயத்தைத் தேர்வுசெய்...",
     "industries": {
-      "retail": "Retail",
-      "hospitality": "Hospitality",
-      "healthcare": "Healthcare",
-      "manufacturing": "Manufacturing",
-      "construction": "Construction",
-      "logistics": "Logistics",
-      "foodBeverage": "Food & Beverage",
-      "education": "Education",
-      "technology": "Technology",
-      "finance": "Finance",
-      "government": "Government",
-      "nonprofit": "Non-profit",
-      "other": "Other"
+      "retail": "சில்லறை",
+      "hospitality": "விருந்தோம்பல்",
+      "healthcare": "சுகாதாரம்",
+      "manufacturing": "உற்பத்தி",
+      "construction": "கட்டுமானம்",
+      "logistics": "தளவாடம்",
+      "foodBeverage": "உணவு & பானம்",
+      "education": "கல்வி",
+      "technology": "தொழில்நுட்பம்",
+      "finance": "நிதி",
+      "government": "அரசு",
+      "nonprofit": "இலாப நோக்கமற்ற",
+      "other": "பிற"
     }
   },
   "locations": {

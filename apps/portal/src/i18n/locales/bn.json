@@ -1521,9 +1521,9 @@
     "columnStatus": "Status",
     "columnBuddy": "Buddy",
     "status": {
-      "onTrack": "On Track",
-      "atRisk": "At Risk",
-      "overdue": "Overdue"
+      "onTrack": "ট্র্যাকে",
+      "atRisk": "ঝুঁকিতে",
+      "overdue": "বিলম্বিত"
     },
     "noTaskDetails": "Detailed task breakdown not available for this employee.",
     "templatesTitle": "Onboarding Templates",
@@ -2601,7 +2601,7 @@
       "finance": "Finance",
       "government": "Government",
       "nonprofit": "Non-profit",
-      "other": "Other"
+      "other": "অন্যান্য"
     }
   },
   "locations": {
@@ -2657,7 +2657,7 @@
       "posDesc": "POS & retail systems",
       "scheduling": "Migration",
       "schedulingDesc": "Import from other tools",
-      "learning": "Learning",
+      "learning": "শিক্ষা",
       "learningDesc": "Training & certifications",
       "analytics": "Analytics",
       "analyticsDesc": "BI & reporting tools",
@@ -2706,7 +2706,7 @@
       "authOAuth2": "OAuth 2.0",
       "triggerManual": "Manual",
       "triggerManualDesc": "Run on demand",
-      "triggerScheduled": "Scheduled",
+      "triggerScheduled": "নির্ধারিত",
       "triggerScheduledDesc": "Run on a schedule",
       "triggerEvent": "Event-based",
       "triggerEventDesc": "Triggered by Uplift events",
@@ -2734,10 +2734,10 @@
       "jobApplication": "Job Application",
       "categoryEmployees": "Employees",
       "categoryScheduling": "Scheduling",
-      "categoryTimeTracking": "Time Tracking",
+      "categoryTimeTracking": "সময় ট্র্যাকিং",
       "categoryTimeOff": "Time Off",
       "categorySkills": "Skills",
-      "categoryCareer": "Career"
+      "categoryCareer": "ক্যারিয়ার"
     },
     "noIntegrationsFound": "No integrations found",
     "noIntegrationsAvailable": "No integrations are available yet.",
@@ -3083,7 +3083,7 @@
     "saving": "Saving...",
     "saveNotes": "Save Notes",
     "oneTime": "One-time",
-    "scheduleBtn": "Schedule",
+    "scheduleBtn": "সময়সূচী",
     "giveFeedbackBtn": "Give Feedback",
     "noFeedbackReceived": "No feedback received",
     "noFeedbackReceivedDesc": "You haven't received any feedback yet.",
@@ -3094,11 +3094,11 @@
     "addFocusArea": "+ Add Focus Area",
     "stretch": "Stretch",
     "reading": "Reading",
-    "otherAction": "Other",
+    "otherAction": "অন্যান্য",
     "addAction": "+ Add Action",
     "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
     "createFirstReview": "Start First Review Cycle",
-    "upcomingMeetings": "Upcoming 1-on-1s",
+    "upcomingMeetings": "আসন্ন ১-অন-১",
     "allCycles": "Review Cycles",
     "newCycle": "New Cycle",
     "participants": "Participants",
@@ -3107,7 +3107,7 @@
     "statusActive": "Active",
     "statusInReview": "In Review",
     "statusCalibration": "Calibration",
-    "statusCompleted": "Completed",
+    "statusCompleted": "সম্পন্ন",
     "typeAnnual": "Annual",
     "typeQuarterly": "Quarterly",
     "typeProbation": "Probation",
@@ -3596,7 +3596,7 @@
     "nextShiftTime": "Tomorrow, 7:00 AM — 3:00 PM",
     "nextShiftLocation": "The Grand Hotel, Main Restaurant",
     "nextShiftRole": "Front of House",
-    "pendingActions": "Pending Actions",
+    "pendingActions": "অপেক্ষমাণ কার্যক্রম",
     "pendingCount": "3 items need attention",
     "pendingTraining": "1 training overdue",
     "pendingDocument": "1 document to sign",

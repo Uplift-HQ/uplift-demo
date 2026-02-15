@@ -882,25 +882,25 @@
     "downloadSuccess": "薪資單已下載"
   },
   "performance": {
-    "completed": "Completed",
-    "atRisk": "At Risk",
-    "activeReviews": "Active Reviews",
-    "myPerformance": "My Performance",
-    "managerReview": "Manager review",
-    "startSelfAssessment": "Start Self-Assessment",
-    "constructive": "Constructive",
-    "pending": "Pending",
-    "goalsOnTrack": "Goals On Track",
-    "prepareNotes": "Prepare notes",
-    "nextReview": "Next Review",
-    "waiting": "Waiting",
-    "onTrack": "On Track",
-    "myGoals": "My Goals",
-    "praise": "Praise",
-    "upcoming1on1s": "Upcoming 1-on-1s",
-    "selfAssessment": "Self-assessment",
-    "recentFeedback": "Recent Feedback",
-    "currentRating": "Current Rating"
+    "completed": "已完成",
+    "atRisk": "有風險",
+    "activeReviews": "進行中的評核",
+    "myPerformance": "我的績效",
+    "managerReview": "主管評核",
+    "startSelfAssessment": "開始自我評估",
+    "constructive": "建設性",
+    "pending": "待處理",
+    "goalsOnTrack": "目標進展順利",
+    "prepareNotes": "準備筆記",
+    "nextReview": "下次評核",
+    "waiting": "等待中",
+    "onTrack": "進展順利",
+    "myGoals": "我的目標",
+    "praise": "讚揚",
+    "upcoming1on1s": "即將進行的一對一會議",
+    "selfAssessment": "自我評估",
+    "recentFeedback": "近期回饋",
+    "currentRating": "目前評分"
   },
   "performance.mySubtitle": "您的評估、目標和發展",
   "performance.myTitle": "我的績效",
@@ -1497,77 +1497,77 @@
       "fill_required": "Please fill in all required fields",
       "category_extra_pto": "Extra PTO",
       "category_preferred_shift": "Preferred Shift",
-      "category_gift_card": "Gift Card",
-      "category_recognition": "Recognition",
-      "category_other": "Other"
+      "category_gift_card": "禮品卡",
+      "category_recognition": "表揚",
+      "category_other": "其他"
     },
     "rewards": {
-      "new": "NEW",
-      "get_perk": "Get Perk",
-      "available_points": "Available Points",
-      "total_saved": "Total Saved",
-      "featured_offers": "Featured Offers",
-      "how_to_earn_points": "How to Earn Points"
+      "new": "新",
+      "get_perk": "獲取福利",
+      "available_points": "可用積分",
+      "total_saved": "累計節省",
+      "featured_offers": "精選優惠",
+      "how_to_earn_points": "如何獲取積分"
     },
     "onboardingPrefs": {
-      "step_2_of_2": "Step 2 of 2",
-      "set_your_preferences": "Set your preferences",
-      "choose_your_preferred_language": "Choose your preferred language",
-      "what_should_we_alert_you_about": "What should we alert you about?",
-      "when_are_you_typically_available_to_work": "When are you typically available to work?",
-      "your_goals": "Your Goals",
-      "what_are_you_working_towards": "What are you working towards?",
-      "location_preference": "Location Preference",
-      "where_are_you_willing_to_work": "Where are you willing to work?",
-      "complete_setup": "Complete Setup"
+      "step_2_of_2": "第 2 步，共 2 步",
+      "set_your_preferences": "設定您的偏好",
+      "choose_your_preferred_language": "選擇您偏好的語言",
+      "what_should_we_alert_you_about": "您希望收到哪些通知？",
+      "when_are_you_typically_available_to_work": "您通常何時可以上班？",
+      "your_goals": "您的目標",
+      "what_are_you_working_towards": "您正在努力達成什麼目標？",
+      "location_preference": "地點偏好",
+      "where_are_you_willing_to_work": "您願意在哪些地點工作？",
+      "complete_setup": "完成設定"
     },
     "taskExecution": {
-      "task_steps": "Task Steps",
-      "photo_evidence": "Photo Evidence",
-      "file_attachments": "File Attachments",
-      "attach_file": "Attach File",
-      "add_signature": "Add Signature",
-      "submit_for_review": "Submit for Review",
-      "capture_photo": "Capture Photo",
-      "choose_photo_source": "Choose photo source",
-      "camera": "Camera",
-      "gallery": "Gallery",
-      "select_file": "Select File",
-      "file_picker_hint": "File picker would open here",
-      "incomplete": "Incomplete",
-      "complete_all_steps": "Please complete all task steps before submitting.",
-      "proof_required": "Proof Required",
-      "attach_proof_message": "Please attach at least one photo or file as proof of completion.",
-      "submit_task": "Submit Task",
-      "submit_for_review_confirm": "Submit task for manager review?",
-      "exit_task": "Exit Task",
-      "progress_saved": "Your progress will be saved. Continue?",
-      "exit": "Exit",
-      "back_exit": "← Exit",
-      "steps_completed": "{{done}} of {{total}} steps completed",
-      "notes": "Notes",
-      "notes_placeholder": "Add any additional notes or comments...",
-      "signature": "Signature",
-      "type_name_to_sign": "Type your full name to sign",
-      "enter_full_name": "Enter your full name",
-      "sign": "Sign",
-      "photo_captured": "Photo captured",
-      "file_attached": "File attached",
-      "signature_added": "Signature added"
+      "task_steps": "任務步驟",
+      "photo_evidence": "照片證明",
+      "file_attachments": "檔案附件",
+      "attach_file": "附加檔案",
+      "add_signature": "新增簽名",
+      "submit_for_review": "提交審核",
+      "capture_photo": "拍攝照片",
+      "choose_photo_source": "選擇照片來源",
+      "camera": "相機",
+      "gallery": "相簿",
+      "select_file": "選擇檔案",
+      "file_picker_hint": "檔案選擇器將在此開啟",
+      "incomplete": "未完成",
+      "complete_all_steps": "請在提交前完成所有任務步驟。",
+      "proof_required": "需要證明",
+      "attach_proof_message": "請附加至少一張照片或檔案作為完成證明。",
+      "submit_task": "提交任務",
+      "submit_for_review_confirm": "提交任務給主管審核？",
+      "exit_task": "退出任務",
+      "progress_saved": "您的進度將被儲存。繼續嗎？",
+      "exit": "退出",
+      "back_exit": "← 退出",
+      "steps_completed": "已完成 {{done}}/{{total}} 步驟",
+      "notes": "備註",
+      "notes_placeholder": "新增任何額外備註或留言...",
+      "signature": "簽名",
+      "type_name_to_sign": "輸入您的全名以簽名",
+      "enter_full_name": "輸入您的全名",
+      "sign": "簽名",
+      "photo_captured": "照片已拍攝",
+      "file_attached": "檔案已附加",
+      "signature_added": "簽名已新增"
     },
     "offline": {
-      "sync_conflict": "Sync Conflict",
-      "keep_server_data": "Keep Server Data",
-      "keep_my_changes": "Keep My Changes",
-      "decide_later": "Decide Later"
+      "sync_conflict": "同步衝突",
+      "keep_server_data": "保留伺服器資料",
+      "keep_my_changes": "保留我的變更",
+      "decide_later": "稍後決定"
     },
     "help": {
-      "help_support": "Help & Support",
+      "help_support": "說明與支援",
       "headerSubtitle": "尋找常見問題的答案或聯繫我們的支援團隊"
     },
     "payslips": {},
     "chat": {
-      "direct_messages": "Direct Messages"
+      "direct_messages": "私人訊息"
     },
     "login": {},
     "schedule": {},
@@ -1576,68 +1576,68 @@
     "notifications": {},
     "more": {},
     "expenses": {
-      "date_of_expense": "Date of Expense",
-      "receipt_attached": "Receipt attached",
-      "tap_to_change": "Tap to change",
-      "attach_receipt_photo": "Attach Receipt Photo",
-      "take_photo_or_choose_from_library": "Take photo or choose from library",
-      "approved_jan": "Approved (Jan)",
-      "recent_expenses": "Recent Expenses"
+      "date_of_expense": "費用日期",
+      "receipt_attached": "收據已附加",
+      "tap_to_change": "點擊更換",
+      "attach_receipt_photo": "附加收據照片",
+      "take_photo_or_choose_from_library": "拍照或從相簿選擇",
+      "approved_jan": "已核准（一月）",
+      "recent_expenses": "近期報銷"
     },
     "compliance": {
-      "certifications_training": "Certifications & Training"
+      "certifications_training": "認證與培訓"
     },
     "integrations": {
-      "connected_apps": "Connected Apps"
+      "connected_apps": "已連結應用程式"
     },
     "jobs": {
-      "apply_for_job": "Apply for Job",
-      "your_skills_match": "Your Skills Match",
-      "submit_application": "Submit Application",
-      "open_positions": "Open Positions"
+      "apply_for_job": "申請職位",
+      "your_skills_match": "您的技能匹配度",
+      "submit_application": "提交申請",
+      "open_positions": "開放職位"
     },
     "aiInsights": {
-      "ai_insights": "AI Insights",
-      "analysis_details": "Analysis Details",
-      "affected_team_members": "Affected Team Members",
-      "action_taken": "Action Taken"
+      "ai_insights": "AI 洞察",
+      "analysis_details": "分析詳情",
+      "affected_team_members": "受影響的團隊成員",
+      "action_taken": "已採取的行動"
     },
     "approvals": {
-      "all_caught_up": "All Caught Up!"
+      "all_caught_up": "已全部處理完畢！"
     },
     "expenseApprovals": {
-      "total_amount": "Total Amount",
-      "policy_ok": "Policy OK",
-      "policy_review_required": "Policy review required",
-      "all_caught_up": "All caught up!",
-      "no_pending_expense_approvals": "No pending expense approvals",
-      "expense_details": "Expense Details",
-      "date_of_expense": "Date of Expense",
-      "tap_to_view_receipt": "Tap to view receipt",
-      "policy_compliant": "Policy compliant",
-      "policy_issues_found": "Policy issues found",
-      "reject_expense": "Reject Expense"
+      "total_amount": "總金額",
+      "policy_ok": "符合政策",
+      "policy_review_required": "需要政策審核",
+      "all_caught_up": "已全部處理完畢！",
+      "no_pending_expense_approvals": "沒有待審核的報銷",
+      "expense_details": "報銷詳情",
+      "date_of_expense": "費用日期",
+      "tap_to_view_receipt": "點擊查看收據",
+      "policy_compliant": "符合政策",
+      "policy_issues_found": "發現政策問題",
+      "reject_expense": "拒絕報銷"
     },
     "jobPostings": {
-      "job_description": "Job Description",
-      "new_job": "New Job",
-      "loading_job_postings": "Loading job postings...",
-      "no_job_postings_yet": "No job postings yet",
-      "create_your_first_job_posting_to_start_h": "Create your first job posting to start hiring"
+      "job_description": "職位描述",
+      "new_job": "新職位",
+      "loading_job_postings": "正在載入職缺...",
+      "no_job_postings_yet": "尚無職缺公告",
+      "create_your_first_job_posting_to_start_h": "建立您的第一個職缺公告以開始招聘"
     },
     "managerMore": {
-      "sign_out": "Sign Out",
-      "uplift_manager_v100": "Uplift Manager v1.0.0"
+      "sign_out": "登出",
+      "uplift_manager_v100": "Uplift 主管版 v1.0.0"
     },
     "skillsVerification": {
-      "loading_verification_requests": "Loading verification requests...",
-      "all_caught_up": "All caught up!",
-      "no_pending_skill_verifications": "No pending skill verifications",
-      "evidence": "Evidence:"
+      "loading_verification_requests": "正在載入驗證請求...",
+      "all_caught_up": "已全部處理完畢！",
+      "no_pending_skill_verifications": "沒有待處理的技能驗證",
+      "evidence": "證明："
     },
     "teamSchedule": {
-      "loading_approvals": "Loading approvals...",
-      "all_caught_up": "All caught up!"
+      "loading_approvals": "正在載入審核項目...",
+      "all_caught_up": "已全部處理完畢！"
     },
     "onboardingSkills": {},
     "onboardingWelcome": {},

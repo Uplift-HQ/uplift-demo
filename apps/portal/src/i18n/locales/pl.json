@@ -144,7 +144,7 @@
       "dishwasher": "Zmywacz",
       "cook": "Kucharz",
       "barback": "Pomocnik barmana",
-      "sous": "Sous Chef",
+      "sous": "Sous szef",
       "expeditor": "Ekspedytor"
     },
     "new": "NOWE",
@@ -198,7 +198,7 @@
     "adminPortal": "Panel administratora",
     "invalidCode": "Nieprawidłowy kod",
     "allRightsReserved": "Wszelkie prawa zastrzeżone",
-    "termsOfService": "Regulamin",
+    "termsOfService": "Warunki korzystania z usługi",
     "privacyPolicy": "Polityka prywatności",
     "placeholder": {
       "email": "Adres email",
@@ -235,14 +235,14 @@
     "badges": "Odznaki"
   },
   "home": {
-    "welcome": "Witaj ponownie, {{name}}!",
+    "welcome": "Witaj, {{name}}!",
     "welcomeBack": "Witaj ponownie,",
     "todayShift": "Dzisiejsza zmiana",
-    "noShiftToday": "Brak zaplanowanej zmiany",
+    "noShiftToday": "Brak zaplanowanej zmiany na dziś",
     "upcomingShifts": "Nadchodzące zmiany",
     "quickActions": "Szybkie akcje",
-    "clockIn": "Rozpocznij pracę",
-    "clockOut": "Zakończ pracę",
+    "clockIn": "Wejście",
+    "clockOut": "Wyjście",
     "startBreak": "Rozpocznij przerwę",
     "endBreak": "Zakończ przerwę",
     "viewSchedule": "Zobacz grafik",
@@ -2016,7 +2016,7 @@
       "workforce": "KADRY",
       "documents": "DOKUMENTY",
       "analytics": "ANALITYKA",
-      "admin": "ADMIN",
+      "admin": "ADMINISTRACJA",
       "talent": "TALENTY",
       "people": "PRACOWNICY",
       "engagement": "ZAANGAŻOWANIE",
@@ -3051,7 +3051,7 @@
     "policy": "Polityka",
     "idDocument": "Dokument tożsamości",
     "hasRightToWork": "Posiada pozwolenie na pracę",
-    "myDocuments": "Moje Dokumenty",
+    "myDocuments": "Moje dokumenty",
     "upload": "Prześlij"
   },
   "performance": {
@@ -3149,7 +3149,7 @@
     "companyGoals": "Cele firmowe",
     "moodCheck": "Jak się czujesz?",
     "inReview": "W trakcie oceny",
-    "subtitle": "Oceny, cele, feedback i rozwój pracowników",
+    "subtitle": "Oceny, cele, informacje zwrotne i rozwój pracowników",
     "noDepartment": "Brak działu",
     "selfBadge": "Własna",
     "managerBadge": "Kierownik",
@@ -3614,7 +3614,7 @@
     "lastReview": "Ostatnia ocena: 4,2/5",
     "employee": "Pracownik",
     "performanceFeedback": "Wydajność i opinie",
-    "title": "Momentum",
+    "title": "Wynik Momentum",
     "score": "Wynik"
   },
   "signature": {

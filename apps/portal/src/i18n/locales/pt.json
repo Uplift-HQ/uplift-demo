@@ -91,7 +91,7 @@
       "workforce": "EFETIVO",
       "documents": "DOCUMENTOS",
       "analytics": "ANÁLISES",
-      "admin": "ADMIN",
+      "admin": "ADMINISTRAÇÃO",
       "talent": "TALENTO",
       "people": "PESSOAS",
       "engagement": "ENVOLVIMENTO",
@@ -1175,7 +1175,7 @@
       "cannotEditBuiltIn": "Funções integradas não podem ser modificadas",
       "deleteUsersWarning": "Esta função está atribuída a {{count}} usuários. Eles voltarão às permissões padrão.",
       "saveError": "Falha ao salvar função",
-      "permAdmin": "Admin",
+      "permAdmin": "Administrador",
       "addRole": "Adicionar função personalizada",
       "module": "Módulo",
       "custom": "Personalizado",
@@ -1555,7 +1555,7 @@
     "firstNamePlaceholder": "ex. João",
     "lastName": "Sobrenome",
     "lastNamePlaceholder": "ex. Silva",
-    "emailAddress": "Email",
+    "emailAddress": "E-mail",
     "emailPlaceholder": "ex. joao.silva@empresa.com",
     "emailExistsWarning": "Já existe um funcionário com este email ({{name}}).",
     "phoneNumber": "Telefone",
@@ -2731,7 +2731,7 @@
     },
     "rateLimits": {
       "basic": "Básico",
-      "standard": "Standard",
+      "standard": "Padrão",
       "premium": "Premium"
     },
     "copied": "Copiado!",
@@ -3361,7 +3361,15 @@
     "createPlan": "Criar Plano"
   },
   "surveys": {
-    "templates": "Modelos",
+    "templates": {
+      "title": "Modelos de Pesquisa",
+      "subtitle": "Escolha um modelo pré-configurado ou crie o seu próprio",
+      "createCustom": "Criar Modelo Personalizado",
+      "preview": "Pré-visualizar",
+      "clone": "Duplicar e Personalizar",
+      "sampleQuestions": "Perguntas de Exemplo",
+      "useTemplate": "Usar Este Modelo"
+    },
     "rating1to10": "Avaliação (1-10)",
     "multipleChoice": "Escolha múltipla",
     "questionType": "Tipo de pergunta",
@@ -3465,7 +3473,7 @@
     "table": {
       "name": "Nome da Pesquisa",
       "type": "Tipo",
-      "status": "Status",
+      "status": "Estado",
       "responses": "Respostas",
       "participation": "Participação",
       "enps": "eNPS",
@@ -3662,15 +3670,6 @@
       },
       "enabled": "Ativado",
       "responded": "responderam"
-    },
-    "templates": {
-      "title": "Modelos de Pesquisa",
-      "subtitle": "Escolha um modelo pré-configurado ou crie o seu próprio",
-      "createCustom": "Criar Modelo Personalizado",
-      "preview": "Pré-visualizar",
-      "clone": "Duplicar e Personalizar",
-      "sampleQuestions": "Perguntas de Exemplo",
-      "useTemplate": "Usar Este Modelo"
     }
   },
   "entity": {
@@ -3920,7 +3919,7 @@
     "contract": "Contrato",
     "titleCol": "Cargo",
     "phone": "Telefone",
-    "status": "Status",
+    "status": "Estado",
     "orgChartHint": "Clique nos nós para ver detalhes. Expanda ou recolha linhas de reporte.",
     "noOrgData": "Nenhuma estrutura organizacional disponível"
   },
@@ -4078,7 +4077,7 @@
       "merchant": "Estabelecimento",
       "category": "Categoria",
       "amount": "Valor",
-      "status": "Status",
+      "status": "Estado",
       "receipt": "Recibo"
     },
     "loading": "Carregando transações...",
@@ -4099,7 +4098,7 @@
       "date": "Data",
       "items": "Itens",
       "amount": "Valor",
-      "status": "Status",
+      "status": "Estado",
       "actions": "Ações",
       "totalAmount": "Valor Total",
       "description": "Descrição"
@@ -4138,7 +4137,7 @@
       "cardNumber": "Cartão",
       "holder": "Titular do Cartão",
       "type": "Tipo",
-      "status": "Status",
+      "status": "Estado",
       "lastSync": "Última Sincronização",
       "noCards": "Nenhum cartão encontrado. Conecte um banco para sincronizar cartões corporativos.",
       "inactive": "Inativo"

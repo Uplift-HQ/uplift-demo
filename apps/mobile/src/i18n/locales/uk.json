@@ -885,7 +885,7 @@
     "completed": "Завершено",
     "atRisk": "Під загрозою",
     "activeReviews": "Активні оцінки",
-    "myPerformance": "Моя результативність",
+    "myPerformance": "Моя продуктивність",
     "managerReview": "Оцінка керівника",
     "startSelfAssessment": "Почати самооцінку",
     "constructive": "Конструктивний",
@@ -1016,7 +1016,7 @@
     "earnSkillVerifications": "Отримуйте підтвердження навичок"
   },
   "schedule": {
-    "title": "Мій графік",
+    "title": "Мій розклад",
     "weekView": "Тиждень",
     "monthView": "Місяць",
     "listView": "Список",
@@ -1841,7 +1841,9 @@
     "checkBackLater": "Перевірте пізніше для нових опитувань",
     "dueDate": "Термін {{date}}",
     "answeredOf": "{{answered}}/{{total}} відповіли",
-    "startSurvey": "Почати опитування"
+    "startSurvey": "Почати опитування",
+    "active": "Активні",
+    "completed": "Завершені"
   },
   "tasks": {
     "title": "Завдання",
@@ -2058,5 +2060,8 @@
   "workerHome.teamSubtitle": "Команда Обслуговування Залу • Гранд Готель, Лондон",
   "workerHome.trainingCompliance": "Відповідність Навчанню",
   "workerHome.trainingProgress": "{{complete}} з {{total}} обов'язкових завершено",
-  "workerHome.viewDetails": "Переглянути деталі"
+  "workerHome.viewDetails": "Переглянути деталі",
+  "momentum": {
+    "momentum": "Momentum"
+  }
 }

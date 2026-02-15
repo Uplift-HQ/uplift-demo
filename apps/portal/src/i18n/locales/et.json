@@ -458,27 +458,27 @@
       "twoWeeks": "2 nädalat",
       "month": "Kuu"
     },
-    "loadError": "Failed to load schedule data",
-    "hideSidebar": "Hide sidebar",
-    "showSidebar": "Show sidebar",
+    "loadError": "Graafiku andmete laadimine ebaõnnestus",
+    "hideSidebar": "Peida külgriba",
+    "showSidebar": "Näita külgriba",
     "publish": {
-      "notification1": "Employees receive push notifications",
-      "notification2": "Shifts appear in employee apps",
-      "notification3": "Changes after this will trigger new notifications",
+      "notification1": "Töötajad saavad tõuketeavitused",
+      "notification2": "Vahetused ilmuvad töötajate rakendustes",
+      "notification3": "Muudatused pärast seda käivitavad uued teavitused",
       "whatHappens": "Mis juhtub avaldamisel:"
     },
-    "today": "Today",
-    "filters": "Filters",
-    "published": "Published",
-    "draft": "Draft",
-    "open": "Open",
-    "scheduleOverview": "Schedule Overview",
-    "thisWeeksStaffing": "This Week's Staffing",
-    "pendingTimeOff": "Pending Time Off",
-    "noPendingRequests": "No pending requests",
-    "shiftSwaps": "Shift Swaps",
-    "noPendingSwaps": "No pending swaps",
-    "aiSchedulingComingSoon": "AI scheduling is coming soon. This feature will analyze employee skills, availability, and preferences to generate optimal schedules.",
+    "today": "Täna",
+    "filters": "Filtrid",
+    "published": "Avaldatud",
+    "draft": "Mustand",
+    "open": "Avatud",
+    "scheduleOverview": "Graafiku ülevaade",
+    "thisWeeksStaffing": "Selle nädala töötajad",
+    "pendingTimeOff": "Ootel puhkused",
+    "noPendingRequests": "Ootel taotlusi pole",
+    "shiftSwaps": "Vahetuste vahetused",
+    "noPendingSwaps": "Ootel vahetusi pole",
+    "aiSchedulingComingSoon": "AI ajakava on tulemas. See funktsioon analüüsib töötajate oskusi, saadavust ja eelistusi optimaalsete graafikute loomiseks.",
     "aiSchedule": "AI Graafik",
     "addShift": "Lisa vahetus",
     "requiredSkills": "Nõutavad oskused",
@@ -551,7 +551,7 @@
     "startBreak": "Alusta pausi",
     "endBreak": "Lõpeta paus",
     "totalHours": "Kokku tunde",
-    "loadError": "Failed to load time tracking data. Please try again.",
+    "loadError": "Aja jälgimise andmete laadimine ebaõnnestus. Palun proovi uuesti.",
     "clockInOutTab": "Sisselogimine/Väljalogimine",
     "entriesWillAppear": "Ajakirjed ilmuvad siia, kui töötajad sisse logivad."
   },
@@ -594,7 +594,7 @@
     "requestDetails": "Puhkusetaotluse üksikasjad",
     "noReason": "Põhjust pole esitatud",
     "submitted": "Esitatud",
-    "loadError": "Failed to load time-off requests. Please try again.",
+    "loadError": "Puhkusetaotluste laadimine ebaõnnestus. Palun proovi uuesti.",
     "types": {
       "annualLeave": "Annual Leave",
       "sickLeave": "Sick Leave",
@@ -723,7 +723,7 @@
     "searchSkills": "Otsi oskusi...",
     "skillAdded": "Oskus edukalt lisatud",
     "verificationRequested": "Kinnitustaotlus saadetud",
-    "loadError": "Failed to load skills. Please try again.",
+    "loadError": "Oskuste laadimine ebaõnnestus. Palun proovi uuesti.",
     "employeeListingComingSoon": "Selle oskuse töötajate loend on peagi saadaval."
   },
   "career": {
@@ -799,7 +799,7 @@
     "expiringSoon": "Aegub peagi",
     "expired": "Aegunud",
     "expires": "Aegub {{date}}",
-    "loadError": "Failed to load career data"
+    "loadError": "Karjääriandmete laadimine ebaõnnestus"
   },
   "gamification": {
     "level": "Tase {{level}}",
@@ -1597,8 +1597,8 @@
     "placeholder": {
       "search": "Search activity..."
     },
-    "loadError": "Failed to load activity data",
-    "rejectionReasonPlaceholder": "Enter reason for rejection..."
+    "loadError": "Tegevusandmete laadimine ebaõnnestus",
+    "rejectionReasonPlaceholder": "Sisesta tagasilükkamise põhjus..."
   },
   "notificationSettings": {
     "title": "Teavituste eelistused",
@@ -1655,10 +1655,10 @@
     "proficiencyLevel": "Oskuse tase",
     "basic": "Algtase",
     "adding": "Lisamine...",
-    "loadError": "Failed to load employee",
-    "verifySkill": "Verify skill",
-    "removeSkill": "Remove skill",
-    "confirmRemoveSkill": "Remove this skill from the employee?"
+    "loadError": "Töötaja laadimine ebaõnnestus",
+    "verifySkill": "Kinnita oskus",
+    "removeSkill": "Eemalda oskus",
+    "confirmRemoveSkill": "Eemaldada see oskus töötajalt?"
   },
   "reports": {
     "title": "Aruanded",
@@ -1696,25 +1696,25 @@
     "lastMonth": "Eelmine kuu",
     "last7Days": "Viimased 7 päeva",
     "last30Days": "Viimased 30 päeva",
-    "allDepartments": "All Departments",
-    "nameLabel": "Name:",
-    "typeLabel": "Type:",
-    "period": "Period",
-    "date": "Date",
-    "location": "Location",
-    "department": "Department",
-    "printReport": "Print Report",
-    "overtime": "Overtime",
+    "allDepartments": "Kõik osakonnad",
+    "nameLabel": "Nimi:",
+    "typeLabel": "Tüüp:",
+    "period": "Periood",
+    "date": "Kuupäev",
+    "location": "Asukoht",
+    "department": "Osakond",
+    "printReport": "Prindi aruanne",
+    "overtime": "Ületunnid",
     "placeholder": {
-      "searchReports": "Search reports...",
-      "startDate": "Start date",
-      "endDate": "End date"
+      "searchReports": "Otsi aruandeid...",
+      "startDate": "Alguskuupäev",
+      "endDate": "Lõpukuupäev"
     },
     "chartTypes": {
-      "table": "Taulukko",
-      "bar": "Pylväskaavio",
-      "line": "Viivakaavio",
-      "pie": "Ympyräkaavio"
+      "table": "Tabel",
+      "bar": "Tulpdiagramm",
+      "line": "Joondiagramm",
+      "pie": "Sektordiagramm"
     },
     "columns": {
       "employeeName": "Työntekijän Nimi",
@@ -1740,8 +1740,8 @@
       "overtimeCost": "Overtime Cost",
       "totalCost": "Total Cost"
     },
-    "loadError": "Failed to load report data",
-    "saveError": "Failed to save report",
+    "loadError": "Aruande andmete laadimine ebaõnnestus",
+    "saveError": "Aruande salvestamine ebaõnnestus",
     "namePlaceholder": "e.g., Weekly Overtime Analysis",
     "groupByOptions": {
       "employee": "Employee",
@@ -1813,9 +1813,9 @@
     "willCreate": "See loob ligikaudu",
     "shiftsLabel": "vahetust",
     "generating": "Genereerimine...",
-    "loadError": "Failed to load templates",
-    "confirmDelete": "Delete this template?",
-    "generateError": "Failed to generate shifts",
+    "loadError": "Mallide laadimine ebaõnnestus",
+    "confirmDelete": "Kas kustutada see mall?",
+    "generateError": "Vahetuste genereerimine ebaõnnestus",
     "patterns": {
       "customDays": "Custom Days",
       "customDaysDesc": "Select specific days",
@@ -2069,7 +2069,7 @@
     "postJob": "Postita töökoht",
     "skillMatch": "oskuste sobivus",
     "noApplicants": "Kandidaate pole veel",
-    "loadError": "Failed to load job postings. Please try again.",
+    "loadError": "Tööpakkumiste laadimine ebaõnnestus. Palun proovi uuesti.",
     "departments": {
       "frontOfHouse": "Teenindussaal",
       "kitchen": "Köök",
@@ -2097,7 +2097,7 @@
     "placeholder": {
       "searchEmployees": "Search employees..."
     },
-    "loadError": "Failed to load employees",
+    "loadError": "Töötajate laadimine ebaõnnestus",
     "failedAddSkill": "Oskuse lisamine ebaõnnestus",
     "failedVerifySkill": "Kinnitamine ebaõnnestus",
     "failedUpdateSkillLevel": "Taseme uuendamine ebaõnnestus",
@@ -2594,7 +2594,7 @@
       "name": "Location name",
       "address": "Address"
     },
-    "loadError": "Failed to load locations. Please try again.",
+    "loadError": "Asukohtade laadimine ebaõnnestus. Palun proovi uuesti.",
     "codePlaceholder": "LON-01",
     "noEmployeesAssigned": "No employees assigned to this location"
   },
@@ -2624,7 +2624,7 @@
     },
     "copied": "Copied!",
     "copy": "Copy",
-    "loadError": "Failed to load integrations",
+    "loadError": "Integratsioonide laadimine ebaõnnestus",
     "apiKeyPlaceholder": "e.g., Production API Key",
     "categories": {
       "hris": "HRIS",

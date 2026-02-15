@@ -168,7 +168,7 @@
     "weekDaysShortMon": "Ma",
     "weekDaysShortTue": "Ti",
     "weekDaysShortWed": "Ke",
-    "weekDaysShortThu": "To",
+    "weekDaysShortThu": "Vastaanottaja",
     "weekDaysShortFri": "Pe",
     "weekDaysShortSat": "La",
     "weekDaysShortSun": "Su"
@@ -200,7 +200,7 @@
     "mon": "Ma",
     "tue": "Ti",
     "wed": "Ke",
-    "thu": "To",
+    "thu": "Vastaanottaja",
     "fri": "Pe",
     "sat": "La",
     "sun": "Su",
@@ -524,7 +524,8 @@
     "reportBug": "Ilmoita virheestä",
     "reportBugDesc": "Kerro meille ongelmista",
     "searchPlaceholder": "Hae ohjeartikkeleista...",
-    "sendEmail": "Lähetä sähköposti"
+    "sendEmail": "Lähetä sähköposti",
+    "chatSupportDescription": "Ota yhteyttä tukeen sähköpostilla osoitteeseen support@uplifthq.co.uk"
   },
   "home": {
     "welcome": "Tervetuloa, {{name}}!",
@@ -1454,7 +1455,7 @@
       "catalog": "Catalog",
       "pending_approvals": "Pending Approvals",
       "available": "{{count}} available",
-      "active": "Active",
+      "active": "Aktiivinen",
       "inactive": "Inactive",
       "requested": "Requested {{date}}",
       "reject": "Reject",
@@ -1499,7 +1500,7 @@
       "category_preferred_shift": "Preferred Shift",
       "category_gift_card": "Gift Card",
       "category_recognition": "Recognition",
-      "category_other": "Other"
+      "category_other": "Muu"
     },
     "rewards": {
       "new": "NEW",
@@ -1545,7 +1546,7 @@
       "exit": "Exit",
       "back_exit": "← Exit",
       "steps_completed": "{{done}} of {{total}} steps completed",
-      "notes": "Notes",
+      "notes": "Muistiinpanot",
       "notes_placeholder": "Add any additional notes or comments...",
       "signature": "Signature",
       "type_name_to_sign": "Type your full name to sign",
@@ -1836,7 +1837,7 @@
     "questions": "{{count}} questions",
     "title": "Surveys",
     "noSurveys": "No active surveys",
-    "completedSurveys": "Completed",
+    "completedSurveys": "Valmis",
     "activeSurveys": "Active Surveys",
     "checkBackLater": "Check back later for new surveys",
     "dueDate": "Due {{date}}",

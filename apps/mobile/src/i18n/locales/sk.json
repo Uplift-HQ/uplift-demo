@@ -248,7 +248,7 @@
     "viewed": "Zobrazené",
     "contract": "Zmluva",
     "companyPolicies": "Firemné Pravidlá",
-    "myDocuments": "Moje Dokumenty",
+    "myDocuments": "Moje dokumenty",
     "allCaughtUp": "Máte všetky dokumenty vybavené",
     "actionRequired": "Vyžaduje sa Akcia",
     "signNow": "Podpísať Teraz",
@@ -595,18 +595,18 @@
   },
   "learning": {
     "instructor": "Instructor",
-    "myCourses": "My Courses",
+    "myCourses": "Moje kurzy",
     "mandatory": "Mandatory",
     "enroll": "Enroll",
     "beginner": "Beginner",
-    "title": "Learning",
+    "title": "Vzdelávanie",
     "earned": "Earned {{date}}",
-    "certificates": "Certificates",
+    "certificates": "Certifikáty",
     "intermediate": "Intermediate",
-    "catalogue": "Catalogue",
+    "catalogue": "Katalóg",
     "recommended": "Recommended For You",
     "noCertificates": "No certificates yet",
-    "search": "Search courses...",
+    "search": "Hľadať kurzy...",
     "noCourses": "No courses found",
     "browseCatalogue": "Browse Catalogue",
     "optional": "Optional",
@@ -885,7 +885,7 @@
     "completed": "Completed",
     "atRisk": "At Risk",
     "activeReviews": "Active Reviews",
-    "myPerformance": "My Performance",
+    "myPerformance": "Môj výkon",
     "managerReview": "Manager review",
     "startSelfAssessment": "Start Self-Assessment",
     "constructive": "Constructive",
@@ -1834,14 +1834,16 @@
     "yourImpact": "Your Impact",
     "continue": "Continue",
     "questions": "{{count}} questions",
-    "title": "Surveys",
+    "title": "Prieskumy",
     "noSurveys": "No active surveys",
     "completedSurveys": "Completed",
     "activeSurveys": "Active Surveys",
     "checkBackLater": "Check back later for new surveys",
     "dueDate": "Due {{date}}",
     "answeredOf": "{{answered}}/{{total}} answered",
-    "startSurvey": "Start Survey"
+    "startSurvey": "Start Survey",
+    "active": "Aktívne",
+    "completed": "Dokončené"
   },
   "tasks": {
     "title": "Úlohy",
@@ -1897,7 +1899,7 @@
     "inventory": "Inventúra"
   },
   "timeOff": {
-    "title": "Voľno",
+    "title": "Dovolenka",
     "request": "Požiadať",
     "timeOffRequest": "Žiadosť o voľno",
     "balance": "Zostatok voľna",
@@ -1944,7 +1946,7 @@
     "yourPendingRequests": "Vaše čakajúce žiadosti"
   },
   "timeTracking": {
-    "title": "Sledovanie času",
+    "title": "Evidencia pracovného času",
     "timeClock": "Hodiny",
     "clockedIn": "Prihlásený",
     "clockedInMessage": "Vaša zmena začala. Prajem pekný deň!",
@@ -2058,5 +2060,8 @@
   "workerHome.teamSubtitle": "Tím Obsluhy Sálu • Grand Hotel, Londýn",
   "workerHome.trainingCompliance": "Dodržiavanie Školení",
   "workerHome.trainingProgress": "{{complete}} z {{total}} povinných dokončených",
-  "workerHome.viewDetails": "Zobraziť detaily"
+  "workerHome.viewDetails": "Zobraziť detaily",
+  "momentum": {
+    "momentum": "Momentum"
+  }
 }

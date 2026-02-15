@@ -53,20 +53,20 @@
     "trackSkillsDesc": "ਆਪਣੇ ਹੁਨਰ ਟਰੈਕ ਕਰੋ ਅਤੇ ਅੰਦਰੂਨੀ ਮੌਕੇ ਖੋਜੋ",
     "viewMyCareer": "ਮੇਰਾ ਕੈਰੀਅਰ ਵੇਖੋ",
     "timeOffBalance": "ਛੁੱਟੀ ਬੈਲੇਂਸ",
-    "loadError": "Failed to load dashboard",
-    "live": "LIVE",
-    "clickToSeeWho": "Click to see who",
-    "affected": "affected",
-    "expiresIn": "Expires in",
-    "overdueBy": "Overdue by",
-    "manageAll": "Manage All",
-    "noRecentActivity": "No recent activity",
-    "noRecentRecognitions": "No recent recognitions",
-    "available": "Available",
+    "loadError": "ਡੈਸ਼ਬੋਰਡ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+    "live": "ਲਾਈਵ",
+    "clickToSeeWho": "ਕੌਣ ਹੈ ਵੇਖਣ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+    "affected": "ਪ੍ਰਭਾਵਿਤ",
+    "expiresIn": "ਸਮਾਪਤ ਹੋਣ ਵਿੱਚ",
+    "overdueBy": "ਬਕਾਇਆ",
+    "manageAll": "ਸਭ ਪ੍ਰਬੰਧਿਤ ਕਰੋ",
+    "noRecentActivity": "ਕੋਈ ਹਾਲੀਆ ਗਤੀਵਿਧੀ ਨਹੀਂ",
+    "noRecentRecognitions": "ਕੋਈ ਹਾਲੀਆ ਮਾਨਤਾ ਨਹੀਂ",
+    "available": "ਉਪਲਬਧ",
     "alerts": {
-      "expiring": "Certifications expiring within 30 days",
-      "training": "Training in progress or pending",
-      "document": "Probation reviews due"
+      "expiring": "30 ਦਿਨਾਂ ਵਿੱਚ ਸਮਾਪਤ ਹੋਣ ਵਾਲੀਆਂ ਸਰਟੀਫਿਕੇਟਾਂ",
+      "training": "ਸਿਖਲਾਈ ਜਾਰੀ ਜਾਂ ਬਕਾਇਆ",
+      "document": "ਪ੍ਰੋਬੇਸ਼ਨ ਸਮੀਖਿਆਵਾਂ ਬਕਾਇਆ"
     }
   },
   "nav": {
