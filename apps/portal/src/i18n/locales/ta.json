@@ -2476,7 +2476,7 @@
       "dateIso": "தேதி → ISO",
       "dateUk": "தேதி → UK வடிவம்",
       "boolYn": "பூலியன் → Y/N",
-      "fieldMappingTip": "புலம் மேப்பிங்குகள் கோரிக்கை உடலை தானாக உருவாக்கப் பயன்படுகின்றன.",
+      "fieldMappingTip": "Field mappings are used to build the request body automatically. You can also use {{field}} syntax in the Request tab for custom JSON structures.",
       "testConfiguration": "உள்ளமைவை சோதி",
       "testDescription": "உங்கள் உள்ளமைவை சரிபார்க்க சோதனை கோரிக்கையை அனுப்பவும்.",
       "testing": "சோதிக்கிறது...",

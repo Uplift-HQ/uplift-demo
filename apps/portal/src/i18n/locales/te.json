@@ -823,7 +823,7 @@
   "gamification": {
     "level": "లెవెల్ {{level}}",
     "levelShort": "లెవెల్ {{level}}",
-    "xp": "XP",
+    "xp": "{{xp}} XP",
     "xpUnit": "XP",
     "xpToNext": "లెవెల్ {{level}}కు {{xp}} XP",
     "badges": "బ్యాడ్జ్‌లు",
@@ -2480,7 +2480,7 @@
       "dateIso": "తేదీ → ISO",
       "dateUk": "తేదీ → UK ఫార్మాట్",
       "boolYn": "బూల్ → Y/N",
-      "fieldMappingTip": "ఫీల్డ్ మ్యాపింగ్‌లు రిక్వెస్ట్ బాడీని స్వయంచాలకంగా నిర్మించడానికి ఉపయోగించబడతాయి.",
+      "fieldMappingTip": "Field mappings are used to build the request body automatically. You can also use {{field}} syntax in the Request tab for custom JSON structures.",
       "testConfiguration": "కాన్ఫిగరేషన్ టెస్ట్ చేయి",
       "testDescription": "మీ కాన్ఫిగరేషన్ ధృవీకరించడానికి టెస్ట్ రిక్వెస్ట్ పంపండి.",
       "testing": "టెస్ట్ చేస్తోంది...",

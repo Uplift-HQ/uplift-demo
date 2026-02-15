@@ -724,7 +724,7 @@
     "verified": "認証済み",
     "pending": "保留中",
     "expired": "期限切れ",
-    "expiresOn": "有効期限",
+    "expiresOn": "Expires {{date}}",
     "addSkill": "スキルを追加",
     "requestVerification": "確認をリクエスト",
     "skillLevel": "スキルレベル",
