@@ -50,7 +50,7 @@
     "view": "Zobacz",
     "details": "Szczegóły",
     "description": "Opis",
-    "status": "Status",
+    "status": "Stan",
     "date": "Data",
     "time": "Czas",
     "name": "Nazwa",
@@ -391,7 +391,7 @@
     "shiftReassigned": "Zmiana przypisana ponownie",
     "swapRequested": "Zamiana zgłoszona",
     "shiftDeleted": "Zmiana usunięta",
-    "minutes": "min"
+    "minutes": "m"
   },
   "timeTracking": {
     "title": "Rejestracja czasu",
@@ -559,7 +559,7 @@
     "firstName": "Imię",
     "lastName": "Nazwisko",
     "phone": "Numer telefonu",
-    "email": "Email",
+    "email": "E-mail",
     "dateOfBirth": "Data urodzenia",
     "address": "Adres",
     "emergencyContact": "Kontakt awaryjny",
@@ -808,7 +808,7 @@
     "inviteUser": "Zaproś użytkownika",
     "user": "Użytkownik",
     "role": "Rola",
-    "status": "Status",
+    "status": "Stan",
     "lastLogin": "Ostatnie logowanie",
     "actions": "Akcje",
     "active": "Aktywny",
@@ -818,7 +818,7 @@
     "inviteTeamMember": "Zaproś członka zespołu",
     "firstName": "Imię",
     "lastName": "Nazwisko",
-    "email": "Email",
+    "email": "E-mail",
     "phone": "Telefon",
     "sendInvitation": "Wyślij zaproszenie",
     "sending": "Wysyłanie...",
@@ -912,7 +912,7 @@
       "primaryLogoDesc": "Wyświetlane na pasku bocznym na jasnym tle. PNG, JPG lub SVG. Maks. 2MB.",
       "darkModeLogo": "Logo trybu ciemnego",
       "darkModeLogoDesc": "Używane na ciemnym tle. Powinna być jasna/biała wersja logo.",
-      "favicon": "Favicon",
+      "favicon": "Ikona zakładki",
       "faviconDesc": "Ikona karty przeglądarki. Najlepiej kwadratowa, 32x32 lub 64x64. PNG lub ICO.",
       "loginBackground": "Tło logowania",
       "loginBackgroundDesc": "Obraz tła ekranu logowania. Zalecane 1920x1080.",
@@ -989,7 +989,7 @@
       "cannotEditBuiltIn": "Wbudowanych ról nie można modyfikować",
       "deleteUsersWarning": "Ta rola jest przypisana do {{count}} użytkowników. Zostaną przywrócone domyślne uprawnienia.",
       "saveError": "Nie udało się zapisać roli",
-      "permAdmin": "Admin",
+      "permAdmin": "Administrator",
       "addRole": "Dodaj niestandardową rolę",
       "module": "Moduł",
       "custom": "Niestandardowa",
@@ -1232,7 +1232,7 @@
     "createReport": "Utwórz raport wydatków",
     "originalAmount": "Kwota oryginalna",
     "utilisation": "Wykorzystanie",
-    "status": "Status",
+    "status": "Stan",
     "submitReport": "Złóż raport",
     "topSpenders": "Największe wydatki",
     "dailyRate": "Stawka dzienna",
@@ -1280,9 +1280,7 @@
     "toLocation": "Do",
     "takePhoto": "Zrób zdjęcie",
     "currency": "Waluta",
-    "budget": "Budżet",
-    "categories": {},
-    "limits": {}
+    "budget": "Budżet"
   },
   "rewards": {
     "title": "Nagrody",
@@ -1407,7 +1405,7 @@
     "reviewInviteDesc": "Przejrzyj dane i zaproś pracownika do aplikacji Uplift.",
     "summary": "Podsumowanie",
     "summaryName": "Imię i Nazwisko",
-    "summaryEmail": "Email",
+    "summaryEmail": "E-mail",
     "summaryPhone": "Telefon",
     "summaryType": "Typ",
     "summaryStartDate": "Data Rozpoczęcia",
@@ -1470,7 +1468,7 @@
     "columnLocation": "Lokalizacja",
     "columnStartDate": "Data rozpoczęcia",
     "columnProgress": "Postęp",
-    "columnStatus": "Status",
+    "columnStatus": "Stan",
     "columnBuddy": "Opiekun",
     "status": {
       "onTrack": "W terminie",
@@ -1665,7 +1663,7 @@
     "quietHours": "Godziny ciszy",
     "subtitle": "Wybierz jak i kiedy otrzymujesz powiadomienia",
     "channelsDesc": "Wybierz sposób otrzymywania powiadomień",
-    "email": "Email",
+    "email": "E-mail",
     "emailDesc": "Otrzymuj powiadomienia przez email",
     "pushDesc": "Otrzymuj powiadomienia push na urządzeniu",
     "sms": "SMS",
@@ -1989,7 +1987,7 @@
       "s10Text": "Zastrzegamy sobie prawo do modyfikacji niniejszego Regulaminu w dowolnym momencie. Poinformujemy o wszelkich istotnych zmianach poprzez opublikowanie nowego Regulaminu na tej stronie i aktualizację daty \"Ostatnia aktualizacja\".",
       "s11Title": "11. Kontakt",
       "s11Text": "Jeśli masz pytania dotyczące niniejszego Regulaminu, skontaktuj się z nami:",
-      "emailLabel": "Email:",
+      "emailLabel": "E-mail:",
       "addressLabel": "Adres:",
       "address": "Londyn, Wielka Brytania"
     }
@@ -2221,7 +2219,7 @@
     "noIntegrations": "Brak połączonych integracji",
     "noIntegrationsDesc": "Połącz pierwszą integrację, aby rozpocząć synchronizację danych",
     "status": {
-      "beta": "Beta",
+      "beta": "Wersja beta",
       "syncing": "Synchronizacja..."
     },
     "stats": {
@@ -2235,8 +2233,8 @@
     },
     "tabs": {
       "connected": "Połączone",
-      "marketplace": "Marketplace",
-      "restApi": "REST API",
+      "marketplace": "Sklep",
+      "restApi": "API REST",
       "apiFactory": "Fabryka API",
       "activityLog": "Dziennik aktywności",
       "settings": "Ustawienia",
@@ -2247,7 +2245,7 @@
     "connection": {
       "lastSync": "Ostatnia synchronizacja",
       "frequency": "Częstotliwość",
-      "status": "Status",
+      "status": "Stan",
       "healthy": "Prawidłowy",
       "errors": "błędy"
     },
@@ -2318,7 +2316,7 @@
       "description": "Mapowanie pól kontroluje, jak dane z {{name}} są mapowane na pola Uplift. Zmiany wchodzą w życie przy następnej synchronizacji.",
       "sourceField": "Pole {{name}}",
       "upliftField": "Pole Uplift",
-      "status": "Status",
+      "status": "Stan",
       "selectField": "Wybierz pole...",
       "mapped": "Zmapowane",
       "unmapped": "Niezmapowane"
@@ -2354,7 +2352,7 @@
       "validationError": "Wprowadź URL i wybierz co najmniej jedno zdarzenie",
       "createdSuccess": "Webhook utworzony pomyślnie!",
       "testSent": "Testowy payload wysłany do",
-      "testStatus": "Status",
+      "testStatus": "Stan",
       "deleteConfirm": "Usunąć ten webhook?",
       "skillExpired": "Umiejętność wygasła"
     },
@@ -2467,7 +2465,7 @@
       "sendTestRequest": "Wyślij żądanie testowe",
       "success": "Sukces",
       "failed": "Niepowodzenie",
-      "status": "Status",
+      "status": "Stan",
       "time": "Czas",
       "response": "Odpowiedź",
       "enableIntegration": "Włącz integrację",
@@ -2479,7 +2477,7 @@
         "authentication": "Uwierzytelnianie",
         "trigger": "Wyzwalacz",
         "fieldMapping": "Mapowanie pól",
-        "test": "Test"
+        "test": "Testuj"
       }
     },
     "logs": {
@@ -2718,14 +2716,14 @@
     "rateLimits": {
       "basic": "Podstawowy",
       "standard": "Standardowy",
-      "premium": "Premium"
+      "premium": "Wersja Premium"
     },
     "copied": "Skopiowano!",
     "copy": "Kopiuj",
     "loadError": "Nie udało się załadować integracji",
     "apiKeyPlaceholder": "np. Produkcyjny klucz API",
     "categories": {
-      "hris": "HRIS",
+      "hris": "System HR",
       "hrisDesc": "Systemy informatyczne HR",
       "payroll": "Płace",
       "payrollDesc": "Płace i wynagrodzenia",
@@ -2776,9 +2774,9 @@
       "customApiDesc": "Zbuduj własną integrację"
     },
     "mapping": {
-      "customField1": "customField1",
-      "customField2": "customField2",
-      "notes": "notes"
+      "customField1": "polePryw1",
+      "customField2": "polePryw2",
+      "notes": "notatki"
     },
     "api": {
       "authNone": "Brak uwierzytelniania",
@@ -2840,7 +2838,7 @@
     "handoverTo": "Przekazanie do",
     "endOfContract": "Koniec umowy",
     "exitInterview": "Rozmowa końcowa",
-    "status": "Status",
+    "status": "Stan",
     "regrettableAttrition": "Niepożądana rotacja",
     "templates": "Szablony",
     "title": "Proces odejścia",
@@ -2888,7 +2886,7 @@
     "employee": "Pracownik",
     "role": "Stanowisko",
     "processed": "Przetworzone",
-    "status": "Status",
+    "status": "Stan",
     "nextReview": "Następny przegląd",
     "incomeTax": "Podatek dochodowy",
     "compensationHistory": "Historia wynagrodzeń",
@@ -3083,14 +3081,14 @@
     "actions": "Działania",
     "reviewPeriod": "Okres oceny",
     "meetsExpectations": "Spełnia oczekiwania",
-    "status": "Status",
+    "status": "Stan",
     "oneOnOnes": "Spotkania 1 na 1",
     "annual": "Roczny",
     "praise": "Pochwała",
     "pendingReviews": "Oczekujące oceny",
     "activeCycles": "Aktywne cykle",
     "title": "Wyniki",
-    "mentoring": "Mentoring",
+    "mentoring": "Mentorstwo",
     "progress": "Postęp",
     "alignTo": "Powiąż z",
     "noCycles": "Brak cykli ocen",
@@ -3098,7 +3096,7 @@
     "cycleName": "Nazwa cyklu",
     "startDate": "Data rozpoczęcia",
     "belowExpectations": "Poniżej oczekiwań",
-    "agenda": "Agenda",
+    "agenda": "Plan",
     "custom": "Niestandardowy",
     "teamGoals": "Cele zespołowe",
     "noPlans": "Brak planów rozwoju",
@@ -3137,7 +3135,7 @@
     "exceedsExpectations": "Przekracza oczekiwania",
     "needsImprovement": "Wymaga poprawy",
     "createGoal": "Utwórz cel",
-    "threeSixty": "360°",
+    "threeSixty": "360 stopni",
     "keyResults": "Kluczowe rezultaty",
     "description": "Opis",
     "recurring": "Cykliczne",
@@ -3258,7 +3256,7 @@
     "exportResults": "Eksportuj wyniki",
     "heatmap": "Mapa cieplna",
     "lifecycleSurveys": "Ankiety cyklu życia",
-    "trend": "Trend",
+    "trend": "Tendencja",
     "highestScoring": "Najwyżej oceniane",
     "questionBuilder": "Pytania",
     "scheduleLaunch": "Zaplanuj uruchomienie",
@@ -3494,7 +3492,7 @@
     "badgeCertified": "Certyfikowany profesjonalista",
     "goodAfternoon": "Dzień dobry",
     "requestTimeOff": "Złóż wniosek urlopowy",
-    "badgeMentor": "Mentor",
+    "badgeMentor": "Opiekun",
     "badgeServiceStar": "Gwiazda obsługi",
     "kudos1Time": "2 godziny temu",
     "badgeSpeedDemon": "Mistrz szybkości",
@@ -3530,7 +3528,7 @@
     "grid": "Siatka",
     "searchPlaceholder": "Szukaj po nazwisku, stanowisku, dziale lub lokalizacji...",
     "noResults": "Nie znaleziono pracowników",
-    "email": "Email",
+    "email": "E-mail",
     "gridView": "Widok siatki",
     "orgChart": "Schemat organizacyjny",
     "name": "Nazwa",
@@ -3607,7 +3605,7 @@
     "recognitionGiven": "Przyznane wyróżnienia: 5 w tym miesiącu",
     "tipAttendance": "Utrzymaj serię obecności",
     "tipFireSafety": "Ukończ szkolenie BHP",
-    "momentum": "Momentum",
+    "momentum": "Impet",
     "engagement": "Zaangażowanie",
     "kudos": "3 pozytywne pochwały w tym miesiącu",
     "tipRecognitionsImpact": "Zaangażowanie +3",
@@ -3660,7 +3658,7 @@
       "merchant": "Sprzedawca",
       "category": "Kategoria",
       "amount": "Kwota",
-      "status": "Status",
+      "status": "Stan",
       "receipt": "Paragon"
     },
     "loading": "Ładowanie transakcji...",
@@ -3681,7 +3679,7 @@
       "date": "Data",
       "items": "Pozycje",
       "amount": "Kwota",
-      "status": "Status",
+      "status": "Stan",
       "actions": "Akcje",
       "totalAmount": "Łączna kwota",
       "description": "Opis"
@@ -3720,7 +3718,7 @@
       "cardNumber": "Karta",
       "holder": "Posiadacz karty",
       "type": "Typ",
-      "status": "Status",
+      "status": "Stan",
       "lastSync": "Ostatnia synchronizacja",
       "noCards": "Nie znaleziono kart. Połącz bank aby zsynchronizować karty firmowe.",
       "inactive": "Nieaktywna"

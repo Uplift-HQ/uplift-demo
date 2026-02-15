@@ -147,7 +147,7 @@
     "retry": "Reintentar",
     "yes": "Sí",
     "no": "No",
-    "ok": "OK",
+    "ok": "Aceptar",
     "error": "Erro",
     "success": "Éxito",
     "warning": "Advertencia",
@@ -265,7 +265,7 @@
       "hostess": "Anfitriona",
       "host": "Anfitrión",
       "manager": "Gerente",
-      "chef": "Chef",
+      "chef": "Cocinero jefe",
       "cashier": "Cajero",
       "waiter": "Mesero",
       "waitress": "Mesera",
@@ -273,7 +273,7 @@
       "dishwasher": "Lavaplatos",
       "cook": "Cocinero",
       "barback": "Ayudante de bar",
-      "sous": "Sous Chef",
+      "sous": "Subchef",
       "expeditor": "Expedidor"
     },
     "new": "NUEVO",
@@ -830,8 +830,8 @@
   "gamification": {
     "level": "Nivel {{level}}",
     "levelShort": "Niv {{level}}",
-    "xp": "{{xp}} XP",
-    "xpUnit": "XP",
+    "xp": "{{xp}} PE",
+    "xpUnit": "PE",
     "xpToNext": "{{xp}} XP para Nivel {{level}}",
     "badges": "Insignias",
     "achievements": "Logros",
@@ -1098,7 +1098,7 @@
       "primaryLogoDesc": "Se muestra en la barra lateral sobre fondos claros. PNG, JPG o SVG. Máx 2MB.",
       "darkModeLogo": "Logo modo oscuro",
       "darkModeLogoDesc": "Se usa sobre fondos oscuros. Debe ser una versión clara/blanca de tu logo.",
-      "favicon": "Favicon",
+      "favicon": "Icono de favoritos",
       "faviconDesc": "Icono de pestaña del navegador. Idealmente cuadrado, 32x32 o 64x64. PNG o ICO.",
       "loginBackground": "Fondo de inicio de sesión",
       "loginBackgroundDesc": "Imagen de fondo para la pantalla de inicio de sesión. Recomendado 1920x1080.",
@@ -2062,8 +2062,8 @@
     "optional": "Opcional"
   },
   "dateTime": {
-    "am": "AM",
-    "pm": "PM",
+    "am": "a. m.",
+    "pm": "p. m.",
     "hours": "horas",
     "minutes": "minutos",
     "seconds": "segundos",
@@ -2790,9 +2790,9 @@
       "customApiDesc": "Crea tu propia integración"
     },
     "mapping": {
-      "customField1": "customField1",
-      "customField2": "customField2",
-      "notes": "notes"
+      "customField1": "campoPers1",
+      "customField2": "campoPers2",
+      "notes": "notas"
     },
     "api": {
       "authNone": "Sin autenticación",
@@ -3040,7 +3040,7 @@
     "noCoursesYet": "Aún no hay cursos",
     "noCoursesDesc": "Crea tu primer curso de formación para empezar a desarrollar a tu equipo. Los cursos pueden incluir formación de cumplimiento, desarrollo de habilidades y más.",
     "createFirstCourse": "Crear primer curso",
-    "mins": "mins",
+    "mins": "min",
     "lessons": "lecciones",
     "course": "Curso",
     "type": "Tipo",
@@ -3130,7 +3130,7 @@
     "daysPending": "Días pendientes",
     "download": "Descargar",
     "notRequired": "No requerida",
-    "variables": "Variables",
+    "variables": "Parámetros",
     "allDocuments": "Todos los documentos",
     "uploadDate": "Fecha de subida",
     "uploadDocument": "Subir documento",
@@ -3339,9 +3339,9 @@
     "focusAreas": "Áreas de enfoque",
     "createPlan": "Crear plan",
     "cycleTypes": {
+      "360": "360°",
       "quarterly": "Trimestral",
       "annual": "Anual",
-      "360": "360°",
       "probation": "Período de prueba"
     },
     "level": "Nivel",
@@ -3594,7 +3594,7 @@
     "departments": {
       "engineering": "Ingeniería",
       "sales": "Ventas",
-      "marketing": "Marketing",
+      "marketing": "Mercadotecnia",
       "hr": "RRHH",
       "finance": "Finanzas",
       "operations": "Operaciones",
@@ -3764,7 +3764,7 @@
       "de": "Alemania",
       "pl": "Polonia",
       "us": "Estados Unidos",
-      "cn": "China",
+      "cn": "República Popular China",
       "ae": "Emiratos Árabes Unidos"
     },
     "calendar": {
@@ -4026,12 +4026,7 @@
     },
     "noRecognitions": "No hay reconocimientos que mostrar para este filtro.",
     "charLimit": "Límite de caracteres alcanzado",
-    "filters": {
-      "received": "Recibidos",
-      "all": "Todos",
-      "myTeam": "Mi equipo",
-      "sent": "Enviados"
-    },
+    "filters": "Filtros",
     "selectRecipient": "Selecciona un compañero...",
     "sendRecognition": "Enviar reconocimiento",
     "recipient": "Destinatario",

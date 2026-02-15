@@ -130,7 +130,7 @@
     "close": "Lukk",
     "submit": "Send inn",
     "search": "Søk",
-    "filter": "Filter",
+    "filter": "Filtrer",
     "sort": "Sorter",
     "refresh": "Oppdater",
     "retry": "Prøv igjen",
@@ -174,7 +174,7 @@
     "name": "Navn",
     "type": "Type",
     "category": "Kategori",
-    "total": "Total",
+    "total": "Totalt",
     "amount": "Beløp",
     "notes": "Notater",
     "comments": "Kommentarer",
@@ -1687,7 +1687,7 @@
     "location": "Lokasjon",
     "department": "Avdeling",
     "printReport": "Skriv ut rapport",
-    "overtime": "Overtime",
+    "overtime": "Overtid",
     "placeholder": {
       "searchReports": "Search reports...",
       "startDate": "Start date",
@@ -1717,7 +1717,7 @@
       "filledShifts": "Fylte Skift",
       "openShifts": "Åpne Skift",
       "fillRate": "Fyllingsgrad",
-      "employee": "Employee",
+      "employee": "Ansatt",
       "period": "Period",
       "regularCost": "Normal kostnad",
       "overtimeCost": "Overtidskostnad",
@@ -1727,15 +1727,15 @@
     "saveError": "Failed to save report",
     "namePlaceholder": "e.g., Weekly Overtime Analysis",
     "groupByOptions": {
-      "employee": "Employee",
-      "location": "Location",
-      "department": "Department",
-      "day": "Day",
-      "week": "Week"
+      "employee": "Ansatt",
+      "location": "Sted",
+      "department": "Avdeling",
+      "day": "Dag",
+      "week": "Uke"
     },
     "summary": {
       "title": "Rapportsammendrag",
-      "name": "Name",
+      "name": "Navn",
       "type": "Type",
       "columns": "Kolonner",
       "groupBy": "Grupper etter"
@@ -2016,7 +2016,7 @@
     "types": {
       "employees": "Ansatte",
       "employeesDesc": "Import employee profiles",
-      "shifts": "Shifts",
+      "shifts": "Skift",
       "shiftsDesc": "Import shift schedules",
       "locations": "Locations",
       "locationsDesc": "Import locations",
@@ -2471,7 +2471,7 @@
       "branding": "Branding & Timezone",
       "inviteAdmin": "Invite Admin",
       "addEmployees": "Add Employees",
-      "done": "Done"
+      "done": "Ferdig"
     },
     "orgDetails": {
       "companyName": "Firmanavn",
@@ -2563,7 +2563,7 @@
       "construction": "Construction",
       "logistics": "Logistics",
       "foodBeverage": "Food & Beverage",
-      "education": "Education",
+      "education": "Utdanning",
       "technology": "Technology",
       "finance": "Finance",
       "government": "Government",
@@ -2575,7 +2575,7 @@
     "placeholder": {
       "search": "Search locations...",
       "name": "Location name",
-      "address": "Address"
+      "address": "Adresse"
     },
     "loadError": "Failed to load locations. Please try again.",
     "codePlaceholder": "LON-01",
@@ -2601,18 +2601,18 @@
       "admin": "Full administrative access"
     },
     "rateLimits": {
-      "basic": "Basic",
+      "basic": "Grunnleggende",
       "standard": "Standard",
       "premium": "Premium"
     },
     "copied": "Copied!",
-    "copy": "Copy",
+    "copy": "Kopier",
     "loadError": "Failed to load integrations",
     "apiKeyPlaceholder": "e.g., Production API Key",
     "categories": {
       "hris": "HRIS",
       "hrisDesc": "Human Resource Information Systems",
-      "payroll": "Payroll",
+      "payroll": "Lønnsliste",
       "payrollDesc": "Payroll & compensation",
       "comms": "Communications",
       "commsDesc": "Team messaging & notifications",
@@ -2626,9 +2626,9 @@
       "schedulingDesc": "Import from other tools",
       "learning": "Learning",
       "learningDesc": "Training & certifications",
-      "analytics": "Analytics",
+      "analytics": "Analyse",
       "analyticsDesc": "BI & reporting tools",
-      "custom": "Custom",
+      "custom": "Tilpasset",
       "customDesc": "API & automation"
     },
     "providers": {
@@ -2671,7 +2671,7 @@
       "authBearer": "Bearer Token",
       "authBasic": "Basic Auth",
       "authOAuth2": "OAuth 2.0",
-      "triggerManual": "Manual",
+      "triggerManual": "Manuell",
       "triggerManualDesc": "Run on demand",
       "triggerScheduled": "Scheduled",
       "triggerScheduledDesc": "Run on a schedule",
@@ -3034,7 +3034,7 @@
     "subtitle": "Reviews, goals, feedback, and employee development",
     "noDepartment": "No department",
     "selfBadge": "Self",
-    "managerBadge": "Manager",
+    "managerBadge": "Leder",
     "peerBadge": "Peer",
     "noReviewsYet": "No performance reviews",
     "createCycleBtn": "Opprett syklus",
@@ -3622,7 +3622,7 @@
     "kudos1": "Amazing service with the VIP table last night!",
     "kudos1Time": "2 hours ago",
     "kudos2": "Thanks for covering my shift on short notice",
-    "kudos2Time": "Yesterday",
+    "kudos2Time": "I går",
     "kudos3": "Guest satisfaction score of 98% this week — outstanding!",
     "kudos3Time": "2 days ago",
     "kudos4": "Great teamwork during the Saturday rush",

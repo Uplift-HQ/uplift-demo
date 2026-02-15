@@ -162,7 +162,7 @@
     "thisWeek": "Esta semana",
     "nextWeek": "Próxima semana",
     "lastWeek": "Semana passada",
-    "hour": "hr",
+    "hour": "h",
     "hours": "horas",
     "minutes": "minutos",
     "apply": "Aplicar",
@@ -185,7 +185,7 @@
     "name": "Nome",
     "type": "Tipo",
     "category": "Categoria",
-    "total": "Total",
+    "total": "Soma",
     "amount": "Valor",
     "notes": "Notas",
     "comments": "Comentários",
@@ -265,7 +265,7 @@
       "hostess": "Recepcionista",
       "host": "Recepcionista",
       "manager": "Gestor",
-      "chef": "Chef",
+      "chef": "Chefe de cozinha",
       "cashier": "Caixa",
       "waiter": "Garçom",
       "waitress": "Garçonete",
@@ -273,7 +273,7 @@
       "dishwasher": "Lavador de louça",
       "cook": "Cozinheiro",
       "barback": "Auxiliar de bar",
-      "sous": "Sous Chef",
+      "sous": "Subchefe",
       "expeditor": "Expedidor"
     },
     "new": "NOVO",
@@ -305,8 +305,8 @@
     "logoutConfirm": "Tem certeza que deseja sair?",
     "sessionExpired": "Sua sessão expirou. Por favor, faça login novamente.",
     "biometricLogin": "Entrar com biometria",
-    "faceId": "Face ID",
-    "touchId": "Touch ID",
+    "faceId": "ID Facial",
+    "touchId": "ID de Toque",
     "fingerprint": "Impressão digital",
     "tagline": "Veja para onde você está indo",
     "noAccount": "Não tem conta?",
@@ -350,7 +350,7 @@
     "home": "Início",
     "schedule": "Agenda",
     "time": "Tempo",
-    "feed": "Feed",
+    "feed": "Novidades",
     "profile": "Perfil",
     "settings": "Configurações",
     "notifications": "Notificações",
@@ -520,7 +520,7 @@
     "shiftReassigned": "Turno reatribuído",
     "swapRequested": "Troca solicitada",
     "shiftDeleted": "Turno eliminado",
-    "minutes": "min"
+    "minutes": "m"
   },
   "timeTracking": {
     "title": "Controle de ponto",
@@ -642,7 +642,7 @@
     "subtitle": "Visualize suas solicitações de folga e saldos"
   },
   "feed": {
-    "title": "Feed",
+    "title": "Novidades",
     "newPost": "Nova publicação",
     "createPost": "Criar publicação",
     "whatsOnYourMind": "No que está pensando?",
@@ -688,8 +688,8 @@
     "send": "Enviar",
     "delivered": "Entregue",
     "read": "Lido",
-    "online": "Online",
-    "offline": "Offline",
+    "online": "Ligado",
+    "offline": "Desligado",
     "lastSeen": "Visto por último {{time}}",
     "typing": "digitando...",
     "noMessages": "Sem mensagens",
@@ -779,7 +779,7 @@
     "experienceNeeded": "Experiência necessária",
     "applicationSubmitted": "Candidatura enviada",
     "applicationStatus": "Status da candidatura",
-    "hourlyRate": "{{rate}}/hr",
+    "hourlyRate": "{{rate}}/h",
     "yourCareerJourney": "Sua jornada de carreira",
     "trackSkillsDesc": "Acompanhe suas habilidades, descubra oportunidades e planeje seu próximo passo na carreira.",
     "totalSkills": "Total de habilidades",
@@ -1098,7 +1098,7 @@
       "primaryLogoDesc": "Exibido na barra lateral em fundos claros. PNG, JPG ou SVG. Máx 2MB.",
       "darkModeLogo": "Logo modo escuro",
       "darkModeLogoDesc": "Usado em fundos escuros. Deve ser a versão clara/branca do seu logo.",
-      "favicon": "Favicon",
+      "favicon": "Ícone de favoritos",
       "faviconDesc": "Ícone da aba do navegador. Idealmente quadrado, 32x32 ou 64x64. PNG ou ICO.",
       "loginBackground": "Fundo do login",
       "loginBackgroundDesc": "Imagem de fundo para a tela de login. Recomendado 1920x1080.",
@@ -1241,7 +1241,7 @@
       "enforceSSO": "Impor SSO a todos os utilizadores",
       "connected": "Ligado",
       "ipWhitelistDesc": "Deixe vazio para permitir todos os IP",
-      "ssoUrlPlaceholder": "https://your-idp.com/sso/saml",
+      "ssoUrlPlaceholder": "https://seu-idp.com/sso/saml",
       "certificate": "Certificado X.509",
       "copied": "Copiado!",
       "scimDesc": "Sincronize utilizadores automaticamente a partir do seu fornecedor de identidade",
@@ -1256,7 +1256,7 @@
       "ssoUrl": "URL de início de sessão SSO",
       "sessionPolicyDesc": "Controle a duração da sessão e os requisitos de segurança",
       "provider": "Fornecedor SSO",
-      "entityIdPlaceholder": "https://your-idp.com/entity-id",
+      "entityIdPlaceholder": "https://seu-idp.com/entity-id",
       "forceReauth": "Forçar reautenticação em ações sensíveis",
       "email": "E-mail",
       "idleTimeout": "Tempo limite de inatividade",
@@ -1935,13 +1935,13 @@
       "monFriDesc": "Semana de trabalho padrão",
       "weekend": "Apenas Fim de Semana",
       "weekendDesc": "Sábado e Domingo",
-      "4on4off": "4 On / 4 Off",
+      "4on4off": "4 Dias / 4 Folgas",
       "4on4offDesc": "Padrão de turno continental",
       "2week": "Rotação de 2 Semanas",
       "2weekDesc": "Padrão quinzenal alternado",
-      "3on3off": "3 On / 3 Off",
+      "3on3off": "3 Dias / 3 Folgas",
       "3on3offDesc": "Padrão comum em retalho",
-      "5on2off": "5 On / 2 Off",
+      "5on2off": "5 Dias / 2 Folgas",
       "5on2offDesc": "Padrão com folgas rotativas"
     },
     "allDays": "Todos os dias",
@@ -2056,7 +2056,7 @@
       "s10Text": "Reservamo-nos o direito de modificar estes Termos a qualquer momento. Notificaremos quaisquer alterações materiais publicando os novos Termos nesta página e atualizando a data de \"Última atualização\".",
       "s11Title": "11. Contacte-nos",
       "s11Text": "Se tiver alguma questão sobre estes Termos, contacte-nos em:",
-      "emailLabel": "Email:",
+      "emailLabel": "E-mail:",
       "addressLabel": "Morada:",
       "address": "Londres, Reino Unido"
     }
@@ -2130,7 +2130,7 @@
     "records": "registos",
     "successful": "Bem-sucedido",
     "failed": "Falhado",
-    "total": "Total",
+    "total": "Soma",
     "importMore": "Importar mais dados",
     "type": {
       "employees": "Colaboradores",
@@ -2189,8 +2189,8 @@
       "reception": "Receção"
     },
     "locations": {
-      "edinburgh": "Grand Metro Edinburgh",
-      "glasgow": "Grand Metro Glasgow",
+      "edinburgh": "Grand Metro Edimburgo",
+      "glasgow": "Grande Metro de Glasgow",
       "manchester": "Grand Metro Manchester"
     }
   },
@@ -2235,7 +2235,7 @@
     "noIntegrations": "Sem integrações ligadas",
     "noIntegrationsDesc": "Ligue a sua primeira integração para começar a sincronizar dados",
     "status": {
-      "beta": "Beta",
+      "beta": "Versão beta",
       "syncing": "A sincronizar..."
     },
     "stats": {
@@ -2249,7 +2249,7 @@
     },
     "tabs": {
       "connected": "Ligadas",
-      "marketplace": "Marketplace",
+      "marketplace": "Loja",
       "restApi": "API REST",
       "apiFactory": "Fábrica de API",
       "activityLog": "Registo de atividade",
@@ -2739,7 +2739,7 @@
     "loadError": "Falha ao carregar integrações",
     "apiKeyPlaceholder": "ex., Chave API de Produção",
     "categories": {
-      "hris": "HRIS",
+      "hris": "SIRH",
       "hrisDesc": "Sistemas de Informação de Recursos Humanos",
       "payroll": "Folha de Pagamento",
       "payrollDesc": "Folha de pagamento e remuneração",
@@ -3083,7 +3083,7 @@
     "continue": "Continuar",
     "start": "Iniciar",
     "noCertificates": "Nenhum certificado conquistado ainda",
-    "defaultIssuer": "Uplift Learning",
+    "defaultIssuer": "Formação Uplift",
     "issued": "Emitido",
     "expires": "Expira",
     "downloadCert": "Baixar Certificado",
@@ -3202,7 +3202,7 @@
     "cycleName": "Nome do ciclo",
     "startDate": "Data de início",
     "belowExpectations": "Abaixo das expectativas",
-    "agenda": "Agenda",
+    "agenda": "Pauta",
     "custom": "Personalizado",
     "teamGoals": "Objetivos da equipa",
     "noPlans": "Ainda sem planos de desenvolvimento",
@@ -3218,7 +3218,7 @@
     "period": "Período",
     "endDate": "Data de fim",
     "schedule1on1": "Agendar reunião individual",
-    "feedback": "Feedback",
+    "feedback": "Avaliação",
     "offTrack": "Fora do caminho",
     "giveFeedback": "Dar feedback",
     "calibration": "Calibração",
@@ -3323,9 +3323,9 @@
     "mySubtitle": "As suas avaliações, objetivos e desenvolvimento",
     "myTitle": "O Meu Desempenho",
     "cycleTypes": {
+      "360": "360°",
       "quarterly": "Trimestral",
       "annual": "Anual",
-      "360": "360°",
       "probation": "Período de experiência"
     },
     "level": "Nível",
@@ -3594,7 +3594,7 @@
     "departments": {
       "engineering": "Engenharia",
       "sales": "Vendas",
-      "marketing": "Marketing",
+      "marketing": "Mercadologia",
       "hr": "RH",
       "finance": "Finanças",
       "operations": "Operações",
@@ -3764,7 +3764,7 @@
       "de": "Alemanha",
       "pl": "Polónia",
       "us": "Estados Unidos",
-      "cn": "China",
+      "cn": "República Popular da China",
       "ae": "Emirados Árabes Unidos"
     },
     "calendar": {
@@ -3842,7 +3842,7 @@
     "badgeCertified": "Profissional certificado",
     "goodAfternoon": "Boa tarde",
     "requestTimeOff": "Solicitar folga",
-    "badgeMentor": "Mentor",
+    "badgeMentor": "Orientador",
     "badgeServiceStar": "Estrela do serviço",
     "kudos1Time": "Há 2 horas",
     "badgeSpeedDemon": "Super rápido",
@@ -3935,12 +3935,7 @@
     },
     "noRecognitions": "Nenhum reconhecimento para mostrar com este filtro.",
     "charLimit": "Limite de caracteres atingido",
-    "filters": {
-      "received": "Recebidos",
-      "all": "Todos",
-      "myTeam": "Minha equipe",
-      "sent": "Enviados"
-    },
+    "filters": "Filtros",
     "selectRecipient": "Selecione um colega...",
     "sendRecognition": "Enviar reconhecimento",
     "recipient": "Destinatário",
@@ -4012,7 +4007,7 @@
     "recognitionGiven": "Reconhecimentos dados: 5 este mês",
     "tipAttendance": "Mantenha sua sequência de presença",
     "tipFireSafety": "Complete o treinamento de segurança contra incêndios",
-    "momentum": "Momentum",
+    "momentum": "Impulso",
     "engagement": "Engajamento",
     "kudos": "3 elogios positivos este mês",
     "tipRecognitionsImpact": "Engajamento +3",
@@ -4050,7 +4045,7 @@
     "month": "Mês",
     "skills": "Habilidades",
     "performance": "Desempenho",
-    "total": "Total"
+    "total": "Soma"
   },
   "corporateCards": {
     "title": "Cartões Corporativos",
@@ -4114,7 +4109,7 @@
       "history": "Histórico de Exportações",
       "exportDate": "Data de Exportação",
       "claims": "Reembolsos",
-      "total": "Total",
+      "total": "Soma",
       "exportedBy": "Exportado Por",
       "download": "Baixar",
       "noExports": "Nenhuma exportação ainda",

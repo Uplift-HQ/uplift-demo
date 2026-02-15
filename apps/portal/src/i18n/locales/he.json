@@ -115,7 +115,18 @@
     "payrollDashboard": "לוח בקרת שכר",
     "payrollRuns": "הרצות שכר",
     "payrollConfig": "הגדרות שכר",
-    "teamPayroll": "שכר צוות"
+    "teamPayroll": "שכר צוות",
+    "home": "בית",
+    "myMomentum": "המומנטום שלי",
+    "mySchedule": "לוח הזמנים שלי",
+    "myPerformance": "הביצועים שלי",
+    "myLearning": "הלמידה שלי",
+    "mySkillsCareer": "הכישורים והקריירה שלי",
+    "myPayslips": "תלושי השכר שלי",
+    "myExpenses": "ההוצאות שלי",
+    "directory": "ספר החברה",
+    "recognition": "קיר ההוקרה",
+    "myDocuments": "המסמכים שלי"
   },
   "common": {
     "loading": "טוען...",
@@ -325,7 +336,15 @@
       "firstName": "שם פרטי",
       "lastName": "שם משפחה",
       "mfaCode": "הזן קוד בן 6 ספרות"
-    }
+    },
+    "demoAccess": "גישה מהירה להדגמה",
+    "demoAdmin": "מנהל משאבי אנוש",
+    "demoAdminDesc": "גישה מלאה לפלטפורמה — ניהול עובדים, הגדרות, דוחות",
+    "demoManager": "מנהל מחלקה",
+    "demoManagerDesc": "ניהול צוות — אישור בקשות, פגישות אישיות, צפייה בביצועי הצוות",
+    "demoWorker": "עובד",
+    "demoWorkerDesc": "שירות עצמי — צפייה בציון המומנטום, הזמנת חופשה, השלמת הדרכות, מתן הוקרה",
+    "signInSubtitle": "התחבר לסביבת העבודה שלך"
   },
   "navigation": {
     "home": "בית",
@@ -1079,7 +1098,44 @@
       "managers": "מנהלים",
       "managersDesc": "ראשי צוותים ומפקחים",
       "admins": "מנהלי מערכת",
-      "adminsDesc": "גישה מלאה"
+      "adminsDesc": "גישה מלאה",
+      "title": "תפקידים והרשאות",
+      "subtitle": "הגדר תפקידים מותאמים וקבע לאילו תכונות יש גישה לכל תפקיד",
+      "addRole": "הוסף תפקיד מותאם",
+      "builtIn": "מובנה",
+      "custom": "מותאם אישית",
+      "roleName": "שם התפקיד",
+      "roleNamePlaceholder": "לדוגמה, מנהל משמרת",
+      "description": "תיאור",
+      "descriptionPlaceholder": "מה יכולים משתמשים בתפקיד זה לעשות?",
+      "permissions": "הרשאות",
+      "module": "מודול",
+      "permNone": "ללא",
+      "permRead": "קריאה",
+      "permWrite": "כתיבה",
+      "permAdmin": "מנהל",
+      "permissionsHelp": "ללא: אין גישה. קריאה: צפייה בלבד. כתיבה: צפייה ועריכה. מנהל: שליטה מלאה כולל מחיקה.",
+      "usersAssigned": "משתמשים משויכים",
+      "more": "עוד",
+      "edit": "ערוך תפקיד",
+      "delete": "מחק תפקיד",
+      "cannotEditBuiltIn": "לא ניתן לערוך תפקידים מובנים",
+      "cannotDeleteBuiltIn": "לא ניתן למחוק תפקידים מובנים",
+      "createRole": "צור תפקיד מותאם",
+      "editRole": "ערוך תפקיד",
+      "saveChanges": "שמור שינויים",
+      "nameRequired": "שם התפקיד נדרש",
+      "created": "התפקיד נוצר בהצלחה",
+      "updated": "התפקיד עודכן בהצלחה",
+      "deleted": "התפקיד נמחק בהצלחה",
+      "saveError": "שמירת התפקיד נכשלה",
+      "deleteError": "מחיקת התפקיד נכשלה",
+      "deleteTitle": "מחק תפקיד",
+      "deleteWarning": "האם אתה בטוח שברצונך למחוק את \"{{name}}\"?",
+      "deleteUsersWarning": "תפקיד זה משויך ל-{{count}} משתמשים. הם יחזרו להרשאות ברירת מחדל.",
+      "confirmDelete": "מחק תפקיד",
+      "infoNote": "תפקידים מותאמים מאפשרים לך ליצור בקרת גישה מדויקת. הקצה תפקידים למשתמשים מדף הפרופיל שלהם בקטע חברי הצוות.",
+      "infoNote2": "לא ניתן לשנות תפקידים מובנים (עובד, מנהל, מנהל מערכת) אך ניתן ליצור תפקידים מותאמים עם הרשאות דומות או שונות."
     },
     "features": {
       "teamSchedules": "לוחות צוות",
@@ -1179,7 +1235,64 @@
       "subtitle": "הגדרת כניסה יחידה, הקצאת SCIM ומדיניות אבטחה",
       "sessionPolicy": "מדיניות הפעלה",
       "ipWhitelistPlaceholder": "הזן כתובות IP מורשות, אחת בכל שורה",
-      "providerType": "סוג ספק"
+      "providerType": "סוג ספק",
+      "testing": "בודק...",
+      "testNoUrl": "נא להזין כתובת SSO או כתובת Metadata לבדיקה",
+      "testInvalidUrl": "נא להזין כתובת URL תקינה",
+      "testSuccess": "החיבור הצליח - התקבל metadata מספק הזהות",
+      "testFailed": "החיבור נכשל",
+      "testError": "בדיקת החיבור נכשלה - בדוק את הכתובת ונסה שוב",
+      "metadataUrl": "כתובת Metadata של ספק הזהות",
+      "metadataUrlDesc": "כתובת URL ל-XML של metadata של ספק הזהות (אופציונלי אם מזינים פרטים ידנית)",
+      "detectedEntityId": "מזהה ישות",
+      "detectedSsoUrl": "כתובת SSO",
+      "detectedProvider": "ספק",
+      "errorCode": "קוד שגיאה"
+    },
+    "rolesPermissions": "תפקידים והרשאות",
+    "portalConfig": {
+      "title": "הגדרות הפורטל",
+      "subtitle": "שלוט באילו מודולים גלויים לכל תפקיד משתמש בפורטל ובנייד",
+      "moduleVisibility": "נראות מודולים",
+      "colModule": "מודול",
+      "colWorkersPortal": "עובדים (פורטל)",
+      "colWorkersMobile": "עובדים (נייד)",
+      "colManagersPortal": "מנהלים (פורטל)",
+      "colManagersMobile": "מנהלים (נייד)",
+      "homepageWidgets": "ווידג'טים בדף הבית של העובד",
+      "homepageWidgetsSubtitle": "בחר אילו ווידג'טים יופיעו בדף הבית של העובד",
+      "widgetAnnouncements": "הודעות",
+      "widgetTeamCelebrations": "חגיגות הצוות",
+      "widgetQuickActions": "פעולות מהירות",
+      "widgetGoalsProgress": "התקדמות ביעדים",
+      "widgetLeaveBalance": "יתרת חופשה",
+      "widgetAchievements": "הישגים",
+      "widgetRecognitionFeed": "פיד הוקרה",
+      "widgetMomentumScore": "ציון מומנטום",
+      "brandingNote": "התאם את המיתוג של הפורטל בלשונית מיתוג",
+      "saveButton": "שמור הגדרות",
+      "saveSuccess": "הגדרות הפורטל נשמרו בהצלחה",
+      "saveError": "שמירת הגדרות הפורטל נכשלה",
+      "module": {
+        "dashboard": "לוח בקרה",
+        "schedule": "לוח זמנים",
+        "time-tracking": "מעקב זמן",
+        "time-off": "חופשות",
+        "momentum": "ציון מומנטום",
+        "performance": "ביצועים",
+        "skills": "כישורים",
+        "learning": "למידה",
+        "career": "קריירה / הזדמנויות",
+        "compensation": "שכר",
+        "expenses": "הוצאות",
+        "surveys": "סקרים",
+        "documents": "מסמכים",
+        "reports": "דוחות",
+        "directory": "ספר החברה",
+        "recognition": "קיר הוקרה",
+        "onboarding": "קליטה",
+        "offboarding": "פרישה"
+      }
     }
   },
   "tasks": {
@@ -1561,7 +1674,8 @@
     "tryAgain": "נסה שוב",
     "somethingWentWrong": "משהו השתבש",
     "goHome": "דף הבית",
-    "technicalDetails": "פרטים טכניים"
+    "technicalDetails": "פרטים טכניים",
+    "unexpectedError": "נתקלנו בשגיאה בלתי צפויה. הדבר נרשם ונבדוק את זה."
   },
   "activity": {
     "title": "סקירת פעילות",
@@ -2678,8 +2792,8 @@
       "customApiDesc": "בנה את האינטגרציה שלך"
     },
     "mapping": {
-      "customField1": "customField1",
-      "customField2": "customField2",
+      "customField1": "שדה מותאם 1",
+      "customField2": "שדה מותאם 2",
       "notes": "הערות"
     },
     "api": {
@@ -2813,7 +2927,8 @@
     "uploadPayslip": "העלאת תלוש שכר",
     "currentSalary": "שכר נוכחי",
     "lastReview": "סקירה אחרונה",
-    "overtime": "שעות נוספות"
+    "overtime": "שעות נוספות",
+    "myPayslips": "תלושי השכר שלי"
   },
   "learning": {
     "score": "ציון",
@@ -3037,7 +3152,8 @@
     "generateDocument": "יצירת מסמך",
     "policy": "מדיניות",
     "idDocument": "תעודה מזהה",
-    "hasRightToWork": "יש היתר עבודה"
+    "hasRightToWork": "יש היתר עבודה",
+    "myDocuments": "המסמכים שלי"
   },
   "performance": {
     "atRisk": "בסיכון",
@@ -3178,7 +3294,7 @@
     "typeQuarterly": "רבעוני",
     "typeProbation": "תקופת ניסיון",
     "goals": "מטרות",
-    "okrs": "OKRs",
+    "okrs": "יעדים ותוצאות מפתח",
     "newGoal": "מטרה חדשה",
     "newOkr": "OKR חדש",
     "noGoalsDesc": "צור את המטרה הראשונה שלך כדי להתחיל לעקוב אחר התקדמות.",
@@ -3467,7 +3583,7 @@
       "pulse": "דופק",
       "onboarding": "קליטה",
       "exit": "יציאה",
-      "dei": "DEI",
+      "dei": "גיוון והכלה",
       "manager": "יעילות מנהל",
       "anniversary": "יום שנה",
       "change": "מוכנות לשינוי"
@@ -3704,12 +3820,7 @@
     "charLimit": "הגעת למגבלת התווים",
     "sendRecognition": "שלח הכרה",
     "successMessage": "ההכרה נשלחה בהצלחה!",
-    "filters": {
-      "all": "הכל",
-      "received": "התקבל",
-      "sent": "נשלח",
-      "myTeam": "הצוות שלי"
-    },
+    "filters": "מסננים",
     "noRecognitions": "אין הכרות להצגה עבור מסנן זה.",
     "mostRecognised": "המוכרים ביותר החודש",
     "mostGenerous": "הנדיבים ביותר (נתנו)",

@@ -281,7 +281,7 @@
     "clickToViewDetails": "Klik untuk melihat butiran",
     "closeEsc": "Tutup (ESC)",
     "logoPreview": "Pratonton logo",
-    "tryAgain": "Cuba lagi",
+    "tryAgain": "Cuba Lagi",
     "selectEmployee": "Pilih pekerja...",
     "selectPerson": "Pilih orang...",
     "priority": {
@@ -338,7 +338,7 @@
       "mfaCode": "Masukkan kod 6 digit"
     },
     "demoAccess": "Akses Demo Pantas",
-    "demoAdmin": "Pentadbir HR",
+    "demoAdmin": "Admin HR",
     "demoAdminDesc": "Akses penuh platform — urus pekerja, konfigurasi tetapan, jalankan laporan",
     "demoManager": "Pengurus Jabatan",
     "demoManagerDesc": "Pengurusan pasukan — luluskan permintaan, jalankan 1-on-1, lihat prestasi pasukan",
@@ -468,7 +468,7 @@
       "analyzing": "Menganalisis jadual dan ketersediaan...",
       "consideringSkills": "Mempertimbangkan kemahiran, keutamaan dan keutamaan anda",
       "noSuggestions": "Tiada cadangan",
-      "priorityWeights": "Berat keutamaan",
+      "priorityWeights": "Pemberat keutamaan",
       "generateSchedule": "Jana jadual"
     },
     "viewModes": {
@@ -845,7 +845,7 @@
     "thisMonth": "Bulan Ini",
     "allTime": "Sepanjang Masa",
     "yourBadges": "Lencana Anda",
-    "badgesEarned": "{{count}} Lencana Diperoleh",
+    "badgesEarned": "{{count}} lencana diperoleh",
     "noBadges": "Tiada lencana diperoleh lagi",
     "earnBadges": "Selesaikan tugas untuk memperoleh lencana",
     "badgeDetails": "Butiran Lencana",
@@ -916,20 +916,20 @@
     "employeeVisibility": "Keterlihatan Pekerja",
     "users": {
       "never": "Tidak pernah",
-      "accountUnlocked": "Akaun dikunci buka",
+      "accountUnlocked": "Akaun dibuka kunci",
       "accountDeactivated": "Akaun dinyahaktifkan",
       "accountReactivated": "Akaun diaktifkan semula",
       "roleUpdated": "Peranan dikemas kini",
-      "passwordResetRequired": "Tetapan semula kata laluan diperlukan pada log masuk seterusnya",
+      "passwordResetRequired": "Penetapan semula kata laluan diperlukan pada log masuk seterusnya",
       "invitationResent": "Jemputan dihantar semula",
       "invitationCancelled": "Jemputan dibatalkan",
       "sessionsRevoked": "Semua sesi dibatalkan"
     },
     "webhooks": {
-      "viewDetails": "Lihat butiran",
-      "deleteWebhook": "Padam webhook",
-      "namePlaceholder": "cth., Pemberitahuan Slack",
-      "secretPlaceholder": "Rahsia webhook anda untuk pengesahan tandatangan"
+      "viewDetails": "Lihat Butiran",
+      "deleteWebhook": "Padam Webhook",
+      "namePlaceholder": "cth. Notifikasi Slack",
+      "secretPlaceholder": "Kunci rahsia webhook anda untuk pengesahan tandatangan"
     },
     "sessions": "Sesi",
     "organizationSettings": "Tetapan Organisasi",
@@ -1082,13 +1082,13 @@
     "contactSales": "Hubungi Jualan",
     "features": {
       "analytics": "Analitik Pasukan",
-      "analyticsDesc": "Akses analitik prestasi",
+      "analyticsDesc": "Akses ke analitik prestasi",
       "careerPaths": "Laluan Kerjaya",
       "careerPathsDesc": "Lihat laluan pembangunan kerjaya",
       "internalJobs": "Jawatan Dalaman",
-      "internalJobsDesc": "Akses iklan jawatan dalaman",
+      "internalJobsDesc": "Akses ke jawatan kosong dalaman",
       "peerRecognition": "Pengiktirafan Rakan Sekerja",
-      "peerRecognitionDesc": "Hantar dan terima penghargaan rakan sekerja",
+      "peerRecognitionDesc": "Hantar dan terima pujian daripada rakan sekerja",
       "teamSchedules": "Jadual Pasukan",
       "teamSchedulesDesc": "Lihat jadual ahli pasukan lain"
     },
@@ -1198,17 +1198,29 @@
       "subtitle": "Konfigurasi single sign-on, peruntukan SCIM, dan polisi keselamatan",
       "sessionPolicy": "Polisi Sesi",
       "ipWhitelistPlaceholder": "Masukkan alamat IP yang dibenarkan, satu setiap baris",
-      "providerType": "Jenis Pembekal"
+      "providerType": "Jenis Pembekal",
+      "testing": "Menguji...",
+      "testNoUrl": "Sila masukkan URL SSO atau URL Metadata untuk ujian",
+      "testInvalidUrl": "Sila masukkan URL yang sah",
+      "testSuccess": "Sambungan berjaya - metadata IdP diterima",
+      "testFailed": "Sambungan gagal",
+      "testError": "Ujian sambungan gagal - semak URL dan cuba lagi",
+      "metadataUrl": "URL Metadata IdP",
+      "metadataUrlDesc": "URL ke XML metadata penyedia identiti (pilihan jika memasukkan butiran secara manual)",
+      "detectedEntityId": "ID Entiti",
+      "detectedSsoUrl": "URL SSO",
+      "detectedProvider": "Pembekal",
+      "errorCode": "Kod Ralat"
     },
     "portalConfig": {
-      "brandingNote": "Sesuaikan penjenamaan portal dalam tab Penjenamaan",
+      "brandingNote": "Sesuaikan penjenamaan portal di tab Penjenamaan",
       "colManagersMobile": "Pengurus (Mudah Alih)",
       "colManagersPortal": "Pengurus (Portal)",
       "colModule": "Modul",
       "colWorkersMobile": "Pekerja (Mudah Alih)",
       "colWorkersPortal": "Pekerja (Portal)",
       "homepageWidgets": "Widget Laman Utama Pekerja",
-      "homepageWidgetsSubtitle": "Pilih widget mana yang muncul di laman utama pekerja",
+      "homepageWidgetsSubtitle": "Pilih widget yang dipaparkan di laman utama pekerja",
       "module": {
         "career": "Kerjaya / Peluang",
         "compensation": "Pampasan",
@@ -1217,9 +1229,9 @@
         "documents": "Dokumen",
         "expenses": "Perbelanjaan",
         "learning": "Pembelajaran",
-        "momentum": "Momentum Score",
+        "momentum": "Skor Momentum",
         "offboarding": "Offboarding",
-        "onboarding": "Onboarding",
+        "onboarding": "Orientasi",
         "performance": "Prestasi",
         "recognition": "Dinding Pengiktirafan",
         "reports": "Laporan",
@@ -1233,16 +1245,16 @@
       "saveButton": "Simpan Konfigurasi",
       "saveError": "Gagal menyimpan konfigurasi portal",
       "saveSuccess": "Konfigurasi portal berjaya disimpan",
-      "subtitle": "Kawal modul mana yang kelihatan untuk setiap peranan pengguna merentasi portal dan mudah alih",
+      "subtitle": "Kawal keterlihatan modul untuk setiap peranan di portal dan mudah alih",
       "title": "Konfigurasi Portal",
       "widgetAchievements": "Pencapaian",
       "widgetAnnouncements": "Pengumuman",
       "widgetGoalsProgress": "Kemajuan Matlamat",
       "widgetLeaveBalance": "Baki Cuti",
-      "widgetMomentumScore": "Momentum Score",
+      "widgetMomentumScore": "Skor Momentum",
       "widgetQuickActions": "Tindakan Pantas",
       "widgetRecognitionFeed": "Suapan Pengiktirafan",
-      "widgetTeamCelebrations": "Sambutan Pasukan"
+      "widgetTeamCelebrations": "Perayaan Pasukan"
     }
   },
   "tasks": {
@@ -1377,7 +1389,8 @@
     "toLocation": "Ke",
     "takePhoto": "Ambil Gambar",
     "currency": "Mata Wang",
-    "budget": "Bajet"
+    "budget": "Bajet",
+    "copyToNew": "Salin ke Baharu"
   },
   "rewards": {
     "title": "Ganjaran",
@@ -1453,7 +1466,8 @@
       "roleDepartment": "Peranan dan Jabatan",
       "skillsCerts": "Kemahiran dan Sijil",
       "availability": "Ketersediaan",
-      "invitation": "Jemputan"
+      "invitation": "Jemputan",
+      "position": "Jawatan"
     },
     "selectType": "Pilih jenis...",
     "selectDepartment": "Pilih jabatan...",
@@ -1624,7 +1638,8 @@
     "tryAgain": "Sila cuba lagi",
     "somethingWentWrong": "Sesuatu tidak kena",
     "goHome": "Ke Laman Utama",
-    "technicalDetails": "Butiran Teknikal"
+    "technicalDetails": "Butiran Teknikal",
+    "unexpectedError": "Ralat tidak dijangka berlaku. Ini telah dilog dan akan disiasat."
   },
   "activity": {
     "title": "Semakan Aktiviti",
@@ -1729,7 +1744,7 @@
     "buildReport": "Bina Laporan",
     "export": "Eksport",
     "exportCsv": "Eksport sebagai CSV",
-    "exportExcel": "Eksport sebagai Excel",
+    "exportExcel": "Excel",
     "exportPdf": "Eksport sebagai PDF",
     "savedReports": "Laporan Tersimpan",
     "hoursWorked": "Jam Bekerja",
@@ -1745,7 +1760,7 @@
     "startDate": "Tarikh Mula",
     "endDate": "Tarikh Tamat",
     "allLocations": "Semua Lokasi",
-    "groupBy": "Kumpul Mengikut",
+    "groupBy": "Kumpulkan Mengikut",
     "employee": "Pekerja",
     "day": "Hari",
     "week": "Minggu",
@@ -1831,7 +1846,33 @@
     "reportType": "Jenis Laporan",
     "savedReportsLocal": "Laporan yang disimpan disimpan secara setempat. Penyimpanan laporan kekal akan datang tidak lama lagi.",
     "sortBy": "Isih Mengikut",
-    "trendOverTime": "Trend Dari Masa ke Masa"
+    "trendOverTime": "Trend Dari Masa ke Masa",
+    "reportTypes": {
+      "scheduling": "Penjadualan",
+      "schedulingDesc": "Analisis syif dan kos buruh",
+      "timeAndAttendance": "Masa dan Kehadiran",
+      "timeAndAttendanceDesc": "Waktu kerja dan ketidakhadiran",
+      "skills": "Kemahiran dan Kecekapan",
+      "skillsDesc": "Penjejakan dan analisis kecekapan",
+      "workforce": "Perancangan Tenaga Kerja",
+      "workforceDesc": "Bilangan pekerja dan ramalan"
+    },
+    "exportFormat": "Format Eksport",
+    "exportPDF": "PDF",
+    "exportCSV": "CSV",
+    "scheduleEmail": "Jadualkan Emel",
+    "download": "Muat Turun",
+    "recentReports": {
+      "description": "Laporan terbaru yang dijana"
+    },
+    "quickReports": {
+      "scheduledOvertime": "Lebih Masa Terjadual",
+      "timeOffUtilization": "Penggunaan Cuti",
+      "skillCompliance": "Pematuhan Kemahiran"
+    },
+    "filterByDepartment": "Tapis mengikut jabatan",
+    "filterByLocation": "Tapis mengikut lokasi",
+    "dateRange": "Julat Tarikh"
   },
   "accessibility": {
     "menu": "Menu",
@@ -1844,7 +1885,8 @@
     "loaded": "Dimuatkan",
     "error": "Ralat",
     "required": "Diperlukan",
-    "optional": "Pilihan"
+    "optional": "Pilihan",
+    "reducedMotion": "Kurangkan Gerakan"
   },
   "shiftTemplates": {
     "title": "Templat Syif",
@@ -1853,9 +1895,9 @@
     "editTemplate": "Sunting Templat",
     "accessRestricted": "Akses Terhad",
     "managersOnly": "Hanya pengurus boleh mengakses templat syif",
-    "noTemplates": "Tiada templat lagi",
+    "noTemplates": "Belum ada templat syif",
     "createHint": "Cipta templat untuk menjana syif berulang dengan cepat",
-    "createFirst": "Cipta Templat Pertama",
+    "createFirst": "Cipta templat pertama anda untuk mempercepatkan penjadualan",
     "shiftsPerDay": "syif sehari",
     "generateShifts": "Jana Syif",
     "templateName": "Nama Templat",
@@ -1898,7 +1940,22 @@
     "allDays": "All days",
     "failedDelete": "Gagal memadam templat",
     "failedSave": "Gagal menyimpan templat",
-    "shiftsGenerated": "Syif berjaya dijana!"
+    "shiftsGenerated": "Syif berjaya dijana!",
+    "createTemplate": "Cipta Templat",
+    "startTime": "Masa Mula",
+    "endTime": "Masa Tamat",
+    "breakDuration": "Tempoh Rehat",
+    "days": "Hari",
+    "applyToSchedule": "Gunakan pada Jadual",
+    "edit": "Edit",
+    "delete": "Padam",
+    "duplicate": "Duplikat",
+    "save": "Simpan Templat",
+    "cancel": "Batal",
+    "role": "Peranan",
+    "location": "Lokasi",
+    "department": "Jabatan",
+    "color": "Warna"
   },
   "legal": {
     "lastUpdated": "Terakhir dikemas kini",
@@ -2010,11 +2067,13 @@
       "emailLabel": "E-mel:",
       "addressLabel": "Alamat:",
       "address": "London, United Kingdom"
-    }
+    },
+    "privacyPolicy": "Dasar Privasi",
+    "termsOfService": "Terma Perkhidmatan"
   },
   "dateTime": {
-    "am": "PG",
-    "pm": "PTG",
+    "am": "pagi",
+    "pm": "petang",
     "hours": "jam",
     "minutes": "minit",
     "seconds": "saat",
@@ -2025,7 +2084,7 @@
     "ago": "lalu",
     "in": "dalam",
     "justNow": "Baru sahaja",
-    "today": "Hari Ini",
+    "today": "Hari ini",
     "tomorrow": "Esok",
     "yesterday": "Semalam",
     "monday": "Isnin",
@@ -2061,7 +2120,7 @@
     "selectType": "Pilih Jenis",
     "uploadFile": "Muat Naik Fail",
     "preview": "Pratonton",
-    "complete": "Selesai",
+    "complete": "Import Selesai",
     "invalidFileType": "Sila muat naik fail CSV atau Excel",
     "importFailed": "Import gagal. Sila cuba lagi.",
     "uploadFor": "Muat Naik",
@@ -2102,7 +2161,11 @@
       "locationsDesc": "Import locations",
       "skills": "Skills",
       "skillsDesc": "Import skills"
-    }
+    },
+    "templateDesc": "Gunakan templat ini untuk menyusun data pekerja",
+    "processing": "Memproses...",
+    "errors": "Ralat",
+    "success": "Berjaya"
   },
   "jobs": {
     "open": "Terbuka",
@@ -2143,7 +2206,10 @@
       "edinburgh": "Grand Metro Edinburgh",
       "glasgow": "Grand Metro Glasgow",
       "manchester": "Grand Metro Manchester"
-    }
+    },
+    "closeJob": "Tutup Jawatan",
+    "reopenJob": "Buka Semula Jawatan",
+    "editJob": "Edit Jawatan"
   },
   "employees": {
     "searchPlaceholder": "Cari mengikut nama atau e-mel...",
@@ -2165,7 +2231,11 @@
     "failedRemoveSkill": "Gagal mengalih keluar kemahiran",
     "failedUpdateSkillLevel": "Gagal mengemas kini tahap kemahiran",
     "failedVerifySkill": "Gagal mengesahkan kemahiran",
-    "loadEmployeeError": "Gagal memuatkan pekerja"
+    "loadEmployeeError": "Gagal memuatkan pekerja",
+    "terminateEmployee": "Tamatkan Pekerja",
+    "reactivate": "Aktifkan Semula",
+    "viewProfile": "Lihat Profil",
+    "editEmployee": "Edit Pekerja"
   },
   "integrationHub": {
     "title": "Hab Integrasi",
@@ -2207,7 +2277,11 @@
       "settings": "Tetapan",
       "fieldMapping": "Pemetaan Medan",
       "syncHistory": "Sejarah Penyegerakan",
-      "webhooks": "Webhooks"
+      "webhooks": "Webhooks",
+      "request": "Permintaan",
+      "authentication": "Pengesahan",
+      "trigger": "Pencetus",
+      "test": "Ujian"
     },
     "connection": {
       "lastSync": "Penyegerakan Terakhir",
@@ -2339,11 +2413,17 @@
     },
     "placeholder": {
       "search": "Search integrations..."
+    },
+    "testSuccess": "Ujian sambungan berjaya",
+    "testFailed": "Ujian sambungan gagal",
+    "logs": {
+      "executionLogs": "Log Pelaksanaan",
+      "export": "Eksport"
     }
   },
   "apiFactory": {
-    "title": "Kilang API",
-    "subtitle": "Bina integrasi REST API tersuai tanpa menulis kod",
+    "title": "Integrasi API",
+    "subtitle": "Cipta integrasi API tersuai untuk berhubung dengan sistem luaran",
     "newIntegration": "Integrasi Baharu",
     "searchPlaceholder": "Cari integrasi...",
     "loadingIntegrations": "Memuatkan integrasi...",
@@ -2462,7 +2542,10 @@
       "apiName": "API name",
       "baseUrl": "Base URL",
       "apiKey": "API key"
-    }
+    },
+    "noIntegrations": "Belum ada integrasi API",
+    "createFirst": "Cipta integrasi API tersuai pertama anda",
+    "edit": "Edit"
   },
   "restApiKeys": {
     "title": "Kunci REST API",
@@ -2539,7 +2622,7 @@
     }
   },
   "orgOnboarding": {
-    "title": "Persediaan Organisasi",
+    "title": "Penyediaan Organisasi",
     "subtitle": "Mari konfigurasikan organisasi anda",
     "steps": {
       "orgDetails": "Butiran Organisasi",
@@ -2547,11 +2630,11 @@
       "departments": "Jabatan",
       "roles": "Peranan & Kebenaran",
       "review": "Semak & Lancarkan",
-      "companyInfo": "Company Info",
-      "branding": "Branding & Timezone",
-      "inviteAdmin": "Invite Admin",
-      "addEmployees": "Add Employees",
-      "done": "Done"
+      "companyInfo": "Maklumat Syarikat",
+      "branding": "Penjenamaan & Zon Masa",
+      "inviteAdmin": "Jemput Admin",
+      "addEmployees": "Tambah Pekerja",
+      "done": "Selesai"
     },
     "orgDetails": {
       "companyName": "Nama Syarikat",
@@ -2630,115 +2713,115 @@
       "skip": "Langkau buat masa ini",
       "finish": "Selesaikan Persediaan"
     },
-    "selectIndustry": "Select industry...",
-    "selectTimezone": "Select timezone...",
-    "selectSize": "Select company size...",
-    "selectCountry": "Select country...",
-    "selectCurrency": "Select currency...",
+    "selectIndustry": "Pilih industri...",
+    "selectTimezone": "Pilih zon masa...",
+    "selectSize": "Pilih saiz syarikat...",
+    "selectCountry": "Pilih negara...",
+    "selectCurrency": "Pilih mata wang...",
     "industries": {
-      "retail": "Retail",
-      "hospitality": "Hospitality",
-      "healthcare": "Healthcare",
-      "manufacturing": "Manufacturing",
-      "construction": "Construction",
-      "logistics": "Logistics",
-      "foodBeverage": "Food & Beverage",
-      "education": "Education",
-      "technology": "Technology",
-      "finance": "Finance",
-      "government": "Government",
-      "nonprofit": "Non-profit",
-      "other": "Other"
+      "retail": "Runcit",
+      "hospitality": "Hospitaliti",
+      "healthcare": "Penjagaan Kesihatan",
+      "manufacturing": "Pembuatan",
+      "construction": "Pembinaan",
+      "logistics": "Logistik",
+      "foodBeverage": "Makanan & Minuman",
+      "education": "Pendidikan",
+      "technology": "Teknologi",
+      "finance": "Kewangan",
+      "government": "Kerajaan",
+      "nonprofit": "Bukan Untung",
+      "other": "Lain-lain"
     }
   },
   "locations": {
     "placeholder": {
-      "search": "Search locations...",
-      "name": "Location name",
-      "address": "Address"
+      "search": "Cari lokasi...",
+      "name": "Nama lokasi",
+      "address": "Alamat"
     },
-    "loadError": "Failed to load locations. Please try again.",
-    "codePlaceholder": "LON-01",
-    "noEmployeesAssigned": "No employees assigned to this location"
+    "loadError": "Gagal memuatkan lokasi. Sila cuba lagi.",
+    "codePlaceholder": "KL-01",
+    "noEmployeesAssigned": "Tiada pekerja ditugaskan ke lokasi ini"
   },
   "integrations": {
     "placeholder": {
       "search": "Search integrations..."
     },
     "scopes": {
-      "employeesRead": "View employee information",
-      "employeesWrite": "Create and update employees",
-      "schedulesRead": "View schedules and shifts",
-      "schedulesWrite": "Create and modify schedules",
-      "timeRead": "View time entries",
-      "timeWrite": "Create and modify time entries",
-      "skillsRead": "View skills and certifications",
-      "skillsWrite": "Manage skills and verifications",
-      "locationsRead": "View location information",
-      "locationsWrite": "Manage locations",
-      "reportsRead": "Access reports data",
-      "webhooksManage": "Configure webhooks",
-      "admin": "Full administrative access"
+      "employeesRead": "Lihat maklumat pekerja",
+      "employeesWrite": "Cipta dan kemas kini pekerja",
+      "schedulesRead": "Lihat jadual dan syif",
+      "schedulesWrite": "Cipta dan ubah jadual",
+      "timeRead": "Lihat entri masa",
+      "timeWrite": "Cipta dan ubah entri masa",
+      "skillsRead": "Lihat kemahiran dan pensijilan",
+      "skillsWrite": "Urus kemahiran dan pengesahan",
+      "locationsRead": "Lihat maklumat lokasi",
+      "locationsWrite": "Urus lokasi",
+      "reportsRead": "Akses data laporan",
+      "webhooksManage": "Konfigurasikan webhook",
+      "admin": "Akses pentadbiran penuh"
     },
     "rateLimits": {
       "basic": "Basic",
       "standard": "Standard",
       "premium": "Premium"
     },
-    "copied": "Copied!",
-    "copy": "Copy",
-    "loadError": "Failed to load integrations",
+    "copied": "Disalin!",
+    "copy": "Salin",
+    "loadError": "Gagal memuatkan integrasi",
     "apiKeyPlaceholder": "e.g., Production API Key",
     "categories": {
       "hris": "HRIS",
-      "hrisDesc": "Human Resource Information Systems",
-      "payroll": "Payroll",
-      "payrollDesc": "Payroll & compensation",
-      "comms": "Communications",
-      "commsDesc": "Team messaging & notifications",
-      "identity": "Identity & SSO",
-      "identityDesc": "Single sign-on & provisioning",
-      "time": "Time & Attendance",
-      "timeDesc": "Time tracking systems",
+      "hrisDesc": "Sistem Maklumat Sumber Manusia",
+      "payroll": "Gaji",
+      "payrollDesc": "Gaji & pampasan",
+      "comms": "Komunikasi",
+      "commsDesc": "Pemesejan pasukan & pemberitahuan",
+      "identity": "Identiti & SSO",
+      "identityDesc": "Log masuk tunggal & peruntukan",
+      "time": "Masa & Kehadiran",
+      "timeDesc": "Sistem penjejakan masa",
       "pos": "Point of Sale",
-      "posDesc": "POS & retail systems",
-      "scheduling": "Migration",
-      "schedulingDesc": "Import from other tools",
-      "learning": "Learning",
-      "learningDesc": "Training & certifications",
-      "analytics": "Analytics",
-      "analyticsDesc": "BI & reporting tools",
-      "custom": "Custom",
-      "customDesc": "API & automation"
+      "posDesc": "Sistem POS & runcit",
+      "scheduling": "Migrasi",
+      "schedulingDesc": "Import dari alat lain",
+      "learning": "Pembelajaran",
+      "learningDesc": "Latihan & pensijilan",
+      "analytics": "Analitik",
+      "analyticsDesc": "Alat BI & pelaporan",
+      "custom": "Tersuai",
+      "customDesc": "API & automasi"
     },
     "providers": {
-      "hibobDesc": "Modern HR platform for mid-size businesses",
-      "workdayDesc": "Enterprise HCM and finance platform",
-      "sapSuccessfactorsDesc": "Enterprise talent management",
-      "bamboohrDesc": "HR software for SMBs",
-      "personioDesc": "European HR platform",
-      "sageHrDesc": "UK HR & people management",
-      "adpDesc": "Enterprise payroll & HR services",
-      "paychexDesc": "Payroll & HR solutions",
-      "gustoDesc": "Modern payroll for small business",
-      "xeroDesc": "Cloud accounting with payroll",
-      "sagePayrollDesc": "UK payroll software",
-      "slackDesc": "Team collaboration & notifications",
-      "microsoftTeamsDesc": "Microsoft 365 collaboration",
-      "whatsappBusinessDesc": "Direct worker messaging",
-      "googleWorkspaceDesc": "Google SSO & directory sync",
+      "hibobDesc": "Platform HR moden untuk perniagaan sederhana",
+      "workdayDesc": "Platform HCM dan kewangan perusahaan",
+      "sapSuccessfactorsDesc": "Pengurusan bakat perusahaan",
+      "bamboohrDesc": "Perisian HR untuk PKS",
+      "personioDesc": "Platform HR Eropah",
+      "sageHrDesc": "HR & pengurusan pekerja UK",
+      "adpDesc": "Perkhidmatan gaji & HR perusahaan",
+      "paychexDesc": "Penyelesaian gaji & HR",
+      "gustoDesc": "Gaji moden untuk perniagaan kecil",
+      "xeroDesc": "Perakaunan awan dengan gaji",
+      "sagePayrollDesc": "Perisian gaji UK",
+      "slackDesc": "Kerjasama pasukan & pemberitahuan",
+      "microsoftTeamsDesc": "Kerjasama Microsoft 365",
+      "whatsappBusinessDesc": "Pemesejan terus pekerja",
+      "googleWorkspaceDesc": "Google SSO & segerakan direktori",
       "microsoftEntraDesc": "Azure AD SSO & SCIM",
-      "oktaDesc": "Enterprise identity management",
-      "squareDesc": "POS & team management",
-      "lightspeedDesc": "Retail & hospitality POS",
-      "deputyDesc": "Import from Deputy",
-      "connecteamDesc": "Import from Connecteam",
-      "kronosDesc": "Enterprise workforce management",
-      "linkedinLearningDesc": "Training completion sync",
-      "powerBiDesc": "Export to Power BI",
-      "lookerDesc": "BI data export",
-      "zapierDesc": "5,000+ app connections",
-      "customApiDesc": "Build your own integration"
+      "oktaDesc": "Pengurusan identiti perusahaan",
+      "squareDesc": "POS & pengurusan pasukan",
+      "lightspeedDesc": "POS runcit & hospitaliti",
+      "deputyDesc": "Import dari Deputy",
+      "connecteamDesc": "Import dari Connecteam",
+      "kronosDesc": "Pengurusan tenaga kerja perusahaan",
+      "linkedinLearningDesc": "Segerakkan penyiapan latihan",
+      "powerBiDesc": "Eksport ke Power BI",
+      "lookerDesc": "Eksport data BI",
+      "zapierDesc": "5,000+ sambungan aplikasi",
+      "customApiDesc": "Bina integrasi anda sendiri"
     },
     "mapping": {
       "customField1": "customField1",
@@ -2746,48 +2829,48 @@
       "notes": "notes"
     },
     "api": {
-      "authNone": "No Authentication",
-      "authApiKey": "API Key",
-      "authBearer": "Bearer Token",
-      "authBasic": "Basic Auth",
+      "authNone": "Tiada Pengesahan",
+      "authApiKey": "Kunci API",
+      "authBearer": "Token Bearer",
+      "authBasic": "Pengesahan Asas",
       "authOAuth2": "OAuth 2.0",
       "triggerManual": "Manual",
-      "triggerManualDesc": "Run on demand",
-      "triggerScheduled": "Scheduled",
-      "triggerScheduledDesc": "Run on a schedule",
-      "triggerEvent": "Event-based",
-      "triggerEventDesc": "Triggered by Uplift events",
-      "triggerWebhook": "Incoming Webhook",
-      "triggerWebhookDesc": "Receive data from external systems",
+      "triggerManualDesc": "Jalankan atas permintaan",
+      "triggerScheduled": "Terjadual",
+      "triggerScheduledDesc": "Jalankan mengikut jadual",
+      "triggerEvent": "Berasaskan Acara",
+      "triggerEventDesc": "Dicetuskan oleh acara Uplift",
+      "triggerWebhook": "Webhook Masuk",
+      "triggerWebhookDesc": "Terima data dari sistem luaran",
       "scopePlaceholder": "read,write",
-      "saveFirstBeforeTesting": "Save the integration first before testing",
-      "testRequestFailed": "Test request failed"
+      "saveFirstBeforeTesting": "Simpan integrasi dahulu sebelum menguji",
+      "testRequestFailed": "Permintaan ujian gagal"
     },
     "events": {
-      "employeeCreated": "Employee Created",
-      "employeeUpdated": "Employee Updated",
-      "employeeDeactivated": "Employee Deactivated",
-      "shiftCreated": "Shift Created",
-      "shiftUpdated": "Shift Updated",
-      "shiftDeleted": "Shift Deleted",
-      "shiftClaimed": "Shift Claimed",
-      "clockIn": "Clock In",
-      "clockOut": "Clock Out",
-      "timeEntryApproved": "Time Entry Approved",
-      "timeOffRequested": "Time Off Requested",
-      "timeOffApproved": "Time Off Approved",
-      "timeOffRejected": "Time Off Rejected",
-      "skillVerified": "Skill Verified",
-      "jobApplication": "Job Application",
-      "categoryEmployees": "Employees",
-      "categoryScheduling": "Scheduling",
-      "categoryTimeTracking": "Time Tracking",
-      "categoryTimeOff": "Time Off",
-      "categorySkills": "Skills",
-      "categoryCareer": "Career"
+      "employeeCreated": "Pekerja Dicipta",
+      "employeeUpdated": "Pekerja Dikemas Kini",
+      "employeeDeactivated": "Pekerja Dinyahaktifkan",
+      "shiftCreated": "Syif Dicipta",
+      "shiftUpdated": "Syif Dikemas Kini",
+      "shiftDeleted": "Syif Dipadam",
+      "shiftClaimed": "Syif Dituntut",
+      "clockIn": "Daftar Masuk",
+      "clockOut": "Daftar Keluar",
+      "timeEntryApproved": "Entri Masa Diluluskan",
+      "timeOffRequested": "Cuti Diminta",
+      "timeOffApproved": "Cuti Diluluskan",
+      "timeOffRejected": "Cuti Ditolak",
+      "skillVerified": "Kemahiran Disahkan",
+      "jobApplication": "Permohonan Kerja",
+      "categoryEmployees": "Pekerja",
+      "categoryScheduling": "Penjadualan",
+      "categoryTimeTracking": "Penjejakan Masa",
+      "categoryTimeOff": "Cuti",
+      "categorySkills": "Kemahiran",
+      "categoryCareer": "Kerjaya"
     },
-    "noIntegrationsFound": "No integrations found",
-    "noIntegrationsAvailable": "No integrations are available yet.",
+    "noIntegrationsFound": "Integrasi tidak dijumpai",
+    "noIntegrationsAvailable": "Belum ada integrasi yang tersedia.",
     "noApiKeys": "No API keys",
     "createApiKeyToStart": "Create an API key to get started with the API."
   },
@@ -2876,7 +2959,7 @@
     "uploadPayslip": "Muat Naik Slip Gaji",
     "currentSalary": "Gaji Semasa",
     "lastReview": "Semakan Terakhir",
-    "overtime": "Kerja Lebih Masa",
+    "overtime": "Lebih Masa",
     "myPayslips": "Slip Gaji Saya"
   },
   "learning": {
@@ -3201,12 +3284,12 @@
     "inReview": "Sedang Disemak",
     "mySubtitle": "Ulasan, matlamat, dan pembangunan anda",
     "myTitle": "Prestasi Saya",
-    "subtitle": "Reviews, goals, feedback, and employee development",
-    "noDepartment": "No department",
-    "selfBadge": "Self",
-    "managerBadge": "Manager",
-    "peerBadge": "Peer",
-    "noReviewsYet": "No performance reviews",
+    "subtitle": "Ulasan, matlamat, maklum balas, dan pembangunan pekerja",
+    "noDepartment": "Tiada jabatan",
+    "selfBadge": "Diri",
+    "managerBadge": "Pengurus",
+    "peerBadge": "Rakan Sekerja",
+    "noReviewsYet": "Tiada ulasan prestasi",
     "createCycleBtn": "Cipta Kitaran",
     "createOkrTitle": "Cipta OKR",
     "createGoalTitle": "Cipta Matlamat",
@@ -3229,12 +3312,12 @@
     "reading": "Bacaan",
     "otherAction": "Lain-lain",
     "addAction": "+ Tambah Tindakan",
-    "noReviewsDesc": "Create your first review cycle to start evaluating employee performance.",
-    "createFirstReview": "Start First Review Cycle",
-    "upcomingMeetings": "Upcoming 1-on-1s",
-    "allCycles": "Review Cycles",
-    "newCycle": "New Cycle",
-    "participants": "Participants",
+    "noReviewsDesc": "Cipta kitaran ulasan pertama anda untuk mula menilai prestasi pekerja.",
+    "createFirstReview": "Mulakan Kitaran Ulasan Pertama",
+    "upcomingMeetings": "1-on-1 Akan Datang",
+    "allCycles": "Kitaran Ulasan",
+    "newCycle": "Kitaran Baharu",
+    "participants": "Peserta",
     "noParticipants": "No participants added yet",
     "statusDraft": "Draft",
     "statusActive": "Active",
@@ -3504,7 +3587,7 @@
       "startDate": "Tarikh Mula",
       "endDate": "Tarikh Tamat",
       "reminderFrequency": "Kekerapan Peringatan",
-      "noReminders": "Tiada peringatan",
+      "noReminders": "Tiada Peringatan",
       "daily": "Harian",
       "every3Days": "Setiap 3 hari",
       "weekly": "Mingguan",
@@ -3588,15 +3671,15 @@
     "lifecycle": {
       "onboarding": {
         "title": "Tinjauan Pengenalan",
-        "subtitle": "Semakan automatik pada 30, 60, dan 90 hari",
+        "subtitle": "Semakan automatik pada hari ke-30, 60, dan 90",
         "30days": "30 hari",
         "60days": "60 hari",
         "90days": "90 hari",
-        "trend": "Kepuasan meningkat merentasi pencapaian pengenalan"
+        "trend": "Kepuasan meningkat di seluruh pencapaian orientasi"
       },
       "exit": {
         "title": "Tinjauan Keluar",
-        "subtitle": "Dihantar automatik apabila pekerja ditandakan sebagai meninggalkan",
+        "subtitle": "Dihantar secara automatik apabila pekerja ditandakan akan keluar",
         "completed": "Selesai",
         "avgSat": "Purata Kepuasan",
         "topReasons": "Sebab Utama Meninggalkan",
@@ -3604,11 +3687,11 @@
         "growth": "Pertumbuhan kerjaya terhad",
         "management": "Isu pengurusan",
         "worklife": "Keseimbangan kerja-kehidupan",
-        "other": "Lain-lain / Peribadi"
+        "other": "Lain-lain / peribadi"
       },
       "anniversary": {
         "title": "Tinjauan Ulang Tahun",
-        "subtitle": "Semakan pencapaian pada 1, 3, dan 5 tahun",
+        "subtitle": "Semakan pencapaian pada tahun ke-1, 3, dan 5",
         "1year": "Tahun 1",
         "3years": "3 Tahun",
         "5years": "5 Tahun",
@@ -3678,7 +3761,7 @@
     "phone": "Telefon",
     "status": "Status",
     "orgChartHint": "Klik nod untuk melihat butiran. Kembangkan atau runtuhkan garis pelaporan.",
-    "noOrgData": "Tiada carta organisasi tersedia"
+    "noOrgData": "Tiada struktur organisasi tersedia"
   },
   "momentum": {
     "attendance": "Kehadiran",
@@ -3735,8 +3818,8 @@
     "departmentComparison": "Perbandingan Jabatan",
     "scoreTrendByDept": "Trend skor mengikut jabatan",
     "yourMomentumScore": "Skor Momentum Anda",
-    "topTeam": "15% teratas dalam pasukan anda",
-    "topDept": "25% teratas dalam jabatan Front of House",
+    "topTeam": "Top 25% pasukan anda",
+    "topDept": "Top 15% jabatan Kaunter Hadapan",
     "sixMonthHistory": "Sejarah 6 bulan",
     "componentBreakdown": "Pecahan Komponen",
     "monthlyHistory": "Sejarah Bulanan",
@@ -3859,10 +3942,10 @@
     "nextShift": "Syif Seterusnya",
     "nextShiftLocation": "The Grand Hotel, Restoran Utama",
     "nextShiftRole": "Front of House",
-    "nextShiftTime": "Esok, 7:00 PG — 3:00 PTG",
+    "nextShiftTime": "Esok, 07:00 - 15:00",
     "overdueTraining": "Keselamatan Kebakaran — tarikh akhir 10 Feb",
     "pendingActions": "Tindakan Tertunda",
-    "pendingCount": "3 perkara perlu perhatian",
+    "pendingCount": "3 item memerlukan perhatian",
     "pendingDocument": "1 dokumen untuk ditandatangani",
     "pendingExpense": "1 perbelanjaan tertunda",
     "pendingTraining": "1 latihan tertunggak",
@@ -3991,8 +4074,8 @@
     "externalProvider": "Pembekal Luar"
   },
   "offline": {
-    "youAreOffline": "You're offline. Some features may be limited.",
-    "backOnline": "Back online"
+    "youAreOffline": "Anda sedang luar talian. Sesetengah ciri terhad.",
+    "backOnline": "Anda kembali dalam talian"
   },
   "myLearning": {
     "title": "Pembelajaran Saya",
@@ -4073,7 +4156,7 @@
       "noExports": "Tiada eksport lagi",
       "csv": "CSV",
       "exportTitle": "Eksport ke Gaji",
-      "exportWarning": "Tuntutan akan ditandakan sebagai dibayar dan tidak boleh diubah suai selepas eksport.",
+      "exportWarning": "Tuntutan akan ditandakan sebagai dibayar dan tidak boleh diubah selepas eksport.",
       "confirmExport": "Eksport"
     },
     "cards": {
@@ -4081,7 +4164,7 @@
       "connectionsDesc": "Sambungkan akaun kad kredit melalui TrueLayer",
       "connect": "Sambungkan Bank",
       "noConnections": "Tiada sambungan bank",
-      "noConnectionsDesc": "Sambungkan HSBC atau bank lain yang disokong melalui TrueLayer",
+      "noConnectionsDesc": "Sambungkan HSBC atau bank disokong lain melalui TrueLayer",
       "connected": "Disambungkan",
       "active": "Aktif",
       "expired": "Tamat Tempoh",
@@ -4101,6 +4184,11 @@
     "type": "Type",
     "typeYourName": "Type your full name",
     "drawAboveLine": "Draw your signature above the line",
-    "captured": "Signature captured"
+    "captured": "Signature captured",
+    "clear": "Padam",
+    "save": "Simpan Tandatangan",
+    "instruction": "Tandatangan di kawasan di bawah",
+    "penColor": "Warna Pen",
+    "saved": "Tandatangan berjaya disimpan"
   }
 }
