@@ -10,7 +10,7 @@ import { api, authApi, featuresApi, DEMO_MODE } from './api';
 const AuthContext = createContext(null);
 
 // Public paths that don't require authentication
-const PUBLIC_PATHS = ['/login', '/terms', '/privacy', '/register', '/forgot-password', '/reset-password'];
+const PUBLIC_PATHS = ['/login', '/auto-login', '/terms', '/privacy', '/register', '/forgot-password', '/reset-password'];
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);

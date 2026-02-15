@@ -58,6 +58,9 @@ import Directory from './pages/Directory';
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
+// Demo auto-login
+import AutoLogin from './pages/AutoLogin';
+
 export default function App() {
   const { loading } = useAuth();
 
@@ -80,6 +83,7 @@ export default function App() {
     <Routes>
       {/* Public routes */}
       <Route path="/login" element={<Login />} />
+      <Route path="/auto-login" element={<AutoLogin />} />
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
 
