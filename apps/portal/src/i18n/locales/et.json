@@ -1131,7 +1131,7 @@
       "saveError": "Failed to Salvesta role",
       "deleteError": "Failed to Kustuta role",
       "deleteTitle": "Kustuta Role",
-      "deleteWarning": "Are you sure you want to Kustuta \"{{Nimi}}\"?",
+      "deleteWarning": "Are you sure you want to Kustuta \"{{name}}\"?",
       "deleteUsersWarning": "This role is assigned to {{count}} users. They will revert to default permissions.",
       "confirmDelete": "Kustuta Role",
       "infoNote": "Custom roles allow you to create fine-grained access control. Assign roles to users from their profile page in the Team Members section.",

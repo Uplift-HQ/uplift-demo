@@ -1111,7 +1111,7 @@
       "deleteError": "Failed প্রতি মুছুন ভূমিকা",
       "deleteTitle": "মুছুন ভূমিকা",
       "deleteUsersWarning": "This ভূমিকা is assigned প্রতি {{count}} ব্যবহারকারীগণ. They will revert প্রতি default permissions.",
-      "deleteWarning": "Are you sure you want প্রতি মুছুন \"{{নাম}}\"?",
+      "deleteWarning": "Are you sure you want প্রতি মুছুন \"{{name}}\"?",
       "deleted": "ভূমিকা deleted successfully",
       "description": "বিবরণ",
       "descriptionPlaceholder": "কি can ব্যবহারকারীগণ সাথে this ভূমিকা do?",

@@ -626,9 +626,9 @@
       "annualleave": "Ferie",
       "sickleaveshort": "Sygeorlov"
     },
-    "approvedFor": "Tid Fra Godkendt for {{Navn}}",
+    "approvedFor": "Tid Fra Godkendt for {{name}}",
     "approveError": "Failed Til Godkend Anmodning. Venligst try again.",
-    "rejectedFor": "Tid Fra Afvist for {{Navn}}",
+    "rejectedFor": "Tid Fra Afvist for {{name}}",
     "rejectError": "Failed Til Afvis Anmodning. Venligst try again.",
     "noPendingRequests": "Nej Afventer time-off Anmodninger",
     "requestsWillAppear": "Time-off Anmodninger will appear here when Medarbejdere Indsend them",
@@ -1131,7 +1131,7 @@
       "saveError": "Failed Til Gem Rolle",
       "deleteError": "Failed Til Slet Rolle",
       "deleteTitle": "Slet Rolle",
-      "deleteWarning": "Are you sure you want Til Slet \"{{Navn}}\"?",
+      "deleteWarning": "Are you sure you want Til Slet \"{{name}}\"?",
       "deleteUsersWarning": "This Rolle is Tildelt Til {{count}} Brugere. They will revert Til Standard permissions.",
       "confirmDelete": "Slet Rolle",
       "infoNote": "Custom Roller allow you Til Opret fine-grained access control. Tildel Roller Til Brugere Fra their Profil page i the Team Medlemmer section.",
@@ -1627,7 +1627,7 @@
     "templatesDesc": "Reusable Skabeloner for Forskellig onboarding workflows",
     "default": "Standard",
     "taskCount": "{{count}} Opgaver",
-    "lastUpdated": "Opdateret {{Dato}}",
+    "lastUpdated": "Opdateret {{date}}",
     "templateTasks": "Skabelonopgaver",
     "createTemplate": "Opret skabelon",
     "createTemplateTitle": "Opret onboarding-skabelon",
@@ -1650,7 +1650,7 @@
       "completionTrend": "Færdiggørelsesrate-tendens",
       "overdueTasks": "Forsinkede opgaver",
       "overdueTasksDesc": "Opgaver that have passed their due Dato",
-      "dueOn": "Due {{Dato}}"
+      "dueOn": "Due {{date}}"
     },
     "pageSubtitle": "Manage Ny hire onboarding workflows, Skabeloner, Og analytics"
   },
@@ -4094,7 +4094,7 @@
     "daysRemaining": "{{count}} Dage remaining",
     "annualLeave": "Annual Fravær",
     "trainingCompliance": "Uddannelse Compliance",
-    "trainingProgress": "{{complete}} of {{Total}} Påkrævet complete",
+    "trainingProgress": "{{complete}} of {{total}} Påkrævet complete",
     "overdueTraining": "Fire Safety — due Feb 10",
     "nextShift": "Næste Vagt",
     "nextShiftTime": "I morgen, 7:00 AM — 3:00 PM",

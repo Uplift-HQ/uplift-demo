@@ -1131,7 +1131,7 @@
       "saveError": "Failed to Uložiť role",
       "deleteError": "Failed to Vymazať role",
       "deleteTitle": "Vymazať Role",
-      "deleteWarning": "Are you sure you want to Vymazať \"{{Meno}}\"?",
+      "deleteWarning": "Are you sure you want to Vymazať \"{{name}}\"?",
       "deleteUsersWarning": "This role is assigned to {{count}} users. They will revert to default permissions.",
       "confirmDelete": "Vymazať Role",
       "infoNote": "Custom roles allow you to create fine-grained access control. Assign roles to users from their profile page in the Team Members section.",

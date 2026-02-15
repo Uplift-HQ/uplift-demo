@@ -497,9 +497,9 @@
       "annualleave": "Urlop roczny",
       "sickleaveshort": "Zwolnienie lekarskie"
     },
-    "approvedFor": "Czas Wył. Zatwierdzone for {{Nazwa}}",
+    "approvedFor": "Czas Wył. Zatwierdzone for {{name}}",
     "approveError": "Failed Do Zatwierdź Wniosek. Proszę try again.",
-    "rejectedFor": "Czas Wył. Odrzucone for {{Nazwa}}",
+    "rejectedFor": "Czas Wył. Odrzucone for {{name}}",
     "rejectError": "Failed Do Odrzuć Wniosek. Proszę try again.",
     "noPendingRequests": "Nie Oczekujące time-off Wnioski",
     "requestsWillAppear": "Time-off Wnioski will appear here when Pracownicy Prześlij them",

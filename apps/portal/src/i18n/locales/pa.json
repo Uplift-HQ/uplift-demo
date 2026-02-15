@@ -1114,7 +1114,7 @@
       "deleteError": "Failed ਨੂੰ ਮਿਟਾਓ ਭੂਮਿਕਾ",
       "deleteTitle": "ਮਿਟਾਓ ਭੂਮਿਕਾ",
       "deleteUsersWarning": "This ਭੂਮਿਕਾ is assigned ਨੂੰ {{count}} ਉਪਭੋਗਤਾ. They will revert ਨੂੰ default permissions.",
-      "deleteWarning": "Are you sure you want ਨੂੰ ਮਿਟਾਓ \"{{ਨਾਮ}}\"?",
+      "deleteWarning": "Are you sure you want ਨੂੰ ਮਿਟਾਓ \"{{name}}\"?",
       "deleted": "ਭੂਮਿਕਾ deleted successfully",
       "description": "ਵਰਣਨ",
       "descriptionPlaceholder": "ਕੀ can ਉਪਭੋਗਤਾ ਨਾਲ this ਭੂਮਿਕਾ do?",

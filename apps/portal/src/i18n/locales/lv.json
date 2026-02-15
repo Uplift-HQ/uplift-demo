@@ -1131,7 +1131,7 @@
       "saveError": "Failed to Saglabāt role",
       "deleteError": "Failed to Dzēst role",
       "deleteTitle": "Dzēst Role",
-      "deleteWarning": "Are you sure you want to Dzēst \"{{Vārds}}\"?",
+      "deleteWarning": "Are you sure you want to Dzēst \"{{name}}\"?",
       "deleteUsersWarning": "This role is assigned to {{count}} users. They will revert to default permissions.",
       "confirmDelete": "Dzēst Role",
       "infoNote": "Custom roles allow you to create fine-grained access control. Assign roles to users from their profile page in the Team Members section.",

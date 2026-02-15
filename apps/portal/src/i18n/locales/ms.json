@@ -1134,7 +1134,7 @@
       "saveError": "Failed to Simpan role",
       "deleteError": "Failed to Padam role",
       "deleteTitle": "Padam Role",
-      "deleteWarning": "Are you sure you want to Padam \"{{Nama}}\"?",
+      "deleteWarning": "Are you sure you want to Padam \"{{name}}\"?",
       "deleteUsersWarning": "This role is assigned to {{count}} users. They will revert to default permissions.",
       "confirmDelete": "Padam Role",
       "infoNote": "Custom roles allow you to create fine-grained access control. Assign roles to users from their profile page in the Team Members section.",
