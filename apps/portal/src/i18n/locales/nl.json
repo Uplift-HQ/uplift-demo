@@ -524,7 +524,7 @@
     "shiftReassigned": "Dienst opnieuw toegewezen",
     "swapRequested": "Ruil aangevraagd",
     "shiftDeleted": "Dienst verwijderd",
-    "minutes": "[NL] min"
+    "minutes": "min"
   },
   "timeTracking": {
     "title": "Tijdregistratie",
@@ -1053,9 +1053,9 @@
     },
     "timezones": {
       "london": "Londen (GMT/BST)",
-      "newYork": "[NL] New York (EST/EDT)",
-      "losAngeles": "[NL] Los Angeles (PST/PDT)",
-      "singapore": "[NL] Singapore (SGT)"
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "singapore": "Singapore (SGT)"
     },
     "branding": {
       "primaryLogo": "Primair logo",
@@ -1198,16 +1198,16 @@
       "providerDesc": "Configureer uw identiteitsprovider voor Single Sign-On",
       "providerType": "Providertype",
       "selectProvider": "Provider selecteren...",
-      "saml": "[NL] SAML 2.0",
-      "oidc": "[NL] OpenID Connect (OIDC)",
-      "azureAd": "[NL] Azure Active Directory",
-      "okta": "[NL] Okta",
-      "googleWorkspace": "[NL] Google Workspace",
-      "oneLogin": "[NL] OneLogin",
+      "saml": "SAML 2.0",
+      "oidc": "OpenID Connect (OIDC)",
+      "azureAd": "Azure Active Directory",
+      "okta": "Okta",
+      "googleWorkspace": "Google Workspace",
+      "oneLogin": "OneLogin",
       "entityId": "Entity-ID / Uitgever",
-      "entityIdPlaceholder": "[NL] https://your-idp.com/entity-id",
+      "entityIdPlaceholder": "https://your-idp.com/entity-id",
       "ssoUrl": "SSO-inlog-URL",
-      "ssoUrlPlaceholder": "[NL] https://your-idp.com/sso/saml",
+      "ssoUrlPlaceholder": "https://your-idp.com/sso/saml",
       "certificate": "X.509-certificaat",
       "certificatePlaceholder": "Plak hier het certificaat van uw IdP...",
       "enforceSSO": "SSO afdwingen voor alle gebruikers",
@@ -1223,7 +1223,7 @@
       "metadataUrlDesc": "URL naar uw identity provider metadata XML (optioneel bij handmatige invoer)",
       "detectedEntityId": "Entiteits-ID",
       "detectedSsoUrl": "SSO-URL",
-      "detectedProvider": "[NL] Provider",
+      "detectedProvider": "Provider",
       "errorCode": "Foutcode",
       "saveConfig": "Configuratie opslaan",
       "scim": "SCIM-provisioning",
@@ -2198,9 +2198,9 @@
       "reception": "Receptie"
     },
     "locations": {
-      "edinburgh": "[NL] Grand Metro Edinburgh",
-      "glasgow": "[NL] Grand Metro Glasgow",
-      "manchester": "[NL] Grand Metro Manchester"
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
     }
   },
   "employees": {
@@ -2259,13 +2259,13 @@
     "tabs": {
       "connected": "Verbonden",
       "marketplace": "Marktplaats",
-      "restApi": "[NL] REST API",
+      "restApi": "REST API",
       "apiFactory": "API-fabriek",
       "activityLog": "Activiteitenlog",
       "settings": "Instellingen",
       "fieldMapping": "Veldtoewijzing",
       "syncHistory": "Synchronisatiegeschiedenis",
-      "webhooks": "[NL] Webhooks"
+      "webhooks": "Webhooks"
     },
     "connection": {
       "lastSync": "Laatste synchronisatie",
@@ -2303,7 +2303,7 @@
         "swapNotifications": "Ruilverzoek-notificaties"
       },
       "identity": {
-        "sso": "[NL] Single sign-on (SSO)",
+        "sso": "Single sign-on (SSO)",
         "autoProvisioning": "Automatische gebruikersaanmaak",
         "directorySync": "Directory-synchronisatie"
       },
@@ -2623,7 +2623,7 @@
       "technology": "Technologie",
       "finance": "Financiën",
       "government": "Overheid",
-      "nonprofit": "[NL] Non-profit",
+      "nonprofit": "Non-profit",
       "other": "Overig"
     },
     "orgDetails": {
@@ -2808,7 +2808,7 @@
       "authApiKey": "API-sleutel",
       "authBearer": "Bearer-token",
       "authBasic": "Basisauthenticatie",
-      "authOAuth2": "[NL] OAuth 2.0",
+      "authOAuth2": "OAuth 2.0",
       "triggerManual": "Handmatig",
       "triggerManualDesc": "Op aanvraag uitvoeren",
       "triggerScheduled": "Gepland",
@@ -3000,7 +3000,7 @@
     "createOkr": "OKR aanmaken",
     "createGoalTitle": "Doel aanmaken",
     "createOkrTitle": "OKR aanmaken",
-    "periodPlaceholder": "[NL] Q1 2026",
+    "periodPlaceholder": "Q1 2026",
     "keyResultPlaceholder": "Titel kernresultaat",
     "targetPlaceholder": "Doel",
     "createBtn": "Aanmaken",
@@ -3283,7 +3283,7 @@
     "continue": "Doorgaan",
     "start": "Starten",
     "noCertificates": "Nog geen certificaten behaald",
-    "defaultIssuer": "[NL] Uplift Learning",
+    "defaultIssuer": "Uplift Learning",
     "issued": "Uitgegeven",
     "expires": "Verloopt",
     "downloadCert": "Certificaat downloaden",
@@ -3434,7 +3434,7 @@
       "status": "Toestand",
       "responses": "Reacties",
       "participation": "Deelname",
-      "enps": "[NL] eNPS",
+      "enps": "eNPS",
       "closesOn": "Sluit op",
       "actions": "Acties"
     },
@@ -3490,11 +3490,11 @@
       "selectDepartments": "Afdelingen selecteren",
       "selectLocations": "Locaties selecteren",
       "locations": {
-        "newYork": "[NL] New York",
-        "sanFrancisco": "[NL] San Francisco",
+        "newYork": "New York",
+        "sanFrancisco": "San Francisco",
         "london": "Londen",
         "berlin": "Berlijn",
-        "singapore": "[NL] Singapore",
+        "singapore": "Singapore",
         "remote": "Op afstand"
       },
       "selectTenure": "Dienstverbanden selecteren",
@@ -3575,7 +3575,7 @@
       "outOf5": "van 5.0",
       "participation": "Deelname",
       "responded": "gereageerd",
-      "enps": "[NL] eNPS",
+      "enps": "eNPS",
       "promoters": "P",
       "passives": "N",
       "detractors": "D",
@@ -3726,11 +3726,11 @@
     "kudos4": "Geweldig teamwerk tijdens de zaterdagdrukte",
     "kudos4Time": "3 dagen geleden",
     "teamCelebrations": "Teamvieringen",
-    "birthdayName": "[NL] Maria Lopez",
+    "birthdayName": "Maria Lopez",
     "birthdayLabel": "Vandaag jarig — wens haar het beste!",
-    "anniversaryName": "[NL] James Turner",
+    "anniversaryName": "James Turner",
     "anniversaryLabel": "2-jarig werkjubileum deze week",
-    "newStarterName": "[NL] Emily Chen",
+    "newStarterName": "Emily Chen",
     "newStarterLabel": "Nieuwe collega — zeg hallo!",
     "myAchievements": "Mijn Prestaties",
     "badgeServiceStar": "Service Ster",
@@ -4111,7 +4111,7 @@
       "de": "Duitsland",
       "pl": "Polen",
       "us": "Verenigde Staten",
-      "cn": "[NL] China",
+      "cn": "China",
       "ae": "Verenigde Arabische Emiraten"
     },
     "calendar": {
