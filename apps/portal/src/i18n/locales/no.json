@@ -122,7 +122,7 @@
     "myPerformance": "My Ytelse",
     "myLearning": "My Læring",
     "mySkillsCareer": "My Ferdigheter & Career",
-    "myPayslips": "My Payslips",
+    "myPayslips": "Mine lønnsslipper",
     "myExpenses": "My Expenses",
     "directory": "Bedrift Directory",
     "recognition": "Anerkjennelse Wall",
@@ -1068,7 +1068,7 @@
     "searchEmployeesPlaceholder": "Søk Ansatte...",
     "passwordPlaceholder": "Your Passord",
     "unknownDevice": "Unknown Device",
-    "currentSession": "Current",
+    "currentSession": "Nåværende",
     "noActivityRecorded": "Nei Aktivitet recorded",
     "noWebhooksConfigured": "Nei webhooks configured",
     "addWebhookToIntegrate": "Legg til a webhook Til integrate Med external systems",
@@ -1106,13 +1106,13 @@
       "subtitle": "Define custom Roller Og configure Hva each Rolle can access",
       "addRole": "Legg til Custom Rolle",
       "builtIn": "Built-in",
-      "custom": "Custom",
+      "custom": "Tilpasset",
       "roleName": "Rolle Navn",
       "roleNamePlaceholder": "e.g., Skift Supervisor",
       "description": "Beskrivelse",
       "descriptionPlaceholder": "Hva can Brukere Med this Rolle do?",
       "permissions": "Permissions",
-      "module": "Module",
+      "module": "Modul",
       "permNone": "Ingen",
       "permRead": "Read",
       "permWrite": "Write",
@@ -1254,7 +1254,7 @@
       "title": "Portal Configuration",
       "subtitle": "Control Hvilken modules are visible for each Bruker Rolle across portal Og Mobil",
       "moduleVisibility": "Module Visibility",
-      "colModule": "Module",
+      "colModule": "Modul",
       "colWorkersPortal": "Workers (Portal)",
       "colWorkersMobile": "Workers (Mobil)",
       "colManagersPortal": "Managers (Portal)",
@@ -1283,7 +1283,7 @@
         "skills": "Ferdigheter",
         "learning": "Læring",
         "career": "Career / Opportunities",
-        "compensation": "Compensation",
+        "compensation": "Kompensasjon",
         "expenses": "Expenses",
         "surveys": "Surveys",
         "documents": "Dokumenter",
@@ -1849,7 +1849,7 @@
       "openShifts": "Åpne Skift",
       "fillRate": "Fyllingsgrad",
       "employee": "Ansatt",
-      "period": "Period",
+      "period": "Periode",
       "regularCost": "Normal kostnad",
       "overtimeCost": "Overtidskostnad",
       "totalCost": "Total kostnad"
@@ -2928,7 +2928,7 @@
     "currentSalary": "Nåværende lønn",
     "lastReview": "Siste revisjon",
     "overtime": "Overtid",
-    "myPayslips": "My Payslips"
+    "myPayslips": "Mine lønnsslipper"
   },
   "learning": {
     "score": "Poengsum",
@@ -3035,7 +3035,7 @@
       "healthSafety": "Health & Safety",
       "compliance": "Compliance",
       "softSkills": "Soft Ferdigheter",
-      "leadership": "Leadership"
+      "leadership": "Ledelse"
     },
     "searchCourses": "Søk courses...",
     "allTypes": "Alle Types",
@@ -3059,7 +3059,7 @@
       "enrolled": "Enrolled",
       "inProgress": "Pågår",
       "completed": "Fullført",
-      "overdue": "Overdue",
+      "overdue": "Forfalt",
       "failed": "Failed"
     },
     "allStatuses": "Alle Statuses",
@@ -3071,7 +3071,7 @@
     "employee": "Ansatt",
     "actions": "Actions",
     "overallCompliance": "Overall Compliance",
-    "overdueCount": "Overdue",
+    "overdueCount": "Forfalt",
     "mandatoryCourses": "Mandatory Courses",
     "courseCompliance": "Kurs Compliance",
     "sendReminderAll": "Send Påminnelse Til Alle Overdue",
@@ -3095,7 +3095,7 @@
       "completionRate": "Completion Rate",
       "avgScore": "Avg Poengsum",
       "certificates": "Certificates",
-      "overdue": "Overdue"
+      "overdue": "Forfalt"
     },
     "completionByDept": "Completion by Avdeling",
     "noDeptData": "Nei Avdeling data Tilgjengelig",
@@ -3320,8 +3320,8 @@
     "myTitle": "My Ytelse",
     "mySubtitle": "Your reviews, Mål, Og development",
     "cycleTypes": {
-      "quarterly": "Quarterly",
-      "annual": "Annual",
+      "quarterly": "Kvartalsvis",
+      "annual": "Årlig",
       "360": "360-Degree",
       "probation": "Probation"
     },
@@ -3338,7 +3338,7 @@
       "development": "Development",
       "stretch": "Stretch"
     },
-    "current": "Current",
+    "current": "Nåværende",
     "target": "Mål",
     "type360": "360-Degree",
     "type": "Type",
@@ -3471,7 +3471,7 @@
       "type": "Type",
       "status": "Status",
       "responses": "Responses",
-      "participation": "Participation",
+      "participation": "Deltakelse",
       "enps": "eNPS",
       "closesOn": "Closes På",
       "actions": "Actions"
@@ -3488,8 +3488,8 @@
     "builder": {
       "step1": "Mal",
       "step2": "Detaljer",
-      "step3": "Questions",
-      "step4": "Audience",
+      "step3": "Spørsmål",
+      "step4": "Målgruppe",
       "step5": "Timeplan",
       "step6": "Gjennomgang",
       "rating5": "Vurdering 1-5",
@@ -3505,11 +3505,11 @@
       "namePlaceholder": "e.g., Q1 2026 Ansatt Engagement Survey",
       "description": "Beskrivelse",
       "descriptionPlaceholder": "Briefly describe the purpose of this survey...",
-      "surveyType": "Survey Type",
+      "surveyType": "Undersøkelsestype",
       "anonymityThreshold": "Anonymity Threshold",
       "thresholdHelp": "Minimum responses Påkrevd Før Resultater are visible",
       "anonymousSurvey": "Anonymous Survey",
-      "questions": "Questions",
+      "questions": "Spørsmål",
       "required": "Påkrevd",
       "addQuestion": "Legg til a Question",
       "questionPlaceholder": "Enter your question...",
@@ -3563,23 +3563,23 @@
       "recurring": "Gjentakende Survey",
       "oneTime": "One-time",
       "monthly": "Månedlig",
-      "quarterly": "Quarterly",
+      "quarterly": "Kvartalsvis",
       "biannual": "Bi-annually",
       "annual": "Annually",
       "autoClose": "Auto-close survey På Slutt Dato",
       "reviewSummary": "Gjennomgang & Launch",
-      "untitled": "Untitled Survey",
-      "questionsCount": "Questions",
+      "untitled": "Navnløs undersøkelse",
+      "questionsCount": "Spørsmål",
       "anonymous": "Anonymous",
       "threshold": "threshold",
-      "audience": "Audience",
+      "audience": "Målgruppe",
       "reminders": "Påminnelser",
       "questionPreview": "Question Forhåndsvisning",
       "saveDraft": "Lagre as Utkast",
       "launch": "Launch Survey"
     },
     "types": {
-      "engagement": "Engagement",
+      "engagement": "Engasjement",
       "pulse": "Pulse",
       "onboarding": "Onboarding",
       "exit": "Avslutt",
@@ -3599,11 +3599,11 @@
       "support": "Støtte"
     },
     "categories": {
-      "engagement": "Engagement",
+      "engagement": "Engasjement",
       "growth": "Growth",
-      "leadership": "Leadership",
+      "leadership": "Ledelse",
       "culture": "Culture",
-      "compensation": "Compensation",
+      "compensation": "Kompensasjon",
       "workLifeBalance": "Work-Life Balance"
     },
     "results": {
@@ -3611,8 +3611,8 @@
       "exportResults": "Eksporter Resultater",
       "overallScore": "Overall Poengsum",
       "outOf5": "out of 5.0",
-      "participation": "Participation",
-      "responded": "responded",
+      "participation": "Deltakelse",
+      "responded": "svarte",
       "enps": "eNPS",
       "promoters": "P",
       "passives": "N",
@@ -3666,7 +3666,7 @@
         "avgScore": "avg Poengsum"
       },
       "enabled": "Enabled",
-      "responded": "responded"
+      "responded": "svarte"
     }
   },
   "entity": {

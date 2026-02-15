@@ -1626,7 +1626,7 @@
     "status": {
       "onTrack": "On Track",
       "atRisk": "At Risk",
-      "overdue": "Overdue"
+      "overdue": "Gecikmiş"
     },
     "noTaskDetails": "Detailed task breakdown not available for this employee.",
     "templatesTitle": "Onboarding Templates",
@@ -1828,7 +1828,7 @@
     "allDepartments": "Tümü Departments",
     "nameLabel": "Name:",
     "typeLabel": "Type:",
-    "period": "Period",
+    "period": "Dönem",
     "date": "Tarih",
     "location": "Konum",
     "department": "Departman",
@@ -1864,7 +1864,7 @@
       "openShifts": "Open Shifts",
       "fillRate": "Fill Rate",
       "employee": "Çalışan",
-      "period": "Period",
+      "period": "Dönem",
       "regularCost": "Regular Cost",
       "overtimeCost": "Overtime Cost",
       "totalCost": "Total Cost"

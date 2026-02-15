@@ -95,12 +95,12 @@
       "talent": "ಪ್ರತಿಭೆ",
       "people": "ಜನರು",
       "engagement": "ತೊಡಗಿಕೊಳ್ಳುವಿಕೆ",
-      "myUplift": "MY UPLIFT",
-      "myWork": "MY WORK",
-      "myGrowth": "MY GROWTH",
-      "myMoney": "MY MONEY",
-      "myPeople": "MY PEOPLE",
-      "payroll": "PAYROLL"
+      "myUplift": "ನನ್ನ ಅಪ್‌ಲಿಫ್ಟ್",
+      "myWork": "ನನ್ನ ಕೆಲಸ",
+      "myGrowth": "ನನ್ನ ಬೆಳವಣಿಗೆ",
+      "myMoney": "ನನ್ನ ಹಣ",
+      "myPeople": "ನನ್ನ ಜನರು",
+      "payroll": "ವೇತನ ಪಟ್ಟಿ"
     },
     "payslips": "ಸಂಬಳ ಚೀಟಿ ಮತ್ತು ವೇತನ",
     "performance": "ಕಾರ್ಯಕ್ಷಮತೆ",
@@ -122,7 +122,7 @@
     "myPerformance": "My ಕಾರ್ಯಕ್ಷಮತೆ",
     "myLearning": "My ಕಲಿಕೆ",
     "mySkillsCareer": "My ಕೌಶಲ್ಯಗಳು & Career",
-    "myPayslips": "My Payslips",
+    "myPayslips": "ನನ್ನ ಪೇಸ್ಲಿಪ್‌ಗಳು",
     "myExpenses": "My Expenses",
     "directory": "ಕಂಪನಿ Directory",
     "recognition": "ಗುರುತಿಸುವಿಕೆ Wall",
@@ -1068,7 +1068,7 @@
     "searchEmployeesPlaceholder": "ಹುಡುಕಿ ಉದ್ಯೋಗಿಗಳು...",
     "passwordPlaceholder": "Your ಪಾಸ್‌ವರ್ಡ್",
     "unknownDevice": "Unknown Device",
-    "currentSession": "Current",
+    "currentSession": "ಪ್ರಸ್ತುತ",
     "noActivityRecorded": "ಇಲ್ಲ ಚಟುವಟಿಕೆ recorded",
     "noWebhooksConfigured": "ಇಲ್ಲ webhooks configured",
     "addWebhookToIntegrate": "ಸೇರಿಸಿ a webhook ಗೆ integrate ಜೊತೆಗೆ external systems",
@@ -1103,13 +1103,13 @@
       "subtitle": "Define custom ಪಾತ್ರಗಳು ಮತ್ತು configure ಏನು each ಪಾತ್ರ can access",
       "addRole": "ಸೇರಿಸಿ Custom ಪಾತ್ರ",
       "builtIn": "Built-in",
-      "custom": "Custom",
+      "custom": "ಕಸ್ಟಮ್",
       "roleName": "ಪಾತ್ರ ಹೆಸರು",
       "roleNamePlaceholder": "e.g., ಶಿಫ್ಟ್ Supervisor",
       "description": "ವಿವರಣೆ",
       "descriptionPlaceholder": "ಏನು can ಬಳಕೆದಾರರು ಜೊತೆಗೆ this ಪಾತ್ರ do?",
       "permissions": "Permissions",
-      "module": "Module",
+      "module": "ಮಾಡ್ಯೂಲ್",
       "permNone": "ಯಾವುದೂ ಇಲ್ಲ",
       "permRead": "Read",
       "permWrite": "Write",
@@ -1254,7 +1254,7 @@
       "title": "Portal Configuration",
       "subtitle": "Control ಯಾವುದು modules are visible ಗಾಗಿ each ಬಳಕೆದಾರ ಪಾತ್ರ across portal ಮತ್ತು ಮೊಬೈಲ್",
       "moduleVisibility": "Module Visibility",
-      "colModule": "Module",
+      "colModule": "ಮಾಡ್ಯೂಲ್",
       "colWorkersPortal": "Workers (Portal)",
       "colWorkersMobile": "Workers (ಮೊಬೈಲ್)",
       "colManagersPortal": "Managers (Portal)",
@@ -1283,15 +1283,15 @@
         "skills": "ಕೌಶಲ್ಯಗಳು",
         "learning": "ಕಲಿಕೆ",
         "career": "Career / Opportunities",
-        "compensation": "Compensation",
+        "compensation": "ಪರಿಹಾರ",
         "expenses": "Expenses",
         "surveys": "Surveys",
         "documents": "ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳು",
         "reports": "ವರದಿಗಳು",
         "directory": "ಕಂಪನಿ Directory",
         "recognition": "ಗುರುತಿಸುವಿಕೆ Wall",
-        "onboarding": "Onboarding",
-        "offboarding": "Offboarding"
+        "onboarding": "ಆನ್‌ಬೋರ್ಡಿಂಗ್",
+        "offboarding": "ಆಫ್‌ಬೋರ್ಡಿಂಗ್"
       }
     }
   },
@@ -1813,7 +1813,7 @@
     "allDepartments": "ಎಲ್ಲಾ ವಿಭಾಗಗಳು",
     "nameLabel": "Name:",
     "typeLabel": "Type:",
-    "period": "Period",
+    "period": "ಅವಧಿ",
     "date": "ದಿನಾಂಕ",
     "location": "ಸ್ಥಳ",
     "department": "ವಿಭಾಗ",
@@ -1849,7 +1849,7 @@
       "openShifts": "खाली शिफ्ट",
       "fillRate": "भरण दर",
       "employee": "ಉದ್ಯೋಗಿ",
-      "period": "Period",
+      "period": "ಅವಧಿ",
       "regularCost": "Regular Cost",
       "overtimeCost": "Overtime Cost",
       "totalCost": "ಒಟ್ಟು Cost"
@@ -2759,7 +2759,7 @@
       "learningDesc": "ತರಬೇತಿ & certifications",
       "analytics": "Analytics",
       "analyticsDesc": "BI & reporting tools",
-      "custom": "Custom",
+      "custom": "ಕಸ್ಟಮ್",
       "customDesc": "API & automation"
     },
     "providers": {
@@ -2835,7 +2835,7 @@
       "categoryTimeTracking": "ಸಮಯ Tracking",
       "categoryTimeOff": "ಸಮಯ ಆಫ್",
       "categorySkills": "ಕೌಶಲ್ಯಗಳು",
-      "categoryCareer": "Career"
+      "categoryCareer": "ವೃತ್ತಿ"
     },
     "noIntegrationsFound": "ಇಲ್ಲ integrations found",
     "noIntegrationsAvailable": "ಇಲ್ಲ integrations are ಲಭ್ಯವಿದೆ yet.",
@@ -2928,7 +2928,7 @@
     "currentSalary": "ಪ್ರಸ್ತುತ ಸಂಬಳ",
     "lastReview": "ಕೊನೆಯ ಸಮೀಕ್ಷೆ",
     "overtime": "ಓವರ್‌ಟೈಮ್",
-    "myPayslips": "My Payslips"
+    "myPayslips": "ನನ್ನ ಪೇಸ್ಲಿಪ್‌ಗಳು"
   },
   "learning": {
     "score": "ಸ್ಕೋರ್",
@@ -3035,7 +3035,7 @@
       "healthSafety": "Health & Safety",
       "compliance": "Compliance",
       "softSkills": "Soft ಕೌಶಲ್ಯಗಳು",
-      "leadership": "Leadership"
+      "leadership": "ನಾಯಕತ್ವ"
     },
     "searchCourses": "ಹುಡುಕಿ courses...",
     "allTypes": "ಎಲ್ಲಾ Types",
@@ -3291,7 +3291,7 @@
     "statusCalibration": "Calibration",
     "statusCompleted": "ಪೂರ್ಣಗೊಂಡಿದೆ",
     "typeAnnual": "Annual",
-    "typeQuarterly": "Quarterly",
+    "typeQuarterly": "ತ್ರೈಮಾಸಿಕ",
     "typeProbation": "Probation",
     "goals": "ಗುರಿಗಳು",
     "okrs": "OKRs",
@@ -3320,7 +3320,7 @@
     "myTitle": "My ಕಾರ್ಯಕ್ಷಮತೆ",
     "mySubtitle": "Your reviews, ಗುರಿಗಳು, ಮತ್ತು development",
     "cycleTypes": {
-      "quarterly": "Quarterly",
+      "quarterly": "ತ್ರೈಮಾಸಿಕ",
       "annual": "Annual",
       "360": "360-Degree",
       "probation": "Probation"
@@ -3338,7 +3338,7 @@
       "development": "Development",
       "stretch": "Stretch"
     },
-    "current": "Current",
+    "current": "ಪ್ರಸ್ತುತ",
     "target": "ಗುರಿ",
     "type360": "360-Degree",
     "type": "ಪ್ರಕಾರ",
@@ -3471,7 +3471,7 @@
       "type": "ಪ್ರಕಾರ",
       "status": "ಸ್ಥಿತಿ",
       "responses": "Responses",
-      "participation": "Participation",
+      "participation": "ಭಾಗವಹಿಸುವಿಕೆ",
       "enps": "eNPS",
       "closesOn": "Closes ಆನ್",
       "actions": "Actions"
@@ -3488,8 +3488,8 @@
     "builder": {
       "step1": "ಟೆಂಪ್ಲೇಟ್",
       "step2": "ವಿವರಗಳು",
-      "step3": "Questions",
-      "step4": "Audience",
+      "step3": "ಪ್ರಶ್ನೆಗಳು",
+      "step4": "ಪ್ರೇಕ್ಷಕರು",
       "step5": "ವೇಳಾಪಟ್ಟಿ",
       "step6": "ವಿಮರ್ಶೆ",
       "rating5": "ರೇಟಿಂಗ್ 1-5",
@@ -3509,7 +3509,7 @@
       "anonymityThreshold": "Anonymity Threshold",
       "thresholdHelp": "Minimum responses ಅಗತ್ಯ ಮೊದಲು ಫಲಿತಾಂಶಗಳು are visible",
       "anonymousSurvey": "Anonymous Survey",
-      "questions": "Questions",
+      "questions": "ಪ್ರಶ್ನೆಗಳು",
       "required": "ಅಗತ್ಯ",
       "addQuestion": "ಸೇರಿಸಿ a Question",
       "questionPlaceholder": "Enter your question...",
@@ -3563,25 +3563,25 @@
       "recurring": "ಪುನರಾವರ್ತಿತ Survey",
       "oneTime": "One-time",
       "monthly": "ಮಾಸಿಕ",
-      "quarterly": "Quarterly",
+      "quarterly": "ತ್ರೈಮಾಸಿಕ",
       "biannual": "Bi-annually",
       "annual": "Annually",
       "autoClose": "Auto-close survey ಮೇಲೆ ಅಂತ್ಯ ದಿನಾಂಕ",
       "reviewSummary": "ವಿಮರ್ಶೆ & Launch",
       "untitled": "Untitled Survey",
-      "questionsCount": "Questions",
+      "questionsCount": "ಪ್ರಶ್ನೆಗಳು",
       "anonymous": "Anonymous",
       "threshold": "threshold",
-      "audience": "Audience",
+      "audience": "ಪ್ರೇಕ್ಷಕರು",
       "reminders": "ಜ್ಞಾಪನೆಗಳು",
       "questionPreview": "Question ಪೂರ್ವವೀಕ್ಷಣೆ",
       "saveDraft": "ಉಳಿಸಿ as ಡ್ರಾಫ್ಟ್",
       "launch": "Launch Survey"
     },
     "types": {
-      "engagement": "Engagement",
+      "engagement": "ಎಂಗೇಜ್‌ಮೆಂಟ್",
       "pulse": "Pulse",
-      "onboarding": "Onboarding",
+      "onboarding": "ಆನ್‌ಬೋರ್ಡಿಂಗ್",
       "exit": "ನಿರ್ಗಮಿಸಿ",
       "dei": "ಡಿಇಐ",
       "manager": "ಮ್ಯಾನೇಜರ್ Effectiveness",
@@ -3599,11 +3599,11 @@
       "support": "ಬೆಂಬಲ"
     },
     "categories": {
-      "engagement": "Engagement",
+      "engagement": "ಎಂಗೇಜ್‌ಮೆಂಟ್",
       "growth": "Growth",
-      "leadership": "Leadership",
+      "leadership": "ನಾಯಕತ್ವ",
       "culture": "Culture",
-      "compensation": "Compensation",
+      "compensation": "ಪರಿಹಾರ",
       "workLifeBalance": "Work-Life Balance"
     },
     "results": {
@@ -3611,8 +3611,8 @@
       "exportResults": "ರಫ್ತು ಮಾಡಿ ಫಲಿತಾಂಶಗಳು",
       "overallScore": "Overall ಸ್ಕೋರ್",
       "outOf5": "out ನ 5.0",
-      "participation": "Participation",
-      "responded": "responded",
+      "participation": "ಭಾಗವಹಿಸುವಿಕೆ",
+      "responded": "ಪ್ರತಿಕ್ರಿಯಿಸಿದರು",
       "enps": "eNPS",
       "promoters": "ಪ",
       "passives": "ನ",
@@ -3666,7 +3666,7 @@
         "avgScore": "avg ಸ್ಕೋರ್"
       },
       "enabled": "Enabled",
-      "responded": "responded"
+      "responded": "ಪ್ರತಿಕ್ರಿಯಿಸಿದರು"
     }
   },
   "entity": {
@@ -3976,7 +3976,7 @@
     "name": "ಹೆಸರು",
     "department": "ವಿಭಾಗ",
     "score": "ಸ್ಕೋರ್",
-    "trend": "Trend",
+    "trend": "ಟ್ರೆಂಡ್",
     "departmentComparison": "ವಿಭಾಗ Comparison",
     "scoreTrendByDept": "ಸ್ಕೋರ್ Trend ಮೂಲಕ ವಿಭಾಗ",
     "yourMomentumScore": "Your Momentum ಸ್ಕೋರ್",

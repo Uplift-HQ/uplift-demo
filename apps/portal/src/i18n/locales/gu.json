@@ -95,12 +95,12 @@
       "talent": "પ્રતિભા",
       "people": "લોકો",
       "engagement": "સંલગ્નતા",
-      "myUplift": "MY UPLIFT",
-      "myWork": "MY WORK",
-      "myGrowth": "MY GROWTH",
-      "myMoney": "MY MONEY",
-      "myPeople": "MY PEOPLE",
-      "payroll": "PAYROLL"
+      "myUplift": "મારું અપલિફ્ટ",
+      "myWork": "મારું કામ",
+      "myGrowth": "મારી વૃદ્ધિ",
+      "myMoney": "મારા પૈસા",
+      "myPeople": "મારા લોકો",
+      "payroll": "પેરોલ"
     },
     "payslips": "પગારપત્રક અને વેતન",
     "performance": "કામગીરી",
@@ -122,7 +122,7 @@
     "myPerformance": "My પ્રદર્શન",
     "myLearning": "My શિક્ષણ",
     "mySkillsCareer": "My કૌશલ્યો & Career",
-    "myPayslips": "My Payslips",
+    "myPayslips": "મારી પેસ્લિપ્સ",
     "myExpenses": "My ખર્ચાઓ",
     "directory": "કંપની Directory",
     "recognition": "ઓળખ Wall",
@@ -357,7 +357,7 @@
     "messages": "સંદેશાઓ",
     "more": "વધુ",
     "tasks": "કાર્યો",
-    "career": "Career",
+    "career": "કારકિર્દી",
     "skills": "કૌશલ્યો",
     "rewards": "પુરસ્કારો",
     "leaderboard": "લીડરબોર્ડ",
@@ -746,7 +746,7 @@
     "employeeListingComingSoon": "આ કૌશલ્ય માટે કર્મચારી યાદી ટૂંક સમયમાં આવી રહી છે."
   },
   "career": {
-    "title": "Career",
+    "title": "કારકિર્દી",
     "careerPath": "Career Path",
     "currentRole": "Current ભૂમિકા",
     "nextRole": "આગળ ભૂમિકા",
@@ -1068,7 +1068,7 @@
     "searchEmployeesPlaceholder": "શોધો કર્મચારીઓ...",
     "passwordPlaceholder": "Your પાસવર્ડ",
     "unknownDevice": "Unknown Device",
-    "currentSession": "Current",
+    "currentSession": "વર્તમાન",
     "noActivityRecorded": "ના પ્રવૃત્તિ recorded",
     "noWebhooksConfigured": "ના webhooks configured",
     "addWebhookToIntegrate": "ઉમેરો a webhook ને integrate સાથે external systems",
@@ -1109,7 +1109,7 @@
       "description": "વર્ણન",
       "descriptionPlaceholder": "શું can વપરાશકર્તાઓ સાથે this ભૂમિકા do?",
       "permissions": "Permissions",
-      "module": "Module",
+      "module": "મોડ્યુલ",
       "permNone": "કોઈ નહીં",
       "permRead": "Read",
       "permWrite": "Write",
@@ -1254,7 +1254,7 @@
       "title": "Portal Configuration",
       "subtitle": "Control કયું modules are visible માટે each વપરાશકર્તા ભૂમિકા across portal અને મોબાઇલ",
       "moduleVisibility": "Module Visibility",
-      "colModule": "Module",
+      "colModule": "મોડ્યુલ",
       "colWorkersPortal": "Workers (Portal)",
       "colWorkersMobile": "Workers (મોબાઇલ)",
       "colManagersPortal": "Managers (Portal)",
@@ -1283,15 +1283,15 @@
         "skills": "કૌશલ્યો",
         "learning": "શિક્ષણ",
         "career": "Career / Opportunities",
-        "compensation": "Compensation",
+        "compensation": "વળતર",
         "expenses": "ખર્ચાઓ",
         "surveys": "Surveys",
         "documents": "દસ્તાવેજો",
         "reports": "રિપોર્ટ્સ",
         "directory": "કંપની Directory",
         "recognition": "ઓળખ Wall",
-        "onboarding": "Onboarding",
-        "offboarding": "Offboarding"
+        "onboarding": "ઓનબોર્ડિંગ",
+        "offboarding": "ઓફબોર્ડિંગ"
       }
     }
   },
@@ -1869,7 +1869,7 @@
     "allDepartments": "બધા વિભાગો",
     "nameLabel": "Name:",
     "typeLabel": "Type:",
-    "period": "Period",
+    "period": "સમયગાળો",
     "date": "તારીખ",
     "location": "સ્થાન",
     "department": "વિભાગ",
@@ -1905,7 +1905,7 @@
       "openShifts": "खाली शिफ्ट",
       "fillRate": "भरण दर",
       "employee": "કર્મચારી",
-      "period": "Period",
+      "period": "સમયગાળો",
       "regularCost": "Regular Cost",
       "overtimeCost": "Overtime Cost",
       "totalCost": "કુલ Cost"
@@ -2928,7 +2928,7 @@
     "currentSalary": "વર્તમાન પગાર",
     "lastReview": "છેલ્લી સમીક્ષા",
     "overtime": "ઓવરટાઇમ",
-    "myPayslips": "My Payslips"
+    "myPayslips": "મારી પેસ્લિપ્સ"
   },
   "learning": {
     "score": "સ્કોર",
@@ -3035,7 +3035,7 @@
       "healthSafety": "Health & Safety",
       "compliance": "Compliance",
       "softSkills": "Soft કૌશલ્યો",
-      "leadership": "Leadership"
+      "leadership": "નેતૃત્વ"
     },
     "searchCourses": "શોધો courses...",
     "allTypes": "બધા Types",
@@ -3291,7 +3291,7 @@
     "statusCalibration": "કેલિબ્રેશન",
     "statusCompleted": "પૂર્ણ",
     "typeAnnual": "Annual",
-    "typeQuarterly": "Quarterly",
+    "typeQuarterly": "ત્રિમાસિક",
     "typeProbation": "Probation",
     "goals": "લક્ષ્યો",
     "okrs": "OKRs",
@@ -3320,7 +3320,7 @@
     "myTitle": "My પ્રદર્શન",
     "mySubtitle": "Your reviews, લક્ષ્યો, અને development",
     "cycleTypes": {
-      "quarterly": "Quarterly",
+      "quarterly": "ત્રિમાસિક",
       "annual": "Annual",
       "360": "360-Degree",
       "probation": "Probation"
@@ -3338,7 +3338,7 @@
       "development": "Development",
       "stretch": "Stretch"
     },
-    "current": "Current",
+    "current": "વર્તમાન",
     "target": "લક્ષ્ય",
     "type360": "360-Degree",
     "type": "પ્રકાર",
@@ -3471,7 +3471,7 @@
       "type": "પ્રકાર",
       "status": "સ્થિતિ",
       "responses": "Responses",
-      "participation": "Participation",
+      "participation": "ભાગીદારી",
       "enps": "eNPS",
       "closesOn": "Closes ચાલુ",
       "actions": "Actions"
@@ -3488,8 +3488,8 @@
     "builder": {
       "step1": "ટેમ્પલેટ",
       "step2": "વિગતો",
-      "step3": "Questions",
-      "step4": "Audience",
+      "step3": "પ્રશ્નો",
+      "step4": "પ્રેક્ષકો",
       "step5": "સમયપત્રક",
       "step6": "સમીક્ષા",
       "rating5": "રેટિંગ 1-5",
@@ -3509,7 +3509,7 @@
       "anonymityThreshold": "Anonymity Threshold",
       "thresholdHelp": "લઘુત્તમ responses જરૂરી પહેલાં પરિણામો are visible",
       "anonymousSurvey": "Anonymous સર્વે",
-      "questions": "Questions",
+      "questions": "પ્રશ્નો",
       "required": "જરૂરી",
       "addQuestion": "ઉમેરો a Question",
       "questionPlaceholder": "Enter your question...",
@@ -3563,25 +3563,25 @@
       "recurring": "પુનરાવર્તિત સર્વે",
       "oneTime": "One-time",
       "monthly": "માસિક",
-      "quarterly": "Quarterly",
+      "quarterly": "ત્રિમાસિક",
       "biannual": "Bi-annually",
       "annual": "Annually",
       "autoClose": "Auto-close સર્વે પર અંત તારીખ",
       "reviewSummary": "સમીક્ષા & Launch",
       "untitled": "Untitled સર્વે",
-      "questionsCount": "Questions",
+      "questionsCount": "પ્રશ્નો",
       "anonymous": "Anonymous",
       "threshold": "threshold",
-      "audience": "Audience",
+      "audience": "પ્રેક્ષકો",
       "reminders": "રિમાઇન્ડર્સ",
       "questionPreview": "Question પૂર્વાવલોકન",
       "saveDraft": "સાચવો as ડ્રાફ્ટ",
       "launch": "Launch સર્વે"
     },
     "types": {
-      "engagement": "Engagement",
+      "engagement": "જોડાણ",
       "pulse": "Pulse",
-      "onboarding": "Onboarding",
+      "onboarding": "ઓનબોર્ડિંગ",
       "exit": "બહાર નીકળો",
       "dei": "ડીઈઆઈ",
       "manager": "મેનેજર Effectiveness",
@@ -3599,11 +3599,11 @@
       "support": "સપોર્ટ"
     },
     "categories": {
-      "engagement": "Engagement",
+      "engagement": "જોડાણ",
       "growth": "Growth",
-      "leadership": "Leadership",
+      "leadership": "નેતૃત્વ",
       "culture": "Culture",
-      "compensation": "Compensation",
+      "compensation": "વળતર",
       "workLifeBalance": "Work-Life બેલેન્સ"
     },
     "results": {
@@ -3611,8 +3611,8 @@
       "exportResults": "નિકાસ કરો પરિણામો",
       "overallScore": "Overall સ્કોર",
       "outOf5": "out નું 5.0",
-      "participation": "Participation",
-      "responded": "responded",
+      "participation": "ભાગીદારી",
+      "responded": "પ્રતિસાદ આપ્યો",
       "enps": "eNPS",
       "promoters": "પ",
       "passives": "ન",
@@ -3666,7 +3666,7 @@
         "avgScore": "avg સ્કોર"
       },
       "enabled": "Enabled",
-      "responded": "responded"
+      "responded": "પ્રતિસાદ આપ્યો"
     }
   },
   "entity": {
@@ -3976,7 +3976,7 @@
     "name": "નામ",
     "department": "વિભાગ",
     "score": "સ્કોર",
-    "trend": "Trend",
+    "trend": "ટ્રેન્ડ",
     "departmentComparison": "વિભાગ Comparison",
     "scoreTrendByDept": "સ્કોર Trend દ્વારા વિભાગ",
     "yourMomentumScore": "Your Momentum સ્કોર",

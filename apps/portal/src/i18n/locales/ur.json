@@ -95,12 +95,12 @@
       "talent": "ہنر",
       "people": "افراد",
       "engagement": "مصروفیت",
-      "myUplift": "MY UPLIFT",
-      "myWork": "MY WORK",
-      "myGrowth": "MY GROWTH",
-      "myMoney": "MY MONEY",
-      "myPeople": "MY PEOPLE",
-      "payroll": "PAYROLL"
+      "myUplift": "میرا اپلفٹ",
+      "myWork": "میرا کام",
+      "myGrowth": "میری ترقی",
+      "myMoney": "میرا پیسہ",
+      "myPeople": "میرے لوگ",
+      "payroll": "پے رول"
     },
     "payslips": "تنخواہ سلپس اور تنخواہ",
     "performance": "کارکردگی",
@@ -122,7 +122,7 @@
     "myPerformance": "My کارکردگی",
     "myLearning": "My سیکھنا",
     "mySkillsCareer": "My مہارتیں & Career",
-    "myPayslips": "My Payslips",
+    "myPayslips": "میری تنخواہ سلپس",
     "myExpenses": "My Expenses",
     "directory": "کمپنی Directory",
     "recognition": "شناخت Wall",
@@ -1068,7 +1068,7 @@
     "searchEmployeesPlaceholder": "تلاش کریں ملازمین...",
     "passwordPlaceholder": "Your پاس ورڈ",
     "unknownDevice": "Unknown Device",
-    "currentSession": "Current",
+    "currentSession": "موجودہ",
     "noActivityRecorded": "نہیں سرگرمی recorded",
     "noWebhooksConfigured": "نہیں webhooks configured",
     "addWebhookToIntegrate": "شامل کریں a webhook کو integrate کے ساتھ external systems",
@@ -1103,13 +1103,13 @@
       "subtitle": "Define custom کردار اور configure کیا each کردار can access",
       "addRole": "شامل کریں Custom کردار",
       "builtIn": "Built-in",
-      "custom": "Custom",
+      "custom": "اپنی مرضی کے مطابق",
       "roleName": "کردار نام",
       "roleNamePlaceholder": "e.g., شفٹ Supervisor",
       "description": "تفصیل",
       "descriptionPlaceholder": "کیا can صارفین کے ساتھ this کردار do?",
       "permissions": "Permissions",
-      "module": "Module",
+      "module": "ماڈیول",
       "permNone": "کوئی نہیں",
       "permRead": "Read",
       "permWrite": "Write",
@@ -1254,7 +1254,7 @@
       "title": "Portal Configuration",
       "subtitle": "Control کون سا modules are visible کے لیے each صارف کردار across portal اور موبائل",
       "moduleVisibility": "Module Visibility",
-      "colModule": "Module",
+      "colModule": "ماڈیول",
       "colWorkersPortal": "Workers (Portal)",
       "colWorkersMobile": "Workers (موبائل)",
       "colManagersPortal": "Managers (Portal)",
@@ -1283,15 +1283,15 @@
         "skills": "مہارتیں",
         "learning": "سیکھنا",
         "career": "Career / Opportunities",
-        "compensation": "Compensation",
+        "compensation": "معاوضہ",
         "expenses": "Expenses",
         "surveys": "Surveys",
         "documents": "دستاویزات",
         "reports": "رپورٹس",
         "directory": "کمپنی Directory",
         "recognition": "شناخت Wall",
-        "onboarding": "Onboarding",
-        "offboarding": "Offboarding"
+        "onboarding": "آن بورڈنگ",
+        "offboarding": "آف بورڈنگ"
       }
     }
   },
@@ -2759,7 +2759,7 @@
       "learningDesc": "تربیت & certifications",
       "analytics": "Analytics",
       "analyticsDesc": "BI & reporting tools",
-      "custom": "Custom",
+      "custom": "اپنی مرضی کے مطابق",
       "customDesc": "API & automation"
     },
     "providers": {
@@ -2835,7 +2835,7 @@
       "categoryTimeTracking": "وقت Tracking",
       "categoryTimeOff": "وقت آف",
       "categorySkills": "مہارتیں",
-      "categoryCareer": "Career"
+      "categoryCareer": "کیریئر"
     },
     "noIntegrationsFound": "نہیں integrations found",
     "noIntegrationsAvailable": "نہیں integrations are دستیاب yet.",
@@ -2928,7 +2928,7 @@
     "currentSalary": "موجودہ تنخواہ",
     "lastReview": "آخری جائزہ",
     "overtime": "اوور ٹائم",
-    "myPayslips": "My Payslips"
+    "myPayslips": "میری تنخواہ سلپس"
   },
   "learning": {
     "score": "سکور",
@@ -3035,7 +3035,7 @@
       "healthSafety": "Health & Safety",
       "compliance": "Compliance",
       "softSkills": "Soft مہارتیں",
-      "leadership": "Leadership"
+      "leadership": "قیادت"
     },
     "searchCourses": "تلاش کریں courses...",
     "allTypes": "سب Types",
@@ -3291,7 +3291,7 @@
     "statusCalibration": "Calibration",
     "statusCompleted": "مکمل",
     "typeAnnual": "Annual",
-    "typeQuarterly": "Quarterly",
+    "typeQuarterly": "سہ ماہی",
     "typeProbation": "Probation",
     "goals": "مقاصد",
     "okrs": "OKRs",
@@ -3320,7 +3320,7 @@
     "myTitle": "My کارکردگی",
     "mySubtitle": "Your reviews, مقاصد, اور development",
     "cycleTypes": {
-      "quarterly": "Quarterly",
+      "quarterly": "سہ ماہی",
       "annual": "Annual",
       "360": "360-Degree",
       "probation": "Probation"
@@ -3338,7 +3338,7 @@
       "development": "Development",
       "stretch": "Stretch"
     },
-    "current": "Current",
+    "current": "موجودہ",
     "target": "ہدف",
     "type360": "360-Degree",
     "type": "قسم",
@@ -3471,7 +3471,7 @@
       "type": "قسم",
       "status": "حیثیت",
       "responses": "Responses",
-      "participation": "Participation",
+      "participation": "شرکت",
       "enps": "eNPS",
       "closesOn": "Closes آن",
       "actions": "Actions"
@@ -3488,8 +3488,8 @@
     "builder": {
       "step1": "ٹیمپلیٹ",
       "step2": "تفصیلات",
-      "step3": "Questions",
-      "step4": "Audience",
+      "step3": "سوالات",
+      "step4": "سامعین",
       "step5": "شیڈول",
       "step6": "جائزہ",
       "rating5": "درجہ بندی 1-5",
@@ -3509,7 +3509,7 @@
       "anonymityThreshold": "Anonymity Threshold",
       "thresholdHelp": "Minimum responses ضروری پہلے نتائج are visible",
       "anonymousSurvey": "Anonymous Survey",
-      "questions": "Questions",
+      "questions": "سوالات",
       "required": "ضروری",
       "addQuestion": "شامل کریں a Question",
       "questionPlaceholder": "Enter your question...",
@@ -3563,25 +3563,25 @@
       "recurring": "بار بار Survey",
       "oneTime": "One-time",
       "monthly": "ماہانہ",
-      "quarterly": "Quarterly",
+      "quarterly": "سہ ماہی",
       "biannual": "Bi-annually",
       "annual": "Annually",
       "autoClose": "Auto-close survey پر اختتام تاریخ",
       "reviewSummary": "جائزہ & Launch",
       "untitled": "Untitled Survey",
-      "questionsCount": "Questions",
+      "questionsCount": "سوالات",
       "anonymous": "Anonymous",
       "threshold": "threshold",
-      "audience": "Audience",
+      "audience": "سامعین",
       "reminders": "یاد دہانیاں",
       "questionPreview": "Question پیش نظارہ",
       "saveDraft": "محفوظ کریں as ڈرافٹ",
       "launch": "Launch Survey"
     },
     "types": {
-      "engagement": "Engagement",
+      "engagement": "مشغولیت",
       "pulse": "Pulse",
-      "onboarding": "Onboarding",
+      "onboarding": "آن بورڈنگ",
       "exit": "باہر نکلیں",
       "dei": "ڈی ای آئی",
       "manager": "مینیجر Effectiveness",
@@ -3599,11 +3599,11 @@
       "support": "سپورٹ"
     },
     "categories": {
-      "engagement": "Engagement",
+      "engagement": "مشغولیت",
       "growth": "Growth",
-      "leadership": "Leadership",
+      "leadership": "قیادت",
       "culture": "Culture",
-      "compensation": "Compensation",
+      "compensation": "معاوضہ",
       "workLifeBalance": "Work-Life Balance"
     },
     "results": {
@@ -3611,8 +3611,8 @@
       "exportResults": "برآمد کریں نتائج",
       "overallScore": "Overall اسکور",
       "outOf5": "out کا 5.0",
-      "participation": "Participation",
-      "responded": "responded",
+      "participation": "شرکت",
+      "responded": "جواب دیا",
       "enps": "eNPS",
       "promoters": "پ",
       "passives": "ن",
@@ -3666,7 +3666,7 @@
         "avgScore": "avg اسکور"
       },
       "enabled": "Enabled",
-      "responded": "responded"
+      "responded": "جواب دیا"
     }
   },
   "entity": {
@@ -3976,7 +3976,7 @@
     "name": "نام",
     "department": "شعبہ",
     "score": "اسکور",
-    "trend": "Trend",
+    "trend": "رجحان",
     "departmentComparison": "شعبہ Comparison",
     "scoreTrendByDept": "اسکور Trend کے ذریعے شعبہ",
     "yourMomentumScore": "Your Momentum اسکور",

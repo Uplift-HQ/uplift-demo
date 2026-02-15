@@ -1813,7 +1813,7 @@
     "allDepartments": "అన్ని విభాగాలు",
     "nameLabel": "పేరు:",
     "typeLabel": "Type:",
-    "period": "Period",
+    "period": "కాలం",
     "date": "తేదీ",
     "location": "స్థానం",
     "department": "విభాగం",
@@ -1849,7 +1849,7 @@
       "openShifts": "खाली शिफ्ट",
       "fillRate": "भरण दर",
       "employee": "ఉద్యోగి",
-      "period": "Period",
+      "period": "కాలం",
       "regularCost": "Regular Cost",
       "overtimeCost": "Overtime Cost",
       "totalCost": "Total Cost"

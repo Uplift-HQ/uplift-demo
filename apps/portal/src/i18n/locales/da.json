@@ -122,7 +122,7 @@
     "myPerformance": "My Præstation",
     "myLearning": "My Læring",
     "mySkillsCareer": "My Kompetencer & Career",
-    "myPayslips": "My Payslips",
+    "myPayslips": "Mine lønsedler",
     "myExpenses": "My Expenses",
     "directory": "Virksomhed Directory",
     "recognition": "Anerkendelse Wall",
@@ -706,7 +706,7 @@
     "startDate": "Startdato",
     "employeeId": "Medarbejder-ID",
     "manager": "Leder",
-    "team": "Team",
+    "team": "Hold",
     "changePhoto": "Skift foto",
     "skills": "Kompetencer",
     "certifications": "Certifikater",
@@ -1103,13 +1103,13 @@
       "subtitle": "Define custom Roller Og configure Hvad each Rolle can access",
       "addRole": "Tilføj Custom Rolle",
       "builtIn": "Built-in",
-      "custom": "Custom",
+      "custom": "Tilpasset",
       "roleName": "Rolle Navn",
       "roleNamePlaceholder": "e.g., Vagt Supervisor",
       "description": "Beskrivelse",
       "descriptionPlaceholder": "Hvad can Brugere Med this Rolle do?",
       "permissions": "Permissions",
-      "module": "Module",
+      "module": "Modul",
       "permNone": "Ingen",
       "permRead": "Read",
       "permWrite": "Write",
@@ -1254,7 +1254,7 @@
       "title": "Portal Configuration",
       "subtitle": "Control Hvilken modules are visible for each Bruger Rolle across portal Og Mobil",
       "moduleVisibility": "Module Visibility",
-      "colModule": "Module",
+      "colModule": "Modul",
       "colWorkersPortal": "Workers (Portal)",
       "colWorkersMobile": "Workers (Mobil)",
       "colManagersPortal": "Managers (Portal)",
@@ -1283,7 +1283,7 @@
         "skills": "Kompetencer",
         "learning": "Læring",
         "career": "Career / Opportunities",
-        "compensation": "Compensation",
+        "compensation": "Kompensation",
         "expenses": "Expenses",
         "surveys": "Surveys",
         "documents": "Dokumenter",
@@ -1620,7 +1620,7 @@
     "status": {
       "onTrack": "På sporet",
       "atRisk": "I risiko",
-      "overdue": "Overdue"
+      "overdue": "Forfalden"
     },
     "noTaskDetails": "Detailed Opgave breakdown Ikke Tilgængelig for this Medarbejder.",
     "templatesTitle": "Onboarding-skabeloner",
@@ -1813,7 +1813,7 @@
     "allDepartments": "Alle afdelinger",
     "nameLabel": "Name:",
     "typeLabel": "Type:",
-    "period": "Period",
+    "period": "Periode",
     "date": "Dato",
     "location": "Placering",
     "department": "Afdeling",
@@ -1849,7 +1849,7 @@
       "openShifts": "Åbne Vagter",
       "fillRate": "Udfyldningsrate",
       "employee": "Medarbejder",
-      "period": "Period",
+      "period": "Periode",
       "regularCost": "Normal omkostning",
       "overtimeCost": "Overtidsomkostning",
       "totalCost": "Samlet omkostning"
@@ -2928,7 +2928,7 @@
     "currentSalary": "Nuværende løn",
     "lastReview": "Seneste revision",
     "overtime": "Overarbejde",
-    "myPayslips": "My Payslips"
+    "myPayslips": "Mine lønsedler"
   },
   "learning": {
     "score": "Score",
@@ -3035,7 +3035,7 @@
       "healthSafety": "Health & Safety",
       "compliance": "Compliance",
       "softSkills": "Soft Kompetencer",
-      "leadership": "Leadership"
+      "leadership": "Ledelse"
     },
     "searchCourses": "Søg courses...",
     "allTypes": "Alle Types",
@@ -3059,7 +3059,7 @@
       "enrolled": "Enrolled",
       "inProgress": "I gang",
       "completed": "Fuldført",
-      "overdue": "Overdue",
+      "overdue": "Forfalden",
       "failed": "Failed"
     },
     "allStatuses": "Alle Statuses",
@@ -3071,7 +3071,7 @@
     "employee": "Medarbejder",
     "actions": "Actions",
     "overallCompliance": "Overall Compliance",
-    "overdueCount": "Overdue",
+    "overdueCount": "Forfalden",
     "mandatoryCourses": "Mandatory Courses",
     "courseCompliance": "Kursus Compliance",
     "sendReminderAll": "Send Påmindelse Til Alle Overdue",
@@ -3095,7 +3095,7 @@
       "completionRate": "Completion Rate",
       "avgScore": "Avg Score",
       "certificates": "Certificates",
-      "overdue": "Overdue"
+      "overdue": "Forfalden"
     },
     "completionByDept": "Completion by Afdeling",
     "noDeptData": "Nej Afdeling data Tilgængelig",
@@ -3320,8 +3320,8 @@
     "myTitle": "My Præstation",
     "mySubtitle": "Your reviews, Mål, Og development",
     "cycleTypes": {
-      "quarterly": "Quarterly",
-      "annual": "Annual",
+      "quarterly": "Kvartalsvis",
+      "annual": "Årlig",
       "360": "360-Degree",
       "probation": "Probation"
     },
@@ -3329,7 +3329,7 @@
     "levels": {
       "company": "Virksomhed",
       "department": "Afdeling",
-      "team": "Team",
+      "team": "Hold",
       "individual": "Individual"
     },
     "category": "Category",
@@ -3338,7 +3338,7 @@
       "development": "Development",
       "stretch": "Stretch"
     },
-    "current": "Current",
+    "current": "Nuværende",
     "target": "Mål",
     "type360": "360-Degree",
     "type": "Type",
@@ -3471,7 +3471,7 @@
       "type": "Type",
       "status": "Status",
       "responses": "Responses",
-      "participation": "Participation",
+      "participation": "Deltagelse",
       "enps": "eNPS",
       "closesOn": "Closes Til",
       "actions": "Actions"
@@ -3488,8 +3488,8 @@
     "builder": {
       "step1": "Skabelon",
       "step2": "Detaljer",
-      "step3": "Questions",
-      "step4": "Audience",
+      "step3": "Spørgsmål",
+      "step4": "Målgruppe",
       "step5": "Tidsplan",
       "step6": "Gennemgang",
       "rating5": "Bedømmelse 1-5",
@@ -3505,11 +3505,11 @@
       "namePlaceholder": "e.g., Q1 2026 Medarbejder Engagement Survey",
       "description": "Beskrivelse",
       "descriptionPlaceholder": "Briefly describe the purpose of this survey...",
-      "surveyType": "Survey Type",
+      "surveyType": "Undersøgelsestype",
       "anonymityThreshold": "Anonymity Threshold",
       "thresholdHelp": "Minimum responses Påkrævet Før Resultater are visible",
       "anonymousSurvey": "Anonymous Survey",
-      "questions": "Questions",
+      "questions": "Spørgsmål",
       "required": "Påkrævet",
       "addQuestion": "Tilføj a Question",
       "questionPlaceholder": "Enter your question...",
@@ -3563,16 +3563,16 @@
       "recurring": "Tilbagevendende Survey",
       "oneTime": "One-time",
       "monthly": "Månedlig",
-      "quarterly": "Quarterly",
+      "quarterly": "Kvartalsvis",
       "biannual": "Bi-annually",
       "annual": "Annually",
       "autoClose": "Auto-close survey Til Slut Dato",
       "reviewSummary": "Gennemgang & Launch",
-      "untitled": "Untitled Survey",
-      "questionsCount": "Questions",
+      "untitled": "Unavngivet undersøgelse",
+      "questionsCount": "Spørgsmål",
       "anonymous": "Anonymous",
       "threshold": "threshold",
-      "audience": "Audience",
+      "audience": "Målgruppe",
       "reminders": "Påmindelser",
       "questionPreview": "Question Forhåndsvisning",
       "saveDraft": "Gem as Kladde",
@@ -3601,9 +3601,9 @@
     "categories": {
       "engagement": "Engagement",
       "growth": "Growth",
-      "leadership": "Leadership",
+      "leadership": "Ledelse",
       "culture": "Culture",
-      "compensation": "Compensation",
+      "compensation": "Kompensation",
       "workLifeBalance": "Work-Life Balance"
     },
     "results": {
@@ -3611,8 +3611,8 @@
       "exportResults": "Eksporter Resultater",
       "overallScore": "Overall Score",
       "outOf5": "out of 5.0",
-      "participation": "Participation",
-      "responded": "responded",
+      "participation": "Deltagelse",
+      "responded": "svarede",
       "enps": "eNPS",
       "promoters": "P",
       "passives": "N",
@@ -3666,7 +3666,7 @@
         "avgScore": "avg Score"
       },
       "enabled": "Enabled",
-      "responded": "responded"
+      "responded": "svarede"
     }
   },
   "entity": {
@@ -3860,7 +3860,7 @@
     "month": "Måned",
     "skills": "Færdigheder",
     "performance": "Præstation",
-    "total": "Total"
+    "total": "I alt"
   },
   "recognition": {
     "title": "Anerkendelsesvæggen",
@@ -4041,7 +4041,7 @@
       "history": "Eksporthistorik",
       "exportDate": "Eksportdato",
       "claims": "Krav",
-      "total": "Total",
+      "total": "I alt",
       "exportedBy": "Eksporteret af",
       "download": "Download",
       "noExports": "Ingen eksporter endnu",

@@ -1270,7 +1270,7 @@
       "title": "Portal Configuration",
       "subtitle": "Control Vilken modules are visible for each Användare Roll across portal Och Mobil",
       "moduleVisibility": "Module Visibility",
-      "colModule": "Module",
+      "colModule": "Modul",
       "colWorkersPortal": "Workers (Portal)",
       "colWorkersMobile": "Workers (Mobil)",
       "colManagersPortal": "Managers (Portal)",
@@ -1299,7 +1299,7 @@
         "skills": "Färdigheter",
         "learning": "Lärande",
         "career": "Career / Opportunities",
-        "compensation": "Compensation",
+        "compensation": "Kompensation",
         "expenses": "Expenses",
         "surveys": "Surveys",
         "documents": "Dokument",
@@ -2946,7 +2946,7 @@
     "currentSalary": "Nuvarande lön",
     "lastReview": "Senaste granskning",
     "overtime": "Övertid",
-    "myPayslips": "My Payslips"
+    "myPayslips": "Mina lönebesked"
   },
   "learning": {
     "score": "Poäng",
@@ -3489,7 +3489,7 @@
       "type": "Typ",
       "status": "Status",
       "responses": "Responses",
-      "participation": "Participation",
+      "participation": "Deltagande",
       "enps": "eNPS",
       "closesOn": "Closes På",
       "actions": "Actions"
@@ -3506,8 +3506,8 @@
     "builder": {
       "step1": "Mall",
       "step2": "Detaljer",
-      "step3": "Questions",
-      "step4": "Audience",
+      "step3": "Frågor",
+      "step4": "Målgrupp",
       "step5": "Schema",
       "step6": "Granskning",
       "rating5": "Betyg 1-5",
@@ -3527,7 +3527,7 @@
       "anonymityThreshold": "Anonymity Threshold",
       "thresholdHelp": "Minimum responses Obligatoriskt Före Resultat are visible",
       "anonymousSurvey": "Anonymous Survey",
-      "questions": "Questions",
+      "questions": "Frågor",
       "required": "Obligatoriskt",
       "addQuestion": "Lägg till a Question",
       "questionPlaceholder": "Enter your question...",
@@ -3581,23 +3581,23 @@
       "recurring": "Återkommande Survey",
       "oneTime": "One-time",
       "monthly": "Månadsvis",
-      "quarterly": "Quarterly",
+      "quarterly": "Kvartalsvis",
       "biannual": "Bi-annually",
       "annual": "Annually",
       "autoClose": "Auto-close survey På Slut Datum",
       "reviewSummary": "Granskning & Launch",
-      "untitled": "Untitled Survey",
-      "questionsCount": "Questions",
+      "untitled": "Namnlös undersökning",
+      "questionsCount": "Frågor",
       "anonymous": "Anonymous",
       "threshold": "threshold",
-      "audience": "Audience",
+      "audience": "Målgrupp",
       "reminders": "Påminnelser",
       "questionPreview": "Question Förhandsgranska",
       "saveDraft": "Spara as Utkast",
       "launch": "Launch Survey"
     },
     "types": {
-      "engagement": "Engagement",
+      "engagement": "Engagemang",
       "pulse": "Pulse",
       "onboarding": "Onboarding",
       "exit": "Avsluta",
@@ -3617,11 +3617,11 @@
       "support": "Support"
     },
     "categories": {
-      "engagement": "Engagement",
+      "engagement": "Engagemang",
       "growth": "Growth",
-      "leadership": "Leadership",
+      "leadership": "Ledarskap",
       "culture": "Culture",
-      "compensation": "Compensation",
+      "compensation": "Kompensation",
       "workLifeBalance": "Work-Life Balance"
     },
     "results": {
@@ -3629,8 +3629,8 @@
       "exportResults": "Exportera Resultat",
       "overallScore": "Overall Poäng",
       "outOf5": "out of 5.0",
-      "participation": "Participation",
-      "responded": "responded",
+      "participation": "Deltagande",
+      "responded": "svarade",
       "enps": "eNPS",
       "promoters": "P",
       "passives": "N",
@@ -3684,7 +3684,7 @@
         "avgScore": "avg Poäng"
       },
       "enabled": "Enabled",
-      "responded": "responded"
+      "responded": "svarade"
     }
   },
   "entity": {
