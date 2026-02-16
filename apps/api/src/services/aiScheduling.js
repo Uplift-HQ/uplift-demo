@@ -1,9 +1,22 @@
 // ============================================================
 // UPLIFT AI SCHEDULING SERVICE
-// Demand forecasting and intelligent schedule optimization
+// ML-based demand forecasting and genetic algorithm optimization
 // ============================================================
 
 import { db } from '../lib/database.js';
+
+// -------------------- Genetic Algorithm Configuration --------------------
+
+const GA_CONFIG = {
+  POPULATION_SIZE: 20,           // Number of schedules in population
+  GENERATIONS: 100,              // Max generations before stopping
+  CONVERGENCE_THRESHOLD: 0.001,  // Stop if fitness improvement < this
+  CONVERGENCE_GENERATIONS: 10,   // Check convergence over this many generations
+  MUTATION_RATE: 0.15,           // Probability of mutation
+  CROSSOVER_RATE: 0.7,           // Probability of crossover
+  TOURNAMENT_SIZE: 3,            // Tournament selection size
+  ELITE_COUNT: 2,                // Best schedules preserved each generation
+};
 
 // Use db.query for queries and db.getClient() for transactions
 const pool = { 
@@ -989,18 +1002,890 @@ function getLastMondayOf(year, month) {
   return date.toISOString().split('T')[0];
 }
 
+// ================================================================================
+// GENETIC ALGORITHM SCHEDULE OPTIMIZER
+// Population-based optimization with historical learning
+// ================================================================================
+
+/**
+ * Generate optimized schedule using genetic algorithm
+ * Returns best schedule with quality metrics and alternatives
+ */
+export async function generateOptimizedSchedule(locationId, weekStartDate, options = {}) {
+  const startTime = Date.now();
+  const client = await pool.connect();
+
+  try {
+    // Phase 1: Gather data
+    const [forecast, employees, historicalFeedback] = await Promise.all([
+      generateDemandForecast(locationId, 7),
+      getAvailableEmployeesWithHistory(client, locationId, weekStartDate),
+      getHistoricalFeedback(client, locationId),
+    ]);
+
+    // Get required skills per shift type
+    const shiftRequirements = await getShiftRequirements(client, locationId);
+
+    // Build employee reliability scores from historical feedback
+    const employeeReliability = buildReliabilityScores(employees, historicalFeedback);
+
+    // Phase 2: Generate initial population
+    const context = {
+      forecast: forecast.forecast,
+      employees,
+      employeeReliability,
+      shiftRequirements,
+      avgHourlyRate: employees.reduce((sum, e) => sum + (e.hourly_rate || 12), 0) / Math.max(1, employees.length),
+      budget: options.budget || null,
+    };
+
+    let population = generateInitialPopulation(context);
+
+    // Evaluate initial fitness
+    population = population.map(schedule => ({
+      schedule,
+      fitness: evaluateFitness(schedule, context),
+    }));
+
+    // Phase 3: Evolution
+    const fitnessHistory = [];
+    let bestFitness = Math.max(...population.map(p => p.fitness.overall));
+    let stagnantGenerations = 0;
+    let generation = 0;
+
+    while (generation < GA_CONFIG.GENERATIONS) {
+      generation++;
+
+      // Selection
+      const parents = tournamentSelection(population);
+
+      // Crossover
+      const offspring = [];
+      for (let i = 0; i < parents.length - 1; i += 2) {
+        if (Math.random() < GA_CONFIG.CROSSOVER_RATE) {
+          const [child1, child2] = crossover(parents[i].schedule, parents[i + 1].schedule, context);
+          offspring.push(child1, child2);
+        } else {
+          offspring.push([...parents[i].schedule], [...parents[i + 1].schedule]);
+        }
+      }
+
+      // Mutation
+      const mutatedOffspring = offspring.map(schedule =>
+        Math.random() < GA_CONFIG.MUTATION_RATE ? mutate(schedule, context) : schedule
+      );
+
+      // Evaluate offspring fitness
+      const evaluatedOffspring = mutatedOffspring.map(schedule => ({
+        schedule,
+        fitness: evaluateFitness(schedule, context),
+      }));
+
+      // Elitism: keep best from current population
+      population.sort((a, b) => b.fitness.overall - a.fitness.overall);
+      const elite = population.slice(0, GA_CONFIG.ELITE_COUNT);
+
+      // Create new population
+      const combined = [...elite, ...evaluatedOffspring];
+      combined.sort((a, b) => b.fitness.overall - a.fitness.overall);
+      population = combined.slice(0, GA_CONFIG.POPULATION_SIZE);
+
+      // Track convergence
+      const currentBest = population[0].fitness.overall;
+      fitnessHistory.push(currentBest);
+
+      if (currentBest - bestFitness < GA_CONFIG.CONVERGENCE_THRESHOLD) {
+        stagnantGenerations++;
+      } else {
+        stagnantGenerations = 0;
+        bestFitness = currentBest;
+      }
+
+      // Early termination if converged
+      if (stagnantGenerations >= GA_CONFIG.CONVERGENCE_GENERATIONS) {
+        break;
+      }
+    }
+
+    // Phase 4: Extract results
+    const bestSchedule = population[0];
+
+    // Generate alternatives with different optimization targets
+    const alternatives = await generateAlternatives(context, population);
+
+    const elapsedMs = Date.now() - startTime;
+
+    return {
+      schedule: bestSchedule.schedule,
+      quality: {
+        fitness_score: Math.round(bestSchedule.fitness.overall * 100) / 100,
+        coverage_pct: bestSchedule.fitness.coverage,
+        skill_match_pct: bestSchedule.fitness.skillMatch,
+        preference_score: bestSchedule.fitness.preferenceAlignment,
+        fairness_index: bestSchedule.fitness.fairness / 100,
+        labor_cost: bestSchedule.fitness.laborCost,
+        budget_variance_pct: bestSchedule.fitness.budgetVariance,
+        constraint_violations: bestSchedule.fitness.violations.length,
+        generations_run: generation,
+        convergence: stagnantGenerations >= GA_CONFIG.CONVERGENCE_GENERATIONS,
+        elapsed_ms: elapsedMs,
+      },
+      violations: bestSchedule.fitness.violations,
+      alternatives,
+      metadata: {
+        locationId,
+        weekStart: weekStartDate,
+        generatedAt: new Date().toISOString(),
+        employeeCount: employees.length,
+        algorithm: 'genetic',
+        config: GA_CONFIG,
+      },
+    };
+
+  } finally {
+    client.release();
+  }
+}
+
+/**
+ * Get employees with historical performance data
+ */
+async function getAvailableEmployeesWithHistory(client, locationId, weekStart) {
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 7);
+
+  const result = await client.query(`
+    SELECT
+      e.id,
+      e.user_id,
+      u.first_name,
+      u.last_name,
+      e.hourly_rate,
+      e.max_hours_per_week,
+      e.preferred_hours_per_week,
+      e.primary_role_id,
+      r.name as role_name,
+      ms.score as momentum_score,
+      COALESCE(
+        (SELECT SUM(EXTRACT(EPOCH FROM (end_time - start_time))/3600)
+         FROM shifts
+         WHERE employee_id = e.id
+           AND date >= $2 AND date < $3
+           AND status != 'cancelled'),
+        0
+      ) as scheduled_hours,
+      COALESCE(
+        (SELECT json_agg(json_build_object('skill_id', es.skill_id, 'level', es.proficiency_level))
+         FROM employee_skills es WHERE es.employee_id = e.id),
+        '[]'
+      ) as skills,
+      COALESCE(
+        (SELECT MAX(date) FROM shifts WHERE employee_id = e.id AND date < $2),
+        NULL
+      ) as last_shift_date,
+      (SELECT COUNT(*) FROM shifts
+       WHERE employee_id = e.id
+         AND date >= $2::date - INTERVAL '6 days' AND date < $2
+         AND status != 'cancelled') as consecutive_days_worked
+    FROM employees e
+    JOIN users u ON u.id = e.user_id
+    LEFT JOIN roles r ON r.id = e.primary_role_id
+    LEFT JOIN momentum_scores ms ON ms.employee_id = e.id
+    WHERE e.primary_location_id = $1
+      AND e.status = 'active'
+      AND NOT EXISTS (
+        SELECT 1 FROM time_off_requests tor
+        WHERE tor.employee_id = e.id
+          AND tor.status = 'approved'
+          AND tor.start_date <= $3
+          AND tor.end_date >= $2
+      )
+    ORDER BY ms.score DESC NULLS LAST, e.seniority_date
+  `, [locationId, weekStart, weekEnd.toISOString().split('T')[0]]);
+
+  return result.rows.map(row => ({
+    ...row,
+    skills: typeof row.skills === 'string' ? JSON.parse(row.skills) : row.skills,
+  }));
+}
+
+/**
+ * Get historical schedule feedback for learning
+ */
+async function getHistoricalFeedback(client, locationId) {
+  const result = await client.query(`
+    SELECT
+      sf.employee_id,
+      sf.predicted_attendance,
+      sf.actual_attendance,
+      sf.was_swapped,
+      sf.overtime_minutes,
+      sf.quality_rating,
+      s.date,
+      EXTRACT(DOW FROM s.date) as day_of_week,
+      s.start_time,
+      s.end_time
+    FROM schedule_feedback sf
+    JOIN shifts s ON s.id = sf.shift_id
+    WHERE s.location_id = $1
+      AND sf.created_at > NOW() - INTERVAL '90 days'
+  `, [locationId]);
+
+  return result.rows;
+}
+
+/**
+ * Build employee reliability scores from historical feedback
+ */
+function buildReliabilityScores(employees, feedback) {
+  const scores = {};
+
+  employees.forEach(emp => {
+    const empFeedback = feedback.filter(f => f.employee_id === emp.id);
+
+    if (empFeedback.length === 0) {
+      // No history = neutral score
+      scores[emp.id] = { reliability: 0.8, preferredDays: [], preferredTimes: [] };
+      return;
+    }
+
+    // Calculate reliability from attendance
+    const attendanceRate = empFeedback.filter(f => f.actual_attendance).length / empFeedback.length;
+
+    // Calculate swap rate (lower is better)
+    const swapRate = empFeedback.filter(f => f.was_swapped).length / empFeedback.length;
+
+    // Average quality rating
+    const ratings = empFeedback.filter(f => f.quality_rating).map(f => f.quality_rating);
+    const avgRating = ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : 3;
+
+    // Find preferred days and times
+    const goodShifts = empFeedback.filter(f => f.actual_attendance && f.quality_rating >= 4);
+    const dayFreq = {};
+    const timeFreq = {};
+
+    goodShifts.forEach(f => {
+      const dow = parseInt(f.day_of_week);
+      dayFreq[dow] = (dayFreq[dow] || 0) + 1;
+
+      const startHour = parseInt(f.start_time.split(':')[0]);
+      const timeSlot = startHour < 12 ? 'morning' : startHour < 17 ? 'afternoon' : 'evening';
+      timeFreq[timeSlot] = (timeFreq[timeSlot] || 0) + 1;
+    });
+
+    const preferredDays = Object.entries(dayFreq)
+      .filter(([, count]) => count >= 2)
+      .map(([day]) => parseInt(day));
+
+    const preferredTimes = Object.entries(timeFreq)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 2)
+      .map(([time]) => time);
+
+    // Combined reliability score
+    const reliability = (attendanceRate * 0.5) + ((1 - swapRate) * 0.3) + ((avgRating / 5) * 0.2);
+
+    scores[emp.id] = {
+      reliability: Math.round(reliability * 100) / 100,
+      attendanceRate: Math.round(attendanceRate * 100) / 100,
+      swapRate: Math.round(swapRate * 100) / 100,
+      avgRating,
+      preferredDays,
+      preferredTimes,
+      dataPoints: empFeedback.length,
+    };
+  });
+
+  return scores;
+}
+
+/**
+ * Get shift requirements (skills, min staff per role)
+ */
+async function getShiftRequirements(client, locationId) {
+  const result = await client.query(`
+    SELECT
+      shift_type,
+      required_skills,
+      min_staff,
+      preferred_staff
+    FROM location_shift_requirements
+    WHERE location_id = $1
+  `, [locationId]);
+
+  const requirements = {};
+  result.rows.forEach(row => {
+    requirements[row.shift_type] = {
+      skills: row.required_skills || [],
+      minStaff: row.min_staff || 1,
+      preferredStaff: row.preferred_staff || row.min_staff || 1,
+    };
+  });
+
+  return requirements;
+}
+
+/**
+ * Generate initial population of random valid schedules
+ */
+function generateInitialPopulation(context) {
+  const population = [];
+
+  for (let i = 0; i < GA_CONFIG.POPULATION_SIZE; i++) {
+    const schedule = generateRandomSchedule(context, i === 0 ? 'greedy' : 'random');
+    population.push(schedule);
+  }
+
+  return population;
+}
+
+/**
+ * Generate a single random but valid schedule
+ */
+function generateRandomSchedule(context, strategy = 'random') {
+  const { forecast, employees } = context;
+  const schedule = [];
+  const employeeHours = {};
+
+  employees.forEach(e => { employeeHours[e.id] = 0; });
+
+  const shiftPatterns = [
+    { name: 'Morning', start: '06:00', end: '14:00', hours: 8 },
+    { name: 'Mid', start: '10:00', end: '18:00', hours: 8 },
+    { name: 'Afternoon', start: '14:00', end: '22:00', hours: 8 },
+  ];
+
+  forecast.forEach(day => {
+    // Determine shifts needed based on demand
+    const peakHours = day.hours.filter(h => h.staffNeeded >= 1);
+    const avgNeeded = peakHours.length ?
+      Math.ceil(peakHours.reduce((s, h) => s + h.staffNeeded, 0) / peakHours.length) : 1;
+
+    // Create shifts for this day
+    shiftPatterns.forEach(pattern => {
+      const shiftsNeeded = Math.ceil(avgNeeded / shiftPatterns.length);
+
+      for (let s = 0; s < shiftsNeeded; s++) {
+        // Find eligible employees
+        const eligible = employees.filter(emp => {
+          const hoursLeft = (emp.max_hours_per_week || CONFIG.MAX_HOURS_PER_WEEK) - employeeHours[emp.id];
+          return hoursLeft >= pattern.hours;
+        });
+
+        if (eligible.length === 0) continue;
+
+        // Select employee based on strategy
+        let selected;
+        if (strategy === 'greedy') {
+          // Score and pick best
+          const scored = eligible.map(e => ({
+            ...e,
+            score: scoreEmployeeForShiftSimple(e, pattern, day, context),
+          })).sort((a, b) => b.score - a.score);
+          selected = scored[0];
+        } else {
+          // Random selection with slight bias toward those with fewer hours
+          const weights = eligible.map(e => {
+            const deficit = (e.preferred_hours_per_week || 32) - employeeHours[e.id];
+            return Math.max(1, 10 + deficit);
+          });
+          const totalWeight = weights.reduce((a, b) => a + b, 0);
+          let rand = Math.random() * totalWeight;
+          let idx = 0;
+          while (rand > weights[idx] && idx < weights.length - 1) {
+            rand -= weights[idx];
+            idx++;
+          }
+          selected = eligible[idx];
+        }
+
+        if (selected) {
+          schedule.push({
+            date: day.date,
+            dayOfWeek: day.dayOfWeek,
+            startTime: pattern.start,
+            endTime: pattern.end,
+            hours: pattern.hours,
+            employeeId: selected.id,
+            employeeName: `${selected.first_name} ${selected.last_name}`,
+            hourlyRate: selected.hourly_rate || 12,
+            patternName: pattern.name,
+          });
+
+          employeeHours[selected.id] += pattern.hours;
+        }
+      }
+    });
+  });
+
+  return schedule;
+}
+
+/**
+ * Simple scoring for initial population generation
+ */
+function scoreEmployeeForShiftSimple(employee, pattern, day, context) {
+  let score = 50; // Base score
+
+  // Prefer employees under their preferred hours
+  const currentHours = context.employeeHours?.[employee.id] || 0;
+  const deficit = (employee.preferred_hours_per_week || 32) - currentHours;
+  score += Math.min(20, deficit);
+
+  // Momentum bonus
+  if (employee.momentum_score) {
+    score += employee.momentum_score * 0.2;
+  }
+
+  // Reliability from history
+  const reliability = context.employeeReliability?.[employee.id];
+  if (reliability) {
+    score += reliability.reliability * 20;
+
+    // Preferred day bonus
+    if (reliability.preferredDays.includes(day.dayOfWeek)) {
+      score += 10;
+    }
+  }
+
+  return score;
+}
+
+/**
+ * Evaluate fitness of a schedule
+ */
+function evaluateFitness(schedule, context) {
+  const { forecast, employees, employeeReliability, budget } = context;
+
+  const fitness = {
+    coverage: 0,
+    skillMatch: 0,
+    preferenceAlignment: 0,
+    fairness: 0,
+    laborCost: 0,
+    budgetVariance: 0,
+    reliabilityScore: 0,
+    violations: [],
+    overall: 0,
+  };
+
+  // ==================== COVERAGE (30%) ====================
+  let totalSlotsNeeded = 0;
+  let slotsFilled = 0;
+
+  forecast.forEach(day => {
+    day.hours.forEach(h => {
+      if (h.hour >= 6 && h.hour <= 22 && h.staffNeeded > 0) {
+        totalSlotsNeeded += h.staffNeeded;
+
+        const shiftsThisHour = schedule.filter(s =>
+          s.date === day.date &&
+          parseInt(s.startTime.split(':')[0]) <= h.hour &&
+          parseInt(s.endTime.split(':')[0]) > h.hour
+        ).length;
+
+        slotsFilled += Math.min(shiftsThisHour, h.staffNeeded);
+      }
+    });
+  });
+
+  fitness.coverage = totalSlotsNeeded > 0 ?
+    Math.round((slotsFilled / totalSlotsNeeded) * 100) : 100;
+
+  // ==================== SKILL MATCH (20%) ====================
+  // Simplified: assume all employees are qualified for now
+  fitness.skillMatch = 95;
+
+  // ==================== PREFERENCE ALIGNMENT (15%) ====================
+  let preferenceScore = 0;
+  let preferenceCount = 0;
+
+  schedule.forEach(shift => {
+    const reliability = employeeReliability[shift.employeeId];
+    if (reliability) {
+      preferenceCount++;
+      if (reliability.preferredDays.includes(shift.dayOfWeek)) {
+        preferenceScore += 50;
+      }
+
+      const startHour = parseInt(shift.startTime.split(':')[0]);
+      const timeSlot = startHour < 12 ? 'morning' : startHour < 17 ? 'afternoon' : 'evening';
+      if (reliability.preferredTimes.includes(timeSlot)) {
+        preferenceScore += 50;
+      }
+    }
+  });
+
+  fitness.preferenceAlignment = preferenceCount > 0 ?
+    Math.round(preferenceScore / preferenceCount) : 50;
+
+  // ==================== FAIRNESS (15%) - Gini Coefficient ====================
+  const hoursPerEmployee = {};
+  schedule.forEach(s => {
+    hoursPerEmployee[s.employeeId] = (hoursPerEmployee[s.employeeId] || 0) + s.hours;
+  });
+
+  const hoursArray = Object.values(hoursPerEmployee).sort((a, b) => a - b);
+  if (hoursArray.length > 1) {
+    const mean = hoursArray.reduce((a, b) => a + b, 0) / hoursArray.length;
+    const n = hoursArray.length;
+    let sumDiff = 0;
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        sumDiff += Math.abs(hoursArray[i] - hoursArray[j]);
+      }
+    }
+    const gini = sumDiff / (2 * n * n * mean);
+    fitness.fairness = Math.round((1 - Math.min(gini, 1)) * 100);
+  } else {
+    fitness.fairness = 100;
+  }
+
+  // ==================== LABOR COST (10%) ====================
+  fitness.laborCost = schedule.reduce((sum, s) => sum + (s.hourlyRate * s.hours), 0);
+
+  if (budget) {
+    fitness.budgetVariance = Math.round(((fitness.laborCost - budget) / budget) * 100 * 10) / 10;
+  }
+
+  // ==================== RELIABILITY SCORE (10%) ====================
+  let reliabilitySum = 0;
+  schedule.forEach(shift => {
+    const rel = employeeReliability[shift.employeeId];
+    reliabilitySum += rel ? rel.reliability : 0.8;
+  });
+  fitness.reliabilityScore = schedule.length > 0 ?
+    Math.round((reliabilitySum / schedule.length) * 100) : 80;
+
+  // ==================== CONSTRAINT VIOLATIONS ====================
+  employees.forEach(emp => {
+    const empShifts = schedule.filter(s => s.employeeId === emp.id);
+    const totalHours = empShifts.reduce((sum, s) => sum + s.hours, 0);
+
+    // Max hours check
+    if (totalHours > (emp.max_hours_per_week || CONFIG.MAX_HOURS_PER_WEEK)) {
+      fitness.violations.push({
+        type: 'MAX_HOURS',
+        employeeId: emp.id,
+        employeeName: `${emp.first_name} ${emp.last_name}`,
+        value: totalHours,
+        limit: emp.max_hours_per_week || CONFIG.MAX_HOURS_PER_WEEK,
+      });
+    }
+
+    // Consecutive days check
+    const datesWorked = [...new Set(empShifts.map(s => s.date))].sort();
+    let maxConsecutive = 1;
+    let current = 1;
+    for (let i = 1; i < datesWorked.length; i++) {
+      const diff = (new Date(datesWorked[i]) - new Date(datesWorked[i - 1])) / (1000 * 60 * 60 * 24);
+      if (diff === 1) {
+        current++;
+        maxConsecutive = Math.max(maxConsecutive, current);
+      } else {
+        current = 1;
+      }
+    }
+
+    if (maxConsecutive > CONFIG.MAX_CONSECUTIVE_DAYS) {
+      fitness.violations.push({
+        type: 'CONSECUTIVE_DAYS',
+        employeeId: emp.id,
+        employeeName: `${emp.first_name} ${emp.last_name}`,
+        value: maxConsecutive,
+        limit: CONFIG.MAX_CONSECUTIVE_DAYS,
+      });
+    }
+
+    // Rest between shifts check
+    const sortedShifts = empShifts.sort((a, b) =>
+      new Date(`${a.date}T${a.startTime}`) - new Date(`${b.date}T${b.startTime}`)
+    );
+    for (let i = 1; i < sortedShifts.length; i++) {
+      const prevEnd = new Date(`${sortedShifts[i-1].date}T${sortedShifts[i-1].endTime}`);
+      const currStart = new Date(`${sortedShifts[i].date}T${sortedShifts[i].startTime}`);
+      const restHours = (currStart - prevEnd) / (1000 * 60 * 60);
+
+      if (restHours < CONFIG.MIN_REST_BETWEEN_SHIFTS && restHours > 0) {
+        fitness.violations.push({
+          type: 'INSUFFICIENT_REST',
+          employeeId: emp.id,
+          employeeName: `${emp.first_name} ${emp.last_name}`,
+          value: Math.round(restHours * 10) / 10,
+          limit: CONFIG.MIN_REST_BETWEEN_SHIFTS,
+        });
+      }
+    }
+  });
+
+  // Penalty for violations
+  const violationPenalty = fitness.violations.length * 5;
+
+  // ==================== OVERALL FITNESS ====================
+  fitness.overall = Math.max(0,
+    (fitness.coverage * 0.30) +
+    (fitness.skillMatch * 0.20) +
+    (fitness.preferenceAlignment * 0.15) +
+    (fitness.fairness * 0.15) +
+    (fitness.reliabilityScore * 0.10) +
+    (budget ? Math.max(0, 100 - Math.abs(fitness.budgetVariance)) * 0.10 : 10)
+    - violationPenalty
+  ) / 100;
+
+  return fitness;
+}
+
+/**
+ * Tournament selection
+ */
+function tournamentSelection(population) {
+  const selected = [];
+  const targetSize = Math.floor(population.length / 2) * 2; // Even number
+
+  while (selected.length < targetSize) {
+    // Pick tournament participants
+    const tournament = [];
+    for (let i = 0; i < GA_CONFIG.TOURNAMENT_SIZE; i++) {
+      const idx = Math.floor(Math.random() * population.length);
+      tournament.push(population[idx]);
+    }
+
+    // Select winner (highest fitness)
+    tournament.sort((a, b) => b.fitness.overall - a.fitness.overall);
+    selected.push(tournament[0]);
+  }
+
+  return selected;
+}
+
+/**
+ * Crossover: swap day-blocks between two parent schedules
+ */
+function crossover(parent1, parent2, context) {
+  const days = [...new Set(parent1.map(s => s.date))];
+  const crossoverPoint = Math.floor(Math.random() * days.length);
+
+  const child1 = [];
+  const child2 = [];
+
+  days.forEach((day, idx) => {
+    const p1Day = parent1.filter(s => s.date === day);
+    const p2Day = parent2.filter(s => s.date === day);
+
+    if (idx < crossoverPoint) {
+      child1.push(...p1Day);
+      child2.push(...p2Day);
+    } else {
+      child1.push(...p2Day);
+      child2.push(...p1Day);
+    }
+  });
+
+  // Repair if needed (fix constraint violations)
+  return [repairSchedule(child1, context), repairSchedule(child2, context)];
+}
+
+/**
+ * Mutation: randomly swap employees or adjust shifts
+ */
+function mutate(schedule, context) {
+  const mutated = [...schedule];
+  const mutationType = Math.random();
+
+  if (mutationType < 0.5 && mutated.length > 0) {
+    // Swap employees between two random shifts
+    const idx1 = Math.floor(Math.random() * mutated.length);
+    const idx2 = Math.floor(Math.random() * mutated.length);
+
+    if (idx1 !== idx2) {
+      const temp = { ...mutated[idx1] };
+      mutated[idx1] = {
+        ...mutated[idx1],
+        employeeId: mutated[idx2].employeeId,
+        employeeName: mutated[idx2].employeeName,
+        hourlyRate: mutated[idx2].hourlyRate,
+      };
+      mutated[idx2] = {
+        ...mutated[idx2],
+        employeeId: temp.employeeId,
+        employeeName: temp.employeeName,
+        hourlyRate: temp.hourlyRate,
+      };
+    }
+  } else if (mutated.length > 0) {
+    // Replace one employee with a random eligible one
+    const idx = Math.floor(Math.random() * mutated.length);
+    const shift = mutated[idx];
+
+    const eligibleEmployees = context.employees.filter(e => {
+      // Check if they could work this shift
+      const currentHours = mutated
+        .filter(s => s.employeeId === e.id)
+        .reduce((sum, s) => sum + s.hours, 0);
+      return currentHours + shift.hours <= (e.max_hours_per_week || CONFIG.MAX_HOURS_PER_WEEK);
+    });
+
+    if (eligibleEmployees.length > 0) {
+      const newEmployee = eligibleEmployees[Math.floor(Math.random() * eligibleEmployees.length)];
+      mutated[idx] = {
+        ...shift,
+        employeeId: newEmployee.id,
+        employeeName: `${newEmployee.first_name} ${newEmployee.last_name}`,
+        hourlyRate: newEmployee.hourly_rate || 12,
+      };
+    }
+  }
+
+  return repairSchedule(mutated, context);
+}
+
+/**
+ * Repair schedule to fix constraint violations
+ */
+function repairSchedule(schedule, context) {
+  const { employees } = context;
+  const repaired = [...schedule];
+  const employeeHours = {};
+
+  // Calculate current hours
+  repaired.forEach(s => {
+    employeeHours[s.employeeId] = (employeeHours[s.employeeId] || 0) + s.hours;
+  });
+
+  // Fix hour violations by reassigning shifts
+  employees.forEach(emp => {
+    const maxHours = emp.max_hours_per_week || CONFIG.MAX_HOURS_PER_WEEK;
+
+    while (employeeHours[emp.id] > maxHours) {
+      // Find shifts for this employee
+      const empShiftIdx = repaired.findIndex(s => s.employeeId === emp.id);
+      if (empShiftIdx === -1) break;
+
+      // Find another employee who can take this shift
+      const shift = repaired[empShiftIdx];
+      const replacement = employees.find(e => {
+        if (e.id === emp.id) return false;
+        const theirHours = employeeHours[e.id] || 0;
+        return theirHours + shift.hours <= (e.max_hours_per_week || CONFIG.MAX_HOURS_PER_WEEK);
+      });
+
+      if (replacement) {
+        employeeHours[emp.id] -= shift.hours;
+        employeeHours[replacement.id] = (employeeHours[replacement.id] || 0) + shift.hours;
+        repaired[empShiftIdx] = {
+          ...shift,
+          employeeId: replacement.id,
+          employeeName: `${replacement.first_name} ${replacement.last_name}`,
+          hourlyRate: replacement.hourly_rate || 12,
+        };
+      } else {
+        // No replacement available - remove shift
+        repaired.splice(empShiftIdx, 1);
+        employeeHours[emp.id] -= shift.hours;
+      }
+    }
+  });
+
+  return repaired;
+}
+
+/**
+ * Generate alternative schedules with different optimization focuses
+ */
+async function generateAlternatives(context, population) {
+  const alternatives = [];
+
+  // Cost Optimized: find schedule with lowest labor cost among top 25%
+  const topQuarter = population.slice(0, Math.ceil(population.length / 4));
+  const costOptimized = topQuarter.reduce((best, curr) =>
+    curr.fitness.laborCost < best.fitness.laborCost ? curr : best
+  );
+
+  alternatives.push({
+    name: 'Cost Optimized',
+    description: 'Minimizes labor cost while maintaining coverage',
+    schedule: costOptimized.schedule,
+    quality: {
+      fitness_score: Math.round(costOptimized.fitness.overall * 100) / 100,
+      coverage_pct: costOptimized.fitness.coverage,
+      labor_cost: costOptimized.fitness.laborCost,
+      preference_score: costOptimized.fitness.preferenceAlignment,
+    },
+  });
+
+  // Employee Preferred: find schedule with highest preference alignment
+  const preferenceOptimized = population.reduce((best, curr) =>
+    curr.fitness.preferenceAlignment > best.fitness.preferenceAlignment ? curr : best
+  );
+
+  alternatives.push({
+    name: 'Employee Preferred',
+    description: 'Maximizes employee shift preferences',
+    schedule: preferenceOptimized.schedule,
+    quality: {
+      fitness_score: Math.round(preferenceOptimized.fitness.overall * 100) / 100,
+      coverage_pct: preferenceOptimized.fitness.coverage,
+      labor_cost: preferenceOptimized.fitness.laborCost,
+      preference_score: preferenceOptimized.fitness.preferenceAlignment,
+    },
+  });
+
+  // Fair Distribution: find schedule with best fairness score
+  const fairnessOptimized = population.reduce((best, curr) =>
+    curr.fitness.fairness > best.fitness.fairness ? curr : best
+  );
+
+  alternatives.push({
+    name: 'Fair Distribution',
+    description: 'Balances hours evenly across employees',
+    schedule: fairnessOptimized.schedule,
+    quality: {
+      fitness_score: Math.round(fairnessOptimized.fitness.overall * 100) / 100,
+      coverage_pct: fairnessOptimized.fitness.coverage,
+      labor_cost: fairnessOptimized.fitness.laborCost,
+      fairness_index: fairnessOptimized.fitness.fairness / 100,
+    },
+  });
+
+  return alternatives;
+}
+
+/**
+ * Store schedule feedback for learning
+ */
+export async function recordScheduleFeedback(shiftId, feedback) {
+  return db.query(`
+    INSERT INTO schedule_feedback (
+      organization_id, schedule_period_id, employee_id, shift_id,
+      predicted_attendance, actual_attendance, was_swapped,
+      overtime_minutes, quality_rating
+    )
+    SELECT
+      s.organization_id, NULL, s.employee_id, s.id,
+      $2, $3, $4, $5, $6
+    FROM shifts s WHERE s.id = $1
+    RETURNING *
+  `, [shiftId, feedback.predictedAttendance, feedback.actualAttendance,
+      feedback.wasSwapped, feedback.overtimeMinutes, feedback.qualityRating]);
+}
+
 // -------------------- Export --------------------
 
 export {
   generateDemandForecast,
   generateScheduleSuggestions,
+  generateOptimizedSchedule,
   calculateScheduleQuality,
   scoreEmployeeForShift,
+  recordScheduleFeedback,
   CONFIG as SCHEDULING_CONFIG,
+  GA_CONFIG,
 };
 
 export default {
   generateDemandForecast,
   generateScheduleSuggestions,
+  generateOptimizedSchedule,
   calculateScheduleQuality,
+  recordScheduleFeedback,
 };

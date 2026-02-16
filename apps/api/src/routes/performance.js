@@ -1470,6 +1470,1017 @@ router.get('/employees', requireRole(['admin', 'manager']), async (req, res) => 
   }
 });
 
+// ============================================================
+// COMPETENCY FRAMEWORKS
+// ============================================================
+
+/**
+ * GET /api/performance/frameworks
+ * List competency frameworks
+ */
+router.get('/frameworks', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const orgId = req.user.organizationId;
+
+    const result = await db.query(`
+      SELECT cf.*,
+        (SELECT COUNT(*) FROM competencies c WHERE c.framework_id = cf.id) as competency_count,
+        u.first_name || ' ' || u.last_name as created_by_name
+      FROM competency_frameworks cf
+      LEFT JOIN users u ON u.id = cf.created_by
+      WHERE cf.organization_id = $1
+      ORDER BY cf.is_default DESC, cf.name
+    `, [orgId]);
+
+    res.json({ frameworks: result.rows });
+  } catch (error) {
+    console.error('Get frameworks error:', error);
+    res.status(500).json({ error: 'Failed to get frameworks' });
+  }
+});
+
+/**
+ * GET /api/performance/frameworks/:id
+ * Get framework with competencies
+ */
+router.get('/frameworks/:id', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const orgId = req.user.organizationId;
+
+    const frameworkResult = await db.query(`
+      SELECT * FROM competency_frameworks
+      WHERE id = $1 AND organization_id = $2
+    `, [id, orgId]);
+
+    if (frameworkResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Framework not found' });
+    }
+
+    const competenciesResult = await db.query(`
+      SELECT c.*,
+        (SELECT json_agg(cl.* ORDER BY cl.level)
+         FROM competency_levels cl WHERE cl.competency_id = c.id) as levels
+      FROM competencies c
+      WHERE c.framework_id = $1
+      ORDER BY c.sort_order, c.category, c.name
+    `, [id]);
+
+    res.json({
+      framework: frameworkResult.rows[0],
+      competencies: competenciesResult.rows
+    });
+  } catch (error) {
+    console.error('Get framework error:', error);
+    res.status(500).json({ error: 'Failed to get framework' });
+  }
+});
+
+/**
+ * POST /api/performance/frameworks
+ * Create competency framework
+ */
+router.post('/frameworks', requireRole(['admin']), async (req, res) => {
+  try {
+    const { name, description, competencies, is_default } = req.body;
+    const orgId = req.user.organizationId;
+    const userId = req.user.userId;
+
+    if (!name) {
+      return res.status(400).json({ error: 'Framework name is required' });
+    }
+
+    const client = await db.getClient();
+    try {
+      await client.query('BEGIN');
+
+      // If setting as default, unset current default
+      if (is_default) {
+        await client.query(`
+          UPDATE competency_frameworks SET is_default = false
+          WHERE organization_id = $1 AND is_default = true
+        `, [orgId]);
+      }
+
+      // Create framework
+      const frameworkResult = await client.query(`
+        INSERT INTO competency_frameworks (organization_id, name, description, is_default, created_by)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *
+      `, [orgId, name, description, is_default || false, userId]);
+
+      const frameworkId = frameworkResult.rows[0].id;
+
+      // Add competencies
+      if (competencies && competencies.length > 0) {
+        for (let i = 0; i < competencies.length; i++) {
+          const comp = competencies[i];
+          const compResult = await client.query(`
+            INSERT INTO competencies (framework_id, name, description, category, weight, sort_order, is_required)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING id
+          `, [frameworkId, comp.name, comp.description, comp.category, comp.weight || 1.0, i, comp.is_required !== false]);
+
+          // Add level definitions
+          if (comp.levels && comp.levels.length > 0) {
+            for (const level of comp.levels) {
+              await client.query(`
+                INSERT INTO competency_levels (competency_id, level, label, description, behavioral_indicators)
+                VALUES ($1, $2, $3, $4, $5)
+              `, [compResult.rows[0].id, level.level, level.label, level.description, level.indicators || []]);
+            }
+          }
+        }
+      }
+
+      await client.query('COMMIT');
+      res.status(201).json({ framework: frameworkResult.rows[0] });
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    console.error('Create framework error:', error);
+    res.status(500).json({ error: 'Failed to create framework' });
+  }
+});
+
+/**
+ * POST /api/performance/frameworks/:id/competencies
+ * Add competency to framework
+ */
+router.post('/frameworks/:id/competencies', requireRole(['admin']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, category, weight, levels } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ error: 'Competency name is required' });
+    }
+
+    const client = await db.getClient();
+    try {
+      await client.query('BEGIN');
+
+      // Get max sort order
+      const maxOrder = await client.query(`
+        SELECT COALESCE(MAX(sort_order), -1) + 1 as next_order
+        FROM competencies WHERE framework_id = $1
+      `, [id]);
+
+      // Create competency
+      const compResult = await client.query(`
+        INSERT INTO competencies (framework_id, name, description, category, weight, sort_order)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *
+      `, [id, name, description, category, weight || 1.0, maxOrder.rows[0].next_order]);
+
+      const competencyId = compResult.rows[0].id;
+
+      // Add level definitions
+      if (levels && levels.length > 0) {
+        for (const level of levels) {
+          await client.query(`
+            INSERT INTO competency_levels (competency_id, level, label, description, behavioral_indicators)
+            VALUES ($1, $2, $3, $4, $5)
+          `, [competencyId, level.level, level.label, level.description, level.indicators || []]);
+        }
+      } else {
+        // Add default level definitions
+        const defaultLevels = [
+          { level: 1, label: 'Developing', description: 'Still learning the fundamentals' },
+          { level: 2, label: 'Competent', description: 'Meets basic expectations' },
+          { level: 3, label: 'Proficient', description: 'Consistently performs well' },
+          { level: 4, label: 'Expert', description: 'Exceeds expectations, mentors others' },
+          { level: 5, label: 'Mastery', description: 'Organizational expert, sets the standard' },
+        ];
+        for (const level of defaultLevels) {
+          await client.query(`
+            INSERT INTO competency_levels (competency_id, level, label, description)
+            VALUES ($1, $2, $3, $4)
+          `, [competencyId, level.level, level.label, level.description]);
+        }
+      }
+
+      await client.query('COMMIT');
+      res.status(201).json({ competency: compResult.rows[0] });
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    console.error('Add competency error:', error);
+    res.status(500).json({ error: 'Failed to add competency' });
+  }
+});
+
+// ============================================================
+// 360-DEGREE REVIEWS
+// ============================================================
+
+/**
+ * POST /api/performance/cycles/:id/configure-360
+ * Configure 360 review for a cycle
+ */
+router.post('/cycles/:id/configure-360', requireRole(['admin']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      min_peer_reviewers = 3,
+      max_peer_reviewers = 5,
+      include_direct_reports = true,
+      include_cross_functional = true,
+      anonymize_peer_feedback = true,
+      peer_selection_mode = 'employee_selected',
+      peer_selection_deadline
+    } = req.body;
+
+    // Update cycle to include 360
+    await db.query(`
+      UPDATE review_cycles SET include_360 = true WHERE id = $1
+    `, [id]);
+
+    // Create or update 360 config
+    const result = await db.query(`
+      INSERT INTO review_360_config (
+        cycle_id, min_peer_reviewers, max_peer_reviewers, include_direct_reports,
+        include_cross_functional, anonymize_peer_feedback, peer_selection_mode, peer_selection_deadline
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      ON CONFLICT (cycle_id) DO UPDATE SET
+        min_peer_reviewers = EXCLUDED.min_peer_reviewers,
+        max_peer_reviewers = EXCLUDED.max_peer_reviewers,
+        include_direct_reports = EXCLUDED.include_direct_reports,
+        include_cross_functional = EXCLUDED.include_cross_functional,
+        anonymize_peer_feedback = EXCLUDED.anonymize_peer_feedback,
+        peer_selection_mode = EXCLUDED.peer_selection_mode,
+        peer_selection_deadline = EXCLUDED.peer_selection_deadline
+      RETURNING *
+    `, [id, min_peer_reviewers, max_peer_reviewers, include_direct_reports,
+        include_cross_functional, anonymize_peer_feedback, peer_selection_mode, peer_selection_deadline]);
+
+    res.json({ config: result.rows[0] });
+  } catch (error) {
+    console.error('Configure 360 error:', error);
+    res.status(500).json({ error: 'Failed to configure 360 review' });
+  }
+});
+
+/**
+ * POST /api/performance/cycles/:cycleId/360-nominations
+ * Nominate peers for 360 review
+ */
+router.post('/cycles/:cycleId/360-nominations', async (req, res) => {
+  try {
+    const { cycleId } = req.params;
+    const { reviewee_id, reviewer_ids, relationship = 'peer' } = req.body;
+    const userId = req.user.userId;
+    const isManager = ['admin', 'manager'].includes(req.user.role);
+
+    // Get employee ID for current user
+    const empResult = await db.query('SELECT id FROM employees WHERE user_id = $1', [userId]);
+    const userEmployeeId = empResult.rows[0]?.id;
+
+    // Determine nominated_by
+    let nominatedBy = 'employee';
+    if (isManager && reviewee_id !== userEmployeeId) {
+      nominatedBy = 'manager';
+    }
+
+    // Verify cycle has 360 enabled
+    const cycleCheck = await db.query(`
+      SELECT rc.*, r3c.max_peer_reviewers
+      FROM review_cycles rc
+      LEFT JOIN review_360_config r3c ON r3c.cycle_id = rc.id
+      WHERE rc.id = $1
+    `, [cycleId]);
+
+    if (!cycleCheck.rows[0]?.include_360) {
+      return res.status(400).json({ error: 'Cycle does not have 360 reviews enabled' });
+    }
+
+    const nominations = [];
+    for (const reviewerId of reviewer_ids) {
+      try {
+        const result = await db.query(`
+          INSERT INTO review_360_nominations (cycle_id, reviewee_id, reviewer_id, relationship, nominated_by)
+          VALUES ($1, $2, $3, $4, $5)
+          ON CONFLICT (cycle_id, reviewee_id, reviewer_id) DO NOTHING
+          RETURNING *
+        `, [cycleId, reviewee_id, reviewerId, relationship, nominatedBy]);
+
+        if (result.rows[0]) {
+          nominations.push(result.rows[0]);
+        }
+      } catch (err) {
+        console.error('Nomination error:', err);
+      }
+    }
+
+    res.status(201).json({ nominations, created: nominations.length });
+  } catch (error) {
+    console.error('Nominate peers error:', error);
+    res.status(500).json({ error: 'Failed to nominate peers' });
+  }
+});
+
+/**
+ * GET /api/performance/360/pending
+ * Get pending 360 reviews to complete
+ */
+router.get('/360/pending', async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    // Get employee ID for current user
+    const empResult = await db.query('SELECT id FROM employees WHERE user_id = $1', [userId]);
+    if (!empResult.rows[0]) {
+      return res.json({ reviews: [] });
+    }
+    const employeeId = empResult.rows[0].id;
+
+    const result = await db.query(`
+      SELECT n.*,
+        rc.name as cycle_name, rc.end_date,
+        eu.first_name || ' ' || eu.last_name as reviewee_name,
+        e.job_title as reviewee_title
+      FROM review_360_nominations n
+      JOIN review_cycles rc ON rc.id = n.cycle_id
+      JOIN employees e ON e.id = n.reviewee_id
+      JOIN users eu ON eu.id = e.user_id
+      WHERE n.reviewer_id = $1
+        AND n.status IN ('pending', 'accepted')
+        AND rc.status IN ('active', 'in_review')
+      ORDER BY rc.end_date ASC
+    `, [employeeId]);
+
+    res.json({ reviews: result.rows });
+  } catch (error) {
+    console.error('Get pending 360 reviews error:', error);
+    res.status(500).json({ error: 'Failed to get pending reviews' });
+  }
+});
+
+/**
+ * POST /api/performance/360/submit/:nominationId
+ * Submit 360 feedback
+ */
+router.post('/360/submit/:nominationId', async (req, res) => {
+  try {
+    const { nominationId } = req.params;
+    const { feedback_text, strengths, development_areas, overall_rating, competency_ratings } = req.body;
+    const userId = req.user.userId;
+
+    // Verify nomination belongs to current user
+    const empResult = await db.query('SELECT id FROM employees WHERE user_id = $1', [userId]);
+    const employeeId = empResult.rows[0]?.id;
+
+    const nomCheck = await db.query(
+      'SELECT * FROM review_360_nominations WHERE id = $1 AND reviewer_id = $2',
+      [nominationId, employeeId]
+    );
+
+    if (!nomCheck.rows[0]) {
+      return res.status(403).json({ error: 'Not authorized to submit this review' });
+    }
+
+    // Create or update response
+    const responseResult = await db.query(`
+      INSERT INTO review_360_responses (nomination_id, feedback_text, strengths, development_areas, overall_rating, competency_ratings, submitted_at)
+      VALUES ($1, $2, $3, $4, $5, $6, NOW())
+      ON CONFLICT (nomination_id) DO UPDATE SET
+        feedback_text = EXCLUDED.feedback_text,
+        strengths = EXCLUDED.strengths,
+        development_areas = EXCLUDED.development_areas,
+        overall_rating = EXCLUDED.overall_rating,
+        competency_ratings = EXCLUDED.competency_ratings,
+        submitted_at = NOW()
+      RETURNING *
+    `, [nominationId, feedback_text, strengths, development_areas, overall_rating, JSON.stringify(competency_ratings || {})]);
+
+    // Update nomination status
+    await db.query(`
+      UPDATE review_360_nominations SET status = 'completed', completed_at = NOW()
+      WHERE id = $1
+    `, [nominationId]);
+
+    res.json({ response: responseResult.rows[0], message: 'Feedback submitted successfully' });
+  } catch (error) {
+    console.error('Submit 360 feedback error:', error);
+    res.status(500).json({ error: 'Failed to submit feedback' });
+  }
+});
+
+/**
+ * GET /api/performance/360/summary/:employeeId
+ * Get 360 feedback summary for an employee (manager view)
+ */
+router.get('/360/summary/:employeeId', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { employeeId } = req.params;
+    const { cycleId } = req.query;
+    const orgId = req.user.organizationId;
+
+    // Verify employee belongs to org
+    const empCheck = await db.query(
+      'SELECT id FROM employees WHERE id = $1 AND organization_id = $2',
+      [employeeId, orgId]
+    );
+
+    if (!empCheck.rows[0]) {
+      return res.status(404).json({ error: 'Employee not found' });
+    }
+
+    // Get all completed nominations and responses
+    let query = `
+      SELECT n.relationship,
+        r.overall_rating, r.feedback_text, r.strengths, r.development_areas, r.competency_ratings,
+        cfg.anonymize_peer_feedback
+      FROM review_360_nominations n
+      JOIN review_360_responses r ON r.nomination_id = n.id
+      JOIN review_360_config cfg ON cfg.cycle_id = n.cycle_id
+      WHERE n.reviewee_id = $1 AND n.status = 'completed'
+    `;
+    const params = [employeeId];
+
+    if (cycleId) {
+      query += ` AND n.cycle_id = $2`;
+      params.push(cycleId);
+    }
+
+    const responses = await db.query(query, params);
+
+    // Aggregate results
+    const summary = {
+      totalResponses: responses.rows.length,
+      averageRating: 0,
+      byRelationship: {},
+      commonStrengths: [],
+      commonDevelopmentAreas: [],
+      competencyAverages: {},
+    };
+
+    if (responses.rows.length > 0) {
+      const ratings = responses.rows.filter(r => r.overall_rating).map(r => r.overall_rating);
+      summary.averageRating = ratings.length > 0
+        ? Math.round(ratings.reduce((a, b) => a + b, 0) / ratings.length * 10) / 10
+        : null;
+
+      // Group by relationship
+      responses.rows.forEach(r => {
+        if (!summary.byRelationship[r.relationship]) {
+          summary.byRelationship[r.relationship] = { count: 0, ratings: [] };
+        }
+        summary.byRelationship[r.relationship].count++;
+        if (r.overall_rating) {
+          summary.byRelationship[r.relationship].ratings.push(r.overall_rating);
+        }
+
+        // Aggregate competency ratings
+        if (r.competency_ratings) {
+          const compRatings = typeof r.competency_ratings === 'string'
+            ? JSON.parse(r.competency_ratings)
+            : r.competency_ratings;
+
+          Object.entries(compRatings).forEach(([compId, rating]) => {
+            if (!summary.competencyAverages[compId]) {
+              summary.competencyAverages[compId] = [];
+            }
+            summary.competencyAverages[compId].push(rating);
+          });
+        }
+      });
+
+      // Calculate competency averages
+      Object.keys(summary.competencyAverages).forEach(compId => {
+        const ratings = summary.competencyAverages[compId];
+        summary.competencyAverages[compId] = Math.round(ratings.reduce((a, b) => a + b, 0) / ratings.length * 10) / 10;
+      });
+
+      // Calculate relationship averages
+      Object.keys(summary.byRelationship).forEach(rel => {
+        const relRatings = summary.byRelationship[rel].ratings;
+        summary.byRelationship[rel].averageRating = relRatings.length > 0
+          ? Math.round(relRatings.reduce((a, b) => a + b, 0) / relRatings.length * 10) / 10
+          : null;
+      });
+    }
+
+    // Include anonymized feedback text if configured
+    const anonymizedFeedback = responses.rows
+      .filter(r => r.feedback_text)
+      .map(r => ({
+        relationship: r.relationship,
+        feedback: r.feedback_text,
+        strengths: r.strengths,
+        developmentAreas: r.development_areas,
+      }));
+
+    res.json({ summary, feedback: anonymizedFeedback });
+  } catch (error) {
+    console.error('Get 360 summary error:', error);
+    res.status(500).json({ error: 'Failed to get 360 summary' });
+  }
+});
+
+// ============================================================
+// CALIBRATION SESSIONS
+// ============================================================
+
+/**
+ * GET /api/performance/calibration
+ * List calibration sessions
+ */
+router.get('/calibration', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const orgId = req.user.organizationId;
+    const { status, cycleId } = req.query;
+
+    let query = `
+      SELECT cs.*,
+        rc.name as cycle_name,
+        d.name as department_name,
+        l.name as location_name,
+        u.first_name || ' ' || u.last_name as facilitator_name,
+        (SELECT COUNT(*) FROM calibration_employees ce WHERE ce.session_id = cs.id) as employee_count,
+        (SELECT COUNT(*) FROM calibration_participants cp WHERE cp.session_id = cs.id) as participant_count
+      FROM calibration_sessions cs
+      LEFT JOIN review_cycles rc ON rc.id = cs.cycle_id
+      LEFT JOIN departments d ON d.id = cs.department_id
+      LEFT JOIN locations l ON l.id = cs.location_id
+      LEFT JOIN users u ON u.id = cs.facilitator_id
+      WHERE cs.organization_id = $1
+    `;
+    const params = [orgId];
+    let paramIndex = 2;
+
+    if (status) {
+      query += ` AND cs.status = $${paramIndex++}`;
+      params.push(status);
+    }
+    if (cycleId) {
+      query += ` AND cs.cycle_id = $${paramIndex++}`;
+      params.push(cycleId);
+    }
+
+    query += ' ORDER BY cs.scheduled_date DESC';
+
+    const result = await db.query(query, params);
+    res.json({ sessions: result.rows });
+  } catch (error) {
+    console.error('Get calibration sessions error:', error);
+    res.status(500).json({ error: 'Failed to get calibration sessions' });
+  }
+});
+
+/**
+ * GET /api/performance/calibration/:id
+ * Get calibration session details
+ */
+router.get('/calibration/:id', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const orgId = req.user.organizationId;
+
+    const sessionResult = await db.query(`
+      SELECT cs.*,
+        rc.name as cycle_name,
+        d.name as department_name,
+        u.first_name || ' ' || u.last_name as facilitator_name
+      FROM calibration_sessions cs
+      LEFT JOIN review_cycles rc ON rc.id = cs.cycle_id
+      LEFT JOIN departments d ON d.id = cs.department_id
+      LEFT JOIN users u ON u.id = cs.facilitator_id
+      WHERE cs.id = $1 AND cs.organization_id = $2
+    `, [id, orgId]);
+
+    if (sessionResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Session not found' });
+    }
+
+    const participantsResult = await db.query(`
+      SELECT cp.*, u.first_name || ' ' || u.last_name as name
+      FROM calibration_participants cp
+      JOIN users u ON u.id = cp.user_id
+      WHERE cp.session_id = $1
+    `, [id]);
+
+    const employeesResult = await db.query(`
+      SELECT ce.*,
+        eu.first_name || ' ' || eu.last_name as employee_name,
+        e.job_title, d.name as department,
+        pr.overall_rating as review_rating, pr.status as review_status
+      FROM calibration_employees ce
+      JOIN employees e ON e.id = ce.employee_id
+      JOIN users eu ON eu.id = e.user_id
+      LEFT JOIN departments d ON d.id = e.department_id
+      LEFT JOIN performance_reviews pr ON pr.id = ce.review_id
+      WHERE ce.session_id = $1
+      ORDER BY ce.pre_overall_rating DESC NULLS LAST, eu.first_name
+    `, [id]);
+
+    // Get distribution snapshot
+    const distributionResult = await db.query(`
+      SELECT * FROM calibration_distributions
+      WHERE session_id = $1
+      ORDER BY created_at DESC
+    `, [id]);
+
+    res.json({
+      session: sessionResult.rows[0],
+      participants: participantsResult.rows,
+      employees: employeesResult.rows,
+      distributions: distributionResult.rows
+    });
+  } catch (error) {
+    console.error('Get calibration session error:', error);
+    res.status(500).json({ error: 'Failed to get session' });
+  }
+});
+
+/**
+ * POST /api/performance/calibration
+ * Create calibration session
+ */
+router.post('/calibration', requireRole(['admin']), async (req, res) => {
+  try {
+    const {
+      name, description, cycle_id, scheduled_date, scheduled_time,
+      duration_minutes, meeting_link, facilitator_id, department_id,
+      location_id, participant_ids, employee_ids
+    } = req.body;
+    const orgId = req.user.organizationId;
+    const userId = req.user.userId;
+
+    if (!name) {
+      return res.status(400).json({ error: 'Session name is required' });
+    }
+
+    const client = await db.getClient();
+    try {
+      await client.query('BEGIN');
+
+      // Create session
+      const sessionResult = await client.query(`
+        INSERT INTO calibration_sessions (
+          organization_id, name, description, cycle_id, scheduled_date, scheduled_time,
+          duration_minutes, meeting_link, facilitator_id, department_id, location_id, created_by
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        RETURNING *
+      `, [orgId, name, description, cycle_id, scheduled_date, scheduled_time,
+          duration_minutes || 60, meeting_link, facilitator_id || userId, department_id,
+          location_id, userId]);
+
+      const sessionId = sessionResult.rows[0].id;
+
+      // Add facilitator as participant
+      await client.query(`
+        INSERT INTO calibration_participants (session_id, user_id, role)
+        VALUES ($1, $2, 'facilitator')
+      `, [sessionId, facilitator_id || userId]);
+
+      // Add other participants
+      if (participant_ids && participant_ids.length > 0) {
+        for (const pid of participant_ids) {
+          await client.query(`
+            INSERT INTO calibration_participants (session_id, user_id, role)
+            VALUES ($1, $2, 'participant')
+            ON CONFLICT (session_id, user_id) DO NOTHING
+          `, [sessionId, pid]);
+        }
+      }
+
+      // Add employees to calibrate
+      if (employee_ids && employee_ids.length > 0) {
+        for (const eid of employee_ids) {
+          // Get their performance review for this cycle if exists
+          let reviewId = null;
+          if (cycle_id) {
+            const reviewResult = await client.query(`
+              SELECT pr.id, pr.overall_rating FROM performance_reviews pr
+              JOIN review_cycle_participants rcp ON rcp.employee_id = pr.employee_id AND rcp.cycle_id = $2
+              WHERE pr.employee_id = $1
+              ORDER BY pr.created_at DESC LIMIT 1
+            `, [eid, cycle_id]);
+            reviewId = reviewResult.rows[0]?.id;
+          }
+
+          await client.query(`
+            INSERT INTO calibration_employees (session_id, employee_id, review_id)
+            VALUES ($1, $2, $3)
+            ON CONFLICT (session_id, employee_id) DO NOTHING
+          `, [sessionId, eid, reviewId]);
+        }
+      }
+
+      await client.query('COMMIT');
+      res.status(201).json({ session: sessionResult.rows[0] });
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    console.error('Create calibration session error:', error);
+    res.status(500).json({ error: 'Failed to create session' });
+  }
+});
+
+/**
+ * PATCH /api/performance/calibration/:id/employees/:employeeId
+ * Update employee calibration rating
+ */
+router.patch('/calibration/:id/employees/:employeeId', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { id, employeeId } = req.params;
+    const { pre_overall_rating, pre_potential_rating, pre_promotion_ready,
+            post_overall_rating, post_potential_rating, post_promotion_ready,
+            discussion_points, calibration_notes, change_justification } = req.body;
+    const userId = req.user.userId;
+
+    const setClause = [];
+    const values = [];
+    let paramIndex = 1;
+
+    if (pre_overall_rating !== undefined) { setClause.push(`pre_overall_rating = $${paramIndex++}`); values.push(pre_overall_rating); }
+    if (pre_potential_rating !== undefined) { setClause.push(`pre_potential_rating = $${paramIndex++}`); values.push(pre_potential_rating); }
+    if (pre_promotion_ready !== undefined) { setClause.push(`pre_promotion_ready = $${paramIndex++}`); values.push(pre_promotion_ready); }
+    if (post_overall_rating !== undefined) { setClause.push(`post_overall_rating = $${paramIndex++}`); values.push(post_overall_rating); }
+    if (post_potential_rating !== undefined) { setClause.push(`post_potential_rating = $${paramIndex++}`); values.push(post_potential_rating); }
+    if (post_promotion_ready !== undefined) { setClause.push(`post_promotion_ready = $${paramIndex++}`); values.push(post_promotion_ready); }
+    if (discussion_points) { setClause.push(`discussion_points = $${paramIndex++}`); values.push(discussion_points); }
+    if (calibration_notes !== undefined) { setClause.push(`calibration_notes = $${paramIndex++}`); values.push(calibration_notes); }
+    if (change_justification !== undefined) { setClause.push(`change_justification = $${paramIndex++}`); values.push(change_justification); }
+
+    // Track if rating was changed
+    if (post_overall_rating !== undefined) {
+      setClause.push(`calibrated_by = $${paramIndex++}`);
+      values.push(userId);
+      setClause.push(`calibrated_at = NOW()`);
+
+      // Check if it differs from pre-rating
+      const preCheck = await db.query(`
+        SELECT pre_overall_rating FROM calibration_employees
+        WHERE session_id = $1 AND employee_id = $2
+      `, [id, employeeId]);
+
+      if (preCheck.rows[0] && preCheck.rows[0].pre_overall_rating !== post_overall_rating) {
+        setClause.push(`rating_changed = TRUE`);
+      }
+    }
+
+    if (setClause.length === 0) {
+      return res.status(400).json({ error: 'No fields to update' });
+    }
+
+    values.push(id, employeeId);
+    const result = await db.query(`
+      UPDATE calibration_employees SET ${setClause.join(', ')}
+      WHERE session_id = $${paramIndex++} AND employee_id = $${paramIndex}
+      RETURNING *
+    `, values);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Employee not found in session' });
+    }
+
+    res.json({ employee: result.rows[0] });
+  } catch (error) {
+    console.error('Update calibration employee error:', error);
+    res.status(500).json({ error: 'Failed to update employee' });
+  }
+});
+
+/**
+ * POST /api/performance/calibration/:id/snapshot
+ * Save distribution snapshot
+ */
+router.post('/calibration/:id/snapshot', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { snapshot_type } = req.body; // 'pre_calibration' or 'post_calibration'
+
+    // Calculate distribution from current ratings
+    const ratingField = snapshot_type === 'pre_calibration' ? 'pre_overall_rating' : 'post_overall_rating';
+
+    const distResult = await db.query(`
+      SELECT
+        COUNT(*) FILTER (WHERE ${ratingField} = 1) as rating_1,
+        COUNT(*) FILTER (WHERE ${ratingField} = 2) as rating_2,
+        COUNT(*) FILTER (WHERE ${ratingField} = 3) as rating_3,
+        COUNT(*) FILTER (WHERE ${ratingField} = 4) as rating_4,
+        COUNT(*) FILTER (WHERE ${ratingField} = 5) as rating_5,
+        COUNT(*) as total,
+        AVG(${ratingField}) as mean,
+        PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY ${ratingField}) as median
+      FROM calibration_employees
+      WHERE session_id = $1 AND ${ratingField} IS NOT NULL
+    `, [id]);
+
+    const dist = distResult.rows[0];
+
+    const result = await db.query(`
+      INSERT INTO calibration_distributions (
+        session_id, snapshot_type, rating_1_count, rating_2_count, rating_3_count,
+        rating_4_count, rating_5_count, total_employees, mean_rating, median_rating
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      ON CONFLICT (session_id, snapshot_type) DO UPDATE SET
+        rating_1_count = EXCLUDED.rating_1_count,
+        rating_2_count = EXCLUDED.rating_2_count,
+        rating_3_count = EXCLUDED.rating_3_count,
+        rating_4_count = EXCLUDED.rating_4_count,
+        rating_5_count = EXCLUDED.rating_5_count,
+        total_employees = EXCLUDED.total_employees,
+        mean_rating = EXCLUDED.mean_rating,
+        median_rating = EXCLUDED.median_rating,
+        created_at = NOW()
+      RETURNING *
+    `, [id, snapshot_type, dist.rating_1 || 0, dist.rating_2 || 0, dist.rating_3 || 0,
+        dist.rating_4 || 0, dist.rating_5 || 0, dist.total || 0, dist.mean, dist.median]);
+
+    res.json({ distribution: result.rows[0] });
+  } catch (error) {
+    console.error('Save distribution snapshot error:', error);
+    res.status(500).json({ error: 'Failed to save snapshot' });
+  }
+});
+
+/**
+ * POST /api/performance/calibration/:id/finalize
+ * Finalize calibration and apply ratings to reviews
+ */
+router.post('/calibration/:id/finalize', requireRole(['admin']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    const client = await db.getClient();
+    try {
+      await client.query('BEGIN');
+
+      // Get all calibrated employees
+      const employees = await client.query(`
+        SELECT ce.*, e.user_id
+        FROM calibration_employees ce
+        JOIN employees e ON e.id = ce.employee_id
+        WHERE ce.session_id = $1 AND ce.post_overall_rating IS NOT NULL
+      `, [id]);
+
+      let updated = 0;
+
+      for (const emp of employees.rows) {
+        // Update performance review if exists
+        if (emp.review_id) {
+          await client.query(`
+            UPDATE performance_reviews SET
+              pre_calibration_rating = overall_rating,
+              overall_rating = $2,
+              is_calibrated = TRUE,
+              calibrated_at = NOW(),
+              calibrated_by = $3,
+              calibration_session_id = $4
+            WHERE id = $1
+          `, [emp.review_id, emp.post_overall_rating, userId, id]);
+        }
+
+        // Update employee record
+        await client.query(`
+          UPDATE employees SET
+            current_performance_rating = $2,
+            potential_rating = $3,
+            last_review_date = CURRENT_DATE
+          WHERE id = $1
+        `, [emp.employee_id, emp.post_overall_rating, emp.post_potential_rating]);
+
+        updated++;
+      }
+
+      // Mark session as completed
+      await client.query(`
+        UPDATE calibration_sessions SET status = 'completed', completed_at = NOW()
+        WHERE id = $1
+      `, [id]);
+
+      // Save final distribution snapshot
+      await client.query(`
+        INSERT INTO calibration_distributions (
+          session_id, snapshot_type, rating_1_count, rating_2_count, rating_3_count,
+          rating_4_count, rating_5_count, total_employees, mean_rating, median_rating
+        )
+        SELECT $1, 'post_calibration',
+          COUNT(*) FILTER (WHERE post_overall_rating = 1),
+          COUNT(*) FILTER (WHERE post_overall_rating = 2),
+          COUNT(*) FILTER (WHERE post_overall_rating = 3),
+          COUNT(*) FILTER (WHERE post_overall_rating = 4),
+          COUNT(*) FILTER (WHERE post_overall_rating = 5),
+          COUNT(*),
+          AVG(post_overall_rating),
+          PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY post_overall_rating)
+        FROM calibration_employees WHERE session_id = $1 AND post_overall_rating IS NOT NULL
+        ON CONFLICT (session_id, snapshot_type) DO UPDATE SET
+          rating_1_count = EXCLUDED.rating_1_count,
+          rating_2_count = EXCLUDED.rating_2_count,
+          rating_3_count = EXCLUDED.rating_3_count,
+          rating_4_count = EXCLUDED.rating_4_count,
+          rating_5_count = EXCLUDED.rating_5_count,
+          total_employees = EXCLUDED.total_employees,
+          mean_rating = EXCLUDED.mean_rating,
+          median_rating = EXCLUDED.median_rating,
+          created_at = NOW()
+      `, [id]);
+
+      await client.query('COMMIT');
+
+      res.json({
+        success: true,
+        message: `Calibration finalized. Updated ${updated} reviews.`,
+        employeesUpdated: updated
+      });
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    console.error('Finalize calibration error:', error);
+    res.status(500).json({ error: 'Failed to finalize calibration' });
+  }
+});
+
+// ============================================================
+// FEEDBACK REQUESTS
+// ============================================================
+
+/**
+ * POST /api/performance/feedback/request
+ * Request feedback from someone
+ */
+router.post('/feedback/request', async (req, res) => {
+  try {
+    const { target_id, subject, context, due_date } = req.body;
+    const userId = req.user.userId;
+    const orgId = req.user.organizationId;
+
+    if (!target_id || !subject) {
+      return res.status(400).json({ error: 'Target user and subject are required' });
+    }
+
+    const result = await db.query(`
+      INSERT INTO feedback_requests (organization_id, requester_id, target_id, subject, context, due_date)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *
+    `, [orgId, userId, target_id, subject, context, due_date]);
+
+    res.status(201).json({ request: result.rows[0] });
+  } catch (error) {
+    console.error('Create feedback request error:', error);
+    res.status(500).json({ error: 'Failed to create request' });
+  }
+});
+
+/**
+ * GET /api/performance/feedback/requests
+ * Get pending feedback requests
+ */
+router.get('/feedback/requests', async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { type = 'received' } = req.query;
+
+    let query;
+    if (type === 'received') {
+      query = `
+        SELECT fr.*,
+          ru.first_name || ' ' || ru.last_name as requester_name
+        FROM feedback_requests fr
+        JOIN users ru ON ru.id = fr.requester_id
+        WHERE fr.target_id = $1 AND fr.status = 'pending'
+        ORDER BY fr.due_date ASC NULLS LAST, fr.created_at DESC
+      `;
+    } else {
+      query = `
+        SELECT fr.*,
+          tu.first_name || ' ' || tu.last_name as target_name
+        FROM feedback_requests fr
+        JOIN users tu ON tu.id = fr.target_id
+        WHERE fr.requester_id = $1
+        ORDER BY fr.created_at DESC
+      `;
+    }
+
+    const result = await db.query(query, [userId]);
+    res.json({ requests: result.rows });
+  } catch (error) {
+    console.error('Get feedback requests error:', error);
+    res.status(500).json({ error: 'Failed to get requests' });
+  }
+});
+
 /**
  * GET /api/performance/dashboard
  * Performance dashboard stats

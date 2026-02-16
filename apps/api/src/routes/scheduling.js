@@ -1,12 +1,16 @@
 // ============================================================
 // SCHEDULING API ROUTES
-// Shifts, Templates, Swaps, Publishing
+// Shifts, Templates, Swaps, Publishing, AI Optimization
 // ============================================================
 
 import { Router } from 'express';
 import { db } from '../lib/database.js';
 import { authMiddleware, requireRole } from '../middleware/index.js';
 import { notificationService } from '../services/notifications.js';
+import {
+  generateOptimizedSchedule,
+  recordScheduleFeedback,
+} from '../services/aiScheduling.js';
 
 const router = Router();
 router.use(authMiddleware);
@@ -1169,6 +1173,220 @@ router.get('/forecast/recommendations', requireRole(['admin', 'manager']), async
     },
     generatedAt: new Date().toISOString()
   });
+});
+
+// ============================================================
+// AI SCHEDULE OPTIMIZER (Genetic Algorithm)
+// ============================================================
+
+// Generate optimized schedule using genetic algorithm
+router.post('/schedule/optimize', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const {
+      locationId,
+      weekStartDate,
+      budget,
+      returnAlternatives = true
+    } = req.body;
+
+    if (!locationId || !weekStartDate) {
+      return res.status(400).json({
+        error: 'locationId and weekStartDate are required'
+      });
+    }
+
+    // Verify location belongs to organization
+    const location = await db.query(
+      `SELECT id FROM locations WHERE id = $1 AND organization_id = $2`,
+      [locationId, organizationId]
+    );
+
+    if (!location.rows[0]) {
+      return res.status(404).json({ error: 'Location not found' });
+    }
+
+    // Generate optimized schedule
+    const result = await generateOptimizedSchedule(locationId, weekStartDate, {
+      budget: budget ? parseFloat(budget) : null,
+    });
+
+    // Optionally strip alternatives to reduce response size
+    if (!returnAlternatives) {
+      delete result.alternatives;
+    }
+
+    res.json(result);
+
+  } catch (error) {
+    console.error('Schedule optimization error:', error);
+    res.status(500).json({
+      error: 'Failed to generate optimized schedule',
+      message: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+});
+
+// Apply optimized schedule (create shifts from optimizer output)
+router.post('/schedule/optimize/apply', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId, userId } = req.user;
+    const { locationId, schedule, periodId } = req.body;
+
+    if (!locationId || !schedule || !Array.isArray(schedule)) {
+      return res.status(400).json({
+        error: 'locationId and schedule array are required'
+      });
+    }
+
+    const created = [];
+    const errors = [];
+
+    for (const shift of schedule) {
+      try {
+        const result = await db.query(
+          `INSERT INTO shifts (
+            organization_id, date, start_time, end_time,
+            location_id, employee_id, created_by, status,
+            ai_generated, ai_confidence_score
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, 'scheduled', TRUE, $8)
+          RETURNING *`,
+          [
+            organizationId,
+            shift.date,
+            `${shift.date}T${shift.startTime}`,
+            `${shift.date}T${shift.endTime}`,
+            locationId,
+            shift.employeeId,
+            userId,
+            shift.confidence || 0.85
+          ]
+        );
+        created.push(result.rows[0]);
+      } catch (err) {
+        errors.push({ shift, error: err.message });
+      }
+    }
+
+    // Update schedule period if provided
+    if (periodId) {
+      await db.query(
+        `UPDATE schedule_periods SET
+           ai_optimized = TRUE,
+           ai_optimized_at = NOW()
+         WHERE id = $1 AND organization_id = $2`,
+        [periodId, organizationId]
+      );
+    }
+
+    res.status(201).json({
+      success: true,
+      created: created.length,
+      errors: errors.length,
+      shifts: created,
+      errorDetails: errors.length > 0 ? errors : undefined
+    });
+
+  } catch (error) {
+    console.error('Apply optimized schedule error:', error);
+    res.status(500).json({ error: 'Failed to apply optimized schedule' });
+  }
+});
+
+// Record feedback on a shift for ML learning
+router.post('/shifts/:id/feedback', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { id } = req.params;
+    const {
+      actualAttendance,
+      wasSwapped,
+      overtimeMinutes,
+      qualityRating,
+      notes
+    } = req.body;
+
+    // Verify shift exists and belongs to org
+    const shift = await db.query(
+      `SELECT id, employee_id FROM shifts WHERE id = $1 AND organization_id = $2`,
+      [id, organizationId]
+    );
+
+    if (!shift.rows[0]) {
+      return res.status(404).json({ error: 'Shift not found' });
+    }
+
+    // Record feedback for ML learning
+    const result = await recordScheduleFeedback(id, {
+      predictedAttendance: true, // Assumed true when scheduled
+      actualAttendance: actualAttendance !== undefined ? actualAttendance : null,
+      wasSwapped: wasSwapped || false,
+      overtimeMinutes: overtimeMinutes || 0,
+      qualityRating: qualityRating ? parseInt(qualityRating) : null,
+    });
+
+    // Optionally update notes on the shift
+    if (notes) {
+      await db.query(
+        `UPDATE shifts SET notes = COALESCE(notes, '') || E'\n[Feedback] ' || $2 WHERE id = $1`,
+        [id, notes]
+      );
+    }
+
+    res.json({
+      success: true,
+      feedback: result.rows[0],
+      message: 'Feedback recorded for ML training'
+    });
+
+  } catch (error) {
+    console.error('Record shift feedback error:', error);
+    res.status(500).json({ error: 'Failed to record feedback' });
+  }
+});
+
+// Get schedule optimization history
+router.get('/schedule/optimize/history', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { locationId, limit = 10 } = req.query;
+
+    let query = `
+      SELECT
+        sp.id,
+        sp.start_date,
+        sp.end_date,
+        sp.location_id,
+        l.name as location_name,
+        sp.ai_optimized,
+        sp.ai_optimized_at,
+        sp.status,
+        (SELECT COUNT(*) FROM shifts s WHERE s.date >= sp.start_date AND s.date <= sp.end_date AND s.location_id = sp.location_id) as shift_count,
+        (SELECT COUNT(*) FROM shifts s WHERE s.date >= sp.start_date AND s.date <= sp.end_date AND s.location_id = sp.location_id AND s.ai_generated = TRUE) as ai_generated_count
+      FROM schedule_periods sp
+      LEFT JOIN locations l ON l.id = sp.location_id
+      WHERE sp.organization_id = $1
+    `;
+
+    const params = [organizationId];
+    let paramIndex = 2;
+
+    if (locationId) {
+      query += ` AND sp.location_id = $${paramIndex++}`;
+      params.push(locationId);
+    }
+
+    query += ` ORDER BY sp.start_date DESC LIMIT $${paramIndex}`;
+    params.push(parseInt(limit));
+
+    const result = await db.query(query, params);
+
+    res.json({ history: result.rows });
+
+  } catch (error) {
+    console.error('Get optimization history error:', error);
+    res.status(500).json({ error: 'Failed to get optimization history' });
+  }
 });
 
 export default router;
