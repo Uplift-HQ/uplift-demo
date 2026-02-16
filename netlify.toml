@@ -3,6 +3,10 @@
   command = "npm run build"
   publish = "apps/portal/dist"
 
+[build.environment]
+  VITE_API_URL = "https://uplift-demo-production.up.railway.app/api"
+  VITE_DEMO_MODE = "true"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
