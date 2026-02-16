@@ -271,32 +271,45 @@ export const validateQuery = (schema) => {
 
 // -------------------- RATE LIMITING --------------------
 
+// Environment-configurable rate limits
+const RATE_LIMIT_WINDOW_MS = parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100;
+const AUTH_RATE_LIMIT_WINDOW_MS = parseInt(process.env.AUTH_RATE_LIMIT_WINDOW_MS) || 5 * 60 * 1000;
+const AUTH_RATE_LIMIT_MAX_REQUESTS = parseInt(process.env.AUTH_RATE_LIMIT_MAX_REQUESTS) || 10;
+
 /**
  * Standard API rate limiter
+ * Configurable via RATE_LIMIT_WINDOW_MS and RATE_LIMIT_MAX_REQUESTS
  */
 export const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: process.env.NODE_ENV === 'production' ? 100 : 10000, // Higher limit for dev/test
+  windowMs: RATE_LIMIT_WINDOW_MS,
+  max: process.env.NODE_ENV === 'production' ? RATE_LIMIT_MAX_REQUESTS : 10000, // Higher limit for dev/test
   standardHeaders: true,
   legacyHeaders: false,
   message: {
     error: 'Too many requests',
-    retryAfter: '15 minutes',
+    retryAfter: `${Math.ceil(RATE_LIMIT_WINDOW_MS / 60000)} minutes`,
+  },
+  keyGenerator: (req) => {
+    // Use combination of IP and user ID if authenticated
+    return req.user?.userId ? `${req.ip}-${req.user.userId}` : req.ip;
   },
 });
 
 /**
  * Strict limiter for auth endpoints
+ * Configurable via AUTH_RATE_LIMIT_WINDOW_MS and AUTH_RATE_LIMIT_MAX_REQUESTS
  */
 export const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 10, // 10 login attempts per 15 minutes
+  windowMs: AUTH_RATE_LIMIT_WINDOW_MS,
+  max: AUTH_RATE_LIMIT_MAX_REQUESTS,
   standardHeaders: true,
   legacyHeaders: false,
   message: {
     error: 'Too many login attempts',
-    retryAfter: '15 minutes',
+    retryAfter: `${Math.ceil(AUTH_RATE_LIMIT_WINDOW_MS / 60000)} minutes`,
   },
+  skipSuccessfulRequests: true, // Only count failed attempts
 });
 
 /**
@@ -309,6 +322,34 @@ export const passwordResetLimiter = rateLimit({
   legacyHeaders: false,
   message: {
     error: 'Too many password reset requests',
+    retryAfter: '1 hour',
+  },
+});
+
+/**
+ * Limiter for MFA endpoints (prevent brute force)
+ */
+export const mfaLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 attempts per 15 minutes
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    error: 'Too many MFA attempts',
+    retryAfter: '15 minutes',
+  },
+});
+
+/**
+ * Limiter for registration (prevent spam accounts)
+ */
+export const registrationLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 3, // 3 registrations per hour per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    error: 'Too many registration attempts',
     retryAfter: '1 hour',
   },
 });
@@ -458,9 +499,6 @@ export const corsOptions = {
       // Railway production URLs
       'https://uplift-portal-production.up.railway.app',
       'https://uplift-platform-production.up.railway.app',
-      // Netlify demo deployment
-      'https://upliftportaldemo.netlify.app',
-      /\.netlify\.app$/,
       // Localhost for development (always allow for demo convenience)
       'http://localhost:3000',
       'http://localhost:5173',
@@ -653,6 +691,8 @@ export default {
   apiLimiter,
   authLimiter,
   passwordResetLimiter,
+  mfaLimiter,
+  registrationLimiter,
   asyncHandler,
   errorHandler,
   notFoundHandler,

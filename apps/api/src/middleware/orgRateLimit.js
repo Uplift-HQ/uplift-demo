@@ -1,9 +1,33 @@
 // ============================================================
 // PER-ORGANIZATION RATE LIMITING
 // Prevents single tenant from overwhelming the system
+// Environment-configurable limits
 // ============================================================
 
 import rateLimit from 'express-rate-limit';
+
+// Rate limit configuration from environment
+const RATE_LIMIT_CONFIG = {
+  // Default API limits
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
+  maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
+
+  // Auth endpoint limits (stricter)
+  authWindowMs: parseInt(process.env.AUTH_RATE_LIMIT_WINDOW_MS) || 5 * 60 * 1000, // 5 minutes
+  authMaxRequests: parseInt(process.env.AUTH_RATE_LIMIT_MAX_REQUESTS) || 10,
+
+  // Per-organization limits
+  orgWindowMs: 60 * 1000, // 1 minute
+  orgMaxRequests: 1000,
+
+  // Tier-based limits
+  tierLimits: {
+    free: parseInt(process.env.RATE_LIMIT_FREE) || 100,
+    starter: parseInt(process.env.RATE_LIMIT_STARTER) || 500,
+    professional: parseInt(process.env.RATE_LIMIT_PROFESSIONAL) || 1000,
+    enterprise: parseInt(process.env.RATE_LIMIT_ENTERPRISE) || 5000,
+  },
+};
 
 // Rate limit store (in-memory or Redis)
 let redisClient = null;
@@ -132,11 +156,11 @@ export const createOrgRateLimiter = (options = {}) => {
 };
 
 /**
- * Standard per-org rate limiter (1000 req/min)
+ * Standard per-org rate limiter (configurable, default 1000 req/min)
  */
 export const orgApiLimiter = createOrgRateLimiter({
-  windowMs: 60 * 1000,
-  max: 1000,
+  windowMs: RATE_LIMIT_CONFIG.orgWindowMs,
+  max: RATE_LIMIT_CONFIG.orgMaxRequests,
 });
 
 /**
@@ -168,23 +192,15 @@ export const orgReportLimiter = createOrgRateLimiter({
 
 /**
  * Tier-based rate limiting based on subscription plan
+ * Configurable via environment variables
  */
 export const tieredOrgRateLimiter = async (req, res, next) => {
   if (!req.user?.organizationId) {
     return next();
   }
 
-  // Get org tier from user context or database
-  // For now, use a simple mapping
-  const tierLimits = {
-    free: 100,
-    starter: 500,
-    professional: 1000,
-    enterprise: 5000,
-  };
-
   const tier = req.user.tier || 'professional';
-  const max = tierLimits[tier] || tierLimits.professional;
+  const max = RATE_LIMIT_CONFIG.tierLimits[tier] || RATE_LIMIT_CONFIG.tierLimits.professional;
 
   const limiter = createOrgRateLimiter({
     windowMs: 60 * 1000,

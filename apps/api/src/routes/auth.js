@@ -6,9 +6,16 @@
 import { Router } from 'express';
 import crypto from 'crypto';
 import { authService, AuthError } from '../services/auth.js';
-import { authMiddleware } from '../middleware/index.js';
+import { authMiddleware, validate, authLimiter, mfaLimiter, passwordResetLimiter, registrationLimiter } from '../middleware/index.js';
 import { db } from '../lib/database.js';
 import * as billingService from '../services/billing.js';
+import {
+  loginSchema,
+  registerSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  mfaSetupSchema,
+} from '../validation/schemas.js';
 
 const router = Router();
 
@@ -43,13 +50,9 @@ const clearAuthCookies = (res) => {
 // -------------------- PUBLIC ROUTES --------------------
 
 // Login
-router.post('/login', async (req, res) => {
+router.post('/login', authLimiter, validate(loginSchema), async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password required' });
-    }
+    const { email, password, mfaCode } = req.body;
 
     const deviceInfo = {
       ip: req.ip,
@@ -84,7 +87,7 @@ router.post('/login', async (req, res) => {
 });
 
 // MFA verification
-router.post('/mfa/verify', async (req, res) => {
+router.post('/mfa/verify', mfaLimiter, async (req, res) => {
   try {
     const { mfaToken, code, method = 'totp' } = req.body;
 
@@ -203,20 +206,11 @@ const validatePassword = (password) => {
 };
 
 // Register new organization
-router.post('/register', async (req, res) => {
+router.post('/register', registrationLimiter, validate(registerSchema), async (req, res) => {
   try {
     const { organizationName, email, password, firstName, lastName } = req.body;
 
-    if (!organizationName || !email || !password || !firstName || !lastName) {
-      return res.status(400).json({ error: 'All fields required' });
-    }
-
-    // Validate password strength
-    const passwordErrors = validatePassword(password);
-    if (passwordErrors.length > 0) {
-      return res.status(400).json({ error: passwordErrors[0], details: passwordErrors });
-    }
-
+    // Zod schema already validated password strength and all required fields
     const result = await authService.register({
       organizationName,
       email,
@@ -249,13 +243,9 @@ router.post('/register', async (req, res) => {
 });
 
 // Request password reset
-router.post('/password/forgot', async (req, res) => {
+router.post('/password/forgot', passwordResetLimiter, validate(forgotPasswordSchema), async (req, res) => {
   try {
     const { email } = req.body;
-
-    if (!email) {
-      return res.status(400).json({ error: 'Email required' });
-    }
 
     await authService.requestPasswordReset(email);
 

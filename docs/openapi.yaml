@@ -23,7 +23,7 @@ info:
 servers:
   - url: http://localhost:3000/api
     description: Development
-  - url: https://api.uplift.hr/api
+  - url: https://api.uplifthq.co.uk/api
     description: Production
 
 tags:
@@ -39,8 +39,18 @@ tags:
     description: Time tracking and timesheets
   - name: TimeOff
     description: Time off requests and policies
+  - name: Expenses
+    description: Expense claims and reimbursements
+  - name: Payroll
+    description: Payroll processing and exports
+  - name: Momentum
+    description: Employee engagement and performance scoring
   - name: Dashboard
     description: Analytics and reporting
+  - name: Billing
+    description: Subscription and billing management
+  - name: System
+    description: Health checks and system endpoints
 
 paths:
   /health:
@@ -530,6 +540,420 @@ paths:
         '200':
           description: Hours report
 
+  # ==================== EXPENSES ====================
+
+  /expenses/my-expenses:
+    get:
+      summary: List my expense claims
+      tags: [Expenses]
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, pending, approved, rejected, paid]
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Expense claims list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  expenses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExpenseClaim'
+                  totals:
+                    type: object
+
+  /expenses/claims:
+    post:
+      summary: Create expense claim
+      tags: [Expenses]
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseClaimInput'
+      responses:
+        '201':
+          description: Claim created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  claim:
+                    $ref: '#/components/schemas/ExpenseClaim'
+
+  /expenses/receipts/scan:
+    post:
+      summary: Scan receipt with OCR
+      tags: [Expenses]
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                receipt:
+                  type: string
+                  format: binary
+                  description: Receipt image (JPG, PNG, PDF)
+                expectedCurrency:
+                  type: string
+                  enum: [GBP, USD, EUR]
+      responses:
+        '200':
+          description: OCR extraction result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  receiptUrl:
+                    type: string
+                  extracted:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      currency:
+                        type: string
+                      date:
+                        type: string
+                      merchant:
+                        type: string
+                  confidence:
+                    type: integer
+
+  /expenses/claims/{id}/approve:
+    post:
+      summary: Approve expense claim
+      tags: [Expenses]
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: Claim approved
+
+  /expenses/claims/{id}/reject:
+    post:
+      summary: Reject expense claim
+      tags: [Expenses]
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Claim rejected
+
+  # ==================== MOMENTUM SCORES ====================
+
+  /momentum/me:
+    get:
+      summary: Get my momentum score
+      tags: [Momentum]
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Current user's momentum score
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MomentumScore'
+
+  /momentum/dashboard:
+    get:
+      summary: Get organization momentum dashboard
+      tags: [Momentum]
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Momentum dashboard metrics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orgAverage:
+                    type: number
+                  distribution:
+                    type: array
+                  trends:
+                    type: object
+
+  /momentum/leaderboard:
+    get:
+      summary: Get momentum leaderboard
+      tags: [Momentum]
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Top employees by momentum score
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leaderboard:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MomentumScore'
+
+  # ==================== PAYROLL ====================
+
+  /payroll/runs:
+    get:
+      summary: List payroll runs
+      tags: [Payroll]
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, pending_approval, approved, processing, completed, failed]
+      responses:
+        '200':
+          description: Payroll runs list
+
+  /payroll/generate:
+    post:
+      summary: Generate payroll run
+      tags: [Payroll]
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [periodStart, periodEnd]
+              properties:
+                periodStart:
+                  type: string
+                  format: date
+                periodEnd:
+                  type: string
+                  format: date
+                employeeIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '201':
+          description: Payroll run created
+
+  /payroll/runs/{id}/approve:
+    post:
+      summary: Approve payroll run
+      tags: [Payroll]
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Payroll approved
+
+  /payroll/export/{id}:
+    get:
+      summary: Export payroll to provider
+      tags: [Payroll]
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+        - name: provider
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [payrun, xero, quickbooks, csv]
+      responses:
+        '200':
+          description: Export data
+
+  # ==================== BILLING ====================
+
+  /billing/subscription:
+    get:
+      summary: Get current subscription
+      tags: [Billing]
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Subscription details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+
+  /billing/portal:
+    post:
+      summary: Create Stripe customer portal session
+      tags: [Billing]
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Portal session URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+
+  # ==================== MFA ====================
+
+  /auth/mfa/setup:
+    post:
+      summary: Setup MFA
+      tags: [Auth]
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: MFA setup data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  secret:
+                    type: string
+                  qrCode:
+                    type: string
+
+  /auth/mfa/verify:
+    post:
+      summary: Verify MFA code during login
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mfaToken, code]
+              properties:
+                mfaToken:
+                  type: string
+                code:
+                  type: string
+                  pattern: '^\d{6}$'
+      responses:
+        '200':
+          description: MFA verified, login complete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+
+  /auth/mfa/enable:
+    post:
+      summary: Enable MFA after verification
+      tags: [Auth]
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code:
+                  type: string
+                  pattern: '^\d{6}$'
+      responses:
+        '200':
+          description: MFA enabled
+
+  # ==================== HEALTH (DETAILED) ====================
+
+  /health/detailed:
+    get:
+      summary: Detailed health check (admin only)
+      tags: [System]
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Detailed system health
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  uptime:
+                    type: number
+                  memory:
+                    type: object
+                  database:
+                    type: object
+
 components:
   securitySchemes:
     cookieAuth:
@@ -714,3 +1138,125 @@ components:
           type: boolean
         breakMinutes:
           type: integer
+
+    ExpenseClaim:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employeeId:
+          type: string
+          format: uuid
+        description:
+          type: string
+        categoryId:
+          type: string
+          format: uuid
+        categoryName:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+          enum: [GBP, USD, EUR]
+        expenseDate:
+          type: string
+          format: date
+        receiptUrl:
+          type: string
+        status:
+          type: string
+          enum: [draft, pending, approved, rejected, paid]
+        notes:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    ExpenseClaimInput:
+      type: object
+      required: [description, amount, expenseDate]
+      properties:
+        description:
+          type: string
+          maxLength: 500
+        categoryId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          minimum: 0.01
+        expenseDate:
+          type: string
+          format: date
+        receiptUrl:
+          type: string
+        notes:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+    MomentumScore:
+      type: object
+      properties:
+        employeeId:
+          type: string
+          format: uuid
+        employeeName:
+          type: string
+        score:
+          type: number
+          minimum: 0
+          maximum: 100
+        trend:
+          type: string
+          enum: [up, down, stable]
+        breakdown:
+          type: object
+          properties:
+            attendance:
+              type: number
+            punctuality:
+              type: number
+            shiftCompletion:
+              type: number
+            skillsGrowth:
+              type: number
+            recognition:
+              type: number
+            engagement:
+              type: number
+        periodStart:
+          type: string
+          format: date
+        periodEnd:
+          type: string
+          format: date
+
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        plan:
+          type: string
+          enum: [free, starter, professional, enterprise]
+        status:
+          type: string
+          enum: [active, past_due, canceled, trialing]
+        currentPeriodStart:
+          type: string
+          format: date-time
+        currentPeriodEnd:
+          type: string
+          format: date-time
+        seatLimit:
+          type: integer
+        seatUsage:
+          type: integer
+        features:
+          type: object

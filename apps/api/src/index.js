@@ -60,6 +60,7 @@ import surveysRoutes from './routes/surveys.js';
 import reportsRoutes from './routes/reports.js';
 import migrationsRoutes from './routes/migrations.js';
 import corporateCardsRoutes from './routes/corporateCards.js';
+import momentumRoutes from './routes/momentum.js';
 
 // Middleware
 import { 
@@ -224,6 +225,71 @@ app.get('/api/health/ready', async (req, res) => {
   }
 });
 
+// Detailed health check (admin only, requires auth)
+app.get('/api/health/detailed', async (req, res) => {
+  // Simple auth check - require valid token
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Authentication required' });
+  }
+
+  try {
+    const dbHealth = await db.healthCheck();
+    const poolStats = db.getPoolStats();
+    const memUsage = process.memoryUsage();
+
+    // Measure DB latency
+    const latencyStart = Date.now();
+    await db.query('SELECT 1');
+    const dbLatency = Date.now() - latencyStart;
+
+    res.json({
+      status: dbHealth.healthy ? 'healthy' : 'degraded',
+      version: process.env.npm_package_version || '1.0.0',
+      timestamp: new Date().toISOString(),
+      uptime: {
+        seconds: Math.floor(process.uptime()),
+        formatted: formatUptime(process.uptime()),
+      },
+      database: {
+        connected: dbHealth.healthy,
+        latencyMs: dbLatency,
+        pool: {
+          total: poolStats.totalCount || 0,
+          idle: poolStats.idleCount || 0,
+          waiting: poolStats.waitingCount || 0,
+        },
+      },
+      memory: {
+        rss: formatBytes(memUsage.rss),
+        heapTotal: formatBytes(memUsage.heapTotal),
+        heapUsed: formatBytes(memUsage.heapUsed),
+        external: formatBytes(memUsage.external),
+      },
+      environment: process.env.NODE_ENV || 'development',
+      nodeVersion: process.version,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'unhealthy',
+      error: error.message,
+      timestamp: new Date().toISOString(),
+    });
+  }
+});
+
+function formatUptime(seconds) {
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  return `${days}d ${hours}h ${mins}m`;
+}
+
+function formatBytes(bytes) {
+  const mb = bytes / (1024 * 1024);
+  return `${mb.toFixed(2)} MB`;
+}
+
 // Prometheus metrics endpoint
 app.get('/metrics', async (req, res) => {
   const poolStats = db.getPoolStats();
@@ -371,6 +437,9 @@ app.use('/api/cookies', cookiesRoutes);
 
 // Gamification routes (points, badges, rewards, affiliate offers)
 app.use('/api/gamification', apiLimiter, csrfProtection, gamificationRoutes);
+
+// Momentum routes (real engagement scoring engine)
+app.use('/api/momentum', apiLimiter, csrfProtection, momentumRoutes);
 
 // Branding routes (white-label customization)
 // Note: GET /api/branding is public (no auth/CSRF), PUT/POST/DELETE require auth

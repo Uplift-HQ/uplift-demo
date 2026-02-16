@@ -4,13 +4,113 @@
 // ============================================================
 
 import { Router } from 'express';
+import multer from 'multer';
+import path from 'path';
+import crypto from 'crypto';
+import { z } from 'zod';
 import { db } from '../lib/database.js';
-import { authMiddleware, requireRole } from '../middleware/index.js';
+import { authMiddleware, requireRole, validate } from '../middleware/index.js';
+import ocrService from '../services/ocr.js';
+import {
+  createExpenseSchema,
+  updateExpenseSchema,
+  expenseApprovalSchema,
+  uuidSchema,
+  dateSchema,
+  positiveAmountSchema,
+} from '../validation/schemas.js';
+
+// Expense claim creation schema (matches createExpenseSchema but with field name mappings)
+const claimCreateSchema = z.object({
+  description: z.string().min(1, 'Description is required').max(500),
+  categoryId: uuidSchema.optional().nullable(),
+  amount: positiveAmountSchema,
+  expenseDate: dateSchema,
+  receiptUrl: z.string().url().max(2000).optional().nullable(),
+  notes: z.string().max(1000).optional().nullable(),
+  tags: z.array(z.string().max(50)).max(10).optional(),
+  status: z.enum(['draft', 'pending']).default('pending'),
+});
+
+const claimUpdateSchema = claimCreateSchema.partial();
 
 const router = Router();
 
+// Configure multer for receipt uploads
+const receiptStorage = multer.diskStorage({
+  destination: process.env.UPLOAD_DIR || '/tmp/uploads',
+  filename: (req, file, cb) => {
+    const uniqueId = crypto.randomBytes(16).toString('hex');
+    cb(null, `receipt-${uniqueId}${path.extname(file.originalname)}`);
+  },
+});
+
+const receiptUpload = multer({
+  storage: receiptStorage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  fileFilter: (req, file, cb) => {
+    const allowed = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.pdf'];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Invalid file type. Allowed: ${allowed.join(', ')}`), false);
+    }
+  },
+});
+
 // All routes require authentication
 router.use(authMiddleware);
+
+// ==================== RECEIPT OCR ====================
+
+/**
+ * POST /api/expenses/receipts/scan
+ * Upload a receipt image and extract data using OCR
+ */
+router.post('/receipts/scan', receiptUpload.single('receipt'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No receipt file uploaded' });
+    }
+
+    const { organizationId } = req.user;
+    const { expectedCurrency } = req.body;
+
+    // Get org currency as default
+    let currency = expectedCurrency;
+    if (!currency) {
+      const orgResult = await db.query(
+        'SELECT currency FROM organizations WHERE id = $1',
+        [organizationId]
+      );
+      currency = orgResult.rows[0]?.currency || 'GBP';
+    }
+
+    // Process with OCR
+    const result = await ocrService.processReceiptUpload(req.file.path, {
+      expectedCurrency: currency,
+    });
+
+    // Store file path for later attachment
+    const receiptUrl = `/uploads/${req.file.filename}`;
+
+    res.json({
+      success: result.success,
+      receiptUrl,
+      extracted: result.extracted,
+      confidence: result.confidence,
+      suggestions: result.suggestions,
+      rawText: process.env.NODE_ENV === 'development' ? result.rawText : undefined,
+    });
+  } catch (error) {
+    console.error('Receipt scan error:', error);
+    res.status(500).json({
+      error: 'Failed to scan receipt',
+      message: error.message,
+    });
+  }
+});
 
 // ==================== CATEGORIES ====================
 
@@ -282,14 +382,10 @@ router.get('/my-expenses/:id', async (req, res) => {
 });
 
 // Create expense claim
-router.post('/claims', async (req, res) => {
+router.post('/claims', validate(claimCreateSchema), async (req, res) => {
   try {
     const { userId, organizationId } = req.user;
     const { description, categoryId, amount, expenseDate, receiptUrl, notes, tags, status } = req.body;
-
-    if (!description || !amount || !expenseDate) {
-      return res.status(400).json({ error: 'Description, amount, and expense date are required' });
-    }
 
     // Get employee ID
     const employee = await db.query(`
@@ -349,7 +445,7 @@ router.post('/claims', async (req, res) => {
 });
 
 // Update expense claim (only if draft or pending)
-router.patch('/claims/:id', async (req, res) => {
+router.patch('/claims/:id', validate(claimUpdateSchema), async (req, res) => {
   try {
     const { userId, organizationId } = req.user;
     const { description, categoryId, amount, expenseDate, receiptUrl, notes, tags, status } = req.body;

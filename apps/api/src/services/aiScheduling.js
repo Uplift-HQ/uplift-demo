@@ -18,17 +18,32 @@ const CONFIG = {
   HISTORY_WEEKS: 12,           // Weeks of history to analyze
   FORECAST_HORIZON_DAYS: 28,   // Days to forecast ahead
   MIN_DATA_POINTS: 4,          // Minimum data points for pattern detection
-  
+
   // Optimization weights
   WEIGHT_COVERAGE: 0.35,       // Importance of shift coverage
   WEIGHT_PREFERENCES: 0.25,    // Importance of employee preferences
   WEIGHT_SKILLS: 0.20,         // Importance of skill matching
   WEIGHT_FAIRNESS: 0.15,       // Importance of fair distribution
   WEIGHT_COST: 0.05,           // Importance of labor cost
-  
+
   // Thresholds
   HIGH_DEMAND_THRESHOLD: 1.3,  // 30% above average
   LOW_DEMAND_THRESHOLD: 0.7,   // 30% below average
+
+  // Labor law constraints (UK Working Time Regulations)
+  MAX_HOURS_PER_WEEK: 48,      // UK WTR limit (unless opted out)
+  MIN_REST_BETWEEN_SHIFTS: 11, // Hours between shifts
+  MAX_CONSECUTIVE_DAYS: 6,     // Days without rest
+  MIN_BREAK_AFTER_HOURS: 6,    // Must have break after 6 hours
+  MIN_WEEKLY_REST: 24,         // Hours per week rest minimum
+
+  // Scoring weights for employee selection
+  SCORE_SKILL_MATCH: 25,       // Points for matching required skills
+  SCORE_PREFERENCE_MATCH: 15,  // Points for preferred shift time
+  SCORE_FAIRNESS: 15,          // Points for balancing hours
+  SCORE_MOMENTUM: 10,          // Points for high momentum score
+  SCORE_COST_EFFICIENCY: 10,   // Points for cost efficiency
+  SCORE_AVAILABILITY: 25,      // Points for availability
 };
 
 // -------------------- Demand Forecasting --------------------
@@ -667,60 +682,266 @@ function optimizeDaySchedule(forecast, employees, preferences, existingShifts) {
 
 /**
  * Score an employee for a specific shift
+ * Enhanced with proper skill matching, labor law checks, and quality factors
  */
-function scoreEmployeeForShift(employee, shiftPattern, preferences, forecast) {
-  let score = 50; // Base score
-  
-  // Check hours remaining
-  const remainingHours = (employee.max_hours_per_week || 40) - (employee.scheduled_hours || 0);
+function scoreEmployeeForShift(employee, shiftPattern, preferences, forecast, context = {}) {
+  const reasons = [];
+  let score = 0;
+
+  // -------------------- HARD CONSTRAINTS (Eligibility) --------------------
+
+  // 1. Check hours remaining this week
+  const remainingHours = (employee.max_hours_per_week || CONFIG.MAX_HOURS_PER_WEEK) - (employee.scheduled_hours || 0);
   if (remainingHours < shiftPattern.hours) {
-    return 0; // Can't work this shift
+    return { score: 0, eligible: false, reason: 'Would exceed weekly hours limit' };
   }
-  
-  // Preference for employees under their preferred hours
-  const preferredRemaining = (employee.preferred_hours_per_week || 32) - (employee.scheduled_hours || 0);
-  if (preferredRemaining > 0) {
-    score += 15;
+
+  // 2. Check minimum rest between shifts
+  if (employee.last_shift_end) {
+    const lastEnd = new Date(employee.last_shift_end);
+    const thisStart = new Date(`${forecast.date}T${shiftPattern.start}`);
+    const restHours = (thisStart - lastEnd) / (1000 * 60 * 60);
+    if (restHours < CONFIG.MIN_REST_BETWEEN_SHIFTS) {
+      return { score: 0, eligible: false, reason: `Insufficient rest (${Math.round(restHours)}h < ${CONFIG.MIN_REST_BETWEEN_SHIFTS}h required)` };
+    }
   }
-  
-  // Check day preferences
+
+  // 3. Check consecutive days worked
+  const consecutiveDays = employee.consecutive_days_worked || 0;
+  if (consecutiveDays >= CONFIG.MAX_CONSECUTIVE_DAYS) {
+    return { score: 0, eligible: false, reason: 'Exceeded maximum consecutive days' };
+  }
+
+  // 4. Check unavailable days
+  if (preferences?.unavailable_days) {
+    const dayOfWeek = new Date(forecast.date).getDay();
+    if (preferences.unavailable_days.includes(dayOfWeek)) {
+      return { score: 0, eligible: false, reason: 'Day marked as unavailable' };
+    }
+  }
+
+  // 5. Check specific unavailable dates
+  if (preferences?.unavailable_dates?.includes(forecast.date)) {
+    return { score: 0, eligible: false, reason: 'Date marked as unavailable' };
+  }
+
+  // -------------------- SOFT SCORING --------------------
+
+  // 1. SKILL MATCH (25 points)
+  if (context.requiredSkills && context.requiredSkills.length > 0) {
+    const employeeSkillIds = employee.skills?.map(s => s.skill_id || s.id) || [];
+    const matchedSkills = context.requiredSkills.filter(s => employeeSkillIds.includes(s));
+    const skillMatchRate = matchedSkills.length / context.requiredSkills.length;
+    const skillScore = Math.round(skillMatchRate * CONFIG.SCORE_SKILL_MATCH);
+    score += skillScore;
+    if (skillMatchRate === 1) reasons.push('Full skill match');
+    else if (skillMatchRate > 0.5) reasons.push(`${Math.round(skillMatchRate * 100)}% skill match`);
+  } else {
+    // No skills required = full points
+    score += CONFIG.SCORE_SKILL_MATCH;
+  }
+
+  // 2. PREFERENCE MATCH (15 points)
   if (preferences) {
     const dayOfWeek = new Date(forecast.date).getDay();
+    const shiftStartHour = parseInt(shiftPattern.start.split(':')[0]);
+
+    // Day preference
     if (preferences.preferred_days?.includes(dayOfWeek)) {
-      score += 20;
+      score += 8;
+      reasons.push('Preferred day');
     }
-    if (preferences.unavailable_days?.includes(dayOfWeek)) {
-      return 0;
+
+    // Time preference
+    const prefTime = preferences.preferred_shift_time;
+    if (prefTime === 'morning' && shiftStartHour >= 6 && shiftStartHour < 12) {
+      score += 7;
+      reasons.push('Preferred morning shift');
+    } else if (prefTime === 'afternoon' && shiftStartHour >= 12 && shiftStartHour < 17) {
+      score += 7;
+      reasons.push('Preferred afternoon shift');
+    } else if (prefTime === 'evening' && shiftStartHour >= 17) {
+      score += 7;
+      reasons.push('Preferred evening shift');
     }
   }
-  
-  // Cost efficiency (lower hourly rate = higher score, within reason)
-  const avgRate = 12; // Assume average rate
-  if (employee.hourly_rate) {
-    score += Math.max(-10, Math.min(10, (avgRate - employee.hourly_rate) * 2));
+
+  // 3. FAIRNESS - Balance hours across team (15 points)
+  const preferredHours = employee.preferred_hours_per_week || 32;
+  const scheduledHours = employee.scheduled_hours || 0;
+  const hoursDeficit = preferredHours - scheduledHours;
+
+  if (hoursDeficit > shiftPattern.hours) {
+    // Employee is under their preferred hours - prioritize them
+    score += CONFIG.SCORE_FAIRNESS;
+    reasons.push('Under preferred hours');
+  } else if (hoursDeficit > 0) {
+    score += Math.round((hoursDeficit / shiftPattern.hours) * CONFIG.SCORE_FAIRNESS);
   }
-  
-  // Skill match bonus
-  // In production, would check required skills vs employee skills
-  score += 10;
-  
-  return Math.max(0, Math.min(100, score));
+
+  // 4. MOMENTUM SCORE (10 points)
+  if (employee.momentum_score) {
+    const momentumBonus = Math.round((employee.momentum_score / 100) * CONFIG.SCORE_MOMENTUM);
+    score += momentumBonus;
+    if (employee.momentum_score >= 80) reasons.push('High performer');
+  }
+
+  // 5. COST EFFICIENCY (10 points)
+  if (context.avgHourlyRate && employee.hourly_rate) {
+    if (employee.hourly_rate <= context.avgHourlyRate) {
+      const savings = (context.avgHourlyRate - employee.hourly_rate) / context.avgHourlyRate;
+      score += Math.round(Math.min(savings * 2, 1) * CONFIG.SCORE_COST_EFFICIENCY);
+    }
+  }
+
+  // 6. AVAILABILITY (25 points - already confirmed available, award points)
+  score += CONFIG.SCORE_AVAILABILITY;
+
+  return {
+    score: Math.min(100, Math.max(0, score)),
+    eligible: true,
+    reasons,
+    breakdown: {
+      skills: context.requiredSkills ? Math.round((employee.skills?.length || 0) / Math.max(1, context.requiredSkills.length) * 25) : 25,
+      preference: preferences ? 15 : 0,
+      fairness: hoursDeficit > 0 ? 15 : 0,
+      momentum: employee.momentum_score ? Math.round((employee.momentum_score / 100) * 10) : 0,
+      availability: 25,
+    },
+  };
+}
+
+/**
+ * Calculate quality metrics for a generated schedule
+ */
+function calculateScheduleQuality(schedule, forecast, employees) {
+  const metrics = {
+    coverage: 0,
+    skillMatch: 0,
+    fairness: 0,
+    laborCompliance: 100,
+    costEfficiency: 0,
+    overall: 0,
+    violations: [],
+  };
+
+  // 1. COVERAGE: slots filled / total slots needed
+  let totalSlotsNeeded = 0;
+  let slotsFilled = 0;
+  forecast.forEach(day => {
+    day.hours.forEach(h => {
+      if (h.staffNeeded > 0) {
+        totalSlotsNeeded += h.staffNeeded;
+        // Count shifts covering this hour
+        const shiftsThisHour = schedule.filter(s =>
+          s.date === day.date &&
+          parseInt(s.startTime.split(':')[0]) <= h.hour &&
+          parseInt(s.endTime.split(':')[0]) > h.hour
+        ).length;
+        slotsFilled += Math.min(shiftsThisHour, h.staffNeeded);
+      }
+    });
+  });
+  metrics.coverage = totalSlotsNeeded > 0 ? Math.round((slotsFilled / totalSlotsNeeded) * 100) : 100;
+
+  // 2. SKILL MATCH: shifts with fully qualified workers
+  const shiftsWithSkills = schedule.filter(s => s.skillMatchRate === 1).length;
+  metrics.skillMatch = schedule.length > 0 ? Math.round((shiftsWithSkills / schedule.length) * 100) : 100;
+
+  // 3. FAIRNESS: Gini coefficient of hours distribution
+  const hoursPerEmployee = {};
+  schedule.forEach(s => {
+    if (!hoursPerEmployee[s.employeeId]) hoursPerEmployee[s.employeeId] = 0;
+    hoursPerEmployee[s.employeeId] += s.hours || 8;
+  });
+  const hoursArray = Object.values(hoursPerEmployee).sort((a, b) => a - b);
+  if (hoursArray.length > 1) {
+    // Simplified Gini: lower is more equal
+    const mean = hoursArray.reduce((a, b) => a + b, 0) / hoursArray.length;
+    const variance = hoursArray.reduce((sum, h) => sum + Math.abs(h - mean), 0) / hoursArray.length;
+    const gini = variance / (2 * mean);
+    metrics.fairness = Math.round((1 - Math.min(gini, 1)) * 100);
+  } else {
+    metrics.fairness = 100;
+  }
+
+  // 4. LABOR COMPLIANCE: check for violations
+  employees.forEach(emp => {
+    const empSchedule = schedule.filter(s => s.employeeId === emp.id);
+    let totalHours = empSchedule.reduce((sum, s) => sum + (s.hours || 8), 0);
+
+    if (totalHours > CONFIG.MAX_HOURS_PER_WEEK) {
+      metrics.violations.push({
+        type: 'MAX_HOURS',
+        employeeId: emp.id,
+        employeeName: `${emp.first_name} ${emp.last_name}`,
+        value: totalHours,
+        limit: CONFIG.MAX_HOURS_PER_WEEK,
+      });
+      metrics.laborCompliance -= 10;
+    }
+
+    // Check consecutive days
+    const datesWorked = [...new Set(empSchedule.map(s => s.date))].sort();
+    let maxConsecutive = 1;
+    let current = 1;
+    for (let i = 1; i < datesWorked.length; i++) {
+      const diff = (new Date(datesWorked[i]) - new Date(datesWorked[i - 1])) / (1000 * 60 * 60 * 24);
+      if (diff === 1) {
+        current++;
+        maxConsecutive = Math.max(maxConsecutive, current);
+      } else {
+        current = 1;
+      }
+    }
+    if (maxConsecutive > CONFIG.MAX_CONSECUTIVE_DAYS) {
+      metrics.violations.push({
+        type: 'CONSECUTIVE_DAYS',
+        employeeId: emp.id,
+        employeeName: `${emp.first_name} ${emp.last_name}`,
+        value: maxConsecutive,
+        limit: CONFIG.MAX_CONSECUTIVE_DAYS,
+      });
+      metrics.laborCompliance -= 10;
+    }
+  });
+  metrics.laborCompliance = Math.max(0, metrics.laborCompliance);
+
+  // 5. OVERALL SCORE (weighted average)
+  metrics.overall = Math.round(
+    metrics.coverage * 0.35 +
+    metrics.skillMatch * 0.20 +
+    metrics.fairness * 0.15 +
+    metrics.laborCompliance * 0.20 +
+    metrics.costEfficiency * 0.10
+  );
+
+  return metrics;
 }
 
 /**
  * Get human-readable reason for assignment
  */
 function getAssignmentReason(employee, pattern) {
+  // If scoreResult has reasons from enhanced scoring, use those
+  if (employee.scoreResult?.reasons?.length > 0) {
+    return employee.scoreResult.reasons.join(', ');
+  }
+
   const reasons = [];
-  
+
   if (employee.scheduled_hours < (employee.preferred_hours_per_week || 32)) {
     reasons.push('Under preferred hours');
   }
-  
+
   if (employee.score > 80) {
-    reasons.push('Strong skill match');
+    reasons.push('High match score');
   }
-  
+
+  if (employee.momentum_score >= 80) {
+    reasons.push('Top performer');
+  }
+
   return reasons.length ? reasons.join(', ') : 'Available and qualified';
 }
 
@@ -770,7 +991,16 @@ function getLastMondayOf(year, month) {
 
 // -------------------- Export --------------------
 
+export {
+  generateDemandForecast,
+  generateScheduleSuggestions,
+  calculateScheduleQuality,
+  scoreEmployeeForShift,
+  CONFIG as SCHEDULING_CONFIG,
+};
+
 export default {
   generateDemandForecast,
   generateScheduleSuggestions,
+  calculateScheduleQuality,
 };
