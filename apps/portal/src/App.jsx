@@ -125,9 +125,11 @@ export default function App() {
         <Route path="/reports" element={<RequireManager><Reports /></RequireManager>} />
         <Route path="/payroll/team" element={<RequireManager><Payroll /></RequireManager>} />
 
+        {/* Manager or Admin */}
+        <Route path="/shift-templates" element={<RequireManager><ShiftTemplates /></RequireManager>} />
+
         {/* Admin only */}
         <Route path="/org-onboarding" element={<RequireAdmin><OrgOnboarding /></RequireAdmin>} />
-        <Route path="/shift-templates" element={<RequireAdmin><ShiftTemplates /></RequireAdmin>} />
         <Route path="/locations" element={<RequireAdmin><Locations /></RequireAdmin>} />
         <Route path="/bulk-import" element={<RequireAdmin><BulkImport /></RequireAdmin>} />
         <Route path="/integrations" element={<RequireAdmin><Integrations /></RequireAdmin>} />
