@@ -2140,7 +2140,7 @@ function ShiftDetailModal({ shift, onClose, t, toast }) {
           <div className="flex justify-between">
             <span className="text-slate-500">{t('common.status', 'Status')}</span>
             <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBadge[shift.status] || statusBadge.draft}`}>
-              {t(`schedule.${shift.status}`, shift.status)}
+              {t(`schedule.${t('common.' + shift.status, shift.status)}`, shift.status)}
             </span>
           </div>
           {shift.break_minutes && (

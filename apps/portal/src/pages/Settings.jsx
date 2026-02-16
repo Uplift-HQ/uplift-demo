@@ -480,9 +480,9 @@ function BrandingSettings({ organization, showMsg }) {
               { icon: Crown, label: t('settings.branding.loginScreen', 'Login Screen') },
               { icon: Globe, label: t('settings.branding.customFavicon', 'Custom Favicon') },
             ].map(item => (
-              <div key={item.label} className="flex flex-col items-center gap-1.5 p-3 bg-white/70 rounded-lg">
+              <div key={t('settings.items.' + item.key, item.label)} className="flex flex-col items-center gap-1.5 p-3 bg-white/70 rounded-lg">
                 <item.icon className="w-5 h-5 text-orange-500" />
-                <span className="text-xs font-medium text-slate-700">{item.label}</span>
+                <span className="text-xs font-medium text-slate-700">{t('settings.items.' + item.key, item.label)}</span>
               </div>
             ))}
           </div>
@@ -1668,8 +1668,8 @@ function WebhooksSettings({ showMsg }) {
         <h3 className="font-medium text-slate-900 mb-4">{t('settings.availableEventTypes', 'Available Event Types')}</h3>
         <div className="grid grid-cols-2 gap-4">
           {eventTypes.map((cat) => (
-            <div key={cat.category} className="p-4 bg-slate-50 rounded-lg">
-              <h4 className="font-medium text-slate-700 mb-2">{cat.category}</h4>
+            <div key={t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)} className="p-4 bg-slate-50 rounded-lg">
+              <h4 className="font-medium text-slate-700 mb-2">{t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)}</h4>
               <div className="space-y-1">
                 {cat.events.map((event) => (
                   <div key={event} className="text-sm font-mono text-slate-600">{event}</div>
@@ -1787,8 +1787,8 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
             <label className="block text-sm font-medium text-slate-700 mb-2">{t('settings.eventsToSubscribe', 'Events to Subscribe')} *</label>
             <div className="space-y-4 max-h-48 overflow-y-auto border border-slate-200 rounded-lg p-3">
               {eventTypes.map((cat) => (
-                <div key={cat.category}>
-                  <h4 className="text-xs font-medium text-slate-500 uppercase mb-2">{cat.category}</h4>
+                <div key={t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)}>
+                  <h4 className="text-xs font-medium text-slate-500 uppercase mb-2">{t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)}</h4>
                   <div className="flex flex-wrap gap-2">
                     {cat.events.map((event) => (
                       <button
@@ -1939,7 +1939,7 @@ function WebhookDetailModal({ webhook, onClose }) {
                         <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
                           log.status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
                         }`}>
-                          {log.status}
+                          {t('common.' + log.status, log.status)}
                         </span>
                       </td>
                       <td className="px-4 py-2 text-right text-slate-600">
@@ -2034,8 +2034,8 @@ function NavigationSettings({ showMsg }) {
         {roles.map((role) => (
           <div key={role.id} className="border border-slate-200 rounded-lg overflow-hidden">
             <div className="bg-slate-50 px-4 py-3 border-b border-slate-200">
-              <h3 className="font-medium text-slate-900">{role.name}</h3>
-              <p className="text-sm text-slate-500">{role.description}</p>
+              <h3 className="font-medium text-slate-900">{role.nameKey ? t(role.nameKey, role.name) : role.name}</h3>
+              <p className="text-sm text-slate-500">{role.descriptionKey ? t(role.descriptionKey, role.description) : role.description}</p>
             </div>
             <div className="p-4">
               <div className="grid grid-cols-2 gap-3">
@@ -2051,8 +2051,8 @@ function NavigationSettings({ showMsg }) {
                       } ${isRequired ? 'opacity-60' : ''}`}
                     >
                       <div>
-                        <p className="font-medium text-sm text-slate-900">{page.name}</p>
-                        <p className="text-xs text-slate-500">{page.description}</p>
+                        <p className="font-medium text-sm text-slate-900">{page.nameKey ? t(page.nameKey, page.name) : page.name}</p>
+                        <p className="text-xs text-slate-500">{page.descriptionKey ? t(page.descriptionKey, page.description) : page.description}</p>
                       </div>
                       <button
                         onClick={() => togglePageForRole(role.id, page.id)}
@@ -2234,7 +2234,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
                       className={`w-2 h-2 rounded-full ${
                         emp.visibility?.[feature.id] ? 'bg-green-500' : 'bg-slate-200'
                       }`}
-                      title={`${feature.name}: ${emp.visibility?.[feature.id] ? 'Enabled' : 'Disabled'}`}
+                      title={`${feature.nameKey ? t(feature.nameKey, feature.name) : feature.name}: ${emp.visibility?.[feature.id] ? 'Enabled' : 'Disabled'}`}
                     />
                   ))}
                 </div>
@@ -2277,8 +2277,8 @@ function EmployeeVisibilitySettings({ showMsg }) {
                       }`}
                     >
                       <div>
-                        <p className="font-medium text-sm text-slate-900">{feature.name}</p>
-                        <p className="text-xs text-slate-500">{feature.description}</p>
+                        <p className="font-medium text-sm text-slate-900">{feature.nameKey ? t(feature.nameKey, feature.name) : feature.name}</p>
+                        <p className="text-xs text-slate-500">{feature.descriptionKey ? t(feature.descriptionKey, feature.description) : feature.description}</p>
                       </div>
                       <button
                         onClick={() => toggleVisibility(emp.id, feature.id)}
@@ -3298,7 +3298,7 @@ function RolesSettings({ showMsg }) {
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3">
-                    <h3 className="font-semibold text-slate-900">{role.name}</h3>
+                    <h3 className="font-semibold text-slate-900">{role.nameKey ? t(role.nameKey, role.name) : role.name}</h3>
                     {role.builtIn ? (
                       <span className="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600">
                         {t('settings.roles.builtIn', 'Built-in')}
@@ -3309,7 +3309,7 @@ function RolesSettings({ showMsg }) {
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-slate-500 mt-1">{role.description}</p>
+                  <p className="text-sm text-slate-500 mt-1">{role.descriptionKey ? t(role.descriptionKey, role.description) : role.description}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <Users className="w-4 h-4 text-slate-400" />
                     <span className="text-sm text-slate-600">
@@ -3322,7 +3322,7 @@ function RolesSettings({ showMsg }) {
                     {PERMISSION_MODULES.slice(0, 5).map(mod => (
                       <div key={mod.id} className="flex items-center gap-1 text-xs text-slate-500">
                         <mod.icon className="w-3 h-3" />
-                        <span>{mod.label}:</span>
+                        <span>{t('settings.modules.' + mod.id, mod.label)}:</span>
                         {getPermissionBadge(role.permissions?.[mod.id] || 'none')}
                       </div>
                     ))}
@@ -3438,7 +3438,7 @@ function RolesSettings({ showMsg }) {
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
                               <mod.icon className="w-4 h-4 text-slate-400" />
-                              <span className="font-medium text-slate-700">{mod.label}</span>
+                              <span className="font-medium text-slate-700">{t('settings.modules.' + mod.id, mod.label)}</span>
                             </div>
                           </td>
                           {PERMISSION_LEVELS.map(level => (
@@ -3729,7 +3729,7 @@ function PortalConfigSettings({ showMsg }) {
                 <th key={col.key} className="text-center px-3 py-3.5 font-semibold text-slate-700">
                   <div className="flex flex-col items-center gap-1">
                     <col.icon className="w-4 h-4 text-slate-400" />
-                    <span className="text-xs leading-tight">{col.label}</span>
+                    <span className="text-xs leading-tight">{t('settings.columns.' + col.id, col.label)}</span>
                   </div>
                 </th>
               ))}

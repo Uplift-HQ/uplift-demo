@@ -550,7 +550,7 @@ export default function OrgOnboarding() {
                         isActive ? 'text-momentum-600' : isDone ? 'text-green-600' : 'text-slate-400'
                       }`}
                     >
-                      {step.label}
+                      {t('orgOnboarding.stepLabels.' + step.key, step.label)}
                     </span>
                   </div>
                   {idx < STEPS.length - 1 && (

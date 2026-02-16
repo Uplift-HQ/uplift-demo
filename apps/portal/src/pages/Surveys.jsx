@@ -249,6 +249,18 @@ function ActiveSurveys({ surveys = [], stats = {}, onRefresh }) {
     closed: { label: t('surveys.status.closed', 'Closed'), color: 'bg-momentum-100 text-momentum-700' },
   };
 
+  const typeConfig = {
+    Engagement: t('surveys.type.engagement', 'Engagement'),
+    Pulse: t('surveys.type.pulse', 'Pulse'),
+    Onboarding: t('surveys.type.onboarding', 'Onboarding'),
+    Exit: t('surveys.type.exit', 'Exit'),
+    DEI: t('surveys.type.dei', 'DEI'),
+    Anniversary: t('surveys.type.anniversary', 'Anniversary'),
+    Manager: t('surveys.type.manager', 'Manager'),
+    Change: t('surveys.type.change', 'Change'),
+  };
+
+
   const filtered = surveys.filter(s => {
     const matchSearch = s.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchStatus = statusFilter === 'all' || s.status === statusFilter;
@@ -364,7 +376,7 @@ function ActiveSurveys({ surveys = [], stats = {}, onRefresh }) {
                   </td>
                   <td className="px-4 py-3">
                     <span className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-700 rounded-full">
-                      {survey.type}
+                      {typeConfig[survey.type] || survey.type}
                     </span>
                   </td>
                   <td className="px-4 py-3">
@@ -701,7 +713,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                           {questionTypes.find(qt => qt.value === q.type)?.label || q.type}
                         </span>
                         <span className="text-xs text-slate-400">|</span>
-                        <span className="text-xs text-slate-500">{q.category}</span>
+                        <span className="text-xs text-slate-500">{t('surveys.questionCategories.' + q.category.replace(/ /g, ''), q.category)}</span>
                         {q.required && (
                           <>
                             <span className="text-xs text-slate-400">|</span>
@@ -738,7 +750,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                   className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                 >
                   {questionTypes.map(qt => (
-                    <option key={qt.value} value={qt.value}>{qt.label}</option>
+                    <option key={qt.value} value={qt.value}>{t('surveys.questionTypes.' + qt.value, qt.label)}</option>
                   ))}
                 </select>
                 <select
@@ -747,7 +759,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                   className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                 >
                   {CATEGORIES.map(cat => (
-                    <option key={cat} value={cat}>{translateCategory(cat)}</option>
+                    <option key={t('surveys.categories.' + cat, cat)} value={t('surveys.categories.' + cat, cat)}>{translateCategory(cat)}</option>
                   ))}
                 </select>
                 <div className="flex items-center gap-3">
@@ -806,7 +818,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                   <opt.icon className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium text-slate-900">{opt.label}</p>
+                  <p className="font-medium text-slate-900">{t('surveys.options.' + opt.value, opt.label)}</p>
                   <p className="text-xs text-slate-500">{opt.desc}</p>
                 </div>
                 {audience.mode === opt.value && <CheckCircle className="w-5 h-5 text-momentum-500" />}
@@ -821,7 +833,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
               <div className="flex flex-wrap gap-2">
                 {DEPARTMENTS.map(dept => (
                   <button
-                    key={dept}
+                    key={t('departments.' + dept.replace(/\s+/g, ''), dept)}
                     onClick={() => {
                       const depts = audience.departments.includes(dept)
                         ? audience.departments.filter(d => d !== dept)
@@ -867,7 +879,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {loc.label}
+                    {loc.labelKey ? t(loc.labelKey, loc.label) : loc.label}
                   </button>
                 ))}
               </div>
@@ -899,7 +911,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {tenure.label}
+                    {t('surveys.tenureOptions.' + tenure.value, tenure.label)}
                   </button>
                 ))}
               </div>
@@ -931,7 +943,7 @@ function SurveyBuilder({ templates = TEMPLATES, onSurveyCreated }) {
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
-                    {role.label}
+                    {role.labelKey ? t(role.labelKey, role.label) : role.label}
                   </button>
                 ))}
               </div>
@@ -1243,7 +1255,7 @@ function ResultsAnalytics({ surveys = [] }) {
               <tr>
                 <th className="text-left p-2 text-xs font-semibold text-slate-500">{t('surveys.results.department', 'Department')}</th>
                 {CATEGORIES.map(cat => (
-                  <th key={cat} className="text-center p-2 text-xs font-semibold text-slate-500 whitespace-nowrap">{translateCategory(cat)}</th>
+                  <th key={t('surveys.categories.' + cat, cat)} className="text-center p-2 text-xs font-semibold text-slate-500 whitespace-nowrap">{translateCategory(cat)}</th>
                 ))}
               </tr>
             </thead>
@@ -1255,7 +1267,7 @@ function ResultsAnalytics({ surveys = [] }) {
                     const score = row.scores[cat];
                     const bg = score >= 75 ? 'bg-green-100 text-green-800' : score >= 55 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800';
                     return (
-                      <td key={cat} className="p-1 text-center">
+                      <td key={t('surveys.categories.' + cat, cat)} className="p-1 text-center">
                         <span className={`inline-block w-full py-1.5 rounded text-xs font-semibold ${bg}`}>
                           {score}%
                         </span>
@@ -1280,7 +1292,7 @@ function ResultsAnalytics({ surveys = [] }) {
                 <div className="flex items-center justify-between">
                   <p className="text-sm text-slate-700 font-medium">{q.text}</p>
                   <div className="flex items-center gap-2 ml-4">
-                    <span className="text-xs text-slate-400">{q.category}</span>
+                    <span className="text-xs text-slate-400">{t('surveys.questionCategories.' + q.category.replace(/ /g, ''), q.category)}</span>
                     <span className={`text-sm font-bold ${q.avg >= 4 ? 'text-green-600' : q.avg >= 3 ? 'text-momentum-600' : 'text-red-500'}`}>
                       {q.avg.toFixed(1)}
                     </span>
@@ -1731,7 +1743,7 @@ function TemplatesTab({ templates = [] }) {
                 <div className="w-10 h-10 rounded-lg bg-momentum-100 text-momentum-600 flex items-center justify-center">
                   <Icon className="w-5 h-5" />
                 </div>
-                <span className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded-full">{tmpl.type}</span>
+                <span className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded-full">{t('surveys.templateTypes.' + tmpl.type, tmpl.type)}</span>
               </div>
               <h3 className="font-semibold text-slate-900 mb-1">{tmpl.name}</h3>
               <p className="text-xs text-slate-500 mb-3 line-clamp-2">{tmpl.description}</p>

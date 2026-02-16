@@ -411,7 +411,7 @@ export default function PerformanceBonuses() {
               }`}
             >
               <tab.icon className="w-4 h-4" />
-              {tab.label}
+              {t('performanceBonuses.tabs.' + tab.key, tab.label)}
             </button>
           ))}
         </nav>
@@ -756,7 +756,7 @@ export default function PerformanceBonuses() {
                       <td className="py-3 px-4 text-right font-medium text-green-600">{formatCurrency(payout.payout_amount)}</td>
                       <td className="py-3 px-4 text-center">
                         <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium capitalize ${getStatusBadge(payout.status)}`}>
-                          {payout.status}
+                          {t('common.' + payout.status, payout.status)}
                         </span>
                       </td>
                     </tr>

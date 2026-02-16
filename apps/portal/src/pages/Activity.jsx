@@ -220,7 +220,7 @@ export default function Activity() {
                   : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              {tab.label}
+              {t('activity.tabs.' + tab.key, tab.label)}
               {tab.count !== undefined && tab.count > 0 && (
                 <span className={`ml-2 px-1.5 py-0.5 rounded-full text-xs ${
                   activeTab === tab.id ? 'bg-white/20' : 'bg-slate-100'

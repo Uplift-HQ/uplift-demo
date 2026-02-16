@@ -383,7 +383,7 @@ function SearchableDropdown({ employees, value, onChange, placeholder, t }) {
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-slate-900 truncate">{emp.name}</p>
-                    <p className="text-xs text-slate-500 truncate">{emp.role} -- {emp.dept}</p>
+                    <p className="text-xs text-slate-500 truncate">{emp.role} -- {t('departments.' + emp.dept.replace(/\s+/g, ''), emp.dept)}</p>
                   </div>
                   {value === emp.id && (
                     <CheckCircle className="w-4 h-4 text-momentum-500 flex-shrink-0 ml-auto" />

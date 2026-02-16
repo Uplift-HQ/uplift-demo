@@ -344,7 +344,7 @@ function ReviewCyclesTab({ t, isManager }) {
           >
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="font-semibold text-slate-900">{cycle.name}</h3>
+                <h3 className="font-semibold text-slate-900">{cycle.nameKey ? t(cycle.nameKey, cycle.name) : cycle.name}</h3>
                 <div className="flex items-center gap-2 mt-1">
                   {getTypeBadge(cycle.type)}
                   {getStatusBadge(cycle.status)}
@@ -417,7 +417,7 @@ function CycleDetailView({ cycle, onBack, getStatusBadge, t }) {
       <div className="bg-white rounded-xl border border-slate-200 p-6">
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">{cycle.name}</h2>
+            <h2 className="text-xl font-bold text-slate-900">{cycle.nameKey ? t(cycle.nameKey, cycle.name) : cycle.name}</h2>
             <div className="flex items-center gap-2 mt-2">
               {getStatusBadge(cycle.status)}
               <span className="text-slate-500 text-sm">
@@ -1779,7 +1779,7 @@ function DevelopmentPlansTab({ t, isManager }) {
                   <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
                     plan.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-600'
                   }`}>
-                    {plan.status}
+                    {t('common.' + plan.status, plan.status)}
                   </span>
                   {plan.review_date && (
                     <span className="text-sm text-slate-500">
@@ -1822,7 +1822,7 @@ function DevelopmentPlansTab({ t, isManager }) {
                             </div>
                             <span className="flex items-center gap-1 text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">
                               {getActionTypeIcon(action.type)}
-                              {action.type}
+                              {t('performance.actionTypes.' + action.type, action.type)}
                             </span>
                           </div>
                         ))}
@@ -1977,7 +1977,7 @@ function CreateDevelopmentPlanModal({ onClose, onCreated, t }) {
                         className="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm"
                       />
                       <select
-                        value={action.type}
+                        value={t('performance.actionTypes.' + action.type, action.type)}
                         onChange={(e) => {
                           const newAreas = [...formData.focus_areas];
                           newAreas[areaIndex].actions[actionIndex].type = e.target.value;

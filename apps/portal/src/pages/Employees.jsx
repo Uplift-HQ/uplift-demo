@@ -224,7 +224,7 @@ export default function Employees() {
                 : 'text-gray-500 border-transparent hover:text-gray-700'
             }`}
           >
-            {tab.label} ({stats[tab.key]})
+            {t('employees.tabs.' + tab.key, tab.label)} ({stats[tab.key]})
           </button>
         ))}
       </div>

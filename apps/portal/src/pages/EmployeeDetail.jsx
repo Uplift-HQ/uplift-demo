@@ -166,7 +166,7 @@ export default function EmployeeDetail() {
             employee.status === 'on_leave' ? 'badge-warning' :
             'badge-neutral'
           }`}>
-            {employee.status}
+            {t('common.' + employee.status, employee.status)}
           </span>
         </div>
       </div>
@@ -214,7 +214,7 @@ export default function EmployeeDetail() {
                       <div>
                         <p className="font-medium text-slate-900">{skill.name}</p>
                         <div className="flex items-center gap-2 text-sm">
-                          <span className="text-slate-500">{skill.category}</span>
+                          <span className="text-slate-500">{t('skills.categories.' + skill.category.toLowerCase().replace(/ /g, ''), skill.category)}</span>
                           {skill.verified && (
                             <span className="flex items-center gap-1 text-green-600">
                               <Check className="w-3 h-3" />

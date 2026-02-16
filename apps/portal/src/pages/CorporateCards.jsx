@@ -477,7 +477,7 @@ export default function CorporateCards() {
                     </td>
                     <td className="px-4 py-3">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[tx.status] || STATUS_STYLES.pending}`}>
-                        {t(`corporateCards.status.${tx.status}`, tx.status)}
+                        {t(`corporateCards.status.${t('common.' + tx.status, tx.status)}`, tx.status)}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-center">

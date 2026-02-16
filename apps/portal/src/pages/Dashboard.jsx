@@ -522,7 +522,7 @@ function AdminDashboard({ t, user, data, departments, entityMultiplier, selected
               return sortedDepts.map((dept, idx) => (
                 <div key={dept.id || dept.name}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm text-slate-700">{dept.name}</span>
+                    <span className="text-sm text-slate-700">{t('departments.' + dept.id, dept.name)}</span>
                     <span className="text-sm font-semibold text-slate-900">{dept.employee_count || 0}</span>
                   </div>
                   <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
@@ -1214,9 +1214,9 @@ function WorkerDashboard({ t, user, showTipsModal, setShowTipsModal }) {
                 {/* Component Breakdown */}
                 <div className="flex-1 w-full space-y-3">
                   {momentumComponents.map((comp, i) => (
-                    <div key={comp.label}>
+                    <div key={t('dashboard.components.' + comp.id, comp.label)}>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm text-slate-700">{comp.label}</span>
+                        <span className="text-sm text-slate-700">{t('dashboard.components.' + comp.id, comp.label)}</span>
                         <div className="flex items-center gap-2">
                           <span className="text-xs text-slate-400">{comp.weight}% {t('workerDash.weight', 'weight')}</span>
                           <span className="text-sm font-semibold text-slate-900">{comp.value}%</span>
@@ -1262,7 +1262,7 @@ function WorkerDashboard({ t, user, showTipsModal, setShowTipsModal }) {
                 const bgColors = { blue: 'bg-blue-50', amber: 'bg-amber-50', green: 'bg-green-50' };
                 return (
                   <div key={ann.id} className={`p-4 rounded-lg border-l-4 ${borderColors[ann.color]} ${bgColors[ann.color]}`}>
-                    <p className="text-sm font-medium text-slate-900">{ann.title}</p>
+                    <p className="text-sm font-medium text-slate-900">{ann.titleKey ? t(ann.titleKey, ann.title) : ann.title}</p>
                     <p className="text-xs text-slate-600 mt-1">{ann.body}</p>
                     <p className="text-xs text-slate-400 mt-2">{ann.date}</p>
                   </div>
@@ -1288,7 +1288,7 @@ function WorkerDashboard({ t, user, showTipsModal, setShowTipsModal }) {
               {goals.map((goal) => (
                 <div key={goal.id}>
                   <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-sm font-medium text-slate-700">{goal.label}</p>
+                    <p className="text-sm font-medium text-slate-700">{t('dashboard.goals.' + goal.id, goal.label)}</p>
                     <span className="text-sm font-semibold text-momentum-600">{goal.percent}%</span>
                   </div>
                   <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden">
@@ -1322,20 +1322,20 @@ function WorkerDashboard({ t, user, showTipsModal, setShowTipsModal }) {
                   if (badge.earned) {
                     return (
                       <div
-                        key={badge.name}
+                        key={t('badges.' + badge.id, badge.name)}
                         className="flex flex-col items-center p-3 bg-gradient-to-b from-momentum-50 to-momentum-100 rounded-xl border border-momentum-200"
                       >
                         <div className="w-12 h-12 rounded-full bg-momentum-500 flex items-center justify-center mb-2">
                           <BadgeIcon className="w-6 h-6 text-white" />
                         </div>
-                        <span className="text-xs font-semibold text-momentum-700 text-center">{badge.name}</span>
+                        <span className="text-xs font-semibold text-momentum-700 text-center">{t('badges.' + badge.id, badge.name)}</span>
                         <span className="text-[10px] text-momentum-500 text-center mt-0.5">{badge.desc}</span>
                       </div>
                     );
                   }
                   return (
                     <div
-                      key={badge.name}
+                      key={t('badges.' + badge.id, badge.name)}
                       className="flex flex-col items-center p-3 bg-slate-50 rounded-xl border border-slate-200 group relative"
                       title={badge.unlockHint}
                     >
@@ -1345,7 +1345,7 @@ function WorkerDashboard({ t, user, showTipsModal, setShowTipsModal }) {
                           <Lock className="w-3 h-3 text-slate-500" />
                         </div>
                       </div>
-                      <span className="text-xs font-semibold text-slate-400 text-center">{badge.name}</span>
+                      <span className="text-xs font-semibold text-slate-400 text-center">{t('badges.' + badge.id, badge.name)}</span>
                       <span className="text-[10px] text-slate-400 text-center mt-0.5">{badge.desc}</span>
                       {/* Tooltip on hover */}
                       <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-slate-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 text-center">
@@ -1429,7 +1429,7 @@ function WorkerDashboard({ t, user, showTipsModal, setShowTipsModal }) {
                     </p>
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <Star className="w-3 h-3 text-amber-500" />
-                      <span className="text-xs font-medium text-amber-700">{rec.category}</span>
+                      <span className="text-xs font-medium text-amber-700">{t('recognition.categories.' + rec.category.replace(/ /g, ''), rec.category)}</span>
                     </div>
                     <p className="text-sm text-slate-600 mt-0.5">{rec.message}</p>
                     <p className="text-xs text-slate-400 mt-1">{rec.time}</p>
@@ -1792,7 +1792,7 @@ function PersonalDashboard({ t, user, showTipsModal, setShowTipsModal }) {
                   {action.type === 'recognition' && <Heart className="w-5 h-5" />}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-slate-900">{action.label}</p>
+                  <p className="text-sm font-medium text-slate-900">{t('dashboard.actions.' + action.id, action.label)}</p>
                   {action.count && (
                     <p className="text-xs text-slate-500">{action.count} {action.amount ? `(${action.amount})` : ''}</p>
                   )}

@@ -234,7 +234,7 @@ export default function Skills() {
         >
           <option value="all">{t('skills.allCategories', 'All Categories')}</option>
           {SKILL_CATEGORIES.map(cat => (
-            <option key={cat.value} value={cat.value}>{cat.label}</option>
+            <option key={cat.value} value={cat.value}>{t('skills.categoryLabels.' + cat.value, cat.label)}</option>
           ))}
         </select>
       </div>
@@ -258,7 +258,7 @@ export default function Skills() {
                   className="bg-white rounded-lg p-4 shadow border hover:border-blue-300 cursor-pointer transition-colors"
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-medium text-gray-900">{skill.name}</h3>
+                    <h3 className="font-medium text-gray-900">{skill.nameKey ? t(skill.nameKey, skill.name) : skill.name}</h3>
                     <span className={`px-2 py-1 text-xs rounded-full border ${getCategoryColor(category)}`}>
                       {getCategoryLabel(category)}
                     </span>
@@ -317,7 +317,7 @@ export default function Skills() {
                 >
                   <option value="">{t('skills.selectCategory', 'Select category')}</option>
                   {SKILL_CATEGORIES.map(cat => (
-                    <option key={cat.value} value={cat.value}>{cat.label}</option>
+                    <option key={cat.value} value={cat.value}>{t('skills.categoryLabels.' + cat.value, cat.label)}</option>
                   ))}
                 </select>
               </div>

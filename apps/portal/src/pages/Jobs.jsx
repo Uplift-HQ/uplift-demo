@@ -134,7 +134,7 @@ export default function Jobs() {
 
       <div className="flex gap-1 border-b">
         {[{ key: 'open', label: t('jobs.open', 'Open') }, { key: 'closed', label: t('jobs.closed', 'Closed') }, { key: 'all', label: t('common.all', 'All') }].map(tab => (
-          <button key={tab.key} onClick={() => setFilter(tab.key)} className={`px-4 py-2 font-medium border-b-2 transition-colors ${filter === tab.key ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{tab.label}</button>
+          <button key={tab.key} onClick={() => setFilter(tab.key)} className={`px-4 py-2 font-medium border-b-2 transition-colors ${filter === tab.key ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`}>{t('jobs.tabs.' + tab.key, tab.label)}</button>
         ))}
       </div>
 
@@ -145,7 +145,7 @@ export default function Jobs() {
           filteredJobs.map(job => (
             <div key={job.id} className="bg-white rounded-lg p-4 border shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between">
-                <div><h3 className="font-semibold text-gray-900 text-lg">{job.title}</h3><p className="text-gray-600">{job.department}</p></div>
+                <div><h3 className="font-semibold text-gray-900 text-lg">{job.title}</h3><p className="text-gray-600">{job.departmentKey ? t(job.departmentKey, job.department) : job.department}</p></div>
                 <span className={`px-2 py-1 text-xs rounded-full ${job.status === 'open' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>{job.status === 'open' ? t('jobs.open', 'Open') : t('jobs.closed', 'Closed')}</span>
               </div>
               <div className="mt-3 flex flex-wrap gap-4 text-sm text-gray-600">

@@ -407,7 +407,7 @@ export default function Compensation() {
             }`}
           >
             <tab.icon className="h-4 w-4" />
-            {tab.label}
+            {t('compensation.tabs.' + tab.key, tab.label)}
           </button>
         ))}
       </div>
@@ -563,7 +563,7 @@ export default function Compensation() {
                       <td className="px-6 py-4 text-sm font-medium text-slate-900">{emp.name}</td>
                       <td className="px-6 py-4 text-sm text-slate-700">{emp.role}</td>
                       <td className="px-6 py-4">
-                        <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">{emp.department}</span>
+                        <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">{t('departments.' + emp.department?.replace(/\s+/g, ''), emp.department)}</span>
                       </td>
                       <td className="px-6 py-4 text-sm text-slate-900 text-right font-semibold">{formatCurrency(emp.salary)}</td>
                       <td className="px-6 py-4 text-sm text-slate-600">{emp.frequency}</td>

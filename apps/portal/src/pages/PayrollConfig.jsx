@@ -549,7 +549,7 @@ function TaxConfigTab() {
               className="flex items-center justify-between p-3 bg-white rounded-lg border border-slate-200"
             >
               <div>
-                <p className="text-sm font-medium text-slate-900">{bracket.label}</p>
+                <p className="text-sm font-medium text-slate-900">{t('payrollConfig.brackets.' + bracket.key, bracket.label)}</p>
                 <p className="text-xs text-slate-500">
                   {bracket.threshold === 0
                     ? t('payrollConfig.tax.fromZero', 'From 0')

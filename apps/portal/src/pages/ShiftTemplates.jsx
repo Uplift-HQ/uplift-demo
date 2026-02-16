@@ -128,7 +128,7 @@ export default function ShiftTemplates() {
           {templates.map(template => (
             <div key={template.id} className="card p-5 hover:shadow-lg transition-shadow">
               <div className="flex items-start justify-between mb-3">
-                <h3 className="font-semibold text-slate-900">{template.name}</h3>
+                <h3 className="font-semibold text-slate-900">{template.nameKey ? t(template.nameKey, template.name) : template.name}</h3>
                 <div className="flex gap-1">
                   <button
                     onClick={() => { setEditingTemplate(template); setShowModal(true); }}
@@ -562,7 +562,7 @@ function ApplyTemplateModal({ template, onClose, onApply, t }) {
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div className="p-4 bg-slate-50 rounded-lg">
-            <h3 className="font-medium text-slate-900">{template.name}</h3>
+            <h3 className="font-medium text-slate-900">{template.nameKey ? t(template.nameKey, template.name) : template.name}</h3>
             <p className="text-sm text-slate-600">
               {template.start_time} - {template.end_time} - {template.days_of_week?.map(d => [t('common.sunday', 'Sun'), t('common.monday', 'Mon'), t('schedule.tuesday', 'Tue'), t('schedule.wednesday', 'Wed'), t('schedule.thursday', 'Thu'), t('schedule.friday', 'Fri'), t('schedule.saturday', 'Sat')][d]).join(', ')}
             </p>

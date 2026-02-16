@@ -238,7 +238,7 @@ export default function Integrations() {
               }`}
             >
               <tab.icon className="w-4 h-4" />
-              {tab.label}
+              {t('integrations.tabs.' + tab.key, tab.label)}
             </button>
           ))}
         </nav>
@@ -265,7 +265,7 @@ export default function Integrations() {
               <div key={i} className={`rounded-xl p-5 border ${getColorClasses(stat.color)}`}>
                 <stat.icon className="w-6 h-6 mb-2 opacity-60" />
                 <div className="text-3xl font-bold">{stat.value}</div>
-                <div className="text-sm opacity-80">{stat.label}</div>
+                <div className="text-sm opacity-80">{t('integrations.stats.' + stat.key, stat.label)}</div>
               </div>
             ))}
           </div>
@@ -302,8 +302,8 @@ export default function Integrations() {
                         {getTypeIcon(integration.type)}
                       </div>
                       <div>
-                        <h4 className="font-medium text-gray-900">{integration.name}</h4>
-                        <p className="text-xs text-gray-500 capitalize">{integration.type}</p>
+                        <h4 className="font-medium text-gray-900">{integration.nameKey ? t(integration.nameKey, integration.name) : integration.name}</h4>
+                        <p className="text-xs text-gray-500 capitalize">{t('integrations.types.' + integration.type, integration.type)}</p>
                       </div>
                     </div>
                     {integration.status === 'connected' ? (
@@ -312,7 +312,7 @@ export default function Integrations() {
                       <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">{t('integrations.available', 'Available')}</span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-600 mt-3">{integration.description}</p>
+                  <p className="text-sm text-gray-600 mt-3">{integration.descriptionKey ? t(integration.descriptionKey, integration.description) : integration.description}</p>
                   {integration.lastSync && (
                     <p className="text-xs text-gray-400 mt-2">
                       {t('integrations.lastSync', 'Last sync')}: {new Date(integration.lastSync).toLocaleTimeString()}

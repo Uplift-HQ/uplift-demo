@@ -242,7 +242,7 @@ export default function TimeOff() {
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            {tab.label} {tab.key !== 'all' && `(${stats[tab.key] || 0})`}
+            {t('timeOff.tabs.' + tab.key, tab.label)} {tab.key !== 'all' && `(${stats[tab.key] || 0})`}
           </button>
         ))}
       </div>

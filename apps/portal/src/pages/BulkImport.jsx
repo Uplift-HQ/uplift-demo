@@ -139,7 +139,7 @@ export default function BulkImport() {
             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-medium ${step >= s.num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
               {step > s.num ? <Check className="h-4 w-4" /> : s.num}
             </div>
-            <span className={`ml-2 text-sm ${step >= s.num ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>{s.label}</span>
+            <span className={`ml-2 text-sm ${step >= s.num ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>{t('bulkImport.steps.' + s.num, s.label)}</span>
             {i < 3 && <ChevronRight className="h-4 w-4 text-gray-400 mx-4" />}
           </div>
         ))}

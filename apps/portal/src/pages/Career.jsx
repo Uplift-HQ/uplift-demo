@@ -425,7 +425,7 @@ function SkillRow({ skill, t }) {
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <p className="font-medium text-slate-900">{skill.name}</p>
+            <p className="font-medium text-slate-900">{skill.nameKey ? t(skill.nameKey, skill.name) : skill.name}</p>
             {skill.verified && (
               <span className="flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">
                 <CheckCircle className="w-3 h-3" />
@@ -445,7 +445,7 @@ function SkillRow({ skill, t }) {
               </span>
             )}
           </div>
-          <p className="text-sm text-slate-500">{skill.category}</p>
+          <p className="text-sm text-slate-500">{t('skills.categories.' + skill.category.toLowerCase().replace(/ /g, ''), skill.category)}</p>
         </div>
       </div>
 
@@ -530,7 +530,7 @@ function AddSkillModal({ skills, mySkillIds, onClose, onRequest, t }) {
               <option value="">{t('career.chooseSkill', 'Choose a skill...')}</option>
               {availableSkills.map(skill => (
                 <option key={skill.id} value={skill.id}>
-                  {skill.name} {skill.category ? `(${skill.category})` : ''}
+                  {skill.nameKey ? t(skill.nameKey, skill.name) : skill.name} {skill.category ? `(${t('skills.categories.' + skill.category.toLowerCase().replace(/ /g, ''), skill.category)})` : ''}
                 </option>
               ))}
             </select>

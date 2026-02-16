@@ -342,7 +342,7 @@ export default function Payroll() {
           >
             {COUNTRIES.map((country) => (
               <option key={country.code} value={country.code}>
-                {country.flag ? `${COUNTRY_FLAGS[country.flag]} ` : ''}{country.name}
+                {country.flag ? `${COUNTRY_FLAGS[country.flag]} ` : ''}{t('countries.' + country.country, country.name)}
               </option>
             ))}
           </select>
@@ -469,7 +469,7 @@ export default function Payroll() {
                       <div className="flex items-center gap-2">
                         <span className="text-lg">{COUNTRY_FLAGS[deadline.country]}</span>
                         <div>
-                          <p className="text-sm font-medium text-slate-900">{deadline.label}</p>
+                          <p className="text-sm font-medium text-slate-900">{deadline.labelKey ? t(deadline.labelKey, deadline.label) : deadline.label}</p>
                           <div className="flex items-center gap-2 mt-1">
                             {getDeadlineTypeBadge(deadline.type)}
                           </div>

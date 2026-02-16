@@ -1221,7 +1221,7 @@ function ActiveOnboardingsTab() {
     const config = configs[status] || configs.on_track;
     return (
       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.className}`}>
-        {config.label}
+        {t('onboarding.configs.' + config.key, config.label)}
       </span>
     );
   };
@@ -1351,7 +1351,7 @@ function ActiveOnboardingsTab() {
                                         {task.done && <Check className="w-3 h-3 text-white" />}
                                       </div>
                                       <span className={`text-sm truncate ${task.done ? 'text-slate-400 line-through' : 'text-slate-700'}`}>
-                                        {task.name}
+                                        {task.nameKey ? t(task.nameKey, task.name) : task.name}
                                       </span>
                                     </div>
                                     <div className="flex items-center gap-2 flex-shrink-0">
@@ -1429,7 +1429,7 @@ function TemplatesTab() {
           >
             <div className="p-5">
               <div className="flex items-start justify-between mb-2">
-                <h3 className="text-sm font-semibold text-slate-900">{template.name}</h3>
+                <h3 className="text-sm font-semibold text-slate-900">{template.nameKey ? t(template.nameKey, template.name) : template.name}</h3>
                 {template.isDefault && (
                   <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-momentum-100 text-momentum-700">
                     {t('onboarding.default', 'Default')}
@@ -1460,7 +1460,7 @@ function TemplatesTab() {
                 <div className="space-y-3">
                   {TEMPLATE_TASKS[template.id].map((group, gi) => (
                     <div key={gi}>
-                      <p className="text-xs font-medium text-slate-700 mb-1.5">{group.category}</p>
+                      <p className="text-xs font-medium text-slate-700 mb-1.5">{t('onboarding.taskCategories.' + group.category.replace(/ /g, ''), group.category)}</p>
                       <div className="space-y-1">
                         {group.items.map((item, ii) => (
                           <div key={ii} className="flex items-center gap-2 text-sm text-slate-600">
@@ -1575,7 +1575,7 @@ function DashboardTab() {
                 </div>
               </div>
               <p className="text-2xl font-bold text-slate-900">{kpi.value}</p>
-              <p className="text-sm text-slate-500 mt-0.5">{kpi.label}</p>
+              <p className="text-sm text-slate-500 mt-0.5">{t('onboarding.kpis.' + kpi.key, kpi.label)}</p>
             </div>
           );
         })}

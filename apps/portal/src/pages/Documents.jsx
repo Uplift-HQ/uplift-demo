@@ -690,7 +690,7 @@ export default function Documents() {
             }`}
           >
             <tab.icon className="h-4 w-4" />
-            {tab.label}
+            {t('documents.tabs.' + tab.key, tab.label)}
             {tab.key === 'signatures' && stats.pending > 0 && (
               <span className="ml-1 px-1.5 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full">
                 {stats.pending}

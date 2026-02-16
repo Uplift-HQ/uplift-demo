@@ -907,7 +907,7 @@ function DataTable({ columns, rows, sortable = true }) {
                 onClick={() => handleSort(i)}
               >
                 <div className={`flex items-center gap-1 ${col.align === 'right' ? 'justify-end' : ''}`}>
-                  {col.label}
+                  {t('reports.columns.' + col.key, col.label)}
                   {sortable && sortCol === i && (
                     sortDir === 'asc' ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />
                   )}
@@ -1582,7 +1582,7 @@ function EngagementReport({ data, t }) {
               a.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
               a.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
               'bg-slate-100 text-slate-600'
-            }`}>{a.status}</span>,
+            }`}>{t('common.' + a.status, a.status)}</span>,
           ])}
         />
       </SectionCard>

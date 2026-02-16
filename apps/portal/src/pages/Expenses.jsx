@@ -447,7 +447,7 @@ export default function Expenses() {
                     </td>
                     <td className="px-4 py-3">
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 capitalize">
-                        {expense.category_name || t(`expenses.category.${expense.category}`, expense.category || 'Other')}
+                        {expense.category_name || t(`expenses.category.${t('expenses.categories.' + expense.category.toLowerCase(), expense.category)}`, expense.category || 'Other')}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-sm text-slate-600">
@@ -461,7 +461,7 @@ export default function Expenses() {
                     </td>
                     <td className="px-4 py-3">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[expense.status]}`}>
-                        {t(`expenses.status.${expense.status}`, expense.status)}
+                        {t(`expenses.status.${t('common.' + expense.status, expense.status)}`, expense.status)}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-center">
@@ -815,7 +815,7 @@ export default function Expenses() {
                   </div>
 
                   <div className="flex items-center gap-2 mb-3 text-sm text-slate-600">
-                    <span className="capitalize">{t(`expenses.category.${expense.category}`, expense.category)}</span>
+                    <span className="capitalize">{t(`expenses.category.${t('expenses.categories.' + expense.category.toLowerCase(), expense.category)}`, expense.category)}</span>
                     <span className="text-slate-300">|</span>
                     <span>{expense.merchant}</span>
                     {expense.hasReceipt && (
@@ -910,7 +910,7 @@ export default function Expenses() {
                   <div className="flex items-center gap-2">
                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${traffic.bgColor} ${traffic.textColor}`}>
                       <span className={`w-2 h-2 rounded-full ${traffic.color}`} />
-                      {traffic.label}
+                      {t('expenses.traffic.' + traffic.key, traffic.label)}
                     </span>
                     <span className="text-lg font-bold text-slate-900">{dept.utilisation}%</span>
                   </div>
@@ -987,7 +987,7 @@ export default function Expenses() {
           </thead>
           <tbody className="divide-y divide-slate-100">
             {POLICY_LIMITS.map((rule) => (
-              <tr key={rule.category}>
+              <tr key={t('expenses.categories.' + rule.category.toLowerCase(), rule.category)}>
                 <td className="px-5 py-3 text-sm font-medium text-slate-700">{t(`expenses.policy.cat.${rule.category.toLowerCase()}`, rule.category)}</td>
                 <td className="px-5 py-3 text-sm text-right">
                   {editingPolicy ? (
@@ -1203,7 +1203,7 @@ export default function Expenses() {
             <h4 className="text-sm font-semibold text-slate-900 mb-4">{t('expenses.dashboard.spendByCategory', 'Spend by Category')}</h4>
             <div className="space-y-3">
               {spendByCategory.map((cat) => (
-                <div key={cat.category}>
+                <div key={t('expenses.categories.' + cat.category.toLowerCase(), cat.category)}>
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm text-slate-700">{t(`expenses.dashboard.cat.${cat.category.toLowerCase()}`, cat.category)}</span>
                     <span className="text-sm font-semibold text-slate-900">£{cat.amount.toLocaleString()} ({cat.pct}%)</span>

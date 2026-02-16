@@ -337,7 +337,7 @@ function RunHeader({ run, t }) {
             </span>
             <h1 className="text-2xl font-bold text-slate-900">{run.title}</h1>
             <span className={`px-3 py-1 rounded-full text-sm font-medium ${STATUS_STYLES[run.status]}`}>
-              {t(`payrollRun.status.${run.status}`, run.status.charAt(0).toUpperCase() + run.status.slice(1))}
+              {t(`payrollRun.status.${t('common.' + run.status, run.status)}`, run.status.charAt(0).toUpperCase() + run.status.slice(1))}
             </span>
           </div>
 
@@ -587,7 +587,7 @@ function VarianceAlertsPanel({ payslips, activeFilter, onFilterChange, t }) {
               } hover:opacity-90`}
             >
               <Icon className="w-4 h-4" />
-              {alert.label}
+              {t('payrollRun.alerts.' + alert.type, alert.label)}
               {isActive && <X className="w-3 h-3 ml-1" />}
             </button>
           );
@@ -1009,7 +1009,7 @@ export default function PayrollRun() {
           </p>
         </div>
         <ActionButtons
-          status={run.status}
+          status={t('common.' + run.status, run.status)}
           onAction={handleAction}
           isProcessing={isProcessing}
           t={t}
@@ -1017,7 +1017,7 @@ export default function PayrollRun() {
       </div>
 
       {/* Progress Stepper */}
-      <ProgressStepper currentStatus={run.status} t={t} />
+      <ProgressStepper currentStatus={t('common.' + run.status, run.status)} t={t} />
 
       {/* Run Header */}
       <RunHeader run={run} t={t} />

@@ -1165,7 +1165,7 @@ export default function Offboarding() {
                               />
                               <div className="flex-1 min-w-0">
                                 <span className={`text-sm ${task.done ? 'line-through text-slate-400' : isTaskOverdue ? 'text-red-700' : 'text-slate-700'}`}>
-                                  {task.label}
+                                  {t('offboarding.taskLabels.' + task.id, task.label)}
                                 </span>
                                 {task.serial && (
                                   <span className="text-xs text-slate-400 ml-2">SN: {task.serial}</span>
@@ -1489,7 +1489,7 @@ export default function Offboarding() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-slate-500">{s.label}</p>
+                  <p className="text-sm text-slate-500">{t('offboarding.categories.' + s.key, s.label)}</p>
                   <p className="text-2xl font-bold text-slate-900 mt-1">{statusCounts[s.key]}</p>
                 </div>
                 <div className={`p-3 ${s.color} rounded-lg`}>
@@ -1656,9 +1656,9 @@ export default function Offboarding() {
             <h4 className="text-sm font-semibold text-slate-900 mb-4">{t('offboarding.analytics.reasonsForLeaving', 'Reasons for Leaving')}</h4>
             <div className="space-y-3">
               {reasonBreakdown.map((reason) => (
-                <div key={reason.label}>
+                <div key={t('offboarding.reasons.' + reason.value, reason.label)}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm text-slate-700">{reason.label}</span>
+                    <span className="text-sm text-slate-700">{t('offboarding.reasons.' + reason.value, reason.label)}</span>
                     <span className="text-sm font-semibold text-slate-900">{reason.pct}%</span>
                   </div>
                   <div className="w-full bg-slate-100 rounded-full h-2.5">
@@ -1985,7 +1985,7 @@ export default function Offboarding() {
                     />
                     <CatIcon className="w-4 h-4 text-slate-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm ${isOverdue ? 'text-red-700 font-medium' : 'text-slate-700'}`}>{task.label}</p>
+                      <p className={`text-sm ${isOverdue ? 'text-red-700 font-medium' : 'text-slate-700'}`}>{t('offboarding.taskLabels.' + task.id, task.label)}</p>
                       <p className="text-xs text-slate-400">{t('offboarding.for', 'For')}: {task.employee} &middot; {task.location} &middot; {task.due}</p>
                     </div>
                     {isOverdue && (
@@ -2016,7 +2016,7 @@ export default function Offboarding() {
                     className="w-4 h-4 rounded border-slate-300 text-green-600 focus:ring-green-500"
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-slate-400 line-through">{task.label}</p>
+                    <p className="text-sm text-slate-400 line-through">{t('offboarding.taskLabels.' + task.id, task.label)}</p>
                     <p className="text-xs text-slate-300">{task.employee} &middot; {task.location}</p>
                   </div>
                   <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />

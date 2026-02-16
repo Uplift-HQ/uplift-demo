@@ -420,7 +420,7 @@ function CatalogueTab({ t, onCreateCourse }) {
                     {getCategoryLabel(course.category)}
                   </span>
                   <h3 className="font-semibold text-slate-900 text-sm group-hover:text-momentum-600 transition-colors line-clamp-2 mb-2">
-                    {course.title}
+                    {course.titleKey ? t(course.titleKey, course.title) : course.title}
                   </h3>
                   <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
                     <span className="flex items-center gap-1">
@@ -485,7 +485,7 @@ function CatalogueTab({ t, onCreateCourse }) {
                           <div className={`${color} w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0`}>
                             <Icon className="w-4 h-4 text-white" />
                           </div>
-                          <span className="font-medium text-slate-900">{course.title}</span>
+                          <span className="font-medium text-slate-900">{course.titleKey ? t(course.titleKey, course.title) : course.title}</span>
                         </div>
                       </td>
                       <td className="px-4 py-3">
@@ -659,7 +659,7 @@ function PathsTab({ t }) {
                             <Icon className="w-3.5 h-3.5 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-slate-900 truncate">{course.title}</p>
+                            <p className="text-sm font-medium text-slate-900 truncate">{course.titleKey ? t(course.titleKey, course.title) : course.title}</p>
                             <p className="text-xs text-slate-500">{course.duration_minutes || 30} {t('learning.mins', 'mins')}</p>
                           </div>
                           <ChevronRight className="w-4 h-4 text-slate-400 flex-shrink-0" />
@@ -1075,7 +1075,7 @@ function ComplianceTab({ t }) {
                     : 0;
                   return (
                     <tr key={course.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-4 py-3 font-medium text-slate-900">{course.title}</td>
+                      <td className="px-4 py-3 font-medium text-slate-900">{course.titleKey ? t(course.titleKey, course.title) : course.title}</td>
                       <td className="px-4 py-3 text-center text-slate-600">{course.completed_count || 0}</td>
                       <td className="px-4 py-3 text-center text-slate-600">{course.in_progress_count || 0}</td>
                       <td className="px-4 py-3 text-center">
@@ -1403,12 +1403,12 @@ function DashboardTab({ t }) {
         {kpis.map((kpi) => {
           const Icon = kpi.icon;
           return (
-            <div key={kpi.label} className="bg-white rounded-xl border border-slate-200 p-4">
+            <div key={t('learning.kpis.' + kpi.key, kpi.label)} className="bg-white rounded-xl border border-slate-200 p-4">
               <div className={`p-2 rounded-lg w-fit mb-3 ${kpi.color.split(' ')[0]}`}>
                 <Icon className={`w-5 h-5 ${kpi.color.split(' ')[1]}`} />
               </div>
               <p className="text-2xl font-bold text-slate-900">{kpi.value}</p>
-              <p className="text-xs text-slate-500 mt-1">{kpi.label}</p>
+              <p className="text-xs text-slate-500 mt-1">{t('learning.kpis.' + kpi.key, kpi.label)}</p>
             </div>
           );
         })}
@@ -1483,7 +1483,7 @@ function DashboardTab({ t }) {
                       <Icon className="w-4 h-4 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium text-slate-900 text-sm truncate">{course.title}</p>
+                      <p className="font-medium text-slate-900 text-sm truncate">{course.titleKey ? t(course.titleKey, course.title) : course.title}</p>
                       <p className="text-xs text-slate-500">{t('learning.completionPercent', '{{rate}}% completion', { rate: course.completion_rate })}</p>
                     </div>
                     <div className="text-right flex-shrink-0">
@@ -1751,7 +1751,7 @@ function CreatePathModal({ t, onClose, onCreated }) {
                     }}
                     className="w-4 h-4 text-momentum-500 border-slate-300 rounded focus:ring-momentum-500"
                   />
-                  <span className="text-sm text-slate-700">{course.title}</span>
+                  <span className="text-sm text-slate-700">{course.titleKey ? t(course.titleKey, course.title) : course.title}</span>
                 </label>
               ))}
             </div>
