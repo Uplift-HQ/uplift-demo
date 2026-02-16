@@ -409,9 +409,42 @@ export const api = new ApiClient();
 // ============================================================
 
 const DEMO_PERSONAS = {
-  'admin@demo.com': { ...DEMO_USER, id: 'demo-admin', email: 'admin@demo.com', firstName: 'Sarah', lastName: 'Chen', role: 'admin' },
-  'manager@demo.com': { ...DEMO_USER, id: 'demo-manager', email: 'manager@demo.com', firstName: 'James', lastName: 'Williams', role: 'manager' },
-  'worker@demo.com': { ...DEMO_USER, id: 'demo-worker', email: 'worker@demo.com', firstName: 'Maria', lastName: 'Santos', role: 'worker' },
+  'admin@demo.com': {
+    ...DEMO_USER,
+    id: 'demo-admin',
+    email: 'admin@demo.com',
+    firstName: 'Sarah',
+    lastName: 'Chen',
+    role: 'admin',
+    employeeId: null, // Admins may not have employee records
+    locationId: 'l1',
+    departmentId: 'dept-mgmt',
+    permissions: ['manage_employees', 'manage_schedules', 'approve_time', 'view_reports', 'manage_settings', 'manage_integrations', 'manage_org'],
+  },
+  'manager@demo.com': {
+    ...DEMO_USER,
+    id: 'demo-manager',
+    email: 'manager@demo.com',
+    firstName: 'James',
+    lastName: 'Williams',
+    role: 'manager',
+    employeeId: 'e6', // James Williams - Shift Supervisor
+    locationId: 'l2',
+    departmentId: 'dept-mgmt',
+    permissions: ['manage_employees', 'manage_schedules', 'approve_time', 'view_reports'],
+  },
+  'worker@demo.com': {
+    ...DEMO_USER,
+    id: 'demo-worker',
+    email: 'worker@demo.com',
+    firstName: 'Maria',
+    lastName: 'Santos',
+    role: 'worker',
+    employeeId: 'e16', // Maria Santos - Server
+    locationId: 'l1',
+    departmentId: 'dept-foh',
+    permissions: ['view_schedule', 'clock_in', 'request_time_off'],
+  },
 };
 
 export const authApi = {
