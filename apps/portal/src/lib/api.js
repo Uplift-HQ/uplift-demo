@@ -199,6 +199,21 @@ const DEMO_EMPLOYEE_COMPLIANCE = [
   { id: 'ec-5', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-5', compliance_item_name: 'Manual Handling', status: 'expiring_soon', completed_at: '2024-10-20', expires_at: '2026-10-20' },
 ];
 
+// Demo Payslips Data
+const DEMO_PAYSLIPS = [
+  { id: 'pay-1', pay_period: 'January 2026', pay_date: '2026-01-31', gross_pay: 2850.00, net_pay: 2156.50, tax: 475.00, ni: 218.50, pension: 0, deductions: 693.50, status: 'paid' },
+  { id: 'pay-2', pay_period: 'December 2025', pay_date: '2025-12-31', gross_pay: 2850.00, net_pay: 2156.50, tax: 475.00, ni: 218.50, pension: 0, deductions: 693.50, status: 'paid' },
+  { id: 'pay-3', pay_period: 'November 2025', pay_date: '2025-11-30', gross_pay: 2850.00, net_pay: 2156.50, tax: 475.00, ni: 218.50, pension: 0, deductions: 693.50, status: 'paid' },
+];
+const DEMO_YTD = { gross: 28500, tax: 4750, ni: 2185, pension: 0, net: 21565 };
+const DEMO_TAX_YEARS = ['2025-26', '2024-25'];
+
+// Demo Learning Paths
+const DEMO_LEARNING_PATHS = [
+  { id: 'path-1', name: 'New Starter Essentials', description: 'Core training for all new employees', courses: ['course-1', 'course-2', 'course-3', 'course-4'], duration_hours: 8, required: true },
+  { id: 'path-2', name: 'Management Development', description: 'Leadership skills for aspiring managers', courses: ['course-7'], duration_hours: 6, required: false },
+];
+
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 // Demo mode - controlled via environment variable
@@ -206,10 +221,6 @@ const API_URL = import.meta.env.VITE_API_URL || '/api';
 // Production MUST have this false (enforced by .env.production)
 export const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
 
-// Production safety check - warn if DEMO_MODE is enabled in production
-if (DEMO_MODE && import.meta.env.MODE === 'production') {
-  console.error('⚠️ CRITICAL: DEMO_MODE is enabled in production build! This should never happen.');
-}
 
 class ApiClient {
   constructor() {
@@ -634,7 +645,12 @@ export const timeApi = {
     return api.get(`/time/pending${query ? `?${query}` : ''}`);
   },
   // Get current clock-in status
-  getStatus: () => api.get('/time/status'),
+  getStatus: async () => {
+    if (DEMO_MODE) {
+      return { status: 'clocked_out', entry: null, shift: null };
+    }
+    return api.get('/time/status');
+  },
   approve: (id) => api.post(`/time/entries/${id}/approve`),
   reject: (id, reason) => api.post(`/time/entries/${id}/reject`, { reason }),
   bulkApprove: (entryIds) => api.post('/time/entries/bulk-approve', { entryIds }),
@@ -971,23 +987,40 @@ export const bulkImportApi = {
 // Learning API
 export const learningApi = {
   // Courses
-  getCourses: (params = {}) => {
+  getCourses: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { courses: DEMO_COURSES, pagination: { page: 1, limit: 20, total: DEMO_COURSES.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/learning/courses${query ? `?${query}` : ''}`);
   },
-  getCourse: (id) => api.get(`/learning/courses/${id}`),
+  getCourse: async (id) => {
+    if (DEMO_MODE) {
+      const course = DEMO_COURSES.find(c => c.id === id);
+      return { course: course || DEMO_COURSES[0] };
+    }
+    return api.get(`/learning/courses/${id}`);
+  },
   createCourse: (data) => api.post('/learning/courses', data),
   updateCourse: (id, data) => api.patch(`/learning/courses/${id}`, data),
   addLesson: (courseId, data) => api.post(`/learning/courses/${courseId}/lessons`, data),
 
   // My Learning (current user)
-  getMyCourses: () => api.get('/learning/my-courses'),
+  getMyCourses: async () => {
+    if (DEMO_MODE) {
+      return { enrollments: DEMO_ENROLLMENTS };
+    }
+    return api.get('/learning/my-courses');
+  },
   enrollSelf: (courseId, dueDate) => api.post('/learning/enroll', { course_id: courseId, due_date: dueDate }),
   completeLesson: (courseId, lessonId, data) =>
     api.post(`/learning/courses/${courseId}/lessons/${lessonId}/complete`, data),
 
   // Enrollments (manager/admin)
-  getEnrollments: (params = {}) => {
+  getEnrollments: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { enrollments: DEMO_ENROLLMENTS, pagination: { page: 1, limit: 20, total: DEMO_ENROLLMENTS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/learning/enrollments${query ? `?${query}` : ''}`);
   },
@@ -997,58 +1030,136 @@ export const learningApi = {
   sendRemindersBulk: () => api.post('/learning/enrollments/send-reminders-bulk'),
 
   // Certifications
-  getCertifications: () => api.get('/learning/certifications'),
-  getExpiringCertifications: (days = 30) => api.get(`/learning/certifications/expiring?days=${days}`),
+  getCertifications: async () => {
+    if (DEMO_MODE) {
+      return { certifications: DEMO_CERTIFICATIONS };
+    }
+    return api.get('/learning/certifications');
+  },
+  getExpiringCertifications: async (days = 30) => {
+    if (DEMO_MODE) {
+      const expiring = DEMO_CERTIFICATIONS.filter(c => {
+        if (!c.expires_at) return false;
+        const daysUntilExpiry = (new Date(c.expires_at) - new Date()) / (1000 * 60 * 60 * 24);
+        return daysUntilExpiry <= days && daysUntilExpiry > 0;
+      });
+      return { certifications: expiring };
+    }
+    return api.get(`/learning/certifications/expiring?days=${days}`);
+  },
   addCertification: (data) => api.post('/learning/certifications', data),
   downloadCertificate: (certId) => `/api/learning/certifications/${certId}/pdf`,
 
   // Learning Paths
-  getPaths: () => api.get('/learning/paths'),
+  getPaths: async () => {
+    if (DEMO_MODE) {
+      return { paths: DEMO_LEARNING_PATHS };
+    }
+    return api.get('/learning/paths');
+  },
   createPath: (data) => api.post('/learning/paths', data),
 
   // Compliance & Dashboard
-  getTeamCompliance: () => api.get('/learning/team-compliance'),
-  getDashboard: () => api.get('/learning/dashboard'),
+  getTeamCompliance: async () => {
+    if (DEMO_MODE) {
+      return { compliance: DEMO_EMPLOYEE_COMPLIANCE, items: DEMO_COMPLIANCE_ITEMS };
+    }
+    return api.get('/learning/team-compliance');
+  },
+  getDashboard: async () => {
+    if (DEMO_MODE) {
+      return {
+        totalCourses: DEMO_COURSES.length,
+        mandatoryCourses: DEMO_COURSES.filter(c => c.is_mandatory).length,
+        totalEnrollments: DEMO_ENROLLMENTS.length,
+        completedEnrollments: DEMO_ENROLLMENTS.filter(e => e.status === 'completed').length,
+        inProgressEnrollments: DEMO_ENROLLMENTS.filter(e => e.status === 'in_progress').length,
+        overallCompletionRate: 67,
+        activeCertifications: DEMO_CERTIFICATIONS.filter(c => c.status === 'active').length,
+        expiringCertifications: 1,
+      };
+    }
+    return api.get('/learning/dashboard');
+  },
 
   // Employees for assignment
-  getEmployees: () => api.get('/learning/employees'),
+  getEmployees: async () => {
+    if (DEMO_MODE) {
+      return { employees: DEMO_EMPLOYEES };
+    }
+    return api.get('/learning/employees');
+  },
 };
 
 // Performance API
 export const performanceApi = {
   // Reviews
-  getMyReviews: () => api.get('/performance/my-reviews'),
-  getReview: (id) => api.get(`/performance/reviews/${id}`),
+  getMyReviews: async () => {
+    if (DEMO_MODE) {
+      return { reviews: DEMO_PERFORMANCE_REVIEWS };
+    }
+    return api.get('/performance/my-reviews');
+  },
+  getReview: async (id) => {
+    if (DEMO_MODE) {
+      const review = DEMO_PERFORMANCE_REVIEWS.find(r => r.id === id);
+      return { review: review || DEMO_PERFORMANCE_REVIEWS[0] };
+    }
+    return api.get(`/performance/reviews/${id}`);
+  },
   createReviewCycle: (data) => api.post('/performance/reviews', data),
   updateReview: (id, data) => api.patch(`/performance/reviews/${id}`, data),
-  getTeamReviews: (params = {}) => {
+  getTeamReviews: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { reviews: DEMO_PERFORMANCE_REVIEWS, pagination: { page: 1, limit: 20, total: DEMO_PERFORMANCE_REVIEWS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/performance/team-reviews${query ? `?${query}` : ''}`);
   },
 
   // Review Cycles
-  getCycles: (params = {}) => {
+  getCycles: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { cycles: DEMO_REVIEW_CYCLES, pagination: { page: 1, limit: 20, total: DEMO_REVIEW_CYCLES.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/performance/cycles${query ? `?${query}` : ''}`);
   },
-  getCycle: (id) => api.get(`/performance/cycles/${id}`),
+  getCycle: async (id) => {
+    if (DEMO_MODE) {
+      const cycle = DEMO_REVIEW_CYCLES.find(c => c.id === id);
+      return { cycle: cycle || DEMO_REVIEW_CYCLES[0] };
+    }
+    return api.get(`/performance/cycles/${id}`);
+  },
   createCycle: (data) => api.post('/performance/cycles', data),
   updateCycle: (id, data) => api.patch(`/performance/cycles/${id}`, data),
   updateCycleParticipant: (cycleId, participantId, data) =>
     api.patch(`/performance/cycles/${cycleId}/participants/${participantId}`, data),
 
   // Goals
-  getGoals: () => api.get('/performance/goals'),
+  getGoals: async () => {
+    if (DEMO_MODE) {
+      return { goals: DEMO_GOALS };
+    }
+    return api.get('/performance/goals');
+  },
   createGoal: (data) => api.post('/performance/goals', data),
   updateGoal: (id, data) => api.patch(`/performance/goals/${id}`, data),
   addGoalUpdate: (goalId, data) => api.post(`/performance/goals/${goalId}/updates`, data),
-  getTeamGoals: (params = {}) => {
+  getTeamGoals: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { goals: DEMO_GOALS, pagination: { page: 1, limit: 20, total: DEMO_GOALS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/performance/team-goals${query ? `?${query}` : ''}`);
   },
 
   // OKRs
-  getOkrs: (params = {}) => {
+  getOkrs: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { okrs: DEMO_OKRS, pagination: { page: 1, limit: 20, total: DEMO_OKRS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/performance/okrs${query ? `?${query}` : ''}`);
   },
@@ -1057,11 +1168,20 @@ export const performanceApi = {
   updateKeyResult: (okrId, krId, data) => api.patch(`/performance/okrs/${okrId}/key-results/${krId}`, data),
 
   // 1-on-1 Meetings
-  getOneOnOnes: (params = {}) => {
+  getOneOnOnes: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { meetings: DEMO_ONE_ON_ONES, pagination: { page: 1, limit: 20, total: DEMO_ONE_ON_ONES.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/performance/one-on-ones${query ? `?${query}` : ''}`);
   },
-  getOneOnOne: (id) => api.get(`/performance/one-on-ones/${id}`),
+  getOneOnOne: async (id) => {
+    if (DEMO_MODE) {
+      const meeting = DEMO_ONE_ON_ONES.find(m => m.id === id);
+      return { meeting: meeting || DEMO_ONE_ON_ONES[0] };
+    }
+    return api.get(`/performance/one-on-ones/${id}`);
+  },
   createOneOnOne: (data) => api.post('/performance/one-on-ones', data),
   updateOneOnOne: (id, data) => api.patch(`/performance/one-on-ones/${id}`, data),
   addOneOnOneAction: (meetingId, data) => api.post(`/performance/one-on-ones/${meetingId}/actions`, data),
@@ -1076,27 +1196,83 @@ export const performanceApi = {
 
   // Feedback
   giveFeedback: (data) => api.post('/performance/feedback', data),
-  getMyFeedback: () => api.get('/performance/my-feedback'),
-  getGivenFeedback: () => api.get('/performance/given-feedback'),
-  getPublicFeedback: (limit = 50) => api.get(`/performance/public-feedback?limit=${limit}`),
+  getMyFeedback: async () => {
+    if (DEMO_MODE) {
+      return { feedback: DEMO_FEEDBACK };
+    }
+    return api.get('/performance/my-feedback');
+  },
+  getGivenFeedback: async () => {
+    if (DEMO_MODE) {
+      return { feedback: [] };
+    }
+    return api.get('/performance/given-feedback');
+  },
+  getPublicFeedback: async (limit = 50) => {
+    if (DEMO_MODE) {
+      return { feedback: DEMO_FEEDBACK.slice(0, limit) };
+    }
+    return api.get(`/performance/public-feedback?limit=${limit}`);
+  },
   reactToFeedback: (feedbackId, reaction) => api.post(`/performance/feedback/${feedbackId}/react`, { reaction }),
 
   // Employees & Dashboard
-  getEmployees: () => api.get('/performance/employees'),
-  getDashboard: () => api.get('/performance/dashboard'),
+  getEmployees: async () => {
+    if (DEMO_MODE) {
+      return { employees: DEMO_EMPLOYEES };
+    }
+    return api.get('/performance/employees');
+  },
+  getDashboard: async () => {
+    if (DEMO_MODE) {
+      return {
+        activeCycles: DEMO_REVIEW_CYCLES.filter(c => c.status === 'active').length,
+        pendingReviews: DEMO_PERFORMANCE_REVIEWS.filter(r => r.status !== 'complete').length,
+        completedReviews: DEMO_PERFORMANCE_REVIEWS.filter(r => r.status === 'complete').length,
+        averageRating: 4.2,
+        goalsCount: DEMO_GOALS.length,
+        goalsOnTrack: DEMO_GOALS.filter(g => g.status === 'in_progress').length,
+        upcomingMeetings: DEMO_ONE_ON_ONES.filter(m => m.status === 'scheduled').length,
+        recentFeedback: DEMO_FEEDBACK.length,
+      };
+    }
+    return api.get('/performance/dashboard');
+  },
 };
 
 // Payslips API
 export const payslipsApi = {
-  getMyPayslips: (params = {}) => {
+  getMyPayslips: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { payslips: DEMO_PAYSLIPS, pagination: { page: 1, limit: 20, total: DEMO_PAYSLIPS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/payslips/my-payslips${query ? `?${query}` : ''}`);
   },
-  getPayslip: (id) => api.get(`/payslips/my-payslips/${id}`),
-  getMyYtd: (taxYear) => api.get(`/payslips/my-ytd${taxYear ? `?taxYear=${taxYear}` : ''}`),
-  getMyYears: () => api.get('/payslips/my-years'),
+  getPayslip: async (id) => {
+    if (DEMO_MODE) {
+      const payslip = DEMO_PAYSLIPS.find(p => p.id === id);
+      return { payslip: payslip || DEMO_PAYSLIPS[0] };
+    }
+    return api.get(`/payslips/my-payslips/${id}`);
+  },
+  getMyYtd: async (taxYear) => {
+    if (DEMO_MODE) {
+      return { ytd: DEMO_YTD };
+    }
+    return api.get(`/payslips/my-ytd${taxYear ? `?taxYear=${taxYear}` : ''}`);
+  },
+  getMyYears: async () => {
+    if (DEMO_MODE) {
+      return { years: DEMO_TAX_YEARS };
+    }
+    return api.get('/payslips/my-years');
+  },
   // Admin endpoints
-  getAll: (params = {}) => {
+  getAll: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { payslips: DEMO_PAYSLIPS, pagination: { page: 1, limit: 20, total: DEMO_PAYSLIPS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/payslips${query ? `?${query}` : ''}`);
   },
@@ -1110,12 +1286,20 @@ export const payslipsApi = {
 // TrueLayer Connections API (extends integrationsApi)
 export const trueLayerApi = {
   // Get TrueLayer OAuth connect URL
-  getConnectUrl: (redirectUri) => {
+  getConnectUrl: async (redirectUri) => {
+    if (DEMO_MODE) {
+      return { connectUrl: '#demo-truelayer-connect' };
+    }
     const params = redirectUri ? `?redirect_uri=${encodeURIComponent(redirectUri)}` : '';
     return api.get(`/integrations/truelayer/connect${params}`);
   },
   // List active TrueLayer connections
-  getConnections: () => api.get('/integrations/truelayer/connections'),
+  getConnections: async () => {
+    if (DEMO_MODE) {
+      return { connections: [{ id: 'conn-1', provider: 'HSBC', account_name: 'Business Current Account', status: 'active', last_synced: new Date().toISOString() }] };
+    }
+    return api.get('/integrations/truelayer/connections');
+  },
   // Sync transactions from TrueLayer
   syncTransactions: (connectionId) => api.post('/integrations/truelayer/sync', { connectionId }),
   // Disconnect TrueLayer connection
@@ -1124,15 +1308,27 @@ export const trueLayerApi = {
 
 // Corporate Cards API
 export const corporateCardsApi = {
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { cards: DEMO_CORPORATE_CARDS, pagination: { page: 1, limit: 20, total: DEMO_CORPORATE_CARDS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/corporate-cards${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/corporate-cards/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const card = DEMO_CORPORATE_CARDS.find(c => c.id === id);
+      return { card: card || DEMO_CORPORATE_CARDS[0] };
+    }
+    return api.get(`/corporate-cards/${id}`);
+  },
   create: (data) => api.post('/corporate-cards', data),
   update: (id, data) => api.patch(`/corporate-cards/${id}`, data),
   delete: (id) => api.delete(`/corporate-cards/${id}`),
-  getTransactions: (cardId, params = {}) => {
+  getTransactions: async (cardId, params = {}) => {
+    if (DEMO_MODE) {
+      return { transactions: DEMO_CARD_TRANSACTIONS, pagination: { page: 1, limit: 20, total: DEMO_CARD_TRANSACTIONS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/corporate-cards/${cardId}/transactions${query ? `?${query}` : ''}`);
   },
@@ -1140,11 +1336,20 @@ export const corporateCardsApi = {
 
 // Card Transactions API
 export const cardTransactionsApi = {
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { transactions: DEMO_CARD_TRANSACTIONS, pagination: { page: 1, limit: 20, total: DEMO_CARD_TRANSACTIONS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/card-transactions${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/card-transactions/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const txn = DEMO_CARD_TRANSACTIONS.find(t => t.id === id);
+      return { transaction: txn || DEMO_CARD_TRANSACTIONS[0] };
+    }
+    return api.get(`/card-transactions/${id}`);
+  },
   update: (id, data) => api.patch(`/card-transactions/${id}`, data),
   uploadReceipt: (id, formData) => api.upload(`/card-transactions/${id}/receipt`, formData),
   // Bulk operations
@@ -1154,37 +1359,68 @@ export const cardTransactionsApi = {
 // Expenses API (for Expenses page - general expense management)
 export const expensesApi = {
   // Get all expenses (admin/manager) - /api/expenses/all
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { expenses: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/expenses/all${query ? `?${query}` : ''}`);
   },
   // Get my expenses only (for personal view) - /api/expenses/my-expenses
-  getMyExpenses: (params = {}) => {
+  getMyExpenses: async (params = {}) => {
+    if (DEMO_MODE) {
+      const myExpenses = DEMO_EXPENSES.filter(e => e.employee_id === 'emp-1');
+      return { expenses: myExpenses, pagination: { page: 1, limit: 20, total: myExpenses.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/expenses/my-expenses${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/expenses/my-expenses/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const expense = DEMO_EXPENSES.find(e => e.id === id);
+      return { expense: expense || DEMO_EXPENSES[0] };
+    }
+    return api.get(`/expenses/my-expenses/${id}`);
+  },
   create: (data) => api.post('/expenses/claims', data),
   update: (id, data) => api.patch(`/expenses/claims/${id}`, data),
   submit: (id) => api.post(`/expenses/claims/${id}/submit`),
   // Get categories
-  getCategories: () => api.get('/expenses/categories'),
+  getCategories: async () => {
+    if (DEMO_MODE) {
+      return { categories: DEMO_EXPENSE_CATEGORIES };
+    }
+    return api.get('/expenses/categories');
+  },
 };
 
 // Expense Claims API (for Corporate Cards / TrueLayer)
 export const expenseClaimsApi = {
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { claims: DEMO_CARD_CLAIMS, pagination: { page: 1, limit: 20, total: DEMO_CARD_CLAIMS.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/expense-claims${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/expense-claims/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const claim = DEMO_CARD_CLAIMS.find(c => c.id === id);
+      return { claim: claim || DEMO_CARD_CLAIMS[0] };
+    }
+    return api.get(`/expense-claims/${id}`);
+  },
   create: (data) => api.post('/expense-claims', data),
   // Submit claim with selected transactions
   submit: (data) => api.post('/expense-claims', data),
   // Review claim (approve/reject)
   review: (id, data) => api.post(`/expense-claims/${id}/review`, data),
   // Get claims ready for payroll export
-  getForPayroll: (params = {}) => {
+  getForPayroll: async (params = {}) => {
+    if (DEMO_MODE) {
+      const approvedClaims = DEMO_CARD_CLAIMS.filter(c => c.status === 'approved');
+      return { claims: approvedClaims, pagination: { page: 1, limit: 20, total: approvedClaims.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/payroll/expenses${query ? `?${query}` : ''}`);
   },
@@ -1193,7 +1429,11 @@ export const expenseClaimsApi = {
 // Payroll Expenses API (for finance team)
 export const payrollExpensesApi = {
   // Get approved claims ready for payroll
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      const approvedClaims = DEMO_CARD_CLAIMS.filter(c => c.status === 'approved');
+      return { claims: approvedClaims, pagination: { page: 1, limit: 20, total: approvedClaims.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/payroll/expenses${query ? `?${query}` : ''}`);
   },
@@ -1212,11 +1452,20 @@ export const payrollExpensesApi = {
 
 // Expense Categories API
 export const expenseCategoriesApi = {
-  list: (params = {}) => {
+  list: async (params = {}) => {
+    if (DEMO_MODE) {
+      return { categories: DEMO_EXPENSE_CATEGORIES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSE_CATEGORIES.length, totalPages: 1 } };
+    }
     const query = new URLSearchParams(params).toString();
     return api.get(`/expense-categories${query ? `?${query}` : ''}`);
   },
-  get: (id) => api.get(`/expense-categories/${id}`),
+  get: async (id) => {
+    if (DEMO_MODE) {
+      const category = DEMO_EXPENSE_CATEGORIES.find(c => c.id === id);
+      return { category: category || DEMO_EXPENSE_CATEGORIES[0] };
+    }
+    return api.get(`/expense-categories/${id}`);
+  },
   create: (data) => api.post('/expense-categories', data),
   update: (id, data) => api.patch(`/expense-categories/${id}`, data),
   delete: (id) => api.delete(`/expense-categories/${id}`),

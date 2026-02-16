@@ -458,6 +458,9 @@ export const corsOptions = {
       // Railway production URLs
       'https://uplift-portal-production.up.railway.app',
       'https://uplift-platform-production.up.railway.app',
+      // Netlify demo deployment
+      'https://upliftportaldemo.netlify.app',
+      /\.netlify\.app$/,
       // Localhost for development (always allow for demo convenience)
       'http://localhost:3000',
       'http://localhost:5173',
