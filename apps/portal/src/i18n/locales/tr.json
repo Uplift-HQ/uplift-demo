@@ -305,8 +305,8 @@
     "logoutConfirm": "Çıkış yapmak istediğinizden emin misiniz?",
     "sessionExpired": "Oturumunuz sona erdi. Lütfen tekrar giriş yapın.",
     "biometricLogin": "Biyometrik ile giriş yap",
-    "faceId": "Face ID",
-    "touchId": "Touch ID",
+    "faceId": "Yüz Tanıma",
+    "touchId": "Parmak İzi",
     "fingerprint": "Parmak İzi",
     "tagline": "Nereye gittiğini gör",
     "noAccount": "Hesabınız yok mu?",
@@ -823,7 +823,7 @@
   "gamification": {
     "level": "Seviye {{level}}",
     "levelShort": "Svy {{level}}",
-    "xp": "{{xp}} XP",
+    "xp": "{{xp}} XP puanı",
     "xpUnit": "XP",
     "xpToNext": "Seviye {{level}} için {{xp}} XP",
     "badges": "Rozetler",
@@ -1050,7 +1050,7 @@
       "primaryLogoDesc": "Açık arka planlarda kenar çubuğunda görüntülenir. PNG, JPG veya SVG. Maks. 2MB.",
       "darkModeLogo": "Koyu Mod Logosu",
       "darkModeLogoDesc": "Koyu arka planlarda kullanılır. Logonuzun açık/beyaz versiyonu olmalıdır.",
-      "favicon": "Favicon",
+      "favicon": "Site Simgesi",
       "faviconDesc": "Tarayıcı sekmesi simgesi. İdeal olarak kare, 32x32 veya 64x64. PNG veya ICO.",
       "loginBackground": "Giriş Arka Planı",
       "loginBackgroundDesc": "Giriş ekranı için arka plan görüntüsü. Önerilen 1920x1080.",
@@ -1180,7 +1180,7 @@
     "webhookSecretDesc": "Doğrulama için webhook yüklerini imzalamak amacıyla kullanılır",
     "webhooksTitle": "Webhook’lar",
     "sso": {
-      "azureAd": "Azure Active Directory",
+      "azureAd": "Azure Active Directory (AAD)",
       "mfa": "Çok Faktörlü Kimlik Doğrulama",
       "requireMfaAll": "Tüm kullanıcılar için MFA zorunlu kıl",
       "testConnection": "Bağlantıyı Test Et",
@@ -1217,7 +1217,7 @@
       "regenerateToken": "Belirteci Yeniden Oluştur",
       "scimEndpoint": "SCIM Uç Nokta URL",
       "okta": "Okta",
-      "sms": "SMS",
+      "sms": "SMS (mesaj)",
       "scimToken": "Bearer Belirteci",
       "saveConfig": "Yapılandırmayı Kaydet",
       "scim": "SCIM Sağlama",
@@ -1245,7 +1245,7 @@
       "metadataUrl": "IdP Meta Veri URL",
       "metadataUrlDesc": "Kimlik sağlayıcı meta verisi XML URL (ayrıntıları manuel giriyorsanız isteğe bağlı)",
       "detectedEntityId": "Varlık Kimliği",
-      "detectedSsoUrl": "SSO URL",
+      "detectedSsoUrl": "SSO URL'si",
       "detectedProvider": "Sağlayıcı",
       "errorCode": "Hata Kodu"
     },
@@ -1494,16 +1494,16 @@
     "maxHoursPerWeek": "Haftalık Maksimum Saat",
     "allSet": "Hazırsınız!",
     "startExploring": "Vardiyaları ve fırsatları keşfetmeye başlayın",
-    "availabilityDesc": "Set the employee's availability and scheduling preferences.",
-    "availabilityTitle": "Availability & Preferences",
-    "daysAvailable": "Days Available",
-    "preferredShiftTimes": "Preferred Shift Times",
+    "availabilityDesc": "Çalışanın müsaitlik ve programlama tercihlerini ayarlayın.",
+    "availabilityTitle": "Müsaitlik ve Tercihler",
+    "daysAvailable": "Müsait Günler",
+    "preferredShiftTimes": "Tercih Edilen Vardiya Saatleri",
     "steps": {
-      "employeeDetails": "Employee Details",
-      "roleDepartment": "Role & Department",
-      "skillsCerts": "Skills & Certs",
-      "availability": "Availability",
-      "invitation": "Invitation",
+      "employeeDetails": "Çalışan Detayları",
+      "roleDepartment": "Rol ve Departman",
+      "skillsCerts": "Beceriler ve Sertifikalar",
+      "availability": "Müsaitlik",
+      "invitation": "Davetiye",
       "position": "Pozisyon",
       "equipment": "Ekipman",
       "team": "Ekip",
@@ -1511,11 +1511,11 @@
       "training": "Eğitim",
       "complete": "Tamamla"
     },
-    "selectType": "Select type...",
-    "selectDepartment": "Select department...",
-    "selectRole": "Select role...",
-    "selectLocation": "Select location...",
-    "selectManager": "Select manager (optional)...",
+    "selectType": "Tür seçin...",
+    "selectDepartment": "Departman seçin...",
+    "selectRole": "Rol seçin...",
+    "selectLocation": "Konum seçin...",
+    "selectManager": "Yönetici seçin (isteğe bağlı)...",
     "employeeDetailsTitle": "Mitarbeiterdaten",
     "employeeDetailsDesc": "Geben Sie die Basisdaten des neuen Mitarbeiters ein.",
     "firstName": "Vorname",
@@ -1608,57 +1608,57 @@
       "payRateRequired": "Gültiges Gehalt ist erforderlich"
     },
     "tabs": {
-      "activeOnboardings": "Active Onboardings",
-      "templates": "Templates",
+      "activeOnboardings": "Aktif İşe Alıştırmalar",
+      "templates": "Şablonlar",
       "addEmployee": "Ekle Employee",
       "dashboard": "Kontrol Paneli"
     },
-    "activeOnboardingsTitle": "Active Onboardings",
-    "activeOnboardingsDesc": "Track the progress of employees currently being onboarded",
+    "activeOnboardingsTitle": "Aktif İşe Alıştırmalar",
+    "activeOnboardingsDesc": "İşe alım sürecindeki çalışanların ilerlemesini takip edin",
     "columnName": "Ad",
     "columnRole": "Rol",
     "columnDepartment": "Departman",
     "columnLocation": "Konum",
-    "columnStartDate": "Start Date",
-    "columnProgress": "Progress",
+    "columnStartDate": "Başlangıç Tarihi",
+    "columnProgress": "İlerleme",
     "columnStatus": "Durum",
-    "columnBuddy": "Buddy",
+    "columnBuddy": "Arkadaş",
     "status": {
-      "onTrack": "On Track",
-      "atRisk": "At Risk",
+      "onTrack": "Yolunda",
+      "atRisk": "Risk Altında",
       "overdue": "Gecikmiş"
     },
-    "noTaskDetails": "Detailed task breakdown not available for this employee.",
-    "templatesTitle": "Onboarding Templates",
-    "templatesDesc": "Reusable templates for different onboarding workflows",
+    "noTaskDetails": "Bu çalışan için detaylı görev dökümü mevcut değil.",
+    "templatesTitle": "İşe Alım Şablonları",
+    "templatesDesc": "Farklı işe alım süreçleri için yeniden kullanılabilir şablonlar",
     "default": "Varsayılan",
-    "taskCount": "{{count}} tasks",
-    "lastUpdated": "Updated {{date}}",
-    "templateTasks": "Template Tasks",
-    "createTemplate": "Create Template",
-    "createTemplateTitle": "Create Onboarding Template",
-    "createTemplateBtn": "Create Template",
+    "taskCount": "{{count}} görev",
+    "lastUpdated": "Güncellendi: {{date}}",
+    "templateTasks": "Şablon Görevleri",
+    "createTemplate": "Şablon Oluştur",
+    "createTemplateTitle": "İşe Alım Şablonu Oluştur",
+    "createTemplateBtn": "Şablon Oluştur",
     "templateName": "Template İsim",
-    "templateNamePlaceholder": "e.g. Graduate Programme Onboarding",
+    "templateNamePlaceholder": "örn. Mezun Programı İşe Alımı",
     "templateDescription": "Açıklama",
-    "templateDescriptionPlaceholder": "Describe the purpose of this template...",
+    "templateDescriptionPlaceholder": "Bu şablonun amacını açıklayın...",
     "templateDuration": "Süre",
-    "templateDurationPlaceholder": "e.g. 30 days",
+    "templateDurationPlaceholder": "örn. 30 gün",
     "kpi": {
-      "activeOnboardings": "Active Onboardings",
-      "avgCompletionTime": "Avg Completion Time",
-      "completionRate": "Completion Rate",
-      "overdueTasks": "Overdue Tasks",
-      "days": "18 days"
+      "activeOnboardings": "Aktif İşe Alıştırmalar",
+      "avgCompletionTime": "Ortalama Tamamlama Süresi",
+      "completionRate": "Tamamlanma Oranı",
+      "overdueTasks": "Gecikmiş Görevler",
+      "days": "18 gün"
     },
     "dashboard": {
-      "byDepartment": "Onboardings by Department",
-      "completionTrend": "Completion Rate Trend",
-      "overdueTasks": "Overdue Tasks",
-      "overdueTasksDesc": "Tasks that have passed their due date",
-      "dueOn": "Due {{date}}"
+      "byDepartment": "Departmana Göre İşe Alımlar",
+      "completionTrend": "Tamamlanma Oranı Eğilimi",
+      "overdueTasks": "Gecikmiş Görevler",
+      "overdueTasksDesc": "Bitiş tarihi geçmiş görevler",
+      "dueOn": "Son tarih: {{date}}"
     },
-    "pageSubtitle": "Manage new hire onboarding workflows, templates, and analytics"
+    "pageSubtitle": "Yeni işe alım süreçlerini, şablonlarını ve analizlerini yönetin"
   },
   "errors": {
     "networkError": "Ağ hatası. Lütfen bağlantınızı kontrol edin.",
@@ -1715,10 +1715,10 @@
     "approve": "Onayla",
     "reject": "Reddet",
     "placeholder": {
-      "search": "Search activity..."
+      "search": "Aktivite ara..."
     },
-    "loadError": "Failed to load activity data",
-    "rejectionReasonPlaceholder": "Enter reason for rejection...",
+    "loadError": "Aktivite verileri yüklenemedi",
+    "rejectionReasonPlaceholder": "Reddetme nedenini girin...",
     "shiftSwap": "Vardiya Değişimi",
     "swapWith": "ile takas",
     "shiftClaimed": "Vardiya Alındı"
@@ -1731,7 +1731,7 @@
     "email": "E-posta",
     "emailDesc": "Bildirimleri e-posta ile alın",
     "pushDesc": "Cihazınızda anlık bildirimler alın",
-    "sms": "SMS",
+    "sms": "SMS (mesaj)",
     "smsDesc": "Acil bildirimler için metin mesajları alın",
     "types": "Bildirim Türleri",
     "typesDesc": "Hangi bildirimleri almak istediğinizi seçin",
@@ -1778,10 +1778,10 @@
     "proficiencyLevel": "Yeterlilik Seviyesi",
     "basic": "Temel",
     "adding": "Ekleniyor...",
-    "loadError": "Failed to load employee",
-    "verifySkill": "Verify skill",
-    "removeSkill": "Remove skill",
-    "confirmRemoveSkill": "Remove this skill from the employee?",
+    "loadError": "Çalışan yüklenemedi",
+    "verifySkill": "Beceriyi doğrula",
+    "removeSkill": "Beceriyi kaldır",
+    "confirmRemoveSkill": "Bu beceriyi çalışandan kaldır?",
     "sendPasswordReset": "Şifre Sıfırlama Gönder",
     "actions": {
       "terminate": "İşten Ayır",
@@ -1826,52 +1826,52 @@
     "last7Days": "Son 7 Gün",
     "last30Days": "Son 30 Gün",
     "allDepartments": "Tümü Departments",
-    "nameLabel": "Name:",
-    "typeLabel": "Type:",
+    "nameLabel": "İsim:",
+    "typeLabel": "Tür:",
     "period": "Dönem",
     "date": "Tarih",
     "location": "Konum",
     "department": "Departman",
-    "printReport": "Print Report",
+    "printReport": "Raporu Yazdır",
     "overtime": "Fazla mesai",
     "placeholder": {
-      "searchReports": "Search reports...",
-      "startDate": "Start date",
-      "endDate": "End date"
+      "searchReports": "Rapor ara...",
+      "startDate": "Başlangıç tarihi",
+      "endDate": "Bitiş tarihi"
     },
     "chartTypes": {
-      "table": "Table",
-      "bar": "Bar Chart",
-      "line": "Line Chart",
-      "pie": "Pie Chart"
+      "table": "Tablo",
+      "bar": "Çubuk Grafik",
+      "line": "Çizgi Grafik",
+      "pie": "Pasta Grafik"
     },
     "columns": {
       "employeeName": "Employee İsim",
-      "totalHours": "Total Hours",
-      "regularHours": "Regular Hours",
-      "overtimeHours": "Overtime Hours",
-      "laborCost": "Labor Cost",
+      "totalHours": "Toplam Saat",
+      "regularHours": "Normal Saatler",
+      "overtimeHours": "Fazla Mesai Saatleri",
+      "laborCost": "İşçilik Maliyeti",
       "location": "Konum",
       "department": "Departman",
-      "scheduledShifts": "Scheduled Shifts",
-      "workedShifts": "Worked Shifts",
-      "missedShifts": "Missed Shifts",
-      "lateArrivals": "Late Arrivals",
-      "avgArrivalDiff": "Avg Arrival Diff",
+      "scheduledShifts": "Planlanan Vardiyalar",
+      "workedShifts": "Çalışılan Vardiyalar",
+      "missedShifts": "Kaçırılan Vardiyalar",
+      "lateArrivals": "Geç Gelenler",
+      "avgArrivalDiff": "Ortalama Varış Farkı",
       "date": "Tarih",
-      "totalShifts": "Total Shifts",
-      "filledShifts": "Filled Shifts",
-      "openShifts": "Open Shifts",
-      "fillRate": "Fill Rate",
+      "totalShifts": "Toplam Vardiya",
+      "filledShifts": "Doldurulmuş Vardiyalar",
+      "openShifts": "Açık Vardiyalar",
+      "fillRate": "Doluluk Oranı",
       "employee": "Çalışan",
       "period": "Dönem",
-      "regularCost": "Regular Cost",
-      "overtimeCost": "Overtime Cost",
-      "totalCost": "Total Cost"
+      "regularCost": "Normal Maliyet",
+      "overtimeCost": "Fazla Mesai Maliyeti",
+      "totalCost": "Toplam Maliyet"
     },
-    "loadError": "Failed to load report data",
+    "loadError": "Rapor verileri yüklenemedi",
     "saveError": "Failed to Kaydet report",
-    "namePlaceholder": "e.g., Weekly Overtime Analysis",
+    "namePlaceholder": "örn. Haftalık Fazla Mesai Analizi",
     "groupByOptions": {
       "employee": "Çalışan",
       "location": "Konum",
@@ -1880,15 +1880,15 @@
       "week": "Hafta"
     },
     "summary": {
-      "title": "Report Summary",
+      "title": "Rapor Özeti",
       "name": "Ad",
       "type": "Tür",
-      "columns": "Columns",
-      "groupBy": "Group by"
+      "columns": "Sütunlar",
+      "groupBy": "Gruplandır"
     },
-    "untitledReport": "Untitled Report",
+    "untitledReport": "Başlıksız Rapor",
     "saveReport": "Kaydet Report",
-    "selectColumns": "Select Columns",
+    "selectColumns": "Sütunları Seç",
     "buildCustomReport": "Özel Rapor Oluştur",
     "dateFrom": "Başlangıç Tarihi",
     "dateTo": "Bitiş Tarihi",
@@ -2186,14 +2186,14 @@
       "skillsDesc": "Yetenekleri içe aktarın"
     },
     "types": {
-      "employees": "Employees",
-      "employeesDesc": "Import employee profiles",
+      "employees": "Çalışanlar",
+      "employeesDesc": "Çalışan profillerini içe aktar",
       "shifts": "Vardiyalar",
-      "shiftsDesc": "Import shift schedules",
-      "locations": "Locations",
-      "locationsDesc": "Import locations",
+      "shiftsDesc": "Vardiya programlarını içe aktar",
+      "locations": "Konumlar",
+      "locationsDesc": "Konumları içe aktar",
       "skills": "Beceriler",
-      "skillsDesc": "Import skills"
+      "skillsDesc": "Becerileri içe aktar"
     },
     "templateDesc": "Bu şablonu kullanarak çalışan verilerini yapılandırın",
     "processing": "İşleniyor...",
@@ -2227,7 +2227,7 @@
     "postJob": "İş İlanı Ver",
     "skillMatch": "yetenek eşleşmesi",
     "noApplicants": "Henüz başvuran yok",
-    "loadError": "Failed to load job postings. Please try again.",
+    "loadError": "İş ilanları yüklenemedi. Lütfen tekrar deneyin.",
     "departments": {
       "frontOfHouse": "Ön Büro",
       "kitchen": "Mutfak",
@@ -2256,9 +2256,9 @@
     "allDepartments": "Tümü Departments",
     "allLocations": "Tümü Locations",
     "placeholder": {
-      "searchEmployees": "Search employees..."
+      "searchEmployees": "Çalışan ara..."
     },
-    "loadError": "Failed to load employees",
+    "loadError": "Çalışanlar yüklenemedi",
     "failedAddSkill": "Beceri eklenemedi",
     "failedVerifySkill": "Beceri doğrulanamadı",
     "failedUpdateSkillLevel": "Beceri seviyesi güncellenemedi",
@@ -2288,7 +2288,7 @@
     "noIntegrations": "Bağlı entegrasyon yok",
     "noIntegrationsDesc": "Veri senkronizasyonu başlatmak için ilk entegrasyonunuzu bağlayın",
     "status": {
-      "beta": "Beta",
+      "beta": "Beta Sürümü",
       "syncing": "Senkronize ediliyor..."
     },
     "stats": {
@@ -2303,7 +2303,7 @@
     "tabs": {
       "connected": "Bağlı",
       "marketplace": "Pazar Yeri",
-      "restApi": "REST API",
+      "restApi": "REST API (arayüz)",
       "apiFactory": "API Fabrikası",
       "activityLog": "Etkinlik Günlüğü",
       "settings": "Ayarlar",
@@ -2427,7 +2427,7 @@
       "testSent": "Test yükü gönderildi",
       "testStatus": "Durum",
       "deleteConfirm": "Bu web kancası silinsin mi?",
-      "skillExpired": "Skill Expired"
+      "skillExpired": "Beceri Süresi Doldu"
     },
     "marketplace": {
       "searchPlaceholder": "Entegrasyon ara...",
@@ -2444,7 +2444,7 @@
       "exportLog": "Günlüğü Dışa Aktar"
     },
     "placeholder": {
-      "search": "Search integrations..."
+      "search": "Entegrasyon ara..."
     },
     "testSuccess": "Bağlantı testi başarılı",
     "testFailed": "Bağlantı testi başarısız"
@@ -2470,7 +2470,7 @@
       "errorsCount": "{{count}} hata",
       "disabled": "Devre Dışı",
       "edit": "Düzenle",
-      "test": "Test",
+      "test": "Test Et",
       "viewLogs": "Günlükleri Görüntüle",
       "delete": "Sil",
       "lastRun": "Son çalıştırma"
@@ -2490,7 +2490,7 @@
       "description": "Açıklama",
       "descriptionPlaceholder": "Bu entegrasyon ne yapıyor?",
       "method": "Yöntem",
-      "url": "URL",
+      "url": "URL (bağlantı)",
       "headers": "Başlıklar",
       "addHeader": "Başlık Ekle",
       "headerName": "Başlık adı",
@@ -2506,11 +2506,11 @@
       "keyNamePlaceholder": "ör. X-API-Key",
       "apiKey": "API Anahtarı",
       "enterApiKey": "API anahtarınızı girin",
-      "bearerToken": "Bearer Token",
+      "bearerToken": "Taşıyıcı Belirteci",
       "enterToken": "Token'ınızı girin",
       "username": "Kullanıcı Adı",
       "password": "Şifre",
-      "tokenUrl": "Token URL",
+      "tokenUrl": "Belirteç URL'si",
       "clientId": "İstemci Kimliği",
       "clientSecret": "İstemci Sırrı",
       "scopes": "Kapsamlar (virgülle ayrılmış)",
@@ -2552,7 +2552,7 @@
         "authentication": "Kimlik Doğrulama",
         "trigger": "Tetikleyici",
         "fieldMapping": "Alan Eşleme",
-        "test": "Test"
+        "test": "Test Et"
       }
     },
     "logs": {
@@ -2568,8 +2568,8 @@
     },
     "placeholder": {
       "apiName": "API İsim",
-      "baseUrl": "Base URL",
-      "apiKey": "API key"
+      "baseUrl": "Temel URL",
+      "apiKey": "API anahtarı"
     },
     "noIntegrations": "Henüz API entegrasyonu yok",
     "createFirst": "İlk özel API entegrasyonunuzu oluşturun",
@@ -2777,7 +2777,7 @@
   },
   "integrations": {
     "placeholder": {
-      "search": "Search integrations..."
+      "search": "Entegrasyon ara..."
     },
     "scopes": {
       "employeesRead": "Çalışan bilgilerini görüntüle",
@@ -2802,7 +2802,7 @@
     "copied": "Kopyalandı!",
     "copy": "Kopyala",
     "loadError": "Entegrasyonlar yüklenemedi",
-    "apiKeyPlaceholder": "e.g., Production API Key",
+    "apiKeyPlaceholder": "örn. Üretim API Anahtarı",
     "categories": {
       "hris": "İKBS",
       "hrisDesc": "İnsan Kaynakları Bilgi Sistemleri",
@@ -2862,7 +2862,7 @@
     "api": {
       "authNone": "Kimlik Doğrulama Yok",
       "authApiKey": "API Anahtarı",
-      "authBearer": "Bearer Token",
+      "authBearer": "Taşıyıcı Belirteci",
       "authBasic": "Temel Kimlik Doğrulama",
       "authOAuth2": "OAuth 2.0",
       "triggerManual": "Manuel",
@@ -2873,7 +2873,7 @@
       "triggerEventDesc": "Uplift olayları tarafından tetiklenir",
       "triggerWebhook": "Gelen Webhook",
       "triggerWebhookDesc": "Harici sistemlerden veri al",
-      "scopePlaceholder": "read,write",
+      "scopePlaceholder": "oku,yaz",
       "saveFirstBeforeTesting": "Test etmeden önce entegrasyonu kaydedin",
       "testRequestFailed": "Test isteği başarısız"
     },
@@ -3301,7 +3301,7 @@
     "exceedsExpectations": "Beklentileri Aşıyor",
     "needsImprovement": "Geliştirilmeli",
     "createGoal": "Hedef Oluştur",
-    "threeSixty": "360°",
+    "threeSixty": "360 derece",
     "keyResults": "Temel Sonuçlar",
     "description": "Açıklama",
     "recurring": "Tekrarlayan",
@@ -3497,7 +3497,7 @@
     "anonymityThreshold": "Anonimlik Eşiği",
     "anniversaryTrigger": "Yıl Dönümü Tetikleyicisi",
     "saveAsDraft": "Taslak Olarak Kaydet",
-    "dei": "DEI",
+    "dei": "DEI (çeşitlilik)",
     "fromScratch": "Sıfırdan Başla",
     "promoters": "Destekçiler",
     "surveyBuilder": "Anket Oluşturucu",
@@ -3537,7 +3537,7 @@
       "status": "Durum",
       "responses": "Yanıtlar",
       "participation": "Katılım",
-      "enps": "eNPS",
+      "enps": "eNPS (puan)",
       "closesOn": "Kapanış Tarihi",
       "actions": "İşlemler"
     },
@@ -3594,7 +3594,7 @@
         "newYork": "New York",
         "sanFrancisco": "San Francisco",
         "london": "Londra",
-        "berlin": "Berlin",
+        "berlin": "Berlin, Almanya",
         "singapore": "Singapur",
         "remote": "Uzaktan"
       },
@@ -3676,7 +3676,7 @@
       "outOf5": "5.0 üzerinden",
       "participation": "Katılım",
       "responded": "yanıtladı",
-      "enps": "eNPS",
+      "enps": "eNPS (puan)",
       "promoters": "D",
       "passives": "P",
       "detractors": "E",
@@ -3919,7 +3919,7 @@
     "badgeServiceStar": "Hizmet Yildizi",
     "badgeSpeedDemon": "Hiz Seytani",
     "badgeTeamPlayer": "Takim Oyuncusu",
-    "badgeMentor": "Mentor",
+    "badgeMentor": "Danışman",
     "badgeCertified": "Sertifikali Uzman",
     "badgeLoyalty": "5 Yillik Kulup",
     "companyAnnouncements": "Sirket Duyurulari",
@@ -3940,7 +3940,7 @@
   "momentum": {
     "pageTitle": "Momentum Puanim",
     "employee": "Calisan",
-    "momentum": "Momentum",
+    "momentum": "İvme",
     "trendUp": "↑3 gecen aya gore",
     "basedOn": "Devam, beceriler, egitim ve geri bildirime dayali",
     "scoreBreakdown": "Puan Dagilimi",
@@ -3988,7 +3988,7 @@
     "name": "Ad",
     "department": "Departman",
     "score": "Puan",
-    "trend": "Trend",
+    "trend": "Eğilim",
     "departmentComparison": "Departman Karsilastirmasi",
     "scoreTrendByDept": "Departmana Gore Puan Trendi",
     "yourMomentumScore": "Momentum Puaniniz",
@@ -4185,7 +4185,7 @@
       "exportedBy": "Aktaran",
       "download": "Indir",
       "noExports": "Henuz aktarim yok",
-      "csv": "CSV",
+      "csv": "CSV (dosya)",
       "exportTitle": "Bordro'ya Aktar",
       "exportWarning": "Talepler ödendi olarak işaretlenecek ve dışa aktarma sonrası değiştirilemeyecek.",
       "confirmExport": "Aktar"

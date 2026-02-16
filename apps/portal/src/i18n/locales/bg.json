@@ -823,7 +823,7 @@
   "gamification": {
     "level": "Ниво {{level}}",
     "levelShort": "Нив {{level}}",
-    "xp": "{{xp}} XP",
+    "xp": "{{xp}} XP точки",
     "xpUnit": "XP",
     "xpToNext": "{{xp}} XP до ниво {{level}}",
     "badges": "Значки",
@@ -2252,7 +2252,7 @@
     "tabs": {
       "connected": "Свързани",
       "marketplace": "Пазар",
-      "restApi": "REST API",
+      "restApi": "REST API (интерфейс)",
       "apiFactory": "API Фабрика",
       "activityLog": "Лог на активността",
       "settings": "Настройки",
@@ -2433,7 +2433,7 @@
       "description": "Описание",
       "descriptionPlaceholder": "Какво прави тази интеграция?",
       "method": "Метод",
-      "url": "URL",
+      "url": "URL (връзка)",
       "headers": "Хедъри",
       "addHeader": "Добави хедър",
       "headerName": "Име на хедър",
@@ -2741,7 +2741,7 @@
     "loadError": "Неуспешно зареждане на интеграции",
     "apiKeyPlaceholder": "напр. Продукционен API ключ",
     "categories": {
-      "hris": "HRIS",
+      "hris": "HRIS (HR система)",
       "hrisDesc": "Системи за управление на човешки ресурси",
       "payroll": "Заплати",
       "payrollDesc": "Заплати и възнаграждения",
@@ -3484,7 +3484,7 @@
       "status": "Статус",
       "responses": "Отговори",
       "participation": "Участие",
-      "enps": "eNPS",
+      "enps": "eNPS (точки)",
       "closesOn": "Затваря на",
       "actions": "Действия"
     },
@@ -3625,7 +3625,7 @@
       "outOf5": "от 5.0",
       "participation": "Участие",
       "responded": "отговорили",
-      "enps": "eNPS",
+      "enps": "eNPS (точки)",
       "promoters": "П",
       "passives": "Н",
       "detractors": "Д",
@@ -3995,7 +3995,7 @@
       "exportedBy": "Експортирано от",
       "download": "Изтегли",
       "noExports": "Все още няма експорти",
-      "csv": "CSV",
+      "csv": "CSV (файл)",
       "exportTitle": "Експорт към заплати",
       "exportWarning": "Заявките ще бъдат маркирани като платени и не могат да бъдат модифицирани след експорт.",
       "confirmExport": "Експортирай"
