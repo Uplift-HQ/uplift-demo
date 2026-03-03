@@ -898,4 +898,754 @@ router.get('/providers/status', authMiddleware, requireRole(['admin']), async (r
   }
 });
 
+// =============================================================================
+// RTI (Real Time Information) SUBMISSIONS
+// =============================================================================
+
+// FPS - Full Payment Submission
+// Submits employee payment details to HMRC after each pay run
+router.post('/rti/fps', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { payroll_run_id, employees } = req.body;
+
+    if (!payroll_run_id) {
+      return res.status(400).json({ error: 'payroll_run_id is required' });
+    }
+
+    // Get organization details for RTI
+    const orgResult = await db.query(
+      `SELECT name, paye_reference, accounts_office_reference
+       FROM organizations WHERE id = $1`,
+      [organizationId]
+    );
+    const org = orgResult.rows[0];
+
+    if (!org.paye_reference) {
+      return res.status(400).json({
+        error: 'PAYE reference not configured. Please set up your employer details in Settings.'
+      });
+    }
+
+    // Get payroll run with employee payslips
+    const runResult = await db.query(`
+      SELECT pr.*, p.employee_id, p.gross_pay, p.net_pay, p.tax_deducted, p.ni_employee,
+             e.first_name, e.last_name, e.ni_number, e.date_of_birth,
+             eps.tax_code, eps.ni_category, eps.student_loan_plan
+      FROM payroll_runs pr
+      JOIN payslips p ON p.payroll_run_id = pr.id
+      JOIN employees e ON e.id = p.employee_id
+      LEFT JOIN employee_payroll_settings eps ON eps.employee_id = e.id
+      WHERE pr.id = $1 AND pr.organization_id = $2
+    `, [payroll_run_id, organizationId]);
+
+    if (runResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Payroll run not found' });
+    }
+
+    // Build FPS XML structure (simplified - real implementation would use HMRC schema)
+    const fpsData = {
+      submission_type: 'FPS',
+      employer: {
+        paye_reference: org.paye_reference,
+        accounts_office_reference: org.accounts_office_reference,
+        name: org.name,
+      },
+      employees: runResult.rows.map(row => ({
+        ni_number: row.ni_number,
+        name: `${row.first_name} ${row.last_name}`,
+        date_of_birth: row.date_of_birth,
+        tax_code: row.tax_code,
+        ni_category: row.ni_category || 'A',
+        gross_pay: row.gross_pay,
+        tax_deducted: row.tax_deducted,
+        ni_employee: row.ni_employee,
+        net_pay: row.net_pay,
+        student_loan: row.student_loan_plan,
+      })),
+      pay_period: {
+        start: runResult.rows[0]?.period_start,
+        end: runResult.rows[0]?.period_end,
+      },
+    };
+
+    // Log FPS submission (in production, this would call HMRC API)
+    console.log('[RTI] FPS Submission:', JSON.stringify(fpsData, null, 2));
+
+    // Record the submission
+    const submissionResult = await db.query(`
+      INSERT INTO rti_submissions (organization_id, payroll_run_id, submission_type, payload, status)
+      VALUES ($1, $2, 'FPS', $3, 'pending')
+      RETURNING *
+    `, [organizationId, payroll_run_id, JSON.stringify(fpsData)]);
+
+    res.json({
+      success: true,
+      message: 'FPS submission queued successfully',
+      submission: submissionResult.rows[0],
+      data: fpsData,
+    });
+  } catch (error) {
+    console.error('FPS submission error:', error);
+    res.status(500).json({ error: 'Failed to submit FPS' });
+  }
+});
+
+// EPS - Employer Payment Summary
+// Monthly submission of employer-level data (recovery of SMP, NICs, etc.)
+router.post('/rti/eps', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { tax_month, tax_year, smp_recovered, spp_recovered, sap_recovered, nic_holiday } = req.body;
+
+    if (!tax_month || !tax_year) {
+      return res.status(400).json({ error: 'tax_month and tax_year are required' });
+    }
+
+    // Get organization details
+    const orgResult = await db.query(
+      `SELECT name, paye_reference, accounts_office_reference
+       FROM organizations WHERE id = $1`,
+      [organizationId]
+    );
+    const org = orgResult.rows[0];
+
+    if (!org.paye_reference) {
+      return res.status(400).json({
+        error: 'PAYE reference not configured.'
+      });
+    }
+
+    // Build EPS data
+    const epsData = {
+      submission_type: 'EPS',
+      employer: {
+        paye_reference: org.paye_reference,
+        accounts_office_reference: org.accounts_office_reference,
+        name: org.name,
+      },
+      tax_year,
+      tax_month,
+      recovery: {
+        smp_recovered: smp_recovered || 0,
+        spp_recovered: spp_recovered || 0,
+        sap_recovered: sap_recovered || 0,
+        nic_holiday: nic_holiday || 0,
+      },
+      no_payment_dates: [],
+    };
+
+    console.log('[RTI] EPS Submission:', JSON.stringify(epsData, null, 2));
+
+    // Record the submission
+    const submissionResult = await db.query(`
+      INSERT INTO rti_submissions (organization_id, submission_type, payload, status, tax_year, tax_month)
+      VALUES ($1, 'EPS', $2, 'pending', $3, $4)
+      RETURNING *
+    `, [organizationId, JSON.stringify(epsData), tax_year, tax_month]);
+
+    res.json({
+      success: true,
+      message: 'EPS submission queued successfully',
+      submission: submissionResult.rows[0],
+      data: epsData,
+    });
+  } catch (error) {
+    console.error('EPS submission error:', error);
+    res.status(500).json({ error: 'Failed to submit EPS' });
+  }
+});
+
+// Get RTI submission history
+router.get('/rti/submissions', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { type, status, limit = 50 } = req.query;
+
+    let query = `
+      SELECT rs.*, pr.period_start, pr.period_end
+      FROM rti_submissions rs
+      LEFT JOIN payroll_runs pr ON pr.id = rs.payroll_run_id
+      WHERE rs.organization_id = $1
+    `;
+    const params = [organizationId];
+
+    if (type) {
+      params.push(type);
+      query += ` AND rs.submission_type = $${params.length}`;
+    }
+    if (status) {
+      params.push(status);
+      query += ` AND rs.status = $${params.length}`;
+    }
+
+    query += ` ORDER BY rs.created_at DESC LIMIT $${params.length + 1}`;
+    params.push(parseInt(limit));
+
+    const result = await db.query(query, params);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching RTI submissions:', error);
+    res.status(500).json({ error: 'Failed to fetch RTI submissions' });
+  }
+});
+
+// =============================================================================
+// P45 / P60 GENERATION
+// =============================================================================
+
+// Generate P45 for a leaving employee
+router.get('/p45/:employeeId', authMiddleware, requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { employeeId } = req.params;
+
+    // Get employee and their payroll data
+    const result = await db.query(`
+      SELECT
+        e.id, e.first_name, e.last_name, e.ni_number, e.date_of_birth,
+        e.address_line1, e.address_line2, e.city, e.postcode,
+        e.employment_start_date, e.termination_date,
+        eps.tax_code, eps.ni_category,
+        o.name as employer_name, o.paye_reference,
+        (SELECT COALESCE(SUM(gross_pay), 0) FROM payslips p
+         JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+         WHERE p.employee_id = e.id
+         AND pr.period_start >= date_trunc('year', COALESCE(e.termination_date, CURRENT_DATE) - interval '3 months')) as gross_pay_ytd,
+        (SELECT COALESCE(SUM(tax_deducted), 0) FROM payslips p
+         JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+         WHERE p.employee_id = e.id
+         AND pr.period_start >= date_trunc('year', COALESCE(e.termination_date, CURRENT_DATE) - interval '3 months')) as tax_ytd
+      FROM employees e
+      LEFT JOIN employee_payroll_settings eps ON eps.employee_id = e.id
+      JOIN organizations o ON o.id = e.organization_id
+      WHERE e.id = $1 AND e.organization_id = $2
+    `, [employeeId, organizationId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Employee not found' });
+    }
+
+    const emp = result.rows[0];
+    const taxYear = getTaxYear(emp.termination_date || new Date());
+
+    const p45Data = {
+      document_type: 'P45',
+      tax_year: taxYear,
+      employer: {
+        name: emp.employer_name,
+        paye_reference: emp.paye_reference,
+      },
+      employee: {
+        ni_number: emp.ni_number,
+        name: `${emp.first_name} ${emp.last_name}`,
+        date_of_birth: emp.date_of_birth,
+        address: [emp.address_line1, emp.address_line2, emp.city, emp.postcode].filter(Boolean).join(', '),
+      },
+      employment: {
+        start_date: emp.employment_start_date,
+        leaving_date: emp.termination_date,
+        tax_code: emp.tax_code || '1257L',
+        week1_month1: false,
+      },
+      pay_and_tax: {
+        total_pay_ytd: parseFloat(emp.gross_pay_ytd) || 0,
+        total_tax_ytd: parseFloat(emp.tax_ytd) || 0,
+      },
+      generated_at: new Date().toISOString(),
+    };
+
+    res.json(p45Data);
+  } catch (error) {
+    console.error('P45 generation error:', error);
+    res.status(500).json({ error: 'Failed to generate P45' });
+  }
+});
+
+// Generate P60 for an employee for a given tax year
+router.get('/p60/:employeeId/:taxYear', authMiddleware, requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { employeeId, taxYear } = req.params;
+
+    // Parse tax year (format: 2025-26)
+    const [startYear] = taxYear.split('-').map(Number);
+    const taxYearStart = new Date(startYear, 3, 6); // April 6
+    const taxYearEnd = new Date(startYear + 1, 3, 5); // April 5
+
+    // Get employee and their payroll data for the tax year
+    const result = await db.query(`
+      SELECT
+        e.id, e.first_name, e.last_name, e.ni_number, e.date_of_birth,
+        e.address_line1, e.address_line2, e.city, e.postcode,
+        e.employment_start_date,
+        eps.tax_code, eps.ni_category, eps.student_loan_plan,
+        o.name as employer_name, o.paye_reference,
+        (SELECT COALESCE(SUM(gross_pay), 0) FROM payslips p
+         JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+         WHERE p.employee_id = e.id
+         AND pr.period_end >= $3 AND pr.period_end <= $4) as gross_pay_total,
+        (SELECT COALESCE(SUM(tax_deducted), 0) FROM payslips p
+         JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+         WHERE p.employee_id = e.id
+         AND pr.period_end >= $3 AND pr.period_end <= $4) as tax_total,
+        (SELECT COALESCE(SUM(ni_employee), 0) FROM payslips p
+         JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+         WHERE p.employee_id = e.id
+         AND pr.period_end >= $3 AND pr.period_end <= $4) as ni_total,
+        (SELECT COALESCE(SUM(student_loan), 0) FROM payslips p
+         JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+         WHERE p.employee_id = e.id
+         AND pr.period_end >= $3 AND pr.period_end <= $4) as student_loan_total
+      FROM employees e
+      LEFT JOIN employee_payroll_settings eps ON eps.employee_id = e.id
+      JOIN organizations o ON o.id = e.organization_id
+      WHERE e.id = $1 AND e.organization_id = $2
+    `, [employeeId, organizationId, taxYearStart, taxYearEnd]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Employee not found' });
+    }
+
+    const emp = result.rows[0];
+
+    const p60Data = {
+      document_type: 'P60',
+      tax_year: taxYear,
+      employer: {
+        name: emp.employer_name,
+        paye_reference: emp.paye_reference,
+      },
+      employee: {
+        ni_number: emp.ni_number,
+        name: `${emp.first_name} ${emp.last_name}`,
+        date_of_birth: emp.date_of_birth,
+        address: [emp.address_line1, emp.address_line2, emp.city, emp.postcode].filter(Boolean).join(', '),
+      },
+      employment: {
+        start_date: emp.employment_start_date,
+        tax_code: emp.tax_code || '1257L',
+        ni_category: emp.ni_category || 'A',
+      },
+      earnings_and_deductions: {
+        pay_in_this_employment: parseFloat(emp.gross_pay_total) || 0,
+        tax_deducted: parseFloat(emp.tax_total) || 0,
+        employee_ni_contributions: parseFloat(emp.ni_total) || 0,
+        student_loan_deductions: parseFloat(emp.student_loan_total) || 0,
+      },
+      generated_at: new Date().toISOString(),
+    };
+
+    res.json(p60Data);
+  } catch (error) {
+    console.error('P60 generation error:', error);
+    res.status(500).json({ error: 'Failed to generate P60' });
+  }
+});
+
+// Helper function to get tax year string
+function getTaxYear(date) {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = d.getMonth();
+  // Tax year runs April 6 to April 5
+  if (month < 3 || (month === 3 && d.getDate() < 6)) {
+    return `${year - 1}-${String(year).slice(2)}`;
+  }
+  return `${year}-${String(year + 1).slice(2)}`;
+}
+
+// =============================================================================
+// CONFIGURABLE EXPORT FIELD MAPPINGS
+// =============================================================================
+
+// Available fields for export mapping
+const EXPORT_FIELDS = {
+  employee_id: { label: 'Employee ID', path: 'employee_id' },
+  employee_number: { label: 'Employee Number', path: 'employee_number' },
+  first_name: { label: 'First Name', path: 'first_name' },
+  last_name: { label: 'Last Name', path: 'last_name' },
+  full_name: { label: 'Full Name', path: 'full_name' },
+  email: { label: 'Email', path: 'email' },
+  department: { label: 'Department', path: 'department' },
+  job_title: { label: 'Job Title', path: 'job_title' },
+  ni_number: { label: 'NI Number', path: 'ni_number' },
+  tax_code: { label: 'Tax Code', path: 'tax_code' },
+  gross_pay: { label: 'Gross Pay', path: 'gross_pay' },
+  net_pay: { label: 'Net Pay', path: 'net_pay' },
+  tax_deducted: { label: 'Tax Deducted', path: 'tax_deducted' },
+  ni_employee: { label: 'NI (Employee)', path: 'ni_employee' },
+  ni_employer: { label: 'NI (Employer)', path: 'ni_employer' },
+  pension_employee: { label: 'Pension (Employee)', path: 'pension_employee' },
+  pension_employer: { label: 'Pension (Employer)', path: 'pension_employer' },
+  student_loan: { label: 'Student Loan', path: 'student_loan' },
+  regular_hours: { label: 'Regular Hours', path: 'regular_hours' },
+  overtime_hours: { label: 'Overtime Hours', path: 'overtime_hours' },
+  sort_code: { label: 'Sort Code', path: 'sort_code' },
+  account_number: { label: 'Account Number', path: 'account_number' },
+  account_name: { label: 'Account Name', path: 'account_name' },
+  pay_period_start: { label: 'Period Start', path: 'period_start' },
+  pay_period_end: { label: 'Period End', path: 'period_end' },
+};
+
+// Get available export fields
+router.get('/export-fields', authMiddleware, async (req, res) => {
+  res.json(EXPORT_FIELDS);
+});
+
+// List export mappings for organization
+router.get('/export-mappings', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { provider } = req.query;
+
+    let query = `
+      SELECT id, name, provider, description, field_mappings, output_format,
+             delimiter, include_header, date_format, is_default, created_at, updated_at
+      FROM payroll_export_mappings
+      WHERE organization_id = $1
+    `;
+    const params = [organizationId];
+
+    if (provider) {
+      query += ' AND provider = $2';
+      params.push(provider);
+    }
+
+    query += ' ORDER BY is_default DESC, name ASC';
+
+    const result = await db.query(query, params);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error listing export mappings:', error);
+    res.status(500).json({ error: 'Failed to list export mappings' });
+  }
+});
+
+// Get single export mapping
+router.get('/export-mappings/:id', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+
+    const result = await db.query(
+      `SELECT * FROM payroll_export_mappings WHERE id = $1 AND organization_id = $2`,
+      [req.params.id, organizationId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Export mapping not found' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error fetching export mapping:', error);
+    res.status(500).json({ error: 'Failed to fetch export mapping' });
+  }
+});
+
+// Create export mapping
+router.post('/export-mappings', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const {
+      name, provider, description, field_mappings,
+      output_format, delimiter, include_header, date_format, is_default
+    } = req.body;
+
+    if (!name || !provider || !field_mappings) {
+      return res.status(400).json({ error: 'name, provider, and field_mappings are required' });
+    }
+
+    // If setting as default, unset other defaults for this provider
+    if (is_default) {
+      await db.query(
+        `UPDATE payroll_export_mappings SET is_default = false
+         WHERE organization_id = $1 AND provider = $2`,
+        [organizationId, provider]
+      );
+    }
+
+    const result = await db.query(`
+      INSERT INTO payroll_export_mappings
+        (organization_id, name, provider, description, field_mappings,
+         output_format, delimiter, include_header, date_format, is_default)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING *
+    `, [
+      organizationId, name, provider, description || null,
+      JSON.stringify(field_mappings), output_format || 'csv',
+      delimiter || ',', include_header !== false, date_format || 'YYYY-MM-DD',
+      is_default || false
+    ]);
+
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error creating export mapping:', error);
+    res.status(500).json({ error: 'Failed to create export mapping' });
+  }
+});
+
+// Update export mapping
+router.put('/export-mappings/:id', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const {
+      name, provider, description, field_mappings,
+      output_format, delimiter, include_header, date_format, is_default
+    } = req.body;
+
+    // If setting as default, unset other defaults for this provider
+    if (is_default && provider) {
+      await db.query(
+        `UPDATE payroll_export_mappings SET is_default = false
+         WHERE organization_id = $1 AND provider = $2 AND id != $3`,
+        [organizationId, provider, req.params.id]
+      );
+    }
+
+    const result = await db.query(`
+      UPDATE payroll_export_mappings
+      SET name = COALESCE($3, name),
+          provider = COALESCE($4, provider),
+          description = COALESCE($5, description),
+          field_mappings = COALESCE($6, field_mappings),
+          output_format = COALESCE($7, output_format),
+          delimiter = COALESCE($8, delimiter),
+          include_header = COALESCE($9, include_header),
+          date_format = COALESCE($10, date_format),
+          is_default = COALESCE($11, is_default),
+          updated_at = NOW()
+      WHERE id = $1 AND organization_id = $2
+      RETURNING *
+    `, [
+      req.params.id, organizationId, name, provider, description,
+      field_mappings ? JSON.stringify(field_mappings) : null,
+      output_format, delimiter, include_header, date_format, is_default
+    ]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Export mapping not found' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error updating export mapping:', error);
+    res.status(500).json({ error: 'Failed to update export mapping' });
+  }
+});
+
+// Delete export mapping
+router.delete('/export-mappings/:id', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+
+    const result = await db.query(
+      `DELETE FROM payroll_export_mappings WHERE id = $1 AND organization_id = $2 RETURNING id`,
+      [req.params.id, organizationId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Export mapping not found' });
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting export mapping:', error);
+    res.status(500).json({ error: 'Failed to delete export mapping' });
+  }
+});
+
+// Export payroll run with custom mapping
+router.post('/export/:runId/custom', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { runId } = req.params;
+    const { mapping_id } = req.body;
+
+    if (!mapping_id) {
+      return res.status(400).json({ error: 'mapping_id is required' });
+    }
+
+    // Get the mapping
+    const mappingResult = await db.query(
+      `SELECT * FROM payroll_export_mappings WHERE id = $1 AND organization_id = $2`,
+      [mapping_id, organizationId]
+    );
+
+    if (mappingResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Export mapping not found' });
+    }
+
+    const mapping = mappingResult.rows[0];
+    const fieldMappings = mapping.field_mappings;
+
+    // Get payroll data
+    const payrollResult = await db.query(`
+      SELECT
+        p.id as payslip_id, p.employee_id, p.gross_pay, p.net_pay,
+        p.tax_deducted, p.ni_employee, p.ni_employer,
+        p.pension_employee, p.pension_employer, p.student_loan,
+        p.regular_hours, p.overtime_hours,
+        e.employee_number, e.first_name, e.last_name, e.email, e.ni_number,
+        d.name as department, jt.name as job_title,
+        eps.tax_code, eps.sort_code, eps.account_number, eps.account_name,
+        pr.period_start, pr.period_end
+      FROM payslips p
+      JOIN employees e ON e.id = p.employee_id
+      JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+      LEFT JOIN departments d ON d.id = e.department_id
+      LEFT JOIN job_titles jt ON jt.id = e.job_title_id
+      LEFT JOIN employee_payroll_settings eps ON eps.employee_id = e.id
+      WHERE p.payroll_run_id = $1 AND p.organization_id = $2
+      ORDER BY e.last_name, e.first_name
+    `, [runId, organizationId]);
+
+    if (payrollResult.rows.length === 0) {
+      return res.status(404).json({ error: 'No payroll data found for this run' });
+    }
+
+    // Build export data based on mapping
+    const exportData = payrollResult.rows.map(row => {
+      const exportRow = {};
+
+      for (const [outputField, sourceField] of Object.entries(fieldMappings)) {
+        let value = row[sourceField];
+
+        // Handle special cases
+        if (sourceField === 'full_name') {
+          value = `${row.first_name} ${row.last_name}`;
+        }
+
+        // Format dates if needed
+        if (value instanceof Date) {
+          value = formatDate(value, mapping.date_format);
+        }
+
+        // Format numbers
+        if (typeof value === 'number') {
+          value = value.toFixed(2);
+        }
+
+        exportRow[outputField] = value ?? '';
+      }
+
+      return exportRow;
+    });
+
+    // Generate output based on format
+    if (mapping.output_format === 'json') {
+      res.json(exportData);
+    } else {
+      // CSV output
+      const headers = Object.keys(fieldMappings);
+      const delimiter = mapping.delimiter || ',';
+
+      let csv = '';
+      if (mapping.include_header) {
+        csv = headers.join(delimiter) + '\n';
+      }
+
+      csv += exportData.map(row =>
+        headers.map(h => {
+          const val = String(row[h] || '');
+          // Escape quotes and wrap in quotes if contains delimiter
+          if (val.includes(delimiter) || val.includes('"') || val.includes('\n')) {
+            return `"${val.replace(/"/g, '""')}"`;
+          }
+          return val;
+        }).join(delimiter)
+      ).join('\n');
+
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', `attachment; filename="${mapping.name.replace(/[^a-z0-9]/gi, '_')}_export.csv"`);
+      res.send(csv);
+    }
+  } catch (error) {
+    console.error('Custom export error:', error);
+    res.status(500).json({ error: 'Failed to export payroll data' });
+  }
+});
+
+// Preview export with mapping
+router.post('/export/:runId/preview', authMiddleware, requireRole(['admin']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { runId } = req.params;
+    const { field_mappings, limit = 5 } = req.body;
+
+    if (!field_mappings) {
+      return res.status(400).json({ error: 'field_mappings is required' });
+    }
+
+    // Get sample payroll data
+    const payrollResult = await db.query(`
+      SELECT
+        p.id as payslip_id, p.employee_id, p.gross_pay, p.net_pay,
+        p.tax_deducted, p.ni_employee, p.ni_employer,
+        e.employee_number, e.first_name, e.last_name, e.email, e.ni_number,
+        d.name as department, jt.name as job_title,
+        eps.tax_code, eps.sort_code, eps.account_number,
+        pr.period_start, pr.period_end
+      FROM payslips p
+      JOIN employees e ON e.id = p.employee_id
+      JOIN payroll_runs pr ON pr.id = p.payroll_run_id
+      LEFT JOIN departments d ON d.id = e.department_id
+      LEFT JOIN job_titles jt ON jt.id = e.job_title_id
+      LEFT JOIN employee_payroll_settings eps ON eps.employee_id = e.id
+      WHERE p.payroll_run_id = $1 AND p.organization_id = $2
+      ORDER BY e.last_name, e.first_name
+      LIMIT $3
+    `, [runId, organizationId, limit]);
+
+    // Build preview data
+    const previewData = payrollResult.rows.map(row => {
+      const exportRow = {};
+
+      for (const [outputField, sourceField] of Object.entries(field_mappings)) {
+        let value = row[sourceField];
+
+        if (sourceField === 'full_name') {
+          value = `${row.first_name} ${row.last_name}`;
+        }
+
+        if (typeof value === 'number') {
+          value = value.toFixed(2);
+        }
+
+        exportRow[outputField] = value ?? '';
+      }
+
+      return exportRow;
+    });
+
+    res.json({
+      headers: Object.keys(field_mappings),
+      rows: previewData,
+      total: payrollResult.rows.length,
+    });
+  } catch (error) {
+    console.error('Export preview error:', error);
+    res.status(500).json({ error: 'Failed to generate preview' });
+  }
+});
+
+// Helper function to format dates
+function formatDate(date, format) {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+
+  switch (format) {
+    case 'DD/MM/YYYY':
+      return `${day}/${month}/${year}`;
+    case 'MM/DD/YYYY':
+      return `${month}/${day}/${year}`;
+    case 'DD-MM-YYYY':
+      return `${day}-${month}-${year}`;
+    default: // YYYY-MM-DD
+      return `${year}-${month}-${day}`;
+  }
+}
+
 export default router;

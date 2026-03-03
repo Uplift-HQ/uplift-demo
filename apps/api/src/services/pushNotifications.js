@@ -429,6 +429,37 @@ export const NotificationTemplates = {
     channelId: 'default',
     data: { type: 'clock_in' },
   }),
+
+  // Expense notifications
+  expenseApproved: (amount) => ({
+    title: 'Expense Approved',
+    body: `Your expense claim for ${amount} has been approved`,
+    channelId: 'expenses',
+    data: { type: 'expense_approved' },
+  }),
+
+  expenseRejected: (amount, reason) => ({
+    title: 'Expense Declined',
+    body: reason
+      ? `Your expense claim for ${amount} was declined: ${reason}`
+      : `Your expense claim for ${amount} was declined`,
+    channelId: 'expenses',
+    data: { type: 'expense_rejected' },
+  }),
+
+  expensePaid: (amount) => ({
+    title: 'Expense Reimbursed',
+    body: `Your expense claim for ${amount} has been paid`,
+    channelId: 'expenses',
+    data: { type: 'expense_paid' },
+  }),
+
+  expenseSubmitted: (employeeName, amount) => ({
+    title: 'New Expense Submitted',
+    body: `${employeeName} submitted an expense claim for ${amount}`,
+    channelId: 'expenses',
+    data: { type: 'expense_submitted' },
+  }),
 };
 
 // -------------------- Utility --------------------

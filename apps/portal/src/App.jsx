@@ -37,6 +37,7 @@ import OrgOnboarding from './pages/OrgOnboarding';
 import Performance from './pages/Performance';
 import Compensation from './pages/Compensation';
 import Documents from './pages/Documents';
+import Contracts from './pages/Contracts';
 import Learning from './pages/Learning';
 import Surveys from './pages/Surveys';
 import Expenses from './pages/Expenses';
@@ -60,6 +61,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 
 // Demo auto-login
 import AutoLogin from './pages/AutoLogin';
+
+// Kiosk mode (standalone, no auth)
+import Kiosk from './pages/Kiosk';
 
 export default function App() {
   const { loading } = useAuth();
@@ -86,6 +90,7 @@ export default function App() {
       <Route path="/auto-login" element={<AutoLogin />} />
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/kiosk" element={<Kiosk />} />
 
       {/* Protected routes with layout */}
       <Route
@@ -135,6 +140,7 @@ export default function App() {
         <Route path="/integrations" element={<RequireAdmin><Integrations /></RequireAdmin>} />
         <Route path="/activity" element={<RequireAdmin><Activity /></RequireAdmin>} />
         <Route path="/surveys" element={<RequireAdmin><Surveys /></RequireAdmin>} />
+        <Route path="/contracts" element={<RequireAdmin><Contracts /></RequireAdmin>} />
         <Route path="/settings" element={<RequireAdmin><Settings /></RequireAdmin>} />
         <Route path="/payroll" element={<RequireAdmin><Payroll /></RequireAdmin>} />
         <Route path="/payroll/runs" element={<RequireAdmin><Payroll /></RequireAdmin>} />

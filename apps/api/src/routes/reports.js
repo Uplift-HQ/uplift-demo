@@ -1208,4 +1208,427 @@ router.get('/', async (req, res) => {
   }
 });
 
+// ============================================================
+// CUSTOM REPORTS
+// ============================================================
+
+// Allowlisted columns per data source for SQL injection prevention
+const ALLOWED_COLUMNS = {
+  employees: {
+    name: "e.first_name || ' ' || e.last_name",
+    department: 'd.name',
+    location: 'l.name',
+    role: 'r.name',
+    employment_type: 'e.employment_type',
+    start_date: 'e.start_date',
+    tenure_months: "EXTRACT(MONTH FROM AGE(NOW(), e.start_date))",
+    salary: 'e.annual_salary',
+    status: 'e.status',
+    country: 'e.country',
+    manager: "m.first_name || ' ' || m.last_name",
+  },
+  time_entries: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    date: 'te.clock_in::date',
+    clock_in: 'te.clock_in',
+    clock_out: 'te.clock_out',
+    total_hours: 'te.total_hours',
+    overtime_hours: 'te.overtime_hours',
+    location: 'l.name',
+    method: 'te.clock_in_method',
+    status: 'te.status',
+  },
+  expenses: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    date: 'ec.expense_date',
+    description: 'ec.description',
+    category: 'ec.category',
+    amount: 'ec.amount',
+    status: 'ec.status',
+    approved_by: "u.first_name || ' ' || u.last_name",
+    receipt_attached: 'ec.receipt_url IS NOT NULL',
+  },
+  payroll: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    period: "pr.pay_period_start || ' - ' || pr.pay_period_end",
+    gross_pay: 'ps.gross_pay',
+    tax: 'ps.total_tax',
+    ni: 'ps.total_ni',
+    pension: 'ps.total_pension',
+    net_pay: 'ps.net_pay',
+    employer_ni: 'ps.employer_ni',
+    employer_pension: 'ps.employer_pension',
+    total_cost: 'ps.gross_pay + ps.employer_ni + ps.employer_pension',
+  },
+  skills: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    skill_name: 's.name',
+    level: 'es.level',
+    verified: 'es.verified',
+    verified_by: "vu.first_name || ' ' || vu.last_name",
+    expiry_date: 'es.expiry_date',
+    status: "CASE WHEN es.expiry_date < NOW() THEN 'expired' WHEN es.verified THEN 'verified' ELSE 'pending' END",
+  },
+  performance: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    review_cycle: 'rc.name',
+    score: 'pr.overall_score',
+    reviewer: "rv.first_name || ' ' || rv.last_name",
+    goals_completed: "(SELECT COUNT(*) FROM performance_goals pg WHERE pg.employee_id = e.id AND pg.status = 'completed')",
+    goals_total: '(SELECT COUNT(*) FROM performance_goals pg WHERE pg.employee_id = e.id)',
+  },
+  time_off: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    type: 'top.name',
+    start_date: 'tor.start_date',
+    end_date: 'tor.end_date',
+    days: 'tor.total_days',
+    status: 'tor.status',
+    approved_by: "u.first_name || ' ' || u.last_name",
+  },
+  training: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    course_name: 'lc.title',
+    status: 'le.status',
+    completion_date: 'le.completed_at',
+    score: 'le.score',
+    mandatory: 'lc.is_mandatory',
+  },
+  shifts: {
+    employee_name: "e.first_name || ' ' || e.last_name",
+    date: 's.date',
+    start_time: 's.start_time',
+    end_time: 's.end_time',
+    location: 'l.name',
+    role: 'r.name',
+    status: 's.status',
+    actual_start: 'te.clock_in',
+    actual_end: 'te.clock_out',
+  },
+};
+
+// Base queries for each data source
+const BASE_QUERIES = {
+  employees: `
+    FROM employees e
+    LEFT JOIN departments d ON d.id = e.department_id
+    LEFT JOIN locations l ON l.id = e.primary_location_id
+    LEFT JOIN roles r ON r.id = e.primary_role_id
+    LEFT JOIN employees m ON m.id = e.manager_id
+    WHERE e.organization_id = $1 AND e.status != 'terminated'
+  `,
+  time_entries: `
+    FROM time_entries te
+    JOIN employees e ON e.id = te.employee_id
+    LEFT JOIN locations l ON l.id = te.location_id
+    WHERE te.organization_id = $1
+  `,
+  expenses: `
+    FROM expense_claims ec
+    JOIN employees e ON e.id = ec.employee_id
+    LEFT JOIN users u ON u.id = ec.reviewed_by
+    WHERE ec.organization_id = $1
+  `,
+  payroll: `
+    FROM payslips ps
+    JOIN payroll_runs pr ON pr.id = ps.payroll_run_id
+    JOIN employees e ON e.id = ps.employee_id
+    WHERE pr.organization_id = $1
+  `,
+  skills: `
+    FROM employee_skills es
+    JOIN employees e ON e.id = es.employee_id
+    JOIN skills s ON s.id = es.skill_id
+    LEFT JOIN users vu ON vu.id = es.verified_by
+    WHERE e.organization_id = $1
+  `,
+  performance: `
+    FROM performance_reviews pr
+    JOIN employees e ON e.id = pr.employee_id
+    JOIN review_cycles rc ON rc.id = pr.cycle_id
+    LEFT JOIN users rv ON rv.id = pr.reviewer_id
+    WHERE e.organization_id = $1
+  `,
+  time_off: `
+    FROM time_off_requests tor
+    JOIN employees e ON e.id = tor.employee_id
+    JOIN time_off_policies top ON top.id = tor.policy_id
+    LEFT JOIN users u ON u.id = tor.reviewed_by
+    WHERE tor.organization_id = $1
+  `,
+  training: `
+    FROM learning_enrollments le
+    JOIN learning_courses lc ON lc.id = le.course_id
+    JOIN employees e ON e.id = le.employee_id
+    WHERE e.organization_id = $1
+  `,
+  shifts: `
+    FROM shifts s
+    JOIN employees e ON e.id = s.employee_id
+    LEFT JOIN locations l ON l.id = s.location_id
+    LEFT JOIN roles r ON r.id = s.role_id
+    LEFT JOIN time_entries te ON te.shift_id = s.id
+    WHERE s.organization_id = $1
+  `,
+};
+
+// Run custom report
+router.post('/custom/run', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { data_source, columns, filters, group_by, visualization } = req.body;
+
+    if (!data_source || !ALLOWED_COLUMNS[data_source]) {
+      return res.status(400).json({ error: 'Invalid data source' });
+    }
+
+    if (!columns || !Array.isArray(columns) || columns.length === 0) {
+      return res.status(400).json({ error: 'At least one column required' });
+    }
+
+    const allowedCols = ALLOWED_COLUMNS[data_source];
+
+    // Validate all columns are allowed
+    for (const col of columns) {
+      if (!allowedCols[col]) {
+        return res.status(400).json({ error: `Invalid column: ${col}` });
+      }
+    }
+
+    // Build SELECT clause
+    const selectClauses = columns.map(col => `${allowedCols[col]} AS "${col}"`);
+    const baseQuery = BASE_QUERIES[data_source];
+    const params = [organizationId];
+    let paramIndex = 2;
+
+    let whereClause = '';
+
+    // Date filters
+    if (filters?.date_start) {
+      const dateCol = data_source === 'employees' ? 'e.start_date' :
+                      data_source === 'time_entries' ? 'te.clock_in' :
+                      data_source === 'expenses' ? 'ec.expense_date' :
+                      data_source === 'time_off' ? 'tor.start_date' :
+                      data_source === 'shifts' ? 's.date' : null;
+      if (dateCol) {
+        whereClause += ` AND ${dateCol} >= $${paramIndex++}`;
+        params.push(filters.date_start);
+      }
+    }
+    if (filters?.date_end) {
+      const dateCol = data_source === 'employees' ? 'e.start_date' :
+                      data_source === 'time_entries' ? 'te.clock_in' :
+                      data_source === 'expenses' ? 'ec.expense_date' :
+                      data_source === 'time_off' ? 'tor.end_date' :
+                      data_source === 'shifts' ? 's.date' : null;
+      if (dateCol) {
+        whereClause += ` AND ${dateCol} <= $${paramIndex++}`;
+        params.push(filters.date_end);
+      }
+    }
+
+    const query = `SELECT ${selectClauses.join(', ')} ${baseQuery} ${whereClause} LIMIT 1000`;
+
+    const result = await db.query(query, params);
+
+    res.json({
+      data: result.rows,
+      columns,
+      row_count: result.rows.length,
+      visualization,
+    });
+  } catch (error) {
+    console.error('Custom report run error:', error);
+    res.status(500).json({ error: 'Failed to run report' });
+  }
+});
+
+// Save custom report
+router.post('/custom/save', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId, userId } = req.user;
+    const { name, description, config } = req.body;
+
+    if (!name || !config) {
+      return res.status(400).json({ error: 'name and config required' });
+    }
+
+    // Check if custom_reports table exists, create if not
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS custom_reports (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        organization_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        config JSONB NOT NULL,
+        created_by UUID REFERENCES users(id),
+        created_at TIMESTAMPTZ DEFAULT NOW(),
+        updated_at TIMESTAMPTZ DEFAULT NOW(),
+        last_run_at TIMESTAMPTZ,
+        schedule JSONB
+      )
+    `);
+
+    const result = await db.query(
+      `INSERT INTO custom_reports (organization_id, name, description, config, created_by)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING *`,
+      [organizationId, name, description || null, JSON.stringify(config), userId]
+    );
+
+    res.status(201).json({ report: result.rows[0] });
+  } catch (error) {
+    console.error('Custom report save error:', error);
+    res.status(500).json({ error: 'Failed to save report' });
+  }
+});
+
+// List saved custom reports
+router.get('/custom', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+
+    // Check if table exists first
+    const tableExists = await db.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables
+        WHERE table_name = 'custom_reports'
+      ) as exists
+    `);
+
+    if (!tableExists.rows[0].exists) {
+      return res.json({ reports: [] });
+    }
+
+    const result = await db.query(
+      `SELECT * FROM custom_reports WHERE organization_id = $1 ORDER BY created_at DESC`,
+      [organizationId]
+    );
+
+    res.json({ reports: result.rows });
+  } catch (error) {
+    console.error('Custom reports list error:', error);
+    res.status(500).json({ error: 'Failed to list reports' });
+  }
+});
+
+// Get single custom report
+router.get('/custom/:id', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { id } = req.params;
+
+    const result = await db.query(
+      `SELECT * FROM custom_reports WHERE id = $1 AND organization_id = $2`,
+      [id, organizationId]
+    );
+
+    if (!result.rows[0]) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+
+    res.json({ report: result.rows[0] });
+  } catch (error) {
+    console.error('Custom report get error:', error);
+    res.status(500).json({ error: 'Failed to get report' });
+  }
+});
+
+// Update custom report
+router.put('/custom/:id', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { id } = req.params;
+    const { name, description, config } = req.body;
+
+    const result = await db.query(
+      `UPDATE custom_reports SET name = COALESCE($3, name), description = COALESCE($4, description),
+       config = COALESCE($5, config), updated_at = NOW()
+       WHERE id = $1 AND organization_id = $2
+       RETURNING *`,
+      [id, organizationId, name, description, config ? JSON.stringify(config) : null]
+    );
+
+    if (!result.rows[0]) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+
+    res.json({ report: result.rows[0] });
+  } catch (error) {
+    console.error('Custom report update error:', error);
+    res.status(500).json({ error: 'Failed to update report' });
+  }
+});
+
+// Delete custom report
+router.delete('/custom/:id', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { id } = req.params;
+
+    const result = await db.query(
+      `DELETE FROM custom_reports WHERE id = $1 AND organization_id = $2 RETURNING id`,
+      [id, organizationId]
+    );
+
+    if (!result.rows[0]) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Custom report delete error:', error);
+    res.status(500).json({ error: 'Failed to delete report' });
+  }
+});
+
+// Export custom report
+router.post('/custom/export', requireRole(['admin', 'manager']), async (req, res) => {
+  try {
+    const { organizationId } = req.user;
+    const { data_source, columns, filters, format = 'csv' } = req.body;
+
+    // Reuse the run logic
+    if (!data_source || !ALLOWED_COLUMNS[data_source]) {
+      return res.status(400).json({ error: 'Invalid data source' });
+    }
+
+    const allowedCols = ALLOWED_COLUMNS[data_source];
+    for (const col of columns) {
+      if (!allowedCols[col]) {
+        return res.status(400).json({ error: `Invalid column: ${col}` });
+      }
+    }
+
+    const selectClauses = columns.map(col => `${allowedCols[col]} AS "${col}"`);
+    const baseQuery = BASE_QUERIES[data_source];
+    const params = [organizationId];
+
+    const query = `SELECT ${selectClauses.join(', ')} ${baseQuery}`;
+    const result = await db.query(query, params);
+
+    if (format === 'csv') {
+      const headers = columns.join(',');
+      const rows = result.rows.map(row =>
+        columns.map(col => {
+          const val = row[col];
+          if (val === null || val === undefined) return '';
+          if (typeof val === 'string' && val.includes(',')) return `"${val}"`;
+          return val;
+        }).join(',')
+      );
+      const csv = [headers, ...rows].join('\n');
+
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="report.csv"');
+      res.send(csv);
+    } else {
+      res.json({ data: result.rows, columns });
+    }
+  } catch (error) {
+    console.error('Custom report export error:', error);
+    res.status(500).json({ error: 'Failed to export report' });
+  }
+});
+
 export default router;

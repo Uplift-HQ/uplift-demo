@@ -29,7 +29,7 @@ import usersRoutes from './routes/users.js';
 import skillsRoutes from './routes/skills.js';
 import operationsRoutes from './routes/operations.js';
 import utilitiesRoutes from './routes/utilities.js';
-import billingRoutes from './routes/billing.js';
+import billingRoutes, { stripeWebhookHandler } from './routes/billing.js';
 import adminRoutes from './routes/admin.js';
 import opsRoutes from './routes/ops.js';
 import licenseRoutes from './routes/licenses.js';
@@ -61,6 +61,9 @@ import reportsRoutes from './routes/reports.js';
 import migrationsRoutes from './routes/migrations.js';
 import corporateCardsRoutes from './routes/corporateCards.js';
 import momentumRoutes from './routes/momentum.js';
+import tasksRoutes from './routes/tasks.js';
+import kioskRoutes from './routes/kiosk.js';
+import contractsRoutes from './routes/contracts.js';
 
 // Middleware
 import { 
@@ -91,6 +94,9 @@ import { configuredTimeout } from './middleware/timeout.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Trust proxy (Railway, Render, etc.) - needed for rate limiting to see real client IPs
+app.set('trust proxy', 1);
 
 // -------------------- MIDDLEWARE --------------------
 
@@ -343,6 +349,11 @@ app.use('/api/ops/licenses', apiLimiter, licenseRoutes);
 // Must be before /api catch-all routes
 app.use('/api/migrations', apiLimiter, migrationsRoutes);
 
+// Stripe webhook - MUST be before coreRoutes (which has authMiddleware)
+// Stripe authenticates via signature header, not Bearer token
+// Raw body parsing is configured at line 155
+app.post('/api/billing/webhooks/stripe', stripeWebhookHandler);
+
 // Core routes (employees, locations, departments, roles, skills)
 app.use('/api', apiLimiter, csrfProtection, coreRoutes);
 
@@ -365,7 +376,7 @@ app.use('/api', apiLimiter, csrfProtection, operationsRoutes);
 app.use('/api', apiLimiter, csrfProtection, utilitiesRoutes);
 
 // Billing routes (subscriptions, seats, invoices)
-// Note: Stripe webhook has its own raw body parsing, mounted separately
+// Note: Stripe webhook is mounted BEFORE coreRoutes (around line 351) to bypass auth
 app.use('/api/billing', apiLimiter, csrfProtection, billingRoutes);
 
 // Admin routes (Uplift backoffice - superadmin only)
@@ -413,6 +424,16 @@ app.use('/api/payroll', apiLimiter, csrfProtection, payrollRoutes);
 
 // Surveys routes (engagement, pulse, eNPS, lifecycle)
 app.use('/api/surveys', apiLimiter, csrfProtection, surveysRoutes);
+
+// Tasks routes (personal and team task management)
+app.use('/api/tasks', apiLimiter, csrfProtection, tasksRoutes);
+
+// Kiosk routes (clock-in kiosk management + kiosk device endpoints)
+// Note: Kiosk device endpoints use X-Kiosk-Key auth, not JWT
+app.use('/api/kiosk', apiLimiter, kioskRoutes);
+
+// Contracts routes (templates + document chasing)
+app.use('/api/contracts', apiLimiter, csrfProtection, contractsRoutes);
 
 // Reports routes (10 HR analytics reports)
 app.use('/api/reports', apiLimiter, csrfProtection, reportsRoutes);

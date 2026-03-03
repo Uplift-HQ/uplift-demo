@@ -28,6 +28,7 @@ import { useToast } from '../components/ToastProvider';
 const TABS = [
   { id: 'organization', nameKey: 'settings.organization', label: 'Organization', icon: Building, adminOnly: true },
   { id: 'branding', nameKey: 'settings.brandingLabel', label: 'Branding', icon: Crown, adminOnly: true },
+  { id: 'time-attendance', nameKey: 'settings.timeAttendance', label: 'Time & Attendance', icon: Clock, adminOnly: true },
   { id: 'feature-flags', nameKey: 'settings.featureFlagsLabel', label: 'Feature Flags', icon: Flag, adminOnly: true },
   { id: 'notifications-config', nameKey: 'settings.notificationsLabel', label: 'Notifications', icon: BellRing, adminOnly: true },
   { id: 'navigation', nameKey: 'settings.navigation', label: 'Navigation', icon: Globe, adminOnly: true },
@@ -203,6 +204,9 @@ export default function Settings() {
               )}
               {activeTab === 'roles' && isAdmin && (
                 <RolesSettings showMsg={showMsg} />
+              )}
+              {activeTab === 'time-attendance' && isAdmin && (
+                <TimeAttendanceSettings showMsg={showMsg} />
               )}
             </>
           )}
@@ -480,9 +484,9 @@ function BrandingSettings({ organization, showMsg }) {
               { icon: Crown, label: t('settings.branding.loginScreen', 'Login Screen') },
               { icon: Globe, label: t('settings.branding.customFavicon', 'Custom Favicon') },
             ].map(item => (
-              <div key={t('settings.items.' + item.key, item.label)} className="flex flex-col items-center gap-1.5 p-3 bg-white/70 rounded-lg">
+              <div key={item.label} className="flex flex-col items-center gap-1.5 p-3 bg-white/70 rounded-lg">
                 <item.icon className="w-5 h-5 text-orange-500" />
-                <span className="text-xs font-medium text-slate-700">{t('settings.items.' + item.key, item.label)}</span>
+                <span className="text-xs font-medium text-slate-700">{item.label}</span>
               </div>
             ))}
           </div>
@@ -1668,8 +1672,8 @@ function WebhooksSettings({ showMsg }) {
         <h3 className="font-medium text-slate-900 mb-4">{t('settings.availableEventTypes', 'Available Event Types')}</h3>
         <div className="grid grid-cols-2 gap-4">
           {eventTypes.map((cat) => (
-            <div key={t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)} className="p-4 bg-slate-50 rounded-lg">
-              <h4 className="font-medium text-slate-700 mb-2">{t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)}</h4>
+            <div key={cat.category} className="p-4 bg-slate-50 rounded-lg">
+              <h4 className="font-medium text-slate-700 mb-2">{cat.category}</h4>
               <div className="space-y-1">
                 {cat.events.map((event) => (
                   <div key={event} className="text-sm font-mono text-slate-600">{event}</div>
@@ -1787,8 +1791,8 @@ function AddWebhookModal({ onClose, onSuccess, eventTypes }) {
             <label className="block text-sm font-medium text-slate-700 mb-2">{t('settings.eventsToSubscribe', 'Events to Subscribe')} *</label>
             <div className="space-y-4 max-h-48 overflow-y-auto border border-slate-200 rounded-lg p-3">
               {eventTypes.map((cat) => (
-                <div key={t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)}>
-                  <h4 className="text-xs font-medium text-slate-500 uppercase mb-2">{t('settings.categories.' + cat.category.replace(/ /g, ''), cat.category)}</h4>
+                <div key={cat.category}>
+                  <h4 className="text-xs font-medium text-slate-500 uppercase mb-2">{cat.category}</h4>
                   <div className="flex flex-wrap gap-2">
                     {cat.events.map((event) => (
                       <button
@@ -1939,7 +1943,7 @@ function WebhookDetailModal({ webhook, onClose }) {
                         <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
                           log.status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
                         }`}>
-                          {t('common.' + log.status, log.status)}
+                          {log.status}
                         </span>
                       </td>
                       <td className="px-4 py-2 text-right text-slate-600">
@@ -2034,8 +2038,8 @@ function NavigationSettings({ showMsg }) {
         {roles.map((role) => (
           <div key={role.id} className="border border-slate-200 rounded-lg overflow-hidden">
             <div className="bg-slate-50 px-4 py-3 border-b border-slate-200">
-              <h3 className="font-medium text-slate-900">{role.nameKey ? t(role.nameKey, role.name) : role.name}</h3>
-              <p className="text-sm text-slate-500">{role.descriptionKey ? t(role.descriptionKey, role.description) : role.description}</p>
+              <h3 className="font-medium text-slate-900">{role.name}</h3>
+              <p className="text-sm text-slate-500">{role.description}</p>
             </div>
             <div className="p-4">
               <div className="grid grid-cols-2 gap-3">
@@ -2051,8 +2055,8 @@ function NavigationSettings({ showMsg }) {
                       } ${isRequired ? 'opacity-60' : ''}`}
                     >
                       <div>
-                        <p className="font-medium text-sm text-slate-900">{page.nameKey ? t(page.nameKey, page.name) : page.name}</p>
-                        <p className="text-xs text-slate-500">{page.descriptionKey ? t(page.descriptionKey, page.description) : page.description}</p>
+                        <p className="font-medium text-sm text-slate-900">{page.name}</p>
+                        <p className="text-xs text-slate-500">{page.description}</p>
                       </div>
                       <button
                         onClick={() => togglePageForRole(role.id, page.id)}
@@ -2234,7 +2238,7 @@ function EmployeeVisibilitySettings({ showMsg }) {
                       className={`w-2 h-2 rounded-full ${
                         emp.visibility?.[feature.id] ? 'bg-green-500' : 'bg-slate-200'
                       }`}
-                      title={`${feature.nameKey ? t(feature.nameKey, feature.name) : feature.name}: ${emp.visibility?.[feature.id] ? 'Enabled' : 'Disabled'}`}
+                      title={`${feature.name}: ${emp.visibility?.[feature.id] ? 'Enabled' : 'Disabled'}`}
                     />
                   ))}
                 </div>
@@ -2277,8 +2281,8 @@ function EmployeeVisibilitySettings({ showMsg }) {
                       }`}
                     >
                       <div>
-                        <p className="font-medium text-sm text-slate-900">{feature.nameKey ? t(feature.nameKey, feature.name) : feature.name}</p>
-                        <p className="text-xs text-slate-500">{feature.descriptionKey ? t(feature.descriptionKey, feature.description) : feature.description}</p>
+                        <p className="font-medium text-sm text-slate-900">{feature.name}</p>
+                        <p className="text-xs text-slate-500">{feature.description}</p>
                       </div>
                       <button
                         onClick={() => toggleVisibility(emp.id, feature.id)}
@@ -3298,7 +3302,7 @@ function RolesSettings({ showMsg }) {
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3">
-                    <h3 className="font-semibold text-slate-900">{role.nameKey ? t(role.nameKey, role.name) : role.name}</h3>
+                    <h3 className="font-semibold text-slate-900">{role.name}</h3>
                     {role.builtIn ? (
                       <span className="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600">
                         {t('settings.roles.builtIn', 'Built-in')}
@@ -3309,7 +3313,7 @@ function RolesSettings({ showMsg }) {
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-slate-500 mt-1">{role.descriptionKey ? t(role.descriptionKey, role.description) : role.description}</p>
+                  <p className="text-sm text-slate-500 mt-1">{role.description}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <Users className="w-4 h-4 text-slate-400" />
                     <span className="text-sm text-slate-600">
@@ -3322,7 +3326,7 @@ function RolesSettings({ showMsg }) {
                     {PERMISSION_MODULES.slice(0, 5).map(mod => (
                       <div key={mod.id} className="flex items-center gap-1 text-xs text-slate-500">
                         <mod.icon className="w-3 h-3" />
-                        <span>{t('settings.modules.' + mod.id, mod.label)}:</span>
+                        <span>{mod.label}:</span>
                         {getPermissionBadge(role.permissions?.[mod.id] || 'none')}
                       </div>
                     ))}
@@ -3438,7 +3442,7 @@ function RolesSettings({ showMsg }) {
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
                               <mod.icon className="w-4 h-4 text-slate-400" />
-                              <span className="font-medium text-slate-700">{t('settings.modules.' + mod.id, mod.label)}</span>
+                              <span className="font-medium text-slate-700">{mod.label}</span>
                             </div>
                           </td>
                           {PERMISSION_LEVELS.map(level => (
@@ -3729,7 +3733,7 @@ function PortalConfigSettings({ showMsg }) {
                 <th key={col.key} className="text-center px-3 py-3.5 font-semibold text-slate-700">
                   <div className="flex flex-col items-center gap-1">
                     <col.icon className="w-4 h-4 text-slate-400" />
-                    <span className="text-xs leading-tight">{t('settings.columns.' + col.id, col.label)}</span>
+                    <span className="text-xs leading-tight">{col.label}</span>
                   </div>
                 </th>
               ))}
@@ -4103,6 +4107,402 @@ function NotificationConfigSettings({ showMsg }) {
           {t('settings.notifConfig.infoNote', 'These are organisation-wide defaults. Individual users can adjust their own notification preferences from their account settings.')}
         </p>
       </div>
+    </div>
+  );
+}
+
+// ============================================================
+// TIME & ATTENDANCE SETTINGS
+// Clock-in methods: GPS, Kiosk, Badge, QR Code
+// ============================================================
+
+function TimeAttendanceSettings({ showMsg }) {
+  const { t } = useTranslation();
+  const toast = useToast();
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  // Clock method settings
+  const [clockMethods, setClockMethods] = useState({
+    gps: true,
+    kiosk: false,
+    badge: false,
+    qr: false,
+  });
+
+  // GPS settings
+  const [gpsSettings, setGpsSettings] = useState({
+    geofence_radius: 100,
+    require_selfie: false,
+  });
+
+  // Kiosks list
+  const [kiosks, setKiosks] = useState([]);
+  const [showCreateKiosk, setShowCreateKiosk] = useState(false);
+  const [newKioskName, setNewKioskName] = useState('');
+  const [newKioskLocation, setNewKioskLocation] = useState('');
+  const [locations, setLocations] = useState([]);
+  const [createdApiKey, setCreatedApiKey] = useState(null);
+
+  useEffect(() => {
+    loadSettings();
+    loadKiosks();
+    loadLocations();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      const result = await api.get('/kiosk/settings');
+      if (result.clock_methods) setClockMethods(result.clock_methods);
+      if (result.gps_settings) setGpsSettings(result.gps_settings);
+    } catch (error) {
+      // Defaults are fine
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadKiosks = async () => {
+    try {
+      const result = await api.get('/kiosk/list');
+      setKiosks(result.kiosks || []);
+    } catch (error) {
+      // No kiosks yet
+    }
+  };
+
+  const loadLocations = async () => {
+    try {
+      const result = await api.get('/locations');
+      setLocations(result.locations || []);
+    } catch (error) {
+      // No locations
+    }
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await api.put('/kiosk/settings', {
+        clock_methods: clockMethods,
+        gps_settings: gpsSettings,
+      });
+      showMsg(t('settings.timeAttendance.saved', 'Time & Attendance settings saved'));
+    } catch (error) {
+      toast.error(t('settings.timeAttendance.saveError', 'Failed to save settings'));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleCreateKiosk = async () => {
+    if (!newKioskName.trim()) return;
+    try {
+      const result = await api.post('/kiosk/create', {
+        name: newKioskName.trim(),
+        location_id: newKioskLocation || null,
+      });
+      setCreatedApiKey(result.api_key);
+      setKiosks([result.kiosk, ...kiosks]);
+      setNewKioskName('');
+      setNewKioskLocation('');
+    } catch (error) {
+      toast.error(error.message || 'Failed to create kiosk');
+    }
+  };
+
+  const handleDeleteKiosk = async (id) => {
+    if (!window.confirm(t('settings.timeAttendance.confirmDelete', 'Are you sure you want to delete this kiosk?'))) return;
+    try {
+      await api.delete(`/kiosk/${id}`);
+      setKiosks(kiosks.filter(k => k.id !== id));
+      showMsg(t('settings.timeAttendance.kioskDeleted', 'Kiosk deleted'));
+    } catch (error) {
+      toast.error('Failed to delete kiosk');
+    }
+  };
+
+  const handleToggleKiosk = async (id, isActive) => {
+    try {
+      await api.patch(`/kiosk/${id}`, { is_active: !isActive });
+      setKiosks(kiosks.map(k => k.id === id ? { ...k, is_active: !isActive } : k));
+    } catch (error) {
+      toast.error('Failed to update kiosk');
+    }
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    toast.success(t('common.copied', 'Copied to clipboard'));
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="w-8 h-8 animate-spin text-momentum-500" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-lg font-semibold text-slate-900">{t('settings.timeAttendance.title', 'Time & Attendance')}</h2>
+        <p className="text-sm text-slate-600">{t('settings.timeAttendance.desc', 'Configure how employees clock in and out')}</p>
+      </div>
+
+      {/* Clock-in Methods */}
+      <div className="space-y-4">
+        <h3 className="text-md font-medium text-slate-800">{t('settings.timeAttendance.clockMethods', 'Clock-in Methods')}</h3>
+        <div className="grid gap-4">
+          {/* GPS Geofencing */}
+          <div className="border border-slate-200 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <Globe className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">{t('settings.timeAttendance.gps', 'GPS Geofencing')}</p>
+                  <p className="text-sm text-slate-500">{t('settings.timeAttendance.gpsDesc', 'Employees clock in via mobile app with location verification')}</p>
+                </div>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={clockMethods.gps}
+                  onChange={(e) => setClockMethods({ ...clockMethods, gps: e.target.checked })}
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-momentum-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+              </label>
+            </div>
+            {clockMethods.gps && (
+              <div className="pl-13 pt-3 border-t border-slate-100 grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.timeAttendance.geofenceRadius', 'Geofence Radius (metres)')}</label>
+                  <input
+                    type="number"
+                    value={gpsSettings.geofence_radius}
+                    onChange={(e) => setGpsSettings({ ...gpsSettings, geofence_radius: parseInt(e.target.value) || 100 })}
+                    className="input w-full"
+                    min="10"
+                    max="5000"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.timeAttendance.requireSelfie', 'Require Selfie')}</label>
+                  <select
+                    value={gpsSettings.require_selfie ? 'yes' : 'no'}
+                    onChange={(e) => setGpsSettings({ ...gpsSettings, require_selfie: e.target.value === 'yes' })}
+                    className="input w-full"
+                  >
+                    <option value="no">{t('common.no', 'No')}</option>
+                    <option value="yes">{t('common.yes', 'Yes')}</option>
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Kiosk / Tablet */}
+          <div className="border border-slate-200 rounded-lg p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                  <Monitor className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">{t('settings.timeAttendance.kiosk', 'Kiosk / Tablet')}</p>
+                  <p className="text-sm text-slate-500">{t('settings.timeAttendance.kioskDesc', 'Shared device at workplace for employee clock-in')}</p>
+                </div>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={clockMethods.kiosk}
+                  onChange={(e) => setClockMethods({ ...clockMethods, kiosk: e.target.checked })}
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-momentum-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+              </label>
+            </div>
+          </div>
+
+          {/* Employee Badge */}
+          <div className="border border-slate-200 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <Key className="w-5 h-5 text-purple-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">{t('settings.timeAttendance.badge', 'Employee Badge / Card')}</p>
+                  <p className="text-sm text-slate-500">{t('settings.timeAttendance.badgeDesc', 'Badge readers input to kiosk via keyboard emulation')}</p>
+                </div>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={clockMethods.badge}
+                  onChange={(e) => setClockMethods({ ...clockMethods, badge: e.target.checked })}
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-momentum-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+              </label>
+            </div>
+            {clockMethods.badge && (
+              <p className="text-xs text-slate-500 pl-13">{t('settings.timeAttendance.badgeInfo', 'Badge readers work as keyboard input devices. The kiosk input field accepts badge scans automatically.')}</p>
+            )}
+          </div>
+
+          {/* QR Code */}
+          <div className="border border-slate-200 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-orange-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">{t('settings.timeAttendance.qr', 'QR Code Scan')}</p>
+                  <p className="text-sm text-slate-500">{t('settings.timeAttendance.qrDesc', 'Employees scan QR code with phone or show personal QR badge')}</p>
+                </div>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={clockMethods.qr}
+                  onChange={(e) => setClockMethods({ ...clockMethods, qr: e.target.checked })}
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-momentum-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+              </label>
+            </div>
+            {clockMethods.qr && (
+              <p className="text-xs text-slate-500 pl-13">{t('settings.timeAttendance.qrInfo', 'Generate QR codes from employee profiles or location pages.')}</p>
+            )}
+          </div>
+        </div>
+
+        <button onClick={handleSave} disabled={saving} className="btn btn-primary">
+          <Save className="w-4 h-4" />
+          {saving ? t('common.saving', 'Saving...') : t('common.saveChanges', 'Save Changes')}
+        </button>
+      </div>
+
+      {/* Kiosk Management */}
+      {clockMethods.kiosk && (
+        <div className="space-y-4 pt-6 border-t border-slate-200">
+          <div className="flex items-center justify-between">
+            <h3 className="text-md font-medium text-slate-800">{t('settings.timeAttendance.kiosks', 'Registered Kiosks')}</h3>
+            <button
+              onClick={() => setShowCreateKiosk(true)}
+              className="btn btn-secondary"
+            >
+              <Plus className="w-4 h-4" />
+              {t('settings.timeAttendance.addKiosk', 'Add Kiosk')}
+            </button>
+          </div>
+
+          {/* Create Kiosk Form */}
+          {showCreateKiosk && (
+            <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-4">
+              <h4 className="font-medium text-slate-900">{t('settings.timeAttendance.newKiosk', 'New Kiosk')}</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.timeAttendance.kioskName', 'Kiosk Name')}</label>
+                  <input
+                    type="text"
+                    value={newKioskName}
+                    onChange={(e) => setNewKioskName(e.target.value)}
+                    placeholder="e.g. Front Desk Tablet"
+                    className="input w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.timeAttendance.location', 'Location (optional)')}</label>
+                  <select
+                    value={newKioskLocation}
+                    onChange={(e) => setNewKioskLocation(e.target.value)}
+                    className="input w-full"
+                  >
+                    <option value="">{t('settings.timeAttendance.allLocations', 'All Locations')}</option>
+                    {locations.map(loc => (
+                      <option key={loc.id} value={loc.id}>{loc.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={handleCreateKiosk} className="btn btn-primary">
+                  {t('common.create', 'Create')}
+                </button>
+                <button onClick={() => { setShowCreateKiosk(false); setCreatedApiKey(null); }} className="btn btn-ghost">
+                  {t('common.cancel', 'Cancel')}
+                </button>
+              </div>
+
+              {/* Show API Key after creation */}
+              {createdApiKey && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                  <p className="text-sm font-medium text-green-800 mb-2">{t('settings.timeAttendance.apiKeyCreated', 'Kiosk API Key Created')}</p>
+                  <p className="text-xs text-green-600 mb-2">{t('settings.timeAttendance.apiKeyWarning', 'Save this key now - it will not be shown again!')}</p>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 bg-white border border-green-300 rounded px-3 py-2 text-sm font-mono break-all">{createdApiKey}</code>
+                    <button onClick={() => copyToClipboard(createdApiKey)} className="btn btn-secondary">
+                      <Copy className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-xs text-green-600 mt-2">{t('settings.timeAttendance.kioskUrl', 'Kiosk URL')}: <code>{window.location.origin}/kiosk</code></p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Kiosks List */}
+          {kiosks.length === 0 ? (
+            <div className="text-center py-8 text-slate-500">
+              <Monitor className="w-12 h-12 mx-auto mb-3 text-slate-300" />
+              <p>{t('settings.timeAttendance.noKiosks', 'No kiosks registered yet')}</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {kiosks.map(kiosk => (
+                <div key={kiosk.id} className="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-2 h-2 rounded-full ${kiosk.is_active ? 'bg-green-500' : 'bg-slate-300'}`} />
+                    <div>
+                      <p className="font-medium text-slate-900">{kiosk.name}</p>
+                      <p className="text-sm text-slate-500">
+                        {kiosk.location_name || t('settings.timeAttendance.allLocations', 'All Locations')}
+                        {kiosk.last_seen_at && (
+                          <span className="ml-2 text-xs text-slate-400">
+                            {t('settings.timeAttendance.lastSeen', 'Last seen')}: {new Date(kiosk.last_seen_at).toLocaleString()}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleToggleKiosk(kiosk.id, kiosk.is_active)}
+                      className={`px-3 py-1 rounded text-sm ${kiosk.is_active ? 'bg-slate-100 text-slate-600' : 'bg-green-100 text-green-600'}`}
+                    >
+                      {kiosk.is_active ? t('common.disable', 'Disable') : t('common.enable', 'Enable')}
+                    </button>
+                    <button
+                      onClick={() => handleDeleteKiosk(kiosk.id)}
+                      className="p-1 text-red-500 hover:bg-red-50 rounded"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

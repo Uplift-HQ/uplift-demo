@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { db } from '../lib/database.js';
 import { authMiddleware, requireRole, validate } from '../middleware/index.js';
 import ocrService from '../services/ocr.js';
+import { notificationService } from '../services/notifications.js';
 import {
   createExpenseSchema,
   updateExpenseSchema,
@@ -600,7 +601,34 @@ router.post('/claims/:id/approve', requireRole(['admin', 'manager']), async (req
       return res.status(404).json({ error: 'Expense not found or already processed' });
     }
 
-    res.json({ expense: result.rows[0] });
+    const expense = result.rows[0];
+
+    // Get employee's user_id for notification
+    const empResult = await db.query(
+      `SELECT user_id FROM employees WHERE id = $1`,
+      [expense.employee_id]
+    );
+
+    if (empResult.rows.length > 0 && empResult.rows[0].user_id) {
+      // Send notification to employee
+      const amount = new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: expense.currency || 'GBP'
+      }).format(expense.amount);
+
+      await notificationService.send({
+        userId: empResult.rows[0].user_id,
+        organizationId,
+        type: 'expense_approved',
+        title: 'Expense Approved',
+        body: `Your expense claim for ${amount} has been approved.`,
+        relatedType: 'expense',
+        relatedId: expense.id,
+        actionUrl: '/expenses',
+      });
+    }
+
+    res.json({ expense });
   } catch (error) {
     console.error('Failed to approve expense:', error);
     res.status(500).json({ error: 'Failed to approve expense' });
@@ -632,7 +660,34 @@ router.post('/claims/:id/reject', requireRole(['admin', 'manager']), async (req,
       return res.status(404).json({ error: 'Expense not found or already processed' });
     }
 
-    res.json({ expense: result.rows[0] });
+    const expense = result.rows[0];
+
+    // Get employee's user_id for notification
+    const empResult = await db.query(
+      `SELECT user_id FROM employees WHERE id = $1`,
+      [expense.employee_id]
+    );
+
+    if (empResult.rows.length > 0 && empResult.rows[0].user_id) {
+      // Send notification to employee
+      const amount = new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: expense.currency || 'GBP'
+      }).format(expense.amount);
+
+      await notificationService.send({
+        userId: empResult.rows[0].user_id,
+        organizationId,
+        type: 'expense_rejected',
+        title: 'Expense Declined',
+        body: `Your expense claim for ${amount} was declined: ${reason}`,
+        relatedType: 'expense',
+        relatedId: expense.id,
+        actionUrl: '/expenses',
+      });
+    }
+
+    res.json({ expense });
   } catch (error) {
     console.error('Failed to reject expense:', error);
     res.status(500).json({ error: 'Failed to reject expense' });
@@ -660,7 +715,33 @@ router.post('/claims/:id/paid', requireRole(['admin']), async (req, res) => {
       return res.status(404).json({ error: 'Expense not found or not approved' });
     }
 
-    res.json({ expense: result.rows[0] });
+    const expense = result.rows[0];
+
+    // Get employee's user_id for notification
+    const empResult = await db.query(
+      `SELECT user_id FROM employees WHERE id = $1`,
+      [expense.employee_id]
+    );
+
+    if (empResult.rows.length > 0 && empResult.rows[0].user_id) {
+      const amount = new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: expense.currency || 'GBP'
+      }).format(expense.amount);
+
+      await notificationService.send({
+        userId: empResult.rows[0].user_id,
+        organizationId,
+        type: 'expense_paid',
+        title: 'Expense Reimbursed',
+        body: `Your expense claim for ${amount} has been paid.`,
+        relatedType: 'expense',
+        relatedId: expense.id,
+        actionUrl: '/expenses',
+      });
+    }
+
+    res.json({ expense });
   } catch (error) {
     console.error('Failed to mark as paid:', error);
     res.status(500).json({ error: 'Failed to mark as paid' });

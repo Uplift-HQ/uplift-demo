@@ -89,7 +89,10 @@ router.get('/time/status', async (req, res) => {
 // Clock in (supports offline sync with idempotency)
 router.post('/time/clock-in', idempotencyMiddleware, async (req, res) => {
   const { organizationId, employeeId } = req.user;
-  const { shiftId, locationId, location, photo, offlineTimestamp } = req.body;
+  const { shiftId, locationId, location, photo, offlineTimestamp, method, badge_id } = req.body;
+
+  // Default method is 'gps' for backwards compatibility
+  const clockMethod = method || 'gps';
 
   if (!employeeId) {
     return res.status(400).json({ error: 'No employee linked to user' });
@@ -140,10 +143,10 @@ router.post('/time/clock-in', idempotencyMiddleware, async (req, res) => {
   const result = await db.query(
     `INSERT INTO time_entries (
       organization_id, employee_id, shift_id, location_id,
-      clock_in, clock_in_location
-    ) VALUES ($1, $2, $3, $4, NOW(), $5)
+      clock_in, clock_in_location, clock_in_method, badge_id
+    ) VALUES ($1, $2, $3, $4, NOW(), $5, $6, $7)
     RETURNING *`,
-    [organizationId, employeeId, shiftId, actualLocationId, JSON.stringify(location)]
+    [organizationId, employeeId, shiftId, actualLocationId, JSON.stringify(location), clockMethod, badge_id || null]
   );
 
   // Update shift status if linked

@@ -252,7 +252,7 @@ router.patch('/employees/:id', requireRole(['admin', 'manager']), async (req, re
     'department_id', 'primary_role_id', 'primary_location_id', 'manager_id',
     'location_ids', 'role_ids', 'hourly_rate', 'contracted_hours_per_week',
     'availability', 'emergency_contact_name', 'emergency_contact_phone',
-    'status', 'custom_fields'
+    'status', 'custom_fields', 'badge_id'
   ];
 
   const setClauses = [];

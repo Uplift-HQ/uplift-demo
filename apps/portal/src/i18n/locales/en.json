@@ -292,54 +292,7 @@
       "high": "High",
       "medium": "Medium",
       "low": "Low"
-    },
-    "draft": "Draft",
-    "scheduled": "Scheduled",
-    "cancelled": "Cancelled",
-    "overdue": "Overdue",
-    "paid": "Paid",
-    "unpaid": "Unpaid",
-    "submitted": "Submitted",
-    "review": "In Review",
-    "inReview": "In Review",
-    "in_review": "In Review",
-    "open": "Open",
-    "closed": "Closed",
-    "on_track": "On Track",
-    "onTrack": "On Track",
-    "at_risk": "At Risk",
-    "atRisk": "At Risk",
-    "in_progress": "In Progress",
-    "inProgress": "In Progress",
-    "not_started": "Not Started",
-    "notStarted": "Not Started",
-    "published": "Published",
-    "connected": "Connected",
-    "disconnected": "Disconnected",
-    "outstanding": "Outstanding",
-    "returned": "Returned",
-    "available": "Available",
-    "unavailable": "Unavailable",
-    "awaiting": "Awaiting",
-    "reminded": "Reminded",
-    "partial": "Partial",
-    "full": "Full",
-    "low": "Low",
-    "medium": "Medium",
-    "high": "High",
-    "urgent": "Urgent",
-    "fullTime": "Full-time",
-    "partTime": "Part-time",
-    "contract": "Contract",
-    "temporary": "Temporary",
-    "intern": "Intern",
-    "travel": "Travel",
-    "meals": "Meals",
-    "accommodation": "Accommodation",
-    "equipment": "Equipment",
-    "mileage": "Mileage",
-    "training": "Training",
-    "other": "Other"
+    }
   },
   "auth": {
     "login": "Log In",
@@ -3081,6 +3034,7 @@
     "reading": "Reading",
     "otherAction": "Other",
     "addAction": "+ Add Action",
+    "schedule1on1": "Schedule 1-on-1",
     "type360": "360-Degree",
     "type": "Type",
     "addKeyResult": "+ Add Key Result",
@@ -3352,6 +3306,7 @@
     "markMandatory": "Mark as mandatory",
     "description": "Description",
     "descriptionPlaceholder": "Describe the course content and objectives...",
+    "pathTitle": "Path Title",
     "pathTitlePlaceholder": "e.g., New Starter Onboarding",
     "pathDescPlaceholder": "Describe what this learning path covers...",
     "selectCourses": "Select Courses",
@@ -3374,15 +3329,7 @@
     "resultsAndAnalytics": "Results & Analytics",
     "enpsDashboard": "eNPS Dashboard",
     "lifecycleSurveys": "Lifecycle Surveys",
-    "templates": {
-      "title": "Survey Templates",
-      "subtitle": "Choose a pre-built template or create your own",
-      "createCustom": "Create Custom Template",
-      "preview": "Preview",
-      "clone": "Clone & Customize",
-      "sampleQuestions": "Sample Questions",
-      "useTemplate": "Use This Template"
-    },
+    "templates": "Templates",
     "createSurvey": "Create Survey",
     "fromTemplate": "Start from Template",
     "fromScratch": "Start from Scratch",
@@ -3677,15 +3624,14 @@
       "enabled": "Enabled",
       "responded": "responded"
     },
-    "type": {
-      "engagement": "Engagement",
-      "pulse": "Pulse",
-      "onboarding": "Onboarding",
-      "exit": "Exit",
-      "dei": "DEI",
-      "anniversary": "Anniversary",
-      "manager": "Manager",
-      "change": "Change"
+    "templates": {
+      "title": "Survey Templates",
+      "subtitle": "Choose a pre-built template or create your own",
+      "createCustom": "Create Custom Template",
+      "preview": "Preview",
+      "clone": "Clone & Customize",
+      "sampleQuestions": "Sample Questions",
+      "useTemplate": "Use This Template"
     }
   },
   "offboarding": {
@@ -3888,7 +3834,12 @@
     "charLimit": "Character limit reached",
     "sendRecognition": "Send Recognition",
     "successMessage": "Recognition sent successfully!",
-    "filters": "Filters",
+    "filters": {
+      "all": "All",
+      "received": "Received",
+      "sent": "Sent",
+      "myTeam": "My Team"
+    },
     "noRecognitions": "No recognitions to show for this filter.",
     "mostRecognised": "Most Recognised This Month",
     "mostGenerous": "Most Generous (Given)",
@@ -3924,6 +3875,7 @@
     "characters": "characters",
     "more": "more needed",
     "searchByName": "Search by name...",
+    "filters": "Filters",
     "clearFilters": "Clear all",
     "department": "Department",
     "allDepartments": "All Departments",
@@ -4090,11 +4042,13 @@
     "myPayslips": "My Payslips",
     "configuration": "Payroll Configuration",
     "config": "Configuration",
+
     "grossPay": "Gross Pay",
     "netPay": "Net Pay",
     "totalDeductions": "Total Deductions",
     "employerContributions": "Employer Contributions",
     "totalEmployerCost": "Total Employer Cost",
+
     "incomeTax": "Income Tax",
     "nationalInsurance": "National Insurance",
     "pension": "Pension",
@@ -4105,37 +4059,44 @@
     "healthInsurance": "Health Insurance",
     "unemploymentInsurance": "Unemployment Insurance",
     "housingFund": "Housing Fund",
+
     "payPeriod": "Pay Period",
     "payDate": "Pay Date",
     "taxYear": "Tax Year",
     "taxCode": "Tax Code",
     "niCategory": "NI Category",
     "employeeNumber": "Employee Number",
+
     "yearToDate": "Year to Date",
     "ytdGross": "YTD Gross",
     "ytdTax": "YTD Tax",
     "ytdNI": "YTD NI",
     "ytdPension": "YTD Pension",
     "ytdNet": "YTD Net",
+
     "basicSalary": "Basic Salary",
     "overtime": "Overtime",
     "bonus": "Bonus",
     "allowances": "Allowances",
     "commission": "Commission",
+
     "totalMonthlyCoast": "Total Monthly Cost",
     "employeesOnPayroll": "Employees on Payroll",
     "nextPayDate": "Next Pay Date",
     "outstandingActions": "Outstanding Actions",
+
     "countryBreakdown": "Country Breakdown",
     "monthlyGross": "Monthly Gross",
     "monthlyEmployerCost": "Monthly Employer Cost",
     "currency": "Currency",
     "nextRunDate": "Next Run Date",
+
     "upcomingDeadlines": "Upcoming Deadlines",
     "recentRuns": "Recent Payroll Runs",
     "preparedBy": "Prepared By",
     "reviewedBy": "Reviewed By",
     "approvedBy": "Approved By",
+
     "status": {
       "draft": "Draft",
       "calculating": "Calculating",
@@ -4146,6 +4107,7 @@
       "failed": "Failed",
       "paid": "Paid"
     },
+
     "actions": {
       "createRun": "Create Payroll Run",
       "calculate": "Calculate",
@@ -4158,6 +4120,7 @@
       "editConfig": "Edit Configuration",
       "addCountry": "Add Country"
     },
+
     "countries": {
       "uk": "United Kingdom",
       "de": "Germany",
@@ -4166,6 +4129,7 @@
       "cn": "China",
       "ae": "United Arab Emirates"
     },
+
     "calendar": {
       "taxFiling": "Tax Filing",
       "socialFiling": "Social Insurance Filing",
@@ -4173,12 +4137,14 @@
       "yearEnd": "Year End",
       "deadline": "Deadline"
     },
+
     "variance": {
       "newStarter": "New Starter",
       "leaver": "Leaver",
       "highVariance": "High Variance",
       "varianceFromLastMonth": "variance from last month"
     },
+
     "earnings": "Earnings",
     "deductions": "Deductions",
     "summary": "Summary",
@@ -4194,5 +4160,80 @@
     "feedImport": "Feed Import",
     "nativeCalculation": "Native Calculation",
     "externalProvider": "External Provider"
+  },
+
+  "contracts": {
+    "title": "Contracts",
+    "subtitle": "Manage contract templates and employee contracts",
+    "newTemplate": "New Template",
+    "issueContract": "Issue Contract",
+    "allStatus": "All Status",
+    "noContractsFound": "No contracts found",
+    "noTemplatesYet": "No templates yet",
+    "createFirstTemplate": "Create your first template",
+    "editTemplate": "Edit Template",
+    "templateName": "Template Name",
+    "contentHtml": "Content (HTML)",
+    "variablesHint": "Use variables: {{employee_name}}, {{employee_email}}, {{date}}, {{year}}",
+    "cancel": "Cancel",
+    "saveChanges": "Save Changes",
+    "createTemplate": "Create Template",
+    "selectTemplate": "Select template...",
+    "selectEmployee": "Select employee...",
+    "customName": "Custom Name (optional)",
+    "customNameHint": "Leave blank to use template name",
+    "sendToEmployee": "Send to Employee",
+    "sendReminder": "Send Reminder",
+    "draft": "Draft",
+    "sent": "Sent",
+    "viewed": "Viewed",
+    "signed": "Signed",
+    "expired": "Expired",
+    "cancelled": "Cancelled",
+    "signedOn": "Signed on",
+    "sentOn": "Sent on",
+    "draftNotSent": "Draft - not yet sent",
+    "visual": "Visual",
+    "html": "HTML"
+  },
+
+  "kiosk": {
+    "setup": "Kiosk Setup",
+    "setupDesc": "Enter your kiosk API key to connect this device",
+    "apiKeyPlaceholder": "Enter API Key",
+    "connect": "Connect",
+    "error": "Kiosk Error",
+    "tryAgain": "Try Again",
+    "enterEmployeeId": "Enter Employee ID or Scan Badge",
+    "useNumberPad": "Use the number pad or scan your badge",
+    "clear": "Clear",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "success": "Success!",
+    "clockedIn": "Clocked in at",
+    "clockedOut": "Clocked out at",
+    "employeeNotFound": "Employee not found",
+    "offlineQueued": "Offline - will sync when back online",
+    "pendingSync": "pending sync"
+  },
+
+  "customReports": {
+    "title": "Custom Report Builder",
+    "dataSource": "Data Source",
+    "columns": "Columns",
+    "filters": "Filters",
+    "groupBy": "Group By",
+    "visualization": "Visualization",
+    "selectDataSource": "Select data source",
+    "selectColumns": "Select columns to include",
+    "addFilter": "Add Filter",
+    "runReport": "Run Report",
+    "saveReport": "Save Report",
+    "exportCsv": "Export CSV",
+    "savedReports": "Saved Reports",
+    "noSavedReports": "No saved reports yet",
+    "reportName": "Report Name",
+    "table": "Table",
+    "chart": "Chart"
   }
 }

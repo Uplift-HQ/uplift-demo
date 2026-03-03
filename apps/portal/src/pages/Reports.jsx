@@ -69,6 +69,7 @@ const REPORT_DEFS = [
   { id: 'compensation', labelKey: 'reports.compensation', icon: DollarSign, color: 'green' },
   { id: 'momentum', labelKey: 'reports.momentumScores', icon: Zap, color: 'violet' },
   { id: 'engagement', labelKey: 'reports.engagement', icon: Smile, color: 'orange' },
+  { id: 'custom', labelKey: 'reports.customReports', icon: SlidersHorizontal, color: 'slate', isCustom: true },
 ];
 
 // ============================================================
@@ -907,7 +908,7 @@ function DataTable({ columns, rows, sortable = true }) {
                 onClick={() => handleSort(i)}
               >
                 <div className={`flex items-center gap-1 ${col.align === 'right' ? 'justify-end' : ''}`}>
-                  {t('reports.columns.' + col.key, col.label)}
+                  {col.label}
                   {sortable && sortCol === i && (
                     sortDir === 'asc' ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />
                   )}
@@ -1582,7 +1583,7 @@ function EngagementReport({ data, t }) {
               a.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
               a.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
               'bg-slate-100 text-slate-600'
-            }`}>{t('common.' + a.status, a.status)}</span>,
+            }`}>{a.status}</span>,
           ])}
         />
       </SectionCard>
@@ -1702,6 +1703,11 @@ export default function Reports() {
   const ActiveIcon = activeReportDef?.icon || BarChart3;
 
   const renderReport = () => {
+    // Custom reports get a special builder UI
+    if (activeReport === 'custom') {
+      return <CustomReportsBuilder t={t} />;
+    }
+
     const d = reportData[activeReport];
     if (!d) return null;
     switch (activeReport) {
@@ -1914,6 +1920,405 @@ export default function Reports() {
 
       {/* Schedule Modal */}
       {showSchedule && <ScheduleModal onClose={() => setShowSchedule(false)} t={t} />}
+    </div>
+  );
+}
+
+// ============================================================
+// CUSTOM REPORTS BUILDER
+// ============================================================
+
+const DATA_SOURCES = [
+  { id: 'employees', label: 'Employees', columns: ['name', 'department', 'location', 'role', 'employment_type', 'start_date', 'tenure_months', 'salary', 'status', 'country', 'manager'] },
+  { id: 'time_entries', label: 'Time Entries', columns: ['employee_name', 'date', 'clock_in', 'clock_out', 'total_hours', 'overtime_hours', 'location', 'method', 'status'] },
+  { id: 'expenses', label: 'Expenses', columns: ['employee_name', 'date', 'description', 'category', 'amount', 'status', 'approved_by', 'receipt_attached'] },
+  { id: 'payroll', label: 'Payroll', columns: ['employee_name', 'period', 'gross_pay', 'tax', 'ni', 'pension', 'net_pay', 'employer_ni', 'employer_pension', 'total_cost'] },
+  { id: 'skills', label: 'Skills', columns: ['employee_name', 'skill_name', 'level', 'verified', 'verified_by', 'expiry_date', 'status'] },
+  { id: 'performance', label: 'Performance', columns: ['employee_name', 'review_cycle', 'score', 'reviewer', 'goals_completed', 'goals_total'] },
+  { id: 'time_off', label: 'Time Off', columns: ['employee_name', 'type', 'start_date', 'end_date', 'days', 'status', 'approved_by'] },
+  { id: 'training', label: 'Training', columns: ['employee_name', 'course_name', 'status', 'completion_date', 'score', 'mandatory'] },
+  { id: 'shifts', label: 'Shifts', columns: ['employee_name', 'date', 'start_time', 'end_time', 'location', 'role', 'status', 'actual_start', 'actual_end'] },
+];
+
+const GROUP_BY_OPTIONS = [
+  { id: 'none', label: 'None (flat table)' },
+  { id: 'department', label: 'Department' },
+  { id: 'location', label: 'Location' },
+  { id: 'role', label: 'Role' },
+  { id: 'country', label: 'Country' },
+  { id: 'month', label: 'Month' },
+  { id: 'quarter', label: 'Quarter' },
+  { id: 'year', label: 'Year' },
+];
+
+const VIZ_OPTIONS = [
+  { id: 'table', label: 'Table', icon: '📊' },
+  { id: 'bar', label: 'Bar Chart', icon: '📶' },
+  { id: 'line', label: 'Line Chart', icon: '📈' },
+  { id: 'pie', label: 'Pie / Donut', icon: '🥧' },
+];
+
+function CustomReportsBuilder({ t }) {
+  const [savedReports, setSavedReports] = useState([]);
+  const [showBuilder, setShowBuilder] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [running, setRunning] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  // Builder state
+  const [dataSource, setDataSource] = useState('');
+  const [selectedColumns, setSelectedColumns] = useState([]);
+  const [dateStart, setDateStart] = useState('');
+  const [dateEnd, setDateEnd] = useState('');
+  const [departments, setDepartments] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [groupBy, setGroupBy] = useState('none');
+  const [visualization, setVisualization] = useState('table');
+  const [reportName, setReportName] = useState('');
+
+  // Results
+  const [results, setResults] = useState(null);
+
+  // Edit mode
+  const [editingReport, setEditingReport] = useState(null);
+
+  useEffect(() => {
+    loadSavedReports();
+  }, []);
+
+  const loadSavedReports = async () => {
+    try {
+      const result = await api.get('/reports/custom');
+      setSavedReports(result.reports || []);
+    } catch (err) {
+      // No saved reports yet
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const availableColumns = DATA_SOURCES.find(ds => ds.id === dataSource)?.columns || [];
+
+  const toggleColumn = (col) => {
+    setSelectedColumns(prev =>
+      prev.includes(col)
+        ? prev.filter(c => c !== col)
+        : [...prev, col]
+    );
+  };
+
+  const handleRun = async () => {
+    if (!dataSource || selectedColumns.length === 0) return;
+    setRunning(true);
+    try {
+      const result = await api.post('/reports/custom/run', {
+        data_source: dataSource,
+        columns: selectedColumns,
+        filters: {
+          date_start: dateStart || undefined,
+          date_end: dateEnd || undefined,
+        },
+        group_by: groupBy !== 'none' ? groupBy : undefined,
+        visualization,
+      });
+      setResults(result);
+    } catch (err) {
+      console.error('Failed to run report:', err);
+    } finally {
+      setRunning(false);
+    }
+  };
+
+  const handleSave = async () => {
+    if (!reportName.trim() || !dataSource) return;
+    setSaving(true);
+    try {
+      const config = {
+        data_source: dataSource,
+        columns: selectedColumns,
+        filters: { date_start: dateStart, date_end: dateEnd },
+        group_by: groupBy !== 'none' ? groupBy : undefined,
+        visualization,
+      };
+
+      if (editingReport) {
+        await api.put(`/reports/custom/${editingReport.id}`, { name: reportName, config });
+      } else {
+        await api.post('/reports/custom/save', { name: reportName, config });
+      }
+      await loadSavedReports();
+      resetBuilder();
+    } catch (err) {
+      console.error('Failed to save report:', err);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm(t('reports.custom.confirmDelete', 'Delete this report?'))) return;
+    try {
+      await api.delete(`/reports/custom/${id}`);
+      await loadSavedReports();
+    } catch (err) {
+      console.error('Failed to delete report:', err);
+    }
+  };
+
+  const handleLoadReport = (report) => {
+    setEditingReport(report);
+    setDataSource(report.config.data_source);
+    setSelectedColumns(report.config.columns || []);
+    setDateStart(report.config.filters?.date_start || '');
+    setDateEnd(report.config.filters?.date_end || '');
+    setGroupBy(report.config.group_by || 'none');
+    setVisualization(report.config.visualization || 'table');
+    setReportName(report.name);
+    setShowBuilder(true);
+    setResults(null);
+  };
+
+  const handleExportCSV = () => {
+    if (!results?.data) return;
+    const headers = results.columns.join(',');
+    const rows = results.data.map(row =>
+      results.columns.map(col => {
+        const val = row[col];
+        return typeof val === 'string' && val.includes(',') ? `"${val}"` : val;
+      }).join(',')
+    );
+    const csv = [headers, ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${reportName || 'report'}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const resetBuilder = () => {
+    setShowBuilder(false);
+    setEditingReport(null);
+    setDataSource('');
+    setSelectedColumns([]);
+    setDateStart('');
+    setDateEnd('');
+    setGroupBy('none');
+    setVisualization('table');
+    setReportName('');
+    setResults(null);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500" />
+      </div>
+    );
+  }
+
+  if (showBuilder) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              {editingReport ? t('reports.custom.editReport', 'Edit Report') : t('reports.custom.createReport', 'Create Report')}
+            </h2>
+            <p className="text-sm text-slate-500">{t('reports.custom.builderDesc', 'Build a custom report by selecting data source, columns, and filters')}</p>
+          </div>
+          <button onClick={resetBuilder} className="btn btn-ghost">
+            <X className="w-4 h-4" /> {t('common.cancel', 'Cancel')}
+          </button>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            {/* Step 1: Data Source */}
+            <div className="bg-white border border-slate-200 rounded-xl p-4">
+              <h3 className="font-medium text-slate-800 mb-3">{t('reports.custom.step1', '1. Data Source')}</h3>
+              <select value={dataSource} onChange={(e) => { setDataSource(e.target.value); setSelectedColumns([]); }} className="input w-full">
+                <option value="">{t('reports.custom.selectSource', 'Select a data source...')}</option>
+                {DATA_SOURCES.map(ds => (
+                  <option key={ds.id} value={ds.id}>{ds.label}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Step 2: Columns */}
+            {dataSource && (
+              <div className="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 className="font-medium text-slate-800 mb-3">{t('reports.custom.step2', '2. Columns')}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {availableColumns.map(col => (
+                    <button key={col} onClick={() => toggleColumn(col)}
+                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                        selectedColumns.includes(col) ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-transparent'
+                      }`}>
+                      {col.replace(/_/g, ' ')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 3: Filters */}
+            {dataSource && (
+              <div className="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 className="font-medium text-slate-800 mb-3">{t('reports.custom.step3', '3. Filters')}</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('reports.custom.dateFrom', 'Date From')}</label>
+                    <input type="date" value={dateStart} onChange={(e) => setDateStart(e.target.value)} className="input w-full" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('reports.custom.dateTo', 'Date To')}</label>
+                    <input type="date" value={dateEnd} onChange={(e) => setDateEnd(e.target.value)} className="input w-full" />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 4: Group By */}
+            {dataSource && (
+              <div className="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 className="font-medium text-slate-800 mb-3">{t('reports.custom.step4', '4. Group By')}</h3>
+                <select value={groupBy} onChange={(e) => setGroupBy(e.target.value)} className="input w-full">
+                  {GROUP_BY_OPTIONS.map(opt => (
+                    <option key={opt.id} value={opt.id}>{opt.label}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Step 5: Visualization */}
+            {dataSource && (
+              <div className="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 className="font-medium text-slate-800 mb-3">{t('reports.custom.step5', '5. Visualization')}</h3>
+                <div className="flex gap-2">
+                  {VIZ_OPTIONS.map(viz => (
+                    <button key={viz.id} onClick={() => setVisualization(viz.id)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        visualization === viz.id ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-transparent'
+                      }`}>
+                      <span>{viz.icon}</span> {viz.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right: Actions */}
+          <div className="space-y-4">
+            <div className="bg-white border border-slate-200 rounded-xl p-4">
+              <h3 className="font-medium text-slate-800 mb-3">{t('reports.custom.actions', 'Actions')}</h3>
+              <div className="space-y-3">
+                <button onClick={handleRun} disabled={running || !dataSource || selectedColumns.length === 0} className="btn btn-primary w-full">
+                  {running ? t('reports.custom.running', 'Running...') : t('reports.custom.runReport', 'Run Report')}
+                </button>
+                <div className="pt-3 border-t border-slate-100">
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('reports.custom.reportName', 'Report Name')}</label>
+                  <input type="text" value={reportName} onChange={(e) => setReportName(e.target.value)} placeholder="e.g. Monthly Headcount" className="input w-full mb-2" />
+                  <button onClick={handleSave} disabled={saving || !reportName.trim() || !dataSource} className="btn btn-secondary w-full">
+                    {saving ? t('common.saving', 'Saving...') : t('reports.custom.saveReport', 'Save Report')}
+                  </button>
+                </div>
+                {results && (
+                  <button onClick={handleExportCSV} className="btn btn-ghost w-full">
+                    <Download className="w-4 h-4" /> {t('reports.custom.exportCSV', 'Export CSV')}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Results */}
+        {results && (
+          <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-medium text-slate-800">{t('reports.custom.results', 'Results')}</h3>
+              <span className="text-sm text-slate-500">{results.row_count} rows</span>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200">
+                    {results.columns.map(col => (
+                      <th key={col} className="text-left py-2 px-3 font-medium text-slate-700 bg-slate-50">{col.replace(/_/g, ' ')}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {results.data.slice(0, 50).map((row, i) => (
+                    <tr key={i} className="border-b border-slate-100 hover:bg-slate-50">
+                      {results.columns.map(col => (
+                        <td key={col} className="py-2 px-3 text-slate-600">{row[col] ?? '-'}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {results.data.length > 50 && (
+                <p className="text-sm text-slate-500 mt-2 text-center">Showing first 50 of {results.data.length} rows</p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Saved reports list
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-semibold text-slate-900">{t('reports.custom.title', 'Custom Reports')}</h2>
+          <p className="text-sm text-slate-500">{t('reports.custom.desc', 'Build and save custom reports with flexible data selection')}</p>
+        </div>
+        <button onClick={() => setShowBuilder(true)} className="btn btn-primary">
+          <BarChart3 className="w-4 h-4" /> {t('reports.custom.createReport', 'Create Report')}
+        </button>
+      </div>
+
+      {savedReports.length === 0 ? (
+        <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
+          <FileText className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+          <p className="text-slate-600 font-medium mb-1">{t('reports.custom.noReports', 'No custom reports yet')}</p>
+          <p className="text-slate-500 text-sm mb-4">{t('reports.custom.noReportsDesc', 'Create your first custom report to get started')}</p>
+          <button onClick={() => setShowBuilder(true)} className="btn btn-primary">{t('reports.custom.createFirst', 'Create First Report')}</button>
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {savedReports.map(report => (
+            <div key={report.id} className="bg-white border border-slate-200 rounded-xl p-4 flex items-center justify-between hover:shadow-sm transition-shadow">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                  <BarChart3 className="w-5 h-5 text-indigo-600" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-slate-900">{report.name}</h3>
+                  <p className="text-sm text-slate-500">
+                    {DATA_SOURCES.find(ds => ds.id === report.config.data_source)?.label || report.config.data_source}
+                    {report.config.columns?.length > 0 && ` • ${report.config.columns.length} columns`}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button onClick={() => handleLoadReport(report)} className="px-3 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                  {t('common.open', 'Open')}
+                </button>
+                <button onClick={() => handleDelete(report.id)} className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

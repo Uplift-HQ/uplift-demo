@@ -9,7 +9,7 @@ import { useParams, Link } from 'react-router-dom';
 import { employeesApi, skillsApi, api } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { useToast } from '../components/ToastProvider';
-import { ArrowLeft, Mail, Phone, MapPin, Calendar, Clock, Award, Plus, Star, Check, X, Shield, Trash, TrendingUp, Briefcase, GraduationCap, AlertTriangle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Mail, Phone, MapPin, Calendar, Clock, Award, Plus, Star, Check, X, Shield, Trash, TrendingUp, Briefcase, GraduationCap, AlertTriangle, AlertCircle, QrCode, Download, Copy, CreditCard } from 'lucide-react';
 
 export default function EmployeeDetail() {
   const { t } = useTranslation();
@@ -22,6 +22,9 @@ export default function EmployeeDetail() {
   const [error, setError] = useState(null);
   const [showAddSkill, setShowAddSkill] = useState(false);
   const [allSkills, setAllSkills] = useState([]);
+  const [showQrModal, setShowQrModal] = useState(false);
+  const [editingBadge, setEditingBadge] = useState(false);
+  const [badgeId, setBadgeId] = useState('');
 
   useEffect(() => {
     loadEmployee();
@@ -166,7 +169,7 @@ export default function EmployeeDetail() {
             employee.status === 'on_leave' ? 'badge-warning' :
             'badge-neutral'
           }`}>
-            {t('common.' + employee.status, employee.status)}
+            {employee.status}
           </span>
         </div>
       </div>
@@ -184,6 +187,67 @@ export default function EmployeeDetail() {
             <DetailRow label={t('profile.startDate', 'Start Date')} value={employee.start_date} />
             <DetailRow label={t('profile.manager', 'Manager')} value={employee.manager_name} />
             <DetailRow label={t('employeeDetail.hourlyRate', 'Hourly Rate')} value={employee.hourly_rate ? `£${employee.hourly_rate}` : '-'} />
+
+            {/* Badge ID for kiosk clock-in */}
+            <div className="flex items-center justify-between py-2 border-t border-slate-100 mt-2">
+              <div>
+                <span className="text-slate-500 text-sm">{t('employeeDetail.badgeId', 'Badge ID / PIN')}</span>
+                {editingBadge ? (
+                  <div className="flex items-center gap-2 mt-1">
+                    <input
+                      type="text"
+                      value={badgeId}
+                      onChange={(e) => setBadgeId(e.target.value)}
+                      placeholder="e.g. 12345"
+                      className="input w-32 text-sm"
+                      autoFocus
+                    />
+                    <button
+                      onClick={async () => {
+                        try {
+                          await api.patch(`/employees/${id}`, { badge_id: badgeId });
+                          setEmployee({ ...employee, badge_id: badgeId });
+                          setEditingBadge(false);
+                          toast.success(t('common.saved', 'Saved'));
+                        } catch (err) {
+                          toast.error('Failed to save badge ID');
+                        }
+                      }}
+                      className="p-1 text-green-600 hover:bg-green-50 rounded"
+                    >
+                      <Check className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => { setEditingBadge(false); setBadgeId(employee.badge_id || ''); }}
+                      className="p-1 text-slate-400 hover:bg-slate-50 rounded"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <span className="text-slate-900 font-mono">{employee.badge_id || '-'}</span>
+                    {isManagerOrAbove && (
+                      <button
+                        onClick={() => { setBadgeId(employee.badge_id || ''); setEditingBadge(true); }}
+                        className="text-xs text-momentum-500 hover:underline"
+                      >
+                        {t('common.edit', 'Edit')}
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+              {isManagerOrAbove && (
+                <button
+                  onClick={() => setShowQrModal(true)}
+                  className="btn btn-secondary text-sm py-1"
+                >
+                  <QrCode className="w-4 h-4" />
+                  {t('employeeDetail.generateQR', 'Generate QR')}
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -214,7 +278,7 @@ export default function EmployeeDetail() {
                       <div>
                         <p className="font-medium text-slate-900">{skill.name}</p>
                         <div className="flex items-center gap-2 text-sm">
-                          <span className="text-slate-500">{t('skills.categories.' + skill.category.toLowerCase().replace(/ /g, ''), skill.category)}</span>
+                          <span className="text-slate-500">{skill.category}</span>
                           {skill.verified && (
                             <span className="flex items-center gap-1 text-green-600">
                               <Check className="w-3 h-3" />
@@ -294,6 +358,15 @@ export default function EmployeeDetail() {
           skills={availableSkills}
           onClose={() => setShowAddSkill(false)}
           onAdd={handleAddSkill}
+          t={t}
+        />
+      )}
+
+      {/* QR Code Modal */}
+      {showQrModal && (
+        <QRCodeModal
+          employee={employee}
+          onClose={() => setShowQrModal(false)}
           t={t}
         />
       )}
@@ -398,6 +471,104 @@ function AddSkillModal({ skills, onClose, onAdd, t }) {
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  );
+}
+
+function QRCodeModal({ employee, onClose, t }) {
+  const qrData = JSON.stringify({
+    employee_id: employee.id,
+    employee_number: employee.employee_number,
+    name: `${employee.first_name} ${employee.last_name}`,
+  });
+
+  // Generate QR code URL using a free API
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(employee.badge_id || employee.employee_number || employee.id)}`;
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(qrUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `qr-${employee.first_name}-${employee.last_name}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Failed to download QR code:', err);
+    }
+  };
+
+  const handlePrint = () => {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>QR Code - ${employee.first_name} ${employee.last_name}</title>
+          <style>
+            body { font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+            img { max-width: 300px; }
+            h1 { font-size: 24px; margin-bottom: 10px; }
+            p { color: #666; margin: 5px 0; }
+            .badge-id { font-family: monospace; font-size: 20px; margin-top: 15px; }
+          </style>
+        </head>
+        <body>
+          <h1>${employee.first_name} ${employee.last_name}</h1>
+          <p>${employee.role_name || employee.department_name || ''}</p>
+          <img src="${qrUrl}" alt="QR Code" />
+          <p class="badge-id">${employee.badge_id || employee.employee_number || ''}</p>
+          <script>window.onload = () => { window.print(); window.close(); }</script>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl max-w-md w-full p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-semibold">{t('employeeDetail.employeeQR', 'Employee QR Code')}</h2>
+          <button onClick={onClose} className="p-1 hover:bg-slate-100 rounded">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="text-center">
+          <div className="inline-block p-4 bg-white border-2 border-slate-200 rounded-xl mb-4">
+            <img
+              src={qrUrl}
+              alt="QR Code"
+              className="w-48 h-48"
+            />
+          </div>
+
+          <p className="font-medium text-slate-900">{employee.first_name} {employee.last_name}</p>
+          <p className="text-slate-500 text-sm">{employee.role_name || employee.department_name}</p>
+          {(employee.badge_id || employee.employee_number) && (
+            <p className="font-mono text-lg text-slate-700 mt-2">{employee.badge_id || employee.employee_number}</p>
+          )}
+
+          <div className="flex gap-3 justify-center mt-6">
+            <button onClick={handleDownload} className="btn btn-secondary">
+              <Download className="w-4 h-4" />
+              {t('common.download', 'Download')}
+            </button>
+            <button onClick={handlePrint} className="btn btn-primary">
+              {t('common.print', 'Print')}
+            </button>
+          </div>
+
+          <p className="text-xs text-slate-400 mt-4">
+            {t('employeeDetail.qrInfo', 'This QR code can be printed on an employee badge for kiosk clock-in.')}
+          </p>
+        </div>
       </div>
     </div>
   );
