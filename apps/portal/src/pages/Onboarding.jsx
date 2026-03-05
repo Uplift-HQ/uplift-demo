@@ -52,13 +52,13 @@ import {
 
 const ACTIVE_ONBOARDINGS = [
   {
-    id: 1, name: 'Olivia Brown', role: 'Front Desk Agent', department: 'Front of House',
-    location: 'London Victoria', startDate: '2026-02-10', buddy: 'Sarah Chen',
+    id: 1, name: 'Olivia Brown', role: 'Receptionist', department: 'Front of House',
+    location: 'London Mayfair', startDate: '2026-02-10', buddy: 'Sarah Mitchell',
     status: 'on_track', tasksCompleted: 9, tasksTotal: 12,
     tasks: [
       { category: 'IT Setup', items: [
         { name: 'Create email account', assignee: 'IT', due: '2026-02-07', done: true },
-        { name: 'Set up POS access', assignee: 'IT', due: '2026-02-08', done: true },
+        { name: 'Set up Opera PMS access', assignee: 'IT', due: '2026-02-08', done: true },
         { name: 'Issue keycard & badges', assignee: 'IT', due: '2026-02-09', done: true },
       ]},
       { category: 'HR Documents', items: [
@@ -69,7 +69,7 @@ const ACTIVE_ONBOARDINGS = [
       { category: 'Training', items: [
         { name: 'Health & safety induction', assignee: 'Manager', due: '2026-02-10', done: true },
         { name: 'Fire safety training', assignee: 'Manager', due: '2026-02-11', done: true },
-        { name: 'Customer service standards', assignee: 'Manager', due: '2026-02-12', done: true },
+        { name: 'Guest service standards', assignee: 'Manager', due: '2026-02-12', done: true },
       ]},
       { category: 'Team Introductions', items: [
         { name: 'Meet department heads', assignee: 'Buddy', due: '2026-02-10', done: true },
@@ -79,53 +79,53 @@ const ACTIVE_ONBOARDINGS = [
     ]
   },
   {
-    id: 2, name: 'Daniel Park', role: 'Sous Chef', department: 'Kitchen',
-    location: 'Manchester Central', startDate: '2026-02-03', buddy: 'Marcus Johnson',
+    id: 2, name: 'Daniel Park', role: 'Line Cook', department: 'Kitchen',
+    location: 'Paris Champs-Élysées', startDate: '2026-02-03', buddy: 'Klaus Weber',
     status: 'at_risk', tasksCompleted: 5, tasksTotal: 12,
     tasks: [
       { category: 'IT Setup', items: [
         { name: 'Create email account', assignee: 'IT', due: '2026-01-31', done: true },
-        { name: 'Kitchen management system access', assignee: 'IT', due: '2026-02-01', done: true },
+        { name: 'Kitchen system access', assignee: 'IT', due: '2026-02-01', done: true },
         { name: 'Issue uniform & badges', assignee: 'IT', due: '2026-02-02', done: false },
       ]},
       { category: 'HR Documents', items: [
         { name: 'Sign employment contract', assignee: 'HR', due: '2026-01-31', done: true },
-        { name: 'Food hygiene certificate check', assignee: 'HR', due: '2026-02-01', done: true },
+        { name: 'Food Safety certification check', assignee: 'HR', due: '2026-02-01', done: true },
         { name: 'Right to work verification', assignee: 'HR', due: '2026-02-01', done: true },
       ]},
       { category: 'Training', items: [
-        { name: 'HACCP training', assignee: 'Manager', due: '2026-02-03', done: false },
-        { name: 'Allergen awareness', assignee: 'Manager', due: '2026-02-04', done: false },
-        { name: 'Kitchen SOPs walkthrough', assignee: 'Manager', due: '2026-02-05', done: false },
+        { name: 'Food Safety Level 2', assignee: 'Manager', due: '2026-02-03', done: false },
+        { name: 'Kitchen safety training', assignee: 'Manager', due: '2026-02-04', done: false },
+        { name: 'Menu & recipe walkthrough', assignee: 'Manager', due: '2026-02-05', done: false },
       ]},
       { category: 'Team Introductions', items: [
         { name: 'Meet kitchen brigade', assignee: 'Buddy', due: '2026-02-03', done: false },
-        { name: 'Shadow service with mentor', assignee: 'Buddy', due: '2026-02-04', done: false },
-        { name: 'Chef team welcome dinner', assignee: 'Buddy', due: '2026-02-05', done: false },
+        { name: 'Shadow shift with mentor', assignee: 'Buddy', due: '2026-02-04', done: false },
+        { name: 'Team welcome event', assignee: 'Buddy', due: '2026-02-05', done: false },
       ]},
     ]
   },
   {
-    id: 3, name: 'Emma Williams', role: 'Housekeeping Supervisor', department: 'Housekeeping',
-    location: 'London Victoria', startDate: '2026-01-20', buddy: 'Priya Patel',
+    id: 3, name: 'Emma Williams', role: 'Events Coordinator', department: 'Events & Conferences',
+    location: 'London Mayfair', startDate: '2026-01-20', buddy: 'Rachel Thompson',
     status: 'on_track', tasksCompleted: 12, tasksTotal: 12,
     tasks: []
   },
   {
-    id: 4, name: 'Raj Mehta', role: 'Night Auditor', department: 'Finance',
-    location: 'Manchester Central', startDate: '2026-02-17', buddy: 'James Wilson',
+    id: 4, name: 'Raj Mehta', role: 'Bartender', department: 'Bar & Beverage',
+    location: 'Dubai Marina', startDate: '2026-02-17', buddy: 'James Wilson',
     status: 'on_track', tasksCompleted: 3, tasksTotal: 12,
     tasks: []
   },
   {
     id: 5, name: 'Fatima Al-Hassan', role: 'Spa Therapist', department: 'Spa & Wellness',
-    location: 'London Victoria', startDate: '2026-02-05', buddy: 'Lisa Zhang',
+    location: 'London Mayfair', startDate: '2026-02-05', buddy: 'Sophie Anderson',
     status: 'overdue', tasksCompleted: 4, tasksTotal: 10,
     tasks: []
   },
   {
-    id: 6, name: 'Liam O\'Connor', role: 'Bar Supervisor', department: 'Food & Beverage',
-    location: 'Manchester Central', startDate: '2026-02-12', buddy: 'Thomas Brown',
+    id: 6, name: 'Liam O\'Connor', role: 'Maintenance Engineer', department: 'Engineering & Facilities',
+    location: 'Dubai Marina', startDate: '2026-02-12', buddy: 'Thomas Brown',
     status: 'on_track', tasksCompleted: 7, tasksTotal: 12,
     tasks: []
   },
@@ -169,12 +169,11 @@ const TEMPLATE_TASKS = {
 // ============================================================
 
 const DEPARTMENT_CHART = [
-  { department: 'Front of House', count: 2 },
-  { department: 'Kitchen', count: 1 },
-  { department: 'Housekeeping', count: 1 },
-  { department: 'Finance', count: 1 },
-  { department: 'Spa & Wellness', count: 1 },
-  { department: 'Food & Beverage', count: 1 },
+  { department: 'Production', count: 2 },
+  { department: 'Quality Control', count: 1 },
+  { department: 'Warehouse & Logistics', count: 1 },
+  { department: 'EHS', count: 1 },
+  { department: 'Maintenance', count: 1 },
 ];
 
 const COMPLETION_TREND = [

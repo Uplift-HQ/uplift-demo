@@ -138,9 +138,19 @@ router.post('/shifts', requireRole(['admin', 'manager']), async (req, res) => {
     color,
   } = req.body;
 
+  // Build full datetime strings by combining date + time
+  // Handle both "09:00" and "09:00:00" formats
+  const startTimeNormalized = startTime.length === 5 ? `${startTime}:00` : startTime;
+  const endTimeNormalized = endTime.length === 5 ? `${endTime}:00` : endTime;
+  const startDateTime = `${date}T${startTimeNormalized}`;
+  const endDateTime = `${date}T${endTimeNormalized}`;
+
   // Validate times
-  const start = new Date(startTime);
-  const end = new Date(endTime);
+  const start = new Date(startDateTime);
+  const end = new Date(endDateTime);
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    return res.status(400).json({ error: 'Invalid date or time format' });
+  }
   if (end <= start) {
     return res.status(400).json({ error: 'End time must be after start time' });
   }
@@ -148,9 +158,9 @@ router.post('/shifts', requireRole(['admin', 'manager']), async (req, res) => {
   // Check for conflicts if assigning to employee
   if (employeeId) {
     const conflicts = await db.query(
-      `SELECT id FROM shifts 
-       WHERE organization_id = $1 
-         AND employee_id = $2 
+      `SELECT id FROM shifts
+       WHERE organization_id = $1
+         AND employee_id = $2
          AND date = $3
          AND status NOT IN ('cancelled')
          AND (
@@ -158,7 +168,7 @@ router.post('/shifts', requireRole(['admin', 'manager']), async (req, res) => {
            (start_time < $5 AND end_time >= $5) OR
            (start_time >= $4 AND end_time <= $5)
          )`,
-      [organizationId, employeeId, date, startTime, endTime]
+      [organizationId, employeeId, date, startDateTime, endDateTime]
     );
 
     if (conflicts.rows.length > 0) {
@@ -190,7 +200,7 @@ router.post('/shifts', requireRole(['admin', 'manager']), async (req, res) => {
     ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
     RETURNING *`,
     [
-      organizationId, date, startTime, endTime, breakMinutes,
+      organizationId, date, startDateTime, endDateTime, breakMinutes,
       locationId, roleId, employeeId, isOpen, notes, color,
       estimatedCost, userId
     ]
@@ -336,9 +346,9 @@ router.get('/shifts/open', async (req, res) => {
        AND s.employee_id IS NULL
        AND s.date >= CURRENT_DATE
        AND s.status = 'scheduled'
-       AND (s.open_to_location_ids IS NULL OR s.open_to_location_ids && $2)
-       AND (s.open_to_role_ids IS NULL OR s.open_to_role_ids && $3)
-       AND NOT ($4 = ANY(s.applicants))
+       AND (s.location_id = ANY($2::uuid[]) OR cardinality($2::uuid[]) = 0)
+       AND (s.role_id IS NULL OR s.role_id = ANY($3::uuid[]) OR cardinality($3::uuid[]) = 0)
+       AND NOT ($4 = ANY(COALESCE(s.applicants, ARRAY[]::uuid[])))
      ORDER BY s.date, s.start_time`,
     [organizationId, locationIds, roleIds, employeeId]
   );

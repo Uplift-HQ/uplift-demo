@@ -1,6 +1,7 @@
 // ============================================================
 // UPLIFT AI SCHEDULING SERVICE
 // ML-based demand forecasting and genetic algorithm optimization
+// Version: 2026-03-03-v2 (Railway cache bust)
 // ============================================================
 
 import { db } from '../lib/database.js';
@@ -1872,12 +1873,8 @@ export async function recordScheduleFeedback(shiftId, feedback) {
 // -------------------- Export --------------------
 
 export {
-  generateDemandForecast,
-  generateScheduleSuggestions,
-  generateOptimizedSchedule,
   calculateScheduleQuality,
   scoreEmployeeForShift,
-  recordScheduleFeedback,
   CONFIG as SCHEDULING_CONFIG,
   GA_CONFIG,
 };

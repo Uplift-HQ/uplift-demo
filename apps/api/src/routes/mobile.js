@@ -283,7 +283,7 @@ router.get('/jobs/applications/mine', async (req, res) => {
       `SELECT ja.*, j.title, j.description, j.status as job_status,
               d.name as department_name, l.name as location_name
        FROM job_applications ja
-       JOIN job_postings j ON j.id = ja.job_id
+       JOIN job_postings j ON j.id = ja.job_posting_id
        LEFT JOIN departments d ON d.id = j.department_id
        LEFT JOIN locations l ON l.id = j.location_id
        WHERE ja.employee_id = $1

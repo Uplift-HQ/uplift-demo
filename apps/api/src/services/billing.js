@@ -6,17 +6,32 @@
 import Stripe from 'stripe';
 import { db } from '../lib/database.js';
 
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2023-10-16',
-});
+// Initialize Stripe with graceful fallback
+const STRIPE_CONFIGURED = !!process.env.STRIPE_SECRET_KEY;
+let stripe = null;
+
+if (STRIPE_CONFIGURED) {
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2023-10-16',
+  });
+} else {
+  console.warn('[Billing] STRIPE_SECRET_KEY not set - billing features disabled. Set this in Railway for production.');
+}
+
+// Helper to check Stripe availability
+function requireStripe() {
+  if (!stripe) {
+    throw new Error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.');
+  }
+  return stripe;
+}
 
 // ============================================================
 // CUSTOMER MANAGEMENT
 // ============================================================
 
 export async function createCustomer(organization) {
-  const customer = await stripe.customers.create({
+  const customer = await requireStripe().customers.create({
     name: organization.name,
     email: organization.billing_email || organization.email,
     metadata: {
@@ -44,7 +59,7 @@ export async function getOrCreateCustomer(organizationId) {
   if (!org) throw new Error('Organization not found');
 
   if (org.stripe_customer_id) {
-    return await stripe.customers.retrieve(org.stripe_customer_id);
+    return await requireStripe().customers.retrieve(org.stripe_customer_id);
   }
 
   return await createCustomer(org);
@@ -60,7 +75,7 @@ export async function updateCustomer(organizationId, data) {
     throw new Error('No Stripe customer found');
   }
 
-  return await stripe.customers.update(orgResult.rows[0].stripe_customer_id, data);
+  return await requireStripe().customers.update(orgResult.rows[0].stripe_customer_id, data);
 }
 
 // ============================================================
@@ -70,7 +85,7 @@ export async function updateCustomer(organizationId, data) {
 export async function createSubscription(organizationId, planSlug, coreSeats, options = {}) {
   // Get plan
   const planResult = await db.query(
-    `SELECT * FROM plans WHERE slug = $1 AND is_active = true`,
+    `SELECT * FROM billing_plans WHERE slug = $1 AND is_active = true`,
     [planSlug]
   );
   const plan = planResult.rows[0];
@@ -125,7 +140,7 @@ export async function createSubscription(organizationId, planSlug, coreSeats, op
     };
   }
 
-  const subscription = await stripe.subscriptions.create(subscriptionParams);
+  const subscription = await requireStripe().subscriptions.create(subscriptionParams);
 
   // Store subscription locally
   await db.query(`
@@ -191,9 +206,9 @@ export async function cancelSubscription(organizationId, immediate = false, reas
 
   let subscription;
   if (immediate) {
-    subscription = await stripe.subscriptions.cancel(sub.stripe_subscription_id);
+    subscription = await requireStripe().subscriptions.cancel(sub.stripe_subscription_id);
   } else {
-    subscription = await stripe.subscriptions.update(sub.stripe_subscription_id, {
+    subscription = await requireStripe().subscriptions.update(sub.stripe_subscription_id, {
       cancel_at_period_end: true,
     });
   }
@@ -231,7 +246,7 @@ export async function updateCoreSeats(organizationId, newQuantity) {
 
   // Get plan limits
   const planResult = await db.query(
-    `SELECT * FROM plans WHERE id = $1`,
+    `SELECT * FROM billing_plans WHERE id = $1`,
     [sub.plan_id]
   );
   const plan = planResult.rows[0];
@@ -244,7 +259,7 @@ export async function updateCoreSeats(organizationId, newQuantity) {
   }
 
   // Get subscription items from Stripe
-  const stripeSubscription = await stripe.subscriptions.retrieve(sub.stripe_subscription_id);
+  const stripeSubscription = await requireStripe().subscriptions.retrieve(sub.stripe_subscription_id);
   const coreItem = stripeSubscription.items.data.find(
     item => item.price.id === plan.stripe_core_price_id
   );
@@ -254,7 +269,7 @@ export async function updateCoreSeats(organizationId, newQuantity) {
   }
 
   // Update quantity
-  await stripe.subscriptionItems.update(coreItem.id, {
+  await requireStripe().subscriptionItems.update(coreItem.id, {
     quantity: newQuantity,
     proration_behavior: 'create_prorations',
   });
@@ -280,13 +295,13 @@ export async function updateFlexSeats(organizationId, newQuantity) {
   }
 
   const planResult = await db.query(
-    `SELECT * FROM plans WHERE id = $1`,
+    `SELECT * FROM billing_plans WHERE id = $1`,
     [sub.plan_id]
   );
   const plan = planResult.rows[0];
 
   // Get or create flex seat item
-  const stripeSubscription = await stripe.subscriptions.retrieve(sub.stripe_subscription_id);
+  const stripeSubscription = await requireStripe().subscriptions.retrieve(sub.stripe_subscription_id);
   let flexItem = stripeSubscription.items.data.find(
     item => item.price.id === plan.stripe_flex_price_id
   );
@@ -294,13 +309,13 @@ export async function updateFlexSeats(organizationId, newQuantity) {
   if (newQuantity > 0) {
     if (flexItem) {
       // Update existing flex item
-      await stripe.subscriptionItems.update(flexItem.id, {
+      await requireStripe().subscriptionItems.update(flexItem.id, {
         quantity: newQuantity,
         proration_behavior: 'create_prorations',
       });
     } else {
       // Add new flex item
-      await stripe.subscriptionItems.create({
+      await requireStripe().subscriptionItems.create({
         subscription: sub.stripe_subscription_id,
         price: plan.stripe_flex_price_id,
         quantity: newQuantity,
@@ -309,7 +324,7 @@ export async function updateFlexSeats(organizationId, newQuantity) {
     }
   } else if (flexItem) {
     // Remove flex seats entirely
-    await stripe.subscriptionItems.del(flexItem.id, {
+    await requireStripe().subscriptionItems.del(flexItem.id, {
       proration_behavior: 'create_prorations',
     });
   }
@@ -407,7 +422,7 @@ export async function changePlan(organizationId, newPlanSlug) {
   }
 
   const newPlanResult = await db.query(
-    `SELECT * FROM plans WHERE slug = $1 AND is_active = true`,
+    `SELECT * FROM billing_plans WHERE slug = $1 AND is_active = true`,
     [newPlanSlug]
   );
   const newPlan = newPlanResult.rows[0];
@@ -423,7 +438,7 @@ export async function changePlan(organizationId, newPlanSlug) {
   }
 
   // Get Stripe subscription
-  const stripeSubscription = await stripe.subscriptions.retrieve(sub.stripe_subscription_id);
+  const stripeSubscription = await requireStripe().subscriptions.retrieve(sub.stripe_subscription_id);
 
   // Update items to new prices
   const items = stripeSubscription.items.data.map(item => {
@@ -444,7 +459,7 @@ export async function changePlan(organizationId, newPlanSlug) {
     return { id: item.id };
   });
 
-  await stripe.subscriptions.update(sub.stripe_subscription_id, {
+  await requireStripe().subscriptions.update(sub.stripe_subscription_id, {
     items,
     proration_behavior: 'create_prorations',
   });
@@ -573,7 +588,7 @@ export async function createBillingPortalSession(organizationId, returnUrl) {
     throw new Error('No Stripe customer found');
   }
 
-  const session = await stripe.billingPortal.sessions.create({
+  const session = await requireStripe().billingPortal.sessions.create({
     customer: orgResult.rows[0].stripe_customer_id,
     return_url: returnUrl,
   });

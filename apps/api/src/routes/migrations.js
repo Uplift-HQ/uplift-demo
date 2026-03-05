@@ -1073,12 +1073,11 @@ function getMigrationFiles() {
           true
         WHERE NOT EXISTS (SELECT 1 FROM ops_users WHERE email = 'dazevedo@uplifthq.co.uk');
 
-        -- Update existing user to super_admin if exists
+        -- Update existing user to super_admin if exists (do not overwrite password)
         UPDATE ops_users SET
           role = 'super_admin',
           role_id = (SELECT id FROM ops_roles WHERE name = 'super_admin' LIMIT 1),
-          is_active = true,
-          password_hash = '$2a$12$9Dgg3QP48.dYnVFKf8suDuOflNtgxvS897/z281PDkfWwxTTvmABK'
+          is_active = true
         WHERE email = 'dazevedo@uplifthq.co.uk';
       `
     },

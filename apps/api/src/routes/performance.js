@@ -252,12 +252,12 @@ router.get('/team-reviews', requireRole(['admin', 'manager']), async (req, res) 
     let query = `
       SELECT pr.*,
         e.user_id as employee_user_id,
-        eu.first_name || ' ' || eu.last_name as employee_name,
+        COALESCE(eu.first_name || ' ' || eu.last_name, e.first_name || ' ' || e.last_name) as employee_name,
         e.job_title,
         r.first_name || ' ' || r.last_name as reviewer_name
       FROM performance_reviews pr
       JOIN employees e ON e.id = pr.employee_id
-      JOIN users eu ON eu.id = e.user_id
+      LEFT JOIN users eu ON eu.id = e.user_id
       LEFT JOIN users r ON r.id = pr.reviewer_id
       WHERE pr.organization_id = $1
     `;

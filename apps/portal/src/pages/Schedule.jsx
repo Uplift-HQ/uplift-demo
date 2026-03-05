@@ -369,10 +369,10 @@ export default function Schedule() {
     if (templates.length === 0) {
       // If no templates, create default shift patterns
       const defaultTemplates = [
-        { id: 'default-morning', name: 'Morning Shift', role: 'Server', start_time: '07:00', end_time: '15:00', days_of_week: [1, 2, 3, 4, 5], headcount: 2, location_id: selectedLocationId || locations[0]?.id },
-        { id: 'default-evening', name: 'Evening Shift', role: 'Server', start_time: '15:00', end_time: '23:00', days_of_week: [1, 2, 3, 4, 5], headcount: 2, location_id: selectedLocationId || locations[0]?.id },
-        { id: 'default-kitchen-am', name: 'Kitchen AM', role: 'Line Cook', start_time: '06:00', end_time: '14:00', days_of_week: [1, 2, 3, 4, 5, 6], headcount: 1, location_id: selectedLocationId || locations[0]?.id },
-        { id: 'default-kitchen-pm', name: 'Kitchen PM', role: 'Line Cook', start_time: '14:00', end_time: '22:00', days_of_week: [1, 2, 3, 4, 5, 6], headcount: 1, location_id: selectedLocationId || locations[0]?.id },
+        { id: 'default-morning', name: 'Morning Service', role: 'Front Desk Agent', start_time: '06:00', end_time: '14:00', days_of_week: [1, 2, 3, 4, 5], headcount: 4, location_id: selectedLocationId || locations[0]?.id },
+        { id: 'default-afternoon', name: 'Afternoon Service', role: 'Housekeeping Staff', start_time: '14:00', end_time: '22:00', days_of_week: [1, 2, 3, 4, 5], headcount: 4, location_id: selectedLocationId || locations[0]?.id },
+        { id: 'default-qc-day', name: 'Concierge Shift', role: 'Concierge', start_time: '08:00', end_time: '16:00', days_of_week: [1, 2, 3, 4, 5], headcount: 2, location_id: selectedLocationId || locations[0]?.id },
+        { id: 'default-warehouse', name: 'Maintenance Day', role: 'Maintenance Technician', start_time: '07:00', end_time: '15:00', days_of_week: [1, 2, 3, 4, 5, 6], headcount: 3, location_id: selectedLocationId || locations[0]?.id },
       ];
       templates.push(...defaultTemplates);
     }
@@ -857,15 +857,38 @@ export default function Schedule() {
               navigateDate={navigateDate}
               t={t}
             />
+          ) : viewMode === 'month' ? (
+            /* ============================================================
+               MANAGEMENT VIEW - MONTHLY PLANNING OVERVIEW
+               ============================================================ */
+            <MonthlyPlanningView
+              currentDate={currentDate}
+              shifts={shifts}
+              staffingMetrics={staffingMetrics}
+              getShiftsForDay={getShiftsForDay}
+              setSelectedDate={(date) => {
+                setCurrentDate(date);
+                setViewMode('week');
+              }}
+              t={t}
+            />
           ) : (
             /* ============================================================
                MANAGEMENT VIEW - Full grid with all features
                ============================================================ */
             <div>
               {/* Header row */}
-              <div className={`grid border-b border-slate-200 sticky top-0 bg-white z-10`} style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}>
-                <div className="p-3 bg-slate-50 border-r border-slate-200">
-                  <span className="text-sm font-semibold text-slate-500">{t('schedule.employee', 'Employee')}</span>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: `200px repeat(${dateRange.days.length}, minmax(0, 1fr))`,
+                borderBottom: '1px solid #e2e8f0',
+                position: 'sticky',
+                top: 0,
+                background: 'white',
+                zIndex: 10
+              }}>
+                <div style={{ padding: '12px', background: '#f8fafc', borderRight: '1px solid #e2e8f0', overflow: 'hidden' }}>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#64748b' }}>{t('schedule.employee', 'Employee')}</span>
                 </div>
                 {dateRange.days.map((day) => {
                   const dateStr = format(day, 'yyyy-MM-dd');
@@ -875,21 +898,28 @@ export default function Schedule() {
                   return (
                     <div
                       key={day.toISOString()}
-                      className={`p-2 text-center border-r border-slate-200 last:border-r-0 ${
-                        isToday ? 'bg-blue-50' : 'bg-slate-50'
-                      }`}
+                      style={{
+                        padding: '8px',
+                        textAlign: 'center',
+                        borderRight: '1px solid #e2e8f0',
+                        background: isToday ? '#eff6ff' : '#f8fafc',
+                        overflow: 'hidden'
+                      }}
                     >
-                      <p className="text-xs text-slate-500">{t(`common.days.${format(day, 'EEEE').toLowerCase()}Short`, format(day, 'EEE'))}</p>
-                      <p className={`text-lg font-semibold ${isToday ? 'text-blue-600' : 'text-slate-900'}`}>
+                      <p style={{ fontSize: '12px', color: '#64748b', margin: 0 }}>{format(day, 'EEE')}</p>
+                      <p style={{ fontSize: '18px', fontWeight: 600, color: isToday ? '#2563eb' : '#0f172a', margin: 0 }}>
                         {format(day, 'd')}
                       </p>
-                      {/* Coverage numbers */}
                       {metrics && (
-                        <div className={`text-xs mt-1 px-2 py-0.5 rounded-full inline-block ${
-                          metrics.coverage >= 90 ? 'bg-green-100 text-green-700' :
-                          metrics.coverage >= 70 ? 'bg-amber-100 text-amber-700' :
-                          'bg-red-100 text-red-700'
-                        }`}>
+                        <div style={{
+                          fontSize: '11px',
+                          marginTop: '4px',
+                          padding: '2px 8px',
+                          borderRadius: '9999px',
+                          display: 'inline-block',
+                          background: metrics.coverage >= 90 ? '#dcfce7' : metrics.coverage >= 70 ? '#fef3c7' : '#fee2e2',
+                          color: metrics.coverage >= 90 ? '#15803d' : metrics.coverage >= 70 ? '#b45309' : '#dc2626'
+                        }}>
                           {metrics.filled}/{metrics.required}
                         </div>
                       )}
@@ -907,18 +937,44 @@ export default function Schedule() {
                 filteredEmployees.slice(0, isPersonalView ? 1 : 15).map((employee) => (
                   <div
                     key={employee.id}
-                    className="grid border-b border-slate-100 last:border-b-0"
-                    style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: `200px repeat(${dateRange.days.length}, minmax(0, 1fr))`,
+                      borderBottom: '1px solid #f1f5f9'
+                    }}
                   >
-                    <div className="p-3 border-r border-slate-100 flex items-center gap-2 bg-white sticky left-0 z-[5]">
-                      <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">
+                    <div style={{
+                      padding: '12px',
+                      borderRight: '1px solid #f1f5f9',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      background: 'white',
+                      position: 'sticky',
+                      left: 0,
+                      zIndex: 5,
+                      overflow: 'hidden'
+                    }}>
+                      <div style={{
+                        width: '32px',
+                        height: '32px',
+                        background: '#dbeafe',
+                        color: '#2563eb',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '12px',
+                        fontWeight: 500,
+                        flexShrink: 0
+                      }}>
                         {employee.first_name?.[0]}{employee.last_name?.[0]}
                       </div>
-                      <div className="min-w-0">
-                        <p className="text-sm font-medium text-slate-900 truncate">
+                      <div style={{ minWidth: 0, overflow: 'hidden' }}>
+                        <p style={{ fontSize: '14px', fontWeight: 500, color: '#0f172a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: 0 }}>
                           {employee.first_name} {employee.last_name}
                         </p>
-                        <p className="text-xs text-slate-500 truncate">{employee.role || employee.job_title || ''}</p>
+                        <p style={{ fontSize: '12px', color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: 0 }}>{employee.role || employee.job_title || ''}</p>
                       </div>
                     </div>
 
@@ -931,11 +987,18 @@ export default function Schedule() {
                       return (
                         <div
                           key={day.toISOString()}
-                          className={`p-1 border-r border-slate-100 last:border-r-0 min-h-[70px] overflow-hidden transition-colors ${
-                            isToday ? 'bg-blue-50/30' : ''
-                          } ${isDropZone ? 'bg-blue-100 ring-2 ring-blue-400 ring-inset' : ''} ${
-                            showManagementFeatures ? 'cursor-pointer hover:bg-slate-50' : ''
-                          }`}
+                          style={{
+                            padding: '2px',
+                            minHeight: '60px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '2px',
+                            background: isDropZone ? '#dbeafe' : isToday ? '#eff6ff' : 'white',
+                            borderRight: '1px solid #e2e8f0',
+                            borderBottom: '1px solid #e2e8f0',
+                            cursor: showManagementFeatures ? 'pointer' : 'default',
+                            overflow: 'hidden'
+                          }}
                           onDragOver={(e) => showManagementFeatures && handleDragOver(e, employee.id, day)}
                           onDragLeave={handleDragLeave}
                           onDrop={(e) => showManagementFeatures && handleDrop(e, employee.id, day)}
@@ -967,8 +1030,12 @@ export default function Schedule() {
               {/* Open shifts row - only in management view */}
               {showManagementFeatures && (
                 <div
-                  className="grid border-t-2 border-slate-200 bg-slate-50/50"
-                  style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `200px repeat(${dateRange.days.length}, minmax(0, 1fr))`,
+                    borderTop: '2px solid #e2e8f0',
+                    background: 'rgba(248,250,252,0.5)'
+                  }}
                 >
                   <div className="p-3 border-r border-slate-200 flex items-center gap-2">
                     <div className="w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center">
@@ -999,8 +1066,12 @@ export default function Schedule() {
               {/* Labour cost row - only in management view */}
               {showManagementFeatures && (
                 <div
-                  className="grid border-t border-slate-200 bg-green-50/30"
-                  style={{ gridTemplateColumns: `200px repeat(${dateRange.days.length}, 1fr)` }}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `200px repeat(${dateRange.days.length}, minmax(0, 1fr))`,
+                    borderTop: '1px solid #e2e8f0',
+                    background: 'rgba(240,253,244,0.3)'
+                  }}
                 >
                   <div className="p-3 border-r border-slate-200 flex items-center gap-2">
                     <div className="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
@@ -1432,51 +1503,224 @@ function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, 
       {/* Calendar Grid */}
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-6">
         {personalViewMode === 'week' && (
-          <div className="grid grid-cols-7 gap-2">
-            {viewDateRange.days.map((day) => (
-              <DayCell key={day.toISOString()} day={day} />
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
+            {viewDateRange.days.map((day) => {
+              const dayShift = getShiftForDay(day);
+              const isToday = isSameDay(day, new Date());
+              const isSelected = isSameDay(day, selectedDate);
+              const hasShift = !!dayShift;
+
+              const statusColors = {
+                published: '#22c55e',
+                confirmed: '#22c55e',
+                draft: '#f97316',
+                open: '#94a3b8',
+              };
+
+              return (
+                <div
+                  key={day.toISOString()}
+                  onClick={() => setSelectedDate(day)}
+                  style={{
+                    padding: '2px',
+                    minHeight: '60px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2px',
+                    background: isSelected ? '#2563eb' : isToday ? '#eff6ff' : 'white',
+                    borderRight: '1px solid #e2e8f0',
+                    borderBottom: '1px solid #e2e8f0',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4px' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 500, color: isSelected ? '#93c5fd' : '#64748b' }}>
+                      {format(day, 'EEE')}
+                    </span>
+                    <span style={{ fontSize: '18px', fontWeight: 700, color: isSelected ? 'white' : '#1e293b' }}>
+                      {format(day, 'd')}
+                    </span>
+                  </div>
+                  {hasShift ? (
+                    <div style={{
+                      background: statusColors[dayShift.status] || statusColors.draft,
+                      color: 'white',
+                      borderRadius: '6px',
+                      padding: '4px 8px',
+                      marginBottom: '2px',
+                      fontSize: '11px',
+                      lineHeight: '1.3',
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      overflow: 'hidden',
+                      minHeight: '44px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center'
+                    }}>
+                      <div style={{ fontWeight: 600 }}>{formatShortTime(dayShift)}</div>
+                      <div style={{ opacity: 0.85, fontSize: '10px' }}>{dayShift.location_name || ''}</div>
+                    </div>
+                  ) : (
+                    <span style={{ fontSize: '11px', color: isSelected ? '#93c5fd' : '#94a3b8', textAlign: 'center', padding: '4px' }}>
+                      OFF
+                    </span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
         {personalViewMode === 'twoWeek' && (
-          <div className="space-y-4">
-            <div>
-              <p className="text-xs font-medium text-slate-500 mb-2">
-                {format(viewDateRange.start, 'd MMM')} - {format(addDays(viewDateRange.start, 6), 'd MMM')}
-              </p>
-              <div className="grid grid-cols-7 gap-1">
-                {viewDateRange.days.slice(0, 7).map((day) => (
-                  <DayCell key={day.toISOString()} day={day} compact />
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-slate-500 mb-2">
-                {format(addDays(viewDateRange.start, 7), 'd MMM')} - {format(viewDateRange.end, 'd MMM')}
-              </p>
-              <div className="grid grid-cols-7 gap-1">
-                {viewDateRange.days.slice(7, 14).map((day) => (
-                  <DayCell key={day.toISOString()} day={day} compact />
-                ))}
-              </div>
+          <div style={{ overflowX: 'auto' }}>
+            {/* 14-day grid with inline styles */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(14, 1fr)', gap: '2px' }}>
+              {/* Day headers - 14 columns */}
+              {viewDateRange.days.map((day, idx) => (
+                <div key={`header-${idx}`} style={{ textAlign: 'center', fontSize: '11px', fontWeight: 600, color: '#475569', padding: '8px 4px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
+                  {format(day, 'EEE d')}
+                </div>
+              ))}
+              {/* Day cells - 14 columns */}
+              {viewDateRange.days.map((day) => {
+                const dayShift = getShiftForDay(day);
+                const isToday = isSameDay(day, new Date());
+                const isSelected = isSameDay(day, selectedDate);
+                const hasShift = !!dayShift;
+
+                // Status colors matching ShiftCard
+                const statusColors = {
+                  published: '#22c55e',
+                  confirmed: '#22c55e',
+                  draft: '#f97316',
+                  open: '#94a3b8',
+                };
+
+                return (
+                  <div
+                    key={day.toISOString()}
+                    onClick={() => setSelectedDate(day)}
+                    style={{
+                      padding: '2px',
+                      minHeight: '60px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '2px',
+                      background: isSelected ? '#2563eb' : isToday ? '#eff6ff' : 'white',
+                      borderRight: '1px solid #e2e8f0',
+                      borderBottom: '1px solid #e2e8f0',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: isSelected ? 'white' : '#1e293b', padding: '2px 4px' }}>
+                      {format(day, 'd')}
+                    </span>
+                    {hasShift ? (
+                      <div style={{
+                        background: statusColors[dayShift.status] || statusColors.draft,
+                        color: 'white',
+                        borderRadius: '6px',
+                        padding: '4px 8px',
+                        marginBottom: '2px',
+                        fontSize: '11px',
+                        lineHeight: '1.3',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        overflow: 'hidden',
+                        minHeight: '44px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center'
+                      }}>
+                        <div style={{ fontWeight: 600 }}>{formatShortTime(dayShift)}</div>
+                        <div style={{ opacity: 0.85, fontSize: '10px' }}>{dayShift.location_name || ''}</div>
+                      </div>
+                    ) : (
+                      <span style={{ fontSize: '11px', color: isSelected ? '#93c5fd' : '#94a3b8', marginTop: 'auto', padding: '2px 4px' }}>
+                        OFF
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
 
         {personalViewMode === 'month' && (
           <div>
-            {/* Day headers */}
-            <div className="grid grid-cols-7 gap-1 mb-2">
+            {/* Day headers - using inline styles */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '2px', marginBottom: '4px' }}>
               {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-                <div key={d} className="text-center text-xs font-medium text-slate-500 py-1">{d}</div>
+                <div key={d} style={{ textAlign: 'center', fontSize: '11px', fontWeight: 500, color: '#64748b', padding: '8px 4px' }}>{d}</div>
               ))}
             </div>
-            {/* Calendar grid */}
-            <div className="grid grid-cols-7 gap-1">
-              {viewDateRange.days.map((day) => (
-                <DayCell key={day.toISOString()} day={day} compact />
-              ))}
+            {/* Calendar grid - using inline styles */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '2px' }}>
+              {viewDateRange.days.map((day) => {
+                const dayShift = getShiftForDay(day);
+                const isToday = isSameDay(day, new Date());
+                const isSelected = isSameDay(day, selectedDate);
+                const hasShift = !!dayShift;
+                const isCurrentMonth = day.getMonth() === currentDate.getMonth();
+
+                // Status colors matching ShiftCard
+                const statusColors = {
+                  published: '#22c55e',
+                  confirmed: '#22c55e',
+                  draft: '#f97316',
+                  open: '#94a3b8',
+                };
+
+                return (
+                  <div
+                    key={day.toISOString()}
+                    onClick={() => setSelectedDate(day)}
+                    style={{
+                      padding: '2px',
+                      minHeight: '60px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '2px',
+                      background: isSelected ? '#2563eb' : isToday ? '#eff6ff' : 'white',
+                      borderRight: '1px solid #e2e8f0',
+                      borderBottom: '1px solid #e2e8f0',
+                      cursor: 'pointer',
+                      opacity: isCurrentMonth ? 1 : 0.4
+                    }}
+                  >
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: isSelected ? 'white' : '#1e293b', padding: '2px 4px' }}>
+                      {format(day, 'd')}
+                    </span>
+                    {hasShift && isCurrentMonth ? (
+                      <div style={{
+                        background: statusColors[dayShift.status] || statusColors.draft,
+                        color: 'white',
+                        borderRadius: '6px',
+                        padding: '4px 8px',
+                        marginBottom: '2px',
+                        fontSize: '11px',
+                        lineHeight: '1.3',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        overflow: 'hidden',
+                        minHeight: '44px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center'
+                      }}>
+                        <div style={{ fontWeight: 600 }}>{formatShortTime(dayShift)}</div>
+                        <div style={{ opacity: 0.85, fontSize: '10px' }}>{dayShift.location_name || ''}</div>
+                      </div>
+                    ) : isCurrentMonth ? (
+                      <span style={{ fontSize: '11px', color: isSelected ? '#93c5fd' : '#94a3b8', marginTop: 'auto', padding: '2px 4px' }}>
+                        OFF
+                      </span>
+                    ) : null}
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -1582,44 +1826,289 @@ function PersonalScheduleView({ shifts, dateRange, currentDate, setCurrentDate, 
   );
 }
 
+// Monthly Planning Overview - Admin view only
+// Click any day to navigate to week view for that date
+function MonthlyPlanningView({ currentDate, shifts, staffingMetrics, getShiftsForDay, setSelectedDate, t }) {
+  // Calculate month grid - need to pad to full weeks
+  const monthStart = startOfMonth(currentDate);
+  const monthEnd = endOfMonth(currentDate);
+  const calendarStart = startOfWeek(monthStart, { weekStartsOn: 1 });
+  const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: 1 });
+  const calendarDays = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
+
+  // Group days into weeks
+  const weeks = [];
+  for (let i = 0; i < calendarDays.length; i += 7) {
+    weeks.push(calendarDays.slice(i, i + 7));
+  }
+
+  // Demo events for specific dates
+  const events = {
+    '2026-03-20': 'ISO 9001 Audit',
+    '2026-03-23': 'Planned Maintenance'
+  };
+
+  // Get day stats
+  const getDayStats = (day) => {
+    const dateStr = format(day, 'yyyy-MM-dd');
+    const dayShifts = getShiftsForDay(day);
+    const totalShifts = dayShifts.length;
+
+    // Calculate total hours
+    let totalHours = 0;
+    dayShifts.forEach(shift => {
+      if (shift.start_time && shift.end_time) {
+        const start = parseISO(shift.start_time);
+        const end = parseISO(shift.end_time);
+        totalHours += (end - start) / (1000 * 60 * 60);
+      }
+    });
+
+    // Get coverage from staffingMetrics
+    const metrics = staffingMetrics[dateStr];
+    const coverage = metrics?.coverage || 0;
+
+    // Determine coverage status
+    let coverageStatus = 'none';
+    let coverageColor = '#94a3b8'; // grey
+    if (totalShifts > 0) {
+      if (coverage >= 95) {
+        coverageStatus = 'full';
+        coverageColor = '#22c55e'; // green
+      } else if (coverage >= 80) {
+        coverageStatus = 'partial';
+        coverageColor = '#f59e0b'; // amber
+      } else {
+        coverageStatus = 'low';
+        coverageColor = '#ef4444'; // red
+      }
+    }
+
+    // Get event for this day
+    const event = events[dateStr];
+
+    return { totalShifts, totalHours: Math.round(totalHours), coverageStatus, coverageColor, event };
+  };
+
+  // Get week number
+  const getWeekNumber = (date) => {
+    const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 });
+    return Math.ceil((differenceInDays(date, start) + 1) / 7);
+  };
+
+  const isToday = (day) => isSameDay(day, new Date());
+  const isCurrentMonth = (day) => day.getMonth() === currentDate.getMonth();
+
+  return (
+    <div style={{ padding: '16px' }}>
+      {/* Day headers */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '40px repeat(7, 1fr)',
+        gridAutoRows: '44px'
+      }}>
+        <div style={{ background: '#f8fafc' }} />
+        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+          <div key={day} style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontWeight: 600,
+            fontSize: '13px',
+            color: '#475569',
+            background: '#f8fafc',
+            borderBottom: '2px solid #e2e8f0'
+          }}>
+            {day}
+          </div>
+        ))}
+      </div>
+
+      {/* Week rows */}
+      {weeks.map((week, weekIndex) => (
+        <div key={weekIndex} style={{
+          display: 'grid',
+          gridTemplateColumns: '40px repeat(7, 1fr)',
+          gridAutoRows: '120px'
+        }}>
+          {/* Week number */}
+          <div style={{
+            height: '100%',
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            paddingTop: '8px',
+            fontSize: '11px',
+            color: '#94a3b8',
+            fontWeight: 500,
+            background: '#fafafa'
+          }}>
+            W{getWeekNumber(week[0]) + weekIndex}
+          </div>
+
+          {/* Day cells */}
+          {week.map((day) => {
+            const stats = getDayStats(day);
+            const today = isToday(day);
+            const inMonth = isCurrentMonth(day);
+
+            return (
+              <div
+                key={day.toISOString()}
+                onClick={() => setSelectedDate(day)}
+                style={{
+                  height: '100%',
+                  overflow: 'hidden',
+                  padding: '8px',
+                  background: inMonth ? 'white' : '#fafafa',
+                  borderRight: '1px solid #e2e8f0',
+                  borderBottom: '1px solid #e2e8f0',
+                  borderLeft: `3px solid ${inMonth ? stats.coverageColor : '#e2e8f0'}`,
+                  cursor: 'pointer',
+                  position: 'relative',
+                  opacity: inMonth ? 1 : 0.5,
+                  boxShadow: today ? 'inset 0 0 0 2px #3b82f6' : 'none'
+                }}
+              >
+                {/* Date number */}
+                <div style={{ marginBottom: '6px' }}>
+                  <span style={{
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    color: today ? '#2563eb' : inMonth ? '#0f172a' : '#94a3b8',
+                    width: '24px',
+                    height: '24px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '50%',
+                    background: today ? '#dbeafe' : 'transparent'
+                  }}>
+                    {format(day, 'd')}
+                  </span>
+                </div>
+
+                {/* Shift summary badges */}
+                {inMonth && stats.totalShifts > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px', marginBottom: '4px' }}>
+                    <span style={{
+                      fontSize: '10px',
+                      fontWeight: 500,
+                      padding: '1px 5px',
+                      borderRadius: '3px',
+                      background: '#f1f5f9',
+                      color: '#475569'
+                    }}>
+                      {stats.totalShifts} shifts
+                    </span>
+                    <span style={{
+                      fontSize: '10px',
+                      fontWeight: 500,
+                      padding: '1px 5px',
+                      borderRadius: '3px',
+                      background: '#f1f5f9',
+                      color: '#475569'
+                    }}>
+                      {stats.totalHours}h
+                    </span>
+                  </div>
+                )}
+
+                {/* Coverage indicator text */}
+                {inMonth && stats.totalShifts > 0 && (
+                  <div style={{
+                    fontSize: '9px',
+                    color: stats.coverageColor,
+                    fontWeight: 500
+                  }}>
+                    {stats.coverageStatus === 'full' && '✓ Staffed'}
+                    {stats.coverageStatus === 'partial' && '⚠ Gaps'}
+                    {stats.coverageStatus === 'low' && '✗ Low'}
+                  </div>
+                )}
+
+                {/* Event label */}
+                {inMonth && stats.event && (
+                  <div style={{
+                    fontSize: '9px',
+                    color: '#7c3aed',
+                    fontWeight: 500,
+                    background: '#f3e8ff',
+                    padding: '1px 4px',
+                    borderRadius: '3px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    marginTop: '3px'
+                  }}>
+                    📌 {stats.event}
+                  </div>
+                )}
+
+                {/* No shifts indicator */}
+                {inMonth && stats.totalShifts === 0 && (
+                  <div style={{ fontSize: '10px', color: '#94a3b8' }}>
+                    No shifts
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      ))}
+
+      {/* Click hint */}
+      <div style={{
+        marginTop: '12px',
+        fontSize: '12px',
+        color: '#64748b',
+        textAlign: 'center'
+      }}>
+        Click any day to view details in weekly view
+      </div>
+    </div>
+  );
+}
+
 // Shift card component with skills match indicator
 function ShiftCard({ shift, employee, onDragStart, calculateSkillsMatch, onSelect, t }) {
   const startTime = shift.start_time ? format(parseISO(shift.start_time), "HH:mm") : "--:--";
   const endTime = shift.end_time ? format(parseISO(shift.end_time), "HH:mm") : "--:--";
 
-  const skillsMatch = employee && shift.required_skills?.length > 0
-    ? calculateSkillsMatch(employee, shift)
-    : { score: 100, status: "full" };
-
-  // BUG 4 fix: colour-coded by status with left border
-  const statusStyles = {
-    published: "bg-green-50 border-green-300 text-green-900 border-l-green-600",
-    draft: "bg-orange-50 border-orange-300 text-orange-900 border-l-orange-500",
-    open: "bg-slate-50 border-slate-300 text-slate-700 border-l-slate-400",
+  // Status-based colors (inline)
+  const statusColors = {
+    published: '#22c55e',  // green-500
+    confirmed: '#22c55e',
+    draft: '#f97316',      // orange-500
+    open: '#94a3b8',       // slate-400
   };
-
-  const skillMatchColors = {
-    full: "bg-green-500",
-    partial: "bg-amber-500",
-    low: "bg-red-500",
-  };
+  const bgColor = statusColors[shift.status] || statusColors.draft;
 
   return (
     <div
       draggable={!!onDragStart}
       onDragStart={(e) => onDragStart && onDragStart(e, shift)}
       onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
-      className={`p-1.5 rounded text-xs mb-1 border border-l-[3px] cursor-pointer transition-shadow hover:shadow-md w-full box-border ${
-        statusStyles[shift.status] || statusStyles.draft
-      }`}
+      style={{
+        background: bgColor,
+        color: 'white',
+        borderRadius: '6px',
+        padding: '4px 8px',
+        marginBottom: '2px',
+        fontSize: '11px',
+        lineHeight: '1.3',
+        width: '100%',
+        boxSizing: 'border-box',
+        overflow: 'hidden',
+        minHeight: '44px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        cursor: 'pointer'
+      }}
     >
-      <div className="flex items-center justify-between">
-        <p className="font-medium">{startTime} - {endTime}</p>
-        {shift.required_skills?.length > 0 && (
-          <div className={`w-2 h-2 rounded-full ${skillMatchColors[skillsMatch.status]}`} />
-        )}
-      </div>
-      <p className="truncate opacity-75">{shift.location_name}</p>
+      <div style={{ fontWeight: 600 }}>{startTime} - {endTime}</div>
+      <div style={{ opacity: 0.85, fontSize: '10px' }}>{shift.location_name || employee?.role || ''}</div>
     </div>
   );
 }
@@ -1767,12 +2256,35 @@ function PublishModal({ draftCount, onClose, onPublish, t }) {
 }
 
 function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply, locations, dateRange, t }) {
+  // 3-Step Wizard State
+  const [currentStep, setCurrentStep] = useState(1);
+  const [scheduleMode, setScheduleMode] = useState('templates'); // templates, demand, agreedHours
   const [scheduleRange, setScheduleRange] = useState('week');
   const [startDate, setStartDate] = useState(format(dateRange.start, 'yyyy-MM-dd'));
   const [endDate, setEndDate] = useState(format(dateRange.end, 'yyyy-MM-dd'));
   const [locationFilter, setLocationFilter] = useState('');
   const [selectedSuggestions, setSelectedSuggestions] = useState([]);
   const [expandedDays, setExpandedDays] = useState({});
+
+  // Step 2: Auto-Fill Configuration
+  const [prioritySliders, setPrioritySliders] = useState({
+    costOptimization: 50,
+    equalHours: 70,
+    skillMatching: 80,
+    seniorityWeight: 40,
+  });
+  const [constraints, setConstraints] = useState({
+    maxHoursWeek: 48,
+    minRestHours: 11,
+    maxConsecutiveDays: 6,
+    preferredShiftLength: 8,
+  });
+  const [countryRules, setCountryRules] = useState('UK');
+
+  // Step 3: Compliance issues (demo)
+  const [complianceIssues, setComplianceIssues] = useState([]);
+  const [saveAsTemplate, setSaveAsTemplate] = useState(false);
+  const [templateName, setTemplateName] = useState('');
 
   // Update dates when range changes
   const handleRangeChange = (range) => {
@@ -1825,8 +2337,55 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
   useEffect(() => {
     if (suggestions?.suggestions) {
       setSelectedSuggestions(suggestions.suggestions.map(s => s.id));
+      // Generate demo compliance issues
+      const issues = [];
+      if (suggestions.summary.totalHours > 200) {
+        issues.push({ type: 'warning', message: 'High total hours scheduled - verify overtime approvals' });
+      }
+      if (suggestions.summary.openShifts > 5) {
+        issues.push({ type: 'info', message: `${suggestions.summary.openShifts} shifts need staff assignment` });
+      }
+      setComplianceIssues(issues);
+      setCurrentStep(3);
     }
   }, [suggestions]);
+
+  // Country-specific compliance rules
+  const countryRulesData = {
+    UK: { maxWeekly: 48, minRest: 11, label: 'UK - Working Time Regulations' },
+    DE: { maxWeekly: 48, minRest: 11, label: 'Germany - ArbZG' },
+    PL: { maxWeekly: 40, minRest: 11, label: 'Poland - Kodeks Pracy' },
+    US: { maxWeekly: 40, minRest: 8, label: 'USA - FLSA (overtime after 40h)' },
+    FR: { maxWeekly: 35, minRest: 11, label: 'France - Code du Travail' },
+    ES: { maxWeekly: 40, minRest: 12, label: 'Spain - Estatuto de los Trabajadores' },
+    IT: { maxWeekly: 40, minRest: 11, label: 'Italy - D.Lgs. 66/2003' },
+    AE: { maxWeekly: 48, minRest: 8, label: 'UAE - Federal Labour Law' },
+  };
+
+  // Step progress indicator
+  const StepIndicator = () => (
+    <div className="flex items-center justify-center gap-4 mb-6">
+      {[
+        { num: 1, label: 'Choose Mode' },
+        { num: 2, label: 'Configure' },
+        { num: 3, label: 'Review' },
+      ].map(({ num, label }, idx) => (
+        <div key={num} className="flex items-center">
+          <div className={`flex items-center gap-2 ${currentStep >= num ? 'text-purple-600' : 'text-slate-400'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+              currentStep > num ? 'bg-purple-600 text-white' :
+              currentStep === num ? 'bg-purple-100 text-purple-700 ring-2 ring-purple-600' :
+              'bg-slate-100 text-slate-400'
+            }`}>
+              {currentStep > num ? <Check className="w-4 h-4" /> : num}
+            </div>
+            <span className="text-sm font-medium hidden sm:inline">{label}</span>
+          </div>
+          {idx < 2 && <div className={`w-12 h-0.5 mx-2 ${currentStep > num ? 'bg-purple-600' : 'bg-slate-200'}`} />}
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -1834,7 +2393,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
         <div className="flex justify-between items-center p-6 border-b shrink-0">
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <Wand2 className="w-5 h-5 text-purple-600" />
-            {t('schedule.smartScheduleBuilder', 'Smart Schedule Builder')}
+            {t('schedule.smartScheduleBuilder', 'AI Schedule Builder')}
           </h2>
           <button onClick={onClose} className="p-1.5 hover:bg-gray-100 rounded-lg">
             <X className="h-5 w-5 text-gray-500" />
@@ -1842,28 +2401,107 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
         </div>
 
         <div className="flex-1 overflow-y-auto p-6">
-          {!suggestions && !loading && (
+          <StepIndicator />
+
+          {/* ============================================================
+              STEP 1: Choose Scheduling Mode
+              ============================================================ */}
+          {currentStep === 1 && !loading && (
             <div className="space-y-6">
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                <h3 className="font-medium text-purple-900 mb-2 flex items-center gap-2">
-                  <Zap className="w-4 h-4" />
-                  {t('schedule.smart.howItWorks', 'How Smart Schedule Works')}
-                </h3>
-                <ul className="text-sm text-purple-700 space-y-1 list-disc list-inside">
-                  <li>{t('schedule.smart.step1', 'Uses your shift templates to determine staffing needs')}</li>
-                  <li>{t('schedule.smart.step2', 'Matches employees by role and location')}</li>
-                  <li>{t('schedule.smart.step3', 'Distributes hours fairly across your team')}</li>
-                  <li>{t('schedule.smart.step4', 'Creates open shifts when no matching employees are available')}</li>
-                </ul>
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">How would you like to build your schedule?</h3>
+                <p className="text-slate-500">Choose a scheduling approach that fits your business</p>
               </div>
 
-              <div>
-                <h3 className="font-medium text-slate-900 mb-4">{t('schedule.smart.dateRange', 'Date Range')}</h3>
+              {/* Mode Selection Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Templates Mode */}
+                <button
+                  onClick={() => setScheduleMode('templates')}
+                  className={`p-5 rounded-xl border-2 text-left transition-all ${
+                    scheduleMode === 'templates'
+                      ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+                      : 'border-slate-200 hover:border-purple-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      scheduleMode === 'templates' ? 'bg-purple-600 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      <CalendarDays className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Schedule from Templates</h4>
+                      <span className="text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full">Recommended</span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">
+                    Use your shift templates to build the schedule. Define production runs, maintenance windows, and changeovers with automatic role timing.
+                  </p>
+                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-600">
+                    <strong>Examples:</strong> 3-shift rotation, Line Changeover, Maintenance Shutdown, Quality Audit
+                  </div>
+                </button>
+
+                {/* Demand Mode */}
+                <button
+                  onClick={() => setScheduleMode('demand')}
+                  className={`p-5 rounded-xl border-2 text-left transition-all ${
+                    scheduleMode === 'demand'
+                      ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+                      : 'border-slate-200 hover:border-purple-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      scheduleMode === 'demand' ? 'bg-purple-600 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      <TrendingUp className="w-5 h-5" />
+                    </div>
+                    <h4 className="font-semibold text-slate-900">Schedule from Demand</h4>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">
+                    Set staffing levels per production line and department based on order volume and output targets.
+                  </p>
+                  <div className="text-xs text-slate-500">
+                    Best for: Variable production schedules, seasonal demand
+                  </div>
+                </button>
+
+                {/* Agreed Hours Mode */}
+                <button
+                  onClick={() => setScheduleMode('agreedHours')}
+                  className={`p-5 rounded-xl border-2 text-left transition-all ${
+                    scheduleMode === 'agreedHours'
+                      ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+                      : 'border-slate-200 hover:border-purple-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      scheduleMode === 'agreedHours' ? 'bg-purple-600 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      <Users className="w-5 h-5" />
+                    </div>
+                    <h4 className="font-semibold text-slate-900">Schedule from Contracted Hours</h4>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">
+                    Build schedules from employees' contracted shift patterns and availability.
+                  </p>
+                  <div className="text-xs text-slate-500">
+                    Best for: Fixed-hours contracts, union environments
+                  </div>
+                </button>
+              </div>
+
+              {/* Date Range Selection */}
+              <div className="border-t pt-6">
+                <h4 className="font-medium text-slate-900 mb-4">Schedule Period</h4>
                 <div className="flex gap-3 mb-4">
                   {[
-                    { key: 'week', label: t('schedule.smart.thisWeek', 'This Week') },
-                    { key: 'twoWeek', label: t('schedule.smart.twoWeeks', '2 Weeks') },
-                    { key: 'month', label: t('schedule.smart.thisMonth', 'This Month') },
+                    { key: 'week', label: 'This Week' },
+                    { key: 'twoWeek', label: '2 Weeks' },
+                    { key: 'month', label: 'This Month' },
                   ].map(({ key, label }) => (
                     <button
                       key={key}
@@ -1880,7 +2518,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('common.startDate', 'Start Date')}</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
                     <input
                       type="date"
                       value={startDate}
@@ -1889,7 +2527,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('common.endDate', 'End Date')}</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">End Date</label>
                     <input
                       type="date"
                       value={endDate}
@@ -1900,14 +2538,15 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                 </div>
               </div>
 
+              {/* Location Filter */}
               <div>
-                <h3 className="font-medium text-slate-900 mb-3">{t('schedule.smart.locationFilter', 'Location (Optional)')}</h3>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Location</label>
                 <select
                   value={locationFilter}
                   onChange={(e) => setLocationFilter(e.target.value)}
                   className="w-full px-3 py-2 border rounded-lg"
                 >
-                  <option value="">{t('schedule.allLocations', 'All Locations')}</option>
+                  <option value="">All Locations</option>
                   {locations.map(loc => (
                     <option key={loc.id} value={loc.id}>{loc.name}</option>
                   ))}
@@ -1916,57 +2555,209 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
             </div>
           )}
 
-          {loading && (
-            <div className="flex flex-col items-center py-12">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600 mb-4"></div>
-              <p className="text-gray-600 font-medium">{t('schedule.smart.generating', 'Generating smart schedule...')}</p>
-              <p className="text-sm text-gray-500 mt-2">{t('schedule.smart.analyzing', 'Analyzing templates, availability, and distributing hours fairly')}</p>
+          {/* ============================================================
+              STEP 2: Auto-Fill Staff Configuration
+              ============================================================ */}
+          {currentStep === 2 && !loading && (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">Configure Auto-Fill Settings</h3>
+                <p className="text-slate-500">Adjust how staff are assigned to shifts</p>
+              </div>
+
+              {/* Priority Sliders */}
+              <div className="bg-slate-50 rounded-xl p-5 border">
+                <h4 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+                  <Target className="w-4 h-4 text-purple-600" />
+                  Optimization Priorities
+                </h4>
+                <div className="space-y-5">
+                  {[
+                    { key: 'costOptimization', label: 'Cost Optimization', desc: 'Prefer lower-cost staff where possible' },
+                    { key: 'equalHours', label: 'Equal Hours Distribution', desc: 'Distribute hours fairly across team' },
+                    { key: 'skillMatching', label: 'Skill Matching', desc: 'Prioritize best-qualified staff for each role' },
+                    { key: 'seniorityWeight', label: 'Seniority Weight', desc: 'Give preference to senior employees' },
+                  ].map(({ key, label, desc }) => (
+                    <div key={key}>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm font-medium text-slate-700">{label}</span>
+                        <span className="text-sm text-purple-600 font-medium">{prioritySliders[key]}%</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={prioritySliders[key]}
+                        onChange={(e) => setPrioritySliders(prev => ({ ...prev, [key]: parseInt(e.target.value) }))}
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                      />
+                      <p className="text-xs text-slate-500 mt-0.5">{desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Constraints */}
+              <div className="bg-slate-50 rounded-xl p-5 border">
+                <h4 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-blue-600" />
+                  Scheduling Constraints
+                </h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Max Hours/Week</label>
+                    <input
+                      type="number"
+                      value={constraints.maxHoursWeek}
+                      onChange={(e) => setConstraints(prev => ({ ...prev, maxHoursWeek: parseInt(e.target.value) }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Min Rest Between Shifts (hrs)</label>
+                    <input
+                      type="number"
+                      value={constraints.minRestHours}
+                      onChange={(e) => setConstraints(prev => ({ ...prev, minRestHours: parseInt(e.target.value) }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Max Consecutive Days</label>
+                    <input
+                      type="number"
+                      value={constraints.maxConsecutiveDays}
+                      onChange={(e) => setConstraints(prev => ({ ...prev, maxConsecutiveDays: parseInt(e.target.value) }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Preferred Shift Length (hrs)</label>
+                    <select
+                      value={constraints.preferredShiftLength}
+                      onChange={(e) => setConstraints(prev => ({ ...prev, preferredShiftLength: parseInt(e.target.value) }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                    >
+                      {[4, 6, 8, 10, 12].map(h => <option key={h} value={h}>{h} hours</option>)}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Country-Specific Rules */}
+              <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
+                <h4 className="font-medium text-blue-900 mb-4 flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  Country-Specific Labour Rules
+                </h4>
+                <select
+                  value={countryRules}
+                  onChange={(e) => {
+                    setCountryRules(e.target.value);
+                    const rules = countryRulesData[e.target.value];
+                    if (rules) {
+                      setConstraints(prev => ({
+                        ...prev,
+                        maxHoursWeek: rules.maxWeekly,
+                        minRestHours: rules.minRest,
+                      }));
+                    }
+                  }}
+                  className="w-full px-3 py-2 border border-blue-300 rounded-lg bg-white mb-3"
+                >
+                  {Object.entries(countryRulesData).map(([code, { label }]) => (
+                    <option key={code} value={code}>{label}</option>
+                  ))}
+                </select>
+                <p className="text-xs text-blue-700">
+                  Selected: {countryRulesData[countryRules]?.label} — Max {countryRulesData[countryRules]?.maxWeekly}h/week, Min {countryRulesData[countryRules]?.minRest}h rest
+                </p>
+              </div>
             </div>
           )}
 
-          {suggestions && !loading && (
+          {/* Loading State */}
+          {loading && (
+            <div className="flex flex-col items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
+              <p className="text-gray-600 font-medium text-lg">Generating smart schedule...</p>
+              <p className="text-sm text-gray-500 mt-2">
+                {scheduleMode === 'templates'
+                  ? 'Matching shift templates to events and calculating arrival times...'
+                  : scheduleMode === 'demand'
+                  ? 'Analyzing demand patterns and optimizing coverage...'
+                  : 'Distributing contracted hours fairly across your team...'}
+              </p>
+            </div>
+          )}
+
+          {/* ============================================================
+              STEP 3: Review & Publish
+              ============================================================ */}
+          {currentStep === 3 && suggestions && !loading && (
             <div className="space-y-4">
+              <div className="text-center mb-4">
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">Review Generated Schedule</h3>
+                <p className="text-slate-500">Review shifts and publish when ready</p>
+              </div>
+
+              {/* Compliance Check */}
+              {complianceIssues.length > 0 && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <h4 className="font-medium text-amber-900 mb-2 flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4" />
+                    Compliance Check
+                  </h4>
+                  <ul className="space-y-1">
+                    {complianceIssues.map((issue, idx) => (
+                      <li key={idx} className={`text-sm flex items-center gap-2 ${
+                        issue.type === 'warning' ? 'text-amber-700' : 'text-blue-700'
+                      }`}>
+                        {issue.type === 'warning' ? '⚠️' : 'ℹ️'} {issue.message}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Summary stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-purple-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-purple-700">{suggestions.summary.totalShifts}</p>
-                  <p className="text-xs text-purple-600">{t('schedule.smart.totalShifts', 'Total Shifts')}</p>
+                  <p className="text-xs text-purple-600">Total Shifts</p>
                 </div>
                 <div className="bg-green-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-green-700">{suggestions.summary.filledShifts}</p>
-                  <p className="text-xs text-green-600">{t('schedule.smart.filledShifts', 'Filled Shifts')}</p>
+                  <p className="text-xs text-green-600">Filled Shifts</p>
                 </div>
                 <div className="bg-amber-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-amber-700">{suggestions.summary.openShifts}</p>
-                  <p className="text-xs text-amber-600">{t('schedule.smart.openShifts', 'Open Shifts')}</p>
+                  <p className="text-xs text-amber-600">Open Shifts</p>
                 </div>
                 <div className="bg-blue-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-blue-700">{suggestions.summary.fairnessScore}%</p>
-                  <p className="text-xs text-blue-600">{t('schedule.smart.fairness', 'Fairness Score')}</p>
+                  <p className="text-xs text-blue-600">Fairness Score</p>
                 </div>
               </div>
 
               <div className="flex items-center justify-between mb-2">
                 <p className="text-sm text-slate-600">
-                  {t('schedule.smart.estimatedCost', 'Estimated Cost')}: <span className="font-medium">£{suggestions.summary.estimatedCost.toLocaleString()}</span>
+                  Est. Cost: <span className="font-medium">£{suggestions.summary.estimatedCost.toLocaleString()}</span>
                   <span className="mx-2">|</span>
-                  {t('schedule.smart.totalHours', 'Total Hours')}: <span className="font-medium">{suggestions.summary.totalHours}</span>
+                  Total Hours: <span className="font-medium">{suggestions.summary.totalHours}</span>
                   <span className="mx-2">|</span>
-                  {t('schedule.smart.avgPerEmployee', 'Avg/Employee')}: <span className="font-medium">{suggestions.summary.avgHoursPerEmployee}h</span>
+                  Avg/Employee: <span className="font-medium">{suggestions.summary.avgHoursPerEmployee}h</span>
                 </p>
                 <button
                   onClick={handleSelectAll}
                   className="text-sm text-purple-600 hover:text-purple-700 font-medium"
                 >
-                  {selectedSuggestions.length === suggestions.suggestions.length
-                    ? t('schedule.smart.deselectAll', 'Deselect All')
-                    : t('schedule.smart.selectAll', 'Select All')
-                  }
+                  {selectedSuggestions.length === suggestions.suggestions.length ? 'Deselect All' : 'Select All'}
                 </button>
               </div>
 
               {/* Shifts grouped by date */}
-              <div className="border rounded-lg divide-y max-h-[40vh] overflow-y-auto">
+              <div className="border rounded-lg divide-y max-h-[35vh] overflow-y-auto">
                 {Object.entries(groupedByDate).map(([date, dayShifts]) => {
                   const isExpanded = expandedDays[date] !== false;
                   const selectedCount = dayShifts.filter(s => selectedSuggestions.includes(s.id)).length;
@@ -1980,9 +2771,9 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                         <div className="flex items-center gap-3">
                           {isExpanded ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
                           <span className="font-medium text-slate-900">{format(parseISO(date), 'EEEE, MMM d')}</span>
-                          <span className="text-sm text-slate-500">({dayShifts.length} {t('schedule.shifts', 'shifts')})</span>
+                          <span className="text-sm text-slate-500">({dayShifts.length} shifts)</span>
                         </div>
-                        <span className="text-sm text-purple-600">{selectedCount}/{dayShifts.length} {t('schedule.selected', 'selected')}</span>
+                        <span className="text-sm text-purple-600">{selectedCount}/{dayShifts.length} selected</span>
                       </button>
                       {isExpanded && (
                         <div className="px-3 pb-3 space-y-2">
@@ -2009,13 +2800,11 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                                     <span className="font-medium text-sm text-slate-900">{shiftStartTime} - {shiftEndTime}</span>
                                     <span className="text-xs px-1.5 py-0.5 bg-slate-200 text-slate-600 rounded">{shift.employee_role}</span>
                                     {shift.is_open && (
-                                      <span className="text-xs px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded">{t('schedule.open', 'Open')}</span>
+                                      <span className="text-xs px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded">Open</span>
                                     )}
                                   </div>
                                   <p className="text-xs text-slate-500 truncate">
-                                    {shift.employee_name || t('schedule.unassigned', 'Unassigned')}
-                                    <span className="mx-1">-</span>
-                                    {shift.location_name}
+                                    {shift.employee_name || 'Unassigned'} — {shift.location_name}
                                   </p>
                                 </div>
                                 <span className="text-sm text-slate-600">{shift.hours}h</span>
@@ -2029,61 +2818,97 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                 })}
               </div>
 
+              {/* Save as Template Option */}
+              <div className="border rounded-lg p-4 bg-slate-50">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={saveAsTemplate}
+                    onChange={(e) => setSaveAsTemplate(e.target.checked)}
+                    className="w-4 h-4 rounded text-purple-600"
+                  />
+                  <span className="text-sm font-medium text-slate-700">Save this configuration as a template</span>
+                </label>
+                {saveAsTemplate && (
+                  <input
+                    type="text"
+                    placeholder="Template name (e.g., 'Weekend Brunch Setup')"
+                    value={templateName}
+                    onChange={(e) => setTemplateName(e.target.value)}
+                    className="mt-3 w-full px-3 py-2 border rounded-lg text-sm"
+                  />
+                )}
+              </div>
+
               {suggestions.suggestions.length === 0 && (
                 <div className="text-center py-8">
                   <AlertCircle className="w-10 h-10 text-amber-400 mx-auto mb-3" />
-                  <p className="text-slate-600 font-medium">{t('schedule.smart.noShiftsGenerated', 'No shifts could be generated')}</p>
-                  <p className="text-sm text-slate-500 mt-1">{t('schedule.smart.checkTemplates', 'Check that you have shift templates configured for the selected date range and location.')}</p>
+                  <p className="text-slate-600 font-medium">No shifts could be generated</p>
+                  <p className="text-sm text-slate-500 mt-1">Check that you have shift templates configured for the selected date range and location.</p>
                 </div>
               )}
             </div>
           )}
         </div>
 
+        {/* Footer with Navigation */}
         <div className="p-6 border-t bg-white shrink-0 flex justify-between">
           <div>
-            {suggestions && selectedSuggestions.length > 0 && (
+            {currentStep === 3 && suggestions && selectedSuggestions.length > 0 && (
               <p className="text-sm text-slate-600">
-                {selectedSuggestions.length} {t('schedule.smart.shiftsToApply', 'shifts will be added')}
+                {selectedSuggestions.length} shifts will be added
               </p>
             )}
           </div>
           <div className="flex gap-3">
+            {currentStep > 1 && !loading && (
+              <button
+                onClick={() => setCurrentStep(prev => prev - 1)}
+                className="px-4 py-2 text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200"
+              >
+                Back
+              </button>
+            )}
             <button onClick={onClose} className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
-              {t('common.cancel', 'Cancel')}
+              Cancel
             </button>
-            {!suggestions ? (
+
+            {currentStep === 1 && (
+              <button
+                onClick={() => setCurrentStep(2)}
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2"
+              >
+                Next: Configure
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
+
+            {currentStep === 2 && (
               <button
                 onClick={() => onGenerate(parseISO(startDate), parseISO(endDate), locationFilter)}
                 className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2"
               >
                 <Wand2 className="w-4 h-4" />
-                {t('schedule.smart.generateSchedule', 'Generate Smart Schedule')}
+                Generate Schedule
               </button>
-            ) : (
-              <>
-                <button
-                  onClick={() => { setSelectedSuggestions([]); }}
-                  className="px-4 py-2 text-purple-700 bg-purple-100 rounded-lg hover:bg-purple-200"
-                >
-                  {t('schedule.smart.regenerate', 'Regenerate')}
-                </button>
-                <button
-                  onClick={() => {
-                    const toApply = suggestions.suggestions.filter(s => selectedSuggestions.includes(s.id));
-                    onApply(toApply);
-                  }}
-                  disabled={selectedSuggestions.length === 0}
-                  className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
-                    selectedSuggestions.length > 0
-                      ? 'bg-green-600 text-white hover:bg-green-700'
-                      : 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                  }`}
-                >
-                  <Check className="w-4 h-4" />
-                  {t('schedule.smart.applySchedule', 'Apply Schedule')}
-                </button>
-              </>
+            )}
+
+            {currentStep === 3 && suggestions && (
+              <button
+                onClick={() => {
+                  const toApply = suggestions.suggestions.filter(s => selectedSuggestions.includes(s.id));
+                  onApply(toApply);
+                }}
+                disabled={selectedSuggestions.length === 0}
+                className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
+                  selectedSuggestions.length > 0
+                    ? 'bg-green-600 text-white hover:bg-green-700'
+                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                }`}
+              >
+                <Send className="w-4 h-4" />
+                Publish Schedule
+              </button>
             )}
           </div>
         </div>

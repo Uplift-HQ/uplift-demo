@@ -1,11 +1,14 @@
 // ============================================================
 // SKILLS MANAGEMENT PAGE - REAL API
+// Supports isPersonalView for My View data isolation
 // ============================================================
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { skillsApi, locationsApi, employeesApi } from '../lib/api';
-import { Search, Plus, Award, Users, CheckCircle, X, Filter, Star, ChevronRight, AlertTriangle, MapPin, Clock, AlertCircle } from 'lucide-react';
+import { Link, Navigate } from 'react-router-dom';
+import { skillsApi, locationsApi, employeesApi, DEMO_MODE } from '../lib/api';
+import { useView } from '../lib/viewContext';
+import { DEMO_MY_DATA } from '../lib/demoData';
+import { Search, Plus, Award, Users, CheckCircle, X, Filter, Star, ChevronRight, AlertTriangle, MapPin, Clock, AlertCircle, Shield, Calendar } from 'lucide-react';
 
 // Static categories - with translation keys
 const getSkillCategories = (t) => [
@@ -19,7 +22,15 @@ const getSkillCategories = (t) => [
 
 export default function Skills() {
   const { t } = useTranslation();
+  const { isPersonalView } = useView();
   const SKILL_CATEGORIES = getSkillCategories(t);
+
+  // ============================================================
+  // PERSONAL VIEW - My Skills
+  // ============================================================
+  if (isPersonalView && DEMO_MODE) {
+    return <MySkillsView t={t} />;
+  }
 
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -461,6 +472,194 @@ export default function Skills() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ============================================================
+// MY SKILLS VIEW - Personal skills for My View / Worker View
+// ============================================================
+function MySkillsView({ t }) {
+  const mySkills = DEMO_MY_DATA.skills || [];
+  const myTraining = DEMO_MY_DATA.training || [];
+
+  const verifiedSkills = mySkills.filter(s => s.verified);
+  const pendingSkills = mySkills.filter(s => !s.verified);
+  const expiringSkills = mySkills.filter(s => s.expiry && new Date(s.expiry) < new Date(Date.now() + 90 * 24 * 60 * 60 * 1000));
+
+  const getCategoryColor = (category) => {
+    const colors = {
+      'Certifications': 'bg-green-100 text-green-800 border-green-200',
+      'Health & Safety': 'bg-red-100 text-red-800 border-red-200',
+      'Compliance': 'bg-blue-100 text-blue-800 border-blue-200',
+      'Soft Skills': 'bg-purple-100 text-purple-800 border-purple-200',
+    };
+    return colors[category] || 'bg-gray-100 text-gray-800 border-gray-200';
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">{t('skills.mySkills', 'My Skills & Certifications')}</h1>
+        <p className="text-gray-600">{t('skills.mySkillsSubtitle', 'View your skills, certifications, and training progress')}</p>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div className="bg-white rounded-lg p-4 shadow border">
+          <div className="flex items-center gap-2 text-gray-600">
+            <Award className="h-5 w-5" />
+            <span>{t('skills.totalSkills', 'Total Skills')}</span>
+          </div>
+          <p className="text-2xl font-bold mt-1">{mySkills.length}</p>
+        </div>
+        <div className="bg-white rounded-lg p-4 shadow border">
+          <div className="flex items-center gap-2 text-green-600">
+            <CheckCircle className="h-5 w-5" />
+            <span>{t('skills.verified', 'Verified')}</span>
+          </div>
+          <p className="text-2xl font-bold mt-1 text-green-600">{verifiedSkills.length}</p>
+        </div>
+        <div className="bg-white rounded-lg p-4 shadow border">
+          <div className="flex items-center gap-2 text-amber-600">
+            <Clock className="h-5 w-5" />
+            <span>{t('skills.pending', 'Pending')}</span>
+          </div>
+          <p className="text-2xl font-bold mt-1 text-amber-600">{pendingSkills.length}</p>
+        </div>
+        <div className="bg-white rounded-lg p-4 shadow border">
+          <div className="flex items-center gap-2 text-red-600">
+            <AlertTriangle className="h-5 w-5" />
+            <span>{t('skills.expiringSoon', 'Expiring Soon')}</span>
+          </div>
+          <p className="text-2xl font-bold mt-1 text-red-600">{expiringSkills.length}</p>
+        </div>
+      </div>
+
+      {/* Expiring Soon Alert */}
+      {expiringSkills.length > 0 && (
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <AlertTriangle className="h-5 w-5 text-amber-600" />
+            <h3 className="font-semibold text-amber-800">{t('skills.expiringAlert', 'Certifications Expiring Soon')}</h3>
+          </div>
+          <div className="space-y-2">
+            {expiringSkills.map(skill => (
+              <div key={skill.id} className="flex items-center justify-between bg-white rounded-lg p-3 border border-amber-200">
+                <div className="flex items-center gap-3">
+                  <Shield className="h-5 w-5 text-amber-500" />
+                  <span className="font-medium text-gray-900">{skill.name}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Calendar className="h-4 w-4 text-gray-400" />
+                  <span className="text-amber-600 font-medium">
+                    {t('skills.expires', 'Expires')}: {new Date(skill.expiry).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* My Skills List */}
+      <div className="bg-white rounded-lg shadow border">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="font-semibold text-gray-900">{t('skills.mySkillsList', 'My Skills')}</h2>
+        </div>
+        <div className="divide-y divide-gray-100">
+          {mySkills.map(skill => (
+            <div key={skill.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+              <div className="flex items-center gap-4">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${skill.verified ? 'bg-green-100' : 'bg-gray-100'}`}>
+                  {skill.verified ? (
+                    <CheckCircle className="h-5 w-5 text-green-600" />
+                  ) : (
+                    <Clock className="h-5 w-5 text-gray-400" />
+                  )}
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900">{skill.name}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className={`px-2 py-0.5 text-xs rounded-full border ${getCategoryColor(skill.category)}`}>
+                      {skill.category}
+                    </span>
+                    {skill.level > 0 && (
+                      <span className="text-xs text-gray-500">
+                        {t('skills.level', 'Level')} {skill.level}/5
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="text-right">
+                {skill.verified ? (
+                  <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">
+                    <CheckCircle className="h-3 w-3" />
+                    {t('skills.verified', 'Verified')}
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-700">
+                    {t('skills.pendingVerification', 'Pending Verification')}
+                  </span>
+                )}
+                {skill.expiry && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    {t('skills.expires', 'Expires')}: {new Date(skill.expiry).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Training Progress */}
+      <div className="bg-white rounded-lg shadow border">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="font-semibold text-gray-900">{t('skills.trainingProgress', 'Training Progress')}</h2>
+        </div>
+        <div className="divide-y divide-gray-100">
+          {myTraining.map(course => (
+            <div key={course.id} className="px-6 py-4">
+              <div className="flex items-center justify-between mb-2">
+                <p className="font-medium text-gray-900">{course.course}</p>
+                <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                  course.status === 'completed' ? 'bg-green-100 text-green-700' :
+                  course.status === 'in_progress' ? 'bg-blue-100 text-blue-700' :
+                  'bg-gray-100 text-gray-600'
+                }`}>
+                  {course.status === 'completed' ? t('skills.completed', 'Completed') :
+                   course.status === 'in_progress' ? t('skills.inProgress', 'In Progress') :
+                   t('skills.notStarted', 'Not Started')}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${
+                      course.status === 'completed' ? 'bg-green-500' : 'bg-blue-500'
+                    }`}
+                    style={{ width: `${course.progress}%` }}
+                  />
+                </div>
+                <span className="text-sm text-gray-600 font-medium">{course.progress}%</span>
+              </div>
+              {course.deadline && course.status !== 'completed' && (
+                <p className="text-xs text-gray-500 mt-1">
+                  {t('skills.dueBy', 'Due by')}: {new Date(course.deadline).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </p>
+              )}
+              {course.completedDate && (
+                <p className="text-xs text-green-600 mt-1">
+                  {t('skills.completedOn', 'Completed')}: {new Date(course.completedDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

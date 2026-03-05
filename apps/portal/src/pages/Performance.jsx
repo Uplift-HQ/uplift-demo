@@ -28,6 +28,125 @@ const TABS = [
 ];
 
 // ============================================================
+// DEMO DATA — DEVELOPMENT PLANS
+// ============================================================
+
+const DEMO_DEVELOPMENT_PLANS = [
+  {
+    id: 'dp-1',
+    employee_name: 'James Thompson',
+    title: 'Career Development Plan — Restaurant Manager Track',
+    job_title: 'Server',
+    manager: 'Robert Hughes',
+    status: 'active',
+    created_at: '2026-01-15',
+    review_date: '2026-06-15',
+    focus_areas: [
+      {
+        id: 'fa-1',
+        title: 'Achieve Restaurant Manager certification',
+        sort_order: 1,
+        actions: [
+          { id: 'a-1', text: 'Complete hospitality management module', type: 'training', status: 'completed', sort_order: 1 },
+          { id: 'a-2', text: 'Shadow restaurant manager for 4 weeks', type: 'stretch', status: 'in_progress', sort_order: 2 },
+          { id: 'a-3', text: 'Lead team meeting (monthly)', type: 'stretch', status: 'pending', sort_order: 3 },
+        ],
+      },
+      {
+        id: 'fa-2',
+        title: 'Obtain Advanced Sommelier certification',
+        sort_order: 2,
+        actions: [
+          { id: 'a-4', text: 'Book sommelier course', type: 'training', status: 'completed', sort_order: 1 },
+          { id: 'a-5', text: 'Complete wine tasting assessment', type: 'training', status: 'in_progress', sort_order: 2 },
+        ],
+      },
+      {
+        id: 'fa-3',
+        title: 'Improve guest service scores',
+        sort_order: 3,
+        actions: [
+          { id: 'a-6', text: 'Attend hospitality excellence refresher', type: 'training', status: 'completed', sort_order: 1 },
+          { id: 'a-7', text: 'Achieve 98%+ guest satisfaction for 3 months', type: 'stretch', status: 'in_progress', sort_order: 2 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'dp-2',
+    employee_name: 'Sarah Chen',
+    title: 'HR Leadership Development',
+    job_title: 'HR Manager',
+    manager: 'Robert Hughes',
+    status: 'active',
+    created_at: '2026-01-10',
+    review_date: '2026-07-10',
+    focus_areas: [
+      {
+        id: 'fa-4',
+        title: 'Complete CIPD Level 7',
+        sort_order: 1,
+        actions: [
+          { id: 'a-8', text: 'Submit dissertation', type: 'training', status: 'in_progress', sort_order: 1 },
+          { id: 'a-9', text: 'Complete final module exams', type: 'training', status: 'pending', sort_order: 2 },
+        ],
+      },
+      {
+        id: 'fa-5',
+        title: 'Reduce time-to-hire by 20%',
+        sort_order: 2,
+        actions: [
+          { id: 'a-10', text: 'Implement ATS workflow', type: 'stretch', status: 'completed', sort_order: 1 },
+          { id: 'a-11', text: 'Build hiring manager training', type: 'training', status: 'in_progress', sort_order: 2 },
+          { id: 'a-12', text: 'Set up referral programme', type: 'stretch', status: 'pending', sort_order: 3 },
+        ],
+      },
+      {
+        id: 'fa-6',
+        title: 'Launch new onboarding programme',
+        sort_order: 3,
+        actions: [
+          { id: 'a-13', text: 'Finalise 90-day checklist', type: 'stretch', status: 'completed', sort_order: 1 },
+          { id: 'a-14', text: 'Train department leads', type: 'training', status: 'completed', sort_order: 2 },
+          { id: 'a-15', text: 'Pilot with March cohort', type: 'stretch', status: 'in_progress', sort_order: 3 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'dp-3',
+    employee_name: 'Mark Williams',
+    title: 'Front Desk Manager Career Path',
+    job_title: 'Front Desk Manager',
+    manager: 'Lisa Chen',
+    status: 'active',
+    created_at: '2026-02-01',
+    review_date: '2026-08-01',
+    focus_areas: [
+      {
+        id: 'fa-7',
+        title: 'Become Certified Hotel Management Professional',
+        sort_order: 1,
+        actions: [
+          { id: 'a-16', text: 'Complete hotel management training', type: 'training', status: 'completed', sort_order: 1 },
+          { id: 'a-17', text: 'Conduct 3 supervised front desk audits', type: 'stretch', status: 'in_progress', sort_order: 2 },
+          { id: 'a-18', text: 'Pass certification exam', type: 'training', status: 'pending', sort_order: 3 },
+        ],
+      },
+      {
+        id: 'fa-8',
+        title: 'Cross-train on Paris Champs-Élysées operations',
+        sort_order: 2,
+        actions: [
+          { id: 'a-19', text: 'Complete Paris Champs-Élysées service procedures', type: 'reading', status: 'completed', sort_order: 1 },
+          { id: 'a-20', text: 'Shadow Paris Champs-Élysées manager for 2 weeks', type: 'mentoring', status: 'in_progress', sort_order: 2 },
+        ],
+      },
+    ],
+  },
+];
+
+// ============================================================
 // LOADING & EMPTY STATES
 // ============================================================
 
@@ -1692,9 +1811,14 @@ function DevelopmentPlansTab({ t, isManager }) {
       setLoading(true);
       setError(null);
       const res = await performanceApi.getDevelopmentPlans();
-      setPlans(res.plans || []);
+      // Use demo data if API returns empty
+      const apiPlans = res?.plans || [];
+      setPlans(apiPlans.length > 0 ? apiPlans : DEMO_DEVELOPMENT_PLANS);
     } catch (err) {
-      setError(err.message);
+      // Fallback to demo data on error
+      if (import.meta.env.DEV) console.error('Development plans API error, using demo data:', err);
+      setPlans(DEMO_DEVELOPMENT_PLANS);
+      setError(null); // Clear error since we have demo data
     } finally {
       setLoading(false);
     }

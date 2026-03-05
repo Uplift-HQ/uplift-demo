@@ -8,6 +8,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { api, skillsApi, employeesApi } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { DEMO_CAREER, DEMO_SKILLS } from '../lib/demoData';
+
+const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
 import {
   TrendingUp, Award, Target, BookOpen, ChevronRight, Star,
   CheckCircle, AlertCircle, Clock, Briefcase, MapPin, Building,
@@ -33,6 +36,16 @@ export default function Career() {
     setLoading(true);
     setError(null);
     try {
+      // Use demo data in DEMO_MODE
+      if (DEMO_MODE) {
+        setMySkills(DEMO_CAREER.mySkills || []);
+        setCareerPaths(DEMO_CAREER.careerPaths || []);
+        setSkillsGap(DEMO_CAREER.skillsGap || []);
+        setAllSkills(DEMO_SKILLS || []);
+        setLoading(false);
+        return;
+      }
+
       // Get employee ID from user
       const empResult = await api.get('/employees/me').catch(() => null);
       const employeeId = empResult?.employee?.id;

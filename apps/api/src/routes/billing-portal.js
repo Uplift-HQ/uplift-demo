@@ -1,29 +1,25 @@
 // ============================================================
 // BILLING PORTAL ROUTES
 // Customer self-serve billing management API endpoints
+// Uses real billing service - NO MOCK DATA
 // ============================================================
 
 import { Router } from 'express';
 import { db } from '../lib/database.js';
 import { authMiddleware } from '../middleware/index.js';
+import * as billingService from '../services/billing.js';
 
 const router = Router();
-
-// Stripe would be initialized here in production
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // GET /api/billing/overview - Get billing overview
 router.get('/overview', authMiddleware, async (req, res) => {
   try {
-    const { organization_id } = req.user;
+    const organizationId = req.user.organization_id || req.user.organizationId;
 
-    // Get organization billing details
+    // Get organization details
     const orgResult = await db.query(
-      `SELECT o.*, s.name as subscription_plan, s.price, s.billing_period
-       FROM organizations o
-       LEFT JOIN subscriptions s ON s.organization_id = o.id AND s.status = 'active'
-       WHERE o.id = $1`,
-      [organization_id]
+      `SELECT id, name, billing_email, email FROM organizations WHERE id = $1`,
+      [organizationId]
     );
 
     if (orgResult.rows.length === 0) {
@@ -32,59 +28,70 @@ router.get('/overview', authMiddleware, async (req, res) => {
 
     const org = orgResult.rows[0];
 
-    // Get employee count for seat-based billing
-    const employeeResult = await db.query(
-      `SELECT COUNT(*) as count FROM users WHERE organization_id = $1 AND status = 'active'`,
-      [organization_id]
-    );
+    // Get real subscription from database
+    const subscription = await billingService.getSubscription(organizationId);
 
-    // Mock billing data (would come from Stripe in production)
+    // Get seat usage
+    const seatUsage = await billingService.getSeatUsage(organizationId);
+
+    // Get payment methods from database
+    const paymentMethods = await billingService.getPaymentMethods(organizationId);
+    const defaultPayment = paymentMethods.find(pm => pm.is_default) || paymentMethods[0];
+
+    // Get real invoices from database
+    const invoices = await billingService.getInvoices(organizationId, 5);
+
+    // Build response with real data
     const billingData = {
       organization: {
         id: org.id,
         name: org.name,
         billingEmail: org.billing_email || org.email
       },
-      subscription: {
-        plan: org.subscription_plan || 'Professional',
-        status: 'active',
-        price: org.price || 9.99,
-        billingPeriod: org.billing_period || 'monthly',
-        currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      subscription: subscription ? {
+        plan: subscription.plan_name || subscription.plan_slug || 'No plan',
+        planSlug: subscription.plan_slug,
+        status: subscription.status || 'inactive',
+        billingPeriod: 'monthly',
+        currentPeriodStart: subscription.current_period_start,
+        currentPeriodEnd: subscription.current_period_end,
+        cancelAtPeriodEnd: subscription.cancel_at_period_end || false,
+        trialEnd: subscription.trial_end,
         seats: {
-          used: parseInt(employeeResult.rows[0].count),
-          included: 10,
-          additional: Math.max(0, parseInt(employeeResult.rows[0].count) - 10),
-          pricePerSeat: 5.00
-        }
-      },
-      paymentMethod: {
-        type: 'card',
-        brand: 'visa',
-        last4: '4242',
-        expiryMonth: 12,
-        expiryYear: 2025
-      },
-      invoices: [
-        {
-          id: 'inv_001',
-          date: '2024-01-01',
-          amount: 99.90,
-          status: 'paid',
-          pdfUrl: '#'
+          coreUsed: parseInt(seatUsage.core_used) || 0,
+          corePurchased: parseInt(seatUsage.core_purchased) || 0,
+          flexUsed: parseInt(seatUsage.flex_used) || 0,
+          flexPurchased: parseInt(seatUsage.flex_purchased) || 0,
+          totalActive: parseInt(seatUsage.total_active) || 0
         },
-        {
-          id: 'inv_002',
-          date: '2023-12-01',
-          amount: 99.90,
-          status: 'paid',
-          pdfUrl: '#'
-        }
-      ],
-      nextInvoice: {
-        date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-        estimatedAmount: 99.90 + (Math.max(0, parseInt(employeeResult.rows[0].count) - 10) * 5.00)
-      }
+        corePricePerSeat: subscription.core_price_per_seat || 0,
+        flexPricePerSeat: subscription.flex_price_per_seat || 0
+      } : null,
+      paymentMethod: defaultPayment ? {
+        type: defaultPayment.type || 'card',
+        brand: defaultPayment.card_brand,
+        last4: defaultPayment.card_last4,
+        expiryMonth: defaultPayment.card_exp_month,
+        expiryYear: defaultPayment.card_exp_year
+      } : null,
+      invoices: invoices.map(inv => ({
+        id: inv.id,
+        number: inv.number,
+        date: inv.invoice_date,
+        dueDate: inv.due_date,
+        amount: parseFloat(inv.total) / 100, // Convert from cents
+        currency: inv.currency || 'GBP',
+        status: inv.status,
+        pdfUrl: inv.invoice_pdf_url,
+        hostedUrl: inv.hosted_invoice_url
+      })),
+      nextInvoice: subscription?.current_period_end ? {
+        date: subscription.current_period_end,
+        estimatedAmount: (
+          (parseInt(seatUsage.core_purchased) || 0) * (subscription.core_price_per_seat || 0) +
+          (parseInt(seatUsage.flex_purchased) || 0) * (subscription.flex_price_per_seat || 0)
+        )
+      } : null
     };
 
     res.json(billingData);
@@ -94,94 +101,77 @@ router.get('/overview', authMiddleware, async (req, res) => {
   }
 });
 
-// GET /api/billing/plans - Get available plans
+// GET /api/billing/plans - Get available plans from database
 router.get('/plans', async (req, res) => {
-  const plans = [
-    {
-      id: 'starter',
-      name: 'Starter',
-      description: 'Perfect for small teams getting started',
-      monthlyPrice: 4.99,
-      yearlyPrice: 49.99,
-      features: [
-        'Up to 10 employees',
-        'Basic scheduling',
-        'Time tracking',
-        'Mobile app access',
-        'Email support'
-      ],
-      limits: {
-        employees: 10,
-        locations: 1,
-        admins: 1
-      }
-    },
-    {
-      id: 'professional',
-      name: 'Professional',
-      description: 'For growing businesses with advanced needs',
-      monthlyPrice: 9.99,
-      yearlyPrice: 99.99,
-      popular: true,
-      features: [
-        'Up to 50 employees',
-        'Advanced scheduling',
-        'Time tracking with GPS',
-        'Payroll integration',
-        'Custom reports',
-        'Priority support'
-      ],
-      limits: {
-        employees: 50,
-        locations: 5,
-        admins: 5
-      }
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise',
-      description: 'For large organizations with custom requirements',
-      monthlyPrice: 19.99,
-      yearlyPrice: 199.99,
-      features: [
-        'Unlimited employees',
-        'All Professional features',
-        'Custom integrations',
-        'Dedicated account manager',
-        'SLA guarantee',
-        'On-premise option',
-        '24/7 phone support'
-      ],
-      limits: {
-        employees: -1, // unlimited
-        locations: -1,
-        admins: -1
-      }
-    }
-  ];
+  try {
+    const result = await db.query(`
+      SELECT id, slug, name, description,
+             core_price_per_seat, flex_price_per_seat,
+             min_seats, max_seats, features, is_active
+      FROM billing_plans
+      WHERE is_active = true
+      ORDER BY core_price_per_seat ASC
+    `);
 
-  res.json({ plans });
+    const plans = result.rows.map(plan => ({
+      id: plan.slug,
+      name: plan.name,
+      description: plan.description,
+      monthlyPrice: plan.core_price_per_seat,
+      flexPrice: plan.flex_price_per_seat,
+      features: plan.features || [],
+      limits: {
+        minSeats: plan.min_seats,
+        maxSeats: plan.max_seats
+      }
+    }));
+
+    // If no plans in database, return default structure
+    if (plans.length === 0) {
+      return res.json({
+        plans: [],
+        message: 'No billing plans configured. Contact support.'
+      });
+    }
+
+    res.json({ plans });
+  } catch (error) {
+    console.error('Get plans error:', error);
+    res.status(500).json({ error: 'Failed to get plans' });
+  }
 });
 
 // POST /api/billing/portal-session - Create Stripe billing portal session
 router.post('/portal-session', authMiddleware, async (req, res) => {
   try {
-    const { organization_id } = req.user;
+    const organizationId = req.user.organization_id || req.user.organizationId;
     const { returnUrl } = req.body;
 
-    // In production, this would create a Stripe billing portal session
-    // const session = await stripe.billingPortal.sessions.create({
-    //   customer: stripeCustomerId,
-    //   return_url: returnUrl || `${process.env.APP_URL}/settings/billing`
-    // });
+    const defaultReturnUrl = `${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/settings/billing`;
 
-    // Mock response for development
-    res.json({
-      url: returnUrl || '/settings/billing',
-      message: 'In production, this would redirect to Stripe billing portal'
-    });
+    const session = await billingService.createBillingPortalSession(
+      organizationId,
+      returnUrl || defaultReturnUrl
+    );
+
+    res.json({ url: session.url });
   } catch (error) {
     console.error('Create portal session error:', error);
+
+    if (error.message?.includes('Stripe not configured')) {
+      return res.status(503).json({
+        error: 'Billing portal not available. Please contact support.',
+        code: 'STRIPE_NOT_CONFIGURED'
+      });
+    }
+
+    if (error.message?.includes('No Stripe customer')) {
+      return res.status(400).json({
+        error: 'No billing account found. Please contact support to set up billing.',
+        code: 'NO_BILLING_ACCOUNT'
+      });
+    }
+
     res.status(500).json({ error: 'Failed to create billing portal session' });
   }
 });
@@ -189,8 +179,9 @@ router.post('/portal-session', authMiddleware, async (req, res) => {
 // POST /api/billing/change-plan - Change subscription plan
 router.post('/change-plan', authMiddleware, async (req, res) => {
   try {
-    const { organization_id, role } = req.user;
-    const { planId, billingPeriod } = req.body;
+    const organizationId = req.user.organization_id || req.user.organizationId;
+    const { role } = req.user;
+    const { planId } = req.body;
 
     if (role !== 'admin' && role !== 'owner') {
       return res.status(403).json({ error: 'Only admins can change plans' });
@@ -200,164 +191,246 @@ router.post('/change-plan', authMiddleware, async (req, res) => {
       return res.status(400).json({ error: 'planId is required' });
     }
 
-    // In production, this would update Stripe subscription
-    // const subscription = await stripe.subscriptions.update(subscriptionId, { ... });
+    const result = await billingService.changePlan(organizationId, planId);
 
     res.json({
       success: true,
-      message: `Plan changed to ${planId}`,
-      effectiveDate: new Date().toISOString()
+      previousPlan: result.previousPlan,
+      newPlan: result.newPlan,
+      message: `Plan changed from ${result.previousPlan} to ${result.newPlan}`
     });
   } catch (error) {
     console.error('Change plan error:', error);
-    res.status(500).json({ error: 'Failed to change plan' });
+
+    if (error.message?.includes('Stripe not configured')) {
+      return res.status(503).json({ error: 'Billing not available. Contact support.' });
+    }
+
+    res.status(500).json({ error: error.message || 'Failed to change plan' });
   }
 });
 
 // POST /api/billing/seats - Update seat count
 router.post('/seats', authMiddleware, async (req, res) => {
   try {
-    const { organization_id, role } = req.user;
-    const { quantity } = req.body;
+    const organizationId = req.user.organization_id || req.user.organizationId;
+    const { role } = req.user;
+    const { coreSeats, flexSeats } = req.body;
 
     if (role !== 'admin' && role !== 'owner') {
       return res.status(403).json({ error: 'Only admins can update seats' });
     }
 
-    if (!quantity || quantity < 1) {
-      return res.status(400).json({ error: 'Valid quantity is required' });
+    const results = {};
+
+    if (coreSeats !== undefined) {
+      if (coreSeats < 1) {
+        return res.status(400).json({ error: 'Core seats must be at least 1' });
+      }
+      results.coreSeats = await billingService.updateCoreSeats(organizationId, coreSeats);
     }
 
-    // In production, this would update Stripe subscription quantity
+    if (flexSeats !== undefined) {
+      if (flexSeats < 0) {
+        return res.status(400).json({ error: 'Flex seats cannot be negative' });
+      }
+      results.flexSeats = await billingService.updateFlexSeats(organizationId, flexSeats);
+    }
+
     res.json({
       success: true,
-      seats: quantity,
-      message: `Seat count updated to ${quantity}`
+      ...results,
+      message: 'Seat count updated successfully'
     });
   } catch (error) {
     console.error('Update seats error:', error);
-    res.status(500).json({ error: 'Failed to update seats' });
+
+    if (error.message?.includes('Stripe not configured')) {
+      return res.status(503).json({ error: 'Billing not available. Contact support.' });
+    }
+
+    res.status(500).json({ error: error.message || 'Failed to update seats' });
   }
 });
 
 // POST /api/billing/cancel - Cancel subscription
 router.post('/cancel', authMiddleware, async (req, res) => {
   try {
-    const { organization_id, role } = req.user;
-    const { reason, feedback } = req.body;
+    const organizationId = req.user.organization_id || req.user.organizationId;
+    const { role } = req.user;
+    const { reason, feedback, immediate = false } = req.body;
 
     if (role !== 'admin' && role !== 'owner') {
       return res.status(403).json({ error: 'Only admins can cancel subscriptions' });
     }
 
-    // Log cancellation reason
-    await db.query(
-      `INSERT INTO subscription_events (organization_id, event_type, metadata)
-       VALUES ($1, 'cancellation_requested', $2::jsonb)
-       ON CONFLICT DO NOTHING`,
-      [organization_id, JSON.stringify({ reason, feedback })]
-    ).catch(() => {}); // Table might not exist
+    const subscription = await billingService.cancelSubscription(
+      organizationId,
+      immediate,
+      reason || feedback
+    );
 
-    // In production, this would cancel via Stripe
     res.json({
       success: true,
-      cancelAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-      message: 'Subscription will be cancelled at the end of the billing period'
+      status: subscription.status,
+      cancelAtPeriodEnd: subscription.cancel_at_period_end,
+      message: immediate
+        ? 'Subscription cancelled immediately'
+        : 'Subscription will be cancelled at the end of the billing period'
     });
   } catch (error) {
     console.error('Cancel subscription error:', error);
-    res.status(500).json({ error: 'Failed to cancel subscription' });
+
+    if (error.message?.includes('No active subscription')) {
+      return res.status(400).json({ error: 'No active subscription to cancel' });
+    }
+
+    res.status(500).json({ error: error.message || 'Failed to cancel subscription' });
   }
 });
 
 // POST /api/billing/reactivate - Reactivate cancelled subscription
 router.post('/reactivate', authMiddleware, async (req, res) => {
   try {
-    const { organization_id, role } = req.user;
+    const organizationId = req.user.organization_id || req.user.organizationId;
+    const { role } = req.user;
 
     if (role !== 'admin' && role !== 'owner') {
       return res.status(403).json({ error: 'Only admins can reactivate subscriptions' });
     }
 
-    // In production, this would reactivate via Stripe
+    // Get subscription
+    const sub = await billingService.getSubscription(organizationId);
+
+    if (!sub?.stripe_subscription_id) {
+      return res.status(400).json({ error: 'No subscription found to reactivate' });
+    }
+
+    // Reactivate via Stripe - remove cancel_at_period_end
+    if (billingService.stripe) {
+      await billingService.stripe.subscriptions.update(sub.stripe_subscription_id, {
+        cancel_at_period_end: false
+      });
+    }
+
+    // Update local database
+    await db.query(`
+      UPDATE subscriptions
+      SET cancel_at_period_end = false, cancellation_reason = null, updated_at = NOW()
+      WHERE organization_id = $1
+    `, [organizationId]);
+
     res.json({
       success: true,
       message: 'Subscription reactivated successfully'
     });
   } catch (error) {
     console.error('Reactivate subscription error:', error);
-    res.status(500).json({ error: 'Failed to reactivate subscription' });
+    res.status(500).json({ error: error.message || 'Failed to reactivate subscription' });
   }
 });
 
 // GET /api/billing/invoices - Get invoice history
 router.get('/invoices', authMiddleware, async (req, res) => {
   try {
-    const { organization_id } = req.user;
-    const { limit = 12 } = req.query;
+    const organizationId = req.user.organization_id || req.user.organizationId;
+    const limit = Math.min(parseInt(req.query.limit) || 12, 100);
 
-    // In production, this would fetch from Stripe
-    // const invoices = await stripe.invoices.list({ customer: customerId, limit });
+    const invoices = await billingService.getInvoices(organizationId, limit);
 
-    // Mock invoice data
-    const invoices = [];
-    const now = new Date();
-    for (let i = 0; i < Math.min(limit, 12); i++) {
-      const date = new Date(now);
-      date.setMonth(date.getMonth() - i);
-      invoices.push({
-        id: `inv_${String(i + 1).padStart(3, '0')}`,
-        number: `INV-2024-${String(100 - i).padStart(4, '0')}`,
-        date: date.toISOString().split('T')[0],
-        dueDate: date.toISOString().split('T')[0],
-        amount: 99.90,
-        currency: 'GBP',
-        status: 'paid',
-        pdfUrl: '#'
-      });
-    }
-
-    res.json({ invoices });
+    res.json({
+      invoices: invoices.map(inv => ({
+        id: inv.id,
+        stripeId: inv.stripe_invoice_id,
+        number: inv.number,
+        date: inv.invoice_date,
+        dueDate: inv.due_date,
+        paidAt: inv.paid_at,
+        amount: parseFloat(inv.total) / 100, // Convert from cents
+        amountPaid: parseFloat(inv.amount_paid) / 100,
+        amountDue: parseFloat(inv.amount_due) / 100,
+        currency: inv.currency || 'GBP',
+        status: inv.status,
+        pdfUrl: inv.invoice_pdf_url,
+        hostedUrl: inv.hosted_invoice_url
+      }))
+    });
   } catch (error) {
     console.error('Get invoices error:', error);
     res.status(500).json({ error: 'Failed to get invoices' });
   }
 });
 
-// PUT /api/billing/payment-method - Update payment method
+// GET /api/billing/subscription - Get current subscription details
+router.get('/subscription', authMiddleware, async (req, res) => {
+  try {
+    const organizationId = req.user.organization_id || req.user.organizationId;
+
+    const subscription = await billingService.getSubscription(organizationId);
+    const seatUsage = await billingService.getSeatUsage(organizationId);
+
+    if (!subscription) {
+      return res.json({ subscription: null, message: 'No active subscription' });
+    }
+
+    res.json({
+      subscription: {
+        id: subscription.id,
+        stripeId: subscription.stripe_subscription_id,
+        plan: subscription.plan_name || subscription.plan_slug,
+        planSlug: subscription.plan_slug,
+        status: subscription.status,
+        coreSeats: subscription.core_seats,
+        flexSeats: subscription.flex_seats,
+        currentPeriodStart: subscription.current_period_start,
+        currentPeriodEnd: subscription.current_period_end,
+        cancelAtPeriodEnd: subscription.cancel_at_period_end,
+        trialStart: subscription.trial_start,
+        trialEnd: subscription.trial_end
+      },
+      usage: {
+        coreUsed: parseInt(seatUsage.core_used) || 0,
+        corePurchased: parseInt(seatUsage.core_purchased) || 0,
+        flexUsed: parseInt(seatUsage.flex_used) || 0,
+        flexPurchased: parseInt(seatUsage.flex_purchased) || 0,
+        totalActive: parseInt(seatUsage.total_active) || 0
+      }
+    });
+  } catch (error) {
+    console.error('Get subscription error:', error);
+    res.status(500).json({ error: 'Failed to get subscription' });
+  }
+});
+
+// PUT /api/billing/payment-method - Update payment method (redirect to Stripe portal)
 router.put('/payment-method', authMiddleware, async (req, res) => {
   try {
-    const { organization_id, role } = req.user;
+    const organizationId = req.user.organization_id || req.user.organizationId;
+    const { role } = req.user;
 
     if (role !== 'admin' && role !== 'owner') {
       return res.status(403).json({ error: 'Only admins can update payment methods' });
     }
 
-    // In production, STRIPE_SECRET_KEY is required for payment method updates
-    if (process.env.NODE_ENV === 'production' && !process.env.STRIPE_SECRET_KEY) {
+    // Create billing portal session for payment method update
+    const returnUrl = `${process.env.APP_URL || 'https://app.uplifthq.co.uk'}/settings/billing`;
+
+    const session = await billingService.createBillingPortalSession(organizationId, returnUrl);
+
+    res.json({
+      url: session.url,
+      message: 'Redirect to Stripe to update payment method'
+    });
+  } catch (error) {
+    console.error('Update payment method error:', error);
+
+    if (error.message?.includes('Stripe not configured')) {
       return res.status(503).json({
-        error: 'Payment method updates are not available. Please contact support.',
+        error: 'Payment method updates not available. Contact support.',
         code: 'STRIPE_NOT_CONFIGURED'
       });
     }
 
-    // In development/staging without Stripe configured, return mock response
-    if (!process.env.STRIPE_SECRET_KEY) {
-      return res.json({
-        clientSecret: 'mock_client_secret_dev_only',
-        message: 'Development mode: Stripe not configured. In production, use this client secret with Stripe.js to collect payment method',
-        isDevelopment: true
-      });
-    }
-
-    // Production path: Use actual Stripe
-    // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-    // const setupIntent = await stripe.setupIntents.create({ customer: customerId });
-    // res.json({ clientSecret: setupIntent.client_secret });
-
-    res.status(501).json({ error: 'Stripe integration pending configuration' });
-  } catch (error) {
-    console.error('Update payment method error:', error);
     res.status(500).json({ error: 'Failed to update payment method' });
   }
 });

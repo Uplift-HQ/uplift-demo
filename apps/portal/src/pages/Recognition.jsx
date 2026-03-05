@@ -3,11 +3,15 @@
 // Peer-to-peer recognition feed, leaderboards, giving
 // recognition, and role-based analytics.
 // Route: /recognition
+// Supports isPersonalView for My View data isolation
 // ============================================================
 
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../lib/auth';
+import { useView } from '../lib/viewContext';
+import { DEMO_MODE } from '../lib/api';
+import { DEMO_MY_DATA } from '../lib/demoData';
 import {
   Star,
   HeartHandshake,
@@ -30,6 +34,7 @@ import {
   MapPin,
   Calendar,
   ArrowRight,
+  User,
 } from 'lucide-react';
 
 // ============================================================
@@ -48,28 +53,29 @@ const CATEGORIES = [
 const COMPANY_VALUES = [
   { key: 'excellence', labelKey: 'recognition.value.excellence', labelFallback: 'Excellence' },
   { key: 'teamwork', labelKey: 'recognition.value.teamwork', labelFallback: 'Teamwork' },
-  { key: 'guestFirst', labelKey: 'recognition.value.guestFirst', labelFallback: 'Guest First' },
+  { key: 'safetyFirst', labelKey: 'recognition.value.safetyFirst', labelFallback: 'Safety First' },
   { key: 'innovation', labelKey: 'recognition.value.innovation', labelFallback: 'Innovation' },
   { key: 'integrity', labelKey: 'recognition.value.integrity', labelFallback: 'Integrity' },
 ];
 
 const DEPARTMENTS = [
+  { key: 'foodBeverage', labelFallback: 'Food & Beverage' },
   { key: 'frontOffice', labelFallback: 'Front Office' },
   { key: 'housekeeping', labelFallback: 'Housekeeping' },
-  { key: 'foodBeverage', labelFallback: 'Food & Beverage' },
-  { key: 'kitchen', labelFallback: 'Kitchen' },
-  { key: 'spaWellness', labelFallback: 'Spa & Wellness' },
-  { key: 'concierge', labelFallback: 'Concierge' },
+  { key: 'guestServices', labelFallback: 'Guest Services' },
+  { key: 'facilities', labelFallback: 'Facilities' },
+  { key: 'wellness', labelFallback: 'Wellness' },
+  { key: 'adminHr', labelFallback: 'Admin & HR' },
+  { key: 'procurement', labelFallback: 'Procurement' },
+  { key: 'revenueManagement', labelFallback: 'Revenue Management' },
   { key: 'events', labelFallback: 'Events' },
-  { key: 'management', labelFallback: 'Management' },
 ];
 
 const LOCATIONS = [
-  { key: 'london', labelFallback: 'London' },
-  { key: 'paris', labelFallback: 'Paris' },
-  { key: 'tokyo', labelFallback: 'Tokyo' },
-  { key: 'dubai', labelFallback: 'Dubai' },
-  { key: 'newYork', labelFallback: 'New York' },
+  { key: 'london', labelFallback: 'London Mayfair' },
+  { key: 'paris', labelFallback: 'Paris Champs-Élysées' },
+  { key: 'dubai', labelFallback: 'Dubai Marina' },
+  { key: 'tokyo', labelFallback: 'Tokyo Ginza' },
 ];
 
 // ============================================================
@@ -77,18 +83,18 @@ const LOCATIONS = [
 // ============================================================
 
 const EMPLOYEES = [
-  { id: 1, name: 'James Williams', role: 'Front Office Manager', dept: 'Front Office', location: 'London' },
-  { id: 2, name: 'Maria Santos', role: 'Guest Relations Lead', dept: 'Front Office', location: 'London' },
-  { id: 3, name: 'Pierre Dubois', role: 'F&B Supervisor', dept: 'Food & Beverage', location: 'Paris' },
-  { id: 4, name: 'Sophie Anderson', role: 'Senior Concierge', dept: 'Concierge', location: 'London' },
-  { id: 5, name: 'Ahmed Hassan', role: 'Night Manager', dept: 'Management', location: 'Dubai' },
-  { id: 6, name: 'Yuki Tanaka', role: 'Sous Chef', dept: 'Kitchen', location: 'Tokyo' },
-  { id: 7, name: 'Emily Watson', role: 'Spa Director', dept: 'Spa & Wellness', location: 'London' },
-  { id: 8, name: 'Raj Patel', role: 'Night Auditor', dept: 'Front Office', location: 'Dubai' },
-  { id: 9, name: 'Claire Dubois', role: 'Housekeeping Lead', dept: 'Housekeeping', location: 'Paris' },
-  { id: 10, name: 'Wei Zhang', role: 'Head Chef', dept: 'Kitchen', location: 'Tokyo' },
-  { id: 11, name: 'Aiko Yamamoto', role: 'Guest Services', dept: 'Concierge', location: 'Tokyo' },
-  { id: 12, name: 'Liam O\'Connor', role: 'Events Coordinator', dept: 'Events', location: 'London' },
+  { id: 1, name: 'James Williams', role: 'Restaurant Manager', dept: 'Food & Beverage', location: 'London Mayfair' },
+  { id: 2, name: 'Sarah Mitchell', role: 'Front Desk Manager', dept: 'Front Office', location: 'London Mayfair' },
+  { id: 3, name: 'Klaus Weber', role: 'Head Chef', dept: 'Food & Beverage', location: 'Dubai Marina' },
+  { id: 4, name: 'Sophie Anderson', role: 'Spa Manager', dept: 'Wellness', location: 'London Mayfair' },
+  { id: 5, name: 'Omar Al-Rashid', role: 'Housekeeping Supervisor', dept: 'Housekeeping', location: 'Dubai Marina' },
+  { id: 6, name: 'Kenji Yamamoto', role: 'Concierge', dept: 'Guest Services', location: 'Tokyo Ginza' },
+  { id: 7, name: 'Emily Watson', role: 'HR Manager', dept: 'Admin & HR', location: 'London Mayfair' },
+  { id: 8, name: 'David Roberts', role: 'Facilities Manager', dept: 'Facilities', location: 'Paris Champs-Élysées' },
+  { id: 9, name: 'Anna Kowalska', role: 'Procurement Manager', dept: 'Procurement', location: 'Dubai Marina' },
+  { id: 10, name: 'Michael Turner', role: 'Executive Chef', dept: 'Food & Beverage', location: 'Paris Champs-Élysées' },
+  { id: 11, name: 'Yuki Tanaka', role: 'Revenue Manager', dept: 'Revenue Management', location: 'Tokyo Ginza' },
+  { id: 12, name: 'Rachel Thompson', role: 'Event Coordinator', dept: 'Events', location: 'London Mayfair' },
 ];
 
 // ============================================================
@@ -105,7 +111,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 1,
     toId: 2,
     categoryKey: 'greatWork',
-    message: 'Handled the VIP check-in flawlessly. Guest left a 5-star review!',
+    message: 'Exceptional handling of a complex guest situation. You turned a concern into a memorable experience!',
     value: 'excellence',
     timestamp: now - 2 * HOUR,
     likes: 14,
@@ -116,7 +122,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 2,
     toId: 3,
     categoryKey: 'teamPlayer',
-    message: 'Covered my shift on short notice. True team spirit!',
+    message: 'Stayed late to help with the evening service during a busy weekend. True team spirit!',
     value: 'teamwork',
     timestamp: now - 4 * HOUR,
     likes: 9,
@@ -127,8 +133,8 @@ const INITIAL_RECOGNITIONS = [
     fromId: 4,
     toId: 11,
     categoryKey: 'aboveBeyond',
-    message: 'Stayed late to help a lost guest find their way back to the hotel',
-    value: 'guestFirst',
+    message: 'Stayed late to coordinate special spa treatments during our annual wellness summit',
+    value: 'safetyFirst',
     timestamp: now - 6 * HOUR,
     likes: 22,
     likedByMe: false,
@@ -138,7 +144,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 5,
     toId: 1,
     categoryKey: 'innovation',
-    message: 'Brilliant idea to use QR codes for the breakfast menu',
+    message: 'Brilliant idea to implement the new guest request system. It\'s improved response times significantly!',
     value: 'innovation',
     timestamp: now - 1 * DAY,
     likes: 17,
@@ -149,7 +155,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 6,
     toId: 10,
     categoryKey: 'mentor',
-    message: 'Thank you for teaching me the proper knife techniques',
+    message: 'Thank you for sharing your culinary expertise and mentoring techniques in the kitchen',
     value: 'excellence',
     timestamp: now - 1.5 * DAY,
     likes: 11,
@@ -160,7 +166,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 7,
     toId: 9,
     categoryKey: 'goalCrusher',
-    message: 'Achieved 100% room turnover rate this month!',
+    message: 'Successfully sourced premium suppliers and achieved 100% on-time delivery this month!',
     value: 'excellence',
     timestamp: now - 2 * DAY,
     likes: 26,
@@ -171,8 +177,8 @@ const INITIAL_RECOGNITIONS = [
     fromId: 8,
     toId: 4,
     categoryKey: 'greatWork',
-    message: 'Your concierge recommendations got amazing feedback',
-    value: 'guestFirst',
+    message: 'Your wellness program initiatives are making a real difference for our guests and staff',
+    value: 'safetyFirst',
     timestamp: now - 2.5 * DAY,
     likes: 8,
     likedByMe: false,
@@ -182,7 +188,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 3,
     toId: 5,
     categoryKey: 'teamPlayer',
-    message: 'Always ready to help during rush hour',
+    message: 'Always ready to help during peak guest arrival periods',
     value: 'teamwork',
     timestamp: now - 3 * DAY,
     likes: 13,
@@ -193,8 +199,8 @@ const INITIAL_RECOGNITIONS = [
     fromId: 9,
     toId: 8,
     categoryKey: 'aboveBeyond',
-    message: 'Going the extra mile for night shift guests',
-    value: 'guestFirst',
+    message: 'Going the extra mile to keep all hotel facilities running smoothly',
+    value: 'excellence',
     timestamp: now - 4 * DAY,
     likes: 19,
     likedByMe: false,
@@ -204,7 +210,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 1,
     toId: 7,
     categoryKey: 'greatWork',
-    message: 'Spa customer satisfaction at all-time high',
+    message: 'Staff satisfaction at all-time high after the new onboarding programme',
     value: 'excellence',
     timestamp: now - 5 * DAY,
     likes: 15,
@@ -215,7 +221,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 10,
     toId: 6,
     categoryKey: 'innovation',
-    message: 'New plating style for the omakase menu is stunning',
+    message: 'New concierge service initiative improved guest satisfaction scores by 15%',
     value: 'innovation',
     timestamp: now - 6 * DAY,
     likes: 20,
@@ -226,7 +232,7 @@ const INITIAL_RECOGNITIONS = [
     fromId: 2,
     toId: 1,
     categoryKey: 'mentor',
-    message: 'Your guidance during my first month made all the difference',
+    message: 'Your guidance during my first month working in guest services made all the difference',
     value: 'teamwork',
     timestamp: now - 7 * DAY,
     likes: 24,
@@ -560,8 +566,8 @@ function LeaderboardSidebar({ recognitions, t }) {
 // ============================================================
 
 function ManagerAnalyticsPanel({ recognitions, t }) {
-  // Simulate "my team" as Front Office + Concierge for demo
-  const teamDepts = ['Front Office', 'Concierge'];
+  // Simulate "my team" as Food & Beverage + Front Office for demo
+  const teamDepts = ['Food & Beverage', 'Front Office'];
   const teamMembers = EMPLOYEES.filter((e) => teamDepts.includes(e.dept));
   const teamIds = teamMembers.map((e) => e.id);
 
@@ -773,6 +779,14 @@ function AdminAnalyticsPanel({ recognitions, t }) {
 export default function Recognition() {
   const { t } = useTranslation();
   const { user, isAdmin, isManagerOrAbove } = useAuth();
+  const { isPersonalView } = useView();
+
+  // ============================================================
+  // PERSONAL VIEW - My Recognition
+  // ============================================================
+  if (isPersonalView && DEMO_MODE) {
+    return <MyRecognitionView t={t} user={user} />;
+  }
 
   // State
   const [recognitions, setRecognitions] = useState(INITIAL_RECOGNITIONS);
@@ -1230,6 +1244,176 @@ export default function Recognition() {
         <div>
           <LeaderboardSidebar recognitions={recognitions} t={t} />
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// MY RECOGNITION VIEW - Personal view for My View / Worker View
+// ============================================================
+function MyRecognitionView({ t, user }) {
+  const myRecognition = DEMO_MY_DATA.recognition || { received: [], given: [] };
+  const received = myRecognition.received || [];
+  const given = myRecognition.given || [];
+
+  const getCategoryByKey = (key) => {
+    return CATEGORIES.find((c) => c.key === key) || CATEGORIES[0];
+  };
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">
+          {t('recognition.myRecognition', 'My Recognition')}
+        </h1>
+        <p className="text-slate-500 mt-1">
+          {t('recognition.myRecognitionSubtitle', 'Recognition you\'ve received and given to colleagues')}
+        </p>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="bg-white rounded-xl border border-slate-200 p-6">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+              <Trophy className="w-6 h-6 text-green-600" />
+            </div>
+            <div>
+              <p className="text-sm text-slate-500">{t('recognition.received', 'Recognition Received')}</p>
+              <p className="text-3xl font-bold text-slate-900">{received.length}</p>
+            </div>
+          </div>
+          <p className="text-sm text-slate-500">
+            {t('recognition.totalLikesReceived', 'Total likes')}: {received.reduce((sum, r) => sum + (r.likes || 0), 0)}
+          </p>
+        </div>
+        <div className="bg-white rounded-xl border border-slate-200 p-6">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+              <Send className="w-6 h-6 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-sm text-slate-500">{t('recognition.given', 'Recognition Given')}</p>
+              <p className="text-3xl font-bold text-slate-900">{given.length}</p>
+            </div>
+          </div>
+          <p className="text-sm text-slate-500">
+            {t('recognition.totalLikesOnGiven', 'Total likes on your recognitions')}: {given.reduce((sum, r) => sum + (r.likes || 0), 0)}
+          </p>
+        </div>
+      </div>
+
+      {/* Recognition Received */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-200">
+          <div className="flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-amber-500" />
+            <h2 className="font-semibold text-slate-900">
+              {t('recognition.receivedTitle', 'Recognition I\'ve Received')}
+            </h2>
+          </div>
+        </div>
+        {received.length === 0 ? (
+          <div className="p-8 text-center">
+            <Trophy className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <p className="text-slate-500">{t('recognition.noRecognitionReceived', 'No recognition received yet')}</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-slate-100">
+            {received.map((rec) => {
+              const category = getCategoryByKey(rec.category);
+              const CategoryIcon = category?.Icon || Star;
+              return (
+                <div key={rec.id} className="p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-momentum-100 flex items-center justify-center text-momentum-600 font-semibold text-sm flex-shrink-0">
+                      {rec.from.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-semibold text-slate-900">{rec.from}</span>
+                        <span className="text-slate-400">→</span>
+                        <span className="font-semibold text-slate-900">{t('recognition.you', 'You')}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${category.bg} ${category.border} border`}>
+                          <CategoryIcon className={`w-3.5 h-3.5 ${category.color}`} />
+                          {t(`recognition.categories.${rec.category}`, category.labelFallback)}
+                        </span>
+                        <span className="text-xs text-slate-400">{formatDate(rec.date)}</span>
+                      </div>
+                      <p className="text-sm text-slate-700">&ldquo;{rec.message}&rdquo;</p>
+                      <div className="flex items-center gap-1 mt-2 text-sm text-slate-500">
+                        <Heart className="w-4 h-4 text-red-400" />
+                        <span>{rec.likes} {t('recognition.likes', 'likes')}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Recognition Given */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-200">
+          <div className="flex items-center gap-2">
+            <Send className="w-5 h-5 text-blue-500" />
+            <h2 className="font-semibold text-slate-900">
+              {t('recognition.givenTitle', 'Recognition I\'ve Given')}
+            </h2>
+          </div>
+        </div>
+        {given.length === 0 ? (
+          <div className="p-8 text-center">
+            <Send className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <p className="text-slate-500">{t('recognition.noRecognitionGiven', 'No recognition given yet')}</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-slate-100">
+            {given.map((rec) => {
+              const category = getCategoryByKey(rec.category);
+              const CategoryIcon = category?.Icon || Star;
+              return (
+                <div key={rec.id} className="p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-semibold text-sm flex-shrink-0">
+                      {rec.to.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-semibold text-slate-900">{t('recognition.you', 'You')}</span>
+                        <span className="text-slate-400">→</span>
+                        <span className="font-semibold text-slate-900">{rec.to}</span>
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${category.bg} ${category.border} border`}>
+                          <CategoryIcon className={`w-3.5 h-3.5 ${category.color}`} />
+                          {t(`recognition.categories.${rec.category}`, category.labelFallback)}
+                        </span>
+                        <span className="text-xs text-slate-400">{formatDate(rec.date)}</span>
+                      </div>
+                      <p className="text-sm text-slate-700">&ldquo;{rec.message}&rdquo;</p>
+                      <div className="flex items-center gap-1 mt-2 text-sm text-slate-500">
+                        <Heart className="w-4 h-4 text-red-400" />
+                        <span>{rec.likes} {t('recognition.likes', 'likes')}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

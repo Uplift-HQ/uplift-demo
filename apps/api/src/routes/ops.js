@@ -8,9 +8,62 @@ import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import rateLimit from 'express-rate-limit';
 import { authenticator } from 'otplib';
 import { db } from '../lib/database.js';
 import * as billingService from '../services/billing.js';
+
+// ==================== SIMPLE IN-MEMORY RATE LIMITER ====================
+// Reliable rate limiting that ALWAYS works - no async initialization issues
+
+const loginAttempts = new Map(); // IP -> { count, resetTime }
+
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
+const RATE_LIMIT_MAX = 10; // 10 attempts per window
+
+// Clean up old entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, data] of loginAttempts.entries()) {
+    if (now > data.resetTime) {
+      loginAttempts.delete(ip);
+    }
+  }
+}, 60 * 1000); // Clean every minute
+
+// Rate limiter middleware that ACTUALLY WORKS
+const opsLoginLimiter = (req, res, next) => {
+  const ip = req.ip || req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
+  const now = Date.now();
+
+  let data = loginAttempts.get(ip);
+
+  // If no record or window expired, reset
+  if (!data || now > data.resetTime) {
+    data = { count: 0, resetTime: now + RATE_LIMIT_WINDOW };
+    loginAttempts.set(ip, data);
+  }
+
+  // Increment counter
+  data.count++;
+
+  // Set headers
+  res.setHeader('X-RateLimit-Limit', RATE_LIMIT_MAX);
+  res.setHeader('X-RateLimit-Remaining', Math.max(0, RATE_LIMIT_MAX - data.count));
+  res.setHeader('X-RateLimit-Reset', Math.ceil(data.resetTime / 1000));
+
+  // Check if over limit
+  if (data.count > RATE_LIMIT_MAX) {
+    const retryAfter = Math.ceil((data.resetTime - now) / 1000);
+    res.setHeader('Retry-After', retryAfter);
+    return res.status(429).json({
+      error: 'Too many login attempts. Please try again in 15 minutes.',
+      retryAfter
+    });
+  }
+
+  next();
+};
 
 // Configure TOTP settings
 authenticator.options = {
@@ -172,7 +225,7 @@ router.get('/ping', (req, res) => {
   res.json({ pong: true, time: new Date().toISOString() });
 });
 
-router.post('/auth/login', async (req, res) => {
+router.post('/auth/login', opsLoginLimiter, async (req, res) => {
   const { email, password, mfaToken } = req.body;
   const ip = req.ip;
   const userAgent = req.headers['user-agent'];
@@ -253,9 +306,16 @@ router.post('/auth/login', async (req, res) => {
       // Decrypt the stored secret and verify TOTP
       let secret = user.mfa_secret;
       try {
-        secret = crypto
-          .createDecipher('aes-256-cbc', process.env.MFA_ENCRYPTION_KEY || process.env.JWT_SECRET)
-          .update(user.mfa_secret, 'hex', 'utf8');
+        // Format: iv(32hex):encrypted(hex)
+        const parts = user.mfa_secret.split(':');
+        if (parts.length === 2) {
+          const iv = Buffer.from(parts[0], 'hex');
+          const encrypted = parts[1];
+          const key = crypto.scryptSync(process.env.MFA_ENCRYPTION_KEY || process.env.JWT_SECRET, 'salt', 32);
+          const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
+          secret = decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8');
+        }
+        // If no colon, might be old format - try as-is for backwards compatibility
       } catch (e) {
         // If decryption fails, use as-is (backwards compatibility)
       }
@@ -393,10 +453,12 @@ router.post('/auth/setup-mfa', opsAuth, async (req, res) => {
     );
 
     // Store secret temporarily (not enabled yet - will be enabled after verification)
-    // Encrypt the secret before storing
-    const encryptedSecret = crypto
-      .createCipher('aes-256-cbc', process.env.MFA_ENCRYPTION_KEY || process.env.JWT_SECRET)
-      .update(secret, 'utf8', 'hex');
+    // Encrypt the secret using modern crypto with IV
+    const iv = crypto.randomBytes(16);
+    const key = crypto.scryptSync(process.env.MFA_ENCRYPTION_KEY || process.env.JWT_SECRET, 'salt', 32);
+    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+    const encrypted = cipher.update(secret, 'utf8', 'hex') + cipher.final('hex');
+    const encryptedSecret = iv.toString('hex') + ':' + encrypted;
 
     await db.query(`UPDATE ops_users SET mfa_secret = $1 WHERE id = $2`, [encryptedSecret, req.opsUser.id]);
 
@@ -429,13 +491,22 @@ router.post('/auth/verify-mfa', opsAuth, async (req, res) => {
       return res.status(400).json({ error: 'MFA not set up. Please run setup first.' });
     }
 
-    // Decrypt the secret
+    // Decrypt the secret using modern crypto
     const encryptedSecret = userResult.rows[0].mfa_secret;
     let secret;
     try {
-      secret = crypto
-        .createDecipher('aes-256-cbc', process.env.MFA_ENCRYPTION_KEY || process.env.JWT_SECRET)
-        .update(encryptedSecret, 'hex', 'utf8');
+      // Format: iv(32hex):encrypted(hex)
+      const parts = encryptedSecret.split(':');
+      if (parts.length === 2) {
+        const iv = Buffer.from(parts[0], 'hex');
+        const encrypted = parts[1];
+        const key = crypto.scryptSync(process.env.MFA_ENCRYPTION_KEY || process.env.JWT_SECRET, 'salt', 32);
+        const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
+        secret = decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8');
+      } else {
+        // Backwards compatibility for old format
+        secret = encryptedSecret;
+      }
     } catch (e) {
       // If decryption fails, try using it as-is (for backwards compatibility)
       secret = encryptedSecret;
@@ -844,7 +915,7 @@ router.get('/dashboard', requirePermission('customers.view'), async (req, res) =
     };
 
     try {
-      const r = await db.query(`SELECT COUNT(*) as c FROM organizations WHERE status = 'active'`);
+      const r = await db.query(`SELECT COUNT(*) as c FROM organizations`);
       metrics.total_customers = parseInt(r.rows[0]?.c) || 0;
     } catch (e) { /* ignore */ }
 
@@ -873,11 +944,11 @@ router.get('/dashboard', requirePermission('customers.view'), async (req, res) =
     try {
       const mrrResult = await db.query(`
         SELECT COALESCE(SUM(
-          (s.core_seats * COALESCE(p.core_price_per_seat, 0)) +
-          (COALESCE(s.flex_seats, 0) * COALESCE(p.flex_price_per_seat, 0))
+          (s.core_seats * COALESCE(bp.core_seat_price_monthly, 0)) +
+          (COALESCE(s.flex_seats, 0) * COALESCE(bp.flex_seat_price_monthly, 0))
         ), 0) as mrr
         FROM subscriptions s
-        LEFT JOIN plans p ON s.plan_id = p.id
+        LEFT JOIN billing_plans bp ON s.plan_id = bp.id
         WHERE s.status IN ('active', 'trialing', 'past_due')
       `);
       mrr = parseInt(mrrResult.rows[0]?.mrr) || 0;
@@ -951,10 +1022,10 @@ router.get('/customers', requirePermission('customers.view'), async (req, res) =
         o.id, o.name, o.created_at,
         s.status as subscription_status,
         COALESCE(s.core_seats, 0) as core_seats,
-        p.name as plan_name
+        bp.name as plan_name
       FROM organizations o
       LEFT JOIN subscriptions s ON s.organization_id = o.id
-      LEFT JOIN plans p ON s.plan_id = p.id
+      LEFT JOIN billing_plans bp ON s.plan_id = bp.id
       WHERE 1=1
     `;
 
@@ -974,7 +1045,7 @@ router.get('/customers', requirePermission('customers.view'), async (req, res) =
     }
 
     if (plan) {
-      query += ` AND p.slug = $${paramIndex}`;
+      query += ` AND bp.slug = $${paramIndex}`;
       params.push(plan);
       paramIndex++;
     }
@@ -992,10 +1063,10 @@ router.get('/customers', requirePermission('customers.view'), async (req, res) =
 
     // Get total count
     let countQuery = `
-      SELECT COUNT(*) 
+      SELECT COUNT(*)
       FROM organizations o
       LEFT JOIN subscriptions s ON s.organization_id = o.id
-      LEFT JOIN plans p ON s.plan_id = p.id
+      LEFT JOIN billing_plans bp ON s.plan_id = bp.id
       WHERE 1=1
     `;
     const countParams = [];
@@ -1011,7 +1082,7 @@ router.get('/customers', requirePermission('customers.view'), async (req, res) =
       countParams.push(status);
     }
     if (plan) {
-      countQuery += ` AND p.slug = $${countParamIndex}`;
+      countQuery += ` AND bp.slug = $${countParamIndex}`;
       countParams.push(plan);
     }
 
@@ -1033,14 +1104,14 @@ router.get('/customers/:id', requirePermission('customers.view'), async (req, re
 
     // Get org details
     const orgResult = await db.query(`
-      SELECT o.*, 
-        s.*, 
-        p.name as plan_name,
-        p.slug as plan_slug,
-        p.features as plan_features
+      SELECT o.*,
+        s.*,
+        bp.name as plan_name,
+        bp.slug as plan_slug,
+        bp.features as plan_features
       FROM organizations o
       LEFT JOIN subscriptions s ON s.organization_id = o.id
-      LEFT JOIN plans p ON s.plan_id = p.id
+      LEFT JOIN billing_plans bp ON s.plan_id = bp.id
       WHERE o.id = $1
     `, [id]);
 
@@ -1246,17 +1317,17 @@ router.get('/billing/overview', requirePermission('billing.view'), async (req, r
   try {
     // MRR by plan
     const mrrByPlan = await db.query(`
-      SELECT 
-        p.name as plan_name,
-        p.slug as plan_slug,
+      SELECT
+        bp.name as plan_name,
+        bp.slug as plan_slug,
         COUNT(s.id) as customer_count,
         SUM(s.core_seats) as total_core_seats,
         SUM(s.flex_seats) as total_flex_seats,
-        SUM((s.core_seats * p.core_price_per_seat) + (s.flex_seats * p.flex_price_per_seat)) as mrr
+        SUM((s.core_seats * COALESCE(bp.core_seat_price_monthly, 0)) + (COALESCE(s.flex_seats, 0) * COALESCE(bp.flex_seat_price_monthly, 0))) as mrr
       FROM subscriptions s
-      JOIN plans p ON s.plan_id = p.id
+      JOIN billing_plans bp ON s.plan_id = bp.id
       WHERE s.status IN ('active', 'trialing')
-      GROUP BY p.id, p.name, p.slug
+      GROUP BY bp.id, bp.name, bp.slug
       ORDER BY mrr DESC
     `);
 
@@ -1273,16 +1344,16 @@ router.get('/billing/overview', requirePermission('billing.view'), async (req, r
 
     // Upcoming renewals
     const upcomingRenewals = await db.query(`
-      SELECT 
+      SELECT
         o.name as org_name,
         s.core_seats,
         s.flex_seats,
         s.current_period_end,
-        p.name as plan_name,
-        (s.core_seats * p.core_price_per_seat) + (s.flex_seats * p.flex_price_per_seat) as amount
+        bp.name as plan_name,
+        (s.core_seats * COALESCE(bp.core_seat_price_monthly, 0)) + (COALESCE(s.flex_seats, 0) * COALESCE(bp.flex_seat_price_monthly, 0)) as amount
       FROM subscriptions s
       JOIN organizations o ON s.organization_id = o.id
-      JOIN plans p ON s.plan_id = p.id
+      JOIN billing_plans bp ON s.plan_id = bp.id
       WHERE s.status = 'active'
         AND s.current_period_end BETWEEN NOW() AND NOW() + INTERVAL '7 days'
       ORDER BY s.current_period_end
@@ -1645,7 +1716,7 @@ router.get('/fx-rates', async (req, res) => {
 // Get plans (for onboarding wizard)
 router.get('/plans', requirePermission('onboard'), async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM plans WHERE is_active = true ORDER BY sort_order, name');
+    const result = await db.query('SELECT * FROM billing_plans WHERE is_active = true ORDER BY display_order, name');
     res.json({ plans: result.rows });
   } catch (error) {
     console.error('Get plans error:', error);
@@ -1676,8 +1747,8 @@ router.post('/onboard/organization', requirePermission('onboard'), async (req, r
     }
 
     const result = await db.query(`
-      INSERT INTO organizations (name, slug, billing_email, billing_name, tax_id, status)
-      VALUES ($1, $2, $3, $4, $5, 'active')
+      INSERT INTO organizations (name, slug, billing_email, billing_name, tax_id)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *
     `, [name, slug, billingEmail, billingName || null, taxId || null]);
 

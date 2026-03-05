@@ -1063,7 +1063,7 @@ router.get('/rti/submissions', authMiddleware, requireRole(['admin']), async (re
     const { type, status, limit = 50 } = req.query;
 
     let query = `
-      SELECT rs.*, pr.period_start, pr.period_end
+      SELECT rs.*, pr.pay_period_start, pr.pay_period_end
       FROM rti_submissions rs
       LEFT JOIN payroll_runs pr ON pr.id = rs.payroll_run_id
       WHERE rs.organization_id = $1

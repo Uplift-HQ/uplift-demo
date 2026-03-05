@@ -147,7 +147,8 @@ export const clockOutSchema = z.object({
   photo: z.string().max(2000).optional().nullable(),
 });
 
-export const createTimeEntrySchema = z.object({
+// Base schema without refinement (needed for .partial())
+const timeEntryBaseSchema = z.object({
   employeeId: uuidSchema,
   date: dateSchema,
   clockIn: dateTimeSchema,
@@ -157,7 +158,10 @@ export const createTimeEntrySchema = z.object({
   shiftId: uuidSchema.optional().nullable(),
   notes: z.string().max(500).optional().nullable(),
   type: z.enum(['regular', 'overtime', 'holiday', 'sick', 'pto']).default('regular'),
-}).refine((data) => {
+});
+
+// Full create schema with cross-field validation
+export const createTimeEntrySchema = timeEntryBaseSchema.refine((data) => {
   if (data.clockOut) {
     return new Date(data.clockOut) > new Date(data.clockIn);
   }
@@ -167,7 +171,8 @@ export const createTimeEntrySchema = z.object({
   path: ['clockOut'],
 });
 
-export const updateTimeEntrySchema = createTimeEntrySchema.partial();
+// Partial schema for updates (refinement not needed for partial updates)
+export const updateTimeEntrySchema = timeEntryBaseSchema.partial();
 
 // -------------------- SHIFT SCHEMAS --------------------
 

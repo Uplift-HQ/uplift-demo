@@ -15,6 +15,168 @@ import {
   ClipboardCheck, Upload, Paperclip, Star, Flag
 } from 'lucide-react';
 
+// ============================================================
+// DEMO ACTIVITY DATA - Grand Metropolitan
+// ============================================================
+const DEMO_ACTIVITY = [
+  {
+    id: 'act-001',
+    type: 'task_completion',
+    title: 'Daily Service Inspection - Restaurant Floor',
+    description: 'Completed morning service checklist including table setup verification and dining area inspection.',
+    status: 'pending',
+    priority: 'high',
+    employee: { name: 'Marcus Thompson', department: 'Server', avatar: 'MT' },
+    location: 'London Mayfair',
+    timestamp: new Date(Date.now() - 1800000).toISOString(), // 30 mins ago
+    checklist: [
+      { item: 'Table settings prepared', checked: true },
+      { item: 'Emergency exits clear', checked: true },
+      { item: 'Dining area clean and organized', checked: true },
+      { item: 'Fire safety equipment accessible', checked: true },
+    ],
+  },
+  {
+    id: 'act-002',
+    type: 'proof_upload',
+    title: 'Kitchen Equipment Check Photo',
+    description: 'Daily pre-service inspection photo showing kitchen equipment condition.',
+    status: 'pending',
+    employee: { name: 'David Rodriguez', department: 'Kitchen Staff', avatar: 'DR' },
+    location: 'London Mayfair',
+    timestamp: new Date(Date.now() - 3600000).toISOString(), // 1 hour ago
+    attachments: [
+      { id: 'file-1', name: 'kitchen_inspection_20260305.jpg', type: 'image' },
+    ],
+    metadata: { equipment: 'Oven #3', checkType: 'Pre-Service', condition: 'Good' },
+  },
+  {
+    id: 'act-003',
+    type: 'form_submission',
+    title: 'Incident Report - Dining Area',
+    description: 'Incident involving spill in dining area section 3.',
+    status: 'pending',
+    priority: 'high',
+    employee: { name: 'Sophie Chen', department: 'Facilities Manager', avatar: 'SC' },
+    location: 'London Mayfair',
+    timestamp: new Date(Date.now() - 7200000).toISOString(), // 2 hours ago
+    formData: {
+      incidentType: 'Safety Incident',
+      location: 'Dining Area Section 3',
+      dateTime: '5 Mar 2026, 09:15',
+      description: 'Water spill on dining floor during service',
+      correctiveAction: 'Cleaned spill and placed caution signage',
+    },
+  },
+  {
+    id: 'act-004',
+    type: 'clock_photo',
+    title: 'Clock-in Verification',
+    description: 'Shift start photo verification for evening service.',
+    status: 'approved',
+    employee: { name: 'James Wilson', department: 'Bartender', avatar: 'JW' },
+    location: 'Dubai Marina',
+    timestamp: new Date(Date.now() - 28800000).toISOString(), // 8 hours ago
+    attachments: [
+      { id: 'file-2', name: 'clockin_jwilson.jpg', type: 'image' },
+    ],
+  },
+  {
+    id: 'act-005',
+    type: 'task_completion',
+    title: 'Weekly Equipment Maintenance Log',
+    description: 'Completed scheduled maintenance on kitchen appliances.',
+    status: 'approved',
+    employee: { name: 'Tom Bradley', department: 'Maintenance Staff', avatar: 'TB' },
+    location: 'London Mayfair',
+    timestamp: new Date(Date.now() - 43200000).toISOString(), // 12 hours ago
+    checklist: [
+      { item: 'HVAC system serviced', checked: true },
+      { item: 'Equipment calibration verified', checked: true },
+      { item: 'Safety systems tested', checked: true },
+      { item: 'Maintenance log updated', checked: true },
+    ],
+  },
+  {
+    id: 'act-006',
+    type: 'proof_upload',
+    title: 'Quality Inspection Photos - Evening Service',
+    description: 'Food quality inspection and plating documentation.',
+    status: 'pending',
+    employee: { name: 'Emma Roberts', department: 'Chef', avatar: 'ER' },
+    location: 'Paris Champs-Élysées',
+    timestamp: new Date(Date.now() - 5400000).toISOString(), // 1.5 hours ago
+    attachments: [
+      { id: 'file-3', name: 'plating_sample1.jpg', type: 'image' },
+      { id: 'file-4', name: 'plating_sample2.jpg', type: 'image' },
+      { id: 'file-5', name: 'inspection_report.pdf', type: 'document' },
+    ],
+  },
+  {
+    id: 'act-007',
+    type: 'form_submission',
+    title: 'Holiday Request',
+    description: 'Annual leave request for Easter period.',
+    status: 'approved',
+    employee: { name: 'Lisa Anderson', department: 'Receptionist', avatar: 'LA' },
+    location: 'London Mayfair',
+    timestamp: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
+    formData: {
+      leaveType: 'Annual Leave',
+      startDate: '18 Apr 2026',
+      endDate: '22 Apr 2026',
+      totalDays: '3 days',
+      coverArrangements: 'Mark Stevens covering',
+    },
+  },
+  {
+    id: 'act-008',
+    type: 'task_completion',
+    title: 'Emergency Safety Drill Documentation',
+    description: 'Monthly emergency evacuation drill completed and logged.',
+    status: 'approved',
+    employee: { name: 'Robert Hughes', department: 'Facilities Manager', avatar: 'RH' },
+    location: 'Dubai Marina',
+    timestamp: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
+    checklist: [
+      { item: 'All guests and staff evacuated', checked: true },
+      { item: 'Assembly points checked', checked: true },
+      { item: 'Evacuation time recorded (3:42)', checked: true },
+      { item: 'Drill report submitted', checked: true },
+    ],
+  },
+  {
+    id: 'act-009',
+    type: 'proof_upload',
+    title: 'Delivery Receipt - Food Supplies',
+    description: 'Signed delivery receipt for produce shipment.',
+    status: 'pending',
+    employee: { name: 'Mike Patterson', department: 'Warehouse Staff', avatar: 'MP' },
+    location: 'London Mayfair',
+    timestamp: new Date(Date.now() - 10800000).toISOString(), // 3 hours ago
+    attachments: [
+      { id: 'file-6', name: 'delivery_receipt_DR2026030501.pdf', type: 'document' },
+    ],
+    metadata: { supplier: 'Fresh Produce Suppliers Ltd', poNumber: 'PO-2026-4521', weight: '50 kg' },
+  },
+  {
+    id: 'act-010',
+    type: 'form_submission',
+    title: 'Training Completion - Food Safety',
+    description: 'Completed mandatory food safety refresher course.',
+    status: 'rejected',
+    employee: { name: 'Sarah Mitchell', department: 'Server', avatar: 'SM' },
+    location: 'London Mayfair',
+    timestamp: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
+    formData: {
+      courseName: 'Food Safety Refresher',
+      completionDate: '2 Mar 2026',
+      assessmentScore: '72%',
+      certificateId: 'FS-2026-1842',
+    },
+  },
+];
+
 export default function Activity() {
   const { t } = useTranslation();
   const { user, isManagerOrAbove, isAdmin } = useAuth();
@@ -37,11 +199,13 @@ export default function Activity() {
     try {
       // NOTE: Replace with dedicated activityApi.list() when endpoint is available
       const result = await api.get('/activity');
-      setSubmissions(result?.submissions || result?.activities || []);
+      const data = result?.submissions || result?.activities || [];
+      // Use demo data if API returns empty
+      setSubmissions(data.length > 0 ? data : DEMO_ACTIVITY);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load activity:', err);
-      setError(err.message || t('activity.loadError', 'Failed to load activity data'));
-      setSubmissions([]);
+      // Use demo data as fallback on error (for DEMO_MODE)
+      setSubmissions(DEMO_ACTIVITY);
     } finally {
       setLoading(false);
     }

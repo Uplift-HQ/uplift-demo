@@ -3,8 +3,21 @@
 // Extract data from receipt images using Tesseract.js
 // ============================================================
 
-import Tesseract from 'tesseract.js';
 import path from 'path';
+
+// Conditional Tesseract import - may not be available on all platforms
+let Tesseract = null;
+let ocrAvailable = false;
+
+try {
+  const tesseractModule = await import('tesseract.js');
+  Tesseract = tesseractModule.default;
+  ocrAvailable = true;
+  console.log('[OCR] Tesseract.js loaded successfully');
+} catch (error) {
+  console.warn('[OCR] Tesseract.js not available - OCR features disabled:', error.message);
+  ocrAvailable = false;
+}
 
 // Currency patterns for extraction
 const CURRENCY_PATTERNS = {
@@ -32,12 +45,37 @@ const DATE_PATTERNS = [
 ];
 
 /**
+ * Check if OCR is available
+ * @returns {boolean}
+ */
+export function isOcrAvailable() {
+  return ocrAvailable;
+}
+
+/**
  * Extract data from a receipt image
  * @param {string} imagePath - Path to the receipt image
  * @param {Object} options - Extraction options
  * @returns {Promise<Object>} Extracted receipt data
  */
 export async function extractReceiptData(imagePath, options = {}) {
+  // Check if OCR is available
+  if (!ocrAvailable || !Tesseract) {
+    return {
+      success: false,
+      error: 'OCR not available - Tesseract.js could not be loaded on this platform',
+      rawText: null,
+      extracted: {
+        amount: null,
+        currency: null,
+        date: null,
+        merchant: null,
+        items: [],
+      },
+      suggestions: ['OCR is not available. Please enter receipt details manually.'],
+    };
+  }
+
   const { language = 'eng', expectedCurrency } = options;
 
   try {
@@ -323,4 +361,5 @@ export async function processReceiptUpload(filePath, options = {}) {
 export default {
   extractReceiptData,
   processReceiptUpload,
+  isOcrAvailable,
 };

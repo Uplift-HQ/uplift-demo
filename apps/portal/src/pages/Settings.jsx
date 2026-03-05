@@ -12,7 +12,7 @@ import {
   Lock, Unlock, UserX, UserCheck, RefreshCw, Send, X,
   Monitor, Smartphone, Globe, Clock, Download, AlertTriangle,
   ChevronRight, MoreVertical, Eye, History, Sun, Moon, Webhook,
-  Palette, Check, Copy, Trash2, Play, Pause, Upload, Image, Crown, Sparkles,
+  Palette, Check, Copy, Trash2, Play, Pause, Upload, Image, Crown,
   KeyRound, Link2, Layout as LayoutIcon,
   LayoutDashboard, CalendarDays, Timer, CalendarOff, TrendingUp,
   GraduationCap, Receipt, FileText, ClipboardList, Briefcase,
@@ -20,9 +20,22 @@ import {
   Bell, BellRing, Inbox, ToggleLeft, Flag, Zap, Heart, Radio,
   Info, RotateCcw, Loader2, CheckCircle, XCircle, Edit, UserCog
 } from 'lucide-react';
-import { brandingApi } from '../lib/api';
+import { brandingApi, settingsApi } from '../lib/api';
 import { useBranding } from '../lib/branding';
 import { useToast } from '../components/ToastProvider';
+
+const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
+
+// Demo team members data for Settings > Team Members
+const DEMO_TEAM_MEMBERS = [
+  { id: 'user-1', email: 'admin@grandmetropolitan.com', first_name: 'Admin', last_name: 'User', role: 'admin', status: 'active', last_login: '2026-03-04T09:15:00Z', created_at: '2024-01-15T10:00:00Z' },
+  { id: 'user-2', email: 'james.wilson@grandmetropolitan.com', first_name: 'James', last_name: 'Wilson', role: 'manager', status: 'active', last_login: '2026-03-04T08:30:00Z', created_at: '2024-03-20T14:00:00Z' },
+  { id: 'user-3', email: 'sarah.thompson@grandmetropolitan.com', first_name: 'Sarah', last_name: 'Thompson', role: 'manager', status: 'active', last_login: '2026-03-03T16:45:00Z', created_at: '2024-06-15T09:00:00Z' },
+  { id: 'user-4', email: 'raj.patel@grandmetropolitan.com', first_name: 'Raj', last_name: 'Patel', role: 'manager', status: 'active', last_login: '2026-03-04T07:00:00Z', created_at: '2024-08-10T11:00:00Z' },
+  { id: 'user-5', email: 'emma.clarke@grandmetropolitan.com', first_name: 'Emma', last_name: 'Clarke', role: 'viewer', status: 'active', last_login: '2026-03-02T14:20:00Z', created_at: '2024-09-01T08:30:00Z' },
+  { id: 'user-6', email: 'piotr.kowalski@grandmetropolitan.com', first_name: 'Piotr', last_name: 'Kowalski', role: 'viewer', status: 'active', last_login: '2026-03-04T06:00:00Z', created_at: '2024-10-15T10:00:00Z' },
+  { id: 'user-7', email: 'fatima.ahmed@grandmetropolitan.com', first_name: 'Fatima', last_name: 'Ahmed', role: 'viewer', status: 'pending', last_login: null, created_at: '2026-02-28T12:00:00Z' },
+];
 
 // Tab configuration - names will be translated in the component
 const TABS = [
@@ -73,8 +86,12 @@ export default function Settings() {
         const result = await organizationApi.get();
         setOrganization(result?.organization || null);
       } else if (activeTab === 'users' && isAdmin) {
-        const result = await api.get('/users');
-        setUsers(result?.users || []);
+        if (DEMO_MODE) {
+          setUsers(DEMO_TEAM_MEMBERS);
+        } else {
+          const result = await api.get('/users');
+          setUsers(result?.users || []);
+        }
       } else if (activeTab === 'sessions') {
         const result = await api.get(`/users/${user.id}/sessions`);
         setSessions(result?.sessions || []);
@@ -354,7 +371,6 @@ function OrganizationSettings({ organization, onSave }) {
 function BrandingSettings({ organization, showMsg }) {
   const { t } = useTranslation();
   const { updateBranding, refetch } = useBranding();
-  const hasFeature = (Array.isArray(organization?.features) && organization.features.includes('white_label')) || organization?.plan === 'enterprise';
 
   const [form, setForm] = useState({
     brand_name: '',
@@ -453,47 +469,6 @@ function BrandingSettings({ organization, showMsg }) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-momentum-500" />
-      </div>
-    );
-  }
-
-  // Enterprise upsell banner
-  if (!hasFeature) {
-    return (
-      <div className="space-y-6">
-        <div>
-          <h2 className="text-lg font-semibold text-slate-900">{t('settings.brandingLabel', 'Branding')}</h2>
-          <p className="text-sm text-slate-600">{t('settings.brandingDesc', 'Customize the look and feel of your Uplift experience')}</p>
-        </div>
-        <div className="relative overflow-hidden rounded-xl border-2 border-dashed border-orange-300 bg-gradient-to-br from-orange-50 to-amber-50 p-8 text-center">
-          <div className="absolute top-3 right-3">
-            <Sparkles className="w-6 h-6 text-orange-400 animate-pulse" />
-          </div>
-          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-orange-200">
-            <Crown className="w-8 h-8 text-white" />
-          </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2">{t('settings.upgradeEnterpriseBranding', 'Upgrade to Enterprise for Custom Branding')}</h3>
-          <p className="text-slate-600 max-w-md mx-auto mb-6">
-            White-label your Uplift portal with your company logo, colors, and brand identity.
-            Give your employees a seamless, branded experience.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-lg mx-auto mb-6">
-            {[
-              { icon: Image, label: t('settings.branding.customLogo', 'Custom Logo') },
-              { icon: Palette, label: t('settings.branding.brandColors', 'Brand Colors') },
-              { icon: Crown, label: t('settings.branding.loginScreen', 'Login Screen') },
-              { icon: Globe, label: t('settings.branding.customFavicon', 'Custom Favicon') },
-            ].map(item => (
-              <div key={item.label} className="flex flex-col items-center gap-1.5 p-3 bg-white/70 rounded-lg">
-                <item.icon className="w-5 h-5 text-orange-500" />
-                <span className="text-xs font-medium text-slate-700">{item.label}</span>
-              </div>
-            ))}
-          </div>
-          <button onClick={() => window.open('mailto:sales@uplift.hr')} className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-lg shadow-lg shadow-orange-200 hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all">
-            {t('settings.contactSales', 'Contact Sales')}
-          </button>
-        </div>
       </div>
     );
   }
@@ -1967,6 +1942,28 @@ function WebhookDetailModal({ webhook, onClose }) {
 // NAVIGATION SETTINGS (Page Visibility)
 // ============================================================
 
+// Demo navigation pages for Settings > Navigation
+const DEMO_NAV_PAGES = [
+  { id: 'dashboard', name: 'Dashboard', description: 'Overview and analytics', required: true },
+  { id: 'employees', name: 'Employees', description: 'Employee directory and profiles' },
+  { id: 'schedule', name: 'Schedule', description: 'Shift scheduling and calendar' },
+  { id: 'time-tracking', name: 'Time & Attendance', description: 'Clock in/out and timesheets' },
+  { id: 'time-off', name: 'Time Off', description: 'Leave requests and balances' },
+  { id: 'payroll', name: 'Payroll', description: 'Payroll runs and pay stubs' },
+  { id: 'performance', name: 'Performance', description: 'Reviews and feedback' },
+  { id: 'documents', name: 'Documents', description: 'Company documents and policies' },
+  { id: 'career', name: 'Career', description: 'Skills and development' },
+  { id: 'benefits', name: 'Benefits', description: 'Benefits enrollment and info' },
+  { id: 'rewards', name: 'Rewards', description: 'Recognition and rewards' },
+  { id: 'reports', name: 'Reports', description: 'Analytics and reporting' },
+];
+
+const DEMO_NAV_VISIBILITY = {
+  worker: ['dashboard', 'schedule', 'time-tracking', 'time-off', 'payroll', 'documents', 'career', 'benefits', 'rewards'],
+  manager: ['dashboard', 'employees', 'schedule', 'time-tracking', 'time-off', 'payroll', 'performance', 'documents', 'career', 'benefits', 'rewards', 'reports'],
+  admin: ['dashboard', 'employees', 'schedule', 'time-tracking', 'time-off', 'payroll', 'performance', 'documents', 'career', 'benefits', 'rewards', 'reports'],
+};
+
 function NavigationSettings({ showMsg }) {
   const { t } = useTranslation();
   const [pages, setPages] = useState([]);
@@ -1978,8 +1975,13 @@ function NavigationSettings({ showMsg }) {
   }, []);
 
   const loadNavigationSettings = async () => {
+    if (DEMO_MODE) {
+      setPages(DEMO_NAV_PAGES);
+      setRoleVisibility(DEMO_NAV_VISIBILITY);
+      setLoading(false);
+      return;
+    }
     try {
-      // NOTE: Replace with organizationApi.getNavigation() when available
       const result = await api.get('/organization/navigation');
       setPages(result?.pages || []);
       setRoleVisibility(result?.roleVisibility || {});
@@ -2098,6 +2100,18 @@ function NavigationSettings({ showMsg }) {
 // EMPLOYEE VISIBILITY SETTINGS (Per-Employee Feature Access)
 // ============================================================
 
+// Demo employees with visibility settings for Settings > Employee Visibility
+const DEMO_VISIBILITY_EMPLOYEES = [
+  { id: 'emp-001', first_name: 'James', last_name: 'Wilson', role: 'General Manager', status: 'active', visibility: { team_schedules: true, internal_jobs: true, career_paths: true, analytics: true, peer_recognition: true } },
+  { id: 'emp-002', first_name: 'Sarah', last_name: 'Thompson', role: 'Bartender', status: 'active', visibility: { team_schedules: true, internal_jobs: true, career_paths: true, analytics: false, peer_recognition: true } },
+  { id: 'emp-003', first_name: 'Piotr', last_name: 'Kowalski', role: 'Chef', status: 'active', visibility: { team_schedules: true, internal_jobs: true, career_paths: false, analytics: false, peer_recognition: true } },
+  { id: 'emp-004', first_name: 'Fatima', last_name: 'Ahmed', role: 'Front Desk Supervisor', status: 'active', visibility: { team_schedules: true, internal_jobs: true, career_paths: true, analytics: false, peer_recognition: true } },
+  { id: 'emp-005', first_name: 'Tom', last_name: 'Evans', role: 'Server', status: 'probation', visibility: { team_schedules: true, internal_jobs: false, career_paths: false, analytics: false, peer_recognition: true } },
+  { id: 'emp-006', first_name: 'Anya', last_name: 'Nowak', role: 'Housekeeping Attendant', status: 'active', visibility: { team_schedules: true, internal_jobs: true, career_paths: true, analytics: false, peer_recognition: true } },
+  { id: 'emp-007', first_name: 'Raj', last_name: 'Patel', role: 'Shift Lead', status: 'active', visibility: { team_schedules: true, internal_jobs: true, career_paths: true, analytics: true, peer_recognition: true } },
+  { id: 'emp-008', first_name: 'Emma', last_name: 'Clarke', role: 'Guest Services Coordinator', status: 'active', visibility: { team_schedules: true, internal_jobs: true, career_paths: true, analytics: true, peer_recognition: true } },
+];
+
 function EmployeeVisibilitySettings({ showMsg }) {
   const { t } = useTranslation();
   const [employees, setEmployees] = useState([]);
@@ -2110,8 +2124,12 @@ function EmployeeVisibilitySettings({ showMsg }) {
   }, []);
 
   const loadEmployees = async () => {
+    if (DEMO_MODE) {
+      setEmployees(DEMO_VISIBILITY_EMPLOYEES);
+      setLoading(false);
+      return;
+    }
     try {
-      // NOTE: Replace with employeesApi.listWithVisibility() when available
       const result = await api.get('/employees?include=visibility');
       setEmployees(result?.employees || []);
     } catch (error) {
@@ -3057,10 +3075,16 @@ function SSOSettings({ showMsg }) {
 const PERMISSION_MODULES = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'schedule', label: 'Schedule', icon: CalendarDays },
-  { id: 'time-tracking', label: 'Time Tracking', icon: Timer },
+  { id: 'time-tracking', label: 'Time & Attendance', icon: Timer },
   { id: 'time-off', label: 'Time Off', icon: CalendarOff },
   { id: 'payroll', label: 'Payroll', icon: Coins },
   { id: 'employees', label: 'Employees', icon: Users },
+  { id: 'documents', label: 'Documents', icon: FileText },
+  { id: 'performance', label: 'Performance', icon: TrendingUp },
+  { id: 'career', label: 'Career', icon: GraduationCap },
+  { id: 'expenses', label: 'Expenses', icon: Receipt },
+  { id: 'benefits', label: 'Benefits', icon: Heart },
+  { id: 'recognition', label: 'Recognition', icon: Award },
   { id: 'reports', label: 'Reports', icon: BarChart3 },
   { id: 'settings', label: 'Settings', icon: Shield },
 ];
@@ -3075,7 +3099,7 @@ const BUILT_IN_ROLES = [
     name: 'Worker',
     description: 'Standard employee with access to personal schedule and time tracking',
     builtIn: true,
-    userCount: 45,
+    userCount: 380,
     permissions: {
       dashboard: 'read',
       schedule: 'read',
@@ -3083,6 +3107,12 @@ const BUILT_IN_ROLES = [
       'time-off': 'write',
       payroll: 'read',
       employees: 'none',
+      documents: 'read',
+      performance: 'read',
+      career: 'read',
+      expenses: 'write',
+      benefits: 'read',
+      recognition: 'write',
       reports: 'none',
       settings: 'none',
     }
@@ -3092,7 +3122,7 @@ const BUILT_IN_ROLES = [
     name: 'Manager',
     description: 'Team lead with access to team schedules and approvals',
     builtIn: true,
-    userCount: 8,
+    userCount: 65,
     permissions: {
       dashboard: 'read',
       schedule: 'write',
@@ -3100,6 +3130,12 @@ const BUILT_IN_ROLES = [
       'time-off': 'admin',
       payroll: 'read',
       employees: 'read',
+      documents: 'write',
+      performance: 'write',
+      career: 'read',
+      expenses: 'admin',
+      benefits: 'read',
+      recognition: 'write',
       reports: 'read',
       settings: 'none',
     }
@@ -3109,7 +3145,7 @@ const BUILT_IN_ROLES = [
     name: 'Administrator',
     description: 'Full system access including settings and configuration',
     builtIn: true,
-    userCount: 3,
+    userCount: 6,
     permissions: {
       dashboard: 'admin',
       schedule: 'admin',
@@ -3117,6 +3153,12 @@ const BUILT_IN_ROLES = [
       'time-off': 'admin',
       payroll: 'admin',
       employees: 'admin',
+      documents: 'admin',
+      performance: 'admin',
+      career: 'admin',
+      expenses: 'admin',
+      benefits: 'admin',
+      recognition: 'admin',
       reports: 'admin',
       settings: 'admin',
     }
@@ -3841,6 +3883,51 @@ const FEATURE_FLAG_ITEMS = [
     labelFallback: 'Pulse Surveys',
     descKey: 'settings.featureFlags.pulseSurveysDesc',
     descFallback: 'Send short, periodic check-in surveys to employees to gauge engagement, sentiment, and satisfaction. Results are aggregated and anonymised for managers.',
+    defaultOn: false,
+  },
+  {
+    id: 'smart_scheduling',
+    icon: CalendarDays,
+    labelKey: 'settings.featureFlags.smartScheduling',
+    labelFallback: 'AI Smart Scheduling',
+    descKey: 'settings.featureFlags.smartSchedulingDesc',
+    descFallback: 'Use AI to automatically generate optimal shift schedules based on demand forecasts, employee availability, skills, and compliance requirements.',
+    defaultOn: true,
+  },
+  {
+    id: 'career_paths',
+    icon: GraduationCap,
+    labelKey: 'settings.featureFlags.careerPaths',
+    labelFallback: 'Career Development',
+    descKey: 'settings.featureFlags.careerPathsDesc',
+    descFallback: 'Enable career path visualisation, skill gap analysis, and internal job matching. Employees can explore growth opportunities within the organisation.',
+    defaultOn: true,
+  },
+  {
+    id: 'shift_swaps',
+    icon: RefreshCw,
+    labelKey: 'settings.featureFlags.shiftSwaps',
+    labelFallback: 'Shift Swaps',
+    descKey: 'settings.featureFlags.shiftSwapsDesc',
+    descFallback: 'Allow employees to request shift swaps with qualified colleagues. Managers can approve or auto-approve based on rules.',
+    defaultOn: true,
+  },
+  {
+    id: 'expenses',
+    icon: Receipt,
+    labelKey: 'settings.featureFlags.expenses',
+    labelFallback: 'Expense Claims',
+    descKey: 'settings.featureFlags.expensesDesc',
+    descFallback: 'Enable expense submission and reimbursement workflow. Employees can submit receipts and track claim status.',
+    defaultOn: true,
+  },
+  {
+    id: 'benefits_enrollment',
+    icon: Heart,
+    labelKey: 'settings.featureFlags.benefits',
+    labelFallback: 'Benefits Enrollment',
+    descKey: 'settings.featureFlags.benefitsDesc',
+    descFallback: 'Allow employees to view and enrol in company benefits during open enrollment periods. Includes health, dental, pension, and voluntary benefits.',
     defaultOn: false,
   },
 ];

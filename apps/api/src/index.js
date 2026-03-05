@@ -95,6 +95,12 @@ import { configuredTimeout } from './middleware/timeout.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// -------------------- BARE MINIMUM STATUS (before ANY middleware) --------------------
+// Railway health checks hit this endpoint - MUST respond without any dependencies
+app.get('/status', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Trust proxy (Railway, Render, etc.) - needed for rate limiting to see real client IPs
 app.set('trust proxy', 1);
 
@@ -762,3 +768,4 @@ export default app;
 // CI deploy test
 // deploy test 1769464340
 // deploy 1769464435
+// Railway redeploy trigger: 1772579324

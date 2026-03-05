@@ -80,14 +80,14 @@ const COMPONENTS = [
     bgClass: 'bg-blue-50',
     iconClass: 'text-blue-600',
     affects: [
-      { key: 'momentum.affects.certsCurrent', fallback: 'Certifications current (Fire Safety, Food Hygiene)' },
+      { key: 'momentum.affects.certsCurrent', fallback: 'Certifications current (IOSH, NEBOSH, Forklift)' },
       { key: 'momentum.affects.newSkills', fallback: 'New skills acquired' },
       { key: 'momentum.affects.courseCompletion', fallback: 'Learning course completion rate' },
     ],
     tips: [
-      { key: 'momentum.tips.fireSafetyRenewal', fallback: 'Complete your overdue Fire Safety Renewal course' },
-      { key: 'momentum.tips.guestRelations', fallback: 'Enrol in the Guest Relations Excellence path' },
-      { key: 'momentum.tips.allergenCert', fallback: 'Get your Allergen Awareness certification' },
+      { key: 'momentum.tips.ioshRenewal', fallback: 'Complete your overdue IOSH Managing Safely renewal' },
+      { key: 'momentum.tips.forkliftCert', fallback: 'Get your Forklift Operator certification' },
+      { key: 'momentum.tips.coshh', fallback: 'Complete the COSHH Awareness training' },
     ],
   },
   {
@@ -155,43 +155,43 @@ const SCORE_DISTRIBUTION = [
 ];
 
 const TOP_PERFORMERS = [
-  { rank: 1, name: 'Sarah Chen', dept: 'Operations', score: 96, trend: 'up' },
-  { rank: 2, name: 'Marcus Johnson', dept: 'Front Desk', score: 94, trend: 'up' },
-  { rank: 3, name: 'Priya Patel', dept: 'Kitchen', score: 93, trend: 'neutral' },
-  { rank: 4, name: 'James Wilson', dept: 'Housekeeping', score: 92, trend: 'up' },
-  { rank: 5, name: 'Ana Rodriguez', dept: 'Operations', score: 91, trend: 'down' },
+  { rank: 1, name: 'Sarah Mitchell', dept: 'Production', score: 96, trend: 'up' },
+  { rank: 2, name: 'Marcus Johnson', dept: 'Quality Control', score: 94, trend: 'up' },
+  { rank: 3, name: 'Rachel Thompson', dept: 'R&D / Engineering', score: 93, trend: 'neutral' },
+  { rank: 4, name: 'James Wilson', dept: 'Warehouse & Logistics', score: 92, trend: 'up' },
+  { rank: 5, name: 'David Roberts', dept: 'Production', score: 91, trend: 'down' },
   { rank: 6, name: 'Thomas Brown', dept: 'Maintenance', score: 90, trend: 'up' },
-  { rank: 7, name: 'Lisa Zhang', dept: 'Front Desk', score: 89, trend: 'up' },
-  { rank: 8, name: 'David Kim', dept: 'Kitchen', score: 88, trend: 'neutral' },
-  { rank: 9, name: 'Emma Taylor', dept: 'Housekeeping', score: 87, trend: 'up' },
-  { rank: 10, name: 'Carlos Mendez', dept: 'Operations', score: 87, trend: 'neutral' },
+  { rank: 7, name: 'Emma Clarke', dept: 'Quality Control', score: 89, trend: 'up' },
+  { rank: 8, name: 'Michael Turner', dept: 'EHS', score: 88, trend: 'neutral' },
+  { rank: 9, name: 'Sophie Williams', dept: 'Warehouse & Logistics', score: 87, trend: 'up' },
+  { rank: 10, name: 'Daniel Harris', dept: 'Production', score: 87, trend: 'neutral' },
 ];
 
 const DEPARTMENT_SCORES = [
-  { name: 'Operations', score: 81, trend: 'up', delta: 2 },
-  { name: 'Front Desk', score: 79, trend: 'up', delta: 3 },
-  { name: 'Kitchen', score: 74, trend: 'neutral', delta: 0 },
-  { name: 'Housekeeping', score: 72, trend: 'up', delta: 1 },
+  { name: 'Production', score: 81, trend: 'up', delta: 2 },
+  { name: 'Quality Control', score: 79, trend: 'up', delta: 3 },
+  { name: 'Warehouse & Logistics', score: 74, trend: 'neutral', delta: 0 },
+  { name: 'R&D / Engineering', score: 82, trend: 'up', delta: 1 },
   { name: 'Maintenance', score: 77, trend: 'down', delta: -1 },
-  { name: 'Spa & Wellness', score: 80, trend: 'up', delta: 4 },
+  { name: 'EHS', score: 80, trend: 'up', delta: 4 },
 ];
 
 const DEPT_TREND_DATA = [
-  { month: 'Sep', Operations: 75, 'Front Desk': 72, Kitchen: 70, Housekeeping: 68, Maintenance: 74, 'Spa & Wellness': 71 },
-  { month: 'Oct', Operations: 76, 'Front Desk': 73, Kitchen: 71, Housekeeping: 69, Maintenance: 75, 'Spa & Wellness': 73 },
-  { month: 'Nov', Operations: 78, 'Front Desk': 75, Kitchen: 72, Housekeeping: 70, Maintenance: 76, 'Spa & Wellness': 75 },
-  { month: 'Dec', Operations: 77, 'Front Desk': 76, Kitchen: 73, Housekeeping: 71, Maintenance: 78, 'Spa & Wellness': 77 },
-  { month: 'Jan', Operations: 79, 'Front Desk': 76, Kitchen: 74, Housekeeping: 71, Maintenance: 78, 'Spa & Wellness': 76 },
-  { month: 'Feb', Operations: 81, 'Front Desk': 79, Kitchen: 74, Housekeeping: 72, Maintenance: 77, 'Spa & Wellness': 80 },
+  { month: 'Sep', Production: 75, 'Quality Control': 72, 'Warehouse & Logistics': 70, 'R&D / Engineering': 78, Maintenance: 74, EHS: 71 },
+  { month: 'Oct', Production: 76, 'Quality Control': 73, 'Warehouse & Logistics': 71, 'R&D / Engineering': 79, Maintenance: 75, EHS: 73 },
+  { month: 'Nov', Production: 78, 'Quality Control': 75, 'Warehouse & Logistics': 72, 'R&D / Engineering': 80, Maintenance: 76, EHS: 75 },
+  { month: 'Dec', Production: 77, 'Quality Control': 76, 'Warehouse & Logistics': 73, 'R&D / Engineering': 81, Maintenance: 78, EHS: 77 },
+  { month: 'Jan', Production: 79, 'Quality Control': 76, 'Warehouse & Logistics': 74, 'R&D / Engineering': 81, Maintenance: 78, EHS: 76 },
+  { month: 'Feb', Production: 81, 'Quality Control': 79, 'Warehouse & Logistics': 74, 'R&D / Engineering': 82, Maintenance: 77, EHS: 80 },
 ];
 
 const DEPT_COLORS = {
-  Operations: '#3b82f6',
-  'Front Desk': '#22c55e',
-  Kitchen: '#f59e0b',
-  Housekeeping: '#ec4899',
+  Production: '#3b82f6',
+  'Quality Control': '#22c55e',
+  'Warehouse & Logistics': '#f59e0b',
+  'R&D / Engineering': '#ec4899',
   Maintenance: '#8b5cf6',
-  'Spa & Wellness': '#06b6d4',
+  EHS: '#06b6d4',
 };
 
 // ============================================================
@@ -611,7 +611,7 @@ function AdminManagerView({ isAdmin, t }) {
                 : t('momentum.teamAverageScore', 'Team Average')}
             </h2>
             <p className="text-slate-500 mt-1">
-              {t('momentum.across266Employees', 'Across 266 active employees')}
+              {t('momentum.across451Employees', 'Across 451 active employees')}
             </p>
             <div className="flex items-center gap-1.5 mt-2 justify-center sm:justify-start">
               <TrendingUp className="w-4 h-4 text-green-500" />
@@ -805,7 +805,7 @@ function EmployeeView({ t, user }) {
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 rounded-full text-xs font-medium text-blue-700">
               <Building2 className="w-3.5 h-3.5" />
-              {t('momentum.topDept', 'Top 15% of Front Desk department')}
+              {t('momentum.topDept', 'Top 15% of Production department')}
             </span>
           </div>
         </div>

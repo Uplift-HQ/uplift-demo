@@ -10,18 +10,35 @@ import { authMiddleware, requireRole } from '../middleware/index.js';
 import * as billingService from '../services/billing.js';
 
 const router = Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+// Graceful Stripe initialization
+const STRIPE_CONFIGURED = !!process.env.STRIPE_SECRET_KEY;
+let stripe = null;
+
+if (STRIPE_CONFIGURED) {
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' });
+} else {
+  console.warn('[Billing Routes] STRIPE_SECRET_KEY not set - some billing features disabled.');
+}
+
+function requireStripe() {
+  if (!stripe) {
+    throw new Error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.');
+  }
+  return stripe;
+}
 
 // ============================================================
-// STRIPE WEBHOOK (no auth - verified by signature)
+// STRIPE WEBHOOK HANDLER (exported for direct mounting in index.js)
+// Must be mounted BEFORE authMiddleware routes to avoid 401
 // ============================================================
 
-router.post('/webhooks/stripe', async (req, res) => {
+export const stripeWebhookHandler = async (req, res) => {
   const sig = req.headers['stripe-signature'];
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(
+    event = requireStripe().webhooks.constructEvent(
       req.rawBody, // Need raw body for signature verification
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
@@ -38,7 +55,7 @@ router.post('/webhooks/stripe', async (req, res) => {
     console.error('Webhook processing error:', err);
     res.status(500).json({ error: 'Webhook processing failed' });
   }
-});
+};
 
 // All routes below require authentication
 router.use(authMiddleware);
@@ -118,7 +135,7 @@ router.post('/subscription/reactivate', requireRole(['admin']), async (req, res)
       return res.status(400).json({ error: 'No subscription found' });
     }
 
-    const subscription = await stripe.subscriptions.update(sub.stripe_subscription_id, {
+    const subscription = await requireStripe().subscriptions.update(sub.stripe_subscription_id, {
       cancel_at_period_end: false,
     });
 
@@ -145,11 +162,11 @@ router.post('/subscription/reactivate', requireRole(['admin']), async (req, res)
 router.get('/plans', async (req, res) => {
   try {
     const result = await db.query(`
-      SELECT id, name, slug, description, core_price_per_seat, flex_price_per_seat,
-             currency, billing_interval, min_seats, max_seats, features, sort_order
-      FROM plans
-      WHERE is_active = true AND is_public = true
-      ORDER BY sort_order
+      SELECT id, name, slug, description, core_seat_price_monthly, flex_seat_price_monthly,
+             currency, min_core_seats, max_core_seats, max_flex_seats, features, display_order
+      FROM billing_plans
+      WHERE is_active = true
+      ORDER BY display_order
     `);
 
     res.json({ plans: result.rows });
@@ -305,7 +322,7 @@ router.get('/invoices/upcoming', async (req, res) => {
       return res.json({ upcomingInvoice: null });
     }
 
-    const upcomingInvoice = await stripe.invoices.retrieveUpcoming({
+    const upcomingInvoice = await requireStripe().invoices.retrieveUpcoming({
       subscription: sub.stripe_subscription_id,
     });
 
@@ -351,7 +368,7 @@ router.post('/payment-methods/setup', requireRole(['admin']), async (req, res) =
   try {
     const customer = await billingService.getOrCreateCustomer(req.user.organizationId);
     
-    const setupIntent = await stripe.setupIntents.create({
+    const setupIntent = await requireStripe().setupIntents.create({
       customer: customer.id,
       payment_method_types: ['card'],
     });
@@ -383,7 +400,7 @@ router.post('/payment-methods/:id/default', requireRole(['admin']), async (req, 
     // Update in Stripe
     const sub = await billingService.getSubscription(req.user.organizationId);
     if (sub?.stripe_subscription_id) {
-      await stripe.subscriptions.update(sub.stripe_subscription_id, {
+      await requireStripe().subscriptions.update(sub.stripe_subscription_id, {
         default_payment_method: pmResult.rows[0].stripe_payment_method_id,
       });
     }
@@ -422,7 +439,7 @@ router.delete('/payment-methods/:id', requireRole(['admin']), async (req, res) =
     }
 
     // Detach from Stripe
-    await stripe.paymentMethods.detach(pmResult.rows[0].stripe_payment_method_id);
+    await requireStripe().paymentMethods.detach(pmResult.rows[0].stripe_payment_method_id);
 
     // Delete local
     await db.query(

@@ -13,7 +13,11 @@ const pool = {
   connect: db.getClient.bind(db) 
 };
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production';
+// JWT_SECRET is REQUIRED - no fallback
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET && process.env.NODE_ENV === 'production') {
+  throw new Error('CRITICAL: JWT_SECRET environment variable is required');
+}
 
 // Store active connections
 const connections = new Map(); // userId -> Set of socket ids

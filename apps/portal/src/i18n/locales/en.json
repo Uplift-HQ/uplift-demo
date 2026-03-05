@@ -2192,15 +2192,15 @@
     "skillMatch": "skill match",
     "noApplicants": "No applicants yet",
     "departments": {
-      "frontOfHouse": "Front of House",
-      "kitchen": "Kitchen",
-      "management": "Management",
-      "reception": "Reception"
+      "production": "Production",
+      "qualityControl": "Quality Control",
+      "warehouse": "Warehouse & Logistics",
+      "rdEngineering": "R&D / Engineering"
     },
     "locations": {
-      "edinburgh": "Grand Metro Edinburgh",
-      "glasgow": "Grand Metro Glasgow",
-      "manchester": "Grand Metro Manchester"
+      "london": "London Mayfair",
+      "paris": "Paris Champs-Élysées",
+      "dubai": "Dubai Marina"
     }
   },
   "employees": {
@@ -3695,7 +3695,7 @@
     "goodMorning": "Good morning",
     "goodAfternoon": "Good afternoon",
     "goodEvening": "Good evening",
-    "teamSubtitle": "Front of House Team • The Grand Hotel, London",
+    "teamSubtitle": "Front of House Team • Grand Metropolitan, London Mayfair",
     "momentumScore": "Your Momentum Score",
     "momentumTrend": "↑{{count}} from last month",
     "viewDetails": "View details",
@@ -3709,18 +3709,18 @@
     "annualLeave": "Annual Leave",
     "trainingCompliance": "Training Compliance",
     "trainingProgress": "{{complete}} of {{total}} required complete",
-    "overdueTraining": "Fire Safety — due Feb 10",
+    "overdueTraining": "IOSH Managing Safely — due Feb 10",
     "nextShift": "Next Shift",
-    "nextShiftTime": "Tomorrow, 7:00 AM — 3:00 PM",
-    "nextShiftLocation": "The Grand Hotel, Main Restaurant",
-    "nextShiftRole": "Front of House",
+    "nextShiftTime": "Tomorrow, 6:00 AM — 2:00 PM",
+    "nextShiftLocation": "Grand Metropolitan, Restaurant Floor",
+    "nextShiftRole": "Production",
     "pendingActions": "Pending Actions",
     "pendingCount": "3 items need attention",
     "pendingTraining": "1 training overdue",
     "pendingDocument": "1 document to sign",
     "pendingExpense": "1 expense pending",
     "recentRecognition": "Recent Recognition",
-    "kudos1": "Amazing service with the VIP table last night!",
+    "kudos1": "Outstanding quality record on the production line!",
     "kudos1Time": "2 hours ago",
     "kudos2": "Thanks for covering my shift on short notice",
     "kudos2Time": "Yesterday",

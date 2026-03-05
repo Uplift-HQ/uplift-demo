@@ -163,6 +163,53 @@ export default function Expenses() {
   const [showNewExpense, setShowNewExpense] = useState(false);
   const [editingPolicy, setEditingPolicy] = useState(false);
 
+  // New expense form state
+  const [newExpenseForm, setNewExpenseForm] = useState({
+    description: '',
+    amount: '',
+    category: 'travel',
+    date: new Date().toISOString().split('T')[0],
+    notes: '',
+    receipt: null,
+  });
+  const [submittingExpense, setSubmittingExpense] = useState(false);
+  const [expenseToast, setExpenseToast] = useState(null);
+
+  const handleSubmitExpense = () => {
+    if (!newExpenseForm.description || !newExpenseForm.amount) return;
+
+    setSubmittingExpense(true);
+    setTimeout(() => {
+      const newExpense = {
+        id: expenses.length + 100,
+        employee: user?.name || 'Current User',
+        title: newExpenseForm.description,
+        category: newExpenseForm.category,
+        merchant: 'Various',
+        amount: parseFloat(newExpenseForm.amount),
+        date: newExpenseForm.date,
+        status: 'pending',
+        hasReceipt: !!newExpenseForm.receipt,
+        report: null,
+        notes: newExpenseForm.notes,
+        policyViolation: false,
+      };
+      setExpenses(prev => [newExpense, ...prev]);
+      setShowNewExpense(false);
+      setSubmittingExpense(false);
+      setNewExpenseForm({
+        description: '',
+        amount: '',
+        category: 'travel',
+        date: new Date().toISOString().split('T')[0],
+        notes: '',
+        receipt: null,
+      });
+      setExpenseToast({ message: t('expenses.submitSuccess', 'Expense submitted for approval'), type: 'success' });
+      setTimeout(() => setExpenseToast(null), 3000);
+    }, 500);
+  };
+
   // Filters
   const [statusFilter, setStatusFilter] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -170,6 +217,7 @@ export default function Expenses() {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSetBudget, setShowSetBudget] = useState(false);
 
   // Fetch expenses from API
   const loadExpenses = useCallback(async () => {
@@ -868,12 +916,10 @@ export default function Expenses() {
   // TAB 4: BUDGETS
   // ============================================================
   const renderBudgets = () => {
-    const [showSetBudget, setShowSetBudget] = useState(false);
-
     const getTrafficLight = (utilisation) => {
-      if (utilisation > 90) return { color: 'bg-red-500', label: t('expenses.budgets.overBudget', 'Over Budget'), textColor: 'text-red-700', bgColor: 'bg-red-50' };
-      if (utilisation > 75) return { color: 'bg-amber-500', label: t('expenses.budgets.caution', 'Caution'), textColor: 'text-amber-700', bgColor: 'bg-amber-50' };
-      return { color: 'bg-green-500', label: t('expenses.budgets.onTrack', 'On Track'), textColor: 'text-green-700', bgColor: 'bg-green-50' };
+      if (utilisation > 90) return { color: 'bg-red-500', label: t('expenses.budgets.overBudget', 'Over Budget'), textColor: 'text-red-700', bgColor: 'bg-red-50', key: 'overBudget' };
+      if (utilisation > 75) return { color: 'bg-amber-500', label: t('expenses.budgets.caution', 'Caution'), textColor: 'text-amber-700', bgColor: 'bg-amber-50', key: 'caution' };
+      return { color: 'bg-green-500', label: t('expenses.budgets.onTrack', 'On Track'), textColor: 'text-green-700', bgColor: 'bg-green-50', key: 'onTrack' };
     };
 
     return (
@@ -1335,6 +1381,175 @@ export default function Expenses() {
       {activeTab === 'budgets' && renderBudgets()}
       {activeTab === 'policy' && renderPolicy()}
       {activeTab === 'dashboard' && renderDashboard()}
+
+      {/* Toast Notification */}
+      {expenseToast && (
+        <div style={{ position: 'fixed', bottom: '24px', right: '24px', backgroundColor: expenseToast.type === 'success' ? '#10b981' : '#ef4444', color: 'white', padding: '12px 20px', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', zIndex: 50, display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <CheckCircle style={{ width: '20px', height: '20px' }} />
+          {expenseToast.message}
+        </div>
+      )}
+
+      {/* New Expense Modal */}
+      {showNewExpense && (
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
+          <div style={{ backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', width: '100%', maxWidth: '500px', margin: '16px', maxHeight: '90vh', overflow: 'auto' }}>
+            <div style={{ padding: '24px', borderBottom: '1px solid #e2e8f0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b' }}>
+                  {t('expenses.submitExpenseTitle', 'Submit Expense')}
+                </h3>
+                <button onClick={() => setShowNewExpense(false)} style={{ padding: '8px', color: '#94a3b8', cursor: 'pointer' }}>
+                  <X style={{ width: '20px', height: '20px' }} />
+                </button>
+              </div>
+            </div>
+
+            <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {/* Description */}
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                  {t('expenses.form.description', 'Description')} *
+                </label>
+                <input
+                  type="text"
+                  value={newExpenseForm.description}
+                  onChange={(e) => setNewExpenseForm(prev => ({ ...prev, description: e.target.value }))}
+                  placeholder={t('expenses.form.descriptionPlaceholder', 'e.g., Train to Manchester client meeting')}
+                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px' }}
+                />
+              </div>
+
+              {/* Amount and Category Row */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                    {t('expenses.form.amount', 'Amount')} *
+                  </label>
+                  <div style={{ position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#6b7280', fontWeight: '500' }}>£</span>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={newExpenseForm.amount}
+                      onChange={(e) => setNewExpenseForm(prev => ({ ...prev, amount: e.target.value }))}
+                      placeholder="0.00"
+                      style={{ width: '100%', padding: '10px 12px 10px 28px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px' }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                    {t('expenses.form.category', 'Category')}
+                  </label>
+                  <select
+                    value={newExpenseForm.category}
+                    onChange={(e) => setNewExpenseForm(prev => ({ ...prev, category: e.target.value }))}
+                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px' }}
+                  >
+                    <option value="travel">{t('expenses.category.travel', 'Travel')}</option>
+                    <option value="meals">{t('expenses.category.meals', 'Meals')}</option>
+                    <option value="equipment">{t('expenses.category.equipment', 'Equipment')}</option>
+                    <option value="training">{t('expenses.category.training', 'Training')}</option>
+                    <option value="office">{t('expenses.category.office', 'Office Supplies')}</option>
+                    <option value="other">{t('expenses.category.other', 'Other')}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Date */}
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                  {t('expenses.form.date', 'Date')}
+                </label>
+                <input
+                  type="date"
+                  value={newExpenseForm.date}
+                  onChange={(e) => setNewExpenseForm(prev => ({ ...prev, date: e.target.value }))}
+                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px' }}
+                />
+              </div>
+
+              {/* Receipt Upload */}
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                  {t('expenses.form.receipt', 'Receipt')}
+                </label>
+                <div
+                  style={{
+                    border: '2px dashed #d1d5db',
+                    borderRadius: '8px',
+                    padding: '24px',
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    backgroundColor: newExpenseForm.receipt ? '#f0fdf4' : '#f9fafb',
+                  }}
+                  onClick={() => document.getElementById('receipt-upload').click()}
+                >
+                  <input
+                    id="receipt-upload"
+                    type="file"
+                    accept="image/*,.pdf"
+                    onChange={(e) => setNewExpenseForm(prev => ({ ...prev, receipt: e.target.files[0] }))}
+                    style={{ display: 'none' }}
+                  />
+                  <Upload style={{ width: '32px', height: '32px', color: '#9ca3af', margin: '0 auto 8px' }} />
+                  {newExpenseForm.receipt ? (
+                    <p style={{ color: '#10b981', fontWeight: '500' }}>{newExpenseForm.receipt.name}</p>
+                  ) : (
+                    <>
+                      <p style={{ color: '#6b7280', fontSize: '14px' }}>{t('expenses.form.dropReceipt', 'Drop receipt or click to upload')}</p>
+                      <p style={{ color: '#9ca3af', fontSize: '12px', marginTop: '4px' }}>{t('expenses.form.fileTypes', 'PNG, JPG, or PDF')}</p>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Notes */}
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                  {t('expenses.form.notes', 'Notes')} ({t('common.optional', 'optional')})
+                </label>
+                <textarea
+                  value={newExpenseForm.notes}
+                  onChange={(e) => setNewExpenseForm(prev => ({ ...prev, notes: e.target.value }))}
+                  placeholder={t('expenses.form.notesPlaceholder', 'Any additional details...')}
+                  rows={3}
+                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px', resize: 'none' }}
+                />
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+              <button
+                onClick={() => setShowNewExpense(false)}
+                style={{ padding: '10px 20px', color: '#64748b', borderRadius: '8px', fontWeight: '500', cursor: 'pointer' }}
+              >
+                {t('common.cancel', 'Cancel')}
+              </button>
+              <button
+                onClick={handleSubmitExpense}
+                disabled={submittingExpense || !newExpenseForm.description || !newExpenseForm.amount}
+                style={{
+                  backgroundColor: '#F26522',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  fontWeight: '500',
+                  cursor: (submittingExpense || !newExpenseForm.description || !newExpenseForm.amount) ? 'not-allowed' : 'pointer',
+                  opacity: (submittingExpense || !newExpenseForm.description || !newExpenseForm.amount) ? 0.5 : 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+              >
+                {submittingExpense ? t('common.submitting', 'Submitting...') : t('expenses.form.submit', 'Submit')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

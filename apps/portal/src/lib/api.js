@@ -112,8 +112,9 @@ const DEMO_FEEDBACK = [
   { id: 'fb-2', from_name: 'James Mitchell', to_employee_id: 'emp-1', message: 'Thanks for helping with the project deadline.', type: 'thanks', visibility: 'public', created_at: '2026-02-01', reactions: { thumbsUp: 2 } },
 ];
 const DEMO_REVIEW_CYCLES = [
-  { id: 'cycle-1', name: 'Q1 2026 Performance Review', status: 'active', start_date: '2026-01-01', end_date: '2026-03-31', type: 'quarterly', participants_count: 45, completed_count: 12 },
-  { id: 'cycle-2', name: 'Q4 2025 Annual Review', status: 'completed', start_date: '2025-10-01', end_date: '2025-12-31', type: 'annual', participants_count: 42, completed_count: 42 },
+  { id: 'cycle-1', name: 'Q1 2026 Performance Review', nameKey: 'performance.q12026Review', status: 'active', start_date: '2026-01-01', end_date: '2026-03-31', type: 'quarterly', participants_count: 451, completed_count: 38 },
+  { id: 'cycle-2', name: 'Q4 2025 Annual Review', nameKey: 'performance.q42025Annual', status: 'completed', start_date: '2025-10-01', end_date: '2025-12-31', type: 'annual', participants_count: 445, completed_count: 445 },
+  { id: 'cycle-3', name: 'Q3 2025 Quarterly Check-in', status: 'completed', start_date: '2025-07-01', end_date: '2025-09-30', type: 'quarterly', participants_count: 438, completed_count: 438 },
 ];
 
 // Demo Learning Data
@@ -1259,14 +1260,16 @@ export const performanceApi = {
   getDashboard: async () => {
     if (DEMO_MODE) {
       return {
-        activeCycles: DEMO_REVIEW_CYCLES.filter(c => c.status === 'active').length,
-        pendingReviews: DEMO_PERFORMANCE_REVIEWS.filter(r => r.status !== 'complete').length,
-        completedReviews: DEMO_PERFORMANCE_REVIEWS.filter(r => r.status === 'complete').length,
-        averageRating: 4.2,
+        activeCycles: 2,
+        pendingReviews: 38,
+        completedReviews: 495,
+        avgRating: '3.52',
         goalsCount: DEMO_GOALS.length,
         goalsOnTrack: DEMO_GOALS.filter(g => g.status === 'in_progress').length,
-        upcomingMeetings: DEMO_ONE_ON_ONES.filter(m => m.status === 'scheduled').length,
+        upcomingMeetings: 12,
         recentFeedback: DEMO_FEEDBACK.length,
+        topPerformers: 15, // % rated 4.5+
+        needsImprovement: 8, // % rated below 2.5
       };
     }
     return api.get('/performance/dashboard');

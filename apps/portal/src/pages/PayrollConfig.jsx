@@ -17,19 +17,23 @@ import {
   Clock,
   AlertCircle,
   Check,
+  Plus,
 } from 'lucide-react';
 
 // ============================================================
 // DEMO DATA - Multi-country setup
 // ============================================================
 
+// Grand Metropolitan Hotel Group operates in 8 countries
 const COUNTRY_FLAGS = {
   GB: '\u{1F1EC}\u{1F1E7}',
   DE: '\u{1F1E9}\u{1F1EA}',
   PL: '\u{1F1F5}\u{1F1F1}',
   US: '\u{1F1FA}\u{1F1F8}',
-  CN: '\u{1F1E8}\u{1F1F3}',
+  FR: '\u{1F1EB}\u{1F1F7}',
   AE: '\u{1F1E6}\u{1F1EA}',
+  ES: '\u{1F1EA}\u{1F1F8}',
+  IT: '\u{1F1EE}\u{1F1F9}',
 };
 
 const COUNTRY_CONFIG = [
@@ -74,10 +78,10 @@ const COUNTRY_CONFIG = [
     enabled: true,
   },
   {
-    code: 'CN',
-    name: 'China',
-    currency: 'CNY',
-    currencySymbol: '\u00A5',
+    code: 'FR',
+    name: 'France',
+    currency: 'EUR',
+    currencySymbol: '\u20AC',
     payFrequency: 'Monthly',
     taxYearStart: '1 January',
     taxYearEnd: '31 December',
@@ -88,6 +92,26 @@ const COUNTRY_CONFIG = [
     name: 'United Arab Emirates',
     currency: 'AED',
     currencySymbol: 'AED',
+    payFrequency: 'Monthly',
+    taxYearStart: '1 January',
+    taxYearEnd: '31 December',
+    enabled: true,
+  },
+  {
+    code: 'ES',
+    name: 'Spain',
+    currency: 'EUR',
+    currencySymbol: '\u20AC',
+    payFrequency: 'Monthly',
+    taxYearStart: '1 January',
+    taxYearEnd: '31 December',
+    enabled: true,
+  },
+  {
+    code: 'IT',
+    name: 'Italy',
+    currency: 'EUR',
+    currencySymbol: '\u20AC',
     payFrequency: 'Monthly',
     taxYearStart: '1 January',
     taxYearEnd: '31 December',
@@ -245,13 +269,49 @@ const INTEGRATIONS = [
     type: 'external',
   },
   {
+    id: 'gusto',
+    name: 'Gusto',
+    logo: null,
+    status: 'available',
+    countries: ['US'],
+    type: 'external',
+  },
+  {
+    id: 'datev',
+    name: 'DATEV',
+    logo: null,
+    status: 'available',
+    countries: ['DE'],
+    type: 'external',
+  },
+  {
+    id: 'payfit',
+    name: 'PayFit',
+    logo: null,
+    status: 'connected',
+    countries: ['FR', 'ES'],
+    type: 'external',
+  },
+  {
     id: 'native',
     name: 'Uplift Native',
     logo: null,
     status: 'active',
-    countries: ['DE', 'PL', 'CN', 'AE'],
+    countries: ['DE', 'PL', 'AE', 'IT'],
     type: 'native',
   },
+];
+
+// Per-location provider assignment
+const LOCATION_PROVIDERS = [
+  { locationId: 'london-mayfair', locationName: 'Grand Metropolitan London Mayfair', country: 'GB', provider: 'sage' },
+  { locationId: 'paris', locationName: 'Grand Metropolitan Paris', country: 'FR', provider: 'payfit' },
+  { locationId: 'dubai', locationName: 'Grand Metropolitan Dubai', country: 'AE', provider: 'native' },
+  { locationId: 'tokyo', locationName: 'Grand Metropolitan Tokyo', country: 'JP', provider: 'native' },
+  { locationId: 'newyork', locationName: 'Grand Metropolitan New York', country: 'US', provider: 'adp' },
+  { locationId: 'lyon', locationName: 'Lyon Office', country: 'FR', provider: 'payfit' },
+  { locationId: 'madrid', locationName: 'Madrid Office', country: 'ES', provider: 'payfit' },
+  { locationId: 'milan', locationName: 'Milan Office', country: 'IT', provider: 'native' },
 ];
 
 const APPROVAL_CONFIG = {
@@ -811,6 +871,48 @@ function CalendarsTab({ calendars, onUpdate }) {
 function IntegrationsTab() {
   const { t } = useTranslation();
   const [integrations, setIntegrations] = useState(INTEGRATIONS);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [newIntegration, setNewIntegration] = useState({
+    name: '',
+    type: 'external',
+    countries: [],
+    apiKey: '',
+    clientId: '',
+    clientSecret: '',
+  });
+
+  const handleAddIntegration = () => {
+    if (!newIntegration.name || newIntegration.countries.length === 0) return;
+
+    const integration = {
+      id: newIntegration.name.toLowerCase().replace(/\s+/g, '-'),
+      name: newIntegration.name,
+      logo: null,
+      status: 'connected',
+      countries: newIntegration.countries,
+      type: newIntegration.type,
+    };
+
+    setIntegrations(prev => [...prev, integration]);
+    setShowAddModal(false);
+    setNewIntegration({
+      name: '',
+      type: 'external',
+      countries: [],
+      apiKey: '',
+      clientId: '',
+      clientSecret: '',
+    });
+  };
+
+  const toggleCountrySelection = (code) => {
+    setNewIntegration(prev => ({
+      ...prev,
+      countries: prev.countries.includes(code)
+        ? prev.countries.filter(c => c !== code)
+        : [...prev.countries, code],
+    }));
+  };
 
   const toggleIntegrationType = (id) => {
     setIntegrations((prev) =>
@@ -827,14 +929,162 @@ function IntegrationsTab() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-lg font-semibold text-slate-900">
-          {t('payrollConfig.integrations.title', 'Payroll Integrations')}
-        </h2>
-        <p className="text-sm text-slate-600">
-          {t('payrollConfig.integrations.description', 'Connect external payroll providers or use native calculations')}
-        </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h2 className="text-lg font-semibold text-slate-900">
+            {t('payrollConfig.integrations.title', 'Payroll Integrations')}
+          </h2>
+          <p className="text-sm text-slate-600">
+            {t('payrollConfig.integrations.description', 'Connect external payroll providers or use native calculations')}
+          </p>
+        </div>
+        <button
+          onClick={() => setShowAddModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600 transition-colors text-sm font-medium"
+        >
+          <Link2 className="h-4 w-4" />
+          {t('payrollConfig.integrations.addIntegration', 'Add Integration')}
+        </button>
       </div>
+
+      {/* Add Integration Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg mx-4">
+            <div className="p-6 border-b border-slate-200">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-slate-900">
+                  {t('payrollConfig.integrations.addNewIntegration', 'Add New Integration')}
+                </h3>
+                <button
+                  onClick={() => setShowAddModal(false)}
+                  className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+                >
+                  <span className="sr-only">Close</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6 space-y-4">
+              {/* Integration Name */}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">
+                  {t('payrollConfig.integrations.integrationName', 'Integration Name')}
+                </label>
+                <input
+                  type="text"
+                  value={newIntegration.name}
+                  onChange={(e) => setNewIntegration(prev => ({ ...prev, name: e.target.value }))}
+                  placeholder="e.g., Workday, Rippling, Deel"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                />
+              </div>
+
+              {/* Integration Type */}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">
+                  {t('payrollConfig.integrations.integrationType', 'Integration Type')}
+                </label>
+                <select
+                  value={newIntegration.type}
+                  onChange={(e) => setNewIntegration(prev => ({ ...prev, type: e.target.value }))}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                >
+                  <option value="external">{t('payrollConfig.integrations.externalAPI', 'External API')}</option>
+                  <option value="native">{t('payrollConfig.integrations.nativeCalculation', 'Native Calculation')}</option>
+                </select>
+              </div>
+
+              {/* Countries */}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  {t('payrollConfig.integrations.selectCountries', 'Select Countries')}
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {Object.keys(COUNTRY_FLAGS).map((code) => (
+                    <button
+                      key={code}
+                      onClick={() => toggleCountrySelection(code)}
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm transition-colors ${
+                        newIntegration.countries.includes(code)
+                          ? 'bg-momentum-50 border-momentum-300 text-momentum-700'
+                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span>{COUNTRY_FLAGS[code]}</span>
+                      <span>{code}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* API Credentials (only for external) */}
+              {newIntegration.type === 'external' && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">
+                      {t('payrollConfig.integrations.apiKey', 'API Key')}
+                    </label>
+                    <input
+                      type="password"
+                      value={newIntegration.apiKey}
+                      onChange={(e) => setNewIntegration(prev => ({ ...prev, apiKey: e.target.value }))}
+                      placeholder="Enter API key"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                        {t('payrollConfig.integrations.clientId', 'Client ID')}
+                      </label>
+                      <input
+                        type="text"
+                        value={newIntegration.clientId}
+                        onChange={(e) => setNewIntegration(prev => ({ ...prev, clientId: e.target.value }))}
+                        placeholder="Client ID"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                        {t('payrollConfig.integrations.clientSecret', 'Client Secret')}
+                      </label>
+                      <input
+                        type="password"
+                        value={newIntegration.clientSecret}
+                        onChange={(e) => setNewIntegration(prev => ({ ...prev, clientSecret: e.target.value }))}
+                        placeholder="Client Secret"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="p-6 border-t border-slate-200 flex justify-end gap-3">
+              <button
+                onClick={() => setShowAddModal(false)}
+                className="px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+              >
+                {t('common.cancel', 'Cancel')}
+              </button>
+              <button
+                onClick={handleAddIntegration}
+                disabled={!newIntegration.name || newIntegration.countries.length === 0}
+                className="px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {t('payrollConfig.integrations.addAndConnect', 'Add & Connect')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Native vs External Toggle Info */}
       <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
@@ -930,6 +1180,60 @@ function IntegrationsTab() {
             )}
           </div>
         ))}
+      </div>
+
+      {/* Per-Location Provider Assignment */}
+      <div className="mt-8">
+        <h3 className="text-md font-semibold text-slate-900 mb-4">
+          {t('payrollConfig.integrations.perLocation', 'Per-Location Provider Assignment')}
+        </h3>
+        <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-slate-50 border-b border-slate-200">
+              <tr>
+                <th className="text-left px-4 py-3 font-medium text-slate-700">{t('payrollConfig.integrations.location', 'Location')}</th>
+                <th className="text-left px-4 py-3 font-medium text-slate-700">{t('payrollConfig.integrations.country', 'Country')}</th>
+                <th className="text-left px-4 py-3 font-medium text-slate-700">{t('payrollConfig.integrations.provider', 'Provider')}</th>
+                <th className="text-left px-4 py-3 font-medium text-slate-700">{t('payrollConfig.integrations.status', 'Status')}</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {LOCATION_PROVIDERS.map((loc) => {
+                const provider = integrations.find(i => i.id === loc.provider);
+                const isConnected = provider?.status === 'connected' || provider?.status === 'active';
+                return (
+                  <tr key={loc.locationId} className="hover:bg-slate-50">
+                    <td className="px-4 py-3">
+                      <span className="font-medium text-slate-900">{loc.locationName}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="text-lg mr-1">{COUNTRY_FLAGS[loc.country]}</span>
+                      <span className="text-slate-600">{loc.country}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <select
+                        defaultValue={loc.provider}
+                        className="text-sm border border-slate-300 rounded-lg px-2 py-1 focus:ring-2 focus:ring-momentum-500"
+                      >
+                        {integrations.filter(i => i.countries.includes(loc.country) || i.type === 'native').map(int => (
+                          <option key={int.id} value={int.id}>{int.name}</option>
+                        ))}
+                      </select>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                        isConnected ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-600'
+                      }`}>
+                        {isConnected ? <Check className="w-3 h-3" /> : null}
+                        {isConnected ? t('payrollConfig.integrations.active', 'Active') : t('payrollConfig.integrations.notConnected', 'Not Connected')}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div className="p-4 bg-amber-50 rounded-lg border border-amber-200">

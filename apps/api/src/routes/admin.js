@@ -645,10 +645,10 @@ router.post('/invoices/:id/void', async (req, res) => {
 router.get('/plans', async (req, res) => {
   try {
     const result = await db.query(`
-      SELECT p.*, 
+      SELECT p.*,
         (SELECT COUNT(*) FROM subscriptions s WHERE s.plan_id = p.id AND s.status = 'active') as active_subscriptions
-      FROM plans p
-      ORDER BY sort_order
+      FROM billing_plans p
+      ORDER BY display_order
     `);
     res.json({ plans: result.rows });
   } catch (error) {

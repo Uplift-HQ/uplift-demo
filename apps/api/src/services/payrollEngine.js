@@ -285,7 +285,7 @@ class PayrollEngine {
 
     // Get employee
     const empResult = await db.query(
-      'SELECT *, salary AS annual_salary FROM employees WHERE id = $1 AND organization_id = $2',
+      'SELECT * FROM employees WHERE id = $1 AND organization_id = $2',
       [employeeId, organizationId]
     );
 
@@ -368,13 +368,28 @@ class PayrollEngine {
    * Get eligible employees for payroll
    */
   async getEligibleEmployees(organizationId, employeeIds = null) {
+    // Note: We select e.* first, then explicitly select eps columns to avoid
+    // eps.id overwriting e.id (which would cause employee_id to be NULL)
     let query = `
-      SELECT e.*, e.salary AS annual_salary, eps.*
+      SELECT e.*,
+        eps.tax_code,
+        eps.ni_category,
+        eps.student_loan_plan,
+        eps.postgrad_loan,
+        eps.pension_contribution,
+        eps.pension_type,
+        eps.pension_provider,
+        eps.pension_reference,
+        eps.payment_method,
+        eps.bank_name,
+        eps.bank_sort_code,
+        eps.bank_account_number,
+        eps.bank_account_name
       FROM employees e
       LEFT JOIN employee_payroll_settings eps ON eps.employee_id = e.id
       WHERE e.organization_id = $1
         AND e.status = 'active'
-        AND e.employment_end_date IS NULL
+        AND e.end_date IS NULL
     `;
 
     const params = [organizationId];

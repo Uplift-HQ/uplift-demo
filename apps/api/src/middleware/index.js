@@ -14,9 +14,13 @@ export { orgApiLimiter, orgStrictLimiter, orgBulkLimiter, orgReportLimiter, tier
 export { requestTimeout, longRequestTimeout, shortRequestTimeout, configuredTimeout } from './timeout.js';
 export { httpLogger } from './httpLogger.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'CHANGE-ME-set-JWT_SECRET-env-var-in-production-32chars';
-if (!process.env.JWT_SECRET) {
-  console.warn('⚠️  WARNING: JWT_SECRET not set in middleware - using insecure fallback');
+// JWT_SECRET is REQUIRED - no fallback in production
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('CRITICAL: JWT_SECRET environment variable is required in production');
+  }
+  console.error('ERROR: JWT_SECRET not set. Set JWT_SECRET environment variable.');
 }
 
 // -------------------- REQUEST ID TRACKING --------------------
@@ -499,6 +503,8 @@ export const corsOptions = {
       // Railway production URLs
       'https://uplift-portal-production.up.railway.app',
       'https://uplift-platform-production.up.railway.app',
+      // Ops portal
+      'https://ops.uplifthq.co.uk',
       // Localhost for development (always allow for demo convenience)
       'http://localhost:3000',
       'http://localhost:5173',

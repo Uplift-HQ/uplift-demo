@@ -155,10 +155,91 @@ export default function Documents() {
     agreed: false,
   });
 
+  // Use Template modal state (create → merge → sign flow)
+  const [showUseTemplateModal, setShowUseTemplateModal] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [mergeForm, setMergeForm] = useState({
+    employeeId: '',
+    fields: {},
+    sendForSignature: true,
+  });
+  const [isGenerating, setIsGenerating] = useState(false);
+
   // Handle signature canvas change
   const handleSignatureChange = useCallback((dataUrl) => {
     setSignatureForm(prev => ({ ...prev, signatureData: dataUrl }));
   }, []);
+
+  // Open use template modal
+  const openUseTemplateModal = (template) => {
+    setSelectedTemplate(template);
+    // Initialize merge fields
+    const fields = {};
+    template.variables.forEach(v => { fields[v] = ''; });
+    setMergeForm({ employeeId: '', fields, sendForSignature: true });
+    setShowUseTemplateModal(true);
+  };
+
+  // Handle generating document from template
+  const handleGenerateDocument = async () => {
+    if (!mergeForm.employeeId) {
+      showToast(t('documents.selectEmployee', 'Please select an employee'), 'error');
+      return;
+    }
+    // Check all required fields are filled
+    const emptyFields = Object.entries(mergeForm.fields).filter(([, v]) => !v);
+    if (emptyFields.length > 0) {
+      showToast(t('documents.fillAllFields', 'Please fill in all merge fields'), 'error');
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      const employee = employees.find(e => e.id === parseInt(mergeForm.employeeId));
+      const newDoc = {
+        id: documents.length + 100,
+        title: selectedTemplate.name,
+        employee: employee?.name || 'Unknown',
+        employeeId: parseInt(mergeForm.employeeId),
+        category: selectedTemplate.category,
+        uploadDate: new Date().toISOString().split('T')[0],
+        signatureStatus: mergeForm.sendForSignature ? 'pending' : 'none',
+        fileType: 'pdf',
+        mergedFields: { ...mergeForm.fields },
+      };
+
+      setDocuments(prev => [newDoc, ...prev]);
+
+      if (mergeForm.sendForSignature) {
+        const newPending = {
+          id: pendingSignatures.length + 100,
+          documentId: newDoc.id,
+          document: newDoc.title,
+          employee: newDoc.employee,
+          employeeId: newDoc.employeeId,
+          sentDate: new Date().toISOString().split('T')[0],
+          status: 'awaiting',
+          daysPending: 0,
+        };
+        setPendingSignatures(prev => [newPending, ...prev]);
+      }
+
+      showToast(
+        mergeForm.sendForSignature
+          ? t('documents.generatedAndSent', 'Document generated and sent for signature')
+          : t('documents.generated', 'Document generated successfully'),
+        'success'
+      );
+      setShowUseTemplateModal(false);
+    } catch (error) {
+      showToast(t('documents.generateError', 'Failed to generate document'), 'error');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   // Fetch data from API when not in demo mode
   useEffect(() => {
@@ -1052,11 +1133,16 @@ export default function Documents() {
                         <td className="px-6 py-4 text-sm text-slate-600">{tmpl.createdDate}</td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => openUseTemplateModal(tmpl)}
+                              className="px-2.5 py-1.5 bg-momentum-500 text-white text-xs font-medium rounded hover:bg-momentum-600 flex items-center gap-1"
+                              title={t('documents.useTemplate', 'Use Template')}
+                            >
+                              <FileSignature className="h-3.5 w-3.5" />
+                              {t('documents.use', 'Use')}
+                            </button>
                             <button className="p-1.5 text-slate-400 hover:text-momentum-600 rounded" title={t('documents.view', 'View')}>
                               <Eye className="h-4 w-4" />
-                            </button>
-                            <button className="p-1.5 text-slate-400 hover:text-blue-600 rounded" title={t('documents.duplicate', 'Duplicate')}>
-                              <FileText className="h-4 w-4" />
                             </button>
                             <button className="p-1.5 text-slate-400 hover:text-red-600 rounded" title={t('documents.delete', 'Delete')}>
                               <Trash2 className="h-4 w-4" />
@@ -1572,6 +1658,136 @@ export default function Documents() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ============ Use Template Modal (Create → Merge → Sign Flow) ============ */}
+      {showUseTemplateModal && selectedTemplate && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-xl max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-slate-200 shrink-0">
+              <div>
+                <h2 className="text-lg font-semibold text-slate-900">{t('documents.generateDocument', 'Generate Document')}</h2>
+                <p className="text-sm text-slate-500">{selectedTemplate.name}</p>
+              </div>
+              <button onClick={() => setShowUseTemplateModal(false)} className="p-2 hover:bg-slate-100 rounded-lg">
+                <X className="h-5 w-5 text-slate-500" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              {/* Step indicator */}
+              <div className="flex items-center justify-center gap-2 text-sm">
+                <div className="flex items-center gap-1.5 text-momentum-600 font-medium">
+                  <div className="w-6 h-6 rounded-full bg-momentum-500 text-white flex items-center justify-center text-xs">1</div>
+                  {t('documents.selectEmployee', 'Select Employee')}
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-300" />
+                <div className="flex items-center gap-1.5 text-slate-400">
+                  <div className="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs">2</div>
+                  {t('documents.fillFields', 'Fill Fields')}
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-300" />
+                <div className="flex items-center gap-1.5 text-slate-400">
+                  <div className="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs">3</div>
+                  {t('documents.generate', 'Generate')}
+                </div>
+              </div>
+
+              {/* Employee selection */}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('documents.employee', 'Employee')} *</label>
+                <select
+                  value={mergeForm.employeeId}
+                  onChange={(e) => setMergeForm({ ...mergeForm, employeeId: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500"
+                >
+                  <option value="">{t('documents.selectEmployeePlaceholder', '-- Select employee --')}</option>
+                  {employees.map(emp => (
+                    <option key={emp.id} value={emp.id}>{emp.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Merge fields */}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('documents.mergeFields', 'Merge Fields')}</label>
+                <div className="space-y-3 bg-slate-50 rounded-lg p-4">
+                  {selectedTemplate.variables.map(variable => (
+                    <div key={variable}>
+                      <label className="block text-xs font-medium text-slate-600 mb-1 capitalize">
+                        {variable.replace(/_/g, ' ')} *
+                      </label>
+                      <input
+                        type={variable.includes('date') ? 'date' : variable.includes('salary') || variable.includes('amount') ? 'number' : 'text'}
+                        value={mergeForm.fields[variable] || ''}
+                        onChange={(e) => setMergeForm({
+                          ...mergeForm,
+                          fields: { ...mergeForm.fields, [variable]: e.target.value }
+                        })}
+                        placeholder={`Enter ${variable.replace(/_/g, ' ')}`}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-momentum-500"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Send for signature option */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={mergeForm.sendForSignature}
+                    onChange={(e) => setMergeForm({ ...mergeForm, sendForSignature: e.target.checked })}
+                    className="mt-1 h-4 w-4 text-momentum-600 focus:ring-momentum-500 border-slate-300 rounded"
+                  />
+                  <div>
+                    <span className="font-medium text-slate-900">{t('documents.sendForSignature', 'Send for signature')}</span>
+                    <p className="text-sm text-slate-600 mt-0.5">
+                      {t('documents.sendForSignatureDesc', 'The employee will receive an email notification to review and sign this document.')}
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              {/* Preview hint */}
+              <div className="flex items-start gap-2 text-sm text-slate-500">
+                <Info className="w-4 h-4 mt-0.5 shrink-0" />
+                <p>{t('documents.previewHint', 'A preview will be available once the document is generated. The employee can review before signing.')}</p>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 p-6 border-t border-slate-200 shrink-0">
+              <button
+                type="button"
+                onClick={() => setShowUseTemplateModal(false)}
+                className="px-4 py-2 text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 text-sm font-medium"
+              >
+                {t('common.cancel', 'Cancel')}
+              </button>
+              <button
+                onClick={handleGenerateDocument}
+                disabled={isGenerating}
+                className="px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600 text-sm font-medium disabled:opacity-50 flex items-center gap-2"
+              >
+                {isGenerating ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    {t('documents.generating', 'Generating...')}
+                  </>
+                ) : (
+                  <>
+                    <FileSignature className="w-4 h-4" />
+                    {mergeForm.sendForSignature
+                      ? t('documents.generateAndSend', 'Generate & Send for Signature')
+                      : t('documents.generateDocument', 'Generate Document')
+                    }
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}

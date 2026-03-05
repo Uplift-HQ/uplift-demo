@@ -21,6 +21,50 @@ export default function TimeOff() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [toast, setToast] = useState(null);
 
+  // Request time off modal state
+  const [showRequestModal, setShowRequestModal] = useState(false);
+  const [requestForm, setRequestForm] = useState({
+    type: 'annual_leave',
+    startDate: '',
+    endDate: '',
+    notes: '',
+  });
+  const [submittingRequest, setSubmittingRequest] = useState(false);
+
+  // Calculate days between dates
+  const calculateDays = (start, end) => {
+    if (!start || !end) return 0;
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const diff = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+    return diff > 0 ? diff : 0;
+  };
+
+  const handleSubmitRequest = () => {
+    if (!requestForm.startDate || !requestForm.endDate) return;
+
+    setSubmittingRequest(true);
+    setTimeout(() => {
+      const newRequest = {
+        id: requests.length + 100,
+        employee_id: user?.employeeId || 1,
+        employee_name: user?.name || 'Current User',
+        type: requestForm.type,
+        start_date: requestForm.startDate,
+        end_date: requestForm.endDate,
+        days: calculateDays(requestForm.startDate, requestForm.endDate),
+        status: 'pending',
+        notes: requestForm.notes,
+        requested_at: new Date().toISOString(),
+      };
+      setRequests(prev => [newRequest, ...prev]);
+      setShowRequestModal(false);
+      setSubmittingRequest(false);
+      setRequestForm({ type: 'annual_leave', startDate: '', endDate: '', notes: '' });
+      showToast(t('timeOff.requestSubmitted', 'Time off request submitted'));
+    }, 500);
+  };
+
   useEffect(() => {
     loadRequests();
   }, [isPersonalView]);
@@ -192,12 +236,13 @@ export default function TimeOff() {
               : t('timeOff.title', 'Manage employee leave requests')}
           </p>
         </div>
-        {isPersonalView && (
-          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            <Plus className="h-4 w-4" />
-            {t('timeOff.requestTimeOff', 'Request Time Off')}
-          </button>
-        )}
+        <button
+          onClick={() => setShowRequestModal(true)}
+          style={{ backgroundColor: '#F26522', color: 'white', padding: '8px 16px', borderRadius: '8px', fontWeight: '500', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+        >
+          <Plus style={{ width: '16px', height: '16px' }} />
+          {t('timeOff.requestTimeOff', 'Request Time Off')}
+        </button>
       </div>
 
       {/* Stats */}
@@ -420,6 +465,128 @@ export default function TimeOff() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Request Time Off Modal */}
+      {showRequestModal && (
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
+          <div style={{ backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', width: '100%', maxWidth: '500px', margin: '0 16px' }}>
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid #e5e7eb' }}>
+              <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#111827', margin: 0 }}>
+                {t('timeOff.requestTimeOff', 'Request Time Off')}
+              </h3>
+              <button onClick={() => setShowRequestModal(false)} style={{ color: '#9ca3af', cursor: 'pointer', background: 'none', border: 'none' }}>
+                <X style={{ width: '20px', height: '20px' }} />
+              </button>
+            </div>
+
+            {/* Form */}
+            <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {/* Leave Type */}
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                  {t('timeOff.leaveType', 'Leave Type')}
+                </label>
+                <select
+                  value={requestForm.type}
+                  onChange={(e) => setRequestForm(prev => ({ ...prev, type: e.target.value }))}
+                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px' }}
+                >
+                  <option value="annual_leave">{t('timeOff.types.annualLeave', 'Annual Leave')}</option>
+                  <option value="sick_leave">{t('timeOff.types.sickLeave', 'Sick Leave')}</option>
+                  <option value="personal">{t('timeOff.types.personal', 'Personal')}</option>
+                  <option value="bereavement">{t('timeOff.types.bereavement', 'Bereavement')}</option>
+                  <option value="maternity">{t('timeOff.types.maternity', 'Maternity')}</option>
+                  <option value="paternity">{t('timeOff.types.paternity', 'Paternity')}</option>
+                  <option value="unpaid">{t('timeOff.types.unpaid', 'Unpaid Leave')}</option>
+                </select>
+              </div>
+
+              {/* Date Range */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                    {t('timeOff.startDate', 'Start Date')}
+                  </label>
+                  <input
+                    type="date"
+                    value={requestForm.startDate}
+                    onChange={(e) => setRequestForm(prev => ({ ...prev, startDate: e.target.value }))}
+                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px' }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                    {t('timeOff.endDate', 'End Date')}
+                  </label>
+                  <input
+                    type="date"
+                    value={requestForm.endDate}
+                    onChange={(e) => setRequestForm(prev => ({ ...prev, endDate: e.target.value }))}
+                    min={requestForm.startDate}
+                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px' }}
+                  />
+                </div>
+              </div>
+
+              {/* Days Calculated */}
+              {requestForm.startDate && requestForm.endDate && (
+                <div style={{ backgroundColor: '#f0fdf4', padding: '12px 16px', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '14px', color: '#166534' }}>
+                      {t('timeOff.totalDays', 'Total Days')}
+                    </span>
+                    <span style={{ fontSize: '18px', fontWeight: '600', color: '#166534' }}>
+                      {calculateDays(requestForm.startDate, requestForm.endDate)} {t('timeOff.days', 'days')}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Notes */}
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+                  {t('common.notes', 'Notes')} <span style={{ color: '#9ca3af', fontWeight: '400' }}>({t('common.optional', 'optional')})</span>
+                </label>
+                <textarea
+                  value={requestForm.notes}
+                  onChange={(e) => setRequestForm(prev => ({ ...prev, notes: e.target.value }))}
+                  rows={3}
+                  placeholder={t('timeOff.notesPlaceholder', 'Add any additional information...')}
+                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px', resize: 'vertical' }}
+                />
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div style={{ display: 'flex', gap: '12px', padding: '16px 24px', borderTop: '1px solid #e5e7eb', backgroundColor: '#f9fafb' }}>
+              <button
+                onClick={() => setShowRequestModal(false)}
+                style={{ flex: 1, padding: '10px 16px', backgroundColor: 'white', border: '1px solid #d1d5db', borderRadius: '8px', fontWeight: '500', cursor: 'pointer' }}
+              >
+                {t('common.cancel', 'Cancel')}
+              </button>
+              <button
+                onClick={handleSubmitRequest}
+                disabled={!requestForm.startDate || !requestForm.endDate || submittingRequest}
+                style={{
+                  flex: 1,
+                  padding: '10px 16px',
+                  backgroundColor: (!requestForm.startDate || !requestForm.endDate || submittingRequest) ? '#fdba74' : '#F26522',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontWeight: '500',
+                  cursor: (!requestForm.startDate || !requestForm.endDate || submittingRequest) ? 'not-allowed' : 'pointer',
+                  opacity: (!requestForm.startDate || !requestForm.endDate || submittingRequest) ? 0.7 : 1
+                }}
+              >
+                {submittingRequest ? t('common.submitting', 'Submitting...') : t('timeOff.submitRequest', 'Submit Request')}
+              </button>
+            </div>
           </div>
         </div>
       )}

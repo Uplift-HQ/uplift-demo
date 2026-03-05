@@ -4,24 +4,78 @@
 // ============================================================
 
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { brandingApi } from './api';
+import { brandingApi, api } from './api';
 
 const BrandingContext = createContext(null);
 
 const DEFAULT_BRANDING = {
-  brand_name: 'Uplift',
-  primary_color: '#F26522',
-  secondary_color: '#1E293B',
-  logo_url: null,
-  dark_logo_url: null,
+  brand_name: 'Grand Metropolitan',
+  primary_color: '#1e3a5f',
+  secondary_color: '#0f2847',
+  logo_url: '/logo.webp',
+  dark_logo_url: '/logo.webp',
   favicon_url: null,
   login_bg_url: null,
 };
+
+// Generate color shades from a hex color
+function hexToHSL(hex) {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+  if (max === min) {
+    h = s = 0;
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  return { h: h * 360, s: s * 100, l: l * 100 };
+}
+
+function HSLToHex(h, s, l) {
+  s /= 100;
+  l /= 100;
+  const a = s * Math.min(l, 1 - l);
+  const f = n => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color).toString(16).padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+function generateColorPalette(primaryHex) {
+  const { h, s } = hexToHSL(primaryHex);
+  return {
+    50: HSLToHex(h, Math.min(s, 30), 95),
+    100: HSLToHex(h, Math.min(s, 40), 90),
+    200: HSLToHex(h, Math.min(s, 50), 80),
+    300: HSLToHex(h, Math.min(s, 60), 65),
+    400: HSLToHex(h, s, 50),
+    500: primaryHex,
+    600: HSLToHex(h, s, 35),
+    700: HSLToHex(h, s, 28),
+    800: HSLToHex(h, s, 20),
+    900: HSLToHex(h, s, 12),
+  };
+}
 
 function applyCSSProperties(branding) {
   const root = document.documentElement;
   if (branding.primary_color) {
     root.style.setProperty('--brand-primary', branding.primary_color);
+    // Generate and apply all shades
+    const palette = generateColorPalette(branding.primary_color);
+    Object.entries(palette).forEach(([shade, color]) => {
+      root.style.setProperty(`--brand-${shade}`, color);
+    });
   }
   if (branding.secondary_color) {
     root.style.setProperty('--brand-secondary', branding.secondary_color);
@@ -51,16 +105,29 @@ export function BrandingProvider({ children }) {
         };
         setBranding(merged);
         applyCSSProperties(merged);
+      } else {
+        // Apply default branding
+        applyCSSProperties(DEFAULT_BRANDING);
       }
     } catch (error) {
       // Silently fail — use defaults
+      console.debug('Branding not available, using defaults');
+      applyCSSProperties(DEFAULT_BRANDING);
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchBranding();
+    // Apply default branding immediately on mount
+    applyCSSProperties(DEFAULT_BRANDING);
+    // Only fetch from API if user is authenticated (has token)
+    const token = api.getToken();
+    if (token) {
+      fetchBranding();
+    } else {
+      setLoading(false);
+    }
   }, [fetchBranding]);
 
   const updateBranding = useCallback((newBranding) => {

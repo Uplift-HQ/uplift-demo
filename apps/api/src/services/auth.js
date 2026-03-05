@@ -12,9 +12,13 @@ import { db } from '../lib/database.js';
 import { emailService } from './email.js';
 import { activityLog } from './activity.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'CHANGE-ME-set-JWT_SECRET-env-var-in-production-32chars';
-if (!process.env.JWT_SECRET) {
-  console.warn('⚠️  WARNING: JWT_SECRET not set - using insecure fallback. Set JWT_SECRET env var!');
+// JWT_SECRET is REQUIRED - no fallback in production
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('CRITICAL: JWT_SECRET environment variable is required in production');
+  }
+  console.error('ERROR: JWT_SECRET not set. Set JWT_SECRET environment variable.');
 }
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '15m';
 const REFRESH_TOKEN_EXPIRES_DAYS = parseInt(process.env.REFRESH_TOKEN_EXPIRES_DAYS) || 30;
@@ -158,7 +162,10 @@ export const authService = {
    */
   async login(email, password, deviceInfo = {}) {
     const result = await db.query(
-      `SELECT * FROM users WHERE email = $1`,
+      `SELECT u.*, e.id as employee_id
+       FROM users u
+       LEFT JOIN employees e ON e.user_id = u.id
+       WHERE u.email = $1`,
       [email.toLowerCase()]
     );
 
