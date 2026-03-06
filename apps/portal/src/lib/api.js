@@ -119,27 +119,59 @@ const DEMO_REVIEW_CYCLES = [
 
 // Demo Learning Data
 const DEMO_COURSES = [
-  { id: 'course-1', title: 'Health & Safety Essentials', description: 'Core workplace safety training', category: 'health_safety', difficulty: 'beginner', duration_minutes: 120, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 8 },
-  { id: 'course-2', title: 'Fire Safety Awareness', description: 'Fire prevention and emergency procedures', category: 'health_safety', difficulty: 'beginner', duration_minutes: 60, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 5 },
-  { id: 'course-3', title: 'Manual Handling Best Practices', description: 'Safe lifting and handling techniques', category: 'health_safety', difficulty: 'beginner', duration_minutes: 90, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 6 },
-  { id: 'course-4', title: 'GDPR Data Protection', description: 'Understanding data protection regulations', category: 'compliance', difficulty: 'intermediate', duration_minutes: 60, is_mandatory: true, status: 'published', passing_score: 85, lessons_count: 4 },
-  { id: 'course-5', title: 'Introduction to Lean Manufacturing', description: 'Fundamentals of lean principles', category: 'skills', difficulty: 'intermediate', duration_minutes: 240, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 12 },
-  { id: 'course-6', title: 'Six Sigma Green Belt', description: 'Quality management methodology', category: 'skills', difficulty: 'advanced', duration_minutes: 2400, is_mandatory: false, status: 'published', passing_score: 75, lessons_count: 24 },
-  { id: 'course-7', title: 'Leadership Fundamentals', description: 'Core leadership skills for managers', category: 'leadership', difficulty: 'intermediate', duration_minutes: 360, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 10 },
-  { id: 'course-8', title: 'First Aid at Work', description: 'Essential first aid training', category: 'health_safety', difficulty: 'intermediate', duration_minutes: 480, is_mandatory: true, status: 'published', passing_score: 85, lessons_count: 15 },
+  { id: 'course-1', title: 'Food Safety Level 2', description: 'Essential food hygiene and safety for hospitality staff', category: 'health_safety', difficulty: 'beginner', duration_minutes: 180, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 12 },
+  { id: 'course-2', title: 'Fire Safety Awareness', description: 'Hotel fire prevention and emergency evacuation procedures', category: 'health_safety', difficulty: 'beginner', duration_minutes: 60, is_mandatory: true, status: 'published', passing_score: 80, lessons_count: 5 },
+  { id: 'course-3', title: 'WSET Level 1 Wine', description: 'Wine and Spirit Education Trust foundation course', category: 'soft_skills', difficulty: 'beginner', duration_minutes: 360, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 8 },
+  { id: 'course-4', title: 'GDPR & Guest Data Protection', description: 'Protecting guest information and privacy compliance', category: 'compliance', difficulty: 'intermediate', duration_minutes: 60, is_mandatory: true, status: 'published', passing_score: 85, lessons_count: 4 },
+  { id: 'course-5', title: 'Opera PMS Essentials', description: 'Property management system fundamentals for front desk', category: 'soft_skills', difficulty: 'intermediate', duration_minutes: 240, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 10 },
+  { id: 'course-6', title: 'WSET Level 2 Wine & Spirits', description: 'Intermediate wine knowledge and service', category: 'soft_skills', difficulty: 'intermediate', duration_minutes: 720, is_mandatory: false, status: 'published', passing_score: 75, lessons_count: 16 },
+  { id: 'course-7', title: 'Hospitality Leadership', description: 'Management skills for hotel department heads', category: 'leadership', difficulty: 'intermediate', duration_minutes: 480, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 12 },
+  { id: 'course-8', title: 'First Aid at Work', description: 'Essential first aid training for hospitality venues', category: 'health_safety', difficulty: 'intermediate', duration_minutes: 480, is_mandatory: true, status: 'published', passing_score: 85, lessons_count: 15 },
+  { id: 'course-9', title: 'Allergen Awareness', description: 'Managing food allergies and dietary requirements', category: 'health_safety', difficulty: 'beginner', duration_minutes: 90, is_mandatory: true, status: 'published', passing_score: 85, lessons_count: 6 },
+  { id: 'course-10', title: 'Guest Service Excellence', description: 'Delivering exceptional guest experiences', category: 'soft_skills', difficulty: 'beginner', duration_minutes: 120, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 8 },
+  { id: 'course-11', title: 'Revenue Management Fundamentals', description: 'Pricing strategies and yield optimisation', category: 'leadership', difficulty: 'advanced', duration_minutes: 360, is_mandatory: false, status: 'published', passing_score: 75, lessons_count: 10 },
+  { id: 'course-12', title: 'Barista Skills Level 1', description: 'Coffee preparation and latte art basics', category: 'soft_skills', difficulty: 'beginner', duration_minutes: 180, is_mandatory: false, status: 'published', passing_score: 70, lessons_count: 6 },
 ];
 const DEMO_ENROLLMENTS = [
-  { id: 'enroll-1', course_id: 'course-1', course_title: 'Health & Safety Essentials', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 92, enrolled_at: '2025-11-01', completed_at: '2025-11-15' },
+  // Current User enrollments
+  { id: 'enroll-1', course_id: 'course-1', course_title: 'Food Safety Level 2', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 92, enrolled_at: '2025-11-01', completed_at: '2025-11-15' },
   { id: 'enroll-2', course_id: 'course-2', course_title: 'Fire Safety Awareness', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 88, enrolled_at: '2025-11-20', completed_at: '2025-12-01' },
-  { id: 'enroll-3', course_id: 'course-3', course_title: 'Manual Handling Best Practices', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 95, enrolled_at: '2025-10-01', completed_at: '2025-10-20' },
-  { id: 'enroll-4', course_id: 'course-4', course_title: 'GDPR Data Protection', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 100, enrolled_at: '2026-01-05', completed_at: '2026-01-10' },
-  { id: 'enroll-5', course_id: 'course-5', course_title: 'Introduction to Lean Manufacturing', employee_id: 'emp-1', employee_name: 'Current User', status: 'in_progress', progress: 65, score: null, enrolled_at: '2026-01-15', completed_at: null },
-  { id: 'enroll-6', course_id: 'course-6', course_title: 'Six Sigma Green Belt', employee_id: 'emp-1', employee_name: 'Current User', status: 'in_progress', progress: 40, score: null, enrolled_at: '2025-12-01', completed_at: null },
+  { id: 'enroll-3', course_id: 'course-3', course_title: 'WSET Level 1 Wine', employee_id: 'emp-1', employee_name: 'Current User', status: 'in_progress', progress: 65, score: null, enrolled_at: '2026-01-15', completed_at: null },
+  { id: 'enroll-4', course_id: 'course-4', course_title: 'GDPR & Guest Data Protection', employee_id: 'emp-1', employee_name: 'Current User', status: 'completed', progress: 100, score: 100, enrolled_at: '2026-01-05', completed_at: '2026-01-10' },
+  // Sophie Williams - Front Desk Manager
+  { id: 'enroll-5', course_id: 'course-5', course_title: 'Opera PMS Essentials', employee_id: 'emp-2', employee_name: 'Sophie Williams', status: 'completed', progress: 100, score: 94, enrolled_at: '2025-10-01', completed_at: '2025-10-20' },
+  { id: 'enroll-6', course_id: 'course-1', course_title: 'Food Safety Level 2', employee_id: 'emp-2', employee_name: 'Sophie Williams', status: 'completed', progress: 100, score: 88, enrolled_at: '2025-09-15', completed_at: '2025-09-28' },
+  { id: 'enroll-7', course_id: 'course-7', course_title: 'Hospitality Leadership', employee_id: 'emp-2', employee_name: 'Sophie Williams', status: 'in_progress', progress: 45, score: null, enrolled_at: '2026-01-08', completed_at: null },
+  // James Thompson - Executive Chef
+  { id: 'enroll-8', course_id: 'course-1', course_title: 'Food Safety Level 2', employee_id: 'emp-3', employee_name: 'James Thompson', status: 'completed', progress: 100, score: 98, enrolled_at: '2025-08-01', completed_at: '2025-08-10' },
+  { id: 'enroll-9', course_id: 'course-9', course_title: 'Allergen Awareness', employee_id: 'emp-3', employee_name: 'James Thompson', status: 'completed', progress: 100, score: 100, enrolled_at: '2025-08-15', completed_at: '2025-08-20' },
+  { id: 'enroll-10', course_id: 'course-7', course_title: 'Hospitality Leadership', employee_id: 'emp-3', employee_name: 'James Thompson', status: 'completed', progress: 100, score: 85, enrolled_at: '2025-11-01', completed_at: '2025-12-15' },
+  // Maria Santos - Housekeeping Supervisor
+  { id: 'enroll-11', course_id: 'course-1', course_title: 'Food Safety Level 2', employee_id: 'emp-4', employee_name: 'Maria Santos', status: 'completed', progress: 100, score: 82, enrolled_at: '2025-10-10', completed_at: '2025-10-25' },
+  { id: 'enroll-12', course_id: 'course-2', course_title: 'Fire Safety Awareness', employee_id: 'emp-4', employee_name: 'Maria Santos', status: 'completed', progress: 100, score: 90, enrolled_at: '2025-10-26', completed_at: '2025-11-05' },
+  { id: 'enroll-13', course_id: 'course-8', course_title: 'First Aid at Work', employee_id: 'emp-4', employee_name: 'Maria Santos', status: 'not_started', progress: 0, score: null, enrolled_at: '2026-02-01', completed_at: null },
+  // Oliver Barnes - F&B Manager
+  { id: 'enroll-14', course_id: 'course-6', course_title: 'WSET Level 2 Wine & Spirits', employee_id: 'emp-5', employee_name: 'Oliver Barnes', status: 'in_progress', progress: 78, score: null, enrolled_at: '2025-12-01', completed_at: null },
+  { id: 'enroll-15', course_id: 'course-1', course_title: 'Food Safety Level 2', employee_id: 'emp-5', employee_name: 'Oliver Barnes', status: 'completed', progress: 100, score: 95, enrolled_at: '2025-07-15', completed_at: '2025-07-28' },
+  { id: 'enroll-16', course_id: 'course-11', course_title: 'Revenue Management Fundamentals', employee_id: 'emp-5', employee_name: 'Oliver Barnes', status: 'not_started', progress: 0, score: null, enrolled_at: '2026-02-10', completed_at: null },
+  // Emma Clarke - Concierge
+  { id: 'enroll-17', course_id: 'course-10', course_title: 'Guest Service Excellence', employee_id: 'emp-6', employee_name: 'Emma Clarke', status: 'completed', progress: 100, score: 96, enrolled_at: '2025-09-01', completed_at: '2025-09-15' },
+  { id: 'enroll-18', course_id: 'course-3', course_title: 'WSET Level 1 Wine', employee_id: 'emp-6', employee_name: 'Emma Clarke', status: 'in_progress', progress: 30, score: null, enrolled_at: '2026-01-20', completed_at: null },
+  // Daniel Brown - Night Manager
+  { id: 'enroll-19', course_id: 'course-2', course_title: 'Fire Safety Awareness', employee_id: 'emp-7', employee_name: 'Daniel Brown', status: 'overdue', progress: 60, score: null, enrolled_at: '2025-11-01', completed_at: null, due_date: '2026-01-15' },
+  { id: 'enroll-20', course_id: 'course-8', course_title: 'First Aid at Work', employee_id: 'emp-7', employee_name: 'Daniel Brown', status: 'completed', progress: 100, score: 91, enrolled_at: '2025-06-01', completed_at: '2025-06-20' },
+  // Lucy Taylor - Spa Manager
+  { id: 'enroll-21', course_id: 'course-1', course_title: 'Food Safety Level 2', employee_id: 'emp-8', employee_name: 'Lucy Taylor', status: 'completed', progress: 100, score: 87, enrolled_at: '2025-09-10', completed_at: '2025-09-25' },
+  { id: 'enroll-22', course_id: 'course-7', course_title: 'Hospitality Leadership', employee_id: 'emp-8', employee_name: 'Lucy Taylor', status: 'in_progress', progress: 55, score: null, enrolled_at: '2025-12-15', completed_at: null },
+  { id: 'enroll-23', course_id: 'course-12', course_title: 'Barista Skills Level 1', employee_id: 'emp-8', employee_name: 'Lucy Taylor', status: 'not_started', progress: 0, score: null, enrolled_at: '2026-02-05', completed_at: null },
 ];
 const DEMO_CERTIFICATIONS = [
-  { id: 'cert-1', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-1', course_title: 'Health & Safety Essentials', issued_at: '2025-11-15', expires_at: '2026-11-15', status: 'active' },
+  { id: 'cert-1', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-1', course_title: 'Food Safety Level 2', issued_at: '2025-11-15', expires_at: '2026-11-15', status: 'active' },
   { id: 'cert-2', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-2', course_title: 'Fire Safety Awareness', issued_at: '2025-12-01', expires_at: '2026-12-01', status: 'active' },
-  { id: 'cert-3', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-4', course_title: 'GDPR Data Protection', issued_at: '2026-01-10', expires_at: '2027-01-10', status: 'active' },
+  { id: 'cert-3', employee_id: 'emp-1', employee_name: 'Current User', course_id: 'course-4', course_title: 'GDPR & Guest Data Protection', issued_at: '2026-01-10', expires_at: '2027-01-10', status: 'active' },
+  { id: 'cert-4', employee_id: 'emp-3', employee_name: 'James Thompson', course_id: 'course-1', course_title: 'Food Safety Level 2', issued_at: '2025-08-10', expires_at: '2026-08-10', status: 'active' },
+  { id: 'cert-5', employee_id: 'emp-3', employee_name: 'James Thompson', course_id: 'course-9', course_title: 'Allergen Awareness', issued_at: '2025-08-20', expires_at: '2026-08-20', status: 'active' },
+  { id: 'cert-6', employee_id: 'emp-5', employee_name: 'Oliver Barnes', course_id: 'course-1', course_title: 'Food Safety Level 2', issued_at: '2025-07-28', expires_at: '2026-07-28', status: 'expiring_soon' },
 ];
 
 // Demo Expense Data
@@ -183,21 +215,35 @@ const DEMO_CARD_CLAIMS = [
   { id: 'claim-4', claim_number: 'EXP-2025-098', employee_id: 'emp-1', employee_name: 'Sarah Mitchell', expense_date: '2025-12-15', transaction_count: 4, total_amount: 156.80, status: 'paid', description: 'December team event' },
 ];
 
-// Demo Compliance Data
+// Demo Compliance Data - Hospitality focused
 const DEMO_COMPLIANCE_ITEMS = [
-  { id: 'comp-1', name: 'Health & Safety Induction', category: 'Safety', frequency: 'annual', is_mandatory: true },
-  { id: 'comp-2', name: 'Fire Safety Training', category: 'Safety', frequency: 'annual', is_mandatory: true },
-  { id: 'comp-3', name: 'First Aid Certificate', category: 'Safety', frequency: '3_years', is_mandatory: true },
-  { id: 'comp-4', name: 'GDPR Training', category: 'Compliance', frequency: 'annual', is_mandatory: true },
-  { id: 'comp-5', name: 'Manual Handling', category: 'Safety', frequency: '2_years', is_mandatory: true },
-  { id: 'comp-6', name: 'Forklift Licence', category: 'Operations', frequency: '3_years', is_mandatory: false },
+  { id: 'comp-1', name: 'Food Safety Level 2', category: 'Safety', frequency: 'annual', is_mandatory: true, compliance_rate: 95 },
+  { id: 'comp-2', name: 'Fire Safety Training', category: 'Safety', frequency: 'annual', is_mandatory: true, compliance_rate: 99 },
+  { id: 'comp-3', name: 'First Aid Certificate', category: 'Safety', frequency: '3_years', is_mandatory: true, compliance_rate: 88 },
+  { id: 'comp-4', name: 'GDPR & Data Protection', category: 'Compliance', frequency: 'annual', is_mandatory: true, compliance_rate: 92 },
+  { id: 'comp-5', name: 'Allergen Awareness', category: 'Safety', frequency: 'annual', is_mandatory: true, compliance_rate: 97 },
+  { id: 'comp-6', name: 'Personal Licence (Alcohol)', category: 'Operations', frequency: '10_years', is_mandatory: false, compliance_rate: 100 },
+  { id: 'comp-7', name: 'COSHH Training', category: 'Safety', frequency: '2_years', is_mandatory: true, compliance_rate: 85 },
+  { id: 'comp-8', name: 'Anti-Money Laundering', category: 'Compliance', frequency: 'annual', is_mandatory: true, compliance_rate: 91 },
 ];
 const DEMO_EMPLOYEE_COMPLIANCE = [
-  { id: 'ec-1', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-1', compliance_item_name: 'Health & Safety Induction', status: 'compliant', completed_at: '2025-11-15', expires_at: '2026-11-15' },
+  { id: 'ec-1', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-1', compliance_item_name: 'Food Safety Level 2', status: 'compliant', completed_at: '2025-11-15', expires_at: '2026-11-15' },
   { id: 'ec-2', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-2', compliance_item_name: 'Fire Safety Training', status: 'compliant', completed_at: '2025-12-01', expires_at: '2026-12-01' },
   { id: 'ec-3', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-3', compliance_item_name: 'First Aid Certificate', status: 'compliant', completed_at: '2024-06-15', expires_at: '2027-06-15' },
-  { id: 'ec-4', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-4', compliance_item_name: 'GDPR Training', status: 'compliant', completed_at: '2026-01-10', expires_at: '2027-01-10' },
-  { id: 'ec-5', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-5', compliance_item_name: 'Manual Handling', status: 'expiring_soon', completed_at: '2024-10-20', expires_at: '2026-10-20' },
+  { id: 'ec-4', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-4', compliance_item_name: 'GDPR & Data Protection', status: 'compliant', completed_at: '2026-01-10', expires_at: '2027-01-10' },
+  { id: 'ec-5', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-5', compliance_item_name: 'Allergen Awareness', status: 'expiring_soon', completed_at: '2025-03-20', expires_at: '2026-03-20' },
+  { id: 'ec-6', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-7', compliance_item_name: 'COSHH Training', status: 'compliant', completed_at: '2025-06-15', expires_at: '2027-06-15' },
+  { id: 'ec-7', employee_id: 'emp-1', employee_name: 'Current User', compliance_item_id: 'comp-8', compliance_item_name: 'Anti-Money Laundering', status: 'compliant', completed_at: '2025-09-01', expires_at: '2026-09-01' },
+];
+
+// Demo Training Calendar/Schedule
+const DEMO_TRAINING_SCHEDULE = [
+  { id: 'sched-1', course_id: 'course-1', course_title: 'Food Safety Level 2', date: '2026-02-15', time: '09:00', location: 'Training Room A', instructor: 'Sarah Mitchell', capacity: 12, enrolled: 8, status: 'open' },
+  { id: 'sched-2', course_id: 'course-2', course_title: 'Fire Safety Awareness', date: '2026-02-18', time: '14:00', location: 'Main Conference Room', instructor: 'Fire Safety Officer', capacity: 20, enrolled: 15, status: 'open' },
+  { id: 'sched-3', course_id: 'course-8', course_title: 'First Aid at Work', date: '2026-02-20', time: '09:00', location: 'Training Room B', instructor: 'St John Ambulance', capacity: 8, enrolled: 8, status: 'full' },
+  { id: 'sched-4', course_id: 'course-3', course_title: 'WSET Level 1 Wine', date: '2026-02-25', time: '10:00', location: 'Restaurant Floor', instructor: 'Oliver Barnes', capacity: 10, enrolled: 6, status: 'open' },
+  { id: 'sched-5', course_id: 'course-9', course_title: 'Allergen Awareness', date: '2026-03-01', time: '11:00', location: 'Kitchen Training Area', instructor: 'James Thompson', capacity: 15, enrolled: 12, status: 'open' },
+  { id: 'sched-6', course_id: 'course-7', course_title: 'Hospitality Leadership', date: '2026-03-05', time: '09:00', location: 'Executive Boardroom', instructor: 'External Consultant', capacity: 8, enrolled: 5, status: 'open' },
 ];
 
 // Demo Payslips Data
@@ -209,10 +255,13 @@ const DEMO_PAYSLIPS = [
 const DEMO_YTD = { gross: 28500, tax: 4750, ni: 2185, pension: 0, net: 21565 };
 const DEMO_TAX_YEARS = ['2025-26', '2024-25'];
 
-// Demo Learning Paths
+// Demo Learning Paths - Hospitality focused
 const DEMO_LEARNING_PATHS = [
-  { id: 'path-1', name: 'New Starter Essentials', description: 'Core training for all new employees', courses: ['course-1', 'course-2', 'course-3', 'course-4'], duration_hours: 8, required: true },
-  { id: 'path-2', name: 'Management Development', description: 'Leadership skills for aspiring managers', courses: ['course-7'], duration_hours: 6, required: false },
+  { id: 'path-1', name: 'Hotel Starter Essentials', description: 'Mandatory training for all new hotel staff', courses: ['course-1', 'course-2', 'course-4', 'course-9'], duration_hours: 8, required: true, progress: 85 },
+  { id: 'path-2', name: 'Front Desk Excellence', description: 'Complete training for front desk team members', courses: ['course-5', 'course-10', 'course-4'], duration_hours: 7, required: false, progress: 60 },
+  { id: 'path-3', name: 'F&B Professional', description: 'Wine, spirits and service excellence for restaurant staff', courses: ['course-3', 'course-6', 'course-12'], duration_hours: 20, required: false, progress: 45 },
+  { id: 'path-4', name: 'Management Development', description: 'Leadership skills for department heads and supervisors', courses: ['course-7', 'course-11'], duration_hours: 14, required: false, progress: 30 },
+  { id: 'path-5', name: 'Kitchen Safety Compliance', description: 'Essential safety training for all kitchen staff', courses: ['course-1', 'course-9', 'course-8'], duration_hours: 12, required: true, progress: 92 },
 ];
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -1102,18 +1151,45 @@ export const learningApi = {
   },
   getDashboard: async () => {
     if (DEMO_MODE) {
+      const completedCount = DEMO_ENROLLMENTS.filter(e => e.status === 'completed').length;
+      const totalCount = DEMO_ENROLLMENTS.length;
       return {
         totalCourses: DEMO_COURSES.length,
         mandatoryCourses: DEMO_COURSES.filter(c => c.is_mandatory).length,
-        totalEnrollments: DEMO_ENROLLMENTS.length,
-        completedEnrollments: DEMO_ENROLLMENTS.filter(e => e.status === 'completed').length,
+        totalEnrollments: totalCount,
+        completedEnrollments: completedCount,
         inProgressEnrollments: DEMO_ENROLLMENTS.filter(e => e.status === 'in_progress').length,
-        overallCompletionRate: 67,
+        overdueEnrollments: DEMO_ENROLLMENTS.filter(e => e.status === 'overdue').length,
+        notStartedEnrollments: DEMO_ENROLLMENTS.filter(e => e.status === 'not_started').length,
+        overallCompletionRate: Math.round((completedCount / totalCount) * 100),
         activeCertifications: DEMO_CERTIFICATIONS.filter(c => c.status === 'active').length,
-        expiringCertifications: 1,
+        expiringCertifications: DEMO_CERTIFICATIONS.filter(c => c.status === 'expiring_soon').length,
+        totalTrainingHours: 156,
+        avgCompletionTime: 4.2,
+        complianceItems: DEMO_COMPLIANCE_ITEMS,
+        upcomingTraining: DEMO_TRAINING_SCHEDULE.slice(0, 3),
+        topCourses: [
+          { course: 'Food Safety Level 2', completions: 45, rating: 4.8 },
+          { course: 'Fire Safety Awareness', completions: 42, rating: 4.6 },
+          { course: 'Guest Service Excellence', completions: 28, rating: 4.9 },
+        ],
+        departmentProgress: [
+          { department: 'Front Office', completion: 92, enrolled: 24 },
+          { department: 'F&B', completion: 88, enrolled: 32 },
+          { department: 'Housekeeping', completion: 85, enrolled: 28 },
+          { department: 'Kitchen', completion: 95, enrolled: 18 },
+          { department: 'Spa', completion: 78, enrolled: 8 },
+        ],
       };
     }
     return api.get('/learning/dashboard');
+  },
+
+  getTrainingSchedule: async () => {
+    if (DEMO_MODE) {
+      return { schedule: DEMO_TRAINING_SCHEDULE };
+    }
+    return api.get('/learning/schedule');
   },
 
   // Employees for assignment

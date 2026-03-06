@@ -80,18 +80,39 @@ export default function Settings() {
   }, [activeTab]);
 
   const loadData = async () => {
+    // In DEMO_MODE, immediately set demo data without API calls
+    if (DEMO_MODE) {
+      if ((activeTab === 'organization' || activeTab === 'branding') && isAdmin) {
+        setOrganization({
+          id: 'org-1',
+          name: 'Grand Metropolitan Hotel Group',
+          industry: 'Hospitality',
+          employees_count: 150,
+          locations_count: 9,
+          timezone: 'Europe/London',
+          currency: 'GBP',
+        });
+      } else if (activeTab === 'users' && isAdmin) {
+        setUsers(DEMO_TEAM_MEMBERS);
+      } else if (activeTab === 'sessions') {
+        setSessions([
+          { id: 'sess-1', device: 'Chrome on MacOS', ip: '192.168.1.100', location: 'London, UK', lastActive: new Date().toISOString(), current: true },
+          { id: 'sess-2', device: 'Safari on iPhone', ip: '192.168.1.101', location: 'London, UK', lastActive: new Date(Date.now() - 3600000).toISOString(), current: false },
+        ]);
+      }
+      setLoading(false);
+      return;
+    }
+
+    // Non-demo mode: call API
     setLoading(true);
     try {
       if ((activeTab === 'organization' || activeTab === 'branding') && isAdmin) {
         const result = await organizationApi.get();
         setOrganization(result?.organization || null);
       } else if (activeTab === 'users' && isAdmin) {
-        if (DEMO_MODE) {
-          setUsers(DEMO_TEAM_MEMBERS);
-        } else {
-          const result = await api.get('/users');
-          setUsers(result?.users || []);
-        }
+        const result = await api.get('/users');
+        setUsers(result?.users || []);
       } else if (activeTab === 'sessions') {
         const result = await api.get(`/users/${user.id}/sessions`);
         setSessions(result?.sessions || []);
@@ -857,6 +878,18 @@ function UserDetailModal({ user, onClose, onRefresh, showMsg }) {
   }, [user.id]);
 
   const loadUserData = async () => {
+    // In DEMO_MODE, use static demo data
+    if (DEMO_MODE) {
+      setSessions([
+        { id: 'sess-1', device: 'Chrome on MacOS', location: 'London, UK', lastActive: new Date().toISOString(), current: true },
+      ]);
+      setActivity([
+        { id: 'act-1', type: 'login', description: 'Logged in', timestamp: new Date(Date.now() - 3600000).toISOString() },
+        { id: 'act-2', type: 'schedule_view', description: 'Viewed schedule', timestamp: new Date(Date.now() - 7200000).toISOString() },
+      ]);
+      return;
+    }
+
     try {
       const [sessResult, actResult] = await Promise.all([
         api.get(`/users/${user.id}/sessions`),

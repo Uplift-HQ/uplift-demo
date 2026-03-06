@@ -77,6 +77,84 @@ const APPROVAL_CHAIN = [
   { level: 3, role: 'Finance', limit: null },
 ];
 
+const DEMO_CORPORATE_CARDS = [
+  {
+    id: 'card-1',
+    cardHolder: 'Robert Hughes',
+    role: 'General Manager',
+    cardNumber: '•••• •••• •••• 4521',
+    type: 'Amex Corporate',
+    limit: 5000,
+    spent: 2340,
+    status: 'active',
+    recentTransactions: [
+      { id: 'txn-1', description: 'Hilton London Bankside', amount: 485.00, date: '2026-01-28', category: 'accommodation' },
+      { id: 'txn-2', description: 'British Airways', amount: 342.00, date: '2026-01-26', category: 'travel' },
+      { id: 'txn-3', description: 'The Ivy Restaurant', amount: 215.00, date: '2026-01-25', category: 'meals' },
+    ],
+  },
+  {
+    id: 'card-2',
+    cardHolder: 'Maria Santos',
+    role: 'Operations Director',
+    cardNumber: '•••• •••• •••• 7832',
+    type: 'Barclays Visa',
+    limit: 3500,
+    spent: 1875,
+    status: 'active',
+    recentTransactions: [
+      { id: 'txn-4', description: 'Catering Supplies Ltd', amount: 892.00, date: '2026-01-29', category: 'equipment' },
+      { id: 'txn-5', description: 'Premier Inn Edinburgh', amount: 189.00, date: '2026-01-27', category: 'accommodation' },
+      { id: 'txn-6', description: 'Uber Business', amount: 67.50, date: '2026-01-24', category: 'travel' },
+    ],
+  },
+  {
+    id: 'card-3',
+    cardHolder: 'James Thompson',
+    role: 'Executive Chef',
+    cardNumber: '•••• •••• •••• 9156',
+    type: 'HSBC Corporate',
+    limit: 2500,
+    spent: 2180,
+    status: 'active',
+    recentTransactions: [
+      { id: 'txn-7', description: 'Smithfield Market', amount: 1245.00, date: '2026-01-30', category: 'equipment' },
+      { id: 'txn-8', description: 'Wine Merchant Ltd', amount: 560.00, date: '2026-01-28', category: 'equipment' },
+      { id: 'txn-9', description: 'Chef Training Academy', amount: 375.00, date: '2026-01-22', category: 'other' },
+    ],
+  },
+  {
+    id: 'card-4',
+    cardHolder: 'Sophie Williams',
+    role: 'Events Manager',
+    cardNumber: '•••• •••• •••• 3284',
+    type: 'Amex Corporate',
+    limit: 4000,
+    spent: 890,
+    status: 'active',
+    recentTransactions: [
+      { id: 'txn-10', description: 'Florist Direct', amount: 320.00, date: '2026-01-29', category: 'equipment' },
+      { id: 'txn-11', description: 'Audio Visual Hire', amount: 450.00, date: '2026-01-26', category: 'equipment' },
+      { id: 'txn-12', description: 'Print Express', amount: 120.00, date: '2026-01-20', category: 'other' },
+    ],
+  },
+  {
+    id: 'card-5',
+    cardHolder: 'Michael O\'Brien',
+    role: 'F&B Manager',
+    cardNumber: '•••• •••• •••• 6743',
+    type: 'Barclays Visa',
+    limit: 2000,
+    spent: 1950,
+    status: 'frozen',
+    recentTransactions: [
+      { id: 'txn-13', description: 'Beverage Wholesale', amount: 1280.00, date: '2026-01-25', category: 'equipment' },
+      { id: 'txn-14', description: 'Staff Uniforms', amount: 450.00, date: '2026-01-20', category: 'equipment' },
+      { id: 'txn-15', description: 'Trade Magazine Sub', amount: 220.00, date: '2026-01-15', category: 'other' },
+    ],
+  },
+];
+
 const CATEGORY_ICONS = {
   travel: Plane,
   meals: Utensils,
@@ -134,6 +212,7 @@ const STATUS_STYLES = {
 const TABS = [
   { id: 'all', labelKey: 'expenses.tabs.allExpenses', icon: Receipt },
   { id: 'reports', labelKey: 'expenses.tabs.expenseReports', icon: FileText },
+  { id: 'cards', labelKey: 'expenses.tabs.corporateCards', icon: CreditCard },
   { id: 'approvals', labelKey: 'expenses.tabs.approvals', icon: CheckCircle },
   { id: 'budgets', labelKey: 'expenses.tabs.budgets', icon: BarChart3 },
   { id: 'policy', labelKey: 'expenses.tabs.policy', icon: Shield },
@@ -1154,6 +1233,189 @@ export default function Expenses() {
   );
 
   // ============================================================
+  // TAB: CORPORATE CARDS
+  // ============================================================
+  const renderCorporateCards = () => {
+    const getStatusStyles = (status) => {
+      switch (status) {
+        case 'active': return 'bg-green-100 text-green-700';
+        case 'frozen': return 'bg-amber-100 text-amber-700';
+        case 'cancelled': return 'bg-red-100 text-red-700';
+        default: return 'bg-slate-100 text-slate-700';
+      }
+    };
+
+    const getSpendPercentage = (spent, limit) => Math.min((spent / limit) * 100, 100);
+
+    const getSpendColor = (spent, limit) => {
+      const pct = (spent / limit) * 100;
+      if (pct >= 95) return 'bg-red-500';
+      if (pct >= 80) return 'bg-amber-500';
+      return 'bg-momentum-500';
+    };
+
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold text-slate-900">{t('expenses.cards.title', 'Corporate Cards')}</h3>
+            <p className="text-sm text-slate-500 mt-1">{t('expenses.cards.subtitle', 'Manage corporate card allocations and monitor spending')}</p>
+          </div>
+          {showManagementFeatures && (
+            <button className="flex items-center gap-2 px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600 text-sm font-medium">
+              <Plus className="w-4 h-4" />
+              {t('expenses.cards.requestCard', 'Request New Card')}
+            </button>
+          )}
+        </div>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {DEMO_CORPORATE_CARDS.map((card) => (
+            <div key={card.id} className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+              {/* Card Header */}
+              <div className="p-5 border-b border-slate-100">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white font-semibold text-lg">
+                      {card.cardHolder.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-slate-900">{card.cardHolder}</p>
+                      <p className="text-xs text-slate-500">{card.role}</p>
+                    </div>
+                  </div>
+                  <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize ${getStatusStyles(card.status)}`}>
+                    {t(`expenses.cards.status.${card.status}`, card.status)}
+                  </span>
+                </div>
+
+                {/* Card Visual */}
+                <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 text-white mb-4">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-xs font-medium opacity-80">{card.type}</span>
+                    <CreditCard className="w-6 h-6 opacity-80" />
+                  </div>
+                  <p className="text-lg font-mono tracking-wider">{card.cardNumber}</p>
+                </div>
+
+                {/* Spend Progress */}
+                <div>
+                  <div className="flex items-center justify-between text-sm mb-2">
+                    <span className="text-slate-600">{t('expenses.cards.spent', 'Spent')}</span>
+                    <span className="font-semibold text-slate-900">
+                      {formatCurrency(card.spent)} <span className="text-slate-400 font-normal">/ {formatCurrency(card.limit)}</span>
+                    </span>
+                  </div>
+                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all ${getSpendColor(card.spent, card.limit)}`}
+                      style={{ width: `${getSpendPercentage(card.spent, card.limit)}%` }}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between mt-1.5">
+                    <span className="text-xs text-slate-400">
+                      {Math.round(getSpendPercentage(card.spent, card.limit))}% {t('expenses.cards.ofLimit', 'of limit used')}
+                    </span>
+                    <span className="text-xs font-medium text-slate-600">
+                      {formatCurrency(card.limit - card.spent)} {t('expenses.cards.remaining', 'remaining')}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Recent Transactions */}
+              <div className="p-4 bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                  {t('expenses.cards.recentTransactions', 'Recent Transactions')}
+                </p>
+                <div className="space-y-2">
+                  {card.recentTransactions.map((txn) => {
+                    const CategoryIcon = CATEGORY_ICONS[txn.category] || FileText;
+                    return (
+                      <div key={txn.id} className="flex items-center justify-between bg-white rounded-lg p-2.5">
+                        <div className="flex items-center gap-2.5">
+                          <div className="p-1.5 bg-slate-100 rounded">
+                            <CategoryIcon className="w-3.5 h-3.5 text-slate-500" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-slate-900">{txn.description}</p>
+                            <p className="text-xs text-slate-400">{formatDate(txn.date)}</p>
+                          </div>
+                        </div>
+                        <span className="text-sm font-semibold text-slate-900">{formatCurrency(txn.amount)}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Card Actions */}
+              {showManagementFeatures && (
+                <div className="px-4 py-3 border-t border-slate-100 flex items-center justify-end gap-2">
+                  <button className="text-xs text-slate-600 hover:text-slate-900 px-3 py-1.5 hover:bg-slate-100 rounded transition-colors">
+                    {t('expenses.cards.viewAll', 'View All Transactions')}
+                  </button>
+                  {card.status === 'active' ? (
+                    <button className="text-xs text-amber-600 hover:text-amber-700 px-3 py-1.5 hover:bg-amber-50 rounded transition-colors">
+                      {t('expenses.cards.freeze', 'Freeze Card')}
+                    </button>
+                  ) : card.status === 'frozen' ? (
+                    <button className="text-xs text-green-600 hover:text-green-700 px-3 py-1.5 hover:bg-green-50 rounded transition-colors">
+                      {t('expenses.cards.unfreeze', 'Unfreeze Card')}
+                    </button>
+                  ) : null}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Summary Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="bg-white rounded-xl border border-slate-200 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">{t('expenses.cards.totalCards', 'Total Cards')}</p>
+                <p className="text-2xl font-bold text-slate-900 mt-1">{DEMO_CORPORATE_CARDS.length}</p>
+              </div>
+              <div className="p-3 bg-momentum-50 rounded-lg">
+                <CreditCard className="w-5 h-5 text-momentum-500" />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl border border-slate-200 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">{t('expenses.cards.totalSpend', 'Total Card Spend')}</p>
+                <p className="text-2xl font-bold text-slate-900 mt-1">
+                  {formatCurrency(DEMO_CORPORATE_CARDS.reduce((sum, c) => sum + c.spent, 0))}
+                </p>
+              </div>
+              <div className="p-3 bg-blue-50 rounded-lg">
+                <TrendingUp className="w-5 h-5 text-blue-500" />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl border border-slate-200 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-slate-500">{t('expenses.cards.activeCards', 'Active Cards')}</p>
+                <p className="text-2xl font-bold text-green-600 mt-1">
+                  {DEMO_CORPORATE_CARDS.filter(c => c.status === 'active').length}
+                </p>
+              </div>
+              <div className="p-3 bg-green-50 rounded-lg">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // ============================================================
   // TAB 6: DASHBOARD
   // ============================================================
   const renderDashboard = () => {
@@ -1377,6 +1639,7 @@ export default function Expenses() {
       {/* Tab Content */}
       {activeTab === 'all' && renderAllExpenses()}
       {activeTab === 'reports' && renderExpenseReports()}
+      {activeTab === 'cards' && renderCorporateCards()}
       {activeTab === 'approvals' && renderApprovals()}
       {activeTab === 'budgets' && renderBudgets()}
       {activeTab === 'policy' && renderPolicy()}
