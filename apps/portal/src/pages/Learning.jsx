@@ -128,6 +128,9 @@ export default function Learning() {
   useEffect(() => {
     if (isPersonalView) {
       setActiveTab('my_learning');
+    } else if (activeTab === 'my_learning') {
+      // Redirect away from my_learning when switching to admin view
+      setActiveTab('catalogue');
     }
   }, [isPersonalView]);
 
@@ -150,7 +153,7 @@ export default function Learning() {
       {/* Tab Navigation */}
       <div className="border-b border-slate-200">
         <nav className="flex gap-1 -mb-px overflow-x-auto">
-          {(showManagementFeatures ? TABS : TABS.filter(t => ['catalogue', 'paths', 'my_learning'].includes(t.id))).map((tab) => {
+          {(showManagementFeatures ? TABS.filter(t => t.id !== 'my_learning') : TABS.filter(t => ['catalogue', 'paths', 'my_learning'].includes(t.id))).map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (
