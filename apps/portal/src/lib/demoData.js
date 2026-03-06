@@ -1,6 +1,6 @@
 // ============================================================
 // UPLIFT PORTAL - DEMO DATA
-// Grand Metropolitan Hotel Group (9 properties across 8 countries)
+// Grand Metropolitan (9 properties across 8 countries)
 // ============================================================
 
 // ============================================================
@@ -438,7 +438,7 @@ export const DEMO_WEBHOOKS = [
 
 export const DEMO_ORGANIZATION = {
   id: 'org-1',
-  name: 'Grand Metropolitan Hotel Group',
+  name: 'Grand Metropolitan',
   industry: 'Hospitality',
   employees_count: 150,
   locations_count: DEMO_LOCATIONS.length,

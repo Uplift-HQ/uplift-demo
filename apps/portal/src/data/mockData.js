@@ -1,5 +1,5 @@
 // ============================================================
-// MOCK DATA FOR DEMO - Grand Metropolitan Hotel Group
+// MOCK DATA FOR DEMO - Grand Metropolitan
 // Field names match what pages expect
 // ============================================================
 
@@ -141,7 +141,7 @@ export const reports = {
 
 // Settings
 export const settings = {
-  organization: { name: 'Grand Metropolitan Hotel Group', industry: 'Hospitality', timezone: 'Europe/London', currency: 'GBP', logo: null },
+  organization: { name: 'Grand Metropolitan', industry: 'Hospitality', timezone: 'Europe/London', currency: 'GBP', logo: null },
   users: [
     { id: 'u1', firstName: 'Sarah', lastName: 'Chen', email: 'sarah.chen@grandmetropolitan.com', role: 'admin', status: 'active', lastLogin: new Date(Date.now() - 120000).toISOString() },
     { id: 'u2', firstName: 'James', lastName: 'Williams', email: 'james.williams@grandmetropolitan.com', role: 'manager', status: 'active', lastLogin: new Date(Date.now() - 3600000).toISOString() },

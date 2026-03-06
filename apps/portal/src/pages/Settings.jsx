@@ -85,7 +85,7 @@ export default function Settings() {
       if ((activeTab === 'organization' || activeTab === 'branding') && isAdmin) {
         setOrganization({
           id: 'org-1',
-          name: 'Grand Metropolitan Hotel Group',
+          name: 'Grand Metropolitan',
           industry: 'Hospitality',
           employees_count: 150,
           locations_count: 9,

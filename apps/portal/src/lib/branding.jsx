@@ -12,8 +12,8 @@ const DEFAULT_BRANDING = {
   brand_name: 'Grand Metropolitan',
   primary_color: '#1e3a5f',
   secondary_color: '#0f2847',
-  logo_url: '/logo.webp',
-  dark_logo_url: '/logo.webp',
+  logo_url: '/logo.svg',
+  dark_logo_url: '/logo.svg',
   favicon_url: null,
   login_bg_url: null,
 };
