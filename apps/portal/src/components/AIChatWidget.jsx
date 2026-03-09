@@ -7,11 +7,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Send, Loader2 } from 'lucide-react';
 
-// Nova Icon SVG Component
+// Nova Icon SVG Component (with glow rings)
 const NovaIcon = ({ size = 24, className = '' }) => (
   <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-    <circle cx="32" cy="38" r="13" fill="currentColor" opacity="0.95" />
-    <path d="M27 31 L32 10 L37 31 Z" fill="currentColor" opacity="0.95" />
+    <circle cx="32" cy="38" r="14" fill="currentColor" opacity="0.95" />
+    <path d="M26 30 L32 8 L38 30 Z" fill="currentColor" opacity="0.95" />
+    <circle cx="32" cy="38" r="18" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.3" />
+    <circle cx="32" cy="38" r="22" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.15" />
   </svg>
 );
 
@@ -154,13 +156,14 @@ export default function AIChatWidget() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg
+          fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full
           flex items-center justify-center transition-all duration-200
           ${isOpen
             ? 'bg-slate-700 hover:bg-slate-800 rotate-0'
             : 'bg-momentum-500 hover:bg-momentum-600 hover:scale-105'
           }
         `}
+        style={!isOpen ? { boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)' } : {}}
         aria-label={isOpen ? 'Close chat' : 'Open Nova'}
       >
         {isOpen ? (
