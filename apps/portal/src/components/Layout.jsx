@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { SUPPORTED_LANGUAGES, changeLanguage, getCurrentLanguage } from '../i18n';
 import RoleSwitcher from './RoleSwitcher';
 import OfflineBanner from './OfflineBanner';
+import AIChatWidget from './AIChatWidget';
 import {
   LayoutDashboard,
   Users,
@@ -676,6 +677,9 @@ export default function Layout() {
           <Outlet />
         </main>
       </div>
+
+      {/* AI Chat Widget — always visible */}
+      <AIChatWidget />
     </div>
   );
 }
