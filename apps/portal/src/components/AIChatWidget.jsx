@@ -1,13 +1,27 @@
 // ============================================================
-// AI CHAT WIDGET
+// NOVA AI CHAT WIDGET
 // Floating chatbot that calls Anthropic API directly
 // Uses demo data context for realistic responses
 // ============================================================
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Sparkles, Loader2 } from 'lucide-react';
+import { X, Send, Loader2 } from 'lucide-react';
 
-const DEMO_CONTEXT = `You are Uplift AI, the intelligent assistant built into the Uplift workforce management platform.
+// Nova Icon SVG Component
+const NovaIcon = ({ size = 24, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <circle cx="32" cy="38" r="13" fill="currentColor" opacity="0.95" />
+    <path d="M27 31 L32 10 L37 31 Z" fill="currentColor" opacity="0.95" />
+  </svg>
+);
+
+const DEMO_CONTEXT = `You are Nova, the intelligent assistant built into the Uplift workforce management platform.
+
+VOICE & PERSONALITY:
+- Be direct and helpful. Say "Hey" not "Hello". Keep it concise. No corporate fluff.
+- You're Nova — a warm, capable assistant that gets things done.
+- Use first person. Be proactive and solution-oriented.
+- British English spelling (organisation, colour, favour, etc.)
 
 You are running in DEMO MODE for Grand Metropolitan Hotel Group.
 150 employees across 9 hotel locations worldwide.
@@ -40,7 +54,7 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I'm Uplift AI. Ask me about your schedule, team, approvals, or anything else. How can I help?",
+      content: "Hey — I'm Nova, your Uplift assistant. What do you need?",
     },
   ]);
   const [input, setInput] = useState('');
@@ -119,7 +133,7 @@ export default function AIChatWidget() {
         ...prev,
         {
           role: 'assistant',
-          content: "I'm having trouble connecting right now. Please try again.",
+          content: "Having trouble connecting. Try again in a moment.",
         },
       ]);
     } finally {
@@ -147,12 +161,12 @@ export default function AIChatWidget() {
             : 'bg-momentum-500 hover:bg-momentum-600 hover:scale-105'
           }
         `}
-        aria-label={isOpen ? 'Close chat' : 'Open Uplift AI'}
+        aria-label={isOpen ? 'Close chat' : 'Open Nova'}
       >
         {isOpen ? (
           <X className="w-6 h-6 text-white" />
         ) : (
-          <Sparkles className="w-6 h-6 text-white" />
+          <NovaIcon size={28} className="text-white" />
         )}
       </button>
 
@@ -162,11 +176,11 @@ export default function AIChatWidget() {
           {/* Header */}
           <div className="bg-slate-900 px-4 py-3 flex items-center gap-3">
             <div className="w-8 h-8 bg-momentum-500 rounded-lg flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-white" />
+              <NovaIcon size={20} className="text-white" />
             </div>
             <div>
-              <h3 className="text-white font-semibold text-sm">Uplift AI</h3>
-              <p className="text-slate-400 text-xs">Your intelligent assistant</p>
+              <h3 className="text-white font-semibold text-sm">Nova</h3>
+              <p className="text-slate-400 text-xs">Your Uplift assistant</p>
             </div>
           </div>
 

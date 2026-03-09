@@ -1,5 +1,5 @@
 // ============================================================
-// UPLIFT AI SCHEDULING SERVICE
+// NOVA AI SCHEDULING SERVICE
 // ML-based demand forecasting and genetic algorithm optimization
 // Version: 2026-03-03-v2 (Railway cache bust)
 // ============================================================

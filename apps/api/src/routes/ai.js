@@ -1,5 +1,5 @@
 // ============================================================
-// UPLIFT AI & REALTIME ROUTES
+// NOVA AI & REALTIME ROUTES
 // Routes for AI scheduling, push notifications, and WebSocket
 // ============================================================
 
