@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { api } from '../lib/api';
+import { api, DEMO_MODE } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { useToast } from '../components/ToastProvider';
 import {
@@ -196,6 +196,14 @@ export default function Activity() {
   const loadActivity = async () => {
     setLoading(true);
     setError(null);
+
+    // DEMO_MODE: Use local demo data immediately - no API calls
+    if (DEMO_MODE) {
+      setSubmissions(DEMO_ACTIVITY);
+      setLoading(false);
+      return;
+    }
+
     try {
       // NOTE: Replace with dedicated activityApi.list() when endpoint is available
       const result = await api.get('/activity');
@@ -204,7 +212,7 @@ export default function Activity() {
       setSubmissions(data.length > 0 ? data : DEMO_ACTIVITY);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Failed to load activity:', err);
-      // Use demo data as fallback on error (for DEMO_MODE)
+      // Use demo data as fallback on error
       setSubmissions(DEMO_ACTIVITY);
     } finally {
       setLoading(false);
