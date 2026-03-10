@@ -96,8 +96,9 @@ export default function Settings() {
         setUsers(DEMO_TEAM_MEMBERS);
       } else if (activeTab === 'sessions') {
         setSessions([
-          { id: 'sess-1', device: 'Chrome on MacOS', ip: '192.168.1.100', location: 'London, UK', lastActive: new Date().toISOString(), current: true },
-          { id: 'sess-2', device: 'Safari on iPhone', ip: '192.168.1.101', location: 'London, UK', lastActive: new Date(Date.now() - 3600000).toISOString(), current: false },
+          { id: '1', device_name: 'Chrome on macOS', device_type: 'desktop', browser: 'Chrome', os: 'macOS', ip_address: '82.12.xx.xx', location: 'London, UK', last_active_at: '2026-03-09T10:30:00Z', is_current: true },
+          { id: '2', device_name: 'Uplift Mobile (iOS)', device_type: 'mobile', browser: 'Uplift App', os: 'iOS', ip_address: '82.12.xx.xx', location: 'London, UK', last_active_at: '2026-03-09T08:15:00Z', is_current: false },
+          { id: '3', device_name: 'Safari on iPhone', device_type: 'mobile', browser: 'Safari', os: 'iOS', ip_address: '194.60.xx.xx', location: 'Sittingbourne, UK', last_active_at: '2026-03-07T14:22:00Z', is_current: false },
         ]);
       }
       setLoading(false);
