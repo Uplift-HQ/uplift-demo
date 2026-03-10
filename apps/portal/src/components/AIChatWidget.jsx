@@ -17,6 +17,97 @@ const NovaIcon = ({ size = 24, className = '' }) => (
   </svg>
 );
 
+// Render markdown-like formatting in messages (React-based)
+const renderMessage = (text) => {
+  if (!text) return null;
+
+  const lines = text.split('\n');
+  const elements = [];
+  let listItems = [];
+  let listType = null; // 'ul' or 'ol'
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      if (listType === 'ol') {
+        elements.push(
+          <ol key={`ol-${elements.length}`} className="list-decimal ml-4 my-2">
+            {listItems}
+          </ol>
+        );
+      } else {
+        elements.push(
+          <ul key={`ul-${elements.length}`} className="list-disc ml-4 my-2">
+            {listItems}
+          </ul>
+        );
+      }
+      listItems = [];
+      listType = null;
+    }
+  };
+
+  const renderInlineFormatting = (line, keyPrefix) => {
+    // Handle bold: **text** or *text*
+    const parts = line.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={`${keyPrefix}-${i}`}>{part.slice(2, -2)}</strong>;
+      }
+      if (part.startsWith('*') && part.endsWith('*')) {
+        return <strong key={`${keyPrefix}-${i}`}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={`${keyPrefix}-${i}`}>{part}</span>;
+    });
+  };
+
+  lines.forEach((line, lineIdx) => {
+    // Check for bullet points (- or •)
+    const bulletMatch = line.match(/^[-•]\s+(.+)$/);
+    if (bulletMatch) {
+      if (listType !== 'ul') {
+        flushList();
+        listType = 'ul';
+      }
+      listItems.push(
+        <li key={`li-${lineIdx}`}>{renderInlineFormatting(bulletMatch[1], `li-${lineIdx}`)}</li>
+      );
+      return;
+    }
+
+    // Check for numbered lists (1. 2. 3.)
+    const numberedMatch = line.match(/^\d+\.\s+(.+)$/);
+    if (numberedMatch) {
+      if (listType !== 'ol') {
+        flushList();
+        listType = 'ol';
+      }
+      listItems.push(
+        <li key={`li-${lineIdx}`}>{renderInlineFormatting(numberedMatch[1], `li-${lineIdx}`)}</li>
+      );
+      return;
+    }
+
+    // Regular line - flush any pending list
+    flushList();
+
+    if (line.trim() === '') {
+      elements.push(<br key={`br-${lineIdx}`} />);
+    } else {
+      elements.push(
+        <span key={`line-${lineIdx}`}>
+          {renderInlineFormatting(line, `line-${lineIdx}`)}
+          {lineIdx < lines.length - 1 && <br />}
+        </span>
+      );
+    }
+  });
+
+  // Flush any remaining list
+  flushList();
+
+  return elements;
+};
+
 const DEMO_CONTEXT = `You are Nova, the intelligent assistant built into the Uplift workforce management platform.
 
 VOICE & PERSONALITY:
@@ -203,7 +294,7 @@ export default function AIChatWidget() {
                     }
                   `}
                 >
-                  {msg.content}
+                  {msg.role === 'user' ? msg.content : renderMessage(msg.content)}
                 </div>
               </div>
             ))}
