@@ -307,7 +307,178 @@ class ApiClient {
     return match ? match[1] : null;
   }
 
+  async handleResponse(response) {
+    if (!response.ok) {
+      const error = new Error(response.statusText || 'Request failed');
+      error.status = response.status;
+      try {
+        error.data = await response.json();
+      } catch {
+        // Response not JSON
+      }
+      throw error;
+    }
+    // Handle 204 No Content
+    if (response.status === 204) {
+      return { success: true };
+    }
+    return response.json();
+  }
+
+  // Demo mode data router - returns appropriate data based on path
+  // This prevents ALL network calls in demo mode for instant loading
+  getDemoDataForPath(method, path) {
+    // For non-GET methods, return generic success
+    if (method !== 'GET') {
+      return { success: true, message: 'Demo mode - operation simulated', id: 'demo-' + Date.now() };
+    }
+
+    // Normalize path for matching
+    const normalizedPath = path.split('?')[0]; // Remove query params
+
+    // Match specific paths to demo data
+    if (normalizedPath === '/employees' || normalizedPath.startsWith('/employees')) {
+      const idMatch = normalizedPath.match(/\/employees\/([^/]+)$/);
+      if (idMatch) {
+        const emp = DEMO_EMPLOYEES.find(e => e.id === idMatch[1]);
+        return { employee: emp || DEMO_EMPLOYEES[0] };
+      }
+      return { employees: DEMO_EMPLOYEES };
+    }
+
+    if (normalizedPath === '/locations' || normalizedPath.startsWith('/locations')) {
+      const idMatch = normalizedPath.match(/\/locations\/([^/]+)$/);
+      if (idMatch) {
+        const loc = DEMO_LOCATIONS.find(l => l.id === idMatch[1]);
+        return { location: loc || DEMO_LOCATIONS[0] };
+      }
+      return { locations: DEMO_LOCATIONS };
+    }
+
+    if (normalizedPath === '/departments') return { departments: DEMO_DEPARTMENTS };
+    if (normalizedPath === '/roles') return { roles: DEMO_ROLES };
+    if (normalizedPath === '/skills') return { skills: DEMO_SKILLS };
+    if (normalizedPath === '/dashboard') return DEMO_DASHBOARD;
+    if (normalizedPath === '/organization') return { organization: DEMO_ORGANIZATION };
+    if (normalizedPath === '/organization/branding') return { branding: DEMO_BRANDING };
+    if (normalizedPath === '/integrations') return { integrations: DEMO_INTEGRATIONS };
+    if (normalizedPath === '/integrations/api-keys') return { apiKeys: DEMO_API_KEYS };
+    if (normalizedPath === '/webhooks') return { webhooks: DEMO_WEBHOOKS };
+    if (normalizedPath === '/notifications') return { notifications: DEMO_NOTIFICATIONS };
+    if (normalizedPath === '/activity') return { activities: DEMO_ACTIVITIES };
+    if (normalizedPath === '/users' || normalizedPath === '/auth/users') return { users: DEMO_USERS };
+    if (normalizedPath === '/users/me/sessions') return { sessions: DEMO_SESSIONS };
+    if (normalizedPath === '/settings/navigation') return { navigation: DEMO_NAVIGATION };
+    if (normalizedPath === '/settings/employee-visibility') return { visibility: DEMO_EMPLOYEE_VISIBILITY };
+    if (normalizedPath === '/jobs') return { jobs: DEMO_OPPORTUNITIES };
+    if (normalizedPath === '/career/paths') return DEMO_CAREER;
+    if (normalizedPath === '/career/insights') return { insights: DEMO_CAREER.insights };
+    if (normalizedPath === '/import/templates') return { templates: DEMO_IMPORT_TEMPLATES };
+    if (normalizedPath === '/time-off/policies') return { policies: DEMO_TIME_OFF_POLICIES };
+    if (normalizedPath.startsWith('/time-off/requests')) return { requests: DEMO_TIME_OFF_REQUESTS };
+    if (normalizedPath.startsWith('/time-off/balances')) return { balances: DEMO_TIME_OFF_BALANCES };
+    if (normalizedPath === '/time/status') return { status: 'clocked_out', entry: null, shift: null };
+    if (normalizedPath.startsWith('/time/entries') || normalizedPath === '/time/pending') return { entries: DEMO_TIME_ENTRIES };
+    if (normalizedPath.startsWith('/shifts/swaps')) return { swaps: DEMO_SHIFT_SWAPS };
+    if (normalizedPath.startsWith('/shift-templates')) return { templates: DEMO_SHIFT_TEMPLATES };
+    if (normalizedPath.startsWith('/schedule/periods')) return { periods: DEMO_SCHEDULE_PERIODS };
+    if (normalizedPath.startsWith('/shifts')) {
+      const shifts = generateDemoShifts(getWeekStart());
+      return { shifts };
+    }
+
+    // Reports
+    if (normalizedPath.startsWith('/reports/hours')) return { data: DEMO_EMPLOYEES.map(e => ({ id: e.id, first_name: e.first_name, last_name: e.last_name, location_name: e.location, total_hours: 140, regular_hours: 140, overtime_hours: 0, labor_cost: 1750 })), totals: DEMO_HOURS_REPORT.summary };
+    if (normalizedPath.startsWith('/reports/attendance')) return { data: DEMO_EMPLOYEES.map(e => ({ id: e.id, first_name: e.first_name, last_name: e.last_name, location_name: e.location, total_shifts: 20, on_time: 18, late: 2, no_show: 0, punctuality_rate: 90 })), totals: DEMO_ATTENDANCE_REPORT.summary };
+    if (normalizedPath.startsWith('/reports/labor-cost')) return { data: DEMO_LOCATIONS.map(l => ({ id: l.id, location_name: l.name, hours: 200, cost: 2500, budget: 4000, variance: -500 })), totals: DEMO_LABOR_COST_REPORT.summary };
+    if (normalizedPath.startsWith('/reports/coverage')) return { data: DEMO_LOCATIONS.map(l => ({ id: l.id, location_name: l.name, total_shifts: 25, filled_shifts: 23, open_shifts: 2, coverage_rate: 92 })), totals: { coverageRate: 94, understaffedShifts: 4, overstaffedShifts: 2 } };
+
+    // Learning
+    if (normalizedPath === '/learning/courses' || normalizedPath.startsWith('/learning/courses')) {
+      const idMatch = normalizedPath.match(/\/learning\/courses\/([^/]+)$/);
+      if (idMatch) {
+        const course = DEMO_COURSES.find(c => c.id === idMatch[1]);
+        return { course: course || DEMO_COURSES[0] };
+      }
+      return { courses: DEMO_COURSES, pagination: { page: 1, limit: 20, total: DEMO_COURSES.length, totalPages: 1 } };
+    }
+    if (normalizedPath === '/learning/my-courses') return { enrollments: DEMO_ENROLLMENTS };
+    if (normalizedPath === '/learning/enrollments') return { enrollments: DEMO_ENROLLMENTS, pagination: { page: 1, limit: 20, total: DEMO_ENROLLMENTS.length, totalPages: 1 } };
+    if (normalizedPath === '/learning/certifications') return { certifications: DEMO_CERTIFICATIONS };
+    if (normalizedPath.startsWith('/learning/certifications/expiring')) return { certifications: DEMO_CERTIFICATIONS.filter(c => c.status === 'expiring_soon') };
+    if (normalizedPath === '/learning/paths') return { paths: DEMO_LEARNING_PATHS };
+    if (normalizedPath === '/learning/team-compliance') return { compliance: DEMO_EMPLOYEE_COMPLIANCE, items: DEMO_COMPLIANCE_ITEMS };
+    if (normalizedPath === '/learning/dashboard') return { totalCourses: DEMO_COURSES.length, completedEnrollments: DEMO_ENROLLMENTS.filter(e => e.status === 'completed').length, totalEnrollments: DEMO_ENROLLMENTS.length };
+    if (normalizedPath === '/learning/schedule') return { schedule: DEMO_TRAINING_SCHEDULE };
+    if (normalizedPath === '/learning/employees') return { employees: DEMO_EMPLOYEES };
+
+    // Performance
+    if (normalizedPath === '/performance/my-reviews') return { reviews: DEMO_PERFORMANCE_REVIEWS };
+    if (normalizedPath.startsWith('/performance/reviews/')) return { review: DEMO_PERFORMANCE_REVIEWS[0] };
+    if (normalizedPath === '/performance/team-reviews') return { reviews: DEMO_PERFORMANCE_REVIEWS, pagination: { page: 1, limit: 20, total: DEMO_PERFORMANCE_REVIEWS.length, totalPages: 1 } };
+    if (normalizedPath === '/performance/cycles') return { cycles: DEMO_REVIEW_CYCLES, pagination: { page: 1, limit: 20, total: DEMO_REVIEW_CYCLES.length, totalPages: 1 } };
+    if (normalizedPath === '/performance/goals') return { goals: DEMO_GOALS };
+    if (normalizedPath === '/performance/team-goals') return { goals: DEMO_GOALS, pagination: { page: 1, limit: 20, total: DEMO_GOALS.length, totalPages: 1 } };
+    if (normalizedPath === '/performance/okrs') return { okrs: DEMO_OKRS, pagination: { page: 1, limit: 20, total: DEMO_OKRS.length, totalPages: 1 } };
+    if (normalizedPath === '/performance/one-on-ones') return { meetings: DEMO_ONE_ON_ONES, pagination: { page: 1, limit: 20, total: DEMO_ONE_ON_ONES.length, totalPages: 1 } };
+    if (normalizedPath === '/performance/my-feedback') return { feedback: DEMO_FEEDBACK };
+    if (normalizedPath === '/performance/given-feedback') return { feedback: [] };
+    if (normalizedPath.startsWith('/performance/public-feedback')) return { feedback: DEMO_FEEDBACK };
+    if (normalizedPath === '/performance/employees') return { employees: DEMO_EMPLOYEES };
+    if (normalizedPath === '/performance/dashboard') return { activeCycles: 2, pendingReviews: 38, completedReviews: 495, avgRating: '3.52', goalsCount: DEMO_GOALS.length };
+
+    // Payslips
+    if (normalizedPath === '/payslips/my-payslips' || normalizedPath === '/payslips') return { payslips: DEMO_PAYSLIPS, pagination: { page: 1, limit: 20, total: DEMO_PAYSLIPS.length, totalPages: 1 } };
+    if (normalizedPath.startsWith('/payslips/my-ytd')) return { ytd: DEMO_YTD };
+    if (normalizedPath === '/payslips/my-years') return { years: DEMO_TAX_YEARS };
+
+    // Corporate Cards & Expenses
+    if (normalizedPath === '/corporate-cards') return { cards: DEMO_CORPORATE_CARDS, pagination: { page: 1, limit: 20, total: DEMO_CORPORATE_CARDS.length, totalPages: 1 } };
+    if (normalizedPath.startsWith('/corporate-cards/') && normalizedPath.includes('/transactions')) return { transactions: DEMO_CARD_TRANSACTIONS, pagination: { page: 1, limit: 20, total: DEMO_CARD_TRANSACTIONS.length, totalPages: 1 } };
+    if (normalizedPath === '/card-transactions') return { transactions: DEMO_CARD_TRANSACTIONS, pagination: { page: 1, limit: 20, total: DEMO_CARD_TRANSACTIONS.length, totalPages: 1 } };
+    if (normalizedPath === '/expenses/all') return { expenses: DEMO_EXPENSES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
+    if (normalizedPath === '/expenses/my-expenses') return { expenses: DEMO_EXPENSES.filter(e => e.employee_id === 'emp-1'), pagination: { page: 1, limit: 20, total: DEMO_EXPENSES.length, totalPages: 1 } };
+    if (normalizedPath === '/expenses/categories') return { categories: DEMO_EXPENSE_CATEGORIES };
+    if (normalizedPath === '/expense-claims') return { claims: DEMO_CARD_CLAIMS, pagination: { page: 1, limit: 20, total: DEMO_CARD_CLAIMS.length, totalPages: 1 } };
+    if (normalizedPath === '/expense-categories') return { categories: DEMO_EXPENSE_CATEGORIES, pagination: { page: 1, limit: 20, total: DEMO_EXPENSE_CATEGORIES.length, totalPages: 1 } };
+    if (normalizedPath.startsWith('/payroll/expenses')) return { claims: DEMO_CARD_CLAIMS.filter(c => c.status === 'approved'), pagination: { page: 1, limit: 20, total: 1, totalPages: 1 } };
+
+    // Integrations
+    if (normalizedPath.startsWith('/integrations/truelayer/connections')) return { connections: [{ id: 'conn-1', provider: 'HSBC', account_name: 'Business Current Account', status: 'active', last_synced: new Date().toISOString() }] };
+    if (normalizedPath.startsWith('/integrations/custom-endpoints')) return { endpoints: DEMO_CUSTOM_INTEGRATIONS, pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } };
+    if (normalizedPath.startsWith('/integrations/sync-logs')) return { logs: [], pagination: { page: 1, limit: 50, total: 0, totalPages: 0 } };
+    if (normalizedPath.startsWith('/integrations/')) {
+      const idMatch = normalizedPath.match(/\/integrations\/([^/]+)$/);
+      if (idMatch) {
+        const integration = DEMO_INTEGRATIONS.find(i => i.id === idMatch[1]);
+        return { integration: integration || DEMO_INTEGRATIONS[0] };
+      }
+    }
+
+    // Features
+    if (normalizedPath === '/features') return { features: {} };
+
+    // Auth
+    if (normalizedPath === '/auth/me') {
+      const stored = localStorage.getItem('uplift_user');
+      return { user: stored ? JSON.parse(stored) : DEMO_USER };
+    }
+
+    // Skills employees
+    if (normalizedPath.match(/\/skills\/[^/]+\/employees/)) {
+      return { employees: DEMO_EMPLOYEES.slice(0, 5).map(e => ({ ...e, level: 2, verified: true })) };
+    }
+
+    // Default fallback - return empty success
+    return { success: true, data: [] };
+  }
+
   async request(method, path, data, options = {}) {
+    // DEMO MODE: Short-circuit ALL API calls - return demo data instantly
+    if (DEMO_MODE) {
+      return this.getDemoDataForPath(method, path);
+    }
+
     const url = `${API_URL}${path}`;
 
     const headers = {
