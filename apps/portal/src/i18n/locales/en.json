@@ -191,6 +191,10 @@
     "update": "Update",
     "create": "Create",
     "view": "View",
+    "send": "Send",
+    "saveChanges": "Save Changes",
+    "value": "Value",
+    "enter": "Enter",
     "details": "Details",
     "description": "Description",
     "status": "Status",
@@ -297,7 +301,12 @@
       "high": "High",
       "medium": "Medium",
       "low": "Low"
-    }
+    },
+    "recommended": "Recommended",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "allLocations": "All Locations",
+    "open": "Open"
   },
   "auth": {
     "login": "Log In",
@@ -532,7 +541,24 @@
     "shiftReassigned": "Shift reassigned",
     "swapRequested": "Swap requested",
     "shiftDeleted": "Shift deleted",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "How would you like to build your schedule?",
+    "chooseApproach": "Choose a scheduling approach that fits your business",
+    "schedulePeriod": "Schedule Period",
+    "configureAutoFill": "Configure Auto-Fill Settings",
+    "maxHoursWeek": "Max Hours/Week",
+    "minRestBetweenShifts": "Min Rest Between Shifts (hrs)",
+    "maxConsecutiveDays": "Max Consecutive Days",
+    "preferredShiftLength": "Preferred Shift Length (hrs)",
+    "generatingSchedule": "Generating smart schedule...",
+    "reviewGeneratedSchedule": "Review Generated Schedule",
+    "totalShifts": "Total Shifts",
+    "filledShifts": "Filled Shifts",
+    "saveAsTemplate": "Save this configuration as a template",
+    "noShiftsGenerated": "No shifts could be generated",
+    "fairnessScore": "Fairness Score",
+    "templateNamePlaceholder": "Template name (e.g., 'Weekend Brunch Setup')",
+    "checkShiftTemplates": "Check that you have shift templates configured for the selected date range and location."
   },
   "timeTracking": {
     "title": "Time Tracking",
@@ -1917,7 +1943,29 @@
     "skillsDesc": "Skills and competencies",
     "custom": "Custom Reports",
     "customDesc": "Build your own analytics",
-    "showingFirst50": "Showing first 50 of {{count}} rows"
+    "showingFirst50": "Showing first 50 of {{count}} rows",
+    "payQuartilesSubtitle": "Proportion of males and females in each pay quartile",
+    "quartile": "{{name}} Quartile",
+    "threeYearTrendSubtitle": "Year-on-year improvement in gender pay gap",
+    "narrativeSubtitle": "Statement from the CEO",
+    "actionPlanSubtitle": "Initiatives to close the gender pay gap",
+    "headerName": "Header name",
+    "currentEnps": "Current eNPS",
+    "ukGenderPayGapReporting": "UK Gender Pay Gap Reporting",
+    "meanGap": "Mean Gap",
+    "medianGap": "Median Gap",
+    "improvedFrom": "Improved from {{value}}",
+    "male": "Male",
+    "female": "Female",
+    "payQuartiles": "Pay Quartiles",
+    "threeYearTrend": "Three-Year Trend",
+    "narrative": "Our Commitment",
+    "actionPlan": "Action Plan",
+    "initiative": "Initiative",
+    "target": "Target",
+    "status": "Status",
+    "maleReceivingBonus": "Males Receiving Bonus",
+    "femaleReceivingBonus": "Females Receiving Bonus"
   },
   "accessibility": {
     "menu": "Menu",
@@ -2188,7 +2236,12 @@
       "locationsDesc": "Import locations",
       "skills": "Skills",
       "skillsDesc": "Import skills"
-    }
+    },
+    "clientId": "Client ID",
+    "clientSecret": "Client Secret",
+    "applicationClientId": "Application (client) ID",
+    "clientSecretValue": "Client secret value",
+    "domain": "Domain Controller"
   },
   "jobs": {
     "loadError": "Failed to load job postings. Please try again.",
@@ -4210,6 +4263,14 @@
     "externalProvider": "External Provider"
   },
 
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Enter API key",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret"
+    }
+  },
+
   "contracts": {
     "title": "Contracts",
     "subtitle": "Manage contract templates and employee contracts",
@@ -4248,7 +4309,11 @@
     "send": "Send",
     "delete": "Delete",
     "template": "Template",
-    "employee": "Employee"
+    "employee": "Employee",
+    "templateNamePlaceholder": "e.g., Employment Contract",
+    "useVariables": "Use variables:",
+    "customNameOptional": "Custom Name (optional)",
+    "leaveBlankForTemplate": "Leave blank to use template name"
   },
 
   "kiosk": {
@@ -4273,7 +4338,17 @@
     "loading": "Loading kiosk...",
     "reconfigure": "Reconfigure Kiosk",
     "offlineBanner": "Offline - events will sync when connected",
-    "employeeIdPlaceholder": "Employee ID or PIN"
+    "employeeIdPlaceholder": "Employee ID or PIN",
+    "getApiKey": "Get your API key from Settings > Time & Attendance",
+    "offlineSync": "Offline - events will sync when connected",
+    "queued": "{{count}} queued",
+    "clockedInAt": "Clocked in at {{time}}",
+    "lastClockedOut": "Last clocked out at {{time}}",
+    "enterIdOrScan": "Enter Employee ID or Scan Badge",
+    "employeeIdOrPin": "Employee ID or PIN",
+    "poweredBy": "Powered by Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
 
   "customReports": {

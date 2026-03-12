@@ -2409,8 +2409,8 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
           {currentStep === 1 && !loading && (
             <div className="space-y-6">
               <div className="text-center mb-6">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">How would you like to build your schedule?</h3>
-                <p className="text-slate-500">Choose a scheduling approach that fits your business</p>
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('schedule.howBuildSchedule', 'How would you like to build your schedule?')}</h3>
+                <p className="text-slate-500">{t('schedule.chooseApproach', 'Choose a scheduling approach that fits your business')}</p>
               </div>
 
               {/* Mode Selection Cards */}
@@ -2431,15 +2431,15 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                       <CalendarDays className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-slate-900">Schedule from Templates</h4>
-                      <span className="text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full">Recommended</span>
+                      <h4 className="font-semibold text-slate-900">{t('schedule.scheduleFromTemplates', 'Schedule from Templates')}</h4>
+                      <span className="text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full">{t('common.recommended', 'Recommended')}</span>
                     </div>
                   </div>
                   <p className="text-sm text-slate-600 mb-3">
                     Use your shift templates to build the schedule. Define production runs, maintenance windows, and changeovers with automatic role timing.
                   </p>
                   <div className="bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-600">
-                    <strong>Examples:</strong> 3-shift rotation, Line Changeover, Maintenance Shutdown, Quality Audit
+                    <strong>{t('common.examples', 'Examples')}:</strong> {t('schedule.templateExamples', '3-shift rotation, Line Changeover, Maintenance Shutdown, Quality Audit')}
                   </div>
                 </button>
 
@@ -2458,7 +2458,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     }`}>
                       <TrendingUp className="w-5 h-5" />
                     </div>
-                    <h4 className="font-semibold text-slate-900">Schedule from Demand</h4>
+                    <h4 className="font-semibold text-slate-900">{t('schedule.scheduleFromDemand', 'Schedule from Demand')}</h4>
                   </div>
                   <p className="text-sm text-slate-600 mb-3">
                     Set staffing levels per production line and department based on order volume and output targets.
@@ -2483,7 +2483,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     }`}>
                       <Users className="w-5 h-5" />
                     </div>
-                    <h4 className="font-semibold text-slate-900">Schedule from Contracted Hours</h4>
+                    <h4 className="font-semibold text-slate-900">{t('schedule.scheduleFromContractedHours', 'Schedule from Contracted Hours')}</h4>
                   </div>
                   <p className="text-sm text-slate-600 mb-3">
                     Build schedules from employees' contracted shift patterns and availability.
@@ -2496,7 +2496,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
 
               {/* Date Range Selection */}
               <div className="border-t pt-6">
-                <h4 className="font-medium text-slate-900 mb-4">Schedule Period</h4>
+                <h4 className="font-medium text-slate-900 mb-4">{t('schedule.schedulePeriod', 'Schedule Period')}</h4>
                 <div className="flex gap-3 mb-4">
                   {[
                     { key: 'week', label: 'This Week' },
@@ -2518,7 +2518,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('common.startDate', 'Start Date')}</label>
                     <input
                       type="date"
                       value={startDate}
@@ -2527,7 +2527,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">End Date</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('common.endDate', 'End Date')}</label>
                     <input
                       type="date"
                       value={endDate}
@@ -2540,13 +2540,13 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
 
               {/* Location Filter */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Location</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('common.location', 'Location')}</label>
                 <select
                   value={locationFilter}
                   onChange={(e) => setLocationFilter(e.target.value)}
                   className="w-full px-3 py-2 border rounded-lg"
                 >
-                  <option value="">All Locations</option>
+                  <option value="">{t('common.allLocations', 'All Locations')}</option>
                   {locations.map(loc => (
                     <option key={loc.id} value={loc.id}>{loc.name}</option>
                   ))}
@@ -2561,8 +2561,8 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
           {currentStep === 2 && !loading && (
             <div className="space-y-6">
               <div className="text-center mb-6">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">Configure Auto-Fill Settings</h3>
-                <p className="text-slate-500">Adjust how staff are assigned to shifts</p>
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('schedule.configureAutoFill', 'Configure Auto-Fill Settings')}</h3>
+                <p className="text-slate-500">{t('schedule.adjustStaffAssignment', 'Adjust how staff are assigned to shifts')}</p>
               </div>
 
               {/* Priority Sliders */}
@@ -2605,7 +2605,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                 </h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Max Hours/Week</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('schedule.maxHoursWeek', 'Max Hours/Week')}</label>
                     <input
                       type="number"
                       value={constraints.maxHoursWeek}
@@ -2614,7 +2614,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Min Rest Between Shifts (hrs)</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('schedule.minRestBetweenShifts', 'Min Rest Between Shifts (hrs)')}</label>
                     <input
                       type="number"
                       value={constraints.minRestHours}
@@ -2623,7 +2623,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Max Consecutive Days</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('schedule.maxConsecutiveDays', 'Max Consecutive Days')}</label>
                     <input
                       type="number"
                       value={constraints.maxConsecutiveDays}
@@ -2632,7 +2632,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Preferred Shift Length (hrs)</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">{t('schedule.preferredShiftLength', 'Preferred Shift Length (hrs)')}</label>
                     <select
                       value={constraints.preferredShiftLength}
                       onChange={(e) => setConstraints(prev => ({ ...prev, preferredShiftLength: parseInt(e.target.value) }))}
@@ -2680,7 +2680,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
           {loading && (
             <div className="flex flex-col items-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
-              <p className="text-gray-600 font-medium text-lg">Generating smart schedule...</p>
+              <p className="text-gray-600 font-medium text-lg">{t('schedule.generatingSchedule', 'Generating smart schedule...')}</p>
               <p className="text-sm text-gray-500 mt-2">
                 {scheduleMode === 'templates'
                   ? 'Matching shift templates to events and calculating arrival times...'
@@ -2697,8 +2697,8 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
           {currentStep === 3 && suggestions && !loading && (
             <div className="space-y-4">
               <div className="text-center mb-4">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">Review Generated Schedule</h3>
-                <p className="text-slate-500">Review shifts and publish when ready</p>
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('schedule.reviewGeneratedSchedule', 'Review Generated Schedule')}</h3>
+                <p className="text-slate-500">{t('schedule.reviewShiftsPublish', 'Review shifts and publish when ready')}</p>
               </div>
 
               {/* Compliance Check */}
@@ -2724,19 +2724,19 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-purple-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-purple-700">{suggestions.summary.totalShifts}</p>
-                  <p className="text-xs text-purple-600">Total Shifts</p>
+                  <p className="text-xs text-purple-600">{t('schedule.totalShifts', 'Total Shifts')}</p>
                 </div>
                 <div className="bg-green-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-green-700">{suggestions.summary.filledShifts}</p>
-                  <p className="text-xs text-green-600">Filled Shifts</p>
+                  <p className="text-xs text-green-600">{t('schedule.filledShifts', 'Filled Shifts')}</p>
                 </div>
                 <div className="bg-amber-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-amber-700">{suggestions.summary.openShifts}</p>
-                  <p className="text-xs text-amber-600">Open Shifts</p>
+                  <p className="text-xs text-amber-600">{t('schedule.openShifts', 'Open Shifts')}</p>
                 </div>
                 <div className="bg-blue-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-bold text-blue-700">{suggestions.summary.fairnessScore}%</p>
-                  <p className="text-xs text-blue-600">Fairness Score</p>
+                  <p className="text-xs text-blue-600">{t('schedule.fairnessScore', 'Fairness Score')}</p>
                 </div>
               </div>
 
@@ -2800,7 +2800,7 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                                     <span className="font-medium text-sm text-slate-900">{shiftStartTime} - {shiftEndTime}</span>
                                     <span className="text-xs px-1.5 py-0.5 bg-slate-200 text-slate-600 rounded">{shift.employee_role}</span>
                                     {shift.is_open && (
-                                      <span className="text-xs px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded">Open</span>
+                                      <span className="text-xs px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded">{t('common.open', 'Open')}</span>
                                     )}
                                   </div>
                                   <p className="text-xs text-slate-500 truncate">
@@ -2827,12 +2827,12 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
                     onChange={(e) => setSaveAsTemplate(e.target.checked)}
                     className="w-4 h-4 rounded text-purple-600"
                   />
-                  <span className="text-sm font-medium text-slate-700">Save this configuration as a template</span>
+                  <span className="text-sm font-medium text-slate-700">{t('schedule.saveAsTemplate', 'Save this configuration as a template')}</span>
                 </label>
                 {saveAsTemplate && (
                   <input
                     type="text"
-                    placeholder="Template name (e.g., 'Weekend Brunch Setup')"
+                    placeholder={t('schedule.templateNamePlaceholder', "Template name (e.g., 'Weekend Brunch Setup')")}
                     value={templateName}
                     onChange={(e) => setTemplateName(e.target.value)}
                     className="mt-3 w-full px-3 py-2 border rounded-lg text-sm"
@@ -2843,8 +2843,8 @@ function SmartScheduleModal({ suggestions, loading, onClose, onGenerate, onApply
               {suggestions.suggestions.length === 0 && (
                 <div className="text-center py-8">
                   <AlertCircle className="w-10 h-10 text-amber-400 mx-auto mb-3" />
-                  <p className="text-slate-600 font-medium">No shifts could be generated</p>
-                  <p className="text-sm text-slate-500 mt-1">Check that you have shift templates configured for the selected date range and location.</p>
+                  <p className="text-slate-600 font-medium">{t('schedule.noShiftsGenerated', 'No shifts could be generated')}</p>
+                  <p className="text-sm text-slate-500 mt-1">{t('schedule.checkShiftTemplates', 'Check that you have shift templates configured for the selected date range and location.')}</p>
                 </div>
               )}
             </div>

@@ -307,7 +307,16 @@
       "high": "Vysoká",
       "medium": "Střední",
       "low": "Nízká"
-    }
+    },
+    "send": "Odeslat",
+    "saveChanges": "Uložit změny",
+    "value": "Hodnota",
+    "enter": "Vstup",
+    "recommended": "Doporučeno",
+    "startDate": "Datum zahájení",
+    "endDate": "Datum ukončení",
+    "allLocations": "Všechna místa",
+    "open": "Otevřeno"
   },
   "auth": {
     "login": "Přihlásit",
@@ -551,7 +560,24 @@
     "publishConfirm": "Publikovat všechny koncepty směn a informovat členy týmu?",
     "reassignShift": "Přeřadit",
     "shiftCreated": "Směna vytvořena",
-    "teamNotified": "Členové týmu byli informováni"
+    "teamNotified": "Členové týmu byli informováni",
+    "howBuildSchedule": "Jak chcete vytvořit rozvrh?",
+    "chooseApproach": "Vyberte přístup k plánování vhodný pro vaše podnikání",
+    "schedulePeriod": "Období rozvrhu",
+    "configureAutoFill": "Konfigurovat nastavení automatického vyplnění",
+    "maxHoursWeek": "Max hodin/týden",
+    "minRestBetweenShifts": "Min odpočinek mezi směnami (hod)",
+    "maxConsecutiveDays": "Max po sobě jdoucích dnů",
+    "preferredShiftLength": "Preferovaná délka směny (hod)",
+    "generatingSchedule": "Generování chytrého rozvrhu...",
+    "reviewGeneratedSchedule": "Zkontrolovat vygenerovaný rozvrh",
+    "totalShifts": "Celkem směn",
+    "filledShifts": "Obsazené směny",
+    "saveAsTemplate": "Uložit tuto konfiguraci jako šablonu",
+    "noShiftsGenerated": "Nepodařilo se vygenerovat směny",
+    "fairnessScore": "Skóre spravedlnosti",
+    "templateNamePlaceholder": "Název šablony (např. 'Nastavení víkendového brunche')",
+    "checkShiftTemplates": "Zkontrolujte, zda máte nakonfigurované šablony směn pro vybrané období a místo."
   },
   "timeTracking": {
     "title": "Sledování času",
@@ -2013,7 +2039,29 @@
     "skillsDesc": "Dovednosti a kompetence",
     "custom": "Vlastní reporty",
     "customDesc": "Vytvořte vlastní analytiku",
-    "showingFirst50": "Zobrazuje se prvních 50 z {{count}} řádků"
+    "showingFirst50": "Zobrazuje se prvních 50 z {{count}} řádků",
+    "payQuartilesSubtitle": "Podíl mužů a žen v každém platovém kvartilu",
+    "quartile": "Kvartil {{name}}",
+    "threeYearTrendSubtitle": "Roční zlepšení v genderové mzdové mezeře",
+    "narrativeSubtitle": "Prohlášení generálního ředitele",
+    "actionPlanSubtitle": "Iniciativy k uzavření genderové mzdové mezery",
+    "headerName": "Název záhlaví",
+    "currentEnps": "Aktuální eNPS",
+    "ukGenderPayGapReporting": "Zpráva o genderové mzdové mezeře ve Velké Británii",
+    "meanGap": "Průměrná mezera",
+    "medianGap": "Mediánová mezera",
+    "improvedFrom": "Zlepšeno z {{value}}",
+    "male": "Muž",
+    "female": "Žena",
+    "payQuartiles": "Platové kvartily",
+    "threeYearTrend": "Tříletý trend",
+    "narrative": "Náš závazek",
+    "actionPlan": "Akční plán",
+    "initiative": "Iniciativa",
+    "target": "Cíl",
+    "status": "Stav",
+    "maleReceivingBonus": "Muži dostávající bonus",
+    "femaleReceivingBonus": "Ženy dostávající bonus"
   },
   "shiftTemplates": {
     "title": "Šablony směn",
@@ -2228,7 +2276,12 @@
       "locationsDesc": "Importovat pobocky",
       "skills": "Dovednosti",
       "skillsDesc": "Importovat dovednosti"
-    }
+    },
+    "clientId": "ID klienta",
+    "clientSecret": "Tajný klíč klienta",
+    "applicationClientId": "ID aplikace (klienta)",
+    "clientSecretValue": "Hodnota tajného klíče klienta",
+    "domain": "Řadič domény"
   },
   "jobs": {
     "open": "Otevřeno",
@@ -4290,7 +4343,11 @@
     "send": "Odeslat",
     "delete": "Smazat",
     "template": "Šablona",
-    "employee": "Zaměstnanec"
+    "employee": "Zaměstnanec",
+    "templateNamePlaceholder": "např. Pracovní smlouva",
+    "useVariables": "Použít proměnné:",
+    "customNameOptional": "Vlastní název (volitelné)",
+    "leaveBlankForTemplate": "Ponechte prázdné pro použití názvu šablony"
   },
   "kiosk": {
     "setup": "Nastavení kiosku",
@@ -4314,7 +4371,17 @@
     "loading": "Načítání kiosku...",
     "reconfigure": "Překonfigurovat kiosk",
     "offlineBanner": "Offline - události se synchronizují po připojení",
-    "employeeIdPlaceholder": "ID zaměstnance nebo PIN"
+    "employeeIdPlaceholder": "ID zaměstnance nebo PIN",
+    "getApiKey": "Získejte API klíč v Nastavení > Docházka",
+    "offlineSync": "Offline - události se synchronizují po připojení",
+    "queued": "{{count}} ve frontě",
+    "clockedInAt": "Příchod v {{time}}",
+    "lastClockedOut": "Poslední odchod v {{time}}",
+    "enterIdOrScan": "Zadejte ID zaměstnance nebo naskenujte kartu",
+    "employeeIdOrPin": "ID zaměstnance nebo PIN",
+    "poweredBy": "Provozuje Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Tvorba vlastních reportů",
@@ -4334,5 +4401,12 @@
     "reportName": "Název reportu",
     "table": "Tabulka",
     "chart": "Graf"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Zadejte API klíč",
+      "clientId": "ID klienta",
+      "clientSecret": "Tajný klíč klienta"
+    }
   }
 }

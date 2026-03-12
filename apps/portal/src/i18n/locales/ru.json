@@ -293,7 +293,16 @@
     },
     "tryAgain": "Повторить попытку",
     "selectEmployee": "Выберите сотрудника...",
-    "selectPerson": "Выберите человека..."
+    "selectPerson": "Выберите человека...",
+    "send": "Отправить",
+    "saveChanges": "Сохранить изменения",
+    "value": "Значение",
+    "enter": "Ввод",
+    "recommended": "Рекомендуется",
+    "startDate": "Дата начала",
+    "endDate": "Дата окончания",
+    "allLocations": "Все локации",
+    "open": "Открыто"
   },
   "auth": {
     "login": "Войти",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Смена переназначена",
     "swapRequested": "Обмен запрошен",
     "shiftDeleted": "Смена удалена",
-    "minutes": "мин"
+    "minutes": "мин",
+    "howBuildSchedule": "Как вы хотите создать расписание?",
+    "chooseApproach": "Выберите подход к планированию, подходящий для вашего бизнеса",
+    "schedulePeriod": "Период расписания",
+    "configureAutoFill": "Настроить параметры автозаполнения",
+    "maxHoursWeek": "Макс. часов/неделю",
+    "minRestBetweenShifts": "Мин. отдых между сменами (часы)",
+    "maxConsecutiveDays": "Макс. последовательных дней",
+    "preferredShiftLength": "Предпочтительная длина смены (часы)",
+    "generatingSchedule": "Создание умного расписания...",
+    "reviewGeneratedSchedule": "Просмотр созданного расписания",
+    "totalShifts": "Всего смен",
+    "filledShifts": "Заполненных смен",
+    "saveAsTemplate": "Сохранить эту конфигурацию как шаблон",
+    "noShiftsGenerated": "Не удалось создать смены",
+    "fairnessScore": "Оценка справедливости",
+    "templateNamePlaceholder": "Название шаблона (напр., 'Настройка выходного бранча')",
+    "checkShiftTemplates": "Убедитесь, что у вас настроены шаблоны смен для выбранного диапазона дат и локации."
   },
   "timeTracking": {
     "title": "Учёт времени",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Навыки и компетенции",
     "custom": "Пользовательские отчёты",
     "customDesc": "Создайте собственную аналитику",
-    "showingFirst50": "Показаны первые 50 из {{count}} строк"
+    "showingFirst50": "Показаны первые 50 из {{count}} строк",
+    "payQuartilesSubtitle": "Доля мужчин и женщин в каждом квартиле оплаты",
+    "quartile": "Квартиль {{name}}",
+    "threeYearTrendSubtitle": "Ежегодное улучшение гендерного разрыва в оплате труда",
+    "narrativeSubtitle": "Заявление генерального директора",
+    "actionPlanSubtitle": "Инициативы по сокращению гендерного разрыва в оплате труда",
+    "headerName": "Имя заголовка",
+    "currentEnps": "Текущий eNPS",
+    "ukGenderPayGapReporting": "Отчёт о гендерном разрыве в оплате труда (Великобритания)",
+    "meanGap": "Средний разрыв",
+    "medianGap": "Медианный разрыв",
+    "improvedFrom": "Улучшено с {{value}}",
+    "male": "Мужской",
+    "female": "Женский",
+    "payQuartiles": "Квартили оплаты",
+    "threeYearTrend": "Трёхлетний тренд",
+    "narrative": "Наши обязательства",
+    "actionPlan": "План действий",
+    "initiative": "Инициатива",
+    "target": "Цель",
+    "status": "Статус",
+    "maleReceivingBonus": "Мужчины, получающие бонус",
+    "femaleReceivingBonus": "Женщины, получающие бонус"
   },
   "accessibility": {
     "menu": "Меню",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Импорт локаций",
       "skills": "Навыки",
       "skillsDesc": "Импорт навыков"
-    }
+    },
+    "clientId": "ID клиента",
+    "clientSecret": "Секрет клиента",
+    "applicationClientId": "ID приложения (клиента)",
+    "clientSecretValue": "Значение секрета клиента",
+    "domain": "Контроллер домена"
   },
   "jobs": {
     "open": "Открыта",
@@ -4236,7 +4289,11 @@
     "send": "Отправить",
     "delete": "Удалить",
     "template": "Шаблон",
-    "employee": "Сотрудник"
+    "employee": "Сотрудник",
+    "templateNamePlaceholder": "напр., Трудовой договор",
+    "useVariables": "Использовать переменные:",
+    "customNameOptional": "Пользовательское имя (опционально)",
+    "leaveBlankForTemplate": "Оставьте пустым для использования имени шаблона"
   },
   "kiosk": {
     "setup": "Настройка киоска",
@@ -4260,7 +4317,17 @@
     "loading": "Загрузка киоска...",
     "reconfigure": "Перенастроить киоск",
     "offlineBanner": "Офлайн - события синхронизируются при подключении",
-    "employeeIdPlaceholder": "ID сотрудника или PIN"
+    "employeeIdPlaceholder": "ID сотрудника или PIN",
+    "getApiKey": "Получите API-ключ в Настройки > Учёт рабочего времени",
+    "offlineSync": "Офлайн - события синхронизируются при подключении",
+    "queued": "{{count}} в очереди",
+    "clockedInAt": "Отметка прихода в {{time}}",
+    "lastClockedOut": "Последняя отметка ухода в {{time}}",
+    "enterIdOrScan": "Введите ID сотрудника или отсканируйте бейдж",
+    "employeeIdOrPin": "ID сотрудника или PIN",
+    "poweredBy": "Работает на Uplift",
+    "online": "Онлайн",
+    "offline": "Офлайн"
   },
   "customReports": {
     "title": "Конструктор отчётов",
@@ -4280,5 +4347,12 @@
     "reportName": "Название отчёта",
     "table": "Таблица",
     "chart": "Диаграмма"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Введите API-ключ",
+      "clientId": "ID клиента",
+      "clientSecret": "Секрет клиента"
+    }
   }
 }

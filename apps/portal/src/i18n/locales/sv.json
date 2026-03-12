@@ -298,7 +298,16 @@
       "admin": "Administratör",
       "manager": "Chef",
       "worker": "Anställd"
-    }
+    },
+    "send": "Skicka",
+    "saveChanges": "Spara ändringar",
+    "value": "Värde",
+    "enter": "Ange",
+    "recommended": "Rekommenderad",
+    "startDate": "Startdatum",
+    "endDate": "Slutdatum",
+    "allLocations": "Alla platser",
+    "open": "Öppen"
   },
   "auth": {
     "login": "Logga in",
@@ -533,7 +542,24 @@
     "shiftReassigned": "Skift omfördelat",
     "swapRequested": "Byte begärt",
     "shiftDeleted": "Skift raderat",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Hur vill du skapa ditt schema?",
+    "chooseApproach": "Välj en schemaläggningsmetod som passar din verksamhet",
+    "schedulePeriod": "Schemaperiod",
+    "configureAutoFill": "Konfigurera inställningar för automatisk ifyllning",
+    "maxHoursWeek": "Max timmar/vecka",
+    "minRestBetweenShifts": "Min vila mellan skift (tim)",
+    "maxConsecutiveDays": "Max dagar i rad",
+    "preferredShiftLength": "Föredragen skiftlängd (tim)",
+    "generatingSchedule": "Genererar smart schema...",
+    "reviewGeneratedSchedule": "Granska genererat schema",
+    "totalShifts": "Totalt skift",
+    "filledShifts": "Fyllda skift",
+    "saveAsTemplate": "Spara denna konfiguration som mall",
+    "noShiftsGenerated": "Inga skift kunde genereras",
+    "fairnessScore": "Rättvisepoäng",
+    "templateNamePlaceholder": "Mallnamn (t.ex. 'Helgbrunch-setup')",
+    "checkShiftTemplates": "Kontrollera att du har skiftmallar konfigurerade för valt datumintervall och plats."
   },
   "timeTracking": {
     "title": "Tidrapportering",
@@ -1926,7 +1952,29 @@
     "skillsDesc": "Färdigheter och kompetenser",
     "custom": "Anpassade rapporter",
     "customDesc": "Bygg din egen analys",
-    "showingFirst50": "Visar första 50 av {{count}} rader"
+    "showingFirst50": "Visar första 50 av {{count}} rader",
+    "payQuartilesSubtitle": "Andel män och kvinnor i varje lönekvartal",
+    "quartile": "{{name}} kvartal",
+    "threeYearTrendSubtitle": "Årlig förbättring av löneskillnaden mellan könen",
+    "narrativeSubtitle": "VD:s uttalande",
+    "actionPlanSubtitle": "Initiativ för att minska löneskillnaden",
+    "headerName": "Rubriknamn",
+    "currentEnps": "Nuvarande eNPS",
+    "ukGenderPayGapReporting": "UK rapport om löneskillnad mellan könen",
+    "meanGap": "Genomsnittlig skillnad",
+    "medianGap": "Median skillnad",
+    "improvedFrom": "Förbättrat från {{value}}",
+    "male": "Man",
+    "female": "Kvinna",
+    "payQuartiles": "Lönekvartal",
+    "threeYearTrend": "Treårstrend",
+    "narrative": "Vårt åtagande",
+    "actionPlan": "Handlingsplan",
+    "initiative": "Initiativ",
+    "target": "Mål",
+    "status": "Status",
+    "maleReceivingBonus": "Män som får bonus",
+    "femaleReceivingBonus": "Kvinnor som får bonus"
   },
   "accessibility": {
     "menu": "Meny",
@@ -2199,7 +2247,12 @@
       "locationsDesc": "Importera platser",
       "skills": "Kompetenser",
       "skillsDesc": "Importera kompetenser"
-    }
+    },
+    "clientId": "Klient-ID",
+    "clientSecret": "Klienthemlighet",
+    "applicationClientId": "Applikations (klient) ID",
+    "clientSecretValue": "Klienthemlighetsvärde",
+    "domain": "Domänkontrollant"
   },
   "jobs": {
     "open": "Öppen",
@@ -4255,7 +4308,11 @@
     "send": "Skicka",
     "delete": "Radera",
     "template": "Mall",
-    "employee": "Anställd"
+    "employee": "Anställd",
+    "templateNamePlaceholder": "t.ex. Anställningsavtal",
+    "useVariables": "Använd variabler:",
+    "customNameOptional": "Anpassat namn (valfritt)",
+    "leaveBlankForTemplate": "Lämna tomt för att använda mallnamnet"
   },
   "kiosk": {
     "setup": "Kioskinställning",
@@ -4279,7 +4336,17 @@
     "loading": "Laddar kiosk...",
     "reconfigure": "Konfigurera om kiosk",
     "offlineBanner": "Offline - händelser synkroniseras vid anslutning",
-    "employeeIdPlaceholder": "Anställd-ID eller PIN"
+    "employeeIdPlaceholder": "Anställd-ID eller PIN",
+    "getApiKey": "Hämta din API-nyckel från Inställningar > Tid & närvaro",
+    "offlineSync": "Offline - händelser synkroniseras vid anslutning",
+    "queued": "{{count}} i kö",
+    "clockedInAt": "Stämplade in {{time}}",
+    "lastClockedOut": "Senaste utstämpling {{time}}",
+    "enterIdOrScan": "Ange anställnings-ID eller skanna kort",
+    "employeeIdOrPin": "Anställnings-ID eller PIN",
+    "poweredBy": "Drivs av Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Anpassad rapportbyggare",
@@ -4299,5 +4366,12 @@
     "reportName": "Rapportnamn",
     "table": "Tabell",
     "chart": "Diagram"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Ange API-nyckel",
+      "clientId": "Klient-ID",
+      "clientSecret": "Klienthemlighet"
+    }
   }
 }

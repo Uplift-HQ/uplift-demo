@@ -293,7 +293,16 @@
       "high": "Înalt",
       "medium": "Mediu",
       "low": "Scăzut"
-    }
+    },
+    "send": "Trimite",
+    "saveChanges": "Salvează modificările",
+    "value": "Valoare",
+    "enter": "Intrare",
+    "recommended": "Recomandat",
+    "startDate": "Data de început",
+    "endDate": "Data de sfârșit",
+    "allLocations": "Toate locațiile",
+    "open": "Deschis"
   },
   "auth": {
     "login": "Autentificare",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Tura a fost reatribuită",
     "swapRequested": "Schimb solicitat",
     "shiftDeleted": "Tura a fost ștearsă",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Cum doriți să creați programul?",
+    "chooseApproach": "Alegeți o abordare de programare potrivită pentru afacerea dvs.",
+    "schedulePeriod": "Perioada programului",
+    "configureAutoFill": "Configurați setările de completare automată",
+    "maxHoursWeek": "Ore max/săptămână",
+    "minRestBetweenShifts": "Odihnă min între ture (ore)",
+    "maxConsecutiveDays": "Zile consecutive max",
+    "preferredShiftLength": "Lungimea preferată a turei (ore)",
+    "generatingSchedule": "Generare program inteligent...",
+    "reviewGeneratedSchedule": "Revizuire program generat",
+    "totalShifts": "Total ture",
+    "filledShifts": "Ture ocupate",
+    "saveAsTemplate": "Salvează această configurație ca șablon",
+    "noShiftsGenerated": "Nu s-au putut genera ture",
+    "fairnessScore": "Scor de echitate",
+    "templateNamePlaceholder": "Numele șablonului (ex., 'Configurare brunch de weekend')",
+    "checkShiftTemplates": "Verificați că aveți șabloane de ture configurate pentru intervalul de date și locația selectate."
   },
   "timeTracking": {
     "title": "Pontaj",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Competențe și abilități",
     "custom": "Rapoarte personalizate",
     "customDesc": "Creați propria analiză",
-    "showingFirst50": "Se afișează primele 50 din {{count}} rânduri"
+    "showingFirst50": "Se afișează primele 50 din {{count}} rânduri",
+    "payQuartilesSubtitle": "Proporția de bărbați și femei în fiecare cuartilă salarială",
+    "quartile": "Cuartila {{name}}",
+    "threeYearTrendSubtitle": "Îmbunătățire anuală a decalajului salarial de gen",
+    "narrativeSubtitle": "Declarația CEO-ului",
+    "actionPlanSubtitle": "Inițiative pentru reducerea decalajului salarial de gen",
+    "headerName": "Nume antet",
+    "currentEnps": "eNPS curent",
+    "ukGenderPayGapReporting": "Raport UK despre decalajul salarial de gen",
+    "meanGap": "Decalaj mediu",
+    "medianGap": "Decalaj median",
+    "improvedFrom": "Îmbunătățit de la {{value}}",
+    "male": "Masculin",
+    "female": "Feminin",
+    "payQuartiles": "Cuartile salariale",
+    "threeYearTrend": "Tendință pe trei ani",
+    "narrative": "Angajamentul nostru",
+    "actionPlan": "Plan de acțiune",
+    "initiative": "Inițiativă",
+    "target": "Țintă",
+    "status": "Status",
+    "maleReceivingBonus": "Bărbați care primesc bonus",
+    "femaleReceivingBonus": "Femei care primesc bonus"
   },
   "accessibility": {
     "menu": "Meniu",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Importa locatii",
       "skills": "Competente",
       "skillsDesc": "Importa competente"
-    }
+    },
+    "clientId": "ID client",
+    "clientSecret": "Secret client",
+    "applicationClientId": "ID aplicație (client)",
+    "clientSecretValue": "Valoarea secretului client",
+    "domain": "Controller de domeniu"
   },
   "jobs": {
     "open": "Deschis",
@@ -4236,7 +4289,11 @@
     "send": "Trimite",
     "delete": "Șterge",
     "template": "Șablon",
-    "employee": "Angajat"
+    "employee": "Angajat",
+    "templateNamePlaceholder": "ex., Contract de muncă",
+    "useVariables": "Folosește variabile:",
+    "customNameOptional": "Nume personalizat (opțional)",
+    "leaveBlankForTemplate": "Lasă gol pentru a folosi numele șablonului"
   },
   "kiosk": {
     "setup": "Configurare chioșc",
@@ -4260,7 +4317,17 @@
     "loading": "Se încarcă chioșcul...",
     "reconfigure": "Reconfigurează chioșcul",
     "offlineBanner": "Offline - evenimentele se vor sincroniza la conectare",
-    "employeeIdPlaceholder": "ID angajat sau PIN"
+    "employeeIdPlaceholder": "ID angajat sau PIN",
+    "getApiKey": "Obține cheia API din Setări > Timp și prezență",
+    "offlineSync": "Offline - evenimentele se vor sincroniza la conectare",
+    "queued": "{{count}} în așteptare",
+    "clockedInAt": "Pontaj intrare la {{time}}",
+    "lastClockedOut": "Ultima ieșire la {{time}}",
+    "enterIdOrScan": "Introduceți ID angajat sau scanați ecuson",
+    "employeeIdOrPin": "ID angajat sau PIN",
+    "poweredBy": "Dezvoltat de Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Generator de rapoarte personalizate",
@@ -4280,5 +4347,12 @@
     "reportName": "Nume raport",
     "table": "Tabel",
     "chart": "Grafic"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Introduceți cheia API",
+      "clientId": "ID client",
+      "clientSecret": "Secret client"
+    }
   }
 }

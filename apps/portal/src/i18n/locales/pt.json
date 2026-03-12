@@ -293,7 +293,16 @@
       "medium": "Média",
       "low": "Baixa"
     },
-    "tryAgain": "Tentar novamente"
+    "tryAgain": "Tentar novamente",
+    "send": "Enviar",
+    "saveChanges": "Salvar alterações",
+    "value": "Valor",
+    "enter": "Entrar",
+    "recommended": "Recomendado",
+    "startDate": "Data de início",
+    "endDate": "Data de término",
+    "allLocations": "Todos os locais",
+    "open": "Aberto"
   },
   "auth": {
     "login": "Entrar",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Turno reatribuído",
     "swapRequested": "Troca solicitada",
     "shiftDeleted": "Turno eliminado",
-    "minutes": "m"
+    "minutes": "m",
+    "howBuildSchedule": "Como você gostaria de criar sua escala?",
+    "chooseApproach": "Escolha uma abordagem de agendamento que se adapte ao seu negócio",
+    "schedulePeriod": "Período da escala",
+    "configureAutoFill": "Configurar ajustes de preenchimento automático",
+    "maxHoursWeek": "Máx. horas/semana",
+    "minRestBetweenShifts": "Descanso mín. entre turnos (h)",
+    "maxConsecutiveDays": "Máx. dias consecutivos",
+    "preferredShiftLength": "Duração preferida do turno (h)",
+    "generatingSchedule": "Gerando escala inteligente...",
+    "reviewGeneratedSchedule": "Revisar escala gerada",
+    "totalShifts": "Total de turnos",
+    "filledShifts": "Turnos preenchidos",
+    "saveAsTemplate": "Salvar esta configuração como modelo",
+    "noShiftsGenerated": "Não foi possível gerar turnos",
+    "fairnessScore": "Pontuação de equidade",
+    "templateNamePlaceholder": "Nome do modelo (ex., 'Configuração brunch de fim de semana')",
+    "checkShiftTemplates": "Verifique se você tem modelos de turnos configurados para o período e local selecionados."
   },
   "timeTracking": {
     "title": "Controle de ponto",
@@ -1908,7 +1934,29 @@
     "skillsDesc": "Competências e qualificações",
     "custom": "Relatórios personalizados",
     "customDesc": "Crie a sua própria análise",
-    "showingFirst50": "A mostrar as primeiras 50 de {{count}} linhas"
+    "showingFirst50": "A mostrar as primeiras 50 de {{count}} linhas",
+    "payQuartilesSubtitle": "Proporção de homens e mulheres em cada quartil salarial",
+    "quartile": "Quartil {{name}}",
+    "threeYearTrendSubtitle": "Melhoria anual na diferença salarial entre gêneros",
+    "narrativeSubtitle": "Declaração do CEO",
+    "actionPlanSubtitle": "Iniciativas para fechar a diferença salarial entre gêneros",
+    "headerName": "Nome do cabeçalho",
+    "currentEnps": "eNPS atual",
+    "ukGenderPayGapReporting": "Relatório de diferença salarial de gênero do Reino Unido",
+    "meanGap": "Diferença média",
+    "medianGap": "Diferença mediana",
+    "improvedFrom": "Melhorado de {{value}}",
+    "male": "Masculino",
+    "female": "Feminino",
+    "payQuartiles": "Quartis salariais",
+    "threeYearTrend": "Tendência de três anos",
+    "narrative": "Nosso compromisso",
+    "actionPlan": "Plano de ação",
+    "initiative": "Iniciativa",
+    "target": "Meta",
+    "status": "Status",
+    "maleReceivingBonus": "Homens recebendo bônus",
+    "femaleReceivingBonus": "Mulheres recebendo bônus"
   },
   "accessibility": {
     "menu": "Menu",
@@ -2179,7 +2227,12 @@
       "locationsDesc": "Importar localizações",
       "skills": "Competências",
       "skillsDesc": "Importar competências"
-    }
+    },
+    "clientId": "ID do cliente",
+    "clientSecret": "Segredo do cliente",
+    "applicationClientId": "ID do aplicativo (cliente)",
+    "clientSecretValue": "Valor do segredo do cliente",
+    "domain": "Controlador de domínio"
   },
   "jobs": {
     "open": "Aberto",
@@ -4231,7 +4284,11 @@
     "send": "Enviar",
     "delete": "Eliminar",
     "template": "Modelo",
-    "employee": "Colaborador"
+    "employee": "Colaborador",
+    "templateNamePlaceholder": "ex., Contrato de trabalho",
+    "useVariables": "Usar variáveis:",
+    "customNameOptional": "Nome personalizado (opcional)",
+    "leaveBlankForTemplate": "Deixe em branco para usar o nome do modelo"
   },
   "kiosk": {
     "setup": "Configuração do quiosque",
@@ -4255,7 +4312,17 @@
     "loading": "A carregar quiosque...",
     "reconfigure": "Reconfigurar quiosque",
     "offlineBanner": "Offline - os eventos serão sincronizados quando conectado",
-    "employeeIdPlaceholder": "ID do colaborador ou PIN"
+    "employeeIdPlaceholder": "ID do colaborador ou PIN",
+    "getApiKey": "Obtenha sua chave API em Configurações > Tempo e Presença",
+    "offlineSync": "Offline - eventos serão sincronizados quando conectado",
+    "queued": "{{count}} na fila",
+    "clockedInAt": "Entrada registrada às {{time}}",
+    "lastClockedOut": "Última saída registrada às {{time}}",
+    "enterIdOrScan": "Digite o ID do funcionário ou escaneie o crachá",
+    "employeeIdOrPin": "ID do funcionário ou PIN",
+    "poweredBy": "Desenvolvido por Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Construtor de relatórios personalizados",
@@ -4275,5 +4342,12 @@
     "reportName": "Nome do relatório",
     "table": "Tabela",
     "chart": "Gráfico"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Inserir chave API",
+      "clientId": "ID do cliente",
+      "clientSecret": "Segredo do cliente"
+    }
   }
 }

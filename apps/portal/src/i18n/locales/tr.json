@@ -293,7 +293,16 @@
       "high": "Yüksek",
       "medium": "Orta",
       "low": "Düşük"
-    }
+    },
+    "send": "Gönder",
+    "saveChanges": "Değişiklikleri kaydet",
+    "value": "Değer",
+    "enter": "Giriş",
+    "recommended": "Önerilen",
+    "startDate": "Başlangıç tarihi",
+    "endDate": "Bitiş tarihi",
+    "allLocations": "Tüm konumlar",
+    "open": "Açık"
   },
   "auth": {
     "login": "Giriş Yap",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Vardiya yeniden atandı",
     "swapRequested": "Takas talep edildi",
     "shiftDeleted": "Vardiya silindi",
-    "minutes": "dk"
+    "minutes": "dk",
+    "howBuildSchedule": "Programınızı nasıl oluşturmak istersiniz?",
+    "chooseApproach": "İşletmenize uygun bir planlama yaklaşımı seçin",
+    "schedulePeriod": "Program dönemi",
+    "configureAutoFill": "Otomatik doldurma ayarlarını yapılandır",
+    "maxHoursWeek": "Maks saat/hafta",
+    "minRestBetweenShifts": "Vardiyalar arası min dinlenme (saat)",
+    "maxConsecutiveDays": "Maks ardışık gün",
+    "preferredShiftLength": "Tercih edilen vardiya süresi (saat)",
+    "generatingSchedule": "Akıllı program oluşturuluyor...",
+    "reviewGeneratedSchedule": "Oluşturulan programı incele",
+    "totalShifts": "Toplam vardiya",
+    "filledShifts": "Doldurulmuş vardiyalar",
+    "saveAsTemplate": "Bu yapılandırmayı şablon olarak kaydet",
+    "noShiftsGenerated": "Vardiya oluşturulamadı",
+    "fairnessScore": "Adalet puanı",
+    "templateNamePlaceholder": "Şablon adı (örn. 'Hafta sonu brunch kurulumu')",
+    "checkShiftTemplates": "Seçilen tarih aralığı ve konum için vardiya şablonlarının yapılandırılmış olduğundan emin olun."
   },
   "timeTracking": {
     "title": "Zaman Takibi",
@@ -1951,7 +1977,29 @@
     "skillsDesc": "Beceriler ve yetkinlikler",
     "custom": "Özel raporlar",
     "customDesc": "Kendi analizinizi oluşturun",
-    "showingFirst50": "{{count}} satırdan ilk 50 tanesi gösteriliyor"
+    "showingFirst50": "{{count}} satırdan ilk 50 tanesi gösteriliyor",
+    "payQuartilesSubtitle": "Her maaş çeyreğinde erkek ve kadın oranı",
+    "quartile": "{{name}} çeyrek",
+    "threeYearTrendSubtitle": "Cinsiyet maaş farkında yıllık iyileşme",
+    "narrativeSubtitle": "CEO açıklaması",
+    "actionPlanSubtitle": "Cinsiyet maaş farkını kapatmak için girişimler",
+    "headerName": "Başlık adı",
+    "currentEnps": "Mevcut eNPS",
+    "ukGenderPayGapReporting": "UK Cinsiyet Maaş Farkı Raporu",
+    "meanGap": "Ortalama fark",
+    "medianGap": "Medyan fark",
+    "improvedFrom": "{{value}}'dan iyileştirildi",
+    "male": "Erkek",
+    "female": "Kadın",
+    "payQuartiles": "Maaş çeyrekleri",
+    "threeYearTrend": "Üç yıllık trend",
+    "narrative": "Taahhüdümüz",
+    "actionPlan": "Eylem planı",
+    "initiative": "Girişim",
+    "target": "Hedef",
+    "status": "Durum",
+    "maleReceivingBonus": "Prim alan erkekler",
+    "femaleReceivingBonus": "Prim alan kadınlar"
   },
   "accessibility": {
     "menu": "Menü",
@@ -2225,7 +2273,12 @@
     },
     "templateDesc": "Bu şablonu kullanarak çalışan verilerini yapılandırın",
     "processing": "İşleniyor...",
-    "errors": "Hatalar"
+    "errors": "Hatalar",
+    "clientId": "İstemci ID",
+    "clientSecret": "İstemci sırrı",
+    "applicationClientId": "Uygulama (istemci) ID",
+    "clientSecretValue": "İstemci sırrı değeri",
+    "domain": "Etki alanı denetleyicisi"
   },
   "jobs": {
     "open": "Açık",
@@ -4298,7 +4351,11 @@
     "send": "Gönder",
     "delete": "Sil",
     "template": "Şablon",
-    "employee": "Çalışan"
+    "employee": "Çalışan",
+    "templateNamePlaceholder": "örn. İş sözleşmesi",
+    "useVariables": "Değişkenleri kullan:",
+    "customNameOptional": "Özel ad (isteğe bağlı)",
+    "leaveBlankForTemplate": "Şablon adını kullanmak için boş bırakın"
   },
   "kiosk": {
     "setup": "Kiosk kurulumu",
@@ -4322,7 +4379,17 @@
     "loading": "Kiosk yükleniyor...",
     "reconfigure": "Kiosk'u Yeniden Yapılandır",
     "offlineBanner": "Çevrimdışı - bağlandığında olaylar senkronize edilecek",
-    "employeeIdPlaceholder": "Çalışan ID veya PIN"
+    "employeeIdPlaceholder": "Çalışan ID veya PIN",
+    "getApiKey": "API anahtarınızı Ayarlar > Zaman ve Devam'dan alın",
+    "offlineSync": "Çevrimdışı - bağlantı kurulduğunda olaylar senkronize edilecek",
+    "queued": "{{count}} sırada",
+    "clockedInAt": "{{time}} giriş yapıldı",
+    "lastClockedOut": "Son çıkış {{time}}",
+    "enterIdOrScan": "Çalışan ID'si girin veya kartı okutun",
+    "employeeIdOrPin": "Çalışan ID veya PIN",
+    "poweredBy": "Uplift tarafından desteklenmektedir",
+    "online": "Çevrimiçi",
+    "offline": "Çevrimdışı"
   },
   "customReports": {
     "title": "Özel rapor oluşturucu",
@@ -4342,5 +4409,12 @@
     "reportName": "Rapor adı",
     "table": "Tablo",
     "chart": "Grafik"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "API anahtarını girin",
+      "clientId": "İstemci ID",
+      "clientSecret": "İstemci sırrı"
+    }
   }
 }

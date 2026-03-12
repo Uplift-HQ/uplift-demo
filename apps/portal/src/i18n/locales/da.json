@@ -293,7 +293,16 @@
       "high": "Høj",
       "medium": "Mellem",
       "low": "Lav"
-    }
+    },
+    "send": "Send",
+    "saveChanges": "Gem ændringer",
+    "value": "Værdi",
+    "enter": "Indtast",
+    "recommended": "Anbefalet",
+    "startDate": "Startdato",
+    "endDate": "Slutdato",
+    "allLocations": "Alle lokationer",
+    "open": "Åben"
   },
   "auth": {
     "login": "Log ind",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Vagt omfordelt",
     "swapRequested": "Bytte anmodet",
     "shiftDeleted": "Vagt slettet",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Hvordan vil du oprette din vagtplan?",
+    "chooseApproach": "Vælg en planlægningsmetode der passer til din virksomhed",
+    "schedulePeriod": "Vagtplanperiode",
+    "configureAutoFill": "Konfigurer automatisk udfyldning",
+    "maxHoursWeek": "Max timer/uge",
+    "minRestBetweenShifts": "Min hvile mellem vagter (timer)",
+    "maxConsecutiveDays": "Max sammenhængende dage",
+    "preferredShiftLength": "Foretrukken vagtlængde (timer)",
+    "generatingSchedule": "Genererer smart vagtplan...",
+    "reviewGeneratedSchedule": "Gennemgå genereret vagtplan",
+    "totalShifts": "Samlede vagter",
+    "filledShifts": "Besatte vagter",
+    "saveAsTemplate": "Gem denne konfiguration som skabelon",
+    "noShiftsGenerated": "Ingen vagter kunne genereres",
+    "fairnessScore": "Retfærdighedsscore",
+    "templateNamePlaceholder": "Skabelonnavn (f.eks. 'Weekend brunch setup')",
+    "checkShiftTemplates": "Tjek at du har vagtskabeloner konfigureret for det valgte datointerval og lokation."
   },
   "timeTracking": {
     "title": "Tidsregistrering",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Færdigheder og kompetencer",
     "custom": "Brugerdefinerede rapporter",
     "customDesc": "Byg din egen analyse",
-    "showingFirst50": "Viser første 50 af {{count}} rækker"
+    "showingFirst50": "Viser første 50 af {{count}} rækker",
+    "payQuartilesSubtitle": "Andel af mænd og kvinder i hver lønkvartil",
+    "quartile": "{{name}} kvartil",
+    "threeYearTrendSubtitle": "Årlig forbedring i kønslønforskel",
+    "narrativeSubtitle": "CEO-erklæring",
+    "actionPlanSubtitle": "Initiativer til at lukke kønslønforskellen",
+    "headerName": "Overskriftsnavn",
+    "currentEnps": "Nuværende eNPS",
+    "ukGenderPayGapReporting": "UK kønslønforskel-rapport",
+    "meanGap": "Gennemsnitlig forskel",
+    "medianGap": "Median forskel",
+    "improvedFrom": "Forbedret fra {{value}}",
+    "male": "Mand",
+    "female": "Kvinde",
+    "payQuartiles": "Lønkvartiler",
+    "threeYearTrend": "Treårig tendens",
+    "narrative": "Vores engagement",
+    "actionPlan": "Handlingsplan",
+    "initiative": "Initiativ",
+    "target": "Mål",
+    "status": "Status",
+    "maleReceivingBonus": "Mænd der modtager bonus",
+    "femaleReceivingBonus": "Kvinder der modtager bonus"
   },
   "shiftTemplates": {
     "title": "Vagtskabeloner",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Importér lokationer",
       "skills": "Kompetencer",
       "skillsDesc": "Importér kompetencer"
-    }
+    },
+    "clientId": "Klient-ID",
+    "clientSecret": "Klienthemmelighed",
+    "applicationClientId": "Applikations (klient) ID",
+    "clientSecretValue": "Klienthemmelighedsværdi",
+    "domain": "Domænecontroller"
   },
   "jobs": {
     "open": "Åben",
@@ -4235,7 +4288,11 @@
     "send": "Send",
     "delete": "Slet",
     "template": "Skabelon",
-    "employee": "Medarbejder"
+    "employee": "Medarbejder",
+    "templateNamePlaceholder": "f.eks. Ansættelseskontrakt",
+    "useVariables": "Brug variabler:",
+    "customNameOptional": "Brugerdefineret navn (valgfrit)",
+    "leaveBlankForTemplate": "Lad stå tomt for at bruge skabelonnavnet"
   },
   "kiosk": {
     "setup": "Kioskopsætning",
@@ -4259,7 +4316,17 @@
     "loading": "Indlæser kiosk...",
     "reconfigure": "Genkonfigurer kiosk",
     "offlineBanner": "Offline - hændelser synkroniseres ved tilslutning",
-    "employeeIdPlaceholder": "Medarbejder-ID eller PIN"
+    "employeeIdPlaceholder": "Medarbejder-ID eller PIN",
+    "getApiKey": "Hent din API-nøgle fra Indstillinger > Tid & fremmøde",
+    "offlineSync": "Offline - begivenheder synkroniseres ved forbindelse",
+    "queued": "{{count}} i kø",
+    "clockedInAt": "Stemplet ind {{time}}",
+    "lastClockedOut": "Sidst stemplet ud {{time}}",
+    "enterIdOrScan": "Indtast medarbejder-ID eller scan kort",
+    "employeeIdOrPin": "Medarbejder-ID eller PIN",
+    "poweredBy": "Drevet af Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Brugerdefineret rapportbygger",
@@ -4279,5 +4346,12 @@
     "reportName": "Rapportnavn",
     "table": "Tabel",
     "chart": "Diagram"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Indtast API-nøgle",
+      "clientId": "Klient-ID",
+      "clientSecret": "Klienthemmelighed"
+    }
   }
 }

@@ -293,7 +293,16 @@
       "medium": "Media",
       "low": "Baja"
     },
-    "tryAgain": "Intentar de nuevo"
+    "tryAgain": "Intentar de nuevo",
+    "send": "Enviar",
+    "saveChanges": "Guardar cambios",
+    "value": "Valor",
+    "enter": "Entrar",
+    "recommended": "Recomendado",
+    "startDate": "Fecha de inicio",
+    "endDate": "Fecha de fin",
+    "allLocations": "Todas las ubicaciones",
+    "open": "Abierto"
   },
   "auth": {
     "login": "Iniciar sesión",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Turno reasignado",
     "swapRequested": "Intercambio solicitado",
     "shiftDeleted": "Turno eliminado",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "¿Cómo te gustaría crear tu horario?",
+    "chooseApproach": "Elige un enfoque de programación que se adapte a tu negocio",
+    "schedulePeriod": "Período del horario",
+    "configureAutoFill": "Configurar ajustes de autocompletar",
+    "maxHoursWeek": "Máx. horas/semana",
+    "minRestBetweenShifts": "Descanso mín. entre turnos (hrs)",
+    "maxConsecutiveDays": "Máx. días consecutivos",
+    "preferredShiftLength": "Duración preferida del turno (hrs)",
+    "generatingSchedule": "Generando horario inteligente...",
+    "reviewGeneratedSchedule": "Revisar horario generado",
+    "totalShifts": "Turnos totales",
+    "filledShifts": "Turnos cubiertos",
+    "saveAsTemplate": "Guardar esta configuración como plantilla",
+    "noShiftsGenerated": "No se pudieron generar turnos",
+    "fairnessScore": "Puntuación de equidad",
+    "templateNamePlaceholder": "Nombre de plantilla (ej., 'Configuración brunch de fin de semana')",
+    "checkShiftTemplates": "Verifica que tienes plantillas de turnos configuradas para el rango de fechas y ubicación seleccionados."
   },
   "timeTracking": {
     "title": "Control de tiempo",
@@ -1908,7 +1934,29 @@
     "skillsDesc": "Habilidades y competencias",
     "custom": "Informes personalizados",
     "customDesc": "Crea tu propio análisis",
-    "showingFirst50": "Mostrando las primeras 50 de {{count}} filas"
+    "showingFirst50": "Mostrando las primeras 50 de {{count}} filas",
+    "payQuartilesSubtitle": "Proporción de hombres y mujeres en cada cuartil salarial",
+    "quartile": "Cuartil {{name}}",
+    "threeYearTrendSubtitle": "Mejora interanual en la brecha salarial de género",
+    "narrativeSubtitle": "Declaración del CEO",
+    "actionPlanSubtitle": "Iniciativas para cerrar la brecha salarial de género",
+    "headerName": "Nombre del encabezado",
+    "currentEnps": "eNPS actual",
+    "ukGenderPayGapReporting": "Informe de brecha salarial de género del Reino Unido",
+    "meanGap": "Brecha media",
+    "medianGap": "Brecha mediana",
+    "improvedFrom": "Mejorado desde {{value}}",
+    "male": "Masculino",
+    "female": "Femenino",
+    "payQuartiles": "Cuartiles salariales",
+    "threeYearTrend": "Tendencia de tres años",
+    "narrative": "Nuestro compromiso",
+    "actionPlan": "Plan de acción",
+    "initiative": "Iniciativa",
+    "target": "Objetivo",
+    "status": "Estado",
+    "maleReceivingBonus": "Hombres que reciben bonificación",
+    "femaleReceivingBonus": "Mujeres que reciben bonificación"
   },
   "shiftTemplates": {
     "title": "Plantillas de turno",
@@ -2179,7 +2227,12 @@
       "locationsDesc": "Importar ubicaciones",
       "skills": "Habilidades",
       "skillsDesc": "Importar habilidades"
-    }
+    },
+    "clientId": "ID de cliente",
+    "clientSecret": "Secreto de cliente",
+    "applicationClientId": "ID de aplicación (cliente)",
+    "clientSecretValue": "Valor del secreto de cliente",
+    "domain": "Controlador de dominio"
   },
   "jobs": {
     "open": "Abierto",
@@ -4231,7 +4284,11 @@
     "send": "Enviar",
     "delete": "Eliminar",
     "template": "Plantilla",
-    "employee": "Empleado"
+    "employee": "Empleado",
+    "templateNamePlaceholder": "ej., Contrato de empleo",
+    "useVariables": "Usar variables:",
+    "customNameOptional": "Nombre personalizado (opcional)",
+    "leaveBlankForTemplate": "Dejar en blanco para usar el nombre de la plantilla"
   },
   "kiosk": {
     "setup": "Configuración del quiosco",
@@ -4255,7 +4312,17 @@
     "loading": "Cargando quiosco...",
     "reconfigure": "Reconfigurar quiosco",
     "offlineBanner": "Sin conexión - los eventos se sincronizarán al conectarse",
-    "employeeIdPlaceholder": "ID de empleado o PIN"
+    "employeeIdPlaceholder": "ID de empleado o PIN",
+    "getApiKey": "Obtén tu clave API en Configuración > Horario y Asistencia",
+    "offlineSync": "Sin conexión - los eventos se sincronizarán cuando se conecte",
+    "queued": "{{count}} en cola",
+    "clockedInAt": "Entrada registrada a las {{time}}",
+    "lastClockedOut": "Última salida registrada a las {{time}}",
+    "enterIdOrScan": "Ingresa ID de empleado o escanea credencial",
+    "employeeIdOrPin": "ID de empleado o PIN",
+    "poweredBy": "Desarrollado por Uplift",
+    "online": "En línea",
+    "offline": "Sin conexión"
   },
   "customReports": {
     "title": "Constructor de informes personalizados",
@@ -4275,5 +4342,12 @@
     "reportName": "Nombre del informe",
     "table": "Tabla",
     "chart": "Gráfico"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Ingresa clave API",
+      "clientId": "ID de cliente",
+      "clientSecret": "Secreto de cliente"
+    }
   }
 }

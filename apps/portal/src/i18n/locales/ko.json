@@ -293,7 +293,16 @@
       "high": "높음",
       "medium": "중간",
       "low": "낮음"
-    }
+    },
+    "send": "보내기",
+    "saveChanges": "변경 사항 저장",
+    "value": "값",
+    "enter": "입력",
+    "recommended": "추천",
+    "startDate": "시작 날짜",
+    "endDate": "종료 날짜",
+    "allLocations": "모든 위치",
+    "open": "열림"
   },
   "auth": {
     "login": "로그인",
@@ -528,7 +537,24 @@
     "shiftReassigned": "근무가 재배정되었습니다",
     "swapRequested": "교환이 요청되었습니다",
     "shiftDeleted": "근무가 삭제되었습니다",
-    "minutes": "분"
+    "minutes": "분",
+    "howBuildSchedule": "일정을 어떻게 만들겠습니까?",
+    "chooseApproach": "비즈니스에 맞는 일정 관리 방식을 선택하세요",
+    "schedulePeriod": "일정 기간",
+    "configureAutoFill": "자동 채우기 설정 구성",
+    "maxHoursWeek": "주당 최대 시간",
+    "minRestBetweenShifts": "교대 간 최소 휴식 시간(시간)",
+    "maxConsecutiveDays": "최대 연속 근무일",
+    "preferredShiftLength": "선호 교대 시간(시간)",
+    "generatingSchedule": "스마트 일정 생성 중...",
+    "reviewGeneratedSchedule": "생성된 일정 검토",
+    "totalShifts": "총 교대",
+    "filledShifts": "채워진 교대",
+    "saveAsTemplate": "이 구성을 템플릿으로 저장",
+    "noShiftsGenerated": "교대를 생성할 수 없습니다",
+    "fairnessScore": "공정성 점수",
+    "templateNamePlaceholder": "템플릿 이름 (예: '주말 브런치 설정')",
+    "checkShiftTemplates": "선택한 날짜 범위와 위치에 대한 교대 템플릿이 구성되어 있는지 확인하세요."
   },
   "timeTracking": {
     "title": "근태 관리",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "기술 및 역량",
     "custom": "사용자 정의 보고서",
     "customDesc": "자체 분석 구축",
-    "showingFirst50": "{{count}}행 중 처음 50행 표시"
+    "showingFirst50": "{{count}}행 중 처음 50행 표시",
+    "payQuartilesSubtitle": "각 급여 사분위에서의 남녀 비율",
+    "quartile": "{{name}} 사분위",
+    "threeYearTrendSubtitle": "성별 임금 격차의 연간 개선",
+    "narrativeSubtitle": "CEO 성명",
+    "actionPlanSubtitle": "성별 임금 격차 해소를 위한 이니셔티브",
+    "headerName": "헤더 이름",
+    "currentEnps": "현재 eNPS",
+    "ukGenderPayGapReporting": "영국 성별 임금 격차 보고서",
+    "meanGap": "평균 격차",
+    "medianGap": "중앙값 격차",
+    "improvedFrom": "{{value}}에서 개선됨",
+    "male": "남성",
+    "female": "여성",
+    "payQuartiles": "급여 사분위",
+    "threeYearTrend": "3년 추세",
+    "narrative": "우리의 약속",
+    "actionPlan": "실행 계획",
+    "initiative": "이니셔티브",
+    "target": "목표",
+    "status": "상태",
+    "maleReceivingBonus": "보너스 받는 남성",
+    "femaleReceivingBonus": "보너스 받는 여성"
   },
   "accessibility": {
     "menu": "메뉴",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "근무지 가져오기",
       "skills": "스킬",
       "skillsDesc": "스킬 가져오기"
-    }
+    },
+    "clientId": "클라이언트 ID",
+    "clientSecret": "클라이언트 시크릿",
+    "applicationClientId": "애플리케이션(클라이언트) ID",
+    "clientSecretValue": "클라이언트 시크릿 값",
+    "domain": "도메인 컨트롤러"
   },
   "jobs": {
     "open": "진행 중",
@@ -4235,7 +4288,11 @@
     "send": "보내기",
     "delete": "삭제",
     "template": "템플릿",
-    "employee": "직원"
+    "employee": "직원",
+    "templateNamePlaceholder": "예: 고용 계약서",
+    "useVariables": "변수 사용:",
+    "customNameOptional": "사용자 정의 이름 (선택 사항)",
+    "leaveBlankForTemplate": "템플릿 이름을 사용하려면 비워두세요"
   },
   "kiosk": {
     "setup": "키오스크 설정",
@@ -4259,7 +4316,17 @@
     "loading": "키오스크 로딩 중...",
     "reconfigure": "키오스크 재설정",
     "offlineBanner": "오프라인 - 연결 시 이벤트 동기화",
-    "employeeIdPlaceholder": "직원 ID 또는 PIN"
+    "employeeIdPlaceholder": "직원 ID 또는 PIN",
+    "getApiKey": "설정 > 근태 관리에서 API 키를 받으세요",
+    "offlineSync": "오프라인 - 연결 시 이벤트가 동기화됩니다",
+    "queued": "{{count}}개 대기 중",
+    "clockedInAt": "{{time}}에 출근",
+    "lastClockedOut": "마지막 퇴근: {{time}}",
+    "enterIdOrScan": "직원 ID 입력 또는 배지 스캔",
+    "employeeIdOrPin": "직원 ID 또는 PIN",
+    "poweredBy": "Uplift 제공",
+    "online": "온라인",
+    "offline": "오프라인"
   },
   "customReports": {
     "title": "사용자 정의 보고서 작성기",
@@ -4279,5 +4346,12 @@
     "reportName": "보고서 이름",
     "table": "테이블",
     "chart": "차트"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "API 키 입력",
+      "clientId": "클라이언트 ID",
+      "clientSecret": "클라이언트 시크릿"
+    }
   }
 }

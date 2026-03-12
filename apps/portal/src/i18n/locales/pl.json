@@ -164,7 +164,16 @@
       "medium": "Średni",
       "low": "Niski"
     },
-    "tryAgain": "Spróbuj ponownie"
+    "tryAgain": "Spróbuj ponownie",
+    "send": "Wyślij",
+    "saveChanges": "Zapisz zmiany",
+    "value": "Wartość",
+    "enter": "Enter",
+    "recommended": "Zalecane",
+    "startDate": "Data rozpoczęcia",
+    "endDate": "Data zakończenia",
+    "allLocations": "Wszystkie lokalizacje",
+    "open": "Otwarte"
   },
   "auth": {
     "login": "Zaloguj się",
@@ -399,7 +408,24 @@
     "shiftReassigned": "Zmiana przypisana ponownie",
     "swapRequested": "Zamiana zgłoszona",
     "shiftDeleted": "Zmiana usunięta",
-    "minutes": "m"
+    "minutes": "m",
+    "howBuildSchedule": "Jak chcesz utworzyć swój harmonogram?",
+    "chooseApproach": "Wybierz podejście do planowania odpowiednie dla Twojej firmy",
+    "schedulePeriod": "Okres harmonogramu",
+    "configureAutoFill": "Skonfiguruj ustawienia automatycznego wypełniania",
+    "maxHoursWeek": "Maks. godzin/tydzień",
+    "minRestBetweenShifts": "Min. odpoczynek między zmianami (godz.)",
+    "maxConsecutiveDays": "Maks. kolejnych dni",
+    "preferredShiftLength": "Preferowana długość zmiany (godz.)",
+    "generatingSchedule": "Generowanie inteligentnego harmonogramu...",
+    "reviewGeneratedSchedule": "Przejrzyj wygenerowany harmonogram",
+    "totalShifts": "Łączna liczba zmian",
+    "filledShifts": "Obsadzone zmiany",
+    "saveAsTemplate": "Zapisz tę konfigurację jako szablon",
+    "noShiftsGenerated": "Nie można wygenerować zmian",
+    "fairnessScore": "Wynik sprawiedliwości",
+    "templateNamePlaceholder": "Nazwa szablonu (np. 'Konfiguracja weekendowego brunchu')",
+    "checkShiftTemplates": "Sprawdź, czy masz skonfigurowane szablony zmian dla wybranego zakresu dat i lokalizacji."
   },
   "timeTracking": {
     "title": "Rejestracja czasu",
@@ -1861,7 +1887,29 @@
     "skillsDesc": "Umiejętności i kompetencje",
     "custom": "Raporty niestandardowe",
     "customDesc": "Stwórz własną analizę",
-    "showingFirst50": "Pokazuję pierwsze 50 z {{count}} wierszy"
+    "showingFirst50": "Pokazuję pierwsze 50 z {{count}} wierszy",
+    "payQuartilesSubtitle": "Proporcja mężczyzn i kobiet w każdym kwartylu płacowym",
+    "quartile": "Kwartyl {{name}}",
+    "threeYearTrendSubtitle": "Roczna poprawa w różnicy płac między płciami",
+    "narrativeSubtitle": "Oświadczenie CEO",
+    "actionPlanSubtitle": "Inicjatywy na rzecz zmniejszenia różnicy płac",
+    "headerName": "Nazwa nagłówka",
+    "currentEnps": "Bieżący eNPS",
+    "ukGenderPayGapReporting": "Raport UK o różnicy płac między płciami",
+    "meanGap": "Średnia różnica",
+    "medianGap": "Mediana różnicy",
+    "improvedFrom": "Poprawa z {{value}}",
+    "male": "Mężczyzna",
+    "female": "Kobieta",
+    "payQuartiles": "Kwartyle płacowe",
+    "threeYearTrend": "Trend trzyletni",
+    "narrative": "Nasze zobowiązanie",
+    "actionPlan": "Plan działania",
+    "initiative": "Inicjatywa",
+    "target": "Cel",
+    "status": "Status",
+    "maleReceivingBonus": "Mężczyźni otrzymujący premię",
+    "femaleReceivingBonus": "Kobiety otrzymujące premię"
   },
   "shiftTemplates": {
     "title": "Szablony zmian",
@@ -2172,7 +2220,12 @@
       "locationsDesc": "Importuj lokalizacje",
       "skills": "Umiejętności",
       "skillsDesc": "Importuj umiejętności"
-    }
+    },
+    "clientId": "ID klienta",
+    "clientSecret": "Sekret klienta",
+    "applicationClientId": "ID aplikacji (klienta)",
+    "clientSecretValue": "Wartość sekretu klienta",
+    "domain": "Kontroler domeny"
   },
   "jobs": {
     "open": "Otwarte",
@@ -4231,7 +4284,11 @@
     "send": "Wyślij",
     "delete": "Usuń",
     "template": "Szablon",
-    "employee": "Pracownik"
+    "employee": "Pracownik",
+    "templateNamePlaceholder": "np. Umowa o pracę",
+    "useVariables": "Użyj zmiennych:",
+    "customNameOptional": "Nazwa niestandardowa (opcjonalnie)",
+    "leaveBlankForTemplate": "Pozostaw puste, aby użyć nazwy szablonu"
   },
   "kiosk": {
     "setup": "Konfiguracja kiosku",
@@ -4255,7 +4312,17 @@
     "loading": "Ładowanie kiosku...",
     "reconfigure": "Przekonfiguruj kiosk",
     "offlineBanner": "Offline - zdarzenia zostaną zsynchronizowane po połączeniu",
-    "employeeIdPlaceholder": "ID pracownika lub PIN"
+    "employeeIdPlaceholder": "ID pracownika lub PIN",
+    "getApiKey": "Pobierz klucz API w Ustawienia > Czas i obecność",
+    "offlineSync": "Offline - zdarzenia zsynchronizują się po połączeniu",
+    "queued": "{{count}} w kolejce",
+    "clockedInAt": "Odbito wejście o {{time}}",
+    "lastClockedOut": "Ostatnie wyjście o {{time}}",
+    "enterIdOrScan": "Wprowadź ID pracownika lub zeskanuj kartę",
+    "employeeIdOrPin": "ID pracownika lub PIN",
+    "poweredBy": "Obsługiwane przez Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Kreator raportów niestandardowych",
@@ -4275,5 +4342,12 @@
     "reportName": "Nazwa raportu",
     "table": "Tabela",
     "chart": "Wykres"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Wprowadź klucz API",
+      "clientId": "ID klienta",
+      "clientSecret": "Sekret klienta"
+    }
   }
 }

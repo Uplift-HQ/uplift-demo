@@ -841,7 +841,7 @@ function ENPSTimelineChart({ data, height = 280 }) {
             <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800">
               Excellent
             </span>
-            <span className="text-xs text-slate-500 mt-0.5">Current eNPS</span>
+            <span className="text-xs text-slate-500 mt-0.5">{t('reports.currentEnps', 'Current eNPS')}</span>
           </div>
         </div>
         <div className="text-right">
@@ -1591,7 +1591,7 @@ function GenderPayGapReport({ data, t }) {
       <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg flex items-start gap-3">
         <Shield className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm font-medium text-purple-800">UK Gender Pay Gap Reporting</p>
+          <p className="text-sm font-medium text-purple-800">{t('reports.ukGenderPayGapReporting', 'UK Gender Pay Gap Reporting')}</p>
           <p className="text-sm text-purple-700 mt-1">
             Grand Metropolitan Hotel Group (150 employees) is committed to transparent pay practices. This report demonstrates our commitment to equality and fair compensation across all 9 hotel properties.
           </p>
@@ -1601,9 +1601,9 @@ function GenderPayGapReport({ data, t }) {
       {/* Headline Metrics - 6 KPIs matching UK government format */}
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <KPICard label={t('reports.meanGenderPayGap', 'Mean Gender Pay Gap')} value={data.meanGap} suffix="%" icon={TrendingDown} color="purple"
-          trend={-1.7} trendLabel="Improved from 14.1%" />
+          trend={-1.7} trendLabel={t('reports.improvedFrom', 'Improved from {{value}}', { value: '14.1%' })} />
         <KPICard label={t('reports.medianGenderPayGap', 'Median Gender Pay Gap')} value={data.medianGap} suffix="%" icon={TrendingDown} color="indigo"
-          trend={-1.5} trendLabel="Improved from 10.2%" />
+          trend={-1.5} trendLabel={t('reports.improvedFrom', 'Improved from {{value}}', { value: '10.2%' })} />
         <KPICard label={t('reports.meanBonusGap', 'Mean Bonus Pay Gap')} value={data.meanBonusGap} suffix="%" icon={DollarSign} color="amber" />
         <KPICard label={t('reports.medianBonusGap', 'Median Bonus Pay Gap')} value={data.medianBonusGap} suffix="%" icon={DollarSign} color="orange" />
         <KPICard label={t('reports.maleReceivingBonus', 'Males Receiving Bonus')} value={data.maleReceivingBonus} suffix="%" icon={Award} color="blue" />
@@ -1611,11 +1611,11 @@ function GenderPayGapReport({ data, t }) {
       </div>
 
       {/* Pay Quartiles */}
-      <SectionCard title={t('reports.payQuartiles', 'Pay Quartiles')} subtitle="Proportion of males and females in each pay quartile">
+      <SectionCard title={t('reports.payQuartiles', 'Pay Quartiles')} subtitle={t('reports.payQuartilesSubtitle', 'Proportion of males and females in each pay quartile')}>
         <div className="space-y-4">
           {data.quartiles.map((q, i) => (
             <div key={i}>
-              <p className="text-sm font-medium text-slate-700 mb-1.5">{q.name} Quartile</p>
+              <p className="text-sm font-medium text-slate-700 mb-1.5">{t('reports.quartile', '{{name}} Quartile', { name: q.name })}</p>
               <StackedBar segments={[
                 { name: t('reports.male', 'Male'), value: q.male, color: '#3b82f6' },
                 { name: t('reports.female', 'Female'), value: q.female, color: '#ec4899' },
@@ -1630,18 +1630,18 @@ function GenderPayGapReport({ data, t }) {
       </SectionCard>
 
       {/* 3-Year Trend */}
-      <SectionCard title={t('reports.threeYearTrend', 'Three-Year Trend')} subtitle="Year-on-year improvement in gender pay gap">
+      <SectionCard title={t('reports.threeYearTrend', 'Three-Year Trend')} subtitle={t('reports.threeYearTrendSubtitle', 'Year-on-year improvement in gender pay gap')}>
         <div className="grid grid-cols-3 gap-4">
           {data.trend.map((year, i) => (
             <div key={i} className="bg-slate-50 rounded-lg p-4 text-center">
               <p className="text-lg font-bold text-slate-900">{year.year}</p>
               <div className="mt-3 space-y-2">
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide">Mean Gap</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wide">{t('reports.meanGap', 'Mean Gap')}</p>
                   <p className={`text-2xl font-bold ${i === data.trend.length - 1 ? 'text-green-600' : 'text-slate-700'}`}>{year.mean}%</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide">Median Gap</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wide">{t('reports.medianGap', 'Median Gap')}</p>
                   <p className={`text-xl font-semibold ${i === data.trend.length - 1 ? 'text-green-600' : 'text-slate-600'}`}>{year.median}%</p>
                 </div>
               </div>
@@ -1657,7 +1657,7 @@ function GenderPayGapReport({ data, t }) {
       </SectionCard>
 
       {/* Narrative Section */}
-      <SectionCard title={t('reports.narrative', 'Our Commitment')} subtitle="Statement from the CEO">
+      <SectionCard title={t('reports.narrative', 'Our Commitment')} subtitle={t('reports.narrativeSubtitle', 'Statement from the CEO')}>
         <div className="p-4 bg-slate-50 rounded-lg border-l-4 border-purple-500">
           <p className="text-slate-700 leading-relaxed italic">"{data.narrative}"</p>
           <p className="mt-3 text-sm font-medium text-slate-600">— Robert Hughes, CEO</p>
@@ -1665,7 +1665,7 @@ function GenderPayGapReport({ data, t }) {
       </SectionCard>
 
       {/* Action Plan Table */}
-      <SectionCard title={t('reports.actionPlan', 'Action Plan')} subtitle="Initiatives to close the gender pay gap">
+      <SectionCard title={t('reports.actionPlan', 'Action Plan')} subtitle={t('reports.actionPlanSubtitle', 'Initiatives to close the gender pay gap')}>
         <DataTable
           columns={[
             { label: t('reports.initiative', 'Initiative'), bold: true },
@@ -1813,11 +1813,11 @@ function CompensationReport({ data, t }) {
         </ResponsiveContainer>
         <div className="flex justify-center gap-8 mt-4">
           <div className="text-center px-4 py-2 bg-slate-50 rounded-lg">
-            <p className="text-xs text-slate-500 uppercase tracking-wider">Mean</p>
+            <p className="text-xs text-slate-500 uppercase tracking-wider">{t('reports.mean', 'Mean')}</p>
             <p className="text-lg font-bold text-slate-900">£{(data.meanSalary || 34200).toLocaleString()}</p>
           </div>
           <div className="text-center px-4 py-2 bg-slate-50 rounded-lg">
-            <p className="text-xs text-slate-500 uppercase tracking-wider">Median</p>
+            <p className="text-xs text-slate-500 uppercase tracking-wider">{t('reports.median', 'Median')}</p>
             <p className="text-lg font-bold text-slate-900">£{(data.medianSalary || 31500).toLocaleString()}</p>
           </div>
         </div>
@@ -2775,14 +2775,14 @@ function CustomReportsBuilder({ t }) {
                             type="text"
                             value={header.key}
                             onChange={(e) => handleApiHeaderChange(index, 'key', e.target.value)}
-                            placeholder="Header name"
+                            placeholder={t('reports.headerName', 'Header name')}
                             className="input flex-1"
                           />
                           <input
                             type="text"
                             value={header.value}
                             onChange={(e) => handleApiHeaderChange(index, 'value', e.target.value)}
-                            placeholder="Value"
+                            placeholder={t('common.value', 'Value')}
                             className="input flex-1"
                           />
                           {apiHeaders.length > 1 && (

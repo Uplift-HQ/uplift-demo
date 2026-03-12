@@ -297,7 +297,16 @@
       "high": "Hoog",
       "medium": "Gemiddeld",
       "low": "Laag"
-    }
+    },
+    "send": "Verzenden",
+    "saveChanges": "Wijzigingen opslaan",
+    "value": "Waarde",
+    "enter": "Enter",
+    "recommended": "Aanbevolen",
+    "startDate": "Startdatum",
+    "endDate": "Einddatum",
+    "allLocations": "Alle locaties",
+    "open": "Open"
   },
   "auth": {
     "login": "Inloggen",
@@ -532,7 +541,24 @@
     "shiftReassigned": "Dienst opnieuw toegewezen",
     "swapRequested": "Ruil aangevraagd",
     "shiftDeleted": "Dienst verwijderd",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Hoe wilt u uw rooster maken?",
+    "chooseApproach": "Kies een planningsaanpak die past bij uw bedrijf",
+    "schedulePeriod": "Roosterperiode",
+    "configureAutoFill": "Auto-invul instellingen configureren",
+    "maxHoursWeek": "Max uren/week",
+    "minRestBetweenShifts": "Min rust tussen diensten (uur)",
+    "maxConsecutiveDays": "Max opeenvolgende dagen",
+    "preferredShiftLength": "Gewenste dienstlengte (uur)",
+    "generatingSchedule": "Slim rooster genereren...",
+    "reviewGeneratedSchedule": "Gegenereerd rooster bekijken",
+    "totalShifts": "Totaal diensten",
+    "filledShifts": "Ingevulde diensten",
+    "saveAsTemplate": "Deze configuratie als sjabloon opslaan",
+    "noShiftsGenerated": "Er konden geen diensten worden gegenereerd",
+    "fairnessScore": "Eerlijkheidsscore",
+    "templateNamePlaceholder": "Sjabloonnaam (bijv. 'Weekend Brunch Setup')",
+    "checkShiftTemplates": "Controleer of u dienstsjablonen heeft geconfigureerd voor het geselecteerde datumbereik en locatie."
   },
   "timeTracking": {
     "title": "Tijdregistratie",
@@ -1917,7 +1943,29 @@
     "skillsDesc": "Vaardigheden en competenties",
     "custom": "Aangepaste rapporten",
     "customDesc": "Bouw uw eigen analyse",
-    "showingFirst50": "Toont eerste 50 van {{count}} rijen"
+    "showingFirst50": "Toont eerste 50 van {{count}} rijen",
+    "payQuartilesSubtitle": "Verhouding mannen en vrouwen in elk salariskwartiel",
+    "quartile": "{{name}} Kwartiel",
+    "threeYearTrendSubtitle": "Jaarlijkse verbetering in loonkloof tussen geslachten",
+    "narrativeSubtitle": "Verklaring van de CEO",
+    "actionPlanSubtitle": "Initiatieven om de loonkloof te dichten",
+    "headerName": "Koptekstnaam",
+    "currentEnps": "Huidige eNPS",
+    "ukGenderPayGapReporting": "VK Gender Loonkloof Rapportage",
+    "meanGap": "Gemiddelde kloof",
+    "medianGap": "Mediane kloof",
+    "improvedFrom": "Verbeterd van {{value}}",
+    "male": "Man",
+    "female": "Vrouw",
+    "payQuartiles": "Salariskwartielen",
+    "threeYearTrend": "Driejarige trend",
+    "narrative": "Onze toewijding",
+    "actionPlan": "Actieplan",
+    "initiative": "Initiatief",
+    "target": "Doel",
+    "status": "Status",
+    "maleReceivingBonus": "Mannen die bonus ontvangen",
+    "femaleReceivingBonus": "Vrouwen die bonus ontvangen"
   },
   "accessibility": {
     "menu": "Menubalk",
@@ -2188,7 +2236,12 @@
       "locationsDesc": "Locaties importeren",
       "skills": "Vaardigheden",
       "skillsDesc": "Vaardigheden importeren"
-    }
+    },
+    "clientId": "Client-ID",
+    "clientSecret": "Clientgeheim",
+    "applicationClientId": "Applicatie (client) ID",
+    "clientSecretValue": "Clientgeheimwaarde",
+    "domain": "Domeincontroller"
   },
   "jobs": {
     "loadError": "Kan vacatures niet laden. Probeer het opnieuw.",
@@ -4224,7 +4277,11 @@
     "send": "Versturen",
     "delete": "Verwijderen",
     "template": "Sjabloon",
-    "employee": "Medewerker"
+    "employee": "Medewerker",
+    "templateNamePlaceholder": "bijv. Arbeidsovereenkomst",
+    "useVariables": "Gebruik variabelen:",
+    "customNameOptional": "Aangepaste naam (optioneel)",
+    "leaveBlankForTemplate": "Laat leeg om sjabloonnaam te gebruiken"
   },
   "kiosk": {
     "setup": "Kioskconfiguratie",
@@ -4248,7 +4305,17 @@
     "loading": "Kiosk laden...",
     "reconfigure": "Kiosk herconfigureren",
     "offlineBanner": "Offline - gebeurtenissen worden gesynchroniseerd bij verbinding",
-    "employeeIdPlaceholder": "Medewerker-ID of PIN"
+    "employeeIdPlaceholder": "Medewerker-ID of PIN",
+    "getApiKey": "Haal uw API-sleutel op via Instellingen > Tijd & Aanwezigheid",
+    "offlineSync": "Offline - gebeurtenissen worden gesynchroniseerd bij verbinding",
+    "queued": "{{count}} in wachtrij",
+    "clockedInAt": "Ingeklokt om {{time}}",
+    "lastClockedOut": "Laatst uitgeklokt om {{time}}",
+    "enterIdOrScan": "Voer medewerker-ID in of scan badge",
+    "employeeIdOrPin": "Medewerker-ID of PIN",
+    "poweredBy": "Mogelijk gemaakt door Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Aangepaste rapportbouwer",
@@ -4268,5 +4335,12 @@
     "reportName": "Rapportnaam",
     "table": "Tabel",
     "chart": "Grafiek"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "API-sleutel invoeren",
+      "clientId": "Client-ID",
+      "clientSecret": "Clientgeheim"
+    }
   }
 }

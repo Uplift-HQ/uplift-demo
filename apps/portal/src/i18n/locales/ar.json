@@ -293,7 +293,16 @@
       "medium": "متوسطة",
       "low": "منخفضة"
     },
-    "tryAgain": "حاول مرة أخرى"
+    "tryAgain": "حاول مرة أخرى",
+    "send": "إرسال",
+    "saveChanges": "حفظ التغييرات",
+    "value": "القيمة",
+    "enter": "إدخال",
+    "recommended": "موصى به",
+    "startDate": "تاريخ البدء",
+    "endDate": "تاريخ الانتهاء",
+    "allLocations": "جميع المواقع",
+    "open": "مفتوح"
   },
   "auth": {
     "login": "تسجيل الدخول",
@@ -528,7 +537,24 @@
     "shiftReassigned": "تم إعادة تعيين الوردية",
     "swapRequested": "تم طلب التبادل",
     "shiftDeleted": "تم حذف الوردية",
-    "minutes": "د"
+    "minutes": "د",
+    "howBuildSchedule": "كيف تريد بناء جدولك؟",
+    "chooseApproach": "اختر نهج جدولة يناسب عملك",
+    "schedulePeriod": "فترة الجدول",
+    "configureAutoFill": "تكوين إعدادات الملء التلقائي",
+    "maxHoursWeek": "الحد الأقصى للساعات/الأسبوع",
+    "minRestBetweenShifts": "الحد الأدنى للراحة بين الورديات (ساعات)",
+    "maxConsecutiveDays": "الحد الأقصى للأيام المتتالية",
+    "preferredShiftLength": "مدة الوردية المفضلة (ساعات)",
+    "generatingSchedule": "جاري إنشاء جدول ذكي...",
+    "reviewGeneratedSchedule": "مراجعة الجدول المُنشأ",
+    "totalShifts": "إجمالي الورديات",
+    "filledShifts": "الورديات المملوءة",
+    "saveAsTemplate": "حفظ هذا التكوين كقالب",
+    "noShiftsGenerated": "تعذر إنشاء ورديات",
+    "fairnessScore": "درجة العدالة",
+    "templateNamePlaceholder": "اسم القالب (مثال: 'إعداد برانش نهاية الأسبوع')",
+    "checkShiftTemplates": "تحقق من تكوين قوالب الورديات للنطاق الزمني والموقع المحددين."
   },
   "timeTracking": {
     "title": "تتبع الوقت",
@@ -1901,7 +1927,29 @@
     "skillsDesc": "المهارات والكفاءات",
     "custom": "تقارير مخصصة",
     "customDesc": "أنشئ تحليلاتك الخاصة",
-    "showingFirst50": "عرض أول 50 من {{count}} صف"
+    "showingFirst50": "عرض أول 50 من {{count}} صف",
+    "payQuartilesSubtitle": "نسبة الذكور والإناث في كل ربع أجر",
+    "quartile": "الربع {{name}}",
+    "threeYearTrendSubtitle": "التحسن السنوي في فجوة الأجور بين الجنسين",
+    "narrativeSubtitle": "بيان الرئيس التنفيذي",
+    "actionPlanSubtitle": "مبادرات لسد فجوة الأجور بين الجنسين",
+    "headerName": "اسم العنوان",
+    "currentEnps": "eNPS الحالي",
+    "ukGenderPayGapReporting": "تقرير فجوة الأجور بين الجنسين في المملكة المتحدة",
+    "meanGap": "متوسط الفجوة",
+    "medianGap": "الفجوة الوسيطة",
+    "improvedFrom": "تحسن من {{value}}",
+    "male": "ذكر",
+    "female": "أنثى",
+    "payQuartiles": "أرباع الأجور",
+    "threeYearTrend": "اتجاه ثلاث سنوات",
+    "narrative": "التزامنا",
+    "actionPlan": "خطة العمل",
+    "initiative": "المبادرة",
+    "target": "الهدف",
+    "status": "الحالة",
+    "maleReceivingBonus": "الذكور الحاصلون على مكافأة",
+    "femaleReceivingBonus": "الإناث الحاصلات على مكافأة"
   },
   "accessibility": {
     "menu": "القائمة",
@@ -2172,7 +2220,12 @@
       "locationsDesc": "استيراد المواقع",
       "skills": "المهارات",
       "skillsDesc": "استيراد المهارات"
-    }
+    },
+    "clientId": "معرف العميل",
+    "clientSecret": "سر العميل",
+    "applicationClientId": "معرف التطبيق (العميل)",
+    "clientSecretValue": "قيمة سر العميل",
+    "domain": "وحدة تحكم المجال"
   },
   "jobs": {
     "open": "مفتوح",
@@ -4231,7 +4284,11 @@
     "send": "إرسال",
     "delete": "حذف",
     "template": "قالب",
-    "employee": "موظف"
+    "employee": "موظف",
+    "templateNamePlaceholder": "مثال: عقد توظيف",
+    "useVariables": "استخدام المتغيرات:",
+    "customNameOptional": "اسم مخصص (اختياري)",
+    "leaveBlankForTemplate": "اتركه فارغاً لاستخدام اسم القالب"
   },
   "kiosk": {
     "setup": "إعداد الكشك",
@@ -4255,7 +4312,17 @@
     "loading": "جاري تحميل الكشك...",
     "reconfigure": "إعادة تكوين الكشك",
     "offlineBanner": "غير متصل - سيتم مزامنة الأحداث عند الاتصال",
-    "employeeIdPlaceholder": "رقم الموظف أو رقم التعريف الشخصي"
+    "employeeIdPlaceholder": "رقم الموظف أو رقم التعريف الشخصي",
+    "getApiKey": "احصل على مفتاح API من الإعدادات > الوقت والحضور",
+    "offlineSync": "غير متصل - ستتم مزامنة الأحداث عند الاتصال",
+    "queued": "{{count}} في قائمة الانتظار",
+    "clockedInAt": "تسجيل الدخول في {{time}}",
+    "lastClockedOut": "آخر تسجيل خروج في {{time}}",
+    "enterIdOrScan": "أدخل رقم الموظف أو امسح البطاقة",
+    "employeeIdOrPin": "رقم الموظف أو رمز PIN",
+    "poweredBy": "مدعوم من Uplift",
+    "online": "متصل",
+    "offline": "غير متصل"
   },
   "customReports": {
     "title": "منشئ التقارير المخصصة",
@@ -4275,5 +4342,12 @@
     "reportName": "اسم التقرير",
     "table": "جدول",
     "chart": "رسم بياني"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "أدخل مفتاح API",
+      "clientId": "معرف العميل",
+      "clientSecret": "سر العميل"
+    }
   }
 }

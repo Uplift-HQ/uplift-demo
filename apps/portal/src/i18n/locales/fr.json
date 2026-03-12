@@ -293,7 +293,16 @@
       "high": "Haute",
       "medium": "Moyenne",
       "low": "Basse"
-    }
+    },
+    "send": "Envoyer",
+    "saveChanges": "Enregistrer les modifications",
+    "value": "Valeur",
+    "enter": "Entrer",
+    "recommended": "Recommandé",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "allLocations": "Tous les sites",
+    "open": "Ouvert"
   },
   "auth": {
     "login": "Se connecter",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Quart réaffecté",
     "swapRequested": "Échange demandé",
     "shiftDeleted": "Quart supprimé",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Comment souhaitez-vous créer votre planning ?",
+    "chooseApproach": "Choisissez une approche de planification adaptée à votre entreprise",
+    "schedulePeriod": "Période du planning",
+    "configureAutoFill": "Configurer les paramètres de remplissage automatique",
+    "maxHoursWeek": "Heures max/semaine",
+    "minRestBetweenShifts": "Repos min entre les postes (h)",
+    "maxConsecutiveDays": "Jours consécutifs max",
+    "preferredShiftLength": "Durée préférée du poste (h)",
+    "generatingSchedule": "Génération du planning intelligent...",
+    "reviewGeneratedSchedule": "Examiner le planning généré",
+    "totalShifts": "Total des postes",
+    "filledShifts": "Postes pourvus",
+    "saveAsTemplate": "Enregistrer cette configuration comme modèle",
+    "noShiftsGenerated": "Aucun poste n'a pu être généré",
+    "fairnessScore": "Score d'équité",
+    "templateNamePlaceholder": "Nom du modèle (ex., 'Configuration brunch week-end')",
+    "checkShiftTemplates": "Vérifiez que vous avez des modèles de postes configurés pour la période et le site sélectionnés."
   },
   "timeTracking": {
     "title": "Suivi du temps",
@@ -1922,7 +1948,29 @@
     "skillsDesc": "Compétences et qualifications",
     "custom": "Rapports personnalisés",
     "customDesc": "Créez votre propre analyse",
-    "showingFirst50": "Affichage des 50 premières lignes sur {{count}}"
+    "showingFirst50": "Affichage des 50 premières lignes sur {{count}}",
+    "payQuartilesSubtitle": "Proportion d'hommes et de femmes dans chaque quartile de rémunération",
+    "quartile": "Quartile {{name}}",
+    "threeYearTrendSubtitle": "Amélioration annuelle de l'écart de rémunération entre les sexes",
+    "narrativeSubtitle": "Déclaration du PDG",
+    "actionPlanSubtitle": "Initiatives pour réduire l'écart de rémunération entre les sexes",
+    "headerName": "Nom de l'en-tête",
+    "currentEnps": "eNPS actuel",
+    "ukGenderPayGapReporting": "Rapport sur l'écart de rémunération entre les sexes au Royaume-Uni",
+    "meanGap": "Écart moyen",
+    "medianGap": "Écart médian",
+    "improvedFrom": "Amélioré depuis {{value}}",
+    "male": "Homme",
+    "female": "Femme",
+    "payQuartiles": "Quartiles de rémunération",
+    "threeYearTrend": "Tendance sur trois ans",
+    "narrative": "Notre engagement",
+    "actionPlan": "Plan d'action",
+    "initiative": "Initiative",
+    "target": "Objectif",
+    "status": "Statut",
+    "maleReceivingBonus": "Hommes recevant une prime",
+    "femaleReceivingBonus": "Femmes recevant une prime"
   },
   "shiftTemplates": {
     "title": "Modèles de postes",
@@ -2180,7 +2228,12 @@
       "locationsDesc": "Importer des sites",
       "skills": "Compétences",
       "skillsDesc": "Importer des compétences"
-    }
+    },
+    "clientId": "ID client",
+    "clientSecret": "Secret client",
+    "applicationClientId": "ID d'application (client)",
+    "clientSecretValue": "Valeur du secret client",
+    "domain": "Contrôleur de domaine"
   },
   "jobs": {
     "open": "Ouvert",
@@ -4238,7 +4291,11 @@
     "send": "Envoyer",
     "delete": "Supprimer",
     "template": "Modèle",
-    "employee": "Employé"
+    "employee": "Employé",
+    "templateNamePlaceholder": "ex., Contrat de travail",
+    "useVariables": "Utiliser les variables :",
+    "customNameOptional": "Nom personnalisé (optionnel)",
+    "leaveBlankForTemplate": "Laisser vide pour utiliser le nom du modèle"
   },
   "kiosk": {
     "setup": "Configuration du kiosque",
@@ -4262,7 +4319,17 @@
     "loading": "Chargement du kiosque...",
     "reconfigure": "Reconfigurer le kiosque",
     "offlineBanner": "Hors ligne - les événements seront synchronisés à la reconnexion",
-    "employeeIdPlaceholder": "ID employé ou code PIN"
+    "employeeIdPlaceholder": "ID employé ou code PIN",
+    "getApiKey": "Obtenez votre clé API dans Paramètres > Temps et présence",
+    "offlineSync": "Hors ligne - les événements seront synchronisés une fois connecté",
+    "queued": "{{count}} en file d'attente",
+    "clockedInAt": "Pointé à {{time}}",
+    "lastClockedOut": "Dernier pointage de sortie à {{time}}",
+    "enterIdOrScan": "Entrez l'ID employé ou scannez le badge",
+    "employeeIdOrPin": "ID employé ou code PIN",
+    "poweredBy": "Propulsé par Uplift",
+    "online": "En ligne",
+    "offline": "Hors ligne"
   },
   "customReports": {
     "title": "Générateur de rapports personnalisés",
@@ -4282,5 +4349,12 @@
     "reportName": "Nom du rapport",
     "table": "Tableau",
     "chart": "Graphique"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Entrer la clé API",
+      "clientId": "ID client",
+      "clientSecret": "Secret client"
+    }
   }
 }

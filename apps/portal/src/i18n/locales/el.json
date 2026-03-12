@@ -293,7 +293,16 @@
       "high": "Υψηλή",
       "medium": "Μεσαία",
       "low": "Χαμηλή"
-    }
+    },
+    "send": "Αποστολή",
+    "saveChanges": "Αποθήκευση αλλαγών",
+    "value": "Τιμή",
+    "enter": "Εισαγωγή",
+    "recommended": "Συνιστάται",
+    "startDate": "Ημερομηνία έναρξης",
+    "endDate": "Ημερομηνία λήξης",
+    "allLocations": "Όλες οι τοποθεσίες",
+    "open": "Ανοιχτό"
   },
   "auth": {
     "login": "Σύνδεση",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Η βάρδια ανατέθηκε εκ νέου",
     "swapRequested": "Ζητήθηκε ανταλλαγή",
     "shiftDeleted": "Η βάρδια διαγράφηκε",
-    "minutes": "λεπ"
+    "minutes": "λεπ",
+    "howBuildSchedule": "Πώς θέλετε να δημιουργήσετε το πρόγραμμά σας;",
+    "chooseApproach": "Επιλέξτε μια προσέγγιση προγραμματισμού που ταιριάζει στην επιχείρησή σας",
+    "schedulePeriod": "Περίοδος προγράμματος",
+    "configureAutoFill": "Διαμόρφωση ρυθμίσεων αυτόματης συμπλήρωσης",
+    "maxHoursWeek": "Μέγ. ώρες/εβδομάδα",
+    "minRestBetweenShifts": "Ελάχ. ανάπαυση μεταξύ βάρδιων (ώρες)",
+    "maxConsecutiveDays": "Μέγ. συνεχόμενες ημέρες",
+    "preferredShiftLength": "Προτιμώμενη διάρκεια βάρδιας (ώρες)",
+    "generatingSchedule": "Δημιουργία έξυπνου προγράμματος...",
+    "reviewGeneratedSchedule": "Έλεγχος δημιουργημένου προγράμματος",
+    "totalShifts": "Σύνολο βάρδιων",
+    "filledShifts": "Καλυμμένες βάρδιες",
+    "saveAsTemplate": "Αποθήκευση διαμόρφωσης ως πρότυπο",
+    "noShiftsGenerated": "Δεν ήταν δυνατή η δημιουργία βάρδιων",
+    "fairnessScore": "Βαθμολογία δικαιοσύνης",
+    "templateNamePlaceholder": "Όνομα προτύπου (π.χ. 'Ρύθμιση brunch Σαββατοκύριακου')",
+    "checkShiftTemplates": "Ελέγξτε ότι έχετε διαμορφώσει πρότυπα βάρδιων για το επιλεγμένο εύρος ημερομηνιών και τοποθεσία."
   },
   "timeTracking": {
     "title": "Καταγραφή χρόνου",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Δεξιότητες και ικανότητες",
     "custom": "Προσαρμοσμένες αναφορές",
     "customDesc": "Δημιουργήστε τη δική σας ανάλυση",
-    "showingFirst50": "Εμφάνιση πρώτων 50 από {{count}} γραμμές"
+    "showingFirst50": "Εμφάνιση πρώτων 50 από {{count}} γραμμές",
+    "payQuartilesSubtitle": "Αναλογία ανδρών και γυναικών σε κάθε τεταρτημόριο αμοιβών",
+    "quartile": "Τεταρτημόριο {{name}}",
+    "threeYearTrendSubtitle": "Ετήσια βελτίωση στο μισθολογικό χάσμα μεταξύ φύλων",
+    "narrativeSubtitle": "Δήλωση CEO",
+    "actionPlanSubtitle": "Πρωτοβουλίες για κλείσιμο του μισθολογικού χάσματος",
+    "headerName": "Όνομα κεφαλίδας",
+    "currentEnps": "Τρέχον eNPS",
+    "ukGenderPayGapReporting": "Αναφορά μισθολογικού χάσματος φύλων UK",
+    "meanGap": "Μέσο χάσμα",
+    "medianGap": "Διάμεσο χάσμα",
+    "improvedFrom": "Βελτιώθηκε από {{value}}",
+    "male": "Άνδρας",
+    "female": "Γυναίκα",
+    "payQuartiles": "Τεταρτημόρια αμοιβών",
+    "threeYearTrend": "Τριετής τάση",
+    "narrative": "Η δέσμευσή μας",
+    "actionPlan": "Σχέδιο δράσης",
+    "initiative": "Πρωτοβουλία",
+    "target": "Στόχος",
+    "status": "Κατάσταση",
+    "maleReceivingBonus": "Άνδρες που λαμβάνουν μπόνους",
+    "femaleReceivingBonus": "Γυναίκες που λαμβάνουν μπόνους"
   },
   "accessibility": {
     "menu": "Μενού",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Εισαγωγή τοποθεσιών",
       "skills": "Δεξιότητες",
       "skillsDesc": "Εισαγωγή δεξιοτήτων"
-    }
+    },
+    "clientId": "ID πελάτη",
+    "clientSecret": "Μυστικό πελάτη",
+    "applicationClientId": "ID εφαρμογής (πελάτη)",
+    "clientSecretValue": "Τιμή μυστικού πελάτη",
+    "domain": "Ελεγκτής τομέα"
   },
   "jobs": {
     "open": "Ανοιχτή",
@@ -4235,7 +4288,11 @@
     "send": "Αποστολή",
     "delete": "Διαγραφή",
     "template": "Πρότυπο",
-    "employee": "Εργαζόμενος"
+    "employee": "Εργαζόμενος",
+    "templateNamePlaceholder": "π.χ. Σύμβαση εργασίας",
+    "useVariables": "Χρήση μεταβλητών:",
+    "customNameOptional": "Προσαρμοσμένο όνομα (προαιρετικό)",
+    "leaveBlankForTemplate": "Αφήστε κενό για χρήση ονόματος προτύπου"
   },
   "kiosk": {
     "setup": "Ρύθμιση κιόσκι",
@@ -4259,7 +4316,17 @@
     "loading": "Φόρτωση κιόσκι...",
     "reconfigure": "Επαναδιαμόρφωση Κιόσκι",
     "offlineBanner": "Εκτός σύνδεσης - τα συμβάντα θα συγχρονιστούν όταν συνδεθείτε",
-    "employeeIdPlaceholder": "ID εργαζομένου ή PIN"
+    "employeeIdPlaceholder": "ID εργαζομένου ή PIN",
+    "getApiKey": "Λάβετε το κλειδί API από Ρυθμίσεις > Χρόνος & Παρουσίες",
+    "offlineSync": "Εκτός σύνδεσης - τα συμβάντα θα συγχρονιστούν κατά τη σύνδεση",
+    "queued": "{{count}} στην ουρά",
+    "clockedInAt": "Είσοδος στις {{time}}",
+    "lastClockedOut": "Τελευταία έξοδος στις {{time}}",
+    "enterIdOrScan": "Εισάγετε ID υπαλλήλου ή σαρώστε κάρτα",
+    "employeeIdOrPin": "ID υπαλλήλου ή PIN",
+    "poweredBy": "Υποστηρίζεται από Uplift",
+    "online": "Σε σύνδεση",
+    "offline": "Εκτός σύνδεσης"
   },
   "customReports": {
     "title": "Δημιουργός προσαρμοσμένων αναφορών",
@@ -4279,5 +4346,12 @@
     "reportName": "Όνομα αναφοράς",
     "table": "Πίνακας",
     "chart": "Γράφημα"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Εισάγετε κλειδί API",
+      "clientId": "ID πελάτη",
+      "clientSecret": "Μυστικό πελάτη"
+    }
   }
 }

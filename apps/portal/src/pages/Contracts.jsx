@@ -314,14 +314,14 @@ export default function Contracts() {
             className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg hover:bg-slate-50"
           >
             <Plus className="w-4 h-4" />
-            New Template
+            {t('contracts.newTemplate', 'New Template')}
           </button>
           <button
             onClick={() => setShowIssueModal(true)}
             className="flex items-center gap-2 px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600"
           >
             <FileSignature className="w-4 h-4" />
-            Issue Contract
+            {t('contracts.issueContract', 'Issue Contract')}
           </button>
         </div>
       </div>
@@ -379,7 +379,7 @@ export default function Contracts() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search contracts or employees..."
+                placeholder={t('contracts.searchPlaceholder', 'Search contracts or employees...')}
                 value={contractSearch}
                 onChange={(e) => setContractSearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm"
@@ -390,7 +390,7 @@ export default function Contracts() {
               onChange={(e) => setContractFilter(e.target.value)}
               className="px-3 py-2 border border-slate-200 rounded-lg text-sm"
             >
-              <option value="all">All Status</option>
+              <option value="all">{t('contracts.allStatus', 'All Status')}</option>
               {Object.entries(STATUS_CONFIG).map(([key, config]) => (
                 <option key={key} value={key}>{config.label}</option>
               ))}
@@ -401,7 +401,7 @@ export default function Contracts() {
           {filteredContracts.length === 0 ? (
             <div className="p-12 text-center text-slate-500">
               <FileSignature className="w-12 h-12 mx-auto mb-4 text-slate-300" />
-              <p>No contracts found</p>
+              <p>{t('contracts.noContractsFound', 'No contracts found')}</p>
             </div>
           ) : (
             <div className="divide-y divide-slate-100">
@@ -427,7 +427,7 @@ export default function Contracts() {
                       <button
                         onClick={() => viewContract(contract.id)}
                         className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg"
-                        title="View"
+                        title={t('common.view', 'View')}
                       >
                         <Eye className="w-4 h-4" />
                       </button>
@@ -435,7 +435,7 @@ export default function Contracts() {
                         <button
                           onClick={() => sendContract(contract.id)}
                           className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
-                          title="Send"
+                          title={t('common.send', 'Send')}
                         >
                           <Send className="w-4 h-4" />
                         </button>
@@ -444,7 +444,7 @@ export default function Contracts() {
                         <button
                           onClick={() => chaseContract(contract.id)}
                           className="p-2 text-amber-500 hover:text-amber-700 hover:bg-amber-50 rounded-lg"
-                          title="Send Reminder"
+                          title={t('contracts.sendReminder', 'Send Reminder')}
                         >
                           <Bell className="w-4 h-4" />
                         </button>
@@ -452,7 +452,7 @@ export default function Contracts() {
                       <button
                         onClick={() => deleteContract(contract.id)}
                         className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
-                        title="Delete"
+                        title={t('common.delete', 'Delete')}
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -471,12 +471,12 @@ export default function Contracts() {
           {templates.length === 0 ? (
             <div className="p-12 text-center text-slate-500">
               <FileText className="w-12 h-12 mx-auto mb-4 text-slate-300" />
-              <p>No templates yet</p>
+              <p>{t('contracts.noTemplatesYet', 'No templates yet')}</p>
               <button
                 onClick={() => { setSelectedTemplate(null); setShowTemplateModal(true); }}
                 className="mt-4 text-momentum-500 hover:text-momentum-600 font-medium"
               >
-                Create your first template
+                {t('contracts.createFirstTemplate', 'Create your first template')}
               </button>
             </div>
           ) : (
@@ -519,7 +519,7 @@ export default function Contracts() {
           <div className="bg-white rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-slate-200 flex items-center justify-between">
               <h2 className="text-lg font-semibold">
-                {selectedTemplate ? 'Edit Template' : 'New Template'}
+                {selectedTemplate ? t('contracts.editTemplate', 'Edit Template') : t('contracts.newTemplate', 'New Template')}
               </h2>
               <button onClick={() => setShowTemplateModal(false)} className="p-2 hover:bg-slate-100 rounded-lg">
                 <X className="w-5 h-5" />
@@ -527,19 +527,19 @@ export default function Contracts() {
             </div>
             <form onSubmit={saveTemplate} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Template Name</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('contracts.templateName', 'Template Name')}</label>
                 <input
                   name="name"
                   defaultValue={selectedTemplate?.name || ''}
                   required
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg"
-                  placeholder="e.g., Employment Contract"
+                  placeholder={t('contracts.templateNamePlaceholder', 'e.g., Employment Contract')}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Content (HTML)</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('contracts.contentHtml', 'Content (HTML)')}</label>
                 <p className="text-xs text-slate-500 mb-2">
-                  Use variables: {'{{employee_name}}'}, {'{{employee_email}}'}, {'{{date}}'}, {'{{year}}'}
+                  {t('contracts.useVariables', 'Use variables:')} {'{{employee_name}}'}, {'{{employee_email}}'}, {'{{date}}'}, {'{{year}}'}
                 </p>
                 <TemplateEditor
                   name="content_html"
@@ -552,13 +552,13 @@ export default function Contracts() {
                   onClick={() => setShowTemplateModal(false)}
                   className="px-4 py-2 border border-slate-200 rounded-lg hover:bg-slate-50"
                 >
-                  Cancel
+                  {t('common.cancel', 'Cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600"
                 >
-                  {selectedTemplate ? 'Save Changes' : 'Create Template'}
+                  {selectedTemplate ? t('common.saveChanges', 'Save Changes') : t('contracts.createTemplate', 'Create Template')}
                 </button>
               </div>
             </form>
@@ -571,35 +571,35 @@ export default function Contracts() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl w-full max-w-md">
             <div className="p-6 border-b border-slate-200 flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Issue Contract</h2>
+              <h2 className="text-lg font-semibold">{t('contracts.issueContract', 'Issue Contract')}</h2>
               <button onClick={() => setShowIssueModal(false)} className="p-2 hover:bg-slate-100 rounded-lg">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <form onSubmit={issueContract} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Template</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('contracts.template', 'Template')}</label>
                 <select
                   value={issueData.template_id}
                   onChange={(e) => setIssueData({ ...issueData, template_id: e.target.value })}
                   required
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg"
                 >
-                  <option value="">Select template...</option>
+                  <option value="">{t('contracts.selectTemplate', 'Select template...')}</option>
                   {templates.map(t => (
                     <option key={t.id} value={t.id}>{t.name}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Employee</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('common.employee', 'Employee')}</label>
                 <select
                   value={issueData.employee_id}
                   onChange={(e) => setIssueData({ ...issueData, employee_id: e.target.value })}
                   required
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg"
                 >
-                  <option value="">Select employee...</option>
+                  <option value="">{t('contracts.selectEmployee', 'Select employee...')}</option>
                   {employees.map(emp => (
                     <option key={emp.id} value={emp.id}>
                       {emp.first_name} {emp.last_name}
@@ -608,12 +608,12 @@ export default function Contracts() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Custom Name (optional)</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('contracts.customNameOptional', 'Custom Name (optional)')}</label>
                 <input
                   value={issueData.name}
                   onChange={(e) => setIssueData({ ...issueData, name: e.target.value })}
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg"
-                  placeholder="Leave blank to use template name"
+                  placeholder={t('contracts.leaveBlankForTemplate', 'Leave blank to use template name')}
                 />
               </div>
               <div className="flex justify-end gap-3 pt-4">
@@ -622,13 +622,13 @@ export default function Contracts() {
                   onClick={() => setShowIssueModal(false)}
                   className="px-4 py-2 border border-slate-200 rounded-lg hover:bg-slate-50"
                 >
-                  Cancel
+                  {t('common.cancel', 'Cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600"
                 >
-                  Issue Contract
+                  {t('contracts.issueContract', 'Issue Contract')}
                 </button>
               </div>
             </form>
@@ -672,9 +672,9 @@ export default function Contracts() {
                     Signed on {new Date(selectedContract.signed_at).toLocaleDateString()}
                   </span>
                 ) : selectedContract.sent_at ? (
-                  <span>Sent on {new Date(selectedContract.sent_at).toLocaleDateString()}</span>
+                  <span>{t('contracts.sentOn', 'Sent on {{date}}', { date: new Date(selectedContract.sent_at).toLocaleDateString() })}</span>
                 ) : (
-                  <span>Draft - not yet sent</span>
+                  <span>{t('contracts.draftNotSent', 'Draft - not yet sent')}</span>
                 )}
               </div>
               <div className="flex items-center gap-2">
@@ -684,7 +684,7 @@ export default function Contracts() {
                     className="flex items-center gap-2 px-4 py-2 bg-momentum-500 text-white rounded-lg hover:bg-momentum-600"
                   >
                     <Send className="w-4 h-4" />
-                    Send to Employee
+                    {t('contracts.sendToEmployee', 'Send to Employee')}
                   </button>
                 )}
                 {(selectedContract.status === 'sent' || selectedContract.status === 'viewed') && (
@@ -693,7 +693,7 @@ export default function Contracts() {
                     className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600"
                   >
                     <Bell className="w-4 h-4" />
-                    Send Reminder
+                    {t('contracts.sendReminder', 'Send Reminder')}
                   </button>
                 )}
               </div>
@@ -707,6 +707,7 @@ export default function Contracts() {
 
 // Simple rich text editor for templates
 function TemplateEditor({ name, defaultValue }) {
+  const { t } = useTranslation();
   const [content, setContent] = useState(defaultValue || '');
   const [mode, setMode] = useState('visual'); // 'visual' or 'code'
 
@@ -718,14 +719,14 @@ function TemplateEditor({ name, defaultValue }) {
           onClick={() => setMode('visual')}
           className={`px-3 py-1 text-sm rounded ${mode === 'visual' ? 'bg-white shadow-sm' : ''}`}
         >
-          Visual
+          {t('contracts.visual', 'Visual')}
         </button>
         <button
           type="button"
           onClick={() => setMode('code')}
           className={`px-3 py-1 text-sm rounded ${mode === 'code' ? 'bg-white shadow-sm' : ''}`}
         >
-          HTML
+          {t('contracts.html', 'HTML')}
         </button>
       </div>
       <input type="hidden" name={name} value={content} />

@@ -293,7 +293,16 @@
       "high": "Alta",
       "medium": "Media",
       "low": "Bassa"
-    }
+    },
+    "send": "Invia",
+    "saveChanges": "Salva modifiche",
+    "value": "Valore",
+    "enter": "Invio",
+    "recommended": "Consigliato",
+    "startDate": "Data di inizio",
+    "endDate": "Data di fine",
+    "allLocations": "Tutte le sedi",
+    "open": "Aperto"
   },
   "auth": {
     "login": "Accedi",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Turno riassegnato",
     "swapRequested": "Scambio richiesto",
     "shiftDeleted": "Turno eliminato",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Come vorresti creare il tuo programma?",
+    "chooseApproach": "Scegli un approccio di pianificazione adatto alla tua attività",
+    "schedulePeriod": "Periodo del programma",
+    "configureAutoFill": "Configura impostazioni compilazione automatica",
+    "maxHoursWeek": "Ore max/settimana",
+    "minRestBetweenShifts": "Riposo min tra i turni (ore)",
+    "maxConsecutiveDays": "Giorni consecutivi max",
+    "preferredShiftLength": "Durata turno preferita (ore)",
+    "generatingSchedule": "Generazione programma intelligente...",
+    "reviewGeneratedSchedule": "Rivedi programma generato",
+    "totalShifts": "Turni totali",
+    "filledShifts": "Turni coperti",
+    "saveAsTemplate": "Salva questa configurazione come modello",
+    "noShiftsGenerated": "Impossibile generare turni",
+    "fairnessScore": "Punteggio equità",
+    "templateNamePlaceholder": "Nome modello (es., 'Setup brunch weekend')",
+    "checkShiftTemplates": "Verifica di avere modelli di turno configurati per il periodo e la sede selezionati."
   },
   "timeTracking": {
     "title": "Rilevazione presenze",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Competenze e qualifiche",
     "custom": "Report personalizzati",
     "customDesc": "Crea la tua analisi",
-    "showingFirst50": "Visualizzazione delle prime 50 di {{count}} righe"
+    "showingFirst50": "Visualizzazione delle prime 50 di {{count}} righe",
+    "payQuartilesSubtitle": "Proporzione di uomini e donne in ogni quartile retributivo",
+    "quartile": "Quartile {{name}}",
+    "threeYearTrendSubtitle": "Miglioramento annuale del divario retributivo di genere",
+    "narrativeSubtitle": "Dichiarazione del CEO",
+    "actionPlanSubtitle": "Iniziative per colmare il divario retributivo di genere",
+    "headerName": "Nome intestazione",
+    "currentEnps": "eNPS attuale",
+    "ukGenderPayGapReporting": "Report sul divario retributivo di genere nel Regno Unito",
+    "meanGap": "Divario medio",
+    "medianGap": "Divario mediano",
+    "improvedFrom": "Migliorato da {{value}}",
+    "male": "Maschio",
+    "female": "Femmina",
+    "payQuartiles": "Quartili retributivi",
+    "threeYearTrend": "Tendenza triennale",
+    "narrative": "Il nostro impegno",
+    "actionPlan": "Piano d'azione",
+    "initiative": "Iniziativa",
+    "target": "Obiettivo",
+    "status": "Stato",
+    "maleReceivingBonus": "Uomini che ricevono bonus",
+    "femaleReceivingBonus": "Donne che ricevono bonus"
   },
   "accessibility": {
     "menu": "Menù",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Importa sedi",
       "skills": "Competenze",
       "skillsDesc": "Importa competenze"
-    }
+    },
+    "clientId": "ID client",
+    "clientSecret": "Segreto client",
+    "applicationClientId": "ID applicazione (client)",
+    "clientSecretValue": "Valore segreto client",
+    "domain": "Controller di dominio"
   },
   "jobs": {
     "open": "Aperta",
@@ -4235,7 +4288,11 @@
     "send": "Invia",
     "delete": "Elimina",
     "template": "Modello",
-    "employee": "Dipendente"
+    "employee": "Dipendente",
+    "templateNamePlaceholder": "es., Contratto di lavoro",
+    "useVariables": "Usa variabili:",
+    "customNameOptional": "Nome personalizzato (opzionale)",
+    "leaveBlankForTemplate": "Lascia vuoto per usare il nome del modello"
   },
   "kiosk": {
     "setup": "Configurazione chiosco",
@@ -4259,7 +4316,17 @@
     "loading": "Caricamento chiosco...",
     "reconfigure": "Riconfigura chiosco",
     "offlineBanner": "Offline - gli eventi verranno sincronizzati alla connessione",
-    "employeeIdPlaceholder": "ID dipendente o PIN"
+    "employeeIdPlaceholder": "ID dipendente o PIN",
+    "getApiKey": "Ottieni la chiave API da Impostazioni > Tempo e presenze",
+    "offlineSync": "Offline - gli eventi verranno sincronizzati alla connessione",
+    "queued": "{{count}} in coda",
+    "clockedInAt": "Timbrato in entrata alle {{time}}",
+    "lastClockedOut": "Ultima uscita timbrata alle {{time}}",
+    "enterIdOrScan": "Inserisci ID dipendente o scansiona badge",
+    "employeeIdOrPin": "ID dipendente o PIN",
+    "poweredBy": "Sviluppato da Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Generatore di report personalizzati",
@@ -4279,5 +4346,12 @@
     "reportName": "Nome report",
     "table": "Tabella",
     "chart": "Grafico"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Inserisci chiave API",
+      "clientId": "ID client",
+      "clientSecret": "Segreto client"
+    }
   }
 }

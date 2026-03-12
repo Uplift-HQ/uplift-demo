@@ -263,7 +263,7 @@ export default function Kiosk() {
               }
             }}
           />
-          <p className="text-sm text-slate-500">Get your API key from Settings &gt; Time &amp; Attendance</p>
+          <p className="text-sm text-slate-500">{t('kiosk.getApiKey', 'Get your API key from Settings > Time & Attendance')}</p>
         </div>
       </div>
     );
@@ -275,7 +275,7 @@ export default function Kiosk() {
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-16 h-16 text-orange-500 animate-spin mx-auto mb-4" />
-          <p className="text-slate-400 text-xl">Loading kiosk...</p>
+          <p className="text-slate-400 text-xl">{t('kiosk.loading', 'Loading kiosk...')}</p>
         </div>
       </div>
     );
@@ -296,7 +296,7 @@ export default function Kiosk() {
             }}
             className="bg-slate-700 text-white px-6 py-3 rounded-xl text-lg hover:bg-slate-600 transition"
           >
-            Reconfigure Kiosk
+            {t('kiosk.reconfigure', 'Reconfigure Kiosk')}
           </button>
         </div>
       </div>
@@ -314,9 +314,9 @@ export default function Kiosk() {
       {!isOnline && (
         <div className="bg-amber-600 text-white px-4 py-2 flex items-center justify-center gap-2">
           <WifiOff className="w-5 h-5" />
-          <span className="font-medium">Offline - events will sync when connected</span>
+          <span className="font-medium">{t('kiosk.offlineSync', 'Offline - events will sync when connected')}</span>
           {offlineQueue.length > 0 && (
-            <span className="bg-white/20 px-2 py-0.5 rounded text-sm">{offlineQueue.length} queued</span>
+            <span className="bg-white/20 px-2 py-0.5 rounded text-sm">{t('kiosk.queued', '{{count}} queued', { count: offlineQueue.length })}</span>
           )}
         </div>
       )}
@@ -393,12 +393,12 @@ export default function Kiosk() {
               )}
               {employee.clocked_in && employee.last_clock_time && (
                 <p className="text-lg text-green-400 mt-2">
-                  Clocked in at {new Date(employee.last_clock_time).toLocaleTimeString()}
+                  {t('kiosk.clockedInAt', 'Clocked in at {{time}}', { time: new Date(employee.last_clock_time).toLocaleTimeString() })}
                 </p>
               )}
               {!employee.clocked_in && employee.last_clock_time && (
                 <p className="text-lg text-slate-500 mt-2">
-                  Last clocked out at {new Date(employee.last_clock_time).toLocaleTimeString()}
+                  {t('kiosk.lastClockedOut', 'Last clocked out at {{time}}', { time: new Date(employee.last_clock_time).toLocaleTimeString() })}
                 </p>
               )}
             </div>
@@ -416,7 +416,7 @@ export default function Kiosk() {
                   ) : (
                     <LogIn className="w-8 h-8" />
                   )}
-                  Clock In
+                  {t('kiosk.clockIn', 'Clock In')}
                 </button>
               )}
               {employee.clocked_in && (
@@ -430,7 +430,7 @@ export default function Kiosk() {
                   ) : (
                     <LogOut className="w-8 h-8" />
                   )}
-                  Clock Out
+                  {t('kiosk.clockOut', 'Clock Out')}
                 </button>
               )}
               <button
@@ -438,7 +438,7 @@ export default function Kiosk() {
                 className="flex items-center gap-4 bg-slate-700 hover:bg-slate-600 text-white text-2xl font-bold px-8 py-6 rounded-2xl transition-all"
               >
                 <X className="w-8 h-8" />
-                Cancel
+                {t('common.cancel', 'Cancel')}
               </button>
             </div>
           </div>
@@ -452,8 +452,8 @@ export default function Kiosk() {
               <Clock className="w-14 h-14 text-white" />
             </div>
 
-            <h2 className="text-3xl font-bold text-white mb-2">Enter Employee ID or Scan Badge</h2>
-            <p className="text-xl text-slate-400 mb-8">Use the number pad or scan your badge</p>
+            <h2 className="text-3xl font-bold text-white mb-2">{t('kiosk.enterIdOrScan', 'Enter Employee ID or Scan Badge')}</h2>
+            <p className="text-xl text-slate-400 mb-8">{t('kiosk.useNumberPad', 'Use the number pad or scan your badge')}</p>
 
             {/* Input field */}
             <input
@@ -462,7 +462,7 @@ export default function Kiosk() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Employee ID or PIN"
+              placeholder={t('kiosk.employeeIdOrPin', 'Employee ID or PIN')}
               className="w-full bg-slate-800 text-white text-3xl text-center p-6 rounded-2xl border-2 border-slate-700 focus:border-orange-500 focus:outline-none mb-6 font-mono"
               autoFocus
               autoComplete="off"
@@ -483,7 +483,7 @@ export default function Kiosk() {
                 onClick={() => handleNumberPad('clear')}
                 className="bg-red-900/50 hover:bg-red-800/50 text-red-300 text-xl font-bold py-6 rounded-xl transition-all"
               >
-                Clear
+                {t('common.clear', 'Clear')}
               </button>
               <button
                 onClick={() => handleNumberPad('0')}
@@ -499,7 +499,7 @@ export default function Kiosk() {
                 {lookingUp ? (
                   <Loader2 className="w-6 h-6 animate-spin" />
                 ) : (
-                  'Enter'
+                  t('common.enter', 'Enter')
                 )}
               </button>
             </div>
@@ -511,13 +511,13 @@ export default function Kiosk() {
       {!lock && (
         <footer className="bg-slate-800 border-t border-slate-700 px-8 py-3 text-center">
           <p className="text-slate-500 text-sm">
-            Powered by Uplift &bull; {isOnline ? (
+            {t('kiosk.poweredBy', 'Powered by Uplift')} &bull; {isOnline ? (
               <span className="text-green-400 inline-flex items-center gap-1">
-                <Wifi className="w-3 h-3" /> Online
+                <Wifi className="w-3 h-3" /> {t('kiosk.online', 'Online')}
               </span>
             ) : (
               <span className="text-amber-400 inline-flex items-center gap-1">
-                <WifiOff className="w-3 h-3" /> Offline
+                <WifiOff className="w-3 h-3" /> {t('kiosk.offline', 'Offline')}
               </span>
             )}
           </p>

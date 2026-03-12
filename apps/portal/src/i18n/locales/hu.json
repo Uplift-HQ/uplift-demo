@@ -293,7 +293,16 @@
       "high": "Magas",
       "medium": "Közepes",
       "low": "Alacsony"
-    }
+    },
+    "send": "Küldés",
+    "saveChanges": "Változtatások mentése",
+    "value": "Érték",
+    "enter": "Belépés",
+    "recommended": "Ajánlott",
+    "startDate": "Kezdő dátum",
+    "endDate": "Befejező dátum",
+    "allLocations": "Összes helyszín",
+    "open": "Nyitott"
   },
   "auth": {
     "login": "Bejelentkezés",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Műszak újra kiosztva",
     "swapRequested": "Csere kérelmezve",
     "shiftDeleted": "Műszak törölve",
-    "minutes": "perc"
+    "minutes": "perc",
+    "howBuildSchedule": "Hogyan szeretné elkészíteni a beosztást?",
+    "chooseApproach": "Válasszon egy üzletéhez illő beosztási megközelítést",
+    "schedulePeriod": "Beosztási időszak",
+    "configureAutoFill": "Automatikus kitöltés beállítása",
+    "maxHoursWeek": "Max óra/hét",
+    "minRestBetweenShifts": "Min pihenő műszakok között (óra)",
+    "maxConsecutiveDays": "Max egymást követő napok",
+    "preferredShiftLength": "Preferált műszakhossz (óra)",
+    "generatingSchedule": "Okos beosztás generálása...",
+    "reviewGeneratedSchedule": "Generált beosztás áttekintése",
+    "totalShifts": "Összes műszak",
+    "filledShifts": "Betöltött műszakok",
+    "saveAsTemplate": "Konfiguráció mentése sablonként",
+    "noShiftsGenerated": "Nem sikerült műszakokat generálni",
+    "fairnessScore": "Méltányossági pontszám",
+    "templateNamePlaceholder": "Sablon neve (pl. 'Hétvégi brunch beállítás')",
+    "checkShiftTemplates": "Ellenőrizze, hogy vannak-e műszaksablonok konfigurálva a kiválasztott dátumtartományhoz és helyszínhez."
   },
   "timeTracking": {
     "title": "Időkövetés",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Készségek és kompetenciák",
     "custom": "Egyéni jelentések",
     "customDesc": "Készítse el saját elemzését",
-    "showingFirst50": "Az első 50 sor megjelenítése {{count}} sorból"
+    "showingFirst50": "Az első 50 sor megjelenítése {{count}} sorból",
+    "payQuartilesSubtitle": "Férfiak és nők aránya az egyes fizetési kvartilisekben",
+    "quartile": "{{name}} kvartilis",
+    "threeYearTrendSubtitle": "A nemek közötti bérszakadék éves javulása",
+    "narrativeSubtitle": "A vezérigazgató nyilatkozata",
+    "actionPlanSubtitle": "Kezdeményezések a nemek közötti bérszakadék csökkentésére",
+    "headerName": "Fejléc neve",
+    "currentEnps": "Jelenlegi eNPS",
+    "ukGenderPayGapReporting": "UK Nemek közötti bérszakadék jelentés",
+    "meanGap": "Átlagos különbség",
+    "medianGap": "Medián különbség",
+    "improvedFrom": "Javult {{value}}-ről",
+    "male": "Férfi",
+    "female": "Nő",
+    "payQuartiles": "Fizetési kvartilisek",
+    "threeYearTrend": "Hároméves trend",
+    "narrative": "Elkötelezettségünk",
+    "actionPlan": "Cselekvési terv",
+    "initiative": "Kezdeményezés",
+    "target": "Cél",
+    "status": "Állapot",
+    "maleReceivingBonus": "Bónuszt kapó férfiak",
+    "femaleReceivingBonus": "Bónuszt kapó nők"
   },
   "accessibility": {
     "menu": "Menü",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Helyszínek importálása",
       "skills": "Készségek",
       "skillsDesc": "Készségek importálása"
-    }
+    },
+    "clientId": "Kliens azonosító",
+    "clientSecret": "Kliens titok",
+    "applicationClientId": "Alkalmazás (kliens) azonosító",
+    "clientSecretValue": "Kliens titok értéke",
+    "domain": "Tartományvezérlő"
   },
   "jobs": {
     "open": "Nyitott",
@@ -4236,7 +4289,11 @@
     "send": "Küldés",
     "delete": "Törlés",
     "template": "Sablon",
-    "employee": "Alkalmazott"
+    "employee": "Alkalmazott",
+    "templateNamePlaceholder": "pl. Munkaszerződés",
+    "useVariables": "Változók használata:",
+    "customNameOptional": "Egyéni név (opcionális)",
+    "leaveBlankForTemplate": "Hagyja üresen a sablon nevének használatához"
   },
   "kiosk": {
     "setup": "Kiosk beállítása",
@@ -4260,7 +4317,17 @@
     "loading": "Kiosk betöltése...",
     "reconfigure": "Kiosk újrakonfigurálása",
     "offlineBanner": "Offline - az események szinkronizálódnak csatlakozáskor",
-    "employeeIdPlaceholder": "Alkalmazott azonosító vagy PIN"
+    "employeeIdPlaceholder": "Alkalmazott azonosító vagy PIN",
+    "getApiKey": "Szerezze be az API kulcsot a Beállítások > Munkaidő nyilvántartás menüből",
+    "offlineSync": "Offline - az események szinkronizálódnak csatlakozáskor",
+    "queued": "{{count}} várakozik",
+    "clockedInAt": "Érkezés {{time}}-kor",
+    "lastClockedOut": "Utolsó távozás {{time}}-kor",
+    "enterIdOrScan": "Adja meg a munkavállalói azonosítót vagy szkennelj kártyát",
+    "employeeIdOrPin": "Munkavállalói azonosító vagy PIN",
+    "poweredBy": "Működteti az Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Egyéni jelentéskészítő",
@@ -4280,5 +4347,12 @@
     "reportName": "Jelentés neve",
     "table": "Táblázat",
     "chart": "Diagram"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Adja meg az API kulcsot",
+      "clientId": "Kliens azonosító",
+      "clientSecret": "Kliens titok"
+    }
   }
 }

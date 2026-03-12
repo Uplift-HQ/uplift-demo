@@ -280,7 +280,7 @@ export default function BulkImport() {
                           type="text"
                           value={adConfig.clientId}
                           onChange={(e) => setAdConfig(prev => ({ ...prev, clientId: e.target.value }))}
-                          placeholder="Application (client) ID"
+                          placeholder={t('bulkImport.applicationClientId', 'Application (client) ID')}
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                         />
                       </div>
@@ -290,7 +290,7 @@ export default function BulkImport() {
                           type="password"
                           value={adConfig.clientSecret}
                           onChange={(e) => setAdConfig(prev => ({ ...prev, clientSecret: e.target.value }))}
-                          placeholder="Client secret value"
+                          placeholder={t('bulkImport.clientSecretValue', 'Client secret value')}
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                         />
                       </div>

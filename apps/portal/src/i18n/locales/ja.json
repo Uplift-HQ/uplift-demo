@@ -293,7 +293,16 @@
       "high": "高",
       "medium": "中",
       "low": "低"
-    }
+    },
+    "send": "送信",
+    "saveChanges": "変更を保存",
+    "value": "値",
+    "enter": "入力",
+    "recommended": "推奨",
+    "startDate": "開始日",
+    "endDate": "終了日",
+    "allLocations": "すべての場所",
+    "open": "オープン"
   },
   "auth": {
     "login": "ログイン",
@@ -528,7 +537,24 @@
     "shiftReassigned": "シフトが再割当されました",
     "swapRequested": "交換がリクエストされました",
     "shiftDeleted": "シフトが削除されました",
-    "minutes": "分"
+    "minutes": "分",
+    "howBuildSchedule": "スケジュールをどのように作成しますか？",
+    "chooseApproach": "ビジネスに合ったスケジューリング方法を選択",
+    "schedulePeriod": "スケジュール期間",
+    "configureAutoFill": "自動入力設定を構成",
+    "maxHoursWeek": "最大時間/週",
+    "minRestBetweenShifts": "シフト間の最小休息時間（時間）",
+    "maxConsecutiveDays": "最大連続日数",
+    "preferredShiftLength": "希望シフト長（時間）",
+    "generatingSchedule": "スマートスケジュールを生成中...",
+    "reviewGeneratedSchedule": "生成されたスケジュールを確認",
+    "totalShifts": "総シフト数",
+    "filledShifts": "埋まったシフト",
+    "saveAsTemplate": "この設定をテンプレートとして保存",
+    "noShiftsGenerated": "シフトを生成できませんでした",
+    "fairnessScore": "公平性スコア",
+    "templateNamePlaceholder": "テンプレート名（例：'週末ブランチ設定'）",
+    "checkShiftTemplates": "選択した日付範囲と場所のシフトテンプレートが設定されているか確認してください。"
   },
   "timeTracking": {
     "title": "勤怠管理",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "スキルと能力",
     "custom": "カスタムレポート",
     "customDesc": "独自の分析を作成",
-    "showingFirst50": "{{count}}行のうち最初の50行を表示"
+    "showingFirst50": "{{count}}行のうち最初の50行を表示",
+    "payQuartilesSubtitle": "各給与四分位における男女の割合",
+    "quartile": "{{name}}四分位",
+    "threeYearTrendSubtitle": "男女間賃金格差の年次改善",
+    "narrativeSubtitle": "CEOからの声明",
+    "actionPlanSubtitle": "男女間賃金格差を解消するための取り組み",
+    "headerName": "ヘッダー名",
+    "currentEnps": "現在のeNPS",
+    "ukGenderPayGapReporting": "英国男女間賃金格差レポート",
+    "meanGap": "平均格差",
+    "medianGap": "中央値格差",
+    "improvedFrom": "{{value}}から改善",
+    "male": "男性",
+    "female": "女性",
+    "payQuartiles": "給与四分位",
+    "threeYearTrend": "3年間のトレンド",
+    "narrative": "私たちの取り組み",
+    "actionPlan": "アクションプラン",
+    "initiative": "イニシアチブ",
+    "target": "目標",
+    "status": "ステータス",
+    "maleReceivingBonus": "ボーナス受給男性",
+    "femaleReceivingBonus": "ボーナス受給女性"
   },
   "accessibility": {
     "menu": "メニュー",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "ロケーションをインポート",
       "skills": "スキル",
       "skillsDesc": "スキルをインポート"
-    }
+    },
+    "clientId": "クライアントID",
+    "clientSecret": "クライアントシークレット",
+    "applicationClientId": "アプリケーション（クライアント）ID",
+    "clientSecretValue": "クライアントシークレット値",
+    "domain": "ドメインコントローラー"
   },
   "jobs": {
     "open": "募集中",
@@ -4235,7 +4288,11 @@
     "send": "送信",
     "delete": "削除",
     "template": "テンプレート",
-    "employee": "従業員"
+    "employee": "従業員",
+    "templateNamePlaceholder": "例：雇用契約書",
+    "useVariables": "変数を使用：",
+    "customNameOptional": "カスタム名（任意）",
+    "leaveBlankForTemplate": "テンプレート名を使用する場合は空白のまま"
   },
   "kiosk": {
     "setup": "キオスク設定",
@@ -4259,7 +4316,17 @@
     "loading": "キオスクを読み込み中...",
     "reconfigure": "キオスクを再設定",
     "offlineBanner": "オフライン - 接続時にイベントを同期",
-    "employeeIdPlaceholder": "従業員IDまたはPIN"
+    "employeeIdPlaceholder": "従業員IDまたはPIN",
+    "getApiKey": "設定 > 勤怠管理からAPIキーを取得",
+    "offlineSync": "オフライン - 接続時にイベントが同期されます",
+    "queued": "{{count}}件がキューに入っています",
+    "clockedInAt": "{{time}}に出勤",
+    "lastClockedOut": "最終退勤: {{time}}",
+    "enterIdOrScan": "従業員IDを入力またはバッジをスキャン",
+    "employeeIdOrPin": "従業員IDまたはPIN",
+    "poweredBy": "Uplift提供",
+    "online": "オンライン",
+    "offline": "オフライン"
   },
   "customReports": {
     "title": "カスタムレポートビルダー",
@@ -4279,5 +4346,12 @@
     "reportName": "レポート名",
     "table": "テーブル",
     "chart": "チャート"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "APIキーを入力",
+      "clientId": "クライアントID",
+      "clientSecret": "クライアントシークレット"
+    }
   }
 }

@@ -293,7 +293,16 @@
       "high": "Korkea",
       "medium": "Keskitaso",
       "low": "Matala"
-    }
+    },
+    "send": "Lähetä",
+    "saveChanges": "Tallenna muutokset",
+    "value": "Arvo",
+    "enter": "Syötä",
+    "recommended": "Suositeltu",
+    "startDate": "Aloituspäivä",
+    "endDate": "Lopetuspäivä",
+    "allLocations": "Kaikki sijainnit",
+    "open": "Avoin"
   },
   "auth": {
     "login": "Kirjaudu",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Vuoro uudelleenmääritetty",
     "swapRequested": "Vaihto pyydetty",
     "shiftDeleted": "Vuoro poistettu",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Miten haluat luoda aikataulun?",
+    "chooseApproach": "Valitse liiketoimintaasi sopiva aikataulutustapa",
+    "schedulePeriod": "Aikataulujakso",
+    "configureAutoFill": "Määritä automaattitäytön asetukset",
+    "maxHoursWeek": "Max tuntia/viikko",
+    "minRestBetweenShifts": "Min lepo vuorojen välillä (t)",
+    "maxConsecutiveDays": "Max peräkkäiset päivät",
+    "preferredShiftLength": "Suositeltu vuoron pituus (t)",
+    "generatingSchedule": "Luodaan älykästä aikataulua...",
+    "reviewGeneratedSchedule": "Tarkista luotu aikataulu",
+    "totalShifts": "Vuoroja yhteensä",
+    "filledShifts": "Täytetyt vuorot",
+    "saveAsTemplate": "Tallenna tämä kokoonpano mallina",
+    "noShiftsGenerated": "Vuoroja ei voitu luoda",
+    "fairnessScore": "Oikeudenmukaisuuspisteet",
+    "templateNamePlaceholder": "Mallin nimi (esim. 'Viikonloppubrunssiasetukset')",
+    "checkShiftTemplates": "Tarkista, että sinulla on vuoromallit määritetty valitulle ajanjaksolle ja sijainnille."
   },
   "timeTracking": {
     "title": "Ajan seuranta",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Taidot ja kompetenssit",
     "custom": "Mukautetut raportit",
     "customDesc": "Luo oma analytiikka",
-    "showingFirst50": "Näytetään ensimmäiset 50 / {{count}} riviä"
+    "showingFirst50": "Näytetään ensimmäiset 50 / {{count}} riviä",
+    "payQuartilesSubtitle": "Miesten ja naisten osuus kussakin palkkakvartiilissa",
+    "quartile": "{{name}} kvartiili",
+    "threeYearTrendSubtitle": "Vuotuinen parannus sukupuolten välisessä palkkaerossa",
+    "narrativeSubtitle": "Toimitusjohtajan lausunto",
+    "actionPlanSubtitle": "Aloitteet palkkaeron kuromiseksi",
+    "headerName": "Otsikon nimi",
+    "currentEnps": "Nykyinen eNPS",
+    "ukGenderPayGapReporting": "UK sukupuolten palkkaero -raportti",
+    "meanGap": "Keskimääräinen ero",
+    "medianGap": "Mediaaniero",
+    "improvedFrom": "Parantunut {{value}}:sta",
+    "male": "Mies",
+    "female": "Nainen",
+    "payQuartiles": "Palkkakvartilit",
+    "threeYearTrend": "Kolmen vuoden trendi",
+    "narrative": "Sitoumuksemme",
+    "actionPlan": "Toimintasuunnitelma",
+    "initiative": "Aloite",
+    "target": "Tavoite",
+    "status": "Tila",
+    "maleReceivingBonus": "Bonusta saavat miehet",
+    "femaleReceivingBonus": "Bonusta saavat naiset"
   },
   "accessibility": {
     "menu": "Valikko",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Tuo sijainnit",
       "skills": "Taidot",
       "skillsDesc": "Tuo taidot"
-    }
+    },
+    "clientId": "Asiakas-ID",
+    "clientSecret": "Asiakassalaisuus",
+    "applicationClientId": "Sovelluksen (asiakas) ID",
+    "clientSecretValue": "Asiakassalaisuuden arvo",
+    "domain": "Toimialueen ohjauskone"
   },
   "jobs": {
     "open": "Avoin",
@@ -4235,7 +4288,11 @@
     "send": "Lähetä",
     "delete": "Poista",
     "template": "Malli",
-    "employee": "Työntekijä"
+    "employee": "Työntekijä",
+    "templateNamePlaceholder": "esim. Työsopimus",
+    "useVariables": "Käytä muuttujia:",
+    "customNameOptional": "Mukautettu nimi (valinnainen)",
+    "leaveBlankForTemplate": "Jätä tyhjäksi käyttääksesi mallin nimeä"
   },
   "kiosk": {
     "setup": "Kioskin asetukset",
@@ -4259,7 +4316,17 @@
     "loading": "Ladataan kioskia...",
     "reconfigure": "Määritä kiosk uudelleen",
     "offlineBanner": "Offline - tapahtumat synkronoidaan yhteyden palautuessa",
-    "employeeIdPlaceholder": "Työntekijätunnus tai PIN"
+    "employeeIdPlaceholder": "Työntekijätunnus tai PIN",
+    "getApiKey": "Hanki API-avain kohdasta Asetukset > Työajanseuranta",
+    "offlineSync": "Offline - tapahtumat synkronoidaan yhdistettäessä",
+    "queued": "{{count}} jonossa",
+    "clockedInAt": "Kirjautui sisään {{time}}",
+    "lastClockedOut": "Viimeisin uloskirjautuminen {{time}}",
+    "enterIdOrScan": "Syötä työntekijä-ID tai skannaa kortti",
+    "employeeIdOrPin": "Työntekijä-ID tai PIN",
+    "poweredBy": "Toimittaja Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Mukautettu raporttien luonti",
@@ -4279,5 +4346,12 @@
     "reportName": "Raportin nimi",
     "table": "Taulukko",
     "chart": "Kaavio"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Syötä API-avain",
+      "clientId": "Asiakas-ID",
+      "clientSecret": "Asiakassalaisuus"
+    }
   }
 }

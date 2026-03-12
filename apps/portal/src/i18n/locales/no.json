@@ -293,7 +293,16 @@
       "high": "Høy",
       "medium": "Middels",
       "low": "Lav"
-    }
+    },
+    "send": "Send",
+    "saveChanges": "Lagre endringer",
+    "value": "Verdi",
+    "enter": "Angi",
+    "recommended": "Anbefalt",
+    "startDate": "Startdato",
+    "endDate": "Sluttdato",
+    "allLocations": "Alle lokasjoner",
+    "open": "Åpen"
   },
   "auth": {
     "login": "Logg inn",
@@ -528,7 +537,24 @@
     "shiftReassigned": "Vakt omfordelt",
     "swapRequested": "Bytte forespurt",
     "shiftDeleted": "Vakt slettet",
-    "minutes": "min"
+    "minutes": "min",
+    "howBuildSchedule": "Hvordan vil du lage timeplanen?",
+    "chooseApproach": "Velg en planleggingsmetode som passer din virksomhet",
+    "schedulePeriod": "Timeplanperiode",
+    "configureAutoFill": "Konfigurer automatisk utfylling",
+    "maxHoursWeek": "Maks timer/uke",
+    "minRestBetweenShifts": "Min hvile mellom skift (timer)",
+    "maxConsecutiveDays": "Maks sammenhengende dager",
+    "preferredShiftLength": "Foretrukket skiftlengde (timer)",
+    "generatingSchedule": "Genererer smart timeplan...",
+    "reviewGeneratedSchedule": "Gjennomgå generert timeplan",
+    "totalShifts": "Totalt skift",
+    "filledShifts": "Fylte skift",
+    "saveAsTemplate": "Lagre denne konfigurasjonen som mal",
+    "noShiftsGenerated": "Ingen skift kunne genereres",
+    "fairnessScore": "Rettferdighetsscore",
+    "templateNamePlaceholder": "Malnavn (f.eks. 'Helgebrunch-oppsett')",
+    "checkShiftTemplates": "Sjekk at du har skiftmaler konfigurert for valgt datoområde og lokasjon."
   },
   "timeTracking": {
     "title": "Tidregistrering",
@@ -1910,7 +1936,29 @@
     "skillsDesc": "Ferdigheter og kompetanser",
     "custom": "Egendefinerte rapporter",
     "customDesc": "Bygg din egen analyse",
-    "showingFirst50": "Viser forste 50 av {{count}} rader"
+    "showingFirst50": "Viser forste 50 av {{count}} rader",
+    "payQuartilesSubtitle": "Andel menn og kvinner i hver lønnskvartil",
+    "quartile": "{{name}} kvartil",
+    "threeYearTrendSubtitle": "Årlig forbedring i kjønnslønngap",
+    "narrativeSubtitle": "CEO-uttalelse",
+    "actionPlanSubtitle": "Tiltak for å lukke kjønnslønngapet",
+    "headerName": "Overskriftsnavn",
+    "currentEnps": "Nåværende eNPS",
+    "ukGenderPayGapReporting": "UK kjønnslønngap-rapport",
+    "meanGap": "Gjennomsnittlig gap",
+    "medianGap": "Median gap",
+    "improvedFrom": "Forbedret fra {{value}}",
+    "male": "Mann",
+    "female": "Kvinne",
+    "payQuartiles": "Lønnskvartiler",
+    "threeYearTrend": "Treårstrend",
+    "narrative": "Vårt engasjement",
+    "actionPlan": "Handlingsplan",
+    "initiative": "Initiativ",
+    "target": "Mål",
+    "status": "Status",
+    "maleReceivingBonus": "Menn som mottar bonus",
+    "femaleReceivingBonus": "Kvinner som mottar bonus"
   },
   "accessibility": {
     "menu": "Meny",
@@ -2181,7 +2229,12 @@
       "locationsDesc": "Importer Lokasjoner",
       "skills": "Kompetanser",
       "skillsDesc": "Importer Ferdigheter"
-    }
+    },
+    "clientId": "Klient-ID",
+    "clientSecret": "Klienthemmelighet",
+    "applicationClientId": "Applikasjons (klient) ID",
+    "clientSecretValue": "Klienthemmelighetsverdi",
+    "domain": "Domenekontroller"
   },
   "jobs": {
     "open": "Åpen",
@@ -4235,7 +4288,11 @@
     "send": "Send",
     "delete": "Slett",
     "template": "Mal",
-    "employee": "Ansatt"
+    "employee": "Ansatt",
+    "templateNamePlaceholder": "f.eks. Arbeidskontrakt",
+    "useVariables": "Bruk variabler:",
+    "customNameOptional": "Egendefinert navn (valgfritt)",
+    "leaveBlankForTemplate": "La stå tomt for å bruke malnavnet"
   },
   "kiosk": {
     "setup": "Kioskoppsett",
@@ -4259,7 +4316,17 @@
     "loading": "Laster kiosk...",
     "reconfigure": "Konfigurer kiosk på nytt",
     "offlineBanner": "Frakoblet - hendelser synkroniseres ved tilkobling",
-    "employeeIdPlaceholder": "Ansatt-ID eller PIN"
+    "employeeIdPlaceholder": "Ansatt-ID eller PIN",
+    "getApiKey": "Hent API-nøkkelen fra Innstillinger > Tid og fremmøte",
+    "offlineSync": "Frakoblet - hendelser synkroniseres ved tilkobling",
+    "queued": "{{count}} i kø",
+    "clockedInAt": "Stemplet inn {{time}}",
+    "lastClockedOut": "Sist stemplet ut {{time}}",
+    "enterIdOrScan": "Skriv inn ansatt-ID eller skann kort",
+    "employeeIdOrPin": "Ansatt-ID eller PIN",
+    "poweredBy": "Drevet av Uplift",
+    "online": "Pålogget",
+    "offline": "Frakoblet"
   },
   "customReports": {
     "title": "Egendefinert rapportbygger",
@@ -4279,5 +4346,12 @@
     "reportName": "Rapportnavn",
     "table": "Tabell",
     "chart": "Diagram"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "Angi API-nøkkel",
+      "clientId": "Klient-ID",
+      "clientSecret": "Klienthemmelighet"
+    }
   }
 }

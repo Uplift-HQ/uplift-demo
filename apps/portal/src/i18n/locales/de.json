@@ -164,7 +164,16 @@
       "medium": "Mittel",
       "low": "Niedrig"
     },
-    "tryAgain": "Erneut versuchen"
+    "tryAgain": "Erneut versuchen",
+    "send": "Senden",
+    "saveChanges": "Änderungen speichern",
+    "value": "Wert",
+    "enter": "Eingabe",
+    "recommended": "Empfohlen",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "allLocations": "Alle Standorte",
+    "open": "Offen"
   },
   "auth": {
     "login": "Anmelden",
@@ -399,7 +408,24 @@
     "shiftReassigned": "Schicht neu zugewiesen",
     "swapRequested": "Tausch angefragt",
     "shiftDeleted": "Schicht gelöscht",
-    "minutes": "Min"
+    "minutes": "Min",
+    "howBuildSchedule": "Wie möchten Sie Ihren Dienstplan erstellen?",
+    "chooseApproach": "Wählen Sie einen Planungsansatz, der zu Ihrem Unternehmen passt",
+    "schedulePeriod": "Planungszeitraum",
+    "configureAutoFill": "Auto-Ausfüllen-Einstellungen konfigurieren",
+    "maxHoursWeek": "Max. Stunden/Woche",
+    "minRestBetweenShifts": "Min. Ruhezeit zwischen Schichten (Std.)",
+    "maxConsecutiveDays": "Max. aufeinanderfolgende Tage",
+    "preferredShiftLength": "Bevorzugte Schichtlänge (Std.)",
+    "generatingSchedule": "Intelligenter Dienstplan wird erstellt...",
+    "reviewGeneratedSchedule": "Generierten Dienstplan überprüfen",
+    "totalShifts": "Gesamtschichten",
+    "filledShifts": "Besetzte Schichten",
+    "saveAsTemplate": "Diese Konfiguration als Vorlage speichern",
+    "noShiftsGenerated": "Es konnten keine Schichten generiert werden",
+    "fairnessScore": "Fairness-Punktzahl",
+    "templateNamePlaceholder": "Vorlagenname (z.B. 'Wochenend-Brunch-Setup')",
+    "checkShiftTemplates": "Prüfen Sie, ob Schichtvorlagen für den ausgewählten Zeitraum und Standort konfiguriert sind."
   },
   "timeTracking": {
     "title": "Zeiterfassung",
@@ -2027,7 +2053,29 @@
     "skills": "Kompetenzmatrix",
     "skillsDesc": "Fähigkeiten und Kompetenzen",
     "customDesc": "Eigene Analysen erstellen",
-    "showingFirst50": "Zeige erste 50 von {{count}} Zeilen"
+    "showingFirst50": "Zeige erste 50 von {{count}} Zeilen",
+    "payQuartilesSubtitle": "Anteil von Männern und Frauen in jedem Gehaltsquartil",
+    "quartile": "{{name}} Quartil",
+    "threeYearTrendSubtitle": "Jährliche Verbesserung des geschlechtsspezifischen Lohngefälles",
+    "narrativeSubtitle": "Erklärung des CEO",
+    "actionPlanSubtitle": "Initiativen zur Schließung des geschlechtsspezifischen Lohngefälles",
+    "headerName": "Kopfzeilenname",
+    "currentEnps": "Aktueller eNPS",
+    "ukGenderPayGapReporting": "UK Geschlechtsspezifischer Lohnbericht",
+    "meanGap": "Mittlere Lücke",
+    "medianGap": "Mediane Lücke",
+    "improvedFrom": "Verbessert von {{value}}",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "payQuartiles": "Gehaltsquartile",
+    "threeYearTrend": "Drei-Jahres-Trend",
+    "narrative": "Unser Engagement",
+    "actionPlan": "Aktionsplan",
+    "initiative": "Initiative",
+    "target": "Ziel",
+    "status": "Status",
+    "maleReceivingBonus": "Männer mit Bonus",
+    "femaleReceivingBonus": "Frauen mit Bonus"
   },
   "shiftTemplates": {
     "title": "Schichtvorlagen",
@@ -2312,7 +2360,12 @@
       "locationsDesc": "Standorte importieren",
       "skills": "Fähigkeiten",
       "skillsDesc": "Fähigkeiten importieren"
-    }
+    },
+    "clientId": "Client-ID",
+    "clientSecret": "Client-Geheimnis",
+    "applicationClientId": "Anwendungs-(Client-)ID",
+    "clientSecretValue": "Client-Geheimniswert",
+    "domain": "Domänencontroller"
   },
   "jobs": {
     "open": "Offen",
@@ -4561,7 +4614,11 @@
     "send": "Senden",
     "delete": "Löschen",
     "template": "Vorlage",
-    "employee": "Mitarbeiter"
+    "employee": "Mitarbeiter",
+    "templateNamePlaceholder": "z.B. Arbeitsvertrag",
+    "useVariables": "Variablen verwenden:",
+    "customNameOptional": "Benutzerdefinierter Name (optional)",
+    "leaveBlankForTemplate": "Leer lassen, um Vorlagennamen zu verwenden"
   },
   "kiosk": {
     "setup": "Kiosk-Einrichtung",
@@ -4585,7 +4642,17 @@
     "loading": "Kiosk wird geladen...",
     "reconfigure": "Kiosk neu konfigurieren",
     "offlineBanner": "Offline - Ereignisse werden bei Verbindung synchronisiert",
-    "employeeIdPlaceholder": "Mitarbeiter-ID oder PIN"
+    "employeeIdPlaceholder": "Mitarbeiter-ID oder PIN",
+    "getApiKey": "API-Schlüssel unter Einstellungen > Zeit & Anwesenheit abrufen",
+    "offlineSync": "Offline - Ereignisse werden bei Verbindung synchronisiert",
+    "queued": "{{count}} in Warteschlange",
+    "clockedInAt": "Eingestempelt um {{time}}",
+    "lastClockedOut": "Zuletzt ausgestempelt um {{time}}",
+    "enterIdOrScan": "Mitarbeiter-ID eingeben oder Ausweis scannen",
+    "employeeIdOrPin": "Mitarbeiter-ID oder PIN",
+    "poweredBy": "Unterstützt von Uplift",
+    "online": "Online",
+    "offline": "Offline"
   },
   "customReports": {
     "title": "Benutzerdefinierter Berichtsgenerator",
@@ -4605,5 +4672,12 @@
     "reportName": "Berichtsname",
     "table": "Tabelle",
     "chart": "Diagramm"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "API-Schlüssel eingeben",
+      "clientId": "Client-ID",
+      "clientSecret": "Client-Geheimnis"
+    }
   }
 }

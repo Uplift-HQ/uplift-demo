@@ -1032,7 +1032,7 @@ function IntegrationsTab() {
                       type="password"
                       value={newIntegration.apiKey}
                       onChange={(e) => setNewIntegration(prev => ({ ...prev, apiKey: e.target.value }))}
-                      placeholder="Enter API key"
+                      placeholder={t('payrollConfig.integrations.enterApiKey', 'Enter API key')}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                     />
                   </div>
@@ -1046,7 +1046,7 @@ function IntegrationsTab() {
                         type="text"
                         value={newIntegration.clientId}
                         onChange={(e) => setNewIntegration(prev => ({ ...prev, clientId: e.target.value }))}
-                        placeholder="Client ID"
+                        placeholder={t('payrollConfig.integrations.clientId', 'Client ID')}
                         className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                       />
                     </div>
@@ -1058,7 +1058,7 @@ function IntegrationsTab() {
                         type="password"
                         value={newIntegration.clientSecret}
                         onChange={(e) => setNewIntegration(prev => ({ ...prev, clientSecret: e.target.value }))}
-                        placeholder="Client Secret"
+                        placeholder={t('payrollConfig.integrations.clientSecret', 'Client Secret')}
                         className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-momentum-500 focus:border-momentum-500"
                       />
                     </div>

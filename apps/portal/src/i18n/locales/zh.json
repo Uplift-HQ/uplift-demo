@@ -254,7 +254,29 @@
     "skillsDesc": "技能和能力",
     "custom": "自定义报表",
     "customDesc": "构建您自己的分析",
-    "showingFirst50": "显示{{count}}行中的前50行"
+    "showingFirst50": "显示{{count}}行中的前50行",
+    "payQuartilesSubtitle": "每个薪酬四分位数中男女比例",
+    "quartile": "{{name}}四分位",
+    "threeYearTrendSubtitle": "性别薪酬差距的年度改善",
+    "narrativeSubtitle": "CEO声明",
+    "actionPlanSubtitle": "缩小性别薪酬差距的举措",
+    "headerName": "标题名称",
+    "currentEnps": "当前eNPS",
+    "ukGenderPayGapReporting": "英国性别薪酬差距报告",
+    "meanGap": "平均差距",
+    "medianGap": "中位数差距",
+    "improvedFrom": "从{{value}}改善",
+    "male": "男性",
+    "female": "女性",
+    "payQuartiles": "薪酬四分位",
+    "threeYearTrend": "三年趋势",
+    "narrative": "我们的承诺",
+    "actionPlan": "行动计划",
+    "initiative": "举措",
+    "target": "目标",
+    "status": "状态",
+    "maleReceivingBonus": "获得奖金的男性",
+    "femaleReceivingBonus": "获得奖金的女性"
   },
   "shiftTemplates": {
     "title": "班次模板",
@@ -587,7 +609,16 @@
       "medium": "中",
       "low": "低"
     },
-    "tryAgain": "重试"
+    "tryAgain": "重试",
+    "send": "发送",
+    "saveChanges": "保存更改",
+    "value": "值",
+    "enter": "输入",
+    "recommended": "推荐",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "allLocations": "所有地点",
+    "open": "开放"
   },
   "auth": {
     "login": "登录",
@@ -822,7 +853,24 @@
     "shiftReassigned": "班次已重新分配",
     "swapRequested": "已请求交换",
     "shiftDeleted": "班次已删除",
-    "minutes": "分钟"
+    "minutes": "分钟",
+    "howBuildSchedule": "您想如何创建排班表？",
+    "chooseApproach": "选择适合您业务的排班方法",
+    "schedulePeriod": "排班周期",
+    "configureAutoFill": "配置自动填充设置",
+    "maxHoursWeek": "每周最大小时数",
+    "minRestBetweenShifts": "班次间最短休息时间（小时）",
+    "maxConsecutiveDays": "最大连续天数",
+    "preferredShiftLength": "首选班次时长（小时）",
+    "generatingSchedule": "正在生成智能排班...",
+    "reviewGeneratedSchedule": "查看生成的排班",
+    "totalShifts": "总班次",
+    "filledShifts": "已填补班次",
+    "saveAsTemplate": "将此配置保存为模板",
+    "noShiftsGenerated": "无法生成班次",
+    "fairnessScore": "公平性评分",
+    "templateNamePlaceholder": "模板名称（例如：'周末早午餐设置'）",
+    "checkShiftTemplates": "请检查您是否为所选日期范围和地点配置了班次模板。"
   },
   "timeTracking": {
     "title": "考勤",
@@ -2172,7 +2220,12 @@
       "locationsDesc": "导入地点",
       "skills": "技能",
       "skillsDesc": "导入技能"
-    }
+    },
+    "clientId": "客户端ID",
+    "clientSecret": "客户端密钥",
+    "applicationClientId": "应用程序（客户端）ID",
+    "clientSecretValue": "客户端密钥值",
+    "domain": "域控制器"
   },
   "jobs": {
     "open": "开放中",
@@ -4231,7 +4284,11 @@
     "send": "发送",
     "delete": "删除",
     "template": "模板",
-    "employee": "员工"
+    "employee": "员工",
+    "templateNamePlaceholder": "例如：雇佣合同",
+    "useVariables": "使用变量：",
+    "customNameOptional": "自定义名称（可选）",
+    "leaveBlankForTemplate": "留空以使用模板名称"
   },
   "kiosk": {
     "setup": "自助终端设置",
@@ -4255,7 +4312,17 @@
     "loading": "正在加载自助终端...",
     "reconfigure": "重新配置自助终端",
     "offlineBanner": "离线 - 连接后将同步事件",
-    "employeeIdPlaceholder": "员工ID或PIN码"
+    "employeeIdPlaceholder": "员工ID或PIN码",
+    "getApiKey": "从设置 > 考勤管理获取您的API密钥",
+    "offlineSync": "离线 - 连接后事件将同步",
+    "queued": "{{count}}个排队中",
+    "clockedInAt": "{{time}}签到",
+    "lastClockedOut": "上次签退：{{time}}",
+    "enterIdOrScan": "输入员工ID或扫描工牌",
+    "employeeIdOrPin": "员工ID或PIN",
+    "poweredBy": "由Uplift提供支持",
+    "online": "在线",
+    "offline": "离线"
   },
   "customReports": {
     "title": "自定义报表生成器",
@@ -4275,5 +4342,12 @@
     "reportName": "报表名称",
     "table": "表格",
     "chart": "图表"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "输入API密钥",
+      "clientId": "客户端ID",
+      "clientSecret": "客户端密钥"
+    }
   }
 }

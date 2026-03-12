@@ -293,7 +293,16 @@
     "exportComingSoon": "匯出功能即將推出",
     "clickToViewDetails": "點擊查看詳情",
     "closeEsc": "關閉 (ESC)",
-    "logoPreview": "標誌預覽"
+    "logoPreview": "標誌預覽",
+    "send": "傳送",
+    "saveChanges": "儲存變更",
+    "value": "值",
+    "enter": "輸入",
+    "recommended": "推薦",
+    "startDate": "開始日期",
+    "endDate": "結束日期",
+    "allLocations": "所有地點",
+    "open": "開放"
   },
   "auth": {
     "login": "登入",
@@ -529,7 +538,24 @@
     "shiftReassigned": "班次已重新指派",
     "swapRequested": "已請求交換",
     "shiftDeleted": "班次已刪除",
-    "minutes": "分鐘"
+    "minutes": "分鐘",
+    "howBuildSchedule": "您想如何建立排班表？",
+    "chooseApproach": "選擇適合您業務的排班方法",
+    "schedulePeriod": "排班週期",
+    "configureAutoFill": "設定自動填入設定",
+    "maxHoursWeek": "每週最大時數",
+    "minRestBetweenShifts": "班次間最短休息時間（小時）",
+    "maxConsecutiveDays": "最大連續天數",
+    "preferredShiftLength": "偏好班次時長（小時）",
+    "generatingSchedule": "正在產生智慧排班...",
+    "reviewGeneratedSchedule": "檢視產生的排班",
+    "totalShifts": "總班次",
+    "filledShifts": "已填補班次",
+    "saveAsTemplate": "將此設定儲存為範本",
+    "noShiftsGenerated": "無法產生班次",
+    "fairnessScore": "公平性評分",
+    "templateNamePlaceholder": "範本名稱（例如：'週末早午餐設定'）",
+    "checkShiftTemplates": "請確認您已為所選日期範圍和地點設定班次範本。"
   },
   "timeTracking": {
     "title": "時間追蹤",
@@ -1926,7 +1952,29 @@
     "skillsDesc": "技能和能力",
     "custom": "自訂報表",
     "customDesc": "建立您自己的分析",
-    "showingFirst50": "顯示{{count}}列中的前50列"
+    "showingFirst50": "顯示{{count}}列中的前50列",
+    "payQuartilesSubtitle": "各薪資四分位數中的男女比例",
+    "quartile": "{{name}}四分位",
+    "threeYearTrendSubtitle": "性別薪資差距的年度改善",
+    "narrativeSubtitle": "執行長聲明",
+    "actionPlanSubtitle": "縮小性別薪資差距的措施",
+    "headerName": "標題名稱",
+    "currentEnps": "目前eNPS",
+    "ukGenderPayGapReporting": "英國性別薪資差距報告",
+    "meanGap": "平均差距",
+    "medianGap": "中位數差距",
+    "improvedFrom": "從{{value}}改善",
+    "male": "男性",
+    "female": "女性",
+    "payQuartiles": "薪資四分位",
+    "threeYearTrend": "三年趨勢",
+    "narrative": "我們的承諾",
+    "actionPlan": "行動計畫",
+    "initiative": "措施",
+    "target": "目標",
+    "status": "狀態",
+    "maleReceivingBonus": "獲得獎金的男性",
+    "femaleReceivingBonus": "獲得獎金的女性"
   },
   "accessibility": {
     "menu": "選單",
@@ -2197,7 +2245,12 @@
       "locationsDesc": "匯入地點",
       "skills": "技能",
       "skillsDesc": "匯入技能"
-    }
+    },
+    "clientId": "用戶端ID",
+    "clientSecret": "用戶端密鑰",
+    "applicationClientId": "應用程式（用戶端）ID",
+    "clientSecretValue": "用戶端密鑰值",
+    "domain": "網域控制器"
   },
   "jobs": {
     "open": "開放中",
@@ -4275,7 +4328,11 @@
     "send": "傳送",
     "delete": "刪除",
     "template": "範本",
-    "employee": "員工"
+    "employee": "員工",
+    "templateNamePlaceholder": "例如：僱傭合約",
+    "useVariables": "使用變數：",
+    "customNameOptional": "自訂名稱（選填）",
+    "leaveBlankForTemplate": "留空以使用範本名稱"
   },
   "kiosk": {
     "setup": "自助服務機設定",
@@ -4299,7 +4356,17 @@
     "loading": "正在載入自助服務機...",
     "reconfigure": "重新設定自助服務機",
     "offlineBanner": "離線 - 連線後將同步事件",
-    "employeeIdPlaceholder": "員工ID或PIN碼"
+    "employeeIdPlaceholder": "員工ID或PIN碼",
+    "getApiKey": "從設定 > 出勤管理取得您的API金鑰",
+    "offlineSync": "離線 - 連線後事件將同步",
+    "queued": "{{count}}個排隊中",
+    "clockedInAt": "{{time}}打卡上班",
+    "lastClockedOut": "上次打卡下班：{{time}}",
+    "enterIdOrScan": "輸入員工ID或掃描識別證",
+    "employeeIdOrPin": "員工ID或PIN碼",
+    "poweredBy": "由Uplift提供技術支援",
+    "online": "線上",
+    "offline": "離線"
   },
   "customReports": {
     "title": "自訂報表產生器",
@@ -4319,5 +4386,12 @@
     "reportName": "報表名稱",
     "table": "表格",
     "chart": "圖表"
+  },
+  "payrollConfig": {
+    "integrations": {
+      "enterApiKey": "輸入API金鑰",
+      "clientId": "用戶端ID",
+      "clientSecret": "用戶端密鑰"
+    }
   }
 }
