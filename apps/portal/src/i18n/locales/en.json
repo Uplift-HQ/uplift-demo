@@ -132,6 +132,11 @@
     "recognition": "Recognition Wall",
     "myDocuments": "My Documents"
   },
+  "nova": {
+    "online": "Online",
+    "clearConversation": "Clear conversation",
+    "askAnything": "Ask Nova anything..."
+  },
   "common": {
     "loading": "Loading...",
     "save": "Save",
@@ -483,6 +488,9 @@
     "friday": "Fri",
     "saturday": "Sat",
     "allDepartments": "All Departments",
+    "scheduleFromTemplates": "Schedule from Templates",
+    "scheduleFromDemand": "Schedule from Demand",
+    "scheduleFromContractedHours": "Schedule from Contracted Hours",
     "leaveOpen": "Leave Open",
     "shiftPublished": "Shift published successfully",
     "shiftUpdated": "Shift updated successfully",
@@ -576,7 +584,9 @@
     "endBreak": "End Break",
     "totalHours": "Total Hours",
     "clockInOutTab": "Clock In/Out",
-    "entriesWillAppear": "Time entries will appear here once employees clock in."
+    "entriesWillAppear": "Time entries will appear here once employees clock in.",
+    "clockInPhoto": "Clock-in photo",
+    "clockOutPhoto": "Clock-out photo"
   },
   "myTimeTracking": {
     "title": "My Time Tracking"
@@ -993,6 +1003,7 @@
     "thisDevice": "This device",
     "revoke": "Revoke",
     "revoking": "Revoking...",
+    "lastActive": "Last active",
     "noActiveSessions": "No active sessions",
     "customizeAppearance": "Customize how Uplift looks for you",
     "theme": "Theme",
@@ -1889,7 +1900,24 @@
     "sortBy": "Sort By",
     "filters": "Filters",
     "dateFrom": "Date From",
-    "dateTo": "Date To"
+    "dateTo": "Date To",
+    "headcount": "Headcount",
+    "headcountDesc": "Total employee count over time",
+    "turnover": "Turnover",
+    "turnoverDesc": "Employee turnover analysis",
+    "diversity": "Diversity",
+    "diversityDesc": "Workforce diversity metrics",
+    "genderPayGap": "Gender Pay Gap",
+    "genderPayGapDesc": "Gender pay gap analysis and reporting",
+    "salaryDistribution": "Salary Distribution",
+    "salaryDistributionDesc": "Salary band breakdown",
+    "eNPS": "eNPS",
+    "eNPSDesc": "Employee Net Promoter Score",
+    "skills": "Skills Matrix",
+    "skillsDesc": "Skills and competencies",
+    "custom": "Custom Reports",
+    "customDesc": "Build your own analytics",
+    "showingFirst50": "Showing first 50 of {{count}} rows"
   },
   "accessibility": {
     "menu": "Menu",
@@ -2192,15 +2220,15 @@
     "skillMatch": "skill match",
     "noApplicants": "No applicants yet",
     "departments": {
-      "production": "Production",
-      "qualityControl": "Quality Control",
-      "warehouse": "Warehouse & Logistics",
-      "rdEngineering": "R&D / Engineering"
+      "frontOfHouse": "Front of House",
+      "kitchen": "Kitchen",
+      "management": "Management",
+      "reception": "Reception"
     },
     "locations": {
-      "london": "London Mayfair",
-      "paris": "Paris Champs-Élysées",
-      "dubai": "Dubai Marina"
+      "edinburgh": "Grand Metro Edinburgh",
+      "glasgow": "Grand Metro Glasgow",
+      "manchester": "Grand Metro Manchester"
     }
   },
   "employees": {
@@ -3052,6 +3080,26 @@
     "focusAreas": "Focus Areas",
     "createPlan": "Create Plan"
   },
+  "bonus": {
+    "title": "Performance Bonuses",
+    "subtitle": "Upload site scores and calculate employee bonus payouts",
+    "period": "Period",
+    "noPeriodsYet": "No periods yet",
+    "uploadScores": "Upload Scores",
+    "viewScores": "View Scores",
+    "calculateBonuses": "Calculate Bonuses",
+    "approvePay": "Approve & Pay",
+    "fillRequired": "Please fill all required fields",
+    "scoreUploaded": "Score uploaded successfully",
+    "uploadFailed": "Failed to upload score",
+    "selectPeriod": "Please enter a period first",
+    "csvUploaded": "Uploaded {{count}} scores",
+    "csvFailed": "Failed to process CSV",
+    "calculateFailed": "Failed to calculate bonuses",
+    "calculated": "Calculated {{count}} bonus payouts",
+    "approved": "Approved {{count}} payouts",
+    "approveFailed": "Failed to approve payouts"
+  },
   "compensation": {
     "title": "Payslips & Pay",
     "payslips": "Payslips",
@@ -3695,7 +3743,7 @@
     "goodMorning": "Good morning",
     "goodAfternoon": "Good afternoon",
     "goodEvening": "Good evening",
-    "teamSubtitle": "Front of House Team • Grand Metropolitan, London Mayfair",
+    "teamSubtitle": "Front of House Team • The Grand Hotel, London",
     "momentumScore": "Your Momentum Score",
     "momentumTrend": "↑{{count}} from last month",
     "viewDetails": "View details",
@@ -3709,18 +3757,18 @@
     "annualLeave": "Annual Leave",
     "trainingCompliance": "Training Compliance",
     "trainingProgress": "{{complete}} of {{total}} required complete",
-    "overdueTraining": "IOSH Managing Safely — due Feb 10",
+    "overdueTraining": "Fire Safety — due Feb 10",
     "nextShift": "Next Shift",
-    "nextShiftTime": "Tomorrow, 6:00 AM — 2:00 PM",
-    "nextShiftLocation": "Grand Metropolitan, Restaurant Floor",
-    "nextShiftRole": "Production",
+    "nextShiftTime": "Tomorrow, 7:00 AM — 3:00 PM",
+    "nextShiftLocation": "The Grand Hotel, Main Restaurant",
+    "nextShiftRole": "Front of House",
     "pendingActions": "Pending Actions",
     "pendingCount": "3 items need attention",
     "pendingTraining": "1 training overdue",
     "pendingDocument": "1 document to sign",
     "pendingExpense": "1 expense pending",
     "recentRecognition": "Recent Recognition",
-    "kudos1": "Outstanding quality record on the production line!",
+    "kudos1": "Amazing service with the VIP table last night!",
     "kudos1Time": "2 hours ago",
     "kudos2": "Thanks for covering my shift on short notice",
     "kudos2Time": "Yesterday",
@@ -4194,7 +4242,13 @@
     "sentOn": "Sent on",
     "draftNotSent": "Draft - not yet sent",
     "visual": "Visual",
-    "html": "HTML"
+    "html": "HTML",
+    "searchPlaceholder": "Search contracts or employees...",
+    "view": "View",
+    "send": "Send",
+    "delete": "Delete",
+    "template": "Template",
+    "employee": "Employee"
   },
 
   "kiosk": {
@@ -4214,7 +4268,12 @@
     "clockedOut": "Clocked out at",
     "employeeNotFound": "Employee not found",
     "offlineQueued": "Offline - will sync when back online",
-    "pendingSync": "pending sync"
+    "pendingSync": "pending sync",
+    "getApiKeyHint": "Get your API key from Settings > Time & Attendance",
+    "loading": "Loading kiosk...",
+    "reconfigure": "Reconfigure Kiosk",
+    "offlineBanner": "Offline - events will sync when connected",
+    "employeeIdPlaceholder": "Employee ID or PIN"
   },
 
   "customReports": {
