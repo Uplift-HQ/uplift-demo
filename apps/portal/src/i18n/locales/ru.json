@@ -833,7 +833,7 @@
   "gamification": {
     "level": "Уровень {{level}}",
     "levelShort": "Ур {{level}}",
-    "xp": "{{xp}} XP",
+    "xp": "{{xp}} очков опыта",
     "xpUnit": "XP",
     "xpToNext": "{{xp}} XP до уровня {{level}}",
     "badges": "Значки",
@@ -1061,7 +1061,7 @@
       "primaryLogoDesc": "Отображается в боковой панели на светлом фоне. PNG, JPG или SVG. Макс. 2МБ.",
       "darkModeLogo": "Логотип для тёмного режима",
       "darkModeLogoDesc": "Используется на тёмном фоне. Должен быть светлой/белой версией логотипа.",
-      "favicon": "Favicon",
+      "favicon": "Фавикон",
       "faviconDesc": "Значок вкладки браузера. В идеале квадратный, 32x32 или 64x64. PNG или ICO.",
       "loginBackground": "Фон экрана входа",
       "loginBackgroundDesc": "Фоновое изображение для экрана входа. Рекомендуется 1920x1080.",
@@ -1256,7 +1256,7 @@
       "metadataUrl": "URL метаданных IdP",
       "metadataUrlDesc": "URL XML-файла метаданных вашего провайдера идентификации (необязательно при ручном вводе)",
       "detectedEntityId": "ID сущности",
-      "detectedSsoUrl": "SSO URL",
+      "detectedSsoUrl": "URL для SSO",
       "detectedProvider": "Провайдер",
       "errorCode": "Код ошибки"
     },
@@ -2838,7 +2838,7 @@
       "triggerEventDesc": "Срабатывает по событиям Uplift",
       "triggerWebhook": "Входящий Webhook",
       "triggerWebhookDesc": "Получение данных от внешних систем",
-      "scopePlaceholder": "read,write",
+      "scopePlaceholder": "чтение,запись",
       "saveFirstBeforeTesting": "Сначала сохраните интеграцию перед тестированием",
       "testRequestFailed": "Тестовый запрос не выполнен"
     },

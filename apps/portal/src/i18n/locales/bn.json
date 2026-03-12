@@ -1061,7 +1061,7 @@
       "primaryLogoDesc": "হালকা পটভূমিতে সাইডবারে প্রদর্শিত। PNG, JPG, বা SVG। সর্বোচ্চ 2MB।",
       "darkModeLogo": "ডার্ক মোড লোগো",
       "darkModeLogoDesc": "গাঢ় পটভূমিতে ব্যবহৃত। আপনার লোগোর হালকা/সাদা সংস্করণ হওয়া উচিত।",
-      "favicon": "Favicon",
+      "favicon": "ফেভিকন",
       "faviconDesc": "ব্রাউজার ট্যাব আইকন। আদর্শভাবে বর্গাকার, 32x32 বা 64x64। PNG বা ICO।",
       "loginBackground": "লগইন পটভূমি",
       "loginBackgroundDesc": "লগইন স্ক্রিনের পটভূমি ছবি। প্রস্তাবিত 1920x1080।",
@@ -2737,7 +2737,7 @@
       "address": "ঠিকানা"
     },
     "loadError": "অবস্থান লোড করতে ব্যর্থ। আবার চেষ্টা করুন।",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "DHK-01",
     "noEmployeesAssigned": "এই অবস্থানে কোনো কর্মচারী নিযুক্ত নেই"
   },
   "integrations": {
@@ -3937,7 +3937,7 @@
     "yearToDate": "বছর থেকে আজ পর্যন্ত",
     "ytdGross": "YTD মোট",
     "ytdTax": "YTD কর",
-    "ytdNI": "YTD NI",
+    "ytdNI": "বছরের শুরু থেকে NI",
     "ytdPension": "YTD পেনশন",
     "ytdNet": "YTD নিট",
     "basicSalary": "মূল বেতন",

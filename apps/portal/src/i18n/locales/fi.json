@@ -129,7 +129,7 @@
     "myDocuments": "Omat Asiakirjat"
   },
   "nova": {
-    "online": "Online",
+    "online": "Paikalla",
     "clearConversation": "Tyhjennä keskustelu",
     "askAnything": "Kysy Novalta mitä vain..."
   },
@@ -3408,12 +3408,12 @@
   "surveys": {
     "templates": {
       "title": "Mallit",
-      "subtitle": "Choose a pre-built template or create your own",
-      "createCustom": "Create Custom Template",
-      "preview": "Preview",
-      "clone": "Clone & Customize",
-      "sampleQuestions": "Sample Questions",
-      "useTemplate": "Use This Template"
+      "subtitle": "Valitse valmis malli tai luo oma",
+      "createCustom": "Luo mukautettu malli",
+      "preview": "Esikatselu",
+      "clone": "Kloonaa ja mukauta",
+      "sampleQuestions": "Esimerkkikysymykset",
+      "useTemplate": "Käytä tätä mallia"
     },
     "rating1to10": "Arvosana (1-10)",
     "multipleChoice": "Monivalinta",
@@ -3922,7 +3922,7 @@
     "charLimit": "Merkkirajoitus saavutettu",
     "sendRecognition": "Lähetä tunnustus",
     "successMessage": "Tunnustus lähetetty!",
-    "filters": "Filters",
+    "filters": "Suodattimet",
     "noRecognitions": "Ei tunnustuksia näytettäväksi tälle suodattimelle.",
     "mostRecognised": "Eniten tunnustetut tässä kuussa",
     "mostGenerous": "Anteliaimmat (annetut)",

@@ -1068,7 +1068,7 @@
       "primaryLogoDesc": "نمایش در نوار کناری با پس‌زمینه روشن. PNG، JPG یا SVG. حداکثر ۲ مگابایت.",
       "darkModeLogo": "لوگوی حالت تاریک",
       "darkModeLogoDesc": "استفاده در پس‌زمینه تاریک. باید نسخه روشن/سفید لوگوی شما باشد.",
-      "favicon": "Favicon",
+      "favicon": "آیکون سایت",
       "faviconDesc": "آیکون تب مرورگر. ترجیحاً مربعی، ۳۲×۳۲ یا ۶۴×۶۴. PNG یا ICO.",
       "loginBackground": "پس‌زمینه ورود",
       "loginBackgroundDesc": "تصویر پس‌زمینه برای صفحه ورود. پیشنهادی ۱۹۲۰×۱۰۸۰.",
@@ -1911,7 +1911,7 @@
     "genderPayGapDesc": "تحلیل و گزارش شکاف دستمزد جنسیتی",
     "salaryDistribution": "توزیع حقوق",
     "salaryDistributionDesc": "تفکیک سطوح حقوق",
-    "eNPS": "eNPS",
+    "eNPS": "شاخص خالص ترویج‌کنندگان کارمندان",
     "eNPSDesc": "امتیاز خالص پروموتر کارمند",
     "skills": "ماتریس مهارت‌ها",
     "skillsDesc": "مهارت‌ها و شایستگی‌ها",
@@ -3415,12 +3415,12 @@
   "surveys": {
     "templates": {
       "title": "الگوها",
-      "subtitle": "Choose a pre-built template or create your own",
-      "createCustom": "Create Custom Template",
-      "preview": "Preview",
-      "clone": "Clone & Customize",
-      "sampleQuestions": "Sample Questions",
-      "useTemplate": "Use This Template"
+      "subtitle": "یک قالب آماده انتخاب کنید یا قالب خود را بسازید",
+      "createCustom": "ایجاد قالب سفارشی",
+      "preview": "پیش‌نمایش",
+      "clone": "کپی و سفارشی‌سازی",
+      "sampleQuestions": "سوالات نمونه",
+      "useTemplate": "استفاده از این قالب"
     },
     "rating1to10": "امتیازدهی (۱-۱۰)",
     "multipleChoice": "چندگزینه‌ای",

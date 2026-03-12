@@ -583,7 +583,7 @@
     "startBreak": "Ibda l-Pawża",
     "endBreak": "Temm il-Pawża",
     "totalHours": "Total Sigħat",
-    "clockInOutTab": "Clock In/Out",
+    "clockInOutTab": "Idħol/Oħroġ",
     "entriesWillAppear": "Ħin entries will appear here once impjegati clock in.",
     "clockInPhoto": "Ritratt tad-dħul",
     "clockOutPhoto": "Ritratt tal-ħruġ"
@@ -2739,7 +2739,7 @@
   },
   "locations": {
     "loadError": "Falla to load locations. Please try again.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "MLT-01",
     "noEmployeesAssigned": "Le impjegati assigned to this location",
     "placeholder": {
       "search": "Fittex locations...",

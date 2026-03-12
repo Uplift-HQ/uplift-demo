@@ -1498,7 +1498,7 @@
     "step": "{{current}}. solis no {{total}}",
     "yourSkills": "Jūsu prasmes",
     "addSkillsDesc": "Pastāstiet mums par savām prasmēm, lai mēs varētu atrast jums labākās maiņas",
-    "preferences": "Preferences",
+    "preferences": "Izvēles",
     "preferencesDesc": "Iestatiet savu pieejamību un paziņojumu preferences",
     "availableDays": "Pieejamās dienas",
     "preferredHours": "Vēlamās stundas",
@@ -2737,7 +2737,7 @@
       "address": "Adrese"
     },
     "loadError": "Neizdevās ielādēt atrašanās vietas.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "RIX-01",
     "noEmployeesAssigned": "Šai vietai nav piešķirti darbinieki"
   },
   "integrations": {

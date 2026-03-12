@@ -3408,12 +3408,12 @@
   "surveys": {
     "templates": {
       "title": "Sablonok",
-      "subtitle": "Choose a pre-built template or create your own",
-      "createCustom": "Create Custom Template",
-      "preview": "Preview",
-      "clone": "Clone & Customize",
-      "sampleQuestions": "Sample Questions",
-      "useTemplate": "Use This Template"
+      "subtitle": "Válasszon egy előre elkészített sablont, vagy hozzon létre sajátot",
+      "createCustom": "Egyéni sablon létrehozása",
+      "preview": "Előnézet",
+      "clone": "Klónozás és testreszabás",
+      "sampleQuestions": "Minta kérdések",
+      "useTemplate": "Sablon használata"
     },
     "rating1to10": "Értékelés (1–10)",
     "multipleChoice": "Feleletválasztós",

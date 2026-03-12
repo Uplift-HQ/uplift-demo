@@ -2128,11 +2128,11 @@
     "may": "Máj",
     "june": "Jún",
     "july": "Júl",
-    "august": "August",
-    "september": "September",
+    "august": "august",
+    "september": "september",
     "october": "Október",
-    "november": "November",
-    "december": "December"
+    "november": "november",
+    "december": "december"
   },
   "bulkImport": {
     "title": "Hromadný import",
@@ -2737,7 +2737,7 @@
       "address": "Adresa"
     },
     "loadError": "Nepodarilo sa načítať lokality. Skúste to znova.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "BTS-01",
     "noEmployeesAssigned": "Nie employees assigned to this location"
   },
   "integrations": {

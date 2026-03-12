@@ -1061,7 +1061,7 @@
       "primaryLogoDesc": "Displayed میں the sidebar پر لائٹ backgrounds. PNG, JPG, یا SVG. Max 2MB.",
       "darkModeLogo": "ڈارک Mode Logo",
       "darkModeLogoDesc": "Used پر ڈارک backgrounds. Should be light/white version کا your logo.",
-      "favicon": "Favicon",
+      "favicon": "فیویکان",
       "faviconDesc": "Browser tab icon. Ideally square, 32x32 یا 64x64. PNG یا ICO.",
       "loginBackground": "لاگ ان پس منظر",
       "loginBackgroundDesc": "Background image کے لیے the login screen. Recommended 1920x1080.",
@@ -2737,7 +2737,7 @@
       "address": "پتہ"
     },
     "loadError": "Failed کو load مقامات. براہ کرم try again.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "KHI-01",
     "noEmployeesAssigned": "نہیں ملازمین تفویض شدہ کو this مقام"
   },
   "integrations": {
@@ -2806,7 +2806,7 @@
       "microsoftTeamsDesc": "Microsoft 365 تعاون",
       "whatsappBusinessDesc": "براہ راست کارکن پیغام رسانی",
       "googleWorkspaceDesc": "Google SSO & directory سنک کریں",
-      "microsoftEntraDesc": "Azure AD SSO & SCIM",
+      "microsoftEntraDesc": "Azure AD SSO اور SCIM",
       "oktaDesc": "انٹرپرائز شناخت کا انتظام",
       "squareDesc": "POS & ٹیم management",
       "lightspeedDesc": "ریٹیل اور مہمان نوازی POS",
@@ -3868,7 +3868,7 @@
     "charLimit": "حروف کی حد تک پہنچ گئی",
     "sendRecognition": "شناخت بھیجیں",
     "successMessage": "شناخت کامیابی سے بھیج دی گئی!",
-    "filters": "Filters",
+    "filters": "فلٹرز",
     "noRecognitions": "اس فلٹر کے لیے دکھانے کے لیے کوئی شناخت نہیں۔",
     "mostRecognised": "اس مہینے سب سے زیادہ شناخت",
     "mostGenerous": "سب سے زیادہ فیاض (دی گئی)",

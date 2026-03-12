@@ -265,7 +265,7 @@
     "department": "Jabatan",
     "roles": {
       "server": "Pelayan",
-      "bartender": "Bartender",
+      "bartender": "Pelayan Bar",
       "linecook": "Tukang masak barisan",
       "hostess": "Penyambut tetamu",
       "host": "Tuan rumah",
@@ -278,7 +278,7 @@
       "dishwasher": "Pencuci pinggan",
       "cook": "Tukang masak",
       "barback": "Pembantu bar",
-      "sous": "Sous Chef",
+      "sous": "Timbalan Chef",
       "expeditor": "Ekspeditor"
     },
     "exportComingSoon": "Eksport akan datang",
@@ -3925,7 +3925,7 @@
     },
     "category": "Kategori",
     "charLimit": "Had aksara dicapai",
-    "filters": "Filters",
+    "filters": "Penapis",
     "giveRecognition": "Beri Pengiktirafan",
     "message": "Mesej",
     "messagePlaceholder": "Tulis mesej yang bermakna untuk mengiktiraf sumbangan mereka...",

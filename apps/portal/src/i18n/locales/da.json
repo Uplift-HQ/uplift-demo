@@ -1256,7 +1256,7 @@
       "metadataUrl": "IdP Metadata URL",
       "metadataUrlDesc": "URL Til your identity provider metadata XML (Valgfri if entering Detaljer manually)",
       "detectedEntityId": "Entitets-ID",
-      "detectedSsoUrl": "SSO URL",
+      "detectedSsoUrl": "SSO-URL",
       "detectedProvider": "Udbyder",
       "errorCode": "Fejl code"
     },
@@ -2124,15 +2124,15 @@
     "january": "Januar",
     "february": "Februar",
     "march": "Marts",
-    "april": "April",
+    "april": "april",
     "may": "Maj",
     "june": "Juni",
     "july": "Juli",
-    "august": "August",
-    "september": "September",
+    "august": "august",
+    "september": "september",
     "october": "Oktober",
-    "november": "November",
-    "december": "December"
+    "november": "november",
+    "december": "december"
   },
   "bulkImport": {
     "title": "Masseimport",
@@ -2737,7 +2737,7 @@
       "address": "Adresse"
     },
     "loadError": "Failed Til load Lokationer. Venligst try again.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "KBH-01",
     "noEmployeesAssigned": "Nej Medarbejdere Tildelt Til this Lokation"
   },
   "integrations": {
@@ -3329,7 +3329,7 @@
     "noOkrs": "Ingen OKR er endnu",
     "noOkrsDesc": "Opret your Første OKR Til align Team objectives.",
     "createOkr": "Opret OKR",
-    "periodPlaceholder": "Q1 2026",
+    "periodPlaceholder": "K1 2026",
     "keyResultPlaceholder": "Nøgleresultattitel",
     "targetPlaceholder": "Mål",
     "noMeetingsDesc": "Tidsplan your Første 1-on-1 Møde Til Start meaningful conversations.",
@@ -3922,7 +3922,7 @@
     "charLimit": "Tegngrænse nået",
     "sendRecognition": "Send anerkendelse",
     "successMessage": "Anerkendelse sendt!",
-    "filters": "Filters",
+    "filters": "Filtre",
     "noRecognitions": "Ingen anerkendelser at vise for dette filter.",
     "mostRecognised": "Mest anerkendte denne måned",
     "mostGenerous": "Mest generøse (givne)",

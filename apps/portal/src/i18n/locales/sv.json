@@ -1131,7 +1131,7 @@
       "permWrite": "Skriv",
       "permAdmin": "Administratör",
       "permissionsHelp": "Ställ in behörighetsnivå för varje modul",
-      "usersAssigned": "users assigned",
+      "usersAssigned": "användare tilldelade",
       "more": "Mer",
       "edit": "Redigera",
       "delete": "Ta bort",
@@ -1257,7 +1257,7 @@
       "sessionPolicy": "Sessionspolicy",
       "ipWhitelistPlaceholder": "Ange tillåtna IP-adresser, en per rad",
       "providerType": "Leverantörstyp",
-      "testing": "Testing...",
+      "testing": "Testar...",
       "testNoUrl": "Vänligen enter an SSO URL Eller Metadata URL Till Test",
       "testInvalidUrl": "Vänligen enter a Giltig URL",
       "testSuccess": "Anslutning lyckades - IdP-metadata mottagen",
@@ -1266,8 +1266,8 @@
       "metadataUrl": "URL för IdP-metadata",
       "metadataUrlDesc": "URL Till your identity provider metadata XML (Valfritt if entering Detaljer manually)",
       "detectedEntityId": "Entitets-ID",
-      "detectedSsoUrl": "SSO URL",
-      "detectedProvider": "Provider",
+      "detectedSsoUrl": "SSO-URL",
+      "detectedProvider": "Leverantör",
       "errorCode": "Fel code"
     },
     "rolesPermissions": "Roller och behörigheter",
@@ -1278,19 +1278,19 @@
     "webhooksSecret": "Hemlighet",
     "webhooksActive": "Aktiv",
     "portalConfig": {
-      "title": "Portal Configuration",
+      "title": "Portalkonfiguration",
       "subtitle": "Control Vilken modules are visible for each Användare Roll across portal Och Mobil",
       "moduleVisibility": "Modulsynlighet",
       "colModule": "Modul",
-      "colWorkersPortal": "Workers (Portal)",
+      "colWorkersPortal": "Arbetare (Portal)",
       "colWorkersMobile": "Workers (Mobil)",
       "colManagersPortal": "Chefer (Portal)",
       "colManagersMobile": "Managers (Mobil)",
       "homepageWidgets": "Anställd Homepage Widgets",
       "homepageWidgetsSubtitle": "Choose Vilken widgets appear På the Anställd homepage",
       "widgetAnnouncements": "Meddelanden",
-      "widgetTeamCelebrations": "Team Celebrations",
-      "widgetQuickActions": "Quick Actions",
+      "widgetTeamCelebrations": "Teamfiranden",
+      "widgetQuickActions": "Snabbåtgärder",
       "widgetGoalsProgress": "Mål Framsteg",
       "widgetLeaveBalance": "Ledighet Balance",
       "widgetAchievements": "Prestationer",
@@ -1298,7 +1298,7 @@
       "widgetMomentumScore": "Momentum Poäng",
       "brandingNote": "Customise portal branding i the Branding tab",
       "saveButton": "Spara Configuration",
-      "saveSuccess": "Portal configuration saved successfully",
+      "saveSuccess": "Portalkonfigurationen har sparats",
       "saveError": "Failed Till Spara portal configuration",
       "module": {
         "dashboard": "Instrumentpanel",
@@ -1312,7 +1312,7 @@
         "career": "Karriär / Möjligheter",
         "compensation": "Kompensation",
         "expenses": "Utgifter",
-        "surveys": "Surveys",
+        "surveys": "Undersökningar",
         "documents": "Dokument",
         "reports": "Rapporter",
         "directory": "Företag Directory",
@@ -2147,10 +2147,10 @@
     "june": "Juni",
     "july": "Juli",
     "august": "Augusti",
-    "september": "September",
+    "september": "september",
     "october": "Oktober",
-    "november": "November",
-    "december": "December"
+    "november": "november",
+    "december": "december"
   },
   "bulkImport": {
     "title": "Massimport",
@@ -2838,8 +2838,8 @@
       "customApiDesc": "Bygg din egen integration"
     },
     "mapping": {
-      "customField1": "customField1",
-      "customField2": "customField2",
+      "customField1": "anpassatFält1",
+      "customField2": "anpassatFält2",
       "notes": "anteckningar"
     },
     "api": {
@@ -3392,12 +3392,12 @@
     "priority": "Prioritet",
     "targetDate": "Mål Datum",
     "upcoming": "Kommande",
-    "pastMeetings": "Past Meetings",
+    "pastMeetings": "Tidigare möten",
     "employee": "Anställd",
     "date": "Datum",
     "time": "Tid",
     "to": "Till",
-    "visibility": "Visibility",
+    "visibility": "Synlighet",
     "createDevelopmentPlan": "Skapa Development Plan",
     "planTitle": "Plan Titel",
     "focusAreas": "Fokusområden",
@@ -3430,7 +3430,7 @@
       "createCustom": "Skapa Custom Mall",
       "preview": "Förhandsgranska",
       "clone": "Klona och anpassa",
-      "sampleQuestions": "Sample Questions",
+      "sampleQuestions": "Exempelfrågor",
       "useTemplate": "Use This Mall"
     },
     "rating1to10": "Betyg (1-10)",
@@ -3528,7 +3528,7 @@
     "allStatuses": "Alla Statuses",
     "status": {
       "draft": "Utkast",
-      "scheduled": "Scheduled",
+      "scheduled": "Schemalagd",
       "active": "Aktiv",
       "closed": "Stängd"
     },
@@ -3536,16 +3536,16 @@
       "name": "Survey Namn",
       "type": "Typ",
       "status": "Status",
-      "responses": "Responses",
+      "responses": "Svar",
       "participation": "Deltagande",
       "enps": "eNPS (poäng)",
       "closesOn": "Closes På",
       "actions": "Åtgärder"
     },
-    "questions": "questions",
+    "questions": "frågor",
     "actions": {
       "launch": "Starta",
-      "remind": "Remind",
+      "remind": "Påminn",
       "close": "Stäng",
       "viewResults": "Visa Resultat",
       "clone": "Klona"
@@ -3637,7 +3637,7 @@
       "untitled": "Namnlös undersökning",
       "questionsCount": "Frågor",
       "anonymous": "Anonym",
-      "threshold": "threshold",
+      "threshold": "tröskel",
       "audience": "Målgrupp",
       "reminders": "Påminnelser",
       "questionPreview": "Question Förhandsgranska",
@@ -3646,7 +3646,7 @@
     },
     "types": {
       "engagement": "Engagemang",
-      "pulse": "Pulse",
+      "pulse": "Puls",
       "onboarding": "Introduktion",
       "exit": "Avsluta",
       "dei": "DEI (mångfald)",
@@ -3670,13 +3670,13 @@
       "leadership": "Ledarskap",
       "culture": "Kultur",
       "compensation": "Kompensation",
-      "workLifeBalance": "Work-Life Balance"
+      "workLifeBalance": "Balans mellan arbete och fritid"
     },
     "results": {
       "viewingResults": "Viewing Resultat For",
       "exportResults": "Exportera Resultat",
       "overallScore": "Overall Poäng",
-      "outOf5": "out of 5.0",
+      "outOf5": "av 5,0",
       "participation": "Deltagande",
       "responded": "svarade",
       "enps": "eNPS (poäng)",
@@ -3689,18 +3689,20 @@
       "lowestScoring": "Frågor med lägst betyg",
       "heatmap": "Avdelning vs Category Heatmap",
       "department": "Avdelning",
-      "questionBreakdown": "Per-Question Breakdown"
+      "questionBreakdown": "Uppdelning per fråga"
     },
     "enps": {
       "companyEnps": "Företagsövergripande eNPS",
       "greatScore": "Utmärkt - Över branschsnittet på +14",
-      "runQuickEnps": "Run Quick eNPS",
-      "promoters": "Promoters (9-10)",
+      "runQuickEnps": "Kör snabb eNPS",
+      "promoters": "Promotorer (9-10)",
       "passives": "Passiva (7-8)",
       "detractors": "Kritiker (0-6)",
       "employees": "Anställda",
       "byDepartment": "eNPS by Avdelning",
-      "trend": "eNPS Trend (12 Månader)"
+      "trend": "eNPS Trend (12 Månader)",
+      "noSurveyData": "Ingen undersökningsdata",
+      "collectResponses": "Samla in svar"
     },
     "lifecycle": {
       "onboarding": {
@@ -3709,7 +3711,7 @@
         "30days": "30 Dagar",
         "60days": "60 Dagar",
         "90days": "90 Dagar",
-        "trend": "Satisfaction trending upward across onboarding milestones"
+        "trend": "Nöjdheten ökar genom introduktionsmilstolparna"
       },
       "exit": {
         "title": "Avsluta Surveys",
@@ -3720,7 +3722,7 @@
         "compensation": "Bättre compensation elsewhere",
         "growth": "Begränsad karriärutveckling",
         "management": "Ledningsproblem",
-        "worklife": "Work-life balance",
+        "worklife": "Balans mellan arbete och fritid",
         "other": "Annat / personal"
       },
       "anniversary": {
@@ -3940,7 +3942,7 @@
     "charLimit": "Teckengränsen nådd",
     "sendRecognition": "Skicka erkännande",
     "successMessage": "Erkännande skickat!",
-    "filters": "Filters",
+    "filters": "Filter",
     "noRecognitions": "Inga erkännanden att visa för detta filter.",
     "mostRecognised": "Mest erkända denna månad",
     "mostGenerous": "Mest generösa (givna)",

@@ -1124,8 +1124,8 @@
       "delete": "Obriši ulogu",
       "deleteError": "Greška brisanja",
       "deleteTitle": "Obriši ulogu",
-      "deleteUsersWarning": "This role is assigned to {{count}} users. They will revert to default permissions.",
-      "deleteWarning": "Are you sure you want to delete \"{{name}}\"?",
+      "deleteUsersWarning": "Ova uloga je dodijeljena {{count}} korisnicima. Vratit će se na zadane dozvole.",
+      "deleteWarning": "Jeste li sigurni da želite obrisati \"{{name}}\"?",
       "deleted": "Uloga obrisana",
       "descriptionPlaceholder": "Opis uloge",
       "edit": "Uredi ulogu",
@@ -2737,7 +2737,7 @@
       "address": "Adresa"
     },
     "loadError": "Učitavanje lokacija nije uspjelo. Pokušajte ponovno.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "ZAG-01",
     "noEmployeesAssigned": "Nema zaposlenika dodijeljenih ovoj lokaciji"
   },
   "integrations": {

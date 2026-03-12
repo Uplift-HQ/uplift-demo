@@ -1061,7 +1061,7 @@
       "primaryLogoDesc": "ਹਲਕੇ ਬੈਕਗ੍ਰਾਊਂਡ ਤੇ ਸਾਈਡਬਾਰ ਵਿੱਚ ਦਿਖਾਇਆ ਜਾਂਦਾ ਹੈ। PNG, JPG, ਜਾਂ SVG। ਵੱਧ ਤੋਂ ਵੱਧ 2MB।",
       "darkModeLogo": "ਡਾਰਕ ਮੋਡ ਲੋਗੋ",
       "darkModeLogoDesc": "ਹਨੇਰੇ ਬੈਕਗ੍ਰਾਊਂਡ ਤੇ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ। ਤੁਹਾਡੇ ਲੋਗੋ ਦਾ ਹਲਕਾ/ਚਿੱਟਾ ਸੰਸਕਰਣ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।",
-      "favicon": "Favicon",
+      "favicon": "ਫੇਵਿਕੌਨ",
       "faviconDesc": "ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ ਆਈਕਨ। ਆਦਰਸ਼ਕ ਤੌਰ ਤੇ ਵਰਗ, 32x32 ਜਾਂ 64x64। PNG ਜਾਂ ICO।",
       "loginBackground": "ਲੌਗਇਨ ਬੈਕਗ੍ਰਾਊਂਡ",
       "loginBackgroundDesc": "ਲੌਗਇਨ ਸਕ੍ਰੀਨ ਲਈ ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ। ਸਿਫਾਰਸ਼ੀ 1920x1080।",
@@ -2737,7 +2737,7 @@
       "address": "ਪਤਾ"
     },
     "loadError": "ਟਿਕਾਣੇ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "LDH-01",
     "noEmployeesAssigned": "ਇਸ ਟਿਕਾਣੇ ਤੇ ਕੋਈ ਕਰਮਚਾਰੀ ਨਿਯੁਕਤ ਨਹੀਂ"
   },
   "integrations": {
@@ -3760,7 +3760,7 @@
     "yearToDate": "ਸਾਲ ਤੋਂ ਅੱਜ ਤੱਕ",
     "ytdGross": "YTD ਕੁੱਲ",
     "ytdTax": "YTD ਟੈਕਸ",
-    "ytdNI": "YTD NI",
+    "ytdNI": "ਸਾਲ ਦੀ ਸ਼ੁਰੂਆਤ ਤੋਂ NI",
     "ytdPension": "YTD ਪੈਨਸ਼ਨ",
     "ytdNet": "YTD ਸ਼ੁੱਧ",
     "basicSalary": "ਮੁੱਢਲੀ ਤਨਖਾਹ",

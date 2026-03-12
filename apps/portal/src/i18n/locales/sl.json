@@ -2129,10 +2129,10 @@
     "june": "Junij",
     "july": "Julij",
     "august": "Avgust",
-    "september": "September",
+    "september": "september",
     "october": "Oktober",
-    "november": "November",
-    "december": "December"
+    "november": "november",
+    "december": "december"
   },
   "bulkImport": {
     "title": "Masovni uvoz",
@@ -2737,7 +2737,7 @@
       "address": "Naslov"
     },
     "loadError": "Nalaganje lokacij ni uspelo. Poskusite znova.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "LJU-01",
     "noEmployeesAssigned": "Tej lokaciji ni dodeljenih zaposlenih"
   },
   "integrations": {

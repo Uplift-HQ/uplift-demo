@@ -1061,7 +1061,7 @@
       "primaryLogoDesc": "Displayed માં the sidebar પર પ્રકાશ backgrounds. PNG, JPG, અથવા SVG. Max 2MB.",
       "darkModeLogo": "ઘેરું Mode Logo",
       "darkModeLogoDesc": "Used પર ઘેરું backgrounds. Should be light/white version નું your logo.",
-      "favicon": "Favicon",
+      "favicon": "ફેવિકોન",
       "faviconDesc": "Browser tab icon. Ideally square, 32x32 અથવા 64x64. PNG અથવા ICO.",
       "loginBackground": "લોગિન બેકગ્રાઉન્ડ",
       "loginBackgroundDesc": "Background image માટે the login screen. Recommended 1920x1080.",
@@ -2737,7 +2737,7 @@
       "address": "સરનામું"
     },
     "loadError": "સ્થાનો લોડ કરવામાં નિષ્ફળ. કૃપા કરીને ફરી પ્રયાસ કરો.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "AMD-01",
     "noEmployeesAssigned": "આ સ્થાન પર કોઈ કર્મચારી સોંપાયેલ નથી"
   },
   "integrations": {
@@ -3760,7 +3760,7 @@
     "yearToDate": "વર્ષથી આજ સુધી",
     "ytdGross": "YTD કુલ",
     "ytdTax": "YTD કર",
-    "ytdNI": "YTD NI",
+    "ytdNI": "વર્ષની શરૂઆતથી NI",
     "ytdPension": "YTD પેન્શન",
     "ytdNet": "YTD ચોખ્ખું",
     "basicSalary": "મૂળ પગાર",
@@ -3868,7 +3868,7 @@
     "charLimit": "અક્ષર મર્યાદા પહોંચી",
     "sendRecognition": "માન્યતા મોકલો",
     "successMessage": "માન્યતા સફળતાપૂર્વક મોકલાઈ!",
-    "filters": "Filters",
+    "filters": "ફિલ્ટર્સ",
     "noRecognitions": "આ ફિલ્ટર માટે કોઈ માન્યતા બતાવવા નથી.",
     "mostRecognised": "આ મહિને સૌથી વધુ માન્યતા પ્રાપ્ત",
     "mostGenerous": "સૌથી ઉદાર (આપેલ)",

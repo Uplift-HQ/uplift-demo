@@ -1061,7 +1061,7 @@
       "primaryLogoDesc": "Displayed ನಲ್ಲಿ the sidebar ಮೇಲೆ ಲೈಟ್ backgrounds. PNG, JPG, ಅಥವಾ SVG. Max 2MB.",
       "darkModeLogo": "ಡಾರ್ಕ್ Mode Logo",
       "darkModeLogoDesc": "Used ಮೇಲೆ ಡಾರ್ಕ್ backgrounds. Should be light/white version ನ your logo.",
-      "favicon": "Favicon",
+      "favicon": "ಫೇವಿಕಾನ್",
       "faviconDesc": "Browser tab icon. Ideally square, 32x32 ಅಥವಾ 64x64. PNG ಅಥವಾ ICO.",
       "loginBackground": "ಲಾಗಿನ್ ಹಿನ್ನೆಲೆ",
       "loginBackgroundDesc": "Background image ಗಾಗಿ the login screen. Recommended 1920x1080.",
@@ -2737,7 +2737,7 @@
       "address": "ವಿಳಾಸ"
     },
     "loadError": "Failed ಗೆ load ಸ್ಥಳಗಳು. ದಯವಿಟ್ಟು try again.",
-    "codePlaceholder": "LON-01",
+    "codePlaceholder": "BLR-01",
     "noEmployeesAssigned": "ಇಲ್ಲ ಉದ್ಯೋಗಿಗಳು ನಿಯೋಜಿಸಲಾಗಿದೆ ಗೆ this ಸ್ಥಳ"
   },
   "integrations": {
@@ -3760,7 +3760,7 @@
     "yearToDate": "ವರ್ಷದಿಂದ ಇಂದಿನವರೆಗೆ",
     "ytdGross": "YTD ಒಟ್ಟು",
     "ytdTax": "YTD ತೆರಿಗೆ",
-    "ytdNI": "YTD NI",
+    "ytdNI": "ವರ್ಷದ ಪ್ರಾರಂಭದಿಂದ NI",
     "ytdPension": "YTD ಪಿಂಚಣಿ",
     "ytdNet": "YTD ನಿವ್ವಳ",
     "basicSalary": "ಮೂಲ ವೇತನ",
@@ -3868,7 +3868,7 @@
     "charLimit": "ಅಕ್ಷರ ಮಿತಿ ತಲುಪಿದೆ",
     "sendRecognition": "ಗುರುತಿಸುವಿಕೆ ಕಳುಹಿಸಿ",
     "successMessage": "ಗುರುತಿಸುವಿಕೆ ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ!",
-    "filters": "Filters",
+    "filters": "ಫಿಲ್ಟರ್‌ಗಳು",
     "noRecognitions": "ಈ ಫಿಲ್ಟರ್‌ಗೆ ತೋರಿಸಲು ಯಾವುದೇ ಗುರುತಿಸುವಿಕೆಗಳಿಲ್ಲ.",
     "mostRecognised": "ಈ ತಿಂಗಳು ಅತ್ಯಂತ ಗುರುತಿಸಲ್ಪಟ್ಟ",
     "mostGenerous": "ಅತ್ಯಂತ ಉದಾರ (ನೀಡಿದ)",

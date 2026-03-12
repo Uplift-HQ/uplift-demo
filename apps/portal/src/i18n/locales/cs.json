@@ -92,7 +92,7 @@
       "documents": "DOKUMENTY",
       "analytics": "ANALYTIKA",
       "admin": "SPRÁVA",
-      "talent": "TALENT",
+      "talent": "TALENTY",
       "people": "ZAMĚSTNANCI",
       "engagement": "ANGAŽOVANOST",
       "myUplift": "MŮJ UPLIFT",
@@ -3461,13 +3461,13 @@
   },
   "surveys": {
     "templates": {
-      "title": "Survey Templates",
-      "subtitle": "Choose a pre-built template or create your own",
-      "createCustom": "Create Custom Template",
-      "preview": "Preview",
-      "clone": "Clone & Customize",
-      "sampleQuestions": "Sample Questions",
-      "useTemplate": "Use This Template"
+      "title": "Šablony průzkumů",
+      "subtitle": "Vyberte si předpřipravenou šablonu nebo vytvořte vlastní",
+      "createCustom": "Vytvořit vlastní šablonu",
+      "preview": "Náhled",
+      "clone": "Klonovat a přizpůsobit",
+      "sampleQuestions": "Ukázkové otázky",
+      "useTemplate": "Použít tuto šablonu"
     },
     "rating1to10": "Hodnocení (1–10)",
     "multipleChoice": "Výběr z více možností",

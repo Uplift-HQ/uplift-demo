@@ -1109,7 +1109,7 @@
       "primaryLogoDesc": "Se muestra en la barra lateral sobre fondos claros. PNG, JPG o SVG. Máx 2MB.",
       "darkModeLogo": "Logo modo oscuro",
       "darkModeLogoDesc": "Se usa sobre fondos oscuros. Debe ser una versión clara/blanca de tu logo.",
-      "favicon": "Favicon",
+      "favicon": "Icono del sitio",
       "faviconDesc": "Icono de pestaña del navegador. Idealmente cuadrado, 32x32 o 64x64. PNG o ICO.",
       "loginBackground": "Fondo de inicio de sesión",
       "loginBackgroundDesc": "Imagen de fondo para la pantalla de inicio de sesión. Recomendado 1920x1080.",
